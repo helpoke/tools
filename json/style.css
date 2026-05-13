@@ -810,6 +810,35 @@ h1 {
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .compare-content.fullscreen-mode {
+        flex-direction: row !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .compare-actions {
+        gap: 8px;
+    }
+
+    #start-compare-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .compare-result {
+        font-size: 12px;
+    }
+
+    .diff-stats {
+        font-size: 11px;
+        gap: 6px;
+    }
+
+    .diff-item {
+        padding: 8px;
+        font-size: 12px;
+    }
 }
 
 /* 输入框样式 */
@@ -1495,8 +1524,13 @@ button:active {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .tool-container {
-        /* 保持为块级元素，不改变其基本布局 */
+    .container {
+        padding: 24px 0;
+    }
+
+    .tool-container,
+    .compare-container {
+        padding: 4px;
     }
 
     .input-box,
@@ -1513,7 +1547,7 @@ button:active {
     .buttons,
     .bottom-buttons {
         display: flex;
-        gap: 1px;
+        gap: 6px;
         margin-bottom: 10px;
         flex-wrap: wrap;
         justify-content: flex-end;
@@ -1527,30 +1561,146 @@ button:active {
 
     .buttons button,
     .bottom-buttons button {
-        border-radius: 40px;
-        margin: 5px;
-        padding: 10px;
-        font-size: 3vw;
+        border-radius: 8px;
+        margin: 2px;
+        padding: 8px 14px;
+        font-size: 13px;
     }
 
-    .buttons button:hover,
-    .bottom-buttons button:hover {
-        background-color: #1f8c19;
+    .compare-content {
+        flex-direction: column;
+        gap: 12px;
     }
 
-    .buttons #clear-btn,
-    .bottom-buttons #clear-btn-bottom {
-        background-color: #B65426;
+    .compare-box {
+        min-width: auto;
     }
 
-    .buttons #format-btn,
-    .bottom-buttons #format-btn-bottom {
-        background-color: #9CB727;
+    .compare-box h3 {
+        font-size: 14px;
     }
 
-    .buttons #copy-btn,
-    .bottom-buttons #copy-btn-bottom {
-        background-color: #2779B7;
+    .compare-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .compare-header h2 {
+        font-size: 18px;
+    }
+
+    .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .button-group button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .editor-container {
+        height: 60vh;
+        min-height: 300px;
+    }
+
+    .editor-container-wrapper {
+        width: 100%;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+
+    .fullscreen-button {
+        top: 6px;
+        right: 6px;
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+
+    .notification {
+        max-width: 280px;
+        font-size: 13px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 0;
+    }
+
+    .editor-container {
+        height: 50vh;
+        min-height: 250px;
+    }
+
+    .buttons button,
+    .bottom-buttons button {
+        padding: 6px 10px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+
+    .tab-btn {
+        font-size: 12px;
+        padding: 8px 12px;
+        flex: 1;
+        text-align: center;
+    }
+
+    .compare-header h2 {
+        font-size: 16px;
+    }
+
+    .button-group button {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .compare-box h3 {
+        font-size: 13px;
+    }
+
+    .line-numbers {
+        width: 30px;
+        min-width: 30px;
+        padding: 10px 4px;
+        font-size: 11px;
+    }
+
+    .json-editor {
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+
+    .line-number {
+        font-size: 11px;
+        height: 18px;
+    }
+
+    textarea,
+    pre {
+        height: 200px;
+    }
+
+    .notification {
+        max-width: 240px;
+        font-size: 12px;
+    }
+
+    .notification-container {
+        bottom: 10px;
+        right: 10px;
+        gap: 6px;
     }
 }
 
