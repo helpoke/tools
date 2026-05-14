@@ -301,6 +301,96 @@ body {
     margin-left: 0;
 }
 
+
+
+/* ========== Page Footer ========== */
+.footer {
+    background-color: #6771a1;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Collapse toggle button */
+.sidebar-toggle-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: auto;
+    transition: all 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    background: #f1f5f9;
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.sidebar-toggle-btn svg {
+    transition: transform 0.25s ease;
+}
+
+
+/* Mobile toggle */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Sidebar overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 90;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+/* Sidebar overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 90;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
     .sidebar {
@@ -319,6 +409,10 @@ body {
     .main {
         margin-left: 0;
         padding: 0 16px;
+    }
+
+    .sidebar-toggle {
+        display: flex;
     }
 
     .sidebar-float-ball {
@@ -359,6 +453,10 @@ body {
         font-size: 19px;
     }
 
+    .sidebar-toggle {
+        display: flex;
+    }
+
     .page-hero p {
         font-size: 12px;
         padding: 0 8px;
@@ -372,18 +470,4 @@ body {
     .footer p {
         font-size: 12px;
     }
-}
-
-/* ========== Page Footer ========== */
-.footer {
-    background-color: #6771a1;
-    color: #fff;
-    padding: 40px 0;
-    text-align: center;
-    margin-top: auto;
-}
-
-.footer p {
-    margin: 0;
-    font-size: 14px;
 }
