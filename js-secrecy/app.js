@@ -297,11 +297,23 @@ function stringArrayObfuscation(code, opts) {
     let encodedArray;
     switch (opts.stringArrayEncoding) {
         case 'base64':
-            encodedArray = strings.map(s => btoa(unescape(encodeURIComponent(s))));
+            encodedArray = strings.map(s => {
+                const bytes = new TextEncoder().encode(s);
+                let bin = '';
+                for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+                return btoa(bin);
+            });
             break;
         case 'rc4':
             // 简化版：使用 base64 + 位移
-            encodedArray = strings.map(s => btoa(s.split('').map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ (i % 7))).join('')));
+            encodedArray = strings.map(s => {
+                const bytes = new TextEncoder().encode(s);
+                const xored = new Uint8Array(bytes.length);
+                for (let i = 0; i < bytes.length; i++) xored[i] = bytes[i] ^ (i % 7);
+                let bin = '';
+                for (let i = 0; i < xored.length; i++) bin += String.fromCharCode(xored[i]);
+                return btoa(bin);
+            });
             break;
         default:
             encodedArray = strings.map(s => s);
@@ -315,10 +327,10 @@ function stringArrayObfuscation(code, opts) {
     let decodeFunc = '';
     switch (opts.stringArrayEncoding) {
         case 'base64':
-            decodeFunc = `function ${decName}(i){return decodeURIComponent(escape(atob(${arrName}[i])))}`;
+            decodeFunc = `function ${decName}(i){var b=atob(${arrName}[i]),a=new Uint8Array(b.length);for(var j=0;j<b.length;j++)a[j]=b.charCodeAt(j);return new TextDecoder().decode(a)}`;
             break;
         case 'rc4':
-            decodeFunc = `function ${decName}(i){var s=atob(${arrName}[i]);return s.split('').map((c,j)=>String.fromCharCode(c.charCodeAt(0)^(j%7))).join('')}`;
+            decodeFunc = `function ${decName}(i){var b=atob(${arrName}[i]),a=new Uint8Array(b.length);for(var j=0;j<b.length;j++)a[j]=b.charCodeAt(j)^(j%7);return new TextDecoder().decode(a)}`;
             break;
         default:
             decodeFunc = `function ${decName}(i){return ${arrName}[i]}`;
