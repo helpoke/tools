@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="JavaScript代码保护工具, 在线JS代码压缩混淆, JavaScript本地加密混淆, 免费JS代码保护, WASM转换工具">
-    <meta name="keywords" content="JavaScript代码保护, JS代码压缩, JS代码混淆, JavaScript在线加密, WASM转换, 免费代码保护, JS压缩混淆工具, 前端代码安全">
+    <meta name="description" content="JavaScript代码混淆加密工具, 在线JS代码保护, 支持字符串加密、控制流平坦化、死代码注入等多种混淆选项">
+    <meta name="keywords" content="JS混淆, JavaScript加密, JS代码保护, 代码混淆工具, 字符串加密, 控制流平坦化, 死代码注入, 变量重命名">
     <meta name="author" content="余一叶知秋尽">
-    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript代码保护工具</title>
+    <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../../../common/css/style.css">
+    <title>JS混淆加密工具 - Helpoke 助可站</title>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 </head>
 
@@ -20,153 +20,266 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Sidebar -->
+    <!-- 侧边导航栏 -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <a href="../../..">
-                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+            <a href="../..">
+                <img src="../../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
                 小助点
             </a>
         </div>
         <nav class="sidebar-nav">
             <div class="nav-section">图片工具</div>
-            <a href="../../../image/compressor">
-                <span class="nav-icon">📦</span>图片压缩
-            </a>
-            <a href="../../../image/convert">
-                <span class="nav-icon">🔄</span>图片转换
-            </a>
-            <a href="../../../image/watermark">
-                <span class="nav-icon">💧</span>图片水印
-            </a>
-            <a href="../../../image/cropping">
-                <span class="nav-icon">✂️</span>图片裁剪
-            </a>
+            <a href="../../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
+            <a href="../../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
+            <a href="../../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
+            <a href="../../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
 
             <div class="nav-section">视频工具</div>
-            <a href="../../../video/cropping">
-                <span class="nav-icon">✂️</span>视频裁剪
-            </a>
-            <a href="../../../video/watermark">
-                <span class="nav-icon">🎥</span>视频水印
-            </a>
+            <a href="../../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
+            <a href="../../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
+            <a href="../../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
 
             <div class="nav-section">数据 & 开发</div>
-            <a href="../../../json">
-                <span class="nav-icon">{ }</span>JSON 格式化
-            </a>
-            <a href="../../../yaml">
-                <span class="nav-icon">⚙️</span>YAML 格式化
-            </a>
-            <a href="../../../pug">
-                <span class="nav-icon">🌿</span>Pug 格式化
-            </a>
-            <a href="../../../pwd">
-                <span class="nav-icon">🔑</span>密码生成
-            </a>
-            <a href="../../../uuid">
-                <span class="nav-icon">🆔</span>UUID 生成
-            </a>
-            <a href="../../../mermaid">
-                <span class="nav-icon">📊</span>Mermaid 图表
-            </a>
-            <a href="../../../md5">
-                <span class="nav-icon">🔐</span>MD5 加密
-            </a>
-            <a href="../../../token">
-                <span class="nav-icon">🎫</span>Token 工具
-            </a>
-            <a href="../../../num-to-chinese">
-                <span class="nav-icon">🔢</span>数字转中文大写
-            </a>
-            <a href="../../../cron">
-                <span class="nav-icon">⏰</span>Cron 解析
-            </a>
+            <a href="../../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
+            <a href="../../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
+            <a href="../../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
+            <a href="../../pwd"><span class="nav-icon">🔑</span>密码生成</a>
+            <a href="../../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
+            <a href="../../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
+            <a href="../../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
+            <a href="../../token"><span class="nav-icon">🎫</span>Token 工具</a>
+            <a href="../../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
+            <a href="../../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
 
             <div class="nav-section">文档 & 下载</div>
-            <a href="../../../docu/signature">
-                <span class="nav-icon">✍️</span>签名工具
-            </a>
-            <a href="../../../docu/watermark">
-                <span class="nav-icon">🛡️</span>文档水印
-            </a>
-            <a href="../../../download">
-                <span class="nav-icon">⬇️</span>批量下载
-            </a>
+            <a href="../../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
+            <a href="../../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
+            <a href="../../download"><span class="nav-icon">⬇️</span>批量下载</a>
         </nav>
         <div class="sidebar-footer">
             <p>纯前端运行 · 数据本地处理</p>
         </div>
     </aside>
+
     <main class="main">
         <section class="page-hero">
-            <h1>JavaScript代码保护工具</h1>
-            <p>保护您的JavaScript代码：压缩、混淆、WASM转换</p>
+            <h1>JS 混淆加密工具</h1>
+            <p>在浏览器本地对 JavaScript 代码进行混淆加密，保护您的代码安全</p>
         </section>
+
         <div class="container">
+            <div class="main-layout">
+                <!-- 编辑器区域 -->
+                <div class="editor-area">
+                    <div class="editor-body">
+                        <!-- 输入 -->
+                        <div class="editor-pane">
+                            <div class="editor-header input-header">
+                                <h3>📝 源代码</h3>
+                                <div class="file-actions">
+                                    <button class="btn-sm" onclick="document.getElementById('fileInput').click()">📂 打开文件</button>
+                                    <input type="file" id="fileInput" accept=".js,.txt,.mjs" style="display:none">
+                                    <button class="btn-sm" onclick="clearInput()">清空</button>
+                                    <button class="btn-sm" onclick="pasteCode()">粘贴</button>
+                                </div>
+                            </div>
+                            <textarea class="code-editor" id="inputCode" placeholder="// 在此输入 JavaScript 代码，或点击"
+                                打开文件"上传...&#10;&#10;function hello() {&#10; console.log('Hello World!');&#10;}"
+                                spellcheck="false"></textarea>
+                            <div class="toolbar">
+                                <span class="char-count" id="inputCount">0 字符</span>
+                                <span class="char-count" id="inputLines">0 行</span>
+                            </div>
+                        </div>
 
-            <main>
-                <section class="upload-section">
-                    <div class="upload-box">
-                        <input type="file" id="fileInput" accept=".js">
-                        <label for="fileInput" class="upload-label">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="17 8 12 3 7 8"></polyline>
-                                <line x1="12" y1="3" x2="12" y2="15"></line>
-                            </svg>
-                            <span>点击或拖拽文件到此处上传</span>
+                        <!-- 输出 -->
+                        <div class="editor-pane">
+                            <div class="editor-header output-header">
+                                <h3>🔒 混淆后代码</h3>
+                                <div class="file-actions">
+                                    <button class="btn-sm" onclick="copyOutput()">📋 复制</button>
+                                    <button class="btn-sm" onclick="downloadOutput()">💾 下载</button>
+                                </div>
+                            </div>
+                            <textarea class="code-editor" id="outputCode" placeholder="// 混淆后的代码将在此显示..." readonly
+                                spellcheck="false"></textarea>
+                            <div class="toolbar">
+                                <span class="char-count" id="outputCount">0 字符</span>
+                                <span class="char-count" id="outputLines">0 行</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <!-- 选项面板 -->
+                <div class="options-panel">
+                    <div class="options-panel-header">⚙️ 混淆选项</div>
+
+                    <!-- 预设 -->
+                    <div class="options-section">
+                        <div class="options-section-title">快速预设</div>
+                        <select class="option-select" id="preset" onchange="applyPreset()">
+                            <option value="custom">自定义</option>
+                            <option value="low">低混淆（仅变量重命名）</option>
+                            <option value="medium" selected>中混淆（推荐）</option>
+                            <option value="high">高混淆</option>
+                            <option value="maximum">极限混淆</option>
+                        </select>
+                    </div>
+
+                    <!-- 基本选项 -->
+                    <div class="options-section">
+                        <div class="options-section-title">基本</div>
+
+                        <div class="option-item">
+                            <input type="checkbox" id="compact" checked>
+                            <label class="option-label" for="compact">
+                                <div class="name">压缩代码</div>
+                                <div class="desc">删除空格和换行，减小文件体积</div>
+                            </label>
+                        </div>
+
+                        <div class="option-item">
+                            <input type="checkbox" id="stringArray" checked>
+                            <label class="option-label" for="stringArray">
+                                <div class="name">字符串数组</div>
+                                <div class="desc">将字符串提取到数组中，增加逆向难度</div>
+                            </label>
+                        </div>
+
+                        <label class="option-label" style="margin-top:4px;">
+                            <div class="name" style="font-size:12px;">字符串数组阈值</div>
                         </label>
+                        <input type="number" class="option-input" id="stringArrayThreshold" value="5" min="0" max="100">
                     </div>
-                    <div id="fileInfo" class="file-info"></div>
-                </section>
 
-                <section class="options-section">
-                    <h2>保护选项</h2>
-                    <div class="options-grid">
+                    <!-- 变量重命名 -->
+                    <div class="options-section">
+                        <div class="options-section-title">变量重命名</div>
+
                         <div class="option-item">
-                            <input type="checkbox" id="minify" checked>
-                            <label for="minify">代码压缩</label>
-                            <p>删除空格和注释，减小文件大小</p>
+                            <input type="checkbox" id="renameGlobals" checked>
+                            <label class="option-label" for="renameGlobals">
+                                <div class="name">重命名全局变量</div>
+                                <div class="desc">同时重命名全局变量和函数名</div>
+                            </label>
+                        </div>
+
+                        <label class="option-label" style="margin-top:4px;">
+                            <div class="name" style="font-size:12px;">变量名前缀（留空随机）</div>
+                        </label>
+                        <input type="text" class="option-input" id="identifierPrefix" placeholder="例如: _x">
+
+                        <label class="option-label" style="margin-top:4px;">
+                            <div class="name" style="font-size:12px;">重命名模式</div>
+                        </label>
+                        <select class="option-select" id="renameMode">
+                            <option value="hexadecimal">十六进制 (_0x1a2b)</option>
+                            <option value="mangled" selected>简短 (a, b, c...)</option>
+                        </select>
+                    </div>
+
+                    <!-- 字符串编码 -->
+                    <div class="options-section">
+                        <div class="options-section-title">字符串编码</div>
+
+                        <label class="option-label">
+                            <div class="name" style="font-size:12px;">编码方式</div>
+                        </label>
+                        <select class="option-select" id="stringArrayEncoding">
+                            <option value="none">无编码</option>
+                            <option value="base64">Base64</option>
+                            <option value="rc4" selected>RC4</option>
+                            <option value="aes">AES</option>
+                        </select>
+
+                        <label class="option-label" style="margin-top:4px;">
+                            <div class="name" style="font-size:12px;">编码比例 (0-1)</div>
+                        </label>
+                        <input type="number" class="option-input" id="encodingRatio" value="0.8" min="0" max="1"
+                            step="0.1">
+                    </div>
+
+                    <!-- 控制流 -->
+                    <div class="options-section">
+                        <div class="options-section-title">控制流</div>
+
+                        <div class="option-item">
+                            <input type="checkbox" id="controlFlowFlattening">
+                            <label class="option-label" for="controlFlowFlattening">
+                                <div class="name">控制流平坦化</div>
+                                <div class="desc">打乱代码执行流程，增加逆向难度</div>
+                            </label>
+                        </div>
+
+                        <label class="option-label" style="margin-top:4px;">
+                            <div class="name" style="font-size:12px;">平坦化阈值</div>
+                        </label>
+                        <input type="number" class="option-input" id="controlFlowFlatteningThreshold" value="0.75"
+                            min="0" max="1" step="0.05">
+
+                        <div class="option-item">
+                            <input type="checkbox" id="deadCodeInjection">
+                            <label class="option-label" for="deadCodeInjection">
+                                <div class="name">死代码注入</div>
+                                <div class="desc">注入永远不会执行的代码</div>
+                            </label>
+                        </div>
+
+                        <label class="option-label" style="margin-top:4px;">
+                            <div class="name" style="font-size:12px;">死代码比例 (0-1)</div>
+                        </label>
+                        <input type="number" class="option-input" id="deadCodeInjectionThreshold" value="0.4" min="0"
+                            max="1" step="0.1">
+                    </div>
+
+                    <!-- 其他选项 -->
+                    <div class="options-section">
+                        <div class="options-section-title">其他</div>
+
+                        <div class="option-item">
+                            <input type="checkbox" id="selfDefending">
+                            <label class="option-label" for="selfDefending">
+                                <div class="name">自我保护</div>
+                                <div class="desc">防止格式化美化和调试</div>
+                            </label>
                         </div>
 
                         <div class="option-item">
-                            <input type="checkbox" id="obfuscate">
-                            <label for="obfuscate">代码混淆</label>
-                            <p>重命名变量和函数，使代码难以阅读</p>
+                            <input type="checkbox" id="debugProtection">
+                            <label class="option-label" for="debugProtection">
+                                <div class="name">调试保护</div>
+                                <div class="desc">阻止调试器调试混淆后的代码</div>
+                            </label>
                         </div>
 
                         <div class="option-item">
-                            <input type="checkbox" id="wasm">
-                            <label for="wasm">WASM转换</label>
-                            <p>将JavaScript转换为WebAssembly（实验性）</p>
+                            <input type="checkbox" id="disableConsoleOutput">
+                            <label class="option-label" for="disableConsoleOutput">
+                                <div class="name">禁用控制台</div>
+                                <div class="desc">禁用 console.log/debug 等输出</div>
+                            </label>
                         </div>
-                    </div>
-                </section>
 
-                <section class="action-section">
-                    <button id="protectBtn" class="btn-primary" disabled>保护代码</button>
-                    <button id="downloadBtn" class="btn-secondary" disabled>下载结果</button>
-                </section>
+                        <div class="option-item">
+                            <input type="checkbox" id="domainLock">
+                            <label class="option-label" for="domainLock">
+                                <div class="name">域名锁定</div>
+                                <div class="desc">限制代码只能在指定域名运行</div>
+                            </label>
+                        </div>
 
-                <section class="preview-section" id="previewSection">
-                    <h2>代码预览</h2>
-                    <div class="preview-tabs">
-                        <button class="tab-btn active" data-tab="original">原始代码</button>
-                        <button class="tab-btn" data-tab="protected">保护后代码</button>
+                        <input type="text" class="option-input" id="domainLockTargets"
+                            placeholder="例: example.com, *.example.com" style="display:none;">
                     </div>
-                    <div class="code-container">
-                        <pre id="originalCode" class="code-block"></pre>
-                        <pre id="protectedCode" class="code-block hidden"></pre>
-                    </div>
-                </section>
-            </main>
 
+                    <!-- 混淆按钮 -->
+                    <button class="obfuscate-btn" id="obfuscateBtn" onclick="obfuscate()">🔒 开始混淆</button>
+                </div>
+            </div>
         </div>
-
-        <script src="app.js"></script>
-
 
         <div class="page-ad">
             <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
@@ -174,11 +287,12 @@
             </amp-ad>
         </div>
 
-        <!-- 页脚 -->
         <footer class="footer">
             <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
         </footer>
     </main>
+
+    <script src="app.js"></script>
     <script src="../../common/js/nav.js"></script>
 </body>
 

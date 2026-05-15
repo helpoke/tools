@@ -1,349 +1,480 @@
 /**
- * JavaScript代码保护工具 - 主要功能实现
+ * JS 混淆加密工具 - 浏览器端实现
  */
 
-// DOM元素引用
-const fileInput = document.getElementById('fileInput');
-const fileInfo = document.getElementById('fileInfo');
-const protectBtn = document.getElementById('protectBtn');
-const downloadBtn = document.getElementById('downloadBtn');
-const previewSection = document.getElementById('previewSection');
-const originalCode = document.getElementById('originalCode');
-const protectedCode = document.getElementById('protectedCode');
-const tabBtns = document.querySelectorAll('.tab-btn');
-const minifyCheckbox = document.getElementById('minify');
-const obfuscateCheckbox = document.getElementById('obfuscate');
-const wasmCheckbox = document.getElementById('wasm');
+const $ = id => document.getElementById(id);
+const inputCode = $('inputCode');
+const outputCode = $('outputCode');
+const progressBar = $('progressBar');
+const obfuscateBtn = $('obfuscateBtn');
 
-// 存储处理后的代码
-let processedCode = '';
-let originalFileName = '';
-
-// 初始化事件监听器
-function initEventListeners() {
-    // 文件上传事件
-    fileInput.addEventListener('change', handleFileUpload);
-    
-    // 保护按钮点击事件
-    protectBtn.addEventListener('click', protectCode);
-    
-    // 下载按钮点击事件
-    downloadBtn.addEventListener('click', downloadFile);
-    
-    // 选项卡切换事件
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => switchTab(btn));
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    inputCode.addEventListener('input', updateCounts);
+    $('fileInput').addEventListener('change', handleFileUpload);
+    $('domainLock').addEventListener('change', e => {
+        $('domainLockTargets').style.display = e.target.checked ? 'block' : 'none';
     });
-    
-    // 拖拽上传支持
-    const uploadBox = document.querySelector('.upload-box');
-    uploadBox.addEventListener('dragover', handleDragOver);
-    uploadBox.addEventListener('dragleave', handleDragLeave);
-    uploadBox.addEventListener('drop', handleDrop);
+});
+
+function updateCounts() {
+    const val = inputCode.value;
+    $('inputCount').textContent = val.length + ' 字符';
+    $('inputLines').textContent = (val ? val.split('\n').length : 0) + ' 行';
 }
 
-// 处理文件上传
+// 文件上传
 function handleFileUpload(e) {
     const file = e.target.files[0];
-    if (file) {
-        processFile(file);
-    }
-}
-
-// 拖拽上传事件处理
-function handleDragOver(e) {
-    e.preventDefault();
-    const uploadBox = document.querySelector('.upload-box');
-    uploadBox.style.backgroundColor = '#e3f2fd';
-}
-
-function handleDragLeave(e) {
-    e.preventDefault();
-    const uploadBox = document.querySelector('.upload-box');
-    uploadBox.style.backgroundColor = '#fafafa';
-}
-
-function handleDrop(e) {
-    e.preventDefault();
-    const uploadBox = document.querySelector('.upload-box');
-    uploadBox.style.backgroundColor = '#fafafa';
-    
-    const file = e.dataTransfer.files[0];
-    if (file) {
-        fileInput.files = e.dataTransfer.files;
-        processFile(file);
-    }
-}
-
-// 处理上传的文件
-function processFile(file) {
-    if (file.type !== 'application/javascript' && !file.name.endsWith('.js')) {
-        showFileInfo('请上传JavaScript文件 (.js)', 'error');
-        return;
-    }
-    
-    originalFileName = file.name;
-    showFileInfo(`已上传文件: ${file.name} (${formatFileSize(file.size)})`);
-    
+    if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(e) {
-        const code = e.target.result;
-        originalCode.textContent = code;
-        protectBtn.disabled = false;
-        previewSection.style.display = 'block';
+    reader.onload = () => {
+        inputCode.value = reader.result;
+        updateCounts();
+        showToast('文件已加载: ' + file.name, 'success');
     };
     reader.readAsText(file);
+    // 重置 file input 以支持重复上传同名文件
+    e.target.value = '';
 }
 
-// 显示文件信息
-function showFileInfo(message, type = 'success') {
-    fileInfo.textContent = message;
-    fileInfo.classList.add('show');
-    
-    // 重置样式
-    fileInfo.className = 'file-info show';
-    
-    // 添加类型样式
-    if (type === 'error') {
-        fileInfo.classList.add('error');
-        fileInfo.style.backgroundColor = '#ffebee';
-        fileInfo.style.borderLeftColor = '#f44336';
-    } else {
-        fileInfo.style.backgroundColor = '#e3f2fd';
-        fileInfo.style.borderLeftColor = '#2196f3';
+// 清空输入
+function clearInput() {
+    inputCode.value = '';
+    outputCode.value = '';
+    updateCounts();
+    $('outputCount').textContent = '0 字符';
+    $('outputLines').textContent = '0 行';
+}
+
+// 粘贴
+async function pasteCode() {
+    try {
+        const text = await navigator.clipboard.readText();
+        inputCode.value = text;
+        updateCounts();
+        showToast('已粘贴', 'success');
+    } catch {
+        showToast('无法读取剪贴板', 'error');
     }
 }
 
-// 格式化文件大小
-function formatFileSize(bytes) {
-    if (bytes === 0) return '0 Bytes';
-    
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+// 复制输出
+function copyOutput() {
+    const val = outputCode.value;
+    if (!val) { showToast('没有可复制的内容', 'error'); return; }
+    navigator.clipboard.writeText(val).then(() => showToast('已复制到剪贴板', 'success'));
 }
 
-// 保护代码
-function protectCode() {
-    const code = originalCode.textContent;
-    
-    // 禁用按钮防止重复点击
-    protectBtn.disabled = true;
-    protectBtn.textContent = '处理中...';
-    
-    // 模拟处理延迟
-    setTimeout(() => {
-        let result = code;
-        
-        // 代码压缩
-        if (minifyCheckbox.checked) {
-            result = minifyCode(result);
-        }
-        
-        // 代码混淆
-        if (obfuscateCheckbox.checked) {
-            result = obfuscateCode(result);
-        }
-        
-        // WASM转换（简化版实现）
-        if (wasmCheckbox.checked) {
-            result = addWasmWrapper(result);
-        }
-        
-        // 存储处理后的代码
-        processedCode = result;
-        protectedCode.textContent = result;
-        
-        // 启用下载按钮
-        downloadBtn.disabled = false;
-        
-        // 切换到保护后代码标签
-        switchTab(tabBtns[1]);
-        
-        // 恢复按钮状态
-        protectBtn.textContent = '保护代码';
-        protectBtn.disabled = false;
-        
-        showFileInfo(`代码保护完成！文件大小: ${formatFileSize(new Blob([result]).size)}`);
-    }, 500);
-}
-
-// 代码压缩函数
-function minifyCode(code) {
-    // 移除注释
-    code = code.replace(/\/\*[\s\S]*?\*\//g, '');
-    code = code.replace(/\/\/.*$/gm, '');
-    
-    // 移除日志打印语句
-    code = code.replace(/console\.(log|debug|info|warn|error|assert|dir|dirxml|trace|group|groupEnd|time|timeEnd|profile|profileEnd|count)\([\s\S]*?\);?/g, '');
-    
-    // 移除多余空格和换行
-    code = code.replace(/\s+/g, ' ');
-    code = code.replace(/\s*{\s*/g, '{');
-    code = code.replace(/\s*}\s*/g, '}');
-    code = code.replace(/\s*;\s*/g, ';');
-    code = code.replace(/\s*,\s*/g, ',');
-    code = code.replace(/\s*:\s*/g, ':');
-    code = code.replace(/\s*=\s*/g, '=');
-    code = code.replace(/\s*\+\s*/g, '+');
-    code = code.replace(/\s*-\s*/g, '-');
-    code = code.replace(/\s*\*\s*/g, '*');
-    code = code.replace(/\s*\/\s*/g, '/');
-    code = code.replace(/\s*\|\|\s*/g, '||');
-    code = code.replace(/\s*&&\s*/g, '&&');
-    code = code.replace(/\s*===\s*/g, '===');
-    code = code.replace(/\s*!==\s*/g, '!==');
-    code = code.replace(/\s*==\s*/g, '==');
-    code = code.replace(/\s*!=\s*/g, '!=');
-    code = code.replace(/\s*<\s*/g, '<');
-    code = code.replace(/\s*>\s*/g, '>');
-    code = code.replace(/\s*<=\s*/g, '<=');
-    code = code.replace(/\s*>=\s*/g, '>=');
-    
-    return code;
-}
-
-// 代码混淆函数
-function obfuscateCode(code) {
-    // 简单的变量和函数名混淆
-    const varNames = new Set();
-    const funcNames = new Set();
-    
-    // 提取变量名
-    let varPattern = /\b(let|var|const)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\b/g;
-    let match;
-    while ((match = varPattern.exec(code)) !== null) {
-        varNames.add(match[2]);
-    }
-    
-    // 提取函数名
-    let funcPattern = /\bfunction\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/g;
-    while ((match = funcPattern.exec(code)) !== null) {
-        funcNames.add(match[1]);
-    }
-    
-    // 创建混淆映射
-    const varMap = new Map();
-    const funcMap = new Map();
-    
-    // 为变量生成简短的名称
-    let counter = 0;
-    varNames.forEach(name => {
-        varMap.set(name, generateShortName(counter++));
-    });
-    
-    // 为函数生成简短的名称
-    funcNames.forEach(name => {
-        funcMap.set(name, generateShortName(counter++));
-    });
-    
-    // 替换代码中的变量名和函数名
-    let obfuscatedCode = code;
-    
-    // 首先替换函数名
-    funcMap.forEach((newName, oldName) => {
-        // 使用词边界确保只替换完整的函数名
-        const regex = new RegExp(`\b${oldName}\b(?!\s*:)`, 'g');
-        obfuscatedCode = obfuscatedCode.replace(regex, newName);
-    });
-    
-    // 然后替换变量名
-    varMap.forEach((newName, oldName) => {
-        // 使用词边界确保只替换完整的变量名
-        const regex = new RegExp(`\b${oldName}\b(?!\s*:)`, 'g');
-        obfuscatedCode = obfuscatedCode.replace(regex, newName);
-    });
-    
-    return obfuscatedCode;
-}
-
-// 生成简短的变量名
-function generateShortName(counter) {
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$';
-    let name = '';
-    
-    do {
-        name = chars[counter % chars.length] + name;
-        counter = Math.floor(counter / chars.length);
-    } while (counter > 0);
-    
-    return name;
-}
-
-// 添加WASM包装器（简化版实现）
-function addWasmWrapper(code) {
-    // 由于在纯前端环境中实现完整的JS到WASM转换很复杂
-    // 这里我们添加一个简单的包装器，模拟WASM保护
-    return `(function() {
-    // WebAssembly 包装器 - 保护您的代码
-    const encodedCode = '${btoa(unescape(encodeURIComponent(code)))}';
-    
-    // 模拟WASM解码执行
-    function executeProtectedCode() {
-        try {
-            const decodedCode = decodeURIComponent(escape(atob(encodedCode)));
-            // 使用Function构造函数执行代码
-            const execute = new Function(decodedCode);
-            execute();
-        } catch (e) {
-            console.error('代码执行错误:', e);
-        }
-    }
-    
-    // 延迟执行，增加破解难度
-    setTimeout(executeProtectedCode, Math.random() * 100);
-})();`;
-}
-
-// 切换预览选项卡
-function switchTab(activeBtn) {
-    // 更新按钮状态
-    tabBtns.forEach(btn => {
-        btn.classList.remove('active');
-    });
-    activeBtn.classList.add('active');
-    
-    // 显示对应的代码块
-    const tabId = activeBtn.getAttribute('data-tab');
-    originalCode.classList.toggle('hidden', tabId !== 'original');
-    protectedCode.classList.toggle('hidden', tabId !== 'protected');
-}
-
-// 下载文件
-function downloadFile() {
-    if (!processedCode) return;
-    
-    // 创建文件名
-    const baseName = originalFileName.replace(/\.js$/, '');
-    const protectedFileName = `pengline-${baseName}.js`;
-    
-    // 创建Blob对象
-    const blob = new Blob([processedCode], { type: 'application/javascript' });
+// 下载输出
+function downloadOutput() {
+    const val = outputCode.value;
+    if (!val) { showToast('没有可下载的内容', 'error'); return; }
+    const blob = new Blob([val], { type: 'application/javascript' });
     const url = URL.createObjectURL(blob);
-    
-    // 创建下载链接
     const a = document.createElement('a');
     a.href = url;
-    a.download = protectedFileName;
-    
-    // 触发下载
+    a.download = 'obfuscated.js';
     document.body.appendChild(a);
     a.click();
-    
-    // 清理
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('已开始下载', 'success');
+}
+
+// 预设
+function applyPreset() {
+    const preset = $('preset').value;
+    const defaults = {
+        low:       { compact: true, stringArray: false, renameGlobals: true, controlFlowFlattening: false, deadCodeInjection: false, selfDefending: false, debugProtection: false, disableConsoleOutput: false, domainLock: false, stringArrayEncoding: 'none', renameMode: 'mangled' },
+        medium:    { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: false, deadCodeInjection: false, selfDefending: false, debugProtection: false, disableConsoleOutput: false, domainLock: false, stringArrayEncoding: 'base64', renameMode: 'mangled' },
+        high:      { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: true, deadCodeInjection: true, selfDefending: true, debugProtection: false, disableConsoleOutput: true, domainLock: false, stringArrayEncoding: 'rc4', renameMode: 'hexadecimal' },
+        maximum:   { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: true, deadCodeInjection: true, selfDefending: true, debugProtection: true, disableConsoleOutput: true, domainLock: false, stringArrayEncoding: 'rc4', renameMode: 'hexadecimal' }
+    };
+    const d = defaults[preset];
+    if (!d) return;
+    Object.keys(d).forEach(k => {
+        const el = $(k);
+        if (el) {
+            if (el.type === 'checkbox') el.checked = d[k];
+            else if (el.tagName === 'SELECT') el.value = d[k];
+        }
+    });
+}
+
+// ===== 混淆引擎 =====
+function obfuscate() {
+    const code = inputCode.value.trim();
+    if (!code) { showToast('请输入 JavaScript 代码', 'error'); return; }
+
+    progressBar.classList.add('active');
+    obfuscateBtn.disabled = true;
+    obfuscateBtn.textContent = '混淆中...';
+
+    // 使用 setTimeout 让 UI 先渲染进度条
     setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        try {
+            const result = processObfuscation(code);
+            outputCode.value = result;
+            const lines = result.split('\n');
+            $('outputCount').textContent = result.length + ' 字符';
+            $('outputLines').textContent = lines.length + ' 行';
+            showToast('混淆完成！', 'success');
+        } catch (e) {
+            showToast('混淆失败: ' + e.message, 'error');
+            console.error(e);
+        } finally {
+            progressBar.classList.remove('active');
+            obfuscateBtn.disabled = false;
+            obfuscateBtn.textContent = '🔒 开始混淆';
+        }
     }, 100);
 }
 
-// 初始化应用
-function initApp() {
-    initEventListeners();
-    previewSection.style.display = 'none';
+function processObfuscation(code) {
+    const opts = getOptions();
+    let result = code;
+
+    // 步骤 1: 变量和函数名重命名
+    if (opts.renameGlobals) {
+        result = renameIdentifiers(result, opts);
+    }
+
+    // 步骤 2: 字符串数组编码
+    if (opts.stringArray) {
+        result = stringArrayObfuscation(result, opts);
+    }
+
+    // 步骤 3: 控制流平坦化
+    if (opts.controlFlowFlattening) {
+        result = controlFlowFlatten(result, opts);
+    }
+
+    // 步骤 4: 死代码注入
+    if (opts.deadCodeInjection) {
+        result = injectDeadCode(result, opts);
+    }
+
+    // 步骤 5: 自我保护/调试保护
+    if (opts.selfDefending || opts.debugProtection) {
+        result = addSelfDefense(result, opts);
+    }
+
+    // 步骤 6: 禁用控制台
+    if (opts.disableConsoleOutput) {
+        result = disableConsole(result);
+    }
+
+    // 步骤 7: 域名锁定
+    if (opts.domainLock && opts.domainLockTargets) {
+        result = addDomainLock(result, opts);
+    }
+
+    // 步骤 8: 压缩
+    if (opts.compact) {
+        result = minify(result);
+    }
+
+    return result;
 }
 
-// 当页面加载完成后初始化应用
-window.addEventListener('DOMContentLoaded', initApp);
+function getOptions() {
+    return {
+        compact: $('compact').checked,
+        stringArray: $('stringArray').checked,
+        stringArrayThreshold: parseFloat($('stringArrayThreshold').value) || 5,
+        renameGlobals: $('renameGlobals').checked,
+        identifierPrefix: $('identifierPrefix').value || '',
+        renameMode: $('renameMode').value,
+        stringArrayEncoding: $('stringArrayEncoding').value,
+        encodingRatio: parseFloat($('encodingRatio').value) || 0.8,
+        controlFlowFlattening: $('controlFlowFlattening').checked,
+        controlFlowFlatteningThreshold: parseFloat($('controlFlowFlatteningThreshold').value) || 0.75,
+        deadCodeInjection: $('deadCodeInjection').checked,
+        deadCodeInjectionThreshold: parseFloat($('deadCodeInjectionThreshold').value) || 0.4,
+        selfDefending: $('selfDefending').checked,
+        debugProtection: $('debugProtection').checked,
+        disableConsoleOutput: $('disableConsoleOutput').checked,
+        domainLock: $('domainLock').checked,
+        domainLockTargets: $('domainLockTargets').value
+    };
+}
+
+// 生成混淆变量名
+function generateVarName(index, mode, prefix) {
+    if (mode === 'hexadecimal') {
+        const hex = '0x' + (index + 100).toString(16);
+        return (prefix || '_') + hex;
+    }
+    // mangled: a, b, c... z, aa, ab...
+    const chars = 'abcdefghijklmnopqrstuvwxyz';
+    let name = '';
+    let n = index;
+    do {
+        name = chars[n % 26] + name;
+        n = Math.floor(n / 26) - 1;
+    } while (n >= 0);
+    return (prefix || '_') + name;
+}
+
+// 标识符重命名
+function renameIdentifiers(code, opts) {
+    // 收集所有需要重命名的标识符
+    const identifiers = new Set();
+
+    // 匹配 const/let/var 声明
+    const varRegex = /\b(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+    let m;
+    while ((m = varRegex.exec(code)) !== null) {
+        // 跳过关键字
+        if (!['console', 'document', 'window', 'Math', 'JSON', 'Array', 'Object', 'String', 'Number', 'Boolean', 'Promise', 'setTimeout', 'setInterval', 'parseInt', 'parseFloat', 'undefined', 'null', 'true', 'false', 'NaN', 'Infinity', 'function', 'return', 'if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 'try', 'catch', 'finally', 'throw', 'new', 'this', 'class', 'extends', 'import', 'export', 'default', 'from', 'async', 'await', 'yield', 'typeof', 'instanceof', 'in', 'of', 'delete', 'void'].includes(m[1])) {
+            identifiers.add(m[1]);
+        }
+    }
+
+    // 匹配函数声明
+    const funcRegex = /\bfunction\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/g;
+    while ((m = funcRegex.exec(code)) !== null) {
+        if (!['function'].includes(m[1])) {
+            identifiers.add(m[1]);
+        }
+    }
+
+    // 匹配箭头函数和对象属性中的函数赋值 (const fn = () =>)
+    const arrowRegex = /\b(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=\s*(?:async\s*)?\(/g;
+    while ((m = arrowRegex.exec(code)) !== null) {
+        identifiers.add(m[1]);
+    }
+
+    // 匹配类声明
+    const classRegex = /\bclass\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
+    while ((m = classRegex.exec(code)) !== null) {
+        identifiers.add(m[1]);
+    }
+
+    // 过滤掉对象属性的键（冒号左边的不算变量声明）
+    const idList = Array.from(identifiers);
+    const renameMap = new Map();
+    let counter = 0;
+    idList.forEach(id => {
+        renameMap.set(id, generateVarName(counter++, opts.renameMode, opts.identifierPrefix));
+    });
+
+    // 按名称长度降序替换，避免短名称覆盖长名称
+    const sorted = [...renameMap.entries()].sort((a, b) => b[0].length - a[0].length);
+    let result = code;
+    sorted.forEach(([oldName, newName]) => {
+        const regex = new RegExp('\\b' + escapeRegExp(oldName) + '\\b', 'g');
+        result = result.replace(regex, newName);
+    });
+
+    return result;
+}
+
+function escapeRegExp(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// 字符串数组混淆
+function stringArrayObfuscation(code, opts) {
+    const strings = [];
+    // 提取所有字符串字面量
+    const stringRegex = /(['"`])(?:(?!\1|\\).|\\.)*\1/g;
+    let m;
+    const positions = [];
+    while ((m = stringRegex.exec(code)) !== null) {
+        // 跳过空字符串和短字符串
+        const val = m[0].slice(1, -1);
+        if (val.length > 0 && Math.random() < opts.encodingRatio) {
+            positions.push({ index: m.index, length: m[0].length, value: m[0] });
+            strings.push(val);
+        }
+    }
+
+    if (strings.length === 0) return code;
+
+    // 对字符串进行编码
+    let encodedArray;
+    switch (opts.stringArrayEncoding) {
+        case 'base64':
+            encodedArray = strings.map(s => btoa(unescape(encodeURIComponent(s))));
+            break;
+        case 'rc4':
+            // 简化版：使用 base64 + 位移
+            encodedArray = strings.map(s => btoa(s.split('').map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ (i % 7))).join('')));
+            break;
+        default:
+            encodedArray = strings.map(s => s);
+    }
+
+    // 构建数组变量名
+    const arrName = generateVarName(0, 'hexadecimal', '_a');
+    const decName = generateVarName(1, 'hexadecimal', '_b');
+
+    // 生成解码函数
+    let decodeFunc = '';
+    switch (opts.stringArrayEncoding) {
+        case 'base64':
+            decodeFunc = `function ${decName}(i){return decodeURIComponent(escape(atob(${arrName}[i])))}`;
+            break;
+        case 'rc4':
+            decodeFunc = `function ${decName}(i){var s=atob(${arrName}[i]);return s.split('').map((c,j)=>String.fromCharCode(c.charCodeAt(0)^(j%7))).join('')}`;
+            break;
+        default:
+            decodeFunc = `function ${decName}(i){return ${arrName}[i]}`;
+    }
+
+    // 从后向前替换字符串（避免索引偏移）
+    let result = code;
+    for (let i = positions.length - 1; i >= 0; i--) {
+        const pos = positions[i];
+        result = result.slice(0, pos.index) + `${decName}(${i})` + result.slice(pos.index + pos.length);
+    }
+
+    // 在最前面插入数组和解码函数
+    const arrayStr = JSON.stringify(encodedArray);
+    return `(function(){var ${arrName}=${arrayStr};${decodeFunc};${result}})()`;
+}
+
+// 控制流平坦化（简化版：用状态机包装代码块）
+function controlFlowFlatten(code, opts) {
+    // 检测是否超过阈值
+    const stmts = code.split(';').filter(s => s.trim().length > 0);
+    if (stmts.length < 3) return code;
+
+    // 将代码包装在立即执行函数中，使用 switch 状态机
+    const wrapperName = generateVarName(0, 'hexadecimal', '_s');
+    const stateName = generateVarName(1, 'hexadecimal', '_t');
+
+    // 将代码按语句分割
+    const blocks = [];
+    let current = '';
+    let depth = 0;
+    for (const ch of code) {
+        if (ch === '{' || ch === '(' || ch === '[') depth++;
+        if (ch === '}' || ch === ')' || ch === ']') depth--;
+        if (ch === ';' && depth <= 0) {
+            if (current.trim()) blocks.push(current.trim());
+            current = '';
+        } else {
+            current += ch;
+        }
+    }
+    if (current.trim()) blocks.push(current.trim());
+
+    if (blocks.length < 2) return code;
+
+    // 打乱顺序
+    const indices = Array.from({ length: blocks.length }, (_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+
+    // 构建状态机
+    const cases = blocks.map((block, i) => {
+        const originalIndex = indices.indexOf(i);
+        const nextIndex = i < blocks.length - 1 ? indices[i + 1] : -1;
+        return `case ${originalIndex}:${block};${stateName}=${nextIndex};break;`;
+    }).join('');
+
+    return `(function(){var ${stateName}=${indices[0]};while(${stateName}!==-1){switch(${stateName}){${cases}default:${stateName}=-1}}})()`;
+}
+
+// 死代码注入
+function injectDeadCode(code, opts) {
+    const deadCodeSnippets = [
+        `if(typeof ${generateVarName(Math.floor(Math.random()*100),'hexadecimal')}==='undefined'){var ${generateVarName(Math.floor(Math.random()*100),'hexadecimal')}=Math.random()>0.5}`,
+        `try{if(undefined){console.log('${Math.random().toString(36).slice(2)}')}}catch(e){}`,
+        `while(false){var ${generateVarName(Math.floor(Math.random()*100),'hexadecimal')}=${Math.floor(Math.random()*10000)}}`,
+        `if(!![]===![]){throw new Error('${Math.random().toString(36).slice(2)}')}`,
+    ];
+
+    const lines = code.split('\n');
+    const injectCount = Math.floor(lines.length * opts.deadCodeInjectionThreshold);
+    const result = [];
+
+    for (let i = 0; i < lines.length; i++) {
+        result.push(lines[i]);
+        if (Math.random() < opts.deadCodeInjectionThreshold && result.length < injectCount) {
+            const snippet = deadCodeSnippets[Math.floor(Math.random() * deadCodeSnippets.length)];
+            result.push(snippet + ';');
+        }
+    }
+
+    return result.join('\n');
+}
+
+// 自我保护
+function addSelfDefense(code, opts) {
+    let result = code;
+    const fnName = generateVarName(0, 'hexadecimal', '_d');
+
+    if (opts.selfDefending) {
+        // 添加反格式化和反美化代码
+        const selfDefense = `function ${fnName}(){try{var s=${fnName}.toString();if(s.indexOf('\\n')!==-1||s.indexOf('  ')!==-1){throw new Error('非法调用')}}catch(e){throw e}}`;
+        result = selfDefense + result;
+    }
+
+    if (opts.debugProtection) {
+        // 添加反调试代码
+        const debugProtect = `!function(){var d=function(){try{debugger}catch(e){}};setInterval(d,100)}();`;
+        result += debugProtect;
+    }
+
+    return result;
+}
+
+// 禁用控制台
+function disableConsole(code) {
+    const disableCode = `(function(){var methods=['log','debug','info','warn','error','trace','dir','table','assert','count','countReset','group','groupEnd','time','timeEnd','timeLog','clear','profile','profileEnd'];var noop=function(){};methods.forEach(function(m){try{console[m]=noop}catch(e){}})})();`;
+    return disableCode + code;
+}
+
+// 域名锁定
+function addDomainLock(code, opts) {
+    const targets = opts.domainLockTargets.split(',').map(d => d.trim()).filter(Boolean);
+    if (targets.length === 0) return code;
+
+    const check = targets.map(d => {
+        const pattern = d.replace(/\./g, '\\.').replace(/\*/g, '.*');
+        return `/${pattern}/.test(location.hostname)`;
+    }).join('||');
+
+    const lockCode = `(function(){if(!(${check})){throw new Error('Domain not authorized')}})();`;
+    return lockCode + code;
+}
+
+// 压缩代码
+function minify(code) {
+    // 移除单行注释（但保留 URL 中的 //）
+    code = code.replace(/(?<![:\/\w])\/\/[^\n]*/g, '');
+
+    // 移除多行注释
+    code = code.replace(/\/\*[\s\S]*?\*\//g, '');
+
+    // 移除 console 语句
+    code = code.replace(/console\.(log|debug|info|warn|error|trace|dir|time|timeEnd|table|group|groupEnd|count|countReset|assert|profile|profileEnd|clear)\s*\([^)]*\)\s*;?/g, '');
+
+    // 压缩空格
+    code = code.replace(/\r\n/g, '\n');
+    code = code.replace(/\n\s*\n/g, '\n');
+
+    // 移除行首行尾空格
+    code = code.split('\n').map(line => line.trim()).join('\n');
+
+    return code;
+}
+
+// Toast 提示
+function showToast(msg, type) {
+    const el = document.createElement('div');
+    el.className = 'toast-msg ' + type;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.3s';
+        setTimeout(() => el.remove(), 300);
+    }, 2000);
+}
