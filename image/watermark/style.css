@@ -23,7 +23,6 @@
 }
 
 .container {
-    max-width: 1200px;
     padding: 40px 0;
 }
 
@@ -258,7 +257,7 @@ h2 {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    gap: 10px;
+    gap: 20px;
 }
 
 .setting-row .setting-group:last-child label {
@@ -311,6 +310,7 @@ h2 {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+    gap: 20px;
 }
 
 /* 让应用于所有图片按钮与水印类型保持同一行 */
@@ -656,82 +656,108 @@ h2 {
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
 }
 
+
+/* 替换原有的 @media (max-width: 768px) 及 480px 中的设置区样式 */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    .watermark-settings {
+        padding: 16px;
     }
 
-    .container {
-        padding: 20px 0;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-    }
-
-    h2 {
-        font-size: 1.2rem;
-    }
-
-    /* 在小屏幕上，设置行容器变为单列 */
-    .setting-row,
-    .color-position-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
+    /* 1. 设置组改为垂直堆叠，彻底消除横向溢出 */
     .setting-group {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 8px;
         min-height: auto;
         padding-left: 0;
+        margin-bottom: 16px;
     }
 
     .setting-group:hover {
-        padding-left: 0;
         background-color: transparent;
+        padding-left: 0;
     }
 
-    .setting-group label {
-        width: 80%;
-        margin-bottom: 5px;
-        font-size: 0.9rem;
+    /* 2. 标签全宽，统一底部间距 */
+    .setting-group label,
+    .checkbox-label {
+        width: 100% !important;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        line-height: 1.4;
     }
 
+    .setting-group:first-child .checkbox-label {
+        margin-left: 0 !important;
+    }
+
+    /* 3. 输入控件全宽，移除固定宽度限制，增大触控高度 */
     .setting-group input[type="text"],
-    .setting-group select {
-        width: 95%;
+    .setting-group select,
+    .setting-group input[type="range"],
+    .setting-group input[type="color"] {
+        width: 90% !important;
+        min-width: unset !important;
+        margin: 0;
+        height: 44px;
+        /* 符合移动端触控规范 */
+    }
+
+    /* 颜色选择器特殊处理，避免全宽拉伸变形 */
+    .setting-group input[type="color"] {
+        max-width: 120px;
+        height: 44px;
+    }
+
+    /* 4. 行容器（颜色、位置等）改为垂直排列 */
+    .setting-row,
+    .color-position-container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .setting-row .setting-group,
+    .color-position-container .setting-group {
+        width: 100%;
         min-width: unset;
+        margin-bottom: 16px;
+    }
+
+    /* 5. 强制特殊组允许换行，修复 nowrap 导致的溢出 */
+    #textWatermarkGroup,
+    .setting-row .setting-group:last-child {
+        flex-wrap: wrap !important;
+    }
+
+    #textWatermarkGroup label,
+    .setting-row .setting-group:last-child label {
+        width: 100% !important;
+    }
+
+    /* 6. 交互优化 */
+    .radio-group {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .radio-label {
+        width: calc(50% - 8px);
+        /* 双列更紧凑 */
+    }
+
+    .checkbox-label .tooltip {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-top: 6px;
+        max-width: 100%;
+        background: rgba(0, 0, 0, 0.85);
     }
 
     .setting-group input[type="range"] {
-        width: 95%;
-        margin: 10px 0;
-    }
-
-    #downloadImage {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        min-width: unset;
-        font-size: 14px;
-        padding: 10px 20px;
-    }
-
-    #previewContainer {
-        min-height: 300px;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-    }
-
-    #applyWatermark,
-    #downloadCurrentImage,
-    #downloadAllImages {
-        width: 100%;
-        min-width: unset;
+        height: 24px;
+        /* 增大滑块触控区域 */
     }
 }
 
