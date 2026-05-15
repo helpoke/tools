@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="阿拉伯数字转中文大写在线工具, 数字转中文大写转换器, 支持小数, 免费数字转换工具">
+    <meta name="keywords" content="阿拉伯数字转中文, 数字转中文大写, 在线数字转换器, 壹贰叁肆伍, 免费数字转换工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿拉伯数字转中文大写 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-group input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 32px;
+            padding: 24px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+
+        .result h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .result-content {
+            background-color: white;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            word-break: break-all;
+            min-height: 24px;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .result-actions .btn {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .copy-btn {
+            background-color: #27ae60;
+        }
+
+        .copy-btn:hover {
+            background-color: #229954;
+        }
+
+        .copy-btn.copied {
+            background-color: #1e8449;
+        }
+
+        .hint {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #7f8c8d;
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .result-content {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar toggle (mobile) -->
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <!-- 侧边导航栏 -->
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor">
+                <span class="nav-icon">📦</span>图片压缩
+            </a>
+            <a href="../image/convert">
+                <span class="nav-icon">🔄</span>图片转换
+            </a>
+            <a href="../image/watermark">
+                <span class="nav-icon">💧</span>图片水印
+            </a>
+            <a href="../image/cropping">
+                <span class="nav-icon">✂️</span>图片裁剪
+            </a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping">
+                <span class="nav-icon">✂️</span>视频裁剪
+            </a>
+            <a href="../video/watermark">
+                <span class="nav-icon">🎥</span>视频水印
+            </a>
+            <a href="../video/convert">
+                <span class="nav-icon">🔄</span>视频转换
+            </a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json">
+                <span class="nav-icon">{ }</span>JSON 格式化
+            </a>
+            <a href="../yaml">
+                <span class="nav-icon">⚙️</span>YAML 格式化
+            </a>
+            <a href="../pug">
+                <span class="nav-icon">🌿</span>Pug 格式化
+            </a>
+            <a href="../pwd">
+                <span class="nav-icon">🔑</span>密码生成
+            </a>
+            <a href="../uuid">
+                <span class="nav-icon">🆔</span>UUID 生成
+            </a>
+            <a href="../mermaid">
+                <span class="nav-icon">📊</span>Mermaid 图表
+            </a>
+            <a href="../md5">
+                <span class="nav-icon">🔐</span>MD5 加密
+            </a>
+            <a href="../token">
+                <span class="nav-icon">🎫</span>Token 工具
+            </a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature">
+                <span class="nav-icon">✍️</span>签名工具
+            </a>
+            <a href="../docu/watermark">
+                <span class="nav-icon">🛡️</span>文档水印
+            </a>
+            <a href="../download">
+                <span class="nav-icon">⬇️</span>批量下载
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>纯前端运行 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>阿拉伯数字转中文大写工具</h1>
+            <p>将阿拉伯数字快速转换为中文大写数字，支持整数和小数</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="input-group">
+                    <label for="number-input">输入阿拉伯数字</label>
+                    <input type="text" id="number-input" placeholder="例如：112.5" value="112.5" data-name="输入数字">
+                </div>
+
+                <button class="btn" onclick="convertNumber()">转换</button>
+
+                <div class="result">
+                    <h3>转换结果</h3>
+                    <div class="result-content" id="result">壹佰壹拾贰点伍</div>
+                    <div class="result-actions">
+                        <button class="btn copy-btn" onclick="copyResult()">复制结果</button>
+                    </div>
+                    <div class="hint">
+                        <strong>说明：</strong>支持整数和小数转换，最大支持到万亿位。输入负数将转换为负的大写中文数字。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        // 阿拉伯数字转中文大写
+        function numberToChinese(numStr) {
+            const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+            const cnUnits = ['', '拾', '佰', '仟'];
+            const cnBigUnits = ['', '万', '亿', '万亿'];
+            const cnDecimal = '点';
+            const cnNegative = '负';
+
+            let isNegative = false;
+            let input = numStr.trim();
+
+            if (input.startsWith('-')) {
+                isNegative = true;
+                input = input.substring(1);
+            }
+
+            // 分离整数和小数部分
+            let parts = input.split('.');
+            let integerPart = parts[0];
+            let decimalPart = parts.length > 1 ? parts[1] : '';
+
+            // 去除前导零
+            integerPart = integerPart.replace(/^0+/, '') || '0';
+
+            // 转换整数部分
+            function convertInteger(num) {
+                if (num === '0') return '零';
+
+                let result = '';
+                let zeroFlag = false;
+
+                // 按四位一组处理
+                let chunks = [];
+                let temp = num;
+                while (temp.length > 0) {
+                    let chunk = temp.slice(-4);
+                    chunks.unshift(chunk);
+                    temp = temp.slice(0, -4);
+                }
+
+                for (let i = 0; i < chunks.length; i++) {
+                    let chunk = chunks[i];
+                    let chunkResult = '';
+                    let hasNonZero = false;
+
+                    for (let j = 0; j < chunk.length; j++) {
+                        let digit = parseInt(chunk[j]);
+                        let unitIndex = chunk.length - 1 - j;
+
+                        if (digit === 0) {
+                            zeroFlag = true;
+                        } else {
+                            if (zeroFlag && chunkResult !== '') {
+                                chunkResult += '零';
+                            }
+                            chunkResult += cnNums[digit] + cnUnits[unitIndex];
+                            hasNonZero = true;
+                            zeroFlag = false;
+                        }
+                    }
+
+                    // 添加大单位
+                    if (hasNonZero && i < chunks.length - 1) {
+                        chunkResult += cnBigUnits[chunks.length - 1 - i];
+                    }
+
+                    result += chunkResult;
+                }
+
+                // 处理末尾的零
+                result = result.replace(/零+$/, '');
+
+                return result;
+            }
+
+            // 转换小数部分
+            function convertDecimal(decimal) {
+                if (!decimal) return '';
+                let result = cnDecimal;
+                for (let i = 0; i < decimal.length; i++) {
+                    let digit = parseInt(decimal[i]);
+                    if (!isNaN(digit)) {
+                        result += cnNums[digit];
+                    }
+                }
+                return result;
+            }
+
+            let chineseResult = '';
+            if (isNegative) {
+                chineseResult += cnNegative;
+            }
+            chineseResult += convertInteger(integerPart);
+            if (decimalPart) {
+                chineseResult += convertDecimal(decimalPart);
+            }
+
+            return chineseResult;
+        }
+
+        function convertNumber() {
+            const input = document.getElementById('number-input').value;
+
+            // 验证输入
+            if (!input.trim()) {
+                utils.showError('请输入数字');
+                return;
+            }
+
+            // 检查是否为有效数字格式
+            const numRegex = /^-?\d+(\.\d+)?$/;
+            if (!numRegex.test(input.trim())) {
+                utils.showError('请输入有效的数字格式');
+                return;
+            }
+
+            const result = numberToChinese(input);
+            document.getElementById('result').textContent = result;
+        }
+
+        // 复制结果
+        function copyResult() {
+            const resultText = document.getElementById('result').textContent;
+
+            navigator.clipboard.writeText(resultText).then(function () {
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '已复制';
+                copyBtn.classList.add('copied');
+
+                setTimeout(function () {
+                    copyBtn.textContent = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+
+                utils.showSuccess('已复制到剪贴板！');
+            }).catch(function (err) {
+                console.error('复制失败:', err);
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // 输入框实时转换
+        document.getElementById('number-input').addEventListener('input', function (e) {
+            const input = e.target.value;
+            if (/^-?\d*\.?\d*$/.test(input) && input.trim() !== '' && input !== '-') {
+                const result = numberToChinese(input);
+                document.getElementById('result').textContent = result;
+            } else if (input === '' || input === '-') {
+                document.getElementById('result').textContent = '';
+            }
+        });
+
+        // 回车键触发转换
+        document.getElementById('number-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                convertNumber();
+            }
+        });
+
+        // 初始转换
+        convertNumber();
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
