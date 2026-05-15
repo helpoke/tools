@@ -381,8 +381,12 @@
         /* Categories grid */
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
+        }
+
+        .category-card.full-width {
+            grid-column: span 2;
         }
 
         .category-card {
@@ -453,6 +457,11 @@
             display: flex;
             flex-direction: column;
             padding: 8px;
+        }
+
+        .category-card.full-width .tools-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .tool-link {
@@ -582,6 +591,14 @@
             }
 
             .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card.full-width {
+                grid-column: span 1;
+            }
+
+            .category-card.full-width .tools-list {
                 grid-template-columns: 1fr;
             }
         }
@@ -765,12 +782,19 @@
                 <div class="stat-card">
                     <div class="stat-icon purple">🔧</div>
                     <div class="stat-info">
-                        <div class="stat-value">9</div>
+                        <div class="stat-value">6</div>
                         <div class="stat-label">开发工具</div>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon amber">📄</div>
+                    <div class="stat-icon amber">📋</div>
+                    <div class="stat-info">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">数据/日常</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue">📄</div>
                     <div class="stat-info">
                         <div class="stat-value">3</div>
                         <div class="stat-label">文档/下载</div>
@@ -853,17 +877,31 @@
                     </div>
                 </div>
 
-                <!-- 开发工具 -->
+                <!-- 日常工具 -->
                 <div class="category-card">
                     <div class="category-header">
-                        <div class="category-icon dev">🔧</div>
-                        <span class="category-title">开发工具</span>
+                        <div class="category-icon data">🔧</div>
+                        <span class="category-title">日常工具</span>
                     </div>
                     <div class="tools-list">
                         <a href="pwd" class="tool-link">
                             <span class="icon">🔑</span>密码生成（批量）
                             <span class="badge">安全</span>
                         </a>
+                        <a href="number-to-chinese" class="tool-link">
+                            <span class="icon">🔢</span>数字转中文大写（阿拉伯转中文）
+                            <span class="badge">转换</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 开发工具（独占一行） -->
+                <div class="category-card full-width">
+                    <div class="category-header">
+                        <div class="category-icon dev">🛠️</div>
+                        <span class="category-title">开发工具</span>
+                    </div>
+                    <div class="tools-list">
                         <a href="uuid" class="tool-link">
                             <span class="icon">🆔</span>UUID 生成（批量）
                             <span class="badge">ID</span>
@@ -880,15 +918,14 @@
                             <span class="icon">🎫</span>Token 工具（JWT+Token）
                             <span class="badge">令牌</span>
                         </a>
-                        <a href="num-to-chinese" class="tool-link">
-                            <span class="icon">🔢</span>数字转中文大写（阿拉伯转中文）
-                            <span class="badge">转换</span>
-                        </a>
                         <a href="cron" class="tool-link">
                             <span class="icon">⏰</span>Cron 解析（定时任务）
                             <span class="badge">定时</span>
                         </a>
-
+                        <a href="js-secrecy" class="tool-link">
+                            <span class="icon">🛡️</span>JS 代码保护（压缩混淆+WASM）
+                            <span class="badge">加密</span>
+                        </a>
                     </div>
                 </div>
 
