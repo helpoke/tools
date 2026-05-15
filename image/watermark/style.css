@@ -657,107 +657,89 @@ h2 {
 }
 
 
-/* 替换原有的 @media (max-width: 768px) 及 480px 中的设置区样式 */
 @media (max-width: 768px) {
-    .watermark-settings {
-        padding: 16px;
-    }
+    /* 其他移动端全局样式保留... */
 
-    /* 1. 设置组改为垂直堆叠，彻底消除横向溢出 */
+    /* ===== 设置组同行对齐核心代码 ===== */
     .setting-group {
-        flex-direction: column;
-        align-items: stretch;
+        display: flex;
+        flex-direction: row;
+        /* 横向排列 */
+        flex-wrap: nowrap;
+        /* 核心：强制禁止换行 */
+        align-items: center;
+        /* 垂直居中 */
         justify-content: flex-start;
-        gap: 8px;
+        gap: 10px;
+        /* 元素间距，替代 margin */
         min-height: auto;
-        padding-left: 0;
-        margin-bottom: 16px;
+        padding: 0;
+        margin-bottom: 12px;
     }
 
-    .setting-group:hover {
-        background-color: transparent;
-        padding-left: 0;
+    /* 标签：固定自身宽度，绝不压缩 */
+    .setting-group label {
+        width: auto;
+        flex-shrink: 0;
+        /* 防止标签被输入框挤压缩小 */
+        font-size: 0.9rem;
+        margin-bottom: 0;
+        white-space: nowrap;
+        /* 长标签也不换行 */
     }
 
-    /* 2. 标签全宽，统一底部间距 */
-    .setting-group label,
-    .checkbox-label {
-        width: 100% !important;
-        margin-bottom: 8px;
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-
-    .setting-group:first-child .checkbox-label {
-        margin-left: 0 !important;
-    }
-
-    /* 3. 输入控件全宽，移除固定宽度限制，增大触控高度 */
+    /* 文本框/下拉框：自动占满剩余空间，允许收缩 */
     .setting-group input[type="text"],
-    .setting-group select,
-    .setting-group input[type="range"],
-    .setting-group input[type="color"] {
-        width: 90% !important;
-        min-width: unset !important;
+    .setting-group select {
+        flex: 1;
+        /* 自动伸展占满空隙 */
+        width: auto;
+        /* 覆盖原有的 calc(100% - 160px) */
+        min-width: 0;
+        /* 关键：允许 flex 子项收缩到比内容更窄 */
+        padding: 8px 10px;
+    }
+
+    /* 滑块：同样占满剩余空间 */
+    .setting-group input[type="range"] {
+        flex: 1;
         margin: 0;
-        height: 44px;
-        /* 符合移动端触控规范 */
+        height: 6px;
     }
 
-    /* 颜色选择器特殊处理，避免全宽拉伸变形 */
+    /* 滑块/输入框后面的数值：固定显示，不换行 */
+    .setting-group input[type="range"]+span,
+    .setting-group input[type="text"]+span,
+    .setting-group>span:not(.tooltip-icon):not(.description) {
+        flex-shrink: 0;
+        /* 数值不参与压缩 */
+        white-space: nowrap;
+        /* 强制单行显示 */
+        min-width: 24px;
+        /* 预留最小宽度防重叠 */
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+
+    /* 颜色选择器：保持固定宽度，不参与伸缩 */
     .setting-group input[type="color"] {
-        max-width: 120px;
-        height: 44px;
+        width: 60px;
+        flex-shrink: 0;
     }
 
-    /* 4. 行容器（颜色、位置等）改为垂直排列 */
-    .setting-row,
-    .color-position-container {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .setting-row .setting-group,
-    .color-position-container .setting-group {
-        width: 100%;
-        min-width: unset;
-        margin-bottom: 16px;
-    }
-
-    /* 5. 强制特殊组允许换行，修复 nowrap 导致的溢出 */
-    #textWatermarkGroup,
-    .setting-row .setting-group:last-child {
-        flex-wrap: wrap !important;
-    }
-
-    #textWatermarkGroup label,
-    .setting-row .setting-group:last-child label {
-        width: 100% !important;
-    }
-
-    /* 6. 交互优化 */
+    /* 修复单选/复选框组在小屏的布局 */
     .radio-group {
         flex-wrap: wrap;
         gap: 8px;
     }
 
+    .tooltip {
+        display: none;
+    }
+
     .radio-label {
-        width: calc(50% - 8px);
-        /* 双列更紧凑 */
-    }
-
-    .checkbox-label .tooltip {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin-top: 6px;
-        max-width: 100%;
-        background: rgba(0, 0, 0, 0.85);
-    }
-
-    .setting-group input[type="range"] {
-        height: 24px;
-        /* 增大滑块触控区域 */
+        width: auto;
     }
 }
 
