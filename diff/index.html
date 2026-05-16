@@ -26,7 +26,7 @@
         .tool-card {
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
             padding: 28px;
         }
 
@@ -56,8 +56,13 @@
             color: #1e293b;
         }
 
-        .panel-label.old { color: #dc2626; }
-        .panel-label.new { color: #16a34a; }
+        .panel-label.old {
+            color: #dc2626;
+        }
+
+        .panel-label.new {
+            color: #16a34a;
+        }
 
         .panel-actions {
             display: flex;
@@ -96,10 +101,12 @@
         .input-panel textarea:focus {
             outline: none;
             border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
-        .input-panel input[type="file"] { display: none; }
+        .input-panel input[type="file"] {
+            display: none;
+        }
 
         .btn {
             padding: 10px 20px;
@@ -116,7 +123,9 @@
             color: #fff;
         }
 
-        .btn-primary:hover { background: #4338ca; }
+        .btn-primary:hover {
+            background: #4338ca;
+        }
 
         .btn-outline {
             background: #fff;
@@ -195,9 +204,20 @@
             flex-shrink: 0;
         }
 
-        .dot.add { background: #bbf7d0; border: 1px solid #86efac; }
-        .dot.del { background: #fecaca; border: 1px solid #fca5a5; }
-        .dot.mod { background: #fef08a; border: 1px solid #fde047; }
+        .dot.add {
+            background: #bbf7d0;
+            border: 1px solid #86efac;
+        }
+
+        .dot.del {
+            background: #fecaca;
+            border: 1px solid #fca5a5;
+        }
+
+        .dot.mod {
+            background: #fef08a;
+            border: 1px solid #fde047;
+        }
 
         /* Diff result */
         .diff-container {
@@ -251,16 +271,39 @@
             min-width: 300px;
         }
 
-        .diff-line-empty { background: #f8fafc; }
-        .diff-line-add { background: #f0fdf4; }
-        .diff-line-del { background: #fef2f2; }
-        .diff-line-mod { background: #fefce8; }
+        .diff-line-empty {
+            background: #f8fafc;
+        }
 
-        .diff-line-add .content-cell { color: #15803d; }
-        .diff-line-del .content-cell { color: #b91c1c; }
+        .diff-line-add {
+            background: #f0fdf4;
+        }
 
-        .diff-line-add .content-cell::before { content: '+ '; font-weight: 700; }
-        .diff-line-del .content-cell::before { content: '- '; font-weight: 700; }
+        .diff-line-del {
+            background: #fef2f2;
+        }
+
+        .diff-line-mod {
+            background: #fefce8;
+        }
+
+        .diff-line-add .content-cell {
+            color: #15803d;
+        }
+
+        .diff-line-del .content-cell {
+            color: #b91c1c;
+        }
+
+        .diff-line-add .content-cell::before {
+            content: '+ ';
+            font-weight: 700;
+        }
+
+        .diff-line-del .content-cell::before {
+            content: '- ';
+            font-weight: 700;
+        }
 
         .placeholder {
             text-align: center;
@@ -269,21 +312,53 @@
             font-size: 14px;
         }
 
-        .placeholder .icon { font-size: 40px; margin-bottom: 12px; }
+        .placeholder .icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
 
         @media (max-width: 768px) {
-            .container { padding: 40px 16px; }
-            .tool-card { padding: 20px; }
-            .input-panels { grid-template-columns: 1fr; }
-            .actions-row { flex-direction: column; align-items: stretch; }
-            .options-row { margin-left: 0; }
-            .diff-table .ln { width: 32px; min-width: 32px; font-size: 11px; }
-            .diff-table td { padding: 1px 4px; font-size: 12px; }
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .input-panels {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .options-row {
+                margin-left: 0;
+            }
+
+            .diff-table .ln {
+                width: 32px;
+                min-width: 32px;
+                font-size: 11px;
+            }
+
+            .diff-table td {
+                padding: 1px 4px;
+                font-size: 12px;
+            }
         }
 
         @media (max-width: 480px) {
-            .container { padding: 24px 12px; }
-            .tool-card { padding: 16px; }
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 16px;
+            }
         }
     </style>
 </head>
@@ -354,7 +429,7 @@
                 <span class="nav-icon">🎫</span>Token 工具
             </a>
             <a href="../num-to-chinese">
-                <span class="nav-icon">🔢</span>数字转中文
+                <span class="nav-icon">🔢</span>数字&中文互转
             </a>
             <a href="../qrcode">
                 <span class="nav-icon">📱</span>二维码
@@ -414,7 +489,9 @@
                             <span class="panel-label old">原始文本</span>
                             <div class="panel-actions">
                                 <button class="btn-sm" onclick="loadFile('old')">📁 打开文件</button>
-                                <input type="file" id="file-old" accept=".txt,.csv,.json,.xml,.html,.css,.js,.ts,.md,.log,.yml,.yaml,.sql,.py,.java,.c,.cpp,.h,.sh,.bat,.ini,.cfg,.properties,.svg,.vue,.jsx,.tsx" onchange="handleFile(this, 'old')">
+                                <input type="file" id="file-old"
+                                    accept=".txt,.csv,.json,.xml,.html,.css,.js,.ts,.md,.log,.yml,.yaml,.sql,.py,.java,.c,.cpp,.h,.sh,.bat,.ini,.cfg,.properties,.svg,.vue,.jsx,.tsx"
+                                    onchange="handleFile(this, 'old')">
                             </div>
                         </div>
                         <textarea id="input-old" placeholder="输入或粘贴原始文本..."></textarea>
@@ -424,7 +501,9 @@
                             <span class="panel-label new">新文本</span>
                             <div class="panel-actions">
                                 <button class="btn-sm" onclick="loadFile('new')">📁 打开文件</button>
-                                <input type="file" id="file-new" accept=".txt,.csv,.json,.xml,.html,.css,.js,.ts,.md,.log,.yml,.yaml,.sql,.py,.java,.c,.cpp,.h,.sh,.bat,.ini,.cfg,.properties,.svg,.vue,.jsx,.tsx" onchange="handleFile(this, 'new')">
+                                <input type="file" id="file-new"
+                                    accept=".txt,.csv,.json,.xml,.html,.css,.js,.ts,.md,.log,.yml,.yaml,.sql,.py,.java,.c,.cpp,.h,.sh,.bat,.ini,.cfg,.properties,.svg,.vue,.jsx,.tsx"
+                                    onchange="handleFile(this, 'new')">
                             </div>
                         </div>
                         <textarea id="input-new" placeholder="输入或粘贴新文本..."></textarea>
@@ -509,7 +588,7 @@
             var diff = computeLCS(oldWords, newWords);
 
             var oldHtml = '', newHtml = '';
-            diff.forEach(function(d) {
+            diff.forEach(function (d) {
                 if (d.type === 'same') {
                     oldHtml += escHtml(d.line);
                     newHtml += escHtml(d.line);
@@ -554,7 +633,7 @@
 
             // Count stats
             var added = 0, removed = 0, same = 0;
-            diff.forEach(function(d) {
+            diff.forEach(function (d) {
                 if (d.type === 'add') added++;
                 else if (d.type === 'del') removed++;
                 else same++;
@@ -571,7 +650,7 @@
             var html = '<table class="diff-table"><tbody>';
             var oldLineNum = 0, newLineNum = 0;
 
-            diff.forEach(function(d) {
+            diff.forEach(function (d) {
                 if (d.type === 'del') {
                     oldLineNum++;
                     html += '<tr class="diff-line-del">' +
@@ -653,10 +732,10 @@
         function isBinaryFile(file) {
             // Check extension first
             var name = file.name.toLowerCase();
-            var textExts = ['.txt','.csv','.json','.xml','.html','.htm','.css','.js','.ts','.md',
-                '.log','.yml','.yaml','.sql','.py','.java','.c','.cpp','.h','.sh','.bat',
-                '.ini','.cfg','.config','.properties','.svg','.vue','.jsx','.tsx','.php',
-                '.rb','.go','.rs','.swift','.kt','.scala','.lua','.r','.pl','.pm','.toml'];
+            var textExts = ['.txt', '.csv', '.json', '.xml', '.html', '.htm', '.css', '.js', '.ts', '.md',
+                '.log', '.yml', '.yaml', '.sql', '.py', '.java', '.c', '.cpp', '.h', '.sh', '.bat',
+                '.ini', '.cfg', '.config', '.properties', '.svg', '.vue', '.jsx', '.tsx', '.php',
+                '.rb', '.go', '.rs', '.swift', '.kt', '.scala', '.lua', '.r', '.pl', '.pm', '.toml'];
             for (var i = 0; i < textExts.length; i++) {
                 if (name.endsWith(textExts[i])) return false;
             }
@@ -677,7 +756,7 @@
             }
 
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 // Check for null bytes in first 4KB (binary indicator)
                 var text = e.target.result;
                 if (text.indexOf('\x00') !== -1) {
@@ -689,7 +768,7 @@
                 input.value = '';
                 doDiff();
             };
-            reader.onerror = function() {
+            reader.onerror = function () {
                 utils.showError('文件读取失败');
                 input.value = '';
             };
@@ -715,8 +794,8 @@
 
         // Real-time with debounce
         var diffTimer = null;
-        ['input-old', 'input-new'].forEach(function(id) {
-            document.getElementById(id).addEventListener('input', function() {
+        ['input-old', 'input-new'].forEach(function (id) {
+            document.getElementById(id).addEventListener('input', function () {
                 clearTimeout(diffTimer);
                 diffTimer = setTimeout(doDiff, 500);
             });

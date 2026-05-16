@@ -48,15 +48,22 @@
             transition: all 0.2s;
         }
 
-        .tab-btn:hover { color: #3498db; }
+        .tab-btn:hover {
+            color: #3498db;
+        }
 
         .tab-btn.active {
             color: #3498db;
             border-bottom-color: #3498db;
         }
 
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
 
         .input-group {
             margin-bottom: 20px;
@@ -102,7 +109,9 @@
             white-space: nowrap;
         }
 
-        .btn:hover { background-color: #2980b9; }
+        .btn:hover {
+            background-color: #2980b9;
+        }
 
         .btn-outline {
             background: white;
@@ -110,14 +119,21 @@
             border: 1px solid #3498db;
         }
 
-        .btn-outline:hover { background: #f0f7ff; }
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
 
         .btn-copy {
             background-color: #27ae60;
         }
 
-        .btn-copy:hover { background-color: #229954; }
-        .btn-copy.copied { background-color: #1e8449; }
+        .btn-copy:hover {
+            background-color: #229954;
+        }
+
+        .btn-copy.copied {
+            background-color: #1e8449;
+        }
 
         .btn-swap {
             background: #f8f9fa;
@@ -160,8 +176,15 @@
             transition: all 0.2s;
         }
 
-        .mode-toggle button:first-child { border-radius: 6px 0 0 6px; }
-        .mode-toggle button:last-child { border-radius: 0 6px 6px 0; border-left: none; }
+        .mode-toggle button:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        .mode-toggle button:last-child {
+            border-radius: 0 6px 6px 0;
+            border-left: none;
+        }
+
         .mode-toggle button.active {
             background: #3498db;
             color: white;
@@ -176,16 +199,37 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 40px 16px; }
-            .tool-card { padding: 24px; }
-            .actions-row { flex-direction: column; align-items: stretch; }
-            .mode-toggle { margin-left: 0; }
-            .tab-btn { padding: 10px 16px; font-size: 14px; }
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .actions-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .mode-toggle {
+                margin-left: 0;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
-            .container { padding: 24px 12px; }
-            .tool-card { padding: 18px; }
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
         }
     </style>
 </head>
@@ -256,7 +300,7 @@
                 <span class="nav-icon">🎫</span>Token 工具
             </a>
             <a href="../num-to-chinese">
-                <span class="nav-icon">🔢</span>数字转中文
+                <span class="nav-icon">🔢</span>数字&中文互转
             </a>
             <a href="../qrcode">
                 <span class="nav-icon">📱</span>二维码
@@ -327,7 +371,8 @@
                         <button class="btn" onclick="doEncode()">编码</button>
                         <button class="btn btn-outline" onclick="clearAll('encode')">清空</button>
                         <div class="mode-toggle">
-                            <button class="active" data-mode="component" onclick="switchEncodeMode(this, 'component')">encodeURIComponent</button>
+                            <button class="active" data-mode="component"
+                                onclick="switchEncodeMode(this, 'component')">encodeURIComponent</button>
                             <button data-mode="uri" onclick="switchEncodeMode(this, 'uri')">encodeURI</button>
                         </div>
                     </div>
@@ -385,10 +430,10 @@
         var encodeMode = 'component';
 
         function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-            document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
             document.getElementById('tab-' + tab).classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(function(b) {
+            document.querySelectorAll('.tab-btn').forEach(function (b) {
                 if ((tab === 'encode' && b.textContent.indexOf('编码') !== -1 && b.textContent.indexOf('解码') === -1) ||
                     (tab === 'decode' && b.textContent.indexOf('解码') !== -1)) {
                     b.classList.add('active');
@@ -398,7 +443,7 @@
 
         function switchEncodeMode(btn, mode) {
             encodeMode = mode;
-            btn.parentElement.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+            btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
             btn.classList.add('active');
             // Re-encode if output already exists
             if (document.getElementById('encode-output').value) doEncode();
@@ -450,9 +495,9 @@
             var textarea = document.getElementById(textareaId);
             var val = textarea.value;
             if (!val) { utils.showError('没有可复制的内容'); return; }
-            navigator.clipboard.writeText(val).then(function() {
+            navigator.clipboard.writeText(val).then(function () {
                 utils.showSuccess('已复制到剪贴板！');
-            }).catch(function() { utils.showError('复制失败，请手动复制'); });
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
         }
 
         function clearAll(tab) {
@@ -464,7 +509,7 @@
         }
 
         // Real-time encode/decode
-        document.getElementById('encode-input').addEventListener('input', function() {
+        document.getElementById('encode-input').addEventListener('input', function () {
             document.getElementById('encode-count').textContent = '字符数: ' + this.value.length;
             if (this.value) doEncode(); else {
                 document.getElementById('encode-output').value = '';
@@ -472,7 +517,7 @@
             }
         });
 
-        document.getElementById('decode-input').addEventListener('input', function() {
+        document.getElementById('decode-input').addEventListener('input', function () {
             document.getElementById('decode-count').textContent = '字符数: ' + this.value.length;
             if (this.value) doDecode(); else {
                 document.getElementById('decode-output').value = '';
