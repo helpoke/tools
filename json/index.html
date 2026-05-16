@@ -64,9 +64,6 @@
             <a href="../pug">
                 <span class="nav-icon">🌿</span>Pug 格式化
             </a>
-            <a href="../xml">
-                <span class="nav-icon">📐</span>XML 格式化
-            </a>
             <a href="../pwd">
                 <span class="nav-icon">🔑</span>密码生成
             </a>
@@ -79,41 +76,11 @@
             <a href="../md5">
                 <span class="nav-icon">🔐</span>MD5 加密
             </a>
-            <a href="../sha">
-                <span class="nav-icon">🔏</span>SHA 加密
-            </a>
             <a href="../token">
                 <span class="nav-icon">🎫</span>Token 工具
             </a>
             <a href="../num-to-chinese">
-                <span class="nav-icon">🔢</span>数字&中文互转
-            </a>
-            <a href="../qrcode">
-                <span class="nav-icon">📱</span>二维码
-            </a>
-            <a href="../diff">
-                <span class="nav-icon">📋</span>内容对比
-            </a>
-            <a href="../cron">
-                <span class="nav-icon">⏰</span>Cron 解析
-            </a>
-            <a href="../timestamp">
-                <span class="nav-icon">🕐</span>时间戳转换
-            </a>
-            <a href="../urlcode">
-                <span class="nav-icon">🔗</span>URL 编解码
-            </a>
-            <a href="../base-convert">
-                <span class="nav-icon">🧮</span>进制转换
-            </a>
-            <a href="../color-picker">
-                <span class="nav-icon">🎨</span>取色器
-            </a>
-            <a href="../regex">
-                <span class="nav-icon">🔍</span>正则表达式
-            </a>
-            <a href="../js-secrecy">
-                <span class="nav-icon">🛡️</span>JS 混淆加密
+                <span class="nav-icon">🔢</span>数字转中文大写
             </a>
 
             <div class="nav-section">文档 & 下载</div>
@@ -140,9 +107,10 @@
 
             <!-- Tab导航 -->
             <div class="tabs">
-                <button class="tab-btn active" data-tab="format"><b>JSON格式化</b></button>
-                <button class="tab-btn" data-tab="compare"><b>JSON比对</b></button>
-                <button class="tab-btn" data-tab="javabean"><b>Java Bean互转</b></button>
+                <button class="tab-btn active" data-tab="format"><b>格式化</b></button>
+                <button class="tab-btn" data-tab="compare"><b>比对</b></button>
+                <button class="tab-btn" data-tab="javabean"><b>转Java</b></button>
+                <button class="tab-btn" data-tab="xml"><b>转XML</b></button>
             </div>
 
             <!-- Tab内容区域 -->
@@ -151,7 +119,7 @@
                 <div id="format-tab" class="tab-pane active">
                     <div class="tool-container">
                         <div class="compare-header">
-                            <h2>JSON格式化</h2>
+                            <h2>格式化</h2>
                             <div class="button-group">
                                 <button id="paste-btn">粘贴</button>
                                 <button id="copy-btn">复制</button>
@@ -195,7 +163,7 @@
                 <div id="compare-tab" class="tab-pane">
                     <div class="compare-container">
                         <div class="compare-header">
-                            <h2>JSON比对</h2>
+                            <h2>比对</h2>
                             <div class="button-group">
                                 <button id="start-compare-btn">比对</button>
                                 <button id="sync-format-btn">同步格式化</button>
@@ -258,11 +226,68 @@
                     </div>
                 </div>
 
+                <!-- JSON转XML Tab -->
+                <div id="xml-tab" class="tab-pane">
+                    <div class="xml-container">
+                        <div class="compare-header">
+                            <h2>JSON 转 XML</h2>
+                            <div class="button-group">
+                                <button id="json-to-xml-btn">转XML</button>
+                                <button id="xml-to-json-btn">转JSON</button>
+                                <button id="sync-clear-xml-btn">同步清空</button>
+                            </div>
+                        </div>
+                        <div class="compare-content">
+                            <div class="compare-box original">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>JSON</h3>
+                                    <div class="button-group">
+                                        <button id="copy-xml-json-btn" class="copy-btn">复制</button>
+                                        <button id="format-xml-json-btn" class="format-btn">格式化</button>
+                                        <button id="minify-xml-json-btn" class="minify-btn">压缩</button>
+                                        <button id="clear-xml-json-btn" class="clear-btn">清除</button>
+                                    </div>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="xml-json-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="xml-json-editor" class="json-editor" contenteditable="true"
+                                            data-placeholder="请输入JSON数据...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compare-box target">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>XML</h3>
+                                    <div class="button-group">
+                                        <button id="copy-xml-output-btn" class="copy-btn">复制</button>
+                                        <button id="format-xml-output-btn" class="format-btn">格式化</button>
+                                        <button id="clear-xml-output-btn" class="clear-btn">清除</button>
+                                    </div>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="xml-output-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="xml-output-editor" class="json-editor" contenteditable="true"
+                                            data-placeholder="XML转换结果将显示在这里...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- JSON与Java Bean互转Tab -->
                 <div id="javabean-tab" class="tab-pane">
                     <div class="javabean-container">
                         <div class="compare-header">
-                            <h2>Java Bean互转</h2>
+                            <h2>转Java Bean</h2>
                             <div class="button-group">
                                 <button id="clear-bean-btn">同步清空</button>
                             </div>
