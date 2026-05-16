@@ -79,6 +79,14 @@
             background-color: #7f8c8d;
         }
 
+        .btn.copy {
+            background-color: #25339f;
+        }
+
+        .btn.copy:hover {
+            background-color: #0d5a60;
+        }
+
         .io-panels {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -102,7 +110,8 @@
 
         .io-panel textarea {
             width: 100%;
-            height: 360px;
+            height: 600px;
+            background: #C7EDCC;
             padding: 12px 16px;
             border: 1px solid #eaeaea;
             border-radius: 8px;
@@ -130,6 +139,10 @@
             font-size: 13px;
             color: #7f8c8d;
             margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 10px 12px;
         }
 
         .stats span {
@@ -313,10 +326,11 @@
         <div class="container">
             <div class="tool-card">
                 <div class="toolbar">
-                    <button class="btn" onclick="doFormat()" title="格式化 XML（缩进美化）">📐 格式化</button>
-                    <button class="btn" onclick="doMinify()" title="压缩 XML（去除空白）">📦 压缩</button>
-                    <button class="btn accent" onclick="doXml2Json()" title="XML 转 JSON">XML → JSON</button>
-                    <button class="btn accent" onclick="doJson2Xml()" title="JSON 转 XML">JSON → XML</button>
+                    <button class="btn" onclick="doFormat()" title="格式化 XML（缩进美化）">格式化</button>
+                    <button class="btn" onclick="doMinify()" title="压缩 XML（去除空白）">压缩</button>
+                    <button class="btn accent" onclick="doXml2Json()" title="XML 转 JSON">转 JSON</button>
+                    <button class="btn accent" onclick="doJson2Xml()" title="JSON 转 XML">转 XML</button>
+                    <button class="btn copy" onclick="doCopy()">复制</button>
                     <button class="btn gray" onclick="doClear()">清空</button>
                 </div>
 
@@ -337,9 +351,6 @@
                     <div class="io-panel">
                         <label for="output-xml">输出</label>
                         <textarea id="output-xml" readonly placeholder="处理结果将显示在此"></textarea>
-                        <div class="output-toolbar">
-                            <button class="btn gray" onclick="doCopy()">复制输出</button>
-                        </div>
                     </div>
                 </div>
 
@@ -387,43 +398,64 @@
             document.getElementById('stat-lines').textContent = val ? val.split('\n').length : 0;
         }
 
-        // 格式化 XML
-        function formatXml(xml) {
-            var formatted = '';
-            var indent = '';
-            var reg = /(>)(<)(\/*)/g;
-            xml = xml.replace(reg, '$1\n$2$3');
-            var nodes = xml.split('\n');
-            for (var i = 0; i < nodes.length; i++) {
-                var line = nodes[i].trim();
-                if (!line) continue;
-                if (line.match(/^<\?/)) {
-                    formatted += line + '\n';
-                    continue;
-                }
-                if (line.match(/<!--/)) {
-                    formatted += indent + line + '\n';
-                continue;
-            }
-            if (line.match(/<\/\w/)) {
-                indent = indent.substring(2);
-            }
-            if (line.match(/^<\w[^>]*[^/]>/)) {
-                formatted += indent + line.replace(/\s+/g, function (m) {
-                    if (m.indexOf(' ') === 0) return ' ';
-                    return m;
-                });
-                if (!line.match(/\/>$/) && !line.match(/^<!\D/)) {
-                    indent += '  ';
-                }
-                formatted += '\n';
-            } else if (line.match(/^<\/\w/) || line.match(/^<\w[^>]*\/>/)) {
-                formatted += indent + line + '\n';
-            } else {
-                formatted += indent + line + '\n';
-            }
+        function escapeXml(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
         }
-        return formatted.trim();
+
+        // 格式化 XML —— DOM 递归缩进
+        function formatXmlNode(node, depth) {
+            var prefix = '';
+            for (var i = 0; i < depth; i++) prefix += '  ';
+
+            if (node.nodeType === 1) {
+                var tag = '<' + node.nodeName;
+                for (var a = 0; a < node.attributes.length; a++) {
+                    var attr = node.attributes[a];
+                    tag += ' ' + attr.name + '="' + escapeXml(attr.value) + '"';
+                }
+
+                var hasChild = node.childNodes.length > 0;
+                var hasElem = false;
+                for (var c = 0; c < node.childNodes.length; c++) {
+                    if (node.childNodes[c].nodeType === 1) { hasElem = true; break; }
+                }
+
+                if (!hasChild) {
+                    return prefix + tag + '/>';
+                }
+                if (!hasElem) {
+                    var txt = node.textContent || '';
+                    return prefix + tag + '>' + txt + '</' + node.nodeName + '>';
+                }
+
+                var lines = [prefix + tag + '>'];
+                for (var d = 0; d < node.childNodes.length; d++) {
+                    var childLine = formatXmlNode(node.childNodes[d], depth + 1);
+                    if (childLine) lines.push(childLine);
+                }
+                lines.push(prefix + '</' + node.nodeName + '>');
+                return lines.join('\n');
+            }
+            if (node.nodeType === 4) {
+                return prefix + '<![CDATA[' + node.nodeValue + ']]>';
+            }
+            if (node.nodeType === 8) {
+                return prefix + '<!--' + node.nodeValue + '-->';
+            }
+            return '';
+        }
+
+        function formatXml(xml) {
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(xml, 'text/xml');
+            var err = doc.querySelector('parsererror');
+            if (err) throw new Error(err.textContent.replace(/\n/g, ' '));
+            var decl = '';
+            if (doc.xmlVersion) {
+                decl = '<?xml version="' + doc.xmlVersion + '" encoding="UTF-8"?>';
+            }
+            var body = formatXmlNode(doc.documentElement, 0);
+            return decl ? decl + '\n' + body : body;
         }
 
         function doFormat() {
@@ -431,18 +463,9 @@
             var xml = getInput().trim();
             if (!xml) { showError('请输入 XML 内容'); return; }
             try {
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(xml, 'text/xml');
-                var err = doc.querySelector('parsererror');
-                if (err) {
-                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
-                    return;
-                }
-                var serializer = new XMLSerializer();
-                var pretty = formatXml(serializer.serializeToString(doc));
-                setOutput(pretty);
+                setOutput(formatXml(xml));
             } catch (e) {
-                showError('格式化失败: ' + e.message);
+                showError('XML 解析错误: ' + e.message);
             }
         }
 
@@ -470,42 +493,42 @@
             }
         }
 
-        // XML → JSON
+        // XML → JSON（属性直接放对象上，文本内容用 value 键）
         function xmlToJson(xml) {
             var obj = {};
-            if (xml.nodeType === 1) {
-                if (xml.attributes.length > 0) {
-                    obj['@attributes'] = {};
-                    for (var j = 0; j < xml.attributes.length; j++) {
-                        var attr = xml.attributes.item(j);
-                        obj['@attributes'][attr.nodeName] = attr.nodeValue;
-                    }
-                }
-            }
+
             if (xml.nodeType === 3 || xml.nodeType === 4) {
-                var v = xml.nodeValue.trim();
-                return v || '';
+                return xml.nodeValue.trim() || '';
             }
-            if (xml.hasChildNodes()) {
+
+            if (xml.nodeType === 1) {
+                // 属性直接放到对象上
+                for (var j = 0; j < xml.attributes.length; j++) {
+                    var attr = xml.attributes.item(j);
+                    obj[attr.nodeName] = attr.nodeValue;
+                }
+
                 var hasElementChild = false;
                 for (var i = 0; i < xml.childNodes.length; i++) {
                     if (xml.childNodes[i].nodeType === 1) { hasElementChild = true; break; }
                 }
+
                 if (!hasElementChild) {
-                    var text = xml.textContent.trim();
+                    var text = xml.textContent;
                     if (Object.keys(obj).length === 0) return text;
-                    obj['#text'] = text;
+                    obj.value = text;
                     return obj;
                 }
+
                 for (var i = 0; i < xml.childNodes.length; i++) {
                     var child = xml.childNodes[i];
-                    if (child.nodeType === 3 && !child.nodeValue.trim()) continue;
-                    var nodeName = child.nodeName;
-                    if (nodeName === '#text') {
+                    if (child.nodeType === 3) {
                         var tv = child.nodeValue.trim();
-                        if (tv) obj['#text'] = tv;
+                        if (tv) obj.value = (obj.value || '') + tv;
                         continue;
                     }
+                    if (child.nodeType !== 1) continue;
+                    var nodeName = child.nodeName;
                     var childObj = xmlToJson(child);
                     if (obj[nodeName] === undefined) {
                         obj[nodeName] = childObj;
@@ -517,6 +540,7 @@
                     }
                 }
             }
+
             return obj;
         }
 
@@ -541,10 +565,9 @@
             }
         }
 
-        // JSON → XML
+        // JSON → XML（value 键→文本内容，基础类型→属性，对象/数组→子元素）
         function jsonToXml(obj, rootName) {
             rootName = rootName || 'root';
-            var xml = '';
 
             function buildXml(obj, nodeName, indent) {
                 indent = indent || '';
@@ -562,51 +585,36 @@
                     return arrXml;
                 }
 
-                var hasAttrs = obj['@attributes'] !== undefined;
-                var hasText = obj['#text'] !== undefined;
-
-                var tagParts = [nodeName];
-                if (hasAttrs) {
-                    var attrs = obj['@attributes'];
-                    for (var key in attrs) {
-                        if (attrs.hasOwnProperty(key)) {
-                            tagParts.push(key + '="' + escapeXml(String(attrs[key])) + '"');
-                        }
-                    }
-                }
-                var tagOpen = '<' + tagParts.join(' ') + '>';
-
+                var attrs = '';
+                var textVal = '';
                 var children = '';
-                var keys = Object.keys(obj).filter(function (k) {
-                    return k !== '@attributes' && k !== '#text';
-                });
 
-                if (keys.length === 0 && !hasText) {
-                    return indent + tagOpen.replace('>', '/>') + '\n';
-                }
-
-                children += hasText ? escapeXml(String(obj['#text'])) : '';
-                if (keys.length > 0) children += '\n';
+                var keys = Object.keys(obj);
                 for (var i = 0; i < keys.length; i++) {
-                    var val = obj[keys[i]];
-                    if (Array.isArray(val)) {
-                        for (var j = 0; j < val.length; j++) {
-                            children += buildXml(val[j], keys[i], indent + '  ');
+                    var k = keys[i];
+                    var v = obj[k];
+                    if (k === 'value') {
+                        textVal = escapeXml(String(v));
+                    } else if (typeof v === 'object' && v !== null) {
+                        if (Array.isArray(v)) {
+                            for (var j = 0; j < v.length; j++) {
+                                children += buildXml(v[j], k, indent + '  ');
+                            }
+                        } else {
+                            children += buildXml(v, k, indent + '  ');
                         }
                     } else {
-                        children += buildXml(val, keys[i], indent + '  ');
+                        attrs += ' ' + k + '="' + escapeXml(String(v)) + '"';
                     }
                 }
 
-                var closeTag = '</' + nodeName + '>';
-                if (keys.length > 0 && children.endsWith('\n')) {
-                    children += indent;
+                if (!children && !textVal) {
+                    return indent + '<' + nodeName + attrs + '/>\n';
                 }
-                return indent + tagOpen + children + closeTag + '\n';
-            }
-
-            function escapeXml(s) {
-                return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+                if (!children) {
+                    return indent + '<' + nodeName + attrs + '>' + textVal + '</' + nodeName + '>\n';
+                }
+                return indent + '<' + nodeName + attrs + '>\n' + children + indent + '</' + nodeName + '>\n';
             }
 
             if (typeof obj === 'object' && !Array.isArray(obj)) {
@@ -616,9 +624,8 @@
                     obj = obj[rootName];
                 }
             }
-            xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-            xml += buildXml(obj, rootName);
-            return xml.trim();
+
+            return '<?xml version="1.0" encoding="UTF-8"?>\n' + buildXml(obj, rootName).trimEnd();
         }
 
         function doJson2Xml() {
