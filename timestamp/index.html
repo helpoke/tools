@@ -739,14 +739,11 @@
         }
 
         function useCurrentTs() {
-            var s = Math.floor(Date.now() / 1000);
-            document.getElementById('ts-input').value = s;
-            // Switch to seconds unit
-            document.querySelectorAll('.unit-toggle button').forEach(function (b) {
-                b.classList.remove('active');
-                if (b.getAttribute('data-unit') === 's') b.classList.add('active');
-            });
-            currentUnit = 's';
+            if (currentUnit === 'ms') {
+                document.getElementById('ts-input').value = Date.now();
+            } else {
+                document.getElementById('ts-input').value = Math.floor(Date.now() / 1000);
+            }
             convertTs2Date();
         }
 
