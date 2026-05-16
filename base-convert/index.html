@@ -496,10 +496,24 @@
         };
 
         function switchBase(base) {
+            var oldBase = sourceBase;
+            var input = document.getElementById('num-input');
+            var raw = input.value.trim();
+
+            // Convert current input from old base to new base representation
+            if (raw && oldBase !== base) {
+                raw = raw.replace(/^0b/i, '').replace(/^0o/i, '').replace(/^0x/i, '');
+                if (BASE_CONFIG[oldBase].regex.test(raw)) {
+                    var decimalVal = parseInt(raw, oldBase);
+                    if (!isNaN(decimalVal) && isFinite(decimalVal)) {
+                        input.value = decimalVal.toString(base);
+                    }
+                }
+            }
+
             sourceBase = base;
             document.querySelectorAll('.base-tab').forEach(function (b) { b.classList.remove('active'); });
             document.querySelector('.base-tab[data-base="' + base + '"]').classList.add('active');
-            var input = document.getElementById('num-input');
             if (input.value.trim()) convert();
         }
 
