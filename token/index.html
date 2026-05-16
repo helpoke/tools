@@ -549,6 +549,8 @@
             <a href="../md5">
                 <span class="nav-icon">🔐</span>MD5 加密
             </a>
+            <a href="../sha"><span class="nav-icon">🔏</span>SHA 加密</a>
+
             <a href="../token" class="active">
                 <span class="nav-icon">🎫</span>Token 工具
             </a>
@@ -868,7 +870,7 @@
                 verifyEl.style.display = 'flex';
                 if (parts[2] === expectedSig) {
                     verifyEl.className = 'verify-result pass';
-                    verifyEl.innerHTML = '✅ HMAC 签名验证通过（算法：' + headerObj.alg + '）';
+                    verifyEl.innerHTML = 'HMAC 签名验证通过（算法：' + headerObj.alg + '）';
                 } else {
                     verifyEl.className = 'verify-result fail';
                     verifyEl.innerHTML = '❌ 签名不匹配 — 密钥不正确或算法不同';

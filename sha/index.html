@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="SHA在线加密工具, SHA256哈希生成, SHA512哈希生成, 支持批量加密, 纯前端运行保护数据安全">
+    <meta name="keywords" content="SHA256, SHA512, SHA加密, SHA哈希, 在线SHA, 批量加密, 免费SHA工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA 加密工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .tool-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            padding: 28px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', Consolas, monospace;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.2s;
+            line-height: 1.6;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', Consolas, monospace;
+            transition: border-color 0.2s;
+        }
+
+        .options-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-group label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 0;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #475569;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #4338ca;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-success.copied {
+            background: #047857;
+        }
+
+        .result-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .result-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .result-content {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 14px;
+            word-break: break-all;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .result-text {
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .info-note {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        .info-note strong {
+            color: #64748b;
+        }
+
+        .compare-section {
+            margin-top: 16px;
+        }
+
+        .compare-section label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .compare-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .compare-row input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', Consolas, monospace;
+        }
+
+        .compare-row input:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .compare-result {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .compare-result.match {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .compare-result.no-match {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .options-row {
+                flex-direction: column;
+                gap: 12px;
+                align-items: normal;
+            }
+
+            .tab-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
+            <a href="../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
+            <a href="../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
+            <a href="../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
+            <a href="../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
+            <a href="../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
+            <a href="../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
+            <a href="../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
+            <a href="../pwd"><span class="nav-icon">🔑</span>密码生成</a>
+            <a href="../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
+            <a href="../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
+            <a href="../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
+            <a href="../sha" class="active"><span class="nav-icon">🔏</span>SHA 加密</a>
+            <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
+            <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
+            <a href="../qrcode"><span class="nav-icon">📱</span>二维码</a>
+            <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
+            <a href="../timestamp"><span class="nav-icon">🕐</span>时间戳转换</a>
+            <a href="../urlcode"><span class="nav-icon">🔗</span>URL 编解码</a>
+            <a href="../base-convert"><span class="nav-icon">🧮</span>进制转换</a>
+            <a href="../color-picker"><span class="nav-icon">🎨</span>取色器</a>
+            <a href="../js-secrecy"><span class="nav-icon">🛡️</span>JS 混淆加密</a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
+            <a href="../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
+            <a href="../download"><span class="nav-icon">⬇️</span>批量下载</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>纯前端运行 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>SHA 加密工具</h1>
+            <p>支持 SHA256 / SHA512 哈希加密，纯前端运行保护数据安全</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('encrypt')">SHA 加密</button>
+                    <button class="tab-btn" onclick="switchTab('verify')">SHA 校验</button>
+                </div>
+
+                <!-- Encrypt Tab -->
+                <div class="tab-pane active" id="tab-encrypt">
+                    <div class="options-row">
+                        <div class="option-group">
+                            <label>算法：</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="algo" value="SHA256" checked onchange="doEncrypt()">
+                                    SHA256</label>
+                                <label><input type="radio" name="algo" value="SHA512" onchange="doEncrypt()">
+                                    SHA512</label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label>输出：</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="case" value="lower" checked onchange="doEncrypt()">
+                                    小写</label>
+                                <label><input type="radio" name="case" value="upper" onchange="doEncrypt()"> 大写</label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label><input type="checkbox" id="batch-mode" onchange="toggleBatch()"> 批量模式（每行一个）</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="encrypt-input">输入文本</label>
+                        <textarea id="encrypt-input" placeholder="输入要加密的文本..."></textarea>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="btn btn-primary" onclick="doEncrypt()">加密</button>
+                        <button class="btn btn-outline" onclick="clearEncrypt()">清空</button>
+                        <button class="btn btn-outline" onclick="loadFile()">从文件加载</button>
+                        <input type="file" id="file-input" style="display:none;" onchange="handleFile(this)">
+                    </div>
+
+                    <div id="encrypt-results"></div>
+                </div>
+
+                <!-- Verify Tab -->
+                <div class="tab-pane" id="tab-verify">
+                    <div class="form-group">
+                        <label for="verify-input">输入原始文本</label>
+                        <textarea id="verify-input" placeholder="输入要校验的原始文本..." style="min-height:80px;"></textarea>
+                    </div>
+
+                    <div class="compare-section">
+                        <label for="compare-hash">输入哈希值进行比对</label>
+                        <div class="compare-row">
+                            <input type="text" id="compare-hash" placeholder="粘贴 SHA256 或 SHA512 哈希值..."
+                                oninput="doVerify()">
+                        </div>
+                        <div id="compare-result"></div>
+                    </div>
+
+                    <div class="result-section" style="margin-top:16px;">
+                        <h4>当前文本的 SHA 值</h4>
+                        <div class="result-content">
+                            <span class="result-text" id="verify-sha256-text">-</span>
+                            <button class="btn btn-success btn-sm" onclick="copyId('verify-sha256-text')">复制</button>
+                        </div>
+                        <div style="font-size:12px;color:#94a3b8;margin-top:4px;">SHA256</div>
+                        <div class="result-content" style="margin-top:8px;">
+                            <span class="result-text" id="verify-sha512-text">-</span>
+                            <button class="btn btn-success btn-sm" onclick="copyId('verify-sha512-text')">复制</button>
+                        </div>
+                        <div style="font-size:12px;color:#94a3b8;margin-top:4px;">SHA512</div>
+                    </div>
+                </div>
+
+                <div class="info-note">
+                    <strong>说明：</strong>SHA256 输出 256 位（64 个十六进制字符），SHA512 输出 512 位（128 个十六进制字符）。所有计算均在浏览器本地完成，数据不会上传。
+                </div>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
+            document.getElementById('tab-' + tab).classList.add('active');
+            var btns = document.querySelectorAll('.tab-btn');
+            if (tab === 'encrypt') btns[0].classList.add('active');
+            else btns[1].classList.add('active');
+            if (tab === 'verify') doVerify();
+        }
+
+        function getAlgo() {
+            var algo = document.querySelector('input[name="algo"]:checked');
+            return algo ? algo.value : 'SHA256';
+        }
+
+        function getUppercase() {
+            var c = document.querySelector('input[name="case"]:checked');
+            return c ? c.value === 'upper' : false;
+        }
+
+        function hashText(text, algo) {
+            var h;
+            if (algo === 'SHA512') {
+                h = CryptoJS.SHA512(text).toString();
+            } else {
+                h = CryptoJS.SHA256(text).toString();
+            }
+            return h;
+        }
+
+        // ===== Encrypt =====
+        function doEncrypt() {
+            var input = document.getElementById('encrypt-input').value;
+            var container = document.getElementById('encrypt-results');
+            var algo = getAlgo();
+            var upper = getUppercase();
+            var batch = document.getElementById('batch-mode').checked;
+
+            if (!input.trim()) {
+                container.innerHTML = '';
+                return;
+            }
+
+            var lines = batch ? input.split('\n').filter(function (l) { return l.length > 0; }) : [input];
+            var html = '';
+
+            if (batch && lines.length > 1) {
+                html += '<div class="result-section"><h4>批量结果 — ' + algo + '（共 ' + lines.length + ' 条）</h4>';
+            } else if (batch) {
+                html += '<div class="result-section"><h4>' + algo + ' 结果</h4>';
+            } else {
+                html += '<div class="result-section"><h4>' + algo + ' 结果</h4>';
+            }
+
+            lines.forEach(function (line, i) {
+                var h = hashText(line, algo);
+                if (upper) h = h.toUpperCase();
+                var lineLabel = lines.length > 1 ? '<div style="font-size:11px;color:#94a3b8;margin:12px 0 4px;">#' + (i + 1) + '</div>' : '';
+                html += lineLabel +
+                    '<div class="result-content">' +
+                    '<span class="result-text">' + h + '</span>' +
+                    '<button class="btn btn-success btn-sm" onclick="copyText(\'' + h + '\', this)">复制</button>' +
+                    '</div>';
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function clearEncrypt() {
+            document.getElementById('encrypt-input').value = '';
+            document.getElementById('encrypt-results').innerHTML = '';
+        }
+
+        function toggleBatch() {
+            doEncrypt();
+        }
+
+        function loadFile() {
+            document.getElementById('file-input').click();
+        }
+
+        function handleFile(input) {
+            var file = input.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('encrypt-input').value = e.target.result;
+                doEncrypt();
+            };
+            reader.readAsText(file);
+        }
+
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text).then(function () {
+                var orig = btn.textContent;
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+                utils.showSuccess('已复制！');
+            }).catch(function () { utils.showError('复制失败'); });
+        }
+
+        function copyId(id) {
+            var text = document.getElementById(id).textContent;
+            if (text === '-') return;
+            navigator.clipboard.writeText(text).then(function () {
+                utils.showSuccess('已复制！');
+            }).catch(function () { utils.showError('复制失败'); });
+        }
+
+        // ===== Verify =====
+        function doVerify() {
+            var input = document.getElementById('verify-input').value;
+            if (input) {
+                document.getElementById('verify-sha256-text').textContent = hashText(input, 'SHA256');
+                document.getElementById('verify-sha512-text').textContent = hashText(input, 'SHA512');
+            } else {
+                document.getElementById('verify-sha256-text').textContent = '-';
+                document.getElementById('verify-sha512-text').textContent = '-';
+            }
+
+            var compareVal = document.getElementById('compare-hash').value.trim().toLowerCase();
+            var resultDiv = document.getElementById('compare-result');
+
+            if (!compareVal) {
+                resultDiv.innerHTML = '';
+                return;
+            }
+
+            var sha256 = document.getElementById('verify-sha256-text').textContent;
+            var sha512 = document.getElementById('verify-sha512-text').textContent;
+
+            if (sha256 === compareVal) {
+                resultDiv.innerHTML = '<div class="compare-result match">匹配 — SHA256 哈希值一致</div>';
+            } else if (sha512 === compareVal) {
+                resultDiv.innerHTML = '<div class="compare-result match">匹配 — SHA512 哈希值一致</div>';
+            } else {
+                resultDiv.innerHTML = '<div class="compare-result no-match">❌ 不匹配 — 哈希值不一致</div>';
+            }
+        }
+
+        // Real-time
+        document.getElementById('encrypt-input').addEventListener('input', function () {
+            clearTimeout(this._timer);
+            this._timer = setTimeout(doEncrypt, 300);
+        });
+
+        document.getElementById('verify-input').addEventListener('input', function () {
+            clearTimeout(this._timer);
+            this._timer = setTimeout(doVerify, 300);
+        });
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
