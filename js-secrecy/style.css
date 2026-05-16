@@ -59,9 +59,46 @@
     color: var(--text);
 }
 
-.section-title i {
+.section-title i:not(.collapse-arrow) {
     color: var(--primary);
     font-size: 0.95rem;
+}
+
+/* ========== Collapsible Sections ========== */
+.collapse-toggle {
+    cursor: pointer;
+    user-select: none;
+    transition: margin-bottom 0.2s ease, padding-bottom 0.2s ease;
+    border-radius: 8px;
+}
+
+.collapse-toggle:hover {
+    background: var(--bg);
+}
+
+.collapse-toggle.collapsed {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.collapse-arrow {
+    margin-left: auto !important;
+    transition: transform 0.25s ease;
+    font-size: 0.75rem !important;
+    color: var(--text-secondary) !important;
+}
+
+.collapse-toggle:not(.collapsed) .collapse-arrow {
+    transform: rotate(180deg);
+}
+
+.collapse-body {
+    display: block;
+}
+
+.collapse-body.collapsed {
+    display: none;
 }
 
 /* ========== Preset Buttons ========== */
@@ -253,7 +290,7 @@
 textarea {
     width: 100%;
     flex: 1;
-    min-height: 700px;
+    min-height: 1000px;
     background: #C7EDCC;
     border: 1px solid var(--border);
     border-radius: 8px;
