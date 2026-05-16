@@ -345,6 +345,7 @@ h2 {
     position: absolute;
     cursor: move;
     pointer-events: auto;
+    touch-action: none;
     border: 2px solid transparent;
     transition: border-color 0.3s;
     box-sizing: border-box;
@@ -496,6 +497,10 @@ button:disabled {
         grid-column: 1;
         grid-row: 3;
     }
+	
+	.signature-options button {
+		padding: 10px 12px;
+	}
 }
 
 @media (min-width: 1024px) {
@@ -549,6 +554,14 @@ button:disabled {
     #signature-canvas {
         width: 100%;
         height: 200px;
+    }
+	
+	.signature-options button {
+		padding: 10px 12px;
+	}
+
+    #landscape-signature-btn {
+        display: inline-block;
     }
 
     /* 3. 文档内容容器 */
@@ -604,8 +617,7 @@ button:disabled {
         max-width: 100%;
         max-height: 100%;
         pointer-events: auto;
-        left: 15% !important;
-        top: 15% !important;
+        touch-action: none;
     }
 
     /* 6. 工具栏按钮小屏自适应 */
@@ -648,6 +660,80 @@ button:disabled {
     }
 }
 
+
+/* 横屏签名覆盖层 */
+.landscape-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    touch-action: none;
+}
+
+.landscape-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.landscape-toolbar .landscape-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.landscape-toolbar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#landscape-save-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#landscape-cancel-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.landscape-canvas-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px;
+}
+
+#landscape-canvas {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: crosshair;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 横屏签名按钮默认隐藏，移动端显示 */
+#landscape-signature-btn {
+    display: none;
+    background-color: #ff9800;
+    color: white;
+}
+
+#landscape-signature-btn:hover {
+    background-color: #e68a00;
+}
 
 /* 横屏模式适配 */
 @media (orientation: landscape) and (max-width: 1023px) {
