@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
+    <meta name="keywords" content="URL编码, URL解码, URL Encode, URL Decode, encodeURIComponent, 在线URL转码, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL 编码/解码工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover { color: #3498db; }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            transition: border-color 0.3s;
+            min-height: 140px;
+            line-height: 1.6;
+        }
+
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn:hover { background-color: #2980b9; }
+
+        .btn-outline {
+            background: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-outline:hover { background: #f0f7ff; }
+
+        .btn-copy {
+            background-color: #27ae60;
+        }
+
+        .btn-copy:hover { background-color: #229954; }
+        .btn-copy.copied { background-color: #1e8449; }
+
+        .btn-swap {
+            background: #f8f9fa;
+            border: 1px solid #eaeaea;
+            color: #555;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .btn-swap:hover {
+            background: #eef2f7;
+            color: #2c3e50;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 0;
+            margin-left: auto;
+        }
+
+        .mode-toggle button {
+            padding: 6px 14px;
+            border: 1px solid #eaeaea;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: #7f8c8d;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle button:first-child { border-radius: 6px 0 0 6px; }
+        .mode-toggle button:last-child { border-radius: 0 6px 6px 0; border-left: none; }
+        .mode-toggle button.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 40px 16px; }
+            .tool-card { padding: 24px; }
+            .actions-row { flex-direction: column; align-items: stretch; }
+            .mode-toggle { margin-left: 0; }
+            .tab-btn { padding: 10px 16px; font-size: 14px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 24px 12px; }
+            .tool-card { padding: 18px; }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
+            <a href="../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
+            <a href="../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
+            <a href="../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
+            <a href="../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
+            <a href="../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
+            <a href="../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
+            <a href="../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
+            <a href="../pwd"><span class="nav-icon">🔑</span>密码生成</a>
+            <a href="../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
+            <a href="../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
+            <a href="../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
+            <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
+            <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
+            <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
+            <a href="../timestamp"><span class="nav-icon">🕐</span>时间戳转换</a>
+            <a href="../urlcode" class="active"><span class="nav-icon">🔗</span>URL 编解码</a>
+            <a href="../js-secrecy"><span class="nav-icon">🛡️</span>JS 混淆加密</a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
+            <a href="../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
+            <a href="../download"><span class="nav-icon">⬇️</span>批量下载</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>纯前端运行 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>URL 编码 / 解码工具</h1>
+            <p>在线 URL Encode / Decode，支持 encodeURI 和 encodeURIComponent 两种模式</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('encode')">URL 编码</button>
+                    <button class="tab-btn" onclick="switchTab('decode')">URL 解码</button>
+                </div>
+
+                <!-- Encode Tab -->
+                <div class="tab-panel active" id="tab-encode">
+                    <div class="input-group">
+                        <label for="encode-input">输入原始文本</label>
+                        <textarea id="encode-input" placeholder="输入需要编码的文本或 URL..."></textarea>
+                        <div class="char-count" id="encode-count">字符数: 0</div>
+                    </div>
+
+                    <div class="actions-row">
+                        <button class="btn" onclick="doEncode()">编码</button>
+                        <button class="btn btn-outline" onclick="clearAll('encode')">清空</button>
+                        <div class="mode-toggle">
+                            <button class="active" data-mode="component" onclick="switchEncodeMode(this, 'component')">encodeURIComponent</button>
+                            <button data-mode="uri" onclick="switchEncodeMode(this, 'uri')">encodeURI</button>
+                        </div>
+                    </div>
+
+                    <div class="input-group" style="margin-top:20px;">
+                        <label for="encode-output">编码结果</label>
+                        <textarea id="encode-output" readonly placeholder="编码结果将显示在这里..."></textarea>
+                        <div class="char-count" id="encode-out-count">字符数: 0</div>
+                    </div>
+
+                    <div class="actions-row">
+                        <button class="btn btn-copy" onclick="copyResult('encode-output')">复制结果</button>
+                    </div>
+                </div>
+
+                <!-- Decode Tab -->
+                <div class="tab-panel" id="tab-decode">
+                    <div class="input-group">
+                        <label for="decode-input">输入编码文本</label>
+                        <textarea id="decode-input" placeholder="输入需要解码的 URL 编码文本..."></textarea>
+                        <div class="char-count" id="decode-count">字符数: 0</div>
+                    </div>
+
+                    <div class="actions-row">
+                        <button class="btn" onclick="doDecode()">解码</button>
+                        <button class="btn btn-outline" onclick="clearAll('decode')">清空</button>
+                    </div>
+
+                    <div class="input-group" style="margin-top:20px;">
+                        <label for="decode-output">解码结果</label>
+                        <textarea id="decode-output" readonly placeholder="解码结果将显示在这里..."></textarea>
+                        <div class="char-count" id="decode-out-count">字符数: 0</div>
+                    </div>
+
+                    <div class="actions-row">
+                        <button class="btn btn-copy" onclick="copyResult('decode-output')">复制结果</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        var encodeMode = 'component';
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(function(b) {
+                if ((tab === 'encode' && b.textContent.indexOf('编码') !== -1 && b.textContent.indexOf('解码') === -1) ||
+                    (tab === 'decode' && b.textContent.indexOf('解码') !== -1)) {
+                    b.classList.add('active');
+                }
+            });
+        }
+
+        function switchEncodeMode(btn, mode) {
+            encodeMode = mode;
+            btn.parentElement.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            // Re-encode if output already exists
+            if (document.getElementById('encode-output').value) doEncode();
+        }
+
+        function doEncode() {
+            var input = document.getElementById('encode-input').value;
+            var output = document.getElementById('encode-output');
+            if (!input) {
+                output.value = '';
+                document.getElementById('encode-out-count').textContent = '字符数: 0';
+                return;
+            }
+            try {
+                if (encodeMode === 'component') {
+                    output.value = encodeURIComponent(input);
+                } else {
+                    output.value = encodeURI(input);
+                }
+                document.getElementById('encode-out-count').textContent = '字符数: ' + output.value.length;
+            } catch (e) {
+                utils.showError('编码失败: ' + e.message);
+            }
+        }
+
+        function doDecode() {
+            var input = document.getElementById('decode-input').value;
+            var output = document.getElementById('decode-output');
+            if (!input) {
+                output.value = '';
+                document.getElementById('decode-out-count').textContent = '字符数: 0';
+                return;
+            }
+            try {
+                output.value = decodeURIComponent(input);
+                document.getElementById('decode-out-count').textContent = '字符数: ' + output.value.length;
+            } catch (e) {
+                // Try decodeURI as fallback
+                try {
+                    output.value = decodeURI(input);
+                    document.getElementById('decode-out-count').textContent = '字符数: ' + output.value.length;
+                } catch (e2) {
+                    utils.showError('解码失败，请检查输入是否为有效的 URL 编码文本');
+                }
+            }
+        }
+
+        function copyResult(textareaId) {
+            var textarea = document.getElementById(textareaId);
+            var val = textarea.value;
+            if (!val) { utils.showError('没有可复制的内容'); return; }
+            navigator.clipboard.writeText(val).then(function() {
+                utils.showSuccess('已复制到剪贴板！');
+            }).catch(function() { utils.showError('复制失败，请手动复制'); });
+        }
+
+        function clearAll(tab) {
+            var prefix = tab === 'encode' ? 'encode' : 'decode';
+            document.getElementById(prefix + '-input').value = '';
+            document.getElementById(prefix + '-output').value = '';
+            document.getElementById(prefix + '-count').textContent = '字符数: 0';
+            document.getElementById(prefix + '-out-count').textContent = '字符数: 0';
+        }
+
+        // Real-time encode/decode
+        document.getElementById('encode-input').addEventListener('input', function() {
+            document.getElementById('encode-count').textContent = '字符数: ' + this.value.length;
+            if (this.value) doEncode(); else {
+                document.getElementById('encode-output').value = '';
+                document.getElementById('encode-out-count').textContent = '字符数: 0';
+            }
+        });
+
+        document.getElementById('decode-input').addEventListener('input', function() {
+            document.getElementById('decode-count').textContent = '字符数: ' + this.value.length;
+            if (this.value) doDecode(); else {
+                document.getElementById('decode-output').value = '';
+                document.getElementById('decode-out-count').textContent = '字符数: 0';
+            }
+        });
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
