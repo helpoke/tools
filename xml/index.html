@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XML在线格式化工具, XML压缩, XML与JSON互转, 免费XML格式化工具">
+    <meta name="keywords" content="XML格式化, XML在线格式化, XML压缩, XML转JSON, JSON转XML, 免费XML工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML 格式化工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            margin: 0 auto;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn.accent {
+            background-color: #27ae60;
+        }
+
+        .btn.accent:hover {
+            background-color: #229954;
+        }
+
+        .btn.warn {
+            background-color: #e67e22;
+        }
+
+        .btn.warn:hover {
+            background-color: #d35400;
+        }
+
+        .btn.gray {
+            background-color: #95a5a6;
+        }
+
+        .btn.gray:hover {
+            background-color: #7f8c8d;
+        }
+
+        .io-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .io-panels {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .io-panel label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .io-panel textarea {
+            width: 100%;
+            height: 360px;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            resize: vertical;
+            box-sizing: border-box;
+            tab-size: 2;
+        }
+
+        .io-panel textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .output-toolbar {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 16px;
+        }
+
+        .stats span {
+            white-space: nowrap;
+        }
+
+        .error-msg {
+            background: #fdf0ef;
+            color: #c0392b;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: none;
+            word-break: break-all;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .toolbar {
+                gap: 6px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+
+        .xml-tag {
+            color: #e74c3c;
+        }
+
+        .xml-attr {
+            color: #f39c12;
+        }
+
+        .xml-val {
+            color: #27ae60;
+        }
+
+        .xml-comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor">
+                <span class="nav-icon">📦</span>图片压缩
+            </a>
+            <a href="../image/convert">
+                <span class="nav-icon">🔄</span>图片转换
+            </a>
+            <a href="../image/watermark">
+                <span class="nav-icon">💧</span>图片水印
+            </a>
+            <a href="../image/cropping">
+                <span class="nav-icon">✂️</span>图片裁剪
+            </a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping">
+                <span class="nav-icon">✂️</span>视频裁剪
+            </a>
+            <a href="../video/watermark">
+                <span class="nav-icon">🎥</span>视频水印
+            </a>
+            <a href="../video/convert">
+                <span class="nav-icon">🔄</span>视频转换
+            </a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json">
+                <span class="nav-icon">{ }</span>JSON 格式化
+            </a>
+            <a href="../yaml">
+                <span class="nav-icon">⚙️</span>YAML 格式化
+            </a>
+            <a href="../pug">
+                <span class="nav-icon">🌿</span>Pug 格式化
+            </a>
+            <a href="../xml" class="active">
+                <span class="nav-icon">📐</span>XML 格式化
+            </a>
+            <a href="../pwd">
+                <span class="nav-icon">🔑</span>密码生成
+            </a>
+            <a href="../uuid">
+                <span class="nav-icon">🆔</span>UUID 生成
+            </a>
+            <a href="../mermaid">
+                <span class="nav-icon">📊</span>Mermaid 图表
+            </a>
+            <a href="../md5">
+                <span class="nav-icon">🔐</span>MD5 加密
+            </a>
+            <a href="../sha">
+                <span class="nav-icon">🔏</span>SHA 加密
+            </a>
+            <a href="../token">
+                <span class="nav-icon">🎫</span>Token 工具
+            </a>
+            <a href="../num-to-chinese">
+                <span class="nav-icon">🔢</span>数字&中文互转
+            </a>
+            <a href="../qrcode">
+                <span class="nav-icon">📱</span>二维码
+            </a>
+            <a href="../diff">
+                <span class="nav-icon">📋</span>内容对比
+            </a>
+            <a href="../cron">
+                <span class="nav-icon">⏰</span>Cron 解析
+            </a>
+            <a href="../timestamp">
+                <span class="nav-icon">🕐</span>时间戳转换
+            </a>
+            <a href="../urlcode">
+                <span class="nav-icon">🔗</span>URL 编解码
+            </a>
+            <a href="../base-convert">
+                <span class="nav-icon">🧮</span>进制转换
+            </a>
+            <a href="../color-picker">
+                <span class="nav-icon">🎨</span>取色器
+            </a>
+            <a href="../regex">
+                <span class="nav-icon">🔍</span>正则表达式
+            </a>
+            <a href="../js-secrecy">
+                <span class="nav-icon">🛡️</span>JS 混淆加密
+            </a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature">
+                <span class="nav-icon">✍️</span>签名工具
+            </a>
+            <a href="../docu/watermark">
+                <span class="nav-icon">🛡️</span>文档水印
+            </a>
+            <a href="../download">
+                <span class="nav-icon">⬇️</span>批量下载
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>离线工具 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>XML 格式化工具</h1>
+            <p>XML 格式化 / 压缩 / XML↔JSON 互转，纯前端运行</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="toolbar">
+                    <button class="btn" onclick="doFormat()" title="格式化 XML（缩进美化）">📐 格式化</button>
+                    <button class="btn" onclick="doMinify()" title="压缩 XML（去除空白）">📦 压缩</button>
+                    <button class="btn accent" onclick="doXml2Json()" title="XML 转 JSON">XML → JSON</button>
+                    <button class="btn accent" onclick="doJson2Xml()" title="JSON 转 XML">JSON → XML</button>
+                    <button class="btn gray" onclick="doClear()">清空</button>
+                </div>
+
+                <div class="error-msg" id="error"></div>
+
+                <div class="io-panels">
+                    <div class="io-panel">
+                        <label for="input-xml">输入</label>
+                        <textarea id="input-xml" placeholder='&lt;?xml version="1.0"?&gt;
+&lt;root&gt;
+&lt;item id="1"&gt;示例&lt;/item&gt;
+&lt;/root&gt;'>&lt;?xml version="1.0"?&gt;
+&lt;root&gt;
+&lt;item id="1"&gt;示例&lt;/item&gt;
+&lt;item id="2"&gt;测试&lt;/item&gt;
+&lt;/root&gt;</textarea>
+                    </div>
+                    <div class="io-panel">
+                        <label for="output-xml">输出</label>
+                        <textarea id="output-xml" readonly placeholder="处理结果将显示在此"></textarea>
+                        <div class="output-toolbar">
+                            <button class="btn gray" onclick="doCopy()">复制输出</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats" id="stats">
+                    <span>字符: <strong id="stat-chars">0</strong></span>
+                    <span>行数: <strong id="stat-lines">0</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        function hideError() {
+            document.getElementById('error').classList.remove('show');
+        }
+
+        function showError(msg) {
+            var el = document.getElementById('error');
+            el.textContent = msg;
+            el.classList.add('show');
+        }
+
+        function getInput() {
+            return document.getElementById('input-xml').value;
+        }
+
+        function setOutput(val) {
+            document.getElementById('output-xml').value = val;
+            updateStats(val);
+        }
+
+        function updateStats(val) {
+            document.getElementById('stat-chars').textContent = val.length;
+            document.getElementById('stat-lines').textContent = val ? val.split('\n').length : 0;
+        }
+
+        // 格式化 XML
+        function formatXml(xml) {
+            var formatted = '';
+            var indent = '';
+            var reg = /(>)(<)(\/*)/g;
+            xml = xml.replace(reg, '$1\n$2$3');
+            var nodes = xml.split('\n');
+            for (var i = 0; i < nodes.length; i++) {
+                var line = nodes[i].trim();
+                if (!line) continue;
+                if (line.match(/^<\?/)) {
+                    formatted += line + '\n';
+                    continue;
+                }
+                if (line.match(/<!--/)) {
+                    formatted += indent + line + '\n';
+                continue;
+            }
+            if (line.match(/<\/\w/)) {
+                indent = indent.substring(2);
+            }
+            if (line.match(/^<\w[^>]*[^/]>/)) {
+                formatted += indent + line.replace(/\s+/g, function (m) {
+                    if (m.indexOf(' ') === 0) return ' ';
+                    return m;
+                });
+                if (!line.match(/\/>$/) && !line.match(/^<!\D/)) {
+                    indent += '  ';
+                }
+                formatted += '\n';
+            } else if (line.match(/^<\/\w/) || line.match(/^<\w[^>]*\/>/)) {
+                formatted += indent + line + '\n';
+            } else {
+                formatted += indent + line + '\n';
+            }
+        }
+        return formatted.trim();
+        }
+
+        function doFormat() {
+            hideError();
+            var xml = getInput().trim();
+            if (!xml) { showError('请输入 XML 内容'); return; }
+            try {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xml, 'text/xml');
+                var err = doc.querySelector('parsererror');
+                if (err) {
+                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    return;
+                }
+                var serializer = new XMLSerializer();
+                var pretty = formatXml(serializer.serializeToString(doc));
+                setOutput(pretty);
+            } catch (e) {
+                showError('格式化失败: ' + e.message);
+            }
+        }
+
+        // 压缩 XML
+        function doMinify() {
+            hideError();
+            var xml = getInput().trim();
+            if (!xml) { showError('请输入 XML 内容'); return; }
+            try {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xml, 'text/xml');
+                var err = doc.querySelector('parsererror');
+                if (err) {
+                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    return;
+                }
+                var serializer = new XMLSerializer();
+                var minified = serializer.serializeToString(doc);
+                // 去除声明与根元素之间的空白
+                minified = minified.replace(/>\s+</g, '><');
+                minified = minified.replace(/\?>\s+</g, '?><');
+                setOutput(minified);
+            } catch (e) {
+                showError('压缩失败: ' + e.message);
+            }
+        }
+
+        // XML → JSON
+        function xmlToJson(xml) {
+            var obj = {};
+            if (xml.nodeType === 1) {
+                if (xml.attributes.length > 0) {
+                    obj['@attributes'] = {};
+                    for (var j = 0; j < xml.attributes.length; j++) {
+                        var attr = xml.attributes.item(j);
+                        obj['@attributes'][attr.nodeName] = attr.nodeValue;
+                    }
+                }
+            }
+            if (xml.nodeType === 3 || xml.nodeType === 4) {
+                var v = xml.nodeValue.trim();
+                return v || '';
+            }
+            if (xml.hasChildNodes()) {
+                var hasElementChild = false;
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    if (xml.childNodes[i].nodeType === 1) { hasElementChild = true; break; }
+                }
+                if (!hasElementChild) {
+                    var text = xml.textContent.trim();
+                    if (Object.keys(obj).length === 0) return text;
+                    obj['#text'] = text;
+                    return obj;
+                }
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    var child = xml.childNodes[i];
+                    if (child.nodeType === 3 && !child.nodeValue.trim()) continue;
+                    var nodeName = child.nodeName;
+                    if (nodeName === '#text') {
+                        var tv = child.nodeValue.trim();
+                        if (tv) obj['#text'] = tv;
+                        continue;
+                    }
+                    var childObj = xmlToJson(child);
+                    if (obj[nodeName] === undefined) {
+                        obj[nodeName] = childObj;
+                    } else {
+                        if (!Array.isArray(obj[nodeName])) {
+                            obj[nodeName] = [obj[nodeName]];
+                        }
+                        obj[nodeName].push(childObj);
+                    }
+                }
+            }
+            return obj;
+        }
+
+        function doXml2Json() {
+            hideError();
+            var xml = getInput().trim();
+            if (!xml) { showError('请输入 XML 内容'); return; }
+            try {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xml, 'text/xml');
+                var err = doc.querySelector('parsererror');
+                if (err) {
+                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    return;
+                }
+                var result = xmlToJson(doc.documentElement);
+                var wrapper = {};
+                wrapper[doc.documentElement.nodeName] = result;
+                setOutput(JSON.stringify(wrapper, null, 2));
+            } catch (e) {
+                showError('转换失败: ' + e.message);
+            }
+        }
+
+        // JSON → XML
+        function jsonToXml(obj, rootName) {
+            rootName = rootName || 'root';
+            var xml = '';
+
+            function buildXml(obj, nodeName, indent) {
+                indent = indent || '';
+                if (obj === null || obj === undefined) return '';
+
+                if (typeof obj !== 'object') {
+                    return indent + '<' + nodeName + '>' + escapeXml(String(obj)) + '</' + nodeName + '>\n';
+                }
+
+                if (Array.isArray(obj)) {
+                    var arrXml = '';
+                    for (var i = 0; i < obj.length; i++) {
+                        arrXml += buildXml(obj[i], nodeName, indent);
+                    }
+                    return arrXml;
+                }
+
+                var hasAttrs = obj['@attributes'] !== undefined;
+                var hasText = obj['#text'] !== undefined;
+
+                var tagParts = [nodeName];
+                if (hasAttrs) {
+                    var attrs = obj['@attributes'];
+                    for (var key in attrs) {
+                        if (attrs.hasOwnProperty(key)) {
+                            tagParts.push(key + '="' + escapeXml(String(attrs[key])) + '"');
+                        }
+                    }
+                }
+                var tagOpen = '<' + tagParts.join(' ') + '>';
+
+                var children = '';
+                var keys = Object.keys(obj).filter(function (k) {
+                    return k !== '@attributes' && k !== '#text';
+                });
+
+                if (keys.length === 0 && !hasText) {
+                    return indent + tagOpen.replace('>', '/>') + '\n';
+                }
+
+                children += hasText ? escapeXml(String(obj['#text'])) : '';
+                if (keys.length > 0) children += '\n';
+                for (var i = 0; i < keys.length; i++) {
+                    var val = obj[keys[i]];
+                    if (Array.isArray(val)) {
+                        for (var j = 0; j < val.length; j++) {
+                            children += buildXml(val[j], keys[i], indent + '  ');
+                        }
+                    } else {
+                        children += buildXml(val, keys[i], indent + '  ');
+                    }
+                }
+
+                var closeTag = '</' + nodeName + '>';
+                if (keys.length > 0 && children.endsWith('\n')) {
+                    children += indent;
+                }
+                return indent + tagOpen + children + closeTag + '\n';
+            }
+
+            function escapeXml(s) {
+                return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+            }
+
+            if (typeof obj === 'object' && !Array.isArray(obj)) {
+                var rootKeys = Object.keys(obj);
+                if (rootKeys.length === 1) {
+                    rootName = rootKeys[0];
+                    obj = obj[rootName];
+                }
+            }
+            xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+            xml += buildXml(obj, rootName);
+            return xml.trim();
+        }
+
+        function doJson2Xml() {
+            hideError();
+            var input = getInput().trim();
+            if (!input) { showError('请输入 JSON 内容'); return; }
+            try {
+                var obj = JSON.parse(input);
+                var xml = jsonToXml(obj);
+                setOutput(xml);
+            } catch (e) {
+                showError('JSON 解析错误: ' + e.message);
+            }
+        }
+
+        function doClear() {
+            hideError();
+            document.getElementById('input-xml').value = '';
+            document.getElementById('output-xml').value = '';
+            updateStats('');
+        }
+
+        function doCopy() {
+            var text = document.getElementById('output-xml').value;
+            navigator.clipboard.writeText(text).then(function () {
+                utils.showSuccess('已复制到剪贴板！');
+            }).catch(function () {
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // 快捷键 Ctrl+Enter 格式化
+        document.getElementById('input-xml').addEventListener('keydown', function (e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                doFormat();
+            }
+        });
+
+        // 初始格式化
+        doFormat();
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
