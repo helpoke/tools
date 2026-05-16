@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线内容对比工具, 文本差异比对, 文件内容对比, 逐行差异高亮, 纯前端运行保护数据安全">
+    <meta name="keywords" content="内容对比, 文本比对, 文件对比, 差异比较, diff工具, 在线对比, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容对比工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .tool-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            padding: 28px;
+        }
+
+        /* Two-panel input */
+        .input-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .panel-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .panel-label.old { color: #dc2626; }
+        .panel-label.new { color: #16a34a; }
+
+        .panel-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-sm {
+            padding: 5px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #fff;
+            font-size: 12px;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-sm:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .input-panel textarea {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Courier New', Consolas, monospace;
+            resize: vertical;
+            min-height: 220px;
+            line-height: 1.6;
+            transition: border-color 0.2s;
+        }
+
+        .input-panel textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+        }
+
+        .input-panel input[type="file"] { display: none; }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        .btn-primary:hover { background: #4338ca; }
+
+        .btn-outline {
+            background: #fff;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-swap {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.15s;
+        }
+
+        .btn-swap:hover {
+            background: #e2e8f0;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .options-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-left: auto;
+        }
+
+        .options-row label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #64748b;
+            flex-wrap: wrap;
+        }
+
+        .stats-bar .stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stats-bar .stat .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .dot.add { background: #bbf7d0; border: 1px solid #86efac; }
+        .dot.del { background: #fecaca; border: 1px solid #fca5a5; }
+        .dot.mod { background: #fef08a; border: 1px solid #fde047; }
+
+        /* Diff result */
+        .diff-container {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 600px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .diff-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .diff-table td {
+            padding: 1px 8px;
+            vertical-align: top;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .diff-table .ln {
+            width: 44px;
+            min-width: 44px;
+            text-align: right;
+            color: #94a3b8;
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+            user-select: none;
+            font-size: 12px;
+            padding: 1px 8px;
+        }
+
+        .diff-table .ln-old {
+            border-right: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .diff-table .ln-new {
+            border-right: 1px solid #bbf7d0;
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .diff-table .content-cell {
+            padding-left: 12px;
+            min-width: 300px;
+        }
+
+        .diff-line-empty { background: #f8fafc; }
+        .diff-line-add { background: #f0fdf4; }
+        .diff-line-del { background: #fef2f2; }
+        .diff-line-mod { background: #fefce8; }
+
+        .diff-line-add .content-cell { color: #15803d; }
+        .diff-line-del .content-cell { color: #b91c1c; }
+
+        .diff-line-add .content-cell::before { content: '+ '; font-weight: 700; }
+        .diff-line-del .content-cell::before { content: '- '; font-weight: 700; }
+
+        .placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .placeholder .icon { font-size: 40px; margin-bottom: 12px; }
+
+        @media (max-width: 768px) {
+            .container { padding: 40px 16px; }
+            .tool-card { padding: 20px; }
+            .input-panels { grid-template-columns: 1fr; }
+            .actions-row { flex-direction: column; align-items: stretch; }
+            .options-row { margin-left: 0; }
+            .diff-table .ln { width: 32px; min-width: 32px; font-size: 11px; }
+            .diff-table td { padding: 1px 4px; font-size: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 24px 12px; }
+            .tool-card { padding: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
+            <a href="../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
+            <a href="../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
+            <a href="../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
+            <a href="../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
+            <a href="../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
+            <a href="../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
+            <a href="../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
+            <a href="../pwd"><span class="nav-icon">🔑</span>密码生成</a>
+            <a href="../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
+            <a href="../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
+            <a href="../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
+            <a href="../sha"><span class="nav-icon">🔏</span>SHA 加密</a>
+            <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
+            <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
+            <a href="../qrcode"><span class="nav-icon">📱</span>二维码</a>
+            <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
+            <a href="../timestamp"><span class="nav-icon">🕐</span>时间戳转换</a>
+            <a href="../urlcode"><span class="nav-icon">🔗</span>URL 编解码</a>
+            <a href="../base-convert"><span class="nav-icon">🧮</span>进制转换</a>
+            <a href="../color-picker"><span class="nav-icon">🎨</span>取色器</a>
+            <a href="../diff" class="active"><span class="nav-icon">📋</span>内容对比</a>
+            <a href="../js-secrecy"><span class="nav-icon">🛡️</span>JS 混淆加密</a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
+            <a href="../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
+            <a href="../download"><span class="nav-icon">⬇️</span>批量下载</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>纯前端运行 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>内容对比工具</h1>
+            <p>在线文本/文件差异比对，逐行高亮差异位置，纯前端保护数据安全</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="input-panels">
+                    <div class="input-panel">
+                        <div class="panel-header">
+                            <span class="panel-label old">原始文本</span>
+                            <div class="panel-actions">
+                                <button class="btn-sm" onclick="loadFile('old')">📁 打开文件</button>
+                                <input type="file" id="file-old" onchange="handleFile(this, 'old')">
+                            </div>
+                        </div>
+                        <textarea id="input-old" placeholder="输入或粘贴原始文本..."></textarea>
+                    </div>
+                    <div class="input-panel">
+                        <div class="panel-header">
+                            <span class="panel-label new">新文本</span>
+                            <div class="panel-actions">
+                                <button class="btn-sm" onclick="loadFile('new')">📁 打开文件</button>
+                                <input type="file" id="file-new" onchange="handleFile(this, 'new')">
+                            </div>
+                        </div>
+                        <textarea id="input-new" placeholder="输入或粘贴新文本..."></textarea>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <button class="btn btn-primary" onclick="doDiff()">开始对比</button>
+                    <button class="btn btn-outline" onclick="clearAll()">清空</button>
+                    <button class="btn-swap" onclick="swapInputs()" title="交换文本">⇄</button>
+                    <div class="options-row">
+                        <label><input type="checkbox" id="opt-context" checked onchange="doDiff()"> 显示相同行</label>
+                        <label><input type="checkbox" id="opt-word-diff" onchange="doDiff()"> 逐词对比</label>
+                    </div>
+                </div>
+
+                <div id="stats-bar" class="stats-bar" style="display:none;"></div>
+
+                <div class="diff-container" id="diff-container">
+                    <div class="placeholder">
+                        <div class="icon">📋</div>
+                        <p>在上方输入或粘贴两段文本，点击"开始对比"查看差异</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        // ===== LCS Diff Algorithm =====
+        function computeLCS(a, b) {
+            var m = a.length, n = b.length;
+            var dp = new Array(m + 1);
+            for (var i = 0; i <= m; i++) {
+                dp[i] = new Array(n + 1);
+                dp[i][0] = 0;
+            }
+            for (var j = 0; j <= n; j++) dp[0][j] = 0;
+
+            for (var i = 1; i <= m; i++) {
+                for (var j = 1; j <= n; j++) {
+                    if (a[i - 1] === b[j - 1]) {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                    } else {
+                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    }
+                }
+            }
+
+            // Backtrack
+            var result = [];
+            var i = m, j = n;
+            while (i > 0 || j > 0) {
+                if (i > 0 && j > 0 && a[i - 1] === b[j - 1]) {
+                    result.unshift({ type: 'same', oldIdx: i - 1, newIdx: j - 1, line: a[i - 1] });
+                    i--; j--;
+                } else if (j > 0 && (i === 0 || dp[i][j - 1] >= dp[i - 1][j])) {
+                    result.unshift({ type: 'add', oldIdx: -1, newIdx: j - 1, line: b[j - 1] });
+                    j--;
+                } else {
+                    result.unshift({ type: 'del', oldIdx: i - 1, newIdx: -1, line: a[i - 1] });
+                    i--;
+                }
+            }
+            return result;
+        }
+
+        function wordDiff(oldText, newText) {
+            var oldWords = oldText.split(/(\s+)/);
+            var newWords = newText.split(/(\s+)/);
+            var diff = computeLCS(oldWords, newWords);
+
+            var oldHtml = '', newHtml = '';
+            diff.forEach(function(d) {
+                if (d.type === 'same') {
+                    oldHtml += escHtml(d.line);
+                    newHtml += escHtml(d.line);
+                } else if (d.type === 'del') {
+                    oldHtml += '<span style="background:#fecaca;text-decoration:line-through;">' + escHtml(d.line) + '</span>';
+                } else if (d.type === 'add') {
+                    newHtml += '<span style="background:#bbf7d0;">' + escHtml(d.line) + '</span>';
+                }
+            });
+            return { old: oldHtml, new: newHtml };
+        }
+
+        function escHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ===== Main diff =====
+        function doDiff() {
+            var oldText = document.getElementById('input-old').value;
+            var newText = document.getElementById('input-new').value;
+            var container = document.getElementById('diff-container');
+            var statsBar = document.getElementById('stats-bar');
+
+            if (!oldText && !newText) {
+                container.innerHTML = '<div class="placeholder"><div class="icon">📋</div><p>请输入文本后点击"开始对比"</p></div>';
+                statsBar.style.display = 'none';
+                return;
+            }
+
+            // Split into lines preserving trailing empty
+            var oldLines = oldText.split('\n');
+            var newLines = newText.split('\n');
+
+            // Remove last empty line if text doesn't end with newline
+            // (split always creates an extra empty element when text ends with \n)
+            // We'll handle this carefully
+
+            var showContext = document.getElementById('opt-context').checked;
+            var doWordDiff = document.getElementById('opt-word-diff').checked;
+
+            var diff = computeLCS(oldLines, newLines);
+
+            // Count stats
+            var added = 0, removed = 0, same = 0;
+            diff.forEach(function(d) {
+                if (d.type === 'add') added++;
+                else if (d.type === 'del') removed++;
+                else same++;
+            });
+
+            statsBar.style.display = 'flex';
+            statsBar.innerHTML =
+                '<span class="stat"><span class="dot add"></span> 新增 <strong>' + added + '</strong> 行</span>' +
+                '<span class="stat"><span class="dot del"></span> 删除 <strong>' + removed + '</strong> 行</span>' +
+                '<span class="stat"><span class="dot mod"></span> 相同 <strong>' + same + '</strong> 行</span>' +
+                '<span style="margin-left:auto;color:#94a3b8;">共 ' + diff.length + ' 行</span>';
+
+            // Build HTML table
+            var html = '<table class="diff-table"><tbody>';
+            var oldLineNum = 0, newLineNum = 0;
+
+            diff.forEach(function(d) {
+                if (d.type === 'del') {
+                    oldLineNum++;
+                    html += '<tr class="diff-line-del">' +
+                        '<td class="ln ln-old">' + oldLineNum + '</td>' +
+                        '<td class="ln"></td>' +
+                        '<td class="content-cell">' + escHtml(d.line) + '</td>' +
+                        '</tr>';
+                } else if (d.type === 'add') {
+                    newLineNum++;
+                    html += '<tr class="diff-line-add">' +
+                        '<td class="ln"></td>' +
+                        '<td class="ln ln-new">' + newLineNum + '</td>' +
+                        '<td class="content-cell">' + escHtml(d.line) + '</td>' +
+                        '</tr>';
+                } else {
+                    oldLineNum++; newLineNum++;
+                    if (!showContext) {
+                        // In collapsed mode, only show context around changes
+                        // For now, always show same lines when context is checked
+                    }
+                    html += '<tr>' +
+                        '<td class="ln">' + oldLineNum + '</td>' +
+                        '<td class="ln">' + newLineNum + '</td>' +
+                        '<td class="content-cell">' + escHtml(d.line) + '</td>' +
+                        '</tr>';
+                }
+            });
+
+            html += '</tbody></table>';
+
+            // Word diff post-processing (simple approach for changed adjacent lines)
+            if (doWordDiff) {
+                // Find consecutive del+add pairs and highlight word differences
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                var rows = tempDiv.querySelectorAll('tr');
+                for (var i = 0; i < rows.length - 1; i++) {
+                    if (rows[i].classList.contains('diff-line-del') && rows[i + 1].classList.contains('diff-line-add')) {
+                        var oldCell = rows[i].querySelector('.content-cell');
+                        var newCell = rows[i + 1].querySelector('.content-cell');
+                        if (oldCell && newCell) {
+                            var oldTxt = oldCell.textContent;
+                            // strip the '- ' prefix visually
+                            var newTxt = newCell.textContent;
+                            var wd = wordDiff(oldTxt, newTxt);
+                            oldCell.innerHTML = wd.old;
+                            newCell.innerHTML = wd.new;
+                            rows[i].classList.add('diff-line-mod');
+                            rows[i + 1].classList.add('diff-line-mod');
+                        }
+                    }
+                }
+                html = tempDiv.innerHTML;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ===== File handling =====
+        function loadFile(side) {
+            document.getElementById('file-' + side).click();
+        }
+
+        function handleFile(input, side) {
+            var file = input.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('input-' + side).value = e.target.result;
+                input.value = '';
+                doDiff();
+            };
+            reader.readAsText(file);
+        }
+
+        // ===== Swap =====
+        function swapInputs() {
+            var oldInput = document.getElementById('input-old');
+            var newInput = document.getElementById('input-new');
+            var tmp = oldInput.value;
+            oldInput.value = newInput.value;
+            newInput.value = tmp;
+            doDiff();
+        }
+
+        function clearAll() {
+            document.getElementById('input-old').value = '';
+            document.getElementById('input-new').value = '';
+            document.getElementById('diff-container').innerHTML = '<div class="placeholder"><div class="icon">📋</div><p>在上方输入或粘贴两段文本，点击"开始对比"查看差异</p></div>';
+            document.getElementById('stats-bar').style.display = 'none';
+        }
+
+        // Real-time with debounce
+        var diffTimer = null;
+        ['input-old', 'input-new'].forEach(function(id) {
+            document.getElementById(id).addEventListener('input', function() {
+                clearTimeout(diffTimer);
+                diffTimer = setTimeout(doDiff, 500);
+            });
+        });
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
