@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线进制转换工具, 二进制八进制十进制十六进制互转, 支持2/8/10/16进制实时转换, 免费在线进制转换器">
+    <meta name="keywords" content="进制转换, 二进制转十进制, 十六进制转二进制, 八进制转换, 在线进制转换, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进制转换工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Source base selector */
+        .base-select-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .base-select-row .label-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            white-space: nowrap;
+        }
+
+        .base-tabs {
+            display: flex;
+            gap: 0;
+        }
+
+        .base-tab {
+            padding: 8px 20px;
+            border: 1px solid #eaeaea;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+        }
+
+        .base-tab:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .base-tab:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .base-tab:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .base-tab.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .base-tab+.base-tab {
+            border-left: none;
+        }
+
+        /* Input */
+        .input-group {
+            margin-bottom: 28px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #eaeaea;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            transition: border-color 0.3s;
+        }
+
+        .input-row input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .input-row input.error {
+            border-color: #e74c3c;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
+
+        .error-box {
+            background-color: #fef0ef;
+            border: 1px solid #f5c6c2;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #721c24;
+        }
+
+        /* Result cards */
+        .result-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-card {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: 1px solid #eaeaea;
+            transition: all 0.2s;
+        }
+
+        .result-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .result-card.bin {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .result-card.oct {
+            background: #fefce8;
+            border-color: #fef08a;
+        }
+
+        .result-card.dec {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        .result-card.hex {
+            background: #faf5ff;
+            border-color: #e9d5ff;
+        }
+
+        .result-badge {
+            width: 120px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 16px;
+        }
+
+        .result-card.bin .result-badge {
+            background: #22c55e;
+            color: white;
+        }
+
+        .result-card.oct .result-badge {
+            background: #eab308;
+            color: white;
+        }
+
+        .result-card.dec .result-badge {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .result-card.hex .result-badge {
+            background: #a855f7;
+            color: white;
+        }
+
+        .result-value {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            word-break: break-all;
+            letter-spacing: 1px;
+        }
+
+        .result-card.source .result-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn-copy-sm {
+            background: none;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #64748b;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .btn-copy-sm:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .btn-copy-sm.copied {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .btn-copy-all {
+            margin-top: 16px;
+            background-color: #27ae60;
+        }
+
+        .btn-copy-all:hover {
+            background-color: #229954;
+        }
+
+        /* Common presets */
+        .presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .preset-tag {
+            padding: 4px 12px;
+            background: #f1f5f9;
+            border-radius: 14px;
+            font-size: 12px;
+            color: #64748b;
+            cursor: pointer;
+            border: none;
+            font-family: 'Courier New', monospace;
+            transition: all 0.2s;
+        }
+
+        .preset-tag:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .input-row {
+                flex-direction: column;
+            }
+
+            .input-row input {
+                font-size: 17px;
+            }
+
+            .result-value {
+                font-size: 15px;
+            }
+
+            .result-card {
+                padding: 12px 14px;
+            }
+
+            .base-select-row {
+                gap: 8px;
+            }
+
+            .base-tab {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .result-badge {
+                width: 84px;
+                height: 30px;
+                font-size: 12px;
+                margin-right: 10px;
+            }
+
+            .base-tab {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
+            <a href="../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
+            <a href="../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
+            <a href="../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
+            <a href="../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
+            <a href="../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
+            <a href="../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
+            <a href="../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
+            <a href="../pwd"><span class="nav-icon">🔑</span>密码生成</a>
+            <a href="../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
+            <a href="../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
+            <a href="../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
+            <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
+            <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
+            <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
+            <a href="../timestamp"><span class="nav-icon">🕐</span>时间戳转换</a>
+            <a href="../urlcode"><span class="nav-icon">🔗</span>URL 编解码</a>
+            <a href="../base-convert" class="active"><span class="nav-icon">🧮</span>进制转换</a>
+            <a href="../js-secrecy"><span class="nav-icon">🛡️</span>JS 混淆加密</a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
+            <a href="../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
+            <a href="../download"><span class="nav-icon">⬇️</span>批量下载</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>纯前端运行 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>进制转换工具</h1>
+            <p>支持二进制、八进制、十进制、十六进制之间互转，实时转换</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="base-select-row">
+                    <span class="label-text">源进制：</span>
+                    <div class="base-tabs">
+                        <button class="base-tab" data-base="2" onclick="switchBase(2)">BIN</button>
+                        <button class="base-tab" data-base="8" onclick="switchBase(8)">OCT</button>
+                        <button class="base-tab active" data-base="10" onclick="switchBase(10)">DEC</button>
+                        <button class="base-tab" data-base="16" onclick="switchBase(16)">HEX</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-row">
+                        <input type="text" id="num-input" placeholder="输入数字..." value="255" data-name="输入值">
+                        <button class="btn" onclick="convert()">转换</button>
+                        <button class="btn btn-outline" onclick="clearInput()">清空</button>
+                    </div>
+                    <div class="presets">
+                        <button class="preset-tag" onclick="usePreset('255', 10)">255</button>
+                        <button class="preset-tag" onclick="usePreset('1024', 10)">1024</button>
+                        <button class="preset-tag" onclick="usePreset('65535', 10)">65535</button>
+                        <button class="preset-tag" onclick="usePreset('ff', 16)">0xFF</button>
+                        <button class="preset-tag" onclick="usePreset('1010', 2)">0b1010</button>
+                        <button class="preset-tag" onclick="usePreset('777', 8)">0o777</button>
+                        <button class="preset-tag" onclick="usePreset('deadbeef', 16)">0xDEADBEEF</button>
+                    </div>
+                </div>
+
+                <div id="error-box" class="error-box" style="display:none;"></div>
+
+                <div class="result-grid" id="result-grid">
+                    <div class="result-card bin">
+                        <div class="result-badge">BIN(二进制)</div>
+                        <div class="result-value" id="val-bin">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-bin', '二进制')">复制</button>
+                    </div>
+                    <div class="result-card oct">
+                        <div class="result-badge">OCT(八进制)</div>
+                        <div class="result-value" id="val-oct">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-oct', '八进制')">复制</button>
+                    </div>
+                    <div class="result-card dec">
+                        <div class="result-badge">DEC(十进制)</div>
+                        <div class="result-value" id="val-dec">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-dec', '十进制')">复制</button>
+                    </div>
+                    <div class="result-card hex">
+                        <div class="result-badge">HEX(十六进制)</div>
+                        <div class="result-value" id="val-hex">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-hex', '十六进制')">复制</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-copy-all" onclick="copyAll()" style="margin-top:16px;">复制全部</button>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        var sourceBase = 10;
+
+        var BASE_CONFIG = {
+            2: { id: 'bin', name: '二进制', regex: /^[01]+$/ },
+            8: { id: 'oct', name: '八进制', regex: /^[0-7]+$/ },
+            10: { id: 'dec', name: '十进制', regex: /^[0-9]+$/ },
+            16: { id: 'hex', name: '十六进制', regex: /^[0-9a-fA-F]+$/ }
+        };
+
+        function switchBase(base) {
+            sourceBase = base;
+            document.querySelectorAll('.base-tab').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelector('.base-tab[data-base="' + base + '"]').classList.add('active');
+            var input = document.getElementById('num-input');
+            if (input.value.trim()) convert();
+        }
+
+        function convert() {
+            var input = document.getElementById('num-input');
+            var errorBox = document.getElementById('error-box');
+            var raw = input.value.trim();
+
+            errorBox.style.display = 'none';
+            input.classList.remove('error');
+
+            if (!raw) {
+                showError('请输入数字');
+                return;
+            }
+
+            // Remove common prefixes
+            raw = raw.replace(/^0b/i, '').replace(/^0o/i, '').replace(/^0x/i, '');
+
+            // Validate against source base
+            if (!BASE_CONFIG[sourceBase].regex.test(raw)) {
+                showError('输入不符合' + BASE_CONFIG[sourceBase].name + '格式（' + getBaseHint(sourceBase) + '）');
+                return;
+            }
+
+            var decimalVal;
+            try {
+                decimalVal = parseInt(raw, sourceBase);
+            } catch (e) {
+                showError('解析失败');
+                return;
+            }
+
+            if (isNaN(decimalVal)) {
+                showError('无法解析为有效数字');
+                return;
+            }
+
+            if (!isFinite(decimalVal) || decimalVal > Number.MAX_SAFE_INTEGER || decimalVal < Number.MIN_SAFE_INTEGER) {
+                showError('数字超出安全范围（-2^53 ~ 2^53）');
+                return;
+            }
+
+            // Update all result fields
+            document.getElementById('val-bin').textContent = decimalVal.toString(2);
+            document.getElementById('val-oct').textContent = decimalVal.toString(8);
+            document.getElementById('val-dec').textContent = decimalVal.toString(10);
+            var hexStr = decimalVal.toString(16);
+            document.getElementById('val-hex').textContent = decimalVal >= 0 ? hexStr.toLowerCase() : '-' + hexStr.substring(1).toLowerCase();
+
+            // Highlight source result
+            document.querySelectorAll('.result-card').forEach(function (c) { c.classList.remove('source'); });
+            var sourceId = BASE_CONFIG[sourceBase].id;
+            document.getElementById('val-' + sourceId).parentElement.classList.add('source');
+        }
+
+        function showError(msg) {
+            var errorBox = document.getElementById('error-box');
+            errorBox.textContent = msg;
+            errorBox.style.display = 'block';
+            document.getElementById('num-input').classList.add('error');
+        }
+
+        function getBaseHint(base) {
+            if (base === 2) return '仅允许 0-1';
+            if (base === 8) return '仅允许 0-7';
+            if (base === 10) return '仅允许 0-9';
+            if (base === 16) return '仅允许 0-9、A-F';
+            return '';
+        }
+
+        function copyVal(id, label) {
+            var val = document.getElementById(id).textContent;
+            if (val === '-') return;
+            navigator.clipboard.writeText(val).then(function () {
+                var btn = document.querySelector('#val-' + id.split('-')[1]).parentElement.querySelector('.btn-copy-sm');
+                var orig = btn.textContent;
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+                utils.showSuccess('已复制' + label + '！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        function copyAll() {
+            var bin = document.getElementById('val-bin').textContent;
+            var oct = document.getElementById('val-oct').textContent;
+            var dec = document.getElementById('val-dec').textContent;
+            var hex = document.getElementById('val-hex').textContent;
+            if (bin === '-') { utils.showError('没有可复制的内容'); return; }
+            var text = 'BIN: ' + bin + '\nOCT: ' + oct + '\nDEC: ' + dec + '\nHEX: ' + hex;
+            navigator.clipboard.writeText(text).then(function () {
+                utils.showSuccess('已复制全部结果！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        function clearInput() {
+            document.getElementById('num-input').value = '';
+            document.getElementById('error-box').style.display = 'none';
+            document.getElementById('num-input').classList.remove('error');
+            document.getElementById('val-bin').textContent = '-';
+            document.getElementById('val-oct').textContent = '-';
+            document.getElementById('val-dec').textContent = '-';
+            document.getElementById('val-hex').textContent = '-';
+            document.querySelectorAll('.result-card').forEach(function (c) { c.classList.remove('source'); });
+        }
+
+        function usePreset(val, base) {
+            document.getElementById('num-input').value = val;
+            switchBase(base);
+            convert();
+        }
+
+        // Real-time conversion
+        document.getElementById('num-input').addEventListener('input', function () {
+            if (this.value.trim()) convert();
+        });
+
+        document.getElementById('num-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') convert();
+        });
+
+        // Init
+        convert();
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
