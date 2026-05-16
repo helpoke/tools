@@ -1,300 +1,552 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="JavaScript代码混淆加密工具, 在线JS代码保护, 支持字符串加密、控制流平坦化、死代码注入等多种混淆选项">
-    <meta name="keywords" content="JS混淆, JavaScript加密, JS代码保护, 代码混淆工具, 字符串加密, 控制流平坦化, 死代码注入, 变量重命名">
-    <meta name="author" content="余一叶知秋尽">
+    <meta name="google-site-verification" content="XOSABXRRUAZS49EcaQi6x6MeWPQmKxckMHjYKIAGW9s" />
+    <meta name="msvalidate.01" content="6E4E2F0E292AC60E8BC80D88FBF8BE82" />
     <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../common/css/style.css">
-    <link rel="stylesheet" href="style.css">
-    <title>JS混淆加密工具 - Helpoke 助可站</title>
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-</head>
+    <title>JavaScript混淆加密工具 - 保护代码安全 | 专业JS混淆工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
+    <meta name="description" content="免费在线JavaScript混淆加密工具，保护您的代码安全。支持文件上传、高级配置选项，防止逆向工程，提升代码安全性。专业JS混淆解决方案。">
+    <meta name="keywords" content="javascript混淆,js混淆,代码加密,代码保护,前端安全,js加密,混淆工具,JavaScript安全,代码混淆器">
+    <meta name="author" content="余一叶知秋尽">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://javascript-obfuscator-tool.pages.dev/">
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="JavaScript混淆加密工具 - 专业保护您的代码安全">
+    <meta property="og:description" content="免费在线JavaScript混淆加密工具，保护您的代码安全。支持文件上传、高级配置选项，防止逆向工程，提升代码安全性。">
+    <meta property="og:url" content="https://javascript-obfuscator-tool.pages.dev/">
+    <meta property="og:image" content="https://javascript-obfuscator-tool.pages.dev/favicon.ico">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JavaScript混淆加密工具 - 专业JS混淆解决方案">
+    <meta name="twitter:description" content="免费在线JavaScript混淆加密工具，保护您的代码安全。支持文件上传、高级配置选项，防止逆向工程，提升代码安全性。">
+    <meta name="twitter:image" content="https://javascript-obfuscator-tool.pages.dev/favicon.ico">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "JavaScript混淆加密工具",
+      "description": "专业的JavaScript代码混淆工具，支持文件上传和高级配置选项，保护您的代码不被逆向工程",
+      "applicationCategory": "DeveloperTools",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "Web",
+      "softwareVersion": "2.0",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "128"
+      }
+    }
+    </script>
+</head>
 <body>
-    <!-- Sidebar toggle (mobile) -->
+    <!-- 移动端侧边栏切换 -->
     <button class="sidebar-toggle" id="sidebarToggle">☰</button>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- Sidebar -->
-    <!-- 侧边导航栏 -->
+    <!-- 侧边栏导航 -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <a href="../..">
+            <a href="..">
                 <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
                 小助点
             </a>
         </div>
         <nav class="sidebar-nav">
             <div class="nav-section">图片工具</div>
-            <a href="../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
-            <a href="../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
-            <a href="../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
-            <a href="../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
+            <a href="../image/compressor">
+                <span class="nav-icon">📦</span>图片压缩
+            </a>
+            <a href="../image/convert">
+                <span class="nav-icon">🔄</span>图片转换
+            </a>
+            <a href="../image/watermark">
+                <span class="nav-icon">💧</span>图片水印
+            </a>
+            <a href="../image/cropping">
+                <span class="nav-icon">✂️</span>图片裁剪
+            </a>
 
             <div class="nav-section">视频工具</div>
-            <a href="../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
-            <a href="../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
-            <a href="../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
+            <a href="../video/cropping">
+                <span class="nav-icon">✂️</span>视频裁剪
+            </a>
+            <a href="../video/watermark">
+                <span class="nav-icon">🎥</span>视频水印
+            </a>
+            <a href="../video/convert">
+                <span class="nav-icon">🔄</span>视频转换
+            </a>
 
             <div class="nav-section">数据 & 开发</div>
-            <a href="../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
-            <a href="../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
-            <a href="../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
-            <a href="../pwd"><span class="nav-icon">🔑</span>密码生成</a>
-            <a href="../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
-            <a href="../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
-            <a href="../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
-            <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
-            <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
-            <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
+            <a href="../json">
+                <span class="nav-icon">{ }</span>JSON 格式化
+            </a>
+            <a href="../yaml">
+                <span class="nav-icon">⚙️</span>YAML 格式化
+            </a>
+            <a href="../pug">
+                <span class="nav-icon">🌿</span>Pug 格式化
+            </a>
+            <a href="../pwd">
+                <span class="nav-icon">🔑</span>密码生成
+            </a>
+            <a href="../uuid">
+                <span class="nav-icon">🆔</span>UUID 生成
+            </a>
+            <a href="../mermaid">
+                <span class="nav-icon">📊</span>Mermaid 图表
+            </a>
+            <a href="../md5">
+                <span class="nav-icon">🔐</span>MD5 加密
+            </a>
+            <a href="../token">
+                <span class="nav-icon">🎫</span>Token 工具
+            </a>
+            <a href="../num-to-chinese">
+                <span class="nav-icon">🔢</span>数字转中文大写
+            </a>
+            <a href="../cron">
+                <span class="nav-icon">⏰</span>Cron 解析
+            </a>
+            <a href="../js-secrecy" class="active">
+                <span class="nav-icon">🛡️</span>JS 混淆加密
+            </a>
 
             <div class="nav-section">文档 & 下载</div>
-            <a href="../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
-            <a href="../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
-            <a href="../download"><span class="nav-icon">⬇️</span>批量下载</a>
+            <a href="../docu/signature">
+                <span class="nav-icon">✍️</span>签名工具
+            </a>
+            <a href="../docu/watermark">
+                <span class="nav-icon">🛡️</span>文档水印
+            </a>
+            <a href="../download">
+                <span class="nav-icon">⬇️</span>批量下载
+            </a>
         </nav>
         <div class="sidebar-footer">
             <p>纯前端运行 · 数据本地处理</p>
         </div>
     </aside>
 
+    <!-- 主内容 -->
     <main class="main">
+        <!-- 页面标题区 -->
         <section class="page-hero">
-            <h1>JS 混淆加密工具</h1>
-            <p>在浏览器本地对 JavaScript 代码进行混淆加密，保护您的代码安全</p>
+            <h1>JavaScript 混淆加密</h1>
+            <p>保护您的代码安全 - 支持文件上传 - 专业的JS代码保护解决方案</p>
         </section>
 
+        <!-- 工具内容 -->
         <div class="container">
-            <div class="main-layout">
-                <!-- 编辑器区域 -->
-                <div class="editor-area">
-                    <div class="editor-body">
-                        <!-- 输入 -->
-                        <div class="editor-pane">
-                            <div class="editor-header input-header">
-                                <h3>📝 源代码</h3>
-                                <div class="file-actions">
-                                    <button class="btn-sm" onclick="document.getElementById('fileInput').click()">📂
-                                        打开文件</button>
-                                    <input type="file" id="fileInput" accept=".js,.txt,.mjs" style="display:none">
-                                    <button class="btn-sm" onclick="clearInput()">清空</button>
-                                    <button class="btn-sm" onclick="pasteCode()">粘贴</button>
-                                </div>
-                            </div>
-                            <textarea class="code-editor" id="inputCode" placeholder="// 在此输入 JavaScript 代码，或点击"
-                                打开文件"上传...&#10;&#10;function hello() {&#10; console.log('Hello World!');&#10;}"
-                                spellcheck="false"></textarea>
-                            <div class="toolbar">
-                                <span class="char-count" id="inputCount">0 字符</span>
-                                <span class="char-count" id="inputLines">0 行</span>
-                            </div>
+            <div class="main-content">
+                <!-- 配置面板 -->
+                <div class="panel config-panel">
+                    <div class="section-title">
+                        <i class="fas fa-sliders-h"></i>
+                        <span>混淆选项预设</span>
+                    </div>
+
+                    <div class="presets">
+                        <div class="preset-btn active" data-preset="default">
+                            <h3>默认，高性能</h3>
+                            <p>平衡混淆和性能</p>
+                        </div>
+                        <div class="preset-btn" data-preset="low">
+                            <h3>低混淆，高性能</h3>
+                            <p>轻度混淆，最佳性能</p>
+                        </div>
+                        <div class="preset-btn" data-preset="medium">
+                            <h3>中等混淆，性能均衡</h3>
+                            <p>适度混淆，良好性能</p>
+                        </div>
+                        <div class="preset-btn" data-preset="high">
+                            <h3>高混淆，低性能</h3>
+                            <p>最大混淆，性能较低</p>
+                        </div>
+                    </div>
+
+                    <!-- 基础设置 -->
+                    <div class="settings-group">
+                        <div class="section-title">
+                            <i class="fas fa-cog"></i>
+                            <span>基础设置</span>
                         </div>
 
-                        <!-- 输出 -->
-                        <div class="editor-pane">
-                            <div class="editor-header output-header">
-                                <h3>🔒 混淆后代码</h3>
-                                <div class="file-actions">
-                                    <button class="btn-sm" onclick="copyOutput()">📋 复制</button>
-                                    <button class="btn-sm" onclick="downloadOutput()">💾 下载</button>
+                        <div class="settings-grid">
+                            <label class="setting-item">
+                                <input type="checkbox" id="compactCode" checked>
+                                <span>紧凑的代码</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="disableFormatting" checked>
+                                <span>禁止格式化</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="disableConsoleDebug" checked>
+                                <span>禁止控制台调试</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="disableConsoleOutput" checked>
+                                <span>禁止控制台输出</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="numberConversion" checked>
+                                <span>数值转表达式</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="optimizeCode" checked>
+                                <span>优化代码结构</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="splitStrings" checked>
+                                <span>分割字符串</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="unicodeEscape" checked>
+                                <span>转义Unicode</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="renameGlobals" checked>
+                                <span>重命名全局变量</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="renameMethods" checked>
+                                <span>重命名方法及属性</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="transformObjectKeys" checked>
+                                <span>转换对象键名</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="stringArray" checked>
+                                <span>字符串数组</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="stringArrayRotate" checked>
+                                <span>字符串数组旋转</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="stringArrayShuffle" checked>
+                                <span>字符串数组随机播放</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="controlFlowFlattening" checked>
+                                <span>控制流平坦化</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="stringArrayIndexShift" checked>
+                                <span>字符串数组索引移位</span>
+                            </label>
+                            <label class="setting-item">
+                                <input type="checkbox" id="stringArrayWrappersChainedCalls" checked>
+                                <span>字符串数组包装器链式调用</span>
+                            </label>
+                        </div>
+
+                        <!-- 标识符名称生成器 -->
+                        <div class="setting-item select-item">
+                            <label for="identifierNamesGenerator">标识符名称生成器:</label>
+                            <select id="identifierNamesGenerator">
+                                <option value="hexadecimal" selected>十六进制(hexadecimal)</option>
+                                <option value="mangled">短名称(mangled)</option>
+                                <option value="dictionary">字典(dictionary)</option>
+                                <option value="mangled-shuffled">乱七八糟(mangled-shuffled)</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item select-item">
+                            <label for="stringArrayEncoding">字符串数组编码:</label>
+                            <select id="stringArrayEncoding">
+                                <option value="none">无</option>
+                                <option value="base64">Base64</option>
+                                <option value="rc4" selected>RC4</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item select-item">
+                            <label for="stringArrayIndexType">字符串数组索引类型:</label>
+                            <select id="stringArrayIndexType">
+                                <option value="hexadecimal-number" selected>十六进制数字</option>
+                                <option value="hexadecimal-numeric-string">十六进制数字字符串</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item select-item">
+                            <label for="stringArrayWrappersType">字符串数组包装器类型:</label>
+                            <select id="stringArrayWrappersType">
+                                <option value="function" selected>功能(function)</option>
+                                <option value="variable">变量(variable)</option>
+                            </select>
+                        </div>
+
+                        <div class="slider-container">
+                            <div class="slider-header">
+                                <div>
+                                    <span>字符串数组阈值</span>
                                 </div>
+                                <div class="slider-value" id="stringArrayThresholdValue">1</div>
                             </div>
-                            <textarea class="code-editor" id="outputCode" placeholder="// 混淆后的代码将在此显示..." readonly
-                                spellcheck="false"></textarea>
-                            <div class="toolbar">
-                                <span class="char-count" id="outputCount">0 字符</span>
-                                <span class="char-count" id="outputLines">0 行</span>
+                            <input type="range" min="0" max="1" step="0.01" value="1" class="slider" id="stringArrayThresholdSlider">
+                            <small>字符串数组阈值</small>
+                        </div>
+
+                        <!-- 字符串数组包装器设置 -->
+                        <div class="string-array-wrapper-settings">
+                            <h4><i class="fas fa-cog"></i> 字符串数组包装器设置</h4>
+                            <div class="string-array-grid">
+                                <div class="number-input-container">
+                                    <label for="stringArrayWrappersCount">包装器计数:</label>
+                                    <input type="number" id="stringArrayWrappersCount" class="number-input" min="0" max="10" value="2">
+                                </div>
+
+                                <div class="number-input-container">
+                                    <label for="stringArrayWrappersParametersMaxCount">参数最大计数:</label>
+                                    <input type="number" id="stringArrayWrappersParametersMaxCount" class="number-input" min="0" max="10" value="2">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="progress-bar" id="progressBar"></div>
+
+                    <!-- 加密系数 -->
+                    <div class="settings-group">
+                        <div class="section-title">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>加密系数</span>
+                        </div>
+
+                        <div class="slider-container">
+                            <div class="slider-header">
+                                <div>
+                                    <input type="checkbox" id="deadCodeInjection" checked>
+                                    <label for="deadCodeInjection">注入死代码</label>
+                                </div>
+                                <div class="slider-value" id="deadCodeValue">1</div>
+                            </div>
+                            <input type="range" min="0" max="1" step="0.01" value="1" class="slider" id="deadCodeSlider">
+                            <small>注入死代码阈值</small>
+                        </div>
+
+                        <div class="slider-container" style="margin-top: 15px;">
+                            <div class="slider-header">
+                                <div>
+                                    <span>控制流平坦化</span>
+                                </div>
+                                <div class="slider-value" id="controlFlowValue">1</div>
+                            </div>
+                            <input type="range" min="0" max="1" step="0.01" value="1" class="slider" id="controlFlowSlider">
+                            <small>控制流平坦化阈值</small>
+                        </div>
+                    </div>
+
+                    <!-- 高级设置 -->
+                    <div class="settings-group">
+                        <div class="section-title">
+                            <i class="fas fa-lock"></i>
+                            <span>高级设置</span>
+                        </div>
+
+                        <!-- 保留变量名 -->
+                        <div class="input-group">
+                            <div class="input-group-header">
+                                <div class="input-group-title">保留变量名</div>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltip-text">这些变量名不会被重命名</span>
+                                </div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="varNameInput" placeholder="输入要保留的变量名 (如: apiKey)">
+                                <button class="add-btn" id="addVarNameBtn">+</button>
+                            </div>
+                            <div class="items-container" id="varNamesContainer">
+                                <div class="empty-message">未添加保留变量名</div>
+                            </div>
+                        </div>
+
+                        <!-- 保留字符串 -->
+                        <div class="input-group">
+                            <div class="input-group-header">
+                                <div class="input-group-title">保留字符串</div>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltip-text">这些字符串不会被混淆</span>
+                                </div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="stringInput" placeholder="输入要保留的字符串 (如: LICENSE)">
+                                <button class="add-btn" id="addStringBtn">+</button>
+                            </div>
+                            <div class="items-container" id="stringsContainer">
+                                <div class="empty-message">未添加保留字符串</div>
+                            </div>
+                        </div>
+
+                        <!-- 强制转换字符串 -->
+                        <div class="input-group">
+                            <div class="input-group-header">
+                                <div class="input-group-title">强制转换字符串</div>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltip-text">这些字符串会被强制转换为另一种形式</span>
+                                </div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="convertInput" placeholder="输入要强制转换的字符串 (如: password)">
+                                <button class="add-btn" id="addConvertBtn">+</button>
+                            </div>
+                            <div class="items-container" id="convertContainer">
+                                <div class="empty-message">未添加强制转换字符串</div>
+                            </div>
+                        </div>
+
+                        <!-- 调试保护和域锁定设置 -->
+                        <div class="number-input-container">
+                            <label for="debugProtectionInterval">调试保护间隔:</label>
+                            <input type="number" id="debugProtectionInterval" class="number-input" min="0" max="10000" value="0">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-header">
+                                <div class="input-group-title">域锁定</div>
+                                <div class="tooltip">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="tooltip-text">限制代码只能在特定域名下运行</span>
+                                </div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="domainLockInput" placeholder="输入域名 (如: example.com)">
+                                <button class="add-btn" id="addDomainLockBtn">+</button>
+                            </div>
+                            <div class="items-container" id="domainLockContainer">
+                                <div class="empty-message">未添加域锁定</div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <input type="checkbox" id="ignoreImports" checked>
+                            <span>忽略导入</span>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-header">
+                                <div class="input-group-title">域锁定重定向 URL</div>
+                            </div>
+                            <div class="input-wrapper">
+                                <input type="text" id="domainLockRedirectUrl" placeholder="输入重定向URL" value="about:blank">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 选项面板 -->
-                <div class="options-panel">
-                    <div class="options-panel-header">⚙️ 混淆选项</div>
+                <!-- 代码面板 -->
+                <div class="panel code-panel">
+                    <div class="code-container">
+                        <div class="code-header">
+                            <div class="code-tabs">
+                                <div class="code-tab active" data-tab="input">输入代码</div>
+                                <div class="code-tab" data-tab="output">混淆结果</div>
+                            </div>
 
-                    <!-- 预设 -->
-                    <div class="options-section">
-                        <div class="options-section-title">快速预设</div>
-                        <select class="option-select" id="preset" onchange="applyPreset()">
-                            <option value="custom">自定义</option>
-                            <option value="low">低混淆（仅变量重命名）</option>
-                            <option value="medium" selected>中混淆（推荐）</option>
-                            <option value="high">高混淆</option>
-                            <option value="maximum">极限混淆</option>
-                        </select>
+                            <div class="header-buttons">
+                                <div class="file-upload-wrapper">
+                                    <button class="btn btn-info" id="uploadBtn">
+                                        <i class="fas fa-upload"></i>
+                                        <span>上传JS文件</span>
+                                    </button>
+                                    <input type="file" id="fileUpload" accept=".js" style="display: none;">
+                                </div>
+                                <button class="btn btn-warning" id="loadExampleBtn">
+                                    <i class="fas fa-code"></i>
+                                    <span>加载示例</span>
+                                </button>
+                                <button class="btn btn-primary" id="obfuscateBtn">
+                                    <i class="fas fa-lock"></i>
+                                    <span>混淆加密</span>
+                                </button>
+                                <button class="btn btn-success" id="copyBtn">
+                                    <i class="fas fa-copy"></i>
+                                    <span>复制</span>
+                                </button>
+                                <button class="btn btn-primary" id="downloadBtn">
+                                    <i class="fas fa-download"></i>
+                                    <span>下载混淆代码</span>
+                                </button>
+                                <button class="btn btn-danger" id="clearBtn">
+                                    <i class="fas fa-eraser"></i>
+                                    <span>清除代码</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="file-info" id="fileInfo" style="display: none;">
+                            <i class="fas fa-file-code"></i>
+                            <span>已选择文件: <span id="fileName">未选择文件</span> (<span id="fileSize">0</span> KB)</span>
+                        </div>
+
+                        <div class="code-area">
+                            <textarea id="inputCode" placeholder="在此输入您的JavaScript代码或上传JS文件..."></textarea>
+
+                            <textarea id="outputCode" placeholder="混淆结果将显示在这里..." readonly></textarea>
+
+                            <div class="stats-container">
+                                <div class="stat-item">
+                                    <div class="stat-value" id="inputSize">0</div>
+                                    <div class="stat-label">输入字符</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="outputSize">0</div>
+                                    <div class="stat-label">输出字符</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="ratio">0%</div>
+                                    <div class="stat-label">变化率</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- 基本选项 -->
-                    <div class="options-section">
-                        <div class="options-section-title">基本</div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="compact" checked>
-                            <label class="option-label" for="compact">
-                                <div class="name">压缩代码</div>
-                                <div class="desc">删除空格和换行，减小文件体积</div>
-                            </label>
-                        </div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="stringArray" checked>
-                            <label class="option-label" for="stringArray">
-                                <div class="name">字符串数组</div>
-                                <div class="desc">将字符串提取到数组中，增加逆向难度</div>
-                            </label>
-                        </div>
-
-                        <label class="option-label" style="margin-top:4px;">
-                            <div class="name" style="font-size:12px;">字符串数组阈值</div>
-                        </label>
-                        <input type="number" class="option-input" id="stringArrayThreshold" value="5" min="0" max="100">
-                    </div>
-
-                    <!-- 变量重命名 -->
-                    <div class="options-section">
-                        <div class="options-section-title">变量重命名</div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="renameGlobals" checked>
-                            <label class="option-label" for="renameGlobals">
-                                <div class="name">重命名全局变量</div>
-                                <div class="desc">同时重命名全局变量和函数名</div>
-                            </label>
-                        </div>
-
-                        <label class="option-label" style="margin-top:4px;">
-                            <div class="name" style="font-size:12px;">变量名前缀（留空随机）</div>
-                        </label>
-                        <input type="text" class="option-input" id="identifierPrefix" placeholder="例如: _x">
-
-                        <label class="option-label" style="margin-top:4px;">
-                            <div class="name" style="font-size:12px;">重命名模式</div>
-                        </label>
-                        <select class="option-select" id="renameMode">
-                            <option value="hexadecimal">十六进制 (_0x1a2b)</option>
-                            <option value="mangled" selected>简短 (a, b, c...)</option>
-                        </select>
-                    </div>
-
-                    <!-- 字符串编码 -->
-                    <div class="options-section">
-                        <div class="options-section-title">字符串编码</div>
-
-                        <label class="option-label">
-                            <div class="name" style="font-size:12px;">编码方式</div>
-                        </label>
-                        <select class="option-select" id="stringArrayEncoding">
-                            <option value="none">无编码</option>
-                            <option value="base64">Base64</option>
-                            <option value="rc4" selected>RC4</option>
-                            <option value="aes">AES</option>
-                        </select>
-
-                        <label class="option-label" style="margin-top:4px;">
-                            <div class="name" style="font-size:12px;">编码比例 (0-1)</div>
-                        </label>
-                        <input type="number" class="option-input" id="encodingRatio" value="0.8" min="0" max="1"
-                            step="0.1">
-                    </div>
-
-                    <!-- 控制流 -->
-                    <div class="options-section">
-                        <div class="options-section-title">控制流</div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="controlFlowFlattening">
-                            <label class="option-label" for="controlFlowFlattening">
-                                <div class="name">控制流平坦化</div>
-                                <div class="desc">打乱代码执行流程，增加逆向难度</div>
-                            </label>
-                        </div>
-
-                        <label class="option-label" style="margin-top:4px;">
-                            <div class="name" style="font-size:12px;">平坦化阈值</div>
-                        </label>
-                        <input type="number" class="option-input" id="controlFlowFlatteningThreshold" value="0.75"
-                            min="0" max="1" step="0.05">
-
-                        <div class="option-item">
-                            <input type="checkbox" id="deadCodeInjection">
-                            <label class="option-label" for="deadCodeInjection">
-                                <div class="name">死代码注入</div>
-                                <div class="desc">注入永远不会执行的代码</div>
-                            </label>
-                        </div>
-
-                        <label class="option-label" style="margin-top:4px;">
-                            <div class="name" style="font-size:12px;">死代码比例 (0-1)</div>
-                        </label>
-                        <input type="number" class="option-input" id="deadCodeInjectionThreshold" value="0.4" min="0"
-                            max="1" step="0.1">
-                    </div>
-
-                    <!-- 其他选项 -->
-                    <div class="options-section">
-                        <div class="options-section-title">其他</div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="selfDefending">
-                            <label class="option-label" for="selfDefending">
-                                <div class="name">自我保护</div>
-                                <div class="desc">防止格式化美化和调试</div>
-                            </label>
-                        </div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="debugProtection">
-                            <label class="option-label" for="debugProtection">
-                                <div class="name">调试保护</div>
-                                <div class="desc">阻止调试器调试混淆后的代码</div>
-                            </label>
-                        </div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="disableConsoleOutput">
-                            <label class="option-label" for="disableConsoleOutput">
-                                <div class="name">禁用控制台</div>
-                                <div class="desc">禁用 console.log/debug 等输出</div>
-                            </label>
-                        </div>
-
-                        <div class="option-item">
-                            <input type="checkbox" id="domainLock">
-                            <label class="option-label" for="domainLock">
-                                <div class="name">域名锁定</div>
-                                <div class="desc">限制代码只能在指定域名运行</div>
-                            </label>
-                        </div>
-
-                        <input type="text" class="option-input" id="domainLockTargets"
-                            placeholder="例: example.com, *.example.com" style="display:none;">
-                    </div>
-
-                    <!-- 混淆按钮 -->
-                    <button class="obfuscate-btn" id="obfuscateBtn" onclick="obfuscate()">🔒 开始混淆</button>
                 </div>
             </div>
         </div>
 
+        <!-- 广告 -->
         <div class="page-ad">
-            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
-                data-ad-slot="5319728132" data-auto-format="rspv" data-full-width="" layout="responsive">
+            <amp-ad width="970" height="90" type="adsense"
+                data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="7740281459"
+                data-auto-format="rspv" data-full-width="" layout="responsive">
             </amp-ad>
         </div>
 
+        <!-- 页脚 -->
         <footer class="footer">
             <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
         </footer>
     </main>
 
-    <script src="app.js"></script>
-    <script src="../common/js/nav.js"></script>
-</body>
+    <!-- 通知 -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">操作成功！</span>
+    </div>
 
+    <script src="script.js"></script>
+    <script src="../common/js/nav.js"></script>
+    <!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "da7dc967196e4083a0fd0c00e035478c"}'></script><!-- Cloudflare Pages Analytics --></body>
 </html>
