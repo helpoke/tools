@@ -1,492 +1,381 @@
-/**
- * JS 混淆加密工具 - 浏览器端实现
- */
-
+var _a0x64=["X2A=","X2M=","X2I=","X2U=","RE5PQGtrcmVvdk9rZGJlZQ==","ZmhuZk1rdnV1","ZG5vYm1rSm9iaQ==","Y2ljbWNg","ZG5vYm1rSm9iaVdld2FldXE=","Ym1tYG8=","bm5sZg==","aW9ydnBGaXVvdg==","aW9ydnBJb25kcQ==","XG8=","IOmjjw==","5peF57+z47ez54mk7bu9OyI=","c3RhYGF2dQ==","MCHnrpPiqqY=","b3R2c3FxSmlvZ3A=","MCHqoog=","5pai5beQ7q+654yS4I+q6ba34pi5","ZXNwbHY=","5rOj5ZiM44+u56eJ4I625piH4YOD5a+7","ZXNwbHY=","5baw5qCI44i354u04I+q6ba34pi5","c3RhYGF2dQ==","ZXNwbHY=","b2NkdndmZ3RkZi1udg==","c3RhYGF2dQ==","X20=","bm5sZg==","bWBsZGhgYg==","cmI2","aGR6YmBgZWlsY28=","cmI2","aGR6YmBgZWlsY28=","Y2lnYG9naXg=","U0RORkdR","6K6167qW44WkIkllc2dTYnBqdHEm5Lqh5KSE","ZXNwbHY=","YWJ2anJg","IOSvlOOpoA==","b3R2c3FxSmlvZ3A=","IOmjjw==","5ra15bOD466N5IuU6rqB","c3RhYGF2dQ==","5ra15bOD46Sw6rehPyY=","ZXNwbHY=","YWJ2anJg","Y25vc2Vmcg==","c3VwampiR3JzY3o=","c3VwampiR3JzY3pQbXRlcmpsaGE=","cmRsYmlgQWxuYGJodg==","aWVnbXBsYGlkcFN2YGBpeQ==","cmRsYmlgS29lZw==","ZW9hbGBsaGdTY3dtag==","Y25sd3ZqakZtbXRCaWd0dWdtbWth","Y25sd3ZqakZtbXRCaWd0dWdtbWthVGlwZndtaWxl","ZGRjZ0dqYmVIbGlhZnJpbmw=","c2RuZUBgYGVvZmpqYg==","ZGRgdmNVdG91Z2BwbGlu","ZGhxYmZpY0NubHBraWNPdHZzcXE=","ZG5vYm1rSm9iaQ==","aGR6YmBgZWlsY28=","MHk=","YWNhZ2FjYWhoaGhoaGhvcXNxd3FzdnZ6en4=","Xw==","JA==","ZG5hdmlgaHQ=","d2hsZ2ty","c2RuZQ==","dG5y","Z21tYWVpUmhocQ==","SlJNTQ==","T2NoZmdx","U3Vwampi","TnRvYWF3","Qm5tb2FkaA==","UHNtbm12Yw==","c2R2V21oY290dg==","c2R2SmpxY3J3Y28=","cGBwcGFMaHQ=","cGBwcGFDam9gdg==","dW9mZmJsaGVl","bnRubw==","dHN3Zg==","TmBM","SW9kampscnk=","cmR2dnZr","aWc=","Zm5w","d2lrb2E=","ZG4=","c3Zrd2dt","Y2BxZg==","YnNnYm8=","dHN7","Y2B2YGw=","ZmhsYmhpfw==","dGlwbHM=","bmR1","dGlrcA==","ZXl2ZmphdQ==","aWxybHZx","ZXlybHZx","ZGRkYnFpcg==","ZnNtbg==","YXJ7bWc=","eWhnb2A=","dHhyZmtj","aW9xd2VrZWVuZA==","aW8=","b2c=","ZGRuZnBg","dm5rZw==","ZnRsYHBsaW4=","KD4+IlhZWlwoXl9m","XF1g","Zw==","XF0mJQ==","cmI2","aGR6YmBgZWlsY28=","aGR6YmBgZWlsY28=","X2M=","YmBxZjIx","ZnRsYHBsaW4hJnhbZHN9KV1idix9dmBwI1tkcT1gdmxmLSJ7XmN3eV5ZYXNfKihabT1vZ3QkUG9udTpCdndneSldYnMramVvZXdsLD1mbnArcmR0IF5jezk1PV9gej9bZHEubWdtY3FuO15jey8uL19qWVxlfVs9XmN0KmZuYXNBbGBgR3QpXWJ8LD1yZHZ2dmsmbmR1I1BgfnRFZ2BrYWNyKSstYGBlb2VnK1tuL30=","cmI2","JHpdYnF4LiR6XWJ2eC8=","aGR6YmBgZWlsY28=","X3U=","ew==","Ww==","fQ==","Ow==","KGd3bWdxb29vKip/c2dyISZ4W2dnfTwmeFtnb306dWttaWMoJXlcZmR7ITw/LjUsfXN2a3dnbS4kel1hZXgveyV5XGZie2RkZGJxaXI6JXlcZmR7PSwzfnl4Lygo","aWcqd311Y29nIid/WmVoKU9icG0oZm1tbHYtS2F1ai12ZGhkbm8rLS83MDErLyNtY3hgZmZnbGthbSUqeTg7PSZ3bWBgYGlvZ2cjLH12YHAjIH5ZY2kqTmVxbi5nbmxrdy5NYHZrKndnbmVtbiwsLDExMiooIm5leWNnYWZvbWBuJC14O01gdmsqd2duZW1uLCw4MC83fg==","dHN7eG1jLnVvZmZibGhlZSt4Z2poc25uZippaWcpJSd/SGd0aSxxZWtib2wqKipxaVN1cGpqYi4zNystd2lvY2QqMS14ISl8f2BlcWVoKWcqf3g=","d2lrb2EtYGFtcWYtfnBhcyInf1plaClPYnBtKGZtbWx2LUthdWotdmRoZG5vKy0vNzAxKy8jbWN4YGZmZ2xrYW0lKnk4IntMY3dsK2Bsbm1xLEhndGkscWVrYm9sKiouNDYwMTIqeXg=","aWcqIiVeWz08PyJfWC97dWpxa3ImbmR1I0F3dG9zKiQgfkthdWotdmRoZG5vKy0rcm9SdnFta2EoMjQqKnZqaWJnKzYseycofw==","XG8=","aGR6YmBgZWlsY28=","X2U=","ZnRsYHBsaW4hJnhbZ2t9KSt4cHd/e3djcSRaZG88JnhbZ2t9L3ZsV3F0aW9lKy0+b2YpXWFrK29uZWd7S2MuJ11ebSMsJz08LzJ4eVlibixqamFjeE5kKyMlJicoIz45KDcpenZrdmpxIG9ndCRAdHJucCsj7Jue57GW7LWF55WqJC14e2NgdmBsLWMpenZrdmpxIGR/fg==","IWd3bWdxb29vKip/c2dyIV1tOWNzbmJ2amtrLil6dnF9fmJlY3dkY2B0fWJjd2dtLmUoeX55PnVldUttcGB0dmBuK1trKjExMip5LS87","LA==","XF0s","Lis=","LyV5XGZzey8vdmZ3cS5sbmFicGxpbi9qbHdxaGFsZyo=","KGd3bWdxb29vKip/bGAoIConf1pkdXwrKn9xbnJudSNqYHEgRHBxa3cuJ0VtbmVsaCBvbXckZHN0aW1xbX9jZCYrfnksLik6","XG8=","ZGh0","dG5jcHAoa3NmIg==","MA==","b3FjYG1xfyAxLDB3"];function _b0x65(i){var b=atob(_a0x64[i]),a=new Uint8Array(b.length);for(var j=0;j<b.length;j++)a[j]=b.charCodeAt(j)^(j%7);return new TextDecoder().decode(a)}
 const $ = id => document.getElementById(id);
-const inputCode = $('inputCode');
-const outputCode = $('outputCode');
-const progressBar = $('progressBar');
-const obfuscateBtn = $('obfuscateBtn');
-
-// 初始化
-document.addEventListener('DOMContentLoaded', () => {
-    inputCode.addEventListener('input', updateCounts);
-    $('fileInput').addEventListener('change', handleFileUpload);
-    $('domainLock').addEventListener('change', e => {
-        $('domainLockTargets').style.display = e.target.checked ? 'block' : 'none';
-    });
+const _a = $(_b0x65(0));
+const _b = $(_b0x65(1));
+const _c = $(_b0x65(2));
+const _d = $(_b0x65(3));
+document.addEventListener(_b0x65(4), () => {
+$(_b0x65(5)).addEventListener('change', _by);
+$(_b0x65(6)).addEventListener(_b0x65(7), e => {
+$(_b0x65(8)).style.display = e.target.checked ? _b0x65(9) : _b0x65(10);
 });
-
-function updateCounts() {
-    const val = inputCode.value;
-    $('inputCount').textContent = val.length + ' 字符';
-    $('inputLines').textContent = (val ? val.split('\n').length : 0) + ' 行';
+});
+function _bx(e) {
+const _e = e.target.value;
+$(_b0x65(11)).textContent = _e.length + ' 字符';
+$(_b0x65(12)).textContent = (_e ? _e.split(_b0x65(13)).length : 0) + _b0x65(14);
 }
-
-// 文件上传
-function handleFileUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-        inputCode.value = reader.result;
-        updateCounts();
-        showToast('文件已加载: ' + file.name, 'success');
-    };
-    reader.readAsText(file);
-    // 重置 file input 以支持重复上传同名文件
-    e.target.value = '';
+function _by(e) {
+const _f = e.target.files[0];
+if (!_f) return;
+const _g = new FileReader();
+_g.onload = () => {
+_a.value = _g._q;
+_bx();
+_ct(_b0x65(15) + _f._v, _b0x65(16));
+};
+_g.readAsText(_f);
+e.target.value = '';
 }
-
-// 清空输入
-function clearInput() {
-    inputCode.value = '';
-    outputCode.value = '';
-    updateCounts();
-    $('outputCount').textContent = '0 字符';
-    $('outputLines').textContent = '0 行';
+function _bz() {
+_a.value = '';
+_b.value = '';
+_bx();
+$('outputCount').textContent = _b0x65(17);
+$(_b0x65(18)).textContent = _b0x65(19);
 }
-
-// 粘贴
-async function pasteCode() {
-    try {
-        const text = await navigator.clipboard.readText();
-        inputCode.value = text;
-        updateCounts();
-        showToast('已粘贴', 'success');
-    } catch {
-        showToast('无法读取剪贴板', 'error');
-    }
+async function _ca() {
+try {
+const _h = await navigator.clipboard.readText();
+_a.value = _h;
+_bx();
+_ct('已粘贴', 'success');
+} catch {
+_ct(_b0x65(20), _b0x65(21));
 }
-
-// 复制输出
-function copyOutput() {
-    const val = outputCode.value;
-    if (!val) { showToast('没有可复制的内容', 'error'); return; }
-    navigator.clipboard.writeText(val).then(() => showToast('已复制到剪贴板', 'success'));
 }
-
-// 下载输出
-function downloadOutput() {
-    const val = outputCode.value;
-    if (!val) { showToast('没有可下载的内容', 'error'); return; }
-    const blob = new Blob([val], { type: 'application/javascript' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'obfuscated.js';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('已开始下载', 'success');
+function _cb() {
+const _e = _b.value;
+if (!_e) { _ct(_b0x65(22), _b0x65(23)); return; }
+navigator.clipboard.writeText(_e).then(() => _ct(_b0x65(24), _b0x65(25)));
 }
-
-// 预设
-function applyPreset() {
-    const preset = $('preset').value;
-    const defaults = {
-        low:       { compact: true, stringArray: false, renameGlobals: true, controlFlowFlattening: false, deadCodeInjection: false, selfDefending: false, debugProtection: false, disableConsoleOutput: false, domainLock: false, stringArrayEncoding: 'none', renameMode: 'mangled' },
-        medium:    { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: false, deadCodeInjection: false, selfDefending: false, debugProtection: false, disableConsoleOutput: false, domainLock: false, stringArrayEncoding: 'base64', renameMode: 'mangled' },
-        high:      { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: true, deadCodeInjection: true, selfDefending: true, debugProtection: false, disableConsoleOutput: true, domainLock: false, stringArrayEncoding: 'rc4', renameMode: 'hexadecimal' },
-        maximum:   { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: true, deadCodeInjection: true, selfDefending: true, debugProtection: true, disableConsoleOutput: true, domainLock: false, stringArrayEncoding: 'rc4', renameMode: 'hexadecimal' }
-    };
-    const d = defaults[preset];
-    if (!d) return;
-    Object.keys(d).forEach(k => {
-        const el = $(k);
-        if (el) {
-            if (el.type === 'checkbox') el.checked = d[k];
-            else if (el.tagName === 'SELECT') el.value = d[k];
-        }
-    });
+function _cc() {
+const _e = _b.value;
+if (!_e) { _ct('没有可下载的内容', _b0x65(26)); return; }
+const _i = new Blob([_e], { type: 'application/javascript' });
+const _j = URL.createObjectURL(_i);
+const _k = document.createElement('_k');
+_k.href = _j;
+_k.download = _b0x65(27);
+document.body.appendChild(_k);
+_k.click();
+document.body.removeChild(_k);
+URL.revokeObjectURL(_j);
+_ct('已开始下载', _b0x65(28));
 }
-
-// ===== 混淆引擎 =====
-function obfuscate() {
-    const code = inputCode.value.trim();
-    if (!code) { showToast('请输入 JavaScript 代码', 'error'); return; }
-
-    progressBar.classList.add('active');
-    obfuscateBtn.disabled = true;
-    obfuscateBtn.textContent = '混淆中...';
-
-    // 使用 setTimeout 让 UI 先渲染进度条
-    setTimeout(() => {
-        try {
-            const result = processObfuscation(code);
-            outputCode.value = result;
-            const lines = result.split('\n');
-            $('outputCount').textContent = result.length + ' 字符';
-            $('outputLines').textContent = lines.length + ' 行';
-            showToast('混淆完成！', 'success');
-        } catch (e) {
-            showToast('混淆失败: ' + e.message, 'error');
-            console.error(e);
-        } finally {
-            progressBar.classList.remove('active');
-            obfuscateBtn.disabled = false;
-            obfuscateBtn.textContent = '🔒 开始混淆';
-        }
-    }, 100);
+function _cd() {
+const _l = $(_b0x65(29)).value;
+const _m = {
+low:       { compact: true, stringArray: false, renameGlobals: true, controlFlowFlattening: false, deadCodeInjection: false, selfDefending: false, debugProtection: false, disableConsoleOutput: false, domainLock: false, stringArrayEncoding: _b0x65(30), renameMode: _b0x65(31) },
+medium:    { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: false, deadCodeInjection: false, selfDefending: false, debugProtection: false, disableConsoleOutput: false, domainLock: false, stringArrayEncoding: 'base64', renameMode: 'mangled' },
+high:      { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: true, deadCodeInjection: true, selfDefending: true, debugProtection: false, disableConsoleOutput: true, domainLock: false, stringArrayEncoding: _b0x65(32), renameMode: _b0x65(33) },
+maximum:   { compact: true, stringArray: true, renameGlobals: true, controlFlowFlattening: true, deadCodeInjection: true, selfDefending: true, debugProtection: true, disableConsoleOutput: true, domainLock: false, stringArrayEncoding: _b0x65(34), renameMode: _b0x65(35) }
+};
+const _n = _m[_l];
+if (!_n) return;
+Object.keys(_n).forEach(k => {
+const _o = $(k);
+if (_o) {
+if (_o.type === _b0x65(36)) _o.checked = _n[k];
+else if (_o.tagName === _b0x65(37)) _o.value = _n[k];
 }
-
-function processObfuscation(code) {
-    const opts = getOptions();
-    let result = code;
-
-    // 步骤 1: 变量和函数名重命名
-    if (opts.renameGlobals) {
-        result = renameIdentifiers(result, opts);
-    }
-
-    // 步骤 2: 字符串数组编码
-    if (opts.stringArray) {
-        result = stringArrayObfuscation(result, opts);
-    }
-
-    // 步骤 3: 控制流平坦化
-    if (opts.controlFlowFlattening) {
-        result = controlFlowFlatten(result, opts);
-    }
-
-    // 步骤 4: 死代码注入
-    if (opts.deadCodeInjection) {
-        result = injectDeadCode(result, opts);
-    }
-
-    // 步骤 5: 自我保护/调试保护
-    if (opts.selfDefending || opts.debugProtection) {
-        result = addSelfDefense(result, opts);
-    }
-
-    // 步骤 6: 禁用控制台
-    if (opts.disableConsoleOutput) {
-        result = disableConsole(result);
-    }
-
-    // 步骤 7: 域名锁定
-    if (opts.domainLock && opts.domainLockTargets) {
-        result = addDomainLock(result, opts);
-    }
-
-    // 步骤 8: 压缩
-    if (opts.compact) {
-        result = minify(result);
-    }
-
-    return result;
+});
 }
-
-function getOptions() {
-    return {
-        compact: $('compact').checked,
-        stringArray: $('stringArray').checked,
-        stringArrayThreshold: parseFloat($('stringArrayThreshold').value) || 5,
-        renameGlobals: $('renameGlobals').checked,
-        identifierPrefix: $('identifierPrefix').value || '',
-        renameMode: $('renameMode').value,
-        stringArrayEncoding: $('stringArrayEncoding').value,
-        encodingRatio: parseFloat($('encodingRatio').value) || 0.8,
-        controlFlowFlattening: $('controlFlowFlattening').checked,
-        controlFlowFlatteningThreshold: parseFloat($('controlFlowFlatteningThreshold').value) || 0.75,
-        deadCodeInjection: $('deadCodeInjection').checked,
-        deadCodeInjectionThreshold: parseFloat($('deadCodeInjectionThreshold').value) || 0.4,
-        selfDefending: $('selfDefending').checked,
-        debugProtection: $('debugProtection').checked,
-        disableConsoleOutput: $('disableConsoleOutput').checked,
-        domainLock: $('domainLock').checked,
-        domainLockTargets: $('domainLockTargets').value
-    };
+function _ce() {
+const _p = _a.value.trim();
+if (!_p) { _ct(_b0x65(38), _b0x65(39)); return; }
+_c.classList.add(_b0x65(40));
+_d.disabled = true;
+_d.textContent = '混淆中...';
+setTimeout(() => {
+try {
+const _q = _cf(_p);
+_b.value = _q;
+const _r = _q.split('\n');
+$('outputCount').textContent = _q.length + _b0x65(41);
+$(_b0x65(42)).textContent = _r.length + _b0x65(43);
+_ct(_b0x65(44), _b0x65(45));
+} catch (e) {
+_ct(_b0x65(46) + e.message, _b0x65(47));
+} finally {
+_c.classList.remove(_b0x65(48));
+_d.disabled = false;
+_d.textContent = '🔒 开始混淆';
 }
-
-// 生成混淆变量名
-function generateVarName(index, mode, prefix) {
-    if (mode === 'hexadecimal') {
-        const hex = '0x' + (index + 100).toString(16);
-        return (prefix || '_') + hex;
-    }
-    // mangled: a, b, c... z, aa, ab...
-    const chars = 'abcdefghijklmnopqrstuvwxyz';
-    let name = '';
-    let n = index;
-    do {
-        name = chars[n % 26] + name;
-        n = Math.floor(n / 26) - 1;
-    } while (n >= 0);
-    return (prefix || '_') + name;
+}, 100);
 }
-
-// 标识符重命名
-function renameIdentifiers(code, opts) {
-    // 收集所有需要重命名的标识符
-    const identifiers = new Set();
-
-    // 匹配 const/let/var 声明
-    const varRegex = /\b(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
-    let m;
-    while ((m = varRegex.exec(code)) !== null) {
-        // 跳过关键字
-        if (!['console', 'document', 'window', 'Math', 'JSON', 'Array', 'Object', 'String', 'Number', 'Boolean', 'Promise', 'setTimeout', 'setInterval', 'parseInt', 'parseFloat', 'undefined', 'null', 'true', 'false', 'NaN', 'Infinity', 'function', 'return', 'if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 'try', 'catch', 'finally', 'throw', 'new', 'this', 'class', 'extends', 'import', 'export', 'default', 'from', 'async', 'await', 'yield', 'typeof', 'instanceof', 'in', 'of', 'delete', 'void'].includes(m[1])) {
-            identifiers.add(m[1]);
-        }
-    }
-
-    // 匹配函数声明
-    const funcRegex = /\bfunction\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/g;
-    while ((m = funcRegex.exec(code)) !== null) {
-        if (!['function'].includes(m[1])) {
-            identifiers.add(m[1]);
-        }
-    }
-
-    // 匹配箭头函数和对象属性中的函数赋值 (const fn = () =>)
-    const arrowRegex = /\b(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=\s*(?:async\s*)?\(/g;
-    while ((m = arrowRegex.exec(code)) !== null) {
-        identifiers.add(m[1]);
-    }
-
-    // 匹配类声明
-    const classRegex = /\bclass\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g;
-    while ((m = classRegex.exec(code)) !== null) {
-        identifiers.add(m[1]);
-    }
-
-    // 过滤掉对象属性的键（冒号左边的不算变量声明）
-    const idList = Array.from(identifiers);
-    const renameMap = new Map();
-    let counter = 0;
-    idList.forEach(id => {
-        renameMap.set(id, generateVarName(counter++, opts.renameMode, opts.identifierPrefix));
-    });
-
-    // 按名称长度降序替换，避免短名称覆盖长名称
-    const sorted = [...renameMap.entries()].sort((a, b) => b[0].length - a[0].length);
-    let result = code;
-    sorted.forEach(([oldName, newName]) => {
-        const regex = new RegExp('\\b' + escapeRegExp(oldName) + '\\b', 'g');
-        result = result.replace(regex, newName);
-    });
-
-    return result;
+function _cf(_p) {
+const _s = _cg();
+let _q = _p;
+if (_s.renameGlobals) {
+_q = _ci(_q, _s);
 }
-
-function escapeRegExp(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+if (_s.stringArray) {
+_q = _cm(_q, _s);
 }
-
-// 字符串数组混淆
-function stringArrayObfuscation(code, opts) {
-    const strings = [];
-    // 提取所有字符串字面量
-    const stringRegex = /(['"`])(?:(?!\1|\\).|\\.)*\1/g;
-    let m;
-    const positions = [];
-    while ((m = stringRegex.exec(code)) !== null) {
-        // 跳过空字符串和短字符串
-        const val = m[0].slice(1, -1);
-        if (val.length > 0 && Math.random() < opts.encodingRatio) {
-            positions.push({ index: m.index, length: m[0].length, value: m[0] });
-            strings.push(val);
-        }
-    }
-
-    if (strings.length === 0) return code;
-
-    // 对字符串进行编码
-    let encodedArray;
-    switch (opts.stringArrayEncoding) {
-        case 'base64':
-            encodedArray = strings.map(s => {
-                const bytes = new TextEncoder().encode(s);
-                let bin = '';
-                for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
-                return btoa(bin);
-            });
-            break;
-        case 'rc4':
-            // 简化版：使用 base64 + 位移
-            encodedArray = strings.map(s => {
-                const bytes = new TextEncoder().encode(s);
-                const xored = new Uint8Array(bytes.length);
-                for (let i = 0; i < bytes.length; i++) xored[i] = bytes[i] ^ (i % 7);
-                let bin = '';
-                for (let i = 0; i < xored.length; i++) bin += String.fromCharCode(xored[i]);
-                return btoa(bin);
-            });
-            break;
-        default:
-            encodedArray = strings.map(s => s);
-    }
-
-    // 构建数组变量名
-    const arrName = generateVarName(0, 'hexadecimal', '_a');
-    const decName = generateVarName(1, 'hexadecimal', '_b');
-
-    // 生成解码函数
-    let decodeFunc = '';
-    switch (opts.stringArrayEncoding) {
-        case 'base64':
-            decodeFunc = `function ${decName}(i){var b=atob(${arrName}[i]),a=new Uint8Array(b.length);for(var j=0;j<b.length;j++)a[j]=b.charCodeAt(j);return new TextDecoder().decode(a)}`;
-            break;
-        case 'rc4':
-            decodeFunc = `function ${decName}(i){var b=atob(${arrName}[i]),a=new Uint8Array(b.length);for(var j=0;j<b.length;j++)a[j]=b.charCodeAt(j)^(j%7);return new TextDecoder().decode(a)}`;
-            break;
-        default:
-            decodeFunc = `function ${decName}(i){return ${arrName}[i]}`;
-    }
-
-    // 从后向前替换字符串（避免索引偏移）
-    let result = code;
-    for (let i = positions.length - 1; i >= 0; i--) {
-        const pos = positions[i];
-        result = result.slice(0, pos.index) + `${decName}(${i})` + result.slice(pos.index + pos.length);
-    }
-
-    // 在最前面插入数组和解码函数
-    const arrayStr = JSON.stringify(encodedArray);
-    return `(function(){var ${arrName}=${arrayStr};${decodeFunc};${result}})()`;
+if (_s.controlFlowFlattening) {
+_q = _cn(_q, _s);
 }
-
-// 控制流平坦化（简化版：用状态机包装代码块）
-function controlFlowFlatten(code, opts) {
-    // 检测是否超过阈值
-    const stmts = code.split(';').filter(s => s.trim().length > 0);
-    if (stmts.length < 3) return code;
-
-    // 将代码包装在立即执行函数中，使用 switch 状态机
-    const wrapperName = generateVarName(0, 'hexadecimal', '_s');
-    const stateName = generateVarName(1, 'hexadecimal', '_t');
-
-    // 将代码按语句分割
-    const blocks = [];
-    let current = '';
-    let depth = 0;
-    for (const ch of code) {
-        if (ch === '{' || ch === '(' || ch === '[') depth++;
-        if (ch === '}' || ch === ')' || ch === ']') depth--;
-        if (ch === ';' && depth <= 0) {
-            if (current.trim()) blocks.push(current.trim());
-            current = '';
-        } else {
-            current += ch;
-        }
-    }
-    if (current.trim()) blocks.push(current.trim());
-
-    if (blocks.length < 2) return code;
-
-    // 打乱顺序
-    const indices = Array.from({ length: blocks.length }, (_, i) => i);
-    for (let i = indices.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [indices[i], indices[j]] = [indices[j], indices[i]];
-    }
-
-    // 构建状态机
-    const cases = blocks.map((block, i) => {
-        const originalIndex = indices.indexOf(i);
-        const nextIndex = i < blocks.length - 1 ? indices[i + 1] : -1;
-        return `case ${originalIndex}:${block};${stateName}=${nextIndex};break;`;
-    }).join('');
-
-    return `(function(){var ${stateName}=${indices[0]};while(${stateName}!==-1){switch(${stateName}){${cases}default:${stateName}=-1}}})()`;
+if (_s.deadCodeInjection) {
+_q = _co(_q, _s);
 }
-
-// 死代码注入
-function injectDeadCode(code, opts) {
-    const deadCodeSnippets = [
-        `if(typeof ${generateVarName(Math.floor(Math.random()*100),'hexadecimal')}==='undefined'){var ${generateVarName(Math.floor(Math.random()*100),'hexadecimal')}=Math.random()>0.5}`,
-        `try{if(undefined){console.log('${Math.random().toString(36).slice(2)}')}}catch(e){}`,
-        `while(false){var ${generateVarName(Math.floor(Math.random()*100),'hexadecimal')}=${Math.floor(Math.random()*10000)}}`,
-        `if(!![]===![]){throw new Error('${Math.random().toString(36).slice(2)}')}`,
-    ];
-
-    const lines = code.split('\n');
-    const injectCount = Math.floor(lines.length * opts.deadCodeInjectionThreshold);
-    const result = [];
-
-    for (let i = 0; i < lines.length; i++) {
-        result.push(lines[i]);
-        if (Math.random() < opts.deadCodeInjectionThreshold && result.length < injectCount) {
-            const snippet = deadCodeSnippets[Math.floor(Math.random() * deadCodeSnippets.length)];
-            result.push(snippet + ';');
-        }
-    }
-
-    return result.join('\n');
+if (_s.selfDefending || _s.debugProtection) {
+_q = _cp(_q, _s);
 }
-
-// 自我保护
-function addSelfDefense(code, opts) {
-    let result = code;
-    const fnName = generateVarName(0, 'hexadecimal', '_d');
-
-    if (opts.selfDefending) {
-        // 添加反格式化和反美化代码
-        const selfDefense = `function ${fnName}(){try{var s=${fnName}.toString();if(s.indexOf('\\n')!==-1||s.indexOf('  ')!==-1){throw new Error('非法调用')}}catch(e){throw e}}`;
-        result = selfDefense + result;
-    }
-
-    if (opts.debugProtection) {
-        // 添加反调试代码
-        const debugProtect = `!function(){var d=function(){try{debugger}catch(e){}};setInterval(d,100)}();`;
-        result += debugProtect;
-    }
-
-    return result;
+if (_s.disableConsoleOutput) {
+_q = _cq(_q);
 }
-
-// 禁用控制台
-function disableConsole(code) {
-    const disableCode = `(function(){var methods=['log','debug','info','warn','error','trace','dir','table','assert','count','countReset','group','groupEnd','time','timeEnd','timeLog','clear','profile','profileEnd'];var noop=function(){};methods.forEach(function(m){try{console[m]=noop}catch(e){}})})();`;
-    return disableCode + code;
+if (_s.domainLock && _s.domainLockTargets) {
+_q = _cr(_q, _s);
 }
-
-// 域名锁定
-function addDomainLock(code, opts) {
-    const targets = opts.domainLockTargets.split(',').map(d => d.trim()).filter(Boolean);
-    if (targets.length === 0) return code;
-
-    const check = targets.map(d => {
-        const pattern = d.replace(/\./g, '\\.').replace(/\*/g, '.*');
-        return `/${pattern}/.test(location.hostname)`;
-    }).join('||');
-
-    const lockCode = `(function(){if(!(${check})){throw new Error('Domain not authorized')}})();`;
-    return lockCode + code;
+if (_s.compact) {
+_q = _cs(_q);
 }
-
-// 压缩代码
-function minify(code) {
-    // 移除单行注释（但保留 URL 中的 //）
-    code = code.replace(/(?<![:\/\w])\/\/[^\n]*/g, '');
-
-    // 移除多行注释
-    code = code.replace(/\/\*[\s\S]*?\*\//g, '');
-
-    // 移除 console 语句
-    code = code.replace(/console\.(log|debug|info|warn|error|trace|dir|time|timeEnd|table|group|groupEnd|count|countReset|assert|profile|profileEnd|clear)\s*\([^)]*\)\s*;?/g, '');
-
-    // 压缩空格
-    code = code.replace(/\r\n/g, '\n');
-    code = code.replace(/\n\s*\n/g, '\n');
-
-    // 移除行首行尾空格
-    code = code.split('\n').map(line => line.trim()).join('\n');
-
-    return code;
+return _q;
 }
-
-// Toast 提示
-function showToast(msg, type) {
-    const el = document.createElement('div');
-    el.className = 'toast-msg ' + type;
-    el.textContent = msg;
-    document.body.appendChild(el);
-    setTimeout(() => {
-        el.style.opacity = '0';
-        el.style.transition = 'opacity 0.3s';
-        setTimeout(() => el.remove(), 300);
-    }, 2000);
+function _cg() {
+return {
+compact: $(_b0x65(49)).checked,
+stringArray: $(_b0x65(50)).checked,
+stringArrayThreshold: parseFloat($(_b0x65(51)).value) || 5,
+renameGlobals: $(_b0x65(52)).checked,
+identifierPrefix: $(_b0x65(53)).value || '',
+renameMode: $(_b0x65(54)).value,
+stringArrayEncoding: $('stringArrayEncoding').value,
+encodingRatio: parseFloat($(_b0x65(55)).value) || 0.8,
+controlFlowFlattening: $(_b0x65(56)).checked,
+controlFlowFlatteningThreshold: parseFloat($(_b0x65(57)).value) || 0.75,
+deadCodeInjection: $(_b0x65(58)).checked,
+deadCodeInjectionThreshold: parseFloat($('deadCodeInjectionThreshold').value) || 0.4,
+selfDefending: $(_b0x65(59)).checked,
+debugProtection: $(_b0x65(60)).checked,
+disableConsoleOutput: $(_b0x65(61)).checked,
+domainLock: $(_b0x65(62)).checked,
+domainLockTargets: $('domainLockTargets').value
+};
+}
+function _ch(index, mode, prefix) {
+if (mode === _b0x65(63)) {
+const _t = _b0x65(64) + (index + 100).toString(16);
+return (prefix || '_') + _t;
+}
+const _u = _b0x65(65);
+let _v = '';
+let _w = index;
+do {
+_v = _u[_w % 26] + _v;
+_w = Math.floor(_w / 26) - 1;
+} while (_w >= 0);
+return (prefix || _b0x65(66)) + _v;
+}
+function _ci(_p, _s) {
+const _x = new Set();
+const _y = /\b(?:const|let|var)\s+([_k-zA-Z_$][_k-zA-Z0-9_$]*)/g;
+let _z;
+while ((_z = _y.exec(_p)) !== null) {
+if (![_b0x65(67),'console',_b0x65(68),_b0x65(69),_b0x65(70),_b0x65(71),_b0x65(72),'Math',_b0x65(73),'Array',_b0x65(74),_b0x65(75),_b0x65(76),_b0x65(77),_b0x65(78),_b0x65(79),_b0x65(80),_b0x65(81),_b0x65(82),_b0x65(83),_b0x65(84),_b0x65(85),'false',_b0x65(86),_b0x65(87),'function',_b0x65(88),_b0x65(89),'else',_b0x65(90),_b0x65(91),_b0x65(92),_b0x65(93),_b0x65(94),_b0x65(95),'continue',_b0x65(96),_b0x65(97),_b0x65(98),_b0x65(99),_b0x65(100),_b0x65(101),'class',_b0x65(102),_b0x65(103),_b0x65(104),_b0x65(105),_b0x65(106),_b0x65(107),'await',_b0x65(108),_b0x65(109),_b0x65(110),_b0x65(111),_b0x65(112),_b0x65(113),_b0x65(114)].includes(_z[1])) {
+_x.add(_z[1]);
+}
+}
+const _aa = /\bfunction\s+([_k-zA-Z_$][_k-zA-Z0-9_$]*)\s*\(/g;
+while ((_z = _aa.exec(_p)) !== null) {
+if (![_b0x65(115)].includes(_z[1])) {
+_x.add(_z[1]);
+}
+}
+const _ac = /\b(?:const|let|var)\s+([_k-zA-Z_$][_k-zA-Z0-9_$]*)\s*=\s*(?:async\s*)?\(/g;
+while ((_z = _ac.exec(_p)) !== null) {
+_x.add(_z[1]);
+}
+const _ad = /\bclass\s+([_k-zA-Z_$][_k-zA-Z0-9_$]*)/g;
+while ((_z = _ad.exec(_p)) !== null) {
+_x.add(_z[1]);
+}
+const _ae = Array.from(_x);
+const _af = new Map();
+let _ag = 0;
+_ae.forEach(id => {
+_af.set(id, _ch(_ag++, _s.renameMode, _s.identifierPrefix));
+});
+const _ah = [..._af.entries()].sort((_k, _aw) => _aw[0].length - _k[0].length);
+let _q = _p;
+_ah.forEach(([oldName, newName]) => {
+const _ai = new RegExp(_b0x65(116) + _cj(oldName) + _b0x65(117), _b0x65(118));
+_q = _q.replace(_ai, newName);
+});
+return _q;
+}
+function _cj(str) {
+return str.replace(/[.*+?^${}()|[\]\\]/g, _b0x65(119));
+}
+function _ck(_p) {
+const _aj = [];
+const _ai = /\/(?:[^\/\\\n]|\\.)+\/[gimsuy]*/g;
+let _z;
+while ((_z = _ai.exec(_p)) !== null) {
+_aj.push({ start: _z.index, end: _z.index + _z[0].length });
+}
+return _aj;
+}
+function _cl(_ay, _aj) {
+return _aj.some(r => _ay >= r.start && _ay < r.end);
+}
+function _cm(_p, _s) {
+const _ak = [];
+const _al = /(['"`])(?:(?!\1|\\).|\\.)*\1/g;
+let _z;
+const _am = [];
+const _an = _ck(_p);
+while ((_z = _al.exec(_p)) !== null) {
+if (_cl(_z.index, _an)) continue;
+const _e = _z[0].slice(1, -1);
+if (_e.length > 0 && Math.random() < _s.encodingRatio) {
+_am.push({ index: _z.index, length: _z[0].length, value: _z[0] });
+_ak.push(_e);
+}
+}
+if (_ak.length === 0) return _p;
+let _ao;
+switch (_s.stringArrayEncoding) {
+case 'base64':
+_ao = _ak.map(_bo => {
+const _ap = new TextEncoder().encode(_bo);
+let _aq = '';
+for (let _ar = 0; _ar < _ap.length; _ar++) _aq += String.fromCharCode(_ap[_ar]);
+return btoa(_aq);
+});
+break;
+case _b0x65(120):
+_ao = _ak.map(_bo => {
+const _ap = new TextEncoder().encode(_bo);
+const _as = new Uint8Array(_ap.length);
+for (let _ar = 0; _ar < _ap.length; _ar++) _as[_ar] = _ap[_ar] ^ (_ar % 7);
+let _aq = '';
+for (let _ar = 0; _ar < _as.length; _ar++) _aq += String.fromCharCode(_as[_ar]);
+return btoa(_aq);
+});
+break;
+default:
+_ao = _ak.map(_bo => _bo);
+}
+const _at = _ch(0, _b0x65(121), '_a');
+const _au = _ch(1, _b0x65(122), _b0x65(123));
+let _av = '';
+switch (_s.stringArrayEncoding) {
+case _b0x65(124):
+_av = _b0x65(125);
+break;
+case _b0x65(126):
+_av = `function ${_au}(_ar){var _aw=atob(${_at}[_ar]),_k=new Uint8Array(_aw.length);for(var _ax=0;_ax<_aw.length;_ax++)_k[_ax]=_aw.charCodeAt(_ax)^(_ax%7);return new TextDecoder().decode(_k)}`;
+break;
+default:
+_av = `function ${_au}(_ar){return ${_at}[_ar]}`;
+}
+let _q = _p;
+for (let _ar = _am.length - 1; _ar >= 0; _ar--) {
+const _ay = _am[_ar];
+_q = _q.slice(0, _ay.index) + _b0x65(127) + _q.slice(_ay.index + _ay.length);
+}
+const _az = JSON.stringify(_ao);
+return `var ${_at}=${_az};${_av}${_q}`;
+}
+function _cn(_p, _s) {
+const _ba = _ch(1, _b0x65(128), _b0x65(129));
+const _bb = [];
+let _bc = '';
+let _bd = 0;
+for (const _be of _p) {
+if (_be === _b0x65(130) || _be === '(' || _be === _b0x65(131)) _bd++;
+if (_be === _b0x65(132) || _be === ')' || _be === ']') _bd--;
+if (_be === _b0x65(133) && _bd <= 0) {
+if (_bc.trim()) _bb.push(_bc.trim());
+_bc = '';
+} else {
+_bc += _be;
+}
+}
+if (_bc.trim()) _bb.push(_bc.trim());
+if (_bb.length < 3) return _p;
+const _bf = Array.from({ length: _bb.length }, (_, _ar) => _ar);
+for (let _ar = _bf.length - 1; _ar > 0; _ar--) {
+const _ax = Math.floor(Math.random() * (_ar + 1));
+[_bf[_ar], _bf[_ax]] = [_bf[_ax], _bf[_ar]];
+}
+const _ah = _bf.map((origIdx, sortPos) => ({ origIdx, sortPos }));
+_ah.sort((_k, _aw) => _k.origIdx - _aw.origIdx);
+const _bg = _ah.map(({ origIdx, sortPos }, _ar) => {
+const _bh = _ar < _bb.length - 1 ? _ah[_ar + 1].sortPos : -1;
+return `case ${sortPos}:${_bb[origIdx]};${_ba}=${_bh};break;`;
+}).join('');
+const _bi = _ah[0].sortPos;
+return _b0x65(134);
+}
+function _co(_p, _s) {
+const _bj = [
+_b0x65(135),
+_b0x65(136),
+_b0x65(137),
+_b0x65(138),
+];
+const _r = _p.split(_b0x65(139));
+const _bk = Math.floor(_r.length * _s.deadCodeInjectionThreshold);
+const _q = [];
+for (let _ar = 0; _ar < _r.length; _ar++) {
+_q.push(_r[_ar]);
+if (Math.random() < _s.deadCodeInjectionThreshold && _q.length < _bk) {
+const _bl = _bj[Math.floor(Math.random() * _bj.length)];
+_q.push(_bl + ';');
+}
+}
+return _q.join('\n');
+}
+function _cp(_p, _s) {
+let _q = _p;
+const _bm = _ch(0, _b0x65(140), _b0x65(141));
+if (_s.selfDefending) {
+const _bn = _b0x65(142);
+_q = _bn + _q;
+}
+if (_s.debugProtection) {
+const _bp = _b0x65(143);
+_q += _bp;
+}
+return _q;
+}
+function _cq(_p) {
+const _bq = `(function(){var _br=['log','debug','info','warn','error','trace','dir','table','assert','count','countReset','group','groupEnd','time','timeEnd','timeLog','clear','profile','profileEnd'];var _bs=function(){};_br.forEach(function(_z){try{console[_z]=_bs}catch(e){}})})();`;
+return _bq + _p;
+}
+function _cr(_p, _s) {
+const _bt = _s.domainLockTargets.split(_b0x65(144)).map(_n => _n.trim()).filter(Boolean);
+if (_bt.length === 0) return _p;
+const _bu = _bt.map(_n => {
+const _bv = _n.replace(/\./g, _b0x65(145)).replace(/\*/g, _b0x65(146));
+return _b0x65(147);
+}).join('||');
+const _bw = _b0x65(148);
+return _bw + _p;
+}
+function _cs(_p) {
+const _an = _ck(_p);
+_p = _p.replace(/(?<![:\/\w])\/\/[^\n]*/g, (match, offset) =>
+_cl(offset, _an) ? match : '');
+_p = _p.replace(/\/\*[\s\S]*?\*\//g, (match, offset) =>
+_cl(offset, _an) ? match : '');
+_p = _p.replace(/console\.(log|debug|info|warn|error|trace|dir|time|timeEnd|table|group|groupEnd|count|countReset|assert|profile|profileEnd|clear)\s*\([^)]*\)\s*;?/g, '');
+_p = _p.replace(/\r\n/g, '\n');
+_p = _p.replace(/\n\s*\n/g, _b0x65(149));
+_p = _p.split('\n').map(line => line.trim()).join('\n');
+return _p;
+}
+function _ct(msg, type) {
+const _o = document.createElement(_b0x65(150));
+_o.className = _b0x65(151) + type;
+_o.textContent = msg;
+document.body.appendChild(_o);
+setTimeout(() => {
+_o.style.opacity = _b0x65(152);
+_o.style.transition = _b0x65(153);
+setTimeout(() => _o.remove(), 300);
+}, 2000);
 }
