@@ -135,7 +135,9 @@
             white-space: nowrap;
         }
 
-        .btn:hover { background-color: #2980b9; }
+        .btn:hover {
+            background-color: #2980b9;
+        }
 
         .btn-copy {
             background-color: #27ae60;
@@ -143,8 +145,13 @@
             font-size: 13px;
         }
 
-        .btn-copy:hover { background-color: #229954; }
-        .btn-copy.copied { background-color: #1e8449; }
+        .btn-copy:hover {
+            background-color: #229954;
+        }
+
+        .btn-copy.copied {
+            background-color: #1e8449;
+        }
 
         .btn-sm {
             padding: 5px 12px;
@@ -250,13 +257,13 @@
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.15s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .preset-swatch:hover {
             transform: scale(1.15);
             border-color: #3498db;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .btn-copy-all {
@@ -267,24 +274,63 @@
             margin-top: 16px;
         }
 
-        .btn-copy-all:hover { background-color: #229954; }
+        .btn-copy-all:hover {
+            background-color: #229954;
+        }
 
         @media (max-width: 768px) {
-            .container { padding: 40px 16px; }
-            .tool-card { padding: 24px; }
-            .picker-area { justify-content: center; text-align: center; }
-            .picker-hex-big { font-size: 26px; }
-            .triple-inputs { flex-direction: column; gap: 8px; }
-            .triple-sep { display: none; }
-            .hex-input-wrap input { font-size: 17px; }
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .picker-area {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .picker-hex-big {
+                font-size: 26px;
+            }
+
+            .triple-inputs {
+                /* flex-direction: column; */
+                gap: 8px;
+            }
+
+            .triple-sep {
+                display: none;
+            }
+
+            .hex-input-wrap input {
+                font-size: 17px;
+            }
         }
 
         @media (max-width: 480px) {
-            .container { padding: 24px 12px; }
-            .tool-card { padding: 18px; }
-            .color-swatch { width: 80px; height: 80px; }
-            .picker-hex-big { font-size: 22px; }
-            .format-section { padding: 14px; }
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .color-swatch {
+                width: 80px;
+                height: 80px;
+            }
+
+            .picker-hex-big {
+                font-size: 22px;
+            }
+
+            .format-section {
+                padding: 14px;
+            }
         }
     </style>
 </head>
@@ -493,19 +539,19 @@
             if (s === 0) {
                 r = g = b = l;
             } else {
-                var hue2rgb = function(p, q, t) {
+                var hue2rgb = function (p, q, t) {
                     if (t < 0) t += 1;
                     if (t > 1) t -= 1;
-                    if (t < 1/6) return p + (q - p) * 6 * t;
-                    if (t < 1/2) return q;
-                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    if (t < 1 / 6) return p + (q - p) * 6 * t;
+                    if (t < 1 / 2) return q;
+                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
                     return p;
                 };
                 var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
                 var p = 2 * l - q;
-                r = hue2rgb(p, q, h + 1/3);
+                r = hue2rgb(p, q, h + 1 / 3);
                 g = hue2rgb(p, q, h);
-                b = hue2rgb(p, q, h - 1/3);
+                b = hue2rgb(p, q, h - 1 / 3);
             }
 
             return {
@@ -595,7 +641,7 @@
         }
 
         // HEX input
-        document.getElementById('hex-input').addEventListener('input', function() {
+        document.getElementById('hex-input').addEventListener('input', function () {
             if (updating) return;
             var val = this.value.replace(/[^0-9a-fA-F]/g, '').toUpperCase();
             this.value = val;
@@ -606,8 +652,8 @@
         });
 
         // RGB inputs
-        ['rgb-r', 'rgb-g', 'rgb-b'].forEach(function(id) {
-            document.getElementById(id).addEventListener('input', function() {
+        ['rgb-r', 'rgb-g', 'rgb-b'].forEach(function (id) {
+            document.getElementById(id).addEventListener('input', function () {
                 if (updating) return;
                 var r = clamp(parseInt(document.getElementById('rgb-r').value) || 0, 0, 255);
                 var g = clamp(parseInt(document.getElementById('rgb-g').value) || 0, 0, 255);
@@ -617,8 +663,8 @@
         });
 
         // HSL inputs
-        ['hsl-h', 'hsl-s', 'hsl-l'].forEach(function(id) {
-            document.getElementById(id).addEventListener('input', function() {
+        ['hsl-h', 'hsl-s', 'hsl-l'].forEach(function (id) {
+            document.getElementById(id).addEventListener('input', function () {
                 if (updating) return;
                 var h = clamp(parseInt(document.getElementById('hsl-h').value) || 0, 0, 360);
                 var s = clamp(parseInt(document.getElementById('hsl-s').value) || 0, 0, 100);
@@ -628,7 +674,7 @@
         });
 
         // Color picker
-        document.getElementById('color-picker').addEventListener('input', function() {
+        document.getElementById('color-picker').addEventListener('input', function () {
             if (updating) return;
             updateFromPicker(this.value);
         });
@@ -636,7 +682,7 @@
         // ===== Preset swatches =====
         function buildPresets() {
             var html = '';
-            PRESETS.forEach(function(hex) {
+            PRESETS.forEach(function (hex) {
                 html += '<div class="preset-swatch" style="background:' + hex + ';" title="' + hex + '" onclick="setPreset(\'' + hex + '\')"></div>';
             });
             document.getElementById('preset-swatches').innerHTML = html;
@@ -662,9 +708,9 @@
                 var l = document.getElementById('hsl-l').value;
                 text = 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
             }
-            navigator.clipboard.writeText(text).then(function() {
+            navigator.clipboard.writeText(text).then(function () {
                 utils.showSuccess('已复制: ' + text);
-            }).catch(function() { utils.showError('复制失败，请手动复制'); });
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
         }
 
         function copyAll() {
@@ -672,9 +718,9 @@
             var rgb = 'rgb(' + document.getElementById('rgb-r').value + ', ' + document.getElementById('rgb-g').value + ', ' + document.getElementById('rgb-b').value + ')';
             var hsl = 'hsl(' + document.getElementById('hsl-h').value + ', ' + document.getElementById('hsl-s').value + '%, ' + document.getElementById('hsl-l').value + '%)';
             var text = hex + '\n' + rgb + '\n' + hsl;
-            navigator.clipboard.writeText(text).then(function() {
+            navigator.clipboard.writeText(text).then(function () {
                 utils.showSuccess('已复制全部格式！');
-            }).catch(function() { utils.showError('复制失败，请手动复制'); });
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
         }
 
         // Init
