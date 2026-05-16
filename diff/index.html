@@ -323,12 +323,12 @@
             <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
             <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
             <a href="../qrcode"><span class="nav-icon">📱</span>二维码</a>
+            <a href="../diff" class="active"><span class="nav-icon">📋</span>内容对比</a>
             <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
             <a href="../timestamp"><span class="nav-icon">🕐</span>时间戳转换</a>
             <a href="../urlcode"><span class="nav-icon">🔗</span>URL 编解码</a>
             <a href="../base-convert"><span class="nav-icon">🧮</span>进制转换</a>
             <a href="../color-picker"><span class="nav-icon">🎨</span>取色器</a>
-            <a href="../diff" class="active"><span class="nav-icon">📋</span>内容对比</a>
             <a href="../js-secrecy"><span class="nav-icon">🛡️</span>JS 混淆加密</a>
 
             <div class="nav-section">文档 & 下载</div>
@@ -355,7 +355,7 @@
                             <span class="panel-label old">原始文本</span>
                             <div class="panel-actions">
                                 <button class="btn-sm" onclick="loadFile('old')">📁 打开文件</button>
-                                <input type="file" id="file-old" onchange="handleFile(this, 'old')">
+                                <input type="file" id="file-old" accept=".txt,.csv,.json,.xml,.html,.css,.js,.ts,.md,.log,.yml,.yaml,.sql,.py,.java,.c,.cpp,.h,.sh,.bat,.ini,.cfg,.properties,.svg,.vue,.jsx,.tsx" onchange="handleFile(this, 'old')">
                             </div>
                         </div>
                         <textarea id="input-old" placeholder="输入或粘贴原始文本..."></textarea>
@@ -365,7 +365,7 @@
                             <span class="panel-label new">新文本</span>
                             <div class="panel-actions">
                                 <button class="btn-sm" onclick="loadFile('new')">📁 打开文件</button>
-                                <input type="file" id="file-new" onchange="handleFile(this, 'new')">
+                                <input type="file" id="file-new" accept=".txt,.csv,.json,.xml,.html,.css,.js,.ts,.md,.log,.yml,.yaml,.sql,.py,.java,.c,.cpp,.h,.sh,.bat,.ini,.cfg,.properties,.svg,.vue,.jsx,.tsx" onchange="handleFile(this, 'new')">
                             </div>
                         </div>
                         <textarea id="input-new" placeholder="输入或粘贴新文本..."></textarea>
@@ -576,14 +576,63 @@
             document.getElementById('file-' + side).click();
         }
 
+        // Common binary file signatures to reject
+        var BINARY_SIGS = [
+            [0xFF, 0xD8, 0xFF],       // JPEG
+            [0x89, 0x50, 0x4E, 0x47], // PNG
+            [0x47, 0x49, 0x46, 0x38], // GIF
+            [0x42, 0x4D],             // BMP
+            [0x50, 0x4B, 0x03, 0x04], // ZIP/DOCX/XLSX
+            [0x25, 0x50, 0x44, 0x46], // PDF
+            [0xD0, 0xCF, 0x11, 0xE0], // MS Office (old)
+            [0x00, 0x00, 0x00],       // MP4/MOV (ftyp box often starts here)
+            [0x1F, 0x8B],             // GZIP
+            [0x52, 0x61, 0x72, 0x21], // RAR
+            [0x7F, 0x45, 0x4C, 0x46], // ELF
+        ];
+
+        function isBinaryFile(file) {
+            // Check extension first
+            var name = file.name.toLowerCase();
+            var textExts = ['.txt','.csv','.json','.xml','.html','.htm','.css','.js','.ts','.md',
+                '.log','.yml','.yaml','.sql','.py','.java','.c','.cpp','.h','.sh','.bat',
+                '.ini','.cfg','.config','.properties','.svg','.vue','.jsx','.tsx','.php',
+                '.rb','.go','.rs','.swift','.kt','.scala','.lua','.r','.pl','.pm','.toml'];
+            for (var i = 0; i < textExts.length; i++) {
+                if (name.endsWith(textExts[i])) return false;
+            }
+            // Unknown extension — check magic bytes
+            return true;
+            // Note: we can't check magic bytes here without reading the file first.
+            // We'll do it during read.
+        }
+
         function handleFile(input, side) {
             var file = input.files[0];
             if (!file) return;
+
+            if (isBinaryFile(file)) {
+                utils.showError('不支持此文件类型。请上传文本文件（.txt, .json, .csv, .html 等）');
+                input.value = '';
+                return;
+            }
+
             var reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('input-' + side).value = e.target.result;
+                // Check for null bytes in first 4KB (binary indicator)
+                var text = e.target.result;
+                if (text.indexOf('\x00') !== -1) {
+                    utils.showError('检测到二进制内容，仅支持纯文本文件对比');
+                    input.value = '';
+                    return;
+                }
+                document.getElementById('input-' + side).value = text;
                 input.value = '';
                 doDiff();
+            };
+            reader.onerror = function() {
+                utils.showError('文件读取失败');
+                input.value = '';
             };
             reader.readAsText(file);
         }
