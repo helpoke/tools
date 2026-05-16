@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线二维码生成解析工具, 免费生成二维码, 二维码解码, 支持自定义颜色尺寸, 纯前端本地处理">
+    <meta name="keywords" content="二维码生成, 二维码解析, QR码生成, QR码解码, 在线二维码, 免费二维码工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二维码生成/解析工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <style>
+        @import '../common/css/style.css';
+        @import '../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* Generate tab */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: vertical;
+            min-height: 100px;
+            line-height: 1.6;
+        }
+
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .options-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .option label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .option select,
+        .option input[type="number"],
+        .option input[type="color"] {
+            padding: 8px 12px;
+            border: 1px solid #eaeaea;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .option input[type="color"] {
+            width: 48px;
+            height: 36px;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .option select:focus,
+        .option input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
+
+        .btn-download {
+            background-color: #27ae60;
+        }
+
+        .btn-download:hover {
+            background-color: #229954;
+        }
+
+        .qr-result {
+            text-align: center;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            margin-top: 20px;
+        }
+
+        .qr-result canvas {
+            border: 8px solid white;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+        }
+
+        .qr-result-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Parse tab */
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 16px;
+            background: #f8fafc;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: #3498db;
+            background: #f0f7ff;
+        }
+
+        .drop-zone .drop-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .drop-zone p {
+            font-size: 14px;
+            color: #64748b;
+            margin: 4px 0;
+        }
+
+        .drop-zone input[type="file"] {
+            display: none;
+        }
+
+        .drop-zone img {
+            max-width: 260px;
+            max-height: 260px;
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+
+        .parse-result {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 16px;
+        }
+
+        .parse-result.success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .parse-result.error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .parse-result .result-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .parse-result .result-text {
+            font-size: 15px;
+            color: #1e293b;
+            word-break: break-all;
+            line-height: 1.6;
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #eaeaea;
+            margin-bottom: 12px;
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .options-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="..">
+                <img src="../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../image/compressor"><span class="nav-icon">📦</span>图片压缩</a>
+            <a href="../image/convert"><span class="nav-icon">🔄</span>图片转换</a>
+            <a href="../image/watermark"><span class="nav-icon">💧</span>图片水印</a>
+            <a href="../image/cropping"><span class="nav-icon">✂️</span>图片裁剪</a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../video/cropping"><span class="nav-icon">✂️</span>视频裁剪</a>
+            <a href="../video/watermark"><span class="nav-icon">🎥</span>视频水印</a>
+            <a href="../video/convert"><span class="nav-icon">🔄</span>视频转换</a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../json"><span class="nav-icon">{ }</span>JSON 格式化</a>
+            <a href="../yaml"><span class="nav-icon">⚙️</span>YAML 格式化</a>
+            <a href="../pug"><span class="nav-icon">🌿</span>Pug 格式化</a>
+            <a href="../pwd"><span class="nav-icon">🔑</span>密码生成</a>
+            <a href="../uuid"><span class="nav-icon">🆔</span>UUID 生成</a>
+            <a href="../mermaid"><span class="nav-icon">📊</span>Mermaid 图表</a>
+            <a href="../md5"><span class="nav-icon">🔐</span>MD5 加密</a>
+            <a href="../token"><span class="nav-icon">🎫</span>Token 工具</a>
+            <a href="../num-to-chinese"><span class="nav-icon">🔢</span>数字转中文大写</a>
+            <a href="../cron"><span class="nav-icon">⏰</span>Cron 解析</a>
+            <a href="../timestamp"><span class="nav-icon">🕐</span>时间戳转换</a>
+            <a href="../urlcode"><span class="nav-icon">🔗</span>URL 编解码</a>
+            <a href="../base-convert"><span class="nav-icon">🧮</span>进制转换</a>
+            <a href="../color-picker"><span class="nav-icon">🎨</span>取色器</a>
+            <a href="../qrcode" class="active"><span class="nav-icon">📱</span>二维码</a>
+            <a href="../js-secrecy"><span class="nav-icon">🛡️</span>JS 混淆加密</a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../docu/signature"><span class="nav-icon">✍️</span>签名工具</a>
+            <a href="../docu/watermark"><span class="nav-icon">🛡️</span>文档水印</a>
+            <a href="../download"><span class="nav-icon">⬇️</span>批量下载</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>纯前端运行 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>二维码生成 / 解析工具</h1>
+            <p>在线生成与解析二维码，支持自定义颜色尺寸，纯前端本地处理</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('generate')">生成二维码</button>
+                    <button class="tab-btn" onclick="switchTab('parse')">解析二维码</button>
+                </div>
+
+                <!-- Generate Tab -->
+                <div class="tab-panel active" id="tab-generate">
+                    <div class="input-group">
+                        <label for="qr-text">输入内容（文本 / 网址 / 数字）</label>
+                        <textarea id="qr-text" placeholder="输入要生成二维码的内容，例如：https://helpoke.com"></textarea>
+                        <div class="char-count" id="qr-char-count">字符数: 0</div>
+                    </div>
+
+                    <div class="options-row">
+                        <div class="option">
+                            <label>尺寸 (px)</label>
+                            <input type="number" id="qr-size" value="260" min="100" max="600" step="20">
+                        </div>
+                        <div class="option">
+                            <label>容错等级</label>
+                            <select id="qr-ecc">
+                                <option value="L">L - 低 (7%)</option>
+                                <option value="M" selected>M - 中 (15%)</option>
+                                <option value="Q">Q - 较高 (25%)</option>
+                                <option value="H">H - 高 (30%)</option>
+                            </select>
+                        </div>
+                        <div class="option">
+                            <label>前景色</label>
+                            <input type="color" id="qr-fg" value="#000000">
+                        </div>
+                        <div class="option">
+                            <label>背景色</label>
+                            <input type="color" id="qr-bg" value="#ffffff">
+                        </div>
+                    </div>
+
+                    <div class="qr-result" id="qr-result" style="display:none;">
+                        <canvas id="qr-canvas"></canvas>
+                        <div class="qr-result-actions">
+                            <button class="btn btn-download" onclick="downloadQR()">下载图片</button>
+                            <button class="btn btn-outline" onclick="copyQRImage()">复制图片</button>
+                        </div>
+                    </div>
+                    <div id="qr-placeholder" class="qr-result">
+                        <p style="color:#94a3b8;">在上方输入内容后自动生成</p>
+                    </div>
+                </div>
+
+                <!-- Parse Tab -->
+                <div class="tab-panel" id="tab-parse">
+                    <div class="drop-zone" id="drop-zone">
+                        <div class="drop-icon">📷</div>
+                        <p>拖拽图片到此处，或点击上传</p>
+                        <p style="font-size:12px;color:#94a3b8;">支持 PNG / JPG / GIF / BMP</p>
+                        <input type="file" id="qr-file" accept="image/*">
+                        <img id="qr-preview" style="display:none;">
+                    </div>
+
+                    <button class="btn btn-outline" onclick="pasteFromClipboard()"
+                        style="width:100%;margin-bottom:16px;">从剪贴板粘贴图片</button>
+
+                    <div id="qr-decode-status" style="display:none;text-align:center;padding:16px;color:#64748b;">
+                        正在解析...
+                    </div>
+
+                    <div class="parse-result" id="parse-result" style="display:none;">
+                        <div class="result-label">解析结果</div>
+                        <div class="result-text" id="parse-text"></div>
+                        <button class="btn" onclick="copyParseResult()">复制结果</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="9267161710" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        // ===== Tab switching =====
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+            document.getElementById('tab-' + tab).classList.add('active');
+            var btns = document.querySelectorAll('.tab-btn');
+            if (tab === 'generate') btns[0].classList.add('active');
+            else btns[1].classList.add('active');
+        }
+
+        // ===== QR Code Generation =====
+        var genTimer = null;
+
+        function generateQR() {
+            var text = document.getElementById('qr-text').value.trim();
+            var placeholder = document.getElementById('qr-placeholder');
+            var result = document.getElementById('qr-result');
+            var canvas = document.getElementById('qr-canvas');
+
+            if (!text) {
+                placeholder.style.display = 'block';
+                result.style.display = 'none';
+                return;
+            }
+
+            var ecc = document.getElementById('qr-ecc').value;
+            var eccMap = { L: 0, M: 1, Q: 2, H: 3 };
+
+            try {
+                var qr = qrcode(eccMap[ecc], 'M');
+                qr.addData(text);
+                qr.make();
+
+                var size = parseInt(document.getElementById('qr-size').value) || 260;
+                var fg = document.getElementById('qr-fg').value;
+                var bg = document.getElementById('qr-bg').value;
+
+                var cellCount = qr.getModuleCount();
+                var cellSize = Math.floor(size / cellCount);
+                var realSize = cellSize * cellCount;
+
+                canvas.width = realSize;
+                canvas.height = realSize;
+                var ctx = canvas.getContext('2d');
+
+                // Background
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, realSize, realSize);
+
+                // Modules
+                ctx.fillStyle = fg;
+                for (var row = 0; row < cellCount; row++) {
+                    for (var col = 0; col < cellCount; col++) {
+                        if (qr.isDark(row, col)) {
+                            ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+                        }
+                    }
+                }
+
+                placeholder.style.display = 'none';
+                result.style.display = 'block';
+            } catch (e) {
+                placeholder.style.display = 'block';
+                result.style.display = 'none';
+                // Content too long or invalid
+            }
+        }
+
+        document.getElementById('qr-text').addEventListener('input', function () {
+            document.getElementById('qr-char-count').textContent = '字符数: ' + this.value.length;
+            clearTimeout(genTimer);
+            genTimer = setTimeout(generateQR, 300);
+        });
+
+        document.getElementById('qr-size').addEventListener('input', function () {
+            clearTimeout(genTimer);
+            genTimer = setTimeout(generateQR, 300);
+        });
+
+        document.getElementById('qr-ecc').addEventListener('change', generateQR);
+        document.getElementById('qr-fg').addEventListener('input', generateQR);
+        document.getElementById('qr-bg').addEventListener('input', generateQR);
+
+        function downloadQR() {
+            var canvas = document.getElementById('qr-canvas');
+            var text = document.getElementById('qr-text').value.trim() || 'qrcode';
+            var name = text.substring(0, 20).replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_') + '.png';
+            var link = document.createElement('a');
+            link.download = name;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            utils.showSuccess('下载完成！');
+        }
+
+        function copyQRImage() {
+            var canvas = document.getElementById('qr-canvas');
+            canvas.toBlob(function (blob) {
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(function () {
+                    utils.showSuccess('已复制到剪贴板！');
+                }).catch(function () {
+                    utils.showError('复制失败，请尝试下载');
+                });
+            });
+        }
+
+        // ===== QR Code Parsing =====
+        var dropZone = document.getElementById('drop-zone');
+        var fileInput = document.getElementById('qr-file');
+
+        dropZone.addEventListener('click', function () { fileInput.click(); });
+
+        dropZone.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+
+        dropZone.addEventListener('dragleave', function () {
+            this.classList.remove('drag-over');
+        });
+
+        dropZone.addEventListener('drop', function (e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            var file = e.dataTransfer.files[0];
+            if (file) decodeFile(file);
+        });
+
+        fileInput.addEventListener('change', function () {
+            var file = this.files[0];
+            if (file) decodeFile(file);
+        });
+
+        function decodeFile(file) {
+            if (!file.type.match(/image\/(png|jpeg|gif|bmp|webp)/)) {
+                utils.showError('请选择图片文件（PNG/JPG/GIF/BMP）');
+                return;
+            }
+
+            // Preview
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.getElementById('qr-preview');
+                img.src = e.target.result;
+                img.style.display = 'block';
+                tryDecode(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function tryDecode(dataUrl) {
+            var status = document.getElementById('qr-decode-status');
+            var result = document.getElementById('parse-result');
+            status.style.display = 'block';
+            result.style.display = 'none';
+
+            var img = new Image();
+            img.onload = function () {
+                var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                var code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                status.style.display = 'none';
+                result.style.display = 'block';
+                result.className = 'parse-result';
+
+                if (code) {
+                    result.classList.add('success');
+                    document.getElementById('parse-text').textContent = code.data;
+                } else {
+                    result.classList.add('error');
+                    document.getElementById('parse-text').textContent = '未检测到二维码，请确认图片中包含清晰的二维码';
+                }
+            };
+            img.onerror = function () {
+                status.style.display = 'none';
+                utils.showError('图片加载失败');
+            };
+            img.src = dataUrl;
+        }
+
+        function pasteFromClipboard() {
+            navigator.clipboard.read().then(function (items) {
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    for (var j = 0; j < item.types.length; j++) {
+                        if (item.types[j].match(/image\/(png|jpeg|gif|bmp|webp)/)) {
+                            item.getType(item.types[j]).then(function (blob) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    var img = document.getElementById('qr-preview');
+                                    img.src = e.target.result;
+                                    img.style.display = 'block';
+                                    tryDecode(e.target.result);
+                                };
+                                reader.readAsDataURL(blob);
+                            });
+                            return;
+                        }
+                    }
+                }
+                utils.showError('剪贴板中没有图片');
+            }).catch(function () {
+                utils.showError('无法读取剪贴板，请尝试上传图片');
+            });
+        }
+
+        function copyParseResult() {
+            var text = document.getElementById('parse-text').textContent;
+            if (!text) return;
+            navigator.clipboard.writeText(text).then(function () {
+                utils.showSuccess('已复制解析结果！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        // Init
+        generateQR();
+    </script>
+    <script src="../common/js/nav.js"></script>
+</body>
+
+</html>
