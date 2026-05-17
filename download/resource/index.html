@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线资源文件下载工具, 支持下载JS、CSS、字体、图标等网页资源, 批量下载静态资源文件">
+    <meta name="keywords" content="资源下载, JS下载, CSS下载, 字体下载, 静态资源下载, 批量下载, 网页资源下载">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源文件下载工具 - Helpoke 助可站</title>
+    <script async custom-element="amp-ad" src="../../common/lib/amp-ad-0.1.js"></script>
+    <script src="../lib/jszip.min.js"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .tab-container {
+            margin-bottom: 24px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            background: #f8fafc;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #fff;
+            color: #4f46e5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .helper-text {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .option-group label {
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        .option-group select,
+        .option-group input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+        }
+
+        .btn.secondary {
+            background-color: #64748b;
+        }
+
+        .btn.secondary:hover {
+            background-color: #475569;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .extract-btn {
+            margin-top: 12px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .progress-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .stats {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .stats span {
+            margin-right: 16px;
+        }
+
+        .progress-container {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
+            border-radius: 4px;
+            transition: width 0.3s;
+            width: 0%;
+        }
+
+        .download-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .download-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .download-item .filename {
+            flex: 1;
+            font-size: 14px;
+            color: #2c3e50;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-right: 16px;
+        }
+
+        .download-item .status {
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+
+        .status.pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status.downloading {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .status.completed {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status.failed {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .status.skipped {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        .download-item .size {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-right: 12px;
+        }
+
+        .download-item .action {
+            background: none;
+            border: none;
+            color: #4f46e5;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .download-item .action:hover {
+            background: #eef2ff;
+        }
+
+        .info-details {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .info-details summary {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #92400e;
+            list-style: none;
+        }
+
+        .info-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .info-details .info-content {
+            padding: 0 16px 16px;
+            color: #78350f;
+            font-size: 14px;
+        }
+
+        .info-content ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        .info-content li {
+            margin-bottom: 8px;
+        }
+
+        .quick-links {
+            margin-top: 16px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .quick-links h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .quick-links .link-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #fff;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .quick-links .link-item:hover {
+            background: #eef2ff;
+        }
+
+        .quick-links .link-item span {
+            font-size: 13px;
+            color: #4f46e5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .options {
+                flex-direction: column;
+            }
+
+            .option-group {
+                width: 100%;
+            }
+
+            .option-group select,
+            .option-group input[type="number"] {
+                flex: 1;
+            }
+
+            .progress-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .download-item {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .download-item .filename {
+                order: 1;
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .download-item .size {
+                order: 2;
+            }
+
+            .download-item .status {
+                order: 3;
+            }
+
+            .download-item .action {
+                order: 4;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "资源文件下载工具",
+        "description": "在线资源文件下载工具，支持下载JS、CSS、字体、图标等网页静态资源，支持批量下载和打包下载。Online resource file downloader for JS, CSS, fonts and web assets.",
+        "url": "https://tools.pengline.cn/resource-download",
+        "applicationCategory": "DeveloperTool",
+        "featureList": [
+            "JS文件下载",
+            "CSS文件下载",
+            "字体文件下载",
+            "图标文件下载",
+            "批量资源下载",
+            "打包为ZIP下载"
+        ],
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="../../">
+                <img src="../../common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
+                小助点
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">图片工具</div>
+            <a href="../../image/compressor">
+                <span class="nav-icon">📦</span>图片压缩
+            </a>
+            <a href="../../image/convert">
+                <span class="nav-icon">🔄</span>图片转换
+            </a>
+            <a href="../../image/watermark">
+                <span class="nav-icon">💧</span>图片水印
+            </a>
+            <a href="../../image/cropping">
+                <span class="nav-icon">✂️</span>图片裁剪
+            </a>
+
+            <div class="nav-section">视频工具</div>
+            <a href="../../video/cropping">
+                <span class="nav-icon">✂️</span>视频裁剪
+            </a>
+            <a href="../../video/watermark">
+                <span class="nav-icon">🎥</span>视频水印
+            </a>
+            <a href="../../video/convert">
+                <span class="nav-icon">🔄</span>视频转换
+            </a>
+
+            <div class="nav-section">数据 & 开发</div>
+            <a href="../../json">
+                <span class="nav-icon">{ }</span>JSON 格式化
+            </a>
+            <a href="../../yaml">
+                <span class="nav-icon">⚙️</span>YAML 格式化
+            </a>
+            <a href="../../pug">
+                <span class="nav-icon">🌿</span>Pug 格式化
+            </a>
+            <a href="../../xml">
+                <span class="nav-icon">📐</span>XML 格式化
+            </a>
+            <a href="../../pwd">
+                <span class="nav-icon">🔑</span>密码生成
+            </a>
+            <a href="../../uuid">
+                <span class="nav-icon">🆔</span>UUID 生成
+            </a>
+            <a href="../../mermaid">
+                <span class="nav-icon">📊</span>Mermaid 图表
+            </a>
+            <a href="../../md5">
+                <span class="nav-icon">🔐</span>MD5 加密
+            </a>
+            <a href="../../sha">
+                <span class="nav-icon">🔏</span>SHA 加密
+            </a>
+            <a href="../../token">
+                <span class="nav-icon">🎫</span>Token 工具
+            </a>
+            <a href="../../num-to-chinese">
+                <span class="nav-icon">🔢</span>数字&中文互转
+            </a>
+            <a href="../../qrcode">
+                <span class="nav-icon">📱</span>二维码
+            </a>
+            <a href="../../diff">
+                <span class="nav-icon">📋</span>内容对比
+            </a>
+            <a href="../../cron">
+                <span class="nav-icon">⏰</span>Cron 解析
+            </a>
+            <a href="../../timestamp">
+                <span class="nav-icon">🕐</span>时间戳转换
+            </a>
+            <a href="../../urlcode">
+                <span class="nav-icon">🔗</span>URL 编解码
+            </a>
+            <a href="../../base-convert">
+                <span class="nav-icon">🧮</span>进制转换
+            </a>
+            <a href="../../color-picker">
+                <span class="nav-icon">🎨</span>取色器
+            </a>
+            <a href="../../regex">
+                <span class="nav-icon">🔍</span>正则表达式
+            </a>
+            <a href="../../js-secrecy">
+                <span class="nav-icon">🛡️</span>JS 混淆加密
+            </a>
+
+            <div class="nav-section">文档 & 下载</div>
+            <a href="../../docu/signature">
+                <span class="nav-icon">✍️</span>签名工具
+            </a>
+            <a href="../../docu/watermark">
+                <span class="nav-icon">🛡️</span>文档水印
+            </a>
+            <a href="../../download/media">
+                <span class="nav-icon">⬇️</span>视频图片下载
+            </a>
+            <a href="../../download/resource" class="active">
+                <span class="nav-icon">📦</span>资源文件下载
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>离线工具 · 数据本地处理</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>资源文件下载工具</h1>
+            <p>支持下载JS、CSS、字体、图标等网页静态资源，支持批量下载和打包下载。</p>
+        </section>
+
+        <div class="container" data-theme="light">
+            <div class="tool-card">
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="url-tab">直接URL下载</button>
+                        <button class="tab-btn" data-tab="extract-tab">网页资源提取</button>
+                    </div>
+
+                    <div id="url-tab" class="tab-content active">
+                        <label for="resourceUrls">输入资源地址 (每行一个):</label>
+                        <p class="helper-text">支持 JS、CSS、字体(.ttf/.woff/.woff2)、图标等资源文件的下载</p>
+                        <textarea id="resourceUrls" placeholder="例如:
+https://cdn.example.com/jquery.min.js
+https://cdn.example.com/style.css
+https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
+                    </div>
+
+                    <div id="extract-tab" class="tab-content">
+                        <label for="websiteUrl">输入网站URL:</label>
+                        <p class="helper-text">输入网页地址，系统将尝试提取页面中的JS和CSS资源</p>
+                        <input type="text" id="websiteUrl" placeholder="例如: https://example.com/page.html"
+                            class="website-input">
+                        <button id="extractResources" class="btn extract-btn">提取资源</button>
+
+                        <div class="extracted-resources-section" style="margin-top: 20px;">
+                            <h3>提取的资源</h3>
+                            <div id="extractedResourcesContainer" class="download-list"></div>
+                            <div class="extracted-controls" style="margin-top: 12px;">
+                                <button id="selectAllResources" class="btn" style="padding: 8px 16px; font-size: 13px;">全选</button>
+                                <button id="deselectAllResources" class="btn secondary" style="padding: 8px 16px; font-size: 13px;">取消全选</button>
+                                <button id="addSelectedResourcesToQueue" class="btn" style="padding: 8px 16px; font-size: 13px;">添加选中到下载队列</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <div class="option-group">
+                        <label for="concurrency">并发下载数:</label>
+                        <input type="number" id="concurrency" min="1" max="10" value="3">
+                    </div>
+
+                    <div class="option-group">
+                        <label for="fileType">文件类型筛选:</label>
+                        <select id="fileType">
+                            <option value="all">全部类型</option>
+                            <option value="js">仅JS文件</option>
+                            <option value="css">仅CSS文件</option>
+                            <option value="font">仅字体文件</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="packAsZip">打包为ZIP:</label>
+                        <input type="checkbox" id="packAsZip" checked>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button id="startDownload" class="btn">开始下载</button>
+                    <button id="clearList" class="btn secondary">清空列表</button>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="progress-header">
+                    <h2>下载进度</h2>
+                    <div class="stats">
+                        <span id="totalFiles">0</span> 个文件 |
+                        <span id="completedFiles">0</span> 已完成 |
+                        <span id="failedFiles">0</span> 失败 |
+                        <span id="skippedFiles">0</span> 跳过
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>为什么有些资源无法下载？</summary>
+                        <div class="info-content">
+                            <p>某些资源无法自动下载主要受以下技术限制影响：</p>
+                            <ul>
+                                <li><strong>CORS（跨域资源共享）限制</strong>：大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源</li>
+                                <li><strong>网站防盗链保护</strong>：许多资源托管站点实施了防盗链机制</li>
+                                <li><strong>服务器访问控制</strong>：部分服务器会检测请求来源</li>
+                            </ul>
+                            <p>对于无法下载的资源，您可以复制链接在浏览器中直接访问下载。</p>
+                        </div>
+                    </details>
+                </div>
+
+                <div id="downloadProgress" class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+
+                <div id="downloadList" class="download-list"></div>
+            </div>
+
+            <div class="tool-card">
+                <div class="quick-links">
+                    <h4>常用CDN资源快速下载</h4>
+                    <div class="link-item" data-url="https://code.jquery.com/jquery-3.7.1.min.js">
+                        <span>📦 jQuery 3.7.1</span>
+                    </div>
+                    <div class="link-item" data-url="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js">
+                        <span>📦 Vue 3.4.21</span>
+                    </div>
+                    <div class="link-item" data-url="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js">
+                        <span>📦 React 18.2.0</span>
+                    </div>
+                    <div class="link-item" data-url="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+                        <span>📦 Bootstrap 5.3.3 CSS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-ad">
+            <amp-ad width="970" height="90" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                data-ad-slot="5319728132" data-auto-format="rspv" data-full-width="" layout="responsive">
+            </amp-ad>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助可站. <a href="https://pengline.cn" target="_blank">PengLine</a> 保留所有权利.</p>
+        </footer>
+    </main>
+
+    <script src="../../common/js/nav.js"></script>
+    <script>
+        (function() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.dataset.tab;
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+
+            const quickLinks = document.querySelectorAll('.link-item');
+            quickLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const url = link.dataset.url;
+                    const textarea = document.getElementById('resourceUrls');
+                    textarea.value += (textarea.value ? '\n' : '') + url;
+                });
+            });
+
+            const downloadQueue = [];
+            let currentIndex = 0;
+            let concurrency = 3;
+            let activeDownloads = 0;
+            let completedCount = 0;
+            let failedCount = 0;
+            let skippedCount = 0;
+            const filesData = {};
+
+            function formatUrl(url) {
+                url = url.trim();
+                if (!/^https?:\/\//i.test(url)) {
+                    url = 'https://' + url;
+                }
+                return url;
+            }
+
+            function extractFilename(url) {
+                const parts = url.split('/');
+                let filename = parts[parts.length - 1];
+                if (filename.includes('?')) {
+                    filename = filename.split('?')[0];
+                }
+                if (!filename) {
+                    filename = 'resource_' + Date.now() + '.dat';
+                }
+                return filename;
+            }
+
+            function getFileType(url) {
+                const lowerUrl = url.toLowerCase();
+                if (lowerUrl.endsWith('.js')) return 'js';
+                if (lowerUrl.endsWith('.css')) return 'css';
+                if (lowerUrl.match(/\.(ttf|woff|woff2|eot|svg)$/)) return 'font';
+                return 'other';
+            }
+
+            async function fetchResource(url) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: {
+                            'Accept': '*/*'
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    const blob = await response.blob();
+                    return blob;
+                } catch (error) {
+                    throw error;
+                }
+            }
+
+            function createDownloadItem(filename, url) {
+                const item = document.createElement('div');
+                item.className = 'download-item';
+                item.dataset.url = url;
+                item.innerHTML = `
+                    <span class="filename" title="${filename}">${filename}</span>
+                    <span class="size">-</span>
+                    <span class="status pending">等待中</span>
+                    <button class="action" onclick="downloadDirectly('${url}', '${filename}')">直接下载</button>
+                `;
+                return item;
+            }
+
+            function updateDownloadItem(url, status, size = '-') {
+                const items = document.querySelectorAll('.download-item');
+                items.forEach(item => {
+                    if (item.dataset.url === url) {
+                        const statusEl = item.querySelector('.status');
+                        const sizeEl = item.querySelector('.size');
+                        statusEl.className = 'status ' + status;
+                        statusEl.textContent = {
+                            pending: '等待中',
+                            downloading: '下载中',
+                            completed: '已完成',
+                            failed: '失败',
+                            skipped: '已跳过'
+                        }[status];
+                        if (size !== '-') {
+                            sizeEl.textContent = formatSize(size);
+                        }
+                    }
+                });
+            }
+
+            function formatSize(bytes) {
+                if (bytes < 1024) return bytes + ' B';
+                if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+                return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+            }
+
+            async function downloadNext() {
+                if (currentIndex >= downloadQueue.length) {
+                    if (activeDownloads === 0 && completedCount + failedCount + skippedCount === downloadQueue.length) {
+                        updateProgress();
+                    }
+                    return;
+                }
+
+                if (activeDownloads >= concurrency) return;
+
+                const url = downloadQueue[currentIndex];
+                const filename = extractFilename(url);
+                const fileType = getFileType(url);
+                const selectedType = document.getElementById('fileType').value;
+
+                if (selectedType !== 'all' && fileType !== selectedType) {
+                    updateDownloadItem(url, 'skipped');
+                    skippedCount++;
+                    currentIndex++;
+                    updateProgress();
+                    downloadNext();
+                    return;
+                }
+
+                activeDownloads++;
+                currentIndex++;
+                updateDownloadItem(url, 'downloading');
+
+                try {
+                    const blob = await fetchResource(url);
+                    filesData[filename] = blob;
+                    updateDownloadItem(url, 'completed', blob.size);
+                    completedCount++;
+                } catch (error) {
+                    updateDownloadItem(url, 'failed');
+                    failedCount++;
+                }
+
+                activeDownloads--;
+                updateProgress();
+                downloadNext();
+            }
+
+            function updateProgress() {
+                const total = downloadQueue.length;
+                const processed = completedCount + failedCount + skippedCount;
+                const progress = total > 0 ? (processed / total) * 100 : 0;
+                document.getElementById('progressBar').style.width = progress + '%';
+                document.getElementById('totalFiles').textContent = total;
+                document.getElementById('completedFiles').textContent = completedCount;
+                document.getElementById('failedFiles').textContent = failedCount;
+                document.getElementById('skippedFiles').textContent = skippedCount;
+
+                if (processed === total && activeDownloads === 0) {
+                    if (document.getElementById('packAsZip').checked && completedCount > 0) {
+                        setTimeout(packAndDownload, 500);
+                    }
+                }
+            }
+
+            async function packAndDownload() {
+                const zip = new JSZip();
+                Object.keys(filesData).forEach(filename => {
+                    zip.file(filename, filesData[filename]);
+                });
+                const content = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(content);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'resources_' + Date.now() + '.zip';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            window.downloadDirectly = function(url, filename) {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            };
+
+            document.getElementById('startDownload').addEventListener('click', () => {
+                const urls = document.getElementById('resourceUrls').value.split('\n')
+                    .map(url => formatUrl(url))
+                    .filter(url => url && url.includes('://'));
+
+                if (urls.length === 0) {
+                    alert('请输入资源地址');
+                    return;
+                }
+
+                downloadQueue.length = 0;
+                downloadQueue.push(...urls);
+                currentIndex = 0;
+                activeDownloads = 0;
+                completedCount = 0;
+                failedCount = 0;
+                skippedCount = 0;
+                Object.keys(filesData).forEach(key => delete filesData[key]);
+
+                const downloadList = document.getElementById('downloadList');
+                downloadList.innerHTML = '';
+                urls.forEach(url => {
+                    const filename = extractFilename(url);
+                    downloadList.appendChild(createDownloadItem(filename, url));
+                });
+
+                concurrency = parseInt(document.getElementById('concurrency').value) || 3;
+
+                for (let i = 0; i < concurrency && i < downloadQueue.length; i++) {
+                    downloadNext();
+                }
+            });
+
+            document.getElementById('clearList').addEventListener('click', () => {
+                document.getElementById('resourceUrls').value = '';
+                document.getElementById('downloadList').innerHTML = '';
+                document.getElementById('progressBar').style.width = '0%';
+                document.getElementById('totalFiles').textContent = '0';
+                document.getElementById('completedFiles').textContent = '0';
+                document.getElementById('failedFiles').textContent = '0';
+                document.getElementById('skippedFiles').textContent = '0';
+            });
+
+            document.getElementById('extractResources').addEventListener('click', async () => {
+                const url = document.getElementById('websiteUrl').value.trim();
+                if (!url) {
+                    alert('请输入网站URL');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(url);
+                    const html = await response.text();
+                    
+                    const jsRegex = /<script[^>]+src=["']([^"']+\.js[^"']*)["'][^>]*>/gi;
+                    const cssRegex = /<link[^>]+href=["']([^"']+\.css[^"']*)["'][^>]*>/gi;
+                    const fontRegex = /url\(["']?([^"')]+\.(ttf|woff|woff2|eot))["']?\)/gi;
+
+                    const resources = [];
+                    let match;
+
+                    while ((match = jsRegex.exec(html)) !== null) {
+                        resources.push({ url: formatUrl(match[1]), type: 'js' });
+                    }
+
+                    while ((match = cssRegex.exec(html)) !== null) {
+                        resources.push({ url: formatUrl(match[1]), type: 'css' });
+                    }
+
+                    while ((match = fontRegex.exec(html)) !== null) {
+                        resources.push({ url: formatUrl(match[1]), type: 'font' });
+                    }
+
+                    const container = document.getElementById('extractedResourcesContainer');
+                    container.innerHTML = '';
+
+                    resources.forEach((resource, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'download-item';
+                        item.innerHTML = `
+                            <input type="checkbox" checked data-url="${resource.url}" style="margin-right: 8px;">
+                            <span class="filename" title="${resource.url}">${extractFilename(resource.url)}</span>
+                            <span class="status pending" style="background: #dbeafe; color: #2563eb;">${resource.type.toUpperCase()}</span>
+                        `;
+                        container.appendChild(item);
+                    });
+                } catch (error) {
+                    alert('提取资源失败: ' + error.message);
+                }
+            });
+
+            document.getElementById('selectAllResources').addEventListener('click', () => {
+                document.querySelectorAll('#extractedResourcesContainer input[type="checkbox"]').forEach(cb => cb.checked = true);
+            });
+
+            document.getElementById('deselectAllResources').addEventListener('click', () => {
+                document.querySelectorAll('#extractedResourcesContainer input[type="checkbox"]').forEach(cb => cb.checked = false);
+            });
+
+            document.getElementById('addSelectedResourcesToQueue').addEventListener('click', () => {
+                const selected = document.querySelectorAll('#extractedResourcesContainer input[type="checkbox"]:checked');
+                const textarea = document.getElementById('resourceUrls');
+                selected.forEach(cb => {
+                    const url = cb.dataset.url;
+                    if (!textarea.value.includes(url)) {
+                        textarea.value += (textarea.value ? '\n' : '') + url;
+                    }
+                });
+                alert('已添加 ' + selected.length + ' 个资源到下载队列');
+            });
+        })();
+    </script>
+</body>
+
+</html>
