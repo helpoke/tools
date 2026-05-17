@@ -682,13 +682,7 @@ button:disabled {
     display: flex;
     flex-direction: column;
     touch-action: none;
-    transform: rotate(90deg);
-    transform-origin: center center;
-    /* 旋转后宽高互换，需要调整尺寸 */
-    width: 100vh;
-    height: 100vw;
-    top: calc(50% - 50vw);
-    left: calc(50% - 50vh);
+    overflow: hidden;
 }
 
 .landscape-toolbar {
@@ -732,6 +726,7 @@ button:disabled {
     justify-content: center;
     overflow: hidden;
     padding: 5px;
+    min-height: 0;
 }
 
 #landscape-canvas {
@@ -739,12 +734,12 @@ button:disabled {
     border-radius: 4px;
     background-color: #f9f9f9;
     cursor: crosshair;
-    /* 移除max宽高限制，让canvas尽可能大 */
-    max-width: none;
-    max-height: none;
+    /* 将canvas旋转90度实现横屏效果 */
+    transform: rotate(90deg);
+    transform-origin: center center;
+    /* 允许canvas根据内容调整大小 */
     width: auto;
     height: auto;
-    /* 不需要单独旋转，因为整个overlay已经旋转了 */
 }
 
 /* 横屏模式适配 */
