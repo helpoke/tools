@@ -421,6 +421,83 @@
             font-size: 14px;
         }
 
+        /* Recent section */
+        .recent-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .recent-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .recent-icon {
+            font-size: 14px;
+        }
+
+        .recent-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .recent-clear {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all var(--transition);
+        }
+
+        .recent-clear:hover {
+            background: #f1f5f9;
+            color: var(--text);
+        }
+
+        .recent-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .recent-item:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .recent-item .recent-icon {
+            font-size: 12px;
+        }
+
+        .recent-empty {
+            color: var(--text-secondary);
+            font-size: 13px;
+            padding: 8px 0;
+        }
+
         /* Content area */
         .content {
             flex: 1;
@@ -922,6 +999,18 @@
                 <input type="text" class="search-input" id="searchInput" placeholder="搜索工具，如：压缩、二维码、JSON..." />
             </div>
             <div class="search-results" id="searchResults"></div>
+            
+            <!-- 最近使用 -->
+            <div class="recent-section" id="recentSection">
+                <div class="recent-header">
+                    <span class="recent-icon">🕐</span>
+                    <span class="recent-title">最近使用</span>
+                    <button class="recent-clear" id="recentClear" title="清空历史">✕</button>
+                </div>
+                <div class="recent-list" id="recentList">
+                    <div class="recent-empty">暂无记录</div>
+                </div>
+            </div>
         </div>
 
         <!-- Stats -->
@@ -1226,6 +1315,93 @@
             { name: '批量下载', icon: '⬇️', url: 'download', category: '下载工具', keywords: ['下载', '批量', '爬取', 'download'] }
         ];
 
+        // 最近使用相关
+        const MAX_RECENT = 5;
+        const STORAGE_KEY = 'helpoke_recent_tools';
+
+        // 获取最近使用记录
+        function getRecentTools() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        // 保存最近使用记录
+        function saveRecentTool(url) {
+            const recent = getRecentTools();
+            // 移除已存在的相同记录
+            const filtered = recent.filter(item => item.url !== url);
+            // 获取工具信息
+            const tool = toolsData.find(t => t.url === url);
+            if (tool) {
+                // 添加到开头
+                filtered.unshift({
+                    name: tool.name,
+                    icon: tool.icon,
+                    url: tool.url
+                });
+            }
+            // 只保留最近5个
+            const trimmed = filtered.slice(0, MAX_RECENT);
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+            } catch (e) {
+                console.warn('Failed to save recent tools:', e);
+            }
+            renderRecent();
+        }
+
+        // 渲染最近使用列表
+        function renderRecent() {
+            const recentList = document.getElementById('recentList');
+            const recent = getRecentTools();
+
+            if (recent.length === 0) {
+                recentList.innerHTML = '<div class="recent-empty">暂无记录</div>';
+                return;
+            }
+
+            recentList.innerHTML = '';
+            recent.forEach(item => {
+                const element = document.createElement('div');
+                element.className = 'recent-item';
+                element.innerHTML = `
+                    <span class="recent-icon">${item.icon}</span>
+                    <span class="recent-name">${item.name}</span>
+                `;
+                element.addEventListener('click', () => {
+                    // 记录访问
+                    saveRecentTool(item.url);
+                    // 跳转
+                    window.location.href = item.url;
+                });
+                recentList.appendChild(element);
+            });
+        }
+
+        // 清空最近使用记录
+        function clearRecent() {
+            try {
+                localStorage.removeItem(STORAGE_KEY);
+            } catch (e) {
+                console.warn('Failed to clear recent tools:', e);
+            }
+            renderRecent();
+        }
+
+        // 页面加载时渲染最近使用
+        document.addEventListener('DOMContentLoaded', renderRecent);
+
+        // 绑定清空按钮事件
+        const recentClear = document.getElementById('recentClear');
+        if (recentClear) {
+            recentClear.addEventListener('click', clearRecent);
+        }
+
+        // 搜索相关
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
 
@@ -1271,6 +1447,9 @@
                     <span class="result-link">打开</span>
                 `;
                 item.addEventListener('click', () => {
+                    // 记录访问
+                    saveRecentTool(tool.url);
+                    // 跳转
                     window.location.href = tool.url;
                 });
                 searchResults.appendChild(item);
@@ -1330,6 +1509,22 @@
                     activeItem.click();
                 } else if (items.length > 0) {
                     items[0].click();
+                }
+            }
+        });
+
+        // 监听工具链接点击，记录最近使用
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && link.href) {
+                // 检查是否是工具链接
+                const url = link.getAttribute('href');
+                if (url && !url.startsWith('http') && !url.startsWith('mailto')) {
+                    // 只记录站内工具链接
+                    const tool = toolsData.find(t => t.url === url);
+                    if (tool) {
+                        saveRecentTool(url);
+                    }
                 }
             }
         });
