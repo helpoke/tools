@@ -865,7 +865,71 @@
         }
     </style>
 
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async custom-element="amp-ad" src="./common/lib/amp-ad-0.1.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Helpoke 助点站",
+        "description": "实用在线工具集，提供免费图片压缩转换水印、视频裁剪打码、JSON格式化、密码UUID生成、Mermaid图表、文档签名水印、批量下载等工具。所有工具均为离线工具，保护用户隐私安全。Free online tools collection including image processing, video editing, JSON tools, security tools and more. All tools work offline to protect privacy.",
+        "url": "https://helpoke.com",
+        "keywords": "在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://helpoke.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "mainEntity": {
+            "@type": "Collection",
+            "name": "在线工具集",
+            "description": "包含图片工具、视频工具、数据开发工具、加密工具、文档工具等多种实用在线工具",
+            "hasPart": [
+                {
+                    "@type": "WebApplication",
+                    "name": "图片工具",
+                    "description": "图片压缩、转换、水印、裁剪工具",
+                    "featureList": ["图片压缩", "图片格式转换", "图片加水印", "图片裁剪"],
+                    "url": "https://helpoke.com/image/compressor"
+                },
+                {
+                    "@type": "WebApplication",
+                    "name": "视频工具",
+                    "description": "视频裁剪、水印、转换工具",
+                    "featureList": ["视频裁剪", "视频加水印", "视频格式转换"],
+                    "url": "https://helpoke.com/video/cropping"
+                },
+                {
+                    "@type": "WebApplication",
+                    "name": "数据开发工具",
+                    "description": "JSON、YAML、XML格式化及进制转换、正则测试等开发工具",
+                    "featureList": ["JSON格式化", "YAML校验", "XML处理", "进制转换", "正则测试", "时间戳转换", "URL编码解码", "内容对比"],
+                    "url": "https://helpoke.com/json"
+                },
+                {
+                    "@type": "WebApplication",
+                    "name": "加密安全工具",
+                    "description": "MD5、SHA加密、JWT解析、JS混淆等安全工具",
+                    "featureList": ["MD5加密", "SHA256加密", "JWT解析", "Token生成", "JS代码混淆"],
+                    "url": "https://helpoke.com/md5"
+                },
+                {
+                    "@type": "WebApplication",
+                    "name": "文档工具",
+                    "description": "文档签名、水印添加、批量下载工具",
+                    "featureList": ["PDF签名", "Word签名", "文档水印", "批量下载"],
+                    "url": "https://helpoke.com/docu/signature"
+                },
+                {
+                    "@type": "WebApplication",
+                    "name": "实用工具",
+                    "description": "密码生成、UUID生成、Mermaid图表、取色器等实用工具",
+                    "featureList": ["密码生成", "UUID生成", "Mermaid图表", "颜色取色器", "Cron解析", "数字转中文", "二维码生成"],
+                    "url": "https://helpoke.com/pwd"
+                }
+            ]
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -1148,7 +1212,7 @@
                             <span class="badge">安全</span>
                         </a>
                         <a href="num-to-chinese" class="tool-link">
-                            <span class="icon">🔢</span>数字&中文互转（阿拉伯转中文）
+                            <span class="icon">🔢</span>数字&中文互转（中文数字大写）
                             <span class="badge">转换</span>
                         </a>
                         <a href="qrcode" class="tool-link">
@@ -1157,7 +1221,12 @@
                         </a>
                         <a href="diff" class="tool-link">
                             <span class="icon">📋</span>内容对比（文本差异比对）
-                            <span class="badge">diff</span>
+                            <span class="badge">文本</span>
+                        </a>
+                        <!-- 防久坐提醒 -->
+                        <a href="https://remind.helpoke.com" target="_blank" class="tool-link">
+                            <span class="icon">⏰</span>防久坐提醒（定时提醒）
+                            <span class="badge">提醒</span>
                         </a>
                     </div>
                 </div>
@@ -1211,7 +1280,7 @@
                         </a>
                         <a href="regex" class="tool-link">
                             <span class="icon">🔍</span>正则表达式（测试+替换）
-                            <span class="badge">Regex</span>
+                            <span class="badge">正则</span>
                         </a>
                         <a href="js-secrecy" class="tool-link">
                             <span class="icon">🛡️</span>JS 代码保护（压缩混淆）
