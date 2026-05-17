@@ -541,6 +541,10 @@
             var placeholder = document.getElementById('qr-placeholder');
             var result = document.getElementById('qr-result');
             var canvas = document.getElementById('qr-canvas');
+            
+            // 清除之前的错误提示
+            var existingError = result.querySelector('.error-message');
+            if (existingError) existingError.remove();
 
             if (!text) {
                 placeholder.style.display = 'block';
@@ -555,9 +559,11 @@
                 if (typeof qrcode !== 'function') {
                     throw new Error('qrcode-generator库未加载');
                 }
-                // 将文本转为UTF-8编码的字符串，确保中文正确处理
-                var encodedText = encodeURIComponent(text);
-                var qr = qrcode(8, eccMap[ecc]);
+                // 根据是否包含中文选择编码类型
+                var hasChinese = /[^\x00-\x7F]/.test(text);
+                var type = hasChinese ? 8 : 0; // 8=UTF-8, 0=自动
+                var encodedText = hasChinese ? encodeURIComponent(text) : text;
+                var qr = qrcode(type, eccMap[ecc]);
                 qr.addData(encodedText);
                 qr.make();
 
@@ -593,6 +599,7 @@
                 placeholder.style.display = 'none';
                 result.style.display = 'block';
                 var errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
                 errorDiv.style.cssText = 'color:#e74c3c;padding:12px;text-align:center;';
                 errorDiv.textContent = '生成失败：' + (e.message || '内容过长或格式不支持');
                 result.insertBefore(errorDiv, canvas.nextSibling);
@@ -729,11 +736,13 @@
                 if (code && code.data && code.data.trim()) {
                     result.classList.add('success');
                     var decodedText = code.data;
-                    // 尝试解码URI编码的中文
-                    try {
-                        decodedText = decodeURIComponent(code.data);
-                    } catch (e) {
-                        // 解码失败，使用原始数据
+                    // 如果包含%编码且解码成功，则显示解码后的中文
+                    if (/%[0-9A-Fa-f]{2}/.test(code.data)) {
+                        try {
+                            decodedText = decodeURIComponent(code.data);
+                        } catch (e) {
+                            // 解码失败，使用原始数据
+                        }
                     }
                     document.getElementById('parse-text').textContent = decodedText;
                 } else {
