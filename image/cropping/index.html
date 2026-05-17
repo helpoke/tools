@@ -940,6 +940,13 @@
         var dragStart = {};
         var cropStart = {};
 
+        function getEventCoords(e) {
+            if (e.touches && e.touches.length > 0) {
+                return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+            return { x: e.clientX, y: e.clientY };
+        }
+
         cropBox.addEventListener('mousedown', function (e) {
             if (e.target.classList.contains('crop-handle')) return;
             e.preventDefault();
@@ -948,6 +955,16 @@
             var c = getCropNatural();
             cropStart = { x: c.x, y: c.y };
         });
+
+        cropBox.addEventListener('touchstart', function (e) {
+            if (e.target.classList.contains('crop-handle')) return;
+            e.preventDefault();
+            dragging = 'move';
+            var coords = getEventCoords(e);
+            dragStart = { x: coords.x, y: coords.y };
+            var c = getCropNatural();
+            cropStart = { x: c.x, y: c.y };
+        }, { passive: false });
 
         document.querySelectorAll('.crop-handle').forEach(function (handle) {
             handle.addEventListener('mousedown', function (e) {
@@ -958,6 +975,16 @@
                 var c = getCropNatural();
                 cropStart = { x: c.x, y: c.y, w: c.w, h: c.h };
             });
+
+            handle.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dragging = handle.dataset.handle;
+                var coords = getEventCoords(e);
+                dragStart = { x: coords.x, y: coords.y };
+                var c = getCropNatural();
+                cropStart = { x: c.x, y: c.y, w: c.w, h: c.h };
+            }, { passive: false });
         });
 
         document.addEventListener('mousemove', function (e) {
@@ -1021,6 +1048,72 @@
         });
 
         document.addEventListener('mouseup', function () {
+            if (dragging) {
+                dragging = null;
+                updatePreview();
+                updateDimInputs();
+            }
+        });
+
+        document.addEventListener('touchmove', function (e) {
+            if (!dragging) return;
+            e.preventDefault();
+
+            var coords = getEventCoords(e);
+            var dx = (coords.x - dragStart.x) / displayScale;
+            var dy = (coords.y - dragStart.y) / displayScale;
+
+            var c = getCropNatural();
+            var newX = c.x, newY = c.y, newW = c.w, newH = c.h;
+
+            if (dragging === 'move') {
+                newX = cropStart.x + dx;
+                newY = cropStart.y + dy;
+            } else {
+                var r = currentRatio;
+                var handle = dragging;
+
+                if (handle.indexOf('e') !== -1) {
+                    newW = cropStart.w + dx;
+                }
+                if (handle.indexOf('w') !== -1) {
+                    newW = cropStart.w - dx;
+                    newX = cropStart.x + dx;
+                }
+                if (handle.indexOf('s') !== -1) {
+                    newH = cropStart.h + dy;
+                }
+                if (handle.indexOf('n') !== -1) {
+                    newH = cropStart.h - dy;
+                    newY = cropStart.y + dy;
+                }
+
+                if (r) {
+                    if (handle === 'n' || handle === 's') {
+                        newW = newH * r.w / r.h;
+                    } else if (handle === 'e' || handle === 'w') {
+                        newH = newW * r.h / r.w;
+                    } else {
+                        var dw = Math.abs(newW - cropStart.w);
+                        var dh = Math.abs(newH - cropStart.h);
+                        if (dw > dh) {
+                            newH = newW * r.h / r.w;
+                        } else {
+                            newW = newH * r.w / r.h;
+                        }
+                    }
+                }
+
+                if (newW < 10) newW = 10;
+                if (newH < 10) newH = 10;
+            }
+
+            var constrained = constrainToImage(newX, newY, newW, newH);
+            setCropBox(constrained.x, constrained.y, constrained.w, constrained.h);
+            updatePreview();
+        }, { passive: false });
+
+        document.addEventListener('touchend', function () {
             if (dragging) {
                 dragging = null;
                 updatePreview();
