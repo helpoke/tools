@@ -83,6 +83,7 @@ h2 {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    margin-left: 10px;
 }
 
 .signature-options button {
@@ -681,6 +682,13 @@ button:disabled {
     display: flex;
     flex-direction: column;
     touch-action: none;
+    transform: rotate(90deg);
+    transform-origin: center center;
+    /* 旋转后宽高互换，需要调整尺寸 */
+    width: 100vh;
+    height: 100vw;
+    top: calc(50% - 50vw);
+    left: calc(50% - 50vh);
 }
 
 .landscape-toolbar {
@@ -723,7 +731,7 @@ button:disabled {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 10px;
+    padding: 5px;
 }
 
 #landscape-canvas {
@@ -731,8 +739,12 @@ button:disabled {
     border-radius: 4px;
     background-color: #f9f9f9;
     cursor: crosshair;
-    max-width: 100%;
-    max-height: 100%;
+    /* 移除max宽高限制，让canvas尽可能大 */
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    /* 不需要单独旋转，因为整个overlay已经旋转了 */
 }
 
 /* 横屏模式适配 */
