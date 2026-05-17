@@ -218,6 +218,54 @@
             .tool-card {
                 padding: 24px;
             }
+
+            .ref-table {
+                display: block;
+            }
+
+            .ref-table tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0;
+            }
+
+            .ref-table tr {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding: 0;
+                border: none;
+            }
+
+            .ref-table td {
+                display: block;
+                width: calc(50% - 0.25rem);
+                /* 精确计算两列宽度 */
+                padding: 0.6rem 0.4rem;
+                text-align: center;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                background: #ffffff;
+                font-size: 0.95rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .ref-table .num {
+                background: #edf2f7;
+                font-weight: bold;
+                color: #2b6cb0;
+            }
+
+            .ref-table .cn {
+                background: #ffffff;
+                color: #1a202c;
+            }
+
+            .ref-table tr.sep td {
+                border-top: 3px solid #a0aec0;
+                /* 保持分隔线视觉 */
+            }
         }
 
         @media (max-width: 480px) {
@@ -231,6 +279,11 @@
 
             .result-content {
                 font-size: 16px;
+            }
+
+            .ref-table td {
+                width: 100%;
+                padding: 0.7rem 0.5rem;
             }
         }
     </style>
@@ -351,7 +404,7 @@
             </a>
         </nav>
         <div class="sidebar-footer">
-            <p>纯前端运行 · 数据本地处理</p>
+            <p>离线工具 · 数据本地处理</p>
         </div>
     </aside>
 
