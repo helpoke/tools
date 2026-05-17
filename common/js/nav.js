@@ -77,11 +77,12 @@
     // 记录当前页面访问
     (function recordCurrentVisit() {
         var path = window.location.pathname;
-        // 提取工具 URL
         var toolUrl = null;
         for (var i = 0; i < toolsData.length; i++) {
             var t = toolsData[i];
-            if (path.indexOf('/' + t.url + '/') !== -1 || path.indexOf('/' + t.url + '/index.html') !== -1 || path.endsWith('/' + t.url) || path.indexOf(t.url + '/index.html') !== -1) {
+            var urlWithSlash = '/' + t.url + '/';
+            var urlEnd = '/' + t.url;
+            if (path.indexOf(urlWithSlash) !== -1 || path.indexOf(urlWithSlash + 'index.html') !== -1 || path.endsWith(urlEnd) || path.endsWith(urlEnd + '/') || path.indexOf(t.url + '/index.html') !== -1) {
                 toolUrl = t.url;
                 break;
             }
