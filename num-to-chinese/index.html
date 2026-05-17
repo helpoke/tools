@@ -281,10 +281,10 @@
                 font-size: 16px;
             }
 
-            .ref-table td {
+            /* .ref-table td {
                 width: 100%;
                 padding: 0.7rem 0.5rem;
-            }
+            } */
         }
     </style>
 </head>
@@ -425,17 +425,17 @@
                 <div class="tab-panel active" id="tab-num2cn">
                     <div class="input-group">
                         <label for="number-input">输入阿拉伯数字</label>
-                        <input type="text" id="number-input" placeholder="例如：112.5" value="112.5" data-name="输入数字">
+                        <input type="text" id="number-input" placeholder="例如：112.55" value="112.55" data-name="输入数字">
                     </div>
                     <button class="btn" onclick="convertNumber()">转换</button>
                     <div class="result">
                         <h3>转换结果</h3>
-                        <div class="result-content" id="result">壹佰壹拾贰点伍</div>
+                        <div class="result-content" id="result">壹佰壹拾贰圆伍角伍分</div>
                         <div class="result-actions">
                             <button class="btn copy-btn" onclick="copyResult('result')">复制结果</button>
                         </div>
                         <div class="hint">
-                            <strong>说明：</strong>支持整数和小数转换，最大支持到万亿位。输入负数将转换为负的大写中文数字。
+                            <strong>说明：</strong>支持整数和小数转换，最大支持到万亿位，小数最多保留两位。输入负数将转换为负的大写中文数字。小数点前加"圆"，小数部分分别为"角""分"。
                         </div>
                     </div>
                 </div>
@@ -444,18 +444,18 @@
                 <div class="tab-panel" id="tab-cn2num">
                     <div class="input-group">
                         <label for="chinese-input">输入中文大写数字</label>
-                        <input type="text" id="chinese-input" placeholder="例如：壹佰壹拾贰点伍" value="壹佰壹拾贰点伍"
+                        <input type="text" id="chinese-input" placeholder="例如：壹佰壹拾贰元整" value="壹佰壹拾贰元整"
                             data-name="输入中文数字">
                     </div>
                     <button class="btn" onclick="convertChinese()">转换</button>
                     <div class="result">
                         <h3>转换结果</h3>
-                        <div class="result-content" id="cn-result">112.5</div>
+                        <div class="result-content" id="cn-result">112.0</div>
                         <div class="result-actions">
                             <button class="btn copy-btn" onclick="copyResult('cn-result')">复制结果</button>
                         </div>
                         <div class="hint">
-                            <strong>说明：</strong>支持中文大写数字转阿拉伯数字。含"元""圆""点"统一转为小数点，含"角""分"等量词自动去除。
+                            <strong>说明：</strong>支持中文大写数字转阿拉伯数字。含"元""圆""点"统一转为小数点，含"角""分"等量词自动解析为小数位。结果保留两位小数。
                         </div>
                     </div>
                 </div>
@@ -529,13 +529,16 @@
             document.getElementById('tab-' + tab).classList.add('active');
         }
 
-        // 阿拉伯数字转中文大写
+        // 阿拉伯数字转中文大写（金额格式）
         function numberToChinese(numStr) {
             const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
             const cnUnits = ['', '拾', '佰', '仟'];
             const cnBigUnits = ['', '万', '亿', '万亿'];
-            const cnDecimal = '点';
+            const cnDecimalUnits = ['角', '分'];
             const cnNegative = '负';
+            const cnIntegerSuffix = '圆';
+            const cnIntegerSuffixAlt = '元';
+            const cnWhole = '整';
 
             let isNegative = false;
             let input = numStr.trim();
@@ -547,7 +550,7 @@
 
             let parts = input.split('.');
             let integerPart = parts[0];
-            let decimalPart = parts.length > 1 ? parts[1] : '';
+            let decimalPart = parts.length > 1 ? parts[1].substring(0, 2) : ''; // 最多两位小数
 
             integerPart = integerPart.replace(/^0+/, '') || '0';
 
@@ -599,23 +602,42 @@
 
             function convertDecimal(decimal) {
                 if (!decimal) return '';
-                let result = cnDecimal;
+                let result = '';
+                let hasNonZero = false;
                 for (let i = 0; i < decimal.length; i++) {
                     let digit = parseInt(decimal[i]);
-                    if (!isNaN(digit)) {
-                        result += cnNums[digit];
+                    if (!isNaN(digit) && cnDecimalUnits[i]) {
+                        if (digit > 0) {
+                            result += cnNums[digit] + cnDecimalUnits[i];
+                            hasNonZero = true;
+                        } else {
+                            result += '零' + cnDecimalUnits[i];
+                        }
                     }
                 }
-                return result;
+                // 如果小数部分全为零，返回空字符串（将显示"整"）
+                return hasNonZero ? result : '';
             }
 
             let chineseResult = '';
             if (isNegative) {
                 chineseResult += cnNegative;
             }
-            chineseResult += convertInteger(integerPart);
-            if (decimalPart) {
-                chineseResult += convertDecimal(decimalPart);
+            
+            let integerResult = convertInteger(integerPart);
+            chineseResult += integerResult;
+            
+            // 整数部分后加圆
+            chineseResult += cnIntegerSuffix;
+            
+            // 处理小数部分
+            let decimalResult = convertDecimal(decimalPart);
+            
+            if (decimalResult) {
+                chineseResult += decimalResult;
+            } else {
+                // 没有小数时加"整"
+                chineseResult += cnWhole;
             }
 
             return chineseResult;
@@ -632,6 +654,13 @@
             const numRegex = /^-?\d+(\.\d+)?$/;
             if (!numRegex.test(input.trim())) {
                 utils.showError('请输入有效的数字格式');
+                return;
+            }
+
+            // 校验小数位数，最多两位
+            const decimalMatch = input.match(/\.(\d+)/);
+            if (decimalMatch && decimalMatch[1].length > 2) {
+                utils.showError('小数位不能超过两位');
                 return;
             }
 
@@ -656,8 +685,8 @@
             // 预处理：元/圆/点 → .
             input = input.replace(/[元圆点]/g, '.');
 
-            // 去除金额量词：角、分、厘、毫、整
-            input = input.replace(/[角分厘毫整]/g, '');
+            // 去除金额量词：整（保留角分用于小数解析）
+            input = input.replace(/[整]/g, '');
 
             // 处理负号
             let isNegative = false;
@@ -671,12 +700,27 @@
             let intPart = parts[0];
             let decPart = parts.length > 1 ? parts[1] : '';
 
-            // 处理小数部分（直接映射数字）
+            // 处理小数部分（支持角分）
             let decimalResult = '';
-            for (let i = 0; i < decPart.length; i++) {
+            let decIndex = 0;
+            for (let i = 0; i < decPart.length && decIndex < 2; i++) {
                 let ch = decPart[i];
                 if (cnNumsMap[ch] !== undefined) {
                     decimalResult += cnNumsMap[ch];
+                    decIndex++;
+                } else if (ch === '角') {
+                    // 遇到"角"表示当前是角位，如果前面没有数字，补0
+                    if (decIndex === 0) {
+                        decimalResult += '0';
+                    }
+                    decIndex = 1; // 角位结束
+                } else if (ch === '分') {
+                    // 遇到"分"表示当前是分位，如果前面没有数字，补0
+                    while (decIndex < 1) {
+                        decimalResult += '0';
+                        decIndex++;
+                    }
+                    decIndex = 2; // 分位结束
                 }
             }
 
@@ -714,8 +758,12 @@
             let integerResult = parseInteger(intPart);
 
             let result = integerResult.toString();
+            // 确保至少有一位小数，最多两位小数
             if (decimalResult) {
+                decimalResult = decimalResult.padEnd(2, '0').substring(0, 2);
                 result += '.' + decimalResult;
+            } else {
+                result += '.0';
             }
             if (isNegative) {
                 result = '-' + result;
@@ -767,6 +815,17 @@
         // 阿拉伯→中文：实时转换
         document.getElementById('number-input').addEventListener('input', function (e) {
             const input = e.target.value;
+            
+            // 校验小数位数，超过两位就弹框提示
+            const decimalMatch = input.match(/\.(\d+)/);
+            if (decimalMatch && decimalMatch[1].length > 2) {
+                utils.showError('小数位不能超过两位');
+                // 截断多余的小数位
+                const parts = input.split('.');
+                e.target.value = parts[0] + '.' + parts[1].substring(0, 2);
+                return;
+            }
+            
             if (/^-?\d*\.?\d*$/.test(input) && input.trim() !== '' && input !== '-') {
                 const result = numberToChinese(input);
                 document.getElementById('result').textContent = result;
