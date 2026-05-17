@@ -112,7 +112,7 @@
             <a href="../color-picker">
                 <span class="nav-icon">🎨</span>取色器
             </a>
-            <a href="../regex">
+            <a href="../regex" class="active">
                 <span class="nav-icon">🔍</span>正则表达式
             </a>
             <a href="../js-secrecy">
@@ -126,7 +126,7 @@
             <a href="../docu/watermark">
                 <span class="nav-icon">🛡️</span>文档水印
             </a>
-            <a href="../download" class="active">
+            <a href="../download">
                 <span class="nav-icon">⬇️</span>批量下载
             </a>
         </nav>
@@ -146,6 +146,7 @@
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="url-tab">直接URL下载</button>
                         <button class="tab-btn" data-tab="extract-tab">网页图片提取</button>
+                        <button class="tab-btn" data-tab="video-extract-tab">网页视频提取</button>
                     </div>
 
                     <div id="url-tab" class="tab-content active">
@@ -169,6 +170,24 @@
                                 <button id="selectAllImages">全选</button>
                                 <button id="deselectAllImages">取消全选</button>
                                 <button id="addSelectedToQueue">添加选中到下载队列</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="video-extract-tab" class="tab-content">
+                        <label for="videoWebsiteUrl">输入网站URL:</label>
+                        <p class="helper-text">输入包含视频的网页地址，系统将尝试提取页面中的所有视频资源</p>
+                        <input type="text" id="videoWebsiteUrl" placeholder="例如: https://example.com/video-page.html"
+                            class="website-input">
+                        <button id="extractVideos" class="extract-btn">提取视频</button>
+
+                        <div class="extracted-images-section">
+                            <h3>提取的视频</h3>
+                            <div id="extractedVideosContainer" class="extracted-videos-container"></div>
+                            <div class="extracted-controls">
+                                <button id="selectAllVideos">全选</button>
+                                <button id="deselectAllVideos">取消全选</button>
+                                <button id="addSelectedVideosToQueue">添加选中到下载队列</button>
                             </div>
                         </div>
                     </div>
