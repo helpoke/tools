@@ -1,6 +1,113 @@
 (function () {
     'use strict';
 
+    // 工具数据（用于记录最近使用）
+    var toolsData = [
+        { name: '图片压缩', icon: '📦', url: 'image/compressor' },
+        { name: '图片转换', icon: '🔄', url: 'image/convert' },
+        { name: '图片水印', icon: '💧', url: 'image/watermark' },
+        { name: '图片裁剪', icon: '✂️', url: 'image/cropping' },
+        { name: '视频裁剪', icon: '✂️', url: 'video/cropping' },
+        { name: '视频水印', icon: '🎥', url: 'video/watermark' },
+        { name: '视频转换', icon: '🔄', url: 'video/convert' },
+        { name: 'JSON格式化', icon: '{ }', url: 'json' },
+        { name: 'YAML格式化', icon: '⚙️', url: 'yaml' },
+        { name: 'Pug格式化', icon: '🌿', url: 'pug' },
+        { name: 'XML格式化', icon: '📐', url: 'xml' },
+        { name: '密码生成', icon: '🔑', url: 'pwd' },
+        { name: 'UUID生成', icon: '🆔', url: 'uuid' },
+        { name: 'Mermaid图表', icon: '📊', url: 'mermaid' },
+        { name: 'MD5加密', icon: '🔐', url: 'md5' },
+        { name: 'SHA加密', icon: '🔏', url: 'sha' },
+        { name: 'Token工具', icon: '🎫', url: 'token' },
+        { name: '数字中文互转', icon: '🔢', url: 'num-to-chinese' },
+        { name: '二维码', icon: '📱', url: 'qrcode' },
+        { name: '内容对比', icon: '📋', url: 'diff' },
+        { name: 'Cron解析', icon: '⏰', url: 'cron' },
+        { name: '时间戳转换', icon: '🕐', url: 'timestamp' },
+        { name: 'URL编解码', icon: '🔗', url: 'urlcode' },
+        { name: '进制转换', icon: '🧮', url: 'base-convert' },
+        { name: '取色器', icon: '🎨', url: 'color-picker' },
+        { name: '正则表达式', icon: '🔍', url: 'regex' },
+        { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy' },
+        { name: '签名工具', icon: '✍️', url: 'docu/signature' },
+        { name: '文档水印', icon: '🛡️', url: 'docu/watermark' },
+        { name: '批量下载', icon: '⬇️', url: 'download' }
+    ];
+
+    var MAX_RECENT = 5;
+    var STORAGE_KEY = 'helpoke_recent_tools';
+
+    function getRecentTools() {
+        try {
+            var data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveRecentTool(url) {
+        var recent = getRecentTools();
+        var filtered = recent.filter(function (item) {
+            return item.url !== url;
+        });
+        var tool = null;
+        for (var i = 0; i < toolsData.length; i++) {
+            if (toolsData[i].url === url) {
+                tool = toolsData[i];
+                break;
+            }
+        }
+        if (tool) {
+            filtered.unshift({
+                name: tool.name,
+                icon: tool.icon,
+                url: tool.url
+            });
+        }
+        var trimmed = filtered.slice(0, MAX_RECENT);
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+        } catch (e) {
+            console.warn('Failed to save recent tools:', e);
+        }
+    }
+
+    // 记录当前页面访问
+    (function recordCurrentVisit() {
+        var path = window.location.pathname;
+        // 提取工具 URL
+        var toolUrl = null;
+        for (var i = 0; i < toolsData.length; i++) {
+            var t = toolsData[i];
+            if (path.indexOf('/' + t.url + '/') !== -1 || path.indexOf('/' + t.url + '/index.html') !== -1 || path.endsWith('/' + t.url) || path.indexOf(t.url + '/index.html') !== -1) {
+                toolUrl = t.url;
+                break;
+            }
+        }
+        if (toolUrl) {
+            saveRecentTool(toolUrl);
+        }
+    })();
+
+    // 监听侧边栏链接点击
+    function initRecentTracking() {
+        var sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return;
+
+        sidebar.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('#')) {
+                    // 转换为相对路径
+                    var url = href.replace(/^\.\//, '').replace(/^\//, '');
+                    saveRecentTool(url);
+                }
+            });
+        });
+    }
+
     function initSidebar() {
         var sidebar = document.querySelector('.sidebar');
         if (!sidebar) return;
@@ -71,6 +178,9 @@
                 }
             });
         });
+
+        // 初始化最近使用跟踪
+        initRecentTracking();
     }
 
     if (document.readyState === 'loading') {
@@ -81,9 +191,9 @@
 
 
     // Mobile sidebar toggle
-    const sidebar = document.getElementById('sidebar');
-    const toggle = document.getElementById('sidebarToggle');
-    const overlay = document.getElementById('sidebarOverlay');
+    var sidebar = document.getElementById('sidebar');
+    var toggle = document.getElementById('sidebarToggle');
+    var overlay = document.getElementById('sidebarOverlay');
 
     function openSidebar() {
         sidebar.classList.add('open');
@@ -95,16 +205,26 @@
         overlay.classList.remove('show');
     }
 
-    toggle.addEventListener('click', () => {
-        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-    });
+    if (toggle) {
+        toggle.addEventListener('click', function () {
+            if (sidebar.classList.contains('open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
 
-    overlay.addEventListener('click', closeSidebar);
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
 
     // Close sidebar on link click (mobile)
-    sidebar.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) closeSidebar();
+    if (sidebar) {
+        sidebar.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (window.innerWidth <= 768) closeSidebar();
+            });
         });
-    });
+    }
 })();
