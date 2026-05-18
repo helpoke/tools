@@ -506,7 +506,7 @@
             downloadBtn.onclick = function () {
                 var a = document.createElement('a');
                 a.href = outUrl;
-                a.download = origName + '_converted.' + outExt;
+                a.download = origName + '_helpoke.' + outExt;
                 a.click();
             };
             cleanup();
