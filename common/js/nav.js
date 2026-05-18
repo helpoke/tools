@@ -14,6 +14,7 @@
         { name: 'YAML格式化', icon: '⚙️', url: 'yaml' },
         { name: 'Pug格式化', icon: '🌿', url: 'pug' },
         { name: 'XML格式化', icon: '📐', url: 'xml' },
+        { name: 'SQL格式化', icon: '🗃️', url: 'sql' },
         { name: '密码生成', icon: '🔑', url: 'pwd' },
         { name: 'UUID生成', icon: '🆔', url: 'uuid' },
         { name: 'Mermaid图表', icon: '📊', url: 'mermaid' },
@@ -32,7 +33,8 @@
         { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy' },
         { name: '签名工具', icon: '✍️', url: 'docu/signature' },
         { name: '文档水印', icon: '🛡️', url: 'docu/watermark' },
-        { name: '批量下载', icon: '⬇️', url: 'download' }
+        { name: '视频图片下载', icon: '⬇️', url: 'download/media' },
+        { name: '资源文件下载', icon: '📦', url: 'download/resource' }
     ];
 
     var MAX_RECENT = 5;
@@ -206,26 +208,26 @@
         overlay.classList.remove('show');
     }
 
-    if (toggle) {
-        toggle.addEventListener('click', function () {
-            if (sidebar.classList.contains('open')) {
-                closeSidebar();
-            } else {
-                openSidebar();
-            }
-        });
-    }
-
-    if (overlay) {
-        overlay.addEventListener('click', closeSidebar);
-    }
-
-    // Close sidebar on link click (mobile)
-    if (sidebar) {
-        sidebar.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                if (window.innerWidth <= 768) closeSidebar();
+        if (toggle) {
+            toggle.addEventListener('click', function () {
+                if (sidebar.classList.contains('open')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
             });
-        });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar on link click (mobile)
+        if (sidebar) {
+            sidebar.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    if (window.innerWidth <= 768) closeSidebar();
+                });
+            });
     }
 })();
