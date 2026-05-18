@@ -245,13 +245,25 @@
             if (collapsed) {
                 sidebar.classList.add('collapsed');
                 floatBall.classList.add('visible');
+                document.body.classList.add('sidebar-collapsed');
+                // 设置 main 元素的 margin-left 为 0
+                var main = document.querySelector('main.main');
+                if (main) {
+                    main.style.marginLeft = '0';
+                }
             }
 
             // Sidebar button: collapse
             btn.addEventListener('click', function () {
                 sidebar.classList.add('collapsed');
                 floatBall.classList.add('visible');
+                document.body.classList.add('sidebar-collapsed');
                 localStorage.setItem('sidebar-collapsed', 'true');
+                // 直接操作 main 元素的样式
+                var main = document.querySelector('main.main');
+                if (main) {
+                    main.style.marginLeft = '0';
+                }
             });
         }
 
@@ -259,7 +271,13 @@
         floatBall.addEventListener('click', function () {
             sidebar.classList.remove('collapsed');
             floatBall.classList.remove('visible');
+            document.body.classList.remove('sidebar-collapsed');
             localStorage.setItem('sidebar-collapsed', 'false');
+            // 恢复 main 元素的原始 margin-left
+            var main = document.querySelector('main.main');
+            if (main) {
+                main.style.marginLeft = 'var(--sidebar-width)';
+            }
         });
 
         // Mobile: close sidebar on link click
