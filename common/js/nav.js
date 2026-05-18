@@ -107,6 +107,48 @@
             });
     }
 
+    // 加载 Footer 组件
+    function loadFooterComponent(callback) {
+        var basePath = getBasePath();
+        var footerUrl = basePath + 'common/footer.html';
+
+        fetch(footerUrl)
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Failed to load footer component: ' + response.status + ' ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(function (html) {
+                var temp = document.createElement('div');
+                temp.innerHTML = html;
+
+                var template = temp.querySelector('#footer-template');
+                if (template) {
+                    var footerContent = template.innerHTML;
+
+                    // 修复相对路径
+                    var fixedContent = footerContent.replace(
+                        /src="common\//g,
+                        'src="' + basePath + 'common/'
+                    );
+
+                    var footerContainer = document.getElementById('footer-container');
+                    if (footerContainer) {
+                        footerContainer.innerHTML = fixedContent;
+                    }
+                } else {
+                    console.error('Footer template not found');
+                }
+
+                if (callback) callback();
+            })
+            .catch(function (error) {
+                console.error('Failed to load footer:', error);
+                if (callback) callback();
+            });
+    }
+
     // 高亮当前页面的导航项
     function highlightCurrentPage() {
         var path = window.location.pathname;
@@ -366,6 +408,9 @@
             // 绑定移动端事件
             bindMobileEvents();
         });
+
+        // 加载 Footer 组件
+        loadFooterComponent();
     }
 
     if (document.readyState === 'loading') {
