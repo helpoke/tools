@@ -272,7 +272,7 @@
         "@type": "WebApplication",
         "name": "SQL格式化工具",
         "description": "SQL在线格式化美化工具，支持SQL语法高亮、关键字大写、格式化压缩、错误检测。免费在线SQL格式化工具。Online SQL formatter with syntax highlighting and beautification.",
-        "url": "https://tools.pengline.cn/sql",
+        "url": "https://helpoke.com/sql",
         "applicationCategory": "DeveloperTool",
         "featureList": [
             "SQL代码格式化美化",
@@ -346,7 +346,7 @@
                 <span class="nav-icon">🗃️</span>SQL 格式化
             </a>
             <a href="../pwd">
-                <span class="nav-icon">🔑</span>密码生成
+                <span class="nav-icon">🔑</span>随机密码生成
             </a>
             <a href="../uuid">
                 <span class="nav-icon">🆔</span>UUID 生成
@@ -401,10 +401,10 @@
             <a href="../docu/watermark">
                 <span class="nav-icon">🛡️</span>文档水印
             </a>
-            <a href="../download">
+            <a href="../download/media">
                 <span class="nav-icon">⬇️</span>批量下载图像
             </a>
-            <a href="../resource-download">
+            <a href="../download/resource">
                 <span class="nav-icon">📦</span>资源文件下载
             </a>
         </nav>
@@ -522,7 +522,7 @@
 
     <script src="../common/js/nav.js"></script>
     <script>
-        (function() {
+        (function () {
             const SQL_KEYWORDS = [
                 'SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'NOT', 'IN', 'LIKE', 'BETWEEN',
                 'JOIN', 'INNER', 'LEFT', 'RIGHT', 'OUTER', 'FULL', 'CROSS', 'ON',
@@ -707,7 +707,7 @@
                             } else {
                                 currentLine += ' ' + formatKeyword(token.value, uppercase);
                             }
-                        } else if (upperToken === 'SELECT' && j > 0 && tokens[j-1].value.toUpperCase() !== ')' && j > 0) {
+                        } else if (upperToken === 'SELECT' && j > 0 && tokens[j - 1].value.toUpperCase() !== ')' && j > 0) {
                             if (currentLine.trim() && !currentLine.trim().startsWith('(')) {
                                 lines.push(currentLine);
                             }
@@ -835,7 +835,7 @@
                 errorMsg.classList.remove('show');
             }
 
-            document.getElementById('formatBtn').addEventListener('click', function() {
+            document.getElementById('formatBtn').addEventListener('click', function () {
                 const sql = inputSql.value.trim();
                 if (!sql) {
                     showError('请输入 SQL 语句');
@@ -864,7 +864,7 @@
                 }
             });
 
-            document.getElementById('compressBtn').addEventListener('click', function() {
+            document.getElementById('compressBtn').addEventListener('click', function () {
                 const sql = inputSql.value.trim();
                 if (!sql) {
                     showError('请输入 SQL 语句');
@@ -888,41 +888,41 @@
                 }
             });
 
-            document.getElementById('clearBtn').addEventListener('click', function() {
+            document.getElementById('clearBtn').addEventListener('click', function () {
                 inputSql.value = '';
                 outputSql.value = '';
                 hideError();
                 updateStats('');
             });
 
-            document.getElementById('sampleBtn').addEventListener('click', function() {
+            document.getElementById('sampleBtn').addEventListener('click', function () {
                 inputSql.value = `SELECT u.id,u.username,u.email,o.order_id,o.total_amount,
 o.created_at AS order_date FROM users u INNER JOIN orders o ON u.id=o.user_id
 WHERE u.status='active' AND o.total_amount>100 ORDER BY o.created_at DESC LIMIT 10;`;
                 hideError();
             });
 
-            document.getElementById('copyBtn').addEventListener('click', function() {
+            document.getElementById('copyBtn').addEventListener('click', function () {
                 const text = outputSql.value;
                 if (!text) {
                     showError('没有内容可复制');
                     return;
                 }
-                navigator.clipboard.writeText(text).then(function() {
+                navigator.clipboard.writeText(text).then(function () {
                     const btn = document.getElementById('copyBtn');
                     const originalText = btn.innerHTML;
                     btn.innerHTML = '已复制';
                     btn.style.backgroundColor = '#059669';
-                    setTimeout(function() {
+                    setTimeout(function () {
                         btn.innerHTML = originalText;
                         btn.style.backgroundColor = '';
                     }, 2000);
-                }).catch(function() {
+                }).catch(function () {
                     showError('复制失败，请手动选择复制');
                 });
             });
 
-            inputSql.addEventListener('input', function() {
+            inputSql.addEventListener('input', function () {
                 if (!outputSql.value || outputSql.value === '格式化后的 SQL 将显示在这里...') {
                     updateStats(inputSql.value);
                 }

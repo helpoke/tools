@@ -372,7 +372,7 @@
                 <span class="nav-icon">🗃️</span>SQL 格式化
             </a>
             <a href="../pwd">
-                <span class="nav-icon">🔑</span>密码生成
+                <span class="nav-icon">🔑</span>随机密码生成
             </a>
             <a href="../uuid">
                 <span class="nav-icon">🆔</span>UUID 生成
@@ -654,16 +654,16 @@
             if (isNegative) {
                 chineseResult += cnNegative;
             }
-            
+
             let integerResult = convertInteger(integerPart);
             chineseResult += integerResult;
-            
+
             // 整数部分后加圆
             chineseResult += cnIntegerSuffix;
-            
+
             // 处理小数部分
             let decimalResult = convertDecimal(decimalPart);
-            
+
             if (decimalResult) {
                 chineseResult += decimalResult;
             } else {
@@ -846,7 +846,7 @@
         // 阿拉伯→中文：实时转换
         document.getElementById('number-input').addEventListener('input', function (e) {
             const input = e.target.value;
-            
+
             // 校验小数位数，超过两位就弹框提示
             const decimalMatch = input.match(/\.(\d+)/);
             if (decimalMatch && decimalMatch[1].length > 2) {
@@ -856,7 +856,7 @@
                 e.target.value = parts[0] + '.' + parts[1].substring(0, 2);
                 return;
             }
-            
+
             if (/^-?\d*\.?\d*$/.test(input) && input.trim() !== '' && input !== '-') {
                 const result = numberToChinese(input);
                 document.getElementById('result').textContent = result;

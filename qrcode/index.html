@@ -392,7 +392,7 @@
                 <span class="nav-icon">🗃️</span>SQL 格式化
             </a>
             <a href="../pwd">
-                <span class="nav-icon">🔑</span>密码生成
+                <span class="nav-icon">🔑</span>随机密码生成
             </a>
             <a href="../uuid">
                 <span class="nav-icon">🆔</span>UUID 生成
@@ -573,7 +573,7 @@
             var placeholder = document.getElementById('qr-placeholder');
             var result = document.getElementById('qr-result');
             var canvas = document.getElementById('qr-canvas');
-            
+
             // 清除之前的错误提示
             var existingError = result.querySelector('.error-message');
             if (existingError) existingError.remove();
@@ -746,16 +746,16 @@
                     document.getElementById('parse-text').textContent = '无法读取图片数据，可能存在跨域问题';
                     return;
                 }
-                
+
                 // 尝试多次解码
                 var code = null;
                 code = jsQR(imageData.data, imageData.width, imageData.height);
-                
+
                 if (!code) {
                     var grayData = grayscaleImageData(imageData);
                     code = jsQR(grayData.data, grayData.width, grayData.height);
                 }
-                
+
                 if (!code) {
                     var binaryData = binarizeImageData(imageData);
                     code = jsQR(binaryData.data, binaryData.width, binaryData.height);

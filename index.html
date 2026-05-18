@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="实用在线工具集, 免费图片压缩转换水印、视频裁剪打码、JSON格式化、密码UUID生成、Mermaid图表、文档签名水印、批量下载等工具，离线工具保护隐私安全">
+    <meta name="description"
+        content="实用在线工具集, 免费图片压缩转换水印、视频裁剪打码、JSON格式化、密码UUID生成、Mermaid图表、文档签名水印、批量下载等工具，离线Helpoke工具保护隐私安全, Helpoke小助点工具">
     <meta name="keywords"
-        content="在线工具, 免费工具, 图片压缩, 图片水印, 视频裁剪, JSON格式化, 密码生成, UUID生成, Mermaid图表, 文档签名, 批量下载, 隐私保护, 断网可用">
+        content="在线工具, 免费工具, 图片压缩, 图片水印, 视频裁剪, JSON格式化, 密码生成, UUID生成, Mermaid图表, 文档签名, 批量下载, 隐私保护, 断网可用, Helpoke工具, 小助点工具">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="common/img/helpoke.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -877,7 +878,7 @@
         "name": "Helpoke 助点站",
         "description": "实用在线工具集，提供免费图片压缩转换水印、视频裁剪打码、JSON格式化、密码UUID生成、Mermaid图表、文档签名水印、批量下载等工具。所有工具均为离线工具，保护用户隐私安全。Free online tools collection including image processing, video editing, JSON tools, security tools and more. All tools work offline to protect privacy.",
         "url": "https://helpoke.com",
-        "keywords": "在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护",
+        "keywords": "在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护,Helpoke,小助点",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://helpoke.com/search?q={search_term_string}",
@@ -994,7 +995,7 @@
                 <span class="nav-icon">🗃️</span>SQL 格式化
             </a>
             <a href="pwd">
-                <span class="nav-icon">🔑</span>密码生成
+                <span class="nav-icon">🔑</span>随机密码生成
             </a>
             <a href="uuid">
                 <span class="nav-icon">🆔</span>UUID 生成
@@ -1073,26 +1074,26 @@
 
         <div class="content">
             <div class="search-container">
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" id="searchInput" placeholder="搜索工具，如：压缩、二维码、JSON..." />
-            </div>
-            <div class="search-results" id="searchResults"></div>
-            
-            <!-- 最近使用 -->
-            <div class="recent-section" id="recentSection">
-                <div class="recent-header">
-                    <span class="recent-icon">🕐</span>
-                    <span class="recent-title">最近使用</span>
-                    <button class="recent-clear" id="recentClear" title="清空历史">✕</button>
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="搜索工具，如：压缩、二维码、JSON..." />
                 </div>
-                <div class="recent-list" id="recentList">
-                    <div class="recent-empty">暂无记录</div>
-                </div>
-            </div>
-        </div>
+                <div class="search-results" id="searchResults"></div>
 
-        <!-- Stats -->
+                <!-- 最近使用 -->
+                <div class="recent-section" id="recentSection">
+                    <div class="recent-header">
+                        <span class="recent-icon">🕐</span>
+                        <span class="recent-title">最近使用</span>
+                        <button class="recent-clear" id="recentClear" title="清空历史">✕</button>
+                    </div>
+                    <div class="recent-list" id="recentList">
+                        <div class="recent-empty">暂无记录</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
             <div class="stats-row">
                 <div class="stat-card">
                     <div class="stat-icon blue">🖼️</div>
@@ -1222,7 +1223,7 @@
                     </div>
                     <div class="tools-list">
                         <a href="pwd" class="tool-link">
-                            <span class="icon">🔑</span>密码生成（批量）
+                            <span class="icon">🔑</span>随机密码生成（批量）
                             <span class="badge">安全</span>
                         </a>
                         <a href="num-to-chinese" class="tool-link">
@@ -1500,7 +1501,7 @@
         // 模糊搜索函数
         function fuzzySearch(query) {
             if (!query.trim()) return [];
-            
+
             const lowerQuery = query.toLowerCase();
             return toolsData.filter(tool => {
                 const matchName = tool.name.toLowerCase().includes(lowerQuery);
@@ -1520,7 +1521,7 @@
         // 渲染搜索结果
         function renderResults(results) {
             searchResults.innerHTML = '';
-            
+
             if (results.length === 0) {
                 searchResults.innerHTML = '<div class="search-no-results">未找到匹配的工具</div>';
                 searchResults.classList.add('show');
@@ -1546,7 +1547,7 @@
                 });
                 searchResults.appendChild(item);
             });
-            
+
             searchResults.classList.add('show');
         }
 
