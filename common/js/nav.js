@@ -21,7 +21,7 @@
         { name: 'MD5加密', icon: '🔐', url: 'md5' },
         { name: 'SHA加密', icon: '🔏', url: 'sha' },
         { name: 'Token工具', icon: '🎫', url: 'token' },
-        { name: '数字中文互转', icon: '🔢', url: 'num-to-chinese' },
+        { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese' },
         { name: '二维码', icon: '📱', url: 'qrcode' },
         { name: '内容对比', icon: '📋', url: 'diff' },
         { name: 'Cron解析', icon: '⏰', url: 'cron' },
@@ -36,6 +36,97 @@
         { name: '视频图片下载', icon: '⬇️', url: 'download/media' },
         { name: '资源文件下载', icon: '📦', url: 'download/resource' }
     ];
+
+    // 获取相对于根目录的路径前缀
+    function getBasePath() {
+        var path = window.location.pathname;
+        var parts = path.split('/').filter(function (p) { return p && p !== 'index.html'; });
+        // 如果是一级目录（如 /yaml/），返回 '../'
+        // 如果是二级目录（如 /image/compressor/），返回 '../../'
+        if (parts.length >= 1) {
+            return '../'.repeat(parts.length);
+        }
+        return '';
+    }
+
+    // 动态加载导航组件
+    function loadNavComponent(callback) {
+        var basePath = getBasePath();
+        var navUrl = basePath + 'common/nav.html';
+
+        console.log('Loading nav from:', navUrl, 'basePath:', basePath);
+
+        fetch(navUrl)
+            .then(function (response) {
+                console.log('Nav response status:', response.status);
+                if (!response.ok) {
+                    throw new Error('Failed to load nav component: ' + response.status + ' ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(function (html) {
+                // 创建临时元素来解析HTML
+                var temp = document.createElement('div');
+                temp.innerHTML = html;
+
+                // 获取模板内容
+                var template = temp.querySelector('#nav-template');
+                if (template) {
+                    var navContent = template.innerHTML;
+
+                    // 修复相对路径
+                    var fixedContent = navContent.replace(
+                        /src="common\//g,
+                        'src="' + basePath + 'common/'
+                    ).replace(
+                        /href="(image|video|json|yaml|pug|xml|sql|pwd|uuid|mermaid|md5|sha|token|num-to-chinese|qrcode|diff|cron|timestamp|urlcode|base-convert|color-picker|regex|js-secrecy|docu|download)/g,
+                        'href="' + basePath + '$1'
+                    );
+
+                    // 找到导航容器并插入
+                    var navContainer = document.getElementById('nav-container');
+                    if (navContainer) {
+                        navContainer.innerHTML = fixedContent;
+                    } else {
+                        // 如果没有容器，直接在body开头插入
+                        document.body.insertAdjacentHTML('afterbegin', fixedContent);
+                    }
+
+                    // 高亮当前页面
+                    highlightCurrentPage();
+
+                    if (callback) callback();
+                } else {
+                    console.error('Nav template not found');
+                    if (callback) callback();
+                }
+            })
+            .catch(function (error) {
+                console.error('Failed to load nav:', error);
+                if (callback) callback();
+            });
+    }
+
+    // 高亮当前页面的导航项
+    function highlightCurrentPage() {
+        var path = window.location.pathname;
+        var sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return;
+
+        var links = sidebar.querySelectorAll('a');
+        links.forEach(function (link) {
+            var href = link.getAttribute('href');
+            if (href) {
+                // 移除 ../ 和 ./
+                var cleanHref = href.replace(/^\.\.\//, '').replace(/^\.\//, '').replace(/\/$/, '');
+                var cleanPath = path.replace(/\/$/, '').replace(/\/index\.html$/, '');
+
+                if (cleanPath.endsWith('/' + cleanHref) || cleanPath === '/' + cleanHref) {
+                    link.classList.add('active');
+                }
+            }
+        });
+    }
 
     var MAX_RECENT = 5;
     var STORAGE_KEY = 'helpoke_recent_tools';
@@ -186,17 +277,8 @@
         initRecentTracking();
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSidebar);
-    } else {
-        initSidebar();
-    }
-
-
     // Mobile sidebar toggle
-    var sidebar = document.getElementById('sidebar');
-    var toggle = document.getElementById('sidebarToggle');
-    var overlay = document.getElementById('sidebarOverlay');
+    var sidebar, toggle, overlay;
 
     function openSidebar() {
         sidebar.classList.add('open');
@@ -208,6 +290,8 @@
         overlay.classList.remove('show');
     }
 
+    // 绑定移动端侧边栏切换事件
+    function bindMobileEvents() {
         if (toggle) {
             toggle.addEventListener('click', function () {
                 if (sidebar.classList.contains('open')) {
@@ -229,5 +313,28 @@
                     if (window.innerWidth <= 768) closeSidebar();
                 });
             });
+        }
+    }
+
+    // DOM加载完成后先加载导航组件，再初始化侧边栏
+    function onDOMReady() {
+        loadNavComponent(function () {
+            // 导航组件加载完成后获取元素引用
+            sidebar = document.getElementById('sidebar');
+            toggle = document.getElementById('sidebarToggle');
+            overlay = document.getElementById('sidebarOverlay');
+
+            // 初始化侧边栏功能
+            initSidebar();
+
+            // 绑定移动端事件
+            bindMobileEvents();
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', onDOMReady);
+    } else {
+        onDOMReady();
     }
 })();

@@ -938,129 +938,8 @@
 </head>
 
 <body>
-    <!-- Sidebar toggle (mobile) -->
-    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
-            <a href=".">
-                <span class="brand-icon">
-                    <img src="common/img/helpoke.png" alt="helpoke 小助点" width="20" height="20" />
-                </span>
-                小助点
-            </a>
-        </div>
-        <nav class="sidebar-nav">
-            <div class="nav-section">图片工具</div>
-            <a href="image/compressor">
-                <span class="nav-icon">📦</span>图片压缩
-            </a>
-            <a href="image/convert">
-                <span class="nav-icon">🔄</span>图片转换
-            </a>
-            <a href="image/watermark">
-                <span class="nav-icon">💧</span>图片水印
-            </a>
-            <a href="image/cropping">
-                <span class="nav-icon">✂️</span>图片裁剪
-            </a>
-
-            <div class="nav-section">视频工具</div>
-            <a href="video/cropping">
-                <span class="nav-icon">✂️</span>视频裁剪
-            </a>
-            <a href="video/watermark">
-                <span class="nav-icon">🎥</span>视频水印
-            </a>
-            <a href="video/convert">
-                <span class="nav-icon">🔄</span>视频转换
-            </a>
-
-            <div class="nav-section">数据 & 开发</div>
-            <a href="json">
-                <span class="nav-icon">{ }</span>JSON 格式化
-            </a>
-            <a href="yaml">
-                <span class="nav-icon">⚙️</span>YAML 格式化
-            </a>
-            <a href="pug">
-                <span class="nav-icon">🌿</span>Pug 格式化
-            </a>
-            <a href="xml">
-                <span class="nav-icon">📐</span>XML 格式化
-            </a>
-            <a href="sql">
-                <span class="nav-icon">🗃️</span>SQL 格式化
-            </a>
-            <a href="pwd">
-                <span class="nav-icon">🔑</span>随机密码生成
-            </a>
-            <a href="uuid">
-                <span class="nav-icon">🆔</span>UUID 生成
-            </a>
-            <a href="mermaid">
-                <span class="nav-icon">📊</span>Mermaid 图表
-            </a>
-            <a href="md5">
-                <span class="nav-icon">🔐</span>MD5 加密
-            </a>
-            <a href="sha">
-                <span class="nav-icon">🔏</span>SHA 加密
-            </a>
-            <a href="token">
-                <span class="nav-icon">🎫</span>Token 工具
-            </a>
-            <a href="num-to-chinese">
-                <span class="nav-icon">🔢</span>中文大写数字
-            </a>
-            <a href="qrcode">
-                <span class="nav-icon">📱</span>二维码
-            </a>
-            <a href="diff">
-                <span class="nav-icon">📋</span>内容对比
-            </a>
-            <a href="cron">
-                <span class="nav-icon">⏰</span>Cron 解析
-            </a>
-            <a href="timestamp">
-                <span class="nav-icon">🕐</span>时间戳转换
-            </a>
-            <a href="urlcode">
-                <span class="nav-icon">🔗</span>URL 编解码
-            </a>
-            <a href="base-convert">
-                <span class="nav-icon">🧮</span>进制转换
-            </a>
-            <a href="color-picker">
-                <span class="nav-icon">🎨</span>取色器
-            </a>
-            <a href="regex">
-                <span class="nav-icon">🔍</span>正则表达式
-            </a>
-            <a href="js-secrecy">
-                <span class="nav-icon">🛡️</span>JS 混淆加密
-            </a>
-
-            <div class="nav-section">文档 & 下载</div>
-            <a href="docu/signature">
-                <span class="nav-icon">✍️</span>签名工具
-            </a>
-            <a href="docu/watermark">
-                <span class="nav-icon">🛡️</span>文档水印
-            </a>
-            <a href="download/media">
-                <span class="nav-icon">⬇️</span>视频图片下载
-            </a>
-            <a href="download/resource">
-                <span class="nav-icon">📦</span>资源文件下载
-            </a>
-        </nav>
-        <div class="sidebar-footer">
-            <p>离线工具 · 数据本地处理</p>
-        </div>
-    </aside>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
 
     <!-- Main content -->
     <main class="main">
@@ -1391,7 +1270,7 @@
             { name: 'MD5加密', icon: '🔐', url: 'md5', category: '开发工具', keywords: ['md5', 'jiami', 'miyao', 'encrypt', 'hash', 'MD5', '加密', '摘要'] },
             { name: 'SHA加密', icon: '🔏', url: 'sha', category: '开发工具', keywords: ['sha', 'jiami', 'encrypt', 'hash', 'SHA', '加密', '签名'] },
             { name: 'Token工具', icon: '🎫', url: 'token', category: '开发工具', keywords: ['token', 'jwt', 'oauth', '令牌', '认证'] },
-            { name: '数字中文互转', icon: '🔢', url: 'num-to-chinese', category: '开发工具', keywords: ['shuzizhuanzhongwen', 'shuzihanz', 'sz', 'daxie', 'jine', 'num', '数字转中文', '大写金额', '中文大写', '金额转换'] },
+            { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese', category: '开发工具', keywords: ['shuzizhuanzhongwen', 'shuzihanz', 'sz', 'daxie', 'jine', 'num', '数字转中文', '大写金额', '中文大写', '金额转换'] },
             { name: '二维码', icon: '📱', url: 'qrcode', category: '开发工具', keywords: ['erweima', 'ewm', 'qr', 'qrcode', 'qrshengcheng', 'jiexi', '二维码生成', '二维码解析', 'QR码'] },
             { name: '内容对比', icon: '📋', url: 'diff', category: '开发工具', keywords: ['neirongduibi', 'wenduibi', 'diff', 'compare', 'chayi', '内容对比', '文本对比', '差异'] },
             { name: 'Cron解析', icon: '⏰', url: 'cron', category: '开发工具', keywords: ['cron', 'jieshi', 'parse', 'dingishi', 'jihuorenwu', '定时任务', '计划任务', 'Cron表达式'] },
