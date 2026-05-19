@@ -288,17 +288,6 @@
                 sidebar.classList.add('collapsed');
                 floatBall.classList.add('visible');
                 document.body.classList.add('sidebar-collapsed');
-                // 设置 main 元素的样式
-                var main = document.querySelector('main.main');
-                if (main) {
-                    main.style.setProperty('margin-left', '0', 'important');
-                }
-                // 设置 container 元素的样式，移除 max-width 限制
-                var container = document.querySelector('.container');
-                if (container) {
-                    container.style.setProperty('max-width', 'none', 'important');
-                    container.style.setProperty('width', '100%', 'important');
-                }
             }
 
             // Sidebar button: collapse
@@ -307,17 +296,6 @@
                 floatBall.classList.add('visible');
                 document.body.classList.add('sidebar-collapsed');
                 localStorage.setItem('sidebar-collapsed', 'true');
-                // 修改 main 元素的样式
-                var main = document.querySelector('main.main');
-                if (main) {
-                    main.style.setProperty('margin-left', '0', 'important');
-                }
-                // 修改 container 元素的样式，移除 max-width 限制
-                var container = document.querySelector('.container');
-                if (container) {
-                    container.style.setProperty('max-width', 'none', 'important');
-                    container.style.setProperty('width', '100%', 'important');
-                }
             });
         }
 
@@ -327,17 +305,6 @@
             floatBall.classList.remove('visible');
             document.body.classList.remove('sidebar-collapsed');
             localStorage.setItem('sidebar-collapsed', 'false');
-            // 恢复 main 元素的原始样式
-            var main = document.querySelector('main.main');
-            if (main) {
-                main.style.removeProperty('margin-left');
-            }
-            // 恢复 container 元素的原始样式
-            var container = document.querySelector('.container');
-            if (container) {
-                container.style.removeProperty('max-width');
-                container.style.removeProperty('width');
-            }
         });
 
         // Mobile: close sidebar on link click
