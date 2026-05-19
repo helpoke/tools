@@ -703,23 +703,21 @@
 
         .page-layout main.main {
             flex: 1;
-            margin-left: var(--sidebar-width);
+            margin-left: 15%;  /* 导航栏占15% */
             transition: margin-left 0.3s ease;
         }
 
         /* 大屏幕时主内容区域为广告栏留出空间 */
-        @media (min-width: 1400px) {
-            .page-layout main.main {
-                margin-right: 220px;
-            }
+        .page-layout main.main {
+            margin-right: 2%;
         }
 
         .page-layout .ad-sidebar-right {
             position: fixed;
-            right: 24px;
-            top: calc(var(--header-height) + 20px);
-            width: 200px;
-            /* height: calc(100vh - var(--header-height) - 40px); */
+            right: 0;
+            top: var(--header-height);
+            width: 15%;  /* 广告位占15% */
+            /* height: calc(100vh - var(--header-height)); */
             height: 100%;
             overflow-y: auto;
             border-left: 1px solid #e2e8f0;
@@ -729,36 +727,27 @@
 
         /* Sidebar collapsed state - 折叠后扩展主内容区域 */
         body.sidebar-collapsed .page-layout main.main {
-            margin-left: 24px;
-            margin-right: 220px;
+            margin-left: 3%;  /* 折叠后只留3%边距 */
+            margin-right: 18%;
         }
-        
-        @media (min-width: 1400px) {
-            body.sidebar-collapsed .page-layout main.main {
-                margin-left: 24px;
-                margin-right: 220px;
-            }
-        }
+
 
         /* Hide ad sidebar on small screens */
         @media (max-width: 1399px) {
             .page-layout .ad-sidebar-right {
                 display: none;
             }
+            .page-layout main.main {
+                margin-left: var(--sidebar-width);
+            }
+            body.sidebar-collapsed .page-layout main.main {
+                margin-left: 0;
+            }
         }
 
         /* ========== Container width adjustment ========== */
-        @media (min-width: 1200px) {
-            .container {
-                max-width: 1100px;
-            }
-        }
-
-        /* 折叠侧边栏后，扩展 container 宽度 */
-        @media (min-width: 1400px) {
-            body.sidebar-collapsed .container {
-                max-width: 85%;
-            }
+        .container {
+            max-width: 85%;
         }
 
         /* ========== Page Ad ========== */
@@ -890,7 +879,7 @@
                             <span class="badge popular">热门</span>
                         </a>
                         <a href="image/convert" class="tool-link">
-                            <span class="icon">🔄</span><b>图片转换</b>(SVG/Base64/WebP)
+                            <span class="icon">🔄</span><b>图片转换</b>(SVG/Base64/PNG)
                             <span class="badge">转换</span>
                         </a>
                         <a href="image/watermark" class="tool-link">
@@ -964,15 +953,15 @@
                             <span class="badge popular">热门</span>
                         </a>
                         <a href="yaml" class="tool-link">
-                            <span class="icon">⚙️</span><b>YAML 格式化</b>(压缩+格式化)
+                            <span class="icon">⚙️</span><b>YAML 格式化</b>(压缩+校验)
                             <span class="badge">YAML</span>
                         </a>
                         <a href="pug" class="tool-link">
-                            <span class="icon">🌿</span><b>Pug 格式化</b>(压缩+格式化)
+                            <span class="icon">🌿</span><b>Pug 格式化</b>(压缩+校验)
                             <span class="badge">Pug</span>
                         </a>
                         <a href="xml" class="tool-link">
-                            <span class="icon">📐</span><b>XML 格式化</b>(转换+格式化)
+                            <span class="icon">📐</span><b>XML 格式化</b>(压缩+转换)
                             <span class="badge">XML</span>
                         </a>
                         <a href="sql" class="tool-link">
@@ -1002,7 +991,7 @@
                             <span class="badge">Token</span>
                         </a>
                         <a href="js-secrecy" class="tool-link">
-                            <span class="icon">🛡️</span><b>JS 混淆加密</b>(预设级别)
+                            <span class="icon">🛡️</span><b>JS 混淆加密</b>(多级别)
                             <span class="badge">JS</span>
                         </a>
                         <a href="pwd" class="tool-link">
