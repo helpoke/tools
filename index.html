@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helpoke 小助点 - 身边的万能在线工具箱</title>
-    <meta name="description"
-        content="Helpoke 由 Help + Poke 组合而生，寓意随时帮忙、一键轻点即用。聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。（离线亦可用）">
+    <meta name="description" content="Helpoke 由 Help + Poke 组合而生，寓意随时帮忙、一键轻点即用。聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。（离线亦可用）">
     <meta name="keywords" content="在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护">
     <link rel="canonical" href="https://tools.pengline.cn/" />
     <meta property="og:title" content="Helpoke 小助点 - 身边的万能在线工具箱">
@@ -18,8 +16,7 @@
     <meta name="twitter:description" content="聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
     <link rel="apple-touch-icon" href="common/img/helpoke.png">
 
     <!-- Stylesheets -->
@@ -90,9 +87,9 @@
                 },
                 {
                     "@type": "WebApplication",
-                    "name": "文档工具",
+                    "name": "文档与下载工具",
                     "description": "签名工具、文档水印、批量下载",
-                    "featureList": ["文档签名", "文档水印", "资源文件下载"],
+                    "featureList": ["文档签名", "文档水印", "资源文件下载", "视频图片下载"],
                     "url": "https://tools.pengline.cn/docu/signature"
                 }
             ]
@@ -110,7 +107,6 @@
             margin-bottom: 32px;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
         .hero::before {
@@ -120,22 +116,13 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: pulse 8s ease-in-out infinite;
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         .hero h1 {
@@ -143,16 +130,134 @@
             font-weight: 800;
             margin-bottom: 12px;
             position: relative;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero p {
             font-size: 1rem;
             opacity: 0.95;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 0 auto 12px;
             line-height: 1.7;
             position: relative;
+        }
+
+        .hero a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .hero a:hover {
+            color: #e0e7ff;
+        }
+
+        /* ========== Search Box ========== */
+        .search-container {
+            margin-top: 24px;
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .search-icon {
+            padding: 12px 16px;
+            font-size: 18px;
+            color: #64748b;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            padding: 12px 8px;
+            color: #1e293b;
+        }
+
+        .search-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .search-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            margin-top: 8px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f1f5f9;
+        }
+
+        .search-result-item .icon {
+            font-size: 18px;
+        }
+
+        .search-result-item .name {
+            flex: 1;
+            color: #1e293b;
+        }
+
+        .search-result-item .category {
+            font-size: 12px;
+            color: #64748b;
+            padding: 2px 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .search-no-results {
+            padding: 24px;
+            text-align: center;
+            color: #94a3b8;
         }
 
         .category-grid {
@@ -166,13 +271,13 @@
             background: white;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
         }
 
         .category-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
 
         .category-header {
@@ -194,29 +299,12 @@
             font-size: 20px;
         }
 
-        .category-icon.img {
-            background: #fef3c7;
-        }
-
-        .category-icon.video {
-            background: #dbeafe;
-        }
-
-        .category-icon.data {
-            background: #d1fae5;
-        }
-
-        .category-icon.security {
-            background: #fee2e2;
-        }
-
-        .category-icon.util {
-            background: #e0e7ff;
-        }
-
-        .category-icon.dl {
-            background: #fce7f3;
-        }
+        .category-icon.img { background: #fef3c7; }
+        .category-icon.video { background: #dbeafe; }
+        .category-icon.data { background: #d1fae5; }
+        .category-icon.security { background: #fee2e2; }
+        .category-icon.util { background: #e0e7ff; }
+        .category-icon.doc { background: #fce7f3; }
 
         .category-title {
             font-size: 1.1rem;
@@ -264,6 +352,11 @@
             color: #4f46e5;
         }
 
+        .tool-link .badge.sign { background: #fed7aa; color: #ea580c; }
+        .tool-link .badge.watermark { background: #d1fae5; color: #059669; }
+        .tool-link .badge.download { background: #fce7f3; color: #db2777; }
+        .tool-link .badge.resource { background: #e0e7ff; color: #4f46e5; }
+
         /* ========== Stats Row ========== */
         .stats-row {
             display: grid;
@@ -279,7 +372,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .stat-icon {
@@ -292,29 +385,12 @@
             font-size: 24px;
         }
 
-        .stat-icon.blue {
-            background: #dbeafe;
-        }
-
-        .stat-icon.green {
-            background: #d1fae5;
-        }
-
-        .stat-icon.purple {
-            background: #e0e7ff;
-        }
-
-        .stat-icon.orange {
-            background: #fed7aa;
-        }
-
-        .stat-icon.pink {
-            background: #fce7f3;
-        }
-
-        .stat-icon.yellow {
-            background: #fef3c7;
-        }
+        .stat-icon.blue { background: #dbeafe; }
+        .stat-icon.green { background: #d1fae5; }
+        .stat-icon.purple { background: #e0e7ff; }
+        .stat-icon.orange { background: #fed7aa; }
+        .stat-icon.pink { background: #fce7f3; }
+        .stat-icon.yellow { background: #fef3c7; }
 
         .stat-info {
             display: flex;
@@ -338,7 +414,7 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 24px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .recent-header {
@@ -448,7 +524,7 @@
             border-radius: 8px;
             padding: 8px;
             max-height: 50%;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .ad-label {
@@ -482,11 +558,9 @@
             text-align: center;
             margin-top: 40px;
             padding: 24px 24px;
-            color: #1f4d8e;
-            background: #d4d4ef;
+            color: #94a3b8;
             font-size: 13px;
-            border-top: 5px solid #f1f5f9;
-            border-bottom: 5px solid #f1f5f9;
+            border-top: 1px solid #f1f5f9;
         }
 
         .footer-note a {
@@ -510,6 +584,16 @@
 
             .hero p {
                 font-size: 0.9rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .search-input {
+                width: 100%;
             }
 
             .category-grid {
@@ -562,7 +646,7 @@
             padding: 16px;
             margin-bottom: 24px;
             text-align: center;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .page-ad amp-ad {
@@ -584,7 +668,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Navigation component container -->
     <div id="nav-container"></div>
@@ -598,6 +681,16 @@
                 <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。极简操作、安全隐私（离线亦可用）。</p>
                 <p>聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，高效解决生活与办公各类小问题。</p>
                 <p>有什么问题、建议、需求或想法可随时联系，邮箱：<a href="mailto:contact@helpoke.com">contact@helpoke.com</a></p>
+                
+                <!-- Search Box -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="搜索工具..." class="search-input">
+                        <button id="searchBtn" class="search-btn">搜索</button>
+                    </div>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
             </section>
 
             <!-- Recent Used -->
@@ -638,7 +731,7 @@
                 <div class="stat-card">
                     <div class="stat-icon orange">🔐</div>
                     <div class="stat-info">
-                        <div class="stat-value">4</div>
+                        <div class="stat-value">7</div>
                         <div class="stat-label">加密工具</div>
                     </div>
                 </div>
@@ -646,13 +739,13 @@
                     <div class="stat-icon pink">📝</div>
                     <div class="stat-info">
                         <div class="stat-value">4</div>
-                        <div class="stat-label">文档工具</div>
+                        <div class="stat-label">文档下载</div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon yellow">🛠️</div>
                     <div class="stat-info">
-                        <div class="stat-value">15</div>
+                        <div class="stat-value">9</div>
                         <div class="stat-label">实用工具</div>
                     </div>
                 </div>
@@ -799,20 +892,28 @@
                     </div>
                 </div>
 
-                <!-- 文档下载工具 -->
+                <!-- 文档与下载工具 -->
                 <div class="category-card">
                     <div class="category-header">
-                        <div class="category-icon dl">📥</div>
-                        <span class="category-title">下载工具</span>
+                        <div class="category-icon doc">📥</div>
+                        <span class="category-title">文档与下载工具</span>
                     </div>
                     <div class="tools-list">
+                        <a href="docu/signature" class="tool-link">
+                            <span class="icon">✍️</span>文档签名
+                            <span class="badge sign">签名</span>
+                        </a>
+                        <a href="docu/watermark" class="tool-link">
+                            <span class="icon">🛡️</span>文档水印
+                            <span class="badge watermark">水印</span>
+                        </a>
                         <a href="download/media" class="tool-link">
                             <span class="icon">⬇️</span>视频图片下载（批量+爬取）
-                            <span class="badge">下载</span>
+                            <span class="badge download">下载</span>
                         </a>
                         <a href="download/resource" class="tool-link">
                             <span class="icon">📦</span>资源文件下载（JS/CSS/字体）
-                            <span class="badge">资源</span>
+                            <span class="badge resource">资源</span>
                         </a>
                     </div>
                 </div>
@@ -855,41 +956,92 @@
 
     <script src="common/js/nav.js"></script>
     <script>
-        // 工具数据
+        // 工具数据（用于搜索）
         var toolsData = [
-            { name: '图片压缩', icon: '📦', url: 'image/compressor' },
-            { name: '图片转换', icon: '🔄', url: 'image/convert' },
-            { name: '图片水印', icon: '💧', url: 'image/watermark' },
-            { name: '图片裁剪', icon: '✂️', url: 'image/cropping' },
-            { name: '视频裁剪', icon: '✂️', url: 'video/cropping' },
-            { name: '视频水印', icon: '🎥', url: 'video/watermark' },
-            { name: '视频转换', icon: '🔄', url: 'video/convert' },
-            { name: 'JSON格式化', icon: '{ }', url: 'json' },
-            { name: 'YAML格式化', icon: '⚙️', url: 'yaml' },
-            { name: 'Pug格式化', icon: '🌿', url: 'pug' },
-            { name: 'XML格式化', icon: '📐', url: 'xml' },
-            { name: 'SQL格式化', icon: '🗃️', url: 'sql' },
-            { name: '密码生成', icon: '🔑', url: 'pwd' },
-            { name: 'UUID生成', icon: '🆔', url: 'uuid' },
-            { name: 'Mermaid图表', icon: '📊', url: 'mermaid' },
-            { name: 'MD5加密', icon: '🔐', url: 'md5' },
-            { name: 'SHA加密', icon: '🔏', url: 'sha' },
-            { name: 'Token工具', icon: '🎫', url: 'token' },
-            { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese' },
-            { name: '二维码', icon: '📱', url: 'qrcode' },
-            { name: '内容对比', icon: '📋', url: 'diff' },
-            { name: 'Cron解析', icon: '⏰', url: 'cron' },
-            { name: '时间戳转换', icon: '🕐', url: 'timestamp' },
-            { name: 'URL编解码', icon: '🔗', url: 'urlcode' },
-            { name: '进制转换', icon: '🧮', url: 'base-convert' },
-            { name: '取色器', icon: '🎨', url: 'color-picker' },
-            { name: '正则表达式', icon: '🔍', url: 'regex' },
-            { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy' },
-            { name: '签名工具', icon: '✍️', url: 'docu/signature' },
-            { name: '文档水印', icon: '🛡️', url: 'docu/watermark' },
-            { name: '视频图片下载', icon: '⬇️', url: 'download/media' },
-            { name: '资源文件下载', icon: '📦', url: 'download/resource' }
+            { name: '图片压缩', icon: '📦', url: 'image/compressor', category: '图片工具' },
+            { name: '图片转换', icon: '🔄', url: 'image/convert', category: '图片工具' },
+            { name: '图片水印', icon: '💧', url: 'image/watermark', category: '图片工具' },
+            { name: '图片裁剪', icon: '✂️', url: 'image/cropping', category: '图片工具' },
+            { name: '视频裁剪', icon: '✂️', url: 'video/cropping', category: '视频工具' },
+            { name: '视频水印', icon: '🎥', url: 'video/watermark', category: '视频工具' },
+            { name: '视频转换', icon: '🔄', url: 'video/convert', category: '视频工具' },
+            { name: 'JSON格式化', icon: '{ }', url: 'json', category: '数据开发工具' },
+            { name: 'YAML格式化', icon: '⚙️', url: 'yaml', category: '数据开发工具' },
+            { name: 'Pug格式化', icon: '🌿', url: 'pug', category: '数据开发工具' },
+            { name: 'XML格式化', icon: '📐', url: 'xml', category: '数据开发工具' },
+            { name: 'SQL格式化', icon: '🗃️', url: 'sql', category: '数据开发工具' },
+            { name: '密码生成', icon: '🔑', url: 'pwd', category: '实用工具' },
+            { name: 'UUID生成', icon: '🆔', url: 'uuid', category: '实用工具' },
+            { name: 'Mermaid图表', icon: '📊', url: 'mermaid', category: '实用工具' },
+            { name: 'MD5加密', icon: '🔐', url: 'md5', category: '加密安全工具' },
+            { name: 'SHA加密', icon: '🔏', url: 'sha', category: '加密安全工具' },
+            { name: 'Token工具', icon: '🎫', url: 'token', category: '加密安全工具' },
+            { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy', category: '加密安全工具' },
+            { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese', category: '实用工具' },
+            { name: '二维码', icon: '📱', url: 'qrcode', category: '实用工具' },
+            { name: '内容对比', icon: '📋', url: 'diff', category: '实用工具' },
+            { name: 'Cron解析', icon: '⏰', url: 'cron', category: '实用工具' },
+            { name: '时间戳转换', icon: '🕐', url: 'timestamp', category: '实用工具' },
+            { name: 'URL编解码', icon: '🔗', url: 'urlcode', category: '实用工具' },
+            { name: '进制转换', icon: '🧮', url: 'base-convert', category: '实用工具' },
+            { name: '取色器', icon: '🎨', url: 'color-picker', category: '实用工具' },
+            { name: '正则表达式', icon: '🔍', url: 'regex', category: '实用工具' },
+            { name: '文档签名', icon: '✍️', url: 'docu/signature', category: '文档与下载工具' },
+            { name: '文档水印', icon: '🛡️', url: 'docu/watermark', category: '文档与下载工具' },
+            { name: '视频图片下载', icon: '⬇️', url: 'download/media', category: '文档与下载工具' },
+            { name: '资源文件下载', icon: '📦', url: 'download/resource', category: '文档与下载工具' }
         ];
+
+        // 搜索功能
+        var searchInput = document.getElementById('searchInput');
+        var searchBtn = document.getElementById('searchBtn');
+        var searchResults = document.getElementById('searchResults');
+
+        function performSearch() {
+            var query = searchInput.value.trim().toLowerCase();
+            
+            if (!query) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            var results = toolsData.filter(function(tool) {
+                return tool.name.toLowerCase().includes(query) || 
+                       tool.category.toLowerCase().includes(query);
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-no-results">未找到匹配的工具</div>';
+                searchResults.classList.add('active');
+                return;
+            }
+
+            searchResults.innerHTML = results.map(function(tool) {
+                return '<div class="search-result-item" onclick="goToTool(\'' + tool.url + '\')">' +
+                       '<span class="icon">' + tool.icon + '</span>' +
+                       '<span class="name">' + tool.name + '</span>' +
+                       '<span class="category">' + tool.category + '</span>' +
+                       '</div>';
+            }).join('');
+
+            searchResults.classList.add('active');
+        }
+
+        function goToTool(url) {
+            window.location.href = url;
+        }
+
+        searchInput.addEventListener('input', performSearch);
+        searchBtn.addEventListener('click', performSearch);
+
+        // 点击页面其他地方关闭搜索结果
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && 
+                !searchResults.contains(e.target) && 
+                !searchBtn.contains(e.target)) {
+                searchResults.classList.remove('active');
+            }
+        });
 
         // 渲染最近使用
         function renderRecentTools() {
@@ -901,13 +1053,13 @@
                 return;
             }
 
-            recentList.innerHTML = recentTools.map(function (tool) {
+            recentList.innerHTML = recentTools.map(function(tool) {
                 return '<a href="' + tool.url + '" class="recent-item">' + tool.icon + ' ' + tool.name + '</a>';
             }).join('');
         }
 
         // 清空历史
-        document.getElementById('recentClear').addEventListener('click', function () {
+        document.getElementById('recentClear').addEventListener('click', function() {
             localStorage.removeItem('recentTools');
             renderRecentTools();
         });
@@ -916,5 +1068,4 @@
         renderRecentTools();
     </script>
 </body>
-
 </html>
