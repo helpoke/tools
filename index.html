@@ -602,31 +602,13 @@
             margin-bottom: 4px;
         }
 
-        .ad-sidebar-right amp-ad {
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* Right Ad Sidebar for homepage */
-        @media (min-width: 1400px) {
-            .ad-sidebar-right {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 1399px) {
-            .ad-sidebar-right {
-                display: none;
-            }
-        }
-
         /* Footer note */
         .footer-note {
             text-align: center;
             margin-top: 40px;
             padding: 24px 24px;
             color: #e4e9ef;
-            background: #4f92c9;
+            background: #648aeb;
             font-size: 13px;
             border-top: 3px solid #f1f5f9;
             border-bottom: 3px solid #f1f5f9;
@@ -644,20 +626,20 @@
         /* ========== Responsive ========== */
         @media (max-width: 768px) {
             .hero {
-                padding: 32px 20px;
+                padding: 30px 15px;
             }
 
             .hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
 
             .hero p {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
 
             .search-box {
-                flex-direction: column;
-                gap: 8px;
+                /* flex-direction: column; */
+                gap: 6px;
                 padding: 8px;
             }
 
@@ -692,6 +674,11 @@
             .stats-row {
                 grid-template-columns: 1fr;
             }
+
+            .container {
+                max-width: 100% !important;
+            }
+
         }
 
         /* ========== Page Layout Container ========== */
@@ -703,51 +690,49 @@
 
         .page-layout main.main {
             flex: 1;
-            margin-left: 15%;  /* 导航栏占15% */
+            margin-left: 15%;  /* 左间距2% + 导航栏15% */
             transition: margin-left 0.3s ease;
         }
 
-        /* 大屏幕时主内容区域为广告栏留出空间 */
-        .page-layout main.main {
-            margin-right: 2%;
+        /* 默认隐藏广告栏 */
+        .page-layout .ad-sidebar-right {
+            display: none;
         }
 
-        .page-layout .ad-sidebar-right {
-            position: fixed;
-            right: 0;
-            top: var(--header-height);
-            width: 15%;  /* 广告位占15% */
-            /* height: calc(100vh - var(--header-height)); */
-            height: 100%;
-            overflow-y: auto;
-            border-left: 1px solid #e2e8f0;
-            background: white;
-            z-index: 100;
+        /* 默认container宽度100% */
+        .container {
+            max-width: 100%;
         }
 
         /* Sidebar collapsed state - 折叠后扩展主内容区域 */
         body.sidebar-collapsed .page-layout main.main {
-            margin-left: 3%;  /* 折叠后只留3%边距 */
-            margin-right: 18%;
+            margin-left: 2%;
         }
 
-
-        /* Hide ad sidebar on small screens */
-        @media (max-width: 1399px) {
+        /* 宽度>1000px时显示广告栏 */
+        @media (min-width: 1001px) {
             .page-layout .ad-sidebar-right {
-                display: none;
+                display: block;
+                position: fixed;
+                right: 1%;
+                top: var(--header-height);
+                width: 12%;  /* 广告栏11% */
+                /* height: calc(100vh - var(--header-height)); */
+                height: 100%;
+                overflow-y: auto;
+                border-left: 2px solid #dbe2ea;
+                background: white;
+                z-index: 100;
             }
+            
             .page-layout main.main {
-                margin-left: var(--sidebar-width);
+                margin-left: 15%;
             }
-            body.sidebar-collapsed .page-layout main.main {
-                margin-left: 0;
+            
+            /* container宽度85% */
+            .container {
+                max-width: 85%;
             }
-        }
-
-        /* ========== Container width adjustment ========== */
-        .container {
-            max-width: 85%;
         }
 
         /* ========== Page Ad ========== */
