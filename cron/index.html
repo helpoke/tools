@@ -1060,6 +1060,10 @@
                 const step = parseInt(minute.expr.split('/')[1]);
                 return `每隔 <strong>${step}</strong> 分钟执行一次`;
             }
+            if (isMinuteEvery && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const step = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${step}</strong> 小时执行一次`;
+            }
             if (minute.values.length === 1 && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 const step = parseInt(hour.expr.split('/')[1]);
                 return `每隔 <strong>${step}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟执行一次`;
@@ -1107,9 +1111,20 @@
             const [minuteVals, hourVals, dayVals, monthVals, weekdayVals] = fields.map(f => f.values);
             const results = [];
             const now = new Date();
-            let current = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 1, 0, 0);
+            let current = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds() + 1, 0);
             let maxIterations = 366 * 24 * 60 * 2;
             let iterations = 0;
+
+            const minuteIsWildcard = minuteVals.length === 60;
+            const hourIsWildcard = hourVals.length === 24;
+
+            let minuteStep = 1;
+            if (fields[0].expr.includes('/')) {
+                const parts = fields[0].expr.split('/');
+                if (parts.length === 2) {
+                    minuteStep = parseInt(parts[1]) || 1;
+                }
+            }
 
             while (results.length < count && iterations < maxIterations) {
                 iterations++;
@@ -1133,11 +1148,18 @@
                 else { dayMatch = dayVals.includes(day) || weekdayVals.includes(weekday); }
 
                 if (!dayMatch) { current.setDate(current.getDate() + 1); current.setHours(0); current.setMinutes(0); continue; }
-                if (!hourVals.includes(hour)) { current.setHours(current.getHours() + 1); current.setMinutes(0); continue; }
+                if (!hourVals.includes(hour)) { current.setHours(current.getHours() + 1); continue; }
                 if (!minuteVals.includes(minute)) { current.setMinutes(current.getMinutes() + 1); continue; }
 
-                results.push(new Date(current));
-                current.setMinutes(current.getMinutes() + 1);
+                const resultDate = new Date(current);
+                if (resultDate - now >= 60000) {
+                    results.push(resultDate);
+                }
+                if (minuteIsWildcard && !hourIsWildcard) {
+                    current.setHours(current.getHours() + 1);
+                } else {
+                    current.setMinutes(current.getMinutes() + minuteStep);
+                }
             }
             return results;
         }
@@ -1145,12 +1167,14 @@
         function formatDistance(date) {
             const now = new Date();
             const diff = date - now;
-            const minutes = Math.floor(diff / 60000);
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
-            if (days > 0) return `${days} 天后`;
-            if (hours > 0) return `${hours} 小时 ${minutes % 60} 分钟后`;
-            return `${minutes} 分钟后`;
+            if (days > 0) return `${days} 天 ${hours % 24} 小时 ${minutes % 60} 分钟 ${seconds % 60} 秒后`;
+            if (hours > 0) return `${hours} 小时 ${minutes % 60} 分钟 ${seconds % 60} 秒后`;
+            if (minutes > 0) return `${minutes} 分钟 ${seconds % 60} 秒后`;
+            return `${seconds} 秒后`;
         }
 
         function formatDate(date) {
