@@ -1135,7 +1135,7 @@
         // 渲染最近使用
         function renderRecentTools() {
             var recentList = document.getElementById('recentList');
-            var recentTools = JSON.parse(localStorage.getItem('recentTools') || '[]');
+            var recentTools = JSON.parse(localStorage.getItem('helpoke_recent_tools') || '[]');
 
             if (recentTools.length === 0) {
                 recentList.innerHTML = '<div class="recent-empty">暂无记录</div>';
@@ -1149,7 +1149,7 @@
 
         // 清空历史
         document.getElementById('recentClear').addEventListener('click', function () {
-            localStorage.removeItem('recentTools');
+            localStorage.removeItem('helpoke_recent_tools');
             renderRecentTools();
         });
 
