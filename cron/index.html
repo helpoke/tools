@@ -1209,6 +1209,27 @@
                 const minuteStep = parseInt(minute.expr.split('/')[1]);
                 return `每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
             }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                return `每月的 ${formatDayList(day.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                return `每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                return `每月的 ${formatDayList(day.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 且每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
             const descParts = [];
             for (const field of fields) { if (field.expr !== '*' && field.expr !== '?') descParts.push(`${field.name}: ${field.expr}`); }
             if (descParts.length > 0) return `自定义调度: ${descParts.join(', ')}`;
