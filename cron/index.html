@@ -1117,7 +1117,7 @@
             if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 const minuteStep = parseInt(minute.expr.split('/')[1]);
                 const hourStep = parseInt(hour.expr.split('/')[1]);
-                return `每隔 <strong>${hourStep}.${minuteStep}</strong> 小时执行一次`;
+                return `每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
             }
             if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 const minuteStep = parseInt(minute.expr.split('/')[1]);
@@ -1130,17 +1130,84 @@
             if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && !isDayEvery && isMonthEvery && isWeekdayEvery) {
                 const minuteStep = parseInt(minute.expr.split('/')[1]);
                 const hourStep = parseInt(hour.expr.split('/')[1]);
-                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}.${minuteStep}</strong> 小时执行一次`;
+                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
             }
             if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && !isMonthEvery && isWeekdayEvery) {
                 const minuteStep = parseInt(minute.expr.split('/')[1]);
                 const hourStep = parseInt(hour.expr.split('/')[1]);
-                return `每年的 ${formatMonthList(month.values)} 每隔 <strong>${hourStep}.${minuteStep}</strong> 小时执行一次`;
+                return `每年的 ${formatMonthList(month.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
             }
             if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && !isDayEvery && !isMonthEvery && isWeekdayEvery) {
                 const minuteStep = parseInt(minute.expr.split('/')[1]);
                 const hourStep = parseInt(hour.expr.split('/')[1]);
-                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}.${minuteStep}</strong> 小时执行一次`;
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.expr.startsWith('*/') && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每隔 <strong>${minuteStep}</strong> 分钟的每 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟的每 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (hasSecond && second.expr.startsWith('*/') && isMinuteEvery && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的每秒的第 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每周的 ${formatWeekdayList(weekday.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && !isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 且每周的 ${formatWeekdayList(weekday.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (hasSecond && second.expr.startsWith('*/') && isMinuteEvery && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                return `每隔 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && isHourEvery && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每周的 ${formatWeekdayList(weekday.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (hour.expr.startsWith('*/') && !isMinuteEvery && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values.join('、')}</strong> 分钟执行一次`;
+            }
+            if (hour.expr.startsWith('*/') && !isMinuteEvery && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values.join('、')}</strong> 分钟执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.values.length === 1 && hour.expr.startsWith('*/') && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟的第 <strong>${second.values[0]}</strong> 秒执行一次`;
+            }
+            if (hasSecond && second.expr.startsWith('*/') && minute.values.length === 1 && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟的每 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && !isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
             }
             const descParts = [];
             for (const field of fields) { if (field.expr !== '*' && field.expr !== '?') descParts.push(`${field.name}: ${field.expr}`); }
@@ -1280,17 +1347,17 @@
                 if (resultDate - now >= 1000) {
                     results.push(resultDate);
                 }
-                if (hourField.expr.startsWith('*/')) {
-                    const step = parseInt(hourField.expr.split('/')[1]) || 1;
-                    current.setHours(current.getHours() + step);
-                } else if (minuteIsWildcard && !hourIsWildcard) {
-                    current.setHours(current.getHours() + 1);
-                } else if (!minuteIsWildcard && minuteField.expr.startsWith('*/')) {
+                if (!minuteIsWildcard && minuteField.expr.startsWith('*/')) {
                     current.setMinutes(current.getMinutes() + minuteStep);
                     if (current.getMinutes() >= 60) {
                         current.setHours(current.getHours() + 1);
                         current.setMinutes(current.getMinutes() - 60);
                     }
+                } else if (hourField.expr.startsWith('*/')) {
+                    const step = parseInt(hourField.expr.split('/')[1]) || 1;
+                    current.setHours(current.getHours() + step);
+                } else if (minuteIsWildcard && !hourIsWildcard) {
+                    current.setHours(current.getHours() + 1);
                 } else if (secondIsWildcard && !minuteIsWildcard) {
                     current.setMinutes(current.getMinutes() + 1);
                 } else if (secondIsWildcard) {
