@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="页面未找到 - Helpoke助点站">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="common/img/helpoke.png" type="image/x-icon">
+    <title>404 - 页面未找到 | Helpoke 助点站</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-dark: #4338ca;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 0 rgba(79, 70, 229, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .error-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .error-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            margin-left: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .home-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .search-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 32px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .illustration::before {
+            content: '404';
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+
+        .illustration::after {
+            content: '🚀';
+            font-size: 64px;
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            animation: rocket 2s ease-in-out infinite;
+        }
+
+        @keyframes rocket {
+            0%, 100% {
+                transform: translateY(0) rotate(-10deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(-10deg);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .error-code {
+                font-size: 80px;
+            }
+
+            .error-title {
+                font-size: 22px;
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto 12px;
+            }
+
+            .btn-secondary {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="illustration"></div>
+        <div class="error-code">404</div>
+        <h1 class="error-title">页面未找到</h1>
+        <p class="error-desc">抱歉，您访问的页面不存在或已被移动。请检查网址是否正确，或返回首页继续使用我们的工具。</p>
+        <div>
+            <a href="/" class="btn">
+                <span class="home-icon">🏠</span>
+                返回首页
+            </a>
+            <!-- <a href="/" class="btn btn-secondary">
+                <span class="search-icon">🔍</span>
+                浏览工具
+            </a> -->
+        </div>
+    </div>
+</body>
+
+</html>

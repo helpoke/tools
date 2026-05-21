@@ -16,7 +16,7 @@
     </style>
     <style>
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             padding: 40px 0;
         }
 
@@ -540,7 +540,7 @@
                     <div class="input-group">
                         <label for="dt-picker">选择日期时间</label>
                         <div class="datetime-picker-row">
-                            <input type="datetime-local" id="dt-picker">
+                            <input type="datetime-local" id="dt-picker" step="1">
                             <button class="btn" onclick="setDtNow()">当前时间</button>
                             <button class="btn btn-outline" onclick="convertDate2Ts()">转换</button>
                         </div>
@@ -585,8 +585,7 @@
             currentUnit = unit;
             btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
             btn.classList.add('active');
-            var input = document.getElementById('ts-input');
-            if (input.value) convertTs2Date();
+            useCurrentTs();
         }
 
         // ===== Live timestamp =====

@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cron表达式解析工具 - Helpoke 助点站</title>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script src="./lib/croner.umd.js"></script>
     <style>
         @import '../common/css/style.css';
         @import '../common/css/utils.css';
     </style>
     <style>
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             padding: 40px 0;
         }
 
@@ -979,9 +980,9 @@
         }
 
         // ===== Cron 解析器 =====
-        const FIELD_NAMES = ['分', '时', '日', '月', '星期'];
-        const FIELD_RANGES = [[0, 59], [0, 23], [1, 31], [1, 12], [0, 6]];
-        const FIELD_CLASSES = ['minute', 'hour', 'day', 'month', 'weekday'];
+        const FIELD_NAMES = ['秒', '分', '时', '日', '月', '星期'];
+        const FIELD_RANGES = [[0, 59], [0, 59], [0, 23], [1, 31], [1, 12], [0, 6]];
+        const FIELD_CLASSES = ['second', 'minute', 'hour', 'day', 'month', 'weekday'];
         const WEEKDAY_NAMES = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
         const MONTH_NAMES = ['', '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
 
@@ -1036,38 +1037,72 @@
         function parseCronExpression(expr) {
             expr = expr.trim();
             const parts = expr.split(/\s+/);
-            if (parts.length !== 5) throw new Error(`Cron 表达式必须是 5 个字段，当前有 ${parts.length} 个字段。格式：分 时 日 月 星期`);
-            const fields = [];
+            if (parts.length !== 5 && parts.length !== 6) {
+                throw new Error(`Cron 表达式必须是 5 或 6 个字段，当前有 ${parts.length} 个字段。格式：${parts.length === 6 ? '秒 分 时 日 月 星期' : '分 时 日 月 星期'}`);
+            }
+            let fields = [];
+            let fieldIndex = 0;
+            if (parts.length === 6) {
+                try {
+                    const values = parseField(parts[0], 0, 59);
+                    fields.push({ name: '秒', expr: parts[0], values, min: 0, max: 59, cls: 'second' });
+                } catch (e) { throw new Error(`第 1 个字段（秒）解析错误: ${e.message}`); }
+                fieldIndex = 1;
+            }
             for (let i = 0; i < 5; i++) {
                 try {
-                    const values = parseField(parts[i], FIELD_RANGES[i][0], FIELD_RANGES[i][1]);
-                    fields.push({ name: FIELD_NAMES[i], expr: parts[i], values, min: FIELD_RANGES[i][0], max: FIELD_RANGES[i][1], cls: FIELD_CLASSES[i] });
-                } catch (e) { throw new Error(`第 ${i + 1} 个字段（${FIELD_NAMES[i]}）解析错误: ${e.message}`); }
+                    const values = parseField(parts[fieldIndex], FIELD_RANGES[i + (parts.length === 5 ? 1 : 0)][0], FIELD_RANGES[i + (parts.length === 5 ? 1 : 0)][1]);
+                    fields.push({ name: FIELD_NAMES[i + (parts.length === 5 ? 1 : 0)], expr: parts[fieldIndex], values, min: FIELD_RANGES[i + (parts.length === 5 ? 1 : 0)][0], max: FIELD_RANGES[i + (parts.length === 5 ? 1 : 0)][1], cls: FIELD_CLASSES[i + (parts.length === 5 ? 1 : 0)] });
+                } catch (e) { throw new Error(`第 ${i + 1} 个字段（${FIELD_NAMES[i + (parts.length === 5 ? 1 : 0)]}）解析错误: ${e.message}`); }
+                fieldIndex++;
             }
             return fields;
         }
 
         function generateDescription(fields) {
-            const [minute, hour, day, month, weekday] = fields;
+            const hasSecond = fields.length === 6;
+            const second = hasSecond ? fields[0] : null;
+            const minute = hasSecond ? fields[1] : fields[0];
+            const hour = hasSecond ? fields[2] : fields[1];
+            const day = hasSecond ? fields[3] : fields[2];
+            const month = hasSecond ? fields[4] : fields[3];
+            const weekday = hasSecond ? fields[5] : fields[4];
+            const isSecondEvery = !second || second.expr === '*';
             const isMinuteEvery = minute.expr === '*';
             const isHourEvery = hour.expr === '*';
             const isDayEvery = day.expr === '*' || day.expr === '?';
             const isMonthEvery = month.expr === '*';
             const isWeekdayEvery = weekday.expr === '*' || weekday.expr === '?';
 
-            if (isMinuteEvery && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) return '每分钟执行一次';
-            if (minute.expr.startsWith('*/') && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+            if (hasSecond && isSecondEvery && isMinuteEvery && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) return '每秒执行一次';
+            if (!hasSecond && isMinuteEvery && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) return '每分钟执行一次';
+            if (hasSecond && !isSecondEvery && isMinuteEvery && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) return '每分钟的第 ' + second.values[0] + ' 秒执行一次';
+            if (isSecondEvery && minute.expr.startsWith('*/') && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 const step = parseInt(minute.expr.split('/')[1]);
                 return `每隔 <strong>${step}</strong> 分钟执行一次`;
             }
-            if (minute.values.length === 1 && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+            if (isSecondEvery && isMinuteEvery && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 const step = parseInt(hour.expr.split('/')[1]);
-                return `每隔 <strong>${step}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟执行一次`;
+                return `每隔 <strong>${step}</strong> 小时执行一次`;
             }
-            if (minute.values.length === 1 && hour.values.length === 1 && isDayEvery && isMonthEvery && isWeekdayEvery) {
+            if (hasSecond && !isSecondEvery && minute.values.length === 1 && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const step = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${step}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟的第 <strong>${second.values[0]}</strong> 秒执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.values.length === 1 && hour.values.length === 1 && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                return `每天 <strong>${formatTime(hour.values[0], minute.values[0])}</strong> 的第 <strong>${second.values[0]}</strong> 秒执行一次`;
+            }
+            if (isSecondEvery && minute.values.length === 1 && hour.values.length === 1 && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 return `每天 <strong>${formatTime(hour.values[0], minute.values[0])}</strong> 执行一次`;
             }
-            if (minute.values.length === 1 && !isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+            if (hasSecond && !isSecondEvery && minute.values.length === 1 && !isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                return `每天的 ${formatHourList(hour.values)} 的第 <strong>${minute.values[0]}</strong> 分钟的第 <strong>${second.values[0]}</strong> 秒各执行一次`;
+            }
+            if (hour.expr.startsWith('*/') && !isMinuteEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values.join('、')}</strong> 分钟执行一次`;
+            }
+            if (isSecondEvery && minute.values.length === 1 && !isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
                 return `每天的 ${formatHourList(hour.values)} 的第 <strong>${minute.values[0]}</strong> 分钟各执行一次`;
             }
             if (minute.values.length === 1 && (hour.values.length === 1 || hour.expr === '*') && isDayEvery && isMonthEvery && !isWeekdayEvery) {
@@ -1082,14 +1117,189 @@
                 const timeStr = hour.values.length === 1 ? formatTime(hour.values[0], minute.values[0]) : `每小时的第 ${minute.values[0]} 分钟`;
                 return `每年的 ${formatMonthList(month.values)} ${timeStr} 执行一次`;
             }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `在 ${formatHourList(hour.values)} 的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && !isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.expr.startsWith('*/') && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每隔 <strong>${minuteStep}</strong> 分钟的每 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟的每 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (hasSecond && second.expr.startsWith('*/') && isMinuteEvery && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的每秒的第 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每周的 ${formatWeekdayList(weekday.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && hour.expr.startsWith('*/') && !isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 且每周的 ${formatWeekdayList(weekday.values)} 每隔 <strong>${hourStep}</strong> 小时的每 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (hasSecond && second.expr.startsWith('*/') && isMinuteEvery && isHourEvery && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                return `每隔 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && isHourEvery && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每周的 ${formatWeekdayList(weekday.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (hour.expr.startsWith('*/') && !isMinuteEvery && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values.join('、')}</strong> 分钟执行一次`;
+            }
+            if (hour.expr.startsWith('*/') && !isMinuteEvery && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values.join('、')}</strong> 分钟执行一次`;
+            }
+            if (hasSecond && !isSecondEvery && minute.values.length === 1 && hour.expr.startsWith('*/') && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟的第 <strong>${second.values[0]}</strong> 秒执行一次`;
+            }
+            if (hasSecond && second.expr.startsWith('*/') && minute.values.length === 1 && hour.expr.startsWith('*/') && isDayEvery && isMonthEvery && isWeekdayEvery) {
+                const secondStep = parseInt(second.expr.split('/')[1]);
+                const hourStep = parseInt(hour.expr.split('/')[1]);
+                return `每隔 <strong>${hourStep}</strong> 小时的第 <strong>${minute.values[0]}</strong> 分钟的每 <strong>${secondStep}</strong> 秒执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && !isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (minute.expr.startsWith('*/') && !isHourEvery && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                const minuteStep = parseInt(minute.expr.split('/')[1]);
+                return `每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && isMonthEvery && isWeekdayEvery) {
+                return `每月的 ${formatDayList(day.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                return `每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && !isMonthEvery && isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && isMonthEvery && !isWeekdayEvery) {
+                return `每月的 ${formatDayList(day.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            if (!isMinuteEvery && !isHourEvery && !isDayEvery && !isMonthEvery && !isWeekdayEvery) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 且每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
+            }
+            function getFriendlyDescription(fields) {
+            const minute = fields[0], hour = fields[1], day = fields[2], month = fields[3], weekday = fields[4];
+            const minuteExpr = minute.expr, hourExpr = hour.expr, dayExpr = day.expr, monthExpr = month.expr, weekdayExpr = weekday.expr;
+            const isMinuteWildcard = minuteExpr === '*' || minuteExpr === '?';
+            const isHourWildcard = hourExpr === '*' || hourExpr === '?';
+            const isDayWildcard = dayExpr === '*' || dayExpr === '?';
+            const isMonthWildcard = monthExpr === '*';
+            const isWeekdayWildcard = weekdayExpr === '*' || weekdayExpr === '?';
+            const minuteHasRange = minuteExpr.includes('-') && !minuteExpr.startsWith('*/');
+            const hourHasRange = hourExpr.includes('-') && !hourExpr.startsWith('*/');
+            
+            if (!isMonthWildcard && isWeekdayWildcard && isDayWildcard && hourExpr.startsWith('*/') && isMinuteWildcard) {
+                const hourStep = parseInt(hourExpr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)}，每隔 <strong>${hourStep}</strong> 小时执行一次`;
+            }
+            if (!isMonthWildcard && !isWeekdayWildcard && isDayWildcard && isHourWildcard && isMinuteWildcard) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 执行一次`;
+            }
+            if (isMinuteWildcard && isHourWildcard && !isDayWildcard && isMonthWildcard && !isWeekdayWildcard) {
+                return `每月的 ${formatDayList(day.values)} 或每周的 ${formatWeekdayList(weekday.values)} 每分钟执行一次`;
+            }
+            if (!isMinuteWildcard && isHourWildcard && !isDayWildcard && isMonthWildcard && isWeekdayWildcard && minuteExpr.startsWith('*/')) {
+                const minuteStep = parseInt(minuteExpr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)}，每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (isMinuteWildcard && isHourWildcard && !isDayWildcard && !isMonthWildcard && isWeekdayWildcard) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 每分钟执行一次`;
+            }
+            if (isMinuteWildcard && !isHourWildcard && !isDayWildcard && isMonthWildcard && isWeekdayWildcard && hourHasRange) {
+                return `每月的 ${formatDayList(day.values)} 的 <strong>${hourExpr}</strong> 点每分钟执行一次`;
+            }
+            if (isMinuteWildcard && !isHourWildcard && !isDayWildcard && isMonthWildcard && isWeekdayWildcard && !hourHasRange && hourExpr.startsWith('*/')) {
+                const hourStep = parseInt(hourExpr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)}，每隔 <strong>${hourStep}</strong> 小时每分钟执行一次`;
+            }
+            if (!isMinuteWildcard && !isHourWildcard && minuteHasRange && hourHasRange) {
+                return `每天 <strong>${hourExpr}</strong> 点，每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
+            }
+            if (!isMinuteWildcard && !isHourWildcard && minuteHasRange) {
+                return `每天每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
+            }
+            if (!isMinuteWildcard && isHourWildcard && minuteHasRange) {
+                return `每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
+            }
+            if (!isMinuteWildcard && !isHourWildcard && hourHasRange) {
+                return `每天 <strong>${hourExpr}</strong> 点执行一次`;
+            }
+            return null;
+        }
             const descParts = [];
             for (const field of fields) { if (field.expr !== '*' && field.expr !== '?') descParts.push(`${field.name}: ${field.expr}`); }
-            if (descParts.length > 0) return `自定义调度: ${descParts.join(', ')}`;
+            if (descParts.length > 0) {
+                const friendly = getFriendlyDescription(fields);
+                if (friendly) return friendly;
+                return `自定义调度: ${descParts.join(', ')}`;
+            }
             return '每分钟执行一次';
         }
 
         function formatTime(h, m) { return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'); }
         function formatHourList(values) {
+            if (values.length >= 3) {
+                const step = values[1] - values[0];
+                let isStepPattern = step > 0;
+                for (let i = 2; i < values.length && isStepPattern; i++) {
+                    if (values[i] - values[i-1] !== step) isStepPattern = false;
+                }
+                if (isStepPattern) {
+                    return `每隔 <strong>${step}</strong> 小时`;
+                }
+            }
             if (values.length <= 4) return values.map(v => `<strong>${v}</strong> 点`).join('、');
             return `<strong>${values[0]}-${values[values.length - 1]}</strong> 点`;
         }
@@ -1103,13 +1313,176 @@
             return `<strong>${values[0]}-${values[values.length - 1]}</strong> 月`;
         }
 
-        function getNextOccurrences(fields, count = 10) {
-            const [minuteVals, hourVals, dayVals, monthVals, weekdayVals] = fields.map(f => f.values);
+        function getNextOccurrences(fields, count = 10, baseTime = null) {
+            const hasSecond = fields.length === 6;
+            const secondVals = hasSecond ? fields[0].values : [0];
+            const minuteVals = hasSecond ? fields[1].values : fields[0].values;
+            const hourVals = hasSecond ? fields[2].values : fields[1].values;
+            const dayVals = hasSecond ? fields[3].values : fields[2].values;
+            const monthVals = hasSecond ? fields[4].values : fields[3].values;
+            const weekdayVals = hasSecond ? fields[5].values : fields[4].values;
+            const secondField = hasSecond ? fields[0] : null;
+            const minuteField = hasSecond ? fields[1] : fields[0];
+            const hourField = hasSecond ? fields[2] : fields[1];
+            const dayField = hasSecond ? fields[3] : fields[2];
+            const weekdayField = hasSecond ? fields[5] : fields[4];
+
             const results = [];
-            const now = new Date();
-            let current = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 1, 0, 0);
-            let maxIterations = 366 * 24 * 60 * 2;
+            const now = baseTime || new Date();
+
+            const secondIsWildcard = !hasSecond || secondVals.length === 60;
+            const minuteIsWildcard = minuteVals.length === 60;
+            const hourIsWildcard = hourVals.length === 24;
+
+            let startMinute = now.getMinutes();
+            let startSecond = now.getSeconds();
+            let startHour = now.getHours();
+            let needCheckPast = false;
+            let dayOffset = 0;
+            let minuteOverflowHandled = false;
+
+            if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
+                const targetMinute = minuteVals.find(m => m >= startMinute);
+                if (targetMinute !== undefined) {
+                    startMinute = targetMinute;
+                    startSecond = 0;
+                } else {
+                    startMinute = minuteVals[0];
+                    startHour = startHour + 1;
+                    startSecond = 0;
+                    if (startHour > 23) {
+                        startHour = startHour % 24;
+                        dayOffset = 1;
+                    }
+                    minuteOverflowHandled = true;
+                }
+                needCheckPast = true;
+            } else if (minuteField.expr.startsWith('*/')) {
+                const step = parseInt(minuteField.expr.split('/')[1]) || 1;
+                const remainder = startMinute % step;
+                if (remainder !== 0) {
+                    startMinute = startMinute + (step - remainder);
+                }
+                if (startMinute >= 60) {
+                    startMinute = startMinute - 60;
+                    startHour = startHour + 1;
+                    if (startHour > 23) {
+                        startHour = startHour % 24;
+                        dayOffset = 1;
+                    }
+                }
+                needCheckPast = true;
+            }
+            
+            if (!hourIsWildcard && !hourField.expr.startsWith('*/')) {
+                let targetHour = hourVals.find(h => h >= startHour);
+                if (targetHour === undefined) {
+                    targetHour = hourVals[0];
+                    const hourChanged = startHour !== targetHour;
+                    startHour = targetHour;
+                    if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
+                        startMinute = minuteVals[0] || 0;
+                    } else if (minuteField.expr.startsWith('*/')) {
+                        startMinute = minuteVals[0] || 0;
+                    }
+                    dayOffset = 1;
+                    if (hourChanged) {
+                        startSecond = 0;
+                    }
+                } else {
+                    if (targetHour !== startHour) {
+                        startHour = targetHour;
+                        if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
+                            startMinute = minuteVals[0] || 0;
+                        } else if (minuteField.expr.startsWith('*/')) {
+                            startMinute = minuteVals[0] || 0;
+                        }
+                    }
+                }
+                needCheckPast = true;
+            } else if (hourField.expr.startsWith('*/') && !minuteOverflowHandled) {
+                const step = parseInt(hourField.expr.split('/')[1]) || 1;
+                startHour = startHour + step;
+                needCheckPast = true;
+            } else if (hourIsWildcard && minuteIsWildcard) {
+                if (secondIsWildcard) {
+                    startSecond = startSecond + 1;
+                    if (startSecond >= 60) {
+                        startSecond = 0;
+                        startMinute = startMinute + 1;
+                        if (startMinute >= 60) {
+                            startMinute = 0;
+                            startHour = startHour + 1;
+                        }
+                    }
+                }
+            }
+            
+            const dayIsWildcard = dayField.expr === '*' || dayField.expr === '?';
+            if (!dayIsWildcard) {
+                const today = now.getDate();
+                const targetDay = dayVals.find(d => d >= today);
+                if (targetDay !== undefined) {
+                    if (targetDay !== today) {
+                        dayOffset = targetDay - today;
+                        startHour = hourVals[0] || 0;
+                        startMinute = minuteVals[0] || 0;
+                        startSecond = 0;
+                    }
+                } else {
+                    const nextMonthDay = dayVals[0];
+                    const daysInCurrentMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                    const remainingDays = daysInCurrentMonth - today;
+                    dayOffset = remainingDays + nextMonthDay;
+                    startHour = hourVals[0] || 0;
+                    startMinute = minuteVals[0] || 0;
+                    startSecond = 0;
+                }
+            }
+            
+            if (secondField && secondField.expr.startsWith('*/')) {
+                const step = parseInt(secondField.expr.split('/')[1]) || 1;
+                const remainder = startSecond % step;
+                if (remainder !== 0) {
+                    startSecond = startSecond + (step - remainder);
+                }
+            }
+            
+            if (needCheckPast) {
+                const tempDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), startHour, startMinute, startSecond);
+                if (tempDate <= now) {
+                    if (hourField.expr.startsWith('*/')) {
+                        const step = parseInt(hourField.expr.split('/')[1]) || 1;
+                        startHour = startHour + step;
+                    } else if (minuteField.expr.startsWith('*/')) {
+                        const step = parseInt(minuteField.expr.split('/')[1]) || 1;
+                        startMinute = startMinute + step;
+                        if (startMinute >= 60) {
+                            startMinute = startMinute - 60;
+                            startHour = startHour + 1;
+                        }
+                    }
+                }
+            }
+
+            let current = new Date(now.getFullYear(), now.getMonth(), now.getDate() + dayOffset, startHour, startMinute, startSecond, 0);
+            let maxIterations = 366 * 24 * 60 * 60 * 2;
             let iterations = 0;
+
+            let minuteStep = 1;
+            let secondStep = 1;
+            if (minuteField.expr.includes('/')) {
+                const parts = minuteField.expr.split('/');
+                if (parts.length === 2) {
+                    minuteStep = parseInt(parts[1]) || 1;
+                }
+            }
+            if (secondField && secondField.expr.includes('/')) {
+                const parts = secondField.expr.split('/');
+                if (parts.length === 2) {
+                    secondStep = parseInt(parts[1]) || 1;
+                }
+            }
 
             while (results.length < count && iterations < maxIterations) {
                 iterations++;
@@ -1117,40 +1490,136 @@
                 const day = current.getDate();
                 const hour = current.getHours();
                 const minute = current.getMinutes();
+                const second = current.getSeconds();
                 const weekday = current.getDay();
 
                 if (monthVals[0] < 100 && !monthVals.includes(month)) {
-                    current.setMonth(12); current.setDate(1); current.setHours(0); current.setMinutes(0); continue;
+                    current.setMonth(current.getMonth() + 1); current.setDate(1); current.setHours(0); current.setMinutes(0); current.setSeconds(0); continue;
                 }
 
                 let dayMatch = false;
                 const dayIsSpecial = dayVals.some(v => v >= 100);
                 const weekdayIsSpecial = weekdayVals.some(v => v >= 100);
                 if (dayIsSpecial || weekdayIsSpecial) { dayMatch = true; }
-                else if ((fields[2].expr === '*' || fields[2].expr === '?') && (fields[4].expr === '*' || fields[4].expr === '?')) { dayMatch = true; }
-                else if (fields[2].expr !== '*' && fields[2].expr !== '?' && (fields[4].expr === '*' || fields[4].expr === '?')) { dayMatch = dayVals.includes(day); }
-                else if ((fields[2].expr === '*' || fields[2].expr === '?') && fields[4].expr !== '*' && fields[4].expr !== '?') { dayMatch = weekdayVals.includes(weekday); }
+                else if ((dayField.expr === '*' || dayField.expr === '?') && (weekdayField.expr === '*' || weekdayField.expr === '?')) { dayMatch = true; }
+                else if (dayField.expr !== '*' && dayField.expr !== '?' && (weekdayField.expr === '*' || weekdayField.expr === '?')) { dayMatch = dayVals.includes(day); }
+                else if ((dayField.expr === '*' || dayField.expr === '?') && weekdayField.expr !== '*' && weekdayField.expr !== '?') { dayMatch = weekdayVals.includes(weekday); }
                 else { dayMatch = dayVals.includes(day) || weekdayVals.includes(weekday); }
 
-                if (!dayMatch) { current.setDate(current.getDate() + 1); current.setHours(0); current.setMinutes(0); continue; }
-                if (!hourVals.includes(hour)) { current.setHours(current.getHours() + 1); current.setMinutes(0); continue; }
-                if (!minuteVals.includes(minute)) { current.setMinutes(current.getMinutes() + 1); continue; }
+                if (!dayMatch) { current.setDate(current.getDate() + 1); continue; }
+                if (!hourVals.includes(hour)) {
+                    if (hourField.expr.startsWith('*/')) {
+                        const step = parseInt(hourField.expr.split('/')[1]) || 1;
+                        const remainder = hour % step;
+                        const addHour = remainder === 0 ? step : step - remainder;
+                        current.setHours(current.getHours() + addHour);
+                    } else {
+                        current.setHours(current.getHours() + 1);
+                    }
+                    continue;
+                }
+                if (!minuteField.expr.startsWith('*/') && !minuteVals.includes(minute)) {
+                    const nextMinute = minuteVals.find(m => m >= minute);
+                    if (nextMinute !== undefined) {
+                        current.setMinutes(nextMinute);
+                    } else {
+                        current.setMinutes(minuteVals[0]);
+                        if (hourField.expr.startsWith('*/')) {
+                            const hourStep = parseInt(hourField.expr.split('/')[1]) || 1;
+                            let nextHour = current.getHours() + 1;
+                            if (nextHour > 23) {
+                                nextHour = 0;
+                                current.setDate(current.getDate() + 1);
+                            }
+                            const remainder = nextHour % hourStep;
+                            if (remainder !== 0) {
+                                nextHour = nextHour + (hourStep - remainder);
+                            }
+                            if (nextHour > 23) {
+                                nextHour = nextHour % 24;
+                                current.setDate(current.getDate() + 1);
+                            }
+                            current.setHours(nextHour);
+                        } else {
+                            current.setHours(current.getHours() + 1);
+                        }
+                    }
+                    current.setSeconds(0);
+                    continue;
+                }
+                if (hasSecond && !secondVals.includes(second)) {
+                    current.setSeconds(current.getSeconds() + 1);
+                    continue;
+                }
 
-                results.push(new Date(current));
-                current.setMinutes(current.getMinutes() + 1);
+                const resultDate = new Date(current);
+                if (resultDate - now >= 1000) {
+                    results.push(resultDate);
+                }
+                if (!minuteIsWildcard && minuteField.expr.startsWith('*/')) {
+                    current.setMinutes(current.getMinutes() + minuteStep);
+                    if (current.getMinutes() >= 60) {
+                        current.setHours(current.getHours() + 1);
+                        current.setMinutes(current.getMinutes() - 60);
+                    }
+                } else if (minuteIsWildcard && !hourIsWildcard) {
+                    current.setMinutes(current.getMinutes() + 1);
+                    if (current.getMinutes() >= 60) {
+                        current.setHours(current.getHours() + 1);
+                        current.setMinutes(0);
+                    }
+                } else if (!minuteIsWildcard && hourField.expr.startsWith('*/')) {
+                    const hourStep = parseInt(hourField.expr.split('/')[1]) || 1;
+                    const currentMinute = current.getMinutes();
+                    const currentHour = current.getHours();
+                    const nextMinute = minuteVals.find(m => m > currentMinute);
+                    if (nextMinute !== undefined) {
+                        current.setMinutes(nextMinute);
+                    } else {
+                        let nextHour = currentHour + hourStep;
+                        if (nextHour > 23) {
+                            nextHour = nextHour % 24;
+                            current.setDate(current.getDate() + 1);
+                        }
+                        const matchHour = (nextHour % (hourStep * 2)) === 0 || (hourStep === 1);
+                        if (!matchHour) {
+                            nextHour = nextHour + (hourStep - nextHour % hourStep) % hourStep;
+                        }
+                        current.setHours(nextHour);
+                        current.setMinutes(minuteVals[0]);
+                        current.setSeconds(0);
+                    }
+                } else if (hourField.expr.startsWith('*/')) {
+                    const step = parseInt(hourField.expr.split('/')[1]) || 1;
+                    current.setHours(current.getHours() + step);
+                } else if (secondIsWildcard && !minuteIsWildcard) {
+                    current.setMinutes(current.getMinutes() + 1);
+                } else if (secondIsWildcard && !hasSecond) {
+                    current.setMinutes(current.getMinutes() + 1);
+                    if (current.getMinutes() >= 60) {
+                        current.setHours(current.getHours() + 1);
+                        current.setMinutes(0);
+                    }
+                } else if (secondIsWildcard) {
+                    current.setSeconds(current.getSeconds() + 1);
+                } else {
+                    current.setSeconds(current.getSeconds() + secondStep);
+                }
             }
             return results;
         }
 
-        function formatDistance(date) {
-            const now = new Date();
+        function formatDistance(date, baseTime) {
+            const now = baseTime || new Date();
             const diff = date - now;
-            const minutes = Math.floor(diff / 60000);
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
-            if (days > 0) return `${days} 天后`;
-            if (hours > 0) return `${hours} 小时 ${minutes % 60} 分钟后`;
-            return `${minutes} 分钟后`;
+            if (days > 0) return `${days} 天 ${hours % 24} 小时 ${minutes % 60} 分钟 ${seconds % 60} 秒后`;
+            if (hours > 0) return `${hours} 小时 ${minutes % 60} 分钟 ${seconds % 60} 秒后`;
+            if (minutes > 0) return `${minutes} 分钟 ${seconds % 60} 秒后`;
+            return `${seconds} 秒后`;
         }
 
         function formatDate(date) {
@@ -1174,8 +1643,9 @@
                 updateFieldVisual(fields);
                 document.getElementById('description-box').innerHTML = generateDescription(fields);
                 document.getElementById('description-box').style.display = 'block';
-                const occurrences = getNextOccurrences(fields);
-                renderScheduleTable(occurrences);
+                const now = new Date();
+                const occurrences = getNextOccurrences(fields, 10, now);
+                renderScheduleTable(occurrences, now);
             } catch (e) { showError(e.message); }
         }
 
@@ -1185,14 +1655,14 @@
             ).join('');
         }
 
-        function renderScheduleTable(occurrences) {
+        function renderScheduleTable(occurrences, baseTime) {
             const tbody = document.getElementById('schedule-body');
             if (occurrences.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#999;">无法计算执行时间（请检查表达式）</td></tr>';
                 return;
             }
             tbody.innerHTML = occurrences.map((date, i) =>
-                `<tr><td>${i + 1}</td><td>${formatDate(date)}</td><td>${formatDistance(date)}</td></tr>`
+                `<tr><td>${i + 1}</td><td>${formatDate(date)}</td><td>${formatDistance(date, baseTime)}</td></tr>`
             ).join('');
         }
 
