@@ -1270,6 +1270,9 @@
             if (!isMinuteWildcard && !isHourWildcard && minuteHasRange) {
                 return `每天每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
             }
+            if (!isMinuteWildcard && isHourWildcard && minuteHasRange) {
+                return `每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
+            }
             if (!isMinuteWildcard && !isHourWildcard && hourHasRange) {
                 return `每天 <strong>${hourExpr}</strong> 点执行一次`;
             }
@@ -1336,6 +1339,7 @@
             let startHour = now.getHours();
             let needCheckPast = false;
             let dayOffset = 0;
+            let minuteOverflowHandled = false;
 
             if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                 const targetMinute = minuteVals.find(m => m >= startMinute);
@@ -1346,14 +1350,26 @@
                     startMinute = minuteVals[0];
                     startHour = startHour + 1;
                     startSecond = 0;
+                    if (startHour > 23) {
+                        startHour = startHour % 24;
+                        dayOffset = 1;
+                    }
+                    minuteOverflowHandled = true;
                 }
                 needCheckPast = true;
             } else if (minuteField.expr.startsWith('*/')) {
                 const step = parseInt(minuteField.expr.split('/')[1]) || 1;
-                startMinute = startMinute + step;
+                const remainder = startMinute % step;
+                if (remainder !== 0) {
+                    startMinute = startMinute + (step - remainder);
+                }
                 if (startMinute >= 60) {
                     startMinute = startMinute - 60;
                     startHour = startHour + 1;
+                    if (startHour > 23) {
+                        startHour = startHour % 24;
+                        dayOffset = 1;
+                    }
                 }
                 needCheckPast = true;
             }
@@ -1362,21 +1378,29 @@
                 let targetHour = hourVals.find(h => h >= startHour);
                 if (targetHour === undefined) {
                     targetHour = hourVals[0];
+                    const hourChanged = startHour !== targetHour;
                     startHour = targetHour;
                     if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                         startMinute = minuteVals[0] || 0;
+                    } else if (minuteField.expr.startsWith('*/')) {
+                        startMinute = minuteVals[0] || 0;
                     }
                     dayOffset = 1;
+                    if (hourChanged) {
+                        startSecond = 0;
+                    }
                 } else {
                     if (targetHour !== startHour) {
                         startHour = targetHour;
                         if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                             startMinute = minuteVals[0] || 0;
+                        } else if (minuteField.expr.startsWith('*/')) {
+                            startMinute = minuteVals[0] || 0;
                         }
                     }
                 }
                 needCheckPast = true;
-            } else if (hourField.expr.startsWith('*/')) {
+            } else if (hourField.expr.startsWith('*/') && !minuteOverflowHandled) {
                 const step = parseInt(hourField.expr.split('/')[1]) || 1;
                 startHour = startHour + step;
                 needCheckPast = true;
@@ -1500,7 +1524,25 @@
                         current.setMinutes(nextMinute);
                     } else {
                         current.setMinutes(minuteVals[0]);
-                        current.setHours(current.getHours() + 1);
+                        if (hourField.expr.startsWith('*/')) {
+                            const hourStep = parseInt(hourField.expr.split('/')[1]) || 1;
+                            let nextHour = current.getHours() + 1;
+                            if (nextHour > 23) {
+                                nextHour = 0;
+                                current.setDate(current.getDate() + 1);
+                            }
+                            const remainder = nextHour % hourStep;
+                            if (remainder !== 0) {
+                                nextHour = nextHour + (hourStep - remainder);
+                            }
+                            if (nextHour > 23) {
+                                nextHour = nextHour % 24;
+                                current.setDate(current.getDate() + 1);
+                            }
+                            current.setHours(nextHour);
+                        } else {
+                            current.setHours(current.getHours() + 1);
+                        }
                     }
                     current.setSeconds(0);
                     continue;
@@ -1525,6 +1567,27 @@
                     if (current.getMinutes() >= 60) {
                         current.setHours(current.getHours() + 1);
                         current.setMinutes(0);
+                    }
+                } else if (!minuteIsWildcard && hourField.expr.startsWith('*/')) {
+                    const hourStep = parseInt(hourField.expr.split('/')[1]) || 1;
+                    const currentMinute = current.getMinutes();
+                    const currentHour = current.getHours();
+                    const nextMinute = minuteVals.find(m => m > currentMinute);
+                    if (nextMinute !== undefined) {
+                        current.setMinutes(nextMinute);
+                    } else {
+                        let nextHour = currentHour + hourStep;
+                        if (nextHour > 23) {
+                            nextHour = nextHour % 24;
+                            current.setDate(current.getDate() + 1);
+                        }
+                        const matchHour = (nextHour % (hourStep * 2)) === 0 || (hourStep === 1);
+                        if (!matchHour) {
+                            nextHour = nextHour + (hourStep - nextHour % hourStep) % hourStep;
+                        }
+                        current.setHours(nextHour);
+                        current.setMinutes(minuteVals[0]);
+                        current.setSeconds(0);
                     }
                 } else if (hourField.expr.startsWith('*/')) {
                     const step = parseInt(hourField.expr.split('/')[1]) || 1;
