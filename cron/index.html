@@ -1248,7 +1248,21 @@
                 return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 执行一次`;
             }
             if (isMinuteWildcard && isHourWildcard && !isDayWildcard && isMonthWildcard && !isWeekdayWildcard) {
-                return `每月的 ${formatDayList(day.values)} 或每周的 ${formatWeekdayList(weekday.values)} 执行一次`;
+                return `每月的 ${formatDayList(day.values)} 或每周的 ${formatWeekdayList(weekday.values)} 每分钟执行一次`;
+            }
+            if (!isMinuteWildcard && isHourWildcard && !isDayWildcard && isMonthWildcard && isWeekdayWildcard && minuteExpr.startsWith('*/')) {
+                const minuteStep = parseInt(minuteExpr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)}，每隔 <strong>${minuteStep}</strong> 分钟执行一次`;
+            }
+            if (isMinuteWildcard && isHourWildcard && !isDayWildcard && !isMonthWildcard && isWeekdayWildcard) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 每分钟执行一次`;
+            }
+            if (isMinuteWildcard && !isHourWildcard && !isDayWildcard && isMonthWildcard && isWeekdayWildcard && hourHasRange) {
+                return `每月的 ${formatDayList(day.values)} 的 <strong>${hourExpr}</strong> 点每分钟执行一次`;
+            }
+            if (isMinuteWildcard && !isHourWildcard && !isDayWildcard && isMonthWildcard && isWeekdayWildcard && !hourHasRange && hourExpr.startsWith('*/')) {
+                const hourStep = parseInt(hourExpr.split('/')[1]);
+                return `每月的 ${formatDayList(day.values)}，每隔 <strong>${hourStep}</strong> 小时每分钟执行一次`;
             }
             if (!isMinuteWildcard && !isHourWildcard && minuteHasRange && hourHasRange) {
                 return `每天 <strong>${hourExpr}</strong> 点，每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
@@ -1506,13 +1520,23 @@
                         current.setHours(current.getHours() + 1);
                         current.setMinutes(current.getMinutes() - 60);
                     }
+                } else if (minuteIsWildcard && !hourIsWildcard) {
+                    current.setMinutes(current.getMinutes() + 1);
+                    if (current.getMinutes() >= 60) {
+                        current.setHours(current.getHours() + 1);
+                        current.setMinutes(0);
+                    }
                 } else if (hourField.expr.startsWith('*/')) {
                     const step = parseInt(hourField.expr.split('/')[1]) || 1;
                     current.setHours(current.getHours() + step);
-                } else if (minuteIsWildcard && !hourIsWildcard) {
-                    current.setHours(current.getHours() + 1);
                 } else if (secondIsWildcard && !minuteIsWildcard) {
                     current.setMinutes(current.getMinutes() + 1);
+                } else if (secondIsWildcard && !hasSecond) {
+                    current.setMinutes(current.getMinutes() + 1);
+                    if (current.getMinutes() >= 60) {
+                        current.setHours(current.getHours() + 1);
+                        current.setMinutes(0);
+                    }
                 } else if (secondIsWildcard) {
                     current.setSeconds(current.getSeconds() + 1);
                 } else {
