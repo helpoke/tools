@@ -1231,11 +1231,25 @@
             }
             function getFriendlyDescription(fields) {
             const minute = fields[0], hour = fields[1], day = fields[2], month = fields[3], weekday = fields[4];
-            const minuteExpr = minute.expr, hourExpr = hour.expr;
+            const minuteExpr = minute.expr, hourExpr = hour.expr, dayExpr = day.expr, monthExpr = month.expr, weekdayExpr = weekday.expr;
             const isMinuteWildcard = minuteExpr === '*' || minuteExpr === '?';
             const isHourWildcard = hourExpr === '*' || hourExpr === '?';
+            const isDayWildcard = dayExpr === '*' || dayExpr === '?';
+            const isMonthWildcard = monthExpr === '*';
+            const isWeekdayWildcard = weekdayExpr === '*' || weekdayExpr === '?';
             const minuteHasRange = minuteExpr.includes('-') && !minuteExpr.startsWith('*/');
             const hourHasRange = hourExpr.includes('-') && !hourExpr.startsWith('*/');
+            
+            if (!isMonthWildcard && isWeekdayWildcard && isDayWildcard && hourExpr.startsWith('*/') && isMinuteWildcard) {
+                const hourStep = parseInt(hourExpr.split('/')[1]);
+                return `每年的 ${formatMonthList(month.values)}，每隔 <strong>${hourStep}</strong> 小时执行一次`;
+            }
+            if (!isMonthWildcard && !isWeekdayWildcard && isDayWildcard && isHourWildcard && isMinuteWildcard) {
+                return `每年的 ${formatMonthList(month.values)} 的 ${formatWeekdayList(weekday.values)} 执行一次`;
+            }
+            if (isMinuteWildcard && isHourWildcard && !isDayWildcard && isMonthWildcard && !isWeekdayWildcard) {
+                return `每月的 ${formatDayList(day.values)} 或每周的 ${formatWeekdayList(weekday.values)} 执行一次`;
+            }
             if (!isMinuteWildcard && !isHourWildcard && minuteHasRange && hourHasRange) {
                 return `每天 <strong>${hourExpr}</strong> 点，每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
             }
@@ -1313,9 +1327,11 @@
                 const targetMinute = minuteVals.find(m => m >= startMinute);
                 if (targetMinute !== undefined) {
                     startMinute = targetMinute;
+                    startSecond = 0;
                 } else {
                     startMinute = minuteVals[0];
                     startHour = startHour + 1;
+                    startSecond = 0;
                 }
                 needCheckPast = true;
             } else if (minuteField.expr.startsWith('*/')) {
