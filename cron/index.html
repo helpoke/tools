@@ -1229,14 +1229,46 @@
             if (!isMinuteEvery && !isHourEvery && !isDayEvery && !isMonthEvery && !isWeekdayEvery) {
                 return `每年的 ${formatMonthList(month.values)} 的 ${formatDayList(day.values)} 且每周的 ${formatWeekdayList(weekday.values)} 的 ${formatHourList(hour.values)} 的第 <strong>${minute.values.join('、')}</strong> 分钟各执行一次`;
             }
+            function getFriendlyDescription(fields) {
+            const minute = fields[0], hour = fields[1], day = fields[2], month = fields[3], weekday = fields[4];
+            const minuteExpr = minute.expr, hourExpr = hour.expr;
+            const isMinuteWildcard = minuteExpr === '*' || minuteExpr === '?';
+            const isHourWildcard = hourExpr === '*' || hourExpr === '?';
+            const minuteHasRange = minuteExpr.includes('-') && !minuteExpr.startsWith('*/');
+            const hourHasRange = hourExpr.includes('-') && !hourExpr.startsWith('*/');
+            if (!isMinuteWildcard && !isHourWildcard && minuteHasRange && hourHasRange) {
+                return `每天 <strong>${hourExpr}</strong> 点，每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
+            }
+            if (!isMinuteWildcard && !isHourWildcard && minuteHasRange) {
+                return `每天每小时的 <strong>${minuteExpr}</strong> 分钟执行一次`;
+            }
+            if (!isMinuteWildcard && !isHourWildcard && hourHasRange) {
+                return `每天 <strong>${hourExpr}</strong> 点执行一次`;
+            }
+            return null;
+        }
             const descParts = [];
             for (const field of fields) { if (field.expr !== '*' && field.expr !== '?') descParts.push(`${field.name}: ${field.expr}`); }
-            if (descParts.length > 0) return `自定义调度: ${descParts.join(', ')}`;
+            if (descParts.length > 0) {
+                const friendly = getFriendlyDescription(fields);
+                if (friendly) return friendly;
+                return `自定义调度: ${descParts.join(', ')}`;
+            }
             return '每分钟执行一次';
         }
 
         function formatTime(h, m) { return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'); }
         function formatHourList(values) {
+            if (values.length >= 3) {
+                const step = values[1] - values[0];
+                let isStepPattern = step > 0;
+                for (let i = 2; i < values.length && isStepPattern; i++) {
+                    if (values[i] - values[i-1] !== step) isStepPattern = false;
+                }
+                if (isStepPattern) {
+                    return `每隔 <strong>${step}</strong> 小时`;
+                }
+            }
             if (values.length <= 4) return values.map(v => `<strong>${v}</strong> 点`).join('、');
             return `<strong>${values[0]}-${values[values.length - 1]}</strong> 点`;
         }
@@ -1285,7 +1317,6 @@
                     startMinute = minuteVals[0];
                     startHour = startHour + 1;
                 }
-                startSecond = 0;
                 needCheckPast = true;
             } else if (minuteField.expr.startsWith('*/')) {
                 const step = parseInt(minuteField.expr.split('/')[1]) || 1;
@@ -1305,7 +1336,6 @@
                     if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                         startMinute = minuteVals[0] || 0;
                     }
-                    startSecond = 0;
                     dayOffset = 1;
                 } else {
                     if (targetHour !== startHour) {
@@ -1313,21 +1343,12 @@
                         if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                             startMinute = minuteVals[0] || 0;
                         }
-                        startSecond = 0;
                     }
                 }
                 needCheckPast = true;
             } else if (hourField.expr.startsWith('*/')) {
                 const step = parseInt(hourField.expr.split('/')[1]) || 1;
-                const remainder = startHour % step;
-                if (remainder !== 0) {
-                    startHour = startHour + (step - remainder);
-                } else {
-                    const tempDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), startHour, startMinute, startSecond);
-                    if (tempDate <= now) {
-                        startHour = startHour + step;
-                    }
-                }
+                startHour = startHour + step;
                 needCheckPast = true;
             } else if (hourIsWildcard && minuteIsWildcard) {
                 if (secondIsWildcard) {
@@ -1354,7 +1375,6 @@
                         if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                             startMinute = minuteVals[0] || 0;
                         }
-                        startSecond = 0;
                     }
                 } else {
                     const nextMonthDay = dayVals[0];
@@ -1365,7 +1385,6 @@
                     if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
                         startMinute = minuteVals[0] || 0;
                     }
-                    startSecond = 0;
                 }
             }
             
@@ -1448,7 +1467,14 @@
                     continue;
                 }
                 if (!minuteField.expr.startsWith('*/') && !minuteVals.includes(minute)) {
-                    current.setMinutes(current.getMinutes() + 1);
+                    const nextMinute = minuteVals.find(m => m >= minute);
+                    if (nextMinute !== undefined) {
+                        current.setMinutes(nextMinute);
+                    } else {
+                        current.setMinutes(minuteVals[0]);
+                        current.setHours(current.getHours() + 1);
+                    }
+                    current.setSeconds(0);
                     continue;
                 }
                 if (hasSecond && !secondVals.includes(second)) {
