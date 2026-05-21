@@ -1388,9 +1388,8 @@
                     if (targetDay !== today) {
                         dayOffset = targetDay - today;
                         startHour = hourVals[0] || 0;
-                        if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
-                            startMinute = minuteVals[0] || 0;
-                        }
+                        startMinute = minuteVals[0] || 0;
+                        startSecond = 0;
                     }
                 } else {
                     const nextMonthDay = dayVals[0];
@@ -1398,9 +1397,8 @@
                     const remainingDays = daysInCurrentMonth - today;
                     dayOffset = remainingDays + nextMonthDay;
                     startHour = hourVals[0] || 0;
-                    if (!minuteIsWildcard && !minuteField.expr.startsWith('*/')) {
-                        startMinute = minuteVals[0] || 0;
-                    }
+                    startMinute = minuteVals[0] || 0;
+                    startSecond = 0;
                 }
             }
             
