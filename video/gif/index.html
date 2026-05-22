@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频转GIF在线工具，支持从视频中提取精彩片段制作GIF动图，可自定义帧率、尺寸和质量，纯前端处理保护隐私">
+    <meta name="keywords" content="视频转GIF, GIF制作, 在线GIF生成, 视频转动图, 免费GIF工具, 视频截取GIF">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频转GIF - 免费在线视频转GIF动图工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/ffmpeg.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频转GIF工具",
+        "description": "免费在线视频转GIF动图工具，支持从视频中提取精彩片段制作GIF，可自定义帧率、尺寸和质量。纯前端处理，保护用户隐私数据。Free online video to GIF converter.",
+        "url": "https://helpoke.com/video/gif",
+        "applicationCategory": "VideoEditing",
+        "featureList": [
+            "支持MP4、WebM、MOV、AVI等多种视频格式",
+            "自定义GIF帧率和尺寸",
+            "可选择视频片段转换",
+            "实时预览转换效果",
+            "纯前端处理，视频不上传服务器",
+            "一键下载GIF动图"
+        ],
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频转GIF</h1>
+            <p>从视频中提取精彩片段，制作个性化<b style="color: cadetblue;">GIF动图</b>，支持自定义帧率、尺寸和质量。</p>
+        </section>
+        <div class="container">
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 最大支持100MB视频文件。建议先裁剪视频到所需片段再转换为GIF。
+            </p>
+
+            <div class="upload-section">
+                <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv">
+                <label for="videoUpload" class="upload-btn">上传视频文件</label>
+                <p class="upload-note">* 支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 等常见视频格式</p>
+            </div>
+
+            <div class="preview-section" id="previewSection">
+                <div class="video-info" id="videoInfo">
+                    <p>请上传视频文件</p>
+                </div>
+                <div class="video-container">
+                    <video id="videoPlayer" controls></video>
+                </div>
+            </div>
+
+            <div class="settings-section" id="settingsSection">
+                <h3>GIF设置</h3>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="startTime">开始时间 (秒)：</label>
+                        <input type="number" id="startTime" min="0" max="3600" value="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="duration">持续时长 (秒)：</label>
+                        <input type="number" id="duration" min="1" max="60" value="5" step="0.1">
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="frameRate">帧率 (fps)：</label>
+                        <select id="frameRate">
+                            <option value="5">5 (较低流畅度)</option>
+                            <option value="10">10</option>
+                            <option value="15" selected>15 (推荐)</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30 (高流畅度)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="quality">GIF质量：</label>
+                        <select id="quality">
+                            <option value="high">高 (较大文件)</option>
+                            <option value="medium" selected>中 (推荐)</option>
+                            <option value="low">低 (较小文件)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="scale">尺寸缩放：</label>
+                        <select id="scale">
+                            <option value="100">原始尺寸</option>
+                            <option value="75">75%</option>
+                            <option value="50" selected>50%</option>
+                            <option value="25">25%</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="loopCount">循环次数：</label>
+                        <select id="loopCount">
+                            <option value="0" selected>无限循环</option>
+                            <option value="1">播放1次</option>
+                            <option value="2">播放2次</option>
+                            <option value="3">播放3次</option>
+                            <option value="5">播放5次</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="convertBtn" disabled>
+                        <span id="convertBtnText">生成GIF</span>
+                        <span id="convertBtnLoading" style="display: none;">生成中...</span>
+                    </button>
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar" id="progressBar"></div>
+                        <span class="progress-percentage" id="progressPercentage">0%</span>
+                    </div>
+                    <p class="convert-note" id="convertNote" style="display: none;"></p>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h2>生成结果</h2>
+                <div class="result-info" id="resultInfo"></div>
+                <div class="result-container">
+                    <img id="outputGif" alt="生成的GIF">
+                </div>
+                <div class="download-buttons">
+                    <button id="downloadBtn">下载GIF动图</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="defaultModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">提示</h3>
+                    <button class="close-btn"
+                        onclick="document.getElementById('defaultModal').classList.remove('active')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage">这是一个提示消息。</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary"
+                        onclick="document.getElementById('defaultModal').classList.remove('active')">关闭</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </main>
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
