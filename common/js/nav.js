@@ -1,40 +1,41 @@
 (function () {
     'use strict';
 
-    // 工具数据（用于记录最近使用）
-    var toolsData = [
-        { name: '图片压缩', icon: '📦', url: 'image/compressor' },
-        { name: '图片转换', icon: '🔄', url: 'image/convert' },
-        { name: '图片水印', icon: '💧', url: 'image/watermark' },
-        { name: '图片裁剪', icon: '✂️', url: 'image/cropping' },
-        { name: '视频裁剪', icon: '✂️', url: 'video/cropping' },
-        { name: '视频水印', icon: '🎥', url: 'video/watermark' },
-        { name: '视频转换', icon: '🔄', url: 'video/convert' },
-        { name: 'JSON格式化', icon: '{ }', url: 'json' },
-        { name: 'YAML格式化', icon: '⚙️', url: 'yaml' },
-        { name: 'Pug格式化', icon: '🌿', url: 'pug' },
-        { name: 'XML格式化', icon: '📐', url: 'xml' },
-        { name: 'SQL格式化', icon: '🗃️', url: 'sql' },
-        { name: '密码生成', icon: '🔑', url: 'pwd' },
-        { name: 'UUID生成', icon: '🆔', url: 'uuid' },
-        { name: 'Mermaid图表', icon: '📊', url: 'mermaid' },
-        { name: 'MD5加密', icon: '🔐', url: 'md5' },
-        { name: 'SHA加密', icon: '🔏', url: 'sha' },
-        { name: 'Token工具', icon: '🎫', url: 'token' },
-        { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese' },
-        { name: '二维码', icon: '📱', url: 'qrcode' },
-        { name: '内容对比', icon: '📋', url: 'diff' },
-        { name: 'Cron解析', icon: '⏰', url: 'cron' },
-        { name: '时间戳转换', icon: '🕐', url: 'timestamp' },
-        { name: 'URL编解码', icon: '🔗', url: 'urlcode' },
-        { name: '进制转换', icon: '🧮', url: 'base-convert' },
-        { name: '取色器', icon: '🎨', url: 'color-picker' },
-        { name: '正则表达式', icon: '🔍', url: 'regex' },
-        { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy' },
-        { name: '签名工具', icon: '✍️', url: 'docu/signature' },
-        { name: '文档水印', icon: '🛡️', url: 'docu/watermark' },
-        { name: '视频图片下载', icon: '⬇️', url: 'download/media' },
-        { name: '资源文件下载', icon: '📦', url: 'download/resource' }
+    // 工具数据（全局共享，用于导航栏、搜索、最近使用记录）
+    window.toolsData = [
+        { name: '图片压缩', icon: '📦', url: 'image/compressor', category: '图片工具' },
+        { name: '图片转换', icon: '🔄', url: 'image/convert', category: '图片工具' },
+        { name: '图片水印', icon: '💧', url: 'image/watermark', category: '图片工具' },
+        { name: '图片裁剪', icon: '✂️', url: 'image/cropping', category: '图片工具' },
+        { name: '视频裁剪', icon: '✂️', url: 'video/cropping', category: '视频工具' },
+        { name: '视频水印', icon: '🎥', url: 'video/watermark', category: '视频工具' },
+        { name: '视频转换', icon: '🔄', url: 'video/convert', category: '视频工具' },
+        { name: '视频转GIF', icon: '🖼️', url: 'video/gif', category: '视频工具' },
+        { name: 'JSON格式化', icon: '{ }', url: 'json', category: '数据开发工具' },
+        { name: 'YAML格式化', icon: '⚙️', url: 'yaml', category: '数据开发工具' },
+        { name: 'Pug格式化', icon: '🌿', url: 'pug', category: '数据开发工具' },
+        { name: 'XML格式化', icon: '📐', url: 'xml', category: '数据开发工具' },
+        { name: 'SQL格式化', icon: '🗃️', url: 'sql', category: '数据开发工具' },
+        { name: '密码生成', icon: '🔑', url: 'pwd', category: '实用工具' },
+        { name: 'UUID生成', icon: '🆔', url: 'uuid', category: '实用工具' },
+        { name: 'Mermaid图表', icon: '📊', url: 'mermaid', category: '实用工具' },
+        { name: 'MD5加密', icon: '🔐', url: 'md5', category: '加密安全工具' },
+        { name: 'SHA加密', icon: '🔏', url: 'sha', category: '加密安全工具' },
+        { name: 'Token工具', icon: '🎫', url: 'token', category: '加密安全工具' },
+        { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy', category: '加密安全工具' },
+        { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese', category: '实用工具' },
+        { name: '二维码', icon: '📱', url: 'qrcode', category: '实用工具' },
+        { name: '内容对比', icon: '📋', url: 'diff', category: '实用工具' },
+        { name: 'Cron解析', icon: '⏰', url: 'cron', category: '实用工具' },
+        { name: '时间戳转换', icon: '🕐', url: 'timestamp', category: '实用工具' },
+        { name: 'URL编解码', icon: '🔗', url: 'urlcode', category: '实用工具' },
+        { name: '进制转换', icon: '🧮', url: 'base-convert', category: '实用工具' },
+        { name: '取色器', icon: '🎨', url: 'color-picker', category: '实用工具' },
+        { name: '正则表达式', icon: '🔍', url: 'regex', category: '实用工具' },
+        { name: '文档签名', icon: '✍️', url: 'docu/signature', category: '文档与下载工具' },
+        { name: '文档水印', icon: '🛡️', url: 'docu/watermark', category: '文档与下载工具' },
+        { name: '视频图片下载', icon: '⬇️', url: 'download/media', category: '文档与下载工具' },
+        { name: '资源文件下载', icon: '📦', url: 'download/resource', category: '文档与下载工具' }
     ];
 
     // 获取相对于根目录的路径前缀
@@ -188,9 +189,9 @@
             return item.url !== url;
         });
         var tool = null;
-        for (var i = 0; i < toolsData.length; i++) {
-            if (toolsData[i].url === url) {
-                tool = toolsData[i];
+        for (var i = 0; i < window.toolsData.length; i++) {
+            if (window.toolsData[i].url === url) {
+                tool = window.toolsData[i];
                 break;
             }
         }
@@ -213,8 +214,8 @@
     (function recordCurrentVisit() {
         var path = window.location.pathname;
         var toolUrl = null;
-        for (var i = 0; i < toolsData.length; i++) {
-            var t = toolsData[i];
+        for (var i = 0; i < window.toolsData.length; i++) {
+            var t = window.toolsData[i];
             var urlWithSlash = '/' + t.url + '/';
             var urlEnd = '/' + t.url;
             if (path.indexOf(urlWithSlash) !== -1 || path.indexOf(urlWithSlash + 'index.html') !== -1 || path.endsWith(urlEnd) || path.endsWith(urlEnd + '/') || path.indexOf(t.url + '/index.html') !== -1) {
