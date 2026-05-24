@@ -18,8 +18,8 @@
     <meta name="twitter:description" content="聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+    <!-- <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>"> -->
+    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="common/img/helpoke.png">
 
     <!-- Stylesheets -->
@@ -57,20 +57,23 @@
                     "@type": "WebApplication",
                     "name": "图片工具",
                     "description": "图片压缩、转换、水印、裁剪工具",
-                    "featureList": ["图片压缩", "图片格式转换", "图片加水印", "图片裁剪"],
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["图片压缩", "图片格式转换", "图片加水印", "图片裁剪", "图片旋转", "图片翻转", "图片打码", "图片模糊", "图片拼接"],
                     "url": "https://tools.pengline.cn/image/compressor"
                 },
                 {
                     "@type": "WebApplication",
                     "name": "视频工具",
                     "description": "视频裁剪、水印、转换工具",
-                    "featureList": ["视频裁剪", "视频水印", "视频格式转换"],
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["视频裁剪", "视频水印", "视频格式转换", "视频编辑", "视频合并", "视频转音频", "视频加密"],
                     "url": "https://tools.pengline.cn/video/cropping"
                 },
                 {
                     "@type": "WebApplication",
                     "name": "数据开发工具",
                     "description": "JSON、YAML、Pug、XML、SQL格式化工具",
+                    "inLanguage": ["zh-CN", "en-US"], 
                     "featureList": ["JSON格式化", "YAML格式化", "Pug格式化", "XML格式化", "SQL格式化"],
                     "url": "https://tools.pengline.cn/json"
                 },
@@ -78,13 +81,15 @@
                     "@type": "WebApplication",
                     "name": "加密安全工具",
                     "description": "MD5、SHA、Token工具、JS混淆加密",
-                    "featureList": ["MD5加密", "SHA加密", "Token工具", "JS代码混淆"],
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["MD5加密", "SHA加密", "Token工具", "JS代码混淆", "JS代码加密", "JWT工具", "Token解析", "URL编码", "URL解码", "Base64编码", "Base64解码"],
                     "url": "https://tools.pengline.cn/md5"
                 },
                 {
                     "@type": "WebApplication",
                     "name": "实用工具",
                     "description": "密码生成、UUID生成、Mermaid图表、时间戳转换等",
+                    "inLanguage": ["zh-CN", "en-US"], 
                     "featureList": ["密码生成", "UUID生成", "Mermaid图表", "时间戳转换", "Cron解析"],
                     "url": "https://tools.pengline.cn/pwd"
                 },
@@ -92,6 +97,7 @@
                     "@type": "WebApplication",
                     "name": "文档与下载工具",
                     "description": "签名工具、文档水印、批量下载",
+                    "inLanguage": ["zh-CN", "en-US"], 
                     "featureList": ["文档签名", "文档水印", "资源文件下载", "视频图片下载"],
                     "url": "https://tools.pengline.cn/docu/signature"
                 }
@@ -513,7 +519,7 @@
             color: #ef4444;
         }
 
-        .badge.popular{
+        .badge.popular {
             background: #c2cfc9;
             color: #e60a0a;
         }
@@ -697,7 +703,8 @@
 
         .page-layout main.main {
             flex: 1;
-            margin-left: 15%;  /* 左间距2% + 导航栏15% */
+            margin-left: 15%;
+            /* 左间距2% + 导航栏15% */
             transition: margin-left 0.3s ease;
         }
 
@@ -723,7 +730,8 @@
                 position: fixed;
                 right: 1%;
                 top: var(--header-height);
-                width: 12%;  /* 广告栏11% */
+                width: 12%;
+                /* 广告栏11% */
                 /* height: calc(100vh - var(--header-height)); */
                 height: 100%;
                 overflow-y: auto;
@@ -731,11 +739,11 @@
                 background: white;
                 z-index: 100;
             }
-            
+
             .page-layout main.main {
                 margin-left: 15%;
             }
-            
+
             /* container宽度85% */
             .container {
                 max-width: 85%;
@@ -783,292 +791,312 @@
             <div class="container">
                 <!-- Hero Section -->
                 <section class="hero">
-                <h1>有事找 Helpoke（小助点），一点即用</h1>
-                <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。极简操作、安全隐私（离线亦可用）。</p>
-                <p>聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，高效解决生活与办公各类小问题。</p>
-                <p>有什么问题、建议、需求或想法可随时联系，邮箱：<a href="mailto:contact@helpoke.com">contact@helpoke.com</a></p>
+                    <h1>有事找 Helpoke（小助点），一点即用</h1>
+                    <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。极简操作、安全隐私（离线亦可用）。</p>
+                    <p>聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，高效解决生活与办公各类小问题。</p>
+                    <p>有什么问题、建议、需求或想法可随时联系，邮箱：<a href="mailto:contact@helpoke.com">contact@helpoke.com</a></p>
 
-                <!-- Search Box -->
-                <div class="search-container">
-                    <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="searchInput" placeholder="搜索工具..." class="search-input">
-                        <button id="searchBtn" class="search-btn">搜索</button>
+                    <!-- Search Box -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="searchInput" placeholder="搜索工具..." class="search-input">
+                            <button id="searchBtn" class="search-btn">搜索</button>
+                        </div>
+                        <div id="searchResults" class="search-results"></div>
                     </div>
-                    <div id="searchResults" class="search-results"></div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Recent Used -->
-            <div class="recent-section">
-                <div class="recent-header">
-                    <span class="recent-icon">🕐</span>
-                    <span class="recent-title">最近使用</span>
-                    <button class="recent-clear" id="recentClear" title="清空历史">✕</button>
+                <!-- Recent Used -->
+                <div class="recent-section">
+                    <div class="recent-header">
+                        <span class="recent-icon">🕐</span>
+                        <span class="recent-title">最近使用</span>
+                        <button class="recent-clear" id="recentClear" title="清空历史">✕</button>
+                    </div>
+                    <div class="recent-list" id="recentList">
+                        <div class="recent-empty">暂无记录</div>
+                    </div>
                 </div>
-                <div class="recent-list" id="recentList">
-                    <div class="recent-empty">暂无记录</div>
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">🖼️</div>
+                        <div class="stat-info">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">图片工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">🎬</div>
+                        <div class="stat-info">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">视频工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">💻</div>
+                        <div class="stat-info">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">数据工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">🔐</div>
+                        <div class="stat-info">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">加密工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pink">📝</div>
+                        <div class="stat-info">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">文档下载</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">🛠️</div>
+                        <div class="stat-info">
+                            <div class="stat-value">9</div>
+                            <div class="stat-label">实用工具</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool Categories -->
+                <div class="category-grid">
+                    <!-- 图片工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon img">🖼️</div>
+                            <span class="category-title">图片工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="image/compressor" class="tool-link">
+                                <span class="icon">📦</span><b>图片压缩</b>(JPG/PNG/WebP)
+                                <span class="badge popular">热门</span>
+                            </a>
+                            <a href="image/convert" class="tool-link">
+                                <span class="icon">🔄</span><b>图片转换</b>(SVG/Base64/PNG)
+                                <span class="badge">转换</span>
+                            </a>
+                            <a href="image/watermark" class="tool-link">
+                                <span class="icon">💧</span><b>图片水印</b>(滚动文字+图片)
+                                <span class="badge">水印</span>
+                            </a>
+                            <a href="image/cropping" class="tool-link">
+                                <span class="icon">✂️</span><b>图片裁剪</b>(精确比例)
+                                <span class="badge">裁剪</span>
+                            </a>
+                            <!-- 图片处理 -->
+                            <a href="image/edit" class="tool-link">
+                                <span class="icon">🛠️</span><b>图片编辑</b>(旋转+模糊)
+                                <span class="badge">编辑</span>
+                            </a>
+                            <!-- 图片合并 -->
+                            <a href="image/stitch" class="tool-link">
+                                <span class="icon">🖼️</span><b>图片合并</b>(多图拼接)
+                                <span class="badge">拼接</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 视频工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon video">🎬</div>
+                            <span class="category-title">视频工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="video/cropping" class="tool-link">
+                                <span class="icon">✂️</span><b>视频裁剪</b>(尺寸+时长)
+                                <span class="badge popular">热门</span>
+                            </a>
+                            <a href="video/watermark" class="tool-link">
+                                <span class="icon">🎥</span><b>视频水印</b>(滚动文字+图片)
+                                <span class="badge">水印</span>
+                            </a>
+                            <a href="video/convert" class="tool-link">
+                                <span class="icon">🔄</span><b>视频转换</b>(WebM/MP4)
+                                <span class="badge">转换</span>
+                            </a>
+                            <a href="video/gif" class="tool-link">
+                                <span class="icon">🖼️</span><b>视频转GIF</b>(动图制作)
+                                <span class="badge">GIF</span>
+                            </a>
+                            <a href="video/audio" class="tool-link">
+                                <span class="icon">🔊</span><b>视频转音频</b>(提取音频)
+                                <span class="badge">音频</span>
+                            </a>
+                            <!-- 视频编辑 -->
+                            <a href="video/edit" class="tool-link">
+                                <span class="icon">🛠️</span><b>视频编辑</b>(旋转+模糊)
+                                <span class="badge">编辑</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 文档与下载工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon doc">📥</div>
+                            <span class="category-title">文档与下载工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="docu/signature" class="tool-link">
+                                <span class="icon">✍️</span><b>文档签名</b>(在线签名)
+                                <span class="badge sign">签名</span>
+                            </a>
+                            <a href="docu/watermark" class="tool-link">
+                                <span class="icon">🛡️</span><b>文档水印</b>(方式多样)
+                                <span class="badge watermark">水印</span>
+                            </a>
+                            <a href="download/media" class="tool-link">
+                                <span class="icon">⬇️</span><b>视频图片下载</b>(批量+爬取)
+                                <span class="badge download">下载</span>
+                            </a>
+                            <a href="download/resource" class="tool-link">
+                                <span class="icon">📦</span><b>资源文件下载</b>(JS/CSS/字体)
+                                <span class="badge resource">资源</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 数据开发工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon data">💻</div>
+                            <span class="category-title">数据开发工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="json" class="tool-link">
+                                <span class="icon">{ }</span><b>JSON 格式化</b>(比对+转换)
+                                <span class="badge popular">热门</span>
+                            </a>
+                            <a href="yaml" class="tool-link">
+                                <span class="icon">⚙️</span><b>YAML 格式化</b>(压缩+校验)
+                                <span class="badge">YAML</span>
+                            </a>
+                            <a href="pug" class="tool-link">
+                                <span class="icon">🌿</span><b>Pug 格式化</b>(压缩+校验)
+                                <span class="badge">Pug</span>
+                            </a>
+                            <a href="xml" class="tool-link">
+                                <span class="icon">📐</span><b>XML 格式化</b>(压缩+转换)
+                                <span class="badge">XML</span>
+                            </a>
+                            <a href="sql" class="tool-link">
+                                <span class="icon">🗃️</span><b>SQL 格式化</b>(压缩+格式化)
+                                <span class="badge">SQL</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 加密安全工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon security">🔐</div>
+                            <span class="category-title">加密安全工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="md5" class="tool-link">
+                                <span class="icon">🔐</span><b>MD5 加密</b>(加密+校验)
+                                <span class="badge">MD5</span>
+                            </a>
+                            <a href="sha" class="tool-link">
+                                <span class="icon">🔏</span><b>SHA 加密</b>(加密+校验)
+                                <span class="badge">SHA</span>
+                            </a>
+                            <a href="token" class="tool-link">
+                                <span class="icon">🎫</span><b>Token 工具</b>(JWT+Base64)
+                                <span class="badge">Token</span>
+                            </a>
+                            <a href="js-secrecy" class="tool-link">
+                                <span class="icon">🛡️</span><b>JS 混淆加密</b>(JS代码加密)
+                                <span class="badge">JS</span>
+                            </a>
+                            <a href="pwd" class="tool-link">
+                                <span class="icon">🔑</span><b>随机密码生成</b>(自定义格式)
+                                <span class="badge">密码</span>
+                            </a>
+                            <a href="uuid" class="tool-link">
+                                <span class="icon">🆔</span><b>UUID 生成</b>(自定义格式)
+                                <span class="badge">UUID</span>
+                            </a>
+                            <a href="urlcode" class="tool-link">
+                                <span class="icon">🔗</span><b>URL 编解码</b>(编码+解码)
+                                <span class="badge">URL</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 实用工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon util">🛠️</div>
+                            <span class="category-title">实用工具</span>
+                        </div>
+                        <div class="tools-list">
+
+                            <a href="mermaid" class="tool-link">
+                                <span class="icon">📊</span><b>Mermaid UML图表</b>(下载)
+                                <span class="badge">UML</span>
+                            </a>
+                            <a href="timestamp" class="tool-link">
+                                <span class="icon">🕐</span><b>时间戳转换</b>(多格式)
+                                <span class="badge">时间</span>
+                            </a>
+                            <a href="cron" class="tool-link">
+                                <span class="icon">⏰</span><b>Cron 解析器</b>(解析+生成)
+                                <span class="badge">Cron</span>
+                            </a>
+                            <a href="regex" class="tool-link">
+                                <span class="icon">🔍</span><b>正则表达式</b>(校验+提取)
+                                <span class="badge">Regex</span>
+                            </a>
+                            <a href="base-convert" class="tool-link">
+                                <span class="icon">🧮</span><b>进制转换器</b>(2/8/10/16)
+                                <span class="badge">进制</span>
+                            </a>
+                            <a href="color-picker" class="tool-link">
+                                <span class="icon">🎨</span><b>取色器</b>(HEX/RGB/HSL)
+                                <span class="badge">颜色</span>
+                            </a>
+                            <a href="num-to-chinese" class="tool-link">
+                                <span class="icon">🔢</span><b>中文大写数字</b>(防涂改)
+                                <span class="badge">钱币</span>
+                            </a>
+                            <a href="qrcode" class="tool-link">
+                                <span class="icon">📱</span><b>二维码生成</b>(生成+解析)
+                                <span class="badge">QR</span>
+                            </a>
+                            <a href="diff" class="tool-link">
+                                <span class="icon">📋</span><b>文本内容对比</b>(内容差异)
+                                <span class="badge">对比</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-note">
+                    <p>&copy; 2026 Helpoke 助点站 · 离线工具 · 数据本地处理 · 保护隐私安全. <a href="https://pengline.cn"
+                            target="_blank">PengLine</a> 保留所有权利</p>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3>💬 评论</h3>
+                    <script async src="https://giscus.app/client.js" data-repo="helpoke/tools"
+                        data-repo-id="R_kgDOScH5hQ" data-category="Announcements"
+                        data-category-id="DIC_kwDOScH5hc4C9UYU" data-mapping="pathname" data-strict="1"
+                        data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
+                        data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+                        </script>
                 </div>
             </div>
-
-            <!-- Stats -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-icon blue">🖼️</div>
-                    <div class="stat-info">
-                        <div class="stat-value">4</div>
-                        <div class="stat-label">图片工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon green">🎬</div>
-                    <div class="stat-info">
-                        <div class="stat-value">4</div>
-                        <div class="stat-label">视频工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon purple">💻</div>
-                    <div class="stat-info">
-                        <div class="stat-value">5</div>
-                        <div class="stat-label">数据工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon orange">🔐</div>
-                    <div class="stat-info">
-                        <div class="stat-value">7</div>
-                        <div class="stat-label">加密工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon pink">📝</div>
-                    <div class="stat-info">
-                        <div class="stat-value">4</div>
-                        <div class="stat-label">文档下载</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon yellow">🛠️</div>
-                    <div class="stat-info">
-                        <div class="stat-value">9</div>
-                        <div class="stat-label">实用工具</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tool Categories -->
-            <div class="category-grid">
-                <!-- 图片工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon img">🖼️</div>
-                        <span class="category-title">图片工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="image/compressor" class="tool-link">
-                            <span class="icon">📦</span><b>图片压缩</b>(JPG/PNG/WebP)
-                            <span class="badge popular">热门</span>
-                        </a>
-                        <a href="image/convert" class="tool-link">
-                            <span class="icon">🔄</span><b>图片转换</b>(SVG/Base64/PNG)
-                            <span class="badge">转换</span>
-                        </a>
-                        <a href="image/watermark" class="tool-link">
-                            <span class="icon">💧</span><b>图片水印</b>(文字+图片/批量)
-                            <span class="badge">水印</span>
-                        </a>
-                        <a href="image/cropping" class="tool-link">
-                            <span class="icon">✂️</span><b>图片裁剪</b>(比例+精确)
-                            <span class="badge">裁剪</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 视频工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon video">🎬</div>
-                        <span class="category-title">视频工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="video/cropping" class="tool-link">
-                            <span class="icon">✂️</span><b>视频裁剪</b>(尺寸+时长)
-                            <span class="badge popular">热门</span>
-                        </a>
-                        <a href="video/watermark" class="tool-link">
-                            <span class="icon">🎥</span><b>视频水印</b>(滚动文字+图片)
-                            <span class="badge">水印</span>
-                        </a>
-                        <a href="video/convert" class="tool-link">
-                            <span class="icon">🔄</span><b>视频转换</b>(WebM/MP4)
-                            <span class="badge">转换</span>
-                        </a>
-                        <a href="video/gif" class="tool-link">
-                            <span class="icon">🖼️</span><b>视频转GIF</b>(动图制作)
-                            <span class="badge">GIF</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 文档与下载工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon doc">📥</div>
-                        <span class="category-title">文档与下载工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="docu/signature" class="tool-link">
-                            <span class="icon">✍️</span><b>文档签名</b>(在线签名)
-                            <span class="badge sign">签名</span>
-                        </a>
-                        <a href="docu/watermark" class="tool-link">
-                            <span class="icon">🛡️</span><b>文档水印</b>(方式多样)
-                            <span class="badge watermark">水印</span>
-                        </a>
-                        <a href="download/media" class="tool-link">
-                            <span class="icon">⬇️</span><b>视频图片下载</b>(批量+爬取)
-                            <span class="badge download">下载</span>
-                        </a>
-                        <a href="download/resource" class="tool-link">
-                            <span class="icon">📦</span><b>资源文件下载</b>(JS/CSS/字体)
-                            <span class="badge resource">资源</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 数据开发工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon data">💻</div>
-                        <span class="category-title">数据开发工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="json" class="tool-link">
-                            <span class="icon">{ }</span><b>JSON 格式化</b>(比对+转换)
-                            <span class="badge popular">热门</span>
-                        </a>
-                        <a href="yaml" class="tool-link">
-                            <span class="icon">⚙️</span><b>YAML 格式化</b>(压缩+校验)
-                            <span class="badge">YAML</span>
-                        </a>
-                        <a href="pug" class="tool-link">
-                            <span class="icon">🌿</span><b>Pug 格式化</b>(压缩+校验)
-                            <span class="badge">Pug</span>
-                        </a>
-                        <a href="xml" class="tool-link">
-                            <span class="icon">📐</span><b>XML 格式化</b>(压缩+转换)
-                            <span class="badge">XML</span>
-                        </a>
-                        <a href="sql" class="tool-link">
-                            <span class="icon">🗃️</span><b>SQL 格式化</b>(压缩+格式化)
-                            <span class="badge">SQL</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 加密安全工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon security">🔐</div>
-                        <span class="category-title">加密安全工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="md5" class="tool-link">
-                            <span class="icon">🔐</span><b>MD5 加密</b>(加密+校验)
-                            <span class="badge">MD5</span>
-                        </a>
-                        <a href="sha" class="tool-link">
-                            <span class="icon">🔏</span><b>SHA 加密</b>(加密+校验)
-                            <span class="badge">SHA</span>
-                        </a>
-                        <a href="token" class="tool-link">
-                            <span class="icon">🎫</span><b>Token 工具</b>(解析+Base64)
-                            <span class="badge">Token</span>
-                        </a>
-                        <a href="js-secrecy" class="tool-link">
-                            <span class="icon">🛡️</span><b>JS 混淆加密</b>(多级别)
-                            <span class="badge">JS</span>
-                        </a>
-                        <a href="pwd" class="tool-link">
-                            <span class="icon">🔑</span><b>随机密码生成</b>(自定义格式)
-                            <span class="badge">密码</span>
-                        </a>
-                        <a href="uuid" class="tool-link">
-                            <span class="icon">🆔</span><b>UUID 生成</b>(自定义格式)
-                            <span class="badge">UUID</span>
-                        </a>
-                        <a href="urlcode" class="tool-link">
-                            <span class="icon">🔗</span><b>URL 编解码</b>(编码+解码)
-                            <span class="badge">URL</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 实用工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon util">🛠️</div>
-                        <span class="category-title">实用工具</span>
-                    </div>
-                    <div class="tools-list">
-
-                        <a href="mermaid" class="tool-link">
-                            <span class="icon">📊</span><b>Mermaid 图表</b>(预览+下载)
-                            <span class="badge">UML</span>
-                        </a>
-                        <a href="timestamp" class="tool-link">
-                            <span class="icon">🕐</span><b>时间戳转换</b>(秒/毫秒)
-                            <span class="badge">时间</span>
-                        </a>
-                        <a href="cron" class="tool-link">
-                            <span class="icon">⏰</span><b>Cron 解析</b>(解析+生成)
-                            <span class="badge">Cron</span>
-                        </a>
-                        <a href="regex" class="tool-link">
-                            <span class="icon">🔍</span><b>正则表达式</b>(校验+提取)
-                            <span class="badge">Regex</span>
-                        </a>
-                        <a href="base-convert" class="tool-link">
-                            <span class="icon">🧮</span><b>进制转换</b>(2/8/10/16)
-                            <span class="badge">进制</span>
-                        </a>
-                        <a href="color-picker" class="tool-link">
-                            <span class="icon">🎨</span><b>取色器</b>(HEX/RGB/HSL)
-                            <span class="badge">颜色</span>
-                        </a>
-                        <a href="num-to-chinese" class="tool-link">
-                            <span class="icon">🔢</span><b>中文大写数字</b>(自动转换)
-                            <span class="badge">数字</span>
-                        </a>
-                        <a href="qrcode" class="tool-link">
-                            <span class="icon">📱</span><b>二维码生成</b>(生成+解析)
-                            <span class="badge">QR</span>
-                        </a>
-                        <a href="diff" class="tool-link">
-                            <span class="icon">📋</span><b>内容对比</b>(内容差异)
-                            <span class="badge">对比</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="footer-note">
-                <p>&copy; 2026 Helpoke 助点站 · 离线工具 · 数据本地处理 · 保护隐私安全. <a href="https://pengline.cn"
-                        target="_blank">PengLine</a> 保留所有权利</p>
-            </div>
-
-            <!-- Comments Section -->
-            <div class="comments-section">
-                <h3>💬 评论</h3>
-                <script async src="https://giscus.app/client.js" data-repo="helpoke/tools" data-repo-id="R_kgDOScH5hQ"
-                    data-category="Announcements" data-category-id="DIC_kwDOScH5hc4C9UYU" data-mapping="pathname"
-                    data-strict="1" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
-                    data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
-                    </script>
-            </div>
-        </div>
         </main>
 
         <!-- Right Ad Sidebar -->
@@ -1107,7 +1135,8 @@
 
             var results = window.toolsData.filter(function (tool) {
                 return tool.name.toLowerCase().includes(query) ||
-                    tool.category.toLowerCase().includes(query);
+                    tool.category.toLowerCase().includes(query) ||
+                    (tool.keywords && tool.keywords.toLowerCase().includes(query));
             });
 
             if (results.length === 0) {
@@ -1162,8 +1191,8 @@
 
             // 添加点击事件监听
             var items = recentList.querySelectorAll('.recent-item');
-            items.forEach(function(item) {
-                item.addEventListener('click', function() {
+            items.forEach(function (item) {
+                item.addEventListener('click', function () {
                     var url = this.getAttribute('data-url');
                     if (url) {
                         window.location.href = url;

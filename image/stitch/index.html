@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="在线免费图片拼接工具，支持多张图片垂直拼接、水平拼接，自定义拼接间距和背景颜色，本地处理保护隐私">
+    <meta name="keywords" content="图片拼接, 在线图片拼接, 图片合并, 垂直拼接, 水平拼接, 免费图片拼接">
+    <meta name="author" content="余一叶知秋尽">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#3B82F6">
+    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
+    <title>图片拼接工具 - 在线免费合并图片</title>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#6366F1',
+                        neutral: '#1F2937',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .input-focus:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .preview-box {
+            cursor: zoom-in;
+            border: 2px dashed #e5e7eb;
+            transition: border-color 0.2s ease;
+        }
+
+        .preview-box:hover {
+            border-color: #3B82F6;
+        }
+
+        .file-item {
+            transition: all 0.2s ease;
+        }
+
+        .file-item.selected {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-color: #3B82F6;
+        }
+
+        .delete-btn {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .file-item:hover .delete-btn {
+            opacity: 1;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "图片拼接工具",
+        "description": "在线免费图片拼接工具，支持多张图片垂直拼接、水平拼接，自定义拼接间距和背景颜色，支持二次拼接，本地处理保护隐私",
+        "url": "https://helpoke.com/image/stitch",
+        "applicationCategory": "https://schema.org/ImageProcessing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持多张图片同时上传",
+            "支持垂直拼接和水平拼接",
+            "可自定义拼接间距",
+            "可自定义背景颜色",
+            "支持保持宽高比",
+            "支持统一图片尺寸",
+            "支持二次拼接",
+            "支持双击全屏预览",
+            "本地处理，保护用户隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body class="bg-gray-50 font-inter">
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>图片拼接工具</h1>
+            <p>将多张图片拼接成一张，支持垂直和水平拼接，自定义拼接间距和背景颜色，支持二次拼接</p>
+        </section>
+
+        <!-- 主要内容 -->
+        <main class="flex-grow container mx-auto max-w-8xl px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 左侧：上传和预览区域 -->
+                <div class="md:col-span-2 space-y-6">
+                    <!-- 上传区域 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow">
+                        <h2 class="text-xl font-semibold text-neutral mb-4 flex items-center">
+                            <i class="fa fa-upload text-primary mr-2"></i>上传图片
+                        </h2>
+
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
+                            id="drop-area">
+                            <input type="file" id="file-input" class="hidden" accept="image/*" multiple>
+                            <i class="fa fa-upload text-4xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-500">点击或拖拽文件到此处上传</p>
+                            <p class="text-xs text-gray-400 mt-1">支持JPG、PNG、WebP等格式（最多10张）</p>
+                        </div>
+
+                        <!-- 文件列表 -->
+                        <div id="file-list" class="mt-4 hidden">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm text-gray-600">已选择 <span id="file-count">0</span> 张图片</span>
+                                    <button id="select-all" class="text-xs text-primary hover:underline">全选</button>
+                                </div>
+                                <span class="text-sm text-primary">已选 <span id="selected-count">0</span> 张待拼接</span>
+                                <button id="clear-files" class="text-xs text-red-500 hover:underline">清空</button>
+                            </div>
+                            <div id="file-items" class="max-h-32 overflow-y-auto space-y-1"></div>
+                        </div>
+
+                        <!-- 拼接顺序调整 -->
+                        <div id="order-section" class="mt-4 hidden">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-sm font-medium text-gray-700 flex items-center">
+                                    <i class="fa fa-list-ol mr-2 text-primary"></i>拼接顺序
+                                </h3>
+                                <div class="flex items-center gap-2">
+                                    <button id="reverse-order" class="text-xs text-primary hover:underline">反转顺序</button>
+                                </div>
+                            </div>
+                            <div id="order-list" class="max-h-48 overflow-y-auto space-y-2 min-h-[80px] border-2 border-dashed border-gray-200 rounded-lg p-2">
+                                <div id="order-empty-hint" class="text-center text-gray-400 py-4">
+                                    <i class="fa fa-info-circle mr-1"></i>上传图片后，拖拽调整拼接顺序
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 预览区域 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow">
+                        <h2 class="text-xl font-semibold text-neutral mb-4 flex items-center">
+                            <i class="fa fa-eye text-primary mr-2"></i>预览（双击放大）
+                        </h2>
+                        <div id="preview-container"
+                            class="preview-box bg-gray-50 rounded-lg flex items-center justify-center"
+                            style="height: 500px;">
+                            <div class="text-center">
+                                <i class="fa fa-picture-o text-gray-300 text-5xl mb-3"></i>
+                                <p class="text-gray-400">拼接结果将在这里显示</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 全屏覆盖层 -->
+                    <div id="fullscreen-overlay"
+                        class="fixed inset-0 bg-black/95 flex items-center justify-center z-[200] hidden">
+                        <button id="close-fullscreen"
+                            class="absolute top-4 right-6 text-white text-4xl font-light hover:text-gray-300 transition-colors">&times;</button>
+                        <img id="fullscreen-image" src="" alt="全屏预览" class="max-w-[95vw] max-h-[95vh] object-contain">
+                    </div>
+                </div>
+
+                <!-- 右侧：设置区域 -->
+                <div class="space-y-6">
+                    <!-- 拼接设置 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow">
+                        <h2 class="text-xl font-semibold text-neutral mb-4 flex items-center">
+                            <i class="fa fa-cog text-primary mr-2"></i>拼接设置
+                        </h2>
+
+                        <!-- 拼接方向 -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">拼接方向</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button id="vertical-btn"
+                                    class="p-3 border-2 border-primary bg-primary/10 rounded-lg text-primary font-medium flex items-center justify-center">
+                                    <i class="fa fa-arrow-down mr-2"></i>垂直
+                                </button>
+                                <button id="horizontal-btn"
+                                    class="p-3 border-2 border-gray-200 rounded-lg text-gray-500 font-medium flex items-center justify-center">
+                                    <i class="fa fa-arrow-right mr-2"></i>水平
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 拼接间距 -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                拼接间距：<span id="gap-value">0</span>px
+                            </label>
+                            <input type="range" id="gap-slider" min="0" max="50" value="0"
+                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+
+                        <!-- 背景颜色 -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">背景颜色</label>
+                            <div class="flex items-center gap-2">
+                                <input type="color" id="bg-color" value="#ffffff"
+                                    class="w-10 h-10 rounded cursor-pointer">
+                                <input type="text" id="bg-color-hex" value="#ffffff"
+                                    class="flex-1 px-3 py-2 border border-gray-300 rounded-lg input-focus">
+                            </div>
+                        </div>
+
+                        <!-- 保持宽高比 -->
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="maintain-ratio" checked class="w-4 h-4 text-primary rounded">
+                                <span class="ml-2 text-sm text-gray-700">保持宽高比</span>
+                            </label>
+                        </div>
+
+                        <!-- 统一尺寸 -->
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="unify-size" class="w-4 h-4 text-primary rounded">
+                                <span class="ml-2 text-sm text-gray-700">统一图片尺寸</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 操作按钮 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow">
+                        <button id="stitch-btn"
+                            class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg btn-hover flex items-center justify-center mb-3"
+                            disabled>
+                            <i class="fa fa-scissors mr-2"></i>开始拼接
+                        </button>
+                        <button id="add-to-list-btn"
+                            class="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 px-4 rounded-lg btn-hover flex items-center justify-center mb-3"
+                            disabled>
+                            <i class="fa fa-plus mr-2"></i>加入列表
+                        </button>
+                        <button id="download-btn"
+                            class="w-full bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-4 rounded-lg btn-hover flex items-center justify-center"
+                            disabled>
+                            <i class="fa fa-download mr-2"></i>下载图片
+                        </button>
+                    </div>
+
+                    <!-- 使用说明 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow">
+                        <h2 class="text-lg font-semibold text-neutral mb-3 flex items-center">
+                            <i class="fa fa-info-circle text-primary mr-2"></i>使用说明
+                        </h2>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>上传两张或更多图片</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>选择需要拼接的图片</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>拖动或点击调整按钮调整拼接顺序</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>选择拼接方向（垂直或水平）</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>调整拼接间距和背景颜色</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>点击保持宽高比复选框保持图片宽高比</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>点击统一尺寸复选框统一图片尺寸</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>点击开始拼接按钮</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>双击预览可全屏查看</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>点击加入列表按钮将已拼接的图片添加到待处理列表，可继续参与二次拼接</li>
+                            <li><i class="fa fa-check-circle text-green-500 mr-2"></i>点击下载按钮保存拼接结果</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <!-- 成功提示 -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center">
+        <i class="fa fa-check-circle mr-2"></i>
+        <span id="toast-message"></span>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../../common/js/nav.js"></script>
+</body>
+
+</html>

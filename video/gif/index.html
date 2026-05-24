@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
-    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/ffmpeg.min.js"></script>
+    <script src="../lib/ffmpeg.js"></script>
 
     <script type="application/ld+json">
     {
@@ -21,7 +21,8 @@
         "name": "视频转GIF工具",
         "description": "免费在线视频转GIF动图工具，支持从视频中提取精彩片段制作GIF，可自定义帧率、尺寸和质量。纯前端处理，保护用户隐私数据。Free online video to GIF converter.",
         "url": "https://helpoke.com/video/gif",
-        "applicationCategory": "VideoEditing",
+        "applicationCategory": "https://schema.org/VideoEditing",
+        "inLanguage": ["zh-CN", "en-US"], 
         "featureList": [
             "支持MP4、WebM、MOV、AVI等多种视频格式",
             "自定义GIF帧率和尺寸",
@@ -31,10 +32,16 @@
             "一键下载GIF动图"
         ],
         "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
         "offers": {
             "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "CNY"
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
         }
     }
     </script>
@@ -47,9 +54,9 @@
         <section class="page-hero">
             <h1>视频转GIF</h1>
             <p>从视频中提取精彩片段，制作个性化<b style="color: cadetblue;">GIF动图</b>，支持自定义帧率、尺寸和质量。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 最大支持100MB视频文件。建议先裁剪视频到所需片段再转换为GIF。
             </p>
@@ -110,8 +117,8 @@
                         <label for="scale">尺寸缩放：</label>
                         <select id="scale">
                             <option value="100">原始尺寸</option>
-                            <option value="75">75%</option>
-                            <option value="50" selected>50%</option>
+                            <option value="75" selected>75%</option>
+                            <option value="50">50%</option>
                             <option value="25">25%</option>
                         </select>
                     </div>

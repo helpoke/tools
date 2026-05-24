@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频编辑在线免费工具，支持视频旋转、模糊处理，纯前端处理保护隐私">
+    <meta name="keywords" content="视频编辑, 视频旋转, 视频模糊, 在线视频编辑, 免费视频处理">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频编辑 - 免费在线视频旋转模糊处理工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../lib/ffmpeg.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频编辑工具",
+        "description": "免费在线视频编辑工具，支持视频旋转、模糊处理。纯前端处理，保护用户隐私数据。",
+        "url": "https://helpoke.com/video/edit",
+        "applicationCategory": "https://schema.org/VideoEditing",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "支持视频旋转（90度、180度、270度、水平翻转、垂直翻转）",
+            "支持视频模糊处理",
+            "纯前端处理，视频不上传服务器",
+            "实时预览效果",
+            "一键下载编辑后的视频"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频编辑</h1>
+            <p>支持<b style="color: cadetblue;">视频旋转</b>和<b style="color: cadetblue;">模糊处理</b>，纯前端处理保护隐私。</p>
+        </section>
+        <div class="container">
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 最大支持100MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
+            </p>
+
+            <div class="upload-section">
+                <input type="file" id="videoUpload" accept="video/*">
+                <label for="videoUpload" class="upload-btn">上传视频文件</label>
+                <p class="upload-note">* 支持 MP4, WebM, AVI, MOV, MKV 等常见视频格式</p>
+            </div>
+
+            <div class="preview-section" id="previewSection">
+                <div class="video-info" id="videoInfo">
+                    <p>请上传视频文件</p>
+                </div>
+                <div class="video-container">
+                    <video id="videoPlayer" controls></video>
+                </div>
+            </div>
+
+            <div class="settings-section" id="settingsSection">
+                <h3>旋转设置</h3>
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="rotation">旋转角度：</label>
+                        <select id="rotation">
+                            <option value="0">不旋转</option>
+                            <option value="90">顺时针旋转 90°</option>
+                            <option value="180">旋转 180°</option>
+                            <option value="270">顺时针旋转 270° (逆时针90°)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="flipH">水平翻转：</label>
+                        <select id="flipH">
+                            <option value="0">不翻转</option>
+                            <option value="1">水平翻转</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="flipV">垂直翻转：</label>
+                        <select id="flipV">
+                            <option value="0">不翻转</option>
+                            <option value="1">垂直翻转</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3>模糊设置</h3>
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="blurEnable">启用模糊：</label>
+                        <select id="blurEnable">
+                            <option value="0">不模糊</option>
+                            <option value="1">模糊处理</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="blurType">模糊类型：</label>
+                        <select id="blurType">
+                            <option value="boxblur">方框模糊</option>
+                            <option value="gaussian">高斯模糊</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="blurRadius">模糊强度：</label>
+                        <select id="blurRadius">
+                            <option value="3">轻度 (3)</option>
+                            <option value="5" selected>中度 (5)</option>
+                            <option value="10">重度 (10)</option>
+                            <option value="15">极重度 (15)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="processBtn" disabled>
+                        <span id="processBtnText">开始处理</span>
+                        <span id="processBtnLoading" style="display: none;">处理中...</span>
+                    </button>
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar" id="progressBar"></div>
+                        <span class="progress-percentage" id="progressPercentage">0%</span>
+                    </div>
+                    <p class="process-note" id="processNote" style="display: none;"></p>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h2>处理结果</h2>
+                <div class="result-info" id="resultInfo"></div>
+                <div class="result-container">
+                    <video id="outputVideo" controls></video>
+                </div>
+                <div class="download-buttons">
+                    <button id="downloadBtn">下载处理后视频</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="defaultModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">提示</h3>
+                    <button class="close-btn"
+                        onclick="document.getElementById('defaultModal').classList.remove('active')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage">这是一个提示消息。</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary"
+                        onclick="document.getElementById('defaultModal').classList.remove('active')">关闭</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

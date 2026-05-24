@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script src="../lib/jszip.min.js"></script>
+    <script src="../../common/lib/jszip.min.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -21,7 +21,8 @@
         "name": "图片水印添加工具",
         "description": "批量图片水印添加工具，支持文字水印和图片水印两种模式。可自定义水印位置、大小、透明度等参数。本地处理，保护隐私安全。Batch image watermark tool supporting text and image watermarks with customizable options.",
         "url": "https://helpoke.com/image/watermark",
-        "applicationCategory": "ImageProcessing",
+        "applicationCategory": "https://schema.org/ImageProcessing",
+        "inLanguage": ["zh-CN", "en-US"], 
         "featureList": [
             "支持文字水印和图片水印两种模式",
             "批量处理，最多支持30张图片",
@@ -32,10 +33,16 @@
             "一键打包下载所有加水印图片"
         ],
         "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
         "offers": {
             "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "CNY"
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
         }
     }
     </script>
@@ -166,13 +173,12 @@
             </div>
         </div>
 
-        <script src="script.js"></script>
-
-
         <!-- Footer component container -->
         <div id="footer-container"></div>
     </main>
+
     <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
