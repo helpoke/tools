@@ -32,7 +32,7 @@ h3 {
 /* 容器居中 */
 .container {
     max-width: 100%;
-    padding: 20px 0;
+    padding: 40px 0;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -254,30 +254,57 @@ h3 {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
 }
 
 .result-container img {
-    width: 100%;
+    max-width: 100%;
     max-height: 500px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     display: block;
 }
 
 .download-buttons {
-    margin-top: 20px;
+    margin-top: 24px;
     text-align: center;
-	padding: 10px 20px;
 }
 
 #downloadBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-	padding: inherit;
-    border-radius: 8px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+#downloadBtn::before {
+    content: '⬇';
+    font-size: 18px;
 }
 
 #downloadBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #7b8ff0 0%, #8a5cb3 100%);
+}
+
+#downloadBtn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
 /* 弹窗 */
