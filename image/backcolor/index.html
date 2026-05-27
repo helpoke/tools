@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图片背景色切换工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>图片背景色切换工具</h1>
+        
+        <div class="upload-section">
+            <input type="file" id="imageUpload" accept="image/*">
+            <label for="imageUpload" class="upload-btn">上传图片</label>
+        </div>
+        
+        <div class="preview-section">
+            <div class="image-container">
+                <img id="previewImage" src="" alt="预览图片" style="display: none;">
+                <div id="placeholder" class="placeholder">请上传一张图片</div>
+            </div>
+        </div>
+        
+        <div class="color-section">
+            <h2>选择背景颜色</h2>
+            <div class="color-palette">
+                <div class="color-swatch" data-color="#ffffff"></div>
+                <div class="color-swatch" data-color="#000000"></div>
+                <div class="color-swatch" data-color="#ff0000"></div>
+                <div class="color-swatch" data-color="#00ff00"></div>
+                <div class="color-swatch" data-color="#0000ff"></div>
+                <div class="color-swatch" data-color="#ffff00"></div>
+                <div class="color-swatch" data-color="#ff00ff"></div>
+                <div class="color-swatch" data-color="#00ffff"></div>
+            </div>
+            <input type="color" id="customColor" value="#ffffff">
+        </div>
+        
+        <div class="tolerance-section">
+            <h2>背景检测容差</h2>
+            <div class="tolerance-control">
+                <input type="range" id="tolerance" min="0" max="100" value="30">
+                <span id="toleranceValue">30</span>
+            </div>
+            <p>调整容差值可以更好地识别复杂背景，值越大识别范围越广。</p>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="replaceBgColorBtn" disabled>应用背景替换</button>
+            <button id="downloadBtn" disabled>下载结果图片</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

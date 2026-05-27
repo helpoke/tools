@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频转音频在线免费工具，支持从视频中提取音频，转换为MP3、WAV、AAC等格式，纯前端处理保护隐私">
+    <meta name="keywords" content="视频转音频, 提取音频, MP3转换, WAV转换, 视频音频提取, 在线工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频转音频 - 免费在线视频音频提取工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script src="../lib/ffmpeg.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频转音频工具",
+        "description": "免费在线视频转音频工具，支持从视频中提取音频并转换为MP3、WAV、AAC等格式。纯前端处理，保护用户隐私数据。Free online video to audio converter.",
+        "url": "https://helpoke.com/video/audio-extract",
+        "applicationCategory": "https://schema.org/AudioEditing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持从各种视频格式提取音频",
+            "支持MP3、WAV、AAC、M4A等音频格式",
+            "可调节音频质量和码率",
+            "纯前端处理，音频不上传服务器",
+            "实时转换进度显示",
+            "一键下载转换后的音频"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频转音频</h1>
+            <p>从视频中提取音频，转换为<b style="color: cadetblue;">MP3、WAV、AAC、M4A</b>等常见音频格式。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏</em></b>）</p>
+        </section>
+        <div class="container">
+            <p class="description">
+                <b>注意：</b> 最大支持100MB视频文件。支持从MP4、WebM、AVI、MOV、MKV等格式提取音频。
+            </p>
+            <!-- <p class="description warning-text">
+                ⚠️ 由于FFmpeg运行需求，请使用本地服务器打开此页面 (如: <code>npx serve</code> 或 <code>python -m http.server</code>)
+            </p> -->
+
+            <div class="upload-section">
+                <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv">
+                <label for="videoUpload" class="upload-btn">上传视频文件</label>
+                <p class="upload-note">* 支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 等视频格式</p>
+            </div>
+
+            <div class="preview-section" id="previewSection">
+                <div class="video-info" id="videoInfo">
+                    <p>请上传视频文件</p>
+                </div>
+                <div class="video-container">
+                    <video id="videoPlayer" controls></video>
+                </div>
+            </div>
+
+            <div class="settings-section" id="settingsSection">
+                <h3>音频设置</h3>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="outputFormat">目标格式：</label>
+                        <select id="outputFormat">
+                            <option value="mp3">MP3 (最兼容)</option>
+                            <option value="wav">WAV (无损)</option>
+                            <option value="aac">AAC (高品质)</option>
+                            <option value="m4a">M4A (Apple格式)</option>
+                            <option value="ogg">OGG (开源格式)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="audioQuality">音频质量：</label>
+                        <select id="audioQuality">
+                            <option value="320">高质量 (320 kbps)</option>
+                            <option value="256">高品质 (256 kbps)</option>
+                            <option value="192">中等 (192 kbps)</option>
+                            <option value="128" selected>标准 (128 kbps)</option>
+                            <option value="96">低质量 (96 kbps)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="format-info" id="formatInfo">
+                    <p id="formatInfoText"></p>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="convertBtn" disabled>
+                        <span id="convertBtnText">提取音频</span>
+                        <span id="convertBtnLoading" style="display: none;">提取中...</span>
+                    </button>
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar" id="progressBar"></div>
+                        <span class="progress-percentage" id="progressPercentage">0%</span>
+                    </div>
+                    <p class="convert-note" id="convertNote" style="display: none;"></p>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h2>提取结果</h2>
+                <div class="result-info" id="resultInfo"></div>
+                <div class="audio-container">
+                    <audio id="outputAudio" controls></audio>
+                </div>
+                <div class="download-buttons">
+                    <button id="downloadBtn">下载提取的音频</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="defaultModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">提示</h3>
+                    <button class="close-btn"
+                        onclick="document.getElementById('defaultModal').classList.remove('active')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="modalMessage">这是一个提示消息。</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary"
+                        onclick="document.getElementById('defaultModal').classList.remove('active')">关闭</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
+    </main>
+
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

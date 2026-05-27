@@ -3,13 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <meta name="description" content="在线免费转换Base64编码的图片为JPG、PNG、WebP等格式, 在线免费转换SVG图片为JPG、PNG、WebP等格式">
-    <meta name="keywords" content="Base64转图片, SVG转图片, Base64在线转图片, SVG在线转图片, 在线图片免费转换工具">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description"
+        content="在线免费图片格式转换工具，支持Base64编码、SVG代码、图片文件批量上传转换，输出JPG、PNG、WebP、GIF、BMP、ICO等格式，支持调整图片质量和输出分辨率，本地处理保护隐私">
+    <meta name="keywords"
+        content="图片转换, Base64转图片, SVG转图片, 在线图片转换, 图片格式转换, 批量图片转换, JPG转换, PNG转换, WebP转换, GIF转换, ICO转换, 免费图片转换">
     <meta name="author" content="余一叶知秋尽">
-    <link rel="icon" href="../../common/img/helpoke.png" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片转换工具</title>
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../../common/img/helpoke.webp">
+    <title>图片格式转换工具 - 在线免费转换Base64/SVG/图片文件</title>
 
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="styles.css">
@@ -44,7 +50,8 @@
         "name": "图片格式转换工具",
         "description": "在线图片格式转换工具，支持Base64编码、SVG代码转换为JPG、PNG、WebP等图片格式。支持调整图片质量和输出分辨率。Online image format converter supporting Base64 to image, SVG to image conversion.",
         "url": "https://helpoke.com/image/convert",
-        "applicationCategory": "ImageProcessing",
+        "applicationCategory": "https://schema.org/ImageProcessing",
+        "inLanguage": ["zh-CN", "en-US"], 
         "featureList": [
             "支持Base64编码转换为图片",
             "支持SVG矢量图转换为位图",
@@ -55,10 +62,16 @@
             "本地处理，保护用户隐私"
         ],
         "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
         "offers": {
             "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "CNY"
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
         }
     }
     </script>
@@ -71,7 +84,7 @@
     <main class="main">
         <section class="page-hero">
             <h1>图像转换工具</h1>
-            <p>支持Base64、SVG等转换为JPG、PNG、WebP等多种图片格式</p>
+            <p>支持Base64、SVG、图片文件等批量转换为JPG、PNG、WebP、BMP、GIF等多种图片格式</p>
         </section>
 
         <!-- 主要内容 -->
@@ -149,12 +162,23 @@
                     <div id="input-upload" class="space-y-4 hidden">
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
                             id="drop-area">
-                            <input type="file" id="file-input" class="hidden" accept="image/*,image/svg+xml,.svg">
+                            <input type="file" id="file-input" class="hidden" accept="image/*,image/svg+xml,.svg"
+                                multiple>
                             <i class="fa fa-upload text-4xl text-gray-400 mb-2"></i>
                             <p class="text-gray-500">点击或拖拽文件到此处上传</p>
-                            <p class="text-xs text-gray-400 mt-1">支持JPG、PNG、GIF、SVG等格式</p>
+                            <p class="text-xs text-gray-400 mt-1">支持JPG、PNG、GIF、SVG等格式（最多20张）</p>
                         </div>
 
+                        <!-- 文件列表 -->
+                        <div id="file-list" class="hidden">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-gray-600">已选择 <span id="file-count">0</span> 张图片</span>
+                                <button id="clear-files" class="text-xs text-red-500 hover:underline">清空</button>
+                            </div>
+                            <div id="file-items" class="max-h-32 overflow-y-auto space-y-1"></div>
+                        </div>
+
+                        <!-- 当前选中文件信息 -->
                         <div id="file-info" class="hidden bg-gray-50 p-3 rounded-lg">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
@@ -197,7 +221,9 @@
                                 <option value="image/jpeg">JPG (.jpg)</option>
                                 <option value="image/png">PNG (.png) - 推荐用于SVG转换</option>
                                 <option value="image/webp">WebP (.webp)</option>
+                                <option value="image/gif">GIF (.gif)</option>
                                 <option value="image/bmp">BMP (.bmp)</option>
+                                <option value="image/x-icon">ICO (.ico) - Windows图标格式</option>
                                 <option value="base64">Base64 编码</option>
                             </select>
                         </div>
@@ -228,7 +254,7 @@
 
                         <div>
                             <label for="filename" class="block text-sm font-medium text-gray-700 mb-1">文件名：</label>
-                            <input type="text" id="filename" value="pengline-converted-image"
+                            <input type="text" id="filename" value="helpoke-converted-image"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
                         </div>
                     </div>
@@ -243,6 +269,11 @@
                             class="flex-1 bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
                             disabled>
                             <i class="fa fa-download mr-2"></i>下载
+                        </button>
+                        <button id="download-all-btn"
+                            class="flex-1 bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
+                            disabled>
+                            <i class="fa fa-download mr-2"></i>批量下载
                         </button>
                     </div>
 
@@ -293,10 +324,10 @@
                     <p><i class="fa fa-exclamation-triangle text-amber-500 mr-2"></i>注意：过大的图片可能会影响转换性能，请尽量优化输入内容</p>
                 </div>
             </div>
+            <!-- Footer component container -->
+            <div id="footer-container"></div>
         </main>
-        
-        <!-- Footer component container -->
-        <div id="footer-container"></div>
+
 
         <!-- 成功提示 -->
         <div id="toast"
@@ -305,11 +336,12 @@
             <span id="toast-message"></span>
         </div>
 
-        <!-- 引用外部JavaScript文件 -->
-        <script src="script.js"></script>
-
     </main>
     <script src="../../common/js/nav.js"></script>
+    <!-- 引用JSZip库用于批量下载 -->
+    <script src="../../common/lib/jszip.min.js"></script>
+    <!-- 引用外部JavaScript文件 -->
+    <script src="script.js"></script>
 </body>
 
 </html>

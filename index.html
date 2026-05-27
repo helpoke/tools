@@ -3,877 +3,42 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description"
-        content="实用在线工具集, 免费图片压缩转换水印、视频裁剪打码、JSON格式化、密码UUID生成、Mermaid图表、文档签名水印、批量下载等工具，离线Helpoke工具保护隐私安全, Helpoke小助点工具">
-    <meta name="keywords"
-        content="在线工具, 免费工具, 图片压缩, 图片水印, 视频裁剪, JSON格式化, 随机密码生成, UUID生成, Mermaid图表, 文档签名, 批量下载, 隐私保护, 断网可用, Helpoke工具, 小助点工具">
-    <meta name="author" content="余一叶知秋尽">
-    <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
-    <meta name="sogou_site_verification" content="o6QALMUfHp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" href="common/img/helpoke.png" type="image/x-icon">
-    <title>Helpoke 助点站 - 实用在线工具集</title>
-    <style>
-        :root {
-            --primary: #4f46e5;
-            --primary-light: #eef2ff;
-            --primary-dark: #4338ca;
-            --sidebar-width: 240px;
-            --text: #1e293b;
-            --text-secondary: #64748b;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --border: #e2e8f0;
-            --hover-bg: #f8fafc;
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-            --radius: 12px;
-            --transition: 0.2s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* ========== Sidebar ========== */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: #fff;
-            color: #334155;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-            overflow-y: auto;
-            overflow-x: hidden;
-            border-right: 1px solid #e8ecf1;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar-brand {
-            padding: 24px 20px 18px;
-            border-bottom: 1px solid #f1f5f9;
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebar-brand a {
-            font-size: 18px;
-            font-weight: 700;
-            color: #4f46e5;
-            text-decoration: none;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Collapse toggle button */
-        .sidebar-toggle-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            background: #fff;
-            color: #64748b;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-left: auto;
-            transition: all 0.2s ease;
-        }
-
-        .sidebar-toggle-btn:hover {
-            background: #f1f5f9;
-            color: #334155;
-            border-color: #cbd5e1;
-        }
-
-        .sidebar-toggle-btn svg {
-            transition: transform 0.25s ease;
-        }
-
-        .sidebar-brand .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: #eef2ff;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .sidebar-nav {
-            flex: 1;
-            padding: 12px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .sidebar-nav .nav-section {
-            font-size: 12px;
-            color: #94a3b8;
-            padding: 16px 12px 6px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 12px;
-            border-radius: 8px;
-            color: #475569;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.15s ease;
-        }
-
-        .sidebar-nav a:hover {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .sidebar-nav a.active {
-            background: #eef2ff;
-            color: #4f46e5;
-            font-weight: 600;
-        }
-
-        .sidebar-nav a .nav-icon {
-            width: 18px;
-            text-align: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .sidebar-footer {
-            padding: 14px 20px;
-            border-top: 1px solid #f1f5f9;
-            font-size: 12px;
-            color: #94a3b8;
-            text-align: center;
-        }
-
-        /* ========== Collapsed Sidebar ========== */
-        .sidebar.collapsed {
-            transform: translateX(calc(var(--sidebar-width) * -1));
-        }
-
-        /* ========== Floating Toggle Ball ========== */
-        .sidebar-float-ball {
-            position: fixed;
-            top: 20px;
-            left: 16px;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
-            cursor: pointer;
-            z-index: 99;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0.5);
-            pointer-events: none;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-
-        .sidebar-float-ball.visible {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
-        .sidebar-float-ball:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.06);
-            transform: scale(1.08);
-        }
-
-        .sidebar-float-ball .ball-icon {
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        .sidebar-float-ball .ball-tooltip {
-            position: absolute;
-            left: 52px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #1e293b;
-            color: #fff;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.15s ease;
-        }
-
-        .sidebar-float-ball:hover .ball-tooltip {
-            opacity: 1;
-        }
-
-        /* ========== Main Content ========== */
-        .main {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 0 24px;
-            transition: margin-left 0.3s ease;
-        }
-
-        .sidebar.collapsed~.main {
-            margin-left: 0;
-        }
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #7c7c91 0%, #696e9d 50%, #43529d 100%);
-            color: #fff;
-            padding: 28px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            right: -80px;
-            top: -80px;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            right: 120px;
-            bottom: -60px;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 50%;
-        }
-
-        .hero h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 15px;
-            opacity: 0.8;
-            position: relative;
-            z-index: 1;
-            font-weight: 400;
-        }
-
-        /* Search bar */
-        .search-container {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            padding: 20px 24px;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .search-icon {
-            font-size: 18px;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-
-        .search-input {
-            flex: 1;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 15px;
-            background: var(--bg);
-            color: var(--text);
-            transition: all var(--transition);
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: var(--primary);
-            background: #fff;
-            box-shadow: 0 0 0 3px var(--primary-light);
-        }
-
-        .search-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .search-results {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 24px;
-            right: 24px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            max-height: 400px;
-            overflow-y: auto;
-            z-index: 100;
-            display: none;
-        }
-
-        .search-results.show {
-            display: block;
-        }
-
-        .search-results:empty {
-            display: none;
-        }
-
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background var(--transition);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-
-        .search-result-item:hover {
-            background: var(--primary-light);
-        }
-
-        .search-result-item .result-icon {
-            font-size: 16px;
-            width: 24px;
-            text-align: center;
-        }
-
-        .search-result-item .result-info {
-            flex: 1;
-        }
-
-        .search-result-item .result-title {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        .search-result-item .result-category {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        .search-result-item .result-link {
-            font-size: 12px;
-            color: var(--primary);
-            padding: 4px 8px;
-            background: var(--primary-light);
-            border-radius: 4px;
-        }
-
-        .search-no-results {
-            padding: 20px;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        /* Recent section */
-        .recent-section {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-        }
-
-        .recent-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .recent-icon {
-            font-size: 14px;
-        }
-
-        .recent-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .recent-clear {
-            margin-left: auto;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 14px;
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 4px;
-            transition: all var(--transition);
-        }
-
-        .recent-clear:hover {
-            background: #f1f5f9;
-            color: var(--text);
-        }
-
-        .recent-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .recent-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all var(--transition);
-            font-size: 13px;
-            color: var(--text);
-        }
-
-        .recent-item:hover {
-            background: var(--primary-light);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .recent-item .recent-icon {
-            font-size: 12px;
-        }
-
-        .recent-empty {
-            color: var(--text-secondary);
-            font-size: 13px;
-            padding: 8px 0;
-        }
-
-        /* container area */
-        .container {
-            flex: 1;
-            padding: 32px 16px 40px;
-            max-width: 1100px;
-        }
-
-        /* Stats row */
-        .stats-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            flex: 1;
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .stat-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
-        }
-
-        .stat-icon.blue {
-            background: #eef2ff;
-        }
-
-        .stat-icon.green {
-            background: #ecfdf5;
-        }
-
-        .stat-icon.amber {
-            background: #fffbeb;
-        }
-
-        .stat-icon.purple {
-            background: #faf5ff;
-        }
-
-        .stat-info .stat-value {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text);
-            line-height: 1;
-        }
-
-        .stat-info .stat-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* Section header */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .section-header h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        /* Categories grid */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .category-card.full-width {
-            grid-column: span 2;
-        }
-
-        .category-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            transition: all var(--transition);
-            overflow: hidden;
-        }
-
-        .category-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 20px 14px;
-            border-bottom: 1px solid var(--border);
-            background: var(--hover-bg);
-        }
-
-        .category-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .category-icon.img {
-            background: #dbeafe;
-        }
-
-        .category-icon.video {
-            background: #fce7f3;
-        }
-
-        .category-icon.data {
-            background: #d1fae5;
-        }
-
-        .category-icon.dev {
-            background: #ede9fe;
-        }
-
-        .category-icon.doc {
-            background: #fef3c7;
-        }
-
-        .category-icon.dl {
-            background: #e0e7ff;
-        }
-
-        .category-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text);
-            letter-spacing: -0.3px;
-        }
-
-        .tools-list {
-            display: flex;
-            flex-direction: column;
-            padding: 8px;
-        }
-
-        .category-card.full-width .tools-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .tool-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all var(--transition);
-            font-size: 16px;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .tool-link:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .tool-link .icon {
-            font-size: 15px;
-            width: 20px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .tool-link .badge {
-            margin-left: auto;
-            font-size: 11px;
-            background: var(--bg);
-            color: var(--text-secondary);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 500;
-        }
-
-        /* Footer note */
-        .footer-note {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px 24px;
-            background-color: beige;
-            border-top: 2px solid var(--border);
-            border-bottom: 2px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
-        /* Mobile toggle */
-        .sidebar-toggle {
-            display: none;
-            position: fixed;
-            top: 12px;
-            left: 12px;
-            z-index: 200;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background: #fff;
-            border: 1px solid var(--border);
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Sidebar overlay */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 90;
-        }
-
-        .sidebar-overlay.show {
-            display: block;
-        }
-
-        /* ========== Responsive ========== */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .sidebar-toggle {
-                display: flex;
-            }
-
-            .sidebar-float-ball,
-            .sidebar-toggle-btn {
-                display: none;
-            }
-
-            .main {
-                margin-left: 0;
-            }
-
-            .hero {
-                padding: 32px 10px;
-            }
-
-            .hero h1 {
-                font-size: 24px;
-            }
-
-            .container {
-                padding: 24px 0;
-            }
-
-            .stats-row {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .stat-card {
-                flex: 1 1 calc(50% - 5px);
-                min-width: 140px;
-                padding: 14px 16px;
-            }
-
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .category-card.full-width {
-                grid-column: span 1;
-            }
-
-            .category-card.full-width .tools-list {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar-brand {
-                padding: 24px 65px 10px;
-            }
-
-        }
-
-        @media (max-width: 480px) {
-            .stat-card {
-                flex: 1 1 100%;
-            }
-
-            .sidebar-brand {
-                padding: 24px 65px 10px;
-            }
-        }
-
-        /* ========== Right Ad Sidebar ========== */
-        .ad-sidebar-right {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 100vh;
-            z-index: 50;
-            padding: 0 12px;
-            display: flex;
-            flex-direction: column;
-            pointer-events: none;
-        }
-
-        .ad-sidebar-right .ad-slot {
-            flex: 1;
-            background: var(--card-bg);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            pointer-events: auto;
-            position: relative;
-        }
-
-        .ad-sidebar-right .ad-slot:first-child {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .ad-sidebar-right .ad-label {
-            font-size: 11px;
-            color: #94a3b8;
-            text-align: center;
-            padding: 6px;
-            letter-spacing: 0.3px;
-        }
-
-        @media (min-width: 1400px) {
-            .main {
-                margin-right: 300px;
-            }
-        }
-
-        @media (max-width: 1399px) {
-            .ad-sidebar-right {
-                display: none;
-            }
-        }
-    </style>
+    <meta name="robots" content="index,follow,noai">
+    <title>Helpoke 小助点 - 身边的万能在线工具箱</title>
+    <meta name="description"
+        content="Helpoke 由 Help + Poke 组合而生，寓意随时帮忙、一键轻点即用。聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。（离线亦可用）">
+    <meta name="keywords" content="在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护">
+    <link rel="canonical" href="https://helpoke.com/" />
+    <meta property="og:title" content="Helpoke 小助点 - 身边的万能在线工具箱">
+    <meta property="og:description" content="聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Helpoke 小助点 - 身边的万能在线工具箱">
+    <meta name="twitter:description" content="聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。">
+
+    <!-- Favicon -->
+    <!-- <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>"> -->
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="common/img/helpoke.webp">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="common/css/utils.css">
+    <link rel="stylesheet" href="common/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/">
+    <meta property="og:title" content="Helpoke 小助点 - 身边的万能在线工具箱">
+    <meta property="og:description" content="聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
 
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -881,7 +46,7 @@
         "name": "Helpoke 助点站",
         "description": "实用在线工具集，提供免费图片压缩转换水印、视频裁剪打码、JSON格式化、密码UUID生成、Mermaid图表、文档签名水印、批量下载等工具。所有工具均为离线工具，保护用户隐私安全。Free online tools collection including image processing, video editing, JSON tools, security tools and more. All tools work offline to protect privacy.",
         "url": "https://helpoke.com",
-        "keywords": "在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,随机密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护,Helpoke,小助点",
+        "keywords": "在线工具,免费工具,图片压缩,图片水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://helpoke.com/search?q={search_term_string}",
@@ -896,73 +61,758 @@
                     "@type": "WebApplication",
                     "name": "图片工具",
                     "description": "图片压缩、转换、水印、裁剪工具",
-                    "featureList": ["图片压缩", "图片格式转换", "图片加水印", "图片裁剪"],
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["图片压缩", "图片格式转换", "图片加水印", "图片裁剪", "图片旋转", "图片翻转", "图片打码", "图片模糊", "图片拼接"],
                     "url": "https://helpoke.com/image/compressor"
                 },
                 {
                     "@type": "WebApplication",
                     "name": "视频工具",
                     "description": "视频裁剪、水印、转换工具",
-                    "featureList": ["视频裁剪", "视频加水印", "视频格式转换"],
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["视频裁剪", "视频水印", "视频格式转换", "视频编辑", "视频合并", "视频转音频", "视频加密"],
                     "url": "https://helpoke.com/video/cropping"
                 },
                 {
                     "@type": "WebApplication",
                     "name": "数据开发工具",
-                    "description": "JSON、YAML、XML、SQL格式化及进制转换、正则测试等开发工具",
-                    "featureList": ["JSON格式化", "YAML校验", "XML处理", "SQL格式化", "进制转换", "正则测试", "时间戳转换", "URL编码解码", "内容对比"],
+                    "description": "JSON、YAML、Pug、XML、SQL格式化工具",
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["JSON格式化", "YAML格式化", "Pug格式化", "XML格式化", "SQL格式化"],
                     "url": "https://helpoke.com/json"
                 },
                 {
                     "@type": "WebApplication",
                     "name": "加密安全工具",
-                    "description": "MD5、SHA加密、JWT解析、JS混淆等安全工具",
-                    "featureList": ["MD5加密", "SHA256加密", "JWT解析", "Token生成", "JS代码混淆"],
+                    "description": "MD5、SHA、Token工具、JS混淆加密",
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["MD5加密", "SHA加密", "Token工具", "JS代码混淆", "JS代码加密", "JWT工具", "Token解析", "URL编码", "URL解码", "Base64编码", "Base64解码"],
                     "url": "https://helpoke.com/md5"
                 },
                 {
                     "@type": "WebApplication",
-                    "name": "文档工具",
-                    "description": "文档签名、水印添加、批量下载工具",
-                    "featureList": ["PDF签名", "Word签名", "文档水印", "批量下载", "资源文件下载"],
-                    "url": "https://helpoke.com/docu/signature"
+                    "name": "实用工具",
+                    "description": "密码生成、UUID生成、Mermaid图表、时间戳转换等",
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["密码生成", "UUID生成", "Mermaid图表", "时间戳转换", "Cron解析"],
+                    "url": "https://helpoke.com/pwd"
                 },
                 {
                     "@type": "WebApplication",
-                    "name": "实用工具",
-                    "description": "随机密码生成、UUID生成、Mermaid图表、取色器等实用工具",
-                    "featureList": ["随机密码生成", "UUID生成", "Mermaid图表", "颜色取色器", "Cron解析", "数字转中文", "二维码生成"],
-                    "url": "https://helpoke.com/pwd"
+                    "name": "文档与下载工具",
+                    "description": "签名工具、文档水印、批量下载",
+                    "inLanguage": ["zh-CN", "en-US"], 
+                    "featureList": ["文档签名", "文档水印", "资源文件下载", "视频图片下载"],
+                    "url": "https://helpoke.com/docu/signature"
                 }
             ]
         }
     }
     </script>
+
+    <style>
+        /* ========== Homepage Specific Styles ========== */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 48px 32px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 12px;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .hero a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .hero a:hover {
+            color: #e0e7ff;
+        }
+
+        /* ========== Search Box ========== */
+        .search-container {
+            margin-top: 24px;
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            max-width: 60%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-icon {
+            padding: 12px 16px;
+            font-size: 18px;
+            color: #64748b;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            padding: 12px 8px;
+            color: #1e293b;
+        }
+
+        .search-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .search-btn {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            margin-top: 8px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f1f5f9;
+        }
+
+        .search-result-item .icon {
+            font-size: 18px;
+            color: #1e293b;
+        }
+
+        .search-result-item .name {
+            flex: 1;
+            color: #1e293b;
+        }
+
+        .search-result-item .category {
+            font-size: 12px;
+            color: #64748b;
+            padding: 2px 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .search-no-results {
+            padding: 24px;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .category-icon.img {
+            background: #fef3c7;
+        }
+
+        .category-icon.video {
+            background: #dbeafe;
+        }
+
+        .category-icon.data {
+            background: #d1fae5;
+        }
+
+        .category-icon.security {
+            background: #fee2e2;
+        }
+
+        .category-icon.util {
+            background: #e0e7ff;
+        }
+
+        .category-icon.doc {
+            background: #fce7f3;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tool-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: #f8fafc;
+        }
+
+        .tool-link:hover {
+            background: #eef2ff;
+            color: #4f46e5;
+            transform: translateX(4px);
+        }
+
+        .tool-link .icon {
+            font-size: 16px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .tool-link .badge {
+            margin-left: auto;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #e0e7ff;
+            color: #4f46e5;
+        }
+
+        .tool-link .badge.sign {
+            background: #fed7aa;
+            color: #ea580c;
+        }
+
+        .tool-link .badge.watermark {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .tool-link .badge.download {
+            background: #fce7f3;
+            color: #db2777;
+        }
+
+        .tool-link .badge.resource {
+            background: #e0e7ff;
+            color: #4f46e5;
+        }
+
+        /* ========== Stats Row ========== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .stat-icon.blue {
+            background: #dbeafe;
+        }
+
+        .stat-icon.green {
+            background: #d1fae5;
+        }
+
+        .stat-icon.purple {
+            background: #e0e7ff;
+        }
+
+        .stat-icon.orange {
+            background: #fed7aa;
+        }
+
+        .stat-icon.pink {
+            background: #fce7f3;
+        }
+
+        .stat-icon.yellow {
+            background: #fef3c7;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* ========== Recent Section ========== */
+        .recent-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .recent-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .recent-icon {
+            font-size: 20px;
+        }
+
+        .recent-title {
+            font-weight: 700;
+            color: #1e293b;
+            flex: 1;
+        }
+
+        .recent-clear {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .recent-clear:hover {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .badge.popular {
+            background: #c2cfc9;
+            color: #e60a0a;
+        }
+
+        .recent-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .recent-empty {
+            color: #94a3b8;
+            font-size: 14px;
+            padding: 8px 0;
+        }
+
+        .recent-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            transition: all 0.2s;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .recent-item:hover {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        /* ========== Page Hero ========== */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .page-hero h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-hero p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ========== Ad Sidebar Right ========== */
+        .ad-sidebar-right {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 200px;
+            height: 100vh;
+            background: #f8fafc;
+            border-left: 1px solid #e2e8f0;
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+            z-index: 50;
+        }
+
+        .ad-slot {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 0;
+            height: 50%;
+            max-height: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .ad-label {
+            display: block;
+            font-size: 10px;
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        /* Footer note */
+        .footer-note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 24px 24px;
+            color: #e4e9ef;
+            background: #85a290;
+            font-size: 13px;
+            border-top: 3px solid #f1f5f9;
+            border-bottom: 3px solid #f1f5f9;
+        }
+
+        .footer-note a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .footer-note a:hover {
+            color: #4f46e5;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 30px 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.8rem;
+            }
+
+            .search-box {
+                /* flex-direction: column; */
+                gap: 6px;
+                padding: 8px;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .stat-value {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                max-width: 100% !important;
+            }
+
+            .page-layout main.main {
+                width: 100% !important;
+                margin: 0 2% !important;
+            }
+
+        }
+
+        /* ========== Page Layout Container ========== */
+        .page-layout {
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        .page-layout main.main {
+            flex: 1;
+            margin-left: 15%;
+            /* 左间距2% + 导航栏15% */
+            transition: margin-left 0.3s ease;
+        }
+
+        /* 默认隐藏广告栏 */
+        .page-layout .ad-sidebar-right {
+            display: none;
+        }
+
+        /* 默认container宽度100% */
+        .container {
+            max-width: 100%;
+        }
+
+        /* Sidebar collapsed state - 折叠后扩展主内容区域 */
+        body.sidebar-collapsed .page-layout main.main {
+            margin-left: 2%;
+        }
+
+        /* 宽度>1000px时显示广告栏 */
+        @media (min-width: 1001px) {
+            .page-layout .ad-sidebar-right {
+                display: block;
+                position: fixed;
+                right: 1%;
+                top: var(--header-height);
+                width: 12%;
+                /* 广告栏11% */
+                /* height: calc(100vh - var(--header-height)); */
+                height: 100%;
+                overflow-y: auto;
+                border-left: 1px solid #e2e8f0;
+                background: white;
+                z-index: 100;
+            }
+
+            .page-layout main.main {
+                margin-left: 15%;
+            }
+
+            /* container宽度85% */
+            .container {
+                max-width: 85%;
+            }
+        }
+
+        /* ========== Page Ad ========== */
+        .page-ad {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .page-ad amp-ad {
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        /* ========== Giscus Comments ========== */
+        .comments-section {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .comments-section h3 {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Navigation component container -->
     <div id="nav-container"></div>
 
-    <!-- Main content -->
-    <main class="main">
-        <section class="hero">
-            <h1>有事找 Helpoke（小助点），轻点即可解忧</h1>
-            <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题（离线亦可用）。</p>
-            <p>有什么问题、建议、需求或想法可随时联系，邮箱：<a class="social-icon" href="mailto:contact@helpoke.com" target="_blank"
-                    title="Email">contact@helpoke.com</a></p>
-        </section>
+    <!-- Page Layout Container -->
+    <div class="page-layout">
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Hero Section -->
+                <section class="hero">
+                    <h1>有事找 Helpoke（小助点），一点即用</h1>
+                    <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。极简操作、安全隐私（离线亦可用）。</p>
+                    <p>聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，高效解决生活与办公各类小问题。</p>
+                    <p>有什么问题、建议、需求或想法可随时联系，邮箱：<a href="mailto:contact@helpoke.com">contact@helpoke.com</a></p>
 
-        <div class="container">
-            <div class="search-container">
-                <div class="search-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" id="searchInput" placeholder="搜索工具，如：压缩、二维码、JSON..." />
-                </div>
-                <div class="search-results" id="searchResults"></div>
+                    <!-- Search Box -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="searchInput" placeholder="搜索工具..." class="search-input">
+                            <button id="searchBtn" class="search-btn">搜索</button>
+                        </div>
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </section>
 
-                <!-- 最近使用 -->
-                <div class="recent-section" id="recentSection">
+                <!-- Recent Used -->
+                <div class="recent-section">
                     <div class="recent-header">
                         <span class="recent-icon">🕐</span>
                         <span class="recent-title">最近使用</span>
@@ -972,552 +822,397 @@
                         <div class="recent-empty">暂无记录</div>
                     </div>
                 </div>
+
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">🖼️</div>
+                        <div class="stat-info">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">图片工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">🎬</div>
+                        <div class="stat-info">
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">视频工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">💻</div>
+                        <div class="stat-info">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">数据工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">🔐</div>
+                        <div class="stat-info">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label">加密工具</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon pink">📝</div>
+                        <div class="stat-info">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">文档下载</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">🛠️</div>
+                        <div class="stat-info">
+                            <div class="stat-value">9</div>
+                            <div class="stat-label">实用工具</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool Categories -->
+                <div class="category-grid">
+                    <!-- 图片工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon img">🖼️</div>
+                            <span class="category-title">图片工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="image/compressor" class="tool-link">
+                                <span class="icon">📦</span><b>图片压缩</b>(JPG/PNG/WebP)
+                                <span class="badge popular">热门</span>
+                            </a>
+                            <a href="image/convert" class="tool-link">
+                                <span class="icon">🔄</span><b>图片转换</b>(SVG/Base64/PNG)
+                                <span class="badge">转换</span>
+                            </a>
+                            <a href="image/watermark" class="tool-link">
+                                <span class="icon">💧</span><b>图片水印</b>(滚动文字+图片)
+                                <span class="badge">水印</span>
+                            </a>
+                            <a href="image/cropping" class="tool-link">
+                                <span class="icon">✂️</span><b>图片裁剪</b>(精确比例)
+                                <span class="badge">裁剪</span>
+                            </a>
+                            <!-- 图片处理 -->
+                            <a href="image/edit" class="tool-link">
+                                <span class="icon">🛠️</span><b>图片编辑</b>(旋转+模糊)
+                                <span class="badge">编辑</span>
+                            </a>
+                            <!-- 图片合并 -->
+                            <a href="image/stitch" class="tool-link">
+                                <span class="icon">🖼️</span><b>图片合并</b>(多图拼接)
+                                <span class="badge">拼接</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 视频工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon video">🎬</div>
+                            <span class="category-title">视频工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="video/cropping" class="tool-link">
+                                <span class="icon">✂️</span><b>视频裁剪</b>(尺寸+时长)
+                                <span class="badge popular">热门</span>
+                            </a>
+                            <a href="video/watermark" class="tool-link">
+                                <span class="icon">🎥</span><b>视频水印</b>(滚动文字+图片)
+                                <span class="badge">水印</span>
+                            </a>
+                            <a href="video/convert" class="tool-link">
+                                <span class="icon">🔄</span><b>视频转换</b>(WebM/MP4)
+                                <span class="badge">转换</span>
+                            </a>
+                            <a href="video/gif" class="tool-link">
+                                <span class="icon">🖼️</span><b>视频转GIF</b>(动图制作)
+                                <span class="badge">GIF</span>
+                            </a>
+                            <a href="video/audio" class="tool-link">
+                                <span class="icon">🔊</span><b>视频转音频</b>(提取音频)
+                                <span class="badge">音频</span>
+                            </a>
+                            <!-- 视频编辑 -->
+                            <a href="video/edit" class="tool-link">
+                                <span class="icon">🛠️</span><b>视频编辑</b>(旋转+模糊)
+                                <span class="badge">编辑</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 文档与下载工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon doc">📥</div>
+                            <span class="category-title">文档与下载工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="docu/signature" class="tool-link">
+                                <span class="icon">✍️</span><b>文档签名</b>(在线签名)
+                                <span class="badge sign">签名</span>
+                            </a>
+                            <a href="docu/watermark" class="tool-link">
+                                <span class="icon">🛡️</span><b>文档水印</b>(多格式文字)
+                                <span class="badge watermark">水印</span>
+                            </a>
+                            <a href="download/media" class="tool-link">
+                                <span class="icon">⬇️</span><b>视频图片下载</b>(批量+爬取)
+                                <span class="badge download">下载</span>
+                            </a>
+                            <a href="download/resource" class="tool-link">
+                                <span class="icon">📦</span><b>资源文件下载</b>(JS/CSS/字体)
+                                <span class="badge resource">资源</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 数据开发工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon data">💻</div>
+                            <span class="category-title">数据开发工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="json" class="tool-link">
+                                <span class="icon">{ }</span><b>JSON 格式化</b>(比对+转换)
+                                <span class="badge popular">热门</span>
+                            </a>
+                            <a href="yaml" class="tool-link">
+                                <span class="icon">⚙️</span><b>YAML 格式化</b>(压缩+校验)
+                                <span class="badge">YAML</span>
+                            </a>
+                            <a href="pug" class="tool-link">
+                                <span class="icon">🌿</span><b>Pug 格式化</b>(压缩+校验)
+                                <span class="badge">Pug</span>
+                            </a>
+                            <a href="xml" class="tool-link">
+                                <span class="icon">📐</span><b>XML 格式化</b>(压缩+转换)
+                                <span class="badge">XML</span>
+                            </a>
+                            <a href="sql" class="tool-link">
+                                <span class="icon">🗃️</span><b>SQL 格式化</b>(压缩+格式化)
+                                <span class="badge">SQL</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 加密安全工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon security">🔐</div>
+                            <span class="category-title">加密安全工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="md5" class="tool-link">
+                                <span class="icon">🔐</span><b>MD5 加密</b>(加密+校验)
+                                <span class="badge">MD5</span>
+                            </a>
+                            <a href="sha" class="tool-link">
+                                <span class="icon">🔏</span><b>SHA 加密</b>(加密+校验)
+                                <span class="badge">SHA</span>
+                            </a>
+                            <a href="token" class="tool-link">
+                                <span class="icon">🎫</span><b>Token 工具</b>(JWT+Base64)
+                                <span class="badge">Token</span>
+                            </a>
+                            <a href="js-secrecy" class="tool-link">
+                                <span class="icon">🛡️</span><b>JS 混淆加密</b>(JS代码加密)
+                                <span class="badge">JS</span>
+                            </a>
+                            <a href="pwd" class="tool-link">
+                                <span class="icon">🔑</span><b>随机密码生成</b>(自定义格式)
+                                <span class="badge">密码</span>
+                            </a>
+                            <a href="uuid" class="tool-link">
+                                <span class="icon">🆔</span><b>UUID 生成</b>(自定义格式)
+                                <span class="badge">UUID</span>
+                            </a>
+                            <a href="urlcode" class="tool-link">
+                                <span class="icon">🔗</span><b>URL 编解码</b>(编码+解码)
+                                <span class="badge">URL</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 实用工具 -->
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-icon util">🛠️</div>
+                            <span class="category-title">实用工具</span>
+                        </div>
+                        <div class="tools-list">
+
+                            <a href="mermaid" class="tool-link">
+                                <span class="icon">📊</span><b>Mermaid 图表</b>(UML图)
+                                <span class="badge">图表</span>
+                            </a>
+                            <a href="timestamp" class="tool-link">
+                                <span class="icon">🕐</span><b>时间戳转换器</b>(多格式)
+                                <span class="badge">时间</span>
+                            </a>
+                            <a href="cron" class="tool-link">
+                                <span class="icon">⏰</span><b>Cron 解析器</b>(解析+生成)
+                                <span class="badge">Cron</span>
+                            </a>
+                            <a href="regex" class="tool-link">
+                                <span class="icon">🔍</span><b>正则表达式</b>(校验+提取)
+                                <span class="badge">Regex</span>
+                            </a>
+                            <a href="base-convert" class="tool-link">
+                                <span class="icon">🧮</span><b>进制转换器</b>(2/8/10/16)
+                                <span class="badge">进制</span>
+                            </a>
+                            <a href="color-picker" class="tool-link">
+                                <span class="icon">🎨</span><b>颜色选择器</b>(HEX/RGB/HSL)
+                                <span class="badge">颜色</span>
+                            </a>
+                            <a href="num-to-chinese" class="tool-link">
+                                <span class="icon">🔢</span><b>中文大写转换器</b>(中文数字)
+                                <span class="badge">钱币</span>
+                            </a>
+                            <a href="qrcode" class="tool-link">
+                                <span class="icon">📱</span><b>二维码生成器</b>(生成+解析)
+                                <span class="badge">QR</span>
+                            </a>
+                            <a href="diff" class="tool-link">
+                                <span class="icon">📋</span><b>文本内容对比</b>(内容差异)
+                                <span class="badge">对比</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-note">
+                    <p>&copy; 2026 Helpoke 助点站 · 离线工具 · 数据本地处理 · 保护隐私安全. <a href="https://pengline.cn"
+                            target="_blank">余一叶知秋尽</a> 保留所有权利</p>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3>💬 评论</h3>
+                    <script async src="https://giscus.app/client.js" data-repo="helpoke/tools"
+                        data-repo-id="R_kgDOScH5hQ" data-category="Announcements"
+                        data-category-id="DIC_kwDOScH5hc4C9UYU" data-mapping="pathname" data-strict="1"
+                        data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom"
+                        data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+                        </script>
+                </div>
             </div>
+        </main>
 
-            <!-- Stats -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-icon blue">🖼️</div>
-                    <div class="stat-info">
-                        <div class="stat-value">4</div>
-                        <div class="stat-label">图片工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon green">🎬</div>
-                    <div class="stat-info">
-                        <div class="stat-value">3</div>
-                        <div class="stat-label">视频工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon purple">🔧</div>
-                    <div class="stat-info">
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">开发工具</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon amber">📋</div>
-                    <div class="stat-info">
-                        <div class="stat-value">10</div>
-                        <div class="stat-label">数据/日常</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon blue">📄</div>
-                    <div class="stat-info">
-                        <div class="stat-value">4</div>
-                        <div class="stat-label">文档/下载</div>
-                    </div>
-                </div>
+        <!-- Right Ad Sidebar -->
+        <aside class="ad-sidebar-right">
+            <div class="ad-slot">
+                <span class="ad-label">广告位</span>
+                <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                    data-ad-slot="3069419028" data-auto-format="rspv" data-full-width="">
+                    <div overflow=""></div>
+                </amp-ad>
             </div>
-
-            <!-- Tool Categories -->
-            <div class="section-header">
-                <h2>全部工具</h2>
+            <div class="ad-slot">
+                <span class="ad-label">广告位</span>
+                <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-2048978820706528"
+                    data-ad-slot="1947909041" data-auto-format="rspv" data-full-width="">
+                    <div overflow=""></div>
+                </amp-ad>
             </div>
-            <div class="categories-grid">
-                <!-- 图片工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon img">🖼️</div>
-                        <span class="category-title">图片工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="image/compressor" class="tool-link">
-                            <span class="icon">📦</span>图片压缩（批量压缩）
-                            <span class="badge">压缩</span>
-                        </a>
-                        <a href="image/convert" class="tool-link">
-                            <span class="icon">🔄</span>图片转换（格式互转）
-                            <span class="badge">转换</span>
-                        </a>
-                        <a href="image/watermark" class="tool-link">
-                            <span class="icon">💧</span>图片水印（批量加水印）
-                            <span class="badge">水印</span>
-                        </a>
-                        <a href="image/cropping" class="tool-link">
-                            <span class="icon">✂️</span>图片裁剪（精确尺寸）
-                            <span class="badge">裁切</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 视频工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon video">🎬</div>
-                        <span class="category-title">视频工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="video/cropping" class="tool-link">
-                            <span class="icon">✂️</span>视频裁剪（尺寸+时长）
-                            <span class="badge">剪辑</span>
-                        </a>
-                        <a href="video/watermark" class="tool-link">
-                            <span class="icon">🎥</span>视频水印（滚动文字+马赛克）
-                            <span class="badge">水印</span>
-                        </a>
-                        <a href="video/convert" class="tool-link">
-                            <span class="icon">🔄</span>视频转换（格式互转）
-                            <span class="badge">转换</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 数据工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon data">📋</div>
-                        <span class="category-title">数据工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="json" class="tool-link">
-                            <span class="icon">{ }</span>JSON 格式化（比对+转换）
-                            <span class="badge">格式化</span>
-                        </a>
-                        <a href="yaml" class="tool-link">
-                            <span class="icon">⚙️</span>YAML 格式化（校验+压缩）
-                            <span class="badge">校验</span>
-                        </a>
-                        <a href="pug" class="tool-link">
-                            <span class="icon">🌿</span>Pug 格式化（校验+压缩）
-                            <span class="badge">美化</span>
-                        </a>
-                        <a href="xml" class="tool-link">
-                            <span class="icon">📐</span>XML 格式化（格式化+互转）
-                            <span class="badge">XML</span>
-                        </a>
-                        <a href="sql" class="tool-link">
-                            <span class="icon">🗃️</span>SQL 格式化（美化+压缩）
-                            <span class="badge">SQL</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 日常工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon data">🔧</div>
-                        <span class="category-title">日常工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="pwd" class="tool-link">
-                            <span class="icon">🔑</span>随机密码生成（批量）
-                            <span class="badge">安全</span>
-                        </a>
-                        <a href="num-to-chinese" class="tool-link">
-                            <span class="icon">🔢</span>中文大写数字（数字转换）
-                            <span class="badge">防涂改</span>
-                        </a>
-                        <a href="qrcode" class="tool-link">
-                            <span class="icon">📱</span>二维码（生成+解析）
-                            <span class="badge">QR</span>
-                        </a>
-                        <a href="diff" class="tool-link">
-                            <span class="icon">📋</span>内容对比（文本差异比对）
-                            <span class="badge">文本</span>
-                        </a>
-                        <!-- 防久坐提醒 -->
-                        <a href="https://remind.helpoke.com" target="_blank" class="tool-link">
-                            <span class="icon">⏰</span>防久坐提醒（定时提醒）
-                            <span class="badge">提醒</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 开发工具（独占一行） -->
-                <div class="category-card full-width">
-                    <div class="category-header">
-                        <div class="category-icon dev">🛠️</div>
-                        <span class="category-title">开发工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="uuid" class="tool-link">
-                            <span class="icon">🆔</span>UUID 生成（批量）
-                            <span class="badge">ID</span>
-                        </a>
-                        <a href="mermaid" class="tool-link">
-                            <span class="icon">📊</span>Mermaid 图表（UML 图）
-                            <span class="badge">图表</span>
-                        </a>
-                        <a href="md5" class="tool-link">
-                            <span class="icon">🔐</span>MD5 加密（生成+校验）
-                            <span class="badge">哈希</span>
-                        </a>
-                        <a href="sha" class="tool-link">
-                            <span class="icon">🔏</span>SHA 加密（256/512）
-                            <span class="badge">哈希</span>
-                        </a>
-                        <a href="token" class="tool-link">
-                            <span class="icon">🎫</span>Token 工具（JWT+Token）
-                            <span class="badge">令牌</span>
-                        </a>
-                        <a href="cron" class="tool-link">
-                            <span class="icon">⏰</span>Cron 解析（定时任务）
-                            <span class="badge">定时</span>
-                        </a>
-                        <a href="timestamp" class="tool-link">
-                            <span class="icon">🕐</span>时间戳转换（Unix↔日期）
-                            <span class="badge">时间</span>
-                        </a>
-                        <a href="urlcode" class="tool-link">
-                            <span class="icon">🔗</span>URL 编解码（Encode/Decode）
-                            <span class="badge">转码</span>
-                        </a>
-                        <a href="base-convert" class="tool-link">
-                            <span class="icon">🧮</span>进制转换（2/8/10/16 互转）
-                            <span class="badge">进制</span>
-                        </a>
-                        <a href="color-picker" class="tool-link">
-                            <span class="icon">🎨</span>取色器（RGB/HEX/HSL）
-                            <span class="badge">颜色</span>
-                        </a>
-                        <a href="regex" class="tool-link">
-                            <span class="icon">🔍</span>正则表达式（测试+替换）
-                            <span class="badge">正则</span>
-                        </a>
-                        <a href="js-secrecy" class="tool-link">
-                            <span class="icon">🛡️</span>JS 代码保护（压缩混淆）
-                            <span class="badge">加密</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 文档工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon doc">📄</div>
-                        <span class="category-title">文档工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="docu/signature" class="tool-link">
-                            <span class="icon">✍️</span>签名工具（在线签名）
-                            <span class="badge">签名</span>
-                        </a>
-                        <a href="docu/watermark" class="tool-link">
-                            <span class="icon">🛡️</span>文档水印（自选水印）
-                            <span class="badge">水印</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 下载工具 -->
-                <div class="category-card">
-                    <div class="category-header">
-                        <div class="category-icon dl">📥</div>
-                        <span class="category-title">下载工具</span>
-                    </div>
-                    <div class="tools-list">
-                        <a href="download/media" class="tool-link">
-                            <span class="icon">⬇️</span>视频图片下载（批量+爬取）
-                            <span class="badge">下载</span>
-                        </a>
-                        <a href="download/resource" class="tool-link">
-                            <span class="icon">📦</span>资源文件下载（JS/CSS/字体）
-                            <span class="badge">资源</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-note">
-                <p>&copy; 2026 Helpoke 助点站 · 离线工具 · 数据本地处理 · 保护隐私安全. <a href="https://pengline.cn"
-                        target="_blank">PengLine</a> 保留所有权利</p>
-            </div>
-        </div>
-
-        <script async src="https://giscus.app/client.js"
-            data-repo="helpoke/tools"
-            data-repo-id="R_kgDOScH5hQ"
-            data-category="Announcements"
-            data-category-id="DIC_kwDOScH5hc4C9UYU"
-            data-mapping="pathname"
-            data-strict="1"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="preferred_color_scheme"
-            data-lang="zh-CN"
-            crossorigin="anonymous"
-            async>
-    </script>
-    </main>
-
-    <!-- Right Ad Sidebar -->
-    <aside class="ad-sidebar-right">
-        <div class="ad-slot">
-            <span class="ad-label">广告位</span>
-            <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-2048978820706528"
-                data-ad-slot="3069419028" data-auto-format="rspv" data-full-width="">
-                <div overflow=""></div>
-            </amp-ad>
-        </div>
-        <div class="ad-slot">
-            <span class="ad-label">广告位</span>
-            <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-2048978820706528"
-                data-ad-slot="1947909041" data-auto-format="rspv" data-full-width="">
-                <div overflow=""></div>
-            </amp-ad>
-        </div>
-    </aside>
+        </aside>
+    </div>
 
     <script src="common/js/nav.js"></script>
     <script>
-        // 工具数据
-        const toolsData = [
-            // 图片工具
-            { name: '图片压缩', icon: '📦', url: 'image/compressor', category: '图片工具', keywords: ['tupianyasuo', 'tpyasuo', 'yasuo', 'compress', '图片压缩', '图片', '批量', 'yp'] },
-            { name: '图片转换', icon: '🔄', url: 'image/convert', category: '图片工具', keywords: ['tupianzhuanhuan', 'tpzh', 'zhuanhuan', 'convert', 'format', '图片转换', '格式转换', '格式互转'] },
-            { name: '图片水印', icon: '💧', url: 'image/watermark', category: '图片工具', keywords: ['tupianshuiyin', 'tpsy', 'shuiyin', 'watermark', '图片水印', '水印'] },
-            { name: '图片裁剪', icon: '✂️', url: 'image/cropping', category: '图片工具', keywords: ['tupiancaijian', 'tpcj', 'caijian', 'crop', 'cropping', '图片裁剪', '裁剪', '尺寸'] },
-            // 视频工具
-            { name: '视频裁剪', icon: '✂️', url: 'video/cropping', category: '视频工具', keywords: ['shipincajian', 'spcj', 'cajjian', 'clip', '视频裁剪', '裁剪', '尺寸', '时长'] },
-            { name: '视频水印', icon: '🎥', url: 'video/watermark', category: '视频工具', keywords: ['shipinshuiyin', 'spsy', 'shuiyin', 'watermark', 'mosaic', 'masaike', '视频水印', '水印', '马赛克'] },
-            { name: '视频转换', icon: '🔄', url: 'video/convert', category: '视频工具', keywords: ['shipinzhuanhuan', 'spzh', 'zhuanhuan', 'convert', 'format', '视频转换', '格式转换'] },
-            // 数据工具
-            { name: 'JSON格式化', icon: '{ }', url: 'json', category: '数据工具', keywords: ['json', 'format', '格式化', '比对', '格式化工具'] },
-            { name: 'YAML格式化', icon: '⚙️', url: 'yaml', category: '数据工具', keywords: ['yaml', 'format', '格式化', 'yml'] },
-            { name: 'Pug格式化', icon: '🌿', url: 'pug', category: '数据工具', keywords: ['pug', 'format', '格式化', 'jade'] },
-            { name: 'XML格式化', icon: '📐', url: 'xml', category: '数据工具', keywords: ['xml', 'format', '格式化'] },
-            // 开发工具
-            { name: '随机密码生成', icon: '🔑', url: 'pwd', category: '开发工具', keywords: ['mimashengcheng', 'mm', 'mima', 'password', 'generator', '密码生成', '随机密码', '随机生成'] },
-            { name: 'UUID生成', icon: '🆔', url: 'uuid', category: '开发工具', keywords: ['uuid', 'guid', 'generator', 'uuidshengcheng', 'UUID', '唯一标识'] },
-            { name: 'Mermaid图表', icon: '📊', url: 'mermaid', category: '开发工具', keywords: ['mermaid', 'tubiao', 'uml', 'diagram', 'tuyitu', '流程图', '时序图', '图表'] },
-            { name: 'MD5加密', icon: '🔐', url: 'md5', category: '开发工具', keywords: ['md5', 'jiami', 'miyao', 'encrypt', 'hash', 'MD5', '加密', '摘要'] },
-            { name: 'SHA加密', icon: '🔏', url: 'sha', category: '开发工具', keywords: ['sha', 'jiami', 'encrypt', 'hash', 'SHA', '加密', '签名'] },
-            { name: 'Token工具', icon: '🎫', url: 'token', category: '开发工具', keywords: ['token', 'jwt', 'oauth', '令牌', '认证'] },
-            { name: '中文大写数字', icon: '🔢', url: 'num-to-chinese', category: '开发工具', keywords: ['shuzizhuanzhongwen', 'shuzihanz', 'sz', 'daxie', 'jine', 'num', '数字转中文', '大写金额', '中文大写', '金额转换'] },
-            { name: '二维码', icon: '📱', url: 'qrcode', category: '开发工具', keywords: ['erweima', 'ewm', 'qr', 'qrcode', 'qrshengcheng', 'jiexi', '二维码生成', '二维码解析', 'QR码'] },
-            { name: '内容对比', icon: '📋', url: 'diff', category: '开发工具', keywords: ['neirongduibi', 'wenduibi', 'diff', 'compare', 'chayi', '内容对比', '文本对比', '差异'] },
-            { name: 'Cron解析', icon: '⏰', url: 'cron', category: '开发工具', keywords: ['cron', 'jieshi', 'parse', 'dingishi', 'jihuorenwu', '定时任务', '计划任务', 'Cron表达式'] },
-            { name: '时间戳转换', icon: '🕐', url: 'timestamp', category: '开发工具', keywords: ['shijianchuo', 'sjz', 'unix', 'timestamp', 'riqi', 'shijian', '时间戳', 'Unix时间戳', '日期转换'] },
-            { name: 'URL编解码', icon: '🔗', url: 'urlcode', category: '开发工具', keywords: ['urlbianma', 'urljiema', 'urlencode', 'urldecode', 'encode', 'decode', 'URL编码', 'URL解码'] },
-            { name: '进制转换', icon: '🧮', url: 'base-convert', category: '开发工具', keywords: ['jinzhichenghuan', 'jzzh', 'binary', 'hex', 'jinzhi', '进制转换', '二进制', '十六进制', '进制'] },
-            { name: '取色器', icon: '🎨', url: 'color-picker', category: '开发工具', keywords: ['quseqi', 'qsq', 'yanse', 'rgb', 'hex', 'hsl', 'colorpicker', '颜色', '取色'] },
-            { name: '正则表达式', icon: '🔍', url: 'regex', category: '开发工具', keywords: ['zhengze', 'zz', 'regex', 'zhengzebiaodashi', 'ceshi', 'test', '正则', '正则测试'] },
-            { name: 'JS混淆加密', icon: '🛡️', url: 'js-secrecy', category: '开发工具', keywords: ['jshunji', 'jsyh', '混淆', 'yinhua', 'yasuo', 'compress', 'js混淆', 'JS加密', '压缩'] },
-            // 文档工具
-            { name: '签名工具', icon: '✍️', url: 'docu/signature', category: '文档工具', keywords: ['qianming', 'qm', 'qianminggongju', 'signature', 'sign', '签名', '在线签名'] },
-            { name: '文档水印', icon: '🛡️', url: 'docu/watermark', category: '文档工具', keywords: ['wendangshuiyin', 'wdsy', 'shuiyin', 'watermark', '文档水印', '水印'] },
-            // 下载工具
-            { name: '批量下载', icon: '⬇️', url: 'download', category: '下载工具', keywords: ['piliangxiazai', 'plxz', 'xiazai', 'download', 'craw', '爬取', '批量下载', '下载'] }
-        ];
+        // 搜索功能
+        var searchInput = document.getElementById('searchInput');
+        var searchBtn = document.getElementById('searchBtn');
+        var searchResults = document.getElementById('searchResults');
 
-        // 最近使用相关
-        const MAX_RECENT = 5;
-        const STORAGE_KEY = 'helpoke_recent_tools';
+        function performSearch() {
+            var query = searchInput.value.trim().toLowerCase();
 
-        // 获取最近使用记录
-        function getRecentTools() {
-            try {
-                const data = localStorage.getItem(STORAGE_KEY);
-                return data ? JSON.parse(data) : [];
-            } catch {
-                return [];
+            if (!query) {
+                searchResults.classList.remove('active');
+                return;
             }
+
+            var results = window.toolsData.filter(function (tool) {
+                return tool.name.toLowerCase().includes(query) ||
+                    tool.category.toLowerCase().includes(query) ||
+                    (tool.keywords && tool.keywords.toLowerCase().includes(query));
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-no-results">未找到匹配的工具</div>';
+                searchResults.classList.add('active');
+                return;
+            }
+
+            searchResults.innerHTML = results.map(function (tool) {
+                return '<div class="search-result-item" onclick="goToTool(\'' + tool.url + '\')">' +
+                    '<span class="icon">' + tool.icon + '</span>' +
+                    '<span class="name">' + tool.name + '</span>' +
+                    '<span class="category">' + tool.category + '</span>' +
+                    '</div>';
+            }).join('');
+
+            searchResults.classList.add('active');
         }
 
-        // 保存最近使用记录
-        function saveRecentTool(url) {
-            const recent = getRecentTools();
-            // 移除已存在的相同记录
-            const filtered = recent.filter(item => item.url !== url);
-            // 获取工具信息
-            const tool = toolsData.find(t => t.url === url);
-            if (tool) {
-                // 添加到开头
-                filtered.unshift({
-                    name: tool.name,
-                    icon: tool.icon,
-                    url: tool.url
-                });
-            }
-            // 只保留最近5个
-            const trimmed = filtered.slice(0, MAX_RECENT);
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
-            } catch (e) {
-                console.warn('Failed to save recent tools:', e);
-            }
-            renderRecent();
+        function goToTool(url) {
+            window.location.href = url;
         }
 
-        // 渲染最近使用列表
-        function renderRecent() {
-            const recentList = document.getElementById('recentList');
-            const recent = getRecentTools();
+        searchInput.addEventListener('input', performSearch);
+        searchBtn.addEventListener('click', performSearch);
 
-            if (recent.length === 0) {
+        // 点击页面其他地方关闭搜索结果
+        document.addEventListener('click', function (e) {
+            if (!searchInput.contains(e.target) &&
+                !searchResults.contains(e.target) &&
+                !searchBtn.contains(e.target)) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // 渲染最近使用
+        function renderRecentTools() {
+            var recentList = document.getElementById('recentList');
+            var recentTools = JSON.parse(localStorage.getItem('helpoke_recent_tools') || '[]');
+
+            if (recentTools.length === 0) {
                 recentList.innerHTML = '<div class="recent-empty">暂无记录</div>';
                 return;
             }
 
-            recentList.innerHTML = '';
-            recent.forEach(item => {
-                const element = document.createElement('div');
-                element.className = 'recent-item';
-                element.innerHTML = `
-                    <span class="recent-icon">${item.icon}</span>
-                    <span class="recent-name">${item.name}</span>
-                `;
-                element.addEventListener('click', () => {
-                    // 记录访问
-                    saveRecentTool(item.url);
-                    // 跳转
-                    window.location.href = item.url;
-                });
-                recentList.appendChild(element);
-            });
-        }
-
-        // 清空最近使用记录
-        function clearRecent() {
-            try {
-                localStorage.removeItem(STORAGE_KEY);
-            } catch (e) {
-                console.warn('Failed to clear recent tools:', e);
+            var html = '';
+            for (var i = 0; i < recentTools.length; i++) {
+                var tool = recentTools[i];
+                html += '<div class="recent-item" data-url="' + tool.url + '" style="cursor: pointer; pointer-events: auto;">' + tool.icon + ' ' + tool.name + '</div>';
             }
-            renderRecent();
-        }
+            recentList.innerHTML = html;
 
-        // 页面加载时渲染最近使用
-        document.addEventListener('DOMContentLoaded', renderRecent);
-
-        // 绑定清空按钮事件
-        const recentClear = document.getElementById('recentClear');
-        if (recentClear) {
-            recentClear.addEventListener('click', clearRecent);
-        }
-
-        // 搜索相关
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-
-        // 模糊搜索函数
-        function fuzzySearch(query) {
-            if (!query.trim()) return [];
-
-            const lowerQuery = query.toLowerCase();
-            return toolsData.filter(tool => {
-                const matchName = tool.name.toLowerCase().includes(lowerQuery);
-                const matchCategory = tool.category.toLowerCase().includes(lowerQuery);
-                const matchKeyword = tool.keywords.some(k => k.toLowerCase().includes(lowerQuery));
-                return matchName || matchCategory || matchKeyword;
-            }).sort((a, b) => {
-                // 排序：名称匹配优先，然后是关键词匹配
-                const aNameMatch = a.name.toLowerCase().includes(lowerQuery);
-                const bNameMatch = b.name.toLowerCase().includes(lowerQuery);
-                if (aNameMatch && !bNameMatch) return -1;
-                if (!aNameMatch && bNameMatch) return 1;
-                return 0;
-            });
-        }
-
-        // 渲染搜索结果
-        function renderResults(results) {
-            searchResults.innerHTML = '';
-
-            if (results.length === 0) {
-                searchResults.innerHTML = '<div class="search-no-results">未找到匹配的工具</div>';
-                searchResults.classList.add('show');
-                return;
-            }
-
-            results.forEach(tool => {
-                const item = document.createElement('div');
-                item.className = 'search-result-item';
-                item.innerHTML = `
-                    <span class="result-icon">${tool.icon}</span>
-                    <div class="result-info">
-                        <div class="result-title">${tool.name}</div>
-                        <div class="result-category">${tool.category}</div>
-                    </div>
-                    <span class="result-link">打开</span>
-                `;
-                item.addEventListener('click', () => {
-                    // 记录访问
-                    saveRecentTool(tool.url);
-                    // 跳转
-                    window.location.href = tool.url;
-                });
-                searchResults.appendChild(item);
-            });
-
-            searchResults.classList.add('show');
-        }
-
-        // 搜索输入事件
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value;
-            if (query.trim()) {
-                const results = fuzzySearch(query);
-                renderResults(results);
-            } else {
-                searchResults.classList.remove('show');
-            }
-        });
-
-        // 点击外部关闭搜索结果
-        document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.classList.remove('show');
-            }
-        });
-
-        // 键盘导航
-        searchInput.addEventListener('keydown', (e) => {
-            const items = searchResults.querySelectorAll('.search-result-item');
-            if (items.length === 0) return;
-
-            let activeIndex = -1;
-            items.forEach((item, index) => {
-                if (item.classList.contains('active')) {
-                    activeIndex = index;
-                }
-            });
-
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (activeIndex < items.length - 1) {
-                    items[activeIndex]?.classList.remove('active');
-                    items[activeIndex + 1].classList.add('active');
-                    items[activeIndex + 1].scrollIntoView({ block: 'nearest' });
-                }
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (activeIndex > 0) {
-                    items[activeIndex]?.classList.remove('active');
-                    items[activeIndex - 1].classList.add('active');
-                    items[activeIndex - 1].scrollIntoView({ block: 'nearest' });
-                }
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                const activeItem = searchResults.querySelector('.search-result-item.active');
-                if (activeItem) {
-                    activeItem.click();
-                } else if (items.length > 0) {
-                    items[0].click();
-                }
-            }
-        });
-
-        // 监听工具链接点击，记录最近使用
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (link && link.href) {
-                // 检查是否是工具链接
-                const url = link.getAttribute('href');
-                if (url && !url.startsWith('http') && !url.startsWith('mailto')) {
-                    // 只记录站内工具链接
-                    const tool = toolsData.find(t => t.url === url);
-                    if (tool) {
-                        saveRecentTool(url);
+            // 添加点击事件监听
+            var items = recentList.querySelectorAll('.recent-item');
+            items.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    var url = this.getAttribute('data-url');
+                    if (url) {
+                        window.location.href = url;
                     }
-                }
-            }
+                });
+            });
+        }
+
+        // 清空历史
+        document.getElementById('recentClear').addEventListener('click', function () {
+            localStorage.removeItem('helpoke_recent_tools');
+            renderRecentTools();
         });
+
+        // 页面加载时渲染
+        renderRecentTools();
     </script>
 </body>
 

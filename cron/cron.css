@@ -1,0 +1,586 @@
+.container {
+    max-width: 100%;
+    padding: 40px 0;
+}
+
+.tool-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Tab */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #eaeaea;
+    margin-bottom: 24px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #7f8c8d;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    color: #3498db;
+}
+
+.tab-btn.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* Parse tab */
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.input-row {
+    display: flex;
+    gap: 12px;
+}
+
+.input-row input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    transition: border-color 0.3s;
+}
+
+.input-row input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.input-row input.error {
+    border-color: #e74c3c;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* 字段可视化 */
+.field-visual {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.field-chip {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.field-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.field-chip .field-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 4px;
+}
+
+.field-chip .field-value {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+}
+
+.field-chip .field-desc {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 2px;
+}
+
+.field-chip.minute {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.field-chip.hour {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.field-chip.day {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.field-chip.month {
+    background: #f3e5f5;
+    color: #6a1b9a;
+}
+
+.field-chip.weekday {
+    background: #fce4ec;
+    color: #ad1457;
+}
+
+/* 描述区域 */
+.description-box {
+    background-color: #f0f7ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 16px;
+    color: #1a5276;
+    line-height: 1.6;
+}
+
+.description-box strong {
+    color: #0d47a1;
+}
+
+.error-box {
+    background-color: #fef0ef;
+    border: 1px solid #f5c6c2;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: #721c24;
+}
+
+/* 最近执行时间 */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.schedule-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    font-size: 13px;
+    color: #555;
+}
+
+.schedule-table td {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.schedule-table tr:last-child td {
+    border-bottom: none;
+}
+
+.schedule-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #eaeaea;
+}
+
+/* 预设表达式 */
+.presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.preset-btn {
+    padding: 10px 14px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.preset-btn:hover {
+    border-color: #3498db;
+    background: #f0f7ff;
+}
+
+.preset-btn .preset-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.preset-btn .preset-cron {
+    font-size: 12px;
+    color: #7f8c8d;
+    font-family: 'Courier New', monospace;
+}
+
+/* 字段参考表 */
+.ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.ref-table th,
+.ref-table td {
+    padding: 6px 10px;
+    border: 1px solid #eaeaea;
+    text-align: left;
+}
+
+.ref-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+/* 复制按钮 */
+.copy-btn {
+    background-color: #27ae60;
+}
+
+.copy-btn:hover {
+    background-color: #229954;
+}
+
+.copy-btn.copied {
+    background-color: #1e8449;
+}
+
+.result-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.result-actions .btn {
+    flex: 1;
+}
+
+/* 折叠面板 */
+.collapsible {
+    margin-bottom: 12px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.collapsible-header {
+    padding: 12px 16px;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.collapsible-header:hover {
+    background: #eef2f7;
+}
+
+.collapsible-header .arrow {
+    transition: transform 0.2s;
+    font-size: 12px;
+}
+
+.collapsible-header.open .arrow {
+    transform: rotate(90deg);
+}
+
+.collapsible-body {
+    display: none;
+    padding: 16px;
+    background: white;
+}
+
+.collapsible-body.open {
+    display: block;
+}
+
+/* ===== Generate Tab ===== */
+.gen-section {
+    margin-bottom: 20px;
+}
+
+.gen-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gen-section-title .badge {
+    font-size: 11px;
+    background: #eaeaea;
+    color: #666;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.gen-mode-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.gen-mode-btn {
+    padding: 6px 14px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.gen-mode-btn:hover {
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.gen-mode-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.gen-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+    gap: 6px;
+}
+
+.gen-checkboxes.cols-12 {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.gen-checkboxes.cols-7 {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.gen-checkboxes.cols-24 {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.gen-check-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 4px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 13px;
+    user-select: none;
+    background: white;
+}
+
+.gen-check-item:hover {
+    border-color: #3498db;
+}
+
+.gen-check-item.selected {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.gen-check-item input[type="checkbox"] {
+    display: none;
+}
+
+.gen-step-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.gen-step-input label {
+    font-size: 13px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.gen-step-input input[type="number"] {
+    width: 60px;
+    padding: 6px 8px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.gen-step-input input[type="number"]:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* 生成结果 */
+.gen-result {
+    background: #f8f9fa;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 24px;
+}
+
+.gen-result-cron {
+    font-size: 24px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    margin-bottom: 12px;
+}
+
+.gen-result-desc {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 16px;
+    }
+
+    .tool-card {
+        padding: 24px;
+    }
+
+    .field-visual {
+        flex-wrap: wrap;
+    }
+
+    /* .field-chip {
+        min-width: calc(50% - 4px);
+    } */
+
+    .presets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+
+    .gen-checkboxes {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    }
+
+    .gen-checkboxes.cols-12 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .gen-checkboxes.cols-24 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 24px 12px;
+    }
+
+    .tool-card {
+        padding: 18px;
+    }
+
+    /* .field-chip {
+        min-width: 100%;
+    } */
+
+    .input-row input {
+        font-size: 16px;
+    }
+
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,229 @@
+/* 图片拼接工具样式 */
+
+/* 进度条样式 */
+.progress-container {
+    height: 4px;
+    background-color: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #3B82F6;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* 预览图片样式 */
+.preview-image {
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: zoom-in;
+}
+
+/* 全屏覆盖层样式 */
+.fullscreen-overlay {
+    cursor: zoom-out;
+}
+
+.fullscreen-overlay img {
+    border-radius: 4px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 文件项样式 */
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.file-item:hover {
+    background-color: #f3f4f6;
+}
+
+.file-item.selected {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: #3B82F6;
+}
+
+.file-item .file-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #374151;
+    margin-right: 8px;
+}
+
+.file-item .file-size {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-right: 8px;
+}
+
+.file-item .delete-btn {
+    padding: 4px;
+    color: #ef4444;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.file-item .delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* 范围滑块样式 */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #3B82F6;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #3B82F6;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 颜色选择器样式 */
+input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 2px solid #e5e7eb;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}
+
+/* 按钮激活状态 */
+button.active {
+    background-color: #3B82F6 !important;
+    color: white !important;
+    border-color: #3B82F6 !important;
+}
+
+.max-h-32 {
+    max-height: 11rem !important;
+}
+
+/* 顺序列表样式 */
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    cursor: move;
+}
+
+.order-item:hover {
+    background-color: #ffffff;
+    border-color: #3B82F6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+.order-item.drag-over {
+    border-color: #3B82F6;
+    background-color: rgba(59, 130, 246, 0.05);
+    transform: scale(1.02);
+}
+
+.order-item.opacity-50 {
+    opacity: 0.5;
+}
+
+.order-item.scale-95 {
+    transform: scale(0.95);
+}
+
+.order-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.order-item .drag-handle {
+    padding: 4px;
+}
+
+.order-item .drag-handle:hover {
+    color: #3B82F6;
+}
+
+.order-item .move-up-btn,
+.order-item .move-down-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: #9ca3af;
+}
+
+.order-item .move-up-btn:hover:not(:disabled),
+.order-item .move-down-btn:hover:not(:disabled) {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3B82F6;
+}
+
+.order-item .move-up-btn:disabled,
+.order-item .move-down-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .preview-box {
+        height: 300px !important;
+    }
+
+    .file-item .file-size {
+        display: none;
+    }
+
+    .order-item span.flex-1 {
+        display: none;
+    }
+}
+

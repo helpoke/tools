@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频合成工具</title>
+    <link rel="stylesheet" href="video-styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>视频合成工具</h1>
+        
+        <!-- 视频输入区域 -->
+        <div class="section">
+            <h2>视频输入</h2>
+            <div id="videoInputs" class="video-inputs">
+                <div class="video-item">
+                    <input type="file" accept="video/*" class="video-file-input">
+                    <video controls class="preview-video"></video>
+                </div>
+            </div>
+            <button id="addVideoBtn" class="btn">添加视频</button>
+        </div>
+        
+        <!-- 转场效果设置 -->
+        <div class="section">
+            <h2>转场效果</h2>
+            <select id="transitionType" class="form-control">
+                <option value="none">无转场</option>
+                <option value="fade">淡入淡出</option>
+                <option value="slide">滑动</option>
+                <option value="zoom">缩放</option>
+            </select>
+            <input type="number" id="transitionDuration" min="0.1" max="5" step="0.1" value="1" class="form-control">
+            <label for="transitionDuration">转场时长（秒）</label>
+        </div>
+        
+        <!-- 音频输入 -->
+        <div class="section">
+            <h2>音频设置</h2>
+            <input type="file" accept="audio/*" id="audioInput" class="form-control">
+            <label>
+                <input type="checkbox" id="muteOriginalAudio"> 静音原始视频音频
+            </label>
+        </div>
+        
+        <!-- 输出设置 -->
+        <div class="section">
+            <h2>输出设置</h2>
+            <select id="outputFormat" class="form-control">
+                <option value="mp4">MP4</option>
+                <option value="webm">WebM</option>
+            </select>
+            <select id="resolution" class="form-control">
+                <option value="720p">720p</option>
+                <option value="1080p">1080p</option>
+                <option value="original">原始分辨率</option>
+            </select>
+        </div>
+        
+        <!-- 按钮区域 -->
+        <div class="section">
+            <button id="generateCmdBtn" class="btn btn-primary">生成FFmpeg命令</button>
+            <button id="simulateProcessBtn" class="btn btn-secondary">模拟处理</button>
+            <button id="downloadBtn" class="btn btn-success">下载结果</button>
+        </div>
+        
+        <!-- 命令输出区域 -->
+        <div class="section">
+            <h2>FFmpeg命令</h2>
+            <textarea id="ffmpegCommand" rows="5" readonly class="form-control"></textarea>
+        </div>
+        
+        <!-- 处理状态和结果预览 -->
+        <div class="section">
+            <h2>处理状态</h2>
+            <div id="statusMessage" class="status-message">就绪</div>
+            <div id="resultPreview" class="result-preview">
+                <video controls id="outputVideo"></video>
+            </div>
+        </div>
+    </div>
+    
+    <script src="video-script.js"></script>
+</body>
+</html>

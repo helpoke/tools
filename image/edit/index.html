@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线免费图片旋转工具，支持任意角度旋转。在线免费图片模糊工具，支持高斯模糊。批量处理，保护隐私安全。">
+    <meta name="keywords" content="图片旋转, 图片模糊, 在线图片处理, 批量处理, 图像旋转, 图像模糊, 免费图片工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图片旋转与模糊工具 - 在线免费图像处理</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "图片旋转与模糊工具",
+        "description": "在线图片旋转与模糊处理工具，支持任意角度旋转和不同程度的高斯模糊。支持批量处理，本地处理，保护隐私安全。Online image rotation and blur tool supporting batch processing.",
+        "url": "https://helpoke.com/image/process",
+        "applicationCategory": "https://schema.org/ImageProcessing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持图片任意角度旋转",
+            "支持高斯模糊效果",
+            "可调节模糊程度",
+            "支持批量处理（最多30张）",
+            "实时预览处理效果",
+            "本地处理，保护隐私安全"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>图片旋转与模糊</h1>
+            <p>支持图片任意角度旋转，支持高斯模糊效果调节，支持批量处理最多30张图片，所有处理均在本地完成。</p>
+        </section>
+
+        <div class="container">
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧泄漏隐私</em></b>）</p>
+
+            <div class="upload-section">
+                <input type="file" id="imageUpload" accept="image/*" multiple hidden>
+                <label for="imageUpload" class="upload-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>上传图片（支持多选，最多30张）</span>
+                </label>
+            </div>
+
+            <div id="fileList" class="file-list" style="display: none;">
+                <div class="file-list-header">
+                    <span>已选择 <span id="fileCount">0</span> 张图片</span>
+                    <button id="clearFiles" class="clear-btn">清空</button>
+                </div>
+                <div id="fileItems" class="file-items"></div>
+            </div>
+
+            <div id="selectedFileName" class="selected-file-name" style="display: none;">
+                当前图片：<span id="currentFileName"></span>
+            </div>
+
+            <div class="preview-layout">
+                <div class="preview-column">
+                    <h3 class="preview-title">原图（双击放大）</h3>
+                    <div id="originalPreview" class="preview-box">
+                        <p class="placeholder">请上传图片</p>
+                    </div>
+                </div>
+
+                <div class="preview-column">
+                    <h3 class="preview-title">处理后（双击放大）</h3>
+                    <div id="processedPreview" class="preview-box">
+                        <p class="placeholder">等待处理</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="processSettings" class="process-settings" style="display: none;">
+                <div class="apply-all-checkbox">
+                    <label>
+                        <input type="checkbox" id="applyAll" checked>
+                        <span>应用到所有图片</span>
+                    </label>
+                    <span class="checkbox-hint">（勾选：将当前设置应用到所有图片；取消：仅应用到当前选中的图片）</span>
+                </div>
+
+                <div class="settings-row">
+                    <div class="setting-group">
+                        <h3>旋转</h3>
+                        <div class="setting-row">
+                            <label for="rotateSlider">旋转角度：</label>
+                            <input type="range" id="rotateSlider" min="-180" max="180" value="0">
+                            <span id="rotateValue">0°</span>
+                        </div>
+                        <div class="quick-rotate">
+                            <button class="quick-btn" data-rotate="-90">-90°</button>
+                            <button class="quick-btn" data-rotate="90">+90°</button>
+                            <button class="quick-btn" data-rotate="180">180°</button>
+                            <button class="quick-btn" id="resetRotate">重置</button>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>模糊</h3>
+                        <div class="setting-row">
+                            <label for="blurSlider">模糊程度：</label>
+                            <input type="range" id="blurSlider" min="0" max="20" value="0" step="0.5">
+                            <span id="blurValue">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="applyBtn" class="primary-btn">
+                        <i class="fa fa-check"></i> 应用效果
+                    </button>
+                    <button id="downloadBtn" class="secondary-btn" disabled>
+                        <i class="fa fa-download"></i> 下载单张
+                    </button>
+                    <button id="downloadAllBtn" class="secondary-btn" disabled>
+                        <i class="fa fa-download"></i> 批量下载
+                    </button>
+                </div>
+
+                <div id="progressBar" class="progress-bar" style="display: none;">
+                    <div class="progress-bar-fill"></div>
+                    <span class="progress-text">处理中... 0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <div id="fullscreenOverlay" class="fullscreen-overlay" style="display: none;">
+        <button id="closeFullscreen" class="close-fullscreen">&times;</button>
+        <img id="fullscreenImage" src="" alt="">
+    </div>
+
+    <script src="../../common/lib/jszip.min.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
