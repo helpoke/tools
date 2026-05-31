@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图片转GIF在线工具，支持多张图片合成GIF动图，可自定义帧率、尺寸和循环次数，纯前端处理保护隐私">
+    <meta name="keywords" content="图片转GIF, GIF制作, 在线GIF生成, 动图制作, 免费GIF工具, 图片合成GIF">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图片转GIF - 免费在线图片合成GIF动图工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "图片转GIF工具",
+        "description": "免费在线图片转GIF动图工具，支持多张图片合成GIF，可自定义帧率、尺寸和循环次数。纯前端处理，保护用户隐私数据。Free online image to GIF converter.",
+        "url": "https://helpoke.com/image/gif",
+        "applicationCategory": "https://schema.org/ImageEditing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持JPG、PNG、WebP、GIF等多种图片格式",
+            "支持批量上传多张图片",
+            "拖拽调整图片顺序",
+            "自定义帧延迟和循环次数",
+            "实时预览GIF效果",
+            "纯前端处理，图片不上传服务器",
+            "一键下载GIF动图"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>图片转GIF</h1>
+            <p>上传多张图片，合成个性化<b style="color: cadetblue;">GIF动图</b>，支持自定义帧率、尺寸和循环次数。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="upload-section">
+                        <h3>图片文件</h3>
+                        <div class="upload-area" id="uploadArea">
+                            <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
+                            <label for="imageUpload" class="upload-btn">
+                                <span class="upload-icon">+</span>
+                                <span class="upload-text">点击或拖拽上传图片</span>
+                                <span class="upload-hint">支持一次选择多个图片，最多5张</span>
+                            </label>
+                        </div>
+                        <div class="image-list-container">
+                            <div class="image-list-header">
+                                <span class="image-count">已上传 <strong id="imageCount">0</strong> 个图片</span>
+                                <button id="clearAll" class="btn-text" style="display: none;">清空全部</button>
+                            </div>
+                            <ul id="imageList" class="image-list"></ul>
+                            <div id="emptyTip" class="empty-tip">请上传图片文件</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="preview-section">
+                        <h3>预览</h3>
+                        <div class="preview-container">
+                            <img id="previewImage" alt="预览图片" style="max-width: 100%; max-height: 300px; object-fit: contain;">
+                            <canvas id="previewCanvas" style="display: none; max-width: 100%; max-height: 300px;"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>GIF设置</h3>
+
+                        <div class="setting-row">
+                            <div class="input-group">
+                                <label for="frameDelay">帧延迟 (毫秒)：</label>
+                                <input type="number" id="frameDelay" min="100" max="5000" value="500" step="100">
+                            </div>
+                            <div class="input-group">
+                                <label for="loopCount">循环次数：</label>
+                                <select id="loopCount">
+                                    <option value="0" selected>无限循环</option>
+                                    <option value="1">播放1次</option>
+                                    <option value="2">播放2次</option>
+                                    <option value="3">播放3次</option>
+                                    <option value="5">播放5次</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="input-group">
+                                <label for="outputWidth">输出宽度：</label>
+                                <input type="number" id="outputWidth" min="100" max="600" value="320">
+                            </div>
+                            <div class="input-group">
+                                <label for="maintainAspect">保持宽高比：</label>
+                                <input type="checkbox" id="maintainAspect" checked>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button id="generateBtn" disabled>
+                                <span id="generateBtnText">生成GIF</span>
+                                <span id="generateBtnLoading" style="display: none;">生成中...</span>
+                            </button>
+                            <div class="progress-container" id="progressContainer" style="display: none;">
+                                <div class="progress-bar" id="progressBar"></div>
+                                <span class="progress-percentage" id="progressPercentage">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h2>生成结果</h2>
+                <div class="result-info" id="resultInfo"></div>
+                <div class="result-container">
+                    <img id="outputGif" alt="生成的GIF" style="max-width: 100%;">
+                </div>
+                <div class="download-buttons">
+                    <button id="downloadBtn">下载GIF动图</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.min.js"></script> -->
+    <script src="../lib/omggif.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

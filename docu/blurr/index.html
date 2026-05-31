@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="文档内容模糊处理工具，支持PDF文档页面内容模糊，可自定义模糊强度和页面范围，纯前端本地处理保护隐私">
+    <meta name="keywords" content="文档模糊, PDF模糊处理, 内容打码, 隐私保护, 在线模糊工具, 文档内容遮盖">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>文档内容模糊 - PDF文档内容模糊处理工具</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+
+    <script src="../lib/pdf.min.js"></script>
+    <script src="../lib/jspdf.umd.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "文档内容模糊工具",
+        "description": "免费在线文档内容模糊处理工具，支持PDF文档页面内容模糊，可自定义模糊强度和页面范围。纯前端本地处理，保护用户隐私。Free online document blur tool with privacy protection.",
+        "url": "https://helpoke.com/docu/blurr",
+        "applicationCategory": "https://schema.org/ProductivityApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "PDF文档页面模糊",
+            "自定义模糊强度",
+            "选择指定页面模糊",
+            "本地处理，保护隐私",
+            "一键下载处理结果"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>文档内容模糊</h1>
+            <p>上传PDF文档，对<b style="color: cadetblue;">指定页面</b>内容进行模糊处理，可自定义模糊强度，保护敏感信息。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+
+        <div class="container">
+
+            <!-- 上传区域 -->
+            <div class="upload-section">
+                <input type="file" id="fileInput" accept=".pdf">
+                <label for="fileInput" class="upload-btn">
+                    <span class="upload-icon">+</span>
+                    <span class="upload-text">点击选择 PDF 文档</span>
+                </label>
+                <p class="file-info" id="fileInfo">最大支持 100MB 文件</p>
+            </div>
+
+            <!-- 设置面板 -->
+            <div class="settings-panel" id="settingsPanel" style="display:none;">
+                <h3>模糊设置</h3>
+                <div class="settings-grid">
+                    <div class="setting-item search-item">
+                        <label for="searchInput">内容搜索：</label>
+                        <div class="search-row">
+                            <input type="text" id="searchInput" placeholder="输入关键词搜索页面内容...">
+                            <button id="searchBtn" class="btn-sm">搜索</button>
+                            <button id="clearSearchBtn" class="btn-sm" style="display:none;">清除</button>
+                        </div>
+                        <span class="hint" id="searchHint"></span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="blurRadius">模糊强度：<span id="radiusValue">3</span>px</label>
+                        <input type="range" id="blurRadius" min="1" max="10" value="3" step="1">
+                        <span class="hint">值越大越模糊</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="pageMode">页面范围：</label>
+                        <select id="pageMode">
+                            <option value="all">全部页面</option>
+                            <option value="custom">自定义页面</option>
+                        </select>
+                    </div>
+                    <div class="setting-item" id="customPagesGroup" style="display:none;">
+                        <label for="customPages">指定页码：</label>
+                        <input type="text" id="customPages" placeholder="例: 1,3,5-8">
+                        <span class="hint">逗号分隔，支持范围如 1-5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页面预览 -->
+            <div class="preview-section" id="previewSection" style="display:none;">
+                <div class="preview-header">
+                    <h3>页面预览（共 <span id="pageCount">0</span> 页）</h3>
+                    <div class="preview-actions">
+                        <button id="selectAllBtn" class="btn-sm">全选</button>
+                        <button id="deselectAllBtn" class="btn-sm">取消全选</button>
+                    </div>
+                </div>
+                <div class="pages-grid" id="pagesGrid"></div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="action-section" id="actionSection" style="display:none;">
+                <button id="processBtn" class="btn-primary">
+                    <span id="processBtnText">开始模糊处理</span>
+                    <span id="processBtnLoading" style="display:none;">处理中...</span>
+                </button>
+                <div class="progress-container" id="progressContainer" style="display:none;">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+            </div>
+
+            <!-- 结果区域 -->
+            <div class="result-section" id="resultSection" style="display:none;">
+                <h3>处理完成</h3>
+                <div class="result-info" id="resultInfo"></div>
+                <button id="downloadBtn" class="btn-download">下载模糊处理后的 PDF</button>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </main>
+
+    <!-- 放大预览弹窗 -->
+    <div class="modal-overlay" id="enlargeModal" style="display:none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-nav-btn" id="modalPrev" title="上一页">◀</button>
+                <span class="modal-title" id="modalTitle">第 1 页</span>
+                <button class="modal-nav-btn" id="modalNext" title="下一页">▶</button>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-body">
+                <canvas id="modalCanvas"></canvas>
+            </div>
+            <div class="modal-footer">
+                <span class="hint">模糊强度：<strong id="modalBlurRadius">3</strong>px | 状态：<strong id="modalBlurStatus">模糊</strong> | 双击空白处或按 Esc 关闭</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
