@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线Unicode编码解码工具, Unicode/中文互转, 支持中文转Unicode、Unicode转中文, 免费在线Unicode转换工具">
+    <meta name="keywords" content="Unicode编码, Unicode解码, 中文转Unicode, Unicode转中文, Unicode转换, 在线Unicode, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>Unicode 编码/解码工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-copy {
+            background-color: #27ae60;
+        }
+
+        .btn-copy:hover {
+            background-color: #229954;
+        }
+
+        .btn-copy.copied {
+            background-color: #1e8449;
+        }
+
+        .btn-swap {
+            background: #f8f9fa;
+            border: 1px solid #eaeaea;
+            color: #555;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .btn-swap:hover {
+            background: #eef2f7;
+            color: #2c3e50;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .result-area {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+
+        .result-area h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .result-content {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .tool-card {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .actions-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>Unicode 编码 / 解码工具</h1>
+            <p>在线 Unicode Encode / Decode，支持中文与 Unicode 互转</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="encode">中文 → Unicode</button>
+                    <button class="tab-btn" data-tab="decode">Unicode → 中文</button>
+                </div>
+
+                <div id="encode" class="tab-content active">
+                    <div class="input-group">
+                        <label for="unicode-input">输入中文文本</label>
+                        <textarea id="unicode-input" placeholder="请输入要转换的中文文本..."></textarea>
+                    </div>
+                    <div class="actions-row">
+                        <button class="btn" id="encode-btn">转换</button>
+                        <button class="btn btn-copy" id="copy-encoded-btn" style="display: none;">复制结果</button>
+                        <button class="btn btn-swap" id="swap-btn" title="切换到解码">⇄</button>
+                    </div>
+                    <div class="result-area" id="encode-result" style="display: none;">
+                        <h4>Unicode 编码结果</h4>
+                        <div class="result-content" id="encoded-text"></div>
+                    </div>
+                </div>
+
+                <div id="decode" class="tab-content">
+                    <div class="input-group">
+                        <label for="unicode-decode-input">输入 Unicode 字符串</label>
+                        <textarea id="unicode-decode-input" placeholder="请输入 Unicode 字符串，如 \u4e2d\u6587 或 4e2d6587..."></textarea>
+                    </div>
+                    <div class="actions-row">
+                        <button class="btn" id="decode-btn">转换</button>
+                        <button class="btn btn-copy" id="copy-decoded-btn" style="display: none;">复制结果</button>
+                        <button class="btn btn-swap" id="swap-btn-2" title="切换到编码">⇄</button>
+                    </div>
+                    <div class="result-area" id="decode-result" style="display: none;">
+                        <h4>中文结果</h4>
+                        <div class="result-content" id="decoded-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

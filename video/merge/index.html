@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频合成在线免费工具，支持多视频拼接和转场效果，纯前端处理保护隐私">
+    <meta name="keywords" content="视频合成, 视频拼接, 视频合并, 在线视频合成, 免费视频处理">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频合成工具 - 免费在线多视频拼接合并工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../lib/ffmpeg.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频合成工具",
+        "description": "免费在线视频合成工具，支持多视频拼接和转场效果。纯前端处理，保护用户隐私数据。",
+        "url": "https://helpoke.com/video/composer",
+        "applicationCategory": "https://schema.org/VideoEditing",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "支持批量上传多个视频",
+            "支持拖拽调整视频顺序",
+            "支持多种转场效果（淡入淡出、滑动等）",
+            "支持添加背景音乐",
+            "纯前端处理，视频不上传服务器",
+            "实时预览效果",
+            "一键下载合成后的视频"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频合成工具</h1>
+            <p>支持<b style="color: cadetblue;">多视频拼接</b>和<b style="color: cadetblue;">转场效果</b>，支持添加背景音乐，实时预览效果。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+        <div class="container">
+            <p class="description">
+                最多上传5个视频，每个视频最大100MB。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
+            </p>
+
+            <div class="upload-section">
+                <h3>视频文件</h3>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="videoUpload" accept="video/*" multiple style="display: none;">
+                    <label for="videoUpload" class="upload-btn">
+                        <span class="upload-icon">+</span>
+                        <span class="upload-text">点击或拖拽上传视频</span>
+                        <span class="upload-hint">支持一次选择多个视频（最多5个）</span>
+                    </label>
+                </div>
+                <div class="video-list-container">
+                    <div class="video-list-header">
+                        <span class="video-count">已上传 <strong id="videoCount">0</strong> 个视频（拖动/点击调整顺序）</span>
+                        <button id="clearAll" class="btn-text" style="display: none;">清空全部</button>
+                    </div>
+                    <ul id="videoList" class="video-list"></ul>
+                    <div id="emptyTip" class="empty-tip">请上传视频文件</div>
+                </div>
+            </div>
+
+            <div class="video-info" id="videoInfo">
+                <p>请上传视频文件</p>
+            </div>
+
+            <div class="preview-section" id="previewSection">
+                <div class="video-container">
+                    <video id="preview-video" controls></video>
+                </div>
+            </div>
+
+            <div class="settings-section" id="settingsSection">
+                <h3>视频尺寸设置</h3>
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="scale-mode">尺寸处理：</label>
+                        <select id="scale-mode">
+                            <option value="none">保持原始尺寸</option>
+                            <option value="uniform">统一尺寸（按第一个视频）</option>
+                            <option value="aspect" selected>保持宽高比（添加黑边）</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="output-resolution">输出分辨率：</label>
+                        <select id="output-resolution">
+                            <option value="auto">自动（跟随第一个视频）</option>
+                            <option value="1920x1080">1080p (1920x1080)</option>
+                            <option value="1280x720">720p (1280x720)</option>
+                            <option value="854x480">480p (854x480)</option>
+                            <option value="640x360">360p (640x360)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3>转场效果设置</h3>
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="transition-type">转场类型：</label>
+                        <select id="transition-type">
+                            <option value="fade">淡入淡出</option>
+                            <option value="slideleft">向左滑动</option>
+                            <option value="slideright">向右滑动</option>
+                            <option value="slideup">向上滑动</option>
+                            <option value="slidedown">向下滑动</option>
+                            <option value="none">无转场（直接拼接）</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="transition-duration">转场持续时间（秒）：</label>
+                        <input type="number" id="transition-duration" min="0.1" max="10" step="0.1" value="1">
+                    </div>
+                </div>
+
+                <h3>音频设置</h3>
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="audio-input">背景音乐：</label>
+                        <input type="file" id="audio-input" accept="audio/*">
+                    </div>
+                    <div class="input-group">
+                        <label for="audio-volume">音量：</label>
+                        <input type="range" id="audio-volume" min="0" max="200" value="100">
+                        <span id="volume-display">100%</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="process-video" disabled>
+                        <span id="processBtnText">开始处理</span>
+                        <span id="processBtnLoading" style="display: none;">处理中...</span>
+                    </button>
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar" id="progressBar"></div>
+                        <span class="progress-percentage" id="progressPercentage">0%</span>
+                    </div>
+                    <div class="workflow-nodes" id="workflowNodes" style="display: none;">
+                        <div class="workflow-node" data-step="load">加载引擎</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="prepare">准备</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="loadVideo">加载视频</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="normalize">统一尺寸</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="transition">转场</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="merge">合成</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="encode">编码</div>
+                        <div class="workflow-line"></div>
+                        <div class="workflow-node" data-step="complete">完成</div>
+                    </div>
+                    <p class="process-note" id="processNote" style="display: none;"></p>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h2>处理结果</h2>
+                <div class="result-info" id="resultInfo"></div>
+                <div class="result-container">
+                    <video id="outputVideo" controls></video>
+                </div>
+                <div class="download-buttons">
+                    <button id="download-video" disabled>下载视频</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
