@@ -806,7 +806,7 @@
         function buildPresets() {
             var html = '';
             PRESETS.forEach(function (p) {
-                html += '<div class="preset-item" onclick="usePreset(\'' + p.regex + '\', \'' + p.flags + '\')">' +
+                html += '<div class="preset-item" onclick="usePreset(\'' + p.regex.replace(/\\/g, '\\\\') + '\', \'' + p.flags + '\')">' +
                     '<span class="preset-name">' + p.name + '</span>' +
                     '<span class="preset-regex">/' + p.regex + '/' + p.flags + '</span>' +
                     '</div>';
