@@ -221,12 +221,14 @@
 
                 <div id="encode" class="tab-content active">
                     <div class="input-group">
-                        <label for="unicode-input">输入中文文本</label>
+                        <label for="unicode-input">输入中文文本 <input type="checkbox" id="encode-chinese-only" checked style="margin-left: 10px; cursor: pointer;">
+                            <span style="font-weight: normal;">仅编码中文</span></label>
                         <textarea id="unicode-input" placeholder="请输入要转换的中文文本..."></textarea>
                     </div>
                     <div class="actions-row">
                         <button class="btn" id="encode-btn">转换</button>
                         <button class="btn btn-copy" id="copy-encoded-btn" style="display: none;">复制结果</button>
+                        <button class="btn btn-clear" id="clear-encode-btn">内容清空</button>
                         <button class="btn btn-swap" id="swap-btn" title="切换到解码">⇄</button>
                     </div>
                     <div class="result-area" id="encode-result" style="display: none;">
@@ -243,6 +245,7 @@
                     <div class="actions-row">
                         <button class="btn" id="decode-btn">转换</button>
                         <button class="btn btn-copy" id="copy-decoded-btn" style="display: none;">复制结果</button>
+                        <button class="btn btn-clear" id="clear-decode-btn">内容清空</button>
                         <button class="btn btn-swap" id="swap-btn-2" title="切换到编码">⇄</button>
                     </div>
                     <div class="result-area" id="decode-result" style="display: none;">
@@ -256,6 +259,7 @@
     </main>
 
     <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>
 </body>
 
