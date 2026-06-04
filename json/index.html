@@ -56,7 +56,9 @@
     <main class="main">
         <section class="page-hero">
             <h1>JSON工具集</h1>
-            <p>JSON格式化、JSON比对、JSON与Java Bean互转，支持节点折叠与差异高亮</p>
+            <p>JSON格式化工具，支持节点折叠与差异高亮，可以手动选择折叠节点，支持压缩与解义(压缩也是去转义，先解义再格式化)。</p>
+            <p>JSON比对工具，清晰标记不同内容行，可高亮展示节点，指出所有不同点(压缩也是去转义，先解义再比对)。</p>
+            <p>JSON与Java Bean、XML互转工具，支持值自动填充(压缩也是去转义，先解义再互转)。</p>
         </section>
         <div class="container">
 
@@ -89,8 +91,7 @@
                         <div class="input-box">
                             <div id="error-message" class="error-message"></div>
                             <div class="editor-container-wrapper">
-                                <button id="format-fullscreen-btn" class="fullscreen-button"
-                                    onclick="toggleFullScreen()">
+                                <button id="format-fullscreen-btn" class="fullscreen-button">
                                     <span class="iconfont">&#xe8fa;</span></button>
                                 <div class="editor-container">
                                     <div id="line-numbers" class="line-numbers">
@@ -297,12 +298,12 @@
             </div>
         </div>
 
-        <script src="script.js"></script>
-
-
         <!-- Footer component container -->
         <div id="footer-container"></div>
     </main>
+
+    <script src="convert.js"></script>
+    <script src="script.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 
