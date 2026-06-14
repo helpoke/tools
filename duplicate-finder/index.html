@@ -21,7 +21,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -208,12 +208,12 @@
             color: #7f8c8d;
             margin-top: 12px;
             padding: 12px;
-            background: #f8f9fa;
+            background: var(--bg-color);
             border-radius: 8px;
         }
 
         .separator-info code {
-            background: #fff;
+            background: var(--bg-color);
             padding: 2px 6px;
             border-radius: 3px;
             font-family: 'Courier New', monospace;
@@ -245,7 +245,7 @@
             }
 
             textarea {
-                min-height: 120px;
+                min-height: 160px;
             }
 
             .btn {
@@ -270,6 +270,120 @@
             .tool-card {
                 padding: 18px;
             }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .option-row label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-primary {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-section {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-item {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .duplicate-info {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .count-badge {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode .option-row label {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-section {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-item {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .highlighted-text {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .highlighted-text mark {
+            background-color: #4a3f6b;
+            color: #e8e6f0;
+        }
+
+        body.dark-mode .duplicate-tag {
+            background: linear-gradient(135deg, #2d2d44 0%, #1e1e2e 100%);
+            color: #e8e6f0;
+        }
+
+        body.dark-mode .duplicate-tag .count {
+            background: #c0392b;
+            color: white;
+        }
+
+        body.dark-mode .stat-item {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .stat-item .label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .stat-item .value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .section-title {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .error-box {
+            background-color: rgba(231, 76, 60, 0.15);
+            border-color: rgba(231, 76, 60, 0.4);
+            color: #ffb3b3;
         }
     </style>
     <script type="application/ld+json">
@@ -312,6 +426,7 @@
         <section class="page-hero">
             <h1>重复内容查找工具</h1>
             <p>检测文本中重复出现的字符、数字、单词等内容，自动高亮标记重复项</p>
+            <p>支持多种分隔符自动识别，包括空格、逗号、分号、管道符等。可通过点击标签筛选重复项，只标记指定重复项。</p>
         </section>
 
         <div class="container">
@@ -363,8 +478,12 @@
         <div id="footer-container"></div>
     </main>
 
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/utils.js"></script>
     <script>
+        // 全局分隔符定义，确保一致性
+        var SEPARATORS = /[\s,\，;\；\|\、·\n\t。.？?！!：:；;""''""''""''[\]【】()（）{}<>《》「」『』·—–—_=+\-*/\\~`@#$%^&*|§±÷×√π∞∑∈√∠∟⊿∩∪∫∮∴∵∷⊙⊕⊗⊘⊝⊠⊡⋄⋅⋆⋇⋈⋉⋊⋋⋌◈◇◉○◌◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯⊕⊖⊗⊘⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿]+/;
+
         function findDuplicates() {
             var input = document.getElementById('input-text');
             var errorBox = document.getElementById('error-box');
@@ -381,8 +500,7 @@
             }
 
             // 使用多种分隔符进行分割（包含中英文标点符号）
-            var separators = /[\s,\，;\；\|\、·\n\t。.？?！!：:；;""''""''""''[\]【】()（）{}<>《》「」『』·—–—_=+\-*/\\~`@#$%^&*|§±÷×√π∞∑∈√∠∟⊿∩∪∫∮∴∵∷⊙⊕⊗⊘⊝⊠⊡⋄⋅⋆⋇⋈⋉⋊⋋⋌◈◇◉○◌◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯⊕⊖⊗⊘⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿]+/;
-            var items = text.split(separators).filter(function(item) {
+            var items = text.split(SEPARATORS).filter(function(item) {
                 return item.trim() !== '';
             });
 
@@ -430,36 +548,125 @@
                 return b.count - a.count;
             });
 
+            // 定义颜色数组，为不同的重复内容分配不同颜色
+            var colors = [
+                '#FFB3B3', // 淡红色
+                '#B3E5FC', // 淡蓝色
+                '#C8E6C9', // 淡绿色
+                '#ddcf53', // 淡黄色
+                '#E1BEE7', // 淡紫色
+                '#FFCCBC', // 淡橙色
+                '#B2DFDB', // 淡青色
+                '#F8BBD0', // 淡粉色
+                '#D1C4E9', // 淡薰衣草色
+                '#C5CAE9', // 淡靛蓝色
+                '#B2EBF2', // 淡青绿色
+                '#DCEDC8', // 淡酸橙绿
+                '#F0F4C3', // 淡柠檬绿
+                '#FFECB3', // 淡琥珀色
+                '#FFCDD2', // 淡玫瑰色
+                '#D7CCC8', // 淡棕色
+                '#CFD8DC', // 淡蓝灰色
+                '#E0F2F1', // 淡薄荷绿
+                '#F3E5F5', // 淡紫罗兰色
+                '#E8F5E9', // 淡森林绿
+                '#FFE0E0', // 淡珊瑚色
+                '#E0E0FF', // 淡蓝紫色
+                '#E8FFE8', // 淡青绿
+                '#FFF0E0', // 淡杏色
+                '#FFE0FF', // 淡洋红色
+                '#E0FFE8', // 淡翡翠绿
+                '#FFEEDD', // 淡米色
+                '#E0F0FF', // 淡天蓝
+                '#FFDFDD', // 淡桃色
+                '#DDE0FF', // 淡紫色
+            ];
+
+            // 为每个重复内容分配颜色
+            duplicates.forEach(function(item, index) {
+                item.color = colors[index % colors.length];
+            });
+
             // 更新统计信息
             document.getElementById('stat-total').textContent = items.length;
             document.getElementById('stat-unique').textContent = Object.keys(counts).length;
             document.getElementById('stat-duplicates').textContent = duplicates.length;
             document.getElementById('dup-count').textContent = duplicates.length;
 
-            // 显示重复标签
+            // 保存当前状态用于筛选功能
+            window.currentDuplicates = duplicates;
+            window.originalText = text;
+            window.selectedDuplicate = null;
+
+            // 显示重复标签，使用对应的颜色
             var tagsHtml = '';
-            duplicates.forEach(function(item) {
-                tagsHtml += '<span class="duplicate-tag">' +
+            duplicates.forEach(function(item, index) {
+                tagsHtml += '<span class="duplicate-tag" style="background-color: ' + item.color + '; border-color: ' + item.color + ';" onclick="toggleDuplicateFilter(' + index + ');">' +
                     item.value +
-                    '<span class="count">' + item.count + '次</span>' +
+                    '<span class="count" style="color: #141313; background-color: ' + item.color + ';">' + item.count + '次</span>' +
                     '</span>';
             });
             document.getElementById('duplicate-tags').innerHTML = tagsHtml;
 
-            // 高亮显示原文中的重复内容（匹配去除标点符号后的版本）
-            var highlightedText = text;
-            duplicates.forEach(function(item) {
-                // 创建正则表达式，匹配去除标点符号后的内容
-                var regex = new RegExp(escapeRegex(item.key), 'g');
-                highlightedText = highlightedText.replace(regex, '<mark>$&</mark>');
-            });
-            document.getElementById('highlighted-text').innerHTML = highlightedText;
+            // 高亮显示原文中的重复内容（匹配去除标点符号后的版本），使用对应的颜色
+            highlightDuplicates(duplicates);
 
             resultSection.classList.add('show');
 
             if (duplicates.length === 0) {
                 document.getElementById('duplicate-tags').innerHTML = '<span style="color:#7f8c8d;">未找到重复内容</span>';
             }
+        }
+
+        // 切换重复内容筛选
+        function toggleDuplicateFilter(index) {
+            var duplicates = window.currentDuplicates;
+            var originalText = window.originalText;
+            var selectedDuplicate = window.selectedDuplicate;
+
+            if (selectedDuplicate === index) {
+                // 点击同一个标签，取消筛选
+                window.selectedDuplicate = null;
+                highlightDuplicates(duplicates);
+                // 移除所有标签的选中状态
+                document.querySelectorAll('.duplicate-tag').forEach(function(tag) {
+                    tag.style.transform = '';
+                    tag.style.boxShadow = '';
+                });
+            } else {
+                // 选择新的标签进行筛选
+                window.selectedDuplicate = index;
+                highlightDuplicates([duplicates[index]]);
+                // 设置选中状态
+                document.querySelectorAll('.duplicate-tag').forEach(function(tag, i) {
+                    if (i === index) {
+                        tag.style.transform = 'scale(1.05)';
+                        tag.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
+                    } else {
+                        tag.style.transform = '';
+                        tag.style.boxShadow = '';
+                    }
+                });
+            }
+        }
+
+        // 高亮显示重复内容
+        function highlightDuplicates(items) {
+            var highlightedText = window.originalText;
+            
+            // 为每个重复内容创建高亮标记
+            items.forEach(function(item) {
+                // 创建正则表达式，只匹配被分隔符包围的完整内容
+                var escapedKey = escapeRegex(item.key);
+                // 使用单词边界匹配：前面是分隔符或开头，后面是分隔符或结尾
+                var regex = new RegExp('(^|[\\s,，;；\\|、·\\n\t。.？?！!：:；;""\'\'【】()（）{}<>《》「」『』·—–—_=+\\-*/\\\\~`@#$%^&*|§±÷×√π∞∑∈√∠∟⊿∩∪∫∮∴∵∷⊙⊕⊗⊘⊝⊠⊡⋄⋅⋆⋇⋈⋉⋊⋋⋌◈◇◉○◌◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯⊕⊖⊗⊘⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿])(' + escapedKey + ')([\\s,，;；\\|、·\\n\t。.？?！!：:；;""\'\'【】()（）{}<>《》「」『』·—–—_=+\\-*/\\\\~`@#$%^&*|§±÷×√π∞∑∈√∠∟⊿∩∪∫∮∴∵∷⊙⊕⊗⊘⊝⊠⊡⋄⋅⋆⋇⋈⋉⋊⋋⋌◈◇◉○◌◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯⊕⊖⊗⊘⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿]|$)', 'g');
+                
+                highlightedText = highlightedText.replace(regex, function(match, before, content, after) {
+                    return before + '<mark style="background-color: ' + item.color + ';">' + content + '</mark>' + after;
+                });
+            });
+            
+            document.getElementById('highlighted-text').innerHTML = highlightedText;
         }
 
         function clearAll() {

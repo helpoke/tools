@@ -23,7 +23,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -151,7 +151,7 @@
             padding: 4px 12px;
             font-size: 13px;
             border: 1px solid #3498db;
-            background-color: white;
+            background-color: var(--bg-card);
             color: #3498db;
             border-radius: 4px;
             cursor: pointer;
@@ -188,7 +188,7 @@
             gap: 16px;
             margin-bottom: 16px;
             padding: 12px;
-            background-color: #f8f9fa;
+            background-color: var(--bg-color);
             border-radius: 8px;
         }
 
@@ -219,6 +219,45 @@
                 width: 100%;
                 text-align: center;
             }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn {
+            border-color: var(--border-color);
         }
     </style>
 </head>
@@ -272,6 +311,7 @@
         <div id="footer-container"></div>
     </main>
 
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
     <script src="script.js"></script>
 </body>

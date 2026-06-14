@@ -96,29 +96,29 @@
             <div class="grid md:grid-cols-2 gap-10">
                 <!-- 输入区域 -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
-                    <h2 class="text-xl font-semibold text-neutral mb-4 flex items-center">
-                        <i class="fa fa-input text-primary mr-2"></i>输入
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fa fa-input mr-2"></i>输入
                     </h2>
 
                     <!-- 输入选项卡 -->
                     <div class="flex border-b border-gray-200 mb-4">
                         <button id="tab-base64"
-                            class="px-4 py-2 text-primary border-b-2 border-primary font-medium">Base64</button>
-                        <button id="tab-svg" class="px-4 py-2 text-gray-500 hover:text-primary">SVG</button>
-                        <button id="tab-upload" class="px-4 py-2 text-gray-500 hover:text-primary">上传文件</button>
+                            class="tab-btn px-4 py-2 border-b-2 border-primary font-medium">Base64</button>
+                        <button id="tab-svg" class="tab-btn px-4 py-2">SVG</button>
+                        <button id="tab-upload" class="tab-btn px-4 py-2">上传文件</button>
                     </div>
 
                     <!-- Base64 输入区域 -->
                     <div id="input-base64" class="space-y-4">
                         <div>
                             <!-- Base64格式说明 -->
-                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-600 mb-2">
-                                <i class="fa fa-info-circle text-primary mr-1"></i><strong>Base64格式说明：</strong>
+                            <div class="format-info rounded-lg p-3 text-sm mb-2">
+                                <i class="fa fa-info-circle mr-1"></i><strong>Base64格式说明：</strong>
                                 请输入完整的Base64图像代码，可以包含或不包含前缀：data:image/xxx;base64,。输入示例如下：
                             </div>
                             <!-- Base64示例 -->
                             <div
-                                class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600 mb-2 overflow-auto max-h-24">
+                                class="code-example rounded-lg p-3 text-xs mb-2 overflow-auto max-h-24">
                                 <pre class="whitespace-pre-wrap">data:image/png;base64,{base64_encode}</pre>
                             </div>
                             <textarea id="base64-input" rows="23"
@@ -126,9 +126,9 @@
                                 placeholder="请粘贴 Base64 图片代码..."></textarea>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-sm text-gray-500" id="base64-length">0 字符</div>
+                            <div class="text-sm" id="base64-length">0 字符</div>
                             <button id="clear-base64"
-                                class="text-sm text-gray-500 hover:text-red-500 transition-colors">
+                                class="text-sm hover:text-red-500 transition-colors">
                                 <i class="fa fa-trash-o mr-1"></i>清除
                             </button>
                         </div>
@@ -138,13 +138,13 @@
                     <div id="input-svg" class="space-y-4 hidden">
                         <div>
                             <!-- SVG格式说明 -->
-                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-600 mb-2">
-                                <i class="fa fa-info-circle text-primary mr-1"></i><strong>SVG格式说明：</strong>
+                            <div class="format-info rounded-lg p-3 text-sm mb-2">
+                                <i class="fa fa-info-circle mr-1"></i><strong>SVG格式说明：</strong>
                                 请输入完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。输入示例如下：
                             </div>
                             <!-- SVG示例 -->
                             <div
-                                class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs text-gray-600 mb-2 overflow-auto max-h-32">
+                                class="code-example rounded-lg p-3 text-xs mb-2 overflow-auto max-h-32">
                                 <pre class="whitespace-pre-wrap">&lt;svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"&gt;
   &lt;circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red"/&gt;
   &lt;text x="50" y="55" font-size="12" text-anchor="middle"&gt;示例&lt;/text&gt;
@@ -155,8 +155,8 @@
                                 placeholder="请粘贴 SVG 代码..."></textarea>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-sm text-gray-500" id="svg-length">0 字符</div>
-                            <button id="clear-svg" class="text-sm text-gray-500 hover:text-red-500 transition-colors">
+                            <div class="text-sm" id="svg-length">0 字符</div>
+                            <button id="clear-svg" class="text-sm hover:text-red-500 transition-colors">
                                 <i class="fa fa-trash-o mr-1"></i>清除
                             </button>
                         </div>
@@ -168,15 +168,15 @@
                             id="drop-area">
                             <input type="file" id="file-input" class="hidden" accept="image/*,image/svg+xml,.svg"
                                 multiple>
-                            <i class="fa fa-upload text-4xl text-gray-400 mb-2"></i>
-                            <p class="text-gray-500">点击或拖拽文件到此处上传</p>
-                            <p class="text-xs text-gray-400 mt-1">支持JPG、PNG、GIF、SVG等格式（最多20张）</p>
+                            <i class="fa fa-upload text-4xl mb-2"></i>
+                            <p>点击或拖拽文件到此处上传</p>
+                            <p class="text-xs mt-1">支持JPG、PNG、GIF、SVG等格式（最多20张）</p>
                         </div>
 
                         <!-- 文件列表 -->
                         <div id="file-list" class="hidden">
                             <div class="flex justify-between items-center mb-2">
-                                <span class="text-sm text-gray-600">已选择 <span id="file-count">0</span> 张图片</span>
+                                <span class="text-sm">已选择 <span id="file-count">0</span> 张图片</span>
                                 <button id="clear-files" class="text-xs text-red-500 hover:underline">清空</button>
                             </div>
                             <div id="file-items" class="max-h-32 overflow-y-auto space-y-1"></div>
@@ -186,20 +186,20 @@
                         <div id="file-info" class="hidden bg-gray-50 p-3 rounded-lg">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <i class="fa fa-file-image-o text-primary mr-2"></i>
+                                    <i class="fa fa-file-image-o mr-2"></i>
                                     <span id="file-name" class="text-sm font-medium"></span>
                                 </div>
-                                <span id="file-size" class="text-xs text-gray-500"></span>
+                                <span id="file-size" class="text-xs"></span>
                             </div>
                         </div>
                         <!-- 预览区域 -->
-                        <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                            <h3 class="text-sm font-medium text-gray-700 mb-2">预览（可点击放大）：</h3>
+                        <div class="preview-wrapper rounded-lg p-4">
+                            <h3 class="text-sm font-medium mb-2">预览（可点击放大）：</h3>
                             <div id="upload-container"
-                                class="h-[400px] bg-white flex items-center justify-center border border-gray-100 rounded overflow-hidden">
-                                <div class="text-center">
-                                    <i class="fa fa-picture-o text-gray-300 text-4xl mb-2"></i>
-                                    <p class="text-gray-400 text-sm">上传后图片将在这里显示</p>
+                                class="preview-inner h-[400px] flex items-center justify-center rounded overflow-hidden">
+                                <div class="preview-placeholder text-center">
+                                    <i class="fa fa-picture-o text-4xl mb-2"></i>
+                                    <p class="text-sm">上传后图片将在这里显示</p>
                                 </div>
                             </div>
                         </div>
@@ -208,9 +208,9 @@
 
                 <!-- 输出和预览区域 -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
-                    <h2 class="text-xl font-semibold text-neutral mb-4 flex items-center">
-                        <i class="fa fa-output text-secondary mr-2"></i>输出设置
-                        （<a href="note.html" target="" class="block text-sm text-primary hover:underline">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fa fa-output mr-2"></i>输出设置
+                        （<a href="note.html" target="" class="block text-sm hover:underline">
                             <i class="fa fa-info-circle mr-1"></i>转换类型与清晰度说明
                         </a>）
                     </h2>
@@ -219,9 +219,9 @@
                     <div class="space-y-4 mb-6">
                         <div>
                             <label for="output-format"
-                                class="block text-sm font-medium text-gray-700 mb-1">输出格式：</label>
+                                class="block text-sm font-medium mb-1">输出格式：</label>
                             <select id="output-format"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus bg-white">
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
                                 <option value="image/jpeg">JPG (.jpg)</option>
                                 <option value="image/png">PNG (.png) - 推荐用于SVG转换</option>
                                 <option value="image/webp">WebP (.webp)</option>
@@ -233,23 +233,19 @@
                         </div>
 
                         <div id="resolution-container">
-                            <label for="resolution-select" class="block text-sm font-medium text-gray-700 mb-1">
+                            <label for="resolution-select" class="block text-sm font-medium mb-1">
                                 输出分辨率（仅对SVG有效）：
                             </label>
                             <select id="resolution-select"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus bg-white">
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
                                 <option value="1024" selected>1024x1024（标准质量）</option>
                                 <option value="2048">2048x2048（高质量）</option>
                                 <option value="4096">4096x4096（超高质量）</option>
                                 <option value="8192">8192x8192（无损质量）</option>
                             </select>
-
-                            <!-- <div id="format-tips" class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700 mt-2">
-                            <i class="fa fa-lightbulb-o mr-1"></i><strong>提示：</strong>对于SVG转换，建议使用PNG格式，以获得最佳清晰度。
-                        </div> -->
                         </div>
                         <div>
-                            <label for="quality-slider" class="block text-sm font-medium text-gray-700 mb-1">
+                            <label for="quality-slider" class="block text-sm font-medium mb-1">
                                 图片质量：<span id="quality-value">90</span>%
                             </label>
                             <input type="range" id="quality-slider" min="1" max="100" value="90"
@@ -257,7 +253,7 @@
                         </div>
 
                         <div>
-                            <label for="filename" class="block text-sm font-medium text-gray-700 mb-1">文件名：</label>
+                            <label for="filename" class="block text-sm font-medium mb-1">文件名：</label>
                             <input type="text" id="filename" value="helpoke-converted-image"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
                         </div>
@@ -266,16 +262,16 @@
                     <!-- 操作按钮 -->
                     <div class="flex space-x-3 mb-6">
                         <button id="convert-btn"
-                            class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center">
+                            class="flex-1 font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center">
                             <i class="fa fa-exchange mr-2"></i>转换
                         </button>
                         <button id="download-btn"
-                            class="flex-1 bg-secondary hover:bg-secondary/90 text-white font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
+                            class="flex-1 font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
                             disabled>
                             <i class="fa fa-download mr-2"></i>下载
                         </button>
                         <button id="download-all-btn"
-                            class="flex-1 bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
+                            class="flex-1 font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
                             disabled>
                             <i class="fa fa-download mr-2"></i>批量下载
                         </button>
@@ -284,30 +280,30 @@
                     <!-- 预览区域容器 -->
                     <div class="space-y-4">
                         <!-- 图片预览区域 -->
-                        <div id="image-preview-container" class="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                            <h3 class="text-sm font-medium text-gray-700 mb-2">预览（可点击放大）：</h3>
+                        <div id="image-preview-container" class="preview-wrapper">
+                            <h3 class="text-sm font-medium mb-2">预览（可点击放大）：</h3>
                             <div id="preview-container"
-                                class="h-[400px] bg-white flex items-center justify-center border border-gray-100 rounded overflow-hidden">
-                                <div class="text-center">
-                                    <i class="fa fa-picture-o text-gray-300 text-4xl mb-2"></i>
-                                    <p class="text-gray-400 text-sm">转换后图片将在这里显示</p>
+                                class="preview-inner h-[400px] flex items-center justify-center rounded overflow-hidden">
+                                <div class="preview-placeholder text-center">
+                                    <i class="fa fa-picture-o text-4xl mb-2"></i>
+                                    <p class="text-sm">转换后图片将在这里显示</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Base64 预览输入框 -->
                         <div id="base64-preview-container"
-                            class="border border-gray-200 rounded-lg p-4 bg-gray-50 hidden">
+                            class="preview-wrapper hidden">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="text-sm font-medium text-gray-700">Base64 编码：</h3>
-                                <button id="copy-base64" class="text-xs text-primary hover:underline">
+                                <h3 class="text-sm font-medium">Base64 编码：</h3>
+                                <button id="copy-base64" class="text-xs hover:underline">
                                     <i class="fa fa-copy mr-1"></i>复制
                                 </button>
                             </div>
                             <textarea id="base64-preview" rows="22"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus resize-y text-xs font-mono"
                                 readonly placeholder="转换为Base64后将显示在这里..."></textarea>
-                            <div class="text-xs text-gray-500 mt-1 text-right">
+                            <div class="text-xs mt-1 text-right">
                                 <span id="base64-size">0 字符</span>
                             </div>
                         </div>
@@ -316,16 +312,16 @@
             </div>
 
             <!-- 功能说明卡片 -->
-            <div class="mt-8 bg-white rounded-xl p-6 card-shadow">
-                <h2 class="text-xl font-semibold text-neutral mb-4 flex items-center">
-                    <i class="fa fa-info-circle text-primary mr-2"></i>使用说明
+            <div class="mt-8 feature-card rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fa fa-info-circle mr-2"></i>使用说明
                 </h2>
-                <div class="space-y-3 text-gray-700">
-                    <p><i class="fa fa-check-circle text-green-500 mr-2"></i>支持多种输入方式：Base64 字符串、SVG 代码或直接上传图片文件</p>
-                    <p><i class="fa fa-check-circle text-green-500 mr-2"></i>输出格式支持：JPG、PNG、WebP、BMP</p>
-                    <p><i class="fa fa-check-circle text-green-500 mr-2"></i>JPG 和 WebP 格式可以调整图片质量，以平衡文件大小和图像清晰度</p>
-                    <p><i class="fa fa-check-circle text-green-500 mr-2"></i>转换过程在本地完成，不会上传您的图片到服务器</p>
-                    <p><i class="fa fa-exclamation-triangle text-amber-500 mr-2"></i>注意：过大的图片可能会影响转换性能，请尽量优化输入内容</p>
+                <div class="space-y-3">
+                    <p><i class="fa fa-check-circle mr-2"></i>支持多种输入方式：Base64 字符串、SVG 代码或直接上传图片文件</p>
+                    <p><i class="fa fa-check-circle mr-2"></i>输出格式支持：JPG、PNG、WebP、BMP</p>
+                    <p><i class="fa fa-check-circle mr-2"></i>JPG 和 WebP 格式可以调整图片质量，以平衡文件大小和图像清晰度</p>
+                    <p><i class="fa fa-check-circle mr-2"></i>转换过程在本地完成，不会上传您的图片到服务器</p>
+                    <p><i class="fa fa-exclamation-triangle mr-2"></i>注意：过大的图片可能会影响转换性能，请尽量优化输入内容</p>
                 </div>
             </div>
             <!-- Footer component container -->
@@ -341,6 +337,7 @@
         </div>
 
     </main>
+    <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <!-- 引用JSZip库用于批量下载 -->

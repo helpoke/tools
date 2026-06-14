@@ -24,7 +24,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -200,6 +200,107 @@
                 text-align: center;
             }
         }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tabs {
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode input[type="text"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-copy {
+            background-color: #27ae60;
+        }
+
+        body.dark-mode .btn-copy:hover {
+            background-color: #229954;
+        }
+
+        body.dark-mode .btn-copy.copied {
+            background-color: #1e8449;
+        }
+
+        body.dark-mode .btn-clear {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-clear:hover {
+            background-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn-swap {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-swap:hover {
+            background-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-area {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-area h4 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: #ffffff !important;
+        }
     </style>
 </head>
 
@@ -258,6 +359,7 @@
         <div id="footer-container"></div>
     </main>
 
+    <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

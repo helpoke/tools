@@ -468,6 +468,210 @@
                 padding: 16px;
             }
         }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-outline {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .match-item {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .match-item-header {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .match-item-body {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .match-item .group-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .match-item .group-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .error-msg {
+            color: var(--error-color);
+        }
+
+        body.dark-mode .tabs {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .tab-btn:hover:not(.active) {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .tab-btn.active {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .highlight-area {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .highlight-area .match {
+            background-color: rgba(251, 146, 60, 0.3);
+        }
+
+        body.dark-mode .highlight-area .match:nth-child(odd) {
+            background-color: rgba(251, 146, 60, 0.4);
+        }
+
+        body.dark-mode .highlight-area .match.focus {
+            background-color: #fb923c;
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .stats-row {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: var(--success-color);
+            color: var(--success-color);
+        }
+
+        body.dark-mode .presets-section {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .presets-title {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .preset-item {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .preset-item:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        body.dark-mode .preset-item .preset-name {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .preset-item .preset-regex {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .replace-preview {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .replace-preview ins {
+            background-color: rgba(16, 185, 129, 0.3);
+        }
+
+        body.dark-mode .regex-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .flags-hint {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .flags-hint span {
+            color: var(--primary-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-box {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode input[type="text"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .match-item {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-pane label[style*="color:#1e293b"] {
+            color: var(--text-primary) !important;
+        }
+
+        body.dark-mode #match-stats.no-match,
+        body.dark-mode #match-stats.match-found {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: inherit !important;
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -700,14 +904,26 @@
             if (matches.length === 0) {
                 statsDiv.style.display = 'flex';
                 statsDiv.innerHTML = '无匹配';
-                statsDiv.style.background = '#fff7ed';
-                statsDiv.style.border = '1px solid #fed7aa';
-                statsDiv.style.color = '#c2410c';
+                if (document.body.classList.contains('dark-mode')) {
+                    statsDiv.style.background = 'rgba(251, 146, 60, 0.1)';
+                    statsDiv.style.border = '1px solid rgba(251, 146, 60, 0.3)';
+                    statsDiv.style.color = '#fb923c';
+                } else {
+                    statsDiv.style.background = '#fff7ed';
+                    statsDiv.style.border = '1px solid #fed7aa';
+                    statsDiv.style.color = '#c2410c';
+                }
             } else {
                 statsDiv.style.display = 'flex';
-                statsDiv.style.background = '#f0fdf4';
-                statsDiv.style.border = '1px solid #bbf7d0';
-                statsDiv.style.color = '#15803d';
+                if (document.body.classList.contains('dark-mode')) {
+                    statsDiv.style.background = 'rgba(16, 185, 129, 0.1)';
+                    statsDiv.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+                    statsDiv.style.color = '#10b981';
+                } else {
+                    statsDiv.style.background = '#f0fdf4';
+                    statsDiv.style.border = '1px solid #bbf7d0';
+                    statsDiv.style.color = '#15803d';
+                }
                 statsDiv.innerHTML = '找到 <strong>' + matches.length + '</strong> 个匹配';
             }
 
@@ -817,6 +1033,8 @@
         function usePreset(regex, flags) {
             document.getElementById('regex-pattern').value = regex;
             document.getElementById('regex-flags').value = flags;
+            document.getElementById('replace-pattern').value = regex;
+            document.getElementById('replace-flags').value = flags;
             doMatch();
         }
 
@@ -848,6 +1066,7 @@
         buildPresets();
         doMatch();
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 
