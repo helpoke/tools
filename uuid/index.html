@@ -30,7 +30,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -284,6 +284,91 @@
                 font-size: 16px;
             }
         }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tools-section h2,
+        body.dark-mode .tool-card h3,
+        body.dark-mode .form-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .tool-card p {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-section h4 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .password-item {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .password-text {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-single-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .copy-single-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-secondary {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .message.success {
+            background-color: rgba(39, 174, 96, 0.2);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -480,6 +565,7 @@
         // 初始生成
         generateUUIDs();
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

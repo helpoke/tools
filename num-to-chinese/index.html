@@ -23,7 +23,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -80,9 +80,9 @@
         .result {
             margin-top: 32px;
             padding: 24px;
-            background-color: #f8f9fa;
+            background-color: var(--bg-color);
             border-radius: 8px;
-            border: 1px solid #eaeaea;
+            border: 1px solid var(--border-color);
         }
 
         .result h3 {
@@ -93,7 +93,7 @@
         }
 
         .result-content {
-            background-color: white;
+            background-color: var(--bg-tertiary);
             padding: 16px;
             border-radius: 8px;
             border: 1px solid #eaeaea;
@@ -162,7 +162,7 @@
         .reference {
             max-width: 800px;
             margin: 0 auto 24px;
-            background: white;
+            background: var(--bg-color);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 24px 32px;
@@ -208,8 +208,8 @@
             padding: 12px;
             border-radius: 6px;
             font-size: 14px;
-            color: #7f8c8d;
-            background-color: #f0f0f0;
+            color: var(--text-secondary);
+            background-color: var(--bg-tertiary);
         }
 
         @media (max-width: 768px) {
@@ -287,6 +287,78 @@
                 width: 100%;
                 padding: 0.7rem 0.5rem;
             } */
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .ref-table {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .ref-table th,
+        body.dark-mode .ref-table td {
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode input[type="number"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-content {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn {
+            border-color: var(--border-color);
         }
     </style>
     <script type="application/ld+json">
@@ -768,6 +840,7 @@
         // 初始转换
         convertNumber();
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

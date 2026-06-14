@@ -23,7 +23,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -232,6 +232,130 @@
             .tool-card {
                 padding: 18px;
             }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tabs {
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .tab-btn:hover,
+        body.dark-mode .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .tab-btn.active {
+            border-bottom-color: var(--primary-color);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-outline {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .btn-swap {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-swap:hover {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .mode-toggle button {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .mode-toggle button:hover:not(.active) {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .mode-toggle button.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .char-count {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: #229954;
+            border-color: #229954;
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode .tabs {
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-box {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn {
+            border-color: var(--success-color);
         }
     </style>
     <script type="application/ld+json">
@@ -443,6 +567,7 @@
             }
         });
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

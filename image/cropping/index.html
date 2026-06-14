@@ -33,24 +33,24 @@
 
         /* ====== Upload ====== */
         .upload-area {
-            border: 2px dashed #cbd5e1;
+            border: 2px dashed var(--border-color);
             border-radius: 12px;
             padding: 40px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            background: #fff;
+            background: var(--bg-card);
             margin-bottom: 20px;
         }
 
         .upload-area:hover {
-            border-color: #4f46e5;
-            background: #eef2ff;
+            border-color: var(--accent-color);
+            background: rgba(99, 102, 241, 0.1);
         }
 
         .upload-area.dragover {
-            border-color: #4f46e5;
-            background: #eef2ff;
+            border-color: var(--accent-color);
+            background: rgba(99, 102, 241, 0.1);
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
 
@@ -62,21 +62,22 @@
         .upload-area .upload-text {
             font-size: 15px;
             font-weight: 500;
-            color: #475569;
+            color: var(--text-primary);
         }
 
         .upload-area .upload-hint {
             font-size: 12px;
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-top: 6px;
         }
 
         /* ====== Crop Editor ====== */
         .crop-editor {
-            background: #fff;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--box-shadow);
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .crop-editor .editor-header {
@@ -84,7 +85,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 14px 20px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -92,7 +93,7 @@
         .crop-editor .editor-header h3 {
             font-size: 15px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         .crop-container-wrapper {
@@ -277,9 +278,9 @@
             display: flex;
             gap: 20px;
             padding: 10px 20px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--border-color);
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
             flex-wrap: wrap;
         }
 
@@ -288,7 +289,7 @@
         }
 
         .crop-info b {
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         /* ====== Side Panel ====== */
@@ -299,16 +300,17 @@
         }
 
         .panel-card {
-            background: #fff;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--box-shadow);
             padding: 20px;
+            border: 1px solid var(--border-color);
         }
 
         .panel-card h4 {
             font-size: 14px;
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text-primary);
             margin-bottom: 14px;
         }
 
@@ -320,26 +322,26 @@
 
         .ratio-btn {
             padding: 8px 4px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            background: #fff;
+            background: var(--bg-card);
             cursor: pointer;
             font-size: 12px;
             font-weight: 500;
-            color: #475569;
+            color: var(--text-primary);
             transition: all 0.15s ease;
             text-align: center;
         }
 
         .ratio-btn:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
+            background: var(--bg-primary);
+            border-color: var(--border-color);
         }
 
         .ratio-btn.active {
-            background: #eef2ff;
-            border-color: #4f46e5;
-            color: #4f46e5;
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
             font-weight: 600;
         }
 
@@ -353,36 +355,38 @@
         .ratio-custom-row input {
             width: 70px;
             padding: 8px 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 13px;
             text-align: center;
+            background: var(--bg-card);
+            color: var(--text-primary);
         }
 
         .ratio-custom-row input:focus {
             outline: none;
-            border-color: #4f46e5;
+            border-color: var(--accent-color);
         }
 
         .ratio-custom-row span {
-            color: #94a3b8;
+            color: var(--text-muted);
             font-weight: 500;
         }
 
         .ratio-custom-row button {
             padding: 8px 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            background: #fff;
+            background: var(--bg-card);
             cursor: pointer;
             font-size: 12px;
-            color: #475569;
+            color: var(--text-primary);
             transition: all 0.15s;
         }
 
         .ratio-custom-row button:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
+            background: var(--bg-primary);
+            border-color: var(--border-color);
         }
 
         .dim-row {
@@ -394,7 +398,7 @@
 
         .dim-row label {
             font-size: 13px;
-            color: #64748b;
+            color: var(--text-secondary);
             width: 36px;
             flex-shrink: 0;
         }
@@ -403,26 +407,28 @@
             flex: 1;
             padding: 8px 10px;
             width: 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             font-size: 13px;
+            background: var(--bg-card);
+            color: var(--text-primary);
         }
 
         .dim-row input:focus {
             outline: none;
-            border-color: #4f46e5;
+            border-color: var(--accent-color);
         }
 
         .dim-row .unit {
             font-size: 12px;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         /* Preview */
         .preview-box {
             width: 100%;
             aspect-ratio: 1;
-            background: #1e293b;
+            background: var(--bg-primary);
             border-radius: 8px;
             overflow: hidden;
             display: flex;
@@ -430,6 +436,7 @@
             justify-content: center;
             margin-bottom: 12px;
             min-height: 120px;
+            border: 1px solid var(--border-color);
         }
 
         .preview-box canvas {
@@ -438,23 +445,24 @@
         }
 
         .preview-placeholder {
-            color: #94a3b8;
+            color: var(--text-muted);
             font-size: 13px;
         }
 
         .format-select {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 13px;
             margin-bottom: 10px;
-            background: #fff;
+            background: var(--bg-card);
+            color: var(--text-primary);
         }
 
         .format-select:focus {
             outline: none;
-            border-color: #4f46e5;
+            border-color: var(--accent-color);
         }
 
         .btn {
@@ -471,24 +479,24 @@
         }
 
         .btn-primary {
-            background: #4f46e5;
+            background: var(--accent-color);
             color: #fff;
         }
 
         .btn-primary:hover {
-            background: #4338ca;
+            background: var(--accent-hover);
         }
 
         .btn-outline {
-            background: #fff;
-            color: #475569;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
             margin-top: 8px;
         }
 
         .btn-outline:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
+            background: var(--bg-primary);
+            border-color: var(--border-color);
         }
 
         .btn:disabled {
@@ -741,6 +749,7 @@
         <div id="footer-container"></div>
     </main>
 
+    <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script>
         var imgNaturalW = 0;

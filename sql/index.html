@@ -267,6 +267,116 @@
                 font-size: 13px;
             }
         }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn.secondary {
+            background-color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn.secondary:hover {
+            background-color: var(--text-muted);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .toolbar {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .options-bar {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select,
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="checkbox"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .option-group label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .stats {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .error-msg {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select,
+        body.dark-mode input[type="number"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .output-textarea {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .output-textarea:focus {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .tool-card h3 {
+            color: var(--text-primary) !important;
+        }
+
+        body.dark-mode .tool-card h4 {
+            color: var(--primary-color) !important;
+        }
+
+        body.dark-mode .tool-card ul {
+            color: var(--text-secondary) !important;
+        }
+
+        body.dark-mode .tool-card ul li::marker {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .tool-card > div:not(.options-bar):not(.toolbar):not(.io-panel) > div {
+            background-color: var(--bg-tertiary) !important;
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -407,6 +517,8 @@
     </main>
 
     <script src="../common/js/nav.js"></script>
+    <script src="../common/js/theme.js"></script>
+    <script src="../common/js/utils.js"></script>
     <script>
         (function () {
             const SQL_KEYWORDS = [

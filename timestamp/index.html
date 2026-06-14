@@ -23,7 +23,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -275,9 +275,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 16px;
-            background: #f8f9fa;
+            background: var(--bg-color);
             border-radius: 8px;
-            border: 1px solid #eaeaea;
+            border: 1px solid var(--border-color);
             transition: all 0.2s;
         }
 
@@ -330,7 +330,7 @@
         .relative-time {
             text-align: center;
             padding: 12px;
-            background: #f0f7ff;
+            background: var(--bg-color);
             border-radius: 8px;
             font-size: 15px;
             color: #1a5276;
@@ -362,9 +362,9 @@
         .dt-result {
             text-align: center;
             padding: 20px;
-            background: #f8f9fa;
+            background: var(--bg-color);
             border-radius: 8px;
-            border: 1px solid #eaeaea;
+            border: 1px solid var(--border-color);
             margin-top: 16px;
         }
 
@@ -449,6 +449,167 @@
             .dt-result-value {
                 font-size: 22px;
             }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tabs {
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .tab-btn:hover,
+        body.dark-mode .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .tab-btn.active {
+            border-bottom-color: var(--primary-color);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="datetime-local"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-outline {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .unit-toggle button {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .unit-toggle button:hover:not(.active) {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .unit-toggle button.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .format-item {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .format-item:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .format-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .format-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .relative-time {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .section-title {
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .dt-result {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .dt-result-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .dt-result-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn-copy {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-copy:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .error-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--error-color);
+        }
+
+        body.dark-mode .tz-info {
+            color: var(--text-muted);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode .dt-result {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .btn-copy {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="datetime-local"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
         }
     </style>
     <script type="application/ld+json">
@@ -823,6 +984,7 @@
         useCurrentTs();
         setDtNow();
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

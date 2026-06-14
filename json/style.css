@@ -108,7 +108,8 @@ h1 {
 /* Tab样式 */
 .tabs {
     display: flex;
-    background: #f8f9fa;
+    background: var(--bg-color);
+    color: var(--text-color);
     border-radius: 8px 8px 0 0;
     padding: 0 10px;
     margin-bottom: 20px;
@@ -161,7 +162,7 @@ h1 {
 /* 工具容器样式 */
 .tool-container {
     display: block;
-    background: white;
+    background: var(--bg-color);
     border-radius: 12px;
     padding: 5px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -804,6 +805,213 @@ h1 {
     font-weight: 500;
 }
 
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode textarea {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode select {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode input[type="number"] {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .output-box {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .result-stats {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .tool-container {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .compare-container {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .compare-header {
+    background-color: var(--bg-secondary);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .compare-header h2 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .tabs {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .tab-btn {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .tab-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .tab-btn.active {
+    color: var(--primary-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .tab-content {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .input-box {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .result-panel {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .json-editor {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .json-editor:empty:before {
+    background-color: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+body.dark-mode #raw-json {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .line-numbers {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+body.dark-mode .line-number {
+    color: var(--text-muted);
+}
+
+body.dark-mode .compare-box h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .compare-actions {
+    border-top-color: var(--border-color);
+}
+
+body.dark-mode .compare-result {
+    color: var(--text-primary);
+}
+
+body.dark-mode .diff-item {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .diff-item:hover {
+    background-color: var(--bg-tertiary);
+}
+
+body.dark-mode .diff-path {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
+}
+
+body.dark-mode .diff-comparison {
+    border-top-color: var(--border-color);
+}
+
+body.dark-mode .diff-stats {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .error-message {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+body.dark-mode .error-context {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .error-context pre {
+    color: var(--text-primary);
+}
+
+body.dark-mode .collapsed {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .collapsed:hover {
+    background-color: var(--bg-tertiary);
+}
+
+body.dark-mode .xml-container {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+/* 全屏模式夜间样式 */
+body.dark-mode .compare-container.fullscreen-mode {
+    background-color: var(--bg-primary);
+}
+
+body.dark-mode .compare-content.fullscreen-mode {
+    background-color: var(--bg-primary);
+}
+
+body.dark-mode .compare-content.fullscreen-mode .json-editor {
+    background-color: var(--bg-tertiary);
+}
+
+body.dark-mode .compare-content.fullscreen-mode .line-numbers {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .editor-container.maximized {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .editor-container.fullscreen {
+    background-color: var(--bg-primary);
+}
+
+body.dark-mode .fullscreen-button {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .fullscreen-button:hover {
+    background-color: var(--primary-color);
+}
+
 .stat-removed {
     color: #dc3545;
     font-weight: 500;
@@ -1156,7 +1364,7 @@ h1 {
     z-index: 9999 !important;
     margin: 0 !important;
     padding: 0 !important;
-    background-color: white;
+    background-color: var(--bg-card);
 }
 
 /* 全屏模式样式 */

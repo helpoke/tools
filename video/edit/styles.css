@@ -44,22 +44,40 @@ h3 {
 }
 
 .upload-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 50px;
+    background-color: #4d5c74;
+    border: 2px dashed #224175;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .upload-btn:hover {
-    background-color: #2980b9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: #40516e;
+    background-color: #f0f8ff;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #3498db;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
 }
 
 .upload-note {
@@ -71,7 +89,7 @@ h3 {
 }
 
 .video-info {
-    background-color: #f5f5f5;
+    background-color: transparent;
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: 4px;
@@ -496,4 +514,304 @@ h3 {
         font-size: 12px;
         padding: 8px 12px;
     }
+}
+
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode .container {
+    background-color: var(--bg-card);
+    box-shadow: var(--box-shadow);
+}
+
+body.dark-mode h1 {
+    color: var(--primary-color);
+}
+
+body.dark-mode h2 {
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode h3 {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .upload-section {
+    background-color: var(--bg-tertiary);
+}
+
+body.dark-mode .upload-btn {
+    background-color: #3a4c69;
+    border: 2px dashed #3a4c69;
+    color: white;
+}
+
+body.dark-mode .upload-btn:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+body.dark-mode .upload-icon {
+    color: var(--text-muted);
+}
+
+body.dark-mode .upload-text {
+    color: var(--text-primary);
+}
+
+body.dark-mode .upload-hint {
+    color: var(--text-muted);
+}
+
+body.dark-mode .video-info,
+body.dark-mode .audio-info {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .info-item span:first-child {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .preview-section,
+body.dark-mode .settings-section,
+body.dark-mode .output-section {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .preview-section h3,
+body.dark-mode .settings-section h3,
+body.dark-mode .output-section h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .setting-row label,
+body.dark-mode .input-group label {
+    color: var(--text-primary);
+}
+
+body.dark-mode .input-group input[type="number"],
+body.dark-mode .input-group input[type="text"],
+body.dark-mode .input-group select {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .video-preview-container,
+body.dark-mode .audio-preview-container {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .video-preview-container video,
+body.dark-mode .audio-preview-container audio {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+body.dark-mode .btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
+}
+
+body.dark-mode #processBtn {
+    background-color: var(--success-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+body.dark-mode #processBtn:hover:not(:disabled) {
+    background-color: #059669;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    transform: translateY(-1px);
+}
+
+body.dark-mode #processBtn:disabled {
+    background-color: var(--bg-tertiary);
+    color: var(--text-muted);
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .btn:disabled {
+    background-color: var(--bg-tertiary);
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+body.dark-mode .progress-bar {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .progress-container {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .progress-percentage {
+    color: var(--text-primary);
+}
+
+body.dark-mode .progress-text {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .preview-section,
+body.dark-mode .settings-section,
+body.dark-mode .output-section {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .result-section {
+    background-color: var(--bg-card);
+    border-color: var(--success-color);
+}
+
+body.dark-mode .result-section h3 {
+    color: var(--success-color);
+}
+
+body.dark-mode .download-section {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+/* 处理结果区域夜间模式 */
+body.dark-mode .result-info {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .result-info p {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .result-info strong {
+    color: var(--primary-color);
+}
+
+body.dark-mode .result-container {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .result-container video {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .download-buttons {
+    background-color: transparent;
+}
+
+body.dark-mode #downloadBtn {
+    background-color: var(--success-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+body.dark-mode #downloadBtn:hover:not(:disabled) {
+    background-color: #059669;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+body.dark-mode .message {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .message.info {
+    border-color: var(--accent-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .message.success {
+    border-color: var(--success-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .message.error {
+    border-color: var(--error-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .loading-overlay {
+    background-color: rgba(15, 23, 42, 0.8);
+}
+
+body.dark-mode .loading-spinner {
+    border-color: var(--border-color);
+    border-top-color: var(--primary-color);
+}
+
+body.dark-mode .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .modal-header {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .modal-title {
+    color: var(--text-primary);
+}
+
+body.dark-mode .modal-close {
+    color: var(--text-muted);
+}
+
+body.dark-mode .modal-close:hover {
+    color: var(--text-primary);
+}
+
+body.dark-mode .modal-footer {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .tabs-container {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .tab-btn {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .tab-btn.active {
+    background-color: var(--bg-card);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .tab-content {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
 }

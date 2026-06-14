@@ -6,9 +6,9 @@
 /* 配置Tailwind自定义颜色 */
 @layer base {
     :root {
-        --color-primary: #3B82F6;
+        --color-primary: var(--primary-color);
         --color-secondary: #10B981;
-        --color-accent: #6366F1;
+        --color-accent: var(--accent-color);
         --color-neutral: #1F2937;
     }
 
@@ -17,46 +17,43 @@
         @apply transition-colors duration-200;
     }
 
-    body2 {
+    body {
         font-family: Inter, system-ui, sans-serif;
-        background-color: #f3f4f6;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
     }
 
     /* 增强头部标题和描述的可见性 */
-    header2 {
-        background: linear-gradient(to right, var(--color-primary), var(--color-accent)) !important;
+    header {
+        background: linear-gradient(to right, var(--primary-color), var(--accent-color)) !important;
     }
 
     /* 确保头部文字为白色，提高可读性 */
-    header2 h1 {
+    header h1 {
         color: white !important;
     }
 
-    header2 p {
+    header p {
         color: rgba(255, 255, 255, 0.9) !important;
     }
 
     h1,
     h2,
     h3 {
-        color: var(--color-neutral);
+        color: var(--text-primary);
     }
 
     p {
-        color: #4B5563;
+        color: var(--text-secondary);
     }
 
     .footer_custom_text p {
-        color: #4B5563;
+        color: var(--text-secondary);
         display: flex;
         justify-content: center;
-        /* 水平居中 */
         gap: 8px;
-        /* 可选：设置链接之间的间距 */
         flex-wrap: nowrap;
-        /* 禁止换行（默认就是不换行） */
         margin: 0;
-        /* 可根据需要调整 */
         padding: 0;
     }
 
@@ -66,7 +63,7 @@
 
     /* 确保按钮颜色正确 */
     .bg-primary {
-        background-color: var(--color-primary) !important;
+        background-color: var(--primary-color) !important;
     }
 
     .bg-secondary {
@@ -74,7 +71,7 @@
     }
 
     .text-primary {
-        color: var(--color-primary) !important;
+        color: var(--primary-color) !important;
     }
 
     .text-secondary {
@@ -82,7 +79,7 @@
     }
 
     .text-neutral {
-        color: var(--color-neutral) !important;
+        color: var(--text-primary) !important;
     }
 
     .max-w-5xl {
@@ -99,6 +96,144 @@
 
     .border-gray-200 {
         gap: 30px;
+        border-color: var(--border-color) !important;
+    }
+
+    .border-gray-200:hover {
+        border-color: var(--accent-color) !important;
+    }
+
+    /* 卡片背景 */
+    .bg-white {
+        background-color: var(--bg-card) !important;
+    }
+
+    /* 边框颜色 */
+    .border-gray-300 {
+        border-color: var(--border-color) !important;
+    }
+
+    /* 输入框样式 */
+    input, select, textarea {
+        background-color: var(--bg-card) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--accent-color) !important;
+        outline: none;
+    }
+
+    /* 标签样式 */
+    .text-gray-600 {
+        color: var(--text-secondary) !important;
+    }
+
+    .text-gray-700 {
+        color: var(--text-primary) !important;
+    }
+
+    .text-gray-500 {
+        color: var(--text-muted) !important;
+    }
+
+    /* 按钮hover状态 */
+    .hover\:bg-blue-600:hover {
+        background-color: var(--primary-hover) !important;
+    }
+
+    /* 进度条 */
+    .progress-bar {
+        background-color: var(--primary-color) !important;
+    }
+
+    /* 文件列表项 */
+    .file-item {
+        background-color: var(--bg-card) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    .file-item:hover {
+        background-color: var(--bg-primary) !important;
+    }
+
+    /* 格式说明区域 */
+    .format-info {
+        background-color: var(--bg-tertiary) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-secondary) !important;
+    }
+
+    .format-info strong {
+        color: var(--text-primary) !important;
+    }
+
+    /* 示例代码区域 */
+    .code-example {
+        background-color: var(--bg-tertiary) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-secondary) !important;
+    }
+
+    .code-example pre {
+        color: var(--text-primary) !important;
+    }
+
+    /* 预览容器 */
+    .preview-wrapper {
+        background-color: var(--bg-tertiary) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    .preview-wrapper h3 {
+        color: var(--text-primary) !important;
+    }
+
+    .preview-inner {
+        background-color: var(--bg-card) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    .preview-placeholder i {
+        color: var(--text-muted) !important;
+    }
+
+    .preview-placeholder p {
+        color: var(--text-muted) !important;
+    }
+
+    /* 输入选项卡 */
+    .tab-btn {
+        color: var(--text-secondary) !important;
+    }
+
+    .tab-btn:hover {
+        color: var(--accent-color) !important;
+    }
+
+    .tab-btn.active {
+        color: var(--accent-color) !important;
+        border-color: var(--accent-color) !important;
+    }
+
+    /* 功能说明卡片 */
+    .feature-card {
+        background-color: var(--bg-card) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    .feature-card h2 {
+        color: var(--text-primary) !important;
+    }
+
+    .feature-card p {
+        color: var(--text-secondary) !important;
+    }
+
+    /* 页脚提示 */
+    #toast {
+        background-color: var(--success-color) !important;
     }
 }
 
@@ -120,6 +255,32 @@
         @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
     }
 
+    /* 操作按钮基础样式 */
+    #convert-btn,
+    #download-btn,
+    #download-all-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        cursor: pointer;
+    }
+
+    #convert-btn:hover:not(:disabled),
+    #download-btn:hover:not(:disabled),
+    #download-all-btn:hover:not(:disabled) {
+        background-color: var(--primary-hover);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    #download-btn:disabled,
+    #download-all-btn:disabled {
+        background-color: #e5e7eb;
+        color: #9ca3af;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+
     .fade-in {
         animation: fadeIn 0.5s ease-in-out;
     }
@@ -134,7 +295,6 @@
         }
     }
 }
-
 
 
 @media (max-width: 768px) {
@@ -170,4 +330,264 @@
     }
 
 
+}
+
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode .bg-white {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .card-shadow {
+    box-shadow: var(--box-shadow);
+}
+
+body.dark-mode h1 {
+    color: var(--primary-color);
+}
+
+body.dark-mode h2 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .description {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .tab-btn {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .tab-btn:hover {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .tab-btn.border-b-2 {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .format-info {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .code-example {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode textarea,
+body.dark-mode input[type="text"] {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .input-focus:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+body.dark-mode .preview-wrapper {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .preview-container {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .preview-container img {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .preview-placeholder {
+    color: var(--text-muted);
+}
+
+body.dark-mode .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+body.dark-mode .btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+body.dark-mode .btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: var(--bg-card);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .btn:disabled {
+    background-color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* 操作按钮夜间模式 */
+body.dark-mode #convert-btn,
+body.dark-mode #download-btn,
+body.dark-mode #download-all-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+body.dark-mode #convert-btn:hover:not(:disabled),
+body.dark-mode #download-btn:hover:not(:disabled),
+body.dark-mode #download-all-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
+}
+
+body.dark-mode #download-btn:disabled,
+body.dark-mode #download-all-btn:disabled {
+    background-color: var(--bg-tertiary);
+    color: var(--text-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+body.dark-mode .btn-hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-mode .progress-bar {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .progress-text {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .result-section {
+    background-color: var(--bg-card);
+    border-color: var(--success-color);
+}
+
+body.dark-mode .result-section h3 {
+    color: var(--success-color);
+}
+
+body.dark-mode .download-section {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .message {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .message.info {
+    border-color: var(--accent-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .message.success {
+    border-color: var(--success-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .message.error {
+    border-color: var(--error-color);
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .loading-overlay {
+    background-color: rgba(15, 23, 42, 0.8);
+}
+
+body.dark-mode .loading-spinner {
+    border-color: var(--border-color);
+    border-top-color: var(--primary-color);
+}
+
+body.dark-mode .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .modal-header {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .modal-title {
+    color: var(--text-primary);
+}
+
+body.dark-mode .modal-close {
+    color: var(--text-muted);
+}
+
+body.dark-mode .modal-close:hover {
+    color: var(--text-primary);
+}
+
+body.dark-mode .modal-footer {
+    border-color: var(--border-color);
+}
+
+body.dark-mode option {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+}
+
+body.dark-mode .border-gray-200 {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .text-gray-600 {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .text-sm {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .hover\:text-red-500:hover {
+    color: var(--error-color);
+}
+
+/* 文件信息区域夜间模式 */
+body.dark-mode #file-info {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode #file-info i {
+    color: var(--primary-color);
+}
+
+body.dark-mode #file-name {
+    color: var(--text-primary);
+}
+
+body.dark-mode #file-size {
+    color: var(--text-muted);
+}
+
+body.dark-mode .font-medium {
+    color: var(--text-primary);
 }

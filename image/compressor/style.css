@@ -24,15 +24,15 @@ h1 {
     text-align: center;
     margin-bottom: 20px;
     padding: 20px;
-    border: 2px dashed #ddd;
+    border: 2px dashed var(--border-color);
     border-radius: 12px;
-    background: #f9f9f9;
+    background: var(--bg-card);
     transition: all 0.3s ease;
 }
 
 .upload-area:hover {
     border-color: #667eea;
-    background: #f0f4ff;
+    background: rgba(102, 126, 234, 0.05);
 }
 
 .upload-btn {
@@ -55,9 +55,10 @@ h1 {
     flex: 1;
     min-width: 250px;
     padding: 10px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    background-color: white;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
     font-size: 1rem;
 }
 
@@ -68,7 +69,7 @@ h1 {
 
 .file-info {
     margin-top: 15px;
-    color: #666;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
@@ -80,16 +81,16 @@ h1 {
 }
 
 .preview-box {
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 8px;
-    background: #fafafa;
+    background: var(--bg-card);
 }
 
 .preview-box h3 {
     text-align: center;
     margin-bottom: 15px;
-    color: #333;
+    color: var(--text-primary);
     font-size: 1.2rem;
 }
 
@@ -98,8 +99,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
-    border: 1px solid #ddd;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 10px;
@@ -229,15 +230,17 @@ h1 {
     flex: 1;
     min-width: 250px;
     padding: 5px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    background-color: white;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .quality-value {
     margin-left: 10px;
     font-weight: bold;
     min-width: 30px;
+    color: var(--text-primary);
 }
 
 .no-margin-bottom {
@@ -290,15 +293,17 @@ h1 {
 
 .dimension-item label {
     font-weight: 500;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .dimension-item input {
     padding: 8px 12px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     width: 150px;
+    background: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .dimension-item input:focus {
@@ -319,17 +324,18 @@ h1 {
 .image-info {
     text-align: center;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .settings {
-    background: #f9f9f9;
+    background: var(--bg-card);
     padding: 25px;
     border-radius: 12px;
+    border: 1px solid var(--border-color);
 }
 
 .setting-tip {
-    color: #666;
+    color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.5;
 }
@@ -397,7 +403,7 @@ h1 {
 
 .file-list h4 {
     margin-bottom: 10px;
-    color: #333;
+    color: var(--text-primary);
     font-size: 1rem;
 }
 
@@ -410,7 +416,8 @@ h1 {
 
 #selectedFiles li {
     padding: 10px;
-    background: #f0f0f0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -419,10 +426,12 @@ h1 {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
+    color: var(--text-primary);
 }
 
 #selectedFiles li:hover {
-    background: #e0e0e0;
+    background: var(--bg-primary);
+    border-color: #667eea;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -432,6 +441,7 @@ h1 {
     color: white;
     font-weight: 500;
     box-shadow: 0 2px 12px rgba(102, 126, 234, 0.4);
+    border-color: transparent;
 }
 
 @media (max-width: 768px) {
@@ -451,9 +461,9 @@ h1 {
         flex: 1;
         min-width: 60%;
         padding: 10px;
-        border: 2px solid #ddd;
+        border: 2px solid var(--border-color);
         border-radius: 8px;
-        background-color: white;
+        background-color: var(--bg-card);
         font-size: 0.7rem;
     }
 }
@@ -488,9 +498,9 @@ h1 {
         flex: 1;
         min-width: 60%;
         padding: 10px;
-        border: 2px solid #ddd;
+        border: 2px solid var(--border-color);
         border-radius: 8px;
-        background-color: white;
+        background-color: var(--bg-card);
         font-size: 0.6rem;
     }
 
@@ -516,4 +526,116 @@ h1 {
         padding: 8px;
         font-size: 0.8rem;
     }
+}
+
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode h1 {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+body.dark-mode .upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+body.dark-mode .upload-btn {
+    background: var(--primary-color);
+}
+
+body.dark-mode .upload-btn:hover {
+    background: var(--primary-hover);
+}
+
+body.dark-mode .settings-panel {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .settings-panel h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .setting-item label {
+    color: var(--text-primary);
+}
+
+body.dark-mode .setting-item input[type="range"],
+body.dark-mode .setting-item input[type="number"],
+body.dark-mode .setting-item select {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .quality-value {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .btn-primary {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+body.dark-mode .btn-secondary {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode #selectedFiles {
+    background: var(--bg-card);
+}
+
+body.dark-mode #selectedFiles li {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .image-info {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .remove-btn {
+    color: var(--text-muted);
+}
+
+body.dark-mode .remove-btn:hover {
+    color: var(--error-color);
+}
+
+body.dark-mode .progress-bar {
+    background: var(--primary-color);
+}
+
+body.dark-mode .progress-text {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .result-section {
+    background: var(--bg-card);
+    border-color: var(--success-color);
+}
+
+body.dark-mode .result-section h3 {
+    color: var(--success-color);
+}
+
+body.dark-mode .stats-item {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .stats-item strong {
+    color: var(--text-primary);
 }

@@ -25,7 +25,7 @@
 
         /* 工具卡片样式 */
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -136,7 +136,7 @@
         }
 
         .result-content {
-            background-color: white;
+            background-color: var(--bg-tertiary);
             padding: 16px;
             border-radius: 8px;
             border: 1px solid #eaeaea;
@@ -364,6 +364,96 @@
                 padding: 6px 12px;
                 font-size: 12px;
             }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="text"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result h3 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-single-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .copy-single-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .password-item {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .password-text {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .password-strength-bar {
+            background-color: var(--bg-card);
+        }
+
+        body.dark-mode .password-strength-text {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .checkbox-item label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .message.success {
+            background-color: rgba(39, 174, 96, 0.2);
+            border-color: var(--border-color);
+            color: var(--text-primary);
         }
     </style>
     <script type="application/ld+json">
@@ -705,6 +795,7 @@
         // 初始生成
         generatePassword();
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

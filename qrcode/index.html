@@ -27,7 +27,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -90,6 +90,8 @@
             border: 1px solid #eaeaea;
             border-radius: 8px;
             font-size: 15px;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             resize: vertical;
             min-height: 100px;
             line-height: 1.6;
@@ -312,6 +314,128 @@
             .tool-card {
                 padding: 18px;
             }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode select:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-primary {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .qr-preview {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .qr-placeholder {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .qr-options {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .qr-result {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode .tab-btn {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .qr-preview {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .qr-placeholder {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .qr-options {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .drop-zone {
+            border-color: var(--border-color);
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .drop-zone:hover,
+        body.dark-mode .drop-zone.drag-over {
+            border-color: var(--primary-color);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        body.dark-mode .drop-zone p {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .parse-result {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .parse-result.success {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: rgba(39, 174, 96, 0.3);
+        }
+
+        body.dark-mode .parse-result.error {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.3);
+        }
+
+        body.dark-mode .parse-result .result-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .parse-result .result-text {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .option label {
+            color: var(--text-secondary);
         }
     </style>
     <script type="application/ld+json">
@@ -736,6 +860,7 @@
         // Init
         generateQR();
     </script>
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

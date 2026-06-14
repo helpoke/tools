@@ -1,9 +1,136 @@
 /* 图片拼接工具样式 */
 
+/* 卡片区域 */
+.card-area {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+/* 上传区域 */
+.drop-area {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+.drop-area:hover {
+    border-color: var(--accent-color);
+}
+
+.drop-area i {
+    color: var(--text-muted);
+}
+
+.drop-area p {
+    color: var(--text-secondary);
+}
+
+/* 头部标题 */
+.card-area h2,
+.card-area h3 {
+    color: var(--text-primary);
+}
+
+/* 标签文字 */
+.card-area label {
+    color: var(--text-secondary);
+}
+
+/* 拼接方向按钮 */
+.card-area button {
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+.card-area button:hover:not(:disabled) {
+    background-color: var(--bg-primary);
+}
+
+/* 拼接方向激活状态 */
+.card-area button.active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* 设置区域输入框 */
+.card-area input[type="text"],
+.card-area input[type="range"] {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.card-area input:focus {
+    border-color: var(--accent-color);
+}
+
+/* 复选框 */
+.card-area input[type="checkbox"] {
+    accent-color: var(--accent-color);
+}
+
+/* 列表文字 */
+.card-area ul {
+    color: var(--text-secondary);
+}
+
+.card-area ul li i {
+    color: var(--success-color);
+}
+
+/* 操作按钮 */
+#stitch-btn:not(:disabled) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#stitch-btn:not(:disabled):hover {
+    background-color: var(--primary-hover);
+}
+
+#add-to-list-btn:not(:disabled) {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+#add-to-list-btn:not(:disabled):hover {
+    background-color: var(--accent-hover);
+}
+
+#download-btn:not(:disabled) {
+    background-color: var(--success-color);
+    color: white;
+}
+
+#download-btn:not(:disabled):hover {
+    background-color: #059669;
+}
+
+/* 按钮禁用状态 */
+.card-area button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 顺序列表容器 */
+.order-list-container {
+    border-color: var(--border-color);
+}
+
+.order-list-container #order-empty-hint {
+    color: var(--text-muted);
+}
+
+/* 页脚提示 */
+#toast {
+    background-color: var(--success-color);
+}
+
 /* 进度条样式 */
 .progress-container {
     height: 4px;
-    background-color: #e5e7eb;
+    background-color: var(--border-color);
     border-radius: 2px;
     overflow: hidden;
     margin-top: 10px;
@@ -11,7 +138,7 @@
 
 .progress-bar {
     height: 100%;
-    background-color: #3B82F6;
+    background-color: var(--primary-color);
     width: 0%;
     transition: width 0.3s ease;
 }
@@ -40,19 +167,19 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 12px;
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     cursor: pointer;
 }
 
 .file-item:hover {
-    background-color: #f3f4f6;
+    background-color: var(--bg-primary);
 }
 
 .file-item.selected {
-    background-color: rgba(59, 130, 246, 0.1);
-    border-color: #3B82F6;
+    background-color: rgba(99, 102, 241, 0.1);
+    border-color: var(--accent-color);
 }
 
 .file-item .file-name {
@@ -61,13 +188,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 14px;
-    color: #374151;
+    color: var(--text-primary);
     margin-right: 8px;
 }
 
 .file-item .file-size {
     font-size: 12px;
-    color: #9ca3af;
+    color: var(--text-muted);
     margin-right: 8px;
 }
 
@@ -89,6 +216,7 @@
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
+    background: var(--border-color);
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -96,20 +224,20 @@ input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     width: 18px;
     height: 18px;
-    background: #3B82F6;
+    background: var(--primary-color);
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid white;
+    border: 2px solid var(--bg-card);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 input[type="range"]::-moz-range-thumb {
     width: 18px;
     height: 18px;
-    background: #3B82F6;
+    background: var(--primary-color);
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid white;
+    border: 2px solid var(--bg-card);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -117,7 +245,7 @@ input[type="range"]::-moz-range-thumb {
 input[type="color"] {
     -webkit-appearance: none;
     appearance: none;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--border-color);
     padding: 0;
 }
 
@@ -132,9 +260,9 @@ input[type="color"]::-webkit-color-swatch {
 
 /* 按钮激活状态 */
 button.active {
-    background-color: #3B82F6 !important;
+    background-color: var(--primary-color) !important;
     color: white !important;
-    border-color: #3B82F6 !important;
+    border-color: var(--primary-color) !important;
 }
 
 .max-h-32 {
@@ -146,8 +274,8 @@ button.active {
     display: flex;
     align-items: center;
     padding: 12px;
-    background-color: #f9fafb;
-    border: 2px solid #e5e7eb;
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     margin-bottom: 8px;
     transition: all 0.2s ease;
@@ -155,14 +283,14 @@ button.active {
 }
 
 .order-item:hover {
-    background-color: #ffffff;
-    border-color: #3B82F6;
+    background-color: var(--bg-primary);
+    border-color: var(--primary-color);
     box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
 }
 
 .order-item.drag-over {
-    border-color: #3B82F6;
-    background-color: rgba(59, 130, 246, 0.05);
+    border-color: var(--primary-color);
+    background-color: rgba(99, 102, 241, 0.05);
     transform: scale(1.02);
 }
 
@@ -183,6 +311,7 @@ button.active {
 
 .order-item .drag-handle {
     padding: 4px;
+    color: var(--text-muted);
 }
 
 .order-item .drag-handle:hover {
@@ -197,13 +326,13 @@ button.active {
     padding: 6px;
     border-radius: 6px;
     transition: all 0.2s ease;
-    color: #9ca3af;
+    color: var(--text-muted);
 }
 
 .order-item .move-up-btn:hover:not(:disabled),
 .order-item .move-down-btn:hover:not(:disabled) {
-    background-color: rgba(59, 130, 246, 0.1);
-    color: #3B82F6;
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
 }
 
 .order-item .move-up-btn:disabled,
@@ -227,3 +356,214 @@ button.active {
     }
 }
 
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode .card-area {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .drop-area {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .drop-area:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+body.dark-mode .drop-area i {
+    color: var(--text-muted);
+}
+
+body.dark-mode .drop-area p {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .card-area h2,
+body.dark-mode .card-area h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .card-area label {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .card-area button {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .card-area button:hover:not(:disabled) {
+    background-color: var(--bg-card);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .card-area button.active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+}
+
+body.dark-mode .card-area input[type="text"],
+body.dark-mode .card-area input[type="range"] {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .card-area input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+body.dark-mode .card-area input[type="checkbox"] {
+    accent-color: var(--primary-color);
+}
+
+body.dark-mode .card-area ul {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .card-area ul li i {
+    color: var(--success-color);
+}
+
+body.dark-mode #stitch-btn:not(:disabled) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-mode #stitch-btn:not(:disabled):hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode #add-to-list-btn:not(:disabled) {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+body.dark-mode #add-to-list-btn:not(:disabled):hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode #download-btn:not(:disabled) {
+    background-color: var(--success-color);
+    color: white;
+}
+
+body.dark-mode #download-btn:not(:disabled):hover {
+    background-color: #059669;
+}
+
+body.dark-mode .card-area button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+body.dark-mode .order-list-container {
+    border-color: var(--border-color);
+    background-color: var(--bg-tertiary);
+}
+
+body.dark-mode .order-list-container #order-empty-hint {
+    color: var(--text-muted);
+}
+
+body.dark-mode #toast {
+    background-color: var(--success-color);
+}
+
+body.dark-mode .progress-container {
+    background-color: var(--border-color);
+}
+
+body.dark-mode .progress-bar {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .file-item {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .file-item:hover {
+    background-color: var(--bg-card);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .file-item.selected {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .file-item .file-name {
+    color: var(--text-primary);
+}
+
+body.dark-mode .file-item .file-size {
+    color: var(--text-muted);
+}
+
+body.dark-mode .file-item .delete-btn {
+    color: var(--error-color);
+}
+
+body.dark-mode .file-item .delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+body.dark-mode input[type="range"] {
+    background: var(--border-color);
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+    background: var(--primary-color);
+    border-color: var(--bg-card);
+}
+
+body.dark-mode input[type="range"]::-moz-range-thumb {
+    background: var(--primary-color);
+    border-color: var(--bg-card);
+}
+
+body.dark-mode input[type="color"] {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .order-item {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .order-item:hover {
+    background-color: var(--bg-card);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+body.dark-mode .order-item.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+body.dark-mode .order-item .drag-handle {
+    color: var(--text-muted);
+}
+
+body.dark-mode .order-item .drag-handle:hover {
+    color: var(--primary-color);
+}
+
+body.dark-mode .order-item .move-up-btn,
+body.dark-mode .order-item .move-down-btn {
+    color: var(--text-muted);
+}
+
+body.dark-mode .order-item .move-up-btn:hover:not(:disabled),
+body.dark-mode .order-item .move-down-btn:hover:not(:disabled) {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+}

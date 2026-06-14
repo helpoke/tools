@@ -23,7 +23,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 32px;
@@ -334,6 +334,71 @@
                 padding: 14px;
             }
         }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode select:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .color-swatch {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .format-section {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .format-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .format-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .preset-swatch {
+            border-color: var(--border-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn {
+            border-color: var(--border-color);
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -463,6 +528,7 @@
         <div id="footer-container"></div>
     </main>
 
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/utils.js"></script>
     <script>
         var updating = false;

@@ -132,6 +132,37 @@
             animation: pulse 8s ease-in-out infinite;
         }
 
+        /* 主题切换按钮 */
+        .hero .theme-toggle {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .hero .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+        }
+
         @keyframes pulse {
 
             0%,
@@ -183,7 +214,7 @@
             align-items: center;
             max-width: 60%;
             margin: 0 auto;
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 4px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -192,7 +223,7 @@
         .search-icon {
             padding: 12px 16px;
             font-size: 18px;
-            color: #64748b;
+            color: var(--text-secondary);
         }
 
         .search-input {
@@ -201,15 +232,16 @@
             outline: none;
             font-size: 15px;
             padding: 12px 8px;
-            color: #1e293b;
+            color: var(--text-primary);
+            background: transparent;
         }
 
         .search-input::placeholder {
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         .search-btn {
-            background: #4f46e5;
+            background: var(--accent-color);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -221,7 +253,7 @@
         }
 
         .search-btn:hover {
-            background: #4338ca;
+            background: var(--accent-hover);
             transform: translateY(-1px);
         }
 
@@ -233,12 +265,13 @@
             width: 100%;
             max-width: 500px;
             margin-top: 8px;
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             display: none;
             z-index: 9999;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .search-results.active {
@@ -255,31 +288,31 @@
         }
 
         .search-result-item:hover {
-            background: #f1f5f9;
+            background: var(--bg-secondary);
         }
 
         .search-result-item .icon {
             font-size: 18px;
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         .search-result-item .name {
             flex: 1;
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         .search-result-item .category {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
             padding: 2px 8px;
-            background: #f1f5f9;
+            background: var(--bg-secondary);
             border-radius: 4px;
         }
 
         .search-no-results {
             padding: 24px;
             text-align: center;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         .category-grid {
@@ -290,11 +323,12 @@
         }
 
         .category-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .category-card:hover {
@@ -308,7 +342,7 @@
             gap: 12px;
             margin-bottom: 16px;
             padding-bottom: 12px;
-            border-bottom: 2px solid #f1f5f9;
+            border-bottom: 2px solid var(--border-light);
         }
 
         .category-icon {
@@ -348,7 +382,7 @@
         .category-title {
             font-size: 1.1rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         .tools-list {
@@ -363,16 +397,16 @@
             gap: 10px;
             padding: 10px 12px;
             border-radius: 8px;
-            color: #475569;
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 14px;
             transition: all 0.2s ease;
-            background: #f8fafc;
+            background: var(--bg-secondary);
         }
 
         .tool-link:hover {
-            background: #eef2ff;
-            color: #4f46e5;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-color);
             transform: translateX(4px);
         }
 
@@ -387,8 +421,8 @@
             font-size: 11px;
             padding: 2px 8px;
             border-radius: 10px;
-            background: #e0e7ff;
-            color: #4f46e5;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-color);
         }
 
         .tool-link .badge.sign {
@@ -407,8 +441,8 @@
         }
 
         .tool-link .badge.resource {
-            background: #e0e7ff;
-            color: #4f46e5;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-color);
         }
 
         /* ========== Stats Row ========== */
@@ -420,13 +454,14 @@
         }
 
         .stat-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 20px;
             display: flex;
             align-items: center;
             gap: 16px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
         }
 
         .stat-icon {
@@ -471,21 +506,22 @@
         .stat-value {
             font-size: 1.5rem;
             font-weight: 800;
-            color: #1e293b;
+            color: var(--text-primary);
         }
 
         .stat-label {
             font-size: 0.85rem;
-            color: #64748b;
+            color: var(--text-secondary);
         }
 
         /* ========== Recent Section ========== */
         .recent-section {
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 24px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
         }
 
         .recent-header {
@@ -494,7 +530,7 @@
             gap: 10px;
             margin-bottom: 16px;
             padding-bottom: 12px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border-light);
         }
 
         .recent-icon {
@@ -503,14 +539,14 @@
 
         .recent-title {
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text-primary);
             flex: 1;
         }
 
         .recent-clear {
             background: none;
             border: none;
-            color: #94a3b8;
+            color: var(--text-muted);
             cursor: pointer;
             font-size: 14px;
             padding: 4px 8px;
@@ -519,8 +555,8 @@
         }
 
         .recent-clear:hover {
-            background: #fee2e2;
-            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
         }
 
         .badge.popular {
@@ -535,7 +571,7 @@
         }
 
         .recent-empty {
-            color: #94a3b8;
+            color: var(--text-muted);
             font-size: 14px;
             padding: 8px 0;
         }
@@ -545,10 +581,10 @@
             align-items: center;
             gap: 8px;
             padding: 8px 12px;
-            background: #f8fafc;
+            background: var(--bg-secondary);
             border-radius: 8px;
             text-decoration: none;
-            color: #475569;
+            color: var(--text-secondary);
             font-size: 14px;
             transition: all 0.2s;
             cursor: pointer;
@@ -556,8 +592,8 @@
         }
 
         .recent-item:hover {
-            background: #eef2ff;
-            color: #4f46e5;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-color);
         }
 
         /* ========== Page Hero ========== */
@@ -587,8 +623,8 @@
             top: 0;
             width: 200px;
             height: 100vh;
-            background: #f8fafc;
-            border-left: 1px solid #e2e8f0;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
             padding: 16px 12px;
             display: flex;
             flex-direction: column;
@@ -598,18 +634,19 @@
         }
 
         .ad-slot {
-            background: white;
+            background: var(--bg-card);
             border-radius: 8px;
             padding: 8px 0;
             height: 50%;
             max-height: 50%;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
         }
 
         .ad-label {
             display: block;
             font-size: 10px;
-            color: #94a3b8;
+            color: var(--text-muted);
             text-align: center;
             margin-bottom: 4px;
         }
@@ -622,17 +659,17 @@
             color: #e4e9ef;
             background: #85a290;
             font-size: 13px;
-            border-top: 3px solid #f1f5f9;
-            border-bottom: 3px solid #f1f5f9;
+            border-top: 3px solid var(--border-light);
+            border-bottom: 3px solid var(--border-light);
         }
 
         .footer-note a {
-            color: #64748b;
+            color: var(--text-secondary);
             text-decoration: none;
         }
 
         .footer-note a:hover {
-            color: #4f46e5;
+            color: var(--accent-color);
         }
 
         /* ========== Responsive ========== */
@@ -761,12 +798,13 @@
 
         /* ========== Page Ad ========== */
         .page-ad {
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 24px;
             text-align: center;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
         }
 
         .page-ad amp-ad {
@@ -778,12 +816,12 @@
         .comments-section {
             margin-top: 40px;
             padding-top: 24px;
-            border-top: 1px solid #f1f5f9;
+            border-top: 1px solid var(--border-light);
         }
 
         .comments-section h3 {
             font-size: 1.1rem;
-            color: #1e293b;
+            color: var(--text-primary);
             margin-bottom: 16px;
         }
     </style>
@@ -800,6 +838,7 @@
             <div class="container">
                 <!-- Hero Section -->
                 <section class="hero">
+                    <button id="theme-toggle" class="theme-toggle" title="切换夜间模式">🌙</button>
                     <h1>有事找 Helpoke（小助点），一点即用</h1>
                     <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。极简操作、安全隐私（离线亦可用）。</p>
                     <p>聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，高效解决生活与办公各类小问题。</p>
@@ -1177,7 +1216,42 @@
     </div>
 
     <script src="common/js/nav.js"></script>
+    <script src="common/js/theme.js"></script>
     <script>
+        // 主题切换功能
+        var themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                var body = document.body;
+                var isDarkMode = body.classList.contains('dark-mode');
+                
+                if (isDarkMode) {
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'false');
+                    themeToggle.innerHTML = '🌙';
+                } else {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'true');
+                    themeToggle.innerHTML = '☀️';
+                }
+            });
+            
+            // 初始化主题
+            var savedTheme = localStorage.getItem('darkMode');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme !== null) {
+                if (savedTheme === 'true') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.innerHTML = '☀️';
+                }
+            } else if (prefersDark) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'true');
+                themeToggle.innerHTML = '☀️';
+            }
+        }
+        
         // 搜索功能
         var searchInput = document.getElementById('searchInput');
         var searchBtn = document.getElementById('searchBtn');

@@ -85,7 +85,7 @@ h1 {
     min-width: 400px;
     min-height: 200px;
     max-width: 100%;
-    max-height: 600px;
+    max-height: 700px;
     overflow-y: auto;
     border: 2px solid #ddd;
     border-radius: 4px;
@@ -377,4 +377,233 @@ h1 {
     font-size: 14px;
     color: #7f8c8d;
     display: none;
+}
+
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+body.dark-mode h1 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .file-info {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .page-info {
+    color: var(--text-secondary);
+    background-color: var(--bg-tertiary);
+}
+
+body.dark-mode .upload-btn {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .upload-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode .preview-container {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .pdf-preview canvas {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .control-panel {
+    background-color: var(--bg-card);
+    box-shadow: var(--box-shadow);
+}
+
+body.dark-mode .control-group label {
+    color: var(--text-primary);
+}
+
+body.dark-mode .control-group input[type="text"] {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .control-group select {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L1 4H11L6 9Z' fill='%23cbd5e1'/%3E%3C/svg%3E");
+}
+
+body.dark-mode .control-group select:hover {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .control-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+body.dark-mode .control-group span {
+    color: var(--text-primary);
+}
+
+/* 搜索功能样式 */
+.search-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.search-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.search-row input[type="text"] {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-row input[type="text"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-sm:hover {
+    background-color: #2980b9;
+}
+
+.hint {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 5px;
+    display: block;
+}
+
+#searchHint {
+    color: #3498db;
+    font-weight: 500;
+}
+
+#searchHint strong {
+    color: #e74c3c;
+}
+
+/* 自定义页面输入样式 */
+.custom-pages-group {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 4px;
+}
+
+.custom-pages-group input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.custom-pages-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+body.dark-mode .search-group {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .search-row input[type="text"] {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .search-row input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+body.dark-mode .custom-pages-group {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-color: var(--warning-color, #f59e0b);
+}
+
+body.dark-mode .custom-pages-group input {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .custom-pages-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+body.dark-mode .hint {
+    color: var(--text-muted);
+}
+
+body.dark-mode .mode-btn {
+    background-color: var(--bg-card);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .mode-btn.active {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .mode-btn:hover {
+    background-color: var(--primary-hover);
+    color: var(--text-primary);
+}
+
+body.dark-mode .download-btn {
+    background-color: var(--success-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .download-btn:hover {
+    background-color: #059669;
+}
+
+body.dark-mode .download-btn:disabled {
+    background-color: var(--text-muted);
+}
+
+body.dark-mode .progress-bar {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .progress-text {
+    color: var(--text-secondary);
 }

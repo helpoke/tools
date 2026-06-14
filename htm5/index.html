@@ -25,7 +25,7 @@
         }
 
         .tool-card {
-            background-color: white;
+            background-color: var(--bg-card);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             padding: 22px;
@@ -74,13 +74,13 @@
             resize: vertical;
             line-height: 1.5;
             box-sizing: border-box;
-            background-color: #C7EDCC;
+            background-color: var(--bg-tertiary);
         }
 
         .editor-textarea:focus {
             outline: none;
             border-color: #3498db;
-            background-color: white;
+            background-color: var(--bg-tertiary);
         }
 
         .actions-row {
@@ -142,7 +142,7 @@
             padding: 4px 12px;
             font-size: 13px;
             border: 1px solid #3498db;
-            background-color: white;
+            background-color: var(--bg-card);
             color: #3498db;
             border-radius: 4px;
             cursor: pointer;
@@ -231,6 +231,111 @@
                 text-align: center;
             }
         }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-area {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-info {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .error-msg {
+            color: var(--error-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-area {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .small-btn {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .small-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .small-btn.copied {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+
+        body.dark-mode .stats {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .stat-item {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .stat-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .options-row {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .option-item label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .option-item input {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .editor-title {
+            color: var(--text-primary);
+        }
     </style>
 </head>
 
@@ -300,6 +405,7 @@
         <div id="footer-container"></div>
     </main>
 
+    <script src="../common/js/theme.js"></script>
     <script src="../common/js/nav.js"></script>
     <script src="script.js"></script>
 </body>
