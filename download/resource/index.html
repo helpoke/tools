@@ -909,7 +909,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                     .filter(url => url && url.includes('://'));
 
                 if (urls.length === 0) {
-                    alert('请输入资源地址');
+                    showError('请输入资源地址');
                     return;
                 }
 
@@ -949,7 +949,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
             document.getElementById('extractResources').addEventListener('click', async () => {
                 const url = document.getElementById('websiteUrl').value.trim();
                 if (!url) {
-                    alert('请输入网站URL');
+                    showError('请输入网站URL');
                     return;
                 }
 
@@ -990,7 +990,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                         container.appendChild(item);
                     });
                 } catch (error) {
-                    alert('提取资源失败: ' + error.message);
+                    showError('提取资源失败: ' + error.message);
                 }
             });
 
@@ -1011,7 +1011,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                         textarea.value += (textarea.value ? '\n' : '') + url;
                     }
                 });
-                alert('已添加 ' + selected.length + ' 个资源到下载队列');
+                showSuccess('已添加 ' + selected.length + ' 个资源到下载队列');
             });
         })();
     </script>
