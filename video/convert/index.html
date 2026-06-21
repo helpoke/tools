@@ -23,7 +23,7 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "视频格式转换工具",
-        "description": "免费在线视频格式转换工具，支持MP4、WebM、MOV、AVI等格式互转。纯前端处理，保护用户隐私数据。Free online video format converter supporting MP4, WebM, MOV, AVI conversions.",
+        "description": "免费在线视频格式转换工具，支持MP4、WebM、MOV、AVI等格式互转。不上传服务器，保护用户隐私数据。Free online video format converter supporting MP4, WebM, MOV, AVI conversions.",
         "url": "https://helpoke.com/video/convert",
         "applicationCategory": "https://schema.org/VideoEditing",
         "inLanguage": ["zh-CN", "en-US"], 
@@ -31,7 +31,7 @@
             "支持MP4、WebM、MOV、AVI等多种格式",
             "格式互转，灵活选择输出格式",
             "可调节视频质量和分辨率",
-            "纯前端处理，视频不上传服务器",
+            "不上传服务器",
             "实时转换进度显示",
             "一键下载转换后的视频"
         ],
@@ -57,10 +57,10 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>视频格式转换</h1>
+            <h1>视频格式转换工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
             <p>支持<b style="color: cadetblue;">MP4、WebM、AVI、MOV、MKV</b>等常见格式，转换为<b style="color: cadetblue;">WebM</b>或<b
                     style="color: cadetblue;">MP4</b>格式，可自定义码率和分辨率。</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
@@ -71,12 +71,15 @@
             </p>
 
             <div class="upload-section">
-                <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv,.ts">
-                <label for="videoUpload" class="upload-btn">上传视频文件</label>
-                <p class="upload-note">* 支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 等常见视频格式</p>
+                <label for="videoUpload" class="upload-area">
+                    <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv,.ts" hidden>
+                    <div class="upload-icon">🎬</div>
+                    <div class="upload-text">点击上传或拖拽视频到此处</div>
+                    <div class="upload-hint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 格式</div>
+                </label>
             </div>
 
-            <div class="preview-section" id="previewSection">
+            <div class="preview-section" id="previewSection" style="display: none;">
                 <div class="video-info" id="videoInfo">
                     <p>请上传视频文件</p>
                 </div>

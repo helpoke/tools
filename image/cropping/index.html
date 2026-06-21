@@ -20,7 +20,6 @@
             max-width: 100%;
             padding: 40px 0;
             width: 100%;
-            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -33,6 +32,8 @@
 
         /* ====== Upload ====== */
         .upload-area {
+            display: block;
+            width: 100%;
             border: 2px dashed var(--border-color);
             border-radius: 12px;
             padding: 40px 20px;
@@ -627,22 +628,21 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图片裁剪工具</h1>
+            <h1>图片大小裁剪工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
             <p>支持自由裁剪和固定比例裁剪，实时预览裁剪效果，离线工具保护数据安全</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
         </section>
 
         <div class="container">
-            <input type="file" id="file-input" accept="image/*" style="display:none;">
-
-            <div id="upload-section" class="upload-area" onclick="document.getElementById('file-input').click()">
+            <label for="file-input" class="upload-area" id="upload-section">
+                <input type="file" id="file-input" accept="image/*" style="display:none;">
                 <div class="upload-icon">🖼️</div>
                 <div class="upload-text">点击上传或拖拽图片到此处</div>
                 <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式</div>
-            </div>
+            </label>
 
             <div class="tool-layout" id="editor-section" style="display:none;">
                 <div class="crop-editor">

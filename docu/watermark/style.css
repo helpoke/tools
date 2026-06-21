@@ -50,8 +50,11 @@ h1 {
 
 /* 文件上传区域 */
 .upload-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 #fileInput {
@@ -59,18 +62,39 @@ h1 {
 }
 
 .upload-btn {
-    display: inline-block;
-    background-color: #3498db;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    background: white;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    min-height: 120px;
 }
 
 .upload-btn:hover {
-    background-color: #2980b9;
+    border-color: #2196f3;
+    background: #f5f9ff;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.file-info {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #999;
 }
 
 /* 预览区域 */
@@ -398,18 +422,36 @@ body.dark-mode .page-info {
     background-color: var(--bg-tertiary);
 }
 
+body.dark-mode .upload-section {
+    background: var(--bg-tertiary);
+}
+
 body.dark-mode .upload-btn {
-    background-color: var(--primary-color);
-    color: var(--text-primary);
+    background: var(--bg-card);
+    border-color: var(--border-color);
 }
 
 body.dark-mode .upload-btn:hover {
-    background-color: var(--primary-hover);
+    background: var(--bg-tertiary);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .upload-icon {
+    color: var(--text-muted);
+}
+
+body.dark-mode .upload-text {
+    color: var(--text-primary);
 }
 
 body.dark-mode .preview-container {
     background-color: var(--bg-card);
     border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .watermark {
+    color: #fff;
 }
 
 body.dark-mode .pdf-preview canvas {
