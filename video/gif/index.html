@@ -29,7 +29,7 @@
             "自定义GIF帧率和尺寸",
             "可选择视频片段转换",
             "实时预览转换效果",
-            "纯前端处理，视频不上传服务器",
+            "不上传服务器",
             "一键下载GIF动图"
         ],
         "operatingSystem": "Web",
@@ -53,9 +53,9 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>视频转GIF</h1>
+            <h1>视频转GIF工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
             <p>从视频中提取精彩片段，制作个性化<b style="color: cadetblue;">GIF动图</b>，支持自定义帧率、尺寸和质量。</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
@@ -66,9 +66,12 @@
             </p>
 
             <div class="upload-section">
-                <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv">
-                <label for="videoUpload" class="upload-btn">上传视频文件</label>
-                <p class="upload-note">* 支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 等常见视频格式</p>
+                <label for="videoUpload" class="upload-area">
+                    <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv" hidden>
+                    <div class="upload-icon">🎬</div>
+                    <div class="upload-text">点击上传或拖拽视频到此处</div>
+                    <div class="upload-hint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 格式</div>
+                </label>
             </div>
 
             <div class="preview-section" id="previewSection">

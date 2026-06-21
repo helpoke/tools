@@ -57,29 +57,23 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图像批量压缩</h1>
-            <p>上传要压缩的图片，选择适合的压缩算法，点击压缩按钮，压缩完成后即可下载。</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <h1>图像大小批量压缩工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
+            <p>上传要压缩的图片，选择适合的压缩算法、压缩质量和最大大小设置，点击压缩按钮，压缩完成后即可下载。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
         </section>
         <div class="container">
-            <div class="upload-area">
+            <label for="fileInput" class="upload-area">
                 <input type="file" id="fileInput" accept="image/png,image/jpeg,image/gif,image/bmp,image/webp" multiple hidden>
-                <label for="fileInput" class="upload-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    点击上传图片 (支持多选，最多40张)
-                </label>
-                <div id="fileInfo" class="file-info"></div>
-                <div id="fileList" class="file-list hidden">
-                    <ul id="selectedFiles"></ul>
-                </div>
+                <div class="upload-icon">🖼️</div>
+                <div class="upload-text">点击上传或拖拽图片到此处</div>
+                <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多40张）</div>
+            </label>
+            <div id="fileInfo" class="file-info"></div>
+            <div id="fileList" class="file-list hidden">
+                <ul id="selectedFiles"></ul>
             </div>
 
             <div class="preview-container">
@@ -135,12 +129,12 @@
                 <div class="dimension-row">
                     <div class="dimension-item">
                         <label for="maxWidth">最大宽度 (px):</label>
-                        <input type="number" id="maxWidth" value="1920" min="100" max="16384">
+                        <input type="number" id="maxWidth" value="1920" min="100" max="1920">
                         <div id="maxWidthError" class="error-message"></div>
                     </div>
                     <div class="dimension-item">
                         <label for="maxHeight">最大高度 (px):</label>
-                        <input type="number" id="maxHeight" value="1080" min="100" max="16384">
+                        <input type="number" id="maxHeight" value="1080" min="100" max="1920">
                         <div id="maxHeightError" class="error-message"></div>
                     </div>
                     <div class="dimension-item">
@@ -148,7 +142,7 @@
                         <input type="number" id="maxSizeKB" value="" min="20" placeholder="自动">
                         <div id="maxSizeError" class="error-message"></div>
                     </div>
-                    <p class="setting-tip">提示：最大尺寸限制图片的上限（100-16384px）；最大文件大小限制压缩后的文件大小，范围20KB到原文件大小，用户可在此范围内随意输入。</p>
+                    <p class="setting-tip">提示：最大尺寸限制图片的上限（100-1920px）；最大文件大小限制压缩后的文件大小，范围20KB到原文件大小，用户可在此范围内随意输入。</p>
                 </div>
 
                 <div class="buttons-container">

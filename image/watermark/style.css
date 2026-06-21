@@ -8,25 +8,39 @@
     padding: 40px 0;
 }
 
-.upload-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    border-radius: 8px;
+.upload-area {
+    display: block;
+    width: 100%;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: transform 0.2s, box-shadow 0.2s;
-    gap: 8px;
+    transition: all 0.2s ease;
+    background: var(--bg-card);
+    margin-bottom: 20px;
 }
 
-.upload-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+.upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.upload-area .upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.upload-area .upload-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.upload-area .upload-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
 }
 
 .description {
@@ -847,12 +861,9 @@ h2 {
 }
 
 /* ==================== 夜间模式样式 ==================== */
-body.dark-mode .upload-btn {
-    background: var(--primary-color);
-}
-
-body.dark-mode .upload-btn:hover {
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+body.dark-mode .upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
 }
 
 body.dark-mode .card {

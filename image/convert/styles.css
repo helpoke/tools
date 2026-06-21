@@ -3,7 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 配置Tailwind自定义颜色 */
+/* ==================== 白天模式样式 ==================== */
+
 @layer base {
     :root {
         --color-primary: var(--primary-color);
@@ -115,14 +116,37 @@
 
     /* 输入框样式 */
     input, select, textarea {
-        background-color: var(--bg-card) !important;
+        background-color: var(--bg-tertiary) !important;
         color: var(--text-primary) !important;
         border-color: var(--border-color) !important;
+        border-width: 1px !important;
     }
 
     input:focus, select:focus, textarea:focus {
         border-color: var(--accent-color) !important;
+        border-width: 2px !important;
         outline: none;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+    }
+
+    /* 滑块样式 */
+    input[type="range"] {
+        background-color: var(--bg-tertiary) !important;
+        accent-color: var(--accent-color) !important;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        cursor: pointer;
+        background: var(--accent-color) !important;
+        border: 2px solid white !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        cursor: pointer;
+        background: var(--accent-color) !important;
+        border: 2px solid white !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
     }
 
     /* 标签样式 */
@@ -262,8 +286,13 @@
         background-color: var(--primary-color);
         color: white;
         border: none;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-weight: 500;
+        font-size: 15px;
         box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         cursor: pointer;
+        transition: all 0.2s ease;
     }
 
     #convert-btn:hover:not(:disabled),
@@ -271,12 +300,14 @@
     #download-all-btn:hover:not(:disabled) {
         background-color: var(--primary-hover);
         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        transform: translateY(-1px);
     }
 
     #download-btn:disabled,
     #download-all-btn:disabled {
-        background-color: #e5e7eb;
-        color: #9ca3af;
+        background-color: var(--bg-tertiary);
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
         box-shadow: none;
         cursor: not-allowed;
     }
@@ -293,6 +324,52 @@
         to {
             opacity: 1;
         }
+    }
+
+    /* 上传区域统一样式 */
+    .upload-area {
+        display: block;
+        width: 100%;
+        border: 3px dashed var(--border-color);
+        border-radius: 16px;
+        padding: 60px 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: var(--bg-card);
+        margin-bottom: 24px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .upload-area:hover {
+        border-color: var(--accent-color);
+        background: rgba(99, 102, 241, 0.08);
+        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+        border-style: solid;
+        transform: translateY(-2px);
+    }
+
+    .upload-area .upload-icon {
+        font-size: 40px;
+        margin-bottom: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .upload-area:hover .upload-icon {
+        transform: scale(1.1);
+    }
+
+    .upload-area .upload-text {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+    }
+
+    .upload-area .upload-hint {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-top: 0;
     }
 }
 
@@ -339,6 +416,7 @@ body.dark-mode .bg-white {
 
 body.dark-mode .card-shadow {
     box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
 }
 
 body.dark-mode h1 {
@@ -351,6 +429,11 @@ body.dark-mode h2 {
 
 body.dark-mode .description {
     color: var(--text-secondary);
+}
+
+body.dark-mode .upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
 }
 
 body.dark-mode .tab-btn {

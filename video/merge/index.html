@@ -29,7 +29,7 @@
             "支持拖拽调整视频顺序",
             "支持多种转场效果（淡入淡出、滑动等）",
             "支持添加背景音乐",
-            "纯前端处理，视频不上传服务器",
+            "不上传服务器",
             "实时预览效果",
             "一键下载合成后的视频"
         ],
@@ -54,9 +54,9 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>视频合成工具</h1>
+            <h1>多视频合并工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
             <p>支持<b style="color: cadetblue;">多视频拼接</b>和<b style="color: cadetblue;">转场效果</b>，支持添加背景音乐，实时预览效果。</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
@@ -67,15 +67,12 @@
             </p>
 
             <div class="upload-section">
-                <h3>视频文件</h3>
-                <div class="upload-area" id="uploadArea">
-                    <input type="file" id="videoUpload" accept="video/*,.ts" multiple style="display: none;">
-                    <label for="videoUpload" class="upload-btn">
-                        <span class="upload-icon">+</span>
-                        <span class="upload-text">点击或拖拽上传视频</span>
-                        <span class="upload-hint">支持一次选择多个视频（最多5个）</span>
-                    </label>
-                </div>
+                <label for="videoUpload" class="upload-area" id="uploadArea">
+                    <input type="file" id="videoUpload" accept="video/*,.ts" multiple hidden>
+                    <div class="upload-icon">🎬</div>
+                    <div class="upload-text">点击上传或拖拽视频到此处</div>
+                    <div class="upload-hint">支持一次选择多个视频（最多5个）</div>
+                </label>
                 <div class="video-list-container">
                     <div class="video-list-header">
                         <span class="video-count">已上传 <strong id="videoCount">0</strong> 个视频（拖动/点击调整顺序）</span>

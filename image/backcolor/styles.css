@@ -38,29 +38,37 @@ h2 {
     font-size: 20px;
 }
 
-/* 上传区域样式 */
-.upload-section {
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 40px 20px;
     text-align: center;
-    margin-bottom: 30px;
-}
-
-#imageUpload {
-    display: none;
-}
-
-.upload-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #3498db;
-    color: white;
-    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
+    background: var(--bg-card);
+    margin-bottom: 20px;
 }
 
-.upload-btn:hover {
-    background-color: #2980b9;
+.upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.upload-area .upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.upload-area .upload-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.upload-area .upload-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
 }
 
 /* 预览区域样式 */
@@ -256,13 +264,9 @@ h2 {
 }
 
 /* ==================== 夜间模式样式 ==================== */
-body.dark-mode .upload-btn {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-body.dark-mode .upload-btn:hover {
-    background-color: var(--primary-hover);
+body.dark-mode .upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.1);
 }
 
 body.dark-mode .color-swatch.active {

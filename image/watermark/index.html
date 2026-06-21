@@ -56,35 +56,31 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图像添加水印</h1>
-            <p>上传图片后，选择水印类型，输入文字或上传图片，可以手动拖动水印位置或者选择特定位置，支持批量添加水印。</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
+            <h1>图像添加水印工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
+            <p>上传图像后，选择水印类型，输入文字或上传图像，可以手动拖动水印位置或者选择特定位置，支持批量添加水印。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
         </section>
         <div class="container">
-            <div class="upload-section">
+            <label for="imageUpload" class="upload-area">
                 <input type="file" id="imageUpload" accept="image/*" multiple hidden>
-                <label for="imageUpload" class="upload-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    <span id="uploadBtnText">上传图片（支持多选，最多30张）</span>
-                    <span id="uploadLoading" style="display: none;">图片加载中...</span>
-                </label>
-            </div>
+                <div class="upload-icon">🖼️</div>
+                <div class="upload-text">
+                    <span id="uploadBtnText">点击上传或拖拽图像到此处</span>
+                    <span id="uploadLoading" style="display: none;">图像加载中...</span>
+                </div>
+                <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多30张）</div>
+            </label>
 
             <div id="fileList" class="file-list">
-                <div class="file-list-empty">请上传图片以显示文件列表</div>
+                <div class="file-list-empty">请上传图像以显示文件列表</div>
             </div>
 
             <div class="preview-section">
                 <div id="previewContainer">
-                    <p>请上传图片以查看预览</p>
+                    <p>请上传图像以查看预览</p>
                     <p id="manualPositionInfo" class="manual-position-info" style="display: none;">提示：点击并拖动水印可以调整位置</p>
                 </div>
             </div>
@@ -99,15 +95,15 @@
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="watermarkType" value="image">
-                            <span>图片水印</span>
+                            <span>图像水印</span>
                         </label>
 
                         <label class="checkbox-label">
                             <input type="checkbox" id="applyToAllImages" value="applyToAll">
-                            <span>以下设置改动时应用到所有图片<span class="tooltip-icon">ℹ</span></span>
+                            <span>以下设置改动时应用到所有图像<span class="tooltip-icon">ℹ</span></span>
                             <p class="tooltip">
-                                勾选后，对水印（类型、位置、颜色、大小、透明度）等的设置，会应用到所有已上传图片中，所有图片保持样式一致。</br>
-                                不勾选则仅对当前选中图片生效。
+                                勾选后，对水印（类型、位置、颜色、大小、透明度）等的设置，会应用到所有已上传图像中，所有图像保持样式一致。</br>
+                                不勾选则仅对当前选中图像生效。
                             </p>
                         </label>
                     </div>
@@ -125,7 +121,7 @@
                 </div>
 
                 <div class="setting-group" id="imageWatermarkGroup" style="display: none;">
-                    <label for="imageWatermarkUpload">选择水印图片：</label>
+                    <label for="imageWatermarkUpload">选择水印图像：</label>
                     <input type="file" id="imageWatermarkUpload" accept="image/*">
                 </div>
 
@@ -168,12 +164,12 @@
 
             <div class="action-buttons">
                 <button id="downloadCurrentImage" disabled>
-                    <span id="downloadCurrentText">下载当前图片</span>
-                    <span id="downloadCurrentLoading" style="display: none;">图片生成中...</span>
+                    <span id="downloadCurrentText">下载当前图像</span>
+                    <span id="downloadCurrentLoading" style="display: none;">图像生成中...</span>
                 </button>
                 <button id="downloadAllImages" disabled>
                     <span id="downloadAllText">打包下载所有</span>
-                    <span id="downloadAllLoading" style="display: none;">图片打包中...</span>
+                    <span id="downloadAllLoading" style="display: none;">图像打包中...</span>
                 </button>
             </div>
         </div>

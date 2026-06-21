@@ -19,10 +19,10 @@
 
 .container {
   max-width: 100%;
-  padding: 40px 0;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 0;
 }
 
 h1 {
@@ -62,28 +62,46 @@ h3 {
   text-align: center;
 }
 
-#mosaic-videoUpload {
-  display: none;
-}
-
-.mosaic-upload-btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 6px;
+/* ====== Upload Area ====== */
+.upload-area {
+  display: block;
+  width: 100%;
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  transition: all 0.2s ease;
+  background: var(--bg-card);
+  margin-bottom: 20px;
 }
 
-.mosaic-upload-btn:hover {
-  background-color: #2980b9;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+.upload-area:hover {
+  border-color: var(--accent-color);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.upload-area.dragover {
+  border-color: var(--accent-color);
+  background: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.upload-area .upload-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.upload-area .upload-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.upload-area .upload-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
 }
 
 /* 提示信息样式 */
@@ -117,7 +135,7 @@ h3 {
 .mosaic-preview-section,
 .mosaic-settings-section,
 .mosaic-output-section {
-  margin-bottom: 30px;
+  margin: 30px;
 }
 
 .mosaic-video-container {
@@ -827,39 +845,18 @@ body.dark-mode .upload-section {
     background-color: var(--bg-tertiary);
 }
 
-body.dark-mode .upload-btn {
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    color: white;
+body.dark-mode .upload-area {
+    border-color: var(--border-color);
 }
 
-body.dark-mode .upload-btn:hover {
-    background-color: var(--primary-hover);
-    border-color: var(--primary-hover);
+body.dark-mode .upload-area:hover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.15);
 }
 
-body.dark-mode .mosaic-upload-btn {
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    color: white;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-}
-
-body.dark-mode .mosaic-upload-btn:hover {
-    background-color: var(--primary-hover);
-    border-color: var(--primary-hover);
-}
-
-body.dark-mode .upload-icon {
-    color: var(--text-muted);
-}
-
-body.dark-mode .upload-text {
-    color: var(--text-primary);
-}
-
-body.dark-mode .upload-hint {
-    color: var(--text-muted);
+body.dark-mode .upload-area.dragover {
+    border-color: var(--accent-color);
+    background: rgba(99, 102, 241, 0.15);
 }
 
 body.dark-mode .video-info,

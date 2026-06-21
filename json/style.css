@@ -906,7 +906,20 @@ body.dark-mode #raw-json {
 
 body.dark-mode .line-numbers {
     background-color: var(--bg-secondary);
-    border-color: var(--border-color);
+    border-right-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+body.dark-mode #line-numbers {
+    background-color: var(--bg-secondary);
+    border-right-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+body.dark-mode #original-line-numbers,
+body.dark-mode #target-line-numbers {
+    background-color: var(--bg-secondary);
+    border-right-color: var(--border-color);
     color: var(--text-muted);
 }
 
@@ -1738,6 +1751,27 @@ button:active {
     scrollbar-color: #c1c1c1 #f1f1f1;
 }
 
+/* 夜间模式滚动条样式 */
+body.dark-mode ::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+body.dark-mode ::-webkit-scrollbar-corner {
+    background: var(--bg-secondary);
+}
+
+body.dark-mode * {
+    scrollbar-color: var(--border-color) var(--bg-secondary);
+}
+
 /* 确保编辑器区域的滚动条也应用样式 */
 .editor-container,
 .editor-content,
@@ -1752,6 +1786,20 @@ button:active {
 .tab-content {
     scrollbar-width: thin;
     scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+body.dark-mode .editor-container,
+body.dark-mode .editor-content,
+body.dark-mode #line-numbers,
+body.dark-mode #original-json,
+body.dark-mode #target-json,
+body.dark-mode #xml-json-editor,
+body.dark-mode #xml-output-editor,
+body.dark-mode #original-line-numbers,
+body.dark-mode #target-line-numbers,
+body.dark-mode #compare-result,
+body.dark-mode .tab-content {
+    scrollbar-color: var(--border-color) var(--bg-secondary);
 }
 
 /* 左侧线和折叠图标样式 */
@@ -2017,6 +2065,17 @@ button:active {
         bottom: 10px;
         right: 10px;
         gap: 6px;
+    }
+
+    /* 移动端夜间模式样式 */
+    body.dark-mode .line-numbers {
+        background-color: var(--bg-secondary);
+        border-right-color: var(--border-color);
+        color: var(--text-muted);
+    }
+
+    body.dark-mode .line-number {
+        color: var(--text-muted);
     }
 }
 
