@@ -29,7 +29,7 @@
             "拖拽调整图片顺序",
             "自定义帧延迟和循环次数",
             "实时预览GIF效果",
-            "不上传服务器",
+            "纯前端处理，图片不上传服务器",
             "一键下载GIF动图"
         ],
         "operatingSystem": "Web",
@@ -53,9 +53,9 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图像转GIF动图工具（<a href="https://helpoke.com" title="返回首页">🏠</a>）</h1>
-            <p>上传多张图像，合成个性化<b style="color: cadetblue;">GIF动图</b>，支持自定义帧率、尺寸和循环次数。</p>
-            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
+            <h1>图片转GIF工具（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>上传多张图片，合成个性化<b style="color: cadetblue;">GIF动图</b>，支持自定义帧率、尺寸和循环次数。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能。</em></b>）</p>
             <p class="description">
                 <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
             </p>
@@ -65,20 +65,20 @@
             <div class="row">
                 <div class="col-6">
                     <div class="upload-section">
-                        <h3>图像文件</h3>
+                        <h3>图片文件</h3>
                         <label for="imageUpload" class="upload-area" id="uploadArea">
                             <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
                             <div class="upload-icon">🖼️</div>
-                            <div class="upload-text">点击上传或拖拽图像到此处</div>
+                            <div class="upload-text">点击上传或拖拽图片到此处</div>
                             <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（最多5张）</div>
                         </label>
                         <div class="image-list-container">
                             <div class="image-list-header">
-                                <span class="image-count">已上传 <strong id="imageCount">0</strong> 个图像</span>
+                                <span class="image-count">已上传 <strong id="imageCount">0</strong> 个图片</span>
                                 <button id="clearAll" class="btn-text" style="display: none;">清空全部</button>
                             </div>
                             <ul id="imageList" class="image-list"></ul>
-                            <div id="emptyTip" class="empty-tip">请上传图像文件</div>
+                            <div id="emptyTip" class="empty-tip">请上传图片文件</div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="preview-section">
                         <h3>预览</h3>
                         <div class="preview-container">
-                            <img id="previewImage" alt="预览图像" style="max-width: 100%; max-height: 300px; object-fit: contain;">
+                            <img id="previewImage" alt="预览图片" style="max-width: 100%; max-height: 300px; object-fit: contain;">
                             <canvas id="previewCanvas" style="display: none; max-width: 100%; max-height: 300px;"></canvas>
                         </div>
                     </div>
