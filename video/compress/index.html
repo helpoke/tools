@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频在线免费压缩，支持MP4、WebM、MOV等格式视频压缩，纯前端处理保护隐私，视频压缩工具">
+    <meta name="keywords" content="视频压缩, 视频在线压缩, 免费视频压缩, MP4压缩, 视频文件压缩, 隐私视频压缩">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频压缩 - 免费在线视频压缩工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script src="../lib/ffmpeg.js"></script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频压缩工具",
+        "description": "免费在线视频压缩工具，支持MP4、WebM、MOV等格式视频压缩。纯前端处理，保护用户隐私数据。Free online video compressor supporting MP4, WebM, MOV compression.",
+        "url": "https://helpoke.com/video/compress",
+        "applicationCategory": "https://schema.org/VideoEditing",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "支持MP4、WebM、MOV等多种格式",
+            "可自定义目标大小或压缩质量",
+            "可调节视频分辨率",
+            "纯前端处理，视频不上传服务器",
+            "实时压缩进度显示",
+            "显示压缩前后对比信息",
+            "一键下载压缩后的视频"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频大小批量压缩工具（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>支持<b style="color: cadetblue;">MP4、WebM、MOV、AVI、MKV</b>等常见格式，可自定义<b style="color: cadetblue;">目标大小</b>或<b style="color: cadetblue;">压缩质量</b>，智能压缩视频体积。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+        <div class="container">
+            <p class="description">
+                <b>注意：</b> 最大支持500MB视频文件。视频越大处理时间越长，建议先将视频裁剪到所需片段再压缩。
+            </p>
+
+            <div class="upload-section">
+                <label for="videoUpload" class="upload-area">
+                    <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv,.ts" multiple hidden>
+                    <div class="upload-icon">🎬</div>
+                    <div class="upload-text">点击上传或拖拽视频到此处（支持批量）</div>
+                    <div class="upload-hint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 格式</div>
+                </label>
+            </div>
+
+            <div class="file-list-section" id="fileListSection" style="display: none;">
+                <h3>待压缩视频列表</h3>
+                <div class="file-list" id="fileList"></div>
+                <div class="file-list-actions">
+                    <button id="clearAllBtn" class="secondary-btn">清空列表</button>
+                </div>
+            </div>
+
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <div class="video-info" id="videoInfo">
+                    <p>请上传视频文件</p>
+                </div>
+                <div class="video-container">
+                    <video id="videoPlayer" controls></video>
+                </div>
+            </div>
+
+            <div class="settings-section" id="settingsSection" style="display: none;">
+                <h3>压缩设置</h3>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="compressMode">压缩模式：</label>
+                        <select id="compressMode">
+                            <option value="quality">按质量压缩</option>
+                            <option value="size">按目标大小压缩</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row" id="qualityRow">
+                    <div class="input-group">
+                        <label for="videoQuality">压缩质量：</label>
+                        <select id="videoQuality">
+                            <option value="high">高质量（约70-80%）</option>
+                            <option value="medium" selected>中等质量（约50-60%）</option>
+                            <option value="low">低质量（约30-40%）</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row" id="targetSizeRow" style="display: none;">
+                    <div class="input-group">
+                        <label for="targetSize">目标大小（MB）：</label>
+                        <input type="number" id="targetSize" min="1" max="500" step="0.5" value="10" placeholder="输入目标大小">
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="resolutionScale">分辨率缩放：</label>
+                        <select id="resolutionScale">
+                            <option value="1">原始分辨率</option>
+                            <option value="0.75">75%</option>
+                            <option value="0.5">50%</option>
+                            <option value="0.25">25%</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="frameRate">帧率：</label>
+                        <select id="frameRate">
+                            <option value="original">原始帧率</option>
+                            <option value="60">60 fps</option>
+                            <option value="30">30 fps</option>
+                            <option value="24">24 fps</option>
+                            <option value="15">15 fps</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="keepAudio">保留音频：</label>
+                        <select id="keepAudio">
+                            <option value="yes">保留</option>
+                            <option value="no">移除</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="input-group">
+                        <label for="outputFormat">输出格式：</label>
+                        <select id="outputFormat">
+                            <option value="original">保留原格式</option>
+                            <option value="mp4">MP4 (H.264)</option>
+                            <option value="webm">WebM (VP8)</option>
+                            <option value="webm-vp9">WebM (VP9)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="compress-info" id="compressInfo">
+                    <p>预计压缩后大小：<span id="estimatedSize">计算中...</span></p>
+                    <p>预计压缩率：<span id="estimatedRatio">计算中...</span></p>
+                </div>
+
+                <div class="button-group">
+                    <button id="compressBtn" class="primary-btn">
+                        <span id="compressBtnText">开始压缩</span>
+                        <span id="compressBtnLoading" style="display: none;">压缩中...</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <span id="progressPercentage">0%</span>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressStatus">正在处理...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection" style="display: none;">
+                <h3>压缩完成</h3>
+                <div class="result-summary" id="resultSummary">
+                    <p>成功压缩：<span id="successCount">0</span> 个视频</p>
+                    <p>原始总大小：<span id="totalOriginalSize">-</span></p>
+                    <p>压缩后总大小：<span id="totalCompressedSize">-</span></p>
+                    <p>总节省空间：<span id="totalSavedSpace">-</span></p>
+                </div>
+                <div class="result-list" id="resultList"></div>
+                <div class="button-group">
+                    <button id="downloadAllBtn" class="primary-btn">下载所有压缩后的视频</button>
+                    <button id="resetBtn" class="secondary-btn">重新压缩</button>
+                </div>
+            </div>
+        </div>
+        <!-- Footer component -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

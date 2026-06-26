@@ -1,0 +1,578 @@
+.description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h2 {
+    margin: 20px 0;
+    color: #34495e;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+h3 {
+    margin: 15px 0;
+    color: #7f8c8d;
+    font-size: 18px;
+}
+
+.upload-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* ====== Upload Area ====== */
+.upload-area {
+    display: block;
+    width: 100%;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--bg-card);
+    margin-bottom: 20px;
+}
+
+.upload-area:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.upload-area.dragover {
+    border-color: #667eea;
+    background: #f0f2ff;
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.upload-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.upload-hint {
+    font-size: 14px;
+    color: #999;
+}
+
+/* ====== File List Section ====== */
+.file-list-section {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-list-section h3 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.file-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.2s;
+}
+
+.file-item:hover {
+    background: #e9ecef;
+}
+
+.file-item.processing {
+    background: #e3f2fd;
+}
+
+.file-item.completed {
+    background: #e8f5e9;
+}
+
+.file-item.error {
+    background: #ffebee;
+}
+
+.file-item-info {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.file-item-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-item-details {
+    font-size: 12px;
+    color: #666;
+}
+
+.file-item-status {
+    margin-left: 15px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.file-item-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.file-item-status.processing {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.file-item-status.completed {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.file-item-status.error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.file-item-actions {
+    margin-left: 10px;
+}
+
+.file-item-actions button {
+    padding: 4px 8px;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.file-item-actions button:hover {
+    background: #e9ecef;
+}
+
+.file-list-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* ====== Preview Section ====== */
+.preview-section {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.video-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.video-info strong {
+    color: #2c3e50;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+/* ====== Settings Section ====== */
+.settings-section {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.setting-row {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.input-group select,
+.input-group input[type="number"],
+.input-group input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+.input-group select:focus,
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.compress-info {
+    background: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.compress-info p {
+    margin: 8px 0;
+    color: #1976d2;
+    font-size: 14px;
+}
+
+.compress-info span {
+    font-weight: 600;
+    color: #0d47a1;
+}
+
+/* ====== Buttons ====== */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    min-width: 150px;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+
+.primary-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.primary-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.secondary-btn {
+    background: #f8f9fa;
+    color: #2c3e50;
+    border: 1px solid var(--border-color);
+}
+
+.secondary-btn:hover {
+    background: #e9ecef;
+}
+
+/* ====== Progress Section ====== */
+.progress-section {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.progress-container {
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 24px;
+    background: #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 12px;
+    transition: width 0.3s ease;
+    width: 0%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+#progressPercentage {
+    position: relative;
+    z-index: 2;
+    padding-right: 10px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+
+/* ====== Output Section ====== */
+.output-section {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-summary {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.result-summary p {
+    margin: 8px 0;
+    color: #2e7d32;
+    font-size: 14px;
+}
+
+.result-summary span {
+    font-weight: 600;
+    color: #1b5e20;
+}
+
+.result-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.result-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.result-item-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-item-details {
+    font-size: 12px;
+    color: #666;
+}
+
+.result-item-actions {
+    margin-left: 10px;
+}
+
+.result-item-actions button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.result-item-actions button:hover {
+    background: #e9ecef;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .upload-area {
+        padding: 30px 15px;
+    }
+
+    .upload-icon {
+        font-size: 36px;
+    }
+
+    .upload-text {
+        font-size: 16px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+    }
+}
+
+/* ====== Dark Mode ====== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-card: #1e1e1e;
+        --border-color: #444;
+    }
+
+    .upload-area:hover {
+        background: #2a2a2a;
+    }
+
+    .upload-area.dragover {
+        background: #333;
+    }
+
+    .video-info {
+        background: #2a2a2a;
+    }
+
+    .video-info p,
+    .video-info strong {
+        color: #e0e0e0;
+    }
+
+    .input-group label {
+        color: #e0e0e0;
+    }
+
+    .input-group select,
+    .input-group input {
+        background: #2a2a2a;
+        color: #e0e0e0;
+        border-color: #444;
+    }
+
+    .compress-info {
+        background: #1a237e;
+    }
+
+    .compress-info p {
+        color: #90caf9;
+    }
+
+    .compress-info span {
+        color: #bbdefb;
+    }
+
+    .result-info {
+        background: #1b5e20;
+    }
+
+    .result-info p {
+        color: #a5d6a7;
+    }
+
+    .result-info span {
+        color: #c8e6c9;
+    }
+
+    .secondary-btn {
+        background: #2a2a2a;
+        color: #e0e0e0;
+        border-color: #444;
+    }
+
+    .secondary-btn:hover {
+        background: #333;
+    }
+}

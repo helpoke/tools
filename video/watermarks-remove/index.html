@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频去水印工具, 视频免费去水印, 视频水印去除, 视频本地处理">
+    <meta name="keywords" content="视频去水印, 视频水印去除, 免费去水印, 视频去水印在线, 视频本地去水印, 视频修复">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频去水印、视频水印去除工具</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../lib/ffmpeg.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频去水印工具",
+        "description": "免费在线视频去水印工具，支持多种去水印方式，本地处理保护隐私。Free online video watermark removal tool with multiple removal methods.",
+        "url": "https://helpoke.com/video/watermark",
+        "applicationCategory": "https://schema.org/VideoEditing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持裁剪法去水印",
+            "支持模糊法去水印",
+            "支持马赛克覆盖去水印",
+            "支持自定义去水印区域",
+            "实时预览去水印效果",
+            "本地处理，保护隐私安全"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频去水印工具（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>支持<b style="color: cadetblue;">模糊处理</b>、<b style="color: cadetblue;">马赛克覆盖</b>、<b style="color: cadetblue;">裁剪去除</b>和<b style="color: cadetblue;">纯色覆盖</b>，纯前端处理保护隐私。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+        <div class="container">
+            <p class="description">
+                <b>注意：</b> 最大支持100MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
+            </p>
+
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" accept="video/*" style="display: none;">
+            <div class="upload-content">
+                <div class="upload-icon">📹</div>
+                <p>点击或拖拽上传视频文件</p>
+                <p class="hint">支持 MP4、WebM、MOV、AVI、MKV 等格式</p>
+            </div>
+        </div>
+
+        <div class="file-info" id="fileInfo" style="display: none;">
+            <div class="file-details">
+                <span class="file-name" id="fileName"></span>
+                <span class="file-size" id="fileSize"></span>
+                <span class="file-duration" id="fileDuration"></span>
+            </div>
+        </div>
+
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <h3>视频预览</h3>
+            <div class="preview-container">
+                <video id="videoPlayer" controls playsinline></video>
+                <div id="watermarkOverlay"></div>
+            </div>
+            <!-- <p class="hint">点击视频画面可以选择去水印区域</p> -->
+            <div class="area-controls" id="areaControls" style="display: none;">
+                <button class="btn btn-secondary" id="addAreaBtn">添加区域</button>
+                <button class="btn btn-danger" id="deleteAreaBtn" disabled>删除当前区域</button>
+                <span id="areaCount" style="margin-left: 10px; color: #666;">区域数量：1</span>
+            </div>
+        </div>
+
+        <div class="settings-section" id="settingsSection" style="display: none;">
+            <h3>去水印设置</h3>
+            
+            <div class="setting-group">
+                <label for="removeMethod">去水印方式：</label>
+                <select id="removeMethod">
+                    <option value="blur">模糊处理</option>
+                    <option value="mosaic">马赛克覆盖</option>
+                    <option value="crop">裁剪去除</option>
+                    <option value="cover">纯色覆盖</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label for="areaPreset">预设位置：</label>
+                <select id="areaPreset">
+                    <option value="custom">自定义区域</option>
+                    <option value="top-left">左上角</option>
+                    <option value="top-right">右上角</option>
+                    <option value="bottom-left">左下角</option>
+                    <option value="bottom-right">右下角</option>
+                    <option value="top-center">顶部居中</option>
+                    <option value="bottom-center">底部居中</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label>区域大小：</label>
+                <div class="range-group">
+                    <input type="range" id="areaWidth" min="5" max="50" value="15" step="1">
+                    <span id="areaWidthValue">15%</span>
+                </div>
+            </div>
+
+            <div class="setting-group" id="blurSettings">
+                <label>模糊强度：</label>
+                <div class="range-group">
+                    <input type="range" id="blurStrength" min="5" max="50" value="20" step="1">
+                    <span id="blurStrengthValue">20px</span>
+                </div>
+            </div>
+
+            <div class="setting-group" id="mosaicSettings">
+                <label>马赛克大小：</label>
+                <div class="range-group">
+                    <input type="range" id="mosaicSize" min="4" max="32" value="16" step="2">
+                    <span id="mosaicSizeValue">16px</span>
+                </div>
+            </div>
+
+            <div class="setting-group" id="colorSettings">
+                <label>覆盖颜色：</label>
+                <input type="color" id="coverColor" value="#000000">
+            </div>
+
+            <div class="setting-group">
+                <label for="outputFormat">输出格式：</label>
+                <select id="outputFormat">
+                    <option value="original">保留原格式</option>
+                    <option value="mp4">MP4 (H.264)</option>
+                    <option value="webm">WebM</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" id="processBtn">
+                <span id="processBtnText">开始去水印处理</span>
+                <span id="processBtnLoading" style="display: none;">处理中...</span>
+            </button>
+        </div>
+
+        <div class="progress-section" id="progressSection" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+                <span id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-text">
+                <span id="progressStatus">准备就绪</span>
+            </div>
+        </div>
+
+        <div class="output-section" id="outputSection" style="display: none;">
+            <h3>处理结果</h3>
+            <div class="result-info">
+                <div class="info-item">
+                    <span class="label">原文件大小：</span>
+                    <span id="originalSize"></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">处理后大小：</span>
+                    <span id="outputSize"></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">去水印方式：</span>
+                    <span id="usedMethod"></span>
+                </div>
+            </div>
+            <div class="result-container">
+                <video id="outputVideo" controls></video>
+            </div>
+            <div class="download-buttons">
+                <button class="btn btn-primary" id="downloadBtn">下载处理后的视频</button>
+                <button class="btn btn-secondary" id="resetBtn">重新处理</button>
+            </div>
+        </div>
+        </div>
+
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
