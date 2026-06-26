@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频免费添加水印, 视频本地添加水印, 隐私视频添加水印, 视频本地加水印">
+    <meta name="keywords"
+        content="视频免费打码, 视频本地加水印, 隐私视频加水印, 隐私视频打码, 无损加水印, 免费加水印， 视频打码遮挡, 视频马赛克遮挡, 视频模糊处理, 视频文字水印, 视频图片水印, 视频滚动水印">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频加水印、视频免费加水印、视频打码</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "视频水印工具",
+        "description": "免费在线视频水印添加工具，支持文字水印、图片水印和打码功能。可自定义水印样式、位置和透明度。本地处理保护隐私。Free online video watermark tool with text, image watermark and mosaic features.",
+        "url": "https://helpoke.com/video/watermark",
+        "applicationCategory": "https://schema.org/VideoEditing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持文字水印添加",
+            "支持图片水印添加",
+            "支持视频打码/马赛克功能",
+            "自定义水印位置和大小",
+            "可调节水印透明度",
+            "支持滚动水印效果",
+            "本地处理，保护隐私安全"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1>视频加水印、打码遮挡工具（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>支持<b style="color: cadetblue;">文字水印（滚动）、图片水印、马赛克遮挡、模糊处理</b>，可多种水印类型混合使用。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。所以处理速度取决于您的计算机性能</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+        <div class="mosaic-instructions">
+            <ul>
+                <li><b>添加水印</b>：选择水印类型 -> 调整相关参数（大小、颜色等）-> 单击视频空白处即可添加水印</li>
+                <li><b>删除水印</b>：双击当前选中的水印，即可删除（只能按序删除，不能随机删除之前已添加的水印）</li>
+                <li><b>水印参数调整</b>：手动拖拽调整大小、拖动位置。或者通过参数调整水印位置、颜色、大小、透明度等</li>
+                <li><b>水印数量限制</b>：单个类型一次最多可添加2个水印，多种类型混合总数一次最多可添加5个</li>
+                <li><b>时间范围限制</b>：可设置水印在视频中显示的时间区间，默认整个视频区间都显示水印</li>
+                <li><b>使用说明</b>：当前水印样式（大小、位置等）设置后，再单击视频添加下一个水印，各水印间样式是独立的</li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="mosaic-upload-section">
+                <label for="mosaic-videoUpload" class="upload-area">
+                    <input type="file" id="mosaic-videoUpload" accept="video/*" hidden>
+                    <div class="upload-icon">🎬</div>
+                    <div class="upload-text">点击上传或拖拽视频到此处</div>
+                    <div class="upload-hint">支持 MP4, WebM, AVI, MOV, MKV 等常见视频格式</div>
+                </label>
+            </div>
+
+            <div class="mosaic-preview-section" id="mosaic-previewSection" style="display: none;">
+                <div class="mosaic-video-info" id="mosaic-videoInfo"></div>
+                <div class="mosaic-video-container">
+                    <div id="mosaic-video-wrapper" class="mosaic-video-wrapper">
+                        <video id="mosaic-videoPlayer" playsinline></video>
+                        <div id="mosaic-mosaicBox" class="mosaic-box"></div>
+                        <canvas id="mosaic-canvas"></canvas>
+                        <!-- 完全透明的覆盖层，用于捕获所有点击事件 -->
+                        <div id="mosaic-full-overlay" class="mosaic-full-overlay"></div>
+                        <div id="mosaic-custom-controls" class="mosaic-custom-controls">
+                            <button id="mosaic-play-pause" class="mosaic-control-button">播放</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mosaic-settings-section" id="mosaic-settingsSection">
+                <div class="mosaic-mosaic-settings">
+                    <div class="mosaic-input-group">
+                        <label for="mosaic-type">水印类型:</label>
+                        <select id="mosaic-type">
+                            <option value="text" selected>文字水印</option>
+                            <option value="image">图片水印</option>
+                            <option value="mosaic">马赛克</option>
+                            <option value="blur">模糊处理</option>
+                        </select>
+                    </div>
+
+                    <div class="mosaic-mosaic-size" id="mosaic-mosaic-size-section">
+                        <div class="mosaic-input-row">
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-mosaicSize">遮挡块大小/模糊半径:</label>
+                                <input type="number" id="mosaic-mosaicSize" min="5" max="100" value="25">
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-areaSize">遮挡区域大小:</label>
+                                <input type="number" id="mosaic-areaSize" min="20" max="500" value="150">
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-mosaicColor">马赛克颜色:</label>
+                                <input type="color" id="mosaic-mosaicColor" value="#000000">
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-blurOpacity">模糊透明度 (%):</label>
+                                <input type="number" id="mosaic-blurOpacity" min="20" max="100" value="80">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mosaic-text-section" id="mosaic-text-section" style="display:none">
+                        <div class="mosaic-input-row">
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-text">水印文字:</label>
+                                <input type="text" id="mosaic-text" placeholder="请输入水印文字，最多50个字符" value=""
+                                    maxlength="50">
+                            </div>
+                            <div class="mosaic-input-group">
+                                <label for="mosaic-textSize">文字大小:</label>
+                                <input type="number" id="mosaic-textSize" min="10" max="100" value="30">
+                            </div>
+                            <div class="mosaic-input-group">
+                                <label for="mosaic-textColor">文字颜色:</label>
+                                <input type="color" id="mosaic-textColor" value="#000000">
+                            </div>
+                        </div>
+                        <div class="mosaic-input-row">
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-textPosition">水印位置:</label>
+                                <select id="mosaic-textPosition">
+                                    <option value="left-top" selected>左上方</option>
+                                    <option value="left-bottom">左下方</option>
+                                    <option value="right-top">右上方</option>
+                                    <option value="right-bottom">右下方</option>
+                                    <option value="text-center">居中</option>
+                                    <option value="top-center">上居中</option>
+                                    <option value="bottom-center">下居中</option>
+                                    <option value="left-center">左居中</option>
+                                    <option value="right-center">右居中</option>
+                                    <option value="text-full" hidden>平铺</option>
+                                    <option value="move-other">其他（拖动）</option>
+                                </select>
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-textOpacity">水印透明度:</label>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="range" id="mosaic-textOpacity" min="0.1" max="1" value="0.5" step="0.1"
+                                        style="flex: 1; margin-right: 10px; padding: 0; height: 40px;">
+                                    <span id="mosaic-textOpacityValue"
+                                        style="font-size: 16px; color: #555; min-width: 30px;">0.5</span>
+                                </div>
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-textScroll">滚动效果（选“固定”才能拖动）:</label>
+                                <select id="mosaic-textScroll">
+                                    <option value="fixed" selected>固定</option>
+                                    <option value="horizontal">水平滚动</option>
+                                    <option value="vertical">垂直滚动</option>
+                                </select>
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-textScrollSpeed">滚动速度:</label>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="range" id="mosaic-textScrollSpeed" min="10" max="200" value="50"
+                                        step="5" style="flex: 1; margin-right: 10px; padding: 0; height: 40px;">
+                                    <span id="mosaic-scrollSpeedValue"
+                                        style="font-size: 16px; color: #555; min-width: 30px;">50</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mosaic-image-section" id="mosaic-image-section" style="display:none">
+                        <div class="mosaic-input-row">
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-imageUpload">上传图片:</label>
+                                <input type="file" id="mosaic-imageUpload" accept="image/*">
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-imageSize">图片大小 (百分比):</label>
+                                <input type="number" id="mosaic-imageSize" min="5" max="25" value="15">
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-imagePosition">水印位置:</label>
+                                <select id="mosaic-imagePosition">
+                                    <option value="left-top" selected>左上方</option>
+                                    <option value="left-bottom">左下方</option>
+                                    <option value="right-top">右上方</option>
+                                    <option value="right-bottom">右下方</option>
+                                    <option value="text-center">居中</option>
+                                    <option value="move-other">其他（拖动）</option>
+                                </select>
+                            </div>
+                            <div class="mosaic-input-group" style="flex: 1;">
+                                <label for="mosaic-imageOpacity">水印透明度:</label>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="range" id="mosaic-imageOpacity" min="0.1" max="1" value="0.8"
+                                        step="0.1" style="flex: 1; margin-right: 10px; padding: 0; height: 40px;">
+                                    <span id="mosaic-imageOpacityValue"
+                                        style="font-size: 16px; color: #555; min-width: 30px;">0.8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mosaic-time-settings">
+                        <div class="mosaic-time-row">
+                            <div class="mosaic-input-group">
+                                <label for="mosaic-startTime">开始时间 (秒):</label>
+                                <input type="number" id="mosaic-startTime" min="0" step="0.1">
+                            </div>
+                            <div class="mosaic-input-group">
+                                <label for="mosaic-endTime">结束时间 (秒):</label>
+                                <input type="number" id="mosaic-endTime" min="0" step="0.1">
+                            </div>
+                        </div>
+                        <div class="mosaic-time-display">
+                            <p>视频总时长: <span id="mosaic-totalDuration">00:00</span></p>
+                        </div>
+                    </div>
+                    <div class="mosaic-action-buttons">
+                        <button id="mosaic-applyMosaicBtn">确认添加水印</button>
+                        <button id="mosaic-removeAllBtn">移除所有水印</button>
+                    </div>
+                    <!-- 进度条区域 -->
+                    <div class="mosaic-progress-container" style="display:none;">
+                        <div class="mosaic-progress-bar-wrapper">
+                            <div id="mosaic-progressBar" class="mosaic-progress-bar"></div>
+                        </div>
+                        <div class="mosaic-progress-text">
+                            <span id="mosaic-progressPercentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mosaic-output-section" id="mosaic-outputSection">
+                <div class="mosaic-result-container">
+                    <video id="mosaic-outputVideo" controls></video>
+                </div>
+                <div class="mosaic-download-buttons">
+                    <button id="mosaic-downloadBtn">下载水印视频</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提示信息区域 -->
+        <div id="mosaic-messageContainer" class="mosaic-message-container" style="display:none;">
+            <p id="mosaic-messageText" class="mosaic-message-text"></p>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+    
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <!-- 引入视频处理脚本 -->
+    <script src="script.js"></script>
+</body>
+
+</html>
