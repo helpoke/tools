@@ -27,6 +27,13 @@
     --border-radius: 8px;
     --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    /* 语法高亮颜色 */
+    --syntax-key: #0066cc;
+    --syntax-string: #008000;
+    --syntax-number: #ff0000;
+    --syntax-boolean: #0000ff;
+    /* 输入框背景色 */
+    --input-bg: #C7EDCC;
 }
 
 /* 夜间模式主题变量 */
@@ -35,6 +42,7 @@ body.dark-mode {
     --bg-secondary: #1e293b;
     --bg-card: #1e293b;
     --bg-tertiary: #1e293b;
+    --bg-footer: #1e293b;
     --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
@@ -44,6 +52,13 @@ body.dark-mode {
     --accent-hover: #4f46e5;
     --primary-color: #3b82f6;
     --primary-hover: #2563eb;
+    /* 夜间模式语法高亮颜色 */
+    --syntax-key: #60a5fa;
+    --syntax-string: #34d399;
+    --syntax-number: #f87171;
+    --syntax-boolean: #a78bfa;
+    /* 夜间模式输入框背景色 */
+    --input-bg: #0f3420;
 }
 
 body {
@@ -77,6 +92,11 @@ body {
     overflow-x: hidden;
     border-right: 1px solid var(--border-color);
     transition: transform 0.3s ease;
+}
+
+.main h1 a {
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -399,27 +419,27 @@ body.sidebar-collapsed main.main {
     color: var(--text-secondary);
 }
 
-/* Collapse toggle button */
-.sidebar-toggle-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    border: 1px solid #e2e8f0;
-    background: transparent;
-    color: #64748b;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-left: auto;
-    transition: all 0.2s ease;
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
-.sidebar-toggle-btn:hover {
-    background: #f1f5f9;
-    color: #334155;
-    border-color: #cbd5e1;
+.footer a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* Collapse toggle button (dark mode) */
+body.dark-mode .sidebar-toggle-btn {
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .sidebar-toggle-btn:hover {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
 }
 
 .sidebar-toggle-btn svg {
@@ -437,13 +457,21 @@ body.sidebar-collapsed main.main {
     width: 40px;
     height: 40px;
     border-radius: 8px;
-    background: #fff;
-    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     font-size: 20px;
     cursor: pointer;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--box-shadow);
     align-items: center;
     justify-content: center;
+    color: var(--text-primary);
+}
+
+/* Mobile toggle dark mode */
+body.dark-mode .sidebar-toggle {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
 }
 
 /* Sidebar overlay */

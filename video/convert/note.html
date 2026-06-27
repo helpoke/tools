@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频格式转换工具说明，支持MP4、WebM、AVI、MOV等格式互转，可调节视频质量和分辨率，纯前端处理保护隐私">
+    <meta name="keywords" content="视频格式转换, 视频转换器, MP4转WebM, WebM转MP4, 视频编码转换工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频格式转换工具 - 免费、安全、多格式支持</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #EC4899 0%, #DB2777 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #DB2777;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DB2777;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        .info-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .info-section ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tool-section h2 {
+            color: #DB2777;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DB2777;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .author-info p {
+            margin: 8px 0;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .related-tools h2 {
+            color: #DB2777;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DB2777;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #DB2777;
+            color: white;
+            border-color: #DB2777;
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(219, 39, 119, 0.05) 100%);
+            border-left: 4px solid #EC4899;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0 !important;
+        }
+
+        .format-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .format-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>视频格式转换工具</h1>
+            <p class="subtitle">免费、安全、多种格式任意转换</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这是什么工具？</h2>
+                <p>
+                    视频格式转换工具是一款功能全面的在线视频格式转换器，可以将各种视频格式相互转换。在实际生活和工作中，我们经常会遇到视频格式不兼容的问题：下载的电影是 MKV 格式但播放器不支持、手机拍摄的 MOV 视频无法上传到某些网站、为了兼容性需要将视频转换为 MP4 格式等等。
+                </p>
+                <p>
+                    本工具基于业界领先的 FFmpeg 多媒体处理框架开发，支持几乎所有主流视频格式的转换。无论你需要将 WebM 转换为 MP4 以获得更好的兼容性，还是将 AVI 转换为更现代的格式，都能轻松完成。
+                </p>
+
+                <h3>支持的输入格式</h3>
+                <div class="format-tags">
+                    <span class="format-tag">MP4</span>
+                    <span class="format-tag">WebM</span>
+                    <span class="format-tag">AVI</span>
+                    <span class="format-tag">MOV</span>
+                    <span class="format-tag">MKV</span>
+                    <span class="format-tag">WMV</span>
+                    <span class="format-tag">FLV</span>
+                    <span class="format-tag">3GP</span>
+                </div>
+
+                <h3>支持的输出格式</h3>
+                <div class="format-tags">
+                    <span class="format-tag">MP4 (H.264)</span>
+                    <span class="format-tag">WebM (VP8/VP9)</span>
+                    <span class="format-tag">TS (MPEG-TS)</span>
+                    <span class="format-tag">WMV</span>
+                    <span class="format-tag">MOV</span>
+                    <span class="format-tag">AVI</span>
+                    <span class="format-tag">MKV</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>如何使用这个工具？</h2>
+                <p>
+                    视频格式转换的操作简单直观，按照以下步骤即可完成转换：
+                </p>
+                <p>
+                    <strong>第一步：上传视频。</strong> 点击页面上传区域，选择要转换的视频文件。支持拖拽上传，操作更加便捷。
+                </p>
+                <p>
+                    <strong>第二步：选择输出格式。</strong> 根据你的需求选择目标格式。如果追求兼容性，推荐 MP4 (H.264)；如果需要更小的文件体积，可以选择 WebM (VP9)。
+                </p>
+                <p>
+                    <strong>第三步：调整转换参数。</strong> 可以自定义视频质量（高/中/低）、自定义码率、调整分辨率缩放比例、设置帧率以及选择是否保留音频。
+                </p>
+                <p>
+                    <strong>第四步：开始转换。</strong> 点击转换按钮，等待处理完成。转换进度会实时显示，让你随时掌握处理状态。
+                </p>
+
+                <div class="highlight-box">
+                    <p><strong>格式选择建议：</strong> MP4 (H.264) 是兼容性最好的格式，几乎所有设备和播放器都能播放；WebM (VP9) 文件体积更小，适合网络传输，但部分老设备可能不支持。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>核心功能特点</h2>
+            <ul>
+                <li><strong>多格式支持：</strong> 支持八种主流视频格式的相互转换，满足各种场景需求</li>
+                <li><strong>灵活的质量控制：</strong> 提供预设质量和自定义码率两种模式，精细控制输出质量</li>
+                <li><strong>分辨率调整：</strong> 支持按比例缩放或自定义分辨率，适应不同用途</li>
+                <li><strong>帧率调节：</strong> 可以调整视频帧率，降低帧率可进一步减小文件体积</li>
+                <li><strong>音频选项：</strong> 可选择保留或移除视频中的音轨</li>
+                <li><strong>纯前端处理：</strong> 所有转换在浏览器本地完成，无需上传，保护隐私安全</li>
+            </ul>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>适用场景与人群</h2>
+            <p>
+                <strong>视频编辑爱好者：</strong> 从网上下载的素材可能是各种格式，转换工具可以将它们统一为编辑软件支持的格式，避免格式不兼容的困扰。
+            </p>
+            <p>
+                <strong>内容创作者：</strong> 不同平台对视频格式有不同的要求，比如某平台只支持 MP4，使用转换工具可以快速将视频调整为平台要求的格式。
+            </p>
+            <p>
+                <strong>教育培训工作者：</strong> 将教学视频转换为适合在线播放的格式，同时压缩文件体积，方便学生下载或缓存观看。
+            </p>
+            <p>
+                <strong>移动端用户：</strong> 手机拍摄的视频可能是 MOV 或其他格式，转换工具可以将其转换为更通用的 MP4 格式，方便分享到各个平台。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>使用注意事项</h2>
+            <p>
+                <strong>文件大小限制：</strong> 当前版本最大支持 100MB 的视频文件。如果需要转换更大的视频，建议先使用裁剪工具截取需要的片段。
+            </p>
+            <p>
+                <strong>处理时间说明：</strong> 视频格式转换需要重新编码，处理时间取决于视频长度和电脑性能。高质量设置会需要更长的处理时间。
+            </p>
+            <p>
+                <strong>避免重复转换：</strong> 每次格式转换都会造成一定的画质损失，建议保留原始文件，避免多次转换导致画质越来越差。
+            </p>
+            <p>
+                <strong>编码器选择：</strong> H.264 编码的 MP4 文件兼容性最好；VP9 编码的 WebM 文件在相同质量下体积更小，但兼容性稍差。
+            </p>
+            <p>
+                <strong>保持浏览器运行：</strong> 转换过程中请勿关闭浏览器或刷新页面，否则会导致处理中断。
+            </p>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #DB2777; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频格式转换工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p>© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../compress/index.html" class="tool-link">视频压缩工具</a>
+                <a href="../cropping/index.html" class="tool-link">视频裁剪工具</a>
+                <a href="../audio/index.html" class="tool-link">视频转音频</a>
+                <a href="../gif/index.html" class="tool-link">视频转GIF</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

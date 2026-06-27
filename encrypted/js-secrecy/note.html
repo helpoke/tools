@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript混淆加密工具说明，保护代码安全，支持文件上传、高级配置选项，防止逆向工程，本地处理保护隐私">
+    <meta name="keywords" content="javascript混淆,js混淆,代码加密,代码保护,前端安全,js加密,混淆工具,JavaScript安全,代码混淆器">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>JavaScript 混淆加密工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #059669;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #059669 0%, #047857 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .obfuscate-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .obfuscate-option {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .obfuscate-option .option-name {
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .obfuscate-option .option-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .obfuscate-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>JavaScript 混淆加密工具 - 免费、安全、快速</h1>
+            <p class="subtitle">保护代码安全，支持文件上传、高级配置选项，防止逆向工程，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是JavaScript混淆加密工具？</h2>
+                <p>JavaScript混淆加密工具是一款专业的在线代码保护工具，专为需要保护JavaScript代码安全的用户设计。JavaScript代码通常以源码形式运行，容易被阅读、分析和复制。通过混淆加密，可以将代码转换为难以理解的形式，增加逆向工程的难度，保护代码的知识产权和商业价值。</p>
+                <p>工具采用先进的混淆技术，包括变量名混淆、字符串加密、控制流平坦化、死代码注入等多种混淆手段。混淆后的代码功能不变，但阅读难度大大增加，可以有效防止代码被轻易复制和理解。工具支持直接输入代码或上传文件进行混淆，并提供多种高级配置选项，满足不同安全需求。所有处理均在浏览器本地完成，您的代码不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：输入或上传代码</h3>
+                <p>您可以直接在代码编辑器中粘贴JavaScript代码，也可以点击上传按钮上传.js文件。工具支持处理各种大小的JavaScript文件，包括单文件和压缩文件。</p>
+
+                <h3>第二步：配置混淆选项</h3>
+                <p>根据您的安全需求，选择合适的混淆强度和选项。高强度混淆会增加代码体积和运行开销，但安全性更高；低强度混淆代码更轻量，但保护程度较低。您可以自定义开启或关闭各种混淆技术。</p>
+
+                <h3>第三步：执行混淆</h3>
+                <p>点击"开始混淆"按钮，工具会自动处理您的代码。处理过程中请耐心等待，复杂代码可能需要较长时间。混淆完成后，结果会显示在右侧输出区域。</p>
+
+                <h3>第四步：下载结果</h3>
+                <p>混淆完成后，您可以复制混淆后的代码，或点击下载按钮保存为.js文件。建议在下载前测试混淆代码的运行情况，确保功能正常。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>混淆技术详解</h2>
+                
+                <div class="obfuscate-options">
+                    <div class="obfuscate-option">
+                        <div class="option-name">变量名混淆</div>
+                        <div class="option-desc">将变量名替换为无意义的字符串，增加代码理解难度</div>
+                    </div>
+                    <div class="obfuscate-option">
+                        <div class="option-name">字符串加密</div>
+                        <div class="option-desc">加密代码中的字符串常量，运行时动态解密</div>
+                    </div>
+                    <div class="obfuscate-option">
+                        <div class="option-name">控制流平坦化</div>
+                        <div class="option-desc">重组代码逻辑结构，使代码流程难以分析</div>
+                    </div>
+                    <div class="obfuscate-option">
+                        <div class="option-name">死代码注入</div>
+                        <div class="option-desc">添加无效代码块，增加代码复杂度</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>前端开发者：</strong>保护商业项目的核心代码，防止代码被轻易复制和分析。</p>
+                <p><strong>独立开发者：</strong>保护个人作品的核心逻辑，维护代码的知识产权。</p>
+                <p><strong>企业开发团队：</strong>保护商业软件的前端代码，防止竞争对手抄袭。</p>
+                <p><strong>安全工程师：</strong>了解混淆技术原理，评估代码安全防护方案。</p>
+                <p><strong>学习研究者：</strong>学习混淆技术，研究代码保护方法。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">多种混淆技术</span>
+                    <span class="feature-tag">支持文件上传</span>
+                    <span class="feature-tag">高级配置选项</span>
+                    <span class="feature-tag">变量名混淆</span>
+                    <span class="feature-tag">字符串加密</span>
+                    <span class="feature-tag">控制流平坦化</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有混淆操作都在您的浏览器中完成，代码不会上传到任何服务器。这意味着您的源代码始终处于您的控制之下，特别适合处理包含商业秘密或知识产权的代码。同时，工具提供多种混淆强度选项，您可以根据实际需求选择合适的保护程度。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>混淆会增加代码体积，请评估对性能的影响</li>
+                        <li>高强度混淆可能导致代码运行变慢，请权衡安全与性能</li>
+                        <li>混淆后的代码请务必测试，确保功能正常</li>
+                        <li>混淆不是加密，只是增加逆向难度，无法完全防止破解</li>
+                        <li>建议保留原始代码备份，混淆代码难以维护和调试</li>
+                        <li>部分第三方库可能不适合混淆，请谨慎处理</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #059669; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用JavaScript混淆加密工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../encoding-base64/index.html" class="tool-link">Base64编解码工具</a>
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+                <a href="../pwd/index.html" class="tool-link">随机密码生成工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

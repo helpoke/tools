@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图片转GIF工具说明，在线GIF动图制作工具，支持多张图片合成GIF，自定义帧率、尺寸和循环次数，本地处理保护隐私">
+    <meta name="keywords" content="图片转GIF, GIF制作, 在线GIF生成, 动图制作, 免费GIF工具, 图片合成GIF">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图片转GIF工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #EC4899 0%, #BE185D 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #EC4899;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EC4899;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #EC4899;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-section h2 {
+            color: #EC4899;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EC4899;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #EC4899;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EC4899;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #EC4899 0%, #BE185D 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .setting-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #EC4899;
+        }
+
+        .setting-card h4 {
+            color: #EC4899;
+            margin-bottom: 10px;
+        }
+
+        .setting-card p {
+            text-indent: 0 !important;
+            margin-bottom: 10px !important;
+        }
+
+        .setting-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .setting-tip {
+            padding: 4px 12px;
+            background: rgba(236, 72, 153, 0.15);
+            color: #BE185D;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .frame-rate-info {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid #EC4899;
+        }
+
+        .frame-rate-info p {
+            text-indent: 0 !important;
+            margin-bottom: 8px !important;
+            font-size: 0.95rem !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图片转GIF工具 - 免费、安全、快速</h1>
+            <p class="subtitle">上传多张图片合成GIF动图，支持自定义帧率、尺寸和循环次数，纯前端处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图片转GIF工具？</h2>
+                <p>图片转GIF工具是一款专业的在线GIF动图制作工具，让您可以将多张静态图片合成为生动有趣的GIF动画。无论是制作表情包、分享生活瞬间，还是创建产品展示动画，这款工具都能帮助您轻松实现创意。</p>
+                <p>工具支持上传最多5张图片，您可以通过拖拽调整图片顺序，自定义帧延迟时间（100-5000毫秒），设置循环次数（无限循环或指定次数），并可调整输出尺寸。实时预览功能让您随时查看GIF效果，确保满意后再导出。</p>
+                <p>最值得信赖的是，所有处理都在浏览器本地完成，图片数据不会上传到任何服务器。这意味着您可以放心处理任何敏感图片，无需担心隐私泄露或数据安全问题。工具完全免费，无任何隐藏收费或使用限制。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域或拖拽图片到指定位置，支持同时选择多张图片。工具支持 JPG、PNG、WebP、GIF、BMP 等多种图片格式，单次最多可上传5张图片。上传后，图片会以缩略图形式显示在列表中，方便您查看和管理。</p>
+
+                <h3>第二步：调整图片顺序</h3>
+                <p>在图片列表中，您可以通过拖拽调整图片的顺序。拖拽时会有直观的视觉反馈，帮助您准确放置图片位置。调整顺序后，GIF动画将按照新的顺序播放。</p>
+
+                <h3>第三步：设置GIF参数</h3>
+                <p>在设置区域，您可以调整以下参数：</p>
+                <ul>
+                    <li><strong>帧延迟：</strong>控制每张图片显示的时间，单位为毫秒。值越小，动画播放速度越快；值越大，动画播放速度越慢。</li>
+                    <li><strong>循环次数：</strong>设置GIF播放的循环次数，支持无限循环或指定播放1-5次。</li>
+                    <li><strong>输出宽度：</strong>设置GIF的输出宽度，范围100-800像素。勾选"保持宽高比"会自动调整高度，确保图片比例不变。</li>
+                </ul>
+
+                <h3>第四步：预览并生成</h3>
+                <p>点击"生成GIF"按钮，工具会根据您的设置生成GIF动图。生成过程中会显示进度条，方便您了解处理进度。生成完成后，预览区域会显示最终的GIF效果，您可以点击"下载GIF动图"保存到本地。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>GIF参数设置详解</h2>
+                
+                <div class="setting-card">
+                    <h4>帧延迟设置</h4>
+                    <p>帧延迟决定了每张图片在GIF中显示的时间长度，单位为毫秒。帧延迟越小，动画播放速度越快；帧延迟越大，动画播放速度越慢。</p>
+                    <div class="setting-tips">
+                        <span class="setting-tip">100-200ms：快速动画</span>
+                        <span class="setting-tip">300-500ms：正常速度</span>
+                        <span class="setting-tip">1000ms以上：慢速动画</span>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <h4>循环次数设置</h4>
+                    <p>循环次数控制GIF动画的播放次数。选择"无限循环"时，GIF会一直播放直到用户关闭；选择指定次数时，GIF播放相应次数后停止。</p>
+                    <div class="setting-tips">
+                        <span class="setting-tip">无限循环：表情包、展示动画</span>
+                        <span class="setting-tip">1次：单次展示</span>
+                        <span class="setting-tip">2-5次：强调效果</span>
+                    </div>
+                </div>
+
+                <div class="setting-card">
+                    <h4>输出尺寸设置</h4>
+                    <p>输出宽度决定了GIF的宽度，范围100-800像素。勾选"保持宽高比"会自动计算高度，确保图片比例不变；取消勾选则需要手动设置高度。</p>
+                    <div class="setting-tips">
+                        <span class="setting-tip">100-200px：小尺寸GIF</span>
+                        <span class="setting-tip">300-500px：标准尺寸</span>
+                        <span class="setting-tip">600-800px：大尺寸GIF</span>
+                    </div>
+                </div>
+
+                <div class="frame-rate-info">
+                    <p><strong>帧率与帧延迟的关系：</strong></p>
+                    <p>帧率（FPS）= 1000 / 帧延迟（毫秒）</p>
+                    <p>例如：帧延迟500ms = 2 FPS，帧延迟200ms = 5 FPS，帧延迟100ms = 10 FPS</p>
+                    <p>一般建议：表情包使用3-5 FPS，展示动画使用5-10 FPS，快速动画使用10-20 FPS</p>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>社交媒体用户：</strong>制作表情包、分享生活趣事、创建个性化头像，增加互动趣味性。</p>
+                <p><strong>内容创作者：</strong>在博客、社交媒体、视频中添加GIF动画，吸引观众注意力，提升内容质量。</p>
+                <p><strong>电商卖家：</strong>制作产品展示动画，展示产品多角度细节，提高转化率。</p>
+                <p><strong>设计师：</strong>快速创建动效原型，展示设计理念，提高沟通效率。</p>
+                <p><strong>普通用户：</strong>制作节日祝福动图、生日贺卡、旅行纪念等，让分享更加生动有趣。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">支持批量上传（5张）</span>
+                    <span class="feature-tag">拖拽调整顺序</span>
+                    <span class="feature-tag">自定义帧延迟</span>
+                    <span class="feature-tag">可调循环次数</span>
+                    <span class="feature-tag">自定义输出尺寸</span>
+                    <span class="feature-tag">实时预览效果</span>
+                    <span class="feature-tag">一键下载GIF</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>注意事项</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>图片数量限制：</strong>单次最多上传5张图片，建议控制图片数量以保持GIF文件大小合理。图片数量过多会导致GIF文件过大，影响加载速度和分享体验。</li>
+                    <li><strong>帧延迟设置：</strong>帧延迟太小会导致动画过快，内容难以辨认；帧延迟太大则会让动画显得卡顿。建议根据实际需求在300-1000毫秒之间调整。</li>
+                    <li><strong>输出尺寸设置：</strong>输出尺寸越大，GIF文件越大。建议根据使用场景选择合适的尺寸，如社交媒体分享使用300-500像素，网站展示使用500-800像素。</li>
+                    <li><strong>处理期间不要关闭页面：</strong>生成GIF需要一定时间，尤其是图片数量较多时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
+                    <li><strong>浏览器兼容性：</strong>建议使用 Chrome、Firefox、Safari 等现代浏览器以获得最佳性能。旧版浏览器可能不支持某些功能或处理速度较慢。</li>
+                    <li><strong>图片格式建议：</strong>建议使用分辨率一致的图片，以获得更好的动画效果。如果图片分辨率不一致，工具会自动调整到指定的输出尺寸。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #E11D48; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片转GIF工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../stitch/index.html" class="tool-link">图片拼接工具</a>
+                <a href="../cropping/index.html" class="tool-link">图片裁剪工具</a>
+                <a href="../edit/index.html" class="tool-link">图片旋转与模糊工具</a>
+                <a href="../compressor/index.html" class="tool-link">图像批量压缩工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

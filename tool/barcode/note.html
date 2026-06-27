@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="条形码生成工具说明，支持CODE128/EAN/ISBN等格式，免费在线条形码制作工具，本地处理保护隐私">
+    <meta name="keywords" content="条形码生成, CODE128, EAN, ISBN, 条形码制作, 在线条形码, 免费工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>条形码生成工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #2563EB;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2563EB;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #2563EB;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #2563EB;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2563EB;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .barcode-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .barcode-type {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .barcode-type .type-name {
+            font-weight: 600;
+            color: #2563EB;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .barcode-type .type-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .barcode-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>条形码生成工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持CODE128/EAN/ISBN等格式，免费在线条形码制作工具，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是条形码生成工具？</h2>
+                <p>条形码生成工具是一款专业的在线条形码制作工具，专为需要生成条形码的用户设计。条形码是一种将数据编码为图形的技术，广泛应用于商品标识、物流追踪、库存管理等场景。通过扫描条形码，可以快速读取商品信息、价格、库存等数据，提高工作效率。</p>
+                <p>工具支持多种条形码格式，包括CODE128、EAN-13、ISBN等常用格式。CODE128是最常用的条形码格式，支持所有ASCII字符；EAN-13主要用于商品条码；ISBN用于图书编号。您可以根据实际需求选择合适的条形码格式，生成的条形码可以下载保存为图片文件，方便打印和使用。所有生成均在浏览器本地完成，保护您的数据隐私。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：选择条形码格式</h3>
+                <p>从下拉菜单中选择需要的条形码格式。不同格式适用于不同场景：CODE128适合通用场景，EAN-13适合商品条码，ISBN适合图书编号。选择后可以查看该格式的特点和使用说明。</p>
+
+                <h3>第二步：输入条形码内容</h3>
+                <p>在输入框中输入需要编码的内容。不同格式对输入内容有不同要求：CODE128支持所有字符，EAN-13需要13位数字，ISBN需要符合ISBN规范。工具会自动验证输入内容是否符合所选格式的要求。</p>
+
+                <h3>第三步：自定义外观</h3>
+                <p>您可以调整条形码的宽度、高度、颜色等外观参数，使其更适合您的使用场景。支持设置条形码颜色和背景颜色，方便与不同打印材质配合使用。</p>
+
+                <h3>第四步：生成和下载</h3>
+                <p>点击"生成条形码"按钮，工具会立即生成条形码并显示预览。满意后点击"下载"按钮，将条形码保存为PNG或SVG图片文件，方便打印和使用。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>支持的条形码格式</h2>
+                
+                <div class="barcode-types">
+                    <div class="barcode-type">
+                        <div class="type-name">CODE128</div>
+                        <div class="type-desc">最常用格式，支持所有ASCII字符，适合通用场景</div>
+                    </div>
+                    <div class="barcode-type">
+                        <div class="type-name">EAN-13</div>
+                        <div class="type-desc">国际商品条码标准，用于零售商品标识</div>
+                    </div>
+                    <div class="barcode-type">
+                        <div class="type-name">ISBN</div>
+                        <div class="type-desc">国际标准书号，用于图书编号和出版管理</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>商家店主：</strong>为商品生成条形码，方便库存管理和销售扫码。</p>
+                <p><strong>图书管理员：</strong>为图书生成ISBN条形码，便于图书管理和借阅。</p>
+                <p><strong>仓库管理员：</strong>为物品生成条形码，实现库存追踪和盘点。</p>
+                <p><strong>物流从业者：</strong>为包裹生成条形码，方便运输和配送追踪。</p>
+                <p><strong>开发者：</strong>为应用生成测试条形码，调试扫码功能。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">多格式支持</span>
+                    <span class="feature-tag">自定义外观</span>
+                    <span class="feature-tag">实时预览</span>
+                    <span class="feature-tag">图片下载</span>
+                    <span class="feature-tag">格式验证</span>
+                    <span class="feature-tag">免费使用</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有条形码生成都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的商品信息始终处于您的控制之下，特别适合处理包含商业信息的数据。同时，工具提供实时预览功能，您可以在生成前查看效果，确保符合预期。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>不同条形码格式对输入内容有特定要求，请确保输入符合规范</li>
+                        <li>EAN-13需要13位数字，最后一位是校验位会自动计算</li>
+                        <li>条形码宽度建议不小于20mm，确保扫描器可以识别</li>
+                        <li>下载的图片建议保存为PNG格式，打印效果更好</li>
+                        <li>请使用高质量打印机打印条形码，模糊的条码可能无法识别</li>
+                        <li>ISBN码需要符合国际标准书号规范</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #2563EB; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用条形码生成工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../qrcode/index.html" class="tool-link">二维码生成解析工具</a>
+                <a href="../color-picker/index.html" class="tool-link">取色器颜色转换工具</a>
+                <a href="../../image/compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../../image/watermark/index.html" class="tool-link">图片水印工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

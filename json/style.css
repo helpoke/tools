@@ -70,28 +70,31 @@
 
 /* 不同类型通知的颜色 */
 .notification-success {
-    background-color: #28a745;
+    background-color: var(--success-color);
 }
 
 .notification-error {
-    background-color: #dc3545;
+    background-color: var(--error-color);
 }
 
 .notification-warning {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: var(--warning-color);
+    color: var(--text-primary);
 }
 
 .notification-info {
-    background-color: #17a2b8;
+    background-color: var(--primary-color);
 }
 
 /* 基础样式设置 */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -99,7 +102,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #214c98;
+    color: var(--primary-color);
     font-weight: 600;
 }
 
@@ -108,8 +111,8 @@ h1 {
 /* Tab样式 */
 .tabs {
     display: flex;
-    background: var(--bg-color);
-    color: var(--text-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
     border-radius: 8px 8px 0 0;
     padding: 0 10px;
     margin-bottom: 20px;
@@ -124,30 +127,30 @@ h1 {
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    color: #666;
+    color: var(--text-secondary);
     transition: all 0.3s ease;
     position: relative;
     border-radius: 6px 6px 0 0;
 }
 
 .tab-btn:hover {
-    color: #214c98;
-    background: rgba(33, 76, 152, 0.05);
+    color: var(--primary-color);
+    background: var(--bg-secondary);
 }
 
 .tab-btn.active {
-    color: #214c98;
-    background: white;
-    box-shadow: 0 -2px 0 0 #214c98 inset;
+    color: var(--primary-color);
+    background: var(--bg-card);
+    box-shadow: 0 -2px 0 0 var(--primary-color) inset;
 }
 
 /* Tab内容区域 */
 .tab-content {
-    background: white;
+    background: var(--bg-card);
     border-radius: 0 0 12px 12px;
     padding: 0px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     border-top: none;
 }
 
@@ -162,28 +165,27 @@ h1 {
 /* 工具容器样式 */
 .tool-container {
     display: block;
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 5px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     margin-top: 20px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    /* overflow-x: auto; */
+    background-color: var(--bg-card);
+    color: var(--text-primary);
     max-width: 100%;
 }
 
 /* 比对功能样式 */
 .compare-container {
-    background: white;
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 5px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     margin-top: 20px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
 }
 
 .compare-header {
@@ -192,9 +194,9 @@ h1 {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
 }
 
 /* 按钮容器靠右 */
@@ -205,7 +207,7 @@ h1 {
 
 .compare-header h2 {
     margin: 0;
-    color: #214c98;
+    color: var(--primary-color);
     font-weight: 600;
 }
 
@@ -226,32 +228,31 @@ h1 {
 #minify-target-btn,
 #sync-minify-btn,
 #minify-btn-bottom {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: var(--warning-color);
+    color: var(--text-primary);
 }
 
 #minify-btn:hover,
 #minify-target-btn:hover,
 #sync-minify-btn:hover {
-    background-color: #e0a800;
+    background-color: var(--warning-color);
+    opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
 }
 
 /* 格式化按钮样式（同时适用于JSON格式化和JSON比对） */
 #format-btn,
 #format-target-btn,
 #sync-format-btn {
-    background-color: #17a2b8;
+    background-color: var(--primary-color);
     color: white;
 }
 
 #format-btn:hover,
 #format-target-btn:hover,
 #sync-format-btn:hover {
-    background-color: #138496;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
 }
 
 /* 转义按钮样式（同时适用于JSON格式化和JSON比对） */
@@ -259,47 +260,46 @@ h1 {
 #escape-target-btn,
 #sync-escape-btn,
 #escape-btn-bottom {
-    background-color: #fd7e14;
+    background-color: var(--accent-color);
     color: white;
 }
 
 #escape-btn:hover,
 #escape-target-btn:hover,
 #sync-escape-btn:hover {
-    background-color: #e06c14;
+    background-color: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(253, 126, 20, 0.3);
 }
 
 /* 关闭按钮样式 */
 #close-compare-btn {
-    background-color: #dc3545;
+    background-color: var(--error-color);
     color: white;
 }
 
 #close-compare-btn:hover {
-    background-color: #c82333;
+    background-color: var(--error-color);
+    opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 
 /* 粘贴按钮样式 */
 #paste-btn {
-    background-color: #28a745;
+    background-color: var(--success-color);
     color: white;
 }
 
 #paste-btn:hover {
-    background-color: #218838;
+    background-color: var(--success-color);
+    opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
 }
 
 /* 复制按钮样式 */
 #copy-original-btn,
 #copy-target-btn,
 .copy-btn {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -312,7 +312,7 @@ h1 {
 }
 
 #copy-btn {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -326,9 +326,8 @@ h1 {
 #copy-original-btn:hover,
 #copy-target-btn:hover,
 .copy-btn:hover {
-    background-color: #0069d9;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
 
 /* 格式化按钮样式 */
@@ -336,7 +335,7 @@ h1 {
 #format-original-btn,
 #format-target-btn,
 #sync-format-btn {
-    background-color: #17a2b8;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -352,9 +351,8 @@ h1 {
 #format-original-btn:hover,
 #format-target-btn:hover,
 #sync-format-btn:hover {
-    background-color: #138496;
+    background-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
 }
 
 /* 压缩按钮样式 */
@@ -362,8 +360,8 @@ h1 {
 #minify-original-btn,
 #minify-target-btn,
 #sync-minify-btn {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: var(--warning-color);
+    color: var(--text-primary);
     border: none;
     border-radius: 4px;
     padding: 6px 12px;
@@ -378,16 +376,16 @@ h1 {
 #minify-original-btn:hover,
 #minify-target-btn:hover,
 #sync-minify-btn:hover {
-    background-color: #e0a800;
+    background-color: var(--warning-color);
+    opacity: 0.9;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
 }
 
 /* 清除内容按钮样式 */
 .clear-btn,
 #clear-original-btn,
 #clear-target-btn {
-    background-color: #6c757d;
+    background-color: var(--text-secondary);
     color: white;
     border: none;
     border-radius: 4px;
@@ -402,62 +400,57 @@ h1 {
 .clear-btn:hover,
 #clear-original-btn:hover,
 #clear-target-btn:hover {
-    background-color: #5a6268;
+    background-color: var(--text-muted);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
 }
 
 /* 折叠按钮样式 */
 #collapse-btn {
-    background-color: #6f42c1;
+    background-color: var(--accent-color);
     color: white;
 }
 
 #collapse-btn:hover {
-    background-color: #5a32a3;
+    background-color: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(111, 66, 193, 0.3);
 }
 
 /* 转义按钮样式 */
 #escape-btn {
-    background-color: #fd7e14;
+    background-color: var(--accent-color);
     color: white;
 }
 
 #escape-btn:hover {
-    background-color: #e06c14;
+    background-color: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(253, 126, 20, 0.3);
 }
 
 /* 清空按钮样式 */
 #clear-btn {
-    background-color: #6c757d;
+    background-color: var(--text-secondary);
     color: white;
 }
 
 #clear-btn:hover {
-    background-color: #5a6268;
+    background-color: var(--text-muted);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
 }
 
 /* 清除内容按钮样式 */
 #clear-compare-btn {
-    background-color: #6c757d;
+    background-color: var(--text-secondary);
     color: white;
 }
 
 #clear-compare-btn:hover {
-    background-color: #5a6268;
+    background-color: var(--text-muted);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
 }
 
 /* JSON转Java Bean按钮样式 */
 #json-to-bean-btn {
-    background-color: #4361ee;
+    background-color: var(--accent-color);
     color: white;
     border: none;
     border-radius: 6px;
@@ -467,24 +460,21 @@ h1 {
     font-weight: 600;
     transition: all 0.3s ease;
     margin-left: 8px;
-    /* text-transform: uppercase; */
     letter-spacing: 0.5px;
 }
 
 #json-to-bean-btn:hover {
-    background-color: #3a0ca3;
+    background-color: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
 }
 
 #json-to-bean-btn:active {
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(67, 97, 238, 0.4);
 }
 
 /* Java Bean转JSON按钮样式 */
 #bean-to-json-btn {
-    background-color: #3a86ff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 6px;
@@ -499,19 +489,17 @@ h1 {
 }
 
 #bean-to-json-btn:hover {
-    background-color: #2563eb;
+    background-color: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(58, 134, 255, 0.4);
 }
 
 #bean-to-json-btn:active {
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(58, 134, 255, 0.4);
 }
 
 /* 清空按钮样式优化 */
 #clear-bean-btn {
-    background-color: #6c757d;
+    background-color: var(--text-secondary);
     color: white;
     border: none;
     border-radius: 6px;
@@ -524,14 +512,13 @@ h1 {
 }
 
 #clear-bean-btn:hover {
-    background-color: #5a6268;
+    background-color: var(--text-muted);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
 }
 
 /* JSON转XML按钮样式 */
 #json-to-xml-btn {
-    background-color: #4361ee;
+    background-color: var(--accent-color);
     color: white;
     border: none;
     border-radius: 6px;
@@ -545,19 +532,17 @@ h1 {
 }
 
 #json-to-xml-btn:hover {
-    background-color: #3a0ca3;
+    background-color: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.4);
 }
 
 #json-to-xml-btn:active {
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(67, 97, 238, 0.4);
 }
 
 /* XML转JSON按钮样式 */
 #xml-to-json-btn {
-    background-color: #3a86ff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 6px;
@@ -571,9 +556,8 @@ h1 {
 }
 
 #xml-to-json-btn:hover {
-    background-color: #2563eb;
+    background-color: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(58, 134, 255, 0.4);
 }
 
 #xml-to-json-btn:active {
@@ -583,7 +567,7 @@ h1 {
 
 /* XML同步清空按钮样式 */
 #sync-clear-xml-btn {
-    background-color: #6c757d;
+    background-color: var(--text-secondary);
     color: white;
     border: none;
     border-radius: 6px;
@@ -596,31 +580,31 @@ h1 {
 }
 
 #sync-clear-xml-btn:hover {
-    background-color: #5a6268;
+    background-color: var(--text-muted);
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
 }
 
 /* XML容器样式 */
 .xml-container {
-    background: white;
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 5px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     margin-top: 20px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
 }
 
 /* 开始比对按钮样式 */
 #start-compare-btn {
-    background-color: #28a745;
+    background-color: var(--success-color);
     color: white;
 }
 
 #start-compare-btn:hover {
-    background-color: #218838;
+    background-color: var(--success-color);
+    opacity: 0.9;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
 }
@@ -645,7 +629,7 @@ h1 {
 .compare-box h3 {
     margin-top: 0;
     margin-bottom: 20px;
-    color: #495057;
+    color: var(--text-primary);
     font-size: 16px;
 }
 
@@ -654,11 +638,11 @@ h1 {
     align-items: center;
     gap: 20px;
     padding-top: 10px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--border-color);
 }
 
 #start-compare-btn {
-    background-color: #28a745;
+    background-color: var(--success-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -669,23 +653,24 @@ h1 {
 }
 
 #start-compare-btn:hover {
-    background-color: #218838;
+    background-color: var(--success-color);
+    opacity: 0.9;
 }
 
 .compare-result {
     flex: 1;
     font-size: 14px;
-    color: #495057;
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
 .compare-result .match {
-    color: #28a745;
+    color: var(--success-color);
     font-weight: 500;
 }
 
 .compare-result .diff-title {
-    color: #dc3545;
+    color: var(--error-color);
     font-weight: 600;
     font-size: 16px;
 }
@@ -701,48 +686,47 @@ h1 {
     padding: 10px;
     margin-bottom: 8px;
     border-radius: 6px;
-    border-left: 4px solid #6c757d;
-    background-color: #f8f9fa;
+    border-left: 4px solid var(--text-secondary);
+    background-color: var(--bg-secondary);
     transition: all 0.2s ease;
 }
 
 .diff-item:hover {
-    background-color: #e9ecef;
-    /* transform: translateX(2px); */
+    background-color: var(--bg-card);
 }
 
 /* 不同类型差异的样式 */
 .diff-added {
-    border-left-color: #28a745;
-    background-color: rgba(40, 167, 69, 0.08);
+    border-left-color: var(--success-color);
+    background-color: rgba(16, 185, 129, 0.1);
 }
 
 .diff-removed {
-    border-left-color: #dc3545;
-    background-color: rgba(220, 53, 69, 0.08);
+    border-left-color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.1);
 }
 
 .diff-modified {
-    border-left-color: #ffc107;
-    background-color: rgba(255, 193, 7, 0.08);
+    border-left-color: var(--warning-color);
+    background-color: rgba(245, 158, 11, 0.1);
 }
 
 .diff-type {
-    border-left-color: #17a2b8;
-    background-color: rgba(23, 162, 184, 0.08);
+    border-left-color: var(--primary-color);
+    background-color: rgba(59, 130, 246, 0.1);
 }
 
 .diff-other {
-    border-left-color: #6c757d;
-    background-color: rgba(108, 117, 125, 0.08);
+    border-left-color: var(--text-secondary);
+    background-color: rgba(148, 163, 184, 0.1);
 }
 
 /* 差异路径和描述样式 */
 .diff-path {
     font-weight: 600;
-    color: #495057;
+    color: var(--text-primary);
     margin-right: 8px;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--bg-card);
     padding: 2px 6px;
     border-radius: 3px;
 }
@@ -758,12 +742,12 @@ h1 {
     gap: 8px;
     margin-top: 6px;
     padding-top: 6px;
-    border-top: 1px dashed #dee2e6;
+    border-top: 1px dashed var(--border-color);
 }
 
 .diff-old {
-    color: #dc3545;
-    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.1);
     padding: 2px 6px;
     border-radius: 3px;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
@@ -771,8 +755,8 @@ h1 {
 }
 
 .diff-new {
-    color: #28a745;
-    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+    background-color: rgba(16, 185, 129, 0.1);
     padding: 2px 6px;
     border-radius: 3px;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
@@ -780,7 +764,7 @@ h1 {
 }
 
 .diff-arrow {
-    color: #6c757d;
+    color: var(--text-secondary);
     font-weight: bold;
 }
 
@@ -791,7 +775,7 @@ h1 {
     gap: 10px;
     margin-top: 15px;
     padding: 10px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-secondary);
     border-radius: 6px;
     font-size: 13px;
 }
@@ -801,7 +785,7 @@ h1 {
 }
 
 .stat-added {
-    color: #28a745;
+    color: var(--success-color);
     font-weight: 500;
 }
 
@@ -879,7 +863,6 @@ body.dark-mode .tab-content {
 }
 
 body.dark-mode .input-box {
-    background-color: var(--bg-card);
     border-color: var(--border-color);
 }
 
@@ -995,6 +978,11 @@ body.dark-mode .compare-content.fullscreen-mode .line-numbers {
     border-color: var(--border-color);
 }
 
+body.dark-mode .editor-container {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
 body.dark-mode .editor-container.maximized {
     background-color: var(--bg-card);
 }
@@ -1013,17 +1001,17 @@ body.dark-mode .fullscreen-button:hover {
 }
 
 .stat-removed {
-    color: #dc3545;
+    color: var(--error-color);
     font-weight: 500;
 }
 
 .stat-modified {
-    color: #ffc107;
+    color: var(--warning-color);
     font-weight: 500;
 }
 
 .stat-type {
-    color: #17a2b8;
+    color: var(--primary-color);
     font-weight: 500;
 }
 
@@ -1035,45 +1023,45 @@ body.dark-mode .fullscreen-button:hover {
 }
 
 .json-key {
-    color: #0066cc;
+    color: var(--syntax-key);
     font-weight: 500;
 }
 
 .json-string {
-    color: #008000;
+    color: var(--syntax-string);
 }
 
 .json-number {
-    color: #ff0000;
+    color: var(--syntax-number);
 }
 
 .json-boolean {
-    color: #0000ff;
+    color: var(--syntax-boolean);
 }
 
 .json-null {
-    color: #666666;
+    color: var(--text-muted);
     font-style: italic;
 }
 
 /* 差异节点高亮样式 */
 .diff-key {
-    background-color: #fff3cd;
+    background-color: rgba(245, 158, 11, 0.2);
     padding: 1px 2px;
     border-radius: 2px;
 }
 
 .diff-key-added {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--success-color);
     font-weight: bold;
     padding: 1px 2px;
     border-radius: 2px;
 }
 
 .diff-key-removed {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--error-color);
     font-weight: bold;
     padding: 1px 2px;
     border-radius: 2px;
@@ -1081,8 +1069,8 @@ body.dark-mode .fullscreen-button:hover {
 }
 
 .diff-key-modified {
-    background-color: #fff3cd;
-    color: #856404;
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--warning-color);
     font-weight: bold;
     padding: 1px 2px;
     border-radius: 2px;
@@ -1090,7 +1078,7 @@ body.dark-mode .fullscreen-button:hover {
 
 /* 确保错误信息样式 */
 .compare-result .error {
-    color: #dc3545;
+    color: var(--error-color);
     font-weight: 500;
 }
 
@@ -1139,13 +1127,11 @@ body.dark-mode .fullscreen-button:hover {
 .input-box {
     flex: 1;
     min-width: 300px;
-    background: white;
     border-radius: 12px;
     padding: 5px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     transition: box-shadow 0.3s ease;
-    background: var(--card-bg);
 }
 
 .input-box:hover {
@@ -1156,11 +1142,11 @@ body.dark-mode .fullscreen-button:hover {
 .result-panel {
     flex: 1;
     min-width: 300px;
-    background: white;
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--border-color);
     transition: box-shadow 0.3s ease;
 }
 
@@ -1174,7 +1160,7 @@ body.dark-mode .fullscreen-button:hover {
     display: flex;
     width: 100%;
     height: 90vh;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -1182,20 +1168,20 @@ body.dark-mode .fullscreen-button:hover {
 /* 全屏按钮样式 */
 .fullscreen-btn {
     position: relative;
-    background-color: #697d90;
-    border: 1px solid #ddd;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 5px 8px;
     cursor: pointer;
     font-size: 16px;
-    color: white;
+    color: var(--text-primary);
     transition: all 0.3s ease;
 }
 
 .fullscreen-btn:hover {
-    background-color: #e9ecef;
-    color: #007bff;
-    border-color: #007bff;
+    background-color: var(--bg-tertiary);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 /* 全屏模式样式 */
@@ -1206,26 +1192,26 @@ body.dark-mode .fullscreen-button:hover {
     right: 0;
     bottom: 0;
     z-index: 1000;
-    background-color: #f8f9fa;
+    background-color: var(--bg-primary);
     padding: 10px;
 }
 
 .compare-content.fullscreen-mode {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    z-index: 1000 !important;
-    background-color: #f8f9fa !important;
-    padding: 10px !important;
-    height: 100vh !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-    display: flex !important;
-    gap: 5px !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: var(--bg-primary);
+    padding: 10px;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    gap: 5px;
 }
 
 /* 移除所有可能的高度限制 */
@@ -1258,7 +1244,7 @@ body.dark-mode .fullscreen-button:hover {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    border: 1px solid #ddd !important;
+    border: 1px solid var(--border-color) !important;
     border-radius: 4px !important;
     overflow: hidden !important;
     position: relative !important;
@@ -1266,39 +1252,39 @@ body.dark-mode .fullscreen-button:hover {
 }
 
 .compare-content.fullscreen-mode .json-editor {
-    flex: 1 !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    max-height: none !important;
-    width: 100% !important;
-    overflow: auto !important;
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    padding: 5px !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    border: none !important;
-    resize: none !important;
-    white-space: pre-wrap !important;
-    word-break: break-all !important;
-    background-color: #C7EDCC !important;
+    flex: 1;
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
+    width: 100%;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 0;
+    border: none;
+    resize: none;
+    white-space: pre-wrap;
+    word-break: break-all;
+    background-color: var(--bg-tertiary);
 }
 
 .compare-content.fullscreen-mode .line-numbers {
-    flex-shrink: 0 !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    overflow: hidden !important;
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    padding: 15px 5px !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    border: none !important;
-    background-color: #f8f9fa !important;
-    border-right: 1px solid #ddd !important;
-    width: 40px !important;
-    text-align: right !important;
+    flex-shrink: 0;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 15px 5px;
+    box-sizing: border-box;
+    margin: 0;
+    border: none;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    width: 40px;
+    text-align: right;
 }
 
 /* 确保全屏模式下编辑器标题不会占用太多空间 */
@@ -1333,7 +1319,7 @@ body.dark-mode .fullscreen-button:hover {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #697d90;
+    background-color: var(--text-secondary);
     color: white;
     border: none;
     border-radius: 10px;
@@ -1344,14 +1330,12 @@ body.dark-mode .fullscreen-button:hover {
     z-index: 10000;
     opacity: 1;
     transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
 .fullscreen-button:hover {
     opacity: 1;
-    background-color: #218838;
+    background-color: var(--success-color);
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
 }
 
 /* 最大化模式样式 */
@@ -1380,23 +1364,24 @@ body.dark-mode .fullscreen-button:hover {
 }
 
 .editor-container.fullscreen .fullscreen-button {
-    background-color: #dc3545;
+    background-color: var(--error-color);
 }
 
 .editor-container.fullscreen .fullscreen-button:hover {
-    background-color: #c82333;
+    background-color: var(--error-color);
+    opacity: 0.9;
 }
 
 /* 行号区域样式 width: 50px; */
 .line-numbers {
-    background-color: #f5f5f5;
-    border-right: 1px solid #ddd;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
     padding: 15px 8px 15px 5px;
     text-align: right;
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 14px;
     line-height: 1.5;
-    color: #999;
+    color: var(--text-muted);
     user-select: none;
     overflow: auto;
     flex-shrink: 0;
@@ -1407,7 +1392,7 @@ body.dark-mode .fullscreen-button:hover {
     height: 21px;
     line-height: 1.5;
     font-size: 14px;
-    color: #999;
+    color: var(--text-muted);
     margin-bottom: 0;
 }
 
@@ -1423,18 +1408,24 @@ body.dark-mode .fullscreen-button:hover {
     outline: none;
     white-space: pre-wrap;
     word-break: break-all;
-    background-color: #C7EDCC;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
     overflow-y: auto;
     resize: none;
     box-sizing: border-box;
 }
 
+textarea {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+
 /* 占位符文本样式 */
 .json-editor:empty:before {
     content: attr(data-placeholder);
-    color: #999;
+    color: var(--text-muted);
     pointer-events: none;
-    background-color: #C7EDCC;
+    background-color: var(--input-bg);
 }
 
 /* JSON编辑器样式 */
@@ -1445,12 +1436,12 @@ body.dark-mode .fullscreen-button:hover {
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 14px;
     line-height: 1.5;
-    border: 2px solid #ccc;
+    border: 2px solid var(--border-color);
     border-radius: 4px;
-    background-color: #C7EDCC;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
     white-space: pre;
     overflow-y: auto;
-    /* overflow-x: hidden !important; */
     resize: none;
     outline: none;
     box-sizing: border-box;
@@ -1463,9 +1454,9 @@ body.dark-mode .fullscreen-button:hover {
     display: none;
     margin-top: 10px;
     padding: 15px;
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
     border-radius: 4px;
     font-size: 14px;
     transition: opacity 0.3s ease;
@@ -1479,8 +1470,8 @@ body.dark-mode .fullscreen-button:hover {
 .error-context {
     margin-top: 10px;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 13px;
@@ -1491,37 +1482,24 @@ body.dark-mode .fullscreen-button:hover {
     margin: 0;
     white-space: pre-wrap;
     word-wrap: break-word;
-    color: #495057;
-    /* 允许HTML标签在pre标签中生效 */
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    color: var(--text-primary);
 }
 
 /* 错误位置高亮样式 */
 .error-highlight {
-    background-color: #ffdddd;
-    color: #dc3545;
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--error-color);
     font-weight: bold;
     padding: 2px 4px;
     border-radius: 2px;
-    border: 1px solid #dc3545;
-}
-
-/* 错误高亮样式 */
-.error-highlight {
-    background-color: #ffcccc;
-    color: #d32f2f;
-    border: 1px solid #f44336;
-    padding: 0 2px;
-    border-radius: 2px;
-    cursor: help;
+    border: 1px solid var(--error-color);
 }
 
 
 /* 折叠内容样式 */
 .collapsed {
-    background-color: #e9ecef;
-    color: #495057;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     padding: 2px 6px;
     border-radius: 3px;
     cursor: pointer;
@@ -1530,7 +1508,7 @@ body.dark-mode .fullscreen-button:hover {
 }
 
 .collapsed:hover {
-    background-color: #dee2e6;
+    background-color: var(--bg-card);
 }
 
 /* 通知样式已移至文件顶部，使用notification-container和多类型通知样式 */
@@ -1559,7 +1537,7 @@ body.dark-mode .fullscreen-button:hover {
     font-size: 15px;
     font-weight: 500;
     color: #fff;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -1568,23 +1546,23 @@ body.dark-mode .fullscreen-button:hover {
 
 .buttons button:hover,
 .bottom-buttons button:hover {
-    background-color: #1f8c19;
+    background-color: var(--primary-hover);
 }
 
 .buttons #clear-btn,
 .bottom-buttons #clear-btn-bottom {
-    background-color: #B65426;
+    background-color: var(--text-secondary);
 }
 
 .buttons #format-btn,
 .bottom-buttons #format-btn-bottom {
-    background-color: #9CB727;
+    background-color: var(--success-color);
 }
 
 .buttons #copy-btn,
 .bottom-buttons #copy-btn-bottom,
 .copy-btn {
-    background-color: #2779B7;
+    background-color: var(--accent-color);
 }
 
 button:active {
@@ -1593,23 +1571,23 @@ button:active {
 
 /* JSON语法高亮样式 */
 .string {
-    color: #a31515;
+    color: var(--syntax-string);
 }
 
 .number {
-    color: #098658;
+    color: var(--syntax-number);
 }
 
 .boolean {
-    color: #0000ff;
+    color: var(--syntax-boolean);
 }
 
 .null {
-    color: #7f7f7f;
+    color: var(--text-muted);
 }
 
 .key {
-    color: #001080;
+    color: var(--syntax-key);
 }
 
 .bracket {
@@ -1620,14 +1598,14 @@ button:active {
 .bracket:contains('[')::before,
 .bracket:contains('{')::before {
     content: '- ';
-    color: #333;
+    color: var(--text-secondary);
     font-weight: normal;
 }
 
 /* JSON差异高亮样式 */
 .highlight-diff {
-    background-color: #ffeb3b;
-    border: 1px solid #ffc107;
+    background-color: rgba(245, 158, 11, 0.2);
+    border: 1px solid var(--warning-color);
     padding: 2px 4px;
     border-radius: 3px;
     font-weight: bold;
@@ -1637,7 +1615,7 @@ button:active {
 .diff-summary {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .diff-list {
@@ -1657,18 +1635,18 @@ button:active {
 }
 
 .diff-added {
-    background-color: #e8f5e9;
-    border-left: 3px solid #4caf50;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid var(--success-color);
 }
 
 .diff-removed {
-    background-color: #ffebee;
-    border-left: 3px solid #f44336;
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid var(--error-color);
 }
 
 .diff-changed {
-    background-color: #fff3e0;
-    border-left: 3px solid #ff9800;
+    background-color: rgba(245, 158, 11, 0.1);
+    border-left: 3px solid var(--warning-color);
 }
 
 .diff-path {
@@ -1686,24 +1664,24 @@ button:active {
 }
 
 .diff-added .diff-type {
-    background-color: #4caf50;
+    background-color: var(--success-color);
     color: white;
 }
 
 .diff-removed .diff-type {
-    background-color: #f44336;
+    background-color: var(--error-color);
     color: white;
 }
 
 .diff-changed .diff-type {
-    background-color: #ff9800;
+    background-color: var(--warning-color);
     color: white;
 }
 
 .no-diff {
     text-align: center;
     padding: 20px;
-    color: #4caf50;
+    color: var(--success-color);
     font-weight: bold;
 }
 
@@ -1715,27 +1693,27 @@ button:active {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--bg-secondary);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: var(--border-color);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: var(--text-muted);
 }
 
 ::-webkit-scrollbar-corner {
-    background: #f1f1f1;
+    background: var(--bg-secondary);
 }
 
 /* Firefox滚动条样式 */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-color: var(--border-color) var(--bg-secondary);
 }
 
 /* 确保编辑器区域的滚动条也应用样式 */
@@ -1751,7 +1729,7 @@ button:active {
 #compare-result,
 .tab-content {
     scrollbar-width: thin;
-    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-color: var(--border-color) var(--bg-secondary);
 }
 
 /* 左侧线和折叠图标样式 */
@@ -1788,7 +1766,7 @@ button:active {
 
 /* 红色图标样式 - 用户需求的标红折叠图标 */
 .red-icon {
-    background-color: #ff0000;
+    background-color: var(--error-color);
     border-radius: 2px;
 }
 
@@ -2020,12 +1998,12 @@ button:active {
     }
 }
 
-/* JSON姣斿琛屽彿鏍峰紡 */
+/* JSON比对行号样式 */
 .diff-line-number {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     margin-left: 10px;
     padding: 2px 6px;
-    background-color: #f0f0f0;
+    background-color: var(--bg-secondary);
     border-radius: 3px;
 }

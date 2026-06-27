@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="随机密码生成工具说明，高强度密码生成器，支持自定义长度大小写数字特殊字符组合，本地处理保护隐私">
+    <meta name="keywords" content="随机密码生成, 密码生成器, 高强度密码, 在线密码工具, 安全密码生成, 免费密码生成器, 批量生成密码, 自定义密码规则">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>随机密码生成工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #7C3AED 0%, #6D28D9 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #7C3AED;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #7C3AED;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #7C3AED;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #7C3AED;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #7C3AED;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #7C3AED 0%, #6D28D9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>随机密码生成工具 - 免费、安全、快速</h1>
+            <p class="subtitle">高强度密码生成器，支持自定义长度大小写数字特殊字符组合，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是随机密码生成工具？</h2>
+                <p>随机密码生成工具是一款专业的在线密码生成器，专为需要创建高强度安全密码的用户设计。在网络安全日益重要的今天，使用弱密码或重复使用同一密码会大大增加账户被盗的风险。这款工具可以帮助您快速生成复杂、安全的随机密码，保护您的账户安全。</p>
+                <p>工具支持多种密码配置选项，包括密码长度、是否包含大小写字母、是否包含数字、是否包含特殊字符等。您可以根据不同账户的安全需求，自定义生成符合要求的密码。生成的密码完全随机，不依赖任何预定义模式，难以被猜测或破解。所有生成过程均在浏览器本地完成，密码不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：配置密码规则</h3>
+                <p>设置密码长度，推荐使用12位以上的密码。选择是否包含大写字母、小写字母、数字和特殊字符。对于高安全性账户，建议启用所有字符类型；对于需要便于记忆的场景，可以选择性启用部分字符类型。</p>
+
+                <h3>第二步：生成密码</h3>
+                <p>点击"生成密码"按钮，工具会根据您设置的规则生成随机密码。您可以多次点击生成，直到获得满意的密码。工具会显示生成的密码强度评级，帮助您判断密码安全性。</p>
+
+                <h3>第三步：复制或批量生成</h3>
+                <p>满意后，点击"复制"按钮将密码复制到剪贴板，然后粘贴到目标位置。如果需要生成多个密码，可以使用批量生成功能，一次性生成多个随机密码，方便管理多个账户。</p>
+
+                <h3>密码保存建议</h3>
+                <p>生成的密码建议使用密码管理器保存，如浏览器自带的密码管理、专业的密码管理软件等。不建议将密码保存在文档或笔记中，以免泄露风险。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>个人用户：</strong>为各类网站账户、应用账户生成安全密码，避免使用弱密码或重复密码。</p>
+                <p><strong>企业用户：</strong>为员工账户、系统账户生成符合安全策略的密码，提升企业安全防护。</p>
+                <p><strong>开发运维：</strong>为数据库、服务器、API密钥等生成高强度随机密钥，保护系统安全。</p>
+                <p><strong>安全工程师：</strong>为测试环境、安全评估场景生成临时密码，进行安全测试。</p>
+                <p><strong>IT管理员：</strong>批量生成账户密码，统一管理多个用户账户。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">自定义密码长度</span>
+                    <span class="feature-tag">大小写字母支持</span>
+                    <span class="feature-tag">数字字符支持</span>
+                    <span class="feature-tag">特殊字符支持</span>
+                    <span class="feature-tag">批量生成密码</span>
+                    <span class="feature-tag">密码强度评估</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有密码生成都在您的浏览器中完成，密码不会上传到任何服务器。这意味着您的密码始终处于您的控制之下，不会泄露给任何第三方。同时，工具支持高度自定义，您可以根据不同账户的安全需求，生成符合特定规则的密码。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>生成的密码请务必妥善保存，遗忘后无法找回</li>
+                        <li>建议使用密码管理器保存密码，避免遗忘或泄露</li>
+                        <li>不同账户请使用不同密码，避免一处泄露影响所有账户</li>
+                        <li>密码长度建议12位以上，确保足够安全</li>
+                        <li>重要账户建议启用所有字符类型，提高密码复杂度</li>
+                        <li>请勿在公共场所使用密码生成工具，避免被他人看到</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #7C3AED; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用随机密码生成工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+                <a href="../uuid/index.html" class="tool-link">UUID生成工具</a>
+                <a href="../token/index.html" class="tool-link">Token生成工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

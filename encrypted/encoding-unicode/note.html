@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Unicode编解码工具说明，支持Unicode/中文互转，中文转Unicode、Unicode转中文，本地处理保护隐私">
+    <meta name="keywords" content="Unicode编码, Unicode解码, 中文转Unicode, Unicode转中文, Unicode转换, 在线Unicode, 免费工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>Unicode 编码解码工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #0891B2 0%, #0E7490 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #0891B2;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0891B2;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #0891B2;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #0891B2;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0891B2;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #0891B2 0%, #0E7490 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(8, 145, 178, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>Unicode 编码解码工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持Unicode/中文互转，中文转Unicode、Unicode转中文，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是Unicode编解码工具？</h2>
+                <p>Unicode编解码工具是一款专业的在线Unicode转换工具，专为需要进行Unicode编码和解码操作的用户设计。Unicode是一种国际字符编码标准，为世界上几乎所有语言的每个字符都分配了唯一的编码，使得计算机可以统一处理和显示各种语言的文本。</p>
+                <p>工具支持两种转换模式：编码模式和解码模式。编码模式可以将中文文本转换为Unicode编码序列，例如将"你好"转换为"\u4f60\u597d"；解码模式可以将Unicode编码还原为原始中文文本。这对于处理网页中的Unicode编码、调试程序中的编码问题、分析数据传输中的编码格式等都非常有用。所有转换均在浏览器本地完成，保护您的数据隐私。</p>
+
+                <h2>如何使用？</h2>
+                <h3>编码操作</h3>
+                <p>在输入框中输入需要编码的中文文本或混合文本，点击"编码"按钮。工具会将所有非ASCII字符转换为Unicode编码格式，格式为"\uXXXX"，其中XXXX是字符的十六进制编码。您可以复制编码结果用于其他用途。</p>
+
+                <h3>解码操作</h3>
+                <p>在输入框中输入需要解码的Unicode编码字符串，点击"解码"按钮。工具会将所有Unicode编码还原为原始字符，显示中文或其他非ASCII字符。支持多种Unicode编码格式，包括"\uXXXX"格式和"\\uXXXX"格式。</p>
+
+                <h3>应用场景</h3>
+                <p>Unicode编码常用于：网页中的中文字符显示、JSON数据中的中文编码、程序源代码中的中文处理、跨平台文本传输中的编码统一、数据存储中的字符编码等。了解Unicode的工作原理可以帮助您更好地处理多语言文本。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>前端开发者：</strong>处理网页中的Unicode编码，调试JavaScript中的字符编码问题，确保中文字符正确显示。</p>
+                <p><strong>后端开发者：</strong>处理API接口中的Unicode数据，分析请求和响应中的编码格式，调试编码相关问题。</p>
+                <p><strong>数据分析师：</strong>分析包含Unicode编码的数据文件，还原编码内容进行进一步分析。</p>
+                <p><strong>翻译工作者：</strong>处理多语言文本中的编码问题，确保不同语言字符正确传输和显示。</p>
+                <p><strong>普通用户：</strong>了解Unicode编码原理，处理网页中显示的编码字符，学习字符编码知识。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">中文转Unicode</span>
+                    <span class="feature-tag">Unicode转中文</span>
+                    <span class="feature-tag">支持多语言</span>
+                    <span class="feature-tag">批量处理</span>
+                    <span class="feature-tag">一键复制结果</span>
+                    <span class="feature-tag">实时转换</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有编码解码操作都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的文本内容始终处于您的控制之下，特别适合处理包含隐私信息的文本。同时，工具支持实时转换，您可以在输入的同时看到转换结果，大大提高工作效率。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>Unicode编码仅用于字符表示，不是加密方法</li>
+                        <li>解码时请确保输入的是有效的Unicode编码格式</li>
+                        <li>常见的Unicode编码格式为"\uXXXX"，其中XXXX是4位十六进制数</li>
+                        <li>部分特殊字符可能需要使用UTF-16代理对表示</li>
+                        <li>建议在UTF-8编码环境下使用，确保字符正确显示</li>
+                        <li>ASCII字符（如英文、数字）通常不进行编码</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #0891B2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用Unicode编解码工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../encoding-base64/index.html" class="tool-link">Base64编解码工具</a>
+                <a href="../urlcode/index.html" class="tool-link">URL编码解码工具</a>
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

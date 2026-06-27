@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Cron表达式在线解析工具, Cron定时任务可视化, 支持最近执行时间预测, 免费Cron解析器">
+    <meta name="keywords" content="Cron表达式解析, Cron在线工具, Cron可视化, 定时任务, 时间表达式, 免费Cron工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>Cron表达式解析工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script src="./lib/croner.umd.js"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="./cron.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Cron表达式解析工具",
+        "description": "Cron表达式在线解析工具，支持定时任务可视化和最近执行时间预测。免费Cron解析器。Online Cron expression parser with execution time prediction.",
+        "url": "https://helpoke.com/cron",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "Cron表达式解析",
+            "定时任务可视化",
+            "最近执行时间预测",
+            "支持多种Cron格式",
+            "表达式验证",
+            "免费在线使用"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">Cron 表达式解析工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>将 Cron 表达式转换为人类可读的描述，或可视化生成 Cron 表达式</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <!-- Tab 切换 -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="parse">解析 Cron</button>
+                    <button class="tab-btn" data-tab="generate">生成 Cron</button>
+                </div>
+
+                <!-- ========== 解析 Tab ========== -->
+                <div class="tab-panel active" id="tab-parse">
+                    <div class="input-group">
+                        <label for="cron-input">输入 Cron 表达式（5 位格式）</label>
+                        <div class="input-row">
+                            <input type="text" id="cron-input" placeholder="例如: */5 * * * *" value="*/5 * * * *"
+                                data-name="Cron表达式">
+                            <button class="btn" id="parse-btn">解析</button>
+                        </div>
+                    </div>
+
+                    <div class="field-visual" id="field-visual">
+                        <div class="field-chip minute">
+                            <div class="field-label">分</div>
+                            <div class="field-value">*/5</div>
+                            <div class="field-desc">0-59</div>
+                        </div>
+                        <div class="field-chip hour">
+                            <div class="field-label">时</div>
+                            <div class="field-value">*</div>
+                            <div class="field-desc">0-23</div>
+                        </div>
+                        <div class="field-chip day">
+                            <div class="field-label">日</div>
+                            <div class="field-value">*</div>
+                            <div class="field-desc">1-31</div>
+                        </div>
+                        <div class="field-chip month">
+                            <div class="field-label">月</div>
+                            <div class="field-value">*</div>
+                            <div class="field-desc">1-12</div>
+                        </div>
+                        <div class="field-chip weekday">
+                            <div class="field-label">星期</div>
+                            <div class="field-value">*</div>
+                            <div class="field-desc">0-6</div>
+                        </div>
+                    </div>
+
+                    <div id="error-box" class="error-box" style="display:none;"></div>
+
+                    <div id="description-box" class="description-box">
+                        每隔 <strong>5</strong> 分钟执行一次
+                    </div>
+
+                    <div class="section-title">最近执行时间</div>
+                    <table class="schedule-table" id="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>执行时间</th>
+                                <th>距离现在</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-body"></tbody>
+                    </table>
+
+                    <div class="section-title">常见预设表达式</div>
+                    <div class="presets-grid">
+                        <button class="preset-btn" data-preset="* * * * *">
+                            <div class="preset-name">每分钟</div>
+                            <div class="preset-cron">* * * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="*/5 * * * *">
+                            <div class="preset-name">每 5 分钟</div>
+                            <div class="preset-cron">*/5 * * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="*/10 * * * *">
+                            <div class="preset-name">每 10 分钟</div>
+                            <div class="preset-cron">*/10 * * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="*/30 * * * *">
+                            <div class="preset-name">每 30 分钟</div>
+                            <div class="preset-cron">*/30 * * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 * * * *">
+                            <div class="preset-name">每小时</div>
+                            <div class="preset-cron">0 * * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 */2 * * *">
+                            <div class="preset-name">每 2 小时</div>
+                            <div class="preset-cron">0 */2 * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 0 * * *">
+                            <div class="preset-name">每天午夜</div>
+                            <div class="preset-cron">0 0 * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 9 * * *">
+                            <div class="preset-name">每天早上 9 点</div>
+                            <div class="preset-cron">0 9 * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 9-18 * * *">
+                            <div class="preset-name">每天 9-18 点</div>
+                            <div class="preset-cron">0 9-18 * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 0 * * 1">
+                            <div class="preset-name">每周一</div>
+                            <div class="preset-cron">0 0 * * 1</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 0 * * 1-5">
+                            <div class="preset-name">工作日</div>
+                            <div class="preset-cron">0 0 * * 1-5</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 0 * * 0">
+                            <div class="preset-name">每周日</div>
+                            <div class="preset-cron">0 0 * * 0</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 0 1 * *">
+                            <div class="preset-name">每月 1 号</div>
+                            <div class="preset-cron">0 0 1 * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 0 1 1 *">
+                            <div class="preset-name">每年 1 月 1 日</div>
+                            <div class="preset-cron">0 0 1 1 *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="30 8 * * *">
+                            <div class="preset-name">每天 8:30</div>
+                            <div class="preset-cron">30 8 * * *</div>
+                        </button>
+                        <button class="preset-btn" data-preset="0 */6 * * *">
+                            <div class="preset-name">每 6 小时</div>
+                            <div class="preset-cron">0 */6 * * *</div>
+                        </button>
+                    </div>
+
+                    <div class="collapsible">
+                        <div class="collapsible-header" id="collapsible-header">
+                            <span>字段参考说明</span>
+                            <span class="arrow">▶</span>
+                        </div>
+                        <div class="collapsible-body">
+                            <table class="ref-table">
+                                <tr>
+                                    <th>位置</th>
+                                    <th>字段</th>
+                                    <th>取值范围</th>
+                                    <th>特殊字符</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>分钟</td>
+                                    <td>0-59</td>
+                                    <td>, - * /</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>小时</td>
+                                    <td>0-23</td>
+                                    <td>, - * /</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>日期</td>
+                                    <td>1-31</td>
+                                    <td>, - * ? / L W</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>月份</td>
+                                    <td>1-12</td>
+                                    <td>, - * /</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>星期</td>
+                                    <td>0-6（0=周日）</td>
+                                    <td>, - * ? / L #</td>
+                                </tr>
+                            </table>
+                            <p style="font-size:13px;color:#666;margin-top:8px;">
+                                <strong>*</strong> 任意值 &nbsp;
+                                <strong>,</strong> 枚举 &nbsp;
+                                <strong>-</strong> 范围 &nbsp;
+                                <strong>/</strong> 步长 &nbsp;
+                                <strong>?</strong> 不指定 &nbsp;
+                                <strong>L</strong> 最后 &nbsp;
+                                <strong>W</strong> 工作日 &nbsp;
+                                <strong>#</strong> 第几个星期几
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button class="btn copy-btn" id="copy-cron-btn">复制 Cron 表达式</button>
+                    </div>
+                </div>
+
+                <!-- ========== 生成 Tab ========== -->
+                <div class="tab-panel" id="tab-generate">
+
+                    <!-- 分钟 -->
+                    <div class="gen-section" id="gen-minute">
+                        <div class="gen-section-title">分钟 <span class="badge">0-59</span></div>
+                        <div class="gen-mode-row" data-field="minute">
+                            <button class="gen-mode-btn active" data-mode="every"
+                                >每分钟</button>
+                            <button class="gen-mode-btn" data-mode="step" >每隔 N 分钟</button>
+                            <button class="gen-mode-btn" data-mode="range" >范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific" >指定值</button>
+                        </div>
+                        <div class="gen-mode-content">
+                            <div class="gen-step-row" style="display:none">
+                                <label>每隔</label>
+                                <input type="number" min="1" max="59" value="5" >
+                                <span>分钟</span>
+                            </div>
+                            <div class="gen-range-row" style="display:none">
+                                <label>从</label>
+                                <input type="number" min="0" max="59" value="0" 
+                                    style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
+                                <span>到</span>
+                                <input type="number" min="0" max="59" value="30" 
+                                    style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
+                            </div>
+                            <div class="gen-specific-row" style="display:none">
+                                <div class="gen-checkboxes cols-24" id="minute-checkboxes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 小时 -->
+                    <div class="gen-section" id="gen-hour">
+                        <div class="gen-section-title">小时 <span class="badge">0-23</span></div>
+                        <div class="gen-mode-row" data-field="hour">
+                            <button class="gen-mode-btn active" data-mode="every"
+                                >每小时</button>
+                            <button class="gen-mode-btn" data-mode="step" >每隔 N 小时</button>
+                            <button class="gen-mode-btn" data-mode="range" >范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific" >指定值</button>
+                        </div>
+                        <div class="gen-mode-content">
+                            <div class="gen-step-row" style="display:none">
+                                <label>每隔</label>
+                                <input type="number" min="1" max="23" value="2" >
+                                <span>小时</span>
+                            </div>
+                            <div class="gen-range-row" style="display:none">
+                                <label>从</label>
+                                <input type="number" min="0" max="23" value="9" 
+                                    style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
+                                <span>到</span>
+                                <input type="number" min="0" max="23" value="18" 
+                                    style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
+                            </div>
+                            <div class="gen-specific-row" style="display:none">
+                                <div class="gen-checkboxes cols-24" id="hour-checkboxes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 日 -->
+                    <div class="gen-section" id="gen-day">
+                        <div class="gen-section-title">日 <span class="badge">1-31</span></div>
+                        <div class="gen-mode-row" data-field="day">
+                            <button class="gen-mode-btn active" data-mode="every"
+                                >每日</button>
+                            <button class="gen-mode-btn" data-mode="specific"
+                                >指定日期</button>
+                        </div>
+                        <div class="gen-mode-content">
+                            <div class="gen-specific-row" style="display:none">
+                                <div class="gen-checkboxes cols-12" id="day-checkboxes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 月 -->
+                    <div class="gen-section" id="gen-month">
+                        <div class="gen-section-title">月 <span class="badge">1-12</span></div>
+                        <div class="gen-mode-row" data-field="month">
+                            <button class="gen-mode-btn active" data-mode="every"
+                                >每月</button>
+                            <button class="gen-mode-btn" data-mode="specific"
+                                >指定月份</button>
+                        </div>
+                        <div class="gen-mode-content">
+                            <div class="gen-specific-row" style="display:none">
+                                <div class="gen-checkboxes cols-12" id="month-checkboxes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 星期 -->
+                    <div class="gen-section" id="gen-weekday">
+                        <div class="gen-section-title">星期 <span class="badge">0-6（0=周日）</span></div>
+                        <div class="gen-mode-row" data-field="weekday">
+                            <button class="gen-mode-btn active" data-mode="every"
+                                >不限</button>
+                            <button class="gen-mode-btn" data-mode="specific"
+                                >指定星期</button>
+                        </div>
+                        <div class="gen-mode-content">
+                            <div class="gen-specific-row" style="display:none">
+                                <div class="gen-checkboxes cols-7" id="weekday-checkboxes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 生成结果 -->
+                    <div class="gen-result">
+                        <div class="section-title">生成结果</div>
+                        <div class="gen-result-cron" id="gen-result-cron">* * * * *</div>
+                        <div class="gen-result-desc" id="gen-result-desc">每分钟执行一次</div>
+                        <div class="result-actions" style="margin-top:16px;">
+                            <button class="btn copy-btn" id="copy-gen-btn">复制 Cron 表达式</button>
+                            <button class="btn btn-sm" id="send-to-parse-btn">发送到解析</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+
+</html>

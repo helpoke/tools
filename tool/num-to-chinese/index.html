@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="阿拉伯数字转中文大写在线工具, 数字转中文大写转换器, 支持小数, 免费数字转换工具">
+    <meta name="keywords" content="阿拉伯数字转中文, 数字转中文大写, 在线数字转换器, 壹贰叁肆伍, 免费数字转换工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>数字转中文大写 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-group input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 32px;
+            padding: 24px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .result h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .result-content {
+            background-color: var(--bg-tertiary);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            word-break: break-all;
+            min-height: 24px;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .result-actions .btn {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .copy-btn {
+            background-color: #27ae60;
+        }
+
+        .copy-btn:hover {
+            background-color: #229954;
+        }
+
+        .copy-btn.copied {
+            background-color: #1e8449;
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #eaeaea;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .reference {
+            max-width: 800px;
+            margin: 0 auto 24px;
+            background: var(--bg-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 24px 32px;
+        }
+
+        .reference h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .ref-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+            color: #555;
+        }
+
+        .ref-table .num {
+            font-weight: 600;
+            color: #3498db;
+            min-width: 28px;
+        }
+
+        .ref-table .cn {
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        .ref-table .sep {
+            border-bottom: 2px solid #eaeaea;
+        }
+
+        .hint {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            background-color: var(--bg-tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .ref-table {
+                display: block;
+            }
+
+            .ref-table tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0;
+            }
+
+            .ref-table tr {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding: 0;
+                border: none;
+            }
+
+            .ref-table td {
+                display: block;
+                width: calc(50% - 0.25rem);
+                /* 精确计算两列宽度 */
+                padding: 0.6rem 0.4rem;
+                text-align: center;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                background: #ffffff;
+                font-size: 0.95rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .ref-table .num {
+                background: #edf2f7;
+                font-weight: bold;
+                color: #2b6cb0;
+            }
+
+            .ref-table .cn {
+                background: #ffffff;
+                color: #1a202c;
+            }
+
+            .ref-table tr.sep td {
+                border-top: 3px solid #a0aec0;
+                /* 保持分隔线视觉 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .result-content {
+                font-size: 16px;
+            }
+
+            /* .ref-table td {
+                width: 100%;
+                padding: 0.7rem 0.5rem;
+            } */
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .ref-table {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .ref-table th,
+        body.dark-mode .ref-table td {
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode input[type="number"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-content {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn {
+            border-color: var(--border-color);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "数字转中文大写",
+        "description": "阿拉伯数字转中文大写在线工具，支持小数转换。免费数字转换工具。Online number to Chinese converter supporting decimal numbers.",
+        "url": "https://helpoke.com/num-to-chinese",
+        "applicationCategory": "https://schema.org/ProductivityApplication",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "阿拉伯数字转中文大写",
+            "支持小数转换",
+            "支持金额格式",
+            "一键复制结果",
+            "在线转换，无需安装",
+            "免费在线使用",
+            "Chinese uppercase numbers"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">中文数字大写互转工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>阿拉伯数字与中文大写数字双向转换，支持整数和小数</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="tab-bar">
+                    <button class="tab-btn active" onclick="switchTab('num2cn')">阿拉伯 → 中文</button>
+                    <button class="tab-btn" onclick="switchTab('cn2num')">中文 → 阿拉伯</button>
+                </div>
+
+                <!-- 阿拉伯 → 中文 -->
+                <div class="tab-panel active" id="tab-num2cn">
+                    <div class="input-group">
+                        <label for="number-input">输入阿拉伯数字</label>
+                        <input type="text" id="number-input" placeholder="例如：112.55" value="112.55" data-name="输入数字">
+                    </div>
+                    <button class="btn" onclick="convertNumber()">转换</button>
+                    <div class="result">
+                        <h3>转换结果</h3>
+                        <div class="result-content" id="result">壹佰壹拾贰圆伍角伍分</div>
+                        <div class="result-actions">
+                            <button class="btn copy-btn" onclick="copyResult('result')">复制结果</button>
+                        </div>
+                        <div class="hint">
+                            <strong>说明：</strong>支持整数和小数转换，最大支持到万亿位，小数最多保留两位。输入负数将转换为负的大写中文数字。小数点前加"圆"，小数部分分别为"角""分"。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中文 → 阿拉伯 -->
+                <div class="tab-panel" id="tab-cn2num">
+                    <div class="input-group">
+                        <label for="chinese-input">输入中文大写数字</label>
+                        <input type="text" id="chinese-input" placeholder="例如：壹佰壹拾贰元整" value="壹佰壹拾贰元整"
+                            data-name="输入中文数字">
+                    </div>
+                    <button class="btn" onclick="convertChinese()">转换</button>
+                    <div class="result">
+                        <h3>转换结果</h3>
+                        <div class="result-content" id="cn-result">112.0</div>
+                        <div class="result-actions">
+                            <button class="btn copy-btn" onclick="copyResult('cn-result')">复制结果</button>
+                        </div>
+                        <div class="hint">
+                            <strong>说明：</strong>支持中文大写数字转阿拉伯数字。含"元""圆""点"统一转为小数点，含"角""分"等量词自动解析为小数位。结果保留两位小数。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中文大写参考表 -->
+            <div class="reference">
+                <h3>中文大写数字对照表</h3>
+                <table class="ref-table">
+                    <tr>
+                        <td class="num">0</td>
+                        <td class="cn">零</td>
+                        <td class="num">1</td>
+                        <td class="cn">壹（一）</td>
+                        <td class="num">2</td>
+                        <td class="cn">贰（二）</td>
+                        <td class="num">3</td>
+                        <td class="cn">叁（三）</td>
+                        <td class="num">4</td>
+                        <td class="cn">肆（四）</td>
+                    </tr>
+                    <tr class="sep">
+                        <td class="num">5</td>
+                        <td class="cn">伍（五）</td>
+                        <td class="num">6</td>
+                        <td class="cn">陆（六）</td>
+                        <td class="num">7</td>
+                        <td class="cn">柒（七）</td>
+                        <td class="num">8</td>
+                        <td class="cn">捌（八）</td>
+                        <td class="num">9</td>
+                        <td class="cn">玖（九）</td>
+                    </tr>
+                    <tr>
+                        <td class="num">10</td>
+                        <td class="cn">拾（十）</td>
+                        <td class="num">100</td>
+                        <td class="cn">佰（百）</td>
+                        <td class="num">1000</td>
+                        <td class="cn">仟（千）</td>
+                        <td class="num">10⁴</td>
+                        <td class="cn">万</td>
+                        <td class="num">10⁸</td>
+                        <td class="cn">亿</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        let currentTab = 'num2cn';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(function (btn) { btn.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+        }
+
+        // 阿拉伯数字转中文大写（金额格式）
+        function numberToChinese(numStr) {
+            const cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+            const cnUnits = ['', '拾', '佰', '仟'];
+            const cnBigUnits = ['', '万', '亿', '万亿'];
+            const cnDecimalUnits = ['角', '分'];
+            const cnNegative = '负';
+            const cnIntegerSuffix = '圆';
+            const cnIntegerSuffixAlt = '元';
+            const cnWhole = '整';
+
+            let isNegative = false;
+            let input = numStr.trim();
+
+            if (input.startsWith('-')) {
+                isNegative = true;
+                input = input.substring(1);
+            }
+
+            let parts = input.split('.');
+            let integerPart = parts[0];
+            let decimalPart = parts.length > 1 ? parts[1].substring(0, 2) : ''; // 最多两位小数
+
+            integerPart = integerPart.replace(/^0+/, '') || '0';
+
+            function convertInteger(num) {
+                if (num === '0') return '零';
+
+                let result = '';
+                let zeroFlag = false;
+
+                let chunks = [];
+                let temp = num;
+                while (temp.length > 0) {
+                    let chunk = temp.slice(-4);
+                    chunks.unshift(chunk);
+                    temp = temp.slice(0, -4);
+                }
+
+                for (let i = 0; i < chunks.length; i++) {
+                    let chunk = chunks[i];
+                    let chunkResult = '';
+                    let hasNonZero = false;
+
+                    for (let j = 0; j < chunk.length; j++) {
+                        let digit = parseInt(chunk[j]);
+                        let unitIndex = chunk.length - 1 - j;
+
+                        if (digit === 0) {
+                            zeroFlag = true;
+                        } else {
+                            if (zeroFlag && chunkResult !== '') {
+                                chunkResult += '零';
+                            }
+                            chunkResult += cnNums[digit] + cnUnits[unitIndex];
+                            hasNonZero = true;
+                            zeroFlag = false;
+                        }
+                    }
+
+                    if (hasNonZero && i < chunks.length - 1) {
+                        chunkResult += cnBigUnits[chunks.length - 1 - i];
+                    }
+
+                    result += chunkResult;
+                }
+
+                result = result.replace(/零+$/, '');
+                return result;
+            }
+
+            function convertDecimal(decimal) {
+                if (!decimal) return '';
+                let result = '';
+                let hasNonZero = false;
+                for (let i = 0; i < decimal.length; i++) {
+                    let digit = parseInt(decimal[i]);
+                    if (!isNaN(digit) && cnDecimalUnits[i]) {
+                        if (digit > 0) {
+                            result += cnNums[digit] + cnDecimalUnits[i];
+                            hasNonZero = true;
+                        } else {
+                            result += '零' + cnDecimalUnits[i];
+                        }
+                    }
+                }
+                // 如果小数部分全为零，返回空字符串（将显示"整"）
+                return hasNonZero ? result : '';
+            }
+
+            let chineseResult = '';
+            if (isNegative) {
+                chineseResult += cnNegative;
+            }
+
+            let integerResult = convertInteger(integerPart);
+            chineseResult += integerResult;
+
+            // 整数部分后加圆
+            chineseResult += cnIntegerSuffix;
+
+            // 处理小数部分
+            let decimalResult = convertDecimal(decimalPart);
+
+            if (decimalResult) {
+                chineseResult += decimalResult;
+            } else {
+                // 没有小数时加"整"
+                chineseResult += cnWhole;
+            }
+
+            return chineseResult;
+        }
+
+        function convertNumber() {
+            const input = document.getElementById('number-input').value;
+
+            if (!input.trim()) {
+                utils.showError('请输入数字');
+                return;
+            }
+
+            const numRegex = /^-?\d+(\.\d+)?$/;
+            if (!numRegex.test(input.trim())) {
+                utils.showError('请输入有效的数字格式');
+                return;
+            }
+
+            // 校验小数位数，最多两位
+            const decimalMatch = input.match(/\.(\d+)/);
+            if (decimalMatch && decimalMatch[1].length > 2) {
+                utils.showError('小数位不能超过两位');
+                return;
+            }
+
+            const result = numberToChinese(input);
+            document.getElementById('result').textContent = result;
+        }
+
+        // 中文大写转阿拉伯数字
+        function chineseToNumber(chineseStr) {
+            const cnNumsMap = {
+                '零': 0, '壹': 1, '贰': 2, '叁': 3, '肆': 4,
+                '伍': 5, '陆': 6, '柒': 7, '捌': 8, '玖': 9,
+                '一': 1, '二': 2, '三': 3, '四': 4,
+                '五': 5, '六': 6, '七': 7, '八': 8, '九': 9,
+                '〇': 0
+            };
+            const cnUnitVal = { '拾': 10, '佰': 100, '仟': 1000 };
+            const cnBigUnitVal = { '万': 10000, '亿': 100000000, '万亿': 1000000000000 };
+
+            let input = chineseStr.trim();
+
+            // 预处理：元/圆/点 → .
+            input = input.replace(/[元圆点]/g, '.');
+
+            // 去除金额量词：整（保留角分用于小数解析）
+            input = input.replace(/[整]/g, '');
+
+            // 处理负号
+            let isNegative = false;
+            if (input.startsWith('负')) {
+                isNegative = true;
+                input = input.substring(1);
+            }
+
+            // 分离整数和小数部分
+            let parts = input.split('.');
+            let intPart = parts[0];
+            let decPart = parts.length > 1 ? parts[1] : '';
+
+            // 处理小数部分（支持角分）
+            let decimalResult = '';
+            let decIndex = 0;
+            for (let i = 0; i < decPart.length && decIndex < 2; i++) {
+                let ch = decPart[i];
+                if (cnNumsMap[ch] !== undefined) {
+                    decimalResult += cnNumsMap[ch];
+                    decIndex++;
+                } else if (ch === '角') {
+                    // 遇到"角"表示当前是角位，如果前面没有数字，补0
+                    if (decIndex === 0) {
+                        decimalResult += '0';
+                    }
+                    decIndex = 1; // 角位结束
+                } else if (ch === '分') {
+                    // 遇到"分"表示当前是分位，如果前面没有数字，补0
+                    while (decIndex < 1) {
+                        decimalResult += '0';
+                        decIndex++;
+                    }
+                    decIndex = 2; // 分位结束
+                }
+            }
+
+            // 处理整数部分
+            function parseInteger(str) {
+                if (!str || str === '零') return 0;
+
+                let total = 0;
+                let current = 0;
+                let section = 0;
+
+                for (let i = 0; i < str.length; i++) {
+                    let ch = str[i];
+                    let num = cnNumsMap[ch];
+
+                    if (num !== undefined) {
+                        current = num;
+                    } else if (cnUnitVal[ch] !== undefined) {
+                        if (current === 0) current = 1;
+                        section += current * cnUnitVal[ch];
+                        current = 0;
+                    } else if (cnBigUnitVal[ch] !== undefined) {
+                        section += current;
+                        current = 0;
+                        if (section === 0) section = 1;
+                        total += section * cnBigUnitVal[ch];
+                        section = 0;
+                    }
+                }
+
+                total += section + current;
+                return total;
+            }
+
+            let integerResult = parseInteger(intPart);
+
+            let result = integerResult.toString();
+            // 确保至少有一位小数，最多两位小数
+            if (decimalResult) {
+                decimalResult = decimalResult.padEnd(2, '0').substring(0, 2);
+                result += '.' + decimalResult;
+            } else {
+                result += '.0';
+            }
+            if (isNegative) {
+                result = '-' + result;
+            }
+
+            return result;
+        }
+
+        function convertChinese() {
+            const input = document.getElementById('chinese-input').value;
+
+            if (!input.trim()) {
+                utils.showError('请输入中文大写数字');
+                return;
+            }
+
+            const result = chineseToNumber(input);
+            document.getElementById('cn-result').textContent = result;
+        }
+
+        // 复制结果
+        function copyResult(targetId) {
+            const resultText = document.getElementById(targetId).textContent;
+
+            navigator.clipboard.writeText(resultText).then(function () {
+                const copyBtn = document.querySelector('.copy-btn.copied');
+                if (copyBtn) {
+                    copyBtn.textContent = copyBtn.getAttribute('data-original') || '复制结果';
+                    copyBtn.classList.remove('copied');
+                }
+                const activeTab = document.getElementById('tab-' + currentTab);
+                const btn = activeTab.querySelector('.copy-btn');
+                btn.setAttribute('data-original', btn.textContent);
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+
+                setTimeout(function () {
+                    btn.textContent = btn.getAttribute('data-original') || '复制结果';
+                    btn.classList.remove('copied');
+                }, 2000);
+
+                utils.showSuccess('已复制到剪贴板！');
+            }).catch(function (err) {
+                console.error('复制失败:', err);
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // 阿拉伯→中文：实时转换
+        document.getElementById('number-input').addEventListener('input', function (e) {
+            const input = e.target.value;
+
+            // 校验小数位数，超过两位就弹框提示
+            const decimalMatch = input.match(/\.(\d+)/);
+            if (decimalMatch && decimalMatch[1].length > 2) {
+                utils.showError('小数位不能超过两位');
+                // 截断多余的小数位
+                const parts = input.split('.');
+                e.target.value = parts[0] + '.' + parts[1].substring(0, 2);
+                return;
+            }
+
+            if (/^-?\d*\.?\d*$/.test(input) && input.trim() !== '' && input !== '-') {
+                const result = numberToChinese(input);
+                document.getElementById('result').textContent = result;
+            } else if (input === '' || input === '-') {
+                document.getElementById('result').textContent = '';
+            }
+        });
+
+        document.getElementById('number-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') convertNumber();
+        });
+
+        // 中文→阿拉伯：实时转换
+        document.getElementById('chinese-input').addEventListener('input', function (e) {
+            const input = e.target.value;
+            if (input.trim() !== '') {
+                const result = chineseToNumber(input);
+                document.getElementById('cn-result').textContent = result;
+            } else {
+                document.getElementById('cn-result').textContent = '';
+            }
+        });
+
+        document.getElementById('chinese-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') convertChinese();
+        });
+
+        // 初始转换
+        convertNumber();
+    </script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

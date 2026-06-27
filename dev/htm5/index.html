@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线HTML格式化工具，支持HTML代码美化、压缩、验证，免费在线HTML格式化工具">
+    <meta name="keywords" content="HTML格式化，HTML美化，HTML压缩，HTML验证，在线HTML工具，免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>HTML 格式化工具 - Helpoke 助点站</title>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/js-beautify/1.15.4/beautify-html.min.js"></script> -->
+    <script src="./lib/beautify-html.min.js"></script>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 22px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .editor-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .editor-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            min-height: 600px;
+            padding: 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+            line-height: 1.5;
+            box-sizing: border-box;
+            background-color: var(--bg-tertiary);
+        }
+
+        .editor-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            background-color: var(--bg-tertiary);
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #229954;
+        }
+
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .small-btn {
+            padding: 4px 12px;
+            font-size: 13px;
+            border: 1px solid #3498db;
+            background-color: var(--bg-card);
+            color: #3498db;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .small-btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .small-btn.copied {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            color: white;
+        }
+
+        .stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .options-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .option-item label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .option-item select,
+        .option-item input {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .editor-row {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-card {
+                padding: 20px;
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .actions-row {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-area {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-info {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .error-msg {
+            color: var(--error-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-area {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .small-btn {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .small-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .small-btn.copied {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+
+        body.dark-mode .stats {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .stat-item {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .stat-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .options-row {
+            background-color: var(--bg-tertiary);
+        }
+
+        body.dark-mode .option-item label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .option-item input {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .editor-title {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">HTML 格式化工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>在线 HTML Formatter，支持代码美化、压缩、语法检查</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="options-row">
+                    <div class="option-item">
+                        <label for="indent-size">缩进大小：</label>
+                        <select id="indent-size">
+                            <option value="2">2 空格</option>
+                            <option value="4" selected>4 空格</option>
+                            <option value="tab">Tab</option>
+                        </select>
+                    </div>
+                    <div class="option-item">
+                        <label for="wrap-line-length">换行宽度：</label>
+                        <input type="number" id="wrap-line-length" value="120" min="0" max="200" style="width: 60px;">
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <button class="btn btn-primary" id="btn-format">格式化</button>
+                    <button class="btn btn-warning" id="btn-compress">压缩</button>
+                    <button class="btn btn-success" id="btn-copy">复制结果</button>
+                    <button class="btn btn-secondary" id="btn-clear">清空</button>
+                    <button class="btn btn-secondary" id="btn-sample">加载示例</button>
+                </div>
+
+                <div class="editor-row">
+                    <div class="editor-panel">
+                        <div class="editor-header">
+                            <span class="editor-title">输入 HTML</span>
+                            <div class="editor-actions">
+                                <button class="small-btn" id="btn-paste">粘贴</button>
+                            </div>
+                        </div>
+                        <textarea class="editor-textarea" id="input-html" placeholder="请输入或粘贴 HTML 代码..." spellcheck="false"></textarea>
+                    </div>
+
+                    <div class="editor-panel">
+                        <div class="editor-header">
+                            <span class="editor-title">输出结果</span>
+                            <div class="editor-actions">
+                                <button class="small-btn" id="btn-copy-output">复制</button>
+                            </div>
+                        </div>
+                        <textarea class="editor-textarea output-textarea" id="output-html" readonly placeholder="格式化后的结果将显示在这里..." spellcheck="false"></textarea>
+                    </div>
+                </div>
+
+                <div class="stats" id="stats-panel">
+                    <div class="stat-item">原始大小: <span class="stat-value" id="original-size">0</span> 字符</div>
+                    <div class="stat-item">输出大小: <span class="stat-value" id="output-size">0</span> 字符</div>
+                    <div class="stat-item">行数: <span class="stat-value" id="line-count">0</span></div>
+                </div>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

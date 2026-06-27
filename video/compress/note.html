@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频在线压缩工具说明，支持MP4、WebM、MOV等格式批量压缩，可自定义压缩质量和分辨率，纯前端处理保护隐私">
+    <meta name="keywords" content="视频压缩, 视频在线压缩, 免费视频压缩, MP4压缩, 视频文件压缩工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频压缩工具 - 免费、安全、快速压缩视频</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #D97706;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #D97706;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        .info-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .info-section ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tool-section h2 {
+            color: #D97706;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #D97706;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .author-info p {
+            margin: 8px 0;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .related-tools h2 {
+            color: #D97706;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #D97706;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #D97706;
+            color: white;
+            border-color: #D97706;
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%);
+            border-left: 4px solid #F59E0B;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0 !important;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .feature-item .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0 !important;
+            text-align: center !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>视频压缩工具</h1>
+            <p class="subtitle">免费、安全、快速减小视频文件大小</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这是什么工具？</h2>
+                <p>
+                    视频压缩工具是一款专门用于减小视频文件体积的在线处理工具。在日常使用中，我们经常会遇到视频文件过大的问题：手机拍摄的高清视频占用太多存储空间、需要在微信或邮件中发送视频但文件太大超出限制、上传视频到某些平台但超过了大小要求。这些情况下，视频压缩工具就能派上用场。
+                </p>
+                <p>
+                    与传统的桌面视频压缩软件不同，本工具完全在浏览器中运行，无需下载安装任何软件。所有视频处理都在您的本地设备上完成，不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的烦恼。
+                </p>
+
+                <h3>核心功能特点</h3>
+                <ul>
+                    <li>支持批量压缩多个视频文件，提高工作效率</li>
+                    <li>提供按质量压缩和按目标大小压缩两种模式</li>
+                    <li>可调节视频分辨率和帧率，灵活控制输出效果</li>
+                    <li>支持保留或移除视频音轨</li>
+                    <li>实时显示压缩进度和预估效果</li>
+                    <li>支持 MP4、WebM、MOV 等多种输入格式</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h2>如何使用这个工具？</h2>
+                <p>
+                    视频压缩工具的操作流程经过精心优化，即使是初次使用的用户也能快速上手：
+                </p>
+                <p>
+                    <strong>第一步：上传视频。</strong> 点击上传区域或直接拖拽视频文件到页面中。工具支持同时上传多个视频进行批量压缩，非常适合需要处理大量视频素材的用户。
+                </p>
+                <p>
+                    <strong>第二步：选择压缩模式。</strong> 本工具提供两种压缩方式：按质量压缩允许你选择高、中、低三个质量等级；按目标大小压缩则可以根据你设定的文件大小自动计算最佳压缩参数。
+                </p>
+                <p>
+                    <strong>第三步：调整其他参数。</strong> 还可以进一步调整输出分辨率（原始、75%、50%、25%）、帧率（原始、60fps、30fps等）、是否保留音频、以及输出格式。
+                </p>
+                <p>
+                    <strong>第四步：开始压缩并下载。</strong> 点击"开始压缩"按钮，处理完成后可以一键下载压缩后的视频文件。如果是批量处理，还可以下载所有视频的压缩包。
+                </p>
+
+                <div class="highlight-box">
+                    <p><strong>压缩建议：</strong> 如果视频最终用于网络播放，建议使用中等质量和75%分辨率的设置，可以获得最佳的体积和画质平衡。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>功能亮点详解</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="icon">🎯</div>
+                    <h4>智能压缩</h4>
+                    <p>根据目标大小自动调整压缩参数，无需手动计算</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">📦</div>
+                    <h4>批量处理</h4>
+                    <p>支持同时压缩多个视频，一键导出全部结果</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">📊</div>
+                    <h4>效果预览</h4>
+                    <p>实时显示预估压缩率和节省空间大小</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🔒</div>
+                    <h4>隐私保护</h4>
+                    <p>纯本地处理，视频不上传服务器，安全可靠</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>适用场景与人群</h2>
+            <p>
+                <strong>社交分享场景：</strong> 微信、QQ、微博等平台对视频大小有限制，通过压缩可以将大视频调整到平台允许的范围内，方便分享给朋友或发布到社交媒体。
+            </p>
+            <p>
+                <strong>邮件附件场景：</strong> 大多数邮件服务商限制附件大小在20-25MB，使用压缩工具可以将视频缩小到可以发送的范围。
+            </p>
+            <p>
+                <strong>网站上传场景：</strong> 如果你运营网站或博客，需要上传视频到网站，压缩工具可以将视频优化到平台要求的尺寸和大小。
+            </p>
+            <p>
+                <strong>存储空间管理：</strong> 手机或电脑存储空间不足时，可以批量压缩不常用的视频文件，释放大量存储空间。
+            </p>
+            <p>
+                <strong>视频创作者：</strong> 在视频制作过程中，使用压缩工具可以快速生成不同画质的版本，用于不同平台的发布需求。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>使用注意事项</h2>
+            <p>
+                <strong>文件大小限制：</strong> 当前版本最大支持 500MB 的视频文件。如果需要压缩更大的视频，建议先进行视频裁剪，去除不需要的片段后再压缩。
+            </p>
+            <p>
+                <strong>处理时间说明：</strong> 视频压缩的处理时间取决于视频时长、原始文件大小以及你设置的压缩参数。通常情况下，压缩比下载相同质量的视频要慢一些，请耐心等待。
+            </p>
+            <p>
+                <strong>画质与体积的权衡：</strong> 压缩必然会带来一定程度的画质损失。建议根据实际用途选择合适的压缩级别：网络分享可选低质量，视频存档可选高质量。
+            </p>
+            <p>
+                <strong>批量处理建议：</strong> 批量压缩时，建议单个视频不要超过200MB，太多或太大的视频可能会导致浏览器处理变慢或内存不足。
+            </p>
+            <p>
+                <strong>保留原始文件：</strong> 建议保留原始视频文件的备份，因为压缩是有损的，反复压缩会导致画质越来越差。
+            </p>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #D97706; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频压缩工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p>© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../convert/index.html" class="tool-link">视频格式转换</a>
+                <a href="../cropping/index.html" class="tool-link">视频裁剪工具</a>
+                <a href="../audio/index.html" class="tool-link">视频转音频</a>
+                <a href="../gif/index.html" class="tool-link">视频转GIF</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
