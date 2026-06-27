@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图片旋转与模糊工具说明，在线图片处理工具，支持任意角度旋转和高斯模糊效果，批量处理最多30张图片，本地处理保护隐私">
+    <meta name="keywords" content="图片旋转, 图片模糊, 高斯模糊, 批量处理, 图像旋转, 在线图片处理">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图片旋转与模糊工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #F59E0B;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #F59E0B;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #F59E0B;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-section h2 {
+            color: #F59E0B;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #F59E0B;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #F59E0B;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #F59E0B;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .effect-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #F59E0B;
+        }
+
+        .effect-card h4 {
+            color: #F59E0B;
+            margin-bottom: 10px;
+        }
+
+        .effect-card p {
+            text-indent: 0 !important;
+            margin-bottom: 10px !important;
+        }
+
+        .effect-scenarios {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .effect-scenario {
+            padding: 4px 12px;
+            background: rgba(245, 158, 11, 0.15);
+            color: #D97706;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图片旋转与模糊工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持图片任意角度旋转和高斯模糊效果调节，批量处理最多30张图片，实时预览处理效果</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图片旋转与模糊工具？</h2>
+                <p>图片旋转与模糊工具是一款集图片旋转和模糊处理于一体的在线图片编辑工具。它为用户提供了两种常用的图片处理功能：任意角度旋转和高斯模糊效果调节。无论是纠正拍摄角度、调整图片方向，还是需要模糊处理敏感信息、创建艺术效果，这款工具都能满足您的需求。</p>
+                <p>旋转功能支持 -180° 到 180° 的任意角度调整，并提供了快捷旋转按钮（-90°、+90°、180°），方便用户快速完成常见的旋转操作。模糊功能则采用高斯模糊算法，支持 0 到 20 级的模糊程度调节，可根据需要实现从轻微柔化到完全模糊的效果。</p>
+                <p>工具支持批量上传最多30张图片，您可以选择将设置应用到所有图片或仅应用到当前选中的图片。处理过程中，左侧显示原图，右侧实时预览处理后的效果，让您随时查看处理结果。所有处理均在浏览器本地完成，保护您的隐私安全。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域或拖拽图片到指定位置，支持同时选择多张图片。工具支持 JPG、PNG、WebP、GIF、BMP 等多种图片格式，单次最多可上传30张图片。上传后，图片列表会显示在页面上，方便您查看和管理。</p>
+
+                <h3>第二步：选择处理方式</h3>
+                <p>在处理设置区域，您可以同时设置旋转角度和模糊程度。通过拖动旋转滑块调整角度，或点击快捷旋转按钮快速旋转。拖动模糊滑块调整模糊程度，数值越大，模糊效果越明显。</p>
+
+                <h3>第三步：应用效果</h3>
+                <p>点击"应用效果"按钮，工具会根据您的设置处理图片。右侧预览区域会实时显示处理后的效果。如果勾选了"应用到所有图片"选项，所有已上传的图片都会应用相同的设置。</p>
+
+                <h3>第四步：下载处理后的图片</h3>
+                <p>处理完成后，您可以点击"下载单张"下载当前选中的图片，或点击"批量下载"一次性下载所有处理后的图片。批量下载时，工具会自动将所有图片打包为 ZIP 文件。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>功能效果详解</h2>
+                
+                <div class="effect-card">
+                    <h4>旋转功能</h4>
+                    <p>支持 -180° 到 180° 的任意角度旋转，采用高质量插值算法，确保旋转后的图片保持清晰锐利。</p>
+                    <div class="effect-scenarios">
+                        <span class="effect-scenario">纠正拍摄角度</span>
+                        <span class="effect-scenario">调整图片方向</span>
+                        <span class="effect-scenario">创建特殊角度</span>
+                        <span class="effect-scenario">批量处理照片</span>
+                    </div>
+                </div>
+
+                <div class="effect-card">
+                    <h4>高斯模糊功能</h4>
+                    <p>采用先进的高斯模糊算法，支持 0 到 20 级模糊程度调节。高斯模糊是图像处理中最常用的模糊技术，能产生自然柔和的模糊效果。</p>
+                    <div class="effect-scenarios">
+                        <span class="effect-scenario">保护隐私信息</span>
+                        <span class="effect-scenario">创建背景虚化</span>
+                        <span class="effect-scenario">艺术效果处理</span>
+                        <span class="effect-scenario">突出主体内容</span>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>摄影爱好者：</strong>批量纠正拍摄角度，调整照片方向，创建艺术效果，提升作品质量。</p>
+                <p><strong>社交媒体用户：</strong>处理分享图片，模糊敏感信息，调整图片方向，让分享更加安全和美观。</p>
+                <p><strong>内容创作者：</strong>在视频剪辑、图文创作中处理素材图片，创建模糊背景突出主体。</p>
+                <p><strong>企业办公人员：</strong>处理文档中的图片，模糊保密信息，确保信息安全。</p>
+                <p><strong>设计师：</strong>在设计过程中快速处理图片，创建各种视觉效果，提高工作效率。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">支持批量处理（30张）</span>
+                    <span class="feature-tag">任意角度旋转</span>
+                    <span class="feature-tag">快捷旋转按钮</span>
+                    <span class="feature-tag">可调高斯模糊</span>
+                    <span class="feature-tag">实时预览效果</span>
+                    <span class="feature-tag">应用到全部/单张</span>
+                    <span class="feature-tag">一键批量下载</span>
+                </div>
+                <p>工具的"应用到所有图片"功能非常实用，当您需要对多张图片应用相同的旋转角度和模糊程度时，只需设置一次，即可批量处理所有图片，大大提高工作效率。同时，双击预览图片可以全屏查看，方便您仔细检查处理效果。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>旋转角度设置范围为 -180° 到 180°，超出范围会自动调整到有效范围内</li>
+                        <li>模糊程度设置范围为 0 到 20，值越大模糊效果越明显</li>
+                        <li>勾选"应用到所有图片"后，设置会自动应用到所有已上传的图片</li>
+                        <li>GIF 动态图片仅处理第一帧，如需处理完整动图请使用其他工具</li>
+                        <li>处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失</li>
+                        <li>建议使用 Chrome、Firefox、Safari 等现代浏览器以获得最佳性能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #0D9488; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片旋转与模糊工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../cropping/index.html" class="tool-link">图片裁剪工具</a>
+                <a href="../compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../convert/index.html" class="tool-link">图片格式转换工具</a>
+                <a href="../backcolor/index.html" class="tool-link">图片背景色切换工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

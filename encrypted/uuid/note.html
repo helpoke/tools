@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="UUID生成工具说明，批量生成唯一标识符UUID，支持带连字符与无连字符格式，本地处理保护隐私">
+    <meta name="keywords" content="UUID生成器, UUID在线生成, 唯一标识符生成, 批量生成UUID, 免费UUID工具, GUID生成器, UUID转换, 在线GUID生成">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>UUID 生成工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #10B981;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #10B981;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #10B981;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #10B981;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #10B981;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .uuid-versions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .uuid-version {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .uuid-version .version-name {
+            font-weight: 600;
+            color: #10B981;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .uuid-version .version-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .uuid-versions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>UUID 生成工具 - 免费、安全、快速</h1>
+            <p class="subtitle">批量生成唯一标识符UUID，支持带连字符与无连字符格式，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是UUID生成工具？</h2>
+                <p>UUID生成工具是一款专业的唯一标识符生成工具，专为需要生成UUID的用户设计。UUID（Universally Unique Identifier）是一种128位的全局唯一标识符，也被称为GUID（Globally Unique Identifier）。UUID在分布式系统、数据库主键、会话标识等场景中广泛使用，可以确保生成的标识符在全球范围内不重复。</p>
+                <p>工具支持生成UUID版本4（随机UUID），这是最常用的UUID版本。UUID v4使用随机数生成，具有极高的唯一性保证，碰撞概率极低。同时，工具支持两种输出格式：带连字符的标准格式（如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx）和无连字符的紧凑格式，满足不同应用场景的需求。所有生成过程均在浏览器本地完成。</p>
+
+                <h2>如何使用？</h2>
+                <h3>单个UUID生成</h3>
+                <p>点击"生成UUID"按钮，工具会立即生成一个UUID字符串。您可以选择输出格式：带连字符或无连字符。生成的UUID可以直接复制用于其他用途，如数据库主键、会话标识、文件名等。</p>
+
+                <h3>批量UUID生成</h3>
+                <p>设置需要生成的UUID数量，点击"批量生成"按钮。工具会一次性生成多个UUID，以列表形式显示。批量生成适合需要大量唯一标识符的场景，如批量数据导入、测试数据生成等。</p>
+
+                <h3>格式选择</h3>
+                <p>标准格式（带连字符）：8-4-4-4-12的格式，如550e8400-e29b-41d4-a716-446655440000。紧凑格式（无连字符）：32个连续字符，适合需要紧凑存储或传输的场景。两种格式可以根据实际需求自由选择。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>UUID版本说明</h2>
+                
+                <div class="uuid-versions">
+                    <div class="uuid-version">
+                        <div class="version-name">UUID v4（随机）</div>
+                        <div class="version-desc">使用随机数生成，最常用版本，碰撞概率极低</div>
+                    </div>
+                    <div class="uuid-version">
+                        <div class="version-name">标准格式（带连字符）</div>
+                        <div class="version-desc">8-4-4-4-12格式，符合RFC 4122标准</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>数据库设计师：</strong>为分布式数据库设计全局唯一主键，避免主键冲突。</p>
+                <p><strong>软件开发者：</strong>生成唯一标识符用于对象ID、会话ID、请求追踪ID等。</p>
+                <p><strong>系统架构师：</strong>设计分布式系统的唯一标识方案，确保跨系统不冲突。</p>
+                <p><strong>测试工程师：</strong>批量生成测试数据标识符，进行自动化测试。</p>
+                <p><strong>运维工程师：</strong>生成唯一标识符用于日志追踪、事件标识等。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">UUID v4生成</span>
+                    <span class="feature-tag">批量生成支持</span>
+                    <span class="feature-tag">带连字符格式</span>
+                    <span class="feature-tag">无连字符格式</span>
+                    <span class="feature-tag">全局唯一性</span>
+                    <span class="feature-tag">一键复制结果</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有UUID生成都在您的浏览器中完成，生成的UUID不会上传到任何服务器。这意味着您的标识符始终处于您的控制之下。UUID v4使用高质量随机数生成，确保生成的标识符具有极高的唯一性，碰撞概率约为10^-18，可以放心用于各种需要唯一标识的场景。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>UUID v4基于随机数生成，碰撞概率极低但非零</li>
+                        <li>标准UUID长度为36字符（带连字符）或32字符（无连字符）</li>
+                        <li>UUID不包含任何业务信息，仅作为唯一标识使用</li>
+                        <li>批量生成大量UUID可能需要一定时间</li>
+                        <li>生成的UUID建议妥善保存，避免重复使用</li>
+                        <li>UUID本身不提供安全性，仅提供唯一性</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #10B981; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用UUID生成工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../token/index.html" class="tool-link">Token生成工具</a>
+                <a href="../pwd/index.html" class="tool-link">随机密码生成工具</a>
+                <a href="../encoding-base64/index.html" class="tool-link">Base64编解码工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

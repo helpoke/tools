@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="XML在线格式化工具, XML压缩, XML与JSON互转, 免费XML格式化工具">
+    <meta name="keywords" content="XML格式化, XML在线格式化, XML压缩, XML转JSON, JSON转XML, 免费XML工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>XML 格式化工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            margin: 0 auto;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn.accent {
+            background-color: #27ae60;
+        }
+
+        .btn.accent:hover {
+            background-color: #229954;
+        }
+
+        .btn.warn {
+            background-color: #e67e22;
+        }
+
+        .btn.warn:hover {
+            background-color: #d35400;
+        }
+
+        .btn.gray {
+            background-color: #95a5a6;
+        }
+
+        .btn.gray:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn.copy {
+            background-color: #25339f;
+        }
+
+        .btn.copy:hover {
+            background-color: #0d5a60;
+        }
+
+        .io-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .io-panels {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .io-panel label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .io-panel textarea {
+            width: 100%;
+            height: 600px;
+            background: var(--bg-tertiary);
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            resize: vertical;
+            box-sizing: border-box;
+            tab-size: 2;
+        }
+
+        .io-panel textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .output-toolbar {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 10px 12px;
+        }
+
+        .stats span {
+            white-space: nowrap;
+        }
+
+        .error-msg {
+            background: #fdf0ef;
+            color: #c0392b;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: none;
+            word-break: break-all;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .toolbar {
+                gap: 6px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+
+        .xml-tag {
+            color: #e74c3c;
+        }
+
+        .xml-attr {
+            color: #f39c12;
+        }
+
+        .xml-val {
+            color: #27ae60;
+        }
+
+        .xml-comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .error-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-box {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn {
+            border-color: var(--border-color);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "XML格式化工具",
+        "description": "XML在线格式化工具，支持XML压缩、XML与JSON互转功能。免费在线XML处理工具。Online XML formatter with compression and JSON conversion features.",
+        "url": "https://helpoke.com/xml",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "XML代码格式化美化",
+            "XML压缩功能",
+            "XML与JSON互转",
+            "语法高亮显示",
+            "一键复制结果",
+            "在线处理，无需安装"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">XML 格式化工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>XML 格式化 / 压缩 / XML↔JSON 互转，离线工具</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="toolbar">
+                    <button class="btn" onclick="doFormat()" title="格式化 XML（缩进美化）">格式化</button>
+                    <button class="btn" onclick="doMinify()" title="压缩 XML（去除空白）">压缩</button>
+                    <button class="btn accent" onclick="doXml2Json()" title="XML 转 JSON">转 JSON</button>
+                    <button class="btn accent" onclick="doJson2Xml()" title="JSON 转 XML">转 XML</button>
+                    <button class="btn copy" onclick="doCopy()">复制</button>
+                    <button class="btn gray" onclick="doClear()">清空</button>
+                </div>
+
+                <div class="error-msg" id="error"></div>
+
+                <div class="io-panels">
+                    <div class="io-panel">
+                        <label for="input-xml">输入</label>
+                        <textarea id="input-xml" placeholder='&lt;?xml version="1.0"?&gt;
+&lt;root&gt;
+&lt;item id="1"&gt;示例&lt;/item&gt;
+&lt;/root&gt;'>&lt;?xml version="1.0"?&gt;
+&lt;root&gt;
+&lt;item id="1"&gt;示例&lt;/item&gt;
+&lt;item id="2"&gt;测试&lt;/item&gt;
+&lt;/root&gt;</textarea>
+                    </div>
+                    <div class="io-panel">
+                        <label for="output-xml">输出</label>
+                        <textarea id="output-xml" readonly placeholder="处理结果将显示在此"></textarea>
+                    </div>
+                </div>
+
+                <div class="stats" id="stats">
+                    <span>字符: <strong id="stat-chars">0</strong></span>
+                    <span>行数: <strong id="stat-lines">0</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        function hideError() {
+            document.getElementById('error').classList.remove('show');
+        }
+
+        function showError(msg) {
+            var el = document.getElementById('error');
+            el.textContent = msg;
+            el.classList.add('show');
+        }
+
+        function getInput() {
+            return document.getElementById('input-xml').value;
+        }
+
+        function setOutput(val) {
+            document.getElementById('output-xml').value = val;
+            updateStats(val);
+        }
+
+        function updateStats(val) {
+            document.getElementById('stat-chars').textContent = val.length;
+            document.getElementById('stat-lines').textContent = val ? val.split('\n').length : 0;
+        }
+
+        function escapeXml(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+        }
+
+        // 格式化 XML —— DOM 递归缩进
+        function formatXmlNode(node, depth) {
+            var prefix = '';
+            for (var i = 0; i < depth; i++) prefix += '  ';
+
+            if (node.nodeType === 1) {
+                var tag = '<' + node.nodeName;
+                for (var a = 0; a < node.attributes.length; a++) {
+                    var attr = node.attributes[a];
+                    tag += ' ' + attr.name + '="' + escapeXml(attr.value) + '"';
+                }
+
+                var hasChild = node.childNodes.length > 0;
+                var hasElem = false;
+                for (var c = 0; c < node.childNodes.length; c++) {
+                    if (node.childNodes[c].nodeType === 1) { hasElem = true; break; }
+                }
+
+                if (!hasChild) {
+                    return prefix + tag + '/>';
+                }
+                if (!hasElem) {
+                    var txt = node.textContent || '';
+                    return prefix + tag + '>' + txt + '</' + node.nodeName + '>';
+                }
+
+                var lines = [prefix + tag + '>'];
+                for (var d = 0; d < node.childNodes.length; d++) {
+                    var childLine = formatXmlNode(node.childNodes[d], depth + 1);
+                    if (childLine) lines.push(childLine);
+                }
+                lines.push(prefix + '</' + node.nodeName + '>');
+                return lines.join('\n');
+            }
+            if (node.nodeType === 4) {
+                return prefix + '<![CDATA[' + node.nodeValue + ']]>';
+            }
+            if (node.nodeType === 8) {
+                return prefix + '<!--' + node.nodeValue + '-->';
+            }
+            return '';
+        }
+
+        function formatXml(xml) {
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(xml, 'text/xml');
+            var err = doc.querySelector('parsererror');
+            if (err) throw new Error(err.textContent.replace(/\n/g, ' '));
+            var decl = '';
+            if (doc.xmlVersion) {
+                decl = '<?xml version="' + doc.xmlVersion + '" encoding="UTF-8"?>';
+            }
+            var body = formatXmlNode(doc.documentElement, 0);
+            return decl ? decl + '\n' + body : body;
+        }
+
+        function doFormat() {
+            hideError();
+            var xml = getInput().trim();
+            if (!xml) { showError('请输入 XML 内容'); return; }
+            try {
+                setOutput(formatXml(xml));
+            } catch (e) {
+                showError('XML 解析错误: ' + e.message);
+            }
+        }
+
+        // 压缩 XML
+        function doMinify() {
+            hideError();
+            var xml = getInput().trim();
+            if (!xml) { showError('请输入 XML 内容'); return; }
+            try {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xml, 'text/xml');
+                var err = doc.querySelector('parsererror');
+                if (err) {
+                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    return;
+                }
+                var serializer = new XMLSerializer();
+                var minified = serializer.serializeToString(doc);
+                // 去除声明与根元素之间的空白
+                minified = minified.replace(/>\s+</g, '><');
+                minified = minified.replace(/\?>\s+</g, '?><');
+                setOutput(minified);
+            } catch (e) {
+                showError('压缩失败: ' + e.message);
+            }
+        }
+
+        // XML → JSON（属性直接放对象上，文本内容用 value 键）
+        function xmlToJson(xml) {
+            var obj = {};
+
+            if (xml.nodeType === 3 || xml.nodeType === 4) {
+                return xml.nodeValue.trim() || '';
+            }
+
+            if (xml.nodeType === 1) {
+                // 属性直接放到对象上
+                for (var j = 0; j < xml.attributes.length; j++) {
+                    var attr = xml.attributes.item(j);
+                    obj[attr.nodeName] = attr.nodeValue;
+                }
+
+                var hasElementChild = false;
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    if (xml.childNodes[i].nodeType === 1) { hasElementChild = true; break; }
+                }
+
+                if (!hasElementChild) {
+                    var text = xml.textContent;
+                    if (Object.keys(obj).length === 0) return text;
+                    obj.value = text;
+                    return obj;
+                }
+
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    var child = xml.childNodes[i];
+                    if (child.nodeType === 3) {
+                        var tv = child.nodeValue.trim();
+                        if (tv) obj.value = (obj.value || '') + tv;
+                        continue;
+                    }
+                    if (child.nodeType !== 1) continue;
+                    var nodeName = child.nodeName;
+                    var childObj = xmlToJson(child);
+                    if (obj[nodeName] === undefined) {
+                        obj[nodeName] = childObj;
+                    } else {
+                        if (!Array.isArray(obj[nodeName])) {
+                            obj[nodeName] = [obj[nodeName]];
+                        }
+                        obj[nodeName].push(childObj);
+                    }
+                }
+            }
+
+            return obj;
+        }
+
+        function doXml2Json() {
+            hideError();
+            var xml = getInput().trim();
+            if (!xml) { showError('请输入 XML 内容'); return; }
+            try {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xml, 'text/xml');
+                var err = doc.querySelector('parsererror');
+                if (err) {
+                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    return;
+                }
+                var result = xmlToJson(doc.documentElement);
+                var wrapper = {};
+                wrapper[doc.documentElement.nodeName] = result;
+                setOutput(JSON.stringify(wrapper, null, 2));
+            } catch (e) {
+                showError('转换失败: ' + e.message);
+            }
+        }
+
+        // JSON → XML（value 键→文本内容，基础类型→属性，对象/数组→子元素）
+        function jsonToXml(obj, rootName) {
+            rootName = rootName || 'root';
+
+            function buildXml(obj, nodeName, indent) {
+                indent = indent || '';
+                if (obj === null || obj === undefined) return '';
+
+                if (typeof obj !== 'object') {
+                    return indent + '<' + nodeName + '>' + escapeXml(String(obj)) + '</' + nodeName + '>\n';
+                }
+
+                if (Array.isArray(obj)) {
+                    var arrXml = '';
+                    for (var i = 0; i < obj.length; i++) {
+                        arrXml += buildXml(obj[i], nodeName, indent);
+                    }
+                    return arrXml;
+                }
+
+                var attrs = '';
+                var textVal = '';
+                var children = '';
+
+                var keys = Object.keys(obj);
+                for (var i = 0; i < keys.length; i++) {
+                    var k = keys[i];
+                    var v = obj[k];
+                    if (k === 'value') {
+                        textVal = escapeXml(String(v));
+                    } else if (typeof v === 'object' && v !== null) {
+                        if (Array.isArray(v)) {
+                            for (var j = 0; j < v.length; j++) {
+                                children += buildXml(v[j], k, indent + '  ');
+                            }
+                        } else {
+                            children += buildXml(v, k, indent + '  ');
+                        }
+                    } else {
+                        attrs += ' ' + k + '="' + escapeXml(String(v)) + '"';
+                    }
+                }
+
+                if (!children && !textVal) {
+                    return indent + '<' + nodeName + attrs + '/>\n';
+                }
+                if (!children) {
+                    return indent + '<' + nodeName + attrs + '>' + textVal + '</' + nodeName + '>\n';
+                }
+                return indent + '<' + nodeName + attrs + '>\n' + children + indent + '</' + nodeName + '>\n';
+            }
+
+            if (typeof obj === 'object' && !Array.isArray(obj)) {
+                var rootKeys = Object.keys(obj);
+                if (rootKeys.length === 1) {
+                    rootName = rootKeys[0];
+                    obj = obj[rootName];
+                }
+            }
+
+            return '<?xml version="1.0" encoding="UTF-8"?>\n' + buildXml(obj, rootName).trimEnd();
+        }
+
+        function doJson2Xml() {
+            hideError();
+            var input = getInput().trim();
+            if (!input) { showError('请输入 JSON 内容'); return; }
+            try {
+                var obj = JSON.parse(input);
+                var xml = jsonToXml(obj);
+                setOutput(xml);
+            } catch (e) {
+                showError('JSON 解析错误: ' + e.message);
+            }
+        }
+
+        function doClear() {
+            hideError();
+            document.getElementById('input-xml').value = '';
+            document.getElementById('output-xml').value = '';
+            updateStats('');
+        }
+
+        function doCopy() {
+            var text = document.getElementById('output-xml').value;
+            navigator.clipboard.writeText(text).then(function () {
+                utils.showSuccess('已复制到剪贴板！');
+            }).catch(function () {
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // 快捷键 Ctrl+Enter 格式化
+        document.getElementById('input-xml').addEventListener('keydown', function (e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                doFormat();
+            }
+        });
+
+        // 初始格式化
+        doFormat();
+    </script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="内容对比工具说明，文本差异比对，文件内容对比，逐行差异高亮，离线工具保护数据安全">
+    <meta name="keywords" content="内容对比, 文本比对, 文件对比, 差异比较, diff工具, 在线对比, 免费工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>内容对比工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #8B5CF6;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8B5CF6;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #8B5CF6;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #8B5CF6;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8B5CF6;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .diff-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .diff-type {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .diff-type .type-name {
+            font-weight: 600;
+            color: #8B5CF6;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .diff-type .type-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .diff-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>内容对比工具 - 免费、安全、快速</h1>
+            <p class="subtitle">文本差异比对，文件内容对比，逐行差异高亮，离线工具保护数据安全</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是内容对比工具？</h2>
+                <p>内容对比工具是一款专业的在线文本差异比对工具，专为需要对比两份文本内容的用户设计。在代码开发、文档编辑、内容审核等场景中，我们经常需要对比两个版本的文本，找出它们之间的差异。这款工具可以帮助您快速、准确地识别文本之间的不同之处。</p>
+                <p>工具采用双面板布局，左侧显示原始文本，右侧显示对比文本。差异部分会以不同颜色高亮显示：红色表示删除的内容，绿色表示新增的内容，黄色表示修改的内容。工具支持逐行对比，清晰展示每一行的变化情况。所有对比均在浏览器本地完成，您的文本内容不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：输入对比内容</h3>
+                <p>在左侧面板输入原始文本，右侧面板输入对比文本。您可以直接粘贴文本，也可以上传文件进行对比。工具支持各种文本格式，包括代码、文档、配置文件等。</p>
+
+                <h3>第二步：执行对比</h3>
+                <p>点击"对比"按钮，工具会自动分析两份文本的差异。分析完成后，差异部分会以颜色高亮显示，便于识别。工具支持智能对比，可以识别行内变化和整行变化。</p>
+
+                <h3>第三步：查看差异</h3>
+                <p>仔细查看高亮显示的差异部分，理解文本的变化情况。红色表示原始文本中有但对比文本中删除的内容，绿色表示对比文本中新增的内容。您可以滚动查看所有差异，也可以点击跳转按钮快速定位到下一个差异点。</p>
+
+                <h3>第四步：导出结果</h3>
+                <p>如果需要保存对比结果，可以复制对比后的文本或导出为HTML文件。导出的文件会保留颜色高亮，方便后续查看和分享。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>差异类型说明</h2>
+                
+                <div class="diff-types">
+                    <div class="diff-type">
+                        <div class="type-name">删除内容</div>
+                        <div class="type-desc">原始文本中有，对比文本中被删除的内容</div>
+                    </div>
+                    <div class="diff-type">
+                        <div class="type-name">新增内容</div>
+                        <div class="type-desc">对比文本中新增，原始文本中没有的内容</div>
+                    </div>
+                    <div class="diff-type">
+                        <div class="type-name">修改内容</div>
+                        <div class="type-desc">同一行内发生变化的内容</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>程序员：</strong>对比代码版本差异，查看代码变更，进行代码审查。</p>
+                <p><strong>文档编辑：</strong>对比文档的不同版本，查看修改内容，进行版本管理。</p>
+                <p><strong>内容审核：</strong>对比文章修改前后的差异，确保内容质量。</p>
+                <p><strong>学生：</strong>对比作业修改前后的内容，学习修改建议。</p>
+                <p><strong>研究人员：</strong>对比数据文件差异，分析数据变化。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">逐行差异对比</span>
+                    <span class="feature-tag">颜色高亮显示</span>
+                    <span class="feature-tag">支持文件上传</span>
+                    <span class="feature-tag">智能差异识别</span>
+                    <span class="feature-tag">差异跳转定位</span>
+                    <span class="feature-tag">结果导出</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有文本对比都在您的浏览器中完成，文本内容不会上传到任何服务器。这意味着您的代码、文档等敏感信息始终处于您的控制之下，特别适合处理商业项目的代码审查和文档对比。同时，工具提供智能差异识别，可以准确识别各种类型的文本变化。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>对比结果基于文本内容，格式差异可能影响对比准确性</li>
+                        <li>建议在对比前统一文本格式，确保准确对比</li>
+                        <li>大文本对比可能需要较长时间，请耐心等待</li>
+                        <li>颜色高亮仅在工具中显示，复制后可能丢失颜色信息</li>
+                        <li>建议使用导出功能保存带颜色的对比结果</li>
+                        <li>对比时请确保两份文本编码一致，避免乱码问题</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #8B5CF6; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用内容对比工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../duplicate-finder/index.html" class="tool-link">重复内容查找工具</a>
+                <a href="../text-transform/index.html" class="tool-link">大小写转换工具</a>
+                <a href="../../json/index.html" class="tool-link">JSON格式化工具</a>
+                <a href="../../md/index.html" class="tool-link">Markdown编辑器</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

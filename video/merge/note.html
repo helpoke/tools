@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频合并工具说明，支持多视频拼接和转场效果，支持添加背景音乐，纯前端处理保护隐私">
+    <meta name="keywords" content="视频合并, 视频拼接, 视频合成, 视频转场, 在线视频合并工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频合并工具 - 免费、安全、快速拼接视频</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #2563EB;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2563EB;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        .info-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .info-section ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tool-section h2 {
+            color: #2563EB;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2563EB;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .author-info p {
+            margin: 8px 0;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .related-tools h2 {
+            color: #2563EB;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2563EB;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #2563EB;
+            color: white;
+            border-color: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+            border-left: 4px solid #3B82F6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0 !important;
+        }
+
+        .transition-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .transition-item {
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .transition-item .name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .transition-item .desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .transition-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>视频合并工具</h1>
+            <p class="subtitle">免费、安全、快速拼接多个视频</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这是什么工具？</h2>
+                <p>
+                    视频合并工具是一款功能强大的在线视频拼接工具，可以将多个视频片段无缝合成为一个完整的视频。在日常拍摄中，我们通常会将内容分成多个短片段录制；下载的视频也可能被分割成多个文件。视频合并工具可以帮你将这些分散的视频片段整合在一起，形成一个完整的作品。
+                </p>
+                <p>
+                    除了基础的拼接功能，本工具还支持多种转场效果，让视频之间的过渡更加自然流畅。同时，你还可以添加背景音乐，为视频配上合适的背景音效，提升观看体验。所有处理都在浏览器本地完成，无需上传视频文件。
+                </p>
+
+                <h3>支持的功能</h3>
+                <ul>
+                    <li>批量上传多个视频（最多5个）</li>
+                    <li>拖拽调整视频拼接顺序</li>
+                    <li>多种转场效果可选</li>
+                    <li>添加背景音乐并调节音量</li>
+                    <li>统一视频尺寸或保持原始比例</li>
+                    <li>选择输出分辨率</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h2>如何使用这个工具？</h2>
+                <p>
+                    视频合并的操作分为几个步骤：
+                </p>
+                <p>
+                    <strong>第一步：上传视频。</strong> 点击上传区域，选择要合并的多个视频文件。工具支持一次选择多个视频，最多可以上传5个视频片段。
+                </p>
+                <p>
+                    <strong>第二步：调整视频顺序。</strong> 上传后，可以在列表中拖拽调整视频的拼接顺序。越靠前的视频会放在最终合成视频的前面位置。
+                </p>
+                <p>
+                    <strong>第三步：设置尺寸和转场。</strong> 选择输出分辨率（1080p/720p/480p等）、尺寸处理方式（统一/保持比例/原始）以及转场效果（淡入淡出/滑动等）。
+                </p>
+                <p>
+                    <strong>第四步：添加背景音乐（可选）。</strong> 如果需要添加背景音乐，可以上传音频文件，并调节音量大小。
+                </p>
+                <p>
+                    <strong>第五步：开始处理。</strong> 点击"开始处理"按钮，等待所有视频合并完成后下载结果。
+                </p>
+
+                <div class="highlight-box">
+                    <p><strong>处理时间说明：</strong> 视频合并需要重新编码所有视频帧，处理时间取决于视频总长度和数量。请耐心等待，不要关闭浏览器。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>转场效果类型</h2>
+            <p>转场效果是指两个视频片段切换时的过渡动画，可以让视频更加流畅自然。以下是本工具支持的转场效果：</p>
+            <div class="transition-list">
+                <div class="transition-item">
+                    <div class="name">淡入淡出</div>
+                    <div class="desc">前一个视频渐隐，后一个视频渐显</div>
+                </div>
+                <div class="transition-item">
+                    <div class="name">向左滑动</div>
+                    <div class="desc">画面向左滑动切换到下一段</div>
+                </div>
+                <div class="transition-item">
+                    <div class="name">向右滑动</div>
+                    <div class="desc">画面向右滑动切换到下一段</div>
+                </div>
+                <div class="transition-item">
+                    <div class="name">向上滑动</div>
+                    <div class="desc">画面向上滑动切换到下一段</div>
+                </div>
+                <div class="transition-item">
+                    <div class="name">向下滑动</div>
+                    <div class="desc">画面向下滑动切换到下一段</div>
+                </div>
+                <div class="transition-item">
+                    <div class="name">无转场</div>
+                    <div class="desc">直接切换，适合快速节奏内容</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>适用场景与人群</h2>
+            <p>
+                <strong>Vlog创作者：</strong> 将一天中拍摄的多个片段合并为一个完整的Vlog，配合转场效果和背景音乐，让作品更具观赏性。
+            </p>
+            <p>
+                <strong>婚礼纪念册：</strong> 将求婚、订婚、婚礼等各个重要时刻的视频片段合并为一个完整的故事，配上浪漫的背景音乐。
+            </p>
+            <p>
+                <strong>教育培训视频：</strong> 将多段课程视频合并为一个完整的教程，添加统一的片头片尾和背景音乐。
+            </p>
+            <p>
+                <strong>游戏集锦：</strong> 将多场游戏的精彩片段合并为一个集锦视频，添加动感的背景音乐作为BGM。
+            </p>
+            <p>
+                <strong>企业宣传片：</strong> 将公司介绍、产品展示、客户评价等多个视频片段整合为一个完整的宣传视频。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>使用注意事项</h2>
+            <p>
+                <strong>视频数量限制：</strong> 每次最多可以上传5个视频进行合并。如果需要合并更多视频，建议分批处理后再合并。
+            </p>
+            <p>
+                <strong>单个文件大小：</strong> 每个视频文件最大支持100MB。建议选择适当质量的视频，过大的视频会增加处理时间。
+            </p>
+            <p>
+                <strong>尺寸不一致处理：</strong> 如果上传的视频尺寸不一致，可以选择"统一尺寸"将所有视频调整为第一个视频的尺寸，或选择"保持宽高比"自动添加黑边填充。
+            </p>
+            <p>
+                <strong>背景音乐建议：</strong> 添加的背景音乐时长最好与视频总时长相近或略长。如果音乐比视频短，会在结尾停止；如果是纯音乐循环，通常不需要太长的音频文件。
+            </p>
+            <p>
+                <strong>版权提醒：</strong> 使用的背景音乐请确保有合法的使用授权，避免侵犯他人版权。
+            </p>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #2563EB; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频合并工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p>© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../cropping/index.html" class="tool-link">视频裁剪工具</a>
+                <a href="../compress/index.html" class="tool-link">视频压缩工具</a>
+                <a href="../edit/index.html" class="tool-link">视频编辑工具</a>
+                <a href="../convert/index.html" class="tool-link">视频格式转换</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

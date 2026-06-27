@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频裁剪工具说明，支持按时间长度和尺寸大小裁剪视频，实时预览裁剪效果，纯前端处理保护隐私">
+    <meta name="keywords" content="视频裁剪, 视频剪辑, 视频剪切, 免费视频裁剪, 在线视频裁剪工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频裁剪工具 - 免费、安全、快速剪辑视频</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #7C3AED;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #7C3AED;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        .info-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .info-section ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tool-section h2 {
+            color: #7C3AED;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #7C3AED;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .author-info p {
+            margin: 8px 0;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .related-tools h2 {
+            color: #7C3AED;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #7C3AED;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #7C3AED;
+            color: white;
+            border-color: #7C3AED;
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
+            border-left: 4px solid #8B5CF6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0 !important;
+        }
+
+        .step-list {
+            counter-reset: step;
+        }
+
+        .step-list li {
+            padding-left: 50px !important;
+        }
+
+        .step-list li::before {
+            content: counter(step) !important;
+            counter-increment: step;
+            background: #7C3AED;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>视频裁剪工具</h1>
+            <p class="subtitle">免费、安全、精准裁剪视频片段</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这是什么工具？</h2>
+                <p>
+                    视频裁剪工具是一款专注于视频片段截取的在线工具。在视频编辑的众多需求中，裁剪是最基础也是最常用的功能之一。无论是想要去除视频开头或结尾不需要的部分，还是只想保留视频中间某个精彩的片段，裁剪工具都能帮你快速完成。
+                </p>
+                <p>
+                    与传统的视频编辑软件相比，本工具无需下载安装任何程序，打开网页即可使用。更重要的是，所有裁剪处理都在你的浏览器本地完成，视频文件不会被上传到任何服务器，真正做到保护你的隐私数据安全。
+                </p>
+
+                <h3>两种裁剪模式</h3>
+                <p>
+                    <strong>时间裁剪：</strong> 通过设置开始时间和结束时间，精确截取视频的某个时间段。适合只需要视频某一部分的场景，比如从会议录像中提取关键发言片段。
+                </p>
+                <p>
+                    <strong>尺寸裁剪：</strong> 通过设置裁剪框的位置和大小，去除视频四周不需要的画面区域。适合去除视频边框、水印或调整画面构图。
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>如何使用这个工具？</h2>
+                <p>
+                    视频裁剪工具提供两种裁剪方式，可以根据你的需求选择合适的模式：
+                </p>
+                <p>
+                    <strong>时间裁剪步骤：</strong>
+                </p>
+                <ul class="step-list">
+                    <li>上传视频文件到网页</li>
+                    <li>在时长设置区域输入开始时间和结束时间（单位为秒）</li>
+                    <li>点击"开始执行裁剪"按钮</li>
+                    <li>等待处理完成后下载裁剪结果</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>尺寸裁剪步骤：</strong>
+                </p>
+                <ul class="step-list">
+                    <li>上传视频后，视频画面上会出现裁剪框</li>
+                    <li>拖动裁剪框边缘调整大小，或拖动裁剪框内部移动位置</li>
+                    <li>也可以通过参数精确设置裁剪的坐标和尺寸</li>
+                    <li>点击"开始执行裁剪"完成处理</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><strong>实用技巧：</strong> 可以同时使用时间裁剪和尺寸裁剪，先设置时间段再调整裁剪框位置，实现更精细的编辑效果。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>核心功能特点</h2>
+            <ul>
+                <li><strong>时间精准控制：</strong> 支持以0.1秒为精度设置裁剪时间点，确保截取的片段分毫不差</li>
+                <li><strong>尺寸自由裁剪：</strong> 可视化拖拽调整裁剪区域，也可以手动输入精确的坐标数值</li>
+                <li><strong>实时预览：</strong> 调整参数时可以在视频上实时看到裁剪区域的预览效果</li>
+                <li><strong>双重裁剪模式：</strong> 支持时间裁剪和尺寸裁剪两种方式，满足不同场景需求</li>
+                <li><strong>纯本地处理：</strong> 视频全程在浏览器中处理，无需上传服务器，保护隐私安全</li>
+                <li><strong>多格式支持：</strong> 支持 MP4、WebM、AVI、MOV 等主流视频格式</li>
+            </ul>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>适用场景与人群</h2>
+            <p>
+                <strong>短视频创作者：</strong> 从拍摄的长视频中截取最精彩的片段，去除多余的试拍或准备部分，制作精炼的短视频内容。
+            </p>
+            <p>
+                <strong>教育培训人员：</strong> 从课程录像中截取特定章节或知识点片段，方便学生针对性复习或制作教学精华版。
+            </p>
+            <p>
+                <strong>会议记录人员：</strong> 从会议录像中提取领导发言或重点讨论环节，去除无关的等待和讨论时间。
+            </p>
+            <p>
+                <strong>社交媒体用户：</strong> 将横屏视频裁剪为竖屏尺寸，适合抖音、快手等短视频平台的发布需求。
+            </p>
+            <p>
+                <strong>内容编辑工作者：</strong> 去除视频中的广告片段、水印区域或不需要的画面元素，清理素材内容。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>使用注意事项</h2>
+            <p>
+                <strong>文件大小限制：</strong> 当前版本建议上传不超过100MB的视频文件。过大的视频可能会导致处理时间过长或浏览器性能下降。
+            </p>
+            <p>
+                <strong>视频质量说明：</strong> 裁剪后的视频会保持与原始视频相同的质量和编码，因此文件体积不会有明显减小。如需压缩，请另行使用视频压缩工具。
+            </p>
+            <p>
+                <strong>时间参数设置：</strong> 结束时间必须大于开始时间，且不能超过视频总时长。建议先查看视频总时长再设置参数。
+            </p>
+            <p>
+                <strong>尺寸裁剪预览：</strong> 裁剪框外的区域会以暗色遮罩显示，帮助你直观判断裁剪范围是否正确。
+            </p>
+            <p>
+                <strong>浏览器兼容性：</strong> 建议使用 Chrome、Firefox、Edge 等现代浏览器，以获得最佳的使用体验和处理性能。
+            </p>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #7C3AED; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频裁剪工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p>© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../compress/index.html" class="tool-link">视频压缩工具</a>
+                <a href="../convert/index.html" class="tool-link">视频格式转换</a>
+                <a href="../edit/index.html" class="tool-link">视频编辑工具</a>
+                <a href="../merge/index.html" class="tool-link">视频合并工具</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

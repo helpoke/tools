@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线时间戳转换工具, Unix时间戳转日期, 日期转Unix时间戳, 支持秒/毫秒级精度, 多时区显示, 免费在线时间戳工具">
+    <meta name="keywords" content="时间戳转换, Unix时间戳, 时间戳转日期, 日期转时间戳, 在线时间戳, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>时间戳转换工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* Current timestamp bar */
+        .current-ts-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .current-ts-label {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-bottom: 4px;
+        }
+
+        .current-ts-value {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .current-ts-live {
+            font-size: 12px;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .current-ts-live .dot {
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .btn-copy-ts {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-ts:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-copy-ts.copied {
+            background: rgba(46, 204, 113, 0.5);
+        }
+
+        /* Input group */
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            transition: border-color 0.3s;
+        }
+
+        .input-row input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .input-row input.error {
+            border-color: #e74c3c;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
+
+        /* Format toggle: seconds / milliseconds */
+        .unit-toggle {
+            display: flex;
+            gap: 0;
+            margin-bottom: 12px;
+        }
+
+        .unit-toggle button {
+            padding: 6px 16px;
+            border: 1px solid #eaeaea;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #7f8c8d;
+            transition: all 0.2s;
+        }
+
+        .unit-toggle button:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        .unit-toggle button:last-child {
+            border-radius: 0 6px 6px 0;
+            border-left: none;
+        }
+
+        .unit-toggle button.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        /* Result card */
+        .result-section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eaeaea;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .format-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .format-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+
+        .format-item:hover {
+            background: #f0f4ff;
+            border-color: #c5d5f7;
+        }
+
+        .format-label {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 500;
+            min-width: 100px;
+        }
+
+        .format-value {
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn-copy {
+            background: none;
+            border: 1px solid #eaeaea;
+            color: #7f8c8d;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .btn-copy.copied {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        /* Relative time */
+        .relative-time {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            font-size: 15px;
+            color: #1a5276;
+            margin-bottom: 16px;
+        }
+
+        /* Date to timestamp tab */
+        .datetime-picker-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .datetime-picker-row input[type="datetime-local"] {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .datetime-picker-row input[type="datetime-local"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .dt-result {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-top: 16px;
+        }
+
+        .dt-result-value {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            color: #2c3e50;
+            margin: 8px 0;
+        }
+
+        /* Timezone info */
+        .tz-info {
+            font-size: 12px;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .error-box {
+            background-color: #fef0ef;
+            border: 1px solid #f5c6c2;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: #721c24;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .input-row {
+                flex-direction: column;
+            }
+
+            .current-ts-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .current-ts-value {
+                font-size: 22px;
+            }
+
+            .format-item {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .format-value {
+                text-align: left;
+                flex: unset;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px 12px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+
+            .input-row input {
+                font-size: 16px;
+            }
+
+            .dt-result-value {
+                font-size: 22px;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tabs {
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .tab-btn:hover,
+        body.dark-mode .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .tab-btn.active {
+            border-bottom-color: var(--primary-color);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="datetime-local"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-outline {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .unit-toggle button {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .unit-toggle button:hover:not(.active) {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .unit-toggle button.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .format-item {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .format-item:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .format-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .format-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .relative-time {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .section-title {
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .dt-result {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .dt-result-label {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .dt-result-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn-copy {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-copy:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .error-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--error-color);
+        }
+
+        body.dark-mode .tz-info {
+            color: var(--text-muted);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode .dt-result {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .btn-copy {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode input[type="datetime-local"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "时间戳转换工具",
+        "description": "在线时间戳转换工具，支持Unix时间戳转日期、日期转Unix时间戳，支持秒/毫秒级精度，多时区显示。Online timestamp converter with multi-timezone support.",
+        "url": "https://helpoke.com/timestamp",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "Unix时间戳转日期",
+            "日期转Unix时间戳",
+            "支持秒/毫秒精度",
+            "多时区显示",
+            "一键复制结果",
+            "免费在线使用"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">时间戳转换工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>Unix 时间戳与日期时间互转，支持秒/毫秒精度，实时显示当前时间戳</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <!-- Current Timestamp -->
+                <div class="current-ts-bar">
+                    <div>
+                        <div class="current-ts-label">当前时间戳</div>
+                        <div class="current-ts-value" id="live-ts">-</div>
+                        <div class="current-ts-live">
+                            <span class="dot"></span>实时更新
+                        </div>
+                    </div>
+                    <button class="btn-copy-ts" onclick="copyLiveTs()">复制</button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('ts2date')">时间戳 → 日期</button>
+                    <button class="tab-btn" onclick="switchTab('date2ts')">日期 → 时间戳</button>
+                </div>
+
+                <!-- Tab 1: Timestamp to Date -->
+                <div class="tab-panel active" id="tab-ts2date">
+                    <div class="input-group">
+                        <label for="ts-input">输入 Unix 时间戳</label>
+                        <div class="unit-toggle">
+                            <button class="active" data-unit="s" onclick="switchUnit(this, 's')">秒</button>
+                            <button data-unit="ms" onclick="switchUnit(this, 'ms')">毫秒</button>
+                        </div>
+                        <div class="input-row">
+                            <input type="text" id="ts-input" placeholder="例如: 1700000000" value="" data-name="时间戳">
+                            <button class="btn" onclick="convertTs2Date()">转换</button>
+                            <button class="btn btn-outline" onclick="useCurrentTs()">当前</button>
+                        </div>
+                    </div>
+
+                    <div id="ts-error" class="error-box" style="display:none;"></div>
+
+                    <div id="ts-result" style="display:none;">
+                        <div class="relative-time" id="relative-time"></div>
+
+                        <div class="result-section">
+                            <div class="section-title">
+                                <span>转换结果</span>
+                                <button class="btn btn-sm btn-outline" onclick="copyAllFormats()">复制全部</button>
+                            </div>
+                            <div class="format-list" id="format-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Date to Timestamp -->
+                <div class="tab-panel" id="tab-date2ts">
+                    <div class="input-group">
+                        <label for="dt-picker">选择日期时间</label>
+                        <div class="datetime-picker-row">
+                            <input type="datetime-local" id="dt-picker" step="1">
+                            <button class="btn" onclick="setDtNow()">当前时间</button>
+                            <button class="btn btn-outline" onclick="convertDate2Ts()">转换</button>
+                        </div>
+                    </div>
+                    <div class="tz-info" id="tz-info"></div>
+
+                    <div class="dt-result" id="dt-result">
+                        <div style="font-size:13px;color:#7f8c8d;margin-bottom:4px;">Unix 时间戳（秒）</div>
+                        <div class="dt-result-value" id="dt-seconds">-</div>
+                        <button class="btn btn-sm btn-copy" style="margin-bottom:16px;"
+                            onclick="copyDtResult('s')">复制</button>
+
+                        <div style="font-size:13px;color:#7f8c8d;margin-bottom:4px;">Unix 时间戳（毫秒）</div>
+                        <div class="dt-result-value" id="dt-millis">-</div>
+                        <button class="btn btn-sm btn-copy" onclick="copyDtResult('ms')">复制</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        var currentUnit = 's';
+        var lastTsResult = null;
+
+        // ===== Tab switching =====
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+            document.getElementById('tab-' + tab).classList.add('active');
+            var btns = document.querySelectorAll('.tab-btn');
+            if (tab === 'ts2date') btns[0].classList.add('active');
+            else btns[1].classList.add('active');
+        }
+
+        // ===== Unit toggle =====
+        function switchUnit(btn, unit) {
+            currentUnit = unit;
+            btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            useCurrentTs();
+        }
+
+        // ===== Live timestamp =====
+        function updateLiveTs() {
+            var now = Date.now();
+            var s = Math.floor(now / 1000);
+            document.getElementById('live-ts').textContent = s;
+            document.getElementById('live-ts').title = '毫秒: ' + now;
+        }
+
+        function copyLiveTs() {
+            var s = document.getElementById('live-ts').textContent;
+            navigator.clipboard.writeText(s).then(function () {
+                var btn = document.querySelector('.btn-copy-ts');
+                var orig = btn.textContent;
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+                utils.showSuccess('已复制当前时间戳！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        setInterval(updateLiveTs, 1000);
+        updateLiveTs();
+
+        // ===== Tab 1: Timestamp → Date =====
+        function convertTs2Date() {
+            var input = document.getElementById('ts-input');
+            var errorBox = document.getElementById('ts-error');
+            var resultDiv = document.getElementById('ts-result');
+            var raw = input.value.trim();
+
+            errorBox.style.display = 'none';
+            input.classList.remove('error');
+            resultDiv.style.display = 'none';
+
+            if (!raw) {
+                errorBox.textContent = '请输入时间戳';
+                errorBox.style.display = 'block';
+                input.classList.add('error');
+                return;
+            }
+
+            var ts = parseInt(raw, 10);
+            if (isNaN(ts)) {
+                errorBox.textContent = '时间戳格式无效，请输入纯数字';
+                errorBox.style.display = 'block';
+                input.classList.add('error');
+                return;
+            }
+
+            // Auto-detect: if value > 1e12 treat as ms, else treat based on unit toggle
+            var tsMs;
+            if (raw.length >= 13) {
+                tsMs = ts;
+            } else if (currentUnit === 'ms') {
+                tsMs = ts;
+            } else {
+                tsMs = ts * 1000;
+            }
+
+            if (tsMs < -8640000000000000 || tsMs > 8640000000000000) {
+                errorBox.textContent = '时间戳超出有效范围';
+                errorBox.style.display = 'block';
+                input.classList.add('error');
+                return;
+            }
+
+            var date = new Date(tsMs);
+            if (isNaN(date.getTime())) {
+                errorBox.textContent = '无法解析为有效日期';
+                errorBox.style.display = 'block';
+                input.classList.add('error');
+                return;
+            }
+
+            lastTsResult = { tsMs: tsMs, date: date };
+
+            // Relative time
+            var now = Date.now();
+            var diff = tsMs - now;
+            var relHtml = '';
+            var absDiff = Math.abs(diff);
+            if (absDiff < 60000) {
+                relHtml = diff >= 0 ? '刚刚（未来 <strong>' + Math.floor(absDiff / 1000) + '</strong> 秒后）' : '刚刚（<strong>' + Math.floor(absDiff / 1000) + '</strong> 秒前）';
+            } else if (absDiff < 3600000) {
+                relHtml = diff >= 0 ? '<strong>' + Math.floor(absDiff / 60000) + '</strong> 分钟后' : '<strong>' + Math.floor(absDiff / 60000) + '</strong> 分钟前';
+            } else if (absDiff < 86400000) {
+                relHtml = diff >= 0 ? '<strong>' + Math.floor(absDiff / 3600000) + '</strong> 小时后' : '<strong>' + Math.floor(absDiff / 3600000) + '</strong> 小时前';
+            } else if (absDiff < 2592000000) {
+                relHtml = diff >= 0 ? '<strong>' + Math.floor(absDiff / 86400000) + '</strong> 天后' : '<strong>' + Math.floor(absDiff / 86400000) + '</strong> 天前';
+            } else {
+                var days = Math.floor(absDiff / 86400000);
+                relHtml = diff >= 0 ? '<strong>' + days + '</strong> 天后' : '<strong>' + days + '</strong> 天前';
+            }
+
+            var weekdayNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+
+            var formats = [
+                { label: 'ISO 8601', value: toISOString(date) },
+                { label: '中文格式', value: date.getFullYear() + '年' + pad(date.getMonth() + 1) + '月' + pad(date.getDate()) + '日 ' + pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()) + ' ' + weekdayNames[date.getDay()] },
+                { label: '标准格式', value: date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) + ' ' + pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()) },
+                { label: 'UTC 时间', value: date.toUTCString() },
+                { label: '本地时间', value: date.toString() },
+                { label: '日期', value: date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) },
+                { label: '时间', value: pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()) },
+                { label: '星期', value: weekdayNames[date.getDay()] },
+                { label: 'Unix 秒', value: Math.floor(tsMs / 1000) + '' },
+                { label: 'Unix 毫秒', value: tsMs + '' }
+            ];
+
+            document.getElementById('relative-time').innerHTML = '📅 ' + relHtml;
+
+            var listHtml = '';
+            formats.forEach(function (f, i) {
+                listHtml += '<div class="format-item">' +
+                    '<span class="format-label">' + f.label + '</span>' +
+                    '<span class="format-value">' + f.value + '</span>' +
+                    '<button class="btn-copy" onclick="copyFormat(this, \'' + f.label + '\', \'' + escapeJs(f.value) + '\')">复制</button>' +
+                    '</div>';
+            });
+            document.getElementById('format-list').innerHTML = listHtml;
+            resultDiv.style.display = 'block';
+        }
+
+        function useCurrentTs() {
+            if (currentUnit === 'ms') {
+                document.getElementById('ts-input').value = Date.now();
+            } else {
+                document.getElementById('ts-input').value = Math.floor(Date.now() / 1000);
+            }
+            convertTs2Date();
+        }
+
+        function copyFormat(btn, label, value) {
+            navigator.clipboard.writeText(value).then(function () {
+                var orig = btn.textContent;
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+                utils.showSuccess('已复制 ' + label + '！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        function copyAllFormats() {
+            if (!lastTsResult) return;
+            var lines = [];
+            var items = document.querySelectorAll('#format-list .format-item');
+            items.forEach(function (item) {
+                var label = item.querySelector('.format-label').textContent;
+                var value = item.querySelector('.format-value').textContent;
+                lines.push(label + ': ' + value);
+            });
+            navigator.clipboard.writeText(lines.join('\n')).then(function () {
+                utils.showSuccess('已复制全部格式！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        // ===== Tab 2: Date → Timestamp =====
+        function setDtNow() {
+            var now = new Date();
+            var localStr = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + 'T' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+            document.getElementById('dt-picker').value = localStr;
+            document.getElementById('tz-info').textContent = '时区: ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' (UTC' + formatOffset(-now.getTimezoneOffset()) + ')';
+            convertDate2Ts();
+        }
+
+        function convertDate2Ts() {
+            var pickerVal = document.getElementById('dt-picker').value;
+            if (!pickerVal) {
+                document.getElementById('dt-seconds').textContent = '-';
+                document.getElementById('dt-millis').textContent = '-';
+                return;
+            }
+            var date = new Date(pickerVal);
+            var tsMs = date.getTime();
+            var tsS = Math.floor(tsMs / 1000);
+            document.getElementById('dt-seconds').textContent = tsS;
+            document.getElementById('dt-millis').textContent = tsMs;
+            document.getElementById('tz-info').textContent = '时区: ' + Intl.DateTimeFormat().resolvedOptions().timeZone + ' (UTC' + formatOffset(-date.getTimezoneOffset()) + ')';
+        }
+
+        function copyDtResult(unit) {
+            var el = unit === 's' ? document.getElementById('dt-seconds') : document.getElementById('dt-millis');
+            var val = el.textContent;
+            if (val === '-') return;
+            navigator.clipboard.writeText(val).then(function () {
+                utils.showSuccess('已复制！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        // ===== Helpers =====
+        function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+        function formatOffset(minutes) {
+            var sign = minutes >= 0 ? '+' : '-';
+            var absMin = Math.abs(minutes);
+            var h = Math.floor(absMin / 60);
+            var m = absMin % 60;
+            return sign + pad(h) + ':' + pad(m);
+        }
+
+        function toISOString(date) {
+            return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) +
+                'T' + pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()) +
+                formatOffset(-date.getTimezoneOffset());
+        }
+
+        function escapeJs(s) {
+            return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n');
+        }
+
+        // ===== Event listeners =====
+        document.getElementById('ts-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') convertTs2Date();
+        });
+
+        document.getElementById('ts-input').addEventListener('input', function () {
+            var raw = this.value.trim();
+            if (raw && /^\d{10,16}$/.test(raw)) convertTs2Date();
+        });
+
+        document.getElementById('dt-picker').addEventListener('change', convertDate2Ts);
+
+        // ===== Init =====
+        useCurrentTs();
+        setDtNow();
+    </script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

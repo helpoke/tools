@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频去除水印工具说明，支持模糊、马赛克、裁剪和纯色覆盖等方式去除水印，纯前端处理保护隐私">
+    <meta name="keywords" content="视频去水印, 视频水印去除, 去除水印, 在线去水印工具, 视频修复">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频去除水印工具 - 免费、安全、快速清除水印</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #DC2626;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DC2626;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        .info-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .info-section ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tool-section h2 {
+            color: #DC2626;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DC2626;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .author-info p {
+            margin: 8px 0;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .related-tools h2 {
+            color: #DC2626;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DC2626;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #DC2626;
+            color: white;
+            border-color: #DC2626;
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+            border-left: 4px solid #EF4444;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0 !important;
+        }
+
+        .method-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .method-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .method-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .method-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0 !important;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #F59E0B;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .method-cards {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>视频去除水印工具</h1>
+            <p class="subtitle">免费、安全、多种方式清除水印</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这是什么工具？</h2>
+                <p>
+                    视频去除水印工具是一款专门用于处理视频中不需要的水印、马赛克或其他遮挡物的在线工具。在视频编辑过程中，有时我们需要去除视频中已有的水印（比如下载的视频带有平台水印）或对之前添加的马赛克进行重新处理。
+                </p>
+                <p>
+                    本工具提供四种不同的去水印方式，可以根据水印类型和位置选择最合适的方法。所有处理都在浏览器本地完成，视频不会上传到任何服务器，确保你的编辑工作安全私密。
+                </p>
+
+                <h3>支持的四种去水印方式</h3>
+                <div class="method-cards">
+                    <div class="method-card">
+                        <h4>🔵 模糊处理</h4>
+                        <p>对水印区域进行模糊处理，使水印变得模糊不可辨认，柔和自然</p>
+                    </div>
+                    <div class="method-card">
+                        <h4>🔲 马赛克覆盖</h4>
+                        <p>使用传统马赛克效果覆盖水印区域，完全遮盖原始内容</p>
+                    </div>
+                    <div class="method-card">
+                        <h4>✂️ 裁剪去除</h4>
+                        <p>裁掉包含水印的画面区域，适用于水印在边缘的情况</p>
+                    </div>
+                    <div class="method-card">
+                        <h4>⬛ 纯色覆盖</h4>
+                        <p>使用纯色块覆盖水印，可以选择与画面协调的颜色</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>如何使用这个工具？</h2>
+                <p>
+                    视频去除水印的操作步骤：
+                </p>
+                <p>
+                    <strong>第一步：上传视频。</strong> 点击上传区域或拖拽视频文件到页面中。上传后视频会自动播放并暂停在第一帧。
+                </p>
+                <p>
+                    <strong>第二步：选择去水印方式。</strong> 在设置面板中选择使用模糊处理、马赛克覆盖、裁剪去除还是纯色覆盖。
+                </p>
+                <p>
+                    <strong>第三步：设置区域位置。</strong> 可以选择预设位置（四个角落或上下居中）或自定义区域位置，通过调整区域大小滑块来设置覆盖范围。
+                </p>
+                <p>
+                    <strong>第四步：调整参数。</strong> 根据选择的去水印方式，调节相应的参数，如模糊强度、马赛克大小或覆盖颜色。
+                </p>
+                <p>
+                    <strong>第五步：开始处理。</strong> 点击"开始去水印处理"按钮，等待处理完成后预览效果并下载。
+                </p>
+
+                <div class="highlight-box">
+                    <p><strong>区域大小设置：</strong> 区域大小以视频宽度的百分比表示，数值越大覆盖范围越广。建议从较小的值开始，逐步调整到刚好覆盖水印。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>核心功能特点</h2>
+            <ul>
+                <li><strong>四种去水印方式：</strong> 模糊、马赛克、裁剪、纯色覆盖，适应不同场景需求</li>
+                <li><strong>预设位置快捷选择：</strong> 提供左上、右上、左下、右下、上下居中等预设位置，一键选择</li>
+                <li><strong>自定义区域：</strong> 支持自定义区域位置和大小，灵活处理各种水印</li>
+                <li><strong>参数可调：</strong> 模糊强度、马赛克大小、覆盖颜色等参数都可以自由调节</li>
+                <li><strong>实时预览：</strong> 处理前可以在视频上看到去水印区域的预览效果</li>
+                <li><strong>纯本地处理：</strong> 所有操作在浏览器中完成，隐私安全有保障</li>
+            </ul>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>适用场景与人群</h2>
+            <p>
+                <strong>素材二次创作者：</strong> 下载的视频素材带有水印，可以使用去水印工具进行处理后再用于创作。
+            </p>
+            <p>
+                <strong>修复旧视频：</strong> 对之前添加的马赛克效果不满意，想要更换为其他去水印方式或调整参数。
+            </p>
+            <p>
+                <strong>视频剪辑爱好者：</strong> 在剪辑视频时需要去除不需要的遮挡物，获得更干净的原始画面。
+            </p>
+            <p>
+                <strong>教育工作者：</strong> 从网络获取的教学视频中去除平台水印，制作更纯净的学习资料。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>使用注意事项</h2>
+            <div class="warning-box">
+                <p><strong>重要提示：</strong> 请确保你有合法权限对相关视频进行编辑处理。去水印工具仅供技术学习和个人使用，请尊重原创作者的版权。</p>
+            </div>
+            <p>
+                <strong>文件大小限制：</strong> 当前版本最大支持 100MB 的视频文件。首次使用时需要下载约 30MB 的处理引擎。
+            </p>
+            <p>
+                <strong>去水印效果说明：</strong> 去水印处理是在原水印位置添加覆盖效果，无法真正"消除"水印。对于大面积或复杂的水印，可能仍然会有痕迹残留。
+            </p>
+            <p>
+                <strong>区域大小设置：</strong> 建议从较小的区域大小开始（如10-15%），逐步增加直到刚好覆盖水印。过大的区域会覆盖过多正常画面。
+            </p>
+            <p>
+                <strong>方式选择建议：</strong> 模糊处理效果最自然，适合人脸等需要保留轮廓的场景；马赛克覆盖最强，适合需要完全遮盖的场景。
+            </p>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #DC2626; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频去除水印工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p>© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../watermarks-add/index.html" class="tool-link">视频添加水印</a>
+                <a href="../edit/index.html" class="tool-link">视频编辑工具</a>
+                <a href="../cropping/index.html" class="tool-link">视频裁剪工具</a>
+                <a href="../compress/index.html" class="tool-link">视频压缩工具</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="YAML在线格式化校验工具, YAML语法检查, YAML格式化高亮, 详细错误行定位, 免费在线YAML工具, YAML压缩">
+    <meta name="keywords" content="YAML格式化, YAML在线校验, YAML语法检查, YAML在线格式化, YAML压缩, YAML错误定位, 免费YAML工具, YAML validator">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>YAML在线格式化校验工具</title>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script type="module">
+        import * as YAML from 'https://esm.sh/yaml@2';
+        window.YAML = YAML;
+    </script>
+    <script src="script.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "YAML格式化校验工具",
+        "description": "YAML在线格式化校验工具，支持YAML语法检查、代码美化、错误定位和压缩功能。免费在线YAML工具。Online YAML formatter and validator with syntax checking and error highlighting.",
+        "url": "https://helpoke.com/yaml",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "YAML代码格式化与美化",
+            "YAML语法校验与错误定位",
+            "详细错误行定位提示",
+            "YAML压缩功能",
+            "语法高亮显示",
+            "一键复制格式化结果"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">YAML 格式化校验工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>在线 YAML 格式化、语法校验、压缩，精确指出错误行号与上下文，离线工具保护数据安全</p>
+        </section>
+        <div class="container">
+            <div class="tool-header">
+                <h2>YAML 编辑器</h2>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <span id="status-badge" class="success-badge">等待输入</span>
+                    <div class="button-group">
+                        <button class="btn" data-action="load-sample">示例数据</button>
+                        <button class="btn primary" data-action="format-yaml">格式化</button>
+                        <button class="btn" data-action="validate-yaml">校验语法</button>
+                        <button class="btn" data-action="minify-yaml">压缩</button>
+                        <button class="btn" data-action="yaml-to-properties">转 Properties</button>
+                        <button class="btn" data-action="copy-output">复制结果</button>
+                        <button class="btn" data-action="clear-all">清空</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel">
+                    <div class="panel-header">输入 YAML</div>
+                    <div class="panel-body">
+                        <div class="input-with-lines">
+                            <div class="line-numbers" id="input-lines"><span>1</span></div>
+                            <textarea id="yaml-input" placeholder="请在此输入 YAML 内容，或点击「示例数据」查看效果..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">格式化输出</div>
+                    <div class="panel-body">
+                        <div class="output-with-lines">
+                            <div class="line-numbers" id="output-lines"><span></span></div>
+                            <div class="output-content" id="yaml-output"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel error-panel" id="error-panel" style="display:none;">
+                <div class="panel-header">❌ 语法错误 <span id="error-count" style="color:#ef4444;"></span></div>
+                <div id="error-list"></div>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

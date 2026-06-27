@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="UUID在线生成工具, 批量生成唯一标识符UUID, 支持带连字符与无连字符格式, 免费UUID生成器, GUID生成">
+    <meta name="keywords" content="UUID生成器, UUID在线生成, 唯一标识符生成, 批量生成UUID, 免费UUID工具, GUID生成器, UUID转换, 在线GUID生成">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>UUID生成工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        /* 工具区域 */
+        .tools-section {
+            padding: 50px 0;
+        }
+
+        .tools-section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 48px;
+            color: #2c3e50;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto 48px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .tool-card p {
+            margin-bottom: 24px;
+            color: #555;
+            text-align: center;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #27ae60;
+        }
+
+        .btn-secondary:hover {
+            background-color: #219a52;
+        }
+
+        .result-section {
+            margin-top: 32px;
+        }
+
+        .result-section h4 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #2c3e50;
+        }
+
+        .result-content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+            margin-bottom: 16px;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .result-content.single {
+            display: flex;
+            align-items: center;
+        }
+
+        .password-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .password-item .password-text {
+            flex: 1;
+            margin-right: 80px;
+            /* 为按钮预留空间 */
+            word-break: break-all;
+            overflow: hidden;
+        }
+
+        .password-item .copy-single-btn {
+            flex-shrink: 0;
+            align-self: flex-start;
+            margin-top: 2px;
+            position: absolute;
+            right: 0;
+        }
+
+        .copy-single-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .copy-single-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .message {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .tools-section {
+                padding: 30px 0;
+            }
+
+            .tools-section h2 {
+                font-size: 28px;
+                margin-bottom: 32px;
+            }
+
+            .form-row {
+                gap: 10px;
+            }
+
+            .form-group {
+                flex: auto;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .tool-card h3 {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tools-section {
+                padding: 20px 0;
+            }
+
+            .tools-section h2 {
+                font-size: 22px;
+                margin-bottom: 24px;
+            }
+
+            .form-group {
+                flex: auto;
+            }
+
+            .tool-card {
+                padding: 16px;
+            }
+
+            .tool-card h3 {
+                font-size: 18px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+
+            .result-content {
+                padding: 12px;
+                font-size: 12px;
+            }
+
+            .password-item .password-text {
+                font-size: 12px;
+                margin-right: 65px;
+            }
+
+            .copy-single-btn {
+                padding: 3px 10px;
+                font-size: 11px;
+            }
+
+            .result-section h4 {
+                font-size: 16px;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tools-section h2,
+        body.dark-mode .tool-card h3,
+        body.dark-mode .form-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .tool-card p {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .result-section h4 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .password-item {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .password-text {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-single-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .copy-single-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-secondary {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .message.success {
+            background-color: rgba(39, 174, 96, 0.2);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "UUID生成工具",
+        "description": "UUID在线生成工具，支持批量生成唯一标识符，支持带连字符与无连字符格式。免费在线UUID/GUID生成器。Online UUID generator supporting batch generation with multiple formats.",
+        "url": "https://helpoke.com/uuid",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "生成UUID v1/v4版本",
+            "支持带连字符与无连字符格式",
+            "批量生成多个UUID",
+            "一键复制所有UUID",
+            "支持GUID格式",
+            "在线生成，无需安装"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <!-- 主内容 -->
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">UUID 生成工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>生成唯一标识符，适用于各种系统和应用场景，可自定义生成数量</p>
+        </section>
+
+        <!-- 工具区域 -->
+        <section class="tools-section">
+            <div class="container">
+                <div class="tool-card">
+                    <div class="form-row" style="align-items: flex-end;">
+                        <div class="form-group">
+                            <label for="uuid-count">生成数量</label>
+                            <input type="number" id="uuid-count" min="1" max="20" value="5" data-name="生成数量">
+                        </div>
+                        <div class="form-group" style="flex-shrink: 0;">
+                            <label
+                                style="display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50;">生成格式</label>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <div style="display: flex; align-items: center;">
+                                    <input type="radio" id="uuid-format-standard" name="uuid-format"
+                                        style="margin-right: 8px; width: 16px; height: 16px;">
+                                    <label for="uuid-format-standard"
+                                        style="font-size: 14px; color: #555; font-weight: 400;">带连字符</label>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <input type="radio" id="uuid-format-no-hyphen" name="uuid-format" checked
+                                        style="margin-right: 8px; width: 16px; height: 16px;">
+                                    <label for="uuid-format-no-hyphen"
+                                        style="font-size: 14px; color: #555; font-weight: 400;">不带连字符</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="generateUUIDs()">UUID</button>
+                    </div>
+
+
+                    <div class="result-section">
+                        <h4>生成结果</h4>
+                        <div id="uuid-result" class="result-content"></div>
+                        <button class="btn btn-secondary" onclick="copyAllUUIDs()">复制全部UUID</button>
+                        <div id="message" class="message"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+
+        // 生成UUID函数
+        function generateUUID(includeHyphen = true) {
+            const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            return includeHyphen ? uuid : uuid.replace(/-/g, '');
+        }
+
+        // 生成多个UUID
+        function generateUUIDs() {
+            const uuidCountInput = document.getElementById('uuid-count');
+            const count = parseInt(uuidCountInput.value);
+
+            // 验证输入范围
+            if (!utils.validateInput(uuidCountInput)) return;
+
+            const includeHyphen = document.getElementById('uuid-format-standard').checked;
+            const uuidResult = document.getElementById('uuid-result');
+
+            let uuids = [];
+            for (let i = 0; i < count; i++) {
+                uuids.push(generateUUID(includeHyphen));
+            }
+
+            if (count > 1) {
+                uuidResult.className = 'result-content';
+                uuidResult.innerHTML = uuids.map(uuid => `<div class="password-item"><span class="password-text">${uuid}</span><button class="copy-single-btn" onclick="copySingleUUID(this)">复制</button></div>`).join('');
+            } else {
+                uuidResult.className = 'result-content';
+                uuidResult.innerHTML = `<div class="password-item"><span class="password-text">${uuids[0]}</span><button class="copy-single-btn" onclick="copySingleUUID(this)">复制</button></div>`;
+            }
+        }
+
+        // 复制单个UUID
+        function copySingleUUID(button) {
+            const uuidText = button.previousElementSibling.textContent;
+
+            navigator.clipboard.writeText(uuidText).then(function () {
+                const originalText = button.textContent;
+                button.textContent = '已复制';
+                button.style.backgroundColor = '#27ae60';
+
+                setTimeout(function () {
+                    button.textContent = originalText;
+                    button.style.backgroundColor = '#3498db';
+                }, 2000);
+
+                utils.showSuccess('复制成功');
+            }).catch(function (err) {
+                console.error('复制失败:', err);
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // 复制全部UUID
+        function copyAllUUIDs() {
+            const uuidResult = document.getElementById('uuid-result');
+            const uuidItems = uuidResult.querySelectorAll('div');
+
+            let textToCopy = '';
+            if (uuidItems.length > 0) {
+                // 复制多个UUID，每个UUID占一行
+                uuidItems.forEach(item => {
+                    const uuidText = item.querySelector('span').textContent;
+                    textToCopy += uuidText + '\n';
+                });
+            } else {
+                // 复制单个UUID
+                const uuidText = uuidResult.querySelector('span');
+                if (uuidText) {
+                    textToCopy = uuidText.textContent;
+                } else {
+                    textToCopy = uuidResult.textContent;
+                }
+            }
+
+            if (!textToCopy) {
+                utils.showError('请先生成UUID');
+                return;
+            }
+
+            navigator.clipboard.writeText(textToCopy).then(function () {
+                utils.showSuccess('已复制到剪贴板！');
+            }).catch(function (err) {
+                console.error('复制失败:', err);
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // 为输入框添加blur事件监听器
+        document.getElementById('uuid-count').addEventListener('blur', validateUUIDCount);
+
+        // 验证生成数量
+        function validateUUIDCount() {
+            utils.validateInput(document.getElementById('uuid-count'));
+        }
+
+        // 初始生成
+        generateUUIDs();
+    </script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

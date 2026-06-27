@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="媒体文件批量下载工具说明，支持图像视频批量下载，并发下载提高效率，本地处理保护隐私">
+    <meta name="keywords" content="图像视频批量下载, 批量下载图片和视频, 支持并发下载, 支持筛选文件类型">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>媒体文件批量下载工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #EA580C 0%, #C2410C 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #EA580C;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EA580C;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #EA580C;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #EA580C;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EA580C;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #EA580C 0%, #C2410C 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .download-modes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .download-mode {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .download-mode .mode-name {
+            font-weight: 600;
+            color: #EA580C;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .download-mode .mode-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .download-modes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>媒体文件批量下载工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持直接URL下载和网页图片视频提取，批量并发下载媒体资源，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是媒体文件批量下载工具？</h2>
+                <p>媒体文件批量下载工具是一款高效的在线媒体资源下载工具，专为需要批量下载图片和视频的用户设计。在日常工作和生活中，我们经常需要从网页中收集图片、视频等媒体资源，手动逐个下载不仅耗时费力，还容易遗漏。这款工具可以帮助您快速、批量地下载所需资源，大幅提高工作效率。</p>
+                <p>工具提供三种下载模式：直接URL下载、网页图片提取和网页视频提取。直接URL模式支持输入多个资源地址批量下载；网页提取模式可以从指定网页中自动提取所有图片或视频链接，并支持筛选和过滤。工具采用并发下载技术，可以同时下载多个文件，大大缩短下载时间。所有处理均在浏览器本地完成，无需上传到服务器，保护您的隐私安全。</p>
+
+                <h2>如何使用？</h2>
+                <h3>模式一：直接URL下载</h3>
+                <p>在文本框中输入需要下载的资源URL地址，每行一个。工具会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议。设置并发数和文件类型筛选后，点击"开始下载"按钮即可批量下载所有资源。</p>
+
+                <h3>模式二：网页图片提取</h3>
+                <p>输入目标网页的URL地址，工具会自动访问并提取网页中的所有图片链接。提取完成后，您可以查看所有图片缩略图，勾选需要的图片进行下载。支持按文件大小、格式等条件筛选，快速定位目标资源。</p>
+
+                <h3>模式三：网页视频提取</h3>
+                <p>输入目标网页的URL地址，工具会自动检测网页中嵌入的视频资源，包括iframe视频、video标签视频等。提取完成后，您可以查看视频信息，选择需要的视频进行下载。</p>
+
+                <h3>下载与打包</h3>
+                <p>下载完成后，工具提供两种保存方式：逐个下载和打包下载。逐个下载会将文件逐个保存到本地，打包下载会将所有文件压缩成一个ZIP文件，方便统一管理。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>三种下载模式详解</h2>
+                
+                <div class="download-modes">
+                    <div class="download-mode">
+                        <div class="mode-name">直接URL下载</div>
+                        <div class="mode-desc">批量输入URL地址，直接下载资源文件</div>
+                    </div>
+                    <div class="download-mode">
+                        <div class="mode-name">网页图片提取</div>
+                        <div class="mode-desc">自动提取网页中的图片链接，筛选下载</div>
+                    </div>
+                    <div class="download-mode">
+                        <div class="mode-name">网页视频提取</div>
+                        <div class="mode-desc">自动检测网页中的视频资源，一键下载</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>设计师：</strong>从设计灵感网站收集图片素材，批量下载参考图片，提高素材收集效率。</p>
+                <p><strong>内容创作者：</strong>从社交媒体、新闻网站批量下载图片和视频，用于内容创作。</p>
+                <p><strong>研究人员：</strong>从学术网站、数据库批量下载图表、插图等研究素材。</p>
+                <p><strong>电商从业者：</strong>从供应商网站批量下载商品图片，用于店铺运营。</p>
+                <p><strong>普通用户：</strong>从各类网站收集图片和视频，用于个人收藏和分享。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">三种下载模式</span>
+                    <span class="feature-tag">并发下载</span>
+                    <span class="feature-tag">文件类型筛选</span>
+                    <span class="feature-tag">图片缩略图预览</span>
+                    <span class="feature-tag">ZIP打包下载</span>
+                    <span class="feature-tag">自动格式化URL</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具的并发下载功能是一大亮点，它可以同时下载多个文件，大大缩短总下载时间。默认并发数为3，您可以根据网络状况调整并发数。同时，工具支持文件类型筛选，您可以只下载特定格式的文件，如jpg、png、mp4等，避免下载不需要的文件。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>下载期间请勿关闭浏览器或刷新页面，以免数据丢失</li>
+                        <li>网页提取功能仅支持公开访问的网页，登录页面无法提取</li>
+                        <li>部分网站可能有防盗链机制，导致下载失败</li>
+                        <li>视频提取功能可能无法识别所有视频格式</li>
+                        <li>请遵守版权法律法规，下载资源仅用于合法用途</li>
+                        <li>并发数不宜设置过高，以免造成网络拥堵</li>
+                        <li>建议在现代浏览器（Chrome、Firefox、Edge）中使用</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #EA580C; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用媒体文件批量下载工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../resource/index.html" class="tool-link">资源文件下载工具</a>
+                <a href="../../image/compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../../image/stitch/index.html" class="tool-link">图片拼接工具</a>
+                <a href="../../video/audio/index.html" class="tool-link">视频转音频工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

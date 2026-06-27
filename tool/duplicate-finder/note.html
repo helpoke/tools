@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="重复内容查找工具说明，检测文本中重复出现的字符、数字、单词等内容，支持多种分隔符，本地处理保护隐私">
+    <meta name="keywords" content="重复内容查找, 重复检测, 重复字符, 重复单词, 重复数字, 在线工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>重复内容查找工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #EC4899 0%, #DB2777 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #EC4899;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EC4899;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #EC4899;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #EC4899;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #EC4899;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #EC4899 0%, #DB2777 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>重复内容查找工具 - 免费、安全、快速</h1>
+            <p class="subtitle">检测文本中重复出现的字符、数字、单词等内容，支持多种分隔符，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是重复内容查找工具？</h2>
+                <p>重复内容查找工具是一款专业的在线重复检测工具，专为需要查找文本中重复内容的用户设计。在日常工作和学习中，我们经常需要处理包含重复数据的文本，例如重复的编号、重复的单词、重复的电话号码等。手动查找这些重复内容不仅效率低下，还容易遗漏。这款工具可以帮助您快速、准确地找出所有重复内容。</p>
+                <p>工具支持多种重复检测模式，包括字符重复、单词重复、数字重复等。您可以自定义分隔符，以不同的方式分割文本进行检测。检测结果会显示重复内容及其出现次数，方便您进行分析和处理。所有检测均在浏览器本地完成，您的文本内容不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：输入待检测文本</h3>
+                <p>在文本输入框中粘贴需要检测的文本内容。文本可以是任意格式，包括纯文本、CSV数据、日志文件等。支持中英文混合内容的检测。</p>
+
+                <h3>第二步：设置检测参数</h3>
+                <p>选择检测模式：按字符检测、按单词检测、按行检测等。设置分隔符：逗号、空格、换行符等。您可以根据实际需求自定义分隔符，以不同的方式分割文本。</p>
+
+                <h3>第三步：执行检测</h3>
+                <p>点击"开始检测"按钮，工具会自动分析文本中的重复内容。检测完成后，结果会以列表形式显示，包括重复内容、出现次数和位置信息。</p>
+
+                <h3>第四步：处理重复内容</h3>
+                <p>根据检测结果，您可以决定如何处理重复内容。工具提供去重功能，可以自动移除重复内容，保留唯一值。您也可以手动查看每个重复项的详细信息。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>数据处理人员：</strong>清理重复数据，确保数据质量，提高数据分析准确性。</p>
+                <p><strong>内容编辑：</strong>检查文章中重复的单词或段落，优化内容质量。</p>
+                <p><strong>学生：</strong>检查作业中重复的内容，避免抄袭嫌疑。</p>
+                <p><strong>程序员：</strong>查找代码中重复的变量名或函数名，优化代码结构。</p>
+                <p><strong>财务人员：</strong>检测发票号码、订单编号等是否重复，防止重复录入。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">多种检测模式</span>
+                    <span class="feature-tag">自定义分隔符</span>
+                    <span class="feature-tag">重复次数统计</span>
+                    <span class="feature-tag">去重功能</span>
+                    <span class="feature-tag">位置信息显示</span>
+                    <span class="feature-tag">实时检测</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有重复检测都在您的浏览器中完成，文本内容不会上传到任何服务器。这意味着您的数据始终处于您的控制之下，特别适合处理包含敏感信息的数据。同时，工具提供多种检测模式和自定义分隔符，满足不同场景的需求。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>检测结果取决于分隔符设置，请根据实际情况选择合适的分隔符</li>
+                        <li>大文本检测可能需要较长时间，请耐心等待</li>
+                        <li>单词检测区分大小写，如需忽略大小写请先统一文本格式</li>
+                        <li>去重功能会保留第一次出现的内容，移除后续重复项</li>
+                        <li>建议在检测前清理文本中的空白字符，确保准确检测</li>
+                        <li>检测结果仅用于参考，最终处理请人工确认</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #EC4899; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用重复内容查找工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../diff/index.html" class="tool-link">内容对比工具</a>
+                <a href="../text-transform/index.html" class="tool-link">大小写转换工具</a>
+                <a href="../../json/index.html" class="tool-link">JSON格式化工具</a>
+                <a href="../../md/index.html" class="tool-link">Markdown编辑器</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

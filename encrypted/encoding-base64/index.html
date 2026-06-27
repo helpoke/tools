@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线Base64编码解码工具, 支持文本和文件Base64转换, 免费在线Base64转码工具">
+    <meta name="keywords" content="Base64编码, Base64解码, Base64转换, 在线Base64, 文本Base64, 文件Base64, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>Base64 编解码工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eaeaea;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 320px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-copy {
+            background-color: #27ae60;
+        }
+
+        .btn-copy:hover {
+            background-color: #229954;
+        }
+
+        .btn-copy.copied {
+            background-color: #1e8449;
+        }
+
+        .btn-swap {
+            background: #f8f9fa;
+            border: 1px solid #eaeaea;
+            color: #555;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .btn-swap:hover {
+            background: #eef2f7;
+            color: #2c3e50;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            background-color: #9b59b6;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .file-input-wrapper:hover .file-input-label {
+            background-color: #8e44ad;
+        }
+
+        .file-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .file-size {
+            color: #7f8c8d;
+            margin-left: 10px;
+        }
+
+        .result-area {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+
+        .result-area h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .result-content {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .success-msg {
+            color: #27ae60;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .tool-card {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .actions-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tabs {
+            border-bottom-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+            border-color: transparent;
+        }
+
+        body.dark-mode .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        body.dark-mode .input-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-copy {
+            background-color: #10b981;
+        }
+
+        body.dark-mode .btn-copy:hover {
+            background-color: #059669;
+        }
+
+        body.dark-mode .btn-copy.copied {
+            background-color: #047857;
+        }
+
+        body.dark-mode .btn-swap {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-swap:hover {
+            background-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .file-info {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .file-name {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .file-size {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .result-area {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-area h4 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .result-content pre {
+            background-color: transparent;
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .result-content img {
+            border: 1px solid var(--border-color);
+        }
+
+        body.dark-mode .result-content strong {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content pre[style*="background: #f5f5f5"],
+        body.dark-mode .result-content pre[style*="background:#f5f5f5"] {
+            background-color: var(--bg-tertiary) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">Base64 编解码工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>在线 Base64 Encode / Decode，支持文本和文件 Base64 转换</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="text-encode">文本编码</button>
+                <button class="tab-btn" data-tab="text-decode">文本解码</button>
+                <button class="tab-btn" data-tab="file-encode">文件编码</button>
+                <button class="tab-btn" data-tab="file-decode">文件解码</button>
+            </div>
+
+            <div id="text-encode" class="tab-content active">
+                <div class="input-group">
+                    <label for="encode-text">输入文本</label>
+                    <textarea id="encode-text" placeholder="请输入要编码的文本..."></textarea>
+                </div>
+                <div class="actions-row">
+                    <button class="btn" id="encode-btn">编码</button>
+                    <button class="btn btn-copy" id="copy-encoded-btn" style="display: none;">复制结果</button>
+                    <button class="btn btn-swap" id="swap-encode-decode" title="切换到解码">⇄</button>
+                </div>
+                <div class="result-area" id="encode-result" style="display: none;">
+                    <h4>编码结果</h4>
+                    <div class="result-content" id="encoded-text"></div>
+                </div>
+            </div>
+
+            <div id="text-decode" class="tab-content">
+                <div class="input-group">
+                    <label for="decode-text">输入 Base64 文本</label>
+                    <textarea id="decode-text" placeholder="请输入 Base64 字符串..."></textarea>
+                </div>
+                <div class="actions-row">
+                    <button class="btn" id="decode-btn">解码</button>
+                    <button class="btn btn-copy" id="copy-decoded-btn" style="display: none;">复制结果</button>
+                    <button class="btn btn-swap" id="swap-decode-encode" title="切换到编码">⇄</button>
+                </div>
+                <div class="result-area" id="decode-result" style="display: none;">
+                    <h4>解码结果</h4>
+                    <div class="result-content" id="decoded-text"></div>
+                </div>
+            </div>
+
+            <div id="file-encode" class="tab-content">
+                <div class="input-group">
+                    <label>选择文件</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" class="file-input" id="file-to-encode">
+                        <span class="file-input-label">选择文件</span>
+                    </div>
+                    <div class="file-info" id="file-encode-info" style="display: none;">
+                        <span class="file-name" id="file-encode-name"></span>
+                        <span class="file-size" id="file-encode-size"></span>
+                    </div>
+                </div>
+                <div class="actions-row">
+                    <button class="btn" id="encode-file-btn" disabled>编码文件</button>
+                    <button class="btn btn-copy" id="copy-encoded-file-btn" style="display: none;">复制结果</button>
+                    <button class="btn btn-copy" id="download-encoded-btn" style="display: none;">下载结果</button>
+                </div>
+                <div class="result-area" id="file-encode-result" style="display: none;">
+                    <h4>编码结果</h4>
+                    <div class="result-content" id="encoded-file-content"></div>
+                </div>
+            </div>
+
+            <div id="file-decode" class="tab-content">
+                <div class="input-group">
+                    <label for="file-to-decode">选择 Base64 文件</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" class="file-input" id="file-to-decode" accept=".txt,.base64">
+                        <span class="file-input-label">选择文件</span>
+                    </div>
+                    <div class="file-info" id="file-decode-info" style="display: none;">
+                        <span class="file-name" id="file-decode-name"></span>
+                        <span class="file-size" id="file-decode-size"></span>
+                    </div>
+                </div>
+                <div class="actions-row">
+                    <button class="btn" id="decode-file-btn" disabled>解码文件</button>
+                    <button class="btn btn-copy" id="copy-decoded-file-btn" style="display: none;">复制结果</button>
+                    <button class="btn btn-copy" id="download-decoded-btn" style="display: none;">下载结果</button>
+                </div>
+                <div class="result-area" id="file-decode-result" style="display: none;">
+                    <h4>解码结果预览</h4>
+                    <div class="result-content" id="decoded-file-preview"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

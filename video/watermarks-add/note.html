@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="视频添加水印工具说明，支持文字水印、图片水印、马赛克遮挡和模糊处理，可自定义位置和透明度，纯前端处理保护隐私">
+    <meta name="keywords" content="视频水印, 视频加水印, 视频打码, 视频马赛克, 视频模糊, 文字水印工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>视频添加水印工具 - 免费、安全、多种水印类型</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #6D28D9;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #6D28D9;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        .info-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .info-section ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-section ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tool-section h2 {
+            color: #6D28D9;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #6D28D9;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .author-info p {
+            margin: 8px 0;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .related-tools h2 {
+            color: #6D28D9;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #6D28D9;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .tool-link:hover {
+            background: #6D28D9;
+            color: white;
+            border-color: #6D28D9;
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(109, 40, 217, 0.05) 100%);
+            border-left: 4px solid #8B5CF6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0 !important;
+        }
+
+        .watermark-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .watermark-type {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .watermark-type h4 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .watermark-type p {
+            font-size: 0.9rem;
+            margin-bottom: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .watermark-types {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>视频添加水印工具</h1>
+            <p class="subtitle">免费、安全、多种水印类型可选</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这是什么工具？</h2>
+                <p>
+                    视频添加水印工具是一款功能全面的在线视频水印处理工具，支持添加文字水印、图片水印、马赛克遮挡和模糊处理四种方式。在视频创作和分享过程中，我们经常需要对视频添加保护性标记或遮盖敏感内容，这些需求都可以通过本工具轻松实现。
+                </p>
+                <p>
+                    无论是为自己的视频作品添加版权标识、为隐私保护添加马赛克、还是制作带有LOGO的宣传视频，本工具都能提供完善的解决方案。所有处理都在浏览器本地完成，视频不会上传到任何服务器，确保你的内容安全。
+                </p>
+
+                <h3>支持的四种水印类型</h3>
+                <div class="watermark-types">
+                    <div class="watermark-type">
+                        <h4>📝 文字水印</h4>
+                        <p>输入文字内容，可设置字体、大小、颜色和透明度，支持固定位置和滚动效果</p>
+                    </div>
+                    <div class="watermark-type">
+                        <h4>🖼️ 图片水印</h4>
+                        <p>上传PNG或JPG图片作为水印，可调整大小、位置和透明度，适合添加LOGO</p>
+                    </div>
+                    <div class="watermark-type">
+                        <h4>🔲 马赛克</h4>
+                        <p>对指定区域添加马赛克效果，遮盖车牌、人脸、敏感信息等</p>
+                    </div>
+                    <div class="watermark-type">
+                        <h4>🌫️ 模糊处理</h4>
+                        <p>对指定区域进行模糊处理，柔和遮盖的同时保留一定画面信息</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>如何使用这个工具？</h2>
+                <p>
+                    视频添加水印的操作步骤：
+                </p>
+                <p>
+                    <strong>第一步：上传视频。</strong> 点击上传区域选择要添加水印的视频文件。支持拖拽上传，方便快捷。
+                </p>
+                <p>
+                    <strong>第二步：选择水印类型。</strong> 在设置面板中选择要使用的水印类型：文字水印、图片水印、马赛克或模糊处理。
+                </p>
+                <p>
+                    <strong>第三步：配置水印参数。</strong> 根据选择的水印类型，配置相应的参数，如文字内容、字体颜色、图片位置、模糊强度等。
+                </p>
+                <p>
+                    <strong>第四步：设置时间范围。</strong> 可以设置水印显示的起始时间和结束时间，让水印只在需要的时段出现。
+                </p>
+                <p>
+                    <strong>第五步：确认添加并处理。</strong> 点击"确认添加水印"按钮添加到处理队列，然后点击"开始处理"生成最终视频。
+                </p>
+
+                <div class="highlight-box">
+                    <p><strong>水印位置技巧：</strong> 文字水印支持水平滚动效果，适合创建动态版权信息；固定位置的水印可以拖动到视频画面中任意位置。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>核心功能特点</h2>
+            <ul>
+                <li><strong>四种水印类型：</strong> 文字水印、图片水印、马赛克、模糊处理，满足各种场景需求</li>
+                <li><strong>灵活的位置控制：</strong> 支持预设位置和自定义拖拽定位，适应不同构图需求</li>
+                <li><strong>透明度可调：</strong> 所有水印都支持透明度调节，从完全透明到完全不透明</li>
+                <li><strong>时间范围控制：</strong> 可以设置水印出现和消失的时间，实现动态水印效果</li>
+                <li><strong>滚动文字效果：</strong> 文字水印支持水平滚动，特别适合版权声明</li>
+                <li><strong>批量添加：</strong> 支持同时添加多个水印，最多可添加5个不同类型的水印</li>
+            </ul>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>适用场景与人群</h2>
+            <p>
+                <strong>视频创作者：</strong> 为自己的原创视频添加版权水印，防止他人盗用。可以使用LOGO水印或文字水印，标明视频来源。
+            </p>
+            <p>
+                <strong>社交媒体运营者：</strong> 在发布的视频中添加平台水印或个人品牌标识，提升品牌知名度。
+            </p>
+            <p>
+                <strong>隐私保护需求：</strong> 在分享含有他人面部、车牌号、门牌号等敏感信息的视频前，使用马赛克或模糊功能进行遮挡处理。
+            </p>
+            <p>
+                <strong>影视剪辑爱好者：</strong> 制作影视剪辑或混剪视频时，添加来源说明或作者水印，遵守版权规范。
+            </p>
+            <p>
+                <strong>企业培训部门：</strong> 为内部培训视频添加公司LOGO和保密标识，规范视频资料管理。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>使用注意事项</h2>
+            <p>
+                <strong>水印数量限制：</strong> 单个类型最多可添加2个水印，所有类型混合最多同时添加5个水印。过多的水印会增加处理时间和输出文件大小。
+            </p>
+            <p>
+                <strong>水印删除：</strong> 如果需要删除已添加的水印，双击选中的水印即可删除（只能按添加顺序删除）。
+            </p>
+            <p>
+                <strong>文字水印限制：</strong> 文字水印最多支持50个字符，建议使用简短的版权信息，如"©2026 YourName"。
+            </p>
+            <p>
+                <strong>图片格式建议：</strong> 图片水印建议使用PNG格式，支持透明背景，可以更好地融入视频画面。
+            </p>
+            <p>
+                <strong>处理时间说明：</strong> 水印处理需要逐帧渲染，处理时间取决于视频长度和水印数量，请耐心等待。
+            </p>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #6D28D9; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频添加水印工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p>© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../watermarks-remove/index.html" class="tool-link">视频去除水印</a>
+                <a href="../edit/index.html" class="tool-link">视频编辑工具</a>
+                <a href="../cropping/index.html" class="tool-link">视频裁剪工具</a>
+                <a href="../compress/index.html" class="tool-link">视频压缩工具</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

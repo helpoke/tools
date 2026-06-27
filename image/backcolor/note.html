@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图片背景色切换工具说明，在线图片背景色替换工具，支持多种预设颜色和自定义颜色，调整容差实现精准背景识别">
+    <meta name="keywords" content="图片背景色切换, 背景色替换, 图片背景修改, 在线图片处理, 背景色工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图片背景色切换工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #059669;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-section h2 {
+            color: #059669;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图片背景色切换工具 - 免费、安全、快速</h1>
+            <p class="subtitle">一键替换图片背景颜色，支持多种预设颜色和自定义颜色，智能背景识别技术</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图片背景色切换工具？</h2>
+                <p>图片背景色切换工具是一款专为图片背景修改设计的在线工具。它采用智能背景识别算法，可以精准检测图片中的背景区域，并将其替换为您指定的颜色。无论是产品照片、证件照还是设计素材，只需简单几步，就能快速改变图片的整体色调和氛围。</p>
+                <p>这款工具特别适合处理那些背景颜色单一但需要调整的图片。例如，您可能有一张白色背景的产品照片，想要换成灰色背景以突出产品质感；或者有一张证件照，需要将背景改为特定颜色以符合要求。使用本工具，这些需求都能轻松实现。</p>
+                <p>所有处理均在浏览器本地完成，图片不会上传到任何服务器，最大限度保护您的隐私和数据安全。您可以放心处理任何敏感图片，无需担心信息泄露。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域或直接拖拽图片到指定位置。工具支持 JPG、PNG、WebP、GIF、BMP 等多种常见图片格式。上传后，图片会在预览区域显示，方便您查看和确认。</p>
+
+                <h3>第二步：选择背景颜色</h3>
+                <p>在颜色选择区域，您可以从预设的 8 种常用颜色中选择，包括白色、黑色、红色、绿色、蓝色等。如果预设颜色不能满足您的需求，还可以点击自定义颜色按钮，通过颜色选择器精确设置您想要的背景颜色。</p>
+
+                <h3>第三步：调整背景检测容差</h3>
+                <p>通过拖动容差滑块，可以调整背景识别的范围。容差值越小，识别范围越精确，只替换与原背景颜色完全一致的区域；容差值越大，识别范围越广，可以替换颜色相近的区域。建议根据图片实际情况调整，以获得最佳效果。</p>
+
+                <h3>第四步：应用并下载</h3>
+                <p>点击"应用背景替换"按钮，工具会自动处理图片并在预览区域显示替换后的效果。确认满意后，点击"下载结果图片"即可将修改后的图片保存到本地。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>电商卖家：</strong>快速更换产品图片背景颜色，打造统一风格的商品展示页面，提升店铺视觉效果。</p>
+                <p><strong>设计师：</strong>在设计过程中需要为素材更换不同背景色，快速预览各种配色方案，提高设计效率。</p>
+                <p><strong>证件照处理：</strong>将证件照背景更换为白色、蓝色或红色，满足不同证件的要求。</p>
+                <p><strong>社交媒体运营：</strong>为配图更换背景色，使图片在社交媒体上更加醒目和吸引人。</p>
+                <p><strong>普通用户：</strong>日常图片处理需求，如更换照片背景、调整图片整体色调等。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">支持多种图片格式</span>
+                    <span class="feature-tag">8种预设颜色</span>
+                    <span class="feature-tag">自定义颜色选择</span>
+                    <span class="feature-tag">可调背景检测容差</span>
+                    <span class="feature-tag">实时预览效果</span>
+                    <span class="feature-tag">一键下载结果</span>
+                    <span class="feature-tag">无需安装软件</span>
+                </div>
+                <p>工具的核心优势在于智能背景识别技术。通过调整容差值，您可以精确控制背景替换的范围，确保前景主体不受影响。无论是简单的纯色背景还是复杂的渐变背景，都能得到满意的处理效果。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>背景颜色过于复杂或与前景颜色相近时，可能会影响替换效果</li>
+                        <li>建议使用背景颜色相对单一的图片，以获得最佳替换效果</li>
+                        <li>容差值设置过大可能会误替换前景区域，需谨慎调整</li>
+                        <li>处理期间请勿关闭浏览器或刷新页面，以免数据丢失</li>
+                        <li>GIF 动态图片仅处理第一帧，如需处理完整动图请使用其他工具</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #10B981; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片背景色切换工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../cropping/index.html" class="tool-link">图片裁剪工具</a>
+                <a href="../watermark/index.html" class="tool-link">图片水印添加工具</a>
+                <a href="../edit/index.html" class="tool-link">图片旋转与模糊工具</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

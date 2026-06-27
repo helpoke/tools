@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="MD5在线加密工具, MD5哈希生成, MD5校验, 批量MD5生成, 支持16位32位大小写输出, 离线工具保护数据安全">
+    <meta name="keywords" content="MD5加密, MD5在线生成, MD5校验, MD5哈希, 批量MD5, 16位MD5, 32位MD5, 免费MD5工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>MD5在线加密工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script> -->
+    <script src="./lib/crypto-js.min.js"></script>
+    <style>
+        @import '../../common/css/style.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .tool-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            padding: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', Consolas, monospace;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.2s;
+            line-height: 1.6;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', Consolas, monospace;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input[type="number"]:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .options-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .option-group label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #475569;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #4338ca;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .result-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .result-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .result-content {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 14px;
+            word-break: break-all;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .result-text {
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .result-placeholder {
+            color: #94a3b8;
+        }
+
+        .copy-icon-btn {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+            font-size: 14px;
+        }
+
+        .copy-icon-btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .copy-icon-btn.copied {
+            background: #d1fae5;
+            border-color: #10b981;
+            color: #059669;
+        }
+
+        .batch-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .batch-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .batch-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+            word-break: break-all;
+        }
+
+        .batch-table .line-num {
+            width: 48px;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .batch-table .hash-cell {
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .verify-result {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .verify-result.match {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .verify-result.mismatch {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .options-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .btn-row {
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px;
+            }
+
+            .tool-card {
+                padding: 16px;
+            }
+
+            .tabs {
+                padding: 4px;
+            }
+
+            .tab-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+
+            .form-group textarea {
+                min-height: 100px;
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .form-group input[type="text"] {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .result-content {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .batch-table th,
+            .batch-table td {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+
+            .radio-group label {
+                font-size: 12px;
+            }
+
+            .option-group>label {
+                font-size: 12px;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .tabs {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .tab-btn {
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .tab-btn:hover:not(.active) {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-outline {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        body.dark-mode .result-section {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-section h4 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-content {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-placeholder {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .copy-icon-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-icon-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .batch-table th {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .batch-table td {
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .batch-table .line-num {
+            color: var(--text-muted);
+        }
+
+        body.dark-mode .verify-result.match {
+            background-color: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: var(--success-color);
+        }
+
+        body.dark-mode .verify-result.mismatch {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--error-color);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .copy-btn {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .copy-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .file-drop-zone {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .file-drop-zone.dragover {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .radio-group label {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .radio-group input:checked+label {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode textarea {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .copy-btn,
+        body.dark-mode .copy-icon-btn {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .file-drop-zone {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .radio-group label {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-box {
+            border-color: var(--border-color);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MD5在线加密工具",
+        "description": "MD5在线加密工具，支持16位、32位大小写输出，支持批量加密和文件校验。离线工具，数据本地处理保护隐私。MD5 hash generator with offline processing.",
+        "url": "https://helpoke.com/md5",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "MD5加密生成",
+            "支持16位/32位输出",
+            "支持大写/小写格式",
+            "批量MD5生成",
+            "文件MD5校验",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">MD5 在线加密工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>支持 MD5 哈希生成、校验、批量处理，离线工具保护数据安全</p>
+        </section>
+
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="generate">MD5 生成</button>
+                <button class="tab-btn" data-tab="verify">MD5 校验</button>
+                <button class="tab-btn" data-tab="batch">批量生成</button>
+            </div>
+
+            <!-- MD5 生成 -->
+            <div id="tab-generate" class="tab-pane active">
+                <div class="tool-card">
+                    <div class="form-group">
+                        <label for="gen-input">输入文本</label>
+                        <textarea id="gen-input" placeholder="请输入要计算 MD5 的文本..."></textarea>
+                    </div>
+
+                    <div class="options-row">
+                        <div class="option-group">
+                            <label>输出大小写</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gen-case" value="lower" checked> 小写</label>
+                                <label><input type="radio" name="gen-case" value="upper"> 大写</label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label>输出位数</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gen-bits" value="32" checked> 32位</label>
+                                <label><input type="radio" name="gen-bits" value="16"> 16位</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="btn btn-primary" onclick="generateMD5()">生成 MD5</button>
+                        <button class="btn btn-outline" onclick="clearGenerate()">清空</button>
+                    </div>
+
+                    <div class="result-section">
+                        <h4>MD5 结果</h4>
+                        <div class="result-content" id="gen-result">
+                            <span class="result-text result-placeholder">等待生成...</span>
+                            <button class="copy-icon-btn" title="复制结果" onclick="copyResult('gen-result')"
+                                style="display:none;">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MD5 校验 -->
+            <div id="tab-verify" class="tab-pane">
+                <div class="tool-card">
+                    <div class="form-group">
+                        <label for="verify-input">原始文本</label>
+                        <textarea id="verify-input" placeholder="请输入原始文本..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="verify-hash">待校验的 MD5 哈希值</label>
+                        <input type="text" id="verify-hash" placeholder="请输入 MD5 哈希值（不区分大小写）...">
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="btn btn-primary" onclick="verifyMD5()">校验 MD5</button>
+                        <button class="btn btn-outline" onclick="clearVerify()">清空</button>
+                    </div>
+
+                    <div id="verify-result" style="display:none;"></div>
+                </div>
+            </div>
+
+            <!-- 批量生成 -->
+            <div id="tab-batch" class="tab-pane">
+                <div class="tool-card">
+                    <div class="form-group">
+                        <label for="batch-input">输入文本（每行一个）</label>
+                        <textarea id="batch-input" placeholder="请输入要批量计算 MD5 的文本，每行一个..."></textarea>
+                    </div>
+
+                    <div class="options-row">
+                        <div class="option-group">
+                            <label>输出大小写</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="batch-case" value="lower" checked> 小写</label>
+                                <label><input type="radio" name="batch-case" value="upper"> 大写</label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label>输出位数</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="batch-bits" value="32" checked> 32位</label>
+                                <label><input type="radio" name="batch-bits" value="16"> 16位</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="btn btn-primary" onclick="batchMD5()">批量生成</button>
+                        <button class="btn btn-success" onclick="copyBatchResult()" id="batch-copy-btn"
+                            style="display:none;">复制全部结果</button>
+                        <button class="btn btn-outline" onclick="clearBatch()">清空</button>
+                    </div>
+
+                    <div class="result-section" id="batch-result-section" style="display:none;">
+                        <h4>批量结果</h4>
+                        <div style="overflow-x:auto;">
+                            <table class="batch-table" id="batch-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:48px;">#</th>
+                                        <th>原文</th>
+                                        <th>MD5</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="batch-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        function computeMD5(text) {
+            return CryptoJS.MD5(text).toString();
+        }
+
+        function get16Bit(hash32) {
+            return hash32.substring(8, 24);
+        }
+
+        function formatHash(hash, bits, casing) {
+            var result = bits === '16' ? get16Bit(hash) : hash;
+            return casing === 'upper' ? result.toUpperCase() : result.toLowerCase();
+        }
+
+        // ===== Tab switching =====
+        document.querySelectorAll('.tab-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+                document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ===== MD5 生成 =====
+        function generateMD5() {
+            var input = document.getElementById('gen-input').value;
+            var resultEl = document.getElementById('gen-result');
+            var copyBtn = resultEl.querySelector('.copy-icon-btn');
+            var textSpan = resultEl.querySelector('.result-text');
+
+            if (!input.trim()) {
+                textSpan.textContent = '请输入文本';
+                textSpan.className = 'result-text result-placeholder';
+                copyBtn.style.display = 'none';
+                return;
+            }
+
+            var bits = document.querySelector('input[name="gen-bits"]:checked').value;
+            var casing = document.querySelector('input[name="gen-case"]:checked').value;
+            var hash = computeMD5(input);
+            var result = formatHash(hash, bits, casing);
+
+            textSpan.textContent = result;
+            textSpan.className = 'result-text';
+            copyBtn.style.display = 'flex';
+        }
+
+        function clearGenerate() {
+            document.getElementById('gen-input').value = '';
+            var resultEl = document.getElementById('gen-result');
+            var textSpan = resultEl.querySelector('.result-text');
+            textSpan.textContent = '等待生成...';
+            textSpan.className = 'result-text result-placeholder';
+            resultEl.querySelector('.copy-icon-btn').style.display = 'none';
+        }
+
+        // ===== MD5 校验 =====
+        function verifyMD5() {
+            var input = document.getElementById('verify-input').value;
+            var expectedHash = document.getElementById('verify-hash').value.trim();
+            var resultEl = document.getElementById('verify-result');
+
+            if (!input.trim()) {
+                utils.showError('请输入原始文本');
+                return;
+            }
+
+            if (!expectedHash) {
+                utils.showError('请输入待校验的 MD5 哈希值');
+                return;
+            }
+
+            var actualHash32 = computeMD5(input);
+            var actualHash16 = get16Bit(actualHash32);
+
+            var normalizedExpected = expectedHash.toLowerCase();
+            var match = (actualHash32.toLowerCase() === normalizedExpected) ||
+                (actualHash16.toLowerCase() === normalizedExpected);
+
+            resultEl.style.display = 'flex';
+            if (match) {
+                resultEl.className = 'verify-result match';
+                resultEl.innerHTML = 'MD5 校验通过 — 文本与哈希值匹配';
+            } else {
+                resultEl.className = 'verify-result mismatch';
+                var actualDisplay = actualHash32.toLowerCase() === normalizedExpected ? actualHash32.toLowerCase() : actualHash32.toLowerCase();
+                resultEl.innerHTML = 'MD5 校验不匹配<br><small>实际 32位 MD5：' + actualHash32.toLowerCase() + '</small><br><small>实际 16位 MD5：' + actualHash16.toLowerCase() + '</small>';
+            }
+        }
+
+        function clearVerify() {
+            document.getElementById('verify-input').value = '';
+            document.getElementById('verify-hash').value = '';
+            var resultEl = document.getElementById('verify-result');
+            resultEl.style.display = 'none';
+            resultEl.innerHTML = '';
+        }
+
+        // ===== 批量生成 =====
+        function batchMD5() {
+            var input = document.getElementById('batch-input').value;
+            var tbody = document.getElementById('batch-tbody');
+            var resultSection = document.getElementById('batch-result-section');
+            var copyBtn = document.getElementById('batch-copy-btn');
+
+            if (!input.trim()) {
+                utils.showError('请输入文本');
+                return;
+            }
+
+            var lines = input.split('\n');
+            var bits = document.querySelector('input[name="batch-bits"]:checked').value;
+            var casing = document.querySelector('input[name="batch-case"]:checked').value;
+
+            var rows = '';
+            for (var i = 0; i < lines.length; i++) {
+                var text = lines[i];
+                var hash = computeMD5(text);
+                var result = formatHash(hash, bits, casing);
+                rows += '<tr>' +
+                    '<td class="line-num">' + (i + 1) + '</td>' +
+                    '<td>' + escapeHtml(text || '&nbsp;') + '</td>' +
+                    '<td><div class="hash-cell"><span>' + result + '</span><button class="copy-icon-btn" onclick="copySingleHash(this)" title="复制">📋</button></div></td>' +
+                    '</tr>';
+            }
+
+            tbody.innerHTML = rows;
+            resultSection.style.display = 'block';
+            copyBtn.style.display = 'inline-block';
+        }
+
+        function clearBatch() {
+            document.getElementById('batch-input').value = '';
+            document.getElementById('batch-tbody').innerHTML = '';
+            document.getElementById('batch-result-section').style.display = 'none';
+            document.getElementById('batch-copy-btn').style.display = 'none';
+        }
+
+        function copyBatchResult() {
+            var tbody = document.getElementById('batch-tbody');
+            var rows = tbody.querySelectorAll('tr');
+            var text = '';
+            rows.forEach(function (row) {
+                var hashSpan = row.querySelector('.hash-cell span');
+                if (hashSpan) {
+                    text += hashSpan.textContent + '\n';
+                }
+            });
+
+            if (!text) {
+                utils.showError('请先生成批量结果');
+                return;
+            }
+
+            navigator.clipboard.writeText(text.trim()).then(function () {
+                utils.showSuccess('已复制全部 MD5 结果');
+            }).catch(function () {
+                utils.showError('复制失败，请手动复制');
+            });
+        }
+
+        // ===== 通用复制 =====
+        function copyResult(resultId) {
+            var resultEl = document.getElementById(resultId);
+            var textSpan = resultEl.querySelector('.result-text');
+            var text = textSpan.textContent;
+
+            if (!text || textSpan.classList.contains('result-placeholder')) return;
+
+            navigator.clipboard.writeText(text).then(function () {
+                var copyBtn = resultEl.querySelector('.copy-icon-btn');
+                copyBtn.classList.add('copied');
+                copyBtn.textContent = '✓';
+                setTimeout(function () {
+                    copyBtn.classList.remove('copied');
+                    copyBtn.textContent = '📋';
+                }, 1500);
+                utils.showSuccess('已复制');
+            }).catch(function () {
+                utils.showError('复制失败');
+            });
+        }
+
+        function copySingleHash(btn) {
+            var hash = btn.parentElement.querySelector('span').textContent;
+            navigator.clipboard.writeText(hash).then(function () {
+                btn.classList.add('copied');
+                btn.textContent = '✓';
+                setTimeout(function () {
+                    btn.classList.remove('copied');
+                    btn.textContent = '📋';
+                }, 1500);
+                utils.showSuccess('已复制');
+            }).catch(function () {
+                utils.showError('复制失败');
+            });
+        }
+
+        function escapeHtml(text) {
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

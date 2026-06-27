@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="SQL格式化工具说明，SQL语法高亮，关键字大写，格式化压缩，错误检测，免费在线SQL格式化工具，本地处理保护隐私">
+    <meta name="keywords" content="SQL格式化, SQL美化, SQL压缩, SQL语法高亮, 在线SQL工具, 免费SQL格式化">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>SQL格式化工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #0891B2 0%, #0E7490 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #0891B2;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0891B2;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #0891B2;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #0891B2;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0891B2;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #0891B2 0%, #0E7490 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(8, 145, 178, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>SQL格式化工具 - 免费、安全、快速</h1>
+            <p class="subtitle">SQL语法高亮，关键字大写，格式化压缩，错误检测，免费在线SQL格式化工具，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是SQL格式化工具？</h2>
+                <p>SQL格式化工具是一款专业的在线SQL代码处理工具，专为需要编辑和优化SQL语句的用户设计。在数据库开发和管理过程中，SQL语句的格式直接影响代码的可读性和维护效率。混乱的SQL语句不仅难以阅读，还容易导致错误和性能问题。这款工具可以帮助您快速、准确地格式化SQL语句，使其结构清晰、易于维护。</p>
+                <p>工具提供三大核心功能：SQL格式化、SQL压缩和关键字大写转换。格式化功能可以将混乱的SQL语句整理为标准的缩进格式，每个关键字和子句清晰显示。压缩功能可以移除多余的空格和换行，将SQL压缩为一行，方便嵌入代码中。关键字大写功能可以将SELECT、FROM、WHERE等关键字统一转换为大写，符合SQL书写规范。所有处理均在浏览器本地完成，您的SQL语句不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：输入SQL语句</h3>
+                <p>在左侧输入区域粘贴需要处理的SQL语句。语句可以是任意长度，支持SELECT、INSERT、UPDATE、DELETE等所有SQL类型。您也可以粘贴多条SQL语句，工具会分别处理。</p>
+
+                <h3>第二步：选择处理方式</h3>
+                <p>根据需求选择处理方式：</p>
+                <ul>
+                    <li><strong>格式化：</strong>将语句整理为标准缩进格式，便于阅读和维护</li>
+                    <li><strong>压缩：</strong>移除空格和换行，将SQL压缩为一行</li>
+                    <li><strong>关键字大写：</strong>将SELECT、FROM等关键字转换为大写</li>
+                </ul>
+
+                <h3>第三步：执行处理</h3>
+                <p>点击对应的按钮，工具会立即处理SQL语句。处理结果显示在右侧输出区域，您可以即时查看效果。格式化后的语句会保持正确的缩进层级，关键字会高亮显示。</p>
+
+                <h3>第四步：复制结果</h3>
+                <p>点击"复制"按钮将处理结果复制到剪贴板，然后粘贴到目标位置。处理结果准确无误，可以直接使用。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>数据库管理员：</strong>格式化复杂SQL语句，提高代码可读性，便于团队协作。</p>
+                <p><strong>后端开发者：</strong>处理数据库查询语句，确保代码规范，便于后期维护。</p>
+                <p><strong>数据分析师：</strong>优化分析SQL语句，提高语句效率，便于理解查询逻辑。</p>
+                <p><strong>学生：</strong>学习SQL语法，理解语句结构，完成作业和项目。</p>
+                <p><strong>普通用户：</strong>处理SQL语句，修复格式问题，提高工作效率。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">SQL格式化</span>
+                    <span class="feature-tag">SQL压缩</span>
+                    <span class="feature-tag">关键字大写</span>
+                    <span class="feature-tag">语法高亮</span>
+                    <span class="feature-tag">错误检测</span>
+                    <span class="feature-tag">一键复制</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有SQL处理都在您的浏览器中完成，语句不会上传到任何服务器。这意味着您的数据库查询逻辑始终处于您的控制之下，特别适合处理包含商业机密的数据查询。同时，工具支持语法高亮显示，关键字、表名、字段名清晰区分，大大提高可读性。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>格式化会添加缩进和换行，可能改变代码体积</li>
+                        <li>压缩功能会移除注释，请确认是否需要保留</li>
+                        <li>关键字大写仅影响标准SQL关键字，不影响表名和字段名</li>
+                        <li>复杂SQL语句可能无法完美格式化，建议人工检查</li>
+                        <li>错误检测基于基本语法规则，复杂错误可能无法识别</li>
+                        <li>格式化结果仅供参考，建议在数据库中测试执行</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #0891B2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用SQL格式化工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../regex/index.html" class="tool-link">正则表达式测试工具</a>
+                <a href="../yaml/index.html" class="tool-link">YAML格式化工具</a>
+                <a href="../../json/index.html" class="tool-link">JSON格式化工具</a>
+                <a href="../../mermaid/index.html" class="tool-link">Mermaid图表工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

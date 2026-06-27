@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线进制转换工具, 二进制八进制十进制十六进制互转, 支持2/8/10/16进制实时转换, 免费在线进制转换器">
+    <meta name="keywords" content="进制转换, 二进制转十进制, 十六进制转二进制, 八进制转换, 在线进制转换, 免费工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>进制转换工具 - Helpoke 助点站</title>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Source base selector */
+        .base-select-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .base-select-row .label-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            white-space: nowrap;
+        }
+
+        .base-tabs {
+            display: flex;
+            gap: 0;
+        }
+
+        .base-tab {
+            padding: 8px 20px;
+            border: 1px solid #eaeaea;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+        }
+
+        .base-tab:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .base-tab:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .base-tab:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .base-tab.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .base-tab+.base-tab {
+            border-left: none;
+        }
+
+        /* Input */
+        .input-group {
+            margin-bottom: 28px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-row input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #eaeaea;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            transition: border-color 0.3s;
+        }
+
+        .input-row input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .input-row input.error {
+            border-color: #e74c3c;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-outline:hover {
+            background: #f0f7ff;
+        }
+
+        .error-box {
+            background-color: #fef0ef;
+            border: 1px solid #f5c6c2;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #721c24;
+        }
+
+        /* Result cards */
+        .result-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-card {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: 1px solid #eaeaea;
+            transition: all 0.2s;
+        }
+
+        .result-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .result-card.bin {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .result-card.oct {
+            background: #fefce8;
+            border-color: #fef08a;
+        }
+
+        .result-card.dec {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        .result-card.hex {
+            background: #faf5ff;
+            border-color: #e9d5ff;
+        }
+
+        .result-badge {
+            width: 77px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-right: 16px;
+        }
+
+        .result-card.bin .result-badge {
+            background: #22c55e;
+            color: white;
+        }
+
+        .result-card.oct .result-badge {
+            background: #eab308;
+            color: white;
+        }
+
+        .result-card.dec .result-badge {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .result-card.hex .result-badge {
+            background: #a855f7;
+            color: white;
+        }
+
+        .result-value {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            word-break: break-all;
+            letter-spacing: 1px;
+        }
+
+        .result-card.source .result-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn-copy-sm {
+            background: none;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #64748b;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .btn-copy-sm:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .btn-copy-sm.copied {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .btn-copy-all {
+            margin-top: 16px;
+            background-color: #27ae60;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn-copy-all:hover {
+            background-color: #229954;
+        }
+
+        /* Common presets */
+        .presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .preset-tag {
+            padding: 4px 12px;
+            background: #f1f5f9;
+            border-radius: 14px;
+            font-size: 12px;
+            color: #64748b;
+            cursor: pointer;
+            border: none;
+            font-family: 'Courier New', monospace;
+            transition: all 0.2s;
+        }
+
+        .preset-tag:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .input-row {
+                flex-direction: column;
+            }
+
+            .input-row input {
+                font-size: 17px;
+            }
+
+            .result-value {
+                font-size: 15px;
+            }
+
+            .result-card {
+                padding: 8px 10px;
+            }
+
+            .base-select-row {
+                gap: 5px;
+            }
+
+            .base-tab {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .tool-card {
+                padding: 15px;
+            }
+
+            .result-badge {
+                width: 84px;
+                height: 30px;
+                font-size: 12px;
+                margin-right: 10px;
+            }
+
+            .base-tab {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .base-select-row .label-text {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"],
+        body.dark-mode select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode select:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .base-tab {
+            background-color: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .base-tab.active {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .base-tab:hover {
+            border-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-outline {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-outline:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-box {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .result-card {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-card .result-value {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn-copy-sm {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-copy-sm:hover {
+            background-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn-copy-all {
+            background-color: var(--success-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .btn-copy-all:hover {
+            background-color: var(--success-color);
+            opacity: 0.9;
+        }
+
+        body.dark-mode .preset-tag {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .preset-tag:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .error-box {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        body.dark-mode input.error {
+            border-color: var(--error-color);
+        }
+
+        /* ==================== 边框颜色覆盖 ==================== */
+        body.dark-mode .base-tab {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .result-box {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode input[type="text"] {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode select {
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .btn-copy-sm {
+            border-color: var(--border-color);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "进制转换工具",
+        "description": "在线进制转换工具，支持二进制、八进制、十进制、十六进制实时互转。免费在线进制转换器。Online base conversion tool supporting binary, octal, decimal and hexadecimal.",
+        "url": "https://helpoke.com/base-convert",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "二进制转十进制",
+            "十进制转十六进制",
+            "八进制转换",
+            "支持2-36进制转换",
+            "实时转换显示",
+            "免费在线使用"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="工具使用说明">进制转换工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>支持二进制、八进制、十进制、十六进制之间互转，实时转换</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="base-select-row">
+                    <span class="label-text">源进制：</span>
+                    <div class="base-tabs">
+                        <button class="base-tab" data-base="2" onclick="switchBase(2)">BIN(二)</button>
+                        <button class="base-tab" data-base="8" onclick="switchBase(8)">OCT(八)</button>
+                        <button class="base-tab active" data-base="10" onclick="switchBase(10)">DEC(十)</button>
+                        <button class="base-tab" data-base="16" onclick="switchBase(16)">HEX(十六)</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-row">
+                        <input type="text" id="num-input" placeholder="输入数字..." value="255" data-name="输入值">
+                        <button class="btn" onclick="convert()">转换</button>
+                        <button class="btn btn-outline" onclick="clearInput()">清空</button>
+                    </div>
+                    <div class="presets">
+                        <button class="preset-tag" onclick="usePreset('255', 10)">255</button>
+                        <button class="preset-tag" onclick="usePreset('1024', 10)">1024</button>
+                        <button class="preset-tag" onclick="usePreset('65535', 10)">65535</button>
+                        <button class="preset-tag" onclick="usePreset('ff', 16)">0xFF</button>
+                        <button class="preset-tag" onclick="usePreset('1010', 2)">0b1010</button>
+                        <button class="preset-tag" onclick="usePreset('777', 8)">0o777</button>
+                        <button class="preset-tag" onclick="usePreset('deadbeef', 16)">0xDEADBEEF</button>
+                    </div>
+                </div>
+
+                <div id="error-box" class="error-box" style="display:none;"></div>
+
+                <div class="result-grid" id="result-grid">
+                    <div class="result-card bin">
+                        <div class="result-badge">BIN(二)</div>
+                        <div class="result-value" id="val-bin">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-bin', '二进制')">复制</button>
+                    </div>
+                    <div class="result-card oct">
+                        <div class="result-badge">OCT(八)</div>
+                        <div class="result-value" id="val-oct">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-oct', '八进制')">复制</button>
+                    </div>
+                    <div class="result-card dec">
+                        <div class="result-badge">DEC(十)</div>
+                        <div class="result-value" id="val-dec">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-dec', '十进制')">复制</button>
+                    </div>
+                    <div class="result-card hex">
+                        <div class="result-badge">HEX(十六)</div>
+                        <div class="result-value" id="val-hex">-</div>
+                        <button class="btn-copy-sm" onclick="copyVal('val-hex', '十六进制')">复制</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-copy-all" onclick="copyAll()" style="margin-top:16px;">复制全部</button>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../common/js/utils.js"></script>
+    <script>
+        var sourceBase = 10;
+
+        var BASE_CONFIG = {
+            2: { id: 'bin', name: '二进制', regex: /^[01]+$/ },
+            8: { id: 'oct', name: '八进制', regex: /^[0-7]+$/ },
+            10: { id: 'dec', name: '十进制', regex: /^[0-9]+$/ },
+            16: { id: 'hex', name: '十六进制', regex: /^[0-9a-fA-F]+$/ }
+        };
+
+        function switchBase(base) {
+            var oldBase = sourceBase;
+            var input = document.getElementById('num-input');
+            var raw = input.value.trim();
+
+            // Convert current input from old base to new base representation
+            if (raw && oldBase !== base) {
+                raw = raw.replace(/^0b/i, '').replace(/^0o/i, '').replace(/^0x/i, '');
+                if (BASE_CONFIG[oldBase].regex.test(raw)) {
+                    var decimalVal = parseInt(raw, oldBase);
+                    if (!isNaN(decimalVal) && isFinite(decimalVal)) {
+                        input.value = decimalVal.toString(base);
+                    }
+                }
+            }
+
+            sourceBase = base;
+            document.querySelectorAll('.base-tab').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelector('.base-tab[data-base="' + base + '"]').classList.add('active');
+            if (input.value.trim()) convert();
+        }
+
+        function convert() {
+            var input = document.getElementById('num-input');
+            var errorBox = document.getElementById('error-box');
+            var raw = input.value.trim();
+
+            errorBox.style.display = 'none';
+            input.classList.remove('error');
+
+            if (!raw) {
+                showError('请输入数字');
+                return;
+            }
+
+            // Remove common prefixes
+            raw = raw.replace(/^0b/i, '').replace(/^0o/i, '').replace(/^0x/i, '');
+
+            // Validate against source base
+            if (!BASE_CONFIG[sourceBase].regex.test(raw)) {
+                showError('输入不符合' + BASE_CONFIG[sourceBase].name + '格式（' + getBaseHint(sourceBase) + '）');
+                return;
+            }
+
+            var decimalVal;
+            try {
+                decimalVal = parseInt(raw, sourceBase);
+            } catch (e) {
+                showError('解析失败');
+                return;
+            }
+
+            if (isNaN(decimalVal)) {
+                showError('无法解析为有效数字');
+                return;
+            }
+
+            if (!isFinite(decimalVal) || decimalVal > Number.MAX_SAFE_INTEGER || decimalVal < Number.MIN_SAFE_INTEGER) {
+                showError('数字超出安全范围（-2^53 ~ 2^53）');
+                return;
+            }
+
+            // Update all result fields
+            document.getElementById('val-bin').textContent = decimalVal.toString(2);
+            document.getElementById('val-oct').textContent = decimalVal.toString(8);
+            document.getElementById('val-dec').textContent = decimalVal.toString(10);
+            var hexStr = decimalVal.toString(16);
+            document.getElementById('val-hex').textContent = decimalVal >= 0 ? hexStr.toLowerCase() : '-' + hexStr.substring(1).toLowerCase();
+
+            // Highlight source result
+            document.querySelectorAll('.result-card').forEach(function (c) { c.classList.remove('source'); });
+            var sourceId = BASE_CONFIG[sourceBase].id;
+            document.getElementById('val-' + sourceId).parentElement.classList.add('source');
+        }
+
+        function showError(msg) {
+            var errorBox = document.getElementById('error-box');
+            errorBox.textContent = msg;
+            errorBox.style.display = 'block';
+            document.getElementById('num-input').classList.add('error');
+        }
+
+        function getBaseHint(base) {
+            if (base === 2) return '仅允许 0-1';
+            if (base === 8) return '仅允许 0-7';
+            if (base === 10) return '仅允许 0-9';
+            if (base === 16) return '仅允许 0-9、A-F';
+            return '';
+        }
+
+        function copyVal(id, label) {
+            var val = document.getElementById(id).textContent;
+            if (val === '-') return;
+            navigator.clipboard.writeText(val).then(function () {
+                var btn = document.querySelector('#val-' + id.split('-')[1]).parentElement.querySelector('.btn-copy-sm');
+                var orig = btn.textContent;
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+                utils.showSuccess('已复制' + label + '！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        function copyAll() {
+            var bin = document.getElementById('val-bin').textContent;
+            var oct = document.getElementById('val-oct').textContent;
+            var dec = document.getElementById('val-dec').textContent;
+            var hex = document.getElementById('val-hex').textContent;
+            if (bin === '-') { utils.showError('没有可复制的内容'); return; }
+            var text = 'BIN: ' + bin + '\nOCT: ' + oct + '\nDEC: ' + dec + '\nHEX: ' + hex;
+            navigator.clipboard.writeText(text).then(function () {
+                utils.showSuccess('已复制全部结果！');
+            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+        }
+
+        function clearInput() {
+            document.getElementById('num-input').value = '';
+            document.getElementById('error-box').style.display = 'none';
+            document.getElementById('num-input').classList.remove('error');
+            document.getElementById('val-bin').textContent = '-';
+            document.getElementById('val-oct').textContent = '-';
+            document.getElementById('val-dec').textContent = '-';
+            document.getElementById('val-hex').textContent = '-';
+            document.querySelectorAll('.result-card').forEach(function (c) { c.classList.remove('source'); });
+        }
+
+        function usePreset(val, base) {
+            document.getElementById('num-input').value = val;
+            switchBase(base);
+            convert();
+        }
+
+        // Real-time conversion
+        document.getElementById('num-input').addEventListener('input', function () {
+            if (this.value.trim()) convert();
+        });
+
+        document.getElementById('num-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') convert();
+        });
+
+        // Init
+        convert();
+    </script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

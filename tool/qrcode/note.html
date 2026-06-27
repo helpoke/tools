@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="二维码生成解析工具说明，免费生成二维码，二维码解码，支持自定义颜色尺寸，纯前端本地处理">
+    <meta name="keywords" content="二维码生成, 二维码解析, QR码生成, QR码解码, 在线二维码, 免费二维码工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>二维码生成解析工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #10B981;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #10B981;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #10B981;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #10B981;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #10B981;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .qrcode-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .qrcode-feature {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .qrcode-feature .feature-name {
+            font-weight: 600;
+            color: #10B981;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .qrcode-feature .feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .qrcode-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>二维码生成解析工具 - 免费、安全、快速</h1>
+            <p class="subtitle">免费生成二维码，二维码解码，支持自定义颜色尺寸，纯前端本地处理</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是二维码生成解析工具？</h2>
+                <p>二维码生成解析工具是一款专业的在线二维码工具集，专为需要生成和解析二维码的用户设计。二维码（QR Code）是一种二维条形码，可以存储大量信息，广泛应用于商品标识、支付扫码、网址链接、名片信息等场景。通过扫描二维码，可以快速获取其中存储的信息。</p>
+                <p>工具提供两大核心功能：二维码生成和二维码解析。生成功能支持将文本、网址、名片等信息转换为二维码图片，并支持自定义颜色、尺寸等参数。解析功能支持上传二维码图片或使用摄像头扫描，提取其中存储的信息。所有处理均在浏览器本地完成，您的信息不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>二维码生成</h3>
+                <p>在输入框中输入需要编码的内容，可以是文本、网址、电话号码、名片信息等。设置二维码尺寸和颜色，点击"生成"按钮。工具会立即生成二维码图片，并提供预览。满意后点击"下载"按钮保存图片，方便打印和使用。</p>
+
+                <h3>二维码解析</h3>
+                <p>点击"解析"标签页，上传二维码图片或使用摄像头扫描。工具会自动识别二维码并提取其中的信息。解析结果会显示在输出区域，您可以复制或查看详细信息。支持大多数常见的二维码格式。</p>
+
+                <h3>自定义设置</h3>
+                <p>生成二维码时，您可以自定义前景色和背景色，使二维码更符合您的品牌风格。同时可以调整二维码尺寸，确保扫描效果良好。建议使用高对比度的颜色组合，以保证扫描成功率。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>核心功能特点</h2>
+                
+                <div class="qrcode-features">
+                    <div class="qrcode-feature">
+                        <div class="feature-name">二维码生成</div>
+                        <div class="feature-desc">将文本、网址等信息转换为二维码图片</div>
+                    </div>
+                    <div class="qrcode-feature">
+                        <div class="feature-name">二维码解析</div>
+                        <div class="feature-desc">上传图片或扫描，提取二维码信息</div>
+                    </div>
+                    <div class="qrcode-feature">
+                        <div class="feature-name">自定义颜色</div>
+                        <div class="feature-desc">设置前景色和背景色，个性化设计</div>
+                    </div>
+                    <div class="qrcode-feature">
+                        <div class="feature-name">尺寸调整</div>
+                        <div class="feature-desc">自定义二维码尺寸，适应不同场景</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>商家店主：</strong>生成商品二维码、支付二维码、店铺二维码，方便顾客扫码。</p>
+                <p><strong>营销人员：</strong>生成活动二维码、优惠券二维码、抽奖二维码，开展营销活动。</p>
+                <p><strong>个人用户：</strong>生成个人名片二维码、联系方式二维码，方便分享。</p>
+                <p><strong>开发者：</strong>测试二维码功能，调试扫码应用。</p>
+                <p><strong>普通用户：</strong>解析未知二维码，了解其中包含的信息。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">二维码生成</span>
+                    <span class="feature-tag">二维码解析</span>
+                    <span class="feature-tag">自定义颜色</span>
+                    <span class="feature-tag">尺寸调整</span>
+                    <span class="feature-tag">图片下载</span>
+                    <span class="feature-tag">摄像头扫描</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有二维码生成和解析都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的敏感信息始终处于您的控制之下，特别适合处理包含个人信息或商业机密的二维码。同时，工具支持摄像头扫描，方便您快速解析二维码。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>二维码内容不宜过长，过长可能导致扫描困难</li>
+                        <li>建议使用高对比度颜色组合，确保扫描成功率</li>
+                        <li>下载的图片建议保存为PNG格式，打印效果更好</li>
+                        <li>扫描陌生二维码前请确认来源安全</li>
+                        <li>解析功能依赖浏览器摄像头权限，请允许访问</li>
+                        <li>部分复杂二维码可能无法解析，请使用专业扫码工具</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #10B981; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用二维码生成解析工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../barcode/index.html" class="tool-link">条形码生成工具</a>
+                <a href="../color-picker/index.html" class="tool-link">取色器颜色转换工具</a>
+                <a href="../../image/compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../../image/watermark/index.html" class="tool-link">图片水印工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="URL编码解码工具说明，支持URL Encode/Decode，encodeURI和encodeURIComponent模式，本地处理保护隐私">
+    <meta name="keywords" content="URL编码, URL解码, URL Encode, URL Decode, encodeURIComponent, 在线URL转码, 免费工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>URL 编码解码工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #6366F1 0%, #4F46E5 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #6366F1;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #6366F1;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #6366F1;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #6366F1;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #6366F1;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #6366F1 0%, #4F46E5 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .encode-methods {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .encode-method {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .encode-method .method-name {
+            font-weight: 600;
+            color: #6366F1;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .encode-method .method-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .encode-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>URL 编码解码工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持URL Encode/Decode，encodeURI和encodeURIComponent模式，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是URL编码解码工具？</h2>
+                <p>URL编码解码工具是一款专业的在线URL转换工具，专为需要进行URL编码和解码操作的用户设计。URL编码（也叫百分号编码）是一种将URL中不允许出现的字符转换为特殊格式的编码方法。URL只能包含ASCII字符集中的某些字符，其他字符（如中文、空格、特殊符号等）必须经过编码才能正确传输。</p>
+                <p>工具支持两种编码方法：encodeURI和encodeURIComponent。encodeURI用于编码完整URL，保留URL中的特殊字符（如:/?=&等）；encodeURIComponent用于编码URL参数值，会将所有特殊字符都编码。您可以根据不同场景选择合适的编码方法。所有转换均在浏览器本地完成，保护您的数据隐私。</p>
+
+                <h2>如何使用？</h2>
+                <h3>URL编码操作</h3>
+                <p>在输入框中输入需要编码的URL或文本，选择编码方法（encodeURI或encodeURIComponent）。点击"编码"按钮，工具会将输入内容转换为URL编码格式。编码后的字符串中，非ASCII字符会转换为%XX格式，其中XX是字符的十六进制编码。</p>
+
+                <h3>URL解码操作</h3>
+                <p>在输入框中输入需要解码的URL编码字符串，点击"解码"按钮。工具会将所有%XX格式的编码还原为原始字符，显示完整的内容。解码操作支持自动识别编码格式，无需手动选择。</p>
+
+                <h3>编码方法选择</h3>
+                <p>encodeURI适合编码完整URL地址，保留URL结构字符（协议分隔符、路径分隔符、查询参数分隔符等）不被编码。encodeURIComponent适合编码URL参数值，会编码所有特殊字符，确保参数值可以安全传输。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>两种编码方法</h2>
+                
+                <div class="encode-methods">
+                    <div class="encode-method">
+                        <div class="method-name">encodeURI</div>
+                        <div class="method-desc">编码完整URL，保留特殊字符（:/?=&等）不被编码</div>
+                    </div>
+                    <div class="encode-method">
+                        <div class="method-name">encodeURIComponent</div>
+                        <div class="method-desc">编码URL参数值，编码所有特殊字符，确保参数安全传输</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>前端开发者：</strong>处理URL参数传递，编码中文和特殊字符，确保参数正确传输。</p>
+                <p><strong>后端开发者：</strong>解析URL参数，处理编码后的请求参数，确保数据正确解码。</p>
+                <p><strong>API开发者：</strong>构建API请求URL，编码请求参数，处理URL中的特殊字符。</p>
+                <p><strong>SEO优化人员：</strong>处理中文URL编码，优化搜索引擎收录的URL格式。</p>
+                <p><strong>普通用户：</strong>了解URL编码原理，处理网页链接中的编码字符。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">encodeURI模式</span>
+                    <span class="feature-tag">encodeURIComponent模式</span>
+                    <span class="feature-tag">自动解码识别</span>
+                    <span class="feature-tag">支持中文编码</span>
+                    <span class="feature-tag">一键复制结果</span>
+                    <span class="feature-tag">实时转换</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有编码解码操作都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的URL内容始终处于您的控制之下，特别适合处理包含敏感信息的URL。同时，工具支持两种编码方法，满足不同应用场景的需求。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>URL编码仅用于URL传输，不是加密方法</li>
+                        <li>编码后的URL可能变长，请评估对URL长度的影响</li>
+                        <li>解码时请确保输入的是有效的URL编码格式</li>
+                        <li>URL中的空格通常编码为%20或+</li>
+                        <li>中文URL建议使用encodeURIComponent编码</li>
+                        <li>部分浏览器会自动处理URL编码，注意手动编码可能产生双重编码</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #6366F1; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用URL编码解码工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../encoding-base64/index.html" class="tool-link">Base64编解码工具</a>
+                <a href="../encoding-unicode/index.html" class="tool-link">Unicode编解码工具</a>
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

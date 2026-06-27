@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="SHA加密工具说明，支持SHA256哈希生成、SHA512哈希生成，批量加密，本地处理保护隐私">
+    <meta name="keywords" content="SHA256, SHA512, SHA加密, SHA哈希, 在线SHA, 批量加密, 免费SHA工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>SHA 加密工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #F59E0B;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #F59E0B;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #F59E0B;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #F59E0B;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #F59E0B;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .sha-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .sha-type {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .sha-type .type-name {
+            font-weight: 600;
+            color: #F59E0B;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .sha-type .type-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .sha-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>SHA 加密工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持SHA256哈希生成、SHA512哈希生成，批量加密，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是SHA加密工具？</h2>
+                <p>SHA加密工具是一款专业的在线哈希生成工具，专为需要生成安全哈希值的用户设计。SHA（Secure Hash Algorithm）是一系列密码散列函数，由美国国家安全局设计，包括SHA-1、SHA-256、SHA-512等多个版本。相比MD5，SHA提供更高的安全性和更长的哈希值，广泛应用于数字签名、文件验证、密码存储等安全敏感场景。</p>
+                <p>工具支持多种SHA算法版本，包括SHA-256（生成256位哈希）和SHA-512（生成512位哈希）。您可以根据安全需求选择合适的算法版本，SHA-512提供更高的安全性但计算更复杂，SHA-256在安全性和性能之间达到良好平衡。所有计算均在浏览器本地完成，您的数据不会上传到任何服务器。</p>
+
+                <h2>如何使用？</h2>
+                <h3>文本哈希计算</h3>
+                <p>在文本输入框中输入需要计算哈希的字符串，选择SHA算法版本（SHA-256或SHA-512）。点击"计算"按钮，工具会生成对应的哈希值。结果以十六进制字符串显示，您可以一键复制用于其他用途。</p>
+
+                <h3>文件哈希计算</h3>
+                <p>点击上传按钮或拖拽文件到指定区域，工具会自动计算文件的SHA哈希值。文件SHA哈希常用于验证文件完整性，特别是在软件下载、安全传输等场景，确保文件未被篡改。</p>
+
+                <h3>批量处理</h3>
+                <p>在批量模式中，您可以输入多行文本或上传多个文件，工具会一次性计算所有输入的SHA哈希值。结果以列表形式显示，便于查看和比对。批量处理适合需要处理大量数据的安全审计场景。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>SHA算法版本</h2>
+                
+                <div class="sha-types">
+                    <div class="sha-type">
+                        <div class="type-name">SHA-256</div>
+                        <div class="type-desc">生成256位（32字节）哈希值，推荐用于大多数安全场景</div>
+                    </div>
+                    <div class="sha-type">
+                        <div class="type-name">SHA-512</div>
+                        <div class="type-desc">生成512位（64字节）哈希值，安全性更高，适合极高安全需求</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>软件开发者：</strong>验证软件发布文件的完整性，确保用户下载的软件未被篡改。</p>
+                <p><strong>安全工程师：</strong>进行安全审计，验证数据完整性，分析文件指纹。</p>
+                <p><strong>数据库管理员：</strong>存储用户密码哈希（配合盐值使用），保护用户信息安全。</p>
+                <p><strong>数字签名：</strong>为文档、合同生成数字指纹，用于验证和防篡改。</p>
+                <p><strong>普通用户：</strong>验证下载文件完整性，确保文件来源可信，防止恶意篡改。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">SHA-256支持</span>
+                    <span class="feature-tag">SHA-512支持</span>
+                    <span class="feature-tag">文件哈希计算</span>
+                    <span class="feature-tag">批量处理</span>
+                    <span class="feature-tag">一键复制结果</span>
+                    <span class="feature-tag">高安全性</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有SHA计算都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的敏感数据和文件始终处于您的控制之下。SHA算法相比MD5具有更高的安全性，目前尚未发现有效的碰撞攻击方法，适合用于安全敏感场景。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>SHA是单向函数，无法从哈希值还原原始数据</li>
+                        <li>用于密码存储时，建议配合盐值（salt）使用</li>
+                        <li>相同输入始终产生相同输出，SHA是确定性算法</li>
+                        <li>SHA-1已被证明存在安全漏洞，不推荐使用</li>
+                        <li>处理大文件时可能需要较长时间，请耐心等待</li>
+                        <li>哈希值长度固定，不随输入长度变化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #F59E0B; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用SHA加密工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../encoding-base64/index.html" class="tool-link">Base64编解码工具</a>
+                <a href="../pwd/index.html" class="tool-link">随机密码生成工具</a>
+                <a href="../uuid/index.html" class="tool-link">UUID生成工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Mermaid在线UML画图工具说明，免费在线UML画图工具，支持流程图、时序图、状态图、类图、实体关系图、饼图、甘特图、用户旅程图等多种图表类型。">
+    <meta name="keywords" content="Mermaid在线UML画图工具, 免费在线UML画图工具, UML流程图, Mermaid语法, 在线图表工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>Mermaid在线UML画图工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(75, 108, 183, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script src="../common/js/theme.js"></script>
+    <script src="./lib/mermaid.min.js"></script>
+    <script src="./lib/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>Mermaid在线UML画图工具 - 免费、安全、快速</h1>
+            <p class="subtitle">用代码绘制专业图表，支持流程图、时序图、状态图、类图等多种类型，实时预览，一键导出</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是 Mermaid 在线画图工具？</h2>
+                <p>Mermaid 在线画图工具是一款基于 Mermaid.js 开源库开发的在线图表绘制工具。它的核心理念是"用代码描述图表"，让用户通过编写简单的文本语法，就能快速生成专业的流程图、时序图、状态图、类图、实体关系图、饼图、甘特图和用户旅程图等多种类型的图表。</p>
+                <p>与传统的拖拽式画图工具不同，Mermaid 通过文本语法来定义图表结构，这种方式不仅高效，而且便于版本控制和团队协作。您可以将图表代码存储在代码仓库中，与团队成员共享和协作编辑，实现真正的"代码即文档"。</p>
+                <p>本工具完全在浏览器端运行，无需安装任何软件，也不需要注册账号。所有处理都在您的本地计算机上完成，不会上传到任何服务器，最大限度保护您的隐私和数据安全。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：选择图表类型</h3>
+                <p>在工具页面顶部，点击您需要的图表类型按钮，如"流程图"、"时序图"、"状态图"等。系统会自动在代码编辑器中填充相应的示例代码，帮助您快速了解语法结构。</p>
+
+                <h3>第二步：编写 Mermaid 语法</h3>
+                <p>在左侧的代码编辑器中，根据您的需求编写或修改 Mermaid 语法代码。您可以参考示例代码的结构，也可以在网上查找 Mermaid 的详细语法文档。</p>
+
+                <h3>第三步：实时预览效果</h3>
+                <p>右侧的预览区域会实时显示您编写的代码对应的图表效果。当您修改代码时，预览区域会自动更新，让您随时看到最新的图表效果。</p>
+
+                <h3>第四步：切换主题与导出</h3>
+                <p>您可以通过预览区域上方的主题选择器切换不同的配色方案，找到最适合您的图表风格。完成后，点击"下载"按钮即可将图表导出为 PNG 或 SVG 格式。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>软件开发者：</strong>用于绘制系统架构图、流程图、API 调用时序图等，将技术方案可视化，便于团队沟通和文档编写。</p>
+                <p><strong>产品经理：</strong>用于绘制用户流程、业务流程、产品功能结构图等，清晰展示产品设计思路。</p>
+                <p><strong>技术写作者：</strong>在技术博客、文档中嵌入专业图表，提升内容质量和可读性。</p>
+                <p><strong>学生与研究者：</strong>用于撰写论文、报告时绘制各种学术图表，如实验流程图、数据关系图等。</p>
+                <p><strong>项目管理人员：</strong>使用甘特图规划项目进度，直观展示任务安排和时间节点。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">无需注册，即用即走</span>
+                    <span class="feature-tag">实时预览，所见即所得</span>
+                    <span class="feature-tag">支持 9 种图表类型</span>
+                    <span class="feature-tag">多主题配色切换</span>
+                    <span class="feature-tag">导出 PNG/SVG 格式</span>
+                    <span class="feature-tag">电商示例参考</span>
+                    <span class="feature-tag">全屏查看模式</span>
+                </div>
+                <p>除此之外，我们还提供了丰富的电商业务示例图表，包括订单流程、API 请求时序、用户购物旅程等真实场景的图表模板，您可以直接参考和修改，快速上手。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>Mermaid 语法有严格的格式要求，缩进和语法错误可能导致图表无法正常渲染</li>
+                        <li>复杂图表可能需要较长的渲染时间，请耐心等待</li>
+                        <li>导出 PNG 图片时，建议先切换到全屏模式以获得更高分辨率</li>
+                        <li>处理期间请勿关闭浏览器或刷新页面，以免数据丢失</li>
+                        <li>SVG 格式保留矢量特性，适合印刷和无限放大；PNG 格式适合网页使用</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2>工具使用演示</h2>
+            <div class="chart-types">
+                <div class="chart-buttons">
+                    <button class="chart-btn" data-type="custom">自定义</button>
+                    <button class="chart-btn" data-type="flowchart">流程图</button>
+                    <button class="chart-btn" data-type="sequence">时序图</button>
+                    <button class="chart-btn" data-type="state">状态图</button>
+                    <button class="chart-btn" data-type="class">类图</button>
+                    <button class="chart-btn" data-type="er">实体关系图</button>
+                    <button class="chart-btn" data-type="pie">饼图</button>
+                    <button class="chart-btn" data-type="gantt">甘特图</button>
+                    <button class="chart-btn" data-type="journey">用户旅程图</button>
+                </div>
+            </div>
+            <div class="chart-examples">
+                <div class="chart-buttons">
+                    <h3>电商示例图表：</h3>
+                    <button class="chart-btn" data-type="order_flowchart">订单流程图</button>
+                    <button class="chart-btn" data-type="order_sequence">订单时序图</button>
+                    <button class="chart-btn" data-type="api_sequence">请求时序图</button>
+                    <button class="chart-btn" data-type="order_state">订单状态图</button>
+                    <button class="chart-btn" data-type="order_class">订单类图</button>
+                    <button class="chart-btn" data-type="order_er">订单实体关系图</button>
+                    <button class="chart-btn" data-type="order_pie">商品分类饼图</button>
+                    <button class="chart-btn" data-type="order_gantt">订单甘特图</button>
+                    <button class="chart-btn" data-type="order_journey">用户购物旅程图</button>
+                </div>
+            </div>
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2>Mermaid 语法代码</h2>
+                        <button id="copy-btn">复制</button>
+                        <button id="clear-btn">清空</button>
+                    </div>
+                    <textarea id="mermaid-input" placeholder="请输入Mermaid语法代码，例如：
+flowchart LR
+    A[Hard] -->|Text| B(Round)
+    B --> C{Decision}
+    C -->|One| D[Result 1]
+    C -->|Two| E[Result 2]">
+</textarea>
+                </div>
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2>预览图</h2>
+                        <div class="theme-selector">
+                            <div class="theme-circle" data-theme="default" style="background-color: #F0F0F0;"></div>
+                            <div class="theme-circle" data-theme="white" style="background-color: #fafafaff;"></div>
+                            <div class="theme-circle" data-theme="gray" style="background-color: #e6ededff;"></div>
+                            <div class="theme-circle" data-theme="shallow" style="background-color: #c7eeed;"></div>
+                            <div class="theme-circle" data-theme="blue" style="background-color: #8ba2ebff;"></div>
+                            <div class="theme-circle" data-theme="yellow" style="background-color: #bcb58aff;"></div>
+                            <div class="theme-circle" data-theme="purple" style="background-color: #c1b1e0ff;"></div>
+                            <div class="theme-circle" data-theme="forest" style="background-color: #80c79eff;"></div>
+                            <div class="theme-circle" data-theme="fire" style="background-color: #d9a49fff;"></div>
+                            <div class="theme-circle" data-theme="dark" style="background-color: #2c3e50;"></div>
+                        </div>
+                        <button id="zoom-btn">全屏</button>
+                        <button id="download-btn">下载</button>
+                    </div>
+                    <div id="mermaid-preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../json/index.html" class="tool-link">在线 JSON 格式化工具</a>
+                <a href="../tool/diff/index.html" class="tool-link">在线文本对比工具</a>
+                <a href="../dev/yaml/index.html" class="tool-link">在线 YAML 格式化工具</a>
+                <a href="../dev/base-convert/index.html" class="tool-link">在线进制转换工具</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+    <script src="example.js"></script>
+</body>
+
+</html>

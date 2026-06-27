@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Base64编解码工具说明，支持文本和文件Base64转换，在线免费Base64转码工具，本地处理保护隐私">
+    <meta name="keywords" content="Base64编码, Base64解码, Base64转换, 在线Base64, 文本Base64, 文件Base64, 免费工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>Base64 编解码工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #4F46E5 0%, #4338CA 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #4F46E5;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #4F46E5;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #4F46E5;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #4F46E5;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #4F46E5;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #4F46E5 0%, #4338CA 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>Base64 编解码工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持文本和文件Base64转换，在线免费Base64转码，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是Base64编解码工具？</h2>
+                <p>Base64编解码工具是一款专业的在线Base64转换工具，专为需要进行Base64编码和解码操作的用户设计。Base64是一种基于64个可打印字符来表示二进制数据的编码方法，广泛应用于电子邮件、网页传输、数据存储等场景，可以将二进制数据转换为文本格式进行传输。</p>
+                <p>工具支持两种转换模式：文本模式和文件模式。文本模式可以对字符串进行Base64编码和解码，适合处理URL参数、简单的数据加密等场景。文件模式可以将任意文件转换为Base64字符串，或将Base64字符串还原为原始文件，适合处理图片、PDF、压缩文件等各类文件。所有转换均在浏览器本地完成，无需上传到服务器，保护您的数据隐私。</p>
+
+                <h2>如何使用？</h2>
+                <h3>模式一：文本编解码</h3>
+                <p>在文本输入框中输入需要编码或解码的字符串。选择编码模式可以将普通文本转换为Base64字符串；选择解码模式可以将Base64字符串还原为原始文本。支持中文、英文、数字、符号等各种字符。</p>
+
+                <h3>模式二：文件编解码</h3>
+                <p>点击上传按钮或拖拽文件到指定区域，工具会自动将文件转换为Base64字符串。转换完成后，您可以复制Base64字符串用于其他用途。同样，您也可以输入Base64字符串，工具会将其还原为原始文件并提供下载。</p>
+
+                <h3>使用场景</h3>
+                <p>Base64编码常用于：在URL中传输二进制数据、在邮件中嵌入图片、在JSON中存储二进制数据、简单的数据隐藏、数据传输过程中的编码转换等。了解Base64的工作原理可以帮助您更好地理解网络传输和数据存储机制。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>开发者：</strong>在API接口中使用Base64传输二进制数据，处理图片、文件等数据的编码转换。</p>
+                <p><strong>网络工程师：</strong>分析邮件传输协议，处理MIME编码的邮件内容，调试网络数据包。</p>
+                <p><strong>数据分析师：</strong>解析包含Base64编码的数据，还原编码后的内容进行分析。</p>
+                <p><strong>安全研究人员：</strong>分析编码数据，识别潜在的编码隐藏信息。</p>
+                <p><strong>普通用户：</strong>处理邮件附件、网页图片等Base64编码内容，了解编码原理。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">文本编解码</span>
+                    <span class="feature-tag">文件编解码</span>
+                    <span class="feature-tag">支持中文编码</span>
+                    <span class="feature-tag">一键复制结果</span>
+                    <span class="feature-tag">文件下载还原</span>
+                    <span class="feature-tag">批量处理</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，所有编码解码操作都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的敏感数据始终处于您的控制之下，特别适合处理包含隐私信息的文件和文本。同时，工具支持中文编码，能够正确处理包含中文字符的文本内容。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>Base64编码后的数据体积会增加约33%，不适合处理大文件</li>
+                        <li>Base64编码不是加密，仅是编码转换，无法保护数据安全</li>
+                        <li>解码时请确保输入的是有效的Base64字符串，否则会解码失败</li>
+                        <li>处理大文件时可能需要较长时间，请耐心等待</li>
+                        <li>建议在UTF-8编码环境下使用，确保中文编码正确</li>
+                        <li>Base64字符串通常以等号（=）结尾，用于填充</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用Base64编解码工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../encoding-unicode/index.html" class="tool-link">Unicode编码解码工具</a>
+                <a href="../urlcode/index.html" class="tool-link">URL编码解码工具</a>
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

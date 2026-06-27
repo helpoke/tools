@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图像批量压缩工具说明，在线图片压缩工具，支持多种压缩算法，批量处理最多40张图片，本地处理保护隐私">
+    <meta name="keywords" content="图像压缩, 图片压缩, 批量压缩, 无损压缩, WebP压缩, 在线压缩工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图像批量压缩工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #8B5CF6;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8B5CF6;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #8B5CF6;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-section h2 {
+            color: #8B5CF6;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8B5CF6;
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #8B5CF6;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #8B5CF6;
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .algorithm-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #8B5CF6;
+        }
+
+        .algorithm-card h4 {
+            color: #8B5CF6;
+            margin-bottom: 10px;
+        }
+
+        .algorithm-card p {
+            text-indent: 0 !important;
+            margin-bottom: 10px !important;
+        }
+
+        .algorithm-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .algorithm-tag {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .tag-recommend {
+            background: rgba(16, 185, 129, 0.2);
+            color: #059669;
+        }
+
+        .tag-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #D97706;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script src="../../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图像批量压缩工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持多种压缩算法，批量处理最多40张图片，智能平衡质量与体积，本地处理保护隐私</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图像批量压缩工具？</h2>
+                <p>图像批量压缩工具是一款功能强大的在线图片压缩工具，专为需要处理大量图片的用户设计。无论是电商卖家需要优化商品图片、设计师需要压缩素材文件，还是普通用户需要减小图片体积以便分享和存储，这款工具都能满足您的需求。</p>
+                <p>工具提供四种压缩算法供您选择：默认压缩、无损压缩、强力压缩和 WebP 格式转换。每种算法都有其适用场景，您可以根据图片类型和压缩需求灵活选择。同时，工具支持批量上传最多40张图片，一次性完成压缩处理，大大提高工作效率。</p>
+                <p>最值得信赖的是，所有压缩处理都在浏览器本地完成，图片数据不会上传到任何服务器。这意味着您可以放心处理任何敏感图片，无需担心隐私泄露或数据安全问题。工具完全免费，无任何隐藏收费或使用限制。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域或拖拽图片到指定位置，支持同时选择多张图片。工具支持 JPG、PNG、WebP、GIF、BMP 等多种图片格式，单次最多可上传40张图片。上传后，图片列表会显示在页面上，方便您查看和管理。</p>
+
+                <h3>第二步：选择压缩算法</h3>
+                <p>根据您的需求选择合适的压缩算法。默认压缩适合一般 JPG 图片，平衡质量和大小；无损压缩适合 PNG 透明图片，保持最高质量；强力压缩适合对质量要求不高但需要极致压缩的场景；WebP 格式则适合网站图片，在保持高质量的同时显著减小体积。</p>
+
+                <h3>第三步：调整压缩参数</h3>
+                <p>通过拖动压缩质量滑块，可以调整压缩后的图片质量。值越高，质量越好但文件越大；值越低，压缩率越高但可能损失细节。建议设置在70-90之间。您还可以设置最大宽度、最大高度和最大文件大小限制，精确控制输出图片规格。</p>
+
+                <h3>第四步：开始压缩并下载</h3>
+                <p>点击"压缩当前图片"处理单张图片，或点击"批量压缩所有图片"一次性处理全部图片。压缩完成后，您可以逐个下载压缩后的图片，或一键打包下载所有压缩图片。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>压缩算法详解</h2>
+                
+                <div class="algorithm-card">
+                    <h4>默认压缩</h4>
+                    <p>平衡质量和文件大小，保持原始图片格式。采用智能压缩算法，在保证视觉质量的前提下尽可能减小文件体积。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-recommend">推荐用于一般JPG图片</span>
+                        <span class="algorithm-tag tag-warning">不适用于PNG透明图片</span>
+                    </div>
+                </div>
+
+                <div class="algorithm-card">
+                    <h4>无损压缩</h4>
+                    <p>保持最高图片质量，不损失任何像素信息，同时保持原始文件扩展名。采用先进的无损压缩技术，在不影响画质的情况下减小文件体积。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-recommend">推荐用于PNG透明图片</span>
+                        <span class="algorithm-tag tag-warning">不推荐用于JPG图片</span>
+                    </div>
+                </div>
+
+                <div class="algorithm-card">
+                    <h4>强力压缩</h4>
+                    <p>优先减小文件大小，统一转换为 JPG 格式以获得最佳压缩率。适合对图片质量要求不高但需要极致压缩的场景。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-recommend">推荐用于极致减小体积</span>
+                        <span class="algorithm-tag tag-warning">会显著降低图像质量</span>
+                    </div>
+                </div>
+
+                <div class="algorithm-card">
+                    <h4>WebP格式</h4>
+                    <p>转换为现代浏览器高效图像格式，能在保持较高质量的同时显著减小文件体积。WebP 格式比 JPG 小约 25-35%，比 PNG 小约 26%。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-recommend">推荐用于网站图片</span>
+                        <span class="algorithm-tag">支持WebP的应用</span>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>电商卖家：</strong>批量压缩商品图片，加快页面加载速度，提升用户购物体验和搜索引擎排名。</p>
+                <p><strong>网页设计师：</strong>优化网站图片资源，减小页面体积，提高网站性能评分。</p>
+                <p><strong>社交媒体用户：</strong>压缩分享图片，避免平台压缩导致的画质损失，同时节省流量。</p>
+                <p><strong>摄影爱好者：</strong>压缩高清照片，便于存储和分享，保留原始照片的高质量版本。</p>
+                <p><strong>企业办公人员：</strong>压缩文档中的图片，减小文档体积，便于邮件发送和云盘存储。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">支持批量压缩（40张）</span>
+                    <span class="feature-tag">4种压缩算法</span>
+                    <span class="feature-tag">可调压缩质量</span>
+                    <span class="feature-tag">尺寸和大小限制</span>
+                    <span class="feature-tag">实时预览对比</span>
+                    <span class="feature-tag">一键打包下载</span>
+                    <span class="feature-tag">支持多种格式</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>注意事项</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>选择合适的压缩算法：</strong>没有最优的压缩算法，只有最适合自己的压缩策略。默认压缩适合一般场景，无损压缩适合需要保留透明通道的PNG图片，强力压缩适合对质量要求不高的场景，WebP适合现代网站。</li>
+                    <li><strong>压缩质量设置：</strong>压缩质量值越高，图像质量越好，但文件大小也越大。建议根据实际需求在70-90之间调整，既能保证良好的视觉效果，又能有效减小文件体积。</li>
+                    <li><strong>最大尺寸限制：</strong>设置合理的最大宽度和高度可以有效控制输出图片的尺寸，避免过大的图片占用存储空间。</li>
+                    <li><strong>处理期间不要关闭页面：</strong>压缩处理需要一定时间，尤其是批量处理时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
+                    <li><strong>浏览器兼容性：</strong>建议使用 Chrome、Firefox、Safari 等现代浏览器以获得最佳性能。旧版浏览器可能不支持某些压缩功能或处理速度较慢。</li>
+                    <li><strong>图片大小限制：</strong>虽然工具支持上传较大的图片，但过大的图片可能会导致浏览器内存不足。建议单张图片不超过10MB，批量处理时注意控制总大小。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #D97706; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图像批量压缩工具</a>
+                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../cropping/index.html" class="tool-link">图片裁剪工具</a>
+                <a href="../convert/index.html" class="tool-link">图片格式转换工具</a>
+                <a href="../edit/index.html" class="tool-link">图片旋转与模糊工具</a>
+                <a href="../backcolor/index.html" class="tool-link">图片背景色切换工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

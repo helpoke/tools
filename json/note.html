@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JSON格式化工具说明，JSON在线格式化、比对、转换工具，支持节点折叠、差异高亮、JSON与Java Bean/XML互转。">
+    <meta name="keywords" content="JSON格式化, JSON在线格式化, JSON比对, JSON转Java Bean, Java Bean转JSON, JSON转XML, JSON高亮展示, JSON工具说明">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>JSON在线格式化对比工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tool-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            grid-column: 1 / -1;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .author-info {
+            background: var(--bg-card);
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.4);
+        }
+
+        .tool-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(75, 108, 183, 0.6);
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script src="../common/js/theme.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>JSON在线格式化对比工具 - 免费、安全、快速</h1>
+            <p class="subtitle">JSON格式化、比对、转换一站式解决方案，支持节点折叠、差异高亮、多格式互转</p>
+            <a href="/" class="back-link">返回首页</a>
+            <a href="index.html" class="back-link">使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是 JSON 格式化工具？</h2>
+                <p>JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，广泛用于 Web 应用、API 接口、配置文件等场景。然而，原始的 JSON 数据往往是压缩成一行或格式混乱的，阅读和调试时非常不便。JSON 格式化工具正是为了解决这一问题而诞生的。</p>
+                <p>本工具集提供四大核心功能：格式化、比对、转换 Java Bean、转换 XML。它可以帮助开发者快速将压缩的 JSON 数据格式化为易读的结构，支持手动折叠和展开节点，方便查看大型 JSON 的层级结构。同时，比对功能可以清晰标记两份 JSON 数据的差异，高亮显示不同点，非常适合代码审查和版本对比。</p>
+                <p>除此之外，工具还支持 JSON 与 Java Bean、XML 的双向转换，自动填充字段值，大幅提升前后端协作效率。所有处理都在浏览器本地完成，无需上传服务器，保护您的数据隐私。</p>
+
+                <h2>如何使用？</h2>
+                <h3>格式化功能</h3>
+                <p>在"格式化"标签页中，粘贴或输入 JSON 数据，点击"格式化"按钮即可将压缩的 JSON 转换为清晰的层级结构。您还可以使用"压缩"功能反向操作，或使用"转义/去转义"处理特殊字符。</p>
+
+                <h3>比对功能</h3>
+                <p>切换到"比对"标签页，在左右两侧分别输入原始 JSON 和目标 JSON，点击"比对"按钮。系统会自动分析差异，高亮显示所有不同点，让您一目了然地看到数据变化。</p>
+
+                <h3>转换功能</h3>
+                <p>在"转Java"标签页中，输入 JSON 数据点击"转Bean"，即可生成对应的 Java Bean 类代码，字段类型和值自动填充。在"转XML"标签页中，可以实现 JSON 与 XML 的双向转换。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>前端开发者：</strong>调试 API 接口返回数据，快速格式化和比对响应内容，定位数据问题。</p>
+                <p><strong>后端开发者：</strong>将 JSON 接口文档转换为 Java Bean 类代码，提升开发效率；比对不同版本的接口数据变化。</p>
+                <p><strong>测试工程师：</strong>比对测试前后数据差异，验证接口返回是否符合预期，快速定位问题。</p>
+                <p><strong>运维人员：</strong>格式化配置文件，查看和分析 JSON 格式的日志数据。</p>
+                <p><strong>数据分析师：</strong>处理 JSON 格式的数据文件，转换为其他格式进行分析。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">节点折叠展开</span>
+                    <span class="feature-tag">差异高亮显示</span>
+                    <span class="feature-tag">语法错误检测</span>
+                    <span class="feature-tag">JSON与Java互转</span>
+                    <span class="feature-tag">JSON与XML互转</span>
+                    <span class="feature-tag">值自动填充</span>
+                    <span class="feature-tag">转义/去转义</span>
+                </div>
+                <p>工具内置语法错误检测机制，当输入的 JSON 格式不正确时，会及时提示错误位置，帮助您快速修复问题。同时支持转义和去转义操作，方便处理包含特殊字符的 JSON 数据。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>JSON 格式要求严格，字符串必须用双引号，不能使用单引号</li>
+                        <li>输入数据量过大时，格式化可能需要较长时间，请耐心等待</li>
+                        <li>比对功能会忽略空白字符差异，只比较实际数据内容</li>
+                        <li>转 Java Bean 时，字段名会自动转换为驼峰命名风格</li>
+                        <li>处理期间请勿关闭浏览器或刷新页面，以免数据丢失</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2>工具使用演示</h2>
+            <!-- Tab导航 -->
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="format"><b>格式化</b></button>
+                <button class="tab-btn" data-tab="compare"><b>比对</b></button>
+                <button class="tab-btn" data-tab="javabean"><b>转Java</b></button>
+                <button class="tab-btn" data-tab="xml"><b>转XML</b></button>
+            </div>
+
+            <!-- Tab内容区域 -->
+            <div class="tab-content">
+                <!-- JSON格式化Tab -->
+                <div id="format-tab" class="tab-pane active">
+                    <div class="tool-container">
+                        <div class="compare-header">
+                            <h2>格式化</h2>
+                            <div class="button-group">
+                                <button id="paste-btn">粘贴</button>
+                                <button id="copy-btn">复制</button>
+                                <button id="format-btn">格式化</button>
+                                <button id="collapse-btn" hidden>折叠</button>
+                                <button id="minify-btn">压缩</button>
+                                <button id="escape-btn">转义</button>
+                                <button id="line-feed-btn">换行</button>
+                                <button id="clear-btn">清空</button>
+                            </div>
+                        </div>
+                        <div class="input-box">
+                            <div id="error-message" class="error-message"></div>
+                            <div class="editor-container-wrapper">
+                                <button id="format-fullscreen-btn" class="fullscreen-button">
+                                    <span class="iconfont">&#xe8fa;</span></button>
+                                <div class="editor-container">
+                                    <div id="line-numbers" class="line-numbers">
+                                        <div class="line-number">1</div>
+                                    </div>
+                                    <div id="raw-json" class="json-editor" contenteditable="true"
+                                        data-placeholder="请在此输入需要格式化的JSON数据...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom-buttons">
+                                <button id="format-btn-bottom">格式化</button>
+                                <button id="copy-btn-bottom">复制</button>
+                                <button id="collapse-btn-bottom" hidden>折叠</button>
+                                <button id="minify-btn-bottom">压缩/去转义</button>
+                                <button id="escape-btn-bottom">转义</button>
+                                <button id="paste-btn-bottom" hidden>粘贴</button>
+                                <button id="clear-btn-bottom">清空</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON比对Tab -->
+                <div id="compare-tab" class="tab-pane">
+                    <div class="compare-container">
+                        <div class="compare-header">
+                            <h2>比对</h2>
+                            <div class="button-group">
+                                <button id="start-compare-btn">比对</button>
+                                <button id="sync-format-btn">同步格式化</button>
+                                <button id="sync-minify-btn">同步压缩</button>
+                                <button id="sync-escape-btn">同步转义</button>
+                                <button id="clear-compare-btn">同步清除</button>
+                            </div>
+                        </div>
+                        <div class="compare-actions">
+                            <div id="compare-result" class="compare-result"></div>
+                        </div>
+                        <div class="compare-content">
+                            <div class="compare-box original">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>原始JSON</h3>
+                                    <div class="button-group">
+                                        <button id="copy-original-btn" class="copy-btn">复制</button>
+                                        <button id="format-original-btn" class="format-btn">格式化</button>
+                                        <button id="minify-original-btn" class="minify-btn">压缩</button>
+                                        <button id="clear-original-btn" class="clear-btn">清除</button>
+                                    </div>
+                                    <span class="iconfont"></span>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="original-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="original-json" class="json-editor" contenteditable="true"
+                                            data-placeholder="请在此输入原始JSON数据...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compare-box target">
+                                <div style="display: flex; justify-content: space-between; align-items: center; ">
+                                    <h3>目标JSON</h3>
+                                    <div class="button-group">
+                                        <button id="copy-target-btn" class="copy-btn">复制</button>
+                                        <button id="format-target-btn" class="format-btn">格式化</button>
+                                        <button id="minify-target-btn" class="minify-btn">压缩</button>
+                                        <button id="clear-target-btn" class="clear-btn">清除</button>
+                                    </div>
+                                    <button id="compare-fullscreen-btn" class="fullscreen-btn">
+                                        <span class="iconfont">&#xe8fa;</span>
+                                    </button>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="target-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="target-json" class="json-editor" contenteditable="true"
+                                            data-placeholder="请在此输入需要比对的JSON数据...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON转XML Tab -->
+                <div id="xml-tab" class="tab-pane">
+                    <div class="xml-container">
+                        <div class="compare-header">
+                            <h2>JSON 转 XML</h2>
+                            <div class="button-group">
+                                <button id="json-to-xml-btn">转XML</button>
+                                <button id="xml-to-json-btn">转JSON</button>
+                                <button id="sync-clear-xml-btn">同步清空</button>
+                            </div>
+                        </div>
+                        <div class="compare-content">
+                            <div class="compare-box original">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>JSON</h3>
+                                    <div class="button-group">
+                                        <button id="copy-xml-json-btn" class="copy-btn">复制</button>
+                                        <button id="format-xml-json-btn" class="format-btn">格式化</button>
+                                        <button id="minify-xml-json-btn" class="minify-btn">压缩</button>
+                                        <button id="clear-xml-json-btn" class="clear-btn">清除</button>
+                                    </div>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="xml-json-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="xml-json-editor" class="json-editor" contenteditable="true"
+                                            data-placeholder="请输入JSON数据...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compare-box target">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>XML</h3>
+                                    <div class="button-group">
+                                        <button id="copy-xml-output-btn" class="copy-btn">复制</button>
+                                        <button id="format-xml-output-btn" class="format-btn">格式化</button>
+                                        <button id="clear-xml-output-btn" class="clear-btn">清除</button>
+                                    </div>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="xml-output-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="xml-output-editor" class="json-editor" contenteditable="true"
+                                            data-placeholder="XML转换结果将显示在这里...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON与Java Bean互转Tab -->
+                <div id="javabean-tab" class="tab-pane">
+                    <div class="javabean-container">
+                        <div class="compare-header">
+                            <h2>转Java Bean</h2>
+                            <div class="button-group">
+                                <button id="json-to-bean-btn">转Bean</button>
+                                <button id="bean-to-json-btn">转JSON</button>
+                                <button id="clear-bean-btn">同步清空</button>
+                            </div>
+                        </div>
+                        <div class="compare-content">
+                            <div class="compare-box original">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>JSON</h3>
+                                    <div class="button-group">
+                                        <button id="copy-input-btn" class="copy-btn">复制</button>
+                                        <button id="format-input-btn" class="format-btn">格式化</button>
+                                        <button id="minify-input-btn" class="minify-btn">压缩</button>
+                                        <button id="clear-input-btn" class="clear-btn">清除</button>
+                                    </div>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="input-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="input-content" class="json-editor" contenteditable="true"
+                                            data-placeholder="请输入JSON代码...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="compare-box target">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h3>Java Bean</h3>
+                                    <div class="button-group">
+                                        <button id="copy-output-btn" class="copy-btn">复制</button>
+                                        <button id="format-output-btn" class="format-btn" hidden>格式化</button>
+                                        <button id="clear-output-btn" class="clear-btn">清除</button>
+                                    </div>
+                                </div>
+                                <div class="editor-container-wrapper">
+                                    <div class="editor-container">
+                                        <div id="output-line-numbers" class="line-numbers">
+                                            <div class="line-number">1</div>
+                                        </div>
+                                        <div id="output-content" class="json-editor" contenteditable="true"
+                                            data-placeholder="请输入Java Bean代码...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="author-info">
+            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../mermaid/index.html" class="tool-link">Mermaid在线画图工具</a>
+                <a href="../dev/yaml/index.html" class="tool-link">在线YAML格式化工具</a>
+                <a href="../dev/xml/index.html" class="tool-link">在线XML格式化工具</a>
+                <a href="../dev/png/index.html" class="tool-link">在线PNG压缩工具</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="convert.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
