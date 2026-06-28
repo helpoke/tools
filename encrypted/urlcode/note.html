@@ -92,7 +92,7 @@
         }
 
         .info-section h3 {
-            color: var(--primary-color);
+            color: #6366F1;
             margin: 25px 0 15px;
             font-size: 1.2rem;
         }
@@ -127,64 +127,7 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
 
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #6366F1;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #6366F1;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #6366F1 0%, #4F46E5 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
-        }
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -251,7 +194,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -259,47 +205,51 @@
         <header>
             <h1>URL 编码解码工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持URL Encode/Decode，encodeURI和encodeURIComponent模式，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是URL编码解码工具？</h2>
-                <p>URL编码解码工具是一款专业的在线URL转换工具，专为需要进行URL编码和解码操作的用户设计。URL编码（也叫百分号编码）是一种将URL中不允许出现的字符转换为特殊格式的编码方法。URL只能包含ASCII字符集中的某些字符，其他字符（如中文、空格、特殊符号等）必须经过编码才能正确传输。</p>
-                <p>工具支持两种编码方法：encodeURI和encodeURIComponent。encodeURI用于编码完整URL，保留URL中的特殊字符（如:/?=&等）；encodeURIComponent用于编码URL参数值，会将所有特殊字符都编码。您可以根据不同场景选择合适的编码方法。所有转换均在浏览器本地完成，保护您的数据隐私。</p>
+                <p>URL编码解码工具是一款专业的在线URL转换工具，专为需要进行URL编码和解码操作的用户设计。URL（Uniform Resource Locator，统一资源定位符）是互联网上标识资源位置的地址标准，但URL的语法规则规定只能包含一小部分ASCII字符集。当URL中需要包含非ASCII字符（如中文、日文）、保留字符（如空格、&、=等）或特殊字符时，这些字符必须经过编码转换才能在URL中正确传输。</p>
+                <p>URL编码（也叫百分号编码或URL Encoding）是一种将URL中不允许直接使用的字符转换为特殊格式的编码方法。编码规则是将字符的UTF-8编码的每个字节表示为%XX的形式，其中XX是该字节的两位十六进制值。例如，中文字符"中"的UTF-8编码是E4 B8 AD，对应的URL编码就是%E4%B8%AD。工具支持两种编码方法：encodeURI和encodeURIComponent。前者用于编码完整URL，保留URL中的结构字符（如冒号、斜杠、问号等）不被编码；后者用于编码URL参数值，会将所有非安全字符都编码。</p>
+                <p>所有转换操作均在浏览器本地完成，数据不会上传到任何服务器。这意味着您的URL内容和参数始终处于您的完全控制之下，保护您的数据隐私。</p>
 
                 <h2>如何使用？</h2>
                 <h3>URL编码操作</h3>
-                <p>在输入框中输入需要编码的URL或文本，选择编码方法（encodeURI或encodeURIComponent）。点击"编码"按钮，工具会将输入内容转换为URL编码格式。编码后的字符串中，非ASCII字符会转换为%XX格式，其中XX是字符的十六进制编码。</p>
+                <p>在输入框中粘贴或输入需要编码的URL或文本内容。选择编码方法：encodeURI适用于编码完整URL地址，它会保留URL中的协议（http:）、主机名（example.com）、路径分隔符（/）、点号（.）等结构字符不被编码，只编码参数中的特殊字符和中文；encodeURIComponent适用于编码URL的参数值或查询字符串，它会将所有非URL安全字符都编码，包括&、=、?等原本用于URL结构的字符。根据您的实际需求选择合适的编码方法。</p>
 
                 <h3>URL解码操作</h3>
-                <p>在输入框中输入需要解码的URL编码字符串，点击"解码"按钮。工具会将所有%XX格式的编码还原为原始字符，显示完整的内容。解码操作支持自动识别编码格式，无需手动选择。</p>
+                <p>在输入框中粘贴需要解码的URL编码字符串，点击"解码"按钮。工具会将所有%XX格式的编码还原为原始字符，自动识别UTF-8编码的中文字符并正确显示。解码操作支持自动识别编码格式，无需手动选择编码方法。解码结果以原始文本形式显示，您可以查看URL中的实际内容。</p>
 
-                <h3>编码方法选择</h3>
-                <p>encodeURI适合编码完整URL地址，保留URL结构字符（协议分隔符、路径分隔符、查询参数分隔符等）不被编码。encodeURIComponent适合编码URL参数值，会编码所有特殊字符，确保参数值可以安全传输。</p>
+                <h3>编码方法选择指南</h3>
+                <p>encodeURI适合场景：编码完整URL地址、编码静态资源路径、编码不需要作为URL参数的字符串。encodeURIComponent适合场景：编码URL参数名和参数值、编码查询字符串内容、编码需要作为URL一部分的用户输入。例如，对于URL"https://example.com/search?q=你好&amp;page=1"，搜索词"你好"应该用encodeURIComponent编码为%E4%BD%A0%E5%A5%BD，而整个URL应该用encodeURI编码。</p>
+
+                <h3>实战案例：API请求参数处理</h3>
+                <p>假设您正在调用一个支持中文搜索的API接口，需要将用户输入的搜索词"北京天气"作为查询参数传递。使用本工具的完整步骤如下：首先确定API的URL格式，如https://api.example.com/search?q=关键词；然后将"北京天气"作为参数值，使用encodeURIComponent编码，得到"%E5%8C%97%E4%BA%AC%E5%A4%A9%E6%B0%94"；接着构建完整URL：https://api.example.com/search?q=%E5%8C%97%E4%BA%AC%E5%A4%A9%E6%B0%94；最后在浏览器或调用工具中发起请求。如果API返回的数据有编码问题，可以使用解码功能反向验证参数是否正确传递。</p>
             </div>
 
             <div class="info-section">
-                <h2>两种编码方法</h2>
-                
+                <h2>两种编码方法对比</h2>
+
                 <div class="encode-methods">
                     <div class="encode-method">
                         <div class="method-name">encodeURI</div>
-                        <div class="method-desc">编码完整URL，保留特殊字符（:/?=&等）不被编码</div>
+                        <div class="method-desc">编码完整URL，保留URL结构字符（:/?=&等）不被编码，适合编码URL地址本身</div>
                     </div>
                     <div class="encode-method">
                         <div class="method-name">encodeURIComponent</div>
-                        <div class="method-desc">编码URL参数值，编码所有特殊字符，确保参数安全传输</div>
+                        <div class="method-desc">编码URL参数值，编码所有非安全字符（包括&amp;?=等），适合编码参数内容</div>
                     </div>
                 </div>
 
                 <h2>适用场景与人群</h2>
-                <p><strong>前端开发者：</strong>处理URL参数传递，编码中文和特殊字符，确保参数正确传输。</p>
-                <p><strong>后端开发者：</strong>解析URL参数，处理编码后的请求参数，确保数据正确解码。</p>
-                <p><strong>API开发者：</strong>构建API请求URL，编码请求参数，处理URL中的特殊字符。</p>
-                <p><strong>SEO优化人员：</strong>处理中文URL编码，优化搜索引擎收录的URL格式。</p>
-                <p><strong>普通用户：</strong>了解URL编码原理，处理网页链接中的编码字符。</p>
+                <p><strong>前端开发者：</strong>处理URL参数传递，编码中文搜索词、特殊字符，确保参数正确传输和解析。</p>
+                <p><strong>后端开发者：</strong>解析URL参数，处理编码后的请求参数，正确解码接收到的中文内容。</p>
+                <p><strong>API开发者：</strong>构建API请求URL，处理包含中文或特殊字符的参数，验证URL编码格式。</p>
+                <p><strong>SEO优化人员：</strong>处理中文URL编码，优化搜索引擎收录的URL格式，提升网站搜索可见性。</p>
+                <p><strong>普通用户：</strong>查看或处理网页链接中的编码字符，理解URL编码原理。</p>
 
                 <h2>特点与优势</h2>
                 <div class="feature-list">
@@ -307,38 +257,50 @@
                     <span class="feature-tag">encodeURI模式</span>
                     <span class="feature-tag">encodeURIComponent模式</span>
                     <span class="feature-tag">自动解码识别</span>
-                    <span class="feature-tag">支持中文编码</span>
+                    <span class="feature-tag">UTF-8编码支持</span>
                     <span class="feature-tag">一键复制结果</span>
                     <span class="feature-tag">实时转换</span>
                     <span class="feature-tag">完全免费</span>
                 </div>
-                <p>工具采用纯前端技术实现，所有编码解码操作都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的URL内容始终处于您的控制之下，特别适合处理包含敏感信息的URL。同时，工具支持两种编码方法，满足不同应用场景的需求。</p>
+                <p>工具采用纯前端技术实现，所有编码解码操作都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的URL内容始终处于您的完全控制之下。工具支持两种编码方法，可以根据不同场景灵活选择：encodeURI保留URL结构，适合编码完整的URL地址；encodeURIComponent编码所有非安全字符，适合编码参数值。同时支持自动识别编码格式，解码时无需手动指定字符集。</p>
 
                 <div class="warning-box">
                     <p><strong>注意事项：</strong></p>
                     <ul>
-                        <li>URL编码仅用于URL传输，不是加密方法</li>
-                        <li>编码后的URL可能变长，请评估对URL长度的影响</li>
-                        <li>解码时请确保输入的是有效的URL编码格式</li>
-                        <li>URL中的空格通常编码为%20或+</li>
-                        <li>中文URL建议使用encodeURIComponent编码</li>
-                        <li>部分浏览器会自动处理URL编码，注意手动编码可能产生双重编码</li>
+                        <li>URL编码不是加密方法，仅用于URL传输，编码后的内容仍可被读取</li>
+                        <li>编码后的URL长度会增加，URL总长度不宜超过2000个字符（浏览器和服务器限制）</li>
+                        <li>解码时请确保输入的是有效的URL编码格式，无效格式可能导致解码失败</li>
+                        <li>URL中的空格有多种编码方式：%20（URL标准）、+（HTML表单习惯）、%20或%00（其他变体）</li>
+                        <li>中文URL建议使用encodeURIComponent编码，确保所有中文字符都被正确编码</li>
+                        <li>避免对同一URL进行多次编码，会产生双重编码问题（如%E5%8C%97%E4%BA%AC变成%E255%8C%2597%E2...）</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：为什么URL需要编码？</h3>
+                <p><strong>答：</strong>URL需要编码的主要原因：1) URL语法限制：URL只能包含ASCII字符集中的保留字符，其他字符必须编码才能传输；2) 歧义消除：某些字符在URL中有特殊含义（如?表示查询开始，&amp;表示参数分隔），如果这些字符出现在参数值中而不编码，会被误认为是URL结构的一部分；3) 字符集问题：不同国家和地区使用不同字符集，中文、日文等非ASCII字符无法直接传输，必须编码为UTF-8字节序列；4) 安全性：编码可以防止注入攻击，如参数值中包含&amp;或=可能干扰参数解析。</p>
+
+                <h3>问：encodeURI和encodeURIComponent有什么区别？</h3>
+                <p><strong>答：</strong>两者区别在于编码范围：1) encodeURI不编码的字符包括：字母数字、- _ . ! ~ * ' ( ) 以及URL结构字符 : / ? &amp; = # @ ；2) encodeURIComponent不编码的字符包括：字母数字 - _ . ! ~ * ' ( ) 。也就是说，encodeURIComponent的编码范围更广，会把: / ? &amp; = # @等URL结构字符也编码。例如：encodeURI("https://example.com/a b") → "https://example.com/a%20b"；encodeURIComponent("https://example.com/") → "https%3A%2F%2Fexample.com%2F"。</p>
+
+                <h3>问：为什么有时候看到+号而不是%20？</h3>
+                <p><strong>答：</strong>+号在URL中有两种含义：1) HTML表单编码：在HTML表单（application/x-www-form-urlencoded）中，空格被编码为+号，这是历史遗留的编码方式；2) URL查询字符串：在URL的查询参数部分，空格既可以编码为%20也可以写成+号，两者通常可以互换。 современные Web应用更倾向于使用%20。但在解码时，+号会被还原为空格，所以浏览器的JavaScript中decodeURIComponent("%2B")返回"+"，而"a+b"中解码时+会被当作空格处理。标准URL编码中空格应该用%20表示。</p>
+
+                <h3>问：什么是双重编码？如何避免？</h3>
+                <p><strong>答：</strong>双重编码是指对已经编码的字符串再次进行URL编码。例如"中"编码一次是"%E4%B8%AD"，再次编码会变成"%25E4%25B8%25AD"。双重编码会导致服务器解析错误或乱码。避免方法：1) 明确编码时机：在客户端编码一次，服务端直接存储和解析，不再重复编码；2) 使用统一框架：前端和后端使用相同的编码函数，避免一方编码一方未编码；3) 调试时使用解码功能：如果遇到乱码，尝试解码一次看是否能还原为正常内容；4) 注意字符集：确保前端编码和后端解码使用相同的字符集（建议UTF-8）。</p>
+
+                <h3>问：URL编码和HTML编码有什么区别？</h3>
+                <p><strong>答：</strong>两者用于不同场景：1) URL编码（Percent-Encoding）：用于URL中的字符传输，如%E4%B8%AD，将每个字节转换为%XX格式；2) HTML编码（HTML Entity Encoding）：用于防止XSS攻击，将特殊字符转换为HTML实体，如"&lt;"变成"&amp;lt;"、"&gt;"变成"&amp;gt;"、"&amp;"变成"&amp;amp;"。简单说：URL编码用于URL内部的数据传输，HTML编码用于网页内容的安全显示。例如，文本框输入"&lt;script&gt;"，在URL中传递时编码为%3Cscript%3E，在网页中显示时编码为&amp;lt;script&amp;gt;。</p>
+
+                <h3>问：Base64编码和URL编码是一样的吗？</h3>
+                <p><strong>答：</strong>不一样，两者是不同的编码方法：1) URL编码：将每个字符的UTF-8字节转换为%XX格式，主要解决URL中非ASCII字符和特殊字符的传输问题；2) Base64编码：将二进制数据转换为64个可打印ASCII字符（A-Z、a-z、0-9、+、/），主要用于在JSON、XML等文本协议中传输二进制数据。两者常结合使用：例如对图片进行Base64编码后，再对Base64字符串进行URL编码，才能作为URL参数传递。Helpoke提供的Base64工具和URL编码工具可以配合使用，先Base64编码再URL编码传输二进制数据。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #6366F1; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用URL编码解码工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用URL编码解码工具"
+             data-tool-url="index.html"
+             data-btn-color="#6366F1"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

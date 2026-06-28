@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #0D9488;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #0D9488;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -266,7 +235,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -274,18 +246,21 @@
         <header>
             <h1>视频编辑工具</h1>
             <p class="subtitle">免费、安全、快速旋转和模糊处理</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频编辑工具是一款轻量级的在线视频处理工具，提供视频旋转和模糊处理两大核心功能。在日常使用手机或相机拍摄视频时，有时会因为握持方式或角度问题导致视频方向不正确；有时又需要对视频中的某些区域进行模糊处理以保护隐私或去除不需要的元素。
+                    视频编辑工具是一款基于浏览器端 FFmpeg 多媒体处理技术的轻量级在线视频处理工具，专注于视频旋转和模糊处理两大核心功能。它采用先进的视频解码和编码算法，配合图像处理滤镜，能够高效完成视频方向调整和隐私遮盖处理。在日常使用手机或相机拍摄视频时，有时会因为握持方式或角度问题导致视频方向不正确；有时又需要对视频中的某些区域进行模糊处理以保护隐私或去除不需要的元素，这些场景中，视频编辑工具都能提供简单高效的解决方案。
                 </p>
                 <p>
-                    传统上，这些简单的视频编辑需求往往需要安装体积庞大的视频编辑软件，学习成本高且操作复杂。而本工具专门针对这两种常见需求进行优化，让你无需学习复杂的编辑软件，只需几步操作就能完成处理。所有处理都在浏览器本地完成，视频不会上传到任何服务器。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架开发，这是业界公认最强大的开源音视频处理框架。工具提供了视频旋转功能：支持顺时针旋转90度、180度、270度，还可以进行水平翻转和垂直翻转，通过组合这些变换可以实现任意方向的视频调整；视频模糊功能：支持方框模糊和高斯模糊两种算法，模糊强度可调（轻度、中度、重度、极重度四档），可以对整个视频或指定时间段应用模糊效果。用户可以同时使用旋转和模糊功能，实现复合编辑效果。
+                </p>
+                <p>
+                    与传统的桌面视频编辑软件不同，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有视频处理都在用户的本地设备上完成，视频文件不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。工具支持 MP4、WebM、AVI、MOV、MKV 等常见视频格式，提供时间范围设置功能，用户可以精确控制效果应用的时间段，实现局部处理需求。
                 </p>
 
                 <h3>两大核心功能</h3>
@@ -383,19 +358,51 @@
             <p>
                 <strong>保留原始文件：</strong> 建议保留原始视频文件的备份，以便后续需要调整时可以重新处理。
             </p>
+
+            <h2>实战案例：会议视频隐私信息处理</h2>
+            <p>小刘是一名企业行政人员，负责整理公司内部会议视频并分享给相关部门。最近录制的一场会议视频中，屏幕投影显示了包含员工个人信息的数据报表，需要在分享前对这些敏感信息进行模糊处理。</p>
+            <p><strong>处理需求分析：</strong></p>
+            <ol>
+                <li><strong>视频方向问题：</strong> 某些片段拍摄角度偏转了90度，需要旋转纠正。</li>
+                <li><strong>隐私信息遮盖：</strong> 5-15分钟时间段展示了员工薪资数据，需要重度模糊处理。</li>
+                <li><strong>其他敏感内容：</strong> 35-45分钟时间段显示了客户联系方式，需要中度模糊处理。</li>
+            </ol>
+            <p><strong>处理流程：</strong></p>
+            <ol>
+                <li>小刘将会议视频上传到视频编辑工具中。</li>
+                <li>首先处理旋转问题：设置旋转角度为90度，不启用模糊，应用到整个视频，处理并下载旋转后的视频。</li>
+                <li>重新上传旋转后的视频，处理隐私信息：设置开始时间为5分钟，持续时间为10分钟。</li>
+                <li>选择高斯模糊，设置模糊强度为重度，处理并下载第一次模糊后的视频。</li>
+                <li>再次上传处理后的视频，处理客户信息：设置开始时间为35分钟，持续时间为10分钟。</li>
+                <li>选择方框模糊，设置模糊强度为中度，处理并下载最终版本的视频。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 处理前，会议视频包含敏感信息，不适合广泛分享；处理后，所有隐私内容已被模糊遮盖，视频可以安全分享给相关部门。员工薪资数据和客户联系方式等信息被有效隐藏，满足了企业信息安全管理要求。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：旋转和模糊可以同时应用吗？</h3>
+            <p>是的。工具支持同时设置旋转参数和模糊参数，一次处理即可完成两项编辑。但建议根据实际需求决定是否同时处理：如果只需要旋转，就不启用模糊；如果只需要模糊，就保持旋转角度为0度。这样可以减少不必要的处理时间。</p>
+
+            <h3>Q2：模糊处理会影响视频画质吗？</h3>
+            <p>会的。模糊处理是对视频画面进行滤镜处理，会在指定时间段内降低画面清晰度。但其他未应用模糊的时间段画质不受影响。建议仅在需要遮盖敏感信息的部分应用模糊，避免对整个视频进行模糊处理，以保持观看体验。</p>
+
+            <h3>Q3：方框模糊和高斯模糊有什么区别？</h3>
+            <p>两种模糊算法效果不同：方框模糊对画面进行均匀模糊处理，遮盖效果强烈但边缘较硬；高斯模糊模糊程度从中心向边缘渐变，效果更自然柔和，适合需要一定美化效果的场景。建议：隐私遮盖选择方框模糊，创意效果选择高斯模糊。</p>
+
+            <h3>Q4：为什么模糊处理时间很长？</h3>
+            <p>模糊处理需要逐帧处理视频画面，计算量较大。处理时间取决于视频长度、模糊强度和电脑性能。长视频、高模糊强度和低配置电脑都会增加处理时间。建议：1. 仅对需要的时间段应用模糊；2. 选择适度的模糊强度；3. 耐心等待处理完成。</p>
+
+            <h3>Q5：可以只模糊视频的一部分区域吗？</h3>
+            <p>当前工具支持按时间段应用模糊，但不支持按画面区域应用模糊（即只模糊画面的某一部分）。如果需要模糊特定区域，建议使用视频水印添加工具，在需要遮盖的区域添加半透明遮罩或水印图案。后续版本会增加区域模糊功能，敬请期待。</p>
+
+            <h3>Q6：旋转后视频比例会改变吗？</h3>
+            <p>旋转90度或270度会改变视频的宽高比例：横屏视频旋转后变为竖屏，竖屏视频旋转后变为横屏。旋转180度不会改变视频比例。翻转操作也不会改变视频比例。建议根据目标播放平台的要求选择合适的旋转角度。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #0D9488; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频编辑工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用视频编辑工具"
+             data-tool-url="index.html"
+             data-btn-color="#0D9488"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

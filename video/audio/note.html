@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #4F46E5;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #4F46E5;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -174,32 +143,6 @@
             padding-bottom: 12px;
             border-bottom: 3px solid #4F46E5;
             font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s;
-            border: 1px solid var(--border-color);
-            font-weight: 500;
-        }
-
-        .tool-link:hover {
-            background: #4F46E5;
-            color: white;
-            border-color: #4F46E5;
-            transform: translateY(-2px);
         }
 
         .highlight-box {
@@ -230,7 +173,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -238,18 +184,21 @@
         <header>
             <h1>视频转音频工具</h1>
             <p class="subtitle">免费、安全、快速从视频中提取音频</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频转音频工具是一款专注于从视频文件中分离并提取音频内容的在线工具。在日常生活和工作中，我们经常会遇到需要从视频中获取音频的情况：比如下载了一段喜欢的音乐视频想要提取背景音乐，录制了会议视频需要转录为文字，或者想把教程视频中的讲解音频单独保存下来。这些场景中，视频转音频工具都能发挥重要作用。
+                    视频转音频工具是一款基于浏览器端 FFmpeg 多媒体处理技术的专业在线音频提取工具，专注于从视频文件中分离并提取高质量音频内容。它采用先进的音频解码和编码算法，能够从各种视频格式中无损提取音频流，并将其转换为多种主流音频格式。在日常生活和工作中，我们经常会遇到需要从视频中获取音频的情况：比如下载了一段喜欢的音乐视频想要提取背景音乐，录制了会议视频需要转录为文字，或者想把教程视频中的讲解音频单独保存下来便于复习。
                 </p>
                 <p>
-                    本工具基于强大的 FFmpeg 多媒体处理引擎开发，支持从各种常见视频格式中提取音频流，并将其转换为多种音频格式输出。无论是手机拍摄的 MOV 视频、电脑录制的 AVI 教程，还是网上下载的 MP4 电影，都可以使用本工具轻松提取音频。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理引擎开发，这是业界公认最强大的开源音视频处理框架。工具支持从各种常见视频格式中提取音频流，包括 MP4、WebM、AVI、MOV、MKV、FLV 等，并将其转换为 MP3、WAV、AAC、M4A、OGG 等多种音频格式输出。音频提取过程采用无损解码技术，确保提取的音频保持原始视频中的音质水平，不会因为格式转换而产生明显的质量损失。
+                </p>
+                <p>
+                    工具提供了丰富的音频参数设置选项：用户可以根据需求选择不同的音频质量（从96kbps到320kbps），设置采样率和声道数；可以指定提取的时间段，实现精准的音频截取，只提取需要的部分内容。所有处理均在浏览器本地完成，采用 WebAssembly 技术实现高性能处理，视频文件全程不会上传至服务器，真正做到隐私安全保护。
                 </p>
 
                 <h3>核心功能特点</h3>
@@ -323,19 +272,41 @@
             <p>
                 <strong>音频质量选择：</strong> 高质量（320 kbps）适合对音质有较高要求的场景；标准质量（128 kbps）是性价比最佳的选择，适合大多数日常使用；低质量（96 kbps）文件最小，适合仅需听清内容不在乎音质的情况。
             </p>
+
+            <h2>实战案例：在线课程音频提取与复习</h2>
+            <p>小张是一名备考考研的学生，经常观看各大平台的在线课程视频进行学习。但在复习阶段，他发现重新观看视频效率较低，希望能够只听讲解音频，在通勤、运动时也能高效复习。</p>
+            <p><strong>提取流程：</strong></p>
+            <ol>
+                <li>小张将购买的在线课程视频（共15个MP4文件）分别上传到视频转音频工具中。</li>
+                <li>选择 MP3 格式作为输出格式，这是最通用的音频格式，兼容所有播放设备。</li>
+                <li>设置音频质量为标准质量（128 kbps），平衡音质和文件体积，适合学习内容的清晰播放。</li>
+                <li>对于某些课时较长的视频，使用时间段截取功能，只提取讲解重点的部分，跳过开头的介绍和结尾的总结。</li>
+                <li>处理完成后，将提取的音频文件整理到手机和播放器中，随时随地复习课程内容。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 使用视频复习时，每天只能复习2小时；使用音频复习后，通勤、运动时都可以学习，每天复习时间增加到4小时，学习效率提升显著。同时，音频文件体积比原视频减小了90%，节省了大量存储空间。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：提取的音频质量会比原视频中的音频差吗？</h3>
+            <p>不会。工具采用无损解码技术提取音频流，音频质量取决于您选择的输出参数。如果选择高质量（320 kbps）输出，提取的音频质量与原视频中的音频几乎一致；如果选择标准质量（128 kbps），会有轻微的质量损失，但大多数场景下听感差异不明显。建议根据实际需求选择合适的音频质量。</p>
+
+            <h3>Q2：为什么处理速度很慢？</h3>
+            <p>视频转音频的处理速度主要取决于三个因素：视频长度、视频编码格式和电脑性能。长视频和高码率视频需要更多处理时间；某些编码格式（如HEVC）解码较慢；低配置电脑处理速度也会受影响。建议在处理长视频时耐心等待，或先使用视频裁剪工具截取需要的部分后再提取音频。</p>
+
+            <h3>Q3：可以提取视频中的特定时间段音频吗？</h3>
+            <p>是的。工具提供了时间段截取功能，您可以设置开始时间和结束时间，只提取视频中特定时间段的音频。这对于提取演讲视频中的某个片段、歌曲中的副歌部分等场景非常实用。建议在提取前先预览视频，确定需要提取的时间范围。</p>
+
+            <h3>Q4：为什么有些视频格式不支持？</h3>
+            <p>虽然 FFmpeg 支持绝大多数视频格式，但由于浏览器环境的技术限制，某些特殊格式或编码可能无法正常处理。建议使用主流视频格式（MP4、WebM、AVI、MOV）进行转换。如果遇到不支持的格式，可以先使用视频格式转换工具将其转换为 MP4 格式，然后再提取音频。</p>
+
+            <h3>Q5：提取的音频可以用于商业用途吗？</h3>
+            <p>这取决于原视频的版权归属。工具只是技术手段，提取音频的版权与原视频相同。如果是您自己拍摄的视频，提取的音频可以自由使用；如果是他人视频，请遵守版权规定，仅用于个人学习或经授权的商业用途。建议在使用前了解版权信息，避免侵权风险。</p>
+
+            <h3>Q6：如何选择最佳的音频格式？</h3>
+            <p>选择音频格式应根据使用场景：MP3 是最通用的格式，兼容所有设备和播放器，适合日常使用；WAV 是无损格式，音质最佳但文件较大，适合专业音频处理；AAC/M4A 是苹果设备首选格式，质量较好且文件适中；OGG 是开源格式，适合技术爱好者。建议大多数用户选择 MP3 格式。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频转音频工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container" data-tool-title="开始使用视频转音频工具" data-tool-url="index.html" data-btn-color="#4F46E5"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

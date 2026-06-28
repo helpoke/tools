@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #7C3AED;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #7C3AED;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -253,7 +222,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -261,18 +233,21 @@
         <header>
             <h1>视频裁剪工具</h1>
             <p class="subtitle">免费、安全、精准裁剪视频片段</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频裁剪工具是一款专注于视频片段截取的在线工具。在视频编辑的众多需求中，裁剪是最基础也是最常用的功能之一。无论是想要去除视频开头或结尾不需要的部分，还是只想保留视频中间某个精彩的片段，裁剪工具都能帮你快速完成。
+                    视频裁剪工具是一款基于浏览器端 FFmpeg 多媒体处理技术的专业在线视频裁剪工具，专注于视频片段截取和画面区域裁剪。它采用先进的视频解码和编码算法，能够在保持视频质量的前提下，精确截取视频的时间段或画面区域。在视频编辑的众多需求中，裁剪是最基础也是最常用的功能之一。无论是想要去除视频开头或结尾不需要的部分，还是只想保留视频中间某个精彩的片段，或是去除视频边框、水印或调整画面构图，裁剪工具都能高效完成。
                 </p>
                 <p>
-                    与传统的视频编辑软件相比，本工具无需下载安装任何程序，打开网页即可使用。更重要的是，所有裁剪处理都在你的浏览器本地完成，视频文件不会被上传到任何服务器，真正做到保护你的隐私数据安全。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架开发，这是业界公认最强大的开源音视频处理框架。工具提供了两种裁剪模式：时间裁剪模式通过设置开始时间和结束时间，精确截取视频的某个时间段，支持以0.1秒为精度设置裁剪时间点，确保截取的片段分毫不差；尺寸裁剪模式通过设置裁剪框的位置和大小，去除视频四周不需要的画面区域，支持可视化拖拽调整和精确坐标输入两种方式。用户可以同时使用两种裁剪模式，实现更精细的编辑效果。
+                </p>
+                <p>
+                    与传统的视频编辑软件相比，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有裁剪处理都在用户的本地设备上完成，视频文件不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。工具支持 MP4、WebM、AVI、MOV 等主流视频格式，提供实时预览功能，用户可以直观地看到裁剪区域的预览效果，确保裁剪范围正确后再执行操作。
                 </p>
 
                 <h3>两种裁剪模式</h3>
@@ -362,19 +337,52 @@
             <p>
                 <strong>浏览器兼容性：</strong> 建议使用 Chrome、Firefox、Edge 等现代浏览器，以获得最佳的使用体验和处理性能。
             </p>
+
+            <h2>实战案例：会议视频精华片段提取</h2>
+            <p>小陈是一名企业培训专员，负责整理公司内部培训会议的录像。最近录制了一场2小时的培训会议，但实际核心内容只集中在几个时间段，需要裁剪成精华片段供员工快速学习。</p>
+            <p><strong>裁剪需求分析：</strong></p>
+            <ol>
+                <li><strong>开场介绍部分：</strong> 0-5分钟，需要去除（不包含实质内容）。</li>
+                <li><strong>核心讲解部分：</strong> 15-45分钟，需要保留（包含主要知识点）。</li>
+                <li><strong>互动问答部分：</strong> 60-80分钟，需要保留（包含关键问题解答）。</li>
+                <li><strong>总结收尾部分：</strong> 110-115分钟，需要保留（包含要点回顾）。</li>
+            </ol>
+            <p><strong>裁剪流程：</strong></p>
+            <ol>
+                <li>小陈将2小时的会议视频上传到视频裁剪工具中。</li>
+                <li>选择时间裁剪模式，第一次裁剪设置开始时间为15分钟，结束时间为45分钟。</li>
+                <li>点击"开始执行裁剪"，等待处理完成后下载第一个片段。</li>
+                <li>重新上传原视频，裁剪第二个片段：开始时间60分钟，结束时间80分钟。</li>
+                <li>继续裁剪第三个片段：开始时间110分钟，结束时间115分钟。</li>
+                <li>将裁剪后的三个片段整理成精华培训视频，总时长缩短到50分钟。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 裁剪前，员工需要观看2小时完整会议才能获取核心内容；裁剪后，精华片段总时长仅50分钟，员工可以在短时间内完成学习，培训效率提升显著。同时，精华视频更便于分享和存档。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：裁剪后的视频画质会下降吗？</h3>
+            <p>不会。视频裁剪只是截取视频的一部分，不会改变视频的编码和质量参数。裁剪后的视频保持与原视频相同的画质和音质。如果需要进一步压缩文件体积，可以在裁剪后使用视频压缩工具进行处理。</p>
+
+            <h3>Q2：可以精确裁剪到秒吗？</h3>
+            <p>是的。工具支持以0.1秒为精度设置裁剪时间点。在时间裁剪模式下，可以输入精确的开始时间和结束时间（单位为秒）。建议先预览视频，确定需要裁剪的时间范围，然后输入精确数值。小数点后一位的精度已经足够精确，可以满足绝大多数裁剪需求。</p>
+
+            <h3>Q3：尺寸裁剪会影响视频比例吗？</h3>
+            <p>取决于裁剪设置。如果保持裁剪框的宽高比与原视频一致，裁剪后视频比例不变；如果随意调整裁剪框大小，裁剪后视频比例会改变。建议根据目标平台的要求调整裁剪框比例：横屏视频保持16:9比例，竖屏视频保持9:16比例。</p>
+
+            <h3>Q4：裁剪后文件大小会减小吗？</h3>
+            <p>时间裁剪会减小文件大小——裁剪的时间越短，文件越小；尺寸裁剪的文件大小变化取决于裁剪区域大小——裁剪区域越小，文件越小。但如果裁剪比例很小（如只裁剪几秒或很小区域），文件大小变化不明显。</p>
+
+            <h3>Q5：可以同时裁剪时间和尺寸吗？</h3>
+            <p>是的。工具支持同时使用时间裁剪和尺寸裁剪两种模式。建议先设置时间裁剪参数，确定需要的时间段，然后再调整尺寸裁剪框，去除不需要的画面区域。这样可以实现更精细的裁剪效果，一步到位完成复杂的裁剪需求。</p>
+
+            <h3>Q6：裁剪框拖动不灵敏怎么办？</h3>
+            <p>如果裁剪框拖动不灵敏，可能是因为视频预览分辨率较高或浏览器性能较低。建议：1. 等待视频完全加载后再拖动裁剪框；2. 使用现代浏览器（Chrome、Firefox、Edge）；3. 尝试通过参数输入设置裁剪坐标，代替拖动操作。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #7C3AED; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频裁剪工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用视频裁剪工具"
+             data-tool-url="index.html"
+             data-btn-color="#7C3AED"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

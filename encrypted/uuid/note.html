@@ -92,7 +92,7 @@
         }
 
         .info-section h3 {
-            color: var(--primary-color);
+            color: #10B981;
             margin: 25px 0 15px;
             font-size: 1.2rem;
         }
@@ -127,64 +127,7 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
 
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #10B981;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #10B981;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-        }
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -251,7 +194,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -259,47 +205,51 @@
         <header>
             <h1>UUID 生成工具 - 免费、安全、快速</h1>
             <p class="subtitle">批量生成唯一标识符UUID，支持带连字符与无连字符格式，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是UUID生成工具？</h2>
-                <p>UUID生成工具是一款专业的唯一标识符生成工具，专为需要生成UUID的用户设计。UUID（Universally Unique Identifier）是一种128位的全局唯一标识符，也被称为GUID（Globally Unique Identifier）。UUID在分布式系统、数据库主键、会话标识等场景中广泛使用，可以确保生成的标识符在全球范围内不重复。</p>
-                <p>工具支持生成UUID版本4（随机UUID），这是最常用的UUID版本。UUID v4使用随机数生成，具有极高的唯一性保证，碰撞概率极低。同时，工具支持两种输出格式：带连字符的标准格式（如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx）和无连字符的紧凑格式，满足不同应用场景的需求。所有生成过程均在浏览器本地完成。</p>
+                <p>UUID生成工具是一款专业的全局唯一标识符生成工具，专为需要生成UUID的用户设计。UUID（Universally Unique Identifier，通用唯一标识符）是一种128位的全局唯一标识符，也被称为GUID（Globally Unique Identifier，全球唯一标识符）。UUID由开放软件基金会（OSF）制定标准，用于在分布式系统中唯一标识信息，无需依赖中央分配机构即可保证全球范围内的唯一性。</p>
+                <p>UUID的标准格式是32个十六进制数字，分布为8-4-4-4-12的分组形式，如：550e8400-e29b-41d4-a716-446655440000。UUID具有全球唯一性保证：根据概率学计算，重复生成UUID而发生碰撞的概率几乎为零。这意味着即使在宇宙中所有计算机上同时生成UUID，也不会出现重复。工具支持生成UUID版本4（随机UUID），这是目前最常用的版本，使用高质量随机数生成，具有极高的唯一性保证。</p>
+                <p>所有UUID生成过程均在浏览器本地完成，基于Web Crypto API的加密安全随机数生成器，确保每个UUID都真正随机且唯一。生成的UUID不会上传到任何服务器，始终处于您的完全控制之下。</p>
 
                 <h2>如何使用？</h2>
                 <h3>单个UUID生成</h3>
-                <p>点击"生成UUID"按钮，工具会立即生成一个UUID字符串。您可以选择输出格式：带连字符或无连字符。生成的UUID可以直接复制用于其他用途，如数据库主键、会话标识、文件名等。</p>
+                <p>点击"生成UUID"按钮，工具会立即基于加密安全的随机数生成器（CSPRNG）生成一个UUID v4字符串。UUID v4的格式为：xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx，其中x是随机十六进制数字，y是4、5、6、7、8、9、a、b中的任意一个（用于标识版本和变体）。生成的UUID以标准格式（带连字符）显示，您可以一键复制用于数据库记录、API请求头、会话ID等场景。</p>
 
                 <h3>批量UUID生成</h3>
-                <p>设置需要生成的UUID数量，点击"批量生成"按钮。工具会一次性生成多个UUID，以列表形式显示。批量生成适合需要大量唯一标识符的场景，如批量数据导入、测试数据生成等。</p>
+                <p>设置需要生成的UUID数量（支持1-1000个），点击"批量生成"按钮。工具会一次性生成多个UUID，以列表形式清晰展示，每个UUID独占一行。批量生成适合需要大量唯一标识符的场景，如：批量数据导入时为主记录分配唯一ID、自动化测试中生成测试数据标识、微服务架构中生成分布式事务ID等。</p>
 
                 <h3>格式选择</h3>
-                <p>标准格式（带连字符）：8-4-4-4-12的格式，如550e8400-e29b-41d4-a716-446655440000。紧凑格式（无连字符）：32个连续字符，适合需要紧凑存储或传输的场景。两种格式可以根据实际需求自由选择。</p>
+                <p>标准格式（带连字符）：采用8-4-4-4-12分组，如550e8400-e29b-41d4-a716-446655440000，符合RFC 4122规范，便于人类阅读和日志分析。紧凑格式（无连字符）：32位连续十六进制字符串，如550e8400e29b41d4a716446655440000，节省存储空间，适合数据库主键和API传输。所有生成的UUID都符合RFC 4122标准，确保兼容性和通用性。</p>
+
+                <h3>实战案例：分布式系统订单号生成</h3>
+                <p>假设某电商平台需要为每笔订单生成全局唯一的订单号，且订单号需要在多个微服务间传递和存储。使用UUID工具的完整方案如下：首先在订单创建服务中，使用批量生成功能一次性生成10000个预分配UUID，存储到Redis队列中；当用户下单时，从队列取出一个UUID作为订单号；订单号格式设计为：{UUID前8位}-{日期}{渠道标识}，如550e8400-20260627W01，既保证唯一性又便于业务追溯；UUID的128位足够存储额外业务信息，且无需数据库自增主键的跨库同步问题；在跨服务调用时，UUID作为幂等性Key，防止重复提交和接口重试导致的数据重复问题。</p>
             </div>
 
             <div class="info-section">
                 <h2>UUID版本说明</h2>
-                
+
                 <div class="uuid-versions">
                     <div class="uuid-version">
                         <div class="version-name">UUID v4（随机）</div>
-                        <div class="version-desc">使用随机数生成，最常用版本，碰撞概率极低</div>
+                        <div class="version-desc">使用加密安全随机数生成，碰撞概率约10^-18，是最常用的版本</div>
                     </div>
                     <div class="uuid-version">
-                        <div class="version-name">标准格式（带连字符）</div>
-                        <div class="version-desc">8-4-4-4-12格式，符合RFC 4122标准</div>
+                        <div class="version-name">RFC 4122 标准</div>
+                        <div class="version-desc">符合国际标准，8-4-4-4-12分组，兼容所有主流系统</div>
                     </div>
                 </div>
 
                 <h2>适用场景与人群</h2>
-                <p><strong>数据库设计师：</strong>为分布式数据库设计全局唯一主键，避免主键冲突。</p>
-                <p><strong>软件开发者：</strong>生成唯一标识符用于对象ID、会话ID、请求追踪ID等。</p>
-                <p><strong>系统架构师：</strong>设计分布式系统的唯一标识方案，确保跨系统不冲突。</p>
-                <p><strong>测试工程师：</strong>批量生成测试数据标识符，进行自动化测试。</p>
-                <p><strong>运维工程师：</strong>生成唯一标识符用于日志追踪、事件标识等。</p>
+                <p><strong>后端开发者：</strong>为数据库主键生成全局唯一ID，设计分布式系统唯一标识方案，解决多节点ID冲突问题。</p>
+                <p><strong>架构师：</strong>设计微服务架构中的消息追踪ID、分布式事务ID，确保跨服务唯一性和可追溯性。</p>
+                <p><strong>测试工程师：</strong>批量生成测试数据唯一标识符，进行自动化测试数据准备和测试用例管理。</p>
+                <p><strong>运维工程师：</strong>生成日志追踪ID、事件唯一标识符，便于日志关联分析和故障排查。</p>
+                <p><strong>数据工程师：</strong>为数据湖、数据仓库中的记录生成唯一标识，支持跨数据源的数据整合和去重。</p>
 
                 <h2>特点与优势</h2>
                 <div class="feature-list">
@@ -308,37 +258,50 @@
                     <span class="feature-tag">批量生成支持</span>
                     <span class="feature-tag">带连字符格式</span>
                     <span class="feature-tag">无连字符格式</span>
-                    <span class="feature-tag">全局唯一性</span>
+                    <span class="feature-tag">CSPRNG随机数</span>
+                    <span class="feature-tag">RFC 4122兼容</span>
                     <span class="feature-tag">一键复制结果</span>
                     <span class="feature-tag">完全免费</span>
                 </div>
-                <p>工具采用纯前端技术实现，所有UUID生成都在您的浏览器中完成，生成的UUID不会上传到任何服务器。这意味着您的标识符始终处于您的控制之下。UUID v4使用高质量随机数生成，确保生成的标识符具有极高的唯一性，碰撞概率约为10^-18，可以放心用于各种需要唯一标识的场景。</p>
+                <p>工具采用纯前端技术实现，基于Web Crypto API的加密安全随机数生成器（CSPRNG）生成UUID v4。CSPRNG是密码学安全的随机数生成器，输出的随机数具有不可预测性和统计随机性，确保每个UUID都是真正随机的。UUID v4的碰撞概率约为10^-18，这意味着每秒生成10亿个UUID，连续生成100年，碰撞概率仍然小于0.00000001%。</p>
 
                 <div class="warning-box">
                     <p><strong>注意事项：</strong></p>
                     <ul>
-                        <li>UUID v4基于随机数生成，碰撞概率极低但非零</li>
-                        <li>标准UUID长度为36字符（带连字符）或32字符（无连字符）</li>
-                        <li>UUID不包含任何业务信息，仅作为唯一标识使用</li>
-                        <li>批量生成大量UUID可能需要一定时间</li>
-                        <li>生成的UUID建议妥善保存，避免重复使用</li>
-                        <li>UUID本身不提供安全性，仅提供唯一性</li>
+                        <li>UUID v4基于随机数生成，碰撞概率极低但理论上非零，对碰撞极度敏感的场景需额外校验</li>
+                        <li>标准UUID长度为36字符（带连字符）或32字符（无连字符），存储时需考虑数据库字段长度</li>
+                        <li>UUID不包含任何时间或业务信息，仅作为纯粹的唯一标识符使用</li>
+                        <li>批量生成大量UUID（如1000个以上）可能需要较长时间，请耐心等待</li>
+                        <li>UUID本身不提供安全性或排序能力，仅提供唯一性标识</li>
+                        <li>如果需要有序的唯一ID，建议使用数据库自增ID或Twitter的Snowflake算法</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：UUID为什么能保证全局唯一？</h3>
+                <p><strong>答：</strong>UUID的全局唯一性基于以下设计：1) 128位空间：UUID有2^128 ≈ 3.4×10^38种可能的值，这个数字远大于地球上的任何数量级；2) 随机版本（v4）：使用加密安全的随机数生成器，每位可能是0或1，几乎不可能生成两个相同的UUID；3) 版本和变体标识：UUID包含版本号（bits 49-52）和变体标识（bits 65-66），确保符合RFC 4122标准；4) 概率分析：即使每秒生成10亿个UUID，100年不重复的概率为99.99999999%。理论上存在碰撞可能，但实际应用中可忽略不计。</p>
+
+                <h3>问：UUID v1、v4有什么区别？</h3>
+                <p><strong>答：</strong>UUID有多个版本，各有特点：1) v1（时间戳版本）：基于MAC地址和时间戳生成，可从UUID反推生成时间和机器信息，但隐私性较差；2) v4（随机版本）：完全随机生成，隐私性好，无法反推任何信息，但无序；3) v5（命名空间版本）：基于命名空间和名称的SHA-1哈希生成，相同命名空间和名称总是产生相同UUID，用于可重现场景；4) v3与v5类似，但使用MD5哈希。日常应用推荐使用v4随机UUID，隐私性好且无需额外参数。</p>
+
+                <h3>问：UUID和自增ID哪个更好？</h3>
+                <p><strong>答：</strong>两者各有适用场景：UUID优势：无需数据库生成，支持分布式系统，无跨库冲突风险，隐私性好（无法推断数据量）；UUID劣势：存储空间大（36字符 vs 4-8字节整数），无序（写入性能略低），可读性差。自增ID优势：存储紧凑（整数类型），顺序递增（写入性能好），可读性强，便于分页；自增ID劣势：需要数据库生成，分布式环境需要额外方案（如Snowflake），可推断业务数据量。分布式系统、微服务架构推荐UUID；单机应用、纯数据库场景推荐自增ID。</p>
+
+                <h3>问：UUID可以作为数据库主键吗？</h3>
+                <p><strong>答：</strong>可以作为主键，但需要注意：1) 存储空间：UUID占36字符（CHAR）或16字节（BINARY），远大于整数类型，索引体积更大；2) 写入性能：无序的UUID会导致B+Tree频繁分裂和页分裂，写入性能比自增ID低约30-50%；3) 优化方案：使用UUID v7（基于时间的有序UUID）或COMB（将时间戳放在前面）来提升写入性能；或者使用雪花算法（Snowflake）生成有序整数ID；4) 实际建议：小规模应用可使用自增ID，分布式系统或需要跨库合并时使用UUID，兼顾性能可考虑UUID v7或Snowflake。</p>
+
+                <h3>问：为什么UUID这么长？</h3>
+                <p><strong>答：</strong>UUID的128位长度是权衡的结果：1) 唯一性保证：128位提供了足够的空间来确保全球唯一性，2^128是340涧（340万亿的三次方），足以给地球上每一粒沙子分配唯一ID；2) 历史原因：UUID设计于互联网早期（1980年代），当时的工程师认为128位是一个"安全"的长度，既足够大又不会让存储成为问题；3) 版本兼容：UUID需要容纳多种生成算法（时间戳、随机数、命名空间等），需要保留足够的空间给版本号、变体标识等元数据；4) 实际效率：虽然36字符看起来很长，但相比GUID的变长格式，固定长度的UUID更利于程序处理。</p>
+
+                <h3>问：UUID能用于安全用途吗？</h3>
+                <p><strong>答：</strong>UUID不能用于安全用途：1) 不是加密：UUID只是标识符，不提供任何加密功能，任何人都可以从UUID推断它是一个标识符；2) 不是随机数：UUID v4虽然使用随机数，但随机数是公开可见的，不能作为密钥或密码使用；3) 可预测性：如果攻击者能获取少量UUID样本，可能推断随机数生成器的状态（理论上有此可能）；4) 安全替代：需要随机数时，应使用专门的加密安全随机数生成器（如Web Crypto API的crypto.getRandomValues()）；需要唯一Token时，应使用专门的令牌生成方案（如OAuth的client_credentials）。UUID的唯一性保证是统计意义上的，不应用于安全认证。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #10B981; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用UUID生成工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用UUID生成工具"
+             data-tool-url="index.html"
+             data-btn-color="#10B981"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

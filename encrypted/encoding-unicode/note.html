@@ -127,64 +127,7 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
 
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #0891B2;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #0891B2;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #0891B2 0%, #0E7490 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(8, 145, 178, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(8, 145, 178, 0.6);
-        }
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -220,7 +163,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,25 +174,28 @@
         <header>
             <h1>Unicode 编码解码工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持Unicode/中文互转，中文转Unicode、Unicode转中文，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是Unicode编解码工具？</h2>
-                <p>Unicode编解码工具是一款专业的在线Unicode转换工具，专为需要进行Unicode编码和解码操作的用户设计。Unicode是一种国际字符编码标准，为世界上几乎所有语言的每个字符都分配了唯一的编码，使得计算机可以统一处理和显示各种语言的文本。</p>
-                <p>工具支持两种转换模式：编码模式和解码模式。编码模式可以将中文文本转换为Unicode编码序列，例如将"你好"转换为"\u4f60\u597d"；解码模式可以将Unicode编码还原为原始中文文本。这对于处理网页中的Unicode编码、调试程序中的编码问题、分析数据传输中的编码格式等都非常有用。所有转换均在浏览器本地完成，保护您的数据隐私。</p>
+                <p>Unicode编解码工具是一款专业的在线Unicode转换工具，专为需要进行Unicode编码和解码操作的用户设计。Unicode是一种国际字符编码标准，由国际Unicode联盟制定，为世界上几乎所有语言的每个字符都分配了唯一的编码点。Unicode的目标是统一所有字符编码，使不同语言、不同平台的文本可以无障碍地交换和显示。目前，Unicode已经收录超过14万个字符，覆盖了人类历史上主要的书写系统。</p>
+                <p>Unicode的编码空间从U+0000到U+10FFFF，共包含17个平面。每个字符都有一个唯一的码点，格式为"U+"后跟十六进制数。例如，中文字符"中"的Unicode码点是U+4E2D，表示为编码格式就是"\u4E2D"。UTF-8、UTF-16、UTF-32是Unicode的不同实现方式，其中UTF-8是目前互联网最广泛使用的编码方式，它使用1到4个字节表示字符，对ASCII字符保持兼容。</p>
 
                 <h2>如何使用？</h2>
                 <h3>编码操作</h3>
-                <p>在输入框中输入需要编码的中文文本或混合文本，点击"编码"按钮。工具会将所有非ASCII字符转换为Unicode编码格式，格式为"\uXXXX"，其中XXXX是字符的十六进制编码。您可以复制编码结果用于其他用途。</p>
+                <p>在输入框中输入需要编码的中文文本或混合文本，点击"编码"按钮。工具会将所有非ASCII字符转换为Unicode编码格式，格式为"\uXXXX"，其中XXXX是字符的十六进制编码。例如，"你好世界"会被编码为"\u4F60\u597D\u4E16\u754C"。您可以复制编码结果用于JavaScript代码、JSON数据或其他需要Unicode转义的场景。ASCII字符（英文、数字、常用符号）通常保持原样不编码。</p>
 
                 <h3>解码操作</h3>
-                <p>在输入框中输入需要解码的Unicode编码字符串，点击"解码"按钮。工具会将所有Unicode编码还原为原始字符，显示中文或其他非ASCII字符。支持多种Unicode编码格式，包括"\uXXXX"格式和"\\uXXXX"格式。</p>
+                <p>在输入框中输入需要解码的Unicode编码字符串，点击"解码"按钮。工具会将所有Unicode编码还原为原始字符，显示中文或其他非ASCII字符。支持多种Unicode编码格式，包括"\uXXXX"格式（4位十六进制）、"\xXX"格式（2位十六进制）以及"&#XXXX;"HTML实体格式。工具会自动识别各种格式并进行解码。</p>
 
                 <h3>应用场景</h3>
-                <p>Unicode编码常用于：网页中的中文字符显示、JSON数据中的中文编码、程序源代码中的中文处理、跨平台文本传输中的编码统一、数据存储中的字符编码等。了解Unicode的工作原理可以帮助您更好地处理多语言文本。</p>
+                <p>Unicode编码在Web开发中非常常见：JavaScript字符串中的中文字符有时需要Unicode转义；JSON数据传输中包含中文；Python源代码中的中文字符串；数据库存储的特殊字符；跨平台文本传输等。了解Unicode的工作原理可以帮助您更好地处理多语言文本，避免乱码问题。</p>
+
+                <h3>实战案例：处理JavaScript中的中文字符</h3>
+                <p>假设您需要在JavaScript代码中处理包含中文的字符串，但遇到编码问题导致中文显示异常。使用本工具的操作步骤如下：首先在输入框中输入有问题的中文字符串；然后点击"编码"按钮获取Unicode编码；将编码结果粘贴到JavaScript代码中，格式如"\\u4F60\\u597D"；在代码中解码还原即可正确显示中文。这种方法常用于处理前后端数据传输、代码混淆等场景。</p>
             </div>
 
             <div class="info-section">
@@ -281,20 +230,32 @@
                         <li>ASCII字符（如英文、数字）通常不进行编码</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：Unicode和UTF-8有什么区别？</h3>
+                <p><strong>答：</strong>Unicode是一个字符集，为每个字符分配了唯一的码点（如U+4E2D表示"中"）；UTF-8是Unicode的一种编码实现方式，将码点转换为字节序列。Unicode和UTF-8的关系就像字符和它的书写方式：Unicode定义了"中"这个字，UTF-8定义了如何用二进制表示"中"。UTF-8是变长编码，ASCII字符用1字节，汉字用3字节，是目前互联网最广泛使用的字符编码。</p>
+
+                <h3>问：为什么需要使用Unicode编码？</h3>
+                <p><strong>答：</strong>使用Unicode编码的主要原因：1) 确保跨平台、跨语言的文本正确显示；2) 避免字符编码不一致导致的乱码问题；3) 在只支持ASCII的环境中传输非ASCII字符；4) JavaScript、JSON等场景需要Unicode转义；5) 程序源代码中处理中文字符串。Unicode提供了统一的字符表示方案，解决了传统编码（如GBK、GB2312）的兼容性问题。</p>
+
+                <h3>问：Unicode编码和Base64编码有什么区别？</h3>
+                <p><strong>答：</strong>Unicode编码和Base64编码是完全不同的概念。Unicode编码是将字符转换为该字符在Unicode字符集中的码点表示（如"中"→"\u4E2D"），是字符到字符的映射；Base64编码是将任意二进制数据转换为64个可打印字符的表示，是二进制到文本的转换。Unicode编码主要用于字符表示，Base64编码主要用于数据传输。</p>
+
+                <h3>问：为什么有时候Unicode编码显示为"?"或乱码？</h3>
+                <p><strong>答：</strong>Unicode编码显示为"?"或乱码通常是因为：1) 目标环境不支持相应的Unicode字符（如老旧的系统）；2) 字符编码设置错误（如应该用UTF-8却用了GBK）；3) 字体不包含该字符，无法显示；4) 在只支持单字节字符的环境中显示了多字节字符。解决方法包括确保使用正确的编码格式、更换支持更多字符的字体、使用支持Unicode的现代浏览器。</p>
+
+                <h3>问：Unicode能表示多少个字符？</h3>
+                <p><strong>答：</strong>Unicode的最大编码空间是U+10FFFF（十进制的1114111），理论上可以表示超过100万个字符。目前Unicode 15.0版本已经收录了约14.9万个字符，包括各种语言的字母、汉字、标点符号、表情符号、数学符号等。其中最常用的汉字约2万多个，中日韩统一表意文字（CJK）占了很大一部分。</p>
+
+                <h3>问：在JSON中使用Unicode编码有什么好处？</h3>
+                <p><strong>答：</strong>在JSON中使用Unicode编码的好处：1) 确保中文字符在不同系统间正确传输；2) 避免编码不一致导致的乱码问题；3) 部分API要求对特殊字符进行Unicode转义；4) 可以安全传输表情符号等特殊字符；5) 提高JSON的可读性（相对于直接使用UTF-8字节）。现代Web应用通常直接使用UTF-8编码JSON，但Unicode转义仍然是一个有用的备选方案。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #0891B2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用Unicode编解码工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用Unicode编解码工具"
+             data-tool-url="index.html"
+             data-btn-color="#0891B2"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

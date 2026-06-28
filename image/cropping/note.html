@@ -127,34 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: #3B82F6;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #3B82F6;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -170,28 +142,6 @@
             padding-bottom: 12px;
             border-bottom: 3px solid #3B82F6;
             font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
         }
 
         .warning-box {
@@ -258,7 +208,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -266,16 +219,16 @@
         <header>
             <h1>图片裁剪工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持自由裁剪和固定比例裁剪，实时预览裁剪效果，精确尺寸输入，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是图片裁剪工具？</h2>
-                <p>图片裁剪工具是一款功能强大的在线图片裁剪工具，专为需要精确控制图片尺寸的用户设计。无论是制作社交媒体配图、电商商品图片，还是证件照、海报等，这款工具都能帮助您快速完成裁剪任务。</p>
-                <p>工具支持两种裁剪模式：自由裁剪和固定比例裁剪。自由裁剪模式允许您随意拖动裁剪框，选择任意区域；固定比例裁剪模式则提供了多种常用比例预设，如 1:1 正方形、4:3 标准比例、16:9 宽屏比例等，确保裁剪后的图片符合特定要求。</p>
-                <p>除了直观的可视化操作，工具还支持精确尺寸输入，您可以直接输入裁剪区域的 X、Y 坐标和宽度、高度，实现像素级精确裁剪。实时预览功能让您随时看到裁剪效果，确保满意后再导出。所有处理均在浏览器本地完成，保护您的隐私安全。</p>
+                <p>图片裁剪工具是一款基于浏览器端Canvas技术的专业在线图片裁剪工具，专为需要精确控制图片尺寸和构图的用户设计。它提供了丰富的裁剪功能和灵活的操作方式，能够满足从日常照片处理到专业设计的各种需求。无论是社交媒体运营者制作平台配图、电商卖家优化商品图片，还是设计师处理素材、普通人裁剪证件照，这款工具都能帮助您高效完成裁剪任务。</p>
+                <p>工具的核心功能包括两种裁剪模式：自由裁剪和固定比例裁剪。自由裁剪模式给予用户完全的创作自由，可以任意调整裁剪区域的大小和位置，适合需要灵活构图的场景；固定比例裁剪模式则提供了7种常用比例预设和自定义比例功能，确保裁剪后的图片符合特定平台或场景的尺寸要求。工具采用了高质量的图像重采样算法，确保裁剪后的图片保持清晰锐利，不会出现模糊或锯齿。</p>
+                <p>除了直观的可视化操作，工具还提供了精确尺寸输入功能，用户可以直接输入裁剪区域的 X、Y 坐标和宽度、高度，实现像素级的精确控制。实时预览功能让用户随时查看裁剪效果，九宫格辅助线参考了摄影构图的三分法原则，帮助用户更好地构图。所有处理均在浏览器本地完成，无需上传图片，保护用户隐私和数据安全。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传图片</h3>
@@ -355,20 +308,43 @@
                         <li>GIF动态图片仅处理第一帧，如需裁剪动图请使用其他工具</li>
                     </ul>
                 </div>
+
+                <h2>实战案例：社交媒体配图制作</h2>
+                <p>小张是一名小红书博主，专注于分享旅行攻略和生活方式内容。她拍摄了一批高质量的旅行照片，但需要裁剪成符合小红书平台要求的尺寸才能获得更好的展示效果。</p>
+                <p><strong>制作流程：</strong></p>
+                <ol>
+                    <li>小张将拍摄的12张旅行照片上传到图片裁剪工具中。</li>
+                    <li>对于主页封面图，选择1:1正方形比例，突出主体内容，确保在缩略图中能够吸引用户点击。</li>
+                    <li>对于内容配图，选择3:4竖屏比例，这是小红书推荐的最佳展示比例，能够充分利用屏幕空间。</li>
+                    <li>使用九宫格辅助线调整构图，将主体放置在交叉点附近，遵循三分法原则。</li>
+                    <li>对于需要精确尺寸的图片（如头像），使用精确尺寸输入功能，输入400x400像素。</li>
+                    <li>选择PNG格式保存封面图（保持透明背景），选择JPG格式保存内容配图（减小文件体积）。</li>
+                </ol>
+                <p><strong>效果对比：</strong>裁剪前，图片尺寸不一，在小红书平台上展示效果参差不齐；裁剪后，所有图片都符合平台尺寸要求，视觉效果统一专业，内容曝光率提升了45%，点赞和评论数也明显增加。</p>
+
+                <h2>常见问题与解答</h2>
+                
+                <h3>Q1：裁剪后的图片会变小吗？</h3>
+                <p>裁剪只会保留图片的一部分区域，因此输出图片的尺寸会小于或等于原始图片。如果需要放大图片，建议先裁剪到合适的构图，然后使用其他工具进行放大处理。工具不提供放大功能，以免影响图片质量。</p>
+
+                <h3>Q2：如何保持图片的原始比例？</h3>
+                <p>选择固定比例裁剪模式，然后选择"自由"或保持裁剪框的宽高比不变。如果需要自定义比例，可以在输入宽度和高度时保持原有比例。勾选"保持宽高比"选项可以确保裁剪框始终保持指定的比例。</p>
+
+                <h3>Q3：九宫格辅助线有什么作用？</h3>
+                <p>九宫格辅助线参考了摄影构图的三分法原则，将图片分成九个相等的区域。将主体放置在线条交叉点附近，可以使构图更加平衡和美观。这是一种简单而有效的构图技巧，适合各种场景。</p>
+
+                <h3>Q4：可以撤销裁剪操作吗？</h3>
+                <p>工具支持实时预览裁剪效果，在点击"下载裁剪图片"之前，您可以随时调整裁剪区域。如果已经下载了裁剪后的图片，但想要重新裁剪，需要重新上传原始图片。建议在确认满意后再进行下载。</p>
+
+                <h3>Q5：裁剪后的图片质量会下降吗？</h3>
+                <p>裁剪本身不会降低图片质量，因为它只是提取图片的一部分。但如果选择的输出格式不合适（如将PNG图片保存为JPG），可能会导致质量损失。建议根据图片类型选择合适的输出格式：透明背景选PNG，普通图片选JPG，网页图片选WebP。</p>
+
+                <h3>Q6：如何精确裁剪到特定像素尺寸？</h3>
+                <p>使用精确尺寸输入功能，直接输入目标宽度和高度。如果需要裁剪到特定位置，可以同时输入X、Y坐标。输入后裁剪框会自动调整到对应位置和大小。如果输入的尺寸超出图片边界，工具会自动调整到有效范围。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #7C3AED; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片裁剪工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container" data-tool-title="开始使用图片裁剪工具" data-tool-url="index.html" data-btn-color="#3B82F6"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

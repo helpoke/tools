@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #E11D48;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #E11D48;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -243,7 +212,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -251,18 +223,21 @@
         <header>
             <h1>视频转GIF工具</h1>
             <p class="subtitle">免费、安全、快速从视频提取精彩瞬间</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频转GIF工具是一款专门用于从视频中提取片段并转换为GIF动图格式的在线工具。GIF图片是一种广泛支持的图片格式，可以在网页、聊天软件、社交媒体中直接显示，无需额外的播放器支持。在日常交流中，一个精彩的GIF动图往往比静态图片更能表达情感，比视频更轻量方便分享。
+                    视频转GIF工具是一款基于浏览器端 FFmpeg 和 gif.js 技术的专业在线视频转GIF转换工具，专门用于从视频中提取片段并转换为GIF动图格式。它采用先进的视频解码算法和 GIF 编码技术，能够从各种视频格式中精准提取精彩片段，生成高质量的 GIF 动图。GIF图片是一种广泛支持的图片格式，可以在网页、聊天软件、社交媒体中直接显示，无需额外的播放器支持。在日常交流中，一个精彩的GIF动图往往比静态图片更能表达情感，比视频更轻量方便分享。
                 </p>
                 <p>
-                    无论是想要分享影视作品中搞笑的片段，提取游戏精彩操作的瞬间，还是制作有趣的聊天表情包，视频转GIF工具都能帮你轻松实现。所有处理都在浏览器本地完成，无需安装任何软件，视频文件也不会上传到服务器。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架和 gif.js 编码引擎开发。工具提供了灵活的时间控制：用户可以精确设置 GIF 的起始时间和持续时长，精准截取想要的片段；帧率可调：支持5-30fps的帧率选择，帧率越高动画越流畅，但文件体积也越大；尺寸缩放：支持原始尺寸、75%、50%、25%等多种缩放比例，大幅减小文件体积；质量等级：提供高、中、低三个质量等级，适应不同用途需求。用户可以根据实际场景选择合适的参数组合，生成最优的 GIF 效果。
+                </p>
+                <p>
+                    与传统的桌面视频转换软件不同，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有视频处理都在用户的本地设备上完成，视频文件不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。无论是想要分享影视作品中搞笑的片段，提取游戏精彩操作的瞬间，还是制作有趣的聊天表情包，视频转GIF工具都能高效完成。
                 </p>
 
                 <h3>为什么选择GIF格式？</h3>
@@ -347,19 +322,53 @@
             <p>
                 <strong>色彩限制：</strong> GIF格式最多支持256色，对于色彩丰富的视频可能会有颜色渐变不自然的情况，这是GIF格式本身的限制。
             </p>
+
+            <h2>实战案例：短视频精彩片段表情包制作</h2>
+            <p>小张是一名活跃的社交媒体用户，经常在各种平台分享有趣的内容。最近他观看了一个搞笑短视频，其中一个表情夸张的片段非常适合制作成表情包，在聊天中使用。</p>
+            <p><strong>制作需求分析：</strong></p>
+            <ol>
+                <li><strong>片段时长：</strong> 搞笑表情持续约3秒，适合表情包长度。</li>
+                <li><strong>使用场景：</strong> 微信聊天、微博评论、朋友圈配图。</li>
+                <li><strong>文件要求：</strong> 文件大小需要控制在2MB以内，方便快速发送。</li>
+            </ol>
+            <p><strong>制作流程：</strong></p>
+            <ol>
+                <li>小张将搞笑短视频上传到视频转GIF工具中。</li>
+                <li>预览视频后，确定搞笑表情开始于第15秒，设置起始时间为15秒。</li>
+                <li>设置持续时长为3秒，刚好涵盖整个搞笑表情片段。</li>
+                <li>设置帧率为15fps，在保持流畅度的同时减小文件体积。</li>
+                <li>设置尺寸缩放为50%，将原视频1080p缩小到540p，大幅减小文件体积。</li>
+                <li>设置GIF质量为中等，平衡画质和文件大小。</li>
+                <li>点击"生成GIF"按钮，等待处理完成后预览效果。</li>
+                <li>确认表情动作清晰、画面流畅后，下载保存到本地。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 制作前，需要在聊天中发送视频链接，接收方需要点击链接才能观看；制作后，可以直接发送GIF表情包，在聊天窗口中自动播放，表达效果更生动，分享更便捷。最终GIF文件大小为1.2MB，符合平台发送要求。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：生成的GIF文件太大怎么办？</h3>
+            <p>GIF文件大小主要取决于时长、帧率和尺寸。建议：1. 缩短GIF时长，控制在5秒以内；2. 降低帧率，选择10fps或15fps；3. 缩小尺寸，选择50%或25%缩放；4. 选择低质量等级。通过这些参数调整，可以大幅减小GIF文件体积。</p>
+
+            <h3>Q2：GIF画质不清晰怎么办？</h3>
+            <p>GIF画质受限于格式本身的256色限制。建议：1. 选择高质量等级，提高色彩还原度；2. 保持原始尺寸或75%缩放，避免过度缩小；3. 提高帧率至20fps以上，增加画面细节；4. 选择色彩相对简单的视频片段，避免色彩丰富的场景。</p>
+
+            <h3>Q3：为什么GIF颜色看起来不自然？</h3>
+            <p>这是GIF格式256色限制导致的。GIF只能显示最多256种颜色，对于色彩丰富的视频（如风景、人物面部），颜色会被压缩映射到有限的色彩空间，导致颜色渐变不自然、出现色块。建议选择色彩简单的视频片段（如卡通、动画、黑白视频），避免色彩丰富的场景。</p>
+
+            <h3>Q4：生成GIF时间很长怎么办？</h3>
+            <p>GIF生成需要逐帧处理视频画面并编码，处理时间取决于视频长度、帧率和电脑性能。建议：1. 缩短GIF时长，减少需要处理的帧数；2. 降低帧率，减少每秒处理的帧数；3. 缩小尺寸，减小每帧的处理数据量；4. 使用现代浏览器和高配置电脑，提高处理速度。</p>
+
+            <h3>Q5：可以设置GIF循环次数吗？</h3>
+            <p>是的。工具支持设置GIF的循环次数：可以选择无限循环（GIF会一直播放），也可以设置播放指定次数后停止。大多数场景建议选择无限循环，确保GIF在聊天和社交媒体中持续播放。如果需要制作只播放一次的演示GIF，可以设置为播放1次。</p>
+
+            <h3>Q6：视频转GIF和图片转GIF有什么区别？</h3>
+            <p>两种工具适用于不同的场景：视频转GIF从单个视频文件中提取片段，适合将视频精彩瞬间转换为GIF；图片转GIF将多张静态图片组合成GIF，适合制作延时动画、步骤演示等。如果需要从视频中提取多帧并组合成GIF，建议先用视频裁剪工具截取关键帧，再用图片转GIF工具组合。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #E11D48; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频转GIF工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用视频转GIF工具"
+             data-tool-url="index.html"
+             data-btn-color="#E11D48"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

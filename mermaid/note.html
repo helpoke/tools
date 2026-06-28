@@ -127,73 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: var(--accent-color);
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--accent-color);
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--accent-color);
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(75, 108, 183, 0.6);
-        }
-
         .warning-box {
             background: var(--bg-tertiary);
             border-left: 4px solid var(--warning-color);
@@ -220,7 +153,6 @@
             }
 
             .info-section,
-            .tool-section,
             .related-tools {
                 padding: 20px;
             }
@@ -229,10 +161,11 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../common/css/style.css">
+    <link rel="stylesheet" href="../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
     <script src="../common/js/theme.js"></script>
-    <script src="./lib/mermaid.min.js"></script>
-    <script src="./lib/html2canvas.min.js"></script>
+    <script src="../common/js/note.js"></script>
 </head>
 
 <body>
@@ -240,29 +173,36 @@
         <header>
             <h1>Mermaid在线UML画图工具 - 免费、安全、快速</h1>
             <p class="subtitle">用代码绘制专业图表，支持流程图、时序图、状态图、类图等多种类型，实时预览，一键导出</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是 Mermaid 在线画图工具？</h2>
-                <p>Mermaid 在线画图工具是一款基于 Mermaid.js 开源库开发的在线图表绘制工具。它的核心理念是"用代码描述图表"，让用户通过编写简单的文本语法，就能快速生成专业的流程图、时序图、状态图、类图、实体关系图、饼图、甘特图和用户旅程图等多种类型的图表。</p>
-                <p>与传统的拖拽式画图工具不同，Mermaid 通过文本语法来定义图表结构，这种方式不仅高效，而且便于版本控制和团队协作。您可以将图表代码存储在代码仓库中，与团队成员共享和协作编辑，实现真正的"代码即文档"。</p>
-                <p>本工具完全在浏览器端运行，无需安装任何软件，也不需要注册账号。所有处理都在您的本地计算机上完成，不会上传到任何服务器，最大限度保护您的隐私和数据安全。</p>
+                <p>Mermaid 在线画图工具是一款基于 Mermaid.js 开源库开发的专业在线图表绘制平台。Mermaid 的核心理念是"用代码描述图表"，这一创新理念彻底改变了传统的图表绘制方式。传统工具需要手动拖拽图形、调整布局、设置样式，不仅效率低下，而且难以维护和版本控制。而 Mermaid 通过简单的文本语法，让您像写代码一样定义图表结构，系统会自动完成布局、样式渲染等工作，大大提升了图表绘制的效率和质量。</p>
+
+                <p>本工具支持多达 9 种专业图表类型：流程图（Flowchart）用于展示业务流程和系统逻辑；时序图（Sequence Diagram）用于描述对象之间的交互时序；状态图（State Diagram）用于展示系统状态转换；类图（Class Diagram）用于描述面向对象系统的结构；实体关系图（ER Diagram）用于设计数据库模型；饼图（Pie Chart）用于展示数据比例；甘特图（Gantt Chart）用于项目进度管理；用户旅程图（User Journey）用于可视化用户体验路径。无论是软件开发、项目管理、业务分析还是学术研究，都能找到适合的图表类型。</p>
+
+                <p>与传统工具相比，Mermaid 的优势非常明显：首先，"代码即文档"的特性让图表可以与代码一同存储在版本控制系统中，支持团队协作编辑和历史追溯，再也不用担心图表文件丢失或版本混乱；其次，语法简洁易学，即使没有绘图经验的用户也能快速上手；最后，本工具完全在浏览器端运行，无需安装任何软件，也不需要注册账号，所有数据处理都在本地完成，确保您的图表内容和商业机密得到最大程度的保护。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：选择图表类型</h3>
-                <p>在工具页面顶部，点击您需要的图表类型按钮，如"流程图"、"时序图"、"状态图"等。系统会自动在代码编辑器中填充相应的示例代码，帮助您快速了解语法结构。</p>
+                <p>进入工具页面后，您会看到顶部的图表类型选择区域，包含"流程图"、"时序图"、"状态图"、"类图"、"实体关系图"、"饼图"、"甘特图"、"用户旅程图"等选项。点击任意图表类型按钮，系统会自动在代码编辑器中填充对应的示例代码，帮助您快速了解该类型图表的语法结构和基本用法。如果您已经熟悉 Mermaid 语法，可以选择"自定义"选项，从空白开始编写代码。</p>
 
-                <h3>第二步：编写 Mermaid 语法</h3>
-                <p>在左侧的代码编辑器中，根据您的需求编写或修改 Mermaid 语法代码。您可以参考示例代码的结构，也可以在网上查找 Mermaid 的详细语法文档。</p>
+                <h3>第二步：编写 Mermaid 语法代码</h3>
+                <p>在左侧的代码编辑器中，您可以根据业务需求编写或修改 Mermaid 语法代码。Mermaid 语法非常直观，以流程图为例，使用 `flowchart LR` 定义从左到右的布局方向，使用 `A[开始]` 定义一个矩形节点，使用 `A --> B` 定义节点之间的连接关系，使用 `|条件|` 添加连接线上的标签文字。以下是一个简单的流程图示例：</p>
+                <p style="text-indent: 0; padding-left: 20px; background: var(--bg-tertiary); padding: 10px; border-radius: 5px; font-family: monospace; font-size: 0.9rem;">flowchart LR<br>&nbsp;&nbsp;A[用户登录] --> B{验证成功?}<br>&nbsp;&nbsp;B -->|是| C[进入首页]<br>&nbsp;&nbsp;B -->|否| D[显示错误提示]<br>&nbsp;&nbsp;D --> A</p>
+                <p>在编写过程中，您可以随时参考右侧的实时预览效果，调整代码以达到预期的图表样式。</p>
 
-                <h3>第三步：实时预览效果</h3>
-                <p>右侧的预览区域会实时显示您编写的代码对应的图表效果。当您修改代码时，预览区域会自动更新，让您随时看到最新的图表效果。</p>
+                <h3>第三步：实时预览与调试</h3>
+                <p>右侧的预览区域会实时显示您编写的代码对应的图表效果。当您在代码编辑器中输入或修改代码时，预览区域会自动更新，实现"所见即所得"的编辑体验。如果代码中存在语法错误，系统会在预览区域显示错误提示，帮助您快速定位问题并修正。您可以反复调整代码和查看预览，直到得到满意的图表效果。</p>
 
                 <h3>第四步：切换主题与导出</h3>
-                <p>您可以通过预览区域上方的主题选择器切换不同的配色方案，找到最适合您的图表风格。完成后，点击"下载"按钮即可将图表导出为 PNG 或 SVG 格式。</p>
+                <p>本工具提供了 10 种精心设计的配色主题，包括默认主题、白色主题、灰色主题、蓝色主题、黄色主题、紫色主题、森林主题、火焰主题、深色主题等。您可以通过预览区域上方的主题选择器，点击不同颜色的圆形按钮来切换主题，找到最适合您的图表风格。完成图表设计后，点击"下载"按钮即可将图表导出为 PNG 或 SVG 格式。PNG 格式适合网页展示和日常分享，SVG 格式保留矢量特性，适合印刷和无限放大场景。</p>
+
+                <h3>实战案例：绘制电商订单流程图</h3>
+                <p>假设您需要绘制一个电商系统的订单处理流程图，使用 Mermaid 可以轻松完成：首先选择"流程图"类型，然后编写如下代码：定义订单创建、支付验证、库存检查、发货、收货等节点，用箭头连接各节点并标注条件分支，最后添加订单取消和退款等异常流程。整个过程只需几分钟，生成的图表清晰专业，而且代码可以保存到版本控制系统中，方便后续修改和维护。</p>
             </div>
 
             <div class="info-section">
@@ -296,80 +236,32 @@
                         <li>SVG 格式保留矢量特性，适合印刷和无限放大；PNG 格式适合网页使用</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：Mermaid 语法难不难学？</h3>
+                <p><strong>答：</strong>Mermaid 语法设计得非常直观和简洁，入门门槛很低。对于流程图、时序图等常用图表类型，掌握基本语法只需要几分钟。本工具提供了丰富的示例代码，覆盖各种常见场景，您可以通过修改示例代码快速上手。即使没有编程基础，只要理解了节点定义和连接关系的基本概念，就能轻松绘制出专业的图表。如果遇到复杂场景，可以参考 Mermaid 官方文档或网上的教程。</p>
+
+                <h3>问：图表渲染失败怎么办？</h3>
+                <p><strong>答：</strong>图表渲染失败通常是由于语法错误导致的。常见问题包括：流程图方向声明错误（如写成 `flowchat` 而非 `flowchart`）、节点定义缺少闭合括号、连接箭头语法错误、时序图中参与者名称使用了保留字等。系统会在预览区域显示具体的错误信息和位置，您可以根据提示逐行检查代码。建议先从简单的示例代码开始，确保基础语法正确后再逐步扩展。</p>
+
+                <h3>问：如何自定义图表样式？</h3>
+                <p><strong>答：</strong>Mermaid 提供了丰富的样式自定义选项。您可以通过 `classDef` 定义样式类，然后使用 `class` 关键字将样式应用到指定节点；也可以使用 `style` 关键字直接设置单个节点或连接线的样式。例如，设置节点背景色：`style A fill:#f9f,stroke:#333,stroke-width:2px`；设置连接线样式：`A -->|条件| B:::classname`。此外，本工具提供了 10 种预设主题，可以快速切换图表的整体配色风格。</p>
+
+                <h3>问：生成的图表可以嵌入到文档中吗？</h3>
+                <p><strong>答：</strong>完全可以。导出的 PNG 和 SVG 图片可以直接插入到 Word、PDF、Markdown 文档中。如果您使用支持 Mermaid 的 Markdown 编辑器（如 VS Code + Markdown Preview Mermaid Support 插件、GitHub README、GitLab Wiki 等），可以直接将 Mermaid 代码嵌入到文档中，编辑器会自动渲染为图表。这也是 Mermaid 的一大优势：代码可以与文档无缝集成，方便维护和版本控制。</p>
+
+                <h3>问：图表可以导出为其他格式吗？</h3>
+                <p><strong>答：</strong>本工具支持导出 PNG 和 SVG 两种格式。PNG 是位图格式，适合网页展示和日常分享；SVG 是矢量格式，支持无损放大，适合印刷和高质量输出。如果需要其他格式（如 PDF、JPEG），可以先导出为 SVG，然后使用其他工具（如 Inkscape、Adobe Illustrator）进行格式转换。建议优先使用 SVG 格式，因为它保留了图表的所有细节和可编辑性。</p>
+
+                <h3>问：如何在团队中协作使用？</h3>
+                <p><strong>答：</strong>Mermaid 的"代码即文档"特性非常适合团队协作。您可以将 Mermaid 代码存储在 Git 仓库中，团队成员可以通过代码审查工具（如 GitHub Pull Request）对图表进行协作编辑和讨论。每次修改都有完整的历史记录，可以随时回滚到之前的版本。此外，您还可以使用本工具的示例代码功能，为团队提供统一的图表模板和最佳实践，确保团队成员绘制的图表风格一致。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <h2>工具使用演示</h2>
-            <div class="chart-types">
-                <div class="chart-buttons">
-                    <button class="chart-btn" data-type="custom">自定义</button>
-                    <button class="chart-btn" data-type="flowchart">流程图</button>
-                    <button class="chart-btn" data-type="sequence">时序图</button>
-                    <button class="chart-btn" data-type="state">状态图</button>
-                    <button class="chart-btn" data-type="class">类图</button>
-                    <button class="chart-btn" data-type="er">实体关系图</button>
-                    <button class="chart-btn" data-type="pie">饼图</button>
-                    <button class="chart-btn" data-type="gantt">甘特图</button>
-                    <button class="chart-btn" data-type="journey">用户旅程图</button>
-                </div>
-            </div>
-            <div class="chart-examples">
-                <div class="chart-buttons">
-                    <h3>电商示例图表：</h3>
-                    <button class="chart-btn" data-type="order_flowchart">订单流程图</button>
-                    <button class="chart-btn" data-type="order_sequence">订单时序图</button>
-                    <button class="chart-btn" data-type="api_sequence">请求时序图</button>
-                    <button class="chart-btn" data-type="order_state">订单状态图</button>
-                    <button class="chart-btn" data-type="order_class">订单类图</button>
-                    <button class="chart-btn" data-type="order_er">订单实体关系图</button>
-                    <button class="chart-btn" data-type="order_pie">商品分类饼图</button>
-                    <button class="chart-btn" data-type="order_gantt">订单甘特图</button>
-                    <button class="chart-btn" data-type="order_journey">用户购物旅程图</button>
-                </div>
-            </div>
-            <div class="editor-container">
-                <div class="input-section">
-                    <div class="section-header">
-                        <h2>Mermaid 语法代码</h2>
-                        <button id="copy-btn">复制</button>
-                        <button id="clear-btn">清空</button>
-                    </div>
-                    <textarea id="mermaid-input" placeholder="请输入Mermaid语法代码，例如：
-flowchart LR
-    A[Hard] -->|Text| B(Round)
-    B --> C{Decision}
-    C -->|One| D[Result 1]
-    C -->|Two| E[Result 2]">
-</textarea>
-                </div>
-                <div class="preview-section">
-                    <div class="section-header">
-                        <h2>预览图</h2>
-                        <div class="theme-selector">
-                            <div class="theme-circle" data-theme="default" style="background-color: #F0F0F0;"></div>
-                            <div class="theme-circle" data-theme="white" style="background-color: #fafafaff;"></div>
-                            <div class="theme-circle" data-theme="gray" style="background-color: #e6ededff;"></div>
-                            <div class="theme-circle" data-theme="shallow" style="background-color: #c7eeed;"></div>
-                            <div class="theme-circle" data-theme="blue" style="background-color: #8ba2ebff;"></div>
-                            <div class="theme-circle" data-theme="yellow" style="background-color: #bcb58aff;"></div>
-                            <div class="theme-circle" data-theme="purple" style="background-color: #c1b1e0ff;"></div>
-                            <div class="theme-circle" data-theme="forest" style="background-color: #80c79eff;"></div>
-                            <div class="theme-circle" data-theme="fire" style="background-color: #d9a49fff;"></div>
-                            <div class="theme-circle" data-theme="dark" style="background-color: #2c3e50;"></div>
-                        </div>
-                        <button id="zoom-btn">全屏</button>
-                        <button id="download-btn">下载</button>
-                    </div>
-                    <div id="mermaid-preview"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用Mermaid图表工具"
+             data-tool-url="index.html"
+             data-btn-color="#2563EB"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

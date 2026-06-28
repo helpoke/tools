@@ -233,6 +233,11 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 
 </head>
 
@@ -241,11 +246,9 @@
     <div class="container">
         <header>
             <h1>SVG图片转换类型与清晰度解决方案</h1>
-            <p class="subtitle">解决SVG转换为其他格式后模糊的问题
-                <a href="index.html" target="" class="block text-sm text-primary hover:underline">
-                    <i class="fa fa-info-circle mr-1"></i>返回工具
-                </a>
-            </p>
+            <p class="subtitle">解决SVG转换为其他格式后模糊的问题</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content">
@@ -330,6 +333,28 @@
                     <p style="font-size: 1.05rem;">
                         <strong>转换为PNG/JPEG等位图格式后</strong>，图像被栅格化为固定数量的像素。当放大这些位图时，像素会被拉伸，导致模糊。这是位图格式的固有特性，因为它们基于像素网格而非数学描述。
                     </p>
+
+                    <br>
+                    <h2>常见问题与解答</h2>
+                
+                    <h3>Q1：为什么SVG转换为PNG后会模糊？</h3>
+                    <p>SVG是矢量格式，使用数学公式描述图形，可以无限缩放而不失真。转换为PNG等位图格式后，图像被栅格化为固定数量的像素。当放大这些位图时，像素会被拉伸，导致模糊。这是位图格式的固有特性。解决方案：设置更高的输出分辨率（如2x或3x），或在需要放大的场景中直接使用SVG格式。</p>
+    
+                    <h3>Q2：SVG转换为JPG后透明背景会变成什么颜色？</h3>
+                    <p>JPG格式不支持透明度，转换时透明背景会被填充为白色或黑色（取决于工具设置）。如果需要保留透明背景，应选择PNG格式。建议在转换前确认目标格式是否支持透明度，避免意外的背景色填充。</p>
+    
+                    <h3>Q3：如何选择合适的输出格式？</h3>
+                    <p>选择输出格式时应考虑使用场景：网页使用优先选择SVG或PNG；打印用途选择PDF或高分辨率PNG（300DPI以上）；社交媒体头像选择PNG（支持透明背景）；邮件附件选择JPG（文件体积小）；移动应用提供多种分辨率的PNG。</p>
+    
+                    <h3>Q4：转换后的图片文件太大怎么办？</h3>
+                    <p>可以通过以下方法减小文件大小：1. 选择合适的格式（JPG比PNG小）；2. 降低JPG质量参数（建议80%-90%）；3. 缩小输出尺寸；4. 使用图片压缩工具进行二次压缩。工具本身会进行一定的压缩优化，但根据使用场景调整参数可以进一步减小文件体积。</p>
+    
+                    <h3>Q5：SVG中的文字转换后会变成图片吗？</h3>
+                    <p>是的，转换为位图格式（PNG、JPG）后，SVG中的文字会被栅格化为像素，不再是可编辑的文本。如果需要保留文字的可编辑性，应选择PDF格式或保留原始SVG文件。建议在转换前确认是否需要保留文字的可编辑性。</p>
+    
+                    <h3>Q6：如何确保转换后的图片在不同设备上显示一致？</h3>
+                    <p>可以通过以下方法确保显示一致性：1. 使用标准颜色空间（如sRGB）；2. 避免使用过于特殊的字体，或在SVG中嵌入字体；3. 为不同设备生成不同分辨率的版本；4. 在多种设备上测试转换结果。建议在转换前了解目标设备的显示特性，选择合适的格式和参数。</p>
+                
                 </div>
             </div>
 
@@ -405,21 +430,31 @@
                         <li><strong>照片类图像</strong>：使用JPEG格式，但设置较高的质量参数（80%以上）</li>
                     </ul>
                 </div>
+
+                <h2>实战案例：Logo格式转换与多平台适配</h2>
+                <p>小王是一名UI设计师，为一家科技公司设计了品牌Logo，使用SVG格式保存以确保清晰度。但在实际应用中，他需要将Logo转换为不同格式以适应各种平台需求。</p>
+                <p><strong>转换需求分析：</strong></p>
+                <ol>
+                    <li><strong>网站使用：</strong>直接使用SVG格式，确保在各种屏幕尺寸下都保持清晰，同时减小文件体积。</li>
+                    <li><strong>社交媒体头像：</strong>转换为PNG格式，设置输出尺寸为512x512像素，支持透明背景。</li>
+                    <li><strong>名片打印：</strong>转换为PDF格式，保持矢量特性，确保打印质量。</li>
+                    <li><strong>邮件签名：</strong>转换为JPG格式，设置高质量参数（90%），减小文件体积以便邮件传输。</li>
+                    <li><strong>移动应用：</strong>生成多尺寸PNG（1x、2x、3x），适应不同屏幕密度。</li>
+                </ol>
+                <p><strong>转换步骤：</strong></p>
+                <ol>
+                    <li>小王将SVG Logo上传到图片格式转换工具中。</li>
+                    <li>选择输出格式为PNG，设置尺寸为512x512像素，用于社交媒体头像。</li>
+                    <li>选择输出格式为PDF，用于名片打印，保持矢量特性。</li>
+                    <li>选择输出格式为JPG，设置质量为90%，用于邮件签名。</li>
+                    <li>重复转换步骤，生成不同尺寸的PNG用于移动应用。</li>
+                </ol>
+                <p><strong>效果对比：</strong>使用SVG格式时，Logo在任何尺寸下都保持清晰；转换为PNG后，在目标尺寸下保持清晰，但放大后会模糊；转换为PDF后，保持矢量特性，适合打印；转换为JPG后，文件体积减小约60%，适合网络传输。</p>
+
             </div>
         </div>
 
-        <div class="tool-section" style="background: var(--bg-card); padding: 35px; border-radius: 15px; box-shadow: var(--box-shadow); border: 1px solid var(--border-color); margin-bottom: 30px;">
-            <h2 style="color: #DB2777; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid #DB2777; font-size: 1.5rem;">工具导向</h2>
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #DB2777; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片格式转换工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info" style="background: var(--bg-card); padding: 25px; border-radius: 15px; text-align: center; margin-bottom: 30px; border: 1px solid var(--border-color); color: var(--text-secondary);">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container" data-tool-title="开始使用图片格式转换工具" data-tool-url="index.html" data-btn-color="#DB2777"></div>
 
         <div class="related-tools" style="background: var(--bg-card); padding: 35px; border-radius: 15px; box-shadow: var(--box-shadow); border: 1px solid var(--border-color); margin-bottom: 30px;">
             <h2 style="color: #DB2777; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid #DB2777; font-size: 1.5rem;">相关工具推荐</h2>

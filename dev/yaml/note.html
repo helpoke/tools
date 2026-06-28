@@ -127,64 +127,7 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #84CC16;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #84CC16;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #84CC16 0%, #65A30D 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(132, 204, 22, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(132, 204, 22, 0.6);
-        }
+        
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -220,7 +163,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,8 +174,8 @@
         <header>
             <h1>YAML格式化校验工具 - 免费、安全、快速</h1>
             <p class="subtitle">YAML语法检查，YAML格式化高亮，详细错误行定位，YAML压缩，免费在线YAML工具，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
@@ -290,19 +236,32 @@
                         <li>转Properties功能仅支持简单YAML结构，复杂结构可能转换失败</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：YAML和JSON有什么区别？</h3>
+                <p><strong>答：</strong>YAML和JSON都是数据序列化格式，但特点不同：YAML更注重人类可读性，语法简洁，支持注释、多行字符串、锚点引用等高级特性；JSON更注重机器解析效率，语法严格，不支持注释，结构简单。YAML适合配置文件、CI/CD流程等人工编辑场景；JSON适合API数据传输、程序间通信等自动化场景。本工具可以帮助您在两种格式间转换，适应不同需求。</p>
+
+                <h3>问：为什么YAML对缩进要求如此严格？</h3>
+                <p><strong>答：</strong>YAML通过缩进定义数据层级结构，不使用括号或标签。缩进决定数据项的父子关系，缩进错误会导致解析失败或数据结构错误。例如，缩进少一格可能导致子项被解析为父项的同级元素，缩进多一格可能导致同级项被解析为子项。建议在项目中统一缩进风格（推荐2空格），并使用本工具的格式化和校验功能确保缩进正确。</p>
+
+                <h3>问：YAML支持哪些数据类型？</h3>
+                <p><strong>答：</strong>YAML支持丰富的数据类型：字符串（支持单引号、双引号、无引号三种形式）；数值（整数、浮点数、科学计数法）；布尔值（true/false、yes/no、on/off）；null值（null、~、空）；日期和时间（ISO 8601格式）；列表（使用-前缀）；字典（使用键:值格式）；多行字符串（使用|保留换行或>折叠换行）。本工具的校验功能会检查这些数据类型的语法是否正确。</p>
+
+                <h3>问：YAML转Properties有什么限制？</h3>
+                <p><strong>答：</strong>YAML转Properties功能有以下限制：仅支持扁平化的键值对结构，嵌套的字典和列表无法完美转换；不支持YAML的高级特性（如锚点引用、多行字符串）；不支持复杂的注释保留；某些YAML数据类型（如布尔值、null）转换后可能变为字符串。建议对简单的配置型YAML使用转Properties功能，复杂结构建议直接使用YAML或转换为JSON。</p>
+
+                <h3>问：如何在YAML中编写多行字符串？</h3>
+                <p><strong>答：</strong>YAML提供两种多行字符串语法：使用竖线符号|（Literal Block Scalar），保留所有换行符，字符串中的每行都会原样保留；使用大于符号>（Folded Block Scalar），将换行符替换为空格，整个块折叠为一行。例如，key: |后的多行文本会保留换行，key: >后的多行文本会合并为一行。本工具会正确处理这些多行字符串的格式化和校验。</p>
+
+                <h3>问：YAML注释有什么特点？</h3>
+                <p><strong>答：</strong>YAML注释使用井号#开头，从#到行尾都是注释内容。注释可以出现在行的任何位置，可以在数据项前面、后面或单独一行。但YAML不支持多行注释（类似/* */），每行注释都需要单独的#。本工具的格式化功能会保留注释内容，但可能调整注释的位置和缩进以匹配数据结构。压缩功能会移除所有注释，生成无注释的纯净YAML代码。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #84CC16; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用YAML格式化校验工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        <div id="note-footer-container"
+             data-tool-title="开始使用YAML格式化校验工具"
+             data-tool-url="index.html"
+             data-btn-color="#84CC16">
         </div>
 
         <div class="related-tools">

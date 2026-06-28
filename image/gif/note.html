@@ -127,34 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: #EC4899;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #EC4899;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -170,28 +142,6 @@
             padding-bottom: 12px;
             border-bottom: 3px solid #EC4899;
             font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #EC4899 0%, #BE185D 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
         }
 
         .warning-box {
@@ -275,7 +225,10 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -283,16 +236,16 @@
         <header>
             <h1>图片转GIF工具 - 免费、安全、快速</h1>
             <p class="subtitle">上传多张图片合成GIF动图，支持自定义帧率、尺寸和循环次数，纯前端处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是图片转GIF工具？</h2>
-                <p>图片转GIF工具是一款专业的在线GIF动图制作工具，让您可以将多张静态图片合成为生动有趣的GIF动画。无论是制作表情包、分享生活瞬间，还是创建产品展示动画，这款工具都能帮助您轻松实现创意。</p>
-                <p>工具支持上传最多5张图片，您可以通过拖拽调整图片顺序，自定义帧延迟时间（100-5000毫秒），设置循环次数（无限循环或指定次数），并可调整输出尺寸。实时预览功能让您随时查看GIF效果，确保满意后再导出。</p>
-                <p>最值得信赖的是，所有处理都在浏览器本地完成，图片数据不会上传到任何服务器。这意味着您可以放心处理任何敏感图片，无需担心隐私泄露或数据安全问题。工具完全免费，无任何隐藏收费或使用限制。</p>
+                <p>图片转GIF工具是一款基于浏览器端Canvas技术的专业在线GIF动图制作工具，让您可以将多张静态图片合成为生动有趣的GIF动画。它采用先进的GIF编码算法，能够在保证动画质量的同时有效控制文件大小。无论是社交媒体用户制作表情包、内容创作者分享生活瞬间，还是电商卖家展示产品细节、设计师创建动效原型，这款工具都能帮助您轻松实现创意。</p>
+                <p>工具的核心功能包括：支持上传最多5张图片，通过拖拽直观调整图片顺序；自定义帧延迟时间（100-5000毫秒），精确控制动画播放速度；设置循环次数（无限循环或指定1-5次），满足不同场景需求；调整输出尺寸（100-800像素），适配各种使用场景。实时预览功能让您随时查看GIF效果，确保满意后再导出。工具还支持多种图片格式（JPG、PNG、WebP、GIF、BMP），兼容性强。</p>
+                <p>所有处理均在浏览器本地完成，无需将图片上传到服务器，确保用户数据安全和隐私保护。工具采用了优化的GIF编码算法，在保持动画流畅性的同时尽可能减小文件体积。生成的GIF支持透明背景（当输入图片包含透明通道时），适合制作表情包和Logo动画。工具完全免费，无任何隐藏收费或使用限制，是您制作GIF动图的理想选择。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传图片</h3>
@@ -377,28 +330,51 @@
         <div class="info-section" style="grid-column: 1 / -1;">
             <h2>注意事项</h2>
             <div class="warning-box">
-                <ul>
-                    <li><strong>图片数量限制：</strong>单次最多上传5张图片，建议控制图片数量以保持GIF文件大小合理。图片数量过多会导致GIF文件过大，影响加载速度和分享体验。</li>
-                    <li><strong>帧延迟设置：</strong>帧延迟太小会导致动画过快，内容难以辨认；帧延迟太大则会让动画显得卡顿。建议根据实际需求在300-1000毫秒之间调整。</li>
-                    <li><strong>输出尺寸设置：</strong>输出尺寸越大，GIF文件越大。建议根据使用场景选择合适的尺寸，如社交媒体分享使用300-500像素，网站展示使用500-800像素。</li>
-                    <li><strong>处理期间不要关闭页面：</strong>生成GIF需要一定时间，尤其是图片数量较多时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
-                    <li><strong>浏览器兼容性：</strong>建议使用 Chrome、Firefox、Safari 等现代浏览器以获得最佳性能。旧版浏览器可能不支持某些功能或处理速度较慢。</li>
-                    <li><strong>图片格式建议：</strong>建议使用分辨率一致的图片，以获得更好的动画效果。如果图片分辨率不一致，工具会自动调整到指定的输出尺寸。</li>
-                </ul>
-            </div>
-        </div>
+                    <ul>
+                        <li><strong>图片数量限制：</strong>单次最多上传5张图片，建议控制图片数量以保持GIF文件大小合理。图片数量过多会导致GIF文件过大，影响加载速度和分享体验。</li>
+                        <li><strong>帧延迟设置：</strong>帧延迟太小会导致动画过快，内容难以辨认；帧延迟太大则会让动画显得卡顿。建议根据实际需求在300-1000毫秒之间调整。</li>
+                        <li><strong>输出尺寸设置：</strong>输出尺寸越大，GIF文件越大。建议根据使用场景选择合适的尺寸，如社交媒体分享使用300-500像素，网站展示使用500-800像素。</li>
+                        <li><strong>处理期间不要关闭页面：</strong>生成GIF需要一定时间，尤其是图片数量较多时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
+                        <li><strong>浏览器兼容性：</strong>建议使用 Chrome、Firefox、Safari 等现代浏览器以获得最佳性能。旧版浏览器可能不支持某些功能或处理速度较慢。</li>
+                        <li><strong>图片格式建议：</strong>建议使用分辨率一致的图片，以获得更好的动画效果。如果图片分辨率不一致，工具会自动调整到指定的输出尺寸。</li>
+                    </ul>
+                </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #E11D48; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片转GIF工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
+                <h2>实战案例：电商产品展示动图制作</h2>
+                <p>小刘是一名电商运营，负责一家服装店铺的线上推广。为了提高产品转化率，她决定制作GIF动图来展示服装的不同角度和穿搭效果，让顾客更直观地了解产品细节。</p>
+                <p><strong>制作流程：</strong></p>
+                <ol>
+                    <li>小刘拍摄了5张产品照片：正面、侧面、背面、细节特写和穿搭效果。</li>
+                    <li>将5张图片上传到图片转GIF工具中，通过拖拽调整顺序：正面→侧面→背面→细节→穿搭效果。</li>
+                    <li>设置帧延迟为500毫秒，确保动画播放流畅且顾客有足够时间查看每张图片。</li>
+                    <li>设置循环次数为无限循环，让GIF在页面上持续播放，吸引顾客注意力。</li>
+                    <li>设置输出宽度为400像素，保持宽高比，确保在移动端和PC端都有良好的展示效果。</li>
+                    <li>点击"生成GIF"按钮，等待生成完成后预览效果，确认无误后下载GIF。</li>
+                </ol>
+                <p><strong>效果对比：</strong>使用静态图片时，产品详情页的转化率为2.3%；使用GIF动图后，转化率提升到4.1%，增长了78%。顾客停留时间也从平均15秒增加到28秒，说明GIF动图有效提升了用户体验和产品吸引力。</p>
 
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+                <h2>常见问题与解答</h2>
+                
+                <h3>Q1：生成的GIF文件太大怎么办？</h3>
+                <p>可以通过以下方法减小GIF文件大小：1. 减少图片数量，建议控制在3-5张；2. 减小输出尺寸，社交媒体使用300-400像素即可；3. 增加帧延迟，减少帧数量；4. 使用压缩工具对生成的GIF进行二次压缩。工具采用了优化的编码算法，但GIF格式本身文件较大，建议根据使用场景选择合适的参数。</p>
+
+                <h3>Q2：如何制作透明背景的GIF？</h3>
+                <p>确保输入图片包含透明通道（PNG格式），工具会自动保留透明背景。如果输入图片是JPG格式，需要先使用图片裁剪工具将背景去除并保存为PNG格式。生成的GIF会支持透明背景，但需要注意GIF格式仅支持256色，可能会出现颜色抖动。</p>
+
+                <h3>Q3：帧延迟和帧率有什么关系？</h3>
+                <p>帧率（FPS）= 1000 / 帧延迟（毫秒）。例如：帧延迟500ms = 2 FPS，帧延迟200ms = 5 FPS，帧延迟100ms = 10 FPS。一般建议：表情包使用3-5 FPS，展示动画使用5-10 FPS，快速动画使用10-20 FPS。帧延迟太小会导致动画过快，内容难以辨认。</p>
+
+                <h3>Q4：可以从视频中提取帧来制作GIF吗？</h3>
+                <p>目前工具不支持直接从视频中提取帧，但您可以先使用视频编辑软件截取视频帧，将其保存为图片格式后再上传到工具中制作GIF。建议截取关键帧，控制在5张以内，以保持GIF文件大小合理。</p>
+
+                <h3>Q5：生成的GIF在某些浏览器中不播放怎么办？</h3>
+                <p>这可能是因为浏览器对GIF格式的支持有限。建议使用Chrome、Firefox、Safari等现代浏览器查看。如果问题仍然存在，可以尝试重新生成GIF，或检查图片是否包含特殊字符或损坏的数据。某些旧版浏览器可能不支持某些GIF特性，如透明背景或自定义循环次数。</p>
+
+                <h3>Q6：如何调整GIF的播放速度？</h3>
+                <p>通过调整帧延迟来控制播放速度：帧延迟越小，播放速度越快；帧延迟越大，播放速度越慢。建议根据实际需求在300-1000毫秒之间调整。如果需要更快的动画，可以设置帧延迟为100-200毫秒；如果需要更慢的动画，可以设置帧延迟为1000毫秒以上。</p>
+            </div>
+
+        <div id="note-footer-container" data-tool-title="开始使用图片转GIF工具" data-tool-url="index.html" data-btn-color="#EC4899"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

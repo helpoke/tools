@@ -127,34 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: #8B5CF6;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #8B5CF6;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -170,28 +142,6 @@
             padding-bottom: 12px;
             border-bottom: 3px solid #8B5CF6;
             font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
         }
 
         .warning-box {
@@ -291,7 +241,10 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -299,16 +252,16 @@
         <header>
             <h1>图片水印添加工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持文字水印和图片水印两种模式，可自定义水印位置、大小、透明度等参数，批量处理最多30张图片</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是图片水印添加工具？</h2>
-                <p>图片水印添加工具是一款专业的在线图片水印工具，让您可以为图片添加文字水印或图片水印，保护图片版权和隐私。无论是摄影师保护作品版权、企业添加品牌标识，还是普通用户分享图片时保护隐私，这款工具都能满足您的需求。</p>
-                <p>工具支持两种水印模式：文字水印和图片水印。文字水印适合添加版权信息、日期、姓名等文字内容；图片水印适合添加Logo、印章、二维码等图像标识。您可以自定义水印位置、大小、透明度、颜色等参数，实现个性化水印效果。</p>
-                <p>工具支持批量上传最多30张图片，您可以选择将设置应用到所有图片或仅应用到当前选中的图片。水印位置支持左上角、右上角、左下角、右下角、居中、平铺和手动定位七种方式，让您灵活控制水印位置。所有处理均在浏览器本地完成，保护您的隐私安全。</p>
+                <p>图片水印添加工具是一款基于浏览器端Canvas技术的专业在线图片水印工具，让您可以为图片添加文字水印或图片水印，有效保护图片版权和隐私。它采用先进的图像合成算法，能够在保持图片质量的同时实现精确的水印叠加效果。无论是摄影师保护作品版权、设计师展示设计成果、企业添加品牌标识，还是普通用户分享图片时保护隐私，这款工具都能提供高效、可靠的水印解决方案。</p>
+                <p>工具支持两种水印模式：文字水印和图片水印。文字水印适合添加版权信息、日期时间、姓名签名、公司名称等文字内容，支持自定义文字颜色；图片水印适合添加品牌Logo、公司印章、二维码、图标标识等图像，支持上传自定义水印图片。用户可以自定义水印位置（7种预设位置+手动定位）、大小（10-100像素）、透明度（10%-100%）等参数，实现个性化水印效果。平铺模式可以让水印重复铺满整个图片，提供全面的版权保护。</p>
+                <p>工具支持批量上传最多30张图片，用户可以选择将设置应用到所有图片或仅应用到当前选中的图片。手动定位功能允许用户直接拖动水印到任意位置，实现精确控制。所有处理均在浏览器本地完成，无需上传图片，保护用户隐私和数据安全。工具完全免费，无任何隐藏收费或使用限制，是您添加图片水印的理想选择。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传图片</h3>
@@ -416,29 +369,59 @@
         <div class="info-section" style="grid-column: 1 / -1;">
             <h2>注意事项</h2>
             <div class="warning-box">
-                <ul>
-                    <li><strong>水印文字限制：</strong>文字水印最多支持30个字符，建议简洁明了地表达版权信息或其他内容。过长的文字会影响水印效果和图片美观。</li>
-                    <li><strong>水印图片格式：</strong>图片水印支持 JPG、PNG、WebP、GIF、BMP 等格式。建议使用透明背景的 PNG 图片作为水印，以获得更好的效果。</li>
-                    <li><strong>水印位置选择：</strong>选择水印位置时，建议避免遮挡图片主体内容。平铺模式适合需要全面保护的场景，单点位置适合需要突出版权信息的场景。</li>
-                    <li><strong>透明度设置：</strong>透明度设置建议在20%-40%之间，既能起到保护作用，又不会过于影响图片的视觉效果。透明度太低水印不明显，太高则会影响图片内容。</li>
-                    <li><strong>大小设置：</strong>水印大小建议根据图片尺寸和内容进行调整，确保水印清晰可见但不喧宾夺主。</li>
-                    <li><strong>应用到所有图片：</strong>勾选"应用到所有图片"后，对水印类型、位置、颜色、大小、透明度等的设置会应用到所有已上传图片中，所有图片保持样式一致。取消勾选则仅对当前选中图片生效。</li>
-                    <li><strong>处理期间不要关闭页面：</strong>添加水印需要一定时间，尤其是批量处理时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
-                </ul>
-            </div>
-        </div>
+                    <ul>
+                        <li><strong>水印文字限制：</strong>文字水印最多支持30个字符，建议简洁明了地表达版权信息或其他内容。过长的文字会影响水印效果和图片美观。</li>
+                        <li><strong>水印图片格式：</strong>图片水印支持 JPG、PNG、WebP、GIF、BMP 等格式。建议使用透明背景的 PNG 图片作为水印，以获得更好的效果。</li>
+                        <li><strong>水印位置选择：</strong>选择水印位置时，建议避免遮挡图片主体内容。平铺模式适合需要全面保护的场景，单点位置适合需要突出版权信息的场景。</li>
+                        <li><strong>透明度设置：</strong>透明度设置建议在20%-40%之间，既能起到保护作用，又不会过于影响图片的视觉效果。透明度太低水印不明显，太高则会影响图片内容。</li>
+                        <li><strong>大小设置：</strong>水印大小建议根据图片尺寸和内容进行调整，确保水印清晰可见但不喧宾夺主。</li>
+                        <li><strong>应用到所有图片：</strong>勾选"应用到所有图片"后，对水印类型、位置、颜色、大小、透明度等的设置会应用到所有已上传图片中，所有图片保持样式一致。取消勾选则仅对当前选中图片生效。</li>
+                        <li><strong>处理期间不要关闭页面：</strong>添加水印需要一定时间，尤其是批量处理时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
+                    </ul>
+                </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #6D28D9; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片水印添加工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
+                <h2>实战案例：摄影师作品版权保护</h2>
+                <p>小李是一名自由摄影师，经常在社交媒体上分享自己的摄影作品。但他发现自己的作品经常被他人未经授权使用，甚至被用于商业用途。为了保护作品版权，他决定为所有作品添加水印。</p>
+                <p><strong>水印策略：</strong></p>
+                <ol>
+                    <li><strong>文字水印：</strong>在图片右下角添加"© 小李摄影"文字水印，设置透明度为30%，字体颜色为白色。</li>
+                    <li><strong>图片水印：</strong>在图片左下角添加个人Logo水印，使用透明背景的PNG图片，设置透明度为40%。</li>
+                    <li><strong>平铺水印：</strong>对于特别重要的作品，使用平铺模式添加半透明的版权文字，防止图片被裁剪后去除水印。</li>
+                </ol>
+                <p><strong>批量处理流程：</strong></p>
+                <ol>
+                    <li>小李将25张摄影作品上传到图片水印添加工具中。</li>
+                    <li>选择文字水印模式，输入"© 小李摄影"，设置颜色为白色。</li>
+                    <li>设置水印位置为右下角，透明度为30%，大小为30像素。</li>
+                    <li>勾选"应用到所有图片"选项，将相同设置应用到所有图片。</li>
+                    <li>对于部分重要作品，切换到图片水印模式，上传个人Logo图片。</li>
+                    <li>设置水印位置为左下角，透明度为40%，大小为40像素。</li>
+                    <li>点击"打包下载所有"按钮，一次性下载所有添加水印的图片。</li>
+                </ol>
+                <p><strong>效果对比：</strong>添加水印前，作品经常被无授权使用；添加水印后，侵权行为明显减少，同时也提升了个人品牌的曝光度。其他摄影师看到小李的水印效果后，也开始使用水印工具保护自己的作品。</p>
 
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+                <h2>常见问题与解答</h2>
+                
+                <h3>Q1：添加水印后图片质量会下降吗？</h3>
+                <p>水印添加本身不会降低图片质量，因为它只是在图片上叠加一层半透明的内容。但如果原始图片已经经过多次压缩，再次保存可能会导致轻微的质量损失。建议在添加水印前使用高质量的原始图片，并选择合适的输出格式（如PNG或高质量JPG）。</p>
+
+                <h3>Q2：如何选择合适的水印透明度？</h3>
+                <p>透明度设置应根据图片内容和使用场景来决定：1. 日常分享使用20%-30%，既能起到保护作用又不影响观看；2. 重要作品使用30%-40%，更加明显地声明版权；3. 平铺水印使用15%-25%，避免过于密集影响视觉效果。建议根据实际效果调整透明度。</p>
+
+                <h3>Q3：水印可以被去除吗？</h3>
+                <p>理论上，任何水印都可以通过图像编辑软件去除，但这需要一定的技术能力和时间成本。添加水印的目的是增加侵权难度，声明版权归属，而不是完全阻止侵权。平铺水印和多处水印可以有效增加去除难度，是更好的版权保护策略。</p>
+
+                <h3>Q4：图片水印为什么会有白色背景？</h3>
+                <p>这通常是因为水印图片本身包含白色背景。建议使用透明背景的PNG图片作为水印，这样叠加到目标图片上时不会显示额外的背景色。如果水印图片有背景色，可以先使用图片背景色切换工具去除背景，或使用图片裁剪工具提取水印部分。</p>
+
+                <h3>Q5：如何为不同图片添加不同的水印？</h3>
+                <p>取消勾选"应用到所有图片"选项，然后依次选择每张图片并设置不同的水印参数。这样可以为不同图片添加个性化的水印效果。建议在批量处理前规划好每张图片的水印策略，提高处理效率。</p>
+
+                <h3>Q6：水印大小如何设置最合适？</h3>
+                <p>水印大小应根据图片尺寸和内容来决定：1. 小尺寸图片（500px以下）使用10-20像素；2. 中等尺寸图片（500-1000px）使用20-40像素；3. 大尺寸图片（1000px以上）使用30-60像素。建议确保水印清晰可见但不喧宾夺主，不遮挡图片主体内容。</p>
+            </div>
+
+        <div id="note-footer-container" data-tool-title="开始使用图片水印添加工具" data-tool-url="index.html" data-btn-color="#8B5CF6"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

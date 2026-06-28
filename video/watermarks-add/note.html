@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #6D28D9;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #6D28D9;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -259,7 +228,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -267,18 +239,21 @@
         <header>
             <h1>视频添加水印工具</h1>
             <p class="subtitle">免费、安全、多种水印类型可选</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频添加水印工具是一款功能全面的在线视频水印处理工具，支持添加文字水印、图片水印、马赛克遮挡和模糊处理四种方式。在视频创作和分享过程中，我们经常需要对视频添加保护性标记或遮盖敏感内容，这些需求都可以通过本工具轻松实现。
+                    视频添加水印工具是一款基于浏览器端 FFmpeg 多媒体处理技术的专业在线视频水印处理工具，支持添加文字水印、图片水印、马赛克遮挡和模糊处理四种方式。它采用先进的视频解码和编码算法，配合图像处理滤镜技术，能够高效完成视频水印添加和内容遮盖处理。在视频创作和分享过程中，我们经常需要对视频添加保护性标记或遮盖敏感内容，如为自己的视频作品添加版权标识、为隐私保护添加马赛克、制作带有LOGO的宣传视频，这些需求都可以通过本工具轻松实现。
                 </p>
                 <p>
-                    无论是为自己的视频作品添加版权标识、为隐私保护添加马赛克、还是制作带有LOGO的宣传视频，本工具都能提供完善的解决方案。所有处理都在浏览器本地完成，视频不会上传到任何服务器，确保你的内容安全。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架开发，这是业界公认最强大的开源音视频处理框架。工具提供了四种水印类型：文字水印支持输入文字内容，可设置字体、大小、颜色和透明度，支持固定位置和水平滚动效果；图片水印支持上传PNG或JPG图片作为水印，可调整大小、位置和透明度，适合添加LOGO；马赛克遮挡可以对指定区域添加马赛克效果，遮盖车牌、人脸、敏感信息等；模糊处理可以对指定区域进行模糊处理，柔和遮盖的同时保留一定画面信息。用户可以灵活组合这些水印类型，实现复杂的保护需求。
+                </p>
+                <p>
+                    与传统的桌面视频编辑软件不同，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有视频处理都在用户的本地设备上完成，视频文件不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。工具支持灵活的位置控制（预设位置和自定义拖拽定位）、透明度可调（从完全透明到完全不透明）、时间范围控制（可以设置水印出现和消失的时间）、批量添加（支持同时添加多个水印，最多可添加5个不同类型的水印），满足各种复杂的视频保护需求。
                 </p>
 
                 <h3>支持的四种水印类型</h3>
@@ -377,19 +352,54 @@
             <p>
                 <strong>处理时间说明：</strong> 水印处理需要逐帧渲染，处理时间取决于视频长度和水印数量，请耐心等待。
             </p>
+
+            <h2>实战案例：原创视频版权保护</h2>
+            <p>小王是一名独立视频创作者，专注于拍摄旅游和美食短视频。最近他发现自己的原创视频被他人盗用并发布到其他平台，没有任何版权标识，很难证明视频的原创归属。因此，他决定为后续发布的所有视频添加版权水印。</p>
+            <p><strong>水印策略分析：</strong></p>
+            <ol>
+                <li><strong>版权标识：</strong> 添加个人品牌LOGO，证明视频原创归属。</li>
+                <li><strong>动态水印：</strong> 添加滚动文字水印，防止水印被裁剪去除。</li>
+                <li><strong>水印位置：</strong> LOGO放置在右下角，滚动文字在画面下方，不影响主要内容观看。</li>
+                <li><strong>水印透明度：</strong> 设置为50%，既能清晰展示又不影响观看体验。</li>
+            </ol>
+            <p><strong>添加流程：</strong></p>
+            <ol>
+                <li>小王将新拍摄的美食视频上传到视频添加水印工具中。</li>
+                <li>选择图片水印类型，上传个人品牌LOGO图片（PNG格式，透明背景）。</li>
+                <li>设置图片水印位置为右下角，大小为视频宽度的15%，透明度为50%。</li>
+                <li>选择文字水印类型，输入"©2026 小王美食旅行"，设置字体为白色，大小为18像素。</li>
+                <li>启用文字滚动效果，设置滚动速度为中等，透明度为50%。</li>
+                <li>设置两种水印都从视频开始到结束全程显示。</li>
+                <li>点击"确认添加水印"将两个水印添加到处理队列，然后点击"开始处理"。</li>
+                <li>处理完成后预览效果，确认水印位置和透明度合适后下载保存。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 添加水印前，视频容易被盗用且难以证明原创归属；添加水印后，每个视频都带有清晰的品牌标识和版权声明，既保护了原创权益，又不影响观看体验。后续发现盗用时，可以通过水印快速证明视频归属，维权更有底气。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：水印会影响视频画质吗？</h3>
+            <p>不会。水印是叠加在视频画面上的额外元素，不会改变视频本身的画质。添加水印后，视频的主体画质保持不变，只是在水印覆盖的区域会有水印图案或处理效果。建议将水印放置在视频边缘位置，避免遮挡主要内容。</p>
+
+            <h3>Q2：文字水印最多可以输入多少字符？</h3>
+            <p>文字水印最多支持50个字符。建议使用简短的版权信息或品牌标识，如"©2026 YourName"或"YourBrand出品"。过长的文字水印会影响观看体验，且滚动效果可能导致文字难以阅读。如需添加更多信息，可以分批添加多个文字水印。</p>
+
+            <h3>Q3：图片水印可以使用什么格式？</h3>
+            <p>图片水印支持PNG和JPG两种格式。建议使用PNG格式，因为它支持透明背景，可以更好地融入视频画面。JPG格式的图片会带有白色背景，可能遮挡视频画面。图片水印大小建议控制在视频宽度的10%-20%，过大会影响观看体验。</p>
+
+            <h3>Q4：可以只在水印在特定时间段显示吗？</h3>
+            <p>是的。工具支持设置水印的显示时间范围。在添加水印时，可以设置起始时间和结束时间，让水印只在需要的时段出现。这对于需要遮挡特定时间段敏感内容的场景非常有用，如只在出现车牌的几秒钟内添加马赛克。</p>
+
+            <h3>Q5：添加多个水印会增加多少处理时间？</h3>
+            <p>水印数量对处理时间有一定影响。每个水印都需要逐帧渲染叠加，水印越多处理时间越长。建议：1. 控制水印数量不超过3个；2. 使用固定位置的水印代替滚动水印（滚动水印处理时间更长）；3. 耐心等待处理完成。如果需要添加大量水印，可以分批处理。</p>
+
+            <h3>Q6：添加的水印可以被去除吗？</h3>
+            <p>取决于水印类型和设置。文字水印和图片水印如果是叠加在画面上的，理论上可以通过视频编辑软件去除，但难度较大；马赛克和模糊处理是破坏性遮盖，基本无法恢复原始内容。建议使用组合水印策略：固定位置水印+滚动水印，增加去除难度，更好地保护原创内容。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #6D28D9; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频添加水印工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用视频添加水印工具"
+             data-tool-url="index.html"
+             data-btn-color="#6D28D9"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

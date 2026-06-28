@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #DB2777;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #DB2777;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -247,7 +216,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -255,18 +227,21 @@
         <header>
             <h1>视频格式转换工具</h1>
             <p class="subtitle">免费、安全、多种格式任意转换</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频格式转换工具是一款功能全面的在线视频格式转换器，可以将各种视频格式相互转换。在实际生活和工作中，我们经常会遇到视频格式不兼容的问题：下载的电影是 MKV 格式但播放器不支持、手机拍摄的 MOV 视频无法上传到某些网站、为了兼容性需要将视频转换为 MP4 格式等等。
+                    视频格式转换工具是一款基于浏览器端 FFmpeg 多媒体处理技术的专业在线视频格式转换器，可以将各种视频格式高效、高质量地相互转换。它采用先进的视频编码和解码算法，支持业界主流的视频编码格式（H.264、H.265/HEVC、VP8、VP9 等），能够在转换过程中保持视频质量，同时提供灵活的参数设置选项。在实际生活和工作中，我们经常会遇到视频格式不兼容的问题：下载的电影是 MKV 格式但播放器不支持、手机拍摄的 MOV 视频无法上传到某些网站、为了兼容性需要将视频转换为 MP4 格式，这些场景中，视频格式转换工具都能提供有效的解决方案。
                 </p>
                 <p>
-                    本工具基于业界领先的 FFmpeg 多媒体处理框架开发，支持几乎所有主流视频格式的转换。无论你需要将 WebM 转换为 MP4 以获得更好的兼容性，还是将 AVI 转换为更现代的格式，都能轻松完成。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架开发，这是业界公认最强大的开源音视频处理框架，支持几乎所有主流视频格式的相互转换。工具提供了丰富的参数设置选项：用户可以根据需求选择不同的视频质量（高、中、低三档预设，或自定义码率精确控制）；调整输出分辨率（支持按比例缩放或自定义分辨率）；设置帧率（降低帧率可进一步减小文件体积）；选择是否保留音轨。这种灵活的参数设置让用户可以根据不同场景需求定制转换效果。
+                </p>
+                <p>
+                    与传统的桌面视频转换软件不同，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有视频转换都在用户的本地设备上完成，不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。工具支持 MP4、WebM、AVI、MOV、MKV、WMV、FLV、3GP 等多种输入格式，输出格式包括 MP4 (H.264)、WebM (VP8/VP9)、TS (MPEG-TS)、WMV、MOV、AVI、MKV 等，满足各种使用场景的需求。
                 </p>
 
                 <h3>支持的输入格式</h3>
@@ -362,19 +337,53 @@
             <p>
                 <strong>保持浏览器运行：</strong> 转换过程中请勿关闭浏览器或刷新页面，否则会导致处理中断。
             </p>
+
+            <h2>实战案例：多平台视频格式统一转换</h2>
+            <p>小王是一名自媒体运营者，负责管理多个社交媒体平台的视频发布。他拍摄了一批宣传视频（共5个MOV格式文件），但不同平台对视频格式有不同的要求，需要进行格式转换才能顺利发布。</p>
+            <p><strong>转换需求分析：</strong></p>
+            <ol>
+                <li><strong>抖音平台：</strong> 要求 MP4 格式，分辨率不超过1080p，建议使用 H.264 编码。</li>
+                <li><strong>B站平台：</strong> 支持 MP4 和 WebM 格式，建议使用 MP4 格式获得更好的兼容性。</li>
+                <li><strong>微信公众号：</strong> 仅支持 MP4 格式，文件大小限制在20MB以内。</li>
+                <li><strong>微博平台：</strong> 支持 MP4 格式，建议使用中等质量平衡画质和体积。</li>
+            </ol>
+            <p><strong>转换流程：</strong></p>
+            <ol>
+                <li>小王将5个MOV视频上传到视频格式转换工具中。</li>
+                <li>选择 MP4 (H.264) 作为输出格式，这是最通用的格式，兼容所有平台。</li>
+                <li>设置视频质量为中等，在保持画质的同时减小文件体积。</li>
+                <li>设置分辨率为75%缩放，确保在各个平台都能流畅播放。</li>
+                <li>保留音频，确保视频有完整的观看体验。</li>
+                <li>点击"开始转换"按钮，等待处理完成后下载转换后的视频。</li>
+                <li>对于微信公众号，额外使用视频压缩工具将文件大小压缩到20MB以内。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 转换前，MOV 格式视频在部分平台无法上传或播放；转换后，所有视频都可以顺利发布到各个平台，播放流畅，画质清晰。转换效率提升，统一了视频格式，便于后续管理和发布。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：转换后视频画质会下降吗？</h3>
+            <p>会有一定程度的画质变化。格式转换本质上是对视频进行重新编码，过程中会损失部分数据。但如果选择高质量设置，画质下降不明显，大多数场景下观看差异不大。建议：1. 选择高质量或自定义高码率设置；2. 避免降低分辨率和帧率；3. 保留原始文件作为备份。</p>
+
+            <h3>Q2：不同格式有什么区别？应该如何选择？</h3>
+            <p>主流格式各有特点：MP4 (H.264) 兼容性最好，几乎所有设备和平台都支持，是通用首选；WebM (VP9) 文件体积更小，适合网络传输，但部分老设备不支持；MOV 是苹果设备首选格式；MKV 支持多音轨和字幕，适合收藏电影。建议大多数用户选择 MP4 格式，确保最大兼容性。</p>
+
+            <h3>Q3：为什么转换后的文件大小变化很大？</h3>
+            <p>文件大小变化取决于多个因素：1. 编码格式不同——H.264 比 VP9 文件通常更大；2. 码率设置——高质量设置码率高，文件更大；3. 分辨率和帧率——降低这两项可以显著减小文件大小。建议根据实际需求选择合适的参数组合，平衡画质和体积。</p>
+
+            <h3>Q4：转换时间很长怎么办？</h3>
+            <p>视频格式转换需要重新编码，处理时间取决于视频时长、原始格式、输出格式和电脑性能。建议：1. 选择中等质量，减少编码时间；2. 先使用裁剪工具截取需要的部分；3. 分批处理，每次不超过3个文件。如果视频很长或参数设置较高，耐心等待即可。</p>
+
+            <h3>Q5：可以批量转换多个视频吗？</h3>
+            <p>当前工具支持单次转换一个视频文件。如果需要批量转换，建议：1. 依次上传并转换每个视频；2. 使用相同的转换参数，保持格式一致；3. 整理转换后的视频到同一文件夹中。批量转换功能正在开发中，敬请期待。</p>
+
+            <h3>Q6：转换后的视频在某个设备上无法播放怎么办？</h3>
+            <p>可能是编码格式不兼容。部分老设备只支持 H.264 编码，如果转换为 VP9 编码的 WebM 格式，可能无法播放。建议：1. 使用 MP4 (H.264) 格式，兼容性最强；2. 检查设备支持的格式列表；3. 尝试降低分辨率，确保设备能够解码播放。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #DB2777; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频格式转换工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用视频格式转换工具"
+             data-tool-url="index.html"
+             data-btn-color="#DB2777"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>
