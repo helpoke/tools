@@ -91,12 +91,13 @@
         .form-group textarea {
             width: 100%;
             padding: 14px 16px;
+            background-color: var(--input-bg);
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             font-size: 14px;
             font-family: 'Courier New', Consolas, monospace;
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
             transition: border-color 0.2s;
             line-height: 1.6;
         }
@@ -857,7 +858,9 @@
         <div id="footer-container"></div>
     </main>
 
-    <script src="../common/js/utils.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
     <script>
         // ===== Tab switching =====
         document.querySelectorAll('.tab-btn').forEach(function (btn) {
@@ -988,12 +991,12 @@
                     verifyEl.innerHTML = 'HMAC 签名验证通过（算法：' + headerObj.alg + '）';
                 } else {
                     verifyEl.className = 'verify-result fail';
-                    verifyEl.innerHTML = '❌ 签名不匹配 — 密钥不正确或算法不同';
+                    verifyEl.innerHTML = '签名不匹配 — 密钥不正确或算法不同';
                 }
             } else {
                 verifyEl.style.display = 'flex';
                 verifyEl.className = 'verify-result pass';
-                verifyEl.innerHTML = 'ℹ️ 未提供密钥，跳过签名验证。已验证 Header 和 Payload 解析成功。';
+                verifyEl.innerHTML = '未提供密钥，跳过签名验证。已验证 Header 和 Payload 解析成功。';
             }
         }
 
@@ -1196,9 +1199,7 @@
             return div.innerHTML;
         }
     </script>
-    <script src="../../common/js/theme.js"></script>
-    <script src="../../common/js/nav.js"></script>
-    <script src="../../common/js/utils.js"></script>
+
 </body>
 
 </html>

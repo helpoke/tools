@@ -127,65 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #7C3AED;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #7C3AED;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #7C3AED 0%, #5B21B6 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
-        }
-
         .warning-box {
             background: var(--bg-tertiary);
             border-left: 4px solid var(--warning-color);
@@ -212,7 +153,6 @@
             }
 
             .info-section,
-            .tool-section,
             .related-tools {
                 padding: 20px;
             }
@@ -220,7 +160,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,31 +171,34 @@
         <header>
             <h1>文档页面筛选工具 - 免费、安全、快速</h1>
             <p class="subtitle">筛选保留需要的PDF页面，剔除不需要的页面，支持内容搜索快速定位目标页面，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是文档页面筛选工具？</h2>
-                <p>文档页面筛选工具是一款实用的在线PDF文档处理工具，专为需要从大型PDF文档中提取特定页面的用户设计。在日常工作中，我们经常遇到包含大量页面的PDF文档，但实际需要的可能只是其中的一部分。这款工具可以帮助您快速筛选和提取所需页面，提高工作效率。</p>
-                <p>工具支持两种筛选模式：保留模式和剔除模式。保留模式允许您选择需要保留的页面，剔除模式则允许您选择需要删除的页面。同时，工具还提供内容搜索功能，可以根据关键词快速定位包含特定内容的页面，极大提高筛选效率。所有处理均在浏览器本地完成，保护您的隐私安全。</p>
+                <p>文档页面筛选工具是一款实用的在线PDF文档处理工具，专为需要从大型PDF文档中提取特定页面的用户设计。在日常工作中，我们经常遇到包含大量页面的PDF文档，但实际需要的可能只是其中的一部分。例如，从100页的合同文档中提取关键条款，从500页的学术论文集中提取几篇相关论文，从扫描的资料中提取有用的页面等。这款工具可以帮助您快速筛选和提取所需页面，提高工作效率。</p>
+                <p>工具支持两种筛选模式：保留模式和剔除模式。保留模式允许您选择需要保留的页面，剔除模式则允许您选择需要删除的页面。同时，工具还提供内容搜索功能，可以根据关键词快速定位包含特定内容的页面，极大提高筛选效率。所有处理均在浏览器本地完成，保护您的隐私安全。与传统的PDF编辑软件相比，本工具无需安装，操作简单，适合临时处理文档的场景。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传PDF文档</h3>
-                <p>点击上传按钮或拖拽PDF文件到指定区域。工具支持最大100MB的PDF文档，能够处理各种大小的文档。上传后，工具会自动解析文档并显示所有页面的缩略图。</p>
+                <p>点击上传按钮或拖拽PDF文件到指定区域。工具支持最大100MB的PDF文档，能够处理各种大小的文档。上传后，工具会自动解析文档并显示所有页面的缩略图，方便您快速浏览文档内容。</p>
 
                 <h3>第二步：选择筛选模式</h3>
-                <p>在设置面板中选择筛选模式：保留模式或剔除模式。保留模式会保留您选中的页面，剔除模式会删除您选中的页面。您可以根据实际需求灵活选择。</p>
+                <p>在设置面板中选择筛选模式：保留模式或剔除模式。保留模式会保留您选中的页面，删除未选中的页面；剔除模式会删除您选中的页面，保留未选中的页面。您可以根据实际需求灵活选择。例如，如果需要的页面较少，建议使用保留模式；如果需要删除的页面较少，建议使用剔除模式。</p>
 
                 <h3>第三步：选择页面</h3>
-                <p>在页面列表中点击选择需要处理的页面。您可以点击单个页面，也可以使用全选功能选择所有页面。页面缩略图会帮助您快速识别页面内容。</p>
+                <p>在页面列表中点击选择需要处理的页面。您可以点击单个页面，也可以使用全选功能选择所有页面。页面缩略图会帮助您快速识别页面内容。点击页面缩略图即可选中或取消选中，操作直观便捷。</p>
 
                 <h3>第四步：内容搜索（可选）</h3>
-                <p>如果文档页数较多，可以使用搜索功能快速定位目标页面。在搜索框中输入关键词，工具会自动高亮显示包含该关键词的页面。</p>
+                <p>如果文档页数较多，可以使用搜索功能快速定位目标页面。在搜索框中输入关键词，工具会自动高亮显示包含该关键词的页面。这对于在大型文档中查找特定内容非常实用，可以大大节省手动翻页查找的时间。</p>
 
                 <h3>第五步：开始筛选并下载</h3>
-                <p>点击"开始筛选"按钮，工具会根据您的选择处理文档。处理完成后，点击"下载"按钮即可保存筛选后的PDF文档。</p>
+                <p>点击"开始筛选"按钮，工具会根据您的选择处理文档。处理完成后，点击"下载"按钮即可保存筛选后的PDF文档。筛选后的文档保持原始格式和质量，仅包含您选择保留的页面。</p>
+
+                <h3>实战案例：从合同文档中提取关键条款</h3>
+                <p>假设您收到一份120页的合同文档，需要提取其中的保密条款、违约责任条款和争议解决条款。使用本工具的操作步骤如下：首先上传合同PDF文件；然后选择"保留模式"；接着使用搜索功能分别搜索"保密"、"违约"、"争议"等关键词，定位到包含这些条款的页面并勾选；点击"开始筛选"按钮进行处理；最后下载只包含关键条款的文档。这样您就得到了一份精简的合同摘要，方便阅读和归档。</p>
             </div>
 
             <div class="info-section">
@@ -287,20 +233,32 @@
                         <li>内容搜索仅支持文本型PDF，扫描件PDF无法搜索</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：如何选择保留模式和剔除模式？</h3>
+                <p><strong>答：</strong>选择哪种模式取决于您的需求：如果需要保留的页面较少，使用保留模式更高效，只需勾选需要的页面即可；如果需要删除的页面较少，使用剔除模式更高效，只需勾选不需要的页面。例如，从100页文档中提取5页关键内容，使用保留模式只需勾选5页；如果需要删除5页不需要的内容，使用剔除模式只需勾选5页。</p>
+
+                <h3>问：内容搜索功能支持哪些搜索方式？</h3>
+                <p><strong>答：</strong>内容搜索功能支持基本的关键词搜索，不区分大小写。您可以输入单个关键词，也可以输入多个关键词（用空格分隔）。搜索结果会高亮显示包含任意关键词的页面。需要注意的是，搜索功能仅支持文本型PDF，扫描件PDF（图像型）无法进行内容搜索。如果您的文档是扫描件，可以先使用OCR工具转换为文本型PDF。</p>
+
+                <h3>问：筛选后的文档会改变文件大小吗？</h3>
+                <p><strong>答：</strong>会。筛选后的文档只包含您选择保留的页面，因此文件大小通常会显著减小。文件大小的减小幅度取决于您保留的页面数量和这些页面的内容复杂度。例如，从100页文档中提取10页，文件大小通常会减小90%左右。同时，筛选操作不会对保留页面的内容进行压缩或质量损失处理。</p>
+
+                <h3>问：工具支持按页码范围选择页面吗？</h3>
+                <p><strong>答：</strong>目前工具支持通过点击页面缩略图进行单个或多个页面的选择，暂不支持直接输入页码范围（如"1-10, 15, 20-25"）。如果需要选择连续的页码范围，可以先点击第一个页面，然后按住Shift键点击最后一个页面，即可选中整个范围的页面。对于非连续的页面选择，需要逐个点击。</p>
+
+                <h3>问：筛选后的文档页码会重新编号吗？</h3>
+                <p><strong>答：</strong>不会。筛选后的文档保留原始页码，不会重新编号。例如，如果您从一份100页的文档中提取第10-20页，筛选后的文档仍然显示页码10-20，而不是重新编号为1-11。这是为了保持文档的原始引用关系，方便您在原始文档中查找对应内容。如果需要重新编号，可以使用专业的PDF编辑软件。</p>
+
+                <h3>问：工具支持处理加密的PDF文档吗？</h3>
+                <p><strong>答：</strong>不支持。工具无法处理加密或受密码保护的PDF文档。如果您的文档已加密，需要先使用PDF解密工具移除密码保护，然后再使用本工具进行页面筛选。建议在处理前确认文档未加密，以免上传后无法正常处理。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #7C3AED; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用文档页面筛选工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用文档页面筛选工具"
+             data-tool-url="index.html"
+             data-btn-color="#7C3AED"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

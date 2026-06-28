@@ -127,65 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #A855F7;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #A855F7;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #A855F7 0%, #9333EA 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
-        }
-
         .warning-box {
             background: var(--bg-tertiary);
             border-left: 4px solid var(--warning-color);
@@ -211,16 +152,17 @@
                 font-size: 1.8rem;
             }
 
-            .info-section,
-            .tool-section,
-            .related-tools {
+            .info-section {
                 padding: 20px;
             }
         }
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,8 +170,8 @@
         <header>
             <h1>Pug格式化校验工具 - 免费、安全、快速</h1>
             <p class="subtitle">Pug语法校验，Pug代码美化，Pug压缩，Jade格式化，免费在线Pug工具，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
@@ -284,24 +226,37 @@
                         <li>Pug语法对缩进要求严格，请确保缩进一致</li>
                         <li>格式化后会统一缩进风格，可能改变原有格式</li>
                         <li>压缩功能会移除所有多余空格，请确认是否需要</li>
-                        <li>校验功能基于Pug编译器，错误信息可能包含编译细节</li>
+                        <li>校验功能基于Pug编译器，错误信息包含编译细节</li>
                         <li>建议在校验前先进行格式化，提高校验准确性</li>
                         <li>Jade语法与Pug兼容，可直接使用Jade代码</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：Pug和Jade有什么关系？</h3>
+                <p><strong>答：</strong>Pug原名Jade，是一个高效的HTML模板引擎。由于商标问题，项目在2016年更名为Pug。两者语法完全相同，只是名称不同。本工具同时支持Pug和Jade代码，您可以直接使用任何一种名称的代码。现有项目中的Jade代码无需修改，可以直接在本工具中处理。</p>
+
+                <h3>问：Pug的缩进错误为什么会导致编译失败？</h3>
+                <p><strong>答：</strong>Pug通过缩进来定义HTML标签的嵌套层级，类似Python的代码块定义。如果缩进不一致（如有的地方用空格，有的地方用制表符），或缩进层级错误，编译器无法正确解析标签关系，导致编译失败。建议在项目中统一缩进风格（推荐2空格或4空格），并使用本工具的格式化功能定期整理代码，避免缩进错误。</p>
+
+                <h3>问：如何在Pug中嵌入JavaScript代码？</h3>
+                <p><strong>答：</strong>Pug支持多种方式嵌入JavaScript：使用 script: 标签后跟JavaScript代码块；使用 script. 标签后跟纯文本JavaScript（适合较长代码）；使用 #{expression} 插入表达式结果；使用 !{expression} 插入未转义的表达式。本工具的校验功能会检查这些语法是否正确，帮助您避免常见的嵌入错误。</p>
+
+                <h3>问：Pug与HTML相比有什么优势？</h3>
+                <p><strong>答：</strong>Pug相比HTML有明显优势：代码量减少30%-50%，无需闭合标签，语法更简洁；通过缩进定义层级，结构更清晰；支持变量、循环、条件判断等编程特性，动态生成HTML更方便；支持模板继承和包含，便于组件化开发；编译后生成标准HTML，兼容所有浏览器。特别适合Express框架和Node.js项目的开发。</p>
+
+                <h3>问：格式化后的Pug代码缩进风格是什么？</h3>
+                <p><strong>答：</strong>本工具默认使用2空格缩进风格格式化Pug代码，这是Pug项目的推荐风格。如果您的团队使用4空格或制表符缩进，可以在项目中配置编辑器的格式化规则。建议整个团队统一使用相同的缩进风格，避免因风格不一致导致的解析错误。</p>
+
+                <h3>问：压缩后的Pug代码还能使用吗？</h3>
+                <p><strong>答：</strong>压缩后的Pug代码仍然有效，只是移除了多余空格和缩进，代码更紧凑。压缩后的代码需要在使用前进行编译，编译器会根据紧凑的格式解析标签关系。建议在开发环境使用格式化代码便于编辑，在生产环境部署前使用压缩代码减小体积。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #A855F7; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用Pug格式化校验工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
+        <div id="note-footer-container"
+             data-tool-title="开始使用Pug格式化校验工具"
+             data-tool-url="index.html"
+             data-btn-color="#A855F7">
         </div>
 
         <div class="related-tools">

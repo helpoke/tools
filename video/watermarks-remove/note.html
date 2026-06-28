@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #DC2626;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #DC2626;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -272,7 +241,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -280,18 +252,21 @@
         <header>
             <h1>视频去除水印工具</h1>
             <p class="subtitle">免费、安全、多种方式清除水印</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频去除水印工具是一款专门用于处理视频中不需要的水印、马赛克或其他遮挡物的在线工具。在视频编辑过程中，有时我们需要去除视频中已有的水印（比如下载的视频带有平台水印）或对之前添加的马赛克进行重新处理。
+                    视频去除水印工具是一款基于浏览器端 FFmpeg 多媒体处理技术的专业在线视频水印处理工具，专门用于处理视频中不需要的水印、马赛克或其他遮挡物。它采用先进的视频解码和编码算法，配合图像处理滤镜技术，能够高效完成视频水印的覆盖和遮盖处理。在视频编辑过程中，有时我们需要去除视频中已有的水印（比如下载的视频带有平台水印）或对之前添加的马赛克进行重新处理，这些场景中，视频去除水印工具都能提供有效的解决方案。
                 </p>
                 <p>
-                    本工具提供四种不同的去水印方式，可以根据水印类型和位置选择最合适的方法。所有处理都在浏览器本地完成，视频不会上传到任何服务器，确保你的编辑工作安全私密。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架开发，这是业界公认最强大的开源音视频处理框架。工具提供了四种去水印方式：模糊处理对水印区域进行模糊处理，使水印变得模糊不可辨认，效果柔和自然；马赛克覆盖使用传统马赛克效果覆盖水印区域，完全遮盖原始内容；裁剪去除裁掉包含水印的画面区域，适用于水印在边缘的情况；纯色覆盖使用纯色块覆盖水印，可以选择与画面协调的颜色。用户可以根据水印类型、位置和需求选择最合适的处理方式。
+                </p>
+                <p>
+                    与传统的桌面视频编辑软件不同，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有视频处理都在用户的本地设备上完成，视频文件不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。工具支持预设位置快捷选择（左上、右上、左下、右下、上下居中等）、自定义区域位置和大小、参数可调（模糊强度、马赛克大小、覆盖颜色等），提供实时预览功能，让用户在处理前就能看到去水印区域的预览效果。
                 </p>
 
                 <h3>支持的四种去水印方式</h3>
@@ -387,19 +362,54 @@
             <p>
                 <strong>方式选择建议：</strong> 模糊处理效果最自然，适合人脸等需要保留轮廓的场景；马赛克覆盖最强，适合需要完全遮盖的场景。
             </p>
+
+            <h2>实战案例：产品展示视频水印优化处理</h2>
+            <p>小李是一名电商运营，负责为公司产品拍摄展示视频。在初期测试阶段，他在视频右下角添加了"测试"字样的临时水印用于内部审核。现在视频审核通过，需要发布到官网和电商平台，需要将这个临时水印替换为正式的LOGO水印。</p>
+            <p><strong>处理需求分析：</strong></p>
+            <ol>
+                <li><strong>水印位置：</strong> 临时"测试"水印位于视频右下角，大小约为视频宽度的15%。</li>
+                <li><strong>水印类型：</strong> 半透明白色文字水印，内容为"测试"。</li>
+                <li><strong>处理策略：</strong> 使用模糊处理覆盖临时水印区域，为后续添加正式LOGO做准备。</li>
+                <li><strong>处理要求：</strong> 覆盖效果要自然，不能影响视频整体观看体验。</li>
+            </ol>
+            <p><strong>处理流程：</strong></p>
+            <ol>
+                <li>小李将产品展示视频上传到视频去除水印工具中。</li>
+                <li>选择"模糊处理"方式，效果自然，不会明显影响观看体验。</li>
+                <li>选择区域位置为"右下角"，与临时水印位置一致。</li>
+                <li>调整区域大小滑块，从12%开始逐步增加到15%，观察预览效果确保完全覆盖临时水印。</li>
+                <li>设置模糊强度为"轻度"，既能模糊水印又保持画面相对清晰。</li>
+                <li>点击"开始去水印处理"按钮，等待处理完成后预览效果。</li>
+                <li>确认临时水印已被模糊覆盖，画面整体协调后下载处理后的视频。</li>
+                <li>使用视频添加水印工具，在同样位置添加正式的公司LOGO水印。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 处理前，视频右下角有明显的"测试"临时水印，不适合对外发布；处理后，临时水印被自然模糊覆盖，视频画面干净整洁。后续添加正式LOGO后，视频可以顺利发布到官网和电商平台，提升了公司形象。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：去水印能真正"消除"水印吗？</h3>
+            <p>不能。本工具的去水印是在原水印位置添加覆盖效果（模糊、马赛克、纯色等），无法真正"消除"水印恢复原始画面。水印是叠加在视频画面上的图像，一旦添加就永久融合在画面中，无法分离去除。如果需要真正去除水印，需要使用AI修复技术，但效果不稳定且可能破坏画面内容。</p>
+
+            <h3>Q2：哪种去水印方式效果最好？</h3>
+            <p>取决于水印类型和需求：模糊处理效果最自然，适合半透明水印或需要保留画面轮廓的场景；马赛克覆盖最彻底，适合需要完全遮盖水印的场景；裁剪去除效果最干净，适合水印在边缘且不影响主要内容的情况；纯色覆盖适合背景单一的视频，可以选择与背景相近的颜色覆盖。建议根据实际情况选择合适的方式。</p>
+
+            <h3>Q3：去水印后画质会下降吗？</h3>
+            <p>水印区域的画质会有一定下降。模糊处理会使水印区域画面变模糊；马赛克覆盖会使水印区域变成马赛克图案；裁剪去除会裁掉部分画面；纯色覆盖会用水印区域变成纯色。但其他未处理区域画质保持不变。建议选择合适的区域大小，避免覆盖过多正常画面。</p>
+
+            <h3>Q4：水印位置不在预设位置怎么办？</h3>
+            <p>工具提供了预设位置（四个角落和上下居中），但如果水印位置不在这些预设位置，可以：1. 选择"自定义位置"选项，手动设置区域坐标；2. 如果水印位置不规则，可以使用多次处理，每次处理不同位置的水印；3. 如果水印分布在整个画面，建议使用裁剪去除方式裁掉大部分画面。</p>
+
+            <h3>Q5：处理时间很长怎么办？</h3>
+            <p>去水印处理需要逐帧处理视频画面，处理时间取决于视频长度、区域大小和电脑性能。建议：1. 选择较小的区域大小，减少需要处理的画面面积；2. 使用模糊处理代替马赛克处理（模糊处理相对更快）；3. 使用现代浏览器和高配置电脑；4. 如果视频很长，可以先裁剪需要的部分再处理。</p>
+
+            <h3>Q6：去水印是否侵犯版权？</h3>
+            <p>取决于视频的版权归属和使用目的。如果去除水印用于未经授权的盗用或侵权行为，则侵犯版权。本工具仅供技术学习和合法用途，请遵守版权规定。建议：1. 仅处理自己拥有版权的视频；2. 处理已获得授权的视频素材；3. 处理用于个人学习和研究目的的视频。请尊重原创作者的版权，避免侵权风险。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #DC2626; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频去除水印工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用视频去除水印工具"
+             data-tool-url="index.html"
+             data-btn-color="#DC2626"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

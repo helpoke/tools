@@ -127,34 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: #8B5CF6;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #8B5CF6;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -170,28 +142,6 @@
             padding-bottom: 12px;
             border-bottom: 3px solid #8B5CF6;
             font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #8B5CF6 0%, #6D28D9 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
         }
 
         .warning-box {
@@ -269,7 +219,10 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -277,16 +230,16 @@
         <header>
             <h1>图像批量压缩工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持多种压缩算法，批量处理最多40张图片，智能平衡质量与体积，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是图像批量压缩工具？</h2>
-                <p>图像批量压缩工具是一款功能强大的在线图片压缩工具，专为需要处理大量图片的用户设计。无论是电商卖家需要优化商品图片、设计师需要压缩素材文件，还是普通用户需要减小图片体积以便分享和存储，这款工具都能满足您的需求。</p>
-                <p>工具提供四种压缩算法供您选择：默认压缩、无损压缩、强力压缩和 WebP 格式转换。每种算法都有其适用场景，您可以根据图片类型和压缩需求灵活选择。同时，工具支持批量上传最多40张图片，一次性完成压缩处理，大大提高工作效率。</p>
-                <p>最值得信赖的是，所有压缩处理都在浏览器本地完成，图片数据不会上传到任何服务器。这意味着您可以放心处理任何敏感图片，无需担心隐私泄露或数据安全问题。工具完全免费，无任何隐藏收费或使用限制。</p>
+                <p>图像批量压缩工具是一款基于浏览器端图像处理技术的专业在线图片压缩工具，专为需要高效处理大量图片的用户设计。它集成了多种先进的图像压缩算法，能够在保持良好视觉质量的前提下，显著减小图片文件体积。无论是电商卖家优化商品图片、网页设计师压缩网站资源，还是普通用户分享图片、备份存储，这款工具都能提供高效、可靠的压缩解决方案。</p>
+                <p>工具的核心技术优势在于支持四种不同的压缩策略：默认压缩采用智能平衡算法，在质量和体积之间取得最佳平衡；无损压缩利用先进的无损压缩技术，在不损失任何像素信息的前提下减小文件体积；强力压缩采用激进的压缩策略，优先减小文件大小；WebP格式转换则将图片转换为现代高效的WebP格式，相比传统JPG格式可减小约25-35%的体积。这种多样化的选择让用户可以根据不同场景灵活选择最合适的压缩方案。</p>
+                <p>批量处理功能是工具的一大亮点，支持单次上传最多40张图片，一次性完成压缩处理，大大提高工作效率。所有处理均在浏览器本地完成，无需将图片上传到服务器，确保用户数据安全和隐私保护。工具支持 JPG、PNG、WebP、GIF、BMP 等多种图片格式，兼容性强，使用便捷。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传图片</h3>
@@ -374,19 +327,41 @@
                     <li><strong>图片大小限制：</strong>虽然工具支持上传较大的图片，但过大的图片可能会导致浏览器内存不足。建议单张图片不超过10MB，批量处理时注意控制总大小。</li>
                 </ul>
             </div>
+
+            <h2>实战案例：网站图片资源优化</h2>
+            <p>小李是一名前端开发工程师，负责维护公司官网。网站上线一段时间后，用户反馈页面加载速度较慢。经过分析，发现页面中的图片资源是主要瓶颈——首页有25张图片，总大小超过3MB，导致首屏加载时间超过5秒。</p>
+            <p><strong>优化方案：</strong></p>
+            <ol>
+                <li>小李使用图像批量压缩工具，将首页的25张图片全部上传，设置压缩质量为80。</li>
+                <li>对于Logo和图标等PNG透明图片，选择无损压缩算法，确保透明通道和细节不受损失。</li>
+                <li>对于产品展示图片，选择默认压缩算法，平衡质量和体积。</li>
+                <li>对于背景装饰图片，选择WebP格式转换，充分利用现代浏览器的性能优势。</li>
+                <li>设置最大宽度为1200像素，确保在桌面端和移动端都有良好的显示效果。</li>
+            </ol>
+            <p><strong>优化效果：</strong>压缩后图片总大小从3.2MB减小到980KB，压缩率达到69%。首屏加载时间从5.2秒优化到2.1秒，页面性能评分从68分提升到92分，用户体验显著改善。</p>
+
+            <h2>常见问题与解答</h2>
+            
+            <h3>Q1：压缩后的图片质量会明显下降吗？</h3>
+            <p>这取决于您选择的压缩算法和质量设置。默认压缩和无损压缩在大多数情况下不会产生明显的质量下降；强力压缩可能会导致轻微的质量损失，但在可接受范围内；WebP格式转换在相同质量下比JPG更小。建议在压缩前预览效果，根据实际需求调整参数。</p>
+
+            <h3>Q2：无损压缩真的不会损失任何质量吗？</h3>
+            <p>是的，无损压缩通过优化图片数据的存储方式来减小文件体积，不会改变任何像素的颜色值。但需要注意的是，无损压缩的压缩率相对较低，通常在10-30%之间，适合对质量要求极高的场景。</p>
+
+            <h3>Q3：WebP格式兼容所有浏览器吗？</h3>
+            <p>WebP格式已经被绝大多数现代浏览器支持，包括Chrome、Firefox、Edge和Safari 14+。但对于一些老旧浏览器（如IE），可能需要提供JPG/PNG作为降级方案。建议在网页中使用 &lt;picture&gt; 标签同时提供WebP和JPG版本。</p>
+
+            <h3>Q4：为什么压缩后的图片反而变大了？</h3>
+            <p>这种情况通常发生在图片已经经过高度压缩的情况下。如果原始图片的压缩率已经很高，再次压缩可能无法进一步减小体积，甚至可能因为重新编码而略有增大。建议对原始图片进行压缩，避免重复压缩。</p>
+
+            <h3>Q5：批量压缩会导致浏览器卡顿吗？</h3>
+            <p>批量压缩大量图片时，浏览器需要处理大量数据，可能会导致短暂的卡顿。建议每次压缩不超过40张图片，并在压缩期间避免进行其他操作。如果遇到严重卡顿，可以分批处理或关闭其他占用资源的标签页。</p>
+
+            <h3>Q6：压缩后的图片可以恢复到原始质量吗？</h3>
+            <p>对于有损压缩（默认压缩、强力压缩、WebP转换），压缩过程中会丢弃部分图像信息，这些信息无法恢复。对于无损压缩，虽然文件大小减小，但图像质量保持不变，可以视为"恢复"到原始质量。建议在压缩前备份原始图片。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #D97706; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图像批量压缩工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container" data-tool-title="开始使用图像批量压缩工具" data-tool-url="index.html" data-btn-color="#8B5CF6"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

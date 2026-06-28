@@ -90,12 +90,13 @@
         .form-group textarea {
             width: 100%;
             padding: 14px 16px;
+            background-color: var(--input-bg);
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             font-size: 14px;
             font-family: 'Courier New', Consolas, monospace;
             resize: vertical;
-            min-height: 120px;
+            min-height: 180px;
             transition: border-color 0.2s;
             line-height: 1.6;
         }
@@ -564,7 +565,7 @@
                 <div class="tab-pane" id="tab-verify">
                     <div class="form-group">
                         <label for="verify-input">输入原始文本</label>
-                        <textarea id="verify-input" placeholder="输入要校验的原始文本..." style="min-height:80px;"></textarea>
+                        <textarea id="verify-input" placeholder="输入要校验的原始文本..." style="min-height:160px;"></textarea>
                     </div>
 
                     <div class="compare-section">
@@ -601,7 +602,9 @@
         <div id="footer-container"></div>
     </main>
 
-    <script src="../common/js/utils.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
     <script>
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
@@ -756,9 +759,7 @@
             this._timer = setTimeout(doVerify, 300);
         });
     </script>
-    <script src="../../common/js/theme.js"></script>
-    <script src="../../common/js/nav.js"></script>
-    <script src="../../common/js/utils.js"></script>
+    
 </body>
 
 </html>

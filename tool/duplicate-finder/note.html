@@ -127,26 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -212,7 +192,6 @@
             }
 
             .info-section,
-            .tool-section,
             .related-tools {
                 padding: 20px;
             }
@@ -220,7 +199,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,15 +210,16 @@
         <header>
             <h1>重复内容查找工具 - 免费、安全、快速</h1>
             <p class="subtitle">检测文本中重复出现的字符、数字、单词等内容，支持多种分隔符，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是重复内容查找工具？</h2>
-                <p>重复内容查找工具是一款专业的在线重复检测工具，专为需要查找文本中重复内容的用户设计。在日常工作和学习中，我们经常需要处理包含重复数据的文本，例如重复的编号、重复的单词、重复的电话号码等。手动查找这些重复内容不仅效率低下，还容易遗漏。这款工具可以帮助您快速、准确地找出所有重复内容。</p>
-                <p>工具支持多种重复检测模式，包括字符重复、单词重复、数字重复等。您可以自定义分隔符，以不同的方式分割文本进行检测。检测结果会显示重复内容及其出现次数，方便您进行分析和处理。所有检测均在浏览器本地完成，您的文本内容不会上传到任何服务器。</p>
+                <p>重复内容查找工具是一款基于浏览器端 JavaScript 技术的专业在线重复检测工具，专为需要查找文本中重复内容的用户设计。在日常工作和学习中，我们经常需要处理包含重复数据的文本，例如重复的编号、重复的单词、重复的电话号码、重复的订单号等。手动查找这些重复内容不仅效率低下，还容易遗漏。这款工具可以帮助您快速、准确地找出所有重复内容。</p>
+                <p>工具基于哈希表（Hash Table）数据结构实现高效的重复检测，时间复杂度为 O(n)，可以在短时间内处理大量文本数据。哈希表通过将每个元素映射到一个唯一的哈希值来快速判断元素是否重复，这种方法比传统的双重循环比对效率高得多。工具支持多种重复检测模式，包括字符重复、单词重复、数字重复、行重复等，您可以根据实际需求选择合适的检测模式。</p>
+                <p>工具提供自定义分隔符功能，支持逗号、空格、换行符、分号等多种分隔符，也可以自定义分隔符。检测结果会显示重复内容、出现次数和位置信息，方便您进行分析和处理。工具还提供一键去重功能，可以自动移除重复内容，保留唯一值。所有检测和处理均在浏览器本地完成，您的文本内容不会上传到任何服务器，确保数据安全和隐私保护。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：输入待检测文本</h3>
@@ -284,20 +267,54 @@
                         <li>检测结果仅用于参考，最终处理请人工确认</li>
                     </ul>
                 </div>
+
+                <h2>实战案例：客户名单重复数据清理</h2>
+                <p>小王是一名销售经理，手上有一份包含5000个客户电话号码的名单，需要清理其中的重复号码。使用重复内容查找工具，他高效完成了数据清理工作。</p>
+                <p><strong>清理需求分析：</strong></p>
+                <ol>
+                    <li><strong>数据规模：</strong> 5000个客户电话号码，以换行符分隔。</li>
+                    <li><strong>重复类型：</strong> 完全相同的电话号码重复。</li>
+                    <li><strong>处理要求：</strong> 移除重复号码，保留唯一值，保持原有顺序。</li>
+                    <li><strong>时间限制：</strong> 需要在10分钟内完成清理。</li>
+                </ol>
+                <p><strong>检测流程：</strong></p>
+                <ol>
+                    <li>小王打开重复内容查找工具，将电话号码名单粘贴到输入框中。</li>
+                    <li>选择检测模式为"按行检测"，分隔符使用默认的换行符。</li>
+                    <li>点击"开始检测"按钮，工具快速分析并找出所有重复号码。</li>
+                    <li>检测结果显示共有125个重复号码，出现次数从2次到5次不等。</li>
+                    <li>点击"一键去重"按钮，工具自动移除重复号码，保留唯一值。</li>
+                    <li>复制去重后的名单，保存到新文件中。</li>
+                    <li>检查去重结果，确认没有遗漏重要数据。</li>
+                </ol>
+                <p><strong>效果对比：</strong> 使用工具前，小王需要手动逐个比对电话号码，预计需要2小时以上；使用工具后，整个清理过程仅用了3分钟，检测出125个重复号码，确保了客户名单的准确性和完整性。</p>
+
+                <h2>常见问题与解答</h2>
+
+                <h3>Q1：检测大文本时卡顿怎么办？</h3>
+                <p>大文本检测会消耗较多内存。建议：1. 将大文本分割成多个小文件分别检测；2. 使用"按行检测"模式（比按字符检测更高效）；3. 关闭其他占用资源的浏览器标签页；4. 如果文本超过10万行，建议分批处理；5. 使用现代浏览器进行检测。</p>
+
+                <h3>Q2：为什么有些重复内容没有被检测出来？</h3>
+                <p>可能是以下原因：1. 分隔符设置不正确，导致文本分割方式不符合预期；2. 存在不可见字符差异（如全角空格和半角空格）；3. 大小写差异，工具默认区分大小写；4. 文本编码不一致；5. 建议在检测前清理文本格式，统一编码和分隔符。</p>
+
+                <h3>Q3：去重后的数据顺序会改变吗？</h3>
+                <p>不会。工具的去重功能会保留第一次出现的内容，移除后续重复项，保持原有顺序不变。例如，文本"apple, banana, apple, orange"去重后为"apple, banana, orange"，顺序与第一次出现的顺序一致。</p>
+
+                <h3>Q4：可以检测中英文混合的文本吗？</h3>
+                <p>可以。工具完全支持中英文混合文本的检测。在"按单词检测"模式下，中文会按字符分割，英文会按空格分割。建议根据实际情况选择合适的检测模式：中文文本适合"按字符检测"或"按行检测"，英文文本适合"按单词检测"。</p>
+
+                <h3>Q5：检测结果可以导出吗？</h3>
+                <p>可以。您可以：1. 复制检测结果到其他文档；2. 复制去重后的文本到新文件；3. 截图保存检测报告。工具的检测结果以列表形式显示，包含重复内容、出现次数和位置信息，方便您进行分析和记录。</p>
+
+                <h3>Q6：如何处理带格式的文本？</h3>
+                <p>建议在检测前清理文本格式。方法：1. 将带格式的文本复制到纯文本编辑器中（如Notepad），去除格式后再粘贴到工具中；2. 使用"按行检测"模式，每行作为一个检测单位；3. 如果文本包含特殊字符，建议先进行字符替换。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #EC4899; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用重复内容查找工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用重复内容查找工具"
+             data-tool-url="index.html"
+             data-btn-color="#DB2777"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

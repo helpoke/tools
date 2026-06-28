@@ -92,7 +92,7 @@
         }
 
         .info-section h3 {
-            color: var(--primary-color);
+            color: #7C3AED;
             margin: 25px 0 15px;
             font-size: 1.2rem;
         }
@@ -127,64 +127,7 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
 
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #7C3AED;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #7C3AED;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #7C3AED 0%, #6D28D9 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
-        }
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -220,7 +163,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,37 +174,39 @@
         <header>
             <h1>随机密码生成工具 - 免费、安全、快速</h1>
             <p class="subtitle">高强度密码生成器，支持自定义长度大小写数字特殊字符组合，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是随机密码生成工具？</h2>
-                <p>随机密码生成工具是一款专业的在线密码生成器，专为需要创建高强度安全密码的用户设计。在网络安全日益重要的今天，使用弱密码或重复使用同一密码会大大增加账户被盗的风险。这款工具可以帮助您快速生成复杂、安全的随机密码，保护您的账户安全。</p>
-                <p>工具支持多种密码配置选项，包括密码长度、是否包含大小写字母、是否包含数字、是否包含特殊字符等。您可以根据不同账户的安全需求，自定义生成符合要求的密码。生成的密码完全随机，不依赖任何预定义模式，难以被猜测或破解。所有生成过程均在浏览器本地完成，密码不会上传到任何服务器。</p>
+                <p>随机密码生成工具是一款专业的在线密码生成器，专为需要创建高强度安全密码的用户设计。在网络安全日益重要的今天，使用弱密码或重复使用同一密码会大大增加账户被盗的风险。据统计，约80%的黑客入侵事件与弱密码有关，攻击者常用字典攻击、暴力破解等手段尝试常见密码组合。这款工具可以帮助您快速生成复杂、安全的随机密码，有效保护您的账户安全。</p>
+                <p>工具支持多种密码配置选项，包括密码长度（4-128位可选）、是否包含大写字母（A-Z）、是否包含小写字母（a-z）、是否包含数字（0-9）、是否包含特殊字符（!@#$%^&amp;*等）。密码生成采用密码学安全的随机数生成器（Cryptographically Secure Random Number Generator），确保每个生成的密码都具有真正的随机性。生成的密码完全随机，不依赖任何预定义模式或词典，难以被猜测或破解。</p>
+                <p>所有密码生成过程均在浏览器本地完成，密码不会上传到任何服务器。这意味着您的密码始终处于您的完全控制之下，不会经过任何第三方服务器，有效防止密码在传输过程中被截获的风险。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：配置密码规则</h3>
-                <p>设置密码长度，推荐使用12位以上的密码。选择是否包含大写字母、小写字母、数字和特殊字符。对于高安全性账户，建议启用所有字符类型；对于需要便于记忆的场景，可以选择性启用部分字符类型。</p>
+                <p>设置密码长度是第一步中的关键决策。密码长度的选择直接影响密码强度：每增加一位字符，暴力破解的难度就呈指数级增长。安全专家建议：普通账户使用12位以上密码，重要账户（如银行邮箱）使用16位以上密码，敏感系统使用20位以上密码。工具提供4到128位的长度选择，您可以根据账户重要性灵活设置。</p>
+                <p>接下来选择字符类型组合。工具提供四种字符类型：大写字母（A-Z）、小写字母（a-z）、数字（0-9）、特殊字符（!@#$%^&amp;*()_+-=[]{}|;:,.<>?）。对于高安全性场景，建议启用所有字符类型，最大化密码空间；对于需要便于记忆的场景，可以选择性启用部分字符类型。需要注意的是，启用的字符类型越少，密码强度越低。</p>
 
                 <h3>第二步：生成密码</h3>
-                <p>点击"生成密码"按钮，工具会根据您设置的规则生成随机密码。您可以多次点击生成，直到获得满意的密码。工具会显示生成的密码强度评级，帮助您判断密码安全性。</p>
+                <p>配置完成后，点击"生成密码"按钮，工具会基于加密安全的随机数生成器（CSPRNG）生成一个完全随机的密码。生成的密码会立即显示在输出区域，同时工具会根据密码长度和字符类型组合自动评估密码强度等级（弱/中等/强/极强）。您可以多次点击生成按钮，直到获得满意的密码。</p>
 
-                <h3>第三步：复制或批量生成</h3>
-                <p>满意后，点击"复制"按钮将密码复制到剪贴板，然后粘贴到目标位置。如果需要生成多个密码，可以使用批量生成功能，一次性生成多个随机密码，方便管理多个账户。</p>
+                <h3>第三步：复制与批量生成</h3>
+                <p>满意后，点击密码旁边的"复制"按钮将密码复制到系统剪贴板，然后安全地粘贴到目标位置。如果需要管理多个账户的密码，可以使用批量生成功能，一次性生成多个随机密码，以列表形式展示，方便查看和复制。建议为每个账户使用不同的密码，避免一处泄露影响所有账户安全。</p>
 
-                <h3>密码保存建议</h3>
-                <p>生成的密码建议使用密码管理器保存，如浏览器自带的密码管理、专业的密码管理软件等。不建议将密码保存在文档或笔记中，以免泄露风险。</p>
+                <h3>实战案例：企业级密码管理策略</h3>
+                <p>某互联网公司的IT部门需要为新员工批量创建账户密码，并制定密码管理策略。使用本工具的操作步骤如下：首先为每个部门设置不同的密码策略：技术部需要16位、包含所有字符类型；市场部使用12位、包含大小写字母和数字；行政部门使用10位、包含基本字符类型。然后使用批量生成功能，一次性生成全量密码。最后将生成的密码导出为加密的密码表，通过安全渠道分发给每位员工。员工收到密码后，IT部门引导员工使用密码管理器保存密码，并定期更换。这种方案既保证了密码的高强度，又便于IT部门统一管理。</p>
             </div>
 
             <div class="info-section">
                 <h2>适用场景与人群</h2>
-                <p><strong>个人用户：</strong>为各类网站账户、应用账户生成安全密码，避免使用弱密码或重复密码。</p>
-                <p><strong>企业用户：</strong>为员工账户、系统账户生成符合安全策略的密码，提升企业安全防护。</p>
-                <p><strong>开发运维：</strong>为数据库、服务器、API密钥等生成高强度随机密钥，保护系统安全。</p>
-                <p><strong>安全工程师：</strong>为测试环境、安全评估场景生成临时密码，进行安全测试。</p>
-                <p><strong>IT管理员：</strong>批量生成账户密码，统一管理多个用户账户。</p>
+                <p><strong>个人用户：</strong>为各类网站账户、应用账户生成安全密码，避免使用弱密码或重复密码，保护个人账号安全。</p>
+                <p><strong>企业用户：</strong>为员工账户、系统账户生成符合企业安全策略的密码，统一管理密码生命周期，提升企业整体安全防护水平。</p>
+                <p><strong>开发运维人员：</strong>为数据库、服务器、API密钥、SSH密钥等生成高强度随机密码和密钥，保护系统和服务安全。</p>
+                <p><strong>安全工程师：</strong>为渗透测试、安全评估场景生成符合测试要求的临时密码，进行安全漏洞评估和密码强度测试。</p>
+                <p><strong>IT管理员：</strong>批量生成员工入职账户密码，统一管理多个用户账户的初始化密码和定期更新密码。</p>
 
                 <h2>特点与优势</h2>
                 <div class="feature-list">
@@ -269,35 +217,48 @@
                     <span class="feature-tag">特殊字符支持</span>
                     <span class="feature-tag">批量生成密码</span>
                     <span class="feature-tag">密码强度评估</span>
+                    <span class="feature-tag">CSPRNG随机数</span>
                     <span class="feature-tag">完全免费</span>
                 </div>
-                <p>工具采用纯前端技术实现，所有密码生成都在您的浏览器中完成，密码不会上传到任何服务器。这意味着您的密码始终处于您的控制之下，不会泄露给任何第三方。同时，工具支持高度自定义，您可以根据不同账户的安全需求，生成符合特定规则的密码。</p>
+                <p>工具采用纯前端技术实现，所有密码生成都基于Web Crypto API的密码学安全随机数生成器，数据不会上传到任何服务器。这意味着您的密码始终处于您的完全控制之下。同时，工具支持4到128位的密码长度自由设置，您可以根据不同账户的安全需求灵活配置密码规则，满足从普通网站到金融系统的各类安全要求。</p>
 
                 <div class="warning-box">
                     <p><strong>注意事项：</strong></p>
                     <ul>
-                        <li>生成的密码请务必妥善保存，遗忘后无法找回</li>
-                        <li>建议使用密码管理器保存密码，避免遗忘或泄露</li>
-                        <li>不同账户请使用不同密码，避免一处泄露影响所有账户</li>
-                        <li>密码长度建议12位以上，确保足够安全</li>
-                        <li>重要账户建议启用所有字符类型，提高密码复杂度</li>
-                        <li>请勿在公共场所使用密码生成工具，避免被他人看到</li>
+                        <li>生成的密码请务必妥善保存，遗忘后无法从工具恢复，密码不会存储在任何服务器</li>
+                        <li>建议使用专业的密码管理器（如1Password、Bitwarden等）保存密码，避免遗忘或泄露</li>
+                        <li>不同账户务必使用不同密码，避免一处泄露导致所有账户被入侵</li>
+                        <li>密码长度建议12位以上，重要账户建议16位以上，确保足够抵御暴力破解</li>
+                        <li>高安全场景请启用所有字符类型，最大化密码空间，增加破解难度</li>
+                        <li>请勿在公共场所使用密码生成工具或查看生成的密码，防止被他人窥视</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：什么样的密码算是强密码？</h3>
+                <p><strong>答：</strong>强密码的核心特征是：长度足够长（建议12位以上）、包含多种字符类型（大写、小写、数字、特殊字符）、没有明显的规律或模式、不是常见词汇或组合。强密码之所以难以破解，是因为密码空间巨大。以12位密码为例，如果使用所有字符类型，密码空间约为(26+26+10+32)^12 ≈ 10^23种组合，即使使用超级计算机也需要数百万年才能穷举。因此，长度是密码安全最重要的因素，比字符类型的多样性更为关键。</p>
+
+                <h3>问：为什么不能使用简单密码？</h3>
+                <p><strong>答：</strong>简单密码容易受到多种攻击：1) 暴力破解：攻击者尝试所有可能的字符组合，短密码很快被穷举；2) 字典攻击：攻击者使用常见密码词典（如123456、password、admin等）进行匹配；3) 社会工程：攻击者通过了解您的个人信息（生日、姓名、宠物名等）猜测密码；4) 键盘记录：恶意软件记录您输入的每一个字符。统计显示，最常用的密码前几名包括：123456、password、12345678、qwerty等，这些密码在几秒内就能被破解。</p>
+
+                <h3>问：如何安全地保存生成的密码？</h3>
+                <p><strong>答：</strong>安全保存密码的建议：1) 使用专业密码管理器（如1Password、Bitwarden、Dashlane等），加密存储所有密码，只需记住一个主密码；2) 使用浏览器内置的密码管理器，方便但安全性稍低；3) 写在纸上：适合极少量、不联网的密码，但有物理丢失风险；4) 避免将密码存储在文档、备忘录、邮件中等未加密的地方；5) 避免通过即时通讯软件传输密码。无论采用哪种方式，都要确保主密码本身足够强。</p>
+
+                <h3>问：密码是不是越长越好？</h3>
+                <p><strong>答：</strong>密码长度确实非常重要，越长越安全。但实际应用中需要平衡安全性和可用性：过长的密码（如30位以上）难以记忆，容易在输入时出错，可能反而导致用户将密码写在纸上造成安全隐患。对于大多数场景，12-16位是较好的平衡点：既能提供足够的安全性（理论上需要数百万年才能破解），又便于记忆和输入。重要账户（银行、邮箱等）建议使用16-20位，一般网站账户使用12位左右即可。</p>
+
+                <h3>问：为什么要使用不同密码？</h3>
+                <p><strong>答：</strong>使用不同密码的主要原因：1) 防止连锁反应：如果一个账户密码泄露，攻击者会尝试用相同的密码登录您的其他账户；2) 减少攻击面：即使某个网站的密码数据库被攻破，您的其他账户仍然安全；3) 隐私保护：不同账户使用不同密码，可以防止您的使用习惯被追踪分析；4) 便于管理：如果需要更换某个密码，不会影响其他账户。建议使用密码管理器来管理大量不同的密码，解决记忆难题。</p>
+
+                <h3>问：定期更换密码有必要吗？</h3>
+                <p><strong>答：</strong>定期更换密码一直是安全专家的建议，但近年来的观点有所变化。传统观点认为定期换密码可以限制密码泄露后的损失时间。但现在安全专家认为：相比定期更换，更重要的是使用强密码且不重复。如果密码足够强且从未泄露，定期更换的意义不大。但以下情况必须立即更换密码：1) 账户发生异常登录；2) 发现网站数据泄露；3) 设备中毒或丢失；4) 与他人分享过密码。定期检查账户安全状态比机械地按日历更换更重要。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #7C3AED; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用随机密码生成工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用随机密码生成工具"
+             data-tool-url="index.html"
+             data-btn-color="#7C3AED"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

@@ -127,26 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -212,7 +192,6 @@
             }
 
             .info-section,
-            .tool-section,
             .related-tools {
                 padding: 20px;
             }
@@ -220,7 +199,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,15 +210,16 @@
         <header>
             <h1>数字转中文大写 - 免费、安全、快速</h1>
             <p class="subtitle">阿拉伯数字转中文大写转换器，支持小数，免费数字转换工具，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是数字转中文大写工具？</h2>
-                <p>数字转中文大写工具是一款专业的在线数字转换工具，专为需要将阿拉伯数字转换为中文大写的用户设计。在中国传统文化和金融领域，中文大写数字被广泛使用，特别是在合同、发票、支票等正式文件中，中文大写数字可以有效防止数字被篡改。</p>
-                <p>工具支持将任意阿拉伯数字转换为中文大写，包括整数和小数。例如，将"123456789"转换为"壹亿贰仟叁佰肆拾伍万陆仟柒佰捌拾玖"，将"123.45"转换为"壹佰贰拾叁元肆角伍分"。工具严格遵循中文大写数字的书写规范，确保转换结果准确无误。所有转换均在浏览器本地完成，保护您的数据隐私。</p>
+                <p>数字转中文大写工具是一款基于浏览器端 JavaScript 技术的专业在线数字转换工具，专为需要将阿拉伯数字转换为中文大写的用户设计。在中国传统文化和金融领域，中文大写数字被广泛使用，特别是在合同、发票、支票等正式文件中，中文大写数字可以有效防止数字被篡改。例如，阿拉伯数字"1000"很容易被改为"7000"或"10000"，而中文大写"壹仟"则很难被篡改。</p>
+                <p>工具采用高精度的数字转换算法，支持将任意阿拉伯数字转换为中文大写，包括整数和小数。转换过程严格遵循中文大写数字的书写规范：使用"零、壹、贰、叁、肆、伍、陆、柒、捌、玖"表示数字，使用"拾、佰、仟、万、亿"表示位数，使用"元、角、分"表示金额单位。例如，将"123456789"转换为"壹亿贰仟叁佰肆拾伍万陆仟柒佰捌拾玖"，将"123.45"转换为"壹佰贰拾叁元肆角伍分"。</p>
+                <p>工具提供两种转换模式：金额模式和普通模式。金额模式会自动添加"元"、"角"、"分"等单位，适合财务场景；普通模式仅转换数字，不添加单位，适合其他场景。工具还支持负数转换，负数会在前面添加"负"字。所有转换均在浏览器本地完成，采用纯前端技术实现，您的财务数据不会上传到任何服务器，确保数据安全和隐私保护。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：输入数字</h3>
@@ -284,20 +267,53 @@
                         <li>超大数字可能超出转换范围，请控制数字长度</li>
                     </ul>
                 </div>
+
+                <h2>实战案例：财务发票金额填写</h2>
+                <p>小李是一名财务人员，正在填写一张金额为"125800.68元"的增值税发票。按照财务规范，发票金额需要同时填写阿拉伯数字和中文大写。使用数字转中文大写工具，他快速完成了金额的转换。</p>
+                <p><strong>转换需求分析：</strong></p>
+                <ol>
+                    <li><strong>金额数值：</strong> 125800.68元，包含整数和小数部分。</li>
+                    <li><strong>转换模式：</strong> 金额模式，需要添加"元"、"角"、"分"单位。</li>
+                    <li><strong>书写规范：</strong> 严格遵循中文大写书写规范，确保正式文件可用。</li>
+                    <li><strong>准确性要求：</strong> 金额转换必须准确无误，避免财务风险。</li>
+                </ol>
+                <p><strong>转换流程：</strong></p>
+                <ol>
+                    <li>小李打开数字转中文大写工具，输入金额"125800.68"。</li>
+                    <li>选择转换模式为"金额模式"，确保添加金额单位。</li>
+                    <li>点击"转换"按钮，工具显示转换结果："壹拾贰万伍仟捌佰元陆角捌分"。</li>
+                    <li>检查转换结果："壹拾贰万伍仟捌佰元陆角捌分"，确认无误。</li>
+                    <li>点击"复制"按钮，将结果复制到剪贴板。</li>
+                    <li>粘贴到发票的中文大写金额栏，完成填写。</li>
+                </ol>
+                <p><strong>效果对比：</strong> 使用工具前，小李需要手动书写中文大写金额，容易出错（如"壹拾"和"十"的区别）；使用工具后，转换结果准确规范，避免了因书写错误导致的财务风险。</p>
+
+                <h2>常见问题与解答</h2>
+
+                <h3>Q1：为什么财务文件需要使用中文大写数字？</h3>
+                <p>中文大写数字可以有效防止数字被篡改。阿拉伯数字"1"很容易被改为"7"或"9"，而中文大写"壹"则很难被篡改。在合同、发票、支票等正式文件中使用中文大写数字，可以保障金额的真实性和严肃性，避免法律纠纷。</p>
+
+                <h3>Q2：金额模式和普通模式有什么区别？</h3>
+                <p>金额模式会自动添加"元"、"角"、"分"等单位，适合财务场景。例如，"123.45"转换为"壹佰贰拾叁元肆角伍分"。普通模式仅转换数字，不添加单位，适合其他场景。例如，"123.45"转换为"壹佰贰拾叁点肆伍"。</p>
+
+                <h3>Q3：小数部分最多支持几位？</h3>
+                <p>金额模式下，小数部分最多支持两位（角、分），超过两位会自动四舍五入。例如，"123.456"会转换为"壹佰贰拾叁元肆角陆分"。普通模式下，小数部分支持任意位数，但过长的小数可能会影响可读性。</p>
+
+                <h3>Q4：负数如何转换？</h3>
+                <p>负数转换会在前面添加"负"字。例如，"-123"转换为"负壹佰贰拾叁"。金额模式下，负数金额转换为"负壹佰贰拾叁元整"。请注意，财务文件中通常不使用负数金额，建议使用正数金额并注明收支类型。</p>
+
+                <h3>Q5：超大数字可以转换吗？</h3>
+                <p>工具支持转换超大数字，但建议控制在合理范围内。JavaScript的数字精度限制为17位有效数字，超过这个范围可能会导致精度损失。对于超过17位的数字，建议使用字符串输入，工具会尝试处理，但不保证完全准确。</p>
+
+                <h3>Q6：转换结果可以直接用于正式文件吗？</h3>
+                <p>可以。工具的转换结果严格遵循中文大写数字的书写规范，可以直接用于合同、发票、支票等正式文件。但建议在使用前人工核对，确保转换结果准确无误。特别是涉及大额金额时，务必仔细检查。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #059669; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用数字转中文大写工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用数字转中文大写工具"
+             data-tool-url="index.html"
+             data-btn-color="#047857"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

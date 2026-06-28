@@ -127,34 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: #10B981;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #10B981;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -170,28 +142,6 @@
             padding-bottom: 12px;
             border-bottom: 3px solid #10B981;
             font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
         .warning-box {
@@ -282,9 +232,12 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -292,16 +245,16 @@
         <header>
             <h1>图片拼接工具 - 免费、安全、快速</h1>
             <p class="subtitle">将多张图片拼接成一张，支持垂直和水平拼接，自定义拼接间距和背景颜色，支持二次拼接</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是图片拼接工具？</h2>
-                <p>图片拼接工具是一款功能强大的在线图片合并工具，让您可以将多张图片无缝拼接成一张完整的图片。无论是制作长图、拼接截图，还是合并多张照片，这款工具都能帮助您轻松实现。</p>
-                <p>工具支持两种拼接方向：垂直拼接和水平拼接。垂直拼接适合制作长图、拼接截图或多图对比；水平拼接适合制作并排展示、全景图或横向排列。您可以自定义拼接间距（0-50像素）和背景颜色，让拼接效果更加完美。</p>
-                <p>工具还支持保持宽高比和统一图片尺寸功能，确保拼接后的图片比例协调。最特别的是，工具支持二次拼接功能，您可以将拼接结果再次加入待处理列表，继续参与新一轮拼接，实现更复杂的拼接需求。所有处理均在浏览器本地完成，保护您的隐私安全。</p>
+                <p>图片拼接工具是一款基于浏览器端Canvas技术的专业在线图片合并工具，让您可以将多张图片无缝拼接成一张完整的图片。它采用先进的图像合成算法，能够在保持图片质量的同时实现精确的拼接效果。无论是社交媒体用户制作长图分享、内容创作者拼接教程截图，还是设计师整合设计稿、摄影爱好者创建全景照片，这款工具都能满足各种拼接需求。</p>
+                <p>工具的核心功能包括两种拼接方向：垂直拼接和水平拼接。垂直拼接将图片从上到下依次排列，适合制作长图、拼接截图、多图对比等场景；水平拼接将图片从左到右依次排列，适合制作并排展示、全景图、横向排列等场景。用户可以自定义拼接间距（0-50像素）和背景颜色，让拼接效果更加完美。工具还支持保持宽高比和统一图片尺寸功能，确保拼接后的图片比例协调，不会出现拉伸变形。</p>
+                <p>二次拼接功能是工具的一大特色，用户可以将拼接结果再次加入待处理列表，继续参与新一轮拼接，实现更复杂的拼接需求。例如，先将两张图片水平拼接，然后将结果与其他图片垂直拼接，创建出更加丰富的布局效果。工具支持单次上传最多10张图片，所有处理均在浏览器本地完成，无需上传图片，保护用户隐私和数据安全。工具完全免费，无任何隐藏收费或使用限制。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传图片</h3>
@@ -384,30 +337,54 @@
         <div class="info-section" style="grid-column: 1 / -1;">
             <h2>注意事项</h2>
             <div class="warning-box">
-                <ul>
-                    <li><strong>图片数量限制：</strong>单次最多上传10张图片，建议控制图片数量以保持拼接后图片的合理性。图片数量过多会导致拼接后图片过大，影响加载速度和分享体验。</li>
-                    <li><strong>拼接间距设置：</strong>拼接间距范围为0-50像素。间距为0时图片紧密相连，适合无缝拼接；适当增加间距可以让图片之间更加清晰区分，适合对比展示。</li>
-                    <li><strong>背景颜色设置：</strong>当图片尺寸不一致或设置了拼接间距时，背景颜色会填充空白区域。建议选择与图片内容协调的背景颜色，或使用白色作为通用背景。</li>
-                    <li><strong>保持宽高比：</strong>勾选"保持宽高比"可以避免图片拉伸变形，确保图片比例正确。如果取消勾选，图片可能会被拉伸以适应拼接尺寸。</li>
-                    <li><strong>统一图片尺寸：</strong>勾选"统一图片尺寸"会将所有图片调整为相同尺寸，适合尺寸不一的图片拼接。取消勾选则保持图片原始尺寸，适合需要保持原图大小的场景。</li>
-                    <li><strong>处理期间不要关闭页面：</strong>拼接处理需要一定时间，尤其是图片数量较多时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
-                    <li><strong>双击全屏预览：</strong>拼接完成后，双击预览区域可以全屏查看拼接结果，方便您仔细检查拼接效果。点击右上角的关闭按钮或按Esc键退出全屏。</li>
-                </ul>
-            </div>
-        </div>
+                    <ul>
+                        <li><strong>图片数量限制：</strong>单次最多上传10张图片，建议控制图片数量以保持拼接后图片的合理性。图片数量过多会导致拼接后图片过大，影响加载速度和分享体验。</li>
+                        <li><strong>拼接间距设置：</strong>拼接间距范围为0-50像素。间距为0时图片紧密相连，适合无缝拼接；适当增加间距可以让图片之间更加清晰区分，适合对比展示。</li>
+                        <li><strong>背景颜色设置：</strong>当图片尺寸不一致或设置了拼接间距时，背景颜色会填充空白区域。建议选择与图片内容协调的背景颜色，或使用白色作为通用背景。</li>
+                        <li><strong>保持宽高比：</strong>勾选"保持宽高比"可以避免图片拉伸变形，确保图片比例正确。如果取消勾选，图片可能会被拉伸以适应拼接尺寸。</li>
+                        <li><strong>统一图片尺寸：</strong>勾选"统一图片尺寸"会将所有图片调整为相同尺寸，适合尺寸不一的图片拼接。取消勾选则保持图片原始尺寸，适合需要保持原图大小的场景。</li>
+                        <li><strong>处理期间不要关闭页面：</strong>拼接处理需要一定时间，尤其是图片数量较多时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
+                        <li><strong>双击全屏预览：</strong>拼接完成后，双击预览区域可以全屏查看拼接结果，方便您仔细检查拼接效果。点击右上角的关闭按钮或按Esc键退出全屏。</li>
+                    </ul>
+                </div>
 
-        <div class="tool-section">
-            <h2>工具使用演示</h2>
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #10B981; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片拼接工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
+                <h2>实战案例：长图文教程制作</h2>
+                <p>小陈是一名技术博主，经常在公众号分享编程教程。为了提高文章的可读性和传播效果，他需要将多张代码截图和演示图片拼接成一张长图，方便读者在手机上阅读。</p>
+                <p><strong>制作流程：</strong></p>
+                <ol>
+                    <li>小陈准备了8张图片：2张代码截图、3张演示图片、2张效果对比图和1张总结图。</li>
+                    <li>将所有图片上传到图片拼接工具中，勾选需要拼接的图片。</li>
+                    <li>调整拼接顺序：代码截图→演示图片→效果对比图→总结图。</li>
+                    <li>选择垂直拼接方向，设置拼接间距为10像素，保持图片之间有适当的间距。</li>
+                    <li>设置背景颜色为白色，确保在各种设备上都有良好的显示效果。</li>
+                    <li>勾选"保持宽高比"选项，避免图片拉伸变形。</li>
+                    <li>点击"开始拼接"按钮，等待拼接完成后预览效果。</li>
+                    <li>对拼接结果不满意的部分，调整顺序和参数后重新拼接。</li>
+                </ol>
+                <p><strong>效果对比：</strong>使用分散的图片时，读者需要多次滑动才能查看完整教程；使用长图后，读者可以一气呵成地阅读完整教程，阅读体验大幅提升。文章的平均阅读时长从3分钟增加到5分钟，转发率也提高了30%。</p>
 
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+                <h2>常见问题与解答</h2>
+                
+                <h3>Q1：拼接后的图片尺寸太大怎么办？</h3>
+                <p>可以通过以下方法减小拼接后图片的尺寸：1. 减少拼接的图片数量；2. 使用图片压缩工具对输入图片进行压缩；3. 调整输出尺寸（如果工具支持）；4. 设置合适的拼接间距，避免间距过大。建议根据使用场景控制拼接图片的数量和尺寸。</p>
+
+                <h3>Q2：如何实现无缝拼接？</h3>
+                <p>将拼接间距设置为0像素即可实现无缝拼接。如果拼接后仍然有缝隙，可能是因为图片本身包含透明边框或背景色不一致。建议确保所有图片的背景色一致，或使用裁剪工具去除图片边缘的透明区域。</p>
+
+                <h3>Q3：图片尺寸不一致会影响拼接效果吗？</h3>
+                <p>会的。如果图片尺寸不一致，拼接后可能会出现空白区域或图片对齐不齐的情况。建议使用"统一图片尺寸"功能，将所有图片调整为相同尺寸；或使用图片裁剪工具先将图片裁剪成相同尺寸。勾选"保持宽高比"可以避免图片拉伸变形。</p>
+
+                <h3>Q4：什么是二次拼接？如何使用？</h3>
+                <p>二次拼接是指将拼接结果再次加入待处理列表，继续参与新一轮拼接。使用方法：完成第一次拼接后，点击"加入列表"按钮，拼接结果会出现在待处理列表中。然后选择新的拼接方向和参数，与其他图片一起进行新一轮拼接。这适合创建复杂的布局效果，如先水平拼接再垂直拼接。</p>
+
+                <h3>Q5：拼接后的图片可以保存为哪些格式？</h3>
+                <p>工具默认将拼接后的图片保存为PNG格式，支持透明背景。如果拼接的图片都没有透明通道，也可以使用图片压缩工具将其转换为JPG格式以减小文件体积。建议根据图片内容选择合适的格式：包含透明背景选PNG，普通图片选JPG，网页图片选WebP。</p>
+
+                <h3>Q6：如何调整拼接图片的顺序？</h3>
+                <p>在拼接顺序列表中，通过拖拽可以调整图片的顺序。拖拽时会有直观的视觉反馈，帮助您准确放置图片位置。您也可以点击"反转顺序"按钮快速反转所有图片的顺序。建议在拼接前仔细规划图片顺序，确保拼接效果符合预期。</p>
+            </div>
+
+        <div id="note-footer-container" data-tool-title="开始使用图片拼接工具" data-tool-url="index.html" data-btn-color="#10B981"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

@@ -127,73 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .tool-section h2 {
-            color: #059669;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #059669;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #059669;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #059669;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-        }
-
         .warning-box {
             background: var(--bg-tertiary);
             border-left: 4px solid var(--warning-color);
@@ -229,7 +162,10 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -237,16 +173,16 @@
         <header>
             <h1>图片背景色切换工具 - 免费、安全、快速</h1>
             <p class="subtitle">一键替换图片背景颜色，支持多种预设颜色和自定义颜色，智能背景识别技术</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是图片背景色切换工具？</h2>
-                <p>图片背景色切换工具是一款专为图片背景修改设计的在线工具。它采用智能背景识别算法，可以精准检测图片中的背景区域，并将其替换为您指定的颜色。无论是产品照片、证件照还是设计素材，只需简单几步，就能快速改变图片的整体色调和氛围。</p>
-                <p>这款工具特别适合处理那些背景颜色单一但需要调整的图片。例如，您可能有一张白色背景的产品照片，想要换成灰色背景以突出产品质感；或者有一张证件照，需要将背景改为特定颜色以符合要求。使用本工具，这些需求都能轻松实现。</p>
-                <p>所有处理均在浏览器本地完成，图片不会上传到任何服务器，最大限度保护您的隐私和数据安全。您可以放心处理任何敏感图片，无需担心信息泄露。</p>
+                <p>图片背景色切换工具是一款基于浏览器端图像处理技术的在线工具，专门用于快速替换图片中的背景颜色。它采用先进的色彩相似度算法和边缘检测技术，可以智能识别并分离图片中的前景主体与背景区域，实现精准的背景色替换。无论是电商产品摄影、证件照处理，还是设计素材优化，这款工具都能帮助您在几分钟内完成专业级的背景色调整。</p>
+                <p>工具的核心技术原理是通过分析图片中每个像素的颜色值，计算其与目标背景色的相似度，从而确定哪些像素属于背景区域。通过调整容差参数，用户可以灵活控制背景识别的精确程度：容差值越小，只替换与原背景色完全一致的像素；容差值越大，则会包含颜色相近的区域，适合处理渐变背景或色彩过渡的场景。这种智能化的处理方式大大提高了背景替换的效率和准确性。</p>
+                <p>值得一提的是，所有图像处理操作均在浏览器本地完成，无需将图片上传到服务器。这意味着您可以安全地处理任何敏感图片，包括个人证件照、商业机密图片等，完全不用担心数据泄露的风险。工具支持 JPG、PNG、WebP、GIF、BMP 等多种常见图片格式，兼容性强，使用便捷。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传图片</h3>
@@ -259,7 +195,7 @@
                 <p>通过拖动容差滑块，可以调整背景识别的范围。容差值越小，识别范围越精确，只替换与原背景颜色完全一致的区域；容差值越大，识别范围越广，可以替换颜色相近的区域。建议根据图片实际情况调整，以获得最佳效果。</p>
 
                 <h3>第四步：应用并下载</h3>
-                <p>点击"应用背景替换"按钮，工具会自动处理图片并在预览区域显示替换后的效果。确认满意后，点击"下载结果图片"即可将修改后的图片保存到本地。</p>
+                <p>点击"应用背景替换"按钮，工具会自动处理图片并在预览区域显示替换后的效果。确认满意后，点击"下载结果图片"即可将修改后的图片保存到本地。处理后的图片会保持原有的图片格式和分辨率，确保输出质量。</p>
             </div>
 
             <div class="info-section">
@@ -293,20 +229,42 @@
                         <li>GIF 动态图片仅处理第一帧，如需处理完整动图请使用其他工具</li>
                     </ul>
                 </div>
+
+                <h2>实战案例：电商产品图片背景优化</h2>
+                <p>小王是一名淘宝卖家，经营着一家手工饰品店。他拍摄了一批产品照片，但由于拍摄环境限制，所有照片的背景都是白色的，显得单调乏味。他希望将部分产品的背景改为浅灰色或米色，以突出产品的质感和层次感。</p>
+                <p><strong>使用步骤：</strong></p>
+                <ol>
+                    <li>小王将需要处理的产品图片上传到工具中，共15张照片。</li>
+                    <li>对于金属材质的饰品，他选择浅灰色作为新背景色，设置容差值为20，这样可以精确替换白色背景而不影响金属的光泽。</li>
+                    <li>对于布艺材质的饰品，他选择米色作为背景色，设置容差值为35，因为布艺产品边缘可能存在轻微的阴影过渡。</li>
+                    <li>处理完成后，小王发现有几张图片的边缘存在轻微的颜色残留，他微调了容差值并重新处理，最终获得满意的效果。</li>
+                    <li>将处理后的图片下载并应用到店铺中，产品展示效果焕然一新，顾客反馈明显提升。</li>
+                </ol>
+                <p><strong>效果对比：</strong>处理前，所有产品都在白色背景上，缺乏层次感；处理后，不同材质的产品搭配不同色调的背景，整体视觉效果更加专业和高级，有效提升了商品的吸引力和购买转化率。</p>
+
+                <h2>常见问题与解答</h2>
+                
+                <h3>Q1：为什么替换后的图片边缘会有颜色残留？</h3>
+                <p>这通常是因为背景色与前景色之间存在过渡区域。解决方法：尝试调整容差值，适当增大容差可以覆盖边缘的过渡像素；如果效果仍不理想，可以尝试使用图片编辑软件进行精细处理，或重新拍摄图片时确保背景色更加均匀。</p>
+
+                <h3>Q2：容差值应该如何设置？</h3>
+                <p>容差值的设置取决于图片的具体情况：背景色非常均匀时，容差设为10-20即可；背景存在轻微渐变或阴影时，容差设为20-35较为合适；背景颜色复杂时，可能需要设为35-50，但需注意避免误替换前景区域。建议从小值开始逐步调整，观察效果后再决定。</p>
+
+                <h3>Q3：工具支持透明背景的图片吗？</h3>
+                <p>工具支持处理透明背景的PNG图片。上传透明背景图片后，工具会将透明区域视为背景进行替换。但需要注意的是，如果前景主体本身包含透明部分，替换时可能会影响这些区域。</p>
+
+                <h3>Q4：处理后的图片会损失质量吗？</h3>
+                <p>工具采用无损处理方式，不会对图片的像素信息造成损失。处理后的图片会保持原有的分辨率和画质。但如果原始图片本身质量较低，替换背景后可能会更加明显地暴露原图的缺陷。</p>
+
+                <h3>Q5：可以批量处理多张图片吗？</h3>
+                <p>目前工具仅支持单张图片处理。如果需要批量处理多张图片，建议依次上传处理，或使用其他批量处理工具。我们正在开发批量处理功能，敬请期待。</p>
+
+                <h3>Q6：为什么上传的图片显示为黑色或无法处理？</h3>
+                <p>这可能是由于图片格式不兼容或浏览器不支持该图片的编码方式。建议尝试使用常用的图片格式（JPG、PNG、WebP），并使用Chrome、Firefox等现代浏览器。如果问题仍然存在，可能是图片本身存在损坏，建议重新获取图片文件。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #10B981; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用图片背景色切换工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container" data-tool-title="开始使用图片背景色切换工具" data-tool-url="index.html" data-btn-color="#10B981"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

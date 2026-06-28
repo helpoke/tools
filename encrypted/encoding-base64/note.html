@@ -127,64 +127,7 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
 
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #4F46E5;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #4F46E5;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #4F46E5 0%, #4338CA 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
-        }
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -220,7 +163,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -228,25 +174,28 @@
         <header>
             <h1>Base64 编解码工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持文本和文件Base64转换，在线免费Base64转码，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是Base64编解码工具？</h2>
-                <p>Base64编解码工具是一款专业的在线Base64转换工具，专为需要进行Base64编码和解码操作的用户设计。Base64是一种基于64个可打印字符来表示二进制数据的编码方法，广泛应用于电子邮件、网页传输、数据存储等场景，可以将二进制数据转换为文本格式进行传输。</p>
-                <p>工具支持两种转换模式：文本模式和文件模式。文本模式可以对字符串进行Base64编码和解码，适合处理URL参数、简单的数据加密等场景。文件模式可以将任意文件转换为Base64字符串，或将Base64字符串还原为原始文件，适合处理图片、PDF、压缩文件等各类文件。所有转换均在浏览器本地完成，无需上传到服务器，保护您的数据隐私。</p>
+                <p>Base64编解码工具是一款专业的在线Base64转换工具，专为需要进行Base64编码和解码操作的用户设计。Base64是一种基于64个可打印字符来表示二进制数据的编码方法，广泛应用于电子邮件、网页传输、数据存储等场景，可以将二进制数据转换为文本格式进行传输。这种编码方式由52个大小写英文字母、10个数字以及"+"、"/"两个特殊字符组成，共64个可打印字符。</p>
+                <p>Base64编码的原理是将二进制数据每3个字节（24位）为一组，然后将这24位分为4个6位的组，每组对应一个Base64字符。如果原数据的字节数不是3的倍数，会使用"="字符进行填充。Base64编码的核心价值在于：它可以将任何二进制数据转换为可打印的ASCII字符形式，方便在只支持文本的环境中进行传输和存储。例如，在URL参数中传输图片数据、在JSON中存储二进制内容、在电子邮件中嵌入附件等场景，都离不开Base64编码。</p>
 
                 <h2>如何使用？</h2>
                 <h3>模式一：文本编解码</h3>
-                <p>在文本输入框中输入需要编码或解码的字符串。选择编码模式可以将普通文本转换为Base64字符串；选择解码模式可以将Base64字符串还原为原始文本。支持中文、英文、数字、符号等各种字符。</p>
+                <p>在文本输入框中输入需要编码或解码的字符串。选择编码模式可以将普通文本转换为Base64字符串；选择解码模式可以将Base64字符串还原为原始文本。支持中文、英文、数字、符号等各种字符。编码后的结果可以直接复制使用，解码时只需切换到解码模式并粘贴Base64字符串即可。工具会自动识别并处理各种编码问题。</p>
 
                 <h3>模式二：文件编解码</h3>
-                <p>点击上传按钮或拖拽文件到指定区域，工具会自动将文件转换为Base64字符串。转换完成后，您可以复制Base64字符串用于其他用途。同样，您也可以输入Base64字符串，工具会将其还原为原始文件并提供下载。</p>
+                <p>点击上传按钮或拖拽文件到指定区域，工具会自动将文件转换为Base64字符串。转换完成后，您可以复制Base64字符串用于API调用或数据存储。同样，您也可以输入Base64字符串，工具会将其还原为原始文件并提供下载。注意：Base64编码会使文件体积增加约33%，因此建议仅对小文件使用此功能。</p>
 
                 <h3>使用场景</h3>
-                <p>Base64编码常用于：在URL中传输二进制数据、在邮件中嵌入图片、在JSON中存储二进制数据、简单的数据隐藏、数据传输过程中的编码转换等。了解Base64的工作原理可以帮助您更好地理解网络传输和数据存储机制。</p>
+                <p>Base64编码常用于：在URL中传输二进制数据（如data URI）、在邮件中嵌入图片（MIME协议）、在JSON中存储二进制数据、简单的数据隐藏、数据传输过程中的编码转换等。了解Base64的工作原理可以帮助您更好地理解网络传输和数据存储机制，在实际开发中灵活运用这一技术。</p>
+
+                <h3>实战案例：在网页中嵌入小图片</h3>
+                <p>假设您需要在一个HTML页面中嵌入一张小图标，但不想额外请求图片文件。使用本工具的操作步骤如下：首先打开Base64编解码工具，选择"文件编码"模式；然后上传图标图片文件，工具会自动生成Base64字符串；复制生成的字符串，格式为"data:image/png;base64,【Base64字符串】"；最后将这段字符串作为img标签的src属性值。这样图片就被内嵌到HTML中，无需额外的网络请求，可以提高页面加载速度。</p>
             </div>
 
             <div class="info-section">
@@ -281,20 +230,32 @@
                         <li>Base64字符串通常以等号（=）结尾，用于填充</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：Base64编码和加密有什么区别？</h3>
+                <p><strong>答：</strong>Base64编码不是加密，两者有本质区别。加密是为了保护数据安全，需要密钥才能还原数据，且加密后的数据通常不可读；Base64编码只是将数据转换为另一种文本格式，任何人都可以解码还原，无法保护数据安全。如果需要真正的数据加密，请使用AES、DES等加密算法。本工具仅提供编码功能，不提供加密功能。</p>
+
+                <h3>问：为什么Base64编码后会有等号（=）？</h3>
+                <p><strong>答：</strong>等号（=）是Base64编码的填充字符。由于Base64编码要求原数据按3字节分组，当原数据字节数不能被3整除时，需要用"="字符进行填充。例如，如果原数据有1个字节，会被填充为2个"="；如果有2个字节，会被填充为1个"="。填充不影响数据的正确性，解码时工具会自动忽略填充字符。</p>
+
+                <h3>问：Base64编码对中文支持如何？</h3>
+                <p><strong>答：</strong>本工具完全支持中文编码。中文字符在UTF-8编码下会被转换为3个字节，然后按照Base64规则进行编码，最终生成一串Base64字符串。解码时，工具会正确还原中文字符。但需要注意的是，如果接收方使用不同的字符编码（如GBK），解码可能会出现乱码，建议确保编码和解码使用相同的字符集。</p>
+
+                <h3>问：多大的文件适合使用Base64编码？</h3>
+                <p><strong>答：</strong>由于Base64编码会使文件体积增加33%，且编码后的数据会占用更多内存，建议仅对小文件（小于100KB）使用Base64编码。对于大文件，建议直接使用二进制格式传输，或考虑使用压缩算法先压缩再编码。如果确实需要在网页中嵌入图片，建议图片大小不超过几KB，否则会增加HTML文件的体积，影响页面加载速度。</p>
+
+                <h3>问：如何识别一个字符串是否是Base64编码？</h3>
+                <p><strong>答：</strong>可以通过以下特征判断一个字符串是否是Base64编码：1) 字符集只包含A-Z、a-z、0-9、+、/以及可能的填充字符"="；2) 字符串长度是4的倍数；3) 通常以1个或2个"="结尾（但不是所有Base64都有填充）。如果满足这些特征，基本可以判断是Base64编码。</p>
+
+                <h3>问：Base64编码在Web开发中有哪些应用？</h3>
+                <p><strong>答：</strong>Base64编码在Web开发中有多种应用：1) Data URI：将小图片内嵌到HTML/CSS中，减少HTTP请求；2) API数据传输：在JSON请求中传输二进制数据；3) 简单的数据混淆：虽然不是加密，但可以增加数据阅读难度；4) 电子邮件附件：MIME协议使用Base64编码传输附件；5) 本地存储：在localStorage中存储小量二进制数据。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #4F46E5; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用Base64编解码工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用Base64编解码工具"
+             data-tool-url="index.html"
+             data-btn-color="#4F46E5"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

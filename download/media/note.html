@@ -127,65 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #EA580C;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #EA580C;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #EA580C 0%, #C2410C 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.6);
-        }
-
         .warning-box {
             background: var(--bg-tertiary);
             border-left: 4px solid var(--warning-color);
@@ -239,7 +180,6 @@
             }
 
             .info-section,
-            .tool-section,
             .related-tools {
                 padding: 20px;
             }
@@ -251,7 +191,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -259,28 +202,31 @@
         <header>
             <h1>媒体文件批量下载工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持直接URL下载和网页图片视频提取，批量并发下载媒体资源，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是媒体文件批量下载工具？</h2>
-                <p>媒体文件批量下载工具是一款高效的在线媒体资源下载工具，专为需要批量下载图片和视频的用户设计。在日常工作和生活中，我们经常需要从网页中收集图片、视频等媒体资源，手动逐个下载不仅耗时费力，还容易遗漏。这款工具可以帮助您快速、批量地下载所需资源，大幅提高工作效率。</p>
-                <p>工具提供三种下载模式：直接URL下载、网页图片提取和网页视频提取。直接URL模式支持输入多个资源地址批量下载；网页提取模式可以从指定网页中自动提取所有图片或视频链接，并支持筛选和过滤。工具采用并发下载技术，可以同时下载多个文件，大大缩短下载时间。所有处理均在浏览器本地完成，无需上传到服务器，保护您的隐私安全。</p>
+                <p>媒体文件批量下载工具是一款高效的在线媒体资源下载工具，专为需要批量下载图片和视频的用户设计。在日常工作和生活中，我们经常需要从网页中收集图片、视频等媒体资源，手动逐个下载不仅耗时费力，还容易遗漏。这款工具可以帮助您快速、批量地下载所需资源，大幅提高工作效率。工具提供三种下载模式：直接URL下载、网页图片提取和网页视频提取，满足不同场景的下载需求。</p>
+                <p>直接URL模式支持输入多个资源地址批量下载，特别适合已经获取了资源链接的情况；网页提取模式可以从指定网页中自动提取所有图片或视频链接，并支持筛选和过滤，适合需要从网页中收集资源的场景。工具采用并发下载技术，可以同时下载多个文件，大大缩短下载时间。所有处理均在浏览器本地完成，无需上传到服务器，保护您的隐私安全。</p>
 
                 <h2>如何使用？</h2>
                 <h3>模式一：直接URL下载</h3>
-                <p>在文本框中输入需要下载的资源URL地址，每行一个。工具会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议。设置并发数和文件类型筛选后，点击"开始下载"按钮即可批量下载所有资源。</p>
+                <p>在文本框中输入需要下载的资源URL地址，每行一个。工具会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议。设置并发数和文件类型筛选后，点击"开始下载"按钮即可批量下载所有资源。建议根据网络状况设置合适的并发数，默认并发数为3，网络较好时可以适当增加，网络较差时建议降低并发数。</p>
 
                 <h3>模式二：网页图片提取</h3>
-                <p>输入目标网页的URL地址，工具会自动访问并提取网页中的所有图片链接。提取完成后，您可以查看所有图片缩略图，勾选需要的图片进行下载。支持按文件大小、格式等条件筛选，快速定位目标资源。</p>
+                <p>输入目标网页的URL地址，工具会自动访问并提取网页中的所有图片链接。提取完成后，您可以查看所有图片缩略图，勾选需要的图片进行下载。支持按文件大小、格式等条件筛选，快速定位目标资源。对于包含大量图片的网页，建议先筛选后再下载，避免下载不需要的文件。</p>
 
                 <h3>模式三：网页视频提取</h3>
-                <p>输入目标网页的URL地址，工具会自动检测网页中嵌入的视频资源，包括iframe视频、video标签视频等。提取完成后，您可以查看视频信息，选择需要的视频进行下载。</p>
+                <p>输入目标网页的URL地址，工具会自动检测网页中嵌入的视频资源，包括iframe视频、video标签视频等。提取完成后，您可以查看视频信息，选择需要的视频进行下载。部分网站可能使用特殊的视频播放技术，导致视频提取不完全，这是正常现象。</p>
 
                 <h3>下载与打包</h3>
-                <p>下载完成后，工具提供两种保存方式：逐个下载和打包下载。逐个下载会将文件逐个保存到本地，打包下载会将所有文件压缩成一个ZIP文件，方便统一管理。</p>
+                <p>下载完成后，工具提供两种保存方式：逐个下载和打包下载。逐个下载会将文件逐个保存到本地，适合文件数量较少的情况；打包下载会将所有文件压缩成一个ZIP文件，方便统一管理和分享，适合文件数量较多的情况。建议根据文件数量选择合适的保存方式。</p>
+
+                <h3>实战案例：收集设计灵感图片</h3>
+                <p>假设您是一名设计师，需要从设计灵感网站收集参考图片。使用本工具的操作步骤如下：首先选择"网页图片提取"模式；然后输入设计灵感网站的URL地址；等待工具提取所有图片链接后，查看图片缩略图并勾选需要的图片；设置文件类型筛选为jpg和png；点击"开始下载"按钮进行批量下载；最后选择"打包下载"将所有图片压缩成ZIP文件。这样您就可以一次性收集大量设计参考图片，大大提高工作效率。</p>
             </div>
 
             <div class="info-section">
@@ -333,20 +279,32 @@
                         <li>建议在现代浏览器（Chrome、Firefox、Edge）中使用</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：为什么有些图片无法提取？</h3>
+                <p><strong>答：</strong>部分网站使用JavaScript动态加载图片，工具可能无法提取通过JavaScript动态生成的图片链接。此外，使用CSS背景图片方式展示的图片也无法被提取。对于这些情况，建议尝试使用直接URL下载模式，手动获取图片链接后进行下载。</p>
+
+                <h3>问：视频提取功能支持哪些视频平台？</h3>
+                <p><strong>答：</strong>工具支持提取使用标准HTML5 video标签和iframe嵌入的视频。对于常见的视频平台（如YouTube、B站、爱奇艺等），由于它们使用自定义的视频播放器和加密技术，工具可能无法直接提取视频链接。建议查看视频页面的源代码，寻找直接的视频资源链接，然后使用直接URL下载模式进行下载。</p>
+
+                <h3>问：如何设置合适的并发数？</h3>
+                <p><strong>答：</strong>并发数指的是同时下载的文件数量。默认并发数为3，这是一个比较安全的设置。如果您的网络带宽充足，可以适当增加并发数（如5-10）以提高下载速度；如果网络不稳定或带宽有限，建议降低并发数（如1-2）以避免下载失败。同时，过高的并发数可能会被目标网站视为恶意请求，导致IP被封禁，请谨慎设置。</p>
+
+                <h3>问：下载失败怎么办？</h3>
+                <p><strong>答：</strong>下载失败可能是由多种原因导致的：目标网站有防盗链机制、网络连接不稳定、资源URL无效等。建议先检查资源URL是否有效，可以在浏览器中直接打开该URL测试；如果URL有效但下载失败，可能是网站的防盗链限制，可以尝试更换并发数或稍后再试；如果多个资源都下载失败，可能是网络问题，请检查网络连接。</p>
+
+                <h3>问：打包下载的ZIP文件有大小限制吗？</h3>
+                <p><strong>答：</strong>打包下载的ZIP文件大小取决于您下载的文件总大小和浏览器的处理能力。一般来说，现代浏览器可以处理几百MB到几GB的ZIP文件，但过大的文件可能会导致浏览器卡顿或内存不足。如果您需要下载大量文件，建议分批次下载，每次下载一部分文件并打包，避免单次打包过大。</p>
+
+                <h3>问：下载的文件保存在哪里？</h3>
+                <p><strong>答：</strong>下载的文件保存在您浏览器的默认下载目录中。您可以在浏览器设置中查看或更改默认下载目录。逐个下载时，每个文件会单独保存到下载目录；打包下载时，所有文件会被压缩成一个ZIP文件保存到下载目录。下载完成后，建议及时整理和备份下载的文件。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #EA580C; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用媒体文件批量下载工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用媒体文件批量下载工具"
+             data-tool-url="index.html"
+             data-btn-color="#EA580C"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

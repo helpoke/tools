@@ -128,37 +128,6 @@
             font-weight: bold;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .tool-section h2 {
-            color: #2563EB;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #2563EB;
-            font-size: 1.5rem;
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .author-info p {
-            margin: 8px 0;
-        }
-
         .related-tools {
             background: var(--bg-card);
             padding: 35px;
@@ -260,7 +229,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -268,18 +240,21 @@
         <header>
             <h1>视频合并工具</h1>
             <p class="subtitle">免费、安全、快速拼接多个视频</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>这是什么工具？</h2>
                 <p>
-                    视频合并工具是一款功能强大的在线视频拼接工具，可以将多个视频片段无缝合成为一个完整的视频。在日常拍摄中，我们通常会将内容分成多个短片段录制；下载的视频也可能被分割成多个文件。视频合并工具可以帮你将这些分散的视频片段整合在一起，形成一个完整的作品。
+                    视频合并工具是一款基于浏览器端 FFmpeg 多媒体处理技术的专业在线视频拼接工具，可以将多个视频片段无缝合成为一个完整的视频作品。它采用先进的视频解码和编码算法，配合转场效果处理技术，能够高效完成多视频片段的拼接和过渡处理。在日常拍摄中，我们通常会将内容分成多个短片段录制；下载的视频也可能被分割成多个文件；视频合并工具可以帮你将这些分散的视频片段整合在一起，形成一个完整连贯的作品。
                 </p>
                 <p>
-                    除了基础的拼接功能，本工具还支持多种转场效果，让视频之间的过渡更加自然流畅。同时，你还可以添加背景音乐，为视频配上合适的背景音效，提升观看体验。所有处理都在浏览器本地完成，无需上传视频文件。
+                    本工具的核心技术优势在于基于 FFmpeg 多媒体处理框架开发，这是业界公认最强大的开源音视频处理框架。工具提供了灵活的拼接功能：支持批量上传多个视频（最多5个），用户可以通过拖拽调整视频的拼接顺序；多种转场效果可选，包括淡入淡出、向左滑动、向右滑动、向上滑动、向下滑动等，让视频之间的过渡更加自然流畅；支持添加背景音乐并调节音量，为视频配上合适的背景音效，提升观看体验；统一视频尺寸或保持原始比例，确保输出视频的视觉一致性。
+                </p>
+                <p>
+                    与传统的桌面视频编辑软件不同，本工具完全在浏览器中运行，采用 WebAssembly 技术实现高性能处理，无需下载安装任何软件。所有视频合并处理都在用户的本地设备上完成，视频文件不会被上传到任何服务器，既保护了隐私安全，又省去了等待上传下载的时间。工具支持 MP4、WebM、AVI、MOV 等主流视频格式，提供多种输出分辨率选择（1080p/720p/480p等），满足不同使用场景的需求。
                 </p>
 
                 <h3>支持的功能</h3>
@@ -387,19 +362,50 @@
             <p>
                 <strong>版权提醒：</strong> 使用的背景音乐请确保有合法的使用授权，避免侵犯他人版权。
             </p>
+
+            <h2>实战案例：旅行日记视频制作</h2>
+            <p>小李是一名旅行爱好者，最近完成了一次云南之旅。他在旅行过程中拍摄了多个视频片段，记录了不同景点和时刻的精彩瞬间，希望将这些片段合并成一个完整的旅行日记视频，分享给家人和朋友。</p>
+            <p><strong>合并需求分析：</strong></p>
+            <ol>
+                <li><strong>视频片段数量：</strong> 共5个视频，每个时长2-5分钟，涵盖昆明、大理、丽江、香格里拉和返程片段。</li>
+                <li><strong>视频尺寸：</strong> 所有视频均为1080p横屏拍摄，尺寸一致。</li>
+                <li><strong>转场需求：</strong> 不同景点之间使用淡入淡出转场，营造温馨回忆的氛围。</li>
+                <li><strong>背景音乐：</strong> 添加一首云南民谣风格的轻音乐作为背景，音量适中不盖过原视频声音。</li>
+            </ol>
+            <p><strong>合并流程：</strong></p>
+            <ol>
+                <li>小李将5个旅行视频上传到视频合并工具中。</li>
+                <li>拖拽调整视频顺序：昆明→大理→丽江→香格里拉→返程，按旅行路线排列。</li>
+                <li>设置输出分辨率为1080p，保持原始尺寸，确保画质最佳。</li>
+                <li>选择转场效果为"淡入淡出"，设置转场时长为1秒，让景点切换更自然。</li>
+                <li>上传云南民谣风格的背景音乐文件，设置音量为30%，不盖过原视频的声音。</li>
+                <li>点击"开始处理"按钮，等待视频合并完成。</li>
+                <li>处理完成后预览效果，确认片段顺序正确、转场流畅、背景音乐合适，下载保存到本地。</li>
+            </ol>
+            <p><strong>效果对比：</strong> 合并前，5个视频分散存放，需要逐个发送给朋友观看；合并后，整合为一个完整的旅行日记视频，时长约15分钟，可以一次发送完整分享。配合淡入淡出转场和背景音乐，视频更具故事性和观赏性，朋友们观看体验更好。</p>
+
+            <h2>常见问题与解答</h2>
+
+            <h3>Q1：合并后视频画质会下降吗？</h3>
+            <p>会有一定程度的画质变化。视频合并需要重新编码所有视频帧，过程中会有轻微的数据损失。但如果选择较高的输出分辨率和保持原始尺寸，画质下降不明显。建议：1. 选择1080p输出分辨率；2. 保持原始尺寸不缩放；3. 使用相同的视频质量设置进行合并。</p>
+
+            <h3>Q2：不同尺寸的视频可以合并吗？</h3>
+            <p>是的。工具提供了三种尺寸处理方式：统一尺寸——将所有视频调整为第一个视频的尺寸，其他视频会被裁剪或拉伸；保持宽高比——自动添加黑边填充，确保所有视频完整显示；保持原始——每个视频保持自己的尺寸，但可能导致播放时画面大小变化。建议选择"保持宽高比"，视觉效果最佳。</p>
+
+            <h3>Q3：转场效果时长可以自定义吗？</h3>
+            <p>工具提供了多种转场效果，但转场时长通常是固定的（约1秒）。如果需要更长或更短的转场时长，建议：1. 在合并前使用视频裁剪工具为每个片段添加空白过渡帧；2. 选择"无转场"效果，在需要转场的片段中添加静态图片过渡。后续版本会增加自定义转场时长功能。</p>
+
+            <h3>Q4：背景音乐会覆盖原视频声音吗？</h3>
+            <p>取决于音量设置。工具支持调节背景音乐的音量大小：设置较低音量（如30%），背景音乐作为BGM轻柔地覆盖在原视频声音之上；设置较高音量（如80%），背景音乐声音较大，可能会盖过原视频声音；设置音量为100%，背景音乐完全覆盖原视频声音。建议设置中等音量（40%-50%），保持背景音乐和原视频声音的平衡。</p>
+
+            <h3>Q5：为什么合并处理时间很长？</h3>
+            <p>视频合并需要重新编码所有视频帧并处理转场效果，处理时间取决于视频总时长、视频数量、输出分辨率和电脑性能。多个视频、长视频、高分辨率都会增加处理时间。建议：1. 控制每次合并的视频数量不超过3个；2. 选择较低的输出分辨率（如720p）；3. 使用现代浏览器和高配置电脑。</p>
+
+            <h3>Q6：可以合并超过5个视频吗？</h3>
+            <p>当前工具每次最多支持合并5个视频。如果需要合并更多视频，建议分批处理：1. 先将前5个视频合并为一个视频；2. 将合并后的视频与新视频继续合并；3. 重复这个过程直到所有视频合并完成。这样可以合并任意数量的视频，只是需要多次处理。</p>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #2563EB; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用视频合并工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p>© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container" data-tool-title="开始使用视频合并工具" data-tool-url="index.html" data-btn-color="#2563EB"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>

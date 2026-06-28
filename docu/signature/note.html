@@ -127,65 +127,6 @@
             font-size: 0.95rem;
         }
 
-        .tool-section {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            grid-column: 1 / -1;
-            border: 1px solid var(--border-color);
-        }
-
-        .author-info {
-            background: var(--bg-card);
-            padding: 25px 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools {
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .related-tools h2 {
-            color: #2563EB;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #2563EB;
-            font-size: 1.5rem;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .tool-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-        }
-
-        .tool-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
-        }
-
         .warning-box {
             background: var(--bg-tertiary);
             border-left: 4px solid var(--warning-color);
@@ -238,7 +179,6 @@
             }
 
             .info-section,
-            .tool-section,
             .related-tools {
                 padding: 20px;
             }
@@ -250,7 +190,10 @@
     </style>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
 </head>
 
 <body>
@@ -258,31 +201,34 @@
         <header>
             <h1>文档在线签名工具 - 免费、安全、快速</h1>
             <p class="subtitle">支持PDF和Word文档在线签名，免费在线手写签名，本地处理保护隐私</p>
-            <a href="/" class="back-link">返回首页</a>
-            <a href="index.html" class="back-link">使用工具</a>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是文档在线签名工具？</h2>
-                <p>文档在线签名工具是一款专业的在线文档签名工具，专为需要在电子文档上添加签名的用户设计。在数字化办公日益普及的今天，电子签名已经成为日常工作的必需品。这款工具可以帮助您快速、便捷地在PDF和Word文档上添加手写签名，无需打印、手写再扫描，大大提高工作效率。</p>
-                <p>工具支持多种签名方式，包括手写签名、文字签名和图片签名。您可以使用鼠标或触摸屏直接绘制签名，也可以输入文字生成签名，还可以上传已有的签名图片。签名添加后，您可以自由调整签名的位置、大小和颜色，确保签名效果符合您的需求。所有处理均在浏览器本地完成，保护您的隐私安全。</p>
+                <p>文档在线签名工具是一款专业的在线文档签名工具，专为需要在电子文档上添加签名的用户设计。在数字化办公日益普及的今天，电子签名已经成为日常工作的必需品。这款工具可以帮助您快速、便捷地在PDF和Word文档上添加手写签名，无需打印、手写再扫描，大大提高工作效率。工具支持多种签名方式，包括手写签名、文字签名和图片签名。</p>
+                <p>传统的签名方式需要打印文档、手写签名、扫描成电子版，整个过程耗时费力，且容易出现签名模糊、文档变形等问题。本工具提供了一站式的电子签名解决方案，支持直接在浏览器中创建和添加签名，签名效果清晰美观，且可以自由调整位置和大小。所有处理均在浏览器本地完成，无需上传到服务器，保护您的隐私和文档安全。</p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：上传文档</h3>
-                <p>点击上传按钮或拖拽PDF或Word文件到指定区域。工具支持PDF和Word两种格式的文档，能够处理日常工作中的各种文档类型。上传后，工具会自动解析文档并显示预览。</p>
+                <p>点击上传按钮或拖拽PDF或Word文件到指定区域。工具支持PDF和Word两种格式的文档，能够处理日常工作中的各种文档类型。上传后，工具会自动解析文档并显示预览，方便您确认文档内容。</p>
 
                 <h3>第二步：选择签名方式</h3>
-                <p>在签名面板中选择签名方式：手写签名、文字签名或图片签名。手写签名可以使用鼠标或触摸屏直接绘制；文字签名可以输入姓名并选择字体；图片签名可以上传已有的签名图片。</p>
+                <p>在签名面板中选择签名方式：手写签名、文字签名或图片签名。手写签名可以使用鼠标或触摸屏直接绘制，最接近真实手写效果；文字签名可以输入姓名并选择字体，生成规范的签名样式；图片签名可以上传已有的签名图片，适合已有电子签名的用户。</p>
 
                 <h3>第三步：创建签名</h3>
-                <p>如果选择手写签名，在签名画布上使用鼠标或手指绘制签名；如果选择文字签名，输入姓名并选择合适的字体和大小；如果选择图片签名，点击上传按钮选择签名图片。</p>
+                <p>如果选择手写签名，在签名画布上使用鼠标或手指绘制签名，支持撤销和重绘功能；如果选择文字签名，输入姓名并选择合适的字体、大小和颜色；如果选择图片签名，点击上传按钮选择签名图片，支持png、jpg、gif等常见格式。</p>
 
                 <h3>第四步：添加签名到文档</h3>
-                <p>签名创建完成后，点击"添加签名"按钮，签名会自动添加到文档的默认位置。您可以拖动签名调整位置，也可以使用缩放工具调整大小。</p>
+                <p>签名创建完成后，点击"添加签名"按钮，签名会自动添加到文档的默认位置。您可以拖动签名调整位置，也可以使用缩放工具调整大小。支持添加多个签名，每个签名都可以独立调整。</p>
 
                 <h3>第五步：下载签名后的文档</h3>
-                <p>签名位置调整完成后，点击"下载"按钮即可保存签名后的文档。签名会被嵌入到文档中，确保签名不会丢失或被篡改。</p>
+                <p>签名位置调整完成后，点击"下载"按钮即可保存签名后的文档。签名会被嵌入到文档中，确保签名不会丢失或被篡改。下载的文档格式与上传时一致，PDF文档下载为PDF，Word文档下载为Word。</p>
+
+                <h3>实战案例：签署劳动合同</h3>
+                <p>假设您收到一份劳动合同需要签署。使用本工具的操作步骤如下：首先上传劳动合同PDF文件；然后选择"手写签名"方式，在签名画布上绘制您的手写签名；接着点击"添加签名"按钮，将签名添加到文档的签名位置；拖动签名调整到合适的位置并调整大小；最后点击"下载"按钮保存签署后的合同。这样您就完成了电子签名，无需打印纸质文档，既环保又高效。</p>
             </div>
 
             <div class="info-section">
@@ -334,20 +280,32 @@
                         <li>手写签名在触摸屏设备上体验更佳</li>
                     </ul>
                 </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：电子签名具有法律效力吗？</h3>
+                <p><strong>答：</strong>根据《中华人民共和国电子签名法》，可靠的电子签名与手写签名或者盖章具有同等的法律效力。本工具生成的电子签名属于普通电子签名，其法律效力取决于具体使用场景和相关法律规定。在商务往来、日常办公等场景中，电子签名被广泛认可和使用。如需用于具有严格法律效力的场景，建议使用经过认证的电子签名服务。</p>
+
+                <h3>问：哪种签名方式最适合我？</h3>
+                <p><strong>答：</strong>选择签名方式取决于您的需求：手写签名最接近真实手写效果，适合需要模拟真实签名的场景；文字签名规范清晰，适合需要统一签名样式的场景；图片签名适合已有电子签名图片的用户。如果您使用触摸屏设备，手写签名的体验更佳；如果您使用鼠标，文字签名可能更方便。建议根据实际情况选择最适合的方式。</p>
+
+                <h3>问：签名可以调整大小和位置吗？</h3>
+                <p><strong>答：</strong>可以。签名添加到文档后，您可以自由拖动签名调整位置，也可以使用缩放工具调整大小。支持添加多个签名，每个签名都可以独立调整。调整完成后，点击"下载"按钮即可保存带有签名的文档。建议调整时参考文档中的签名框或签名线，确保签名位置准确。</p>
+
+                <h3>问：签名会被嵌入到文档中吗？</h3>
+                <p><strong>答：</strong>是的。签名会被嵌入到文档中，而不是作为独立的图片层叠加在文档上方。这意味着下载后的文档中，签名已经成为文档的一部分，不会因为文档格式转换或重新打开而丢失。同时，嵌入方式也使得签名更难被篡改，提高了文档的安全性。</p>
+
+                <h3>问：工具支持多人签名吗？</h3>
+                <p><strong>答：</strong>支持。您可以在同一文档中添加多个签名，每个签名都可以独立调整位置和大小。如果需要多人签署同一文档，可以按顺序添加每个签署人的签名。但需要注意的是，本工具不支持在线协作签名，所有签名需要在同一设备上完成。如果需要多人远程签名，建议使用专门的电子合同平台。</p>
+
+                <h3>问：签名后的文档可以编辑吗？</h3>
+                <p><strong>答：</strong>签名后的文档可以继续编辑，但签名会保持在原来的位置。对于PDF文档，签名后仍可以使用PDF编辑软件添加文字、批注等内容；对于Word文档，签名后仍可以编辑文档内容。但需要注意的是，编辑文档可能会改变签名的位置，建议在签名前确保文档内容已经定稿。如果需要防止文档被篡改，可以使用PDF的加密功能或数字签名功能。</p>
             </div>
         </div>
 
-        <div class="tool-section">
-            <div class="tool-buttons" style="display: flex; justify-content: space-between; align-items: center;">
-                <a href="index.html" class="tool-btn-primary" style="padding: 14px 35px; background: #2563EB; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">开始使用文档在线签名工具</a>
-                <a href="/" class="tool-btn-secondary" style="padding: 14px 35px; background: var(--bg-tertiary); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1.1rem;">返回首页</a>
-            </div>
-        </div>
-
-        <div class="author-info">
-            <p>本文由 Helpoke 编辑整理 | 更新于 2026年6月</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">© 2026 Helpoke. All rights reserved.</p>
-        </div>
+        <div id="note-footer-container"
+             data-tool-title="开始使用文档在线签名工具"
+             data-tool-url="index.html"
+             data-btn-color="#2563EB"></div>
 
         <div class="related-tools">
             <h2>相关工具推荐</h2>
