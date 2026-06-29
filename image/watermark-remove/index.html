@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图像去水印工具, 图片去水印, 图像水印去除, 图片模糊去水印, 图像马赛克去水印, 本地处理保护隐私">
+    <meta name="keywords" content="图像去水印, 图片去水印, 图像水印去除, 图片水印去除, 免费去水印, 图像去水印在线, 图片去水印在线">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图像去水印工具 - Helpoke 助点站</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "图像去水印工具",
+        "description": "免费在线图像去水印工具，支持模糊处理、马赛克覆盖和裁剪去除等多种去水印方式，本地处理保护隐私。Free online image watermark removal tool with multiple removal methods.",
+        "url": "https://helpoke.com/image/watermark-remove",
+        "applicationCategory": "https://schema.org/ImageProcessing",
+        "inLanguage": ["zh-CN", "en-US"], 
+        "featureList": [
+            "支持模糊法去水印",
+            "支持马赛克覆盖去水印",
+            "支持裁剪法去除水印",
+            "支持自定义去水印区域",
+            "实时预览去水印效果",
+            "批量处理多张图片",
+            "本地处理，保护隐私安全"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1><a href="note.html" title="使用说明">图像去水印工具</a>（<a href="/" title="返回首页">🏠</a>）</h1>
+            <p>支持<b style="color: cadetblue;">模糊处理</b>、<b style="color: cadetblue;">马赛克覆盖</b>和<b style="color: cadetblue;">裁剪去除</b>，纯本地处理保护隐私。</p>
+            <p class="description">*（<b><em>所有处理均在您本地完成，不会上传网络服务器，无需担忧隐私泄漏。速度取决于您的计算机和浏览器性能</em></b>）</p>
+            <p class="description">
+                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
+            </p>
+        </section>
+        <div class="container">
+            <div class="tool-layout">
+                <div class="main-content">
+                    <label for="fileInput" class="upload-area" id="uploadArea">
+                        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+                        <div class="upload-icon">🖼️</div>
+                        <div class="upload-text">点击或拖拽上传图片</div>
+                        <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选）</div>
+                    </label>
+
+
+                    <div class="preview-section" id="previewSection" style="display: none;">
+                        <h3>图片预览</h3>
+                        <div class="file-info" id="fileInfo" style="display: none;">
+                            <div class="file-details">
+                                <button class="btn btn-secondary" id="prevBtn" disabled>上一张</button>
+                                <span class="file-name" id="fileName"></span>
+                                <span class="file-size" id="fileSize"></span>
+                                <span class="file-index" id="fileIndex"></span>
+                                <button class="btn btn-secondary" id="nextBtn" disabled>下一张</button>
+                            </div>
+                        </div>
+                        <div class="preview-container">
+                            <div class="canvas-wrapper">
+                                <canvas id="previewCanvas"></canvas>
+                                <div id="watermarkOverlay"></div>
+                            </div>
+                            <div class="preview-controls">
+                                <button class="btn btn-secondary" id="addAreaBtn">添加区域</button>
+                                <button class="btn btn-danger" id="deleteAreaBtn" disabled>删除当前区域</button>
+                                <span id="areaCount" style="margin-left: 10px; color: #666;">区域数量：0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section" id="settingsSection" style="display: none;">
+                        <h3>去水印设置</h3>
+                        
+                        <div class="setting-group">
+                            <label>去水印方式：</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="removeMethod" value="fill" checked>
+                                    <span>智能填充</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="removeMethod" value="blur">
+                                    <span>模糊处理</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="removeMethod" value="mosaic">
+                                    <span>马赛克覆盖</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="removeMethod" value="feather">
+                                    <span>羽化边缘</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="removeMethod" value="color">
+                                    <span>颜色覆盖</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="removeMethod" value="median">
+                                    <span>中值模糊</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-group">
+                                <label for="blurRadius">模糊半径：</label>
+                                <input type="range" id="blurRadius" min="1" max="50" value="10" step="1">
+                                <span id="blurValue">10</span>
+                            </div>
+                            <div class="setting-group">
+                                <label for="mosaicSize">马赛克大小：</label>
+                                <input type="range" id="mosaicSize" min="2" max="30" value="8" step="1">
+                                <span id="mosaicValue">8</span>
+                            </div>
+                            <div class="setting-group">
+                                <label for="featherStrength">羽化强度：</label>
+                                <input type="range" id="featherStrength" min="50" max="100" value="90" step="5">
+                                <span id="featherValue">90%</span>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="applyBtn">应用去水印</button>
+                            <button class="btn btn-secondary" id="downloadBtn" disabled>下载单个图片</button>
+                            <button class="btn btn-secondary" id="downloadAllBtn" disabled>下载全部图片</button>
+                        </div>
+                    </div>
+
+                    <div class="result-section" id="resultSection" style="display: none;">
+                        <h3>处理结果</h3>
+                        <div class="result-container">
+                            <div class="result-image">
+                                <img id="resultImage" alt="处理后的图片">
+                            </div>
+                            <div class="result-info">
+                                <button class="btn btn-primary" id="saveResultBtn">保存图片</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container"></div>
+    </main>
+
+    <script src="../../common/lib/jszip.min.js"></script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图像去水印工具说明，在线图片去水印工具，支持模糊处理、马赛克覆盖和智能填充等多种去水印方式，本地处理保护隐私">
+    <meta name="keywords" content="图像去水印, 图片去水印, 图像水印去除, 图片水印去除, 免费去水印, 在线去水印工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index,follow,noai">
+    <title>图像去水印工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #0EA5E9 0%, #0284C7 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .quick-guide {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .guide-section {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        .guide-section h3 {
+            color: #0EA5E9;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-section ol,
+        .guide-section ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .guide-section li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .guide-section li strong {
+            color: var(--text-primary);
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #0EA5E9;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0EA5E9;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #0EA5E9;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-tools h2 {
+            color: #0EA5E9;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0EA5E9;
+            font-size: 1.5rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .method-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #0EA5E9;
+        }
+
+        .method-card h4 {
+            color: #0EA5E9;
+            margin-bottom: 10px;
+        }
+
+        .method-card p {
+            text-indent: 0 !important;
+            margin-bottom: 10px !important;
+        }
+
+        .method-scenarios {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .method-scenario {
+            padding: 4px 12px;
+            background: rgba(14, 165, 233, 0.15);
+            color: #0284C7;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .quick-guide {
+                grid-template-columns: 1fr;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools,
+            .guide-section {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图像去水印工具 - 免费、安全、快速</h1>
+            <p class="subtitle">支持模糊处理、马赛克覆盖和智能填充等多种去水印方式，纯本地处理保护隐私</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+
+        <div class="quick-guide">
+            <div class="guide-section">
+                <h3><i class="fas fa-list-ol"></i> 使用步骤</h3>
+                <ol>
+                    <li>上传需要去水印的图片</li>
+                    <li>在图片上选择水印区域（点击拖拽）</li>
+                    <li>选择去水印方式</li>
+                    <li>调整参数并预览效果</li>
+                    <li>应用并下载处理后的图片</li>
+                </ol>
+            </div>
+            <div class="guide-section">
+                <h3><i class="fas fa-cogs"></i> 去水印方式说明</h3>
+                <ul>
+                    <li><strong>智能填充</strong>：采样水印区域四周颜色进行插值填充，保持图片尺寸不变，适用于纯色或渐变背景</li>
+                    <li><strong>模糊处理</strong>：对水印区域进行高斯模糊，适用于文字水印</li>
+                    <li><strong>马赛克覆盖</strong>：用马赛克效果覆盖水印，适用于复杂水印</li>
+                    <li><strong>羽化边缘</strong>：对水印区域进行羽化处理，使边缘逐渐淡化，适用于需要自然过渡的场景</li>
+                    <li><strong>颜色覆盖</strong>：用水印区域边缘的平均颜色填充整个区域，适用于颜色变化不大的背景</li>
+                    <li><strong>中值模糊</strong>：使用中值滤波算法去除水印，适用于去除点状噪声和小区域水印</li>
+                </ul>
+            </div>
+            <div class="guide-section">
+                <h3><i class="fas fa-lightbulb"></i> 提示</h3>
+                <ul>
+                    <li>支持添加多个去水印区域</li>
+                    <li>处理后的图片将保持原始格式</li>
+                    <li>建议先在预览中确认效果再下载</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图像去水印工具？</h2>
+                <p>图像去水印工具是一款基于浏览器端Canvas技术的专业在线图片处理工具，帮助用户去除图片上的水印、Logo或其他不需要的标记。它采用先进的图像处理算法，能够在保持图片质量的同时实现有效的水印去除效果。无论是去除截图中的个人信息、消除图片上的版权水印、处理从网络下载的带有水印的图片，还是美化图片去除不需要的标记，这款工具都能提供高效、可靠的解决方案。</p>
+                <p>工具支持三种去水印方式：模糊处理、马赛克覆盖和智能填充。模糊处理通过高斯模糊使水印变得模糊不清，适用于文字水印和简单Logo；马赛克覆盖用马赛克效果覆盖水印区域，适用于复杂的水印图案；智能填充采样水印区域四周的像素颜色，通过双线性插值算法填充水印区域，保持图片尺寸不变，适用于纯色或渐变背景。用户可以添加多个去水印区域，一次处理多个水印。所有处理均在浏览器本地完成，无需上传图片，保护用户隐私和数据安全。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域或拖拽图片到指定位置，支持同时选择多张图片。工具支持 JPG、PNG、WebP、GIF、BMP 等多种图片格式。上传后，图片会显示在预览区域，方便您查看和选择去水印区域。</p>
+
+                <h3>第二步：选择去水印区域</h3>
+                <p>在图片预览区域，使用鼠标拖拽选择水印所在的区域。您可以添加多个区域来处理多个水印。选中区域后，可以点击删除按钮移除该区域。工具会用半透明的矩形标记已选择的区域。</p>
+
+                <h3>第三步：选择去水印方式</h3>
+                <p>根据水印特点选择合适的去水印方式：模糊处理适合文字水印，马赛克覆盖适合复杂图案水印，智能填充适合纯色或渐变背景。您可以根据实际情况灵活选择。</p>
+
+                <h3>第四步：调整参数</h3>
+                <p>根据选择的去水印方式调整相应参数：模糊半径控制模糊程度，数值越大效果越明显；马赛克大小控制方块大小，数值越大效果越明显。建议先在预览中确认效果再应用。</p>
+
+                <h3>第五步：应用并下载</h3>
+                <p>点击"应用去水印"按钮，工具会对图片进行处理并显示处理结果。确认效果满意后，点击"下载处理后的图片"按钮保存处理后的图片。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>去水印方式详解</h2>
+                
+                <div class="method-card">
+                    <h4>模糊处理</h4>
+                    <p>对水印区域进行高斯模糊，使水印变得模糊不清。通过调整模糊半径可以控制模糊程度，适用于文字水印和简单Logo。</p>
+                    <div class="method-scenarios">
+                        <span class="method-scenario">文字水印</span>
+                        <span class="method-scenario">简单Logo</span>
+                        <span class="method-scenario">版权信息</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <h4>马赛克覆盖</h4>
+                    <p>用马赛克效果覆盖水印区域，通过调整马赛克大小可以控制效果强度，适用于复杂的水印图案和难以模糊处理的水印。</p>
+                    <div class="method-scenarios">
+                        <span class="method-scenario">复杂图案</span>
+                        <span class="method-scenario">彩色水印</span>
+                        <span class="method-scenario">多处水印</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <h4>智能填充</h4>
+                    <p>采样水印区域四周的像素颜色，通过双线性插值算法填充水印区域，保持图片尺寸不变。适用于纯色背景或渐变背景上的水印去除。</p>
+                    <div class="method-scenarios">
+                        <span class="method-scenario">纯色背景</span>
+                        <span class="method-scenario">渐变背景</span>
+                        <span class="method-scenario">简单背景</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <h4>羽化边缘</h4>
+                    <p>对水印区域进行羽化处理，使边缘像素逐渐淡化，实现自然过渡效果。适用于需要与周围环境融合的场景，避免处理区域边缘过于明显。</p>
+                    <div class="method-scenarios">
+                        <span class="method-scenario">需要自然过渡</span>
+                        <span class="method-scenario">边缘不均匀</span>
+                        <span class="method-scenario">复杂背景</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <h4>颜色覆盖</h4>
+                    <p>采样水印区域边缘的颜色，计算平均值后填充整个区域。适用于颜色变化不大的背景，处理速度快，效果简洁。</p>
+                    <div class="method-scenarios">
+                        <span class="method-scenario">单色背景</span>
+                        <span class="method-scenario">简单纹理</span>
+                        <span class="method-scenario">快速处理</span>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <h4>中值模糊</h4>
+                    <p>使用中值滤波算法处理水印区域，通过取邻域像素的中值来平滑区域。适用于去除点状噪声、小区域水印，比高斯模糊更能保留边缘信息。</p>
+                    <div class="method-scenarios">
+                        <span class="method-scenario">点状噪声</span>
+                        <span class="method-scenario">小水印</span>
+                        <span class="method-scenario">保留边缘</span>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>截图处理：</strong>去除截图中的个人信息、敏感数据或版权信息。</p>
+                <p><strong>图片美化：</strong>消除图片上不需要的标记、Logo或水印。</p>
+                <p><strong>内容创作：</strong>处理从网络下载的带有水印的图片，用于个人项目。</p>
+                <p><strong>电商运营：</strong>批量处理商品图片，去除供应商添加的水印。</p>
+                <p><strong>普通用户：</strong>美化个人照片，去除不需要的标记。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">多种去水印方式</span>
+                    <span class="feature-tag">支持多区域处理</span>
+                    <span class="feature-tag">实时预览效果</span>
+                    <span class="feature-tag">批量处理支持</span>
+                    <span class="feature-tag">免费无限制</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>注意事项</h2>
+            <div class="warning-box">
+                    <ul>
+                        <li><strong>去水印方式选择：</strong>根据水印特点选择合适的去水印方式。文字水印适合使用模糊处理，复杂图案适合使用马赛克覆盖，纯色背景适合使用智能填充。</li>
+                        <li><strong>参数调整：</strong>模糊半径和马赛克大小需要根据实际情况调整，建议从小值开始逐步增大，直到达到满意效果。</li>
+                        <li><strong>多区域支持：</strong>可以添加多个去水印区域，工具会依次处理每个区域。对于分散的水印，建议分别选择区域处理。</li>
+                        <li><strong>图片质量：</strong>模糊处理和马赛克覆盖会改变水印区域的像素，可能会影响局部图片质量。建议处理前备份原始图片。</li>
+                        <li><strong>填充效果：</strong>智能填充效果取决于背景复杂度，纯色或渐变背景效果较好，复杂背景可能会有明显痕迹。</li>
+                        <li><strong>处理期间不要关闭页面：</strong>处理图片需要一定时间，尤其是批量处理时。处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。</li>
+                    </ul>
+                </div>
+
+                <h2>实战案例：电商商品图片处理</h2>
+                <p>小李是一名电商运营人员，经常需要处理从供应商处获取的商品图片。这些图片通常带有供应商的水印或Logo，需要去除后才能用于店铺展示。小李使用图像去水印工具来批量处理这些图片。</p>
+                <p><strong>处理策略：</strong></p>
+                <ol>
+                    <li><strong>识别水印位置：</strong>大多数供应商水印位于图片的角落或边缘。</li>
+                    <li><strong>选择去水印方式：</strong>对于纯色或渐变背景上的水印，使用智能填充；对于中间的水印，根据类型选择模糊处理或马赛克覆盖。</li>
+                    <li><strong>批量处理：</strong>同时上传多张图片，依次选择每个图片的水印区域并应用去水印。</li>
+                </ol>
+                <p><strong>批量处理流程：</strong></p>
+                <ol>
+                    <li>小李将20张商品图片上传到图像去水印工具中。</li>
+                    <li>对于第一张图片，使用鼠标框选水印区域，选择"智能填充"方式。</li>
+                    <li>点击"应用去水印"，查看处理效果，确认满意后点击"下载处理后的图片"。</li>
+                    <li>依次处理剩余的图片，根据每张图片的水印特点选择合适的去水印方式。</li>
+                    <li>对于部分带有文字水印的图片，选择"模糊处理"方式，调整模糊半径直到文字变得模糊。</li>
+                    <li>对于带有复杂图案水印的图片，选择"马赛克覆盖"方式，调整马赛克大小达到满意效果。</li>
+                </ol>
+                <p><strong>效果对比：</strong>处理前，商品图片带有明显的供应商水印；处理后，水印被成功去除，图片可以直接用于店铺展示。使用图像去水印工具大大提高了小李的工作效率，节省了大量手动处理时间。</p>
+
+                <h2>常见问题与解答</h2>
+                
+                <h3>Q1：工具是否会保存我的图片？</h3>
+                <p>不会。本工具采用纯前端技术实现，所有处理均在您的本地浏览器完成，图片不会上传到任何服务器，处理完成后也不会保存。</p>
+
+                <h3>Q2：处理后的图片质量会下降吗？</h3>
+                <p>模糊处理和马赛克覆盖会改变水印区域的像素，可能会影响局部图片质量。智能填充通过插值算法填充水印区域，保持图片尺寸不变，效果取决于背景复杂度。建议处理前备份原始图片。</p>
+
+                <h3>Q3：支持哪些图片格式？</h3>
+                <p>支持 JPG、PNG、WebP、GIF、BMP 等常见图片格式。处理后的图片默认保存为 PNG 格式以保持透明度。</p>
+
+                <h3>Q4：可以同时处理多个水印吗？</h3>
+                <p>可以。您可以添加多个去水印区域，工具会依次处理每个区域。对于分散的水印，建议分别选择区域处理。</p>
+
+                <h3>Q5：哪种去水印方式效果最好？</h3>
+                <p>这取决于水印的类型和背景：文字水印适合使用模糊处理，复杂图案适合使用马赛克覆盖，纯色或渐变背景适合使用智能填充。建议根据实际情况选择合适的方式。</p>
+
+                <h3>Q6：处理速度快吗？</h3>
+                <p>处理速度取决于图片大小和计算机性能。一般来说，处理一张普通大小的图片只需要几秒钟。建议处理不超过10MB的图片以获得更好的性能。</p>
+            </div>
+
+        <div id="note-footer-container" data-tool-title="开始使用图像去水印工具" data-tool-url="index.html" data-btn-color="#0EA5E9"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../watermark-add/index.html" class="tool-link">图像批量加水印工具</a>
+                <a href="../cropping/index.html" class="tool-link">图片裁剪工具</a>
+                <a href="../edit/index.html" class="tool-link">图片旋转与模糊工具</a>
+                <a href="../convert/index.html" class="tool-link">图片格式转换工具</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
