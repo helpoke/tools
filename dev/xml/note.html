@@ -127,7 +127,7 @@
             font-size: 0.95rem;
         }
 
-        
+
 
         .warning-box {
             background: var(--bg-tertiary);
@@ -167,12 +167,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/note.js"></script>
+    <script src="../../common/js/layout.js"></script>
 </head>
 
 <body>
     <div class="note-container">
         <header>
-            <h1>XML格式化工具 - 免费、安全、快速</h1>
+            <h1>XML格式化工具</h1>
             <p class="subtitle">XML压缩，XML与JSON互转，免费在线XML格式化工具，本地处理保护隐私</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
@@ -181,8 +182,10 @@
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是XML格式化工具？</h2>
-                <p>XML格式化工具是一款专业的在线XML数据处理工具，专为需要编辑和转换XML文档的用户设计。XML（可扩展标记语言）是一种广泛使用的数据交换格式，在配置文件、数据传输、Web服务等场景中被大量使用。然而，XML文档的格式直接影响数据的可读性和处理效率。这款工具可以帮助您快速、准确地格式化和转换XML数据。</p>
-                <p>工具提供三大核心功能：XML格式化、XML压缩和XML与JSON互转。格式化功能可以将混乱的XML文档整理为标准的缩进格式，每个标签层级清晰显示。压缩功能可以移除多余的空格和换行，减小XML文件体积。转换功能可以将XML转换为JSON格式，或将JSON转换为XML格式，方便不同系统间的数据交换。所有处理均在浏览器本地完成，您的数据不会上传到任何服务器。</p>
+                <p>XML格式化工具是一款专业的在线XML数据处理工具，专为需要编辑和转换XML文档的用户设计。XML（可扩展标记语言）是一种广泛使用的数据交换格式，在配置文件、数据传输、Web服务等场景中被大量使用。然而，XML文档的格式直接影响数据的可读性和处理效率。这款工具可以帮助您快速、准确地格式化和转换XML数据。
+                </p>
+                <p>工具提供三大核心功能：XML格式化、XML压缩和XML与JSON互转。格式化功能可以将混乱的XML文档整理为标准的缩进格式，每个标签层级清晰显示。压缩功能可以移除多余的空格和换行，减小XML文件体积。转换功能可以将XML转换为JSON格式，或将JSON转换为XML格式，方便不同系统间的数据交换。所有处理均在浏览器本地完成，您的数据不会上传到任何服务器。
+                </p>
 
                 <h2>如何使用？</h2>
                 <h3>第一步：输入XML数据</h3>
@@ -212,13 +215,17 @@
 
                 <h2>常见问题与解答</h2>
                 <h3>问：XML格式化和HTML格式化有什么区别？</h3>
-                <p><strong>答：</strong>XML和HTML虽然都是标记语言，但用途不同。XML用于存储和传输数据，强调数据的结构和语义；HTML用于展示网页内容，关注显示效果。格式化处理上，XML格式化更注重层级结构的清晰展示，标签和属性的整齐排列；HTML格式化还需要考虑标签的语义化和浏览器兼容性。本工具针对XML特点进行优化，确保数据结构清晰可读。</p>
+                <p><strong>答：</strong>XML和HTML虽然都是标记语言，但用途不同。XML用于存储和传输数据，强调数据的结构和语义；HTML用于展示网页内容，关注显示效果。格式化处理上，XML格式化更注重层级结构的清晰展示，标签和属性的整齐排列；HTML格式化还需要考虑标签的语义化和浏览器兼容性。本工具针对XML特点进行优化，确保数据结构清晰可读。
+                </p>
 
                 <h3>问：XML转JSON过程中数据会丢失吗？</h3>
-                <p><strong>答：</strong>XML转JSON可能出现部分信息丢失：XML属性（如<element attr="value">）在JSON中没有直接对应结构，可能转换为特殊字段或丢失；XML的命名空间信息可能无法完全保留；XML注释会被移除（JSON不支持注释）；XML的混合内容（元素中既有文本又有子元素）转换可能产生复杂结构。建议转换后仔细检查结果，必要时手动补充丢失的信息。</p>
+                <p><strong>答：</strong>XML转JSON可能出现部分信息丢失：XML属性（如<element attr="value">
+                        ）在JSON中没有直接对应结构，可能转换为特殊字段或丢失；XML的命名空间信息可能无法完全保留；XML注释会被移除（JSON不支持注释）；XML的混合内容（元素中既有文本又有子元素）转换可能产生复杂结构。建议转换后仔细检查结果，必要时手动补充丢失的信息。
+                </p>
 
                 <h3>问：JSON转XML有什么格式要求？</h3>
-                <p><strong>答：</strong>JSON转XML要求JSON数据符合特定结构：最外层必须是对象（不能是数组或简单值）；对象键会成为XML标签名；对象值会成为标签内容或子元素；数值、字符串、布尔值、null会转换为对应的文本内容；数组会转换为多个同名子元素。不符合这些要求的JSON可能导致转换失败或生成不规范的XML，建议先调整JSON结构再转换。</p>
+                <p><strong>答：</strong>JSON转XML要求JSON数据符合特定结构：最外层必须是对象（不能是数组或简单值）；对象键会成为XML标签名；对象值会成为标签内容或子元素；数值、字符串、布尔值、null会转换为对应的文本内容；数组会转换为多个同名子元素。不符合这些要求的JSON可能导致转换失败或生成不规范的XML，建议先调整JSON结构再转换。
+                </p>
 
                 <div class="warning-box">
                     <p><strong>注意事项：</strong></p>
@@ -236,10 +243,12 @@
             <div class="info-section">
                 <h2>实战案例</h2>
                 <h3>案例一：统一团队配置文件格式</h3>
-                <p>某开发团队使用多种工具编辑XML配置文件，导致代码风格不统一。使用本工具的格式化功能，可以快速统一格式：粘贴混乱的XML代码，点击"格式化"按钮，工具会按照统一的缩进标准整理代码。将格式化后的代码替换原有配置，整个团队的XML文件格式瞬间统一。</p>
+                <p>某开发团队使用多种工具编辑XML配置文件，导致代码风格不统一。使用本工具的格式化功能，可以快速统一格式：粘贴混乱的XML代码，点击"格式化"按钮，工具会按照统一的缩进标准整理代码。将格式化后的代码替换原有配置，整个团队的XML文件格式瞬间统一。
+                </p>
 
                 <h3>案例二：减小API响应数据体积</h3>
-                <p>某Web服务返回的XML数据体积较大，影响网络传输效率。使用本工具的压缩功能，可以有效减小数据体积：复制API返回的XML数据，点击"压缩"按钮，生成紧凑的单行XML。部署到生产环境后，数据体积减小约40%，显著提升接口响应速度。</p>
+                <p>某Web服务返回的XML数据体积较大，影响网络传输效率。使用本工具的压缩功能，可以有效减小数据体积：复制API返回的XML数据，点击"压缩"按钮，生成紧凑的单行XML。部署到生产环境后，数据体积减小约40%，显著提升接口响应速度。
+                </p>
 
                 <h2>特点与优势</h2>
                 <div class="feature-list">
@@ -252,7 +261,8 @@
                     <span class="feature-tag">一键复制</span>
                     <span class="feature-tag">完全免费</span>
                 </div>
-                <p>工具采用纯前端技术实现，所有XML处理都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的配置文件和数据始终处于您的控制之下，特别适合处理包含商业机密的数据。同时，工具支持XML与JSON的双向转换，方便不同系统间的数据交换。</p>
+                <p>工具采用纯前端技术实现，所有XML处理都在您的浏览器中完成，数据不会上传到任何服务器。这意味着您的配置文件和数据始终处于您的控制之下，特别适合处理包含商业机密的数据。同时，工具支持XML与JSON的双向转换，方便不同系统间的数据交换。
+                </p>
 
                 <h2>常见问题与解答</h2>
                 <h3>问：为什么XML对缩进要求严格？</h3>
@@ -266,10 +276,7 @@
             </div>
         </div>
 
-        <div id="note-footer-container"
-             data-tool-title="开始使用XML格式化工具"
-             data-tool-url="index.html"
-             data-btn-color="#D97706">
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#D97706">
         </div>
 
         <div class="related-tools">
@@ -281,6 +288,8 @@
                 <a href="../../md/index.html" class="tool-link">Markdown编辑器</a>
             </div>
         </div>
+
+        <div id="footer-container"></div>
     </div>
 
 </body>

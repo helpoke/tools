@@ -198,12 +198,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/note.js"></script>
+    <script src="../../common/js/layout.js"></script>
 </head>
 
 <body>
     <div class="note-container">
         <header>
-            <h1>Token 在线工具 - 免费、安全、快速</h1>
+            <h1>Token 在线工具</h1>
             <p class="subtitle">支持JWT解析验证、Token随机生成、Base64编解码，本地处理保护隐私</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
@@ -212,22 +213,30 @@
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是Token在线工具？</h2>
-                <p>Token在线工具是一款专业的Token处理工具集，专为需要解析、生成和管理Token的用户设计。Token（令牌）是现代网络应用中广泛使用的身份认证和数据传输载体，特别是在RESTful API设计、微服务架构、单页应用（SPA）等场景中扮演着核心角色。相比传统的Session认证，Token具有无状态、可扩展、支持跨域等优势，是现代Web应用首选的身份认证方案。</p>
-                <p>工具提供三种核心功能：JWT解析验证、随机Token生成和Base64编解码。JWT（JSON Web Token）是目前最流行的Token格式，由三部分组成：Header（头部，存储Token类型和签名算法）、Payload（载荷，存储用户信息和声明）和Signature（签名，确保Token未被篡改）。工具可以完整解析JWT各部分内容，验证签名格式，检查Token是否过期。同时，工具可以生成各种类型的随机Token字符串，用于API密钥、会话标识、临时验证码等场景。</p>
+                <p>Token在线工具是一款专业的Token处理工具集，专为需要解析、生成和管理Token的用户设计。Token（令牌）是现代网络应用中广泛使用的身份认证和数据传输载体，特别是在RESTful
+                    API设计、微服务架构、单页应用（SPA）等场景中扮演着核心角色。相比传统的Session认证，Token具有无状态、可扩展、支持跨域等优势，是现代Web应用首选的身份认证方案。</p>
+                <p>工具提供三种核心功能：JWT解析验证、随机Token生成和Base64编解码。JWT（JSON Web
+                    Token）是目前最流行的Token格式，由三部分组成：Header（头部，存储Token类型和签名算法）、Payload（载荷，存储用户信息和声明）和Signature（签名，确保Token未被篡改）。工具可以完整解析JWT各部分内容，验证签名格式，检查Token是否过期。同时，工具可以生成各种类型的随机Token字符串，用于API密钥、会话标识、临时验证码等场景。
+                </p>
                 <p>所有处理均在浏览器本地完成，Token内容不会上传到任何服务器。这意味着您的敏感Token信息始终处于您的完全控制之下，不会经过任何第三方服务器。</p>
 
                 <h2>如何使用？</h2>
                 <h3>JWT解析功能</h3>
-                <p>在输入框中粘贴JWT Token字符串（格式如：xxxxx.yyyyy.zzzzz），点击"解析"按钮。工具会自动将Token分割为三部分：Header（Base64URL解码后显示JSON格式）、Payload（Base64URL解码后显示包含用户信息和声明的JSON）、Signature（原始签名字符串）。同时，工具会验证Token的格式是否正确，检测是否包含过期时间（exp）声明，并提示Token是否已过期。解析结果以结构化的JSON格式展示，方便查看和分析Token内容。</p>
+                <p>在输入框中粘贴JWT
+                    Token字符串（格式如：xxxxx.yyyyy.zzzzz），点击"解析"按钮。工具会自动将Token分割为三部分：Header（Base64URL解码后显示JSON格式）、Payload（Base64URL解码后显示包含用户信息和声明的JSON）、Signature（原始签名字符串）。同时，工具会验证Token的格式是否正确，检测是否包含过期时间（exp）声明，并提示Token是否已过期。解析结果以结构化的JSON格式展示，方便查看和分析Token内容。
+                </p>
 
                 <h3>Token生成功能</h3>
-                <p>选择Token长度（16位、32位、64位、128位可选）和字符类型（纯数字、字母、字母数字混合、全部字符）。点击"生成"按钮，工具会基于加密安全的随机数生成器生成符合要求的随机Token字符串。生成的Token可用于API密钥生成、会话标识创建、临时验证码制作等场景。您可以多次生成直到获得满意的Token。</p>
+                <p>选择Token长度（16位、32位、64位、128位可选）和字符类型（纯数字、字母、字母数字混合、全部字符）。点击"生成"按钮，工具会基于加密安全的随机数生成器生成符合要求的随机Token字符串。生成的Token可用于API密钥生成、会话标识创建、临时验证码制作等场景。您可以多次生成直到获得满意的Token。
+                </p>
 
                 <h3>Base64编解码功能</h3>
-                <p>JWT的Header和Payload部分使用Base64URL编码。工具提供独立的Base64编解码功能，方便您手动编码自定义数据或解码JWT内容进行验证。输入需要编码的内容，点击"编码"获取Base64字符串；输入Base64编码的字符串，点击"解码"还原原始内容。工具使用URL安全的Base64URL编码变体（将+替换为-，将/替换为_），符合JWT规范。</p>
+                <p>JWT的Header和Payload部分使用Base64URL编码。工具提供独立的Base64编解码功能，方便您手动编码自定义数据或解码JWT内容进行验证。输入需要编码的内容，点击"编码"获取Base64字符串；输入Base64编码的字符串，点击"解码"还原原始内容。工具使用URL安全的Base64URL编码变体（将+替换为-，将/替换为_），符合JWT规范。
+                </p>
 
                 <h3>实战案例：调试第三方API认证</h3>
-                <p>假设您正在开发一个需要对接第三方支付API的项目，第三方返回的响应头中包含一个JWT格式的访问令牌。使用本工具进行调试的步骤如下：首先从响应头或响应体中复制完整的JWT字符串；然后粘贴到JWT解析框，工具立即显示Header、Payload和Signature三部分；如果Payload中包含用户ID、权限列表、过期时间等信息，可以验证这些数据是否符合预期；检查exp字段确认Token是否已过期；在开发过程中发现问题时，可以利用Base64编解码功能手动构造测试数据，验证系统的解析逻辑是否正确。</p>
+                <p>假设您正在开发一个需要对接第三方支付API的项目，第三方返回的响应头中包含一个JWT格式的访问令牌。使用本工具进行调试的步骤如下：首先从响应头或响应体中复制完整的JWT字符串；然后粘贴到JWT解析框，工具立即显示Header、Payload和Signature三部分；如果Payload中包含用户ID、权限列表、过期时间等信息，可以验证这些数据是否符合预期；检查exp字段确认Token是否已过期；在开发过程中发现问题时，可以利用Base64编解码功能手动构造测试数据，验证系统的解析逻辑是否正确。
+                </p>
             </div>
 
             <div class="info-section">
@@ -267,7 +276,8 @@
                     <span class="feature-tag">URL安全编码</span>
                     <span class="feature-tag">完全免费</span>
                 </div>
-                <p>工具采用纯前端技术实现，所有Token解析和生成都在您的浏览器中完成，Token内容不会上传到任何服务器。这意味着您的敏感Token信息始终处于您的完全控制之下。同时，工具提供完整的JWT解析功能，包括Header和Payload的JSON格式化显示、签名格式验证、过期时间检测，帮助您全面了解Token状态，快速定位认证问题。</p>
+                <p>工具采用纯前端技术实现，所有Token解析和生成都在您的浏览器中完成，Token内容不会上传到任何服务器。这意味着您的敏感Token信息始终处于您的完全控制之下。同时，工具提供完整的JWT解析功能，包括Header和Payload的JSON格式化显示、签名格式验证、过期时间检测，帮助您全面了解Token状态，快速定位认证问题。
+                </p>
 
                 <div class="warning-box">
                     <p><strong>注意事项：</strong></p>
@@ -283,29 +293,45 @@
 
                 <h2>常见问题与解答</h2>
                 <h3>问：JWT的三个部分分别是什么？</h3>
-                <p><strong>答：</strong>JWT（JSON Web Token）由三部分组成，用点号（.）分隔：1) Header（头部）：JSON格式的Base64URL编码，指定Token类型（通常为JWT）和签名算法（如HS256、RS256）；2) Payload（载荷）：JSON格式的Base64URL编码，包含声明（Claims）信息，如用户ID（sub）、发行者（iss）、过期时间（exp）等；3) Signature（签名）：对Header和Payload的签名，用于验证Token是否被篡改。签名的计算方式通常是：HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)。</p>
+                <p><strong>答：</strong>JWT（JSON Web Token）由三部分组成，用点号（.）分隔：1)
+                    Header（头部）：JSON格式的Base64URL编码，指定Token类型（通常为JWT）和签名算法（如HS256、RS256）；2)
+                    Payload（载荷）：JSON格式的Base64URL编码，包含声明（Claims）信息，如用户ID（sub）、发行者（iss）、过期时间（exp）等；3)
+                    Signature（签名）：对Header和Payload的签名，用于验证Token是否被篡改。签名的计算方式通常是：HMACSHA256(base64UrlEncode(header) + "."
+                    + base64UrlEncode(payload), secret)。</p>
 
                 <h3>问：JWT和Session有什么区别？</h3>
-                <p><strong>答：</strong>JWT和Session的主要区别：1) 存储位置：Session数据存储在服务器端，JWT数据本身包含所有信息，存储在客户端；2) 状态管理：Session是有状态的（服务器需维护会话），JWT是无状态的（服务器无需存储）；3) 扩展性：JWT适合分布式系统和跨域场景，Session需要额外处理跨域共享；4) 安全性：Session依赖会话ID，JWT依赖签名算法和密钥；5) 性能：JWT无需查询数据库验证，但每次请求都需要传输完整Token；6) 失效处理：Session可随时失效，JWT在过期前无法主动失效（除非加入黑名单机制）。</p>
+                <p><strong>答：</strong>JWT和Session的主要区别：1) 存储位置：Session数据存储在服务器端，JWT数据本身包含所有信息，存储在客户端；2)
+                    状态管理：Session是有状态的（服务器需维护会话），JWT是无状态的（服务器无需存储）；3) 扩展性：JWT适合分布式系统和跨域场景，Session需要额外处理跨域共享；4)
+                    安全性：Session依赖会话ID，JWT依赖签名算法和密钥；5) 性能：JWT无需查询数据库验证，但每次请求都需要传输完整Token；6)
+                    失效处理：Session可随时失效，JWT在过期前无法主动失效（除非加入黑名单机制）。</p>
 
                 <h3>问：如何确保JWT的安全性？</h3>
-                <p><strong>答：</strong>确保JWT安全性的措施：1) 使用强密钥：使用足够长度的随机密钥（HS256至少32字节，RS256使用2048位以上密钥）；2) 设置短期过期：Access Token过期时间设置较短（如15分钟-1小时），使用Refresh Token定期刷新；3) 验证所有声明：检查iss（发行者）、aud（受众）、exp（过期时间）等标准声明；4) 使用HTTPS：始终通过HTTPS传输Token，防止中间人攻击；5) 不存储敏感信息：Payload中的数据只是编码（非加密），不要存储密码等敏感信息；6) 防止重放攻击：在Token中加入nonce或jti声明，使用一次一密。</p>
+                <p><strong>答：</strong>确保JWT安全性的措施：1) 使用强密钥：使用足够长度的随机密钥（HS256至少32字节，RS256使用2048位以上密钥）；2) 设置短期过期：Access
+                    Token过期时间设置较短（如15分钟-1小时），使用Refresh Token定期刷新；3) 验证所有声明：检查iss（发行者）、aud（受众）、exp（过期时间）等标准声明；4)
+                    使用HTTPS：始终通过HTTPS传输Token，防止中间人攻击；5) 不存储敏感信息：Payload中的数据只是编码（非加密），不要存储密码等敏感信息；6)
+                    防止重放攻击：在Token中加入nonce或jti声明，使用一次一密。</p>
 
                 <h3>问：Token过期了怎么办？</h3>
-                <p><strong>答：</strong>Token过期的处理方式取决于Token类型和系统设计：1) 使用Refresh Token：颁发两个Token——短期Access Token（如15分钟）和长期Refresh Token（如7天），Access Token过期后用Refresh Token换取新的；2) 重新登录：对于不需要Refresh Token的系统，用户需要重新登录获取新Token；3) 自动刷新：前端在检测到Token即将过期时（如提前5分钟），自动调用刷新接口获取新Token；4) 优雅处理：前端应捕获401响应，自动触发刷新流程，避免用户感知。本工具的JWT解析功能会显示Token的过期时间（exp），帮助您判断Token状态。</p>
+                <p><strong>答：</strong>Token过期的处理方式取决于Token类型和系统设计：1) 使用Refresh Token：颁发两个Token——短期Access
+                    Token（如15分钟）和长期Refresh Token（如7天），Access Token过期后用Refresh Token换取新的；2) 重新登录：对于不需要Refresh
+                    Token的系统，用户需要重新登录获取新Token；3) 自动刷新：前端在检测到Token即将过期时（如提前5分钟），自动调用刷新接口获取新Token；4)
+                    优雅处理：前端应捕获401响应，自动触发刷新流程，避免用户感知。本工具的JWT解析功能会显示Token的过期时间（exp），帮助您判断Token状态。</p>
 
                 <h3>问：为什么JWT的签名无法伪造？</h3>
-                <p><strong>答：</strong>JWT签名使用HMAC（对称加密）或RSA/ECDSA（非对称加密）算法：1) HMAC签名：使用服务器端独有的secret密钥对Header和Payload进行签名，只要密钥不泄露，攻击者无法生成有效签名；2) RSA签名：使用私钥签名，任何人可用公钥验证，但只有私钥持有者能签名。签名过程是：对Header和Payload的Base64URL字符串拼接后计算哈希，攻击者没有密钥无法计算出正确的签名值。本工具仅验证签名格式正确性（是否为有效的Base64URL编码的HMAC值），无法验证签名真实性（需要密钥）。</p>
+                <p><strong>答：</strong>JWT签名使用HMAC（对称加密）或RSA/ECDSA（非对称加密）算法：1)
+                    HMAC签名：使用服务器端独有的secret密钥对Header和Payload进行签名，只要密钥不泄露，攻击者无法生成有效签名；2)
+                    RSA签名：使用私钥签名，任何人可用公钥验证，但只有私钥持有者能签名。签名过程是：对Header和Payload的Base64URL字符串拼接后计算哈希，攻击者没有密钥无法计算出正确的签名值。本工具仅验证签名格式正确性（是否为有效的Base64URL编码的HMAC值），无法验证签名真实性（需要密钥）。
+                </p>
 
                 <h3>问：Base64和Base64URL有什么区别？</h3>
-                <p><strong>答：</strong>Base64和Base64URL的区别：1) 字符集：标准Base64使用A-Z、a-z、0-9、+、/，Base64URL使用A-Z、a-z、0-9、-、_；2) URL兼容性：Base64的+和/在URL中具有特殊含义，Base64URL将它们替换为-和_，可直接用于URL参数；3) 填充规则：标准Base64通常需要=填充，Base64URL通常省略尾部=填充；4) JWT使用：JWT规范强制使用Base64URL编码，Header和Payload必须使用URL安全的字符集。本工具使用Base64URL编码，符合JWT规范要求。</p>
+                <p><strong>答：</strong>Base64和Base64URL的区别：1) 字符集：标准Base64使用A-Z、a-z、0-9、+、/，Base64URL使用A-Z、a-z、0-9、-、_；2)
+                    URL兼容性：Base64的+和/在URL中具有特殊含义，Base64URL将它们替换为-和_，可直接用于URL参数；3)
+                    填充规则：标准Base64通常需要=填充，Base64URL通常省略尾部=填充；4)
+                    JWT使用：JWT规范强制使用Base64URL编码，Header和Payload必须使用URL安全的字符集。本工具使用Base64URL编码，符合JWT规范要求。</p>
             </div>
         </div>
 
-        <div id="note-footer-container"
-             data-tool-title="开始使用Token在线工具"
-             data-tool-url="index.html"
-             data-btn-color="#0EA5E9"></div>
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#0EA5E9"></div>
 
 
         <div class="related-tools">
@@ -317,6 +343,8 @@
                 <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
             </div>
         </div>
+
+        <div id="footer-container"></div>
     </div>
 
 </body>
