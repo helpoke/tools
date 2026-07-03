@@ -95,6 +95,9 @@ function showToast(message, type = 'info', duration = 3000) {
 function showSuccess(message, duration) {
     showToast(message, 'success', duration);
 }
+function showSuccess(message) {
+    showToast(message, 'success', 3000);
+}
 
 /**
  * 显示错误弹框
@@ -103,6 +106,9 @@ function showSuccess(message, duration) {
  */
 function showError(message, duration) {
     showToast(message, 'error', duration);
+}
+function showError(message) {
+    showToast(message, 'error', 3000);
 }
 
 /**
@@ -113,6 +119,9 @@ function showError(message, duration) {
 function showInfo(message, duration) {
     showToast(message, 'info', duration);
 }
+function showInfo(message) {
+    showToast(message, 'info', 3000);
+}
 
 /**
  * 显示警告弹框
@@ -121,6 +130,9 @@ function showInfo(message, duration) {
  */
 function showWarning(message, duration) {
     showToast(message, 'warning', duration);
+}
+function showWarning(message) {
+    showToast(message, 'warning', 3000);
 }
 
 /**
@@ -161,4 +173,22 @@ if (typeof module !== 'undefined' && module.exports) {
         showWarning,
         validateInput
     };
+}
+
+// ================= 工具函数 =================
+function formatSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / 1048576).toFixed(2)} MB`;
+}
+
+function formatDuration(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+
+function showFileSizeToast(file, maxFileSize) {
+    showError(`文件大小超过限制（最大 ${formatSize(maxFileSize)}）。当前：${formatSize(file.size)}`);
 }

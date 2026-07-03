@@ -26,6 +26,20 @@
     margin-bottom: 10px;
 }
 
+.result-container {
+    max-height: 500px;
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.result-container video {
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+}
+
 .page-hero .description {
     font-size: 14px;
     color: #666;
@@ -264,6 +278,54 @@ h3 {
     color: #666;
 }
 
+.time-range-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.time-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 160px;
+}
+
+.time-input label {
+    font-size: 13px;
+    color: #666;
+    white-space: nowrap;
+    margin-bottom: 0 !important;
+}
+
+.time-input input[type="number"] {
+    width: 100px;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+    text-align: center;
+}
+
+.time-input .time-unit {
+    font-size: 13px;
+    color: #888;
+    min-width: auto;
+}
+
+.hint {
+    font-size: 12px;
+    color: #999;
+}
+
+.setting-group .hint {
+    font-size: 12px;
+    color: #999;
+    font-weight: normal;
+}
+
 .area-controls {
     display: flex;
     align-items: center;
@@ -317,10 +379,11 @@ h3 {
 
 .progress-fill {
     height: 100%;
-    background-color: #4CAF50;
+    background: linear-gradient(90deg, #4CAF50, #66BB6A);
     width: 0%;
     border-radius: 10px;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease-out;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
 }
 
 .progress-bar span {
@@ -683,7 +746,8 @@ body.dark-mode .setting-group label {
 }
 
 body.dark-mode .setting-group select,
-body.dark-mode .setting-group input[type="range"] {
+body.dark-mode .setting-group input[type="range"],
+body.dark-mode .setting-group input[type="number"] {
     background-color: var(--bg-tertiary);
     border-color: var(--border-color);
     color: var(--text-primary);
