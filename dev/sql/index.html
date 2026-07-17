@@ -479,31 +479,78 @@
                             placeholder="格式化后的 SQL 将显示在这里..."></textarea>
                     </div>
                 </div>
-            </div>
 
-            <div class="tool-card">
-                <h3 style="font-size: 16px; font-weight: 600; color: #2c3e50; margin-bottom: 16px;">SQL 格式化说明</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                    <div style="padding: 16px; background: #f8fafc; border-radius: 8px;">
-                        <h4 style="font-size: 14px; font-weight: 600; color: #4f46e5; margin-bottom: 8px;">支持的功能</h4>
-                        <ul style="font-size: 13px; color: #64748b; list-style: disc; padding-left: 20px;">
-                            <li>SELECT/INSERT/UPDATE/DELETE</li>
-                            <li>CREATE/ALTER/DROP TABLE</li>
-                            <li>JOIN (INNER/LEFT/RIGHT/FULL)</li>
-                            <li>子查询格式化</li>
-                            <li>嵌套函数</li>
-                        </ul>
-                    </div>
-                    <div style="padding: 16px; background: #f8fafc; border-radius: 8px;">
-                        <h4 style="font-size: 14px; font-weight: 600; color: #4f46e5; margin-bottom: 8px;">格式化选项</h4>
-                        <ul style="font-size: 13px; color: #64748b; list-style: disc; padding-left: 20px;">
-                            <li>自定义缩进（空格/Tab）</li>
-                            <li>关键字大小写转换</li>
-                            <li>AND/OR 换行控制</li>
-                            <li>语句间空行数量</li>
-                            <li>可选行号显示</li>
-                        </ul>
-                    </div>
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、格式化功能</h4>
+                            <ul>
+                                <li><strong>格式化：</strong>将压缩或杂乱的SQL代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
+                                <li><strong>压缩：</strong>将格式化的SQL代码压缩为紧凑格式，去除多余空白，减小文件体积。</li>
+                                <li><strong>复制结果：</strong>一键复制格式化或压缩后的代码到剪贴板。</li>
+                                <li><strong>示例SQL：</strong>点击"示例SQL"按钮可以查看格式化效果的示例代码。</li>
+                                <li><strong>清空：</strong>快速清除所有输入和输出内容。</li>
+                            </ul>
+                            <h4>二、格式化选项</h4>
+                            <ul>
+                                <li><strong>缩进：</strong>可选择2空格、4空格或Tab作为缩进单位，默认为4空格。</li>
+                                <li><strong>关键字：</strong>可选择大写、小写或保持原样，默认为保持原样。</li>
+                                <li><strong>语句间空行：</strong>设置每个SQL语句之间的空行数量，默认为1行。</li>
+                                <li><strong>AND/OR 换行：</strong>勾选后，AND/OR 关键字会单独换行显示。</li>
+                            </ul>
+                            <h4>三、支持的 SQL 语法</h4>
+                            <ul>
+                                <li><strong>数据查询：</strong>SELECT、FROM、WHERE、JOIN（INNER/LEFT/RIGHT/FULL/CROSS）</li>
+                                <li><strong>数据操作：</strong>INSERT、UPDATE、DELETE、VALUES、SET</li>
+                                <li><strong>数据定义：</strong>CREATE、ALTER、DROP、TABLE、INDEX、VIEW、DATABASE</li>
+                                <li><strong>查询子句：</strong>ORDER BY、GROUP BY、HAVING、LIMIT、OFFSET</li>
+                                <li><strong>条件表达式：</strong>AND、OR、NOT、IN、LIKE、BETWEEN、IS NULL</li>
+                                <li><strong>流程控制：</strong>CASE、WHEN、THEN、ELSE、END</li>
+                                <li><strong>聚合函数：</strong>COUNT、SUM、AVG、MIN、MAX</li>
+                            </ul>
+                            <h4>四、快捷操作</h4>
+                            <ul>
+                                <li>输入和输出区域都支持独立复制操作。</li>
+                                <li>状态栏会实时显示行数、字符数和关键词数量。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、格式规范</h4>
+                            <ul>
+                                <li>SQL语句必须以分号 <code>;</code> 结尾。</li>
+                                <li>字符串必须用单引号或双引号包裹。</li>
+                                <li>注释支持 <code>--</code>（单行）和 <code>/* ... */</code>（多行）。</li>
+                                <li>标识符（表名、列名）可以用反引号 <code>`</code> 包裹。</li>
+                            </ul>
+                            <h4>二、关键字处理</h4>
+                            <ul>
+                                <li>选择"大写"选项时，所有SQL关键字都会转换为大写。</li>
+                                <li>选择"小写"选项时，所有SQL关键字都会转换为小写。</li>
+                                <li>选择"保持原样"选项时，关键字保持原始大小写。</li>
+                                <li>函数名默认转换为大写。</li>
+                            </ul>
+                            <h4>三、性能提示</h4>
+                            <ul>
+                                <li>处理超大SQL文件（超过1MB）时可能会导致浏览器卡顿。</li>
+                                <li>建议将大型SQL文件分段处理。</li>
+                            </ul>
+                            <h4>四、数据安全</h4>
+                            <ul>
+                                <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li>建议不要在公共设备上处理包含敏感信息的SQL代码。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>格式化失败：</strong>检查SQL语法是否正确，特别是括号和引号是否匹配。</li>
+                                <li><strong>关键字未转换：</strong>确保选择了正确的关键字大小写选项。</li>
+                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>

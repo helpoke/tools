@@ -654,15 +654,74 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
 
                 <div class="info-section">
                     <details class="info-details">
-                        <summary>为什么有些资源无法下载？</summary>
+                        <summary>使用说明</summary>
                         <div class="info-content">
-                            <p>某些资源无法自动下载主要受以下技术限制影响：</p>
+                            <h4>一、直接URL下载</h4>
                             <ul>
-                                <li><strong>CORS（跨域资源共享）限制</strong>：大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源</li>
-                                <li><strong>网站防盗链保护</strong>：许多资源托管站点实施了防盗链机制</li>
-                                <li><strong>服务器访问控制</strong>：部分服务器会检测请求来源</li>
+                                <li><strong>输入URL：</strong>在文本框中输入资源文件的URL地址，每行一个。</li>
+                                <li><strong>支持格式：</strong>支持JS、CSS、字体（.ttf/.woff/.woff2）、图标等网页静态资源文件。</li>
+                                <li><strong>URL格式化：</strong>系统会自动格式化不规范的URL地址。</li>
                             </ul>
-                            <p>对于无法下载的资源，您可以复制链接在浏览器中直接访问下载。</p>
+                            <h4>二、网页资源提取</h4>
+                            <ul>
+                                <li><strong>输入网址：</strong>在输入框中输入网页地址，如 <code>https://example.com/page.html</code>。</li>
+                                <li><strong>提取资源：</strong>点击"提取资源"按钮，系统将尝试提取页面中的JS和CSS资源。</li>
+                                <li><strong>选择资源：</strong>可以勾选或取消勾选资源，选择需要下载的资源。</li>
+                                <li><strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的资源添加到下载列表。</li>
+                            </ul>
+                            <h4>三、下载设置</h4>
+                            <ul>
+                                <li><strong>并发下载数：</strong>设置同时下载的文件数量，范围为1-10，默认3。</li>
+                                <li><strong>文件类型筛选：</strong>可选择"全部类型"、"仅JS文件"、"仅CSS文件"或"仅字体文件"。</li>
+                                <li><strong>打包为ZIP：</strong>勾选后，下载完成的文件将自动打包为ZIP压缩包下载。</li>
+                            </ul>
+                            <h4>四、常用资源快速下载</h4>
+                            <ul>
+                                <li><strong>点击快速链接：</strong>页面下方提供了常用CDN资源的快速下载链接，点击即可添加到下载队列。</li>
+                                <li><strong>包含资源：</strong>包括jQuery、Vue、React、Bootstrap等常用前端库。</li>
+                            </ul>
+                            <h4>五、开始下载</h4>
+                            <ul>
+                                <li><strong>点击下载：</strong>点击"开始下载"按钮开始批量下载。</li>
+                                <li><strong>查看进度：</strong>下载进度会实时显示，包括总文件数、已完成数、失败数和跳过数。</li>
+                                <li><strong>清空列表：</strong>点击"清空列表"按钮可以清除所有下载任务。</li>
+                                <li><strong>直接下载：</strong>对于无法自动下载的资源，可以点击"直接下载"按钮在浏览器中直接下载。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、下载限制</h4>
+                            <ul>
+                                <li><strong>CORS限制：</strong>大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源。</li>
+                                <li><strong>防盗链保护：</strong>许多资源托管站点实施了防盗链机制，会检查请求的来源。</li>
+                                <li><strong>访问控制：</strong>部分服务器会检测请求是否来自真实的浏览器环境。</li>
+                            </ul>
+                            <h4>二、处理方式</h4>
+                            <ul>
+                                <li><strong>无法下载的资源：</strong>对于无法自动下载的资源，您可以复制链接在浏览器中直接访问下载。</li>
+                                <li><strong>直接下载：</strong>点击"直接下载"按钮可以在浏览器中直接打开资源链接。</li>
+                                <li><strong>打包下载：</strong>勾选"打包为ZIP"选项后，所有成功下载的文件会自动打包为ZIP压缩包。</li>
+                            </ul>
+                            <h4>三、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>建议不要在公共设备上处理包含敏感信息的资源。</li>
+                            </ul>
+                            <h4>四、处理过程</h4>
+                            <ul>
+                                <li>处理期间不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失。</li>
+                                <li>大文件处理可能需要较长时间，请耐心等待。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>下载失败：</strong>检查网络连接，或尝试降低并发下载数。</li>
+                                <li><strong>提取无结果：</strong>某些网站使用JavaScript动态加载资源，无法通过静态方式提取。</li>
+                                <li><strong>文件损坏：</strong>服务器可能返回不完整的文件，尝试重新下载。</li>
+                                <li><strong>浏览器限制：</strong>某些浏览器可能限制自动下载，需要手动允许。</li>
+                                <li><strong>打包失败：</strong>文件数量过多或过大可能导致打包失败，建议分批下载。</li>
+                            </ul>
                         </div>
                     </details>
                 </div>

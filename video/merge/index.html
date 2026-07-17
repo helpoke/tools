@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <script src="../lib/ffmpeg.js"></script>
     <script src="../common/ffmpeg-parallel.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -189,6 +190,118 @@
                 <div class="download-buttons">
                     <button id="download-video" disabled>下载视频</button>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、上传视频</h4>
+                        <ul>
+                            <li><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频，支持批量上传。</li>
+                            <li><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
+                            <li><strong>文件大小：</strong>建议单个视频文件不超过 500MB。</li>
+                            <li><strong>预览视频：</strong>上传后可预览每个视频的内容。</li>
+                        </ul>
+                        <h4>二、调整视频顺序</h4>
+                        <ul>
+                            <li><strong>拖拽排序：</strong>通过拖拽调整视频的拼接顺序。</li>
+                            <li><strong>向上/向下：</strong>点击箭头按钮调整单个视频的位置。</li>
+                            <li><strong>删除视频：</strong>点击删除按钮移除不需要的视频。</li>
+                            <li><strong>清空列表：</strong>点击清空按钮移除所有视频。</li>
+                        </ul>
+                        <h4>三、设置转场效果</h4>
+                        <ul>
+                            <li><strong>淡入淡出：</strong>视频之间平滑过渡。</li>
+                            <li><strong>滑动效果：</strong>视频从左向右或从右向左滑动切换。</li>
+                            <li><strong>无转场：</strong>直接切换，无过渡效果。</li>
+                            <li><strong>转场时长：</strong>设置转场效果的持续时间。</li>
+                        </ul>
+                        <h4>四、添加背景音乐</h4>
+                        <ul>
+                            <li><strong>上传音频：</strong>点击上传背景音乐文件。</li>
+                            <li><strong>支持格式：</strong>支持 MP3、WAV、AAC、M4A 等音频格式。</li>
+                            <li><strong>音量调整：</strong>调整背景音乐和视频原音的音量。</li>
+                            <li><strong>循环播放：</strong>设置背景音乐是否循环播放。</li>
+                        </ul>
+                        <h4>五、设置输出参数</h4>
+                        <ul>
+                            <li><strong>视频质量：</strong>选择输出质量（低/中/高/极高）。</li>
+                            <li><strong>分辨率：</strong>选择输出分辨率，自动适配所有视频。</li>
+                            <li><strong>统一尺寸：</strong>自动将所有视频调整为相同尺寸。</li>
+                        </ul>
+                        <h4>六、开始合成</h4>
+                        <ul>
+                            <li><strong>点击合成：</strong>点击"开始合成"按钮开始处理。</li>
+                            <li><strong>进度显示：</strong>实时显示合成进度和处理步骤。</li>
+                            <li><strong>处理步骤：</strong>加载引擎→环境准备→加载视频→统一尺寸→合成片段→编码视频→完成。</li>
+                            <li><strong>等待时间：</strong>合成时间取决于视频数量、长度和电脑性能。</li>
+                        </ul>
+                        <h4>七、查看和下载</h4>
+                        <ul>
+                            <li><strong>预览效果：</strong>合成完成后可预览合成后的视频。</li>
+                            <li><strong>查看信息：</strong>显示合成后的文件大小等信息。</li>
+                            <li><strong>一键下载：</strong>点击"下载视频"按钮保存到本地。</li>
+                        </ul>
+                        <h4>八、适用场景</h4>
+                        <ul>
+                            <li><strong>视频拼接：</strong>将多个短视频拼接成一个长视频。</li>
+                            <li><strong>制作合集：</strong>将多个相关视频合成为一个合集。</li>
+                            <li><strong>添加转场：</strong>为视频添加专业的转场效果。</li>
+                            <li><strong>添加配乐：</strong>为视频添加背景音乐。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、数据安全</h4>
+                        <ul>
+                            <li>所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
+                            <li>视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                            <li>建议在处理敏感视频时使用隐私模式浏览。</li>
+                        </ul>
+                        <h4>二、处理性能</h4>
+                        <ul>
+                            <li>视频合成是计算密集型操作，会占用较多CPU资源。</li>
+                            <li>处理时间取决于视频数量、时长和电脑性能。</li>
+                            <li>建议在合成大文件时关闭其他占用CPU的程序。</li>
+                            <li>多个视频合成时需要更大的内存，建议分批处理。</li>
+                        </ul>
+                        <h4>三、格式限制</h4>
+                        <ul>
+                            <li>支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
+                            <li>不支持的格式可能无法正常合成。</li>
+                            <li>输出格式默认为MP4，兼容性最好。</li>
+                        </ul>
+                        <h4>四、分辨率适配</h4>
+                        <ul>
+                            <li>不同分辨率的视频会自动统一到目标分辨率。</li>
+                            <li>分辨率差异较大时可能导致画面拉伸或黑边。</li>
+                            <li>建议使用相同分辨率的视频进行合成。</li>
+                        </ul>
+                        <h4>五、音频处理</h4>
+                        <ul>
+                            <li>视频原音和背景音乐可以独立调整音量。</li>
+                            <li>背景音乐过长会被截断，过短会循环播放。</li>
+                            <li>建议背景音乐长度与合成后视频长度匹配。</li>
+                        </ul>
+                        <h4>六、质量损失</h4>
+                        <ul>
+                            <li>视频重新编码会导致一定的画质损失。</li>
+                            <li>多次合成会累积画质损失。</li>
+                            <li>建议合成前备份原始视频文件。</li>
+                        </ul>
+                        <h4>七、常见问题</h4>
+                        <ul>
+                            <li><strong>合成失败：</strong>检查视频文件是否损坏或格式不支持。</li>
+                            <li><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
+                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li><strong>音频不同步：</strong>检查视频和音频的编码格式。</li>
+                            <li><strong>内存不足：</strong>减少视频数量或分段合成。</li>
+                        </ul>
+                    </div>
+                </details>
             </div>
         </div>
 

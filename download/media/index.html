@@ -14,6 +14,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -166,17 +167,74 @@
 
                 <div class="info-section">
                     <details class="info-details">
-                        <summary>为什么有些图片无法自动下载？</summary>
+                        <summary>使用说明</summary>
                         <div class="info-content">
-                            <p>某些图片无法自动下载主要受以下技术限制影响：</p>
+                            <h4>一、直接URL下载</h4>
                             <ul>
-                                <li><strong>CORS（跨域资源共享）限制</strong>：大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源</li>
-                                <li><strong>网站防盗链保护</strong>：许多图片托管站点实施了防盗链机制，会检查请求的Referer头部</li>
-                                <li><strong>服务器特定的访问控制</strong>：部分服务器会检测请求是否来自真实的浏览器环境</li>
-                                <li><strong>网络连接问题</strong>：某些服务器可能故意设置连接超时或不稳定来阻止批量下载</li>
-                                <li><strong>JavaScript环境限制</strong>：浏览器的安全策略限制了某些类型的跨域操作</li>
+                                <li><strong>输入URL：</strong>在文本框中输入媒体文件的URL地址，每行一个。</li>
+                                <li><strong>URL格式化：</strong>系统会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议。</li>
+                                <li><strong>支持格式：</strong>支持图片（JPG、PNG、GIF、WebP等）和视频（MP4、WebM、FLV等）格式。</li>
                             </ul>
-                            <p>对于这类图片，系统会将其标记为"链接已保存"状态，您可以通过"在新标签页中打开保存的链接"按钮在浏览器中访问这些图片。通过右键点击图片，选择"保存图片"手动下载。</p>
+                            <h4>二、网页图片提取</h4>
+                            <ul>
+                                <li><strong>输入网址：</strong>在输入框中输入网页地址，如 <code>https://example.com/page.html</code>。</li>
+                                <li><strong>提取图片：</strong>点击"提取图片"按钮，系统将尝试提取页面中的所有静态图片。</li>
+                                <li><strong>选择图片：</strong>可以勾选或取消勾选图片，选择需要下载的图片。</li>
+                                <li><strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的图片添加到下载列表。</li>
+                            </ul>
+                            <h4>三、网页视频提取</h4>
+                            <ul>
+                                <li><strong>输入网址：</strong>在输入框中输入包含视频的网页地址。</li>
+                                <li><strong>提取视频：</strong>点击"提取视频"按钮，系统将尝试提取页面中的所有视频资源。</li>
+                                <li><strong>选择视频：</strong>可以勾选或取消勾选视频，选择需要下载的视频。</li>
+                                <li><strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的视频添加到下载列表。</li>
+                            </ul>
+                            <h4>四、下载设置</h4>
+                            <ul>
+                                <li><strong>并发下载数：</strong>设置同时下载的文件数量，范围为1-10，默认3。</li>
+                                <li><strong>文件类型筛选：</strong>可选择"全部类型"、"仅图片"或"仅视频"。</li>
+                                <li><strong>最小图片尺寸：</strong>设置过滤的最小图片尺寸，可选择不限制、100×100、200×200或500×500。</li>
+                            </ul>
+                            <h4>五、开始下载</h4>
+                            <ul>
+                                <li><strong>点击下载：</strong>点击"开始下载"按钮开始批量下载。</li>
+                                <li><strong>查看进度：</strong>下载进度会实时显示，包括总文件数、已完成数、失败数和跳过数。</li>
+                                <li><strong>清空列表：</strong>点击"清空列表"按钮可以清除所有下载任务。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、下载限制</h4>
+                            <ul>
+                                <li><strong>CORS限制：</strong>大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源。</li>
+                                <li><strong>防盗链保护：</strong>许多图片托管站点实施了防盗链机制，会检查请求的Referer头部。</li>
+                                <li><strong>访问控制：</strong>部分服务器会检测请求是否来自真实的浏览器环境。</li>
+                                <li><strong>网络限制：</strong>某些服务器可能故意设置连接超时或不稳定来阻止批量下载。</li>
+                            </ul>
+                            <h4>二、处理方式</h4>
+                            <ul>
+                                <li><strong>无法下载的资源：</strong>系统会将其标记为"链接已保存"状态，您可以通过"在新标签页中打开保存的链接"按钮在浏览器中访问这些资源。</li>
+                                <li><strong>手动下载：</strong>对于无法自动下载的资源，可以右键点击链接，选择"在新标签页中打开"，然后右键保存。</li>
+                            </ul>
+                            <h4>三、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>建议不要在公共设备上处理包含敏感信息的资源。</li>
+                            </ul>
+                            <h4>四、处理过程</h4>
+                            <ul>
+                                <li>处理期间不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失。</li>
+                                <li>大文件处理可能需要较长时间，请耐心等待。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>下载失败：</strong>检查网络连接，或尝试降低并发下载数。</li>
+                                <li><strong>提取无结果：</strong>某些网站使用JavaScript动态加载图片，无法通过静态方式提取。</li>
+                                <li><strong>文件损坏：</strong>服务器可能返回不完整的文件，尝试重新下载。</li>
+                                <li><strong>浏览器限制：</strong>某些浏览器可能限制自动下载，需要手动允许。</li>
+                            </ul>
                         </div>
                     </details>
                 </div>

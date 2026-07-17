@@ -381,6 +381,86 @@
                     </div>
                 </div>
             </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、解析 Cron 表达式</h4>
+                        <ul>
+                            <li><strong>输入表达式：</strong>在输入框中输入5位Cron表达式，如 <code>*/5 * * * *</code>。</li>
+                            <li><strong>点击解析：</strong>点击"解析"按钮，系统会将表达式转换为人类可读的描述。</li>
+                            <li><strong>可视化展示：</strong>解析结果会以卡片形式展示每个字段的含义（分、时、日、月、星期）。</li>
+                            <li><strong>查看执行时间：</strong>系统会预测最近的执行时间列表，方便您了解任务的执行计划。</li>
+                            <li><strong>使用预设：</strong>点击下方的预设按钮（如每分钟、每小时、每天等）可以快速填入常用表达式。</li>
+                        </ul>
+                        <h4>二、生成 Cron 表达式</h4>
+                        <ul>
+                            <li><strong>选择生成模式：</strong>切换到"生成 Cron"标签页，通过可视化界面配置各字段的执行规则。</li>
+                            <li><strong>分钟配置：</strong>支持每分钟、每隔N分钟、范围选择、指定值四种模式。</li>
+                            <li><strong>小时配置：</strong>支持每小时、每隔N小时、范围选择、指定值四种模式。</li>
+                            <li><strong>日期配置：</strong>支持每日或指定日期。</li>
+                            <li><strong>月份配置：</strong>支持每月或指定月份。</li>
+                            <li><strong>星期配置：</strong>支持不限或指定星期几。</li>
+                            <li><strong>查看结果：</strong>配置完成后自动生成对应的Cron表达式和描述。</li>
+                        </ul>
+                        <h4>三、Cron 表达式格式</h4>
+                        <ul>
+                            <li>Cron表达式由5个字段组成，空格分隔：<code>分 时 日 月 星期</code></li>
+                            <li><strong>分钟(0-59)：</strong>指定任务在小时的第几分钟执行。</li>
+                            <li><strong>小时(0-23)：</strong>指定任务在一天的第几小时执行。</li>
+                            <li><strong>日期(1-31)：</strong>指定任务在月的第几天执行。</li>
+                            <li><strong>月份(1-12)：</strong>指定任务在一年的第几月执行。</li>
+                            <li><strong>星期(0-6)：</strong>指定任务在星期几执行（0=周日）。</li>
+                        </ul>
+                        <h4>四、特殊字符说明</h4>
+                        <ul>
+                            <li><strong>*</strong>：任意值，表示该字段的所有可能值。</li>
+                            <li><strong>,</strong>：枚举，列出多个值，如 <code>1,3,5</code>。</li>
+                            <li><strong>-</strong>：范围，指定值的范围，如 <code>1-5</code>。</li>
+                            <li><strong>/</strong>：步长，指定间隔，如 <code>*/5</code> 表示每5个单位。</li>
+                            <li><strong>?</strong>：不指定，通常用于日期和星期字段冲突时。</li>
+                            <li><strong>L</strong>：最后，如日期字段的 <code>L</code> 表示当月最后一天。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、格式规范</h4>
+                        <ul>
+                            <li>Cron表达式必须为5位格式，各字段之间用空格分隔。</li>
+                            <li>每个字段的值必须在规定范围内，超出范围会导致解析失败。</li>
+                            <li>星期字段0表示周日，1-6分别表示周一到周六。</li>
+                        </ul>
+                        <h4>二、常见示例</h4>
+                        <ul>
+                            <li><code>* * * * *</code> - 每分钟执行</li>
+                            <li><code>0 * * * *</code> - 每小时执行</li>
+                            <li><code>0 0 * * *</code> - 每天午夜执行</li>
+                            <li><code>0 9 * * 1-5</code> - 工作日上午9点执行</li>
+                            <li><code>0 0 1 * *</code> - 每月1号执行</li>
+                        </ul>
+                        <h4>三、执行时间预测</h4>
+                        <ul>
+                            <li>执行时间预测基于当前时间计算，仅供参考。</li>
+                            <li>实际执行时间可能受系统时区和任务调度器影响。</li>
+                            <li>不支持某些高级Cron特性（如秒级精度）。</li>
+                        </ul>
+                        <h4>四、数据安全</h4>
+                        <ul>
+                            <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                            <li>建议不要在公共设备上处理包含敏感信息的Cron表达式。</li>
+                        </ul>
+                        <h4>五、常见问题</h4>
+                        <ul>
+                            <li><strong>解析失败：</strong>检查Cron表达式格式是否正确，字段值是否在有效范围内。</li>
+                            <li><strong>执行时间异常：</strong>确认时区设置是否正确，某些调度器可能使用不同的时区。</li>
+                            <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
         </div>
 
         <!-- Footer component container -->

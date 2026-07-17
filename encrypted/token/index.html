@@ -853,6 +853,91 @@
                     </div>
                 </div>
             </div>
+
+            <div class="tool-card">
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、JWT解析</h4>
+                            <ul>
+                                <li><strong>输入JWT Token：</strong>在文本框中输入完整的JWT Token（格式：header.payload.signature）。</li>
+                                <li><strong>输入签名密钥（可选）：</strong>如果需要验证HMAC签名，输入密钥。</li>
+                                <li><strong>点击解析：</strong>点击"解析 JWT"按钮解析Token的各个部分。</li>
+                                <li><strong>查看Header：</strong>显示Token的头部信息，包括算法和类型。</li>
+                                <li><strong>查看Payload：</strong>显示Token的载荷信息，包括用户数据和声明。</li>
+                                <li><strong>查看时间校验：</strong>显示签发时间(iat)、过期时间(exp)、生效时间(nbf)等的状态。</li>
+                                <li><strong>查看签名：</strong>显示Token的签名部分，并可复制。</li>
+                            </ul>
+                            <h4>二、Token生成</h4>
+                            <ul>
+                                <li><strong>设置Token长度：</strong>设置生成Token的字符长度，范围为8-256位。</li>
+                                <li><strong>设置生成数量：</strong>设置一次性生成的Token数量，范围为1-50个。</li>
+                                <li><strong>选择字符类型：</strong>可选择包含大写字母、小写字母、数字、特殊字符。</li>
+                                <li><strong>选择输出格式：</strong>可选择纯文本、Hex或Base64格式。</li>
+                                <li><strong>点击生成：</strong>点击"生成 Token"按钮生成随机Token。</li>
+                                <li><strong>复制Token：</strong>点击复制按钮复制单个Token，或点击"复制全部 Token"复制所有Token。</li>
+                            </ul>
+                            <h4>三、Base64编解码</h4>
+                            <ul>
+                                <li><strong>输入文本：</strong>在文本框中输入需要编码或解码的文本。</li>
+                                <li><strong>选择编码模式：</strong>选择Base64URL（URL安全）或标准Base64模式。</li>
+                                <li><strong>点击编码：</strong>点击"Base64 编码"按钮将文本编码为Base64格式。</li>
+                                <li><strong>点击解码：</strong>点击"Base64 解码"按钮将Base64文本解码为原始文本。</li>
+                                <li><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
+                            </ul>
+                            <h4>四、JWT基础</h4>
+                            <ul>
+                                <li><strong>结构：</strong>JWT由三部分组成，用点号分隔：Header.Payload.Signature。</li>
+                                <li><strong>Header：</strong>包含算法(alg)和类型(typ)信息，Base64URL编码。</li>
+                                <li><strong>Payload：</strong>包含声明信息，如iss（签发者）、exp（过期时间）、sub（主题）等。</li>
+                                <li><strong>Signature：</strong>使用Header指定的算法对前两部分签名，确保数据完整性。</li>
+                                <li><strong>常用声明：</strong>iat（签发时间）、exp（过期时间）、nbf（生效时间）、iss（签发者）、sub（主题）、aud（受众）、jti（JWT ID）。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>JWT的Payload部分只是Base64编码，不是加密，敏感信息不应存储在Payload中。</li>
+                                <li>生成的Token仅供参考，请勿直接用于生产环境，建议使用更安全的生成方式。</li>
+                            </ul>
+                            <h4>二、JWT解析</h4>
+                            <ul>
+                                <li>JWT格式必须为三段式：header.payload.signature，缺少任何部分都会解析失败。</li>
+                                <li>签名验证需要提供正确的密钥，否则验证将失败。</li>
+                                <li>过期时间(exp)已过的Token会被标记为无效。</li>
+                                <li>生效时间(nbf)未到的Token会被标记为警告。</li>
+                                <li>签发时间(iat)在未来的Token会被标记为警告。</li>
+                            </ul>
+                            <h4>三、Token生成</h4>
+                            <ul>
+                                <li>Token长度建议至少32位，太短的Token安全性较低。</li>
+                                <li>建议至少选择两种字符类型，增加Token的复杂度。</li>
+                                <li>特殊字符可能在某些场景下不兼容，如URL参数。</li>
+                                <li>批量生成时，建议每次生成不超过20个Token。</li>
+                            </ul>
+                            <h4>四、Base64编解码</h4>
+                            <ul>
+                                <li>Base64URL格式将+替换为-，/替换为_，去掉末尾的=，适合URL传输。</li>
+                                <li>标准Base64格式包含+、/和=字符，不适合直接用于URL参数。</li>
+                                <li>解码时如果输入不是有效的Base64字符串，会显示错误信息。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>JWT解析失败：</strong>检查Token格式是否正确，确保是三段式结构。</li>
+                                <li><strong>签名不匹配：</strong>检查密钥是否正确，算法是否匹配。</li>
+                                <li><strong>Token生成失败：</strong>请至少选择一种字符类型。</li>
+                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li><strong>Base64解码失败：</strong>检查输入是否为有效的Base64字符串。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
         </div>
 
         <!-- Footer component container -->

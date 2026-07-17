@@ -6,6 +6,7 @@
     <meta name="robots" content="index,follow,noai">
     <title>图片背景色切换工具</title>
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -53,6 +54,75 @@
         <div class="action-buttons">
             <button id="replaceBgColorBtn" disabled>应用背景替换</button>
             <button id="downloadBtn" disabled>下载结果图片</button>
+        </div>
+
+        <div class="info-section">
+            <details class="info-details">
+                <summary>使用说明</summary>
+                <div class="info-content">
+                    <h4>一、上传图片</h4>
+                    <ul>
+                        <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                        <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                        <li><strong>图片预览：</strong>上传后图片会显示在预览区域。</li>
+                    </ul>
+                    <h4>二、选择背景颜色</h4>
+                    <ul>
+                        <li><strong>预设颜色：</strong>点击颜色面板中的预设颜色块选择背景色。</li>
+                        <li><strong>自定义颜色：</strong>使用颜色选择器自定义背景颜色。</li>
+                        <li><strong>颜色值：</strong>颜色选择器显示当前颜色的十六进制值。</li>
+                    </ul>
+                    <h4>三、调整容差值</h4>
+                    <ul>
+                        <li><strong>容差定义：</strong>容差值决定了背景颜色的识别范围。</li>
+                        <li><strong>值越大：</strong>识别范围越广，会包含更多相似颜色。</li>
+                        <li><strong>值越小：</strong>识别范围越精确，只识别完全匹配的颜色。</li>
+                        <li><strong>默认值：</strong>默认容差值为30，适合大多数场景。</li>
+                    </ul>
+                    <h4>四、应用背景替换</h4>
+                    <ul>
+                        <li><strong>点击应用：</strong>点击"应用背景替换"按钮进行背景替换。</li>
+                        <li><strong>实时预览：</strong>替换后会实时显示处理结果。</li>
+                        <li><strong>下载结果：</strong>点击"下载结果图片"保存处理后的图片。</li>
+                    </ul>
+                    <h4>五、背景替换原理</h4>
+                    <ul>
+                        <li><strong>颜色识别：</strong>通过颜色容差算法识别图片中的背景区域。</li>
+                        <li><strong>像素替换：</strong>将识别到的背景像素替换为所选颜色。</li>
+                        <li><strong>边缘处理：</strong>智能处理颜色边界，避免生硬的边缘效果。</li>
+                    </ul>
+                </div>
+            </details>
+            <details class="info-details">
+                <summary>注意事项</summary>
+                <div class="info-content">
+                    <h4>一、数据安全</h4>
+                    <ul>
+                        <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                        <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                        <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                    </ul>
+                    <h4>二、容差设置</h4>
+                    <ul>
+                        <li>复杂背景建议适当增大容差值（40-60）。</li>
+                        <li>纯色背景可以减小容差值（10-20）以获得更精确的效果。</li>
+                        <li>如果替换效果不理想，可以尝试调整容差值重新处理。</li>
+                    </ul>
+                    <h4>三、图片格式</h4>
+                    <ul>
+                        <li>PNG 格式支持透明背景，替换效果更好。</li>
+                        <li>JPG 格式为压缩格式，边缘可能有轻微色差。</li>
+                        <li>GIF 格式仅处理第一帧。</li>
+                    </ul>
+                    <h4>四、常见问题</h4>
+                    <ul>
+                        <li><strong>替换效果不佳：</strong>调整容差值，尝试不同的颜色选择。</li>
+                        <li><strong>部分区域未替换：</strong>增大容差值或选择更接近的颜色。</li>
+                        <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                        <li><strong>图片加载失败：</strong>检查图片格式是否正确。</li>
+                    </ul>
+                </div>
+            </details>
         </div>
     </div>
     

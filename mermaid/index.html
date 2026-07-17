@@ -13,6 +13,7 @@
     <title>Mermaid在线UML画图工具，免费在线UML画图工具</title>
 
     <link rel="stylesheet" href="../common/css/style.css">
+    <link rel="stylesheet" href="../common/css/utils.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
@@ -136,6 +137,92 @@ flowchart LR
                     </div>
                     <div id="mermaid-preview"></div>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、图表类型介绍</h4>
+                        <ul>
+                            <li><strong>流程图(Flowchart)：</strong>使用流程图展示流程步骤和决策路径，支持多种形状、箭头样式和布局方向（从上到下、从左到右等）。</li>
+                            <li><strong>时序图(Sequence Diagram)：</strong>展示对象之间的交互顺序，常用于描述系统调用流程、API请求时序等场景。</li>
+                            <li><strong>状态图(State Diagram)：</strong>描述对象在生命周期中的状态变化和转换条件，适合展示状态机逻辑。</li>
+                            <li><strong>类图(Class Diagram)：</strong>展示类之间的关系（继承、关联、依赖等），是面向对象设计的核心图表。</li>
+                            <li><strong>实体关系图(ER Diagram)：</strong>描述数据库表结构和表之间的关系，支持一对一、一对多、多对多等关系类型。</li>
+                            <li><strong>饼图(Pie Chart)：</strong>展示数据的比例分布，适合展示分类数据的占比情况。</li>
+                            <li><strong>甘特图(Gantt Chart)：</strong>展示项目进度和时间安排，支持任务分组、依赖关系和里程碑标记。</li>
+                            <li><strong>用户旅程图(Journey)：</strong>描述用户在使用产品过程中的体验和情感变化，帮助优化用户体验。</li>
+                        </ul>
+                        <h4>二、基本使用方法</h4>
+                        <ul>
+                            <li><strong>选择图表类型：</strong>点击上方的图表类型按钮，系统会自动填充对应的示例代码到编辑器中。</li>
+                            <li><strong>输入Mermaid代码：</strong>在左侧编辑器中输入或修改Mermaid语法代码，右侧预览区域会实时更新图表效果。</li>
+                            <li><strong>使用电商示例：</strong>点击"电商示例图表"下的按钮，可以查看实际电商场景的复杂图表示例，包括订单流程、API请求等。</li>
+                            <li><strong>自定义代码：</strong>选择"自定义"按钮，清空编辑器后输入自己的Mermaid代码。</li>
+                        </ul>
+                        <h4>三、图表交互功能</h4>
+                        <ul>
+                            <li><strong>主题切换：</strong>点击预览区域上方的颜色圆点，可切换图表主题色（默认、白色、灰色、蓝色、紫色、深色等10种主题）。</li>
+                            <li><strong>全屏预览：</strong>点击"全屏"按钮，图表会在全屏模式下展示，方便查看大型图表。</li>
+                            <li><strong>滚轮缩放：</strong>在预览区域使用鼠标滚轮可以放大或缩小图表。</li>
+                            <li><strong>拖动平移：</strong>按住鼠标左键拖动可以平移图表，查看超出视口的部分。</li>
+                            <li><strong>下载图表：</strong>点击"下载"按钮，可以将图表导出为PNG或SVG格式图片。</li>
+                            <li><strong>复制代码：</strong>点击"复制"按钮，快速复制当前编辑器中的Mermaid代码。</li>
+                        </ul>
+                        <h4>四、Mermaid语法基础</h4>
+                        <ul>
+                            <li><strong>流程图方向：</strong>使用 <code>flowchart LR</code>（从左到右）、<code>flowchart TD</code>（从上到下）指定布局方向。</li>
+                            <li><strong>节点定义：</strong><code>A[矩形]、B(圆角矩形)、C{菱形判断}、D&gt;平行四边形]、E((圆形))</code>等多种形状。</li>
+                            <li><strong>连接线：</strong><code>--&gt;</code> 实线、<code>-.-&gt;</code> 虚线、<code>==&gt;</code> 粗线，可添加标签 <code>--&gt;|标签|</code>。</li>
+                            <li><strong>子图：</strong>使用 <code>subgraph</code> 定义子图，将相关节点分组展示。</li>
+                            <li><strong>注释：</strong>使用 <code>%% 注释内容</code> 添加单行注释。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、语法规范</h4>
+                        <ul>
+                            <li>Mermaid语法对大小写敏感，关键字（如flowchart、sequenceDiagram）必须使用正确的大小写。</li>
+                            <li>节点之间必须使用连接线连接，否则图表可能无法正确渲染。</li>
+                            <li>特殊字符（如中文、空格、特殊符号）需要使用引号包裹或进行转义。</li>
+                            <li>确保语法结构完整，闭合所有括号和引号。</li>
+                        </ul>
+                        <h4>二、性能提示</h4>
+                        <ul>
+                            <li>过于复杂的图表（超过50个节点或多层嵌套）可能会导致渲染延迟。</li>
+                            <li>建议将大型图表拆分为多个子图，提高可读性和渲染性能。</li>
+                            <li>使用浏览器的缩放功能可以查看图表细节，避免过度放大。</li>
+                        </ul>
+                        <h4>三、浏览器兼容性</h4>
+                        <ul>
+                            <li>建议使用现代浏览器（Chrome 80+、Firefox 75+、Edge 80+、Safari 13+）以获得最佳渲染效果。</li>
+                            <li>旧版浏览器可能不支持某些图表类型或交互功能。</li>
+                            <li>移动端浏览器支持有限，建议在桌面端使用以获得更好的编辑体验。</li>
+                        </ul>
+                        <h4>四、导出与保存</h4>
+                        <ul>
+                            <li>PNG格式适合用于文档插入和分享，图片质量较高。</li>
+                            <li>SVG格式是矢量图，适合用于需要无损缩放的场景，文件体积较小。</li>
+                            <li>建议同时保存Mermaid源代码和导出图片，方便后续修改和维护。</li>
+                        </ul>
+                        <h4>五、数据安全</h4>
+                        <ul>
+                            <li>所有处理均在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li>建议不要在公共设备上处理包含敏感信息的图表内容。</li>
+                            <li>关闭浏览器后，编辑器中的代码会自动清除。</li>
+                        </ul>
+                        <h4>六、常见问题</h4>
+                        <ul>
+                            <li><strong>图表无法渲染：</strong>检查Mermaid语法是否正确，确保所有括号和引号都已闭合。</li>
+                            <li><strong>布局混乱：</strong>尝试调整流程图方向（LR/TD）或使用子图进行分组。</li>
+                            <li><strong>主题切换不生效：</strong>刷新页面后重新尝试，或检查浏览器缓存是否过期。</li>
+                            <li><strong>下载失败：</strong>确保图表已正确渲染，检查浏览器是否允许弹出下载窗口。</li>
+                        </ul>
+                    </div>
+                </details>
             </div>
         </div>
 

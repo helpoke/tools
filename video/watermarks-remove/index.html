@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <script src="../lib/ffmpeg.js"></script>
     <script src="../common/ffmpeg-parallel.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -223,6 +224,103 @@
                     <button class="btn btn-primary" id="downloadBtn">下载处理后的视频</button>
                     <button class="btn btn-secondary" id="resetBtn">重新处理</button>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、上传视频</h4>
+                        <ul>
+                            <li><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
+                            <li><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
+                            <li><strong>文件大小：</strong>建议单个视频文件不超过 500MB。</li>
+                            <li><strong>预览视频：</strong>上传后可预览视频内容。</li>
+                        </ul>
+                        <h4>二、选择去水印方式</h4>
+                        <ul>
+                            <li><strong>裁剪法：</strong>通过裁剪视频边缘去除水印，适合水印位于边缘的情况。</li>
+                            <li><strong>模糊法：</strong>对水印区域进行模糊处理，掩盖水印内容。</li>
+                            <li><strong>马赛克法：</strong>对水印区域添加马赛克效果，完全遮挡水印。</li>
+                        </ul>
+                        <h4>三、设置去水印区域</h4>
+                        <ul>
+                            <li><strong>拖动选择：</strong>在预览画面上拖动鼠标选择水印区域。</li>
+                            <li><strong>精确调整：</strong>可手动输入区域坐标和尺寸。</li>
+                            <li><strong>区域预览：</strong>实时预览选中的水印区域。</li>
+                        </ul>
+                        <h4>四、选择方法建议</h4>
+                        <ul>
+                            <li><strong>水印在边缘：</strong>使用裁剪法，效果最好。</li>
+                            <li><strong>水印在中间：</strong>使用模糊法或马赛克法。</li>
+                            <li><strong>需要保留画面：</strong>使用模糊法，对画面影响较小。</li>
+                            <li><strong>完全遮挡：</strong>使用马赛克法，遮挡效果最好。</li>
+                        </ul>
+                        <h4>五、开始处理</h4>
+                        <ul>
+                            <li><strong>点击处理：</strong>点击"开始去水印"按钮开始处理。</li>
+                            <li><strong>进度显示：</strong>实时显示处理进度。</li>
+                            <li><strong>等待时间：</strong>处理时间取决于视频长度和电脑性能。</li>
+                        </ul>
+                        <h4>六、查看和下载</h4>
+                        <ul>
+                            <li><strong>预览效果：</strong>处理完成后可预览去水印后的视频。</li>
+                            <li><strong>查看信息：</strong>显示处理前后文件大小和使用的去水印方式。</li>
+                            <li><strong>一键下载：</strong>点击"下载处理后的视频"按钮保存到本地。</li>
+                            <li><strong>重新处理：</strong>点击"重新处理"按钮调整参数后重新处理。</li>
+                        </ul>
+                        <h4>七、适用场景</h4>
+                        <ul>
+                            <li><strong>去除平台水印：</strong>去除视频平台添加的水印。</li>
+                            <li><strong>去除版权水印：</strong>去除视频中的版权标识。</li>
+                            <li><strong>去除字幕水印：</strong>去除视频中的字幕或台标。</li>
+                            <li><strong>隐私保护：</strong>模糊视频中的敏感信息。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、数据安全</h4>
+                        <ul>
+                            <li>所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
+                            <li>视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                            <li>建议在处理敏感视频时使用隐私模式浏览。</li>
+                        </ul>
+                        <h4>二、处理性能</h4>
+                        <ul>
+                            <li>视频去水印是计算密集型操作，会占用较多CPU资源。</li>
+                            <li>处理时间取决于视频时长和电脑性能。</li>
+                            <li>建议在处理大文件时关闭其他占用CPU的程序。</li>
+                        </ul>
+                        <h4>三、格式限制</h4>
+                        <ul>
+                            <li>支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
+                            <li>不支持的格式可能无法正常处理。</li>
+                            <li>输出格式默认为MP4，兼容性最好。</li>
+                        </ul>
+                        <h4>四、效果说明</h4>
+                        <ul>
+                            <li>裁剪法会改变视频画面尺寸，可能影响构图。</li>
+                            <li>模糊法可能在水印区域留下模糊痕迹。</li>
+                            <li>马赛克法会完全遮挡水印区域，但会破坏画面完整性。</li>
+                            <li>建议尝试不同方法选择最佳效果。</li>
+                        </ul>
+                        <h4>五、质量损失</h4>
+                        <ul>
+                            <li>视频重新编码会导致一定的画质损失。</li>
+                            <li>建议处理前备份原始视频文件。</li>
+                            <li>多次处理会累积画质损失。</li>
+                        </ul>
+                        <h4>六、常见问题</h4>
+                        <ul>
+                            <li><strong>处理失败：</strong>检查视频文件是否损坏或格式不支持。</li>
+                            <li><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
+                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li><strong>效果不佳：</strong>尝试调整去水印区域或更换去水印方法。</li>
+                        </ul>
+                    </div>
+                </details>
             </div>
         </div>
 

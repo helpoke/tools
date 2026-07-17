@@ -729,6 +729,92 @@
                         <button class="btn btn-sm btn-copy" onclick="copyDtResult('ms')">复制</button>
                     </div>
                 </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、时间戳转日期</h4>
+                            <ul>
+                                <li><strong>输入时间戳：</strong>在输入框中输入Unix时间戳（数字）。</li>
+                                <li><strong>选择单位：</strong>切换秒/毫秒精度，工具会自动识别。</li>
+                                <li><strong>点击转换：</strong>点击"转换"按钮或按Enter键进行转换。</li>
+                                <li><strong>一键使用：</strong>点击"使用当前时间"按钮使用当前时间戳。</li>
+                                <li><strong>实时显示：</strong>页面顶部实时显示当前时间戳（秒）。</li>
+                            </ul>
+                            <h4>二、日期转时间戳</h4>
+                            <ul>
+                                <li><strong>选择日期：</strong>点击日期选择器选择日期时间。</li>
+                                <li><strong>选择时区：</strong>选择目标时区（默认本地时区）。</li>
+                                <li><strong>点击转换：</strong>点击"转换"按钮生成时间戳。</li>
+                                <li><strong>结果显示：</strong>同时显示秒级和毫秒级时间戳。</li>
+                            </ul>
+                            <h4>三、时间戳格式说明</h4>
+                            <ul>
+                                <li><strong>秒级时间戳：</strong>10位数字，如 1700000000（约2023年11月）。</li>
+                                <li><strong>毫秒级时间戳：</strong>13位数字，如 1700000000000。</li>
+                                <li><strong>自动识别：</strong>工具会根据数字位数自动判断精度。</li>
+                            </ul>
+                            <h4>四、时区说明</h4>
+                            <ul>
+                                <li><strong>本地时区：</strong>默认使用浏览器所在时区。</li>
+                                <li><strong>UTC时区：</strong>协调世界时，不考虑夏令时。</li>
+                                <li><strong>其他时区：</strong>支持多种时区选择，如北京时间（UTC+8）。</li>
+                            </ul>
+                            <h4>五、操作技巧</h4>
+                            <ul>
+                                <li><strong>实时更新：</strong>页面顶部时间戳每秒自动更新。</li>
+                                <li><strong>一键复制：</strong>点击"复制"按钮复制时间戳或转换结果。</li>
+                                <li><strong>切换标签：</strong>点击标签切换转换方向。</li>
+                                <li><strong>常用格式：</strong>转换结果提供多种日期格式供复制。</li>
+                            </ul>
+                            <h4>六、适用场景</h4>
+                            <ul>
+                                <li><strong>开发调试：</strong>查看日志中的时间戳对应的具体时间。</li>
+                                <li><strong>数据库查询：</strong>构造时间范围查询条件。</li>
+                                <li><strong>API开发：</strong>生成或解析时间戳格式的接口参数。</li>
+                                <li><strong>数据分析：</strong>处理时间序列数据。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>时间戳数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                                <li>建议在处理敏感时间数据时使用隐私模式浏览。</li>
+                            </ul>
+                            <h4>二、精度说明</h4>
+                            <ul>
+                                <li>秒级精度：精确到秒，适用于大多数场景。</li>
+                                <li>毫秒级精度：精确到毫秒，适用于需要高精度的场景。</li>
+                                <li>输入13位数字时自动按毫秒处理，10位数字按秒处理。</li>
+                            </ul>
+                            <h4>三、时区问题</h4>
+                            <ul>
+                                <li>时间戳转日期时，默认使用本地时区显示。</li>
+                                <li>日期转时间戳时，选择的时区会影响结果。</li>
+                                <li>UTC时区与本地时区可能相差8小时（北京时间）。</li>
+                                <li>夏令时可能影响部分时区的转换结果。</li>
+                            </ul>
+                            <h4>四、时间范围</h4>
+                            <ul>
+                                <li>支持的时间范围：1970年1月1日至2038年1月19日（Unix时间戳范围）。</li>
+                                <li>超出范围的时间戳可能无法正确转换。</li>
+                                <li>负数时间戳表示1970年1月1日之前的时间。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>转换错误：</strong>检查输入是否为纯数字。</li>
+                                <li><strong>时间显示异常：</strong>检查时区选择是否正确。</li>
+                                <li><strong>精度错误：</strong>确认使用秒还是毫秒精度。</li>
+                                <li><strong>复制失败：</strong>检查浏览器是否允许访问剪贴板。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 

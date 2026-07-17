@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -468,6 +469,92 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、混淆预设</h4>
+                            <ul>
+                                <li><strong>默认，高性能：</strong>平衡混淆程度和代码性能，适合大多数场景。</li>
+                                <li><strong>低混淆，高性能：</strong>轻度混淆，代码体积小，执行速度快。</li>
+                                <li><strong>中等混淆，性能均衡：</strong>适度混淆，保持较好的性能。</li>
+                                <li><strong>高混淆，低性能：</strong>最大程度混淆，代码体积增大，执行速度降低。</li>
+                            </ul>
+                            <h4>二、基础设置</h4>
+                            <ul>
+                                <li><strong>紧凑的代码：</strong>压缩代码，减少空白字符。</li>
+                                <li><strong>禁止格式化：</strong>阻止代码被美化工具格式化。</li>
+                                <li><strong>禁止控制台调试：</strong>阻止通过控制台调试代码。</li>
+                                <li><strong>禁止控制台输出：</strong>禁用console.log等输出。</li>
+                                <li><strong>数值转表达式：</strong>将数字转换为表达式形式。</li>
+                                <li><strong>优化代码结构：</strong>优化代码结构，提高混淆效果。</li>
+                                <li><strong>分割字符串：</strong>将字符串分割成多个部分。</li>
+                                <li><strong>转义Unicode：</strong>将字符转义为Unicode编码。</li>
+                                <li><strong>重命名全局变量：</strong>混淆全局变量名称。</li>
+                                <li><strong>重命名方法及属性：</strong>混淆方法和属性名称。</li>
+                                <li><strong>转换对象键名：</strong>混淆对象属性键名。</li>
+                                <li><strong>字符串数组：</strong>将字符串提取到数组中。</li>
+                                <li><strong>控制流平坦化：</strong>打乱代码执行流程。</li>
+                            </ul>
+                            <h4>三、加密系数</h4>
+                            <ul>
+                                <li><strong>注入死代码：</strong>在代码中插入不会执行的代码，增加逆向难度。</li>
+                                <li><strong>控制流平坦化阈值：</strong>控制控制流平坦化的程度。</li>
+                            </ul>
+                            <h4>四、高级设置</h4>
+                            <ul>
+                                <li><strong>保留变量名：</strong>指定不被混淆的变量名，如API密钥。</li>
+                                <li><strong>保留字符串：</strong>指定不被混淆的字符串。</li>
+                                <li><strong>强制转换字符串：</strong>指定需要强制转换的字符串。</li>
+                                <li><strong>域锁定：</strong>限制代码只能在特定域名下运行。</li>
+                                <li><strong>调试保护间隔：</strong>设置调试保护的检查间隔。</li>
+                            </ul>
+                            <h4>五、操作步骤</h4>
+                            <ul>
+                                <li><strong>输入代码：</strong>在输入框中输入JavaScript代码，或点击"上传JS文件"上传文件。</li>
+                                <li><strong>选择预设：</strong>选择合适的混淆预设，或自定义各项设置。</li>
+                                <li><strong>点击混淆：</strong>点击"混淆加密"按钮开始混淆。</li>
+                                <li><strong>复制结果：</strong>点击"复制"按钮将混淆后的代码复制到剪贴板。</li>
+                                <li><strong>下载结果：</strong>点击"下载"按钮将混淆后的代码保存为文件。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、混淆程度与性能</h4>
+                            <ul>
+                                <li>混淆程度越高，代码执行性能越低，文件体积越大。</li>
+                                <li>高混淆模式可能会导致某些代码无法正常运行，请先测试。</li>
+                                <li>建议在生产环境使用前进行充分测试。</li>
+                            </ul>
+                            <h4>二、保留重要内容</h4>
+                            <ul>
+                                <li>如果代码中包含外部调用的API密钥、全局变量等，需要添加到"保留变量名"中。</li>
+                                <li>如果代码中包含动态属性访问（如obj[key]），需要添加到"保留字符串"中。</li>
+                                <li>域锁定功能可以防止代码在未授权域名下运行。</li>
+                            </ul>
+                            <h4>三、文件大小限制</h4>
+                            <ul>
+                                <li>建议处理的文件大小不超过5MB，过大文件可能导致浏览器卡顿。</li>
+                                <li>混淆后的代码体积通常会比原始代码大。</li>
+                            </ul>
+                            <h4>四、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>混淆不是加密，无法完全防止代码被逆向分析，但可以大大增加难度。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>混淆后代码报错：</strong>检查是否有需要保留的变量名或字符串。</li>
+                                <li><strong>代码执行异常：</strong>降低混淆程度，或检查代码中是否有动态属性访问。</li>
+                                <li><strong>混淆缓慢：</strong>大文件混淆时间较长，请耐心等待。</li>
+                                <li><strong>下载失败：</strong>检查浏览器下载权限。</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>

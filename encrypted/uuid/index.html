@@ -452,6 +452,69 @@
                         <button class="btn btn-secondary" onclick="copyAllUUIDs()">复制全部UUID</button>
                         <div id="message" class="message"></div>
                     </div>
+
+                    <div class="info-section" style="margin-top:24px;">
+                        <details class="info-details">
+                            <summary>使用说明</summary>
+                            <div class="info-content">
+                                <h4>一、生成UUID</h4>
+                                <ul>
+                                    <li><strong>设置生成数量：</strong>在"生成数量"输入框中设置一次性生成的UUID数量，范围为1-20个。</li>
+                                    <li><strong>选择生成格式：</strong>选择"带连字符"或"不带连字符"格式。</li>
+                                    <li><strong>点击生成：</strong>点击"UUID"按钮生成随机UUID。</li>
+                                    <li><strong>查看结果：</strong>生成的UUID会显示在"生成结果"区域。</li>
+                                    <li><strong>复制单个UUID：</strong>点击每个UUID右侧的"复制"按钮单独复制该UUID。</li>
+                                    <li><strong>复制全部UUID：</strong>点击"复制全部UUID"按钮复制所有生成的UUID，每个UUID占一行。</li>
+                                </ul>
+                                <h4>二、UUID格式说明</h4>
+                                <ul>
+                                    <li><strong>带连字符格式：</strong>xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx，包含4个连字符，共36个字符。</li>
+                                    <li><strong>不带连字符格式：</strong>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx，不包含连字符，共32个字符。</li>
+                                    <li><strong>版本信息：</strong>本工具生成UUID v4版本，随机生成，不包含时间戳信息。</li>
+                                    <li><strong>变体信息：</strong>使用RFC 4122标准定义的变体。</li>
+                                </ul>
+                                <h4>三、UUID基础</h4>
+                                <ul>
+                                    <li><strong>UUID定义：</strong>UUID（Universally Unique Identifier）是通用唯一标识符，用于在分布式系统中唯一标识对象。</li>
+                                    <li><strong>UUID v1：</strong>基于时间戳和MAC地址生成，可能泄露设备信息。</li>
+                                    <li><strong>UUID v4：</strong>基于随机数生成，是最常用的版本，安全性较高。</li>
+                                    <li><strong>唯一性：</strong>UUID v4生成重复的概率极低，约为1/(2^122)，在实际应用中可以认为是唯一的。</li>
+                                    <li><strong>应用场景：</strong>数据库主键、分布式系统ID、会话标识、文件命名等。</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="info-details">
+                            <summary>注意事项</summary>
+                            <div class="info-content">
+                                <h4>一、数据安全</h4>
+                                <ul>
+                                    <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                    <li>生成的UUID仅供参考，请勿直接用于安全关键场景。</li>
+                                    <li>虽然UUID v4重复概率极低，但在极端情况下仍可能重复，建议在使用前进行唯一性检查。</li>
+                                </ul>
+                                <h4>二、格式选择</h4>
+                                <ul>
+                                    <li>带连字符格式可读性更好，适合日志记录和人工阅读。</li>
+                                    <li>不带连字符格式占用空间更小，适合存储和传输。</li>
+                                    <li>两种格式可以互相转换，只需添加或移除连字符。</li>
+                                </ul>
+                                <h4>三、使用建议</h4>
+                                <ul>
+                                    <li>作为数据库主键时，建议使用不带连字符格式，节省存储空间。</li>
+                                    <li>在API响应中返回UUID时，建议使用带连字符格式，符合RFC标准。</li>
+                                    <li>批量生成时，建议每次生成不超过10个UUID，避免页面卡顿。</li>
+                                </ul>
+                                <h4>四、常见问题</h4>
+                                <ul>
+                                    <li><strong>生成数量错误：</strong>生成数量范围为1-20个，请调整参数。</li>
+                                    <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                    <li><strong>UUID重复：</strong>虽然概率极低，但如果担心重复，可以在使用前进行数据库查询验证。</li>
+                                    <li><strong>格式转换：</strong>可以手动添加或移除连字符在两种格式之间转换。</li>
+                                    <li><strong>UUID版本：</strong>本工具生成的是UUID v4版本，不包含时间戳信息。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
         </section>

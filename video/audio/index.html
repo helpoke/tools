@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -149,11 +150,101 @@
                 <h2>提取结果</h2>
                 <div class="result-info" id="resultInfo"></div>
                 <div class="audio-container">
-                    <audio id="outputAudio" controls></audio>
+                    <audio id="outputAudio" controls>
                 </div>
                 <div class="download-buttons">
                     <button id="downloadBtn">下载提取的音频</button>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、上传视频</h4>
+                        <ul>
+                            <li><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
+                            <li><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
+                            <li><strong>文件大小：</strong>建议单个视频文件不超过 500MB。</li>
+                            <li><strong>预览视频：</strong>上传后可预览视频内容。</li>
+                        </ul>
+                        <h4>二、选择输出格式</h4>
+                        <ul>
+                            <li><strong>MP3格式：</strong>最通用的音频格式，兼容性最好，文件较小。</li>
+                            <li><strong>WAV格式：</strong>无损音频格式，音质最好但文件较大。</li>
+                            <li><strong>AAC格式：</strong>高质量压缩格式，适合苹果设备。</li>
+                            <li><strong>M4A格式：</strong>苹果专用格式，支持高质量音频。</li>
+                        </ul>
+                        <h4>三、设置音频参数</h4>
+                        <ul>
+                            <li><strong>音频质量：</strong>选择输出质量（低/中/高/极高），质量越高文件越大。</li>
+                            <li><strong>采样率：</strong>选择采样率（22050/44100/48000Hz），采样率越高音质越好。</li>
+                            <li><strong>声道：</strong>选择声道（单声道/立体声）。</li>
+                        </ul>
+                        <h4>四、格式选择建议</h4>
+                        <ul>
+                            <li><strong>通用分享：</strong>选择 MP3 格式，兼容性最好。</li>
+                            <li><strong>专业制作：</strong>选择 WAV 格式，保持无损音质。</li>
+                            <li><strong>苹果设备：</strong>选择 M4A 或 AAC 格式。</li>
+                            <li><strong>文件大小：</strong>选择 MP3 格式，文件最小。</li>
+                        </ul>
+                        <h4>五、开始提取</h4>
+                        <ul>
+                            <li><strong>点击提取：</strong>点击"提取音频"按钮开始处理。</li>
+                            <li><strong>进度显示：</strong>实时显示提取进度。</li>
+                            <li><strong>等待时间：</strong>提取时间取决于视频长度和电脑性能。</li>
+                        </ul>
+                        <h4>六、查看和下载</h4>
+                        <ul>
+                            <li><strong>预览效果：</strong>提取完成后可预览音频。</li>
+                            <li><strong>查看信息：</strong>显示提取后的文件大小等信息。</li>
+                            <li><strong>一键下载：</strong>点击"下载提取的音频"按钮保存到本地。</li>
+                        </ul>
+                        <h4>七、适用场景</h4>
+                        <ul>
+                            <li><strong>提取背景音乐：</strong>从视频中提取背景音乐。</li>
+                            <li><strong>保存演讲音频：</strong>从视频中提取演讲或讲座内容。</li>
+                            <li><strong>制作音频素材：</strong>提取视频中的声音效果。</li>
+                            <li><strong>格式转换：</strong>将视频中的音频转换为所需格式。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、数据安全</h4>
+                        <ul>
+                            <li>所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
+                            <li>视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                            <li>建议在处理敏感视频时使用隐私模式浏览。</li>
+                        </ul>
+                        <h4>二、处理性能</h4>
+                        <ul>
+                            <li>音频提取是计算密集型操作，会占用较多CPU资源。</li>
+                            <li>处理时间取决于视频时长和电脑性能。</li>
+                            <li>建议在处理大文件时关闭其他占用CPU的程序。</li>
+                        </ul>
+                        <h4>三、格式限制</h4>
+                        <ul>
+                            <li>支持输入格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
+                            <li>支持输出格式：MP3、WAV、AAC、M4A。</li>
+                            <li>不支持的格式可能无法正常提取。</li>
+                        </ul>
+                        <h4>四、音频质量</h4>
+                        <ul>
+                            <li>提取的音频质量不会超过原始视频中的音频质量。</li>
+                            <li>压缩格式（如MP3）会有一定的音质损失。</li>
+                            <li>建议提取前确认原始视频的音频质量。</li>
+                        </ul>
+                        <h4>五、常见问题</h4>
+                        <ul>
+                            <li><strong>提取失败：</strong>检查视频文件是否损坏或格式不支持。</li>
+                            <li><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
+                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li><strong>无声问题：</strong>检查视频是否包含音频轨道。</li>
+                        </ul>
+                    </div>
+                </details>
             </div>
         </div>
 

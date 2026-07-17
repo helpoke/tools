@@ -351,6 +351,74 @@
                     <span>字符: <strong id="stat-chars">0</strong></span>
                     <span>行数: <strong id="stat-lines">0</strong></span>
                 </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、格式化功能</h4>
+                            <ul>
+                                <li><strong>格式化：</strong>将压缩或杂乱的XML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
+                                <li><strong>压缩：</strong>将格式化的XML代码压缩为紧凑格式，去除空白字符，减小文件体积。</li>
+                                <li><strong>转 JSON：</strong>将XML格式转换为JSON格式，便于数据交换和处理。</li>
+                                <li><strong>转 XML：</strong>将JSON格式转换为XML格式，便于与传统系统集成。</li>
+                                <li><strong>复制结果：</strong>一键复制处理后的代码到剪贴板。</li>
+                                <li><strong>快捷键：</strong>按 Ctrl+Enter 可以快速触发格式化。</li>
+                            </ul>
+                            <h4>二、XML 语法基础</h4>
+                            <ul>
+                                <li><strong>声明：</strong>XML文档开头通常包含声明 <code>&lt;?xml version="1.0"?&gt;</code>。</li>
+                                <li><strong>根元素：</strong>XML必须有且仅有一个根元素，如 <code>&lt;root&gt;&lt;/root&gt;</code>。</li>
+                                <li><strong>标签：</strong>标签必须成对出现，且区分大小写。</li>
+                                <li><strong>属性：</strong>元素可以包含属性，如 <code>&lt;item id="1"&gt;</code>。</li>
+                                <li><strong>特殊字符：</strong>&lt;、&gt;、&amp;、"、' 必须使用实体引用。</li>
+                                <li><strong>CDATA：</strong>使用 <code>&lt;![CDATA[...]]&gt;</code> 包裹特殊字符内容。</li>
+                            </ul>
+                            <h4>三、XML 与 JSON 转换规则</h4>
+                            <ul>
+                                <li><strong>XML 属性：</strong>转换为JSON对象的键值对。</li>
+                                <li><strong>文本内容：</strong>使用 <code>value</code> 键存储。</li>
+                                <li><strong>同名子元素：</strong>转换为JSON数组。</li>
+                                <li><strong>嵌套结构：</strong>保持层级关系。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、格式规范</h4>
+                            <ul>
+                                <li>XML标签必须正确闭合，且区分大小写。</li>
+                                <li>属性值必须用引号包裹。</li>
+                                <li>特殊字符必须使用实体引用，如 <code>&amp;</code> 表示 &。</li>
+                                <li>根元素必须唯一，不能有多个根元素。</li>
+                            </ul>
+                            <h4>二、转换规则</h4>
+                            <ul>
+                                <li>XML转JSON时，属性直接放在对象上，文本内容使用 <code>value</code> 键。</li>
+                                <li>JSON转XML时，<code>value</code> 键会转换为文本内容。</li>
+                                <li>数组会转换为多个同名子元素。</li>
+                                <li>复杂嵌套结构可能导致转换结果不符合预期，建议简化数据结构。</li>
+                            </ul>
+                            <h4>三、性能提示</h4>
+                            <ul>
+                                <li>处理超大XML文件（超过1MB）时可能会导致浏览器卡顿。</li>
+                                <li>建议将大型XML文件分段处理。</li>
+                            </ul>
+                            <h4>四、数据安全</h4>
+                            <ul>
+                                <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li>建议不要在公共设备上处理包含敏感信息的XML代码。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>解析失败：</strong>检查XML语法是否正确，特别是标签闭合和特殊字符。</li>
+                                <li><strong>转换异常：</strong>复杂嵌套结构可能导致转换结果不符合预期。</li>
+                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 

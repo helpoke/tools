@@ -12,6 +12,7 @@
     <title>图像无损压缩工具，隐私图像压缩工具，本地化压缩</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> -->
     <script src="../../common/lib/jszip.min.js"></script>
@@ -161,6 +162,86 @@
                 <div class="download-buttons-container">
                     <a id="mainDownloadLink" class="download-btn" href="#" download disabled>下载压缩图片</a>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、上传图片</h4>
+                        <ul>
+                            <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                            <li><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
+                            <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                        </ul>
+                        <h4>二、选择压缩算法</h4>
+                        <ul>
+                            <li><strong>默认压缩：</strong>平衡质量和大小，保持原始图片格式。不适用于PNG透明图片。</li>
+                            <li><strong>无损压缩：</strong>保持最高质量和原始扩展名。推荐用于PNG透明图片。</li>
+                            <li><strong>强力压缩：</strong>优先减小文件大小，统一转换为JPG格式。</li>
+                            <li><strong>WebP格式：</strong>现代浏览器高效图像格式，保持较高质量和小体积。</li>
+                        </ul>
+                        <h4>三、调整压缩质量</h4>
+                        <ul>
+                            <li><strong>质量滑块：</strong>拖动滑块调整压缩质量（1%-100%）。</li>
+                            <li><strong>质量越高：</strong>图像质量越好，但文件大小越大。</li>
+                            <li><strong>质量越低：</strong>压缩率越高，但可能损失图像细节。</li>
+                            <li><strong>推荐范围：</strong>70-90之间，可根据实际需求调整。</li>
+                        </ul>
+                        <h4>四、设置最大尺寸</h4>
+                        <ul>
+                            <li><strong>最大宽度：</strong>设置图片压缩后的最大宽度（100-16384px）。</li>
+                            <li><strong>最大高度：</strong>设置图片压缩后的最大高度（100-16384px）。</li>
+                            <li><strong>最大大小：</strong>设置压缩后文件的最大大小（20KB到原文件大小）。</li>
+                        </ul>
+                        <h4>五、执行压缩</h4>
+                        <ul>
+                            <li><strong>单张压缩：</strong>点击"压缩当前图片"按钮。</li>
+                            <li><strong>批量压缩：</strong>点击"批量压缩所有图片"按钮。</li>
+                            <li><strong>实时预览：</strong>压缩后可预览原图与压缩后对比。</li>
+                            <li><strong>下载结果：</strong>点击下载按钮保存压缩后的图片。</li>
+                        </ul>
+                        <h4>六、压缩算法选择建议</h4>
+                        <ul>
+                            <li><strong>一般场景：</strong>使用默认压缩，平衡质量和大小。</li>
+                            <li><strong>PNG透明图片：</strong>使用无损压缩，保留透明通道。</li>
+                            <li><strong>追求最小体积：</strong>使用强力压缩或WebP格式。</li>
+                            <li><strong>网站图片：</strong>使用WebP格式，现代浏览器支持。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、数据安全</h4>
+                        <ul>
+                            <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                            <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                        </ul>
+                        <h4>二、压缩设置</h4>
+                        <ul>
+                            <li>压缩质量设置过高（90%以上）可能导致文件增大。</li>
+                            <li>压缩质量设置过低（30%以下）可能导致严重画质损失。</li>
+                            <li>最大尺寸限制不会放大图片，只会缩小超过限制的图片。</li>
+                            <li>最大文件大小设置后，系统会自动调整质量以满足要求。</li>
+                        </ul>
+                        <h4>三、批量处理</h4>
+                        <ul>
+                            <li>批量处理最多支持20张图片。</li>
+                            <li>批量处理时设置会应用到所有图片。</li>
+                            <li>处理期间不要关闭浏览器或刷新页面。</li>
+                            <li>大文件处理可能需要较长时间，请耐心等待。</li>
+                        </ul>
+                        <h4>四、常见问题</h4>
+                        <ul>
+                            <li><strong>压缩后文件变大：</strong>检查压缩算法是否选择正确，尝试调整质量。</li>
+                            <li><strong>PNG透明图片变成黑色背景：</strong>请使用无损压缩算法。</li>
+                            <li><strong>压缩失败：</strong>检查图片格式和大小，尝试单张处理。</li>
+                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                        </ul>
+                    </div>
+                </details>
             </div>
         </div>
 

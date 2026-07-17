@@ -801,6 +801,82 @@
                     <div class="presets-title">常用正则速查（点击填入）</div>
                     <div class="presets-grid" id="presets-grid"></div>
                 </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、正则匹配功能</h4>
+                            <ul>
+                                <li><strong>输入正则表达式：</strong>在正则表达式输入框中输入要测试的正则模式，如 <code>\d{4}-\d{2}-\d{2}</code>。</li>
+                                <li><strong>选择标志：</strong>点击标志按钮设置正则标志（g: 全局匹配，i: 忽略大小写，m: 多行模式，s: 点匹配换行，u: Unicode）。</li>
+                                <li><strong>输入测试文本：</strong>在测试文本区域输入要匹配的文本内容。</li>
+                                <li><strong>实时匹配：</strong>系统会实时显示匹配结果，高亮显示所有匹配项。</li>
+                                <li><strong>查看匹配详情：</strong>在下方列表中查看每个匹配的详细信息，包括位置、长度和捕获分组。</li>
+                                <li><strong>定位匹配：</strong>点击"定位"按钮可以跳转到对应匹配项的高亮位置。</li>
+                            </ul>
+                            <h4>二、正则替换功能</h4>
+                            <ul>
+                                <li><strong>切换到替换：</strong>点击"正则替换"标签页切换到替换模式。</li>
+                                <li><strong>输入正则表达式：</strong>设置要匹配的正则模式。</li>
+                                <li><strong>输入原始文本：</strong>在原始文本区域输入要替换的内容。</li>
+                                <li><strong>设置替换内容：</strong>在"替换为"输入框中输入替换后的内容，支持 <code>$1</code>、<code>$2</code> 等捕获分组引用。</li>
+                                <li><strong>执行替换：</strong>点击"替换"按钮或等待自动执行替换。</li>
+                            </ul>
+                            <h4>三、常用正则速查</h4>
+                            <ul>
+                                <li><strong>点击预设：</strong>点击下方的预设正则表达式可以快速填入。</li>
+                                <li><strong>预设内容：</strong>包含日期、手机号、邮箱、URL、IP地址、身份证、中文汉字、空白行、HTML标签、十六进制颜色、数字、单词等常用正则。</li>
+                            </ul>
+                            <h4>四、正则语法基础</h4>
+                            <ul>
+                                <li><strong>字符类：</strong><code>.</code> 匹配任意字符，<code>\d</code> 匹配数字，<code>\w</code> 匹配字母数字下划线，<code>\s</code> 匹配空白字符。</li>
+                                <li><strong>量词：</strong><code>*</code> 零次或多次，<code>+</code> 一次或多次，<code>?</code> 零次或一次，<code>{n}</code> 恰好n次，<code>{n,m}</code> n到m次。</li>
+                                <li><strong>锚点：</strong><code>^</code> 行首，<code>$</code> 行尾，<code>\b</code> 单词边界。</li>
+                                <li><strong>分组：</strong><code>(pattern)</code> 捕获分组，<code>(?:pattern)</code> 非捕获分组。</li>
+                                <li><strong>或：</strong><code>a|b</code> 匹配a或b。</li>
+                                <li><strong>字符集：</strong><code>[abc]</code> 匹配a、b或c，<code>[^abc]</code> 匹配除a、b、c外的任意字符。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、正则语法</h4>
+                            <ul>
+                                <li>特殊字符需要转义，如 <code>\</code>、<code>.</code>、<code>*</code>、<code>+</code>、<code>?</code>、<code>()</code>、<code>[]</code>、<code>{}</code>、<code>^</code>、<code>$</code>、<code>|</code>。</li>
+                                <li>在JavaScript正则中，反斜杠需要双重转义，如 <code>\\d</code>。</li>
+                                <li>捕获分组从 <code>$1</code> 开始编号，<code>$0</code> 表示完整匹配。</li>
+                            </ul>
+                            <h4>二、标志说明</h4>
+                            <ul>
+                                <li><strong>g（全局）：</strong>查找所有匹配项，而非只匹配第一个。</li>
+                                <li><strong>i（忽略大小写）：</strong>匹配时不区分大小写。</li>
+                                <li><strong>m（多行）：</strong><code>^</code> 和 <code>$</code> 匹配每行的开头和结尾。</li>
+                                <li><strong>s（点匹配换行）：</strong><code>.</code> 可以匹配换行符。</li>
+                                <li><strong>u（Unicode）：</strong>启用Unicode匹配模式。</li>
+                            </ul>
+                            <h4>三、性能提示</h4>
+                            <ul>
+                                <li>复杂正则表达式可能导致性能问题，特别是在处理大量文本时。</li>
+                                <li>避免使用贪婪量词（<code>*</code>、<code>+</code>），考虑使用非贪婪量词（<code>*?</code>、<code>+?</code>）。</li>
+                                <li>测试超大文本（超过100KB）时可能会导致浏览器卡顿。</li>
+                            </ul>
+                            <h4>四、数据安全</h4>
+                            <ul>
+                                <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li>建议不要在公共设备上处理包含敏感信息的文本。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>语法错误：</strong>检查正则表达式中的特殊字符是否正确转义。</li>
+                                <li><strong>无匹配：</strong>确认正则表达式和测试文本是否正确，检查标志设置。</li>
+                                <li><strong>匹配不全：</strong>确保启用了 <code>g</code>（全局）标志。</li>
+                                <li><strong>替换异常：</strong>检查替换内容中的捕获分组引用是否正确。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 

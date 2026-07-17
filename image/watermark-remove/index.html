@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -173,6 +174,102 @@
                                 <button class="btn btn-primary" id="saveResultBtn">保存图片</button>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="info-section">
+                        <details class="info-details">
+                            <summary>使用说明</summary>
+                            <div class="info-content">
+                                <h4>一、上传图片</h4>
+                                <ul>
+                                    <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                                    <li><strong>批量上传：</strong>支持多选上传。</li>
+                                    <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                                </ul>
+                                <h4>二、添加去水印区域</h4>
+                                <ul>
+                                    <li><strong>添加区域：</strong>点击"添加区域"按钮，在图片上绘制去水印区域。</li>
+                                    <li><strong>绘制区域：</strong>拖动鼠标绘制矩形区域覆盖水印。</li>
+                                    <li><strong>删除区域：</strong>点击"删除当前区域"按钮删除选中区域。</li>
+                                    <li><strong>多个区域：</strong>支持添加多个去水印区域。</li>
+                                </ul>
+                                <h4>三、选择去水印方式</h4>
+                                <ul>
+                                    <li><strong>智能填充：</strong>使用周围像素智能填充水印区域，效果自然。</li>
+                                    <li><strong>模糊处理：</strong>对水印区域进行高斯模糊处理。</li>
+                                    <li><strong>马赛克覆盖：</strong>使用马赛克效果覆盖水印区域。</li>
+                                    <li><strong>羽化边缘：</strong>对水印区域进行边缘羽化处理。</li>
+                                    <li><strong>颜色覆盖：</strong>使用指定颜色覆盖水印区域。</li>
+                                    <li><strong>中值模糊：</strong>使用中值滤波算法去除水印。</li>
+                                </ul>
+                                <h4>四、调整参数</h4>
+                                <ul>
+                                    <li><strong>模糊半径：</strong>调整模糊处理的半径（1-50）。</li>
+                                    <li><strong>马赛克大小：</strong>调整马赛克块的大小（2-30）。</li>
+                                    <li><strong>羽化强度：</strong>调整羽化边缘的强度（50%-100%）。</li>
+                                    <li><strong>覆盖颜色：</strong>选择颜色覆盖的颜色，可点击"自动检测"自动选择。</li>
+                                </ul>
+                                <h4>五、应用去水印</h4>
+                                <ul>
+                                    <li><strong>点击应用：</strong>点击"应用去水印"按钮执行处理。</li>
+                                    <li><strong>查看结果：</strong>处理结果显示在结果区域。</li>
+                                    <li><strong>保存图片：</strong>点击"保存图片"或"下载单个图片"按钮保存结果。</li>
+                                    <li><strong>批量下载：</strong>点击"下载全部图片"按钮打包下载所有处理后的图片。</li>
+                                </ul>
+                                <h4>六、去水印方式选择建议</h4>
+                                <ul>
+                                    <li><strong>复杂背景：</strong>使用智能填充，效果最自然。</li>
+                                    <li><strong>纯色背景：</strong>使用颜色覆盖或智能填充。</li>
+                                    <li><strong>文字水印：</strong>使用智能填充或模糊处理。</li>
+                                    <li><strong>需要掩盖：</strong>使用马赛克覆盖。</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="info-details">
+                            <summary>注意事项</summary>
+                            <div class="info-content">
+                                <h4>一、数据安全</h4>
+                                <ul>
+                                    <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                    <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                                    <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                                </ul>
+                                <h4>二、去水印效果</h4>
+                                <ul>
+                                    <li>去水印效果取决于图片背景复杂度和水印位置。</li>
+                                    <li>复杂背景下智能填充效果最好。</li>
+                                    <li>纯色背景下颜色覆盖效果更精确。</li>
+                                    <li>建议尝试不同的去水印方式找到最佳效果。</li>
+                                </ul>
+                                <h4>三、区域选择</h4>
+                                <ul>
+                                    <li>区域应完全覆盖水印，不要过大以免影响其他内容。</li>
+                                    <li>可以添加多个区域处理不同位置的水印。</li>
+                                    <li>区域数量显示在预览区域下方。</li>
+                                </ul>
+                                <h4>四、参数调整</h4>
+                                <ul>
+                                    <li>模糊半径过大可能导致过度模糊。</li>
+                                    <li>马赛克大小过大可能影响周围区域。</li>
+                                    <li>羽化强度越高，边缘越自然。</li>
+                                    <li>自动检测颜色可能不完全准确，可手动调整。</li>
+                                </ul>
+                                <h4>五、性能提示</h4>
+                                <ul>
+                                    <li>大尺寸图片处理需要较长时间，请耐心等待。</li>
+                                    <li>处理期间不要关闭浏览器或刷新页面。</li>
+                                    <li>建议在去水印前先压缩图片以提高处理速度。</li>
+                                    <li>批量下载会打包为ZIP文件。</li>
+                                </ul>
+                                <h4>六、常见问题</h4>
+                                <ul>
+                                    <li><strong>去水印效果不佳：</strong>尝试选择不同的去水印方式。</li>
+                                    <li><strong>区域无法绘制：</strong>确保已添加区域并在图片上拖动。</li>
+                                    <li><strong>颜色检测不准确：</strong>手动选择合适的颜色。</li>
+                                    <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                                </ul>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>

@@ -462,6 +462,74 @@
                         <button class="btn btn-copy" onclick="copyResult('decode-output')">复制结果</button>
                     </div>
                 </div>
+
+                <div class="info-section" style="margin-top:24px;">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、URL编码</h4>
+                            <ul>
+                                <li><strong>输入原始文本：</strong>在"输入原始文本"文本框中输入需要编码的文本或URL。</li>
+                                <li><strong>选择编码模式：</strong>选择encodeURIComponent或encodeURI模式。</li>
+                                <li><strong>点击编码：</strong>点击"编码"按钮将文本编码为URL安全格式。</li>
+                                <li><strong>查看结果：</strong>编码结果会显示在"编码结果"文本框中。</li>
+                                <li><strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。</li>
+                            </ul>
+                            <h4>二、URL解码</h4>
+                            <ul>
+                                <li><strong>输入编码文本：</strong>在"输入编码文本"文本框中输入需要解码的URL编码文本。</li>
+                                <li><strong>点击解码：</strong>点击"解码"按钮将URL编码文本解码为原始文本。</li>
+                                <li><strong>查看结果：</strong>解码结果会显示在"解码结果"文本框中。</li>
+                                <li><strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。</li>
+                            </ul>
+                            <h4>三、编码模式说明</h4>
+                            <ul>
+                                <li><strong>encodeURIComponent：</strong>编码所有非字母数字字符，包括:/?#等特殊字符，适合编码URL参数值。</li>
+                                <li><strong>encodeURI：</strong>只编码非字母数字字符和部分特殊字符，保留:/?#等字符，适合编码完整URL。</li>
+                                <li><strong>区别：</strong>encodeURIComponent编码范围更广，encodeURI保留更多字符。</li>
+                            </ul>
+                            <h4>四、URL编码基础</h4>
+                            <ul>
+                                <li><strong>编码原理：</strong>将非ASCII字符和特殊字符转换为%XX格式，其中XX是字符的十六进制ASCII码。</li>
+                                <li><strong>空格编码：</strong>空格会被编码为%20（encodeURI/encodeURIComponent）或+（application/x-www-form-urlencoded）。</li>
+                                <li><strong>中文编码：</strong>中文字符会被编码为UTF-8字节的十六进制表示，如"中"编码为%E4%B8%AD。</li>
+                                <li><strong>编码长度：</strong>编码后的文本长度通常会增加，特别是包含中文或特殊字符时。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、编码模式选择</h4>
+                            <ul>
+                                <li>编码URL参数值时，建议使用encodeURIComponent，确保参数值中的特殊字符被正确编码。</li>
+                                <li>编码完整URL时，建议使用encodeURI，保留URL结构字符。</li>
+                                <li>如果不确定使用哪种模式，encodeURIComponent是更安全的选择。</li>
+                            </ul>
+                            <h4>二、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>URL编码只是字符转换，不是加密，敏感信息不应通过URL传输。</li>
+                                <li>建议对密码等敏感信息使用HTTPS传输，确保数据安全。</li>
+                            </ul>
+                            <h4>三、格式规范</h4>
+                            <ul>
+                                <li>URL编码使用%XX格式，其中XX是两位十六进制数字。</li>
+                                <li>十六进制数字不区分大小写，%20和%20效果相同。</li>
+                                <li>解码时会自动处理%XX格式的编码字符。</li>
+                                <li>如果编码文本包含无效的%XX格式，可能会导致解码失败。</li>
+                            </ul>
+                            <h4>四、常见问题</h4>
+                            <ul>
+                                <li><strong>解码失败：</strong>检查输入是否为有效的URL编码文本，确保%XX格式正确。</li>
+                                <li><strong>编码结果过长：</strong>包含大量中文或特殊字符的文本编码后长度会显著增加，这是正常现象。</li>
+                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li><strong>编码模式选择：</strong>不确定时使用encodeURIComponent，兼容性更好。</li>
+                                <li><strong>字符计数：</strong>字符计数显示的是文本长度，不是字节数。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 

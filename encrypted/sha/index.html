@@ -596,6 +596,68 @@
                 <div class="info-note">
                     <strong>说明：</strong>SHA256 输出 256 位（64 个十六进制字符），SHA512 输出 512 位（128 个十六进制字符）。所有计算均在浏览器本地完成，数据不会上传。
                 </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、SHA加密</h4>
+                            <ul>
+                                <li><strong>选择算法：</strong>选择 SHA256 或 SHA512 算法进行加密。</li>
+                                <li><strong>选择输出格式：</strong>可选择输出小写或大写格式。</li>
+                                <li><strong>开启批量模式：</strong>勾选"批量模式"后，每行文本会单独计算哈希值。</li>
+                                <li><strong>输入文本：</strong>在文本框中输入需要加密的文本内容。</li>
+                                <li><strong>点击加密：</strong>点击"加密"按钮计算 SHA 哈希值。</li>
+                                <li><strong>从文件加载：</strong>点击"从文件加载"按钮加载文件内容进行加密。</li>
+                                <li><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
+                            </ul>
+                            <h4>二、SHA校验</h4>
+                            <ul>
+                                <li><strong>输入原始文本：</strong>在"输入原始文本"文本框中输入原始内容。</li>
+                                <li><strong>输入哈希值：</strong>在"输入哈希值进行比对"输入框中输入要验证的哈希值。</li>
+                                <li><strong>查看校验结果：</strong>系统会自动比对输入的哈希值与计算结果，并显示匹配或不匹配。</li>
+                                <li><strong>查看当前值：</strong>页面会同时显示当前文本的 SHA256 和 SHA512 值。</li>
+                            </ul>
+                            <h4>三、SHA算法基础</h4>
+                            <ul>
+                                <li><strong>SHA256：</strong>生成 256 位（64 个十六进制字符）的哈希值，安全性较高，性能较好。</li>
+                                <li><strong>SHA512：</strong>生成 512 位（128 个十六进制字符）的哈希值，安全性最高，性能略低。</li>
+                                <li><strong>单向哈希：</strong>SHA 是不可逆的哈希算法，无法从哈希值还原原始数据。</li>
+                                <li><strong>固定长度：</strong>无论输入多长的文本，输出的哈希值长度固定。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>SHA 是不可逆的哈希算法，无法从哈希值还原原始数据。</li>
+                                <li>建议使用 SHA256 或 SHA512 进行密码存储，不要使用已被破解的 MD5。</li>
+                            </ul>
+                            <h4>二、算法选择</h4>
+                            <ul>
+                                <li>一般场景推荐使用 SHA256，平衡安全性和性能。</li>
+                                <li>安全敏感场景建议使用 SHA512，提供更高的安全性。</li>
+                                <li>SHA1 已被证明存在碰撞漏洞，不推荐使用。</li>
+                            </ul>
+                            <h4>三、格式规范</h4>
+                            <ul>
+                                <li>SHA256 输出 64 个十六进制字符，SHA512 输出 128 个十六进制字符。</li>
+                                <li>校验时不区分大小写，输入大写或小写的哈希值都可以正确校验。</li>
+                                <li>批量模式下，空行会被过滤掉，不会计算哈希值。</li>
+                            </ul>
+                            <h4>四、常见问题</h4>
+                            <ul>
+                                <li><strong>校验不匹配：</strong>检查原始文本是否与生成哈希值时的文本完全一致，包括空格和换行符。</li>
+                                <li><strong>结果为空：</strong>确认输入内容不为空。</li>
+                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li><strong>文件加载失败：</strong>检查文件编码是否正确，建议使用 UTF-8 编码的文本文件。</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
 

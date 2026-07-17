@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <script src="../lib/ffmpeg.js"></script>
     <script src="../common/ffmpeg-parallel.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -149,6 +150,99 @@
                 <div class="download-buttons">
                     <button id="downloadBtn">下载裁剪视频</button>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <details class="info-details">
+                    <summary>使用说明</summary>
+                    <div class="info-content">
+                        <h4>一、上传视频</h4>
+                        <ul>
+                            <li><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
+                            <li><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
+                            <li><strong>文件大小：</strong>建议单个视频文件不超过 500MB。</li>
+                            <li><strong>预览视频：</strong>上传后可预览视频内容和总时长。</li>
+                        </ul>
+                        <h4>二、选择裁剪模式</h4>
+                        <ul>
+                            <li><strong>时间裁剪：</strong>按时间长度裁剪视频，截取指定时间段。</li>
+                            <li><strong>范围裁剪：</strong>按画面范围裁剪视频，裁剪指定区域。</li>
+                        </ul>
+                        <h4>三、时间裁剪设置</h4>
+                        <ul>
+                            <li><strong>开始时间：</strong>设置裁剪开始的时间点（秒）。</li>
+                            <li><strong>结束时间：</strong>设置裁剪结束的时间点（秒）。</li>
+                            <li><strong>时间格式：</strong>支持精确到小数点后一位（0.1秒）。</li>
+                            <li><strong>视频时长：</strong>显示视频总时长，方便设置裁剪范围。</li>
+                        </ul>
+                        <h4>四、范围裁剪设置</h4>
+                        <ul>
+                            <li><strong>裁剪区域：</strong>在预览画面上拖动选择要保留的区域。</li>
+                            <li><strong>精确调整：</strong>可手动输入裁剪区域的坐标和尺寸。</li>
+                            <li><strong>保持比例：</strong>裁剪后保持原始宽高比。</li>
+                        </ul>
+                        <h4>五、开始裁剪</h4>
+                        <ul>
+                            <li><strong>点击裁剪：</strong>点击"开始执行裁剪"按钮开始处理。</li>
+                            <li><strong>进度显示：</strong>实时显示裁剪进度。</li>
+                            <li><strong>等待时间：</strong>裁剪时间取决于视频长度和电脑性能。</li>
+                        </ul>
+                        <h4>六、查看和下载</h4>
+                        <ul>
+                            <li><strong>预览效果：</strong>裁剪完成后可预览裁剪后的视频。</li>
+                            <li><strong>一键下载：</strong>点击"下载裁剪视频"按钮保存到本地。</li>
+                        </ul>
+                        <h4>七、适用场景</h4>
+                        <ul>
+                            <li><strong>截取片段：</strong>从长视频中截取精彩片段。</li>
+                            <li><strong>去除黑边：</strong>裁剪视频中的黑边或上下边框。</li>
+                            <li><strong>调整画面：</strong>裁剪出特定区域的画面内容。</li>
+                            <li><strong>制作短视频：</strong>截取长视频中的精华部分。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="info-details">
+                    <summary>注意事项</summary>
+                    <div class="info-content">
+                        <h4>一、数据安全</h4>
+                        <ul>
+                            <li>所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
+                            <li>视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                            <li>建议在处理敏感视频时使用隐私模式浏览。</li>
+                        </ul>
+                        <h4>二、处理性能</h4>
+                        <ul>
+                            <li>视频裁剪是计算密集型操作，会占用较多CPU资源。</li>
+                            <li>处理时间取决于视频时长和电脑性能。</li>
+                            <li>建议在处理大文件时关闭其他占用CPU的程序。</li>
+                        </ul>
+                        <h4>三、格式限制</h4>
+                        <ul>
+                            <li>支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
+                            <li>不支持的格式可能无法正常处理。</li>
+                            <li>输出格式默认为MP4，兼容性最好。</li>
+                        </ul>
+                        <h4>四、时间设置</h4>
+                        <ul>
+                            <li>开始时间必须小于结束时间。</li>
+                            <li>时间不能超出视频总时长范围。</li>
+                            <li>超出范围的时间设置会被自动调整。</li>
+                        </ul>
+                        <h4>五、质量损失</h4>
+                        <ul>
+                            <li>视频重新编码会导致一定的画质损失。</li>
+                            <li>建议裁剪前备份原始视频文件。</li>
+                            <li>范围裁剪会改变视频分辨率。</li>
+                        </ul>
+                        <h4>六、常见问题</h4>
+                        <ul>
+                            <li><strong>裁剪失败：</strong>检查视频文件是否损坏或格式不支持。</li>
+                            <li><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
+                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li><strong>时间错误：</strong>检查开始时间和结束时间设置是否正确。</li>
+                        </ul>
+                    </div>
+                </details>
             </div>
         </div>
 

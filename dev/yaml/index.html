@@ -12,6 +12,7 @@
     <title>YAML在线格式化校验工具</title>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
@@ -102,10 +103,77 @@
             </div>
 
             <div class="panel error-panel" id="error-panel" style="display:none;">
-                <div class="panel-header">❌ 语法错误 <span id="error-count" style="color:#ef4444;"></span></div>
-                <div id="error-list"></div>
-            </div>
+            <div class="panel-header">❌ 语法错误 <span id="error-count" style="color:#ef4444;"></span></div>
+            <div id="error-list"></div>
         </div>
+
+        <div class="info-section">
+            <details class="info-details">
+                <summary>使用说明</summary>
+                <div class="info-content">
+                    <h4>一、格式化功能</h4>
+                    <ul>
+                        <li><strong>格式化：</strong>将压缩或杂乱的YAML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
+                        <li><strong>校验语法：</strong>检查YAML代码的语法正确性，精确指出错误行号和上下文。</li>
+                        <li><strong>压缩：</strong>将格式化的YAML代码压缩为紧凑格式，减小文件体积。</li>
+                        <li><strong>转 Properties：</strong>将YAML格式转换为Java Properties格式，便于配置文件迁移。</li>
+                        <li><strong>复制结果：</strong>一键复制格式化或转换后的代码到剪贴板。</li>
+                    </ul>
+                    <h4>二、YAML 语法基础</h4>
+                    <ul>
+                        <li><strong>缩进：</strong>YAML使用空格缩进表示层级结构，不支持Tab键。</li>
+                        <li><strong>键值对：</strong>使用冒号分隔键和值，如 <code>name: value</code>。</li>
+                        <li><strong>列表：</strong>使用短横线 <code>-</code> 表示列表项。</li>
+                        <li><strong>多行文本：</strong>使用 <code>|</code> 保留换行，使用 <code>&gt;</code> 折叠换行。</li>
+                        <li><strong>注释：</strong>使用 <code>#</code> 开头的行作为注释。</li>
+                        <li><strong>特殊字符：</strong>包含特殊字符的值需要用引号包裹。</li>
+                    </ul>
+                    <h4>三、快捷操作</h4>
+                    <ul>
+                        <li>点击"示例数据"按钮可以查看格式化效果的示例代码。</li>
+                        <li>清空按钮可以快速清除所有内容。</li>
+                        <li>状态栏会显示当前YAML的解析状态。</li>
+                    </ul>
+                </div>
+            </details>
+            <details class="info-details">
+                <summary>注意事项</summary>
+                <div class="info-content">
+                    <h4>一、格式规范</h4>
+                    <ul>
+                        <li>YAML对缩进非常敏感，必须使用空格，不能使用Tab。</li>
+                        <li>同级元素的缩进必须一致。</li>
+                        <li>键名后必须有冒号和空格。</li>
+                        <li>字符串中的冒号和井号需要用引号包裹。</li>
+                        <li>列表项前的短横线后必须有空格。</li>
+                    </ul>
+                    <h4>二、常见错误</h4>
+                    <ul>
+                        <li><strong>缩进错误：</strong>混用空格和Tab，或缩进不一致。</li>
+                        <li><strong>冒号缺失：</strong>键名后忘记加冒号或空格。</li>
+                        <li><strong>引号问题：</strong>包含特殊字符的字符串未加引号。</li>
+                        <li><strong>语法错误：</strong>使用了YAML不支持的语法结构。</li>
+                    </ul>
+                    <h4>三、性能提示</h4>
+                    <ul>
+                        <li>处理超大YAML文件（超过1MB）时可能会导致浏览器卡顿。</li>
+                        <li>建议将大型YAML文件分段处理。</li>
+                    </ul>
+                    <h4>四、数据安全</h4>
+                    <ul>
+                        <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                        <li>建议不要在公共设备上处理包含敏感信息的YAML代码。</li>
+                    </ul>
+                    <h4>五、常见问题</h4>
+                    <ul>
+                        <li><strong>格式化失败：</strong>检查YAML语法是否正确，特别是缩进和冒号。</li>
+                        <li><strong>校验报错：</strong>根据错误提示定位问题行，修正语法错误。</li>
+                        <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </div>
 
         <!-- Footer component container -->
         <div id="footer-container"></div>

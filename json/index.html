@@ -12,6 +12,7 @@
     <title>JSON在线格式化对比工具</title>
 
     <link rel="stylesheet" href="../common/css/style.css">
+    <link rel="stylesheet" href="../common/css/utils.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
@@ -295,6 +296,83 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、格式化功能</h4>
+                            <ul>
+                                <li><strong>格式化：</strong>将压缩的JSON字符串转换为带缩进的易读格式，支持多级缩进和语法高亮显示，便于阅读和调试。</li>
+                                <li><strong>压缩/去转义：</strong>将格式化的JSON压缩为一行，并自动去除转义字符，适用于传输和存储场景。</li>
+                                <li><strong>转义：</strong>将JSON中的特殊字符（如引号、换行符等）进行转义处理，适用于需要在代码中嵌入JSON字符串的场景。</li>
+                                <li><strong>折叠：</strong>对于复杂的嵌套JSON结构，可以一键折叠所有节点，方便快速概览整体结构。</li>
+                                <li><strong>换行：</strong>将一行压缩的JSON字符串按结构自动换行，便于查看长字符串内容。</li>
+                            </ul>
+                            <h4>二、比对功能</h4>
+                            <ul>
+                                <li><strong>差异高亮：</strong>同时输入两段JSON数据，系统会逐行对比并高亮显示所有差异点，支持新增、删除、修改三种差异类型。</li>
+                                <li><strong>同步操作：</strong>支持同步格式化、同步压缩、同步转义和同步清除两个编辑框的内容，提高比对效率。</li>
+                                <li><strong>节点标记：</strong>对于数组和对象，会标记出具体是哪个元素或属性发生了变化。</li>
+                            </ul>
+                            <h4>三、JSON转Java Bean</h4>
+                            <ul>
+                                <li><strong>自动转换：</strong>根据JSON结构自动生成对应的Java实体类代码，包括字段名、类型、getter/setter方法。</li>
+                                <li><strong>类型推断：</strong>自动识别JSON中的数据类型（字符串、数字、布尔值、数组、对象等）并映射为Java类型。</li>
+                                <li><strong>值自动填充：</strong>转换时会保留JSON中的实际值作为示例，便于理解和测试。</li>
+                                <li><strong>Java Bean转JSON：</strong>支持反向转换，将Java Bean代码转换回JSON格式。</li>
+                            </ul>
+                            <h4>四、JSON与XML互转</h4>
+                            <ul>
+                                <li><strong>JSON转XML：</strong>将JSON数据结构转换为标准的XML格式，支持嵌套结构和数组的正确转换。</li>
+                                <li><strong>XML转JSON：</strong>将XML文档转换为JSON格式，保留元素名称、属性和文本内容。</li>
+                                <li><strong>格式优化：</strong>转换后的XML会自动格式化，便于阅读和编辑。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、数据安全</h4>
+                            <ul>
+                                <li>所有处理均在本地浏览器中完成，数据不会上传到服务器，也不会被记录或存储。</li>
+                                <li>建议不要在公共设备上处理包含敏感信息的JSON数据。</li>
+                                <li>处理完成后建议清空编辑框内容，避免敏感信息残留。</li>
+                            </ul>
+                            <h4>二、格式要求</h4>
+                            <ul>
+                                <li>输入的JSON数据必须符合标准JSON语法规范，否则会提示语法错误。</li>
+                                <li>JSON中的字符串必须使用双引号包裹，不能使用单引号。</li>
+                                <li>对象的最后一个属性和数组的最后一个元素后面不能有逗号。</li>
+                                <li>支持的JSON值类型包括：字符串、数字、布尔值、null、数组、对象。</li>
+                            </ul>
+                            <h4>三、性能提示</h4>
+                            <ul>
+                                <li>处理超大JSON数据（超过10MB）时可能会导致浏览器卡顿或响应变慢。</li>
+                                <li>对于特别复杂的嵌套结构，折叠和展开操作可能会有延迟。</li>
+                                <li>建议将大型JSON文件分段处理，避免一次性加载过多数据。</li>
+                            </ul>
+                            <h4>四、浏览器兼容性</h4>
+                            <ul>
+                                <li>建议使用现代浏览器（Chrome 80+、Firefox 75+、Edge 80+、Safari 13+）以获得最佳体验。</li>
+                                <li>旧版浏览器可能不支持某些高级功能，如语法高亮和节点折叠。</li>
+                                <li>移动端浏览器支持有限，建议在桌面端使用以获得更好的编辑体验。</li>
+                            </ul>
+                            <h4>五、编码问题</h4>
+                            <ul>
+                                <li>确保输入数据使用UTF-8编码，避免中文和其他非ASCII字符出现乱码。</li>
+                                <li>如果从其他文件复制JSON数据，注意检查是否包含不可见字符或BOM头。</li>
+                                <li>转义功能会自动处理中文和特殊字符，确保转换后的JSON可以正确解析。</li>
+                            </ul>
+                            <h4>六、常见问题</h4>
+                            <ul>
+                                <li><strong>格式化报错：</strong>请检查JSON语法是否正确，特别是括号是否匹配、逗号位置是否正确。</li>
+                                <li><strong>比对结果不准确：</strong>确保两段JSON的结构相似，建议先分别格式化后再进行比对。</li>
+                                <li><strong>转换结果不符合预期：</strong>复杂的嵌套结构可能需要手动调整，建议检查生成的代码是否符合业务需求。</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>

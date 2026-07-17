@@ -18,6 +18,7 @@
     <title>图片格式转换工具 - 在线免费转换Base64/SVG/图片文件</title>
 
     <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="styles.css">
     <!-- 引入Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -307,17 +308,80 @@
                 </div>
             </div>
 
-            <!-- 功能说明卡片 -->
             <div class="mt-8 feature-card rounded-xl p-6 card-shadow">
-                <h2 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fa fa-info-circle mr-2"></i>使用说明
-                </h2>
-                <div class="space-y-3">
-                    <p><i class="fa fa-check-circle mr-2"></i>支持多种输入方式：Base64 字符串、SVG 代码或直接上传图片文件</p>
-                    <p><i class="fa fa-check-circle mr-2"></i>输出格式支持：JPG、PNG、WebP、BMP</p>
-                    <p><i class="fa fa-check-circle mr-2"></i>JPG 和 WebP 格式可以调整图片质量，以平衡文件大小和图像清晰度</p>
-                    <p><i class="fa fa-check-circle mr-2"></i>转换过程在本地完成，不会上传您的图片到服务器</p>
-                    <p><i class="fa fa-exclamation-triangle mr-2"></i>注意：过大的图片可能会影响转换性能，请尽量优化输入内容</p>
+                <div class="info-section">
+                    <details class="info-details">
+                        <summary>使用说明</summary>
+                        <div class="info-content">
+                            <h4>一、输入方式</h4>
+                            <ul>
+                                <li><strong>Base64输入：</strong>选择"Base64"选项卡，粘贴Base64编码的图片代码。可以包含或不包含前缀data:image/xxx;base64,。</li>
+                                <li><strong>SVG输入：</strong>选择"SVG"选项卡，粘贴完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。</li>
+                                <li><strong>文件上传：</strong>选择"上传文件"选项卡，点击或拖拽图片到上传区域。支持JPG、PNG、WebP、GIF、BMP、SVG格式，最多20张。</li>
+                            </ul>
+                            <h4>二、输出设置</h4>
+                            <ul>
+                                <li><strong>输出格式：</strong>选择输出图片格式，包括JPG、PNG、WebP、GIF、BMP、ICO、Base64编码。</li>
+                                <li><strong>输出分辨率：</strong>仅对SVG有效，可选1024x1024、2048x2048、4096x4096、8192x8192。</li>
+                                <li><strong>图片质量：</strong>拖动滑块调整图片质量（1%-100%），质量越高文件越大。</li>
+                                <li><strong>文件名：</strong>设置下载时的文件名。</li>
+                            </ul>
+                            <h4>三、执行转换</h4>
+                            <ul>
+                                <li><strong>点击转换：</strong>点击"转换"按钮执行格式转换。</li>
+                                <li><strong>实时预览：</strong>转换后可预览结果图片或Base64编码。</li>
+                                <li><strong>下载单张：</strong>点击"下载"按钮保存当前转换结果。</li>
+                                <li><strong>批量下载：</strong>点击"批量下载"按钮打包下载所有转换结果。</li>
+                            </ul>
+                            <h4>四、格式说明</h4>
+                            <ul>
+                                <li><strong>JPG：</strong>有损压缩格式，适合照片，不支持透明。</li>
+                                <li><strong>PNG：</strong>无损压缩格式，支持透明通道，推荐用于SVG转换。</li>
+                                <li><strong>WebP：</strong>现代高效格式，支持透明和动画，文件体积小。</li>
+                                <li><strong>GIF：</strong>支持动画，颜色有限（256色）。</li>
+                                <li><strong>BMP：</strong>无压缩位图格式，文件较大。</li>
+                                <li><strong>ICO：</strong>Windows图标格式，支持多种尺寸。</li>
+                                <li><strong>Base64：</strong>将图片编码为字符串，适合嵌入网页。</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="info-details">
+                        <summary>注意事项</summary>
+                        <div class="info-content">
+                            <h4>一、数据安全</h4>
+                            <ul>
+                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                                <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                            </ul>
+                            <h4>二、格式限制</h4>
+                            <ul>
+                                <li>SVG转换为位图时，建议选择PNG格式以保留透明效果。</li>
+                                <li>JPG格式不支持透明通道，转换后透明区域会变为黑色或白色。</li>
+                                <li>ICO格式输出为标准图标格式，尺寸较小。</li>
+                                <li>Base64编码会使文件体积增大约33%。</li>
+                            </ul>
+                            <h4>三、SVG转换</h4>
+                            <ul>
+                                <li>SVG代码需要包含完整的xmlns命名空间声明。</li>
+                                <li>复杂SVG可能需要较长时间转换。</li>
+                                <li>高分辨率输出会占用更多内存，建议根据需求选择合适的分辨率。</li>
+                            </ul>
+                            <h4>四、批量处理</h4>
+                            <ul>
+                                <li>批量处理最多支持20张图片。</li>
+                                <li>批量上传时，设置会应用到所有图片。</li>
+                                <li>处理期间不要关闭浏览器或刷新页面。</li>
+                            </ul>
+                            <h4>五、常见问题</h4>
+                            <ul>
+                                <li><strong>转换失败：</strong>检查输入格式是否正确，SVG代码是否完整。</li>
+                                <li><strong>透明消失：</strong>确保输出格式选择PNG或WebP。</li>
+                                <li><strong>图片模糊：</strong>增大图片质量或选择更高分辨率。</li>
+                                <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
             <!-- Footer component container -->
