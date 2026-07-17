@@ -49,6 +49,80 @@
     display: block;
 }
 
+/* 格式切换 */
+.format-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.format-switch label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+.format-btn {
+    padding: 6px 16px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.format-btn:hover {
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.format-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+body.dark-mode .format-switch {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .format-switch label {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .format-btn {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .format-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-btn.active {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+/* 秒字段样式 */
+.field-chip.second {
+    background: #e0f7fa;
+    color: #006064;
+}
+
+body.dark-mode .field-chip.second {
+    background-color: rgba(0, 188, 212, 0.1);
+}
+
 /* Parse tab */
 .input-group {
     margin-bottom: 24px;
