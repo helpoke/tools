@@ -8,11 +8,12 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index,follow,noai">
+    <meta name="robots" content="index, follow">
     <title>Cron表达式解析工具 - Helpoke 助点站</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
+        crossorigin="anonymous"></script>
     <script src="./lib/croner.umd.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/cronstrue@3.24.0/dist/cronstrue-i18n.min.js"></script> -->
     <script src="./lib/cronstrue-i18n.min.js"></script>
@@ -21,7 +22,7 @@
         @import '../../common/css/utils.css';
     </style>
     <link rel="stylesheet" href="./cron.css">
-    
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -30,7 +31,7 @@
         "description": "Cron表达式在线解析工具，支持定时任务可视化和最近执行时间预测。免费Cron解析器。Online Cron expression parser with execution time prediction.",
         "url": "https://helpoke.com/cron",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN", "en-US"], 
+        "inLanguage": ["zh-CN"],
         "featureList": [
             "Cron表达式解析",
             "定时任务可视化",
@@ -61,8 +62,11 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">Cron 表达式解析工具</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-            <p>将 Cron 表达式转换为人类可读的描述，或可视化生成 Cron 表达式</p>
+            <h1>Cron表达式解析工具</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>Cron表达式解析工具，支持5位和6位格式，提供表达式解析、生成和执行时间预测功能，支持中文描述</p>
+            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
@@ -257,15 +261,15 @@
                         <div class="gen-mode-content">
                             <div class="gen-step-row" style="display:none">
                                 <label>每隔</label>
-                                <input type="number" min="1" max="59" value="5" >
+                                <input type="number" min="1" max="59" value="5">
                                 <span>秒</span>
                             </div>
                             <div class="gen-range-row" style="display:none">
                                 <label>从</label>
-                                <input type="number" min="0" max="59" value="0" 
+                                <input type="number" min="0" max="59" value="0"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                                 <span>到</span>
-                                <input type="number" min="0" max="59" value="30" 
+                                <input type="number" min="0" max="59" value="30"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                             </div>
                             <div class="gen-specific-row" style="display:none">
@@ -278,24 +282,23 @@
                     <div class="gen-section" id="gen-minute">
                         <div class="gen-section-title">分钟 <span class="badge">0-59</span></div>
                         <div class="gen-mode-row" data-field="minute">
-                            <button class="gen-mode-btn active" data-mode="every"
-                                >每分钟</button>
-                            <button class="gen-mode-btn" data-mode="step" >每隔 N 分钟</button>
-                            <button class="gen-mode-btn" data-mode="range" >范围选择</button>
-                            <button class="gen-mode-btn" data-mode="specific" >指定值</button>
+                            <button class="gen-mode-btn active" data-mode="every">每分钟</button>
+                            <button class="gen-mode-btn" data-mode="step">每隔 N 分钟</button>
+                            <button class="gen-mode-btn" data-mode="range">范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific">指定值</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-step-row" style="display:none">
                                 <label>每隔</label>
-                                <input type="number" min="1" max="59" value="5" >
+                                <input type="number" min="1" max="59" value="5">
                                 <span>分钟</span>
                             </div>
                             <div class="gen-range-row" style="display:none">
                                 <label>从</label>
-                                <input type="number" min="0" max="59" value="0" 
+                                <input type="number" min="0" max="59" value="0"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                                 <span>到</span>
-                                <input type="number" min="0" max="59" value="30" 
+                                <input type="number" min="0" max="59" value="30"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                             </div>
                             <div class="gen-specific-row" style="display:none">
@@ -308,24 +311,23 @@
                     <div class="gen-section" id="gen-hour">
                         <div class="gen-section-title">小时 <span class="badge">0-23</span></div>
                         <div class="gen-mode-row" data-field="hour">
-                            <button class="gen-mode-btn active" data-mode="every"
-                                >每小时</button>
-                            <button class="gen-mode-btn" data-mode="step" >每隔 N 小时</button>
-                            <button class="gen-mode-btn" data-mode="range" >范围选择</button>
-                            <button class="gen-mode-btn" data-mode="specific" >指定值</button>
+                            <button class="gen-mode-btn active" data-mode="every">每小时</button>
+                            <button class="gen-mode-btn" data-mode="step">每隔 N 小时</button>
+                            <button class="gen-mode-btn" data-mode="range">范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific">指定值</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-step-row" style="display:none">
                                 <label>每隔</label>
-                                <input type="number" min="1" max="23" value="2" >
+                                <input type="number" min="1" max="23" value="2">
                                 <span>小时</span>
                             </div>
                             <div class="gen-range-row" style="display:none">
                                 <label>从</label>
-                                <input type="number" min="0" max="23" value="9" 
+                                <input type="number" min="0" max="23" value="9"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                                 <span>到</span>
-                                <input type="number" min="0" max="23" value="18" 
+                                <input type="number" min="0" max="23" value="18"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                             </div>
                             <div class="gen-specific-row" style="display:none">
@@ -338,10 +340,8 @@
                     <div class="gen-section" id="gen-day">
                         <div class="gen-section-title">日 <span class="badge">1-31</span></div>
                         <div class="gen-mode-row" data-field="day">
-                            <button class="gen-mode-btn active" data-mode="every"
-                                >每日</button>
-                            <button class="gen-mode-btn" data-mode="specific"
-                                >指定日期</button>
+                            <button class="gen-mode-btn active" data-mode="every">每日</button>
+                            <button class="gen-mode-btn" data-mode="specific">指定日期</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-specific-row" style="display:none">
@@ -354,10 +354,8 @@
                     <div class="gen-section" id="gen-month">
                         <div class="gen-section-title">月 <span class="badge">1-12</span></div>
                         <div class="gen-mode-row" data-field="month">
-                            <button class="gen-mode-btn active" data-mode="every"
-                                >每月</button>
-                            <button class="gen-mode-btn" data-mode="specific"
-                                >指定月份</button>
+                            <button class="gen-mode-btn active" data-mode="every">每月</button>
+                            <button class="gen-mode-btn" data-mode="specific">指定月份</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-specific-row" style="display:none">
@@ -370,10 +368,8 @@
                     <div class="gen-section" id="gen-weekday">
                         <div class="gen-section-title">星期 <span class="badge">0-6（0=周日）</span></div>
                         <div class="gen-mode-row" data-field="weekday">
-                            <button class="gen-mode-btn active" data-mode="every"
-                                >不限</button>
-                            <button class="gen-mode-btn" data-mode="specific"
-                                >指定星期</button>
+                            <button class="gen-mode-btn active" data-mode="every">不限</button>
+                            <button class="gen-mode-btn" data-mode="specific">指定星期</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-specific-row" style="display:none">
@@ -395,20 +391,46 @@
                 </div>
 
                 <div class="info-section">
-                    <details class="info-details">
-                        <summary>使用说明</summary>
+                    <article class="info-details">
+                        <header><h3>工具介绍</h3></header>
+                        <div class="info-content">
+                            <h4>一、解决的问题</h4>
+                            <ul>
+                                <li>Cron表达式是定时任务调度的核心语法，但对于初学者来说，5位或6位的时间字段组合难以理解和编写。</li>
+                                <li>手动计算Cron表达式的执行时间非常繁琐且容易出错，特别是涉及复杂的步长和范围表达式时。</li>
+                                <li>不同调度器（如Linux Cron、Spring Scheduler、Quartz）对Cron表达式的解析规则略有差异，容易造成混淆。</li>
+                            </ul>
+                            <h4>二、支持的格式</h4>
+                            <ul>
+                                <li><strong>5位标准格式：</strong>分 时 日 月 星期，适用于大多数标准Cron调度器。</li>
+                                <li><strong>6位扩展格式：</strong>秒 分 时 日 月 星期，适用于支持秒级精度的调度器（如Quartz、Spring）。</li>
+                                <li><strong>特殊字符：</strong>支持 *（任意）、,（枚举）、-（范围）、/（步长）、?（不指定）、L（最后）等所有标准Cron特殊字符。</li>
+                            </ul>
+                            <h4>三、核心功能</h4>
+                            <ul>
+                                <li><strong>表达式解析：</strong>将Cron表达式转换为人类可读的中文描述，让您一目了然。</li>
+                                <li><strong>表达式生成：</strong>通过可视化界面配置各字段规则，自动生成对应的Cron表达式。</li>
+                                <li><strong>执行时间预测：</strong>根据当前时间计算最近10次执行时间，方便规划任务执行计划。</li>
+                                <li><strong>格式切换：</strong>支持5位和6位格式之间的快速切换，自动添加或移除秒字段。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                         <div class="info-content">
                             <h4>一、解析 Cron 表达式</h4>
                             <ul>
-                                <li><strong>输入表达式：</strong>在输入框中输入5位Cron表达式，如 <code>*/5 * * * *</code>。</li>
-                                <li><strong>点击解析：</strong>点击"解析"按钮，系统会将表达式转换为人类可读的描述。</li>
-                                <li><strong>可视化展示：</strong>解析结果会以卡片形式展示每个字段的含义（分、时、日、月、星期）。</li>
+                                <li><strong>输入表达式：</strong>在输入框中输入5位或6位Cron表达式，如 <code>*/5 * * * *</code> 或 <code>0 */5 * * * *</code>。</li>
+                                <li><strong>自动解析：</strong>输入后系统会自动解析表达式，并实时更新可视化展示和执行时间预测。</li>
+                                <li><strong>可视化展示：</strong>解析结果会以卡片形式展示每个字段的含义（秒、分、时、日、月、星期）。</li>
                                 <li><strong>查看执行时间：</strong>系统会预测最近的执行时间列表，方便您了解任务的执行计划。</li>
                                 <li><strong>使用预设：</strong>点击下方的预设按钮（如每分钟、每小时、每天等）可以快速填入常用表达式。</li>
                             </ul>
                             <h4>二、生成 Cron 表达式</h4>
                             <ul>
                                 <li><strong>选择生成模式：</strong>切换到"生成 Cron"标签页，通过可视化界面配置各字段的执行规则。</li>
+                                <li><strong>格式切换：</strong>点击"5位"或"6位（含秒）"按钮切换生成格式。</li>
+                                <li><strong>秒配置：</strong>6位格式下支持每秒、每隔N秒、范围选择、指定值四种模式。</li>
                                 <li><strong>分钟配置：</strong>支持每分钟、每隔N分钟、范围选择、指定值四种模式。</li>
                                 <li><strong>小时配置：</strong>支持每小时、每隔N小时、范围选择、指定值四种模式。</li>
                                 <li><strong>日期配置：</strong>支持每日或指定日期。</li>
@@ -418,7 +440,9 @@
                             </ul>
                             <h4>三、Cron 表达式格式</h4>
                             <ul>
-                                <li>Cron表达式由5个字段组成，空格分隔：<code>分 时 日 月 星期</code></li>
+                                <li><strong>5位格式：</strong>分 时 日 月 星期</li>
+                                <li><strong>6位格式：</strong>秒 分 时 日 月 星期</li>
+                                <li><strong>秒(0-59)：</strong>指定任务在分钟的第几秒执行（仅6位格式）。</li>
                                 <li><strong>分钟(0-59)：</strong>指定任务在小时的第几分钟执行。</li>
                                 <li><strong>小时(0-23)：</strong>指定任务在一天的第几小时执行。</li>
                                 <li><strong>日期(1-31)：</strong>指定任务在月的第几天执行。</li>
@@ -435,29 +459,31 @@
                                 <li><strong>L</strong>：最后，如日期字段的 <code>L</code> 表示当月最后一天。</li>
                             </ul>
                         </div>
-                    </details>
-                    <details class="info-details">
-                        <summary>注意事项</summary>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                         <div class="info-content">
                             <h4>一、格式规范</h4>
                             <ul>
-                                <li>Cron表达式必须为5位格式，各字段之间用空格分隔。</li>
+                                <li>Cron表达式必须为5位或6位格式，各字段之间用空格分隔。</li>
                                 <li>每个字段的值必须在规定范围内，超出范围会导致解析失败。</li>
                                 <li>星期字段0表示周日，1-6分别表示周一到周六。</li>
                             </ul>
                             <h4>二、常见示例</h4>
                             <ul>
-                                <li><code>* * * * *</code> - 每分钟执行</li>
+                                <li><code>* * * * *</code> - 每分钟执行（5位）</li>
+                                <li><code>* * * * * *</code> - 每秒执行（6位）</li>
                                 <li><code>0 * * * *</code> - 每小时执行</li>
                                 <li><code>0 0 * * *</code> - 每天午夜执行</li>
                                 <li><code>0 9 * * 1-5</code> - 工作日上午9点执行</li>
                                 <li><code>0 0 1 * *</code> - 每月1号执行</li>
+                                <li><code>10 */5 * * * *</code> - 每隔5分钟的第10秒执行（6位）</li>
                             </ul>
                             <h4>三、执行时间预测</h4>
                             <ul>
                                 <li>执行时间预测基于当前时间计算，仅供参考。</li>
                                 <li>实际执行时间可能受系统时区和任务调度器影响。</li>
-                                <li>不支持某些高级Cron特性（如秒级精度）。</li>
+                                <li>6位格式支持秒级精度的执行时间计算。</li>
                             </ul>
                             <h4>四、数据安全</h4>
                             <ul>
@@ -469,9 +495,10 @@
                                 <li><strong>解析失败：</strong>检查Cron表达式格式是否正确，字段值是否在有效范围内。</li>
                                 <li><strong>执行时间异常：</strong>确认时区设置是否正确，某些调度器可能使用不同的时区。</li>
                                 <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li><strong>格式切换后无变化：</strong>请确保在解析Tab中输入表达式后再切换格式。</li>
                             </ul>
                         </div>
-                    </details>
+                    </article>
                 </div>
             </div>
         </div>
@@ -485,7 +512,7 @@
     <script src="../../common/js/nav.js"></script>
     <script src="cron6.js"></script>
     <script src="script.js"></script>
-    
+
 </body>
 
 </html>

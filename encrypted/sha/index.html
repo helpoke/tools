@@ -8,11 +8,12 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index,follow,noai">
+    <meta name="robots" content="index, follow">
     <title>SHA 加密工具 - Helpoke 助点站</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
+        crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script> -->
     <script src="./lib/crypto-js.min.js"></script>
     <style>
@@ -476,15 +477,15 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "SHA在线加密工具",
-        "description": "SHA在线加密工具，支持SHA1、SHA256、SHA512等多种哈希算法，支持批量加密。离线工具，数据本地处理保护隐私。SHA hash generator with multiple algorithms.",
+        "description": "SHA在线加密工具，支持SHA-256、SHA-512哈希算法，支持批量加密和哈希校验。离线工具，数据本地处理保护隐私。SHA hash generator with multiple algorithms.",
         "url": "https://helpoke.com/sha",
         "applicationCategory": "https://schema.org/SecurityTool",
-        "inLanguage": ["zh-CN", "en-US"], 
+        "inLanguage": ["zh-CN"],
         "featureList": [
-            "支持SHA1、SHA256、SHA512算法",
-            "支持SHA-224、SHA-384算法",
+            "支持SHA-256、SHA-512算法",
+            "哈希值比对校验",
             "批量SHA加密生成",
-            "支持文件哈希校验",
+            "支持从文件加载文本",
             "本地处理，保护隐私",
             "免费在线使用"
         ],
@@ -510,8 +511,11 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">SHA 加密工具</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-            <p>支持 SHA256 / SHA512 哈希加密，离线工具保护数据安全</p>
+            <h1>SHA哈希工具</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>SHA哈希工具，支持计算SHA-256、SHA-512哈希值，支持批量模式和哈希值校验，可从文件加载文本</p>
+            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
@@ -598,8 +602,8 @@
                 </div>
 
                 <div class="info-section">
-                    <details class="info-details">
-                        <summary>使用说明</summary>
+                    <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                         <div class="info-content">
                             <h4>一、SHA加密</h4>
                             <ul>
@@ -626,9 +630,34 @@
                                 <li><strong>固定长度：</strong>无论输入多长的文本，输出的哈希值长度固定。</li>
                             </ul>
                         </div>
-                    </details>
-                    <details class="info-details">
-                        <summary>注意事项</summary>
+                    </article>
+                    
+                    <article class="info-details">
+                        <header><h3>工具介绍</h3></header>
+                        <div class="info-content">
+                            <h4>一、解决的问题</h4>
+                            <ul>
+                                <li>计算文件或文本的SHA哈希值，验证数据完整性。</li>
+                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li>无需安装专业软件，随时随地在线使用。</li>
+                            </ul>
+                            <h4>二、支持的格式</h4>
+                            <ul>
+                                <li><strong>SHA-1：</strong>支持该格式的完整处理功能。</li>
+<li><strong>SHA-256：</strong>支持该格式的完整处理功能。</li>
+<li><strong>SHA-512：</strong>支持该格式的完整处理功能。</li>
+                            </ul>
+                            <h4>三、核心功能</h4>
+                            <ul>
+                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                         <div class="info-content">
                             <h4>一、数据安全</h4>
                             <ul>
@@ -656,7 +685,7 @@
                                 <li><strong>文件加载失败：</strong>检查文件编码是否正确，建议使用 UTF-8 编码的文本文件。</li>
                             </ul>
                         </div>
-                    </details>
+                    </article>
                 </div>
             </div>
         </div>
@@ -822,7 +851,7 @@
             this._timer = setTimeout(doVerify, 300);
         });
     </script>
-    
+
 </body>
 
 </html>

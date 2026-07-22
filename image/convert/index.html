@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="styles.css">
     <!-- 引入Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Tailwind 配置 -->
     <script>
         tailwind.config = {
@@ -43,7 +41,7 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -54,12 +52,12 @@
         "description": "在线图片格式转换工具，支持Base64编码、SVG代码转换为JPG、PNG、WebP等图片格式。支持调整图片质量和输出分辨率。Online image format converter supporting Base64 to image, SVG to image conversion.",
         "url": "https://helpoke.com/image/convert",
         "applicationCategory": "https://schema.org/ImageProcessing",
-        "inLanguage": ["zh-CN", "en-US"], 
+        "inLanguage": ["zh-CN"],
         "featureList": [
             "支持Base64编码转换为图片",
             "支持SVG矢量图转换为位图",
             "支持图片文件直接上传转换",
-            "输出格式：JPG、PNG、WebP、BMP",
+            "输出格式：JPG、PNG、WebP、GIF、BMP、ICO",
             "可调节图片质量（1%-100%）",
             "SVG转换支持多种分辨率输出",
             "本地处理，保护用户隐私"
@@ -86,12 +84,11 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">图像格式批量转换工具</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-            <p>支持Base64、SVG、图片文件等批量转换为JPG、PNG、WebP、BMP、GIF等多种图片格式</p>
+            <h1>图片格式转换工具</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>图片格式转换工具，支持Base64编码、SVG代码、图片文件转换为JPG、PNG、WebP、GIF、BMP、ICO等格式，可调节质量和分辨率，支持批量转换</p>
             <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
-            <p class="description">
-                <b>注意：</b> 处理期间切记不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失，需要重新上传并处理。
-            </p>
         </section>
 
         <!-- 主要内容 -->
@@ -100,7 +97,7 @@
                 <!-- 输入区域 -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <i class="fa fa-input mr-2"></i>输入
+                        <i class="fas fa-file-import mr-2"></i>输入
                     </h2>
 
                     <!-- 输入选项卡 -->
@@ -116,7 +113,7 @@
                         <div>
                             <!-- Base64格式说明 -->
                             <div class="format-info rounded-lg p-3 text-sm mb-2">
-                                <i class="fa fa-info-circle mr-1"></i><strong>Base64格式说明：</strong>
+                                <i class="fas fa-circle-info mr-1"></i><strong>Base64格式说明：</strong>
                                 请输入完整的Base64图像代码，可以包含或不包含前缀：data:image/xxx;base64,。输入示例如下：
                             </div>
                             <!-- Base64示例 -->
@@ -130,7 +127,7 @@
                         <div class="flex justify-between items-center">
                             <div class="text-sm" id="base64-length">0 字符</div>
                             <button id="clear-base64" class="text-sm hover:text-red-500 transition-colors">
-                                <i class="fa fa-trash-o mr-1"></i>清除
+                                <i class="fas fa-trash-can mr-1"></i>清除
                             </button>
                         </div>
                     </div>
@@ -140,7 +137,7 @@
                         <div>
                             <!-- SVG格式说明 -->
                             <div class="format-info rounded-lg p-3 text-sm mb-2">
-                                <i class="fa fa-info-circle mr-1"></i><strong>SVG格式说明：</strong>
+                                <i class="fas fa-circle-info mr-1"></i><strong>SVG格式说明：</strong>
                                 请输入完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。输入示例如下：
                             </div>
                             <!-- SVG示例 -->
@@ -157,7 +154,7 @@
                         <div class="flex justify-between items-center">
                             <div class="text-sm" id="svg-length">0 字符</div>
                             <button id="clear-svg" class="text-sm hover:text-red-500 transition-colors">
-                                <i class="fa fa-trash-o mr-1"></i>清除
+                                <i class="fas fa-trash-can mr-1"></i>清除
                             </button>
                         </div>
                     </div>
@@ -185,7 +182,7 @@
                         <div id="file-info" class="hidden bg-gray-50 p-3 rounded-lg">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <i class="fa fa-file-image-o mr-2"></i>
+                                    <i class="fas fa-file-image mr-2"></i>
                                     <span id="file-name" class="text-sm font-medium"></span>
                                 </div>
                                 <span id="file-size" class="text-xs"></span>
@@ -197,7 +194,7 @@
                             <div id="upload-container"
                                 class="preview-inner h-[400px] flex items-center justify-center rounded overflow-hidden">
                                 <div class="preview-placeholder text-center">
-                                    <i class="fa fa-picture-o text-4xl mb-2"></i>
+                                    <i class="fas fa-image text-4xl mb-2"></i>
                                     <p class="text-sm">上传后图片将在这里显示</p>
                                 </div>
                             </div>
@@ -208,9 +205,9 @@
                 <!-- 输出和预览区域 -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
                     <h2 class="text-xl font-semibold mb-4 flex items-center">
-                        <i class="fa fa-output mr-2"></i>输出设置
+                        <i class="fas fa-file-export mr-2"></i>输出设置
                         （<a href="note.html" target="" class="block text-sm hover:underline">
-                            <i class="fa fa-info-circle mr-1"></i>转换类型与清晰度说明
+                            <i class="fas fa-circle-info mr-1"></i>转换类型与清晰度说明
                         </a>）
                     </h2>
 
@@ -261,17 +258,17 @@
                     <div class="flex space-x-3 mb-6">
                         <button id="convert-btn"
                             class="flex-1 font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center">
-                            <i class="fa fa-exchange mr-2"></i>转换
+                            <i class="fas fa-arrow-right-arrow-left mr-2"></i>转换
                         </button>
                         <button id="download-btn"
                             class="flex-1 font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
                             disabled>
-                            <i class="fa fa-download mr-2"></i>下载
+                            <i class="fas fa-download mr-2"></i>下载
                         </button>
                         <button id="download-all-btn"
                             class="flex-1 font-medium py-2 px-4 rounded-lg btn-hover flex items-center justify-center"
                             disabled>
-                            <i class="fa fa-download mr-2"></i>批量下载
+                            <i class="fas fa-download mr-2"></i>批量下载
                         </button>
                     </div>
 
@@ -283,7 +280,7 @@
                             <div id="preview-container"
                                 class="preview-inner h-[400px] flex items-center justify-center rounded overflow-hidden">
                                 <div class="preview-placeholder text-center">
-                                    <i class="fa fa-picture-o text-4xl mb-2"></i>
+                                    <i class="fas fa-image text-4xl mb-2"></i>
                                     <p class="text-sm">转换后图片将在这里显示</p>
                                 </div>
                             </div>
@@ -294,7 +291,7 @@
                             <div class="flex justify-between items-center mb-2">
                                 <h3 class="text-sm font-medium">Base64 编码：</h3>
                                 <button id="copy-base64" class="text-xs hover:underline">
-                                    <i class="fa fa-copy mr-1"></i>复制
+                                    <i class="fas fa-copy mr-1"></i>复制
                                 </button>
                             </div>
                             <textarea id="base64-preview" rows="22"
@@ -310,14 +307,17 @@
 
             <div class="mt-8 feature-card rounded-xl p-6 card-shadow">
                 <div class="info-section">
-                    <details class="info-details">
-                        <summary>使用说明</summary>
+                    <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                         <div class="info-content">
                             <h4>一、输入方式</h4>
                             <ul>
-                                <li><strong>Base64输入：</strong>选择"Base64"选项卡，粘贴Base64编码的图片代码。可以包含或不包含前缀data:image/xxx;base64,。</li>
-                                <li><strong>SVG输入：</strong>选择"SVG"选项卡，粘贴完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。</li>
-                                <li><strong>文件上传：</strong>选择"上传文件"选项卡，点击或拖拽图片到上传区域。支持JPG、PNG、WebP、GIF、BMP、SVG格式，最多20张。</li>
+                                <li><strong>Base64输入：</strong>选择"Base64"选项卡，粘贴Base64编码的图片代码。可以包含或不包含前缀data:image/xxx;base64,。
+                                </li>
+                                <li><strong>SVG输入：</strong>选择"SVG"选项卡，粘贴完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。
+                                </li>
+                                <li><strong>文件上传：</strong>选择"上传文件"选项卡，点击或拖拽图片到上传区域。支持JPG、PNG、WebP、GIF、BMP、SVG格式，最多20张。
+                                </li>
                             </ul>
                             <h4>二、输出设置</h4>
                             <ul>
@@ -344,9 +344,35 @@
                                 <li><strong>Base64：</strong>将图片编码为字符串，适合嵌入网页。</li>
                             </ul>
                         </div>
-                    </details>
-                    <details class="info-details">
-                        <summary>注意事项</summary>
+                    </article>
+                    
+                    <article class="info-details">
+                        <header><h3>工具介绍</h3></header>
+                        <div class="info-content">
+                            <h4>一、解决的问题</h4>
+                            <ul>
+                                <li>转换图片格式，支持多种格式互转。</li>
+                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li>无需安装专业软件，随时随地在线使用。</li>
+                            </ul>
+                            <h4>二、支持的格式</h4>
+                            <ul>
+                                <li><strong>JPG：</strong>支持该格式的完整处理功能。</li>
+<li><strong>PNG：</strong>支持该格式的完整处理功能。</li>
+<li><strong>WebP：</strong>支持该格式的完整处理功能。</li>
+<li><strong>GIF：</strong>支持该格式的完整处理功能。</li>
+                            </ul>
+                            <h4>三、核心功能</h4>
+                            <ul>
+                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                         <div class="info-content">
                             <h4>一、数据安全</h4>
                             <ul>
@@ -381,10 +407,11 @@
                                 <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                             </ul>
                         </div>
-                    </details>
+                    </article>
                 </div>
             </div>
-            <!-- Footer component container -->
+
+        <!-- Footer component container -->
             <div id="footer-container"></div>
         </main>
 
@@ -392,7 +419,7 @@
         <!-- 成功提示 -->
         <div id="toast"
             class="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center">
-            <i class="fa fa-check-circle mr-2"></i>
+            <i class="fas fa-circle-check mr-2"></i>
             <span id="toast-message"></span>
         </div>
 

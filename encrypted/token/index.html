@@ -8,11 +8,12 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index,follow,noai">
+    <meta name="robots" content="index, follow">
     <title>Token在线工具 - JWT解析、Token生成、Base64编解码</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
+        crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script> -->
     <script src="./lib/crypto-js.min.js"></script>
 
@@ -680,7 +681,7 @@
         "description": "在线Token工具，支持JWT解析验证、Token随机生成、Base64编解码功能。离线工具，数据本地处理保护隐私。Online JWT parser and token generator.",
         "url": "https://helpoke.com/token",
         "applicationCategory": "https://schema.org/SecurityTool",
-        "inLanguage": ["zh-CN", "en-US"], 
+        "inLanguage": ["zh-CN"],
         "featureList": [
             "JWT完整解码",
             "JWT过期时间校验",
@@ -711,8 +712,11 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">Token + JWT在线工具</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-            <p>支持 JWT 解析验证、随机 Token 生成、Base64 编解码，离线工具保护数据安全</p>
+            <h1>Token在线工具</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>Token在线工具，支持JWT解析验证（含签名与过期校验）、随机Token生成和Base64编解码</p>
+            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
@@ -856,8 +860,8 @@
 
             <div class="tool-card">
                 <div class="info-section">
-                    <details class="info-details">
-                        <summary>使用说明</summary>
+                    <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                         <div class="info-content">
                             <h4>一、JWT解析</h4>
                             <ul>
@@ -892,12 +896,37 @@
                                 <li><strong>Header：</strong>包含算法(alg)和类型(typ)信息，Base64URL编码。</li>
                                 <li><strong>Payload：</strong>包含声明信息，如iss（签发者）、exp（过期时间）、sub（主题）等。</li>
                                 <li><strong>Signature：</strong>使用Header指定的算法对前两部分签名，确保数据完整性。</li>
-                                <li><strong>常用声明：</strong>iat（签发时间）、exp（过期时间）、nbf（生效时间）、iss（签发者）、sub（主题）、aud（受众）、jti（JWT ID）。</li>
+                                <li><strong>常用声明：</strong>iat（签发时间）、exp（过期时间）、nbf（生效时间）、iss（签发者）、sub（主题）、aud（受众）、jti（JWT
+                                    ID）。</li>
                             </ul>
                         </div>
-                    </details>
-                    <details class="info-details">
-                        <summary>注意事项</summary>
+                    </article>
+                    
+                    <article class="info-details">
+                        <header><h3>工具介绍</h3></header>
+                        <div class="info-content">
+                            <h4>一、解决的问题</h4>
+                            <ul>
+                                <li>生成随机Token和验证码，用于身份验证。</li>
+                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li>无需安装专业软件，随时随地在线使用。</li>
+                            </ul>
+                            <h4>二、支持的格式</h4>
+                            <ul>
+                                <li><strong>JWT：</strong>支持该格式的完整处理功能。</li>
+<li><strong>随机Token：</strong>支持该格式的完整处理功能。</li>
+                            </ul>
+                            <h4>三、核心功能</h4>
+                            <ul>
+                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                         <div class="info-content">
                             <h4>一、数据安全</h4>
                             <ul>
@@ -935,7 +964,7 @@
                                 <li><strong>Base64解码失败：</strong>检查输入是否为有效的Base64字符串。</li>
                             </ul>
                         </div>
-                    </details>
+                    </article>
                 </div>
             </div>
         </div>

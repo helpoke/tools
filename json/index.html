@@ -8,15 +8,16 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index,follow,noai">
+    <meta name="robots" content="index, follow">
     <title>JSON在线格式化对比工具</title>
 
     <link rel="stylesheet" href="../common/css/style.css">
     <link rel="stylesheet" href="../common/css/utils.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
+        crossorigin="anonymous"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -25,7 +26,7 @@
         "description": "JSON格式化、JSON比对、JSON与Java Bean互转工具。支持节点折叠、差异高亮、值自动填充等功能。免费在线JSON工具。JSON formatting, comparison and conversion tool with node folding and diff highlighting.",
         "url": "https://helpoke.com/json",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN", "en-US"], 
+        "inLanguage": ["zh-CN"],
         "featureList": [
             "JSON格式化与压缩",
             "JSON比对，高亮显示差异",
@@ -52,15 +53,17 @@
 </head>
 
 <body>
+    <!-- 引入 CodeMirror 6 或 Monaco Editor（VS Code 的核心编辑器）。 -->
     <!-- Navigation component container -->
     <div id="nav-container"></div>
 
     <main class="main">
         <section class="page-hero">
-            <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">JSON 工具集</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-            <p>JSON格式化工具，支持节点折叠与差异高亮，可以手动选择折叠节点，支持压缩与解义(压缩也是去转义，先解义再格式化)。</p>
-            <p>JSON比对工具，清晰标记不同内容行，可高亮展示节点，指出所有不同点(压缩也是去转义，先解义再比对)。</p>
-            <p>JSON与Java Bean、XML互转工具，支持值自动填充(压缩也是去转义，先解义再互转)。</p>
+            <h1>JSON工具集</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>JSON工具集，包含格式化、比对、Java Bean互转、XML互转、压缩等功能，支持节点折叠与差异高亮，支持语法校验</p>
+            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
 
@@ -93,7 +96,7 @@
                         <div class="input-box">
                             <div id="error-message" class="error-message"></div>
                             <div class="editor-container-wrapper">
-                                <button id="format-fullscreen-btn" class="fullscreen-button">
+                                <button id="format-fullscreen-btn" class="fullscreen-button" aria-label="全屏切换">
                                     <span class="iconfont">&#xe8fa;</span></button>
                                 <div class="editor-container">
                                     <div id="line-numbers" class="line-numbers">
@@ -135,7 +138,7 @@
                         </div>
                         <div class="compare-content">
                             <div class="compare-box original">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="button-content">
                                     <h3>原始JSON</h3>
                                     <div class="button-group">
                                         <button id="copy-original-btn" class="copy-btn">复制</button>
@@ -157,7 +160,7 @@
                                 </div>
                             </div>
                             <div class="compare-box target">
-                                <div style="display: flex; justify-content: space-between; align-items: center; ">
+                                <div class="button-content">
                                     <h3>目标JSON</h3>
                                     <div class="button-group">
                                         <button id="copy-target-btn" class="copy-btn">复制</button>
@@ -197,7 +200,7 @@
                         </div>
                         <div class="compare-content">
                             <div class="compare-box original">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="button-content">
                                     <h3>JSON</h3>
                                     <div class="button-group">
                                         <button id="copy-xml-json-btn" class="copy-btn">复制</button>
@@ -218,7 +221,7 @@
                                 </div>
                             </div>
                             <div class="compare-box target">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="button-content">
                                     <h3>XML</h3>
                                     <div class="button-group">
                                         <button id="copy-xml-output-btn" class="copy-btn">复制</button>
@@ -254,7 +257,7 @@
                         </div>
                         <div class="compare-content">
                             <div class="compare-box original">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="button-content">
                                     <h3>JSON</h3>
                                     <div class="button-group">
                                         <button id="copy-input-btn" class="copy-btn">复制</button>
@@ -275,7 +278,7 @@
                                 </div>
                             </div>
                             <div class="compare-box target">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="button-content">
                                     <h3>Java Bean</h3>
                                     <div class="button-group">
                                         <button id="copy-output-btn" class="copy-btn">复制</button>
@@ -299,8 +302,8 @@
                 </div>
 
                 <div class="info-section">
-                    <details class="info-details">
-                        <summary>使用说明</summary>
+                    <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                         <div class="info-content">
                             <h4>一、格式化功能</h4>
                             <ul>
@@ -330,9 +333,9 @@
                                 <li><strong>格式优化：</strong>转换后的XML会自动格式化，便于阅读和编辑。</li>
                             </ul>
                         </div>
-                    </details>
-                    <details class="info-details">
-                        <summary>注意事项</summary>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                         <div class="info-content">
                             <h4>一、数据安全</h4>
                             <ul>
@@ -372,7 +375,7 @@
                                 <li><strong>转换结果不符合预期：</strong>复杂的嵌套结构可能需要手动调整，建议检查生成的代码是否符合业务需求。</li>
                             </ul>
                         </div>
-                    </details>
+                    </article>
                 </div>
             </div>
         </div>

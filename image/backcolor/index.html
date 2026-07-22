@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index,follow,noai">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私">
+    <meta name="keywords" content="图片背景色切换, 更换背景色, 图片换背景, 背景色替换, 在线图片处理, 免费图片工具">
     <title>图片背景色切换工具</title>
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">图片背景色切换工具</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-        
+    <main class="main">
+        <section class="page-hero">
+            <h1>图片背景色切换工具</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景</p>
+            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+
         <label for="imageUpload" class="upload-area">
-                <input type="file" id="imageUpload" accept="image/*" style="display:none;">
-                <div class="upload-icon">🖼️</div>
-                <div class="upload-text">点击上传或拖拽图片到此处</div>
-                <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式</div>
-            </label>
-        
+            <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+            <div class="upload-icon">🖼️</div>
+            <div class="upload-text">点击上传或拖拽图片到此处</div>
+            <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式</div>
+        </label>
+
         <div class="preview-section">
             <div class="image-container">
                 <img id="previewImage" src="" alt="预览图片" style="display: none;">
                 <div id="placeholder" class="placeholder">请上传一张图片</div>
             </div>
         </div>
-        
+
         <div class="color-section">
             <h2>选择背景颜色</h2>
             <div class="color-palette">
@@ -41,7 +52,7 @@
             </div>
             <input type="color" id="customColor" value="#ffffff">
         </div>
-        
+
         <div class="tolerance-section">
             <h2>背景检测容差</h2>
             <div class="tolerance-control">
@@ -50,15 +61,15 @@
             </div>
             <p>调整容差值可以更好地识别复杂背景，值越大识别范围越广。</p>
         </div>
-        
+
         <div class="action-buttons">
             <button id="replaceBgColorBtn" disabled>应用背景替换</button>
             <button id="downloadBtn" disabled>下载结果图片</button>
         </div>
 
         <div class="info-section">
-            <details class="info-details">
-                <summary>使用说明</summary>
+            <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                 <div class="info-content">
                     <h4>一、上传图片</h4>
                     <ul>
@@ -92,9 +103,34 @@
                         <li><strong>边缘处理：</strong>智能处理颜色边界，避免生硬的边缘效果。</li>
                     </ul>
                 </div>
-            </details>
-            <details class="info-details">
-                <summary>注意事项</summary>
+            </article>
+            
+                    <article class="info-details">
+                        <header><h3>工具介绍</h3></header>
+                        <div class="info-content">
+                            <h4>一、解决的问题</h4>
+                            <ul>
+                                <li>为图片添加或更换背景色。</li>
+                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li>无需安装专业软件，随时随地在线使用。</li>
+                            </ul>
+                            <h4>二、支持的格式</h4>
+                            <ul>
+                                <li><strong>JPG：</strong>支持该格式的完整处理功能。</li>
+<li><strong>PNG：</strong>支持该格式的完整处理功能。</li>
+<li><strong>GIF：</strong>支持该格式的完整处理功能。</li>
+                            </ul>
+                            <h4>三、核心功能</h4>
+                            <ul>
+                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                 <div class="info-content">
                     <h4>一、数据安全</h4>
                     <ul>
@@ -122,12 +158,13 @@
                         <li><strong>图片加载失败：</strong>检查图片格式是否正确。</li>
                     </ul>
                 </div>
-            </details>
+            </article>
         </div>
     </div>
-    
+
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

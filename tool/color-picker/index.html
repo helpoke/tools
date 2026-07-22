@@ -8,11 +8,12 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index,follow,noai">
+    <meta name="robots" content="index, follow">
     <title>取色器 & 颜色转换 - Helpoke 助点站</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528" crossorigin="anonymous"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
+        crossorigin="anonymous"></script>
     <style>
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
@@ -409,13 +410,13 @@
         "description": "在线取色器和颜色转换工具，支持RGB、HEX、HSL颜色格式互转。免费在线调色工具。Online color picker with RGB, HEX, HSL conversion.",
         "url": "https://helpoke.com/color-picker",
         "applicationCategory": "https://schema.org/DesignTool",
-        "inLanguage": ["zh-CN", "en-US"], 
+        "inLanguage": ["zh-CN"],
         "featureList": [
             "RGB转HEX",
             "HEX转RGB",
             "HSL转RGB",
             "实时颜色预览",
-            "颜色对比度检测",
+            "常用颜色预设",
             "一键复制颜色值"
         ],
         "operatingSystem": "Web",
@@ -440,8 +441,11 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1><a href="note.html" title="工具使用说明、注意事项和常见问题">取色器 & 颜色转换工具</a>（<a href="/" title="返回首页"><i class="fas fa-home"></i></a>）</h1>
-            <p>在线颜色选择器，支持 RGB / HEX / HSL 三种格式实时互转</p>
+            <h1>颜色选择器</h1>
+            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <p>颜色选择器，支持HEX、RGB、HSL颜色格式互转，可视化取色实时预览，提供常用颜色预设，一键复制</p>
+            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
@@ -524,8 +528,8 @@
                 <button class="btn btn-copy-all" onclick="copyAll()">复制全部格式</button>
 
                 <div class="info-section">
-                    <details class="info-details">
-                        <summary>使用说明</summary>
+                    <article class="info-details">
+                        <header><h3>使用说明</h3></header>
                         <div class="info-content">
                             <h4>一、选择颜色</h4>
                             <ul>
@@ -568,9 +572,34 @@
                                 <li><strong>图像处理：</strong>使用RGB格式，直接对应像素值。</li>
                             </ul>
                         </div>
-                    </details>
-                    <details class="info-details">
-                        <summary>注意事项</summary>
+                    </article>
+                    
+                    <article class="info-details">
+                        <header><h3>工具介绍</h3></header>
+                        <div class="info-content">
+                            <h4>一、解决的问题</h4>
+                            <ul>
+                                <li>选择和转换颜色值，支持多种颜色格式。</li>
+                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li>无需安装专业软件，随时随地在线使用。</li>
+                            </ul>
+                            <h4>二、支持的格式</h4>
+                            <ul>
+                                <li><strong>HEX：</strong>支持该格式的完整处理功能。</li>
+<li><strong>RGB：</strong>支持该格式的完整处理功能。</li>
+<li><strong>HSL：</strong>支持该格式的完整处理功能。</li>
+                            </ul>
+                            <h4>三、核心功能</h4>
+                            <ul>
+                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header><h3>注意事项</h3></header>
                         <div class="info-content">
                             <h4>一、数据安全</h4>
                             <ul>
@@ -598,7 +627,7 @@
                                 <li><strong>输入不生效：</strong>确保输入的是有效的颜色值。</li>
                             </ul>
                         </div>
-                    </details>
+                    </article>
                 </div>
             </div>
         </div>
@@ -853,7 +882,7 @@
         // Init
         buildPresets();
     </script>
-    
+
 </body>
 
 </html>
