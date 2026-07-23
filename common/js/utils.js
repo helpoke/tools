@@ -192,3 +192,30 @@ function formatDuration(seconds) {
 function showFileSizeToast(file, maxFileSize) {
     showError(`文件大小超过限制（最大 ${formatSize(maxFileSize)}）。当前：${formatSize(file.size)}`);
 }
+
+// ================= info-section 折叠功能 =================
+/**
+ * info-section 中的 article 支持点击 header 折叠/展开，默认展开
+ */
+(function initInfoSectionToggle() {
+    function setup() {
+        document.querySelectorAll('.info-details > header').forEach(function (header) {
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'true');
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setup);
+    } else {
+        setup();
+    }
+
+    document.addEventListener('click', function (e) {
+        const header = e.target.closest('.info-details > header');
+        if (!header) return;
+        const details = header.parentElement;
+        const collapsed = details.classList.toggle('collapsed');
+        header.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    });
+})();
