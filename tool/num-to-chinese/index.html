@@ -60,6 +60,13 @@
             border-color: #3498db;
         }
 
+        .input-hint {
+            display: block;
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
         .btn {
             display: inline-block;
             background-color: #3498db;
@@ -422,6 +429,7 @@
                     <div class="input-group">
                         <label for="number-input">输入阿拉伯数字</label>
                         <input type="text" id="number-input" placeholder="例如：112.55" value="112.55" data-name="输入数字">
+                        <small class="input-hint">最多支持 16 位整数（约 9999 万亿），小数最多两位</small>
                     </div>
                     <button class="btn" onclick="convertNumber()">转换</button>
                     <div class="result">
@@ -739,6 +747,9 @@
 
         function convertNumber() {
             const input = document.getElementById('number-input').value;
+            const resultEl = document.getElementById('result');
+            // 转换前先清空上次结果
+            resultEl.textContent = '';
 
             if (!input.trim()) {
                 utils.showError('请输入数字');
@@ -758,8 +769,15 @@
                 return;
             }
 
+            // 校验整数部分位数，最多16位（受中文大写单位限制）
+            const integerPart = input.trim().replace('-', '').split('.')[0];
+            if (integerPart.length > 16) {
+                utils.showError('数字过大，最多支持 16 位整数（约 9999 万亿）');
+                return;
+            }
+
             const result = numberToChinese(input);
-            document.getElementById('result').textContent = result;
+            resultEl.textContent = result;
         }
 
         // 中文大写转阿拉伯数字
@@ -818,30 +836,36 @@
                 }
             }
 
-            // 处理整数部分
+            // 处理整数部分（使用 BigInt 保证大数精度）
             function parseInteger(str) {
-                if (!str || str === '零') return 0;
+                if (!str || str === '零') return 0n;
 
-                let total = 0;
-                let current = 0;
-                let section = 0;
+                let total = 0n;
+                let current = 0n;
+                let section = 0n;
 
                 for (let i = 0; i < str.length; i++) {
                     let ch = str[i];
                     let num = cnNumsMap[ch];
 
                     if (num !== undefined) {
-                        current = num;
+                        current = BigInt(num);
                     } else if (cnUnitVal[ch] !== undefined) {
-                        if (current === 0) current = 1;
-                        section += current * cnUnitVal[ch];
-                        current = 0;
+                        if (current === 0n) current = 1n;
+                        section += current * BigInt(cnUnitVal[ch]);
+                        current = 0n;
                     } else if (cnBigUnitVal[ch] !== undefined) {
                         section += current;
-                        current = 0;
-                        if (section === 0) section = 1;
-                        total += section * cnBigUnitVal[ch];
-                        section = 0;
+                        current = 0n;
+                        if (section === 0n) section = 1n;
+                        // "万亿"是组合单位，需整体处理
+                        if (ch === '万' && i + 1 < str.length && str[i + 1] === '亿') {
+                            total += section * BigInt(cnBigUnitVal['万亿']);
+                            i++; // 跳过"亿"
+                        } else {
+                            total += section * BigInt(cnBigUnitVal[ch]);
+                        }
+                        section = 0n;
                     }
                 }
 
@@ -917,6 +941,14 @@
                 // 截断多余的小数位
                 const parts = input.split('.');
                 e.target.value = parts[0] + '.' + parts[1].substring(0, 2);
+                return;
+            }
+
+            // 校验整数部分位数，最多16位（受中文大写单位限制）
+            const integerPart = input.trim().replace('-', '').split('.')[0];
+            if (integerPart.length > 16) {
+                utils.showError('数字过大，最多支持 16 位整数（约 9999 万亿）');
+                document.getElementById('result').textContent = '';
                 return;
             }
 
