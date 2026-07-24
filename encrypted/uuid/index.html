@@ -76,7 +76,7 @@
 
         .form-group input,
         .form-group select {
-            width: 100%;
+            width: 80%;
             padding: 12px 16px;
             border: 1px solid #eaeaea;
             border-radius: 8px;
@@ -412,7 +412,7 @@
         <section class="page-hero">
             <h1>UUID生成工具</h1>
             <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="/index.html" class="home-link"><i class="fas fa-home"></i> 返回首页</a>
             <p>UUID生成工具，随机生成UUID v4唯一标识符，支持带连字符与无连字符格式，支持批量生成和一键复制</p>
             <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
@@ -426,27 +426,25 @@
                             <label for="uuid-count">生成数量</label>
                             <input type="number" id="uuid-count" min="1" max="20" value="5" data-name="生成数量">
                         </div>
-                        <div class="form-group" style="flex-shrink: 0;">
-                            <label
-                                style="display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50;">生成格式</label>
-                            <div style="display: flex; align-items: center; gap: 16px;">
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" id="uuid-format-standard" name="uuid-format"
-                                        style="margin-right: 8px; width: 16px; height: 16px;">
-                                    <label for="uuid-format-standard"
-                                        style="font-size: 14px; color: #555; font-weight: 400;">带连字符</label>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <input type="radio" id="uuid-format-no-hyphen" name="uuid-format" checked
-                                        style="margin-right: 8px; width: 16px; height: 16px;">
-                                    <label for="uuid-format-no-hyphen"
-                                        style="font-size: 14px; color: #555; font-weight: 400;">不带连字符</label>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn" onclick="generateUUIDs()">UUID</button>
                     </div>
-
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>生成格式</label>
+                        <div style="display: flex; gap: 24px; padding: 8px 0;">
+                            <label
+                                style="display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer;">
+                                <input type="radio" id="uuid-format-standard" name="uuid-format"
+                                    style="width: 16px; height: 16px; margin: 0;">
+                                <span style="font-size: 14px; color: #555;">带连字符</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer;">
+                                <input type="radio" id="uuid-format-no-hyphen" name="uuid-format" checked
+                                    style="width: 16px; height: 16px; margin: 0;">
+                                <span style="font-size: 14px; color: #555;">不带连字符</span>
+                            </label>
+                        </div>
+                        <button class="btn" onclick="generateUUIDs()" style="margin-bottom: 24px;">生成 UUID</button>
+                    </div>
 
                     <div class="result-section">
                         <h4>生成结果</h4>
