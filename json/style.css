@@ -295,6 +295,22 @@ h1 {
     transform: translateY(-1px);
 }
 
+/* 示例按钮样式 */
+#example-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#example-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
 /* 复制按钮样式 */
 #copy-original-btn,
 #copy-target-btn,
@@ -624,6 +640,30 @@ h1 {
 .compare-box {
     flex: 1;
     min-width: 300px;
+}
+
+.compare-editor {
+    height: 600px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.compare-editor .cm-editor {
+    height: 100%;
+    background-color: var(--input-bg);
+}
+
+.compare-editor .cm-editor.cm-focused {
+    outline: none;
+}
+
+.compare-editor .cm-content {
+    caret-color: var(--text-primary);
+}
+
+.compare-editor .cm-line {
+    color: var(--text-primary);
 }
 
 .compare-box h3 {
@@ -1237,8 +1277,19 @@ body.dark-mode .fullscreen-button:hover {
     min-height: 0 !important;
     height: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+}
+
+.compare-content.fullscreen-mode .compare-editor {
+    flex: 1 !important;
+    min-height: 0 !important;
     border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.compare-content.fullscreen-mode .compare-editor .cm-editor {
+    flex: 1 !important;
+    min-height: 0 !important;
 }
 
 .compare-content.fullscreen-mode .editor-container {
@@ -1298,9 +1349,9 @@ body.dark-mode .fullscreen-button:hover {
     font-size: 16px !important;
 }
 
-.compare-container.fullscreen-mode .compare-content {
+/* .compare-container.fullscreen-mode .compare-content {
     height: calc(100vh - 120px);
-}
+} */
 
 .compare-container.fullscreen-mode .editor-container {
     height: 100%;
@@ -1451,6 +1502,355 @@ textarea {
     box-sizing: border-box;
     transition: border-color 0.3s;
     scrollbar-width: thin;
+}
+
+/* ==================== CodeMirror 6 编辑器样式 ==================== */
+
+/* 格式化模块编辑器容器 */
+.format-editor {
+    width: 100%;
+    height: 90vh;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* CodeMirror 编辑器整体 */
+.format-editor .cm-editor {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* CodeMirror 编辑器获得焦点时 */
+.format-editor .cm-editor.cm-focused {
+    outline: none;
+}
+
+/* 滚动容器 - 必须 flex:1 填充剩余空间 */
+.format-editor .cm-scroller {
+    flex: 1;
+    min-height: 0;
+    overflow: auto !important;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1.5;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) var(--bg-secondary);
+}
+
+/* 内容区域 */
+.format-editor .cm-content {
+    padding: 10px 0;
+    caret-color: var(--text-primary);
+}
+
+/* 行样式 */
+.format-editor .cm-line {
+    padding: 0 10px;
+    color: var(--text-primary);
+}
+
+/* 行号槽位 */
+.format-editor .cm-gutters {
+    background-color: var(--bg-secondary);
+    color: var(--text-muted);
+    border-right: 1px solid var(--border-color);
+}
+
+/* 行号 */
+.format-editor .cm-lineNumbers .cm-gutterElement {
+    padding: 0 8px 0 6px;
+    min-width: 40px;
+    color: var(--text-muted);
+}
+
+/* 活动行号 */
+.format-editor .cm-activeLineGutter {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* 活动行 */
+.format-editor .cm-activeLine {
+    background-color: rgba(52, 152, 219, 0.04);
+}
+
+/* 选中文本 */
+.format-editor .cm-selectionBackground {
+    background-color: rgba(52, 152, 219, 0.2) !important;
+}
+
+/* 光标 */
+.format-editor .cm-cursor {
+    border-left-color: var(--text-primary);
+    border-left-width: 2px;
+}
+
+/* 折叠标记 */
+.format-editor .cm-foldGutter .cm-gutterElement {
+    color: var(--text-muted);
+}
+
+.format-editor .cm-foldGutter .cm-gutterElement:hover {
+    color: var(--primary-color);
+}
+
+/* CodeMirror JSON 语法高亮 - 亮色主题 */
+.format-editor .cm-editor .cm-content .tok-propertyName {
+    color: var(--syntax-key);
+    font-weight: 500;
+}
+
+.format-editor .cm-editor .cm-content .tok-string {
+    color: var(--syntax-string);
+}
+
+.format-editor .cm-editor .cm-content .tok-number {
+    color: var(--syntax-number);
+}
+
+.format-editor .cm-editor .cm-content .tok-bool {
+    color: var(--syntax-boolean);
+}
+
+.format-editor .cm-editor .cm-content .tok-null {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.format-editor .cm-editor .cm-content .tok-brace,
+.format-editor .cm-editor .cm-content .tok-bracket {
+    font-weight: bold;
+}
+
+.format-editor .cm-editor .cm-content .tok-punctuation {
+    color: var(--text-primary);
+}
+
+/* 匹配括号高亮 */
+.format-editor .cm-editor .cm-matchingBracket {
+    background-color: rgba(52, 152, 219, 0.15);
+    outline: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+/* 搜索面板 */
+.format-editor .cm-panels {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.format-editor .cm-panels.cm-panels-top {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.format-editor .cm-panels.cm-panels-bottom {
+    border-top: 1px solid var(--border-color);
+}
+
+.format-editor .cm-searchField {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.format-editor .cm-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.format-editor .cm-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* 工具提示/自动补全 */
+.format-editor .cm-tooltip {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+/* 折叠占位符 */
+.format-editor .cm-placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* 树视图容器样式 */
+.format-tree-view {
+    width: 100%;
+    height: 90vh;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: auto;
+    padding: 15px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) var(--bg-secondary);
+}
+
+/* 编辑器容器包装器全屏样式 */
+.editor-container-wrapper.maximized {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: var(--bg-card);
+}
+
+.editor-container-wrapper.maximized .format-editor,
+.editor-container-wrapper.maximized .format-tree-view {
+    height: calc(100vh - 20px) !important;
+}
+
+.editor-container-wrapper.maximized .fullscreen-button {
+    background-color: var(--error-color);
+}
+
+.editor-container-wrapper.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    border-radius: 0;
+    border: none;
+    background-color: var(--bg-primary);
+}
+
+.editor-container-wrapper.fullscreen .format-editor,
+.editor-container-wrapper.fullscreen .format-tree-view {
+    height: 100% !important;
+    border-radius: 0;
+}
+
+.editor-container-wrapper.fullscreen .fullscreen-button {
+    background-color: var(--error-color);
+}
+
+/* ==================== CodeMirror 暗色模式样式 ==================== */
+
+body.dark-mode .format-editor .cm-editor {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-content {
+    caret-color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-line {
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-gutters {
+    background-color: var(--bg-secondary);
+    border-right-color: var(--border-color);
+}
+
+body.dark-mode .compare-editor .cm-editor {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+
+body.dark-mode .compare-editor .cm-content {
+    caret-color: var(--text-primary);
+}
+
+body.dark-mode .compare-editor .cm-line {
+    color: var(--text-primary);
+}
+
+body.dark-mode .compare-editor .cm-gutters {
+    background-color: var(--bg-secondary);
+    border-right-color: var(--border-color);
+}
+
+body.dark-mode .format-editor .cm-lineNumbers .cm-gutterElement {
+    color: var(--text-muted);
+}
+
+body.dark-mode .format-editor .cm-activeLineGutter {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-activeLine {
+    background-color: rgba(59, 130, 246, 0.06);
+}
+
+body.dark-mode .format-editor .cm-selectionBackground {
+    background-color: rgba(59, 130, 246, 0.25) !important;
+}
+
+body.dark-mode .format-editor .cm-cursor {
+    border-left-color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-foldGutter .cm-gutterElement {
+    color: var(--text-muted);
+}
+
+body.dark-mode .format-editor .cm-foldGutter .cm-gutterElement:hover {
+    color: var(--primary-color);
+}
+
+body.dark-mode .format-editor .cm-panels {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-searchField {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-tooltip {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .format-editor .cm-matchingBracket {
+    background-color: rgba(59, 130, 246, 0.2);
+    outline-color: rgba(59, 130, 246, 0.4);
+}
+
+body.dark-mode .format-tree-view {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .editor-container-wrapper.maximized {
+    background-color: var(--bg-card);
+}
+
+body.dark-mode .editor-container-wrapper.fullscreen {
+    background-color: var(--bg-primary);
 }
 
 /* 错误消息样式 */
@@ -1689,6 +2089,48 @@ button:active {
     font-weight: bold;
 }
 
+/* CodeMirror 比对差异高亮样式 */
+.cm-diff-removed {
+    background-color: rgba(255, 107, 107, 0.3) !important;
+    border-bottom: 2px solid #ff6b6b !important;
+    border-radius: 2px;
+}
+
+.cm-diff-added {
+    background-color: rgba(81, 207, 102, 0.3) !important;
+    border-bottom: 2px solid #51cf66 !important;
+    border-radius: 2px;
+}
+
+.cm-diff-changed-original {
+    background-color: rgba(255, 193, 7, 0.3) !important;
+    border-bottom: 2px solid #ffc107 !important;
+    border-radius: 2px;
+}
+
+.cm-diff-changed-target {
+    background-color: rgba(255, 193, 7, 0.3) !important;
+    border-bottom: 2px solid #ffc107 !important;
+    border-radius: 2px;
+}
+
+/* 暗色模式下的差异高亮 */
+body.dark-mode .cm-diff-removed {
+    background-color: rgba(255, 107, 107, 0.25) !important;
+    border-bottom-color: #ff6b6b !important;
+}
+
+body.dark-mode .cm-diff-added {
+    background-color: rgba(81, 207, 102, 0.25) !important;
+    border-bottom-color: #51cf66 !important;
+}
+
+body.dark-mode .cm-diff-changed-original,
+body.dark-mode .cm-diff-changed-target {
+    background-color: rgba(255, 193, 7, 0.25) !important;
+    border-bottom-color: #ffc107 !important;
+}
+
 /* 美化滚动条 */
 /* Webkit浏览器滚动条样式 */
 ::-webkit-scrollbar {
@@ -1908,6 +2350,14 @@ button:active {
         width: 100%;
     }
 
+    .format-editor {
+        height: 70vh;
+    }
+
+    .format-tree-view {
+        height: 70vh;
+    }
+
     .tabs {
         flex-wrap: wrap;
     }
@@ -1939,6 +2389,16 @@ button:active {
     .editor-container {
         height: 60vh;
         min-height: 400px;
+    }
+
+    .format-editor {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .format-tree-view {
+        height: 50vh;
+        min-height: 300px;
     }
 
     .buttons button,

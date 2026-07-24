@@ -16,6 +16,33 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- "codemirror": "https://esm.sh/codemirror@6.0.1?deps=@codemirror/state@6.5.2", -->
+    <!-- "@codemirror/lang-json": "https://esm.sh/@codemirror/lang-json@6.0.1?deps=@codemirror/state@6.5.2" -->
+    <!-- Import Map: CodeMirror 6 本地加载，所有模块共享同一份 @codemirror/state -->
+    <script type="importmap">
+    {
+        "imports": {
+            "codemirror": "./lib/codemirror/codemirror/index.js",
+            "@codemirror/lang-json": "./lib/codemirror/codemirror_lang-json/index.js",
+            "@codemirror/state": "./lib/codemirror/codemirror_state/index.js",
+            "@codemirror/view": "./lib/codemirror/codemirror_view/index.js",
+            "@codemirror/language": "./lib/codemirror/codemirror_language/index.js",
+            "@codemirror/commands": "./lib/codemirror/codemirror_commands/index.js",
+            "@codemirror/search": "./lib/codemirror/codemirror_search/index.js",
+            "@codemirror/autocomplete": "./lib/codemirror/codemirror_autocomplete/index.js",
+            "@codemirror/lint": "./lib/codemirror/codemirror_lint/index.js",
+            "@lezer/common": "./lib/codemirror/lezer_common/index.js",
+            "@lezer/highlight": "./lib/codemirror/lezer_highlight/index.js",
+            "@lezer/json": "./lib/codemirror/lezer_json/index.js",
+            "@lezer/lr": "./lib/codemirror/lezer_lr/index.js",
+            "@marijn/find-cluster-break": "./lib/codemirror/marijn_find-cluster-break/index.js",
+            "style-mod": "./lib/codemirror/style-mod/style-mod.js",
+            "w3c-keyname": "./lib/codemirror/w3c-keyname/index.js",
+            "crelt": "./lib/codemirror/crelt/index.js"
+        }
+    }
+    </script>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -53,7 +80,6 @@
 </head>
 
 <body>
-    <!-- 引入 CodeMirror 6 或 Monaco Editor（VS Code 的核心编辑器）。 -->
     <!-- Navigation component container -->
     <div id="nav-container"></div>
 
@@ -86,7 +112,7 @@
                                 <button id="paste-btn">粘贴</button>
                                 <button id="copy-btn">复制</button>
                                 <button id="format-btn">格式化</button>
-                                <button id="collapse-btn" hidden>折叠</button>
+                                <button id="collapse-btn">折叠</button>
                                 <button id="minify-btn">压缩</button>
                                 <button id="escape-btn">转义</button>
                                 <button id="line-feed-btn">换行</button>
@@ -98,20 +124,15 @@
                             <div class="editor-container-wrapper">
                                 <button id="format-fullscreen-btn" class="fullscreen-button" aria-label="全屏切换">
                                     <span class="iconfont">&#xe8fa;</span></button>
-                                <div class="editor-container">
-                                    <div id="line-numbers" class="line-numbers">
-                                        <div class="line-number">1</div>
-                                    </div>
-                                    <div id="raw-json" class="json-editor" contenteditable="true"
-                                        data-placeholder="请在此输入需要格式化的JSON数据...">
-                                    </div>
-                                </div>
+                                <div id="format-editor" class="format-editor"></div>
+                                <div id="format-tree-view" class="format-tree-view" style="display:none;"></div>
                             </div>
                             <div class="bottom-buttons">
-                                <button id="format-btn-bottom">格式化</button>
+                                <button id="example-btn">示例</button>
                                 <button id="copy-btn-bottom">复制</button>
-                                <button id="collapse-btn-bottom" hidden>折叠</button>
-                                <button id="minify-btn-bottom">压缩/去转义</button>
+                                <button id="format-btn-bottom">格式化</button>
+                                <button id="collapse-btn-bottom">折叠</button>
+                                <button id="minify-btn-bottom">压缩</button>
                                 <button id="escape-btn-bottom">转义</button>
                                 <button id="paste-btn-bottom" hidden>粘贴</button>
                                 <button id="clear-btn-bottom">清空</button>
@@ -126,10 +147,10 @@
                         <div class="compare-header">
                             <h2>比对</h2>
                             <div class="button-group">
-                                <button id="start-compare-btn">比对</button>
+                                <button id="start-compare-btn">开始比对</button>
                                 <button id="sync-format-btn">同步格式化</button>
                                 <button id="sync-minify-btn">同步压缩</button>
-                                <button id="sync-escape-btn">同步转义</button>
+                                <button id="sync-escape-btn" hidden>同步转义</button>
                                 <button id="clear-compare-btn">同步清除</button>
                             </div>
                         </div>
@@ -148,16 +169,7 @@
                                     </div>
                                     <span class="iconfont"></span>
                                 </div>
-                                <div class="editor-container-wrapper">
-                                    <div class="editor-container">
-                                        <div id="original-line-numbers" class="line-numbers">
-                                            <div class="line-number">1</div>
-                                        </div>
-                                        <div id="original-json" class="json-editor" contenteditable="true"
-                                            data-placeholder="请在此输入原始JSON数据...">
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="compare-original-editor" class="compare-editor"></div>
                             </div>
                             <div class="compare-box target">
                                 <div class="button-content">
@@ -172,16 +184,7 @@
                                         <span class="iconfont">&#xe8fa;</span>
                                     </button>
                                 </div>
-                                <div class="editor-container-wrapper">
-                                    <div class="editor-container">
-                                        <div id="target-line-numbers" class="line-numbers">
-                                            <div class="line-number">1</div>
-                                        </div>
-                                        <div id="target-json" class="json-editor" contenteditable="true"
-                                            data-placeholder="请在此输入需要比对的JSON数据...">
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="compare-target-editor" class="compare-editor"></div>
                             </div>
                         </div>
                     </div>
@@ -389,6 +392,7 @@
     </main>
 
     <script src="convert.js"></script>
+    <script src="example.js"></script>
     <script src="script.js"></script>
     <script src="../common/js/utils.js"></script>
     <script src="../common/js/theme.js"></script>
