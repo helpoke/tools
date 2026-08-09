@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频压缩原理与实践：如何在保持画质的同时减小90%体积 - 小助点技术博客</title>
+    <meta property="og:title" content="视频压缩原理与实践：如何在保持画质的同时减小90%体积 - 小助点技术博客">
+    <meta property="og:description" content="深入解析视频压缩技术原理，从 H.264 到 H.265 编码格式对比，提供实用的视频压缩指南。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://helpoke.com/blog/video-compression-guide">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="description" content="深入解析视频压缩技术原理，从 H.264 到 H.265 编码格式对比，提供实用的视频压缩指南。">
+    <meta name="keywords" content="视频压缩,H.264,H.265,视频编码,FFmpeg,码率控制">
+    <link rel="icon" href="../../common/img/helpoke.webp">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/utils.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "视频压缩原理与实践：如何在保持画质的同时减小90%体积",
+        "description": "深入解析视频压缩技术原理，从 H.264 到 H.265 编码格式对比，提供实用的视频压缩指南。",
+        "author": {"@type": "Organization", "name": "Helpoke"},
+        "datePublished": "2026-08-09",
+        "url": "https://helpoke.com/blog/video-compression-guide.html"
+    }
+    </script>
+</head>
+<body>
+    <div id="nav-container"></div>
+    <main class="article-container">
+        <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
+        <header class="article-header">
+            <span class="article-category">视频处理</span>
+            <h1 class="article-title">视频压缩原理与实践：如何在保持画质的同时减小90%体积</h1>
+            <div class="article-meta">
+                <span>📅 2026-08-09</span>
+                <span>⏱️ 阅读时长：22分钟</span>
+            </div>
+        </header>
+        <article class="article-content">
+            <h2>引言：视频压缩的重要性</h2>
+            <p>在数字时代，视频已成为最重要的信息载体。然而，原始视频文件体积庞大：1分钟的 1080p 原始视频可达 400MB 以上，4K 视频更是超过 2GB。未经压缩的视频不仅占用大量存储空间，更给网络传输带来巨大压力。视频压缩技术通过去除冗余信息，能够在保持视觉质量的前提下将文件体积减少 90% 以上，是视频产业的基石技术。本文将深入解析视频压缩原理，对比主流编码格式，并提供实用的压缩指南。</p>
+            
+            <h2>一、视频压缩基础：有损与无损压缩</h2>
+            <h3>1.1 视频数据的冗余类型</h3>
+            <p>视频数据包含三种主要冗余：</p>
+            
+            <h4>1. 空间冗余（帧内冗余）</h4>
+            <p>同一帧图像内部相邻像素之间的相关性。例如，蓝天背景区域的像素值变化很小。</p>
+            
+            <h4>2. 时间冗余（帧间冗余）</h4>
+            <p>连续帧之间的相关性。视频中的物体通常在短时间内不会发生剧烈变化，相邻帧有大量重复信息。</p>
+            
+            <h4>3. 编码冗余</h4>
+            <p>数据编码方式带来的冗余。例如，使用固定长度编码高频出现的值会浪费空间。</p>
+            
+            <h3>1.2 无损压缩</h3>
+            <p>无损压缩保证解压后数据与原始数据完全一致，压缩比通常在 2:1 到 5:1 之间。主要技术包括：</p>
+            <ul>
+                <li><strong>行程编码（RLE）</strong>：将连续相同值压缩为值+数量</li>
+                <li><strong>哈夫曼编码</strong>：根据符号频率构建最优前缀码</li>
+                <li><strong>算术编码</strong>：比哈夫曼编码更高效的熵编码</li>
+            </ul>
+            
+            <h3>1.3 有损压缩</h3>
+            <p>有损压缩允许丢失部分信息以获得更高压缩比，通常可达 50:1 到 200:1。核心思想是：</p>
+            <ul>
+                <li><strong>利用人眼视觉系统特性</strong>：人眼对颜色细节、快速运动的物体不敏感</li>
+                <li><strong>去除视觉冗余</strong>：丢弃人眼难以察觉的信息</li>
+                <li><strong>量化技术</strong>：将连续值映射到离散值，丢弃精度</li>
+            </ul>
+            
+            <div class="tip-box">
+                <p><strong>压缩比示例</strong>：<br>
+                - 原始视频：400 MB/分钟（1080p, 30fps）<br>
+                - 无损压缩：约 200 MB/分钟（2:1 压缩比）<br>
+                - 有损压缩：约 20 MB/分钟（20:1 压缩比，视觉无损）<br>
+                - 高压缩比：约 5 MB/分钟（80:1 压缩比，可接受画质）</p>
+            </div>
+            
+            <h2>二、编码格式对比：H.264、H.265、VP9、AV1</h2>
+            <h3>2.1 H.264/AVC（Advanced Video Coding）</h3>
+            <p>H.264 由 ITU-T 和 ISO/IEC 联合开发，于 2003 年发布，是目前最广泛使用的视频编码标准。</p>
+            
+            <h4>核心特性：</h4>
+            <ul>
+                <li><strong>编码效率</strong>：比 MPEG-2 节省 50% 码率，比 MPEG-4 节省 40%</li>
+                <li><strong>编码工具</strong>：多参考帧、帧内预测、整数变换、环路滤波</li>
+                <li><strong>分辨率支持</strong>：最高支持 4K（Level 5.2）</li>
+                <li><strong>编码速度</strong>：快速，适合实时应用</li>
+            </ul>
+            
+            <h4>应用场景：</h4>
+            <ul>
+                <li>在线视频平台（YouTube、Netflix）</li>
+                <li>视频会议系统</li>
+                <li>移动设备录制和播放</li>
+                <li>蓝光光盘</li>
+            </ul>
+            
+            <h3>2.2 H.265/HEVC（High Efficiency Video Coding）</h3>
+            <p>H.265 于 2013 年发布，目标是比 H.264 节省 50% 码率。</p>
+            
+            <h4>核心特性：</h4>
+            <ul>
+                <li><strong>编码效率</strong>：比 H.264 节省 40%-50% 码率</li>
+                <li><strong>编码块</strong>：编码树单元（CTU）最大 64x64，更灵活的块划分</li>
+                <li><strong>帧内预测</strong>：33 种预测模式（H.264 为 9 种）</li>
+                <li><strong>并行处理</strong>：Tiles 和 WPP 支持并行编码</li>
+                <li><strong>分辨率支持</strong>：最高支持 8K</li>
+            </ul>
+            
+            <h4>编码效率对比：</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>视频内容</th>
+                        <th>H.264 码率</th>
+                        <th>H.265 码率</th>
+                        <th>节省比例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1080p 电影</td>
+                        <td>8 Mbps</td>
+                        <td>4.5 Mbps</td>
+                        <td>44%</td>
+                    </tr>
+                    <tr>
+                        <td>4K 视频</td>
+                        <td>20 Mbps</td>
+                        <td>10 Mbps</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td>运动赛事</td>
+                        <td>12 Mbps</td>
+                        <td>7 Mbps</td>
+                        <td>42%</td>
+                    </tr>
+                    <tr>
+                        <td>动画内容</td>
+                        <td>5 Mbps</td>
+                        <td>2.5 Mbps</td>
+                        <td>50%</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>2.3 VP9 和 AV1</h3>
+            <h4>VP9：</h4>
+            <ul>
+                <li>Google 开发，2013 年发布</li>
+                <li>编码效率接近 H.265</li>
+                <li>免版税，YouTube 默认编码</li>
+                <li>浏览器支持：Chrome、Firefox、Edge</li>
+            </ul>
+            
+            <h4>AV1：</h4>
+            <ul>
+                <li>AOMedia Video 1，2018 年发布</li>
+                <li>开源免版税，比 VP9 节省 30% 码率</li>
+                <li>编码效率：比 H.265 节省 20%-30%</li>
+                <li>编码速度：较慢（正在优化）</li>
+                <li>应用：Netflix、YouTube、Twitch</li>
+            </ul>
+            
+            <h3>2.4 编码格式综合对比</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>特性</th>
+                        <th>H.264</th>
+                        <th>H.265</th>
+                        <th>VP9</th>
+                        <th>AV1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>发布年份</td>
+                        <td>2003</td>
+                        <td>2013</td>
+                        <td>2013</td>
+                        <td>2018</td>
+                    </tr>
+                    <tr>
+                        <td>编码效率</td>
+                        <td>基准</td>
+                        <td>+50%</td>
+                        <td>+45%</td>
+                        <td>+70%</td>
+                    </tr>
+                    <tr>
+                        <td>编码速度</td>
+                        <td>快</td>
+                        <td>慢</td>
+                        <td>中</td>
+                        <td>很慢</td>
+                    </tr>
+                    <tr>
+                        <td>解码复杂度</td>
+                        <td>低</td>
+                        <td>高</td>
+                        <td>中</td>
+                        <td>高</td>
+                    </tr>
+                    <tr>
+                        <td>硬件支持</td>
+                        <td>广泛</td>
+                        <td>良好</td>
+                        <td>良好</td>
+                        <td>发展中</td>
+                    </tr>
+                    <tr>
+                        <td>版税</td>
+                        <td>有</td>
+                        <td>有</td>
+                        <td>无</td>
+                        <td>无</td>
+                    </tr>
+                    <tr>
+                        <td>最大分辨率</td>
+                        <td>4K</td>
+                        <td>8K</td>
+                        <td>8K</td>
+                        <td>8K+</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="warning-box">
+                <p><strong>选择建议</strong>：</p>
+                <ul>
+                    <li><strong>通用场景</strong>：H.264（兼容性最好）</li>
+                    <li><strong>高质量/4K</strong>：H.265（效率高，硬件支持好）</li>
+                    <li><strong>Web平台</strong>：VP9（免版税，兼容性好）</li>
+                    <li><strong>未来趋势</strong>：AV1（最高效率，适合新项目）</li>
+                </ul>
+            </div>
+            
+            <h2>三、关键参数解析：码率、帧率、分辨率</h2>
+            <h3>3.1 码率（Bitrate）</h3>
+            <p>码率是决定视频质量和文件大小的最关键参数，单位为 bps（bits per second）。</p>
+            
+            <h4>码率模式：</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>模式</th>
+                        <th>英文</th>
+                        <th>特点</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>固定码率</td>
+                        <td>CBR</td>
+                        <td>码率恒定，文件大小可控</td>
+                        <td>直播、流媒体</td>
+                    </tr>
+                    <tr>
+                        <td>可变码率</td>
+                        <td>VBR</td>
+                        <td>根据复杂度动态调整</td>
+                        <td>点播、存档</td>
+                    </tr>
+                    <tr>
+                        <td>平均码率</td>
+                        <td>ABR</td>
+                        <td>VBR 和 CBR 的平衡</td>
+                        <td>通用编码</td>
+                    </tr>
+                    <tr>
+                        <td>恒定质量</td>
+                        <td>CRF/CQP</td>
+                        <td>固定质量，码率波动大</td>
+                        <td>质量控制优先</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>码率推荐值：</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>分辨率</th>
+                        <th>帧率</th>
+                        <th>低质量</th>
+                        <th>标准质量</th>
+                        <th>高质量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>720p</td>
+                        <td>30fps</td>
+                        <td>1.5 Mbps</td>
+                        <td>2.5 Mbps</td>
+                        <td>4 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td>1080p</td>
+                        <td>30fps</td>
+                        <td>3 Mbps</td>
+                        <td>5 Mbps</td>
+                        <td>8 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td>1080p</td>
+                        <td>60fps</td>
+                        <td>4.5 Mbps</td>
+                        <td>7.5 Mbps</td>
+                        <td>12 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td>4K</td>
+                        <td>30fps</td>
+                        <td>10 Mbps</td>
+                        <td>15 Mbps</td>
+                        <td>25 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td>4K</td>
+                        <td>60fps</td>
+                        <td>15 Mbps</td>
+                        <td>22 Mbps</td>
+                        <td>35 Mbps</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>3.2 帧率（Frame Rate）</h3>
+            <p>帧率影响视频的流畅度，常见帧率：</p>
+            <ul>
+                <li><strong>24 fps</strong>：电影标准，有电影感</li>
+                <li><strong>25/30 fps</strong>：电视标准，流畅度适中</li>
+                <li><strong>50/60 fps</strong>：高帧率，适合运动、游戏</li>
+                <li><strong>120/144 fps</strong>：超高帧率，专业游戏、慢动作</li>
+            </ul>
+            
+            <div class="tip-box">
+                <p><strong>帧率选择</strong>：</p>
+                <ul>
+                    <li>电影、剧集：24 fps 或 25 fps</li>
+                    <li>体育、游戏录制：60 fps</li>
+                    <li>慢动作回放：120 fps 或更高</li>
+                    <li>视频会议：30 fps</li>
+                </ul>
+            </div>
+            
+            <h3>3.3 分辨率（Resolution）</h3>
+            <p>分辨率决定视频的清晰度，常见标准：</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>分辨率</th>
+                        <th>像素总数</th>
+                        <th>应用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SD</td>
+                        <td>480p (720×480)</td>
+                        <td>34.5万</td>
+                        <td>传统电视</td>
+                    </tr>
+                    <tr>
+                        <td>HD</td>
+                        <td>720p (1280×720)</td>
+                        <td>92万</td>
+                        <td>网络视频</td>
+                    </tr>
+                    <tr>
+                        <td>Full HD</td>
+                        <td>1080p (1920×1080)</td>
+                        <td>207万</td>
+                        <td>主流标准</td>
+                    </tr>
+                    <tr>
+                        <td>2K</td>
+                        <td>1440p (2560×1440)</td>
+                        <td>369万</td>
+                        <td>高端显示器</td>
+                    </tr>
+                    <tr>
+                        <td>4K UHD</td>
+                        <td>2160p (3840×2160)</td>
+                        <td>829万</td>
+                        <td>高端电视、电影</td>
+                    </tr>
+                    <tr>
+                        <td>8K UHD</td>
+                        <td>4320p (7680×4320)</td>
+                        <td>3318万</td>
+                        <td>专业制作</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>四、压缩工具选择与最佳设置</h2>
+            <h3>4.1 FFmpeg：专业视频处理工具</h3>
+            <p>FFmpeg 是最强大的开源视频处理工具，支持所有主流编码格式。</p>
+            
+            <h4>基础压缩命令：</h4>
+            <pre><code># H.264 编码（CRF 模式）
+ffmpeg -i input.mp4 -c:v libx264 -crf 23 -c:a aac output.mp4
+
+# H.265 编码
+ffmpeg -i input.mp4 -c:v libx265 -crf 28 -c:a aac output.mp4
+
+# 固定码率编码
+ffmpeg -i input.mp4 -c:v libx264 -b:v 5M -c:a aac output.mp4
+
+# 指定分辨率和帧率
+ffmpeg -i input.mp4 -vf scale=1920:1080 -r 30 -c:v libx264 -crf 23 output.mp4</code></pre>
+            
+            <h4>参数说明：</h4>
+            <ul>
+                <li><strong>-crf</strong>：恒定质量因子（H.264: 18-28，H.265: 20-32），值越小质量越高</li>
+                <li><strong>-b:v</strong>：视频码率（如 5M 表示 5 Mbps）</li>
+                <li><strong>-vf scale</strong>：视频滤镜，调整分辨率</li>
+                <li><strong>-r</strong>：输出帧率</li>
+                <li><strong>-preset</strong>：编码速度预设（ultrafast, fast, medium, slow, veryslow）</li>
+            </ul>
+            
+            <h3>4.2 编码预设选择</h3>
+            <pre><code># 快速编码（适合实时应用）
+ffmpeg -i input.mp4 -c:v libx264 -preset fast -crf 23 output.mp4
+
+# 标准编码（平衡速度和质量）
+ffmpeg -i input.mp4 -c:v libx264 -preset medium -crf 23 output.mp4
+
+# 最佳质量（适合存档）
+ffmpeg -i input.mp4 -c:v libx264 -preset veryslow -crf 23 output.mp4</code></pre>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>预设</th>
+                        <th>编码速度</th>
+                        <th>压缩效率</th>
+                        <th>适用场景</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ultrafast</td>
+                        <td>最快</td>
+                        <td>最低</td>
+                        <td>实时直播</td>
+                    </tr>
+                    <tr>
+                        <td>fast</td>
+                        <td>快</td>
+                        <td>中等</td>
+                        <td>快速编码</td>
+                    </tr>
+                    <tr>
+                        <td>medium</td>
+                        <td>中</td>
+                        <td>良好</td>
+                        <td>通用编码</td>
+                    </tr>
+                    <tr>
+                        <td>slow</td>
+                        <td>慢</td>
+                        <td>高</td>
+                        <td>高质量编码</td>
+                    </tr>
+                    <tr>
+                        <td>veryslow</td>
+                        <td>很慢</td>
+                        <td>最高</td>
+                        <td>存档、最终发布</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>4.3 双编码流程（Two-Pass Encoding）</h3>
+            <p>对于需要精确控制码率的场景，使用双编码流程：</p>
+            <pre><code># 第一遍：分析视频
+ffmpeg -i input.mp4 -c:v libx264 -b:v 5M -pass 1 -f mp4 /dev/null
+
+# 第二遍：实际编码
+ffmpeg -i input.mp4 -c:v libx264 -b:v 5M -pass 2 output.mp4</code></pre>
+            
+            <div class="tip-box">
+                <p><strong>最佳实践</strong>：</p>
+                <ol>
+                    <li>优先使用 CRF 模式，根据内容自适应调整码率</li>
+                    <li>一般用途：CRF 23（H.264）或 28（H.265）</li>
+                    <li>高质量：CRF 18-20</li>
+                    <li>网络发布：使用 medium 或 slow 预设</li>
+                    <li>存档：使用 veryslow 预设 + CRF 18</li>
+                </ol>
+            </div>
+            
+            <h2>五、常见压缩问题：画质损失、兼容性</h2>
+            <h3>5.1 画质损失问题</h3>
+            <h4>常见画质问题：</h4>
+            <ul>
+                <li><strong>块效应（Blocking）</strong>：压缩过度导致块状伪影</li>
+                <li><strong>马赛克效应</strong>：低码率下的典型伪影</li>
+                <li><strong>色彩失真</strong>：色彩精度下降，饱和度降低</li>
+                <li><strong>细节丢失</strong>：高频细节（如头发、纹理）模糊</li>
+            </ul>
+            
+            <h4>解决方案：</h4>
+            <ol>
+                <li><strong>提高码率</strong>：逐步增加码率直到画质可接受</li>
+                <li><strong>降低 CRF 值</strong>：从 28 开始测试，逐步降低到 18</li>
+                <li><strong>使用更高效的编码器</strong>：从 H.264 升级到 H.265</li>
+                <li><strong>调整编码参数</strong>：启用 deblock 滤镜，使用 tune 参数</li>
+            </ol>
+            
+            <h4>高级参数调优：</h4>
+            <pre><code># 使用 tune 参数优化特定内容类型
+ffmpeg -i input.mp4 -c:v libx264 -tune film -crf 23 output.mp4     # 电影
+ffmpeg -i input.mp4 -c:v libx264 -tune animation -crf 23 output.mp4 # 动画
+ffmpeg -i input.mp4 -c:v libx264 -tune fastdecode -crf 23 output.mp4 # 快速解码
+
+# 启用环路滤波
+ffmpeg -i input.mp4 -c:v libx264 -x264-params "deblock=-1,-1" -crf 23 output.mp4</code></pre>
+            
+            <h3>5.2 兼容性问题</h3>
+            <h4>常见兼容性问题：</h4>
+            <ul>
+                <li><strong>编码格式不支持</strong>：设备不支持 H.265</li>
+                <li><strong>Profile 不兼容</strong>：High Profile 在旧设备无法播放</li>
+                <li><strong>容器格式</strong>：某些播放器不支持 MKV、WebM</li>
+                <li><strong>音频编码</strong>：AAC vs AC3 vs MP3</li>
+            </ul>
+            
+            <h4>兼容性解决方案：</h4>
+            <pre><code># 最大兼容性编码（H.264 Baseline Profile）
+ffmpeg -i input.mp4 -c:v libx264 -profile:v baseline -level 3.0 -c:a aac output.mp4
+
+# 标准兼容性（H.264 Main Profile）
+ffmpeg -i input.mp4 -c:v libx264 -profile:v main -level 4.0 -c:a aac output.mp4
+
+# 高质量兼容性（H.264 High Profile）
+ffmpeg -i input.mp4 -c:v libx264 -profile:v high -level 4.2 -c:a aac output.mp4</code></pre>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Profile</th>
+                        <th>兼容性</th>
+                        <th>编码效率</th>
+                        <th>适用设备</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Baseline</td>
+                        <td>最高</td>
+                        <td>最低</td>
+                        <td>移动设备、旧设备</td>
+                    </tr>
+                    <tr>
+                        <td>Main</td>
+                        <td>高</td>
+                        <td>中等</td>
+                        <td>大多数设备</td>
+                    </tr>
+                    <tr>
+                        <td>High</td>
+                        <td>中等</td>
+                        <td>最高</td>
+                        <td>现代设备、电脑</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>六、批量视频压缩工作流</h2>
+            <h3>6.1 批量处理脚本</h3>
+            <h4>Linux/Mac Bash 脚本：</h4>
+            <pre><code>#!/bin/bash
+
+# 批量压缩视频
+for file in *.mp4; do
+    echo "处理文件: $file"
+    ffmpeg -i "$file" -c:v libx264 -crf 23 -c:a aac "compressed_${file}"
+done
+
+echo "批量压缩完成"</code></pre>
+            
+            <h4>Windows PowerShell 脚本：</h4>
+            <pre><code># 批量压缩视频
+Get-ChildItem *.mp4 | ForEach-Object {
+    $inputFile = $_.Name
+    $outputFile = "compressed_" + $_.Name
+    Write-Host "处理文件: $inputFile"
+    ffmpeg -i $inputFile -c:v libx264 -crf 23 -c:a aac $outputFile
+}
+
+Write-Host "批量压缩完成"</code></pre>
+            
+            <h3>6.2 自动化工作流</h3>
+            <h4>使用 Node.js 构建自动化流程：</h4>
+            <pre><code>const { exec } = require('child_process');
+const path = require('path');
+const fs = require('fs');
+
+const inputDir = './input';
+const outputDir = './output';
+
+fs.readdir(inputDir, (err, files) =&gt; {
+    files.forEach(file =&gt; {
+        if (file.endsWith('.mp4')) {
+            const inputFile = path.join(inputDir, file);
+            const outputFile = path.join(outputDir, `compressed_${file}`);
+            
+            const cmd = `ffmpeg -i "${inputFile}" -c:v libx264 -crf 23 -c:a aac "${outputFile}"`;
+            
+            exec(cmd, (error, stdout, stderr) =&gt; {
+                if (error) {
+                    console.error(`错误: ${file}`, error);
+                } else {
+                    console.log(`完成: ${file}`);
+                }
+            });
+        }
+    });
+});</code></pre>
+            
+            <h3>6.3 质量控制流程</h3>
+            <ol>
+                <li><strong>抽样测试</strong>：从批量文件中抽取样本测试编码参数</li>
+                <li><strong>质量评估</strong>：使用 VMAF、SSIM 等指标评估画质损失</li>
+                <li><strong>参数优化</strong>：根据质量评估结果调整 CRF 和码率</li>
+                <li><strong>批量执行</strong>：确定最佳参数后批量处理所有文件</li>
+                <li><strong>质量验证</strong>：随机抽检输出文件质量</li>
+            </ol>
+            
+            <div class="warning-box">
+                <p><strong>注意事项</strong>：</p>
+                <ul>
+                    <li>批量压缩前备份原始文件</li>
+                    <li>监控 CPU 和内存使用，避免系统过载</li>
+                    <li>使用 GPU 加速（NVENC、QSV）可大幅提升速度</li>
+                    <li>保留日志文件，便于问题排查</li>
+                </ul>
+            </div>
+            
+            <h2>总结</h2>
+            <p>视频压缩是一项平衡画质、文件大小和兼容性的技术。理解编码原理、掌握关键参数、选择合适的编码格式和工具，是高效压缩视频的核心能力。在实际应用中，建议根据使用场景选择：通用场景使用 H.264，高质量场景使用 H.265，Web 平台考虑 VP9 或 AV1。通过合理的码率控制、预设选择和批量工作流，可以在保持画质的前提下将视频体积减少 80%-90%，显著降低存储和传输成本。</p>
+        </article>
+        <section class="related-tools">
+            <h3>相关工具推荐</h3>
+            <div class="related-tools-grid">
+                <a href="/video/compress/" class="related-tool-card">
+                    <span class="tool-icon">🎬</span>
+                    <span class="tool-name">视频压缩工具</span>
+                </a>
+                <a href="/video/convert/" class="related-tool-card">
+                    <span class="tool-icon">🔄</span>
+                    <span class="tool-name">视频格式转换</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script src="../../common/js/utils.js"></script>
+</body>
+</html>

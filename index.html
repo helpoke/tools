@@ -88,7 +88,7 @@
                     "description": "MD5、SHA、Token工具、JS混淆加密",
                     "inLanguage": ["zh-CN"],
                     "featureList": ["MD5加密", "SHA加密", "Token工具", "JS代码混淆", "JS代码加密", "JWT工具", "Token解析", "URL编码", "URL解码", "Base64编码", "Base64解码"],
-                    "url": "https://helpoke.com/md5"
+                    "url": "https://helpoke.com/encrypted/md5"
                 },
                 {
                     "@type": "WebApplication",
@@ -96,7 +96,7 @@
                     "description": "密码生成、UUID生成、Mermaid图表、时间戳转换等",
                     "inLanguage": ["zh-CN"],
                     "featureList": ["密码生成", "UUID生成", "Mermaid图表", "时间戳转换", "Cron解析"],
-                    "url": "https://helpoke.com/pwd"
+                    "url": "https://helpoke.com/encrypted/pwd"
                 },
                 {
                     "@type": "WebApplication",
@@ -878,6 +878,255 @@
             color: var(--text-primary);
             margin-bottom: 16px;
         }
+
+        /* ========== Blog Section ========== */
+        .blog-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            font-size: 1.3rem;
+        }
+
+        .blog-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .blog-card-mini {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .blog-card-mini:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .blog-card-mini .card-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .blog-card-mini .card-category {
+            font-size: 0.75rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .blog-card-mini .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .blog-card-mini .card-excerpt {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-link-more {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .blog-link-more a {
+            display: inline-block;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .blog-link-more a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        /* ========== About Section ========== */
+        .about-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        .about-section h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-section p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .about-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .about-feature-item .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature-item .feature-text h4 {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .about-feature-item .feature-text p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* ========== FAQ Section ========== */
+        .faq-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        .faq-section h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .faq-question h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 16px 20px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 992px) {
+            .blog-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -1261,8 +1510,159 @@
                     <p>与大多数在线工具不同，本站所有工具均在您的浏览器本地运行：文件不离开您的设备，处理过程不经过任何服务器，处理完成后也不会留下任何痕迹。即使断开网络，大部分工具依然可以正常使用，特别适合处理涉及隐私或敏感内容的文件。
                     </p>
                     <h3>每个工具都配有详细文档</h3>
-                    <p>每款工具都附有独立的使用文档与常见问题（FAQ），点击工具页面中的“查看详细使用文档与
-                        FAQ”即可阅读功能说明、操作步骤与实战案例，帮助您快速上手。我们会持续更新工具功能与文档内容，如果您有任何建议，欢迎通过页面底部的联系方式或评论区反馈给我们。</p>
+                    <p>每款工具都附有独立的使用文档与常见问题（FAQ），点击工具页面中的"查看详细使用文档与
+                        FAQ"即可阅读功能说明、操作步骤与实战案例，帮助您快速上手。我们会持续更新工具功能与文档内容，如果您有任何建议，欢迎通过页面底部的联系方式或评论区反馈给我们。</p>
+                </section>
+
+                <!-- Blog Section: 热门技术教程 -->
+                <section class="blog-section">
+                    <h2 class="section-title"><span class="icon">📖</span>热门技术教程</h2>
+                    <div class="blog-cards-grid">
+                        <a href="/blog/json-xml-comparison.html" class="blog-card-mini">
+                            <div class="card-icon">📊</div>
+                            <div class="card-category">数据格式</div>
+                            <h3 class="card-title">JSON 与 XML 性能对比及常见语法错误排查</h3>
+                            <p class="card-excerpt">深入对比两种数据格式的性能差异、使用场景和常见语法错误。</p>
+                        </a>
+                        <a href="/blog/webp-image-optimization.html" class="blog-card-mini">
+                            <div class="card-icon">🖼️</div>
+                            <div class="card-category">图像处理</div>
+                            <h3 class="card-title">WebP 格式为什么比 PNG 节省 30% 体积？</h3>
+                            <p class="card-excerpt">深入解析 WebP 格式的压缩原理，提供网页图片优化指南。</p>
+                        </a>
+                        <a href="/blog/hash-algorithm-deep-dive.html" class="blog-card-mini">
+                            <div class="card-icon">🔐</div>
+                            <div class="card-category">加密安全</div>
+                            <h3 class="card-title">深入浅出哈希算法：MD5、SHA256 的原理与应用</h3>
+                            <p class="card-excerpt">从数学原理到实际应用，全面解析哈希算法在密码学中的核心地位。</p>
+                        </a>
+                    </div>
+                    <div class="blog-link-more">
+                        <a href="/blog/">查看全部文章 →</a>
+                    </div>
+                </section>
+
+                <!-- About Section: 关于 Helpoke -->
+                <section class="about-section">
+                    <h2><span class="icon">💡</span>关于 Helpoke 小助点</h2>
+                    <p>Helpoke（小助点）的名字来源于 Help + Poke 的组合，寓意"随时帮忙、一键轻点即用"。我们致力于打造一个简洁高效、安全隐私的在线工具平台，让每个人都能在没有技术门槛的情况下完成日常办公和生活中的各类处理任务。</p>
+                    <p>我们深知数据安全的重要性。在这个数据泄露事件频发的时代，我们选择了一条与众不同的技术路线：<strong>所有工具均在浏览器本地运行</strong>。这意味着您的文件永远不会上传到任何服务器，处理过程完全在您的设备上完成，断网也能使用。无论是个人隐私照片、商业机密文档，还是敏感的代码文件，都可以放心地在 Helpoke 处理。</p>
+                    <p>我们承诺：不收集、不存储、不上传用户的任何数据。您来去自由，无需注册账号，无需提供任何个人信息，打开浏览器即可使用。这正是 Helpoke 的初心——做一个真正站在用户角度、尊重用户隐私的在线工具站。</p>
+                    <div class="about-features">
+                        <div class="about-feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <div class="feature-text">
+                                <h4>本地处理</h4>
+                                <p>所有数据在浏览器中处理，不上传服务器</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon">🚫</span>
+                            <div class="feature-text">
+                                <h4>无需注册</h4>
+                                <p>免登录即用，不收集任何个人信息</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon">🌐</span>
+                            <div class="feature-text">
+                                <h4>离线可用</h4>
+                                <p>断网也能使用大部分工具功能</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon">📱</span>
+                            <div class="feature-text">
+                                <h4>全端适配</h4>
+                                <p>PC、平板、手机均可流畅使用</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <div class="feature-text">
+                                <h4>极简设计</h4>
+                                <p>无广告干扰，专注工具本身</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <span class="feature-icon">🆓</span>
+                            <div class="feature-text">
+                                <h4>完全免费</h4>
+                                <p>所有工具永久免费开放使用</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ Section -->
+                <section class="faq-section">
+                    <h2><span class="icon">❓</span>常见问题 FAQ</h2>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>为什么说数据是本地处理的？是如何实现的？</h3>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Helpoke 使用现代浏览器的 Web API（如 FileReader、Canvas、WebAssembly 等）在客户端实现文件处理。当您上传文件时，文件仅存在于浏览器的内存中，JavaScript 代码直接读取并处理这些数据，处理完成后生成结果文件供您下载。整个过程数据从未离开您的设备，服务器只是提供网页代码，不参与数据处理。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>哪些浏览器可以使用这些工具？</h3>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                我们的工具支持所有现代浏览器，包括 Chrome、Firefox、Safari、Edge 等最新版本。为了获得最佳体验，建议使用 Chrome 或 Firefox 浏览器。部分工具使用了较新的 Web 技术（如 WebCodecs、WebAssembly），建议保持浏览器版本为最新。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>处理大文件时浏览器崩溃怎么办？</h3>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                由于所有处理都在浏览器内存中进行，处理超大文件（如高清视频、大量图片）时可能会占用较多内存。建议：1) 关闭其他占用内存的网页和程序；2) 分批处理文件；3) 使用 64 位浏览器；4) 确保电脑有足够的可用内存。如果仍然崩溃，可以尝试使用桌面版工具。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>视频处理工具支持哪些格式？</h3>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                视频工具基于 FFmpeg（通过 WebAssembly 运行在浏览器中），支持主流格式包括：MP4、WebM、MOV、AVI、MKV、GIF 等。输出格式支持 MP4、WebM、GIF。由于浏览器安全限制，部分加密或特殊编码的视频可能无法处理。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>为什么有些工具在离线状态下无法使用？</h3>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                大部分工具在首次加载后可以离线使用，但以下情况需要网络：1) 首次访问某工具时需要加载网页代码；2) 部分工具依赖外部库（如 FFmpeg、Mermaid），首次使用时需要下载；3) 使用 CDN 加速的资源需要网络。建议在网络良好时预先访问需要使用的工具，之后即可离线使用。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>如何反馈问题或提出功能建议？</h3>
+                            <span class="faq-toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                我们欢迎任何反馈和建议！您可以通过以下方式联系我们：1) 在页面底部的评论区留言；2) 发送邮件至 contact@helpoke.com；3) 访问关于我们页面获取更多联系方式。我们会认真阅读每一条反馈，并持续改进工具。
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <div class="footer-note">
@@ -1406,6 +1806,12 @@
 
         // 页面加载时渲染
         renderRecentTools();
+
+        // FAQ 展开/收起功能
+        function toggleFaq(element) {
+            var faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
     </script>
 </body>
 
