@@ -10,11 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>资源文件下载工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="资源文件下载工具 - Helpoke 助点站">
+    <meta property="og:description" content="在线资源文件下载工具, 支持下载JS、CSS、字体等网页资源, 批量下载静态资源文件">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/download/resource/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="资源文件下载工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="在线资源文件下载工具, 支持下载JS、CSS、字体等网页资源, 批量下载静态资源文件">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/download/resource/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/download/resource/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/download/resource/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
     <script src="../lib/jszip.min.js"></script>
+    <script src="../../common/js/i18n/i18n.js"></script>
     <style>
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
@@ -535,7 +551,7 @@
         "description": "在线资源文件下载工具，支持下载JS、CSS、字体、图标等网页静态资源，支持批量下载和打包下载。Online resource file downloader for JS, CSS, fonts and web assets.",
         "url": "https://helpoke.com/download/resource",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "JS文件下载",
             "CSS文件下载",
@@ -566,47 +582,57 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>资源下载工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>资源下载工具，支持直接URL批量下载和网页资源（JS、CSS、字体等）提取，支持并发下载、类型筛选和ZIP打包下载</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="download.resource.title">资源下载工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与
+                FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i>
+                返回首页</a>
+            <p data-i18n="download.resource.intro">资源下载工具，支持直接URL批量下载和网页资源（JS、CSS、字体等）提取，支持并发下载、类型筛选和ZIP打包下载</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container" data-theme="light">
             <div class="tool-card">
                 <div class="tab-container">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-tab="url-tab">直接URL下载</button>
-                        <button class="tab-btn" data-tab="extract-tab">网页资源提取</button>
+                        <button class="tab-btn active" data-tab="url-tab" data-i18n="download.resource.tabUrl">直接URL下载</button>
+                        <button class="tab-btn" data-tab="extract-tab" data-i18n="download.resource.tabExtract">网页资源提取</button>
                     </div>
 
                     <div id="url-tab" class="tab-content active">
-                        <label for="resourceUrls">输入资源地址 (每行一个):</label>
-                        <p class="helper-text">支持 JS、CSS、字体(.ttf/.woff/.woff2)、图标等资源文件的下载</p>
-                        <textarea id="resourceUrls" placeholder="例如:
+                        <label for="resourceUrls" data-i18n="download.resource.urlLabel">输入资源地址 (每行一个):</label>
+                        <p class="helper-text" data-i18n="download.resource.urlHelper">支持 JS、CSS、字体(.ttf/.woff/.woff2)、图标等资源文件的下载
+                        </p>
+                        <textarea id="resourceUrls" data-i18n-placeholder="download.resource.urlPlaceholder" placeholder="例如:
 https://cdn.example.com/jquery.min.js
 https://cdn.example.com/style.css
 https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                     </div>
 
                     <div id="extract-tab" class="tab-content">
-                        <label for="websiteUrl">输入网站URL:</label>
-                        <p class="helper-text">输入网页地址，系统将尝试提取页面中的JS和CSS资源</p>
-                        <input type="text" id="websiteUrl" placeholder="例如: https://example.com/page.html"
-                            class="website-input">
-                        <button id="extractResources" class="btn extract-btn">提取资源</button>
+                        <label for="websiteUrl" data-i18n="download.resource.websiteLabel">输入网站URL:</label>
+                        <p class="helper-text" data-i18n="download.resource.extractHelper">输入网页地址，系统将尝试提取页面中的JS和CSS资源</p>
+                        <input type="text" id="websiteUrl" data-i18n-placeholder="download.resource.websitePlaceholder"
+                            placeholder="例如: https://example.com/page.html" class="website-input">
+                        <button id="extractResources" class="btn extract-btn"
+                            data-i18n="download.resource.extractBtn">提取资源</button>
 
                         <div class="extracted-resources-section" style="margin-top: 20px;">
-                            <h3>提取的资源</h3>
+                            <h3 data-i18n="download.resource.extractedTitle">提取的资源</h3>
                             <div id="extractedResourcesContainer" class="download-list"></div>
                             <div class="extracted-controls" style="margin-top: 12px;">
-                                <button id="selectAllResources" class="btn"
-                                    style="padding: 8px 16px; font-size: 13px;">全选</button>
+                                <button id="selectAllResources" class="btn" style="padding: 8px 16px; font-size: 13px;"
+                                    data-i18n="download.resource.selectAll">全选</button>
                                 <button id="deselectAllResources" class="btn secondary"
-                                    style="padding: 8px 16px; font-size: 13px;">取消全选</button>
+                                    style="padding: 8px 16px; font-size: 13px;"
+                                    data-i18n="download.resource.deselectAll">取消全选</button>
                                 <button id="addSelectedResourcesToQueue" class="btn"
-                                    style="padding: 8px 16px; font-size: 13px;">添加选中到下载队列</button>
+                                    style="padding: 8px 16px; font-size: 13px;"
+                                    data-i18n="download.resource.addToQueue">添加选中到下载队列</button>
                             </div>
                         </div>
                     </div>
@@ -614,145 +640,41 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
 
                 <div class="options">
                     <div class="option-group">
-                        <label for="concurrency">并发下载数:</label>
+                        <label for="concurrency" data-i18n="download.resource.concurrencyLabel">并发下载数:</label>
                         <input type="number" id="concurrency" min="1" max="10" value="3">
                     </div>
 
                     <div class="option-group">
-                        <label for="fileType">文件类型筛选:</label>
+                        <label for="fileType" data-i18n="download.resource.fileTypeLabel">文件类型筛选:</label>
                         <select id="fileType">
-                            <option value="all">全部类型</option>
-                            <option value="js">仅JS文件</option>
-                            <option value="css">仅CSS文件</option>
-                            <option value="font">仅字体文件</option>
+                            <option value="all" data-i18n="download.resource.optionAll">全部类型</option>
+                            <option value="js" data-i18n="download.resource.optionJs">仅JS文件</option>
+                            <option value="css" data-i18n="download.resource.optionCss">仅CSS文件</option>
+                            <option value="font" data-i18n="download.resource.optionFont">仅字体文件</option>
                         </select>
                     </div>
 
                     <div class="option-group">
-                        <label for="packAsZip">打包为ZIP:</label>
+                        <label for="packAsZip" data-i18n="download.resource.packZipLabel">打包为ZIP:</label>
                         <input type="checkbox" id="packAsZip" checked>
                     </div>
                 </div>
 
                 <div style="text-align: center;">
-                    <button id="startDownload" class="btn">开始下载</button>
-                    <button id="clearList" class="btn secondary">清空列表</button>
+                    <button id="startDownload" class="btn" data-i18n="download.resource.startDownload">开始下载</button>
+                    <button id="clearList" class="btn secondary" data-i18n="download.resource.clearList">清空列表</button>
                 </div>
             </div>
 
             <div class="tool-card">
                 <div class="progress-header">
-                    <h2>下载进度</h2>
+                    <h2 data-i18n="download.resource.progressTitle">下载进度</h2>
                     <div class="stats">
-                        <span id="totalFiles">0</span> 个文件 |
-                        <span id="completedFiles">0</span> 已完成 |
-                        <span id="failedFiles">0</span> 失败 |
-                        <span id="skippedFiles">0</span> 跳过
+                        <span id="totalFiles">0</span><span data-i18n="download.resource.statFiles"> 个文件 |</span>
+                        <span id="completedFiles">0</span><span data-i18n="download.resource.statCompleted"> 已完成 |</span>
+                        <span id="failedFiles">0</span><span data-i18n="download.resource.statFailed"> 失败 |</span>
+                        <span id="skippedFiles">0</span><span data-i18n="download.resource.statSkipped"> 跳过</span>
                     </div>
-                </div>
-
-                <div class="info-section">
-                    <article class="info-details">
-                        <header>
-                            <h3>工具介绍</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4>一、解决的问题</h4>
-                            <ul>
-                                <li>批量下载网页资源和文件。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
-                            </ul>
-                            <h4>二、支持的格式</h4>
-                            <ul>
-                                <li><strong>文件：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>资源：</strong>支持该格式的完整处理功能。</li>
-                            </ul>
-                            <h4>三、核心功能</h4>
-                            <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <article class="info-details">
-                        <header>
-                            <h3>使用说明</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4>一、直接URL下载</h4>
-                            <ul>
-                                <li><strong>输入URL：</strong>在文本框中输入资源文件的URL地址，每行一个。</li>
-                                <li><strong>支持格式：</strong>支持JS、CSS、字体（.ttf/.woff/.woff2）、图标等网页静态资源文件。</li>
-                                <li><strong>URL格式化：</strong>系统会自动格式化不规范的URL地址。</li>
-                            </ul>
-                            <h4>二、网页资源提取</h4>
-                            <ul>
-                                <li><strong>输入网址：</strong>在输入框中输入网页地址，如 <code>https://example.com/page.html</code>。</li>
-                                <li><strong>提取资源：</strong>点击"提取资源"按钮，系统将尝试提取页面中的JS和CSS资源。</li>
-                                <li><strong>选择资源：</strong>可以勾选或取消勾选资源，选择需要下载的资源。</li>
-                                <li><strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的资源添加到下载列表。</li>
-                            </ul>
-                            <h4>三、下载设置</h4>
-                            <ul>
-                                <li><strong>并发下载数：</strong>设置同时下载的文件数量，范围为1-10，默认3。</li>
-                                <li><strong>文件类型筛选：</strong>可选择"全部类型"、"仅JS文件"、"仅CSS文件"或"仅字体文件"。</li>
-                                <li><strong>打包为ZIP：</strong>勾选后，下载完成的文件将自动打包为ZIP压缩包下载。</li>
-                            </ul>
-                            <h4>四、常用资源快速下载</h4>
-                            <ul>
-                                <li><strong>点击快速链接：</strong>页面下方提供了常用CDN资源的快速下载链接，点击即可添加到下载队列。</li>
-                                <li><strong>包含资源：</strong>包括jQuery、Vue、React、Bootstrap等常用前端库。</li>
-                            </ul>
-                            <h4>五、开始下载</h4>
-                            <ul>
-                                <li><strong>点击下载：</strong>点击"开始下载"按钮开始批量下载。</li>
-                                <li><strong>查看进度：</strong>下载进度会实时显示，包括总文件数、已完成数、失败数和跳过数。</li>
-                                <li><strong>清空列表：</strong>点击"清空列表"按钮可以清除所有下载任务。</li>
-                                <li><strong>直接下载：</strong>对于无法自动下载的资源，可以点击"直接下载"按钮在浏览器中直接下载。</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3>注意事项</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4>一、下载限制</h4>
-                            <ul>
-                                <li><strong>CORS限制：</strong>大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源。</li>
-                                <li><strong>防盗链保护：</strong>许多资源托管站点实施了防盗链机制，会检查请求的来源。</li>
-                                <li><strong>访问控制：</strong>部分服务器会检测请求是否来自真实的浏览器环境。</li>
-                            </ul>
-                            <h4>二、处理方式</h4>
-                            <ul>
-                                <li><strong>无法下载的资源：</strong>对于无法自动下载的资源，您可以复制链接在浏览器中直接访问下载。</li>
-                                <li><strong>直接下载：</strong>点击"直接下载"按钮可以在浏览器中直接打开资源链接。</li>
-                                <li><strong>打包下载：</strong>勾选"打包为ZIP"选项后，所有成功下载的文件会自动打包为ZIP压缩包。</li>
-                            </ul>
-                            <h4>三、数据安全</h4>
-                            <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>建议不要在公共设备上处理包含敏感信息的资源。</li>
-                            </ul>
-                            <h4>四、处理过程</h4>
-                            <ul>
-                                <li>处理期间不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失。</li>
-                                <li>大文件处理可能需要较长时间，请耐心等待。</li>
-                            </ul>
-                            <h4>五、常见问题</h4>
-                            <ul>
-                                <li><strong>下载失败：</strong>检查网络连接，或尝试降低并发下载数。</li>
-                                <li><strong>提取无结果：</strong>某些网站使用JavaScript动态加载资源，无法通过静态方式提取。</li>
-                                <li><strong>文件损坏：</strong>服务器可能返回不完整的文件，尝试重新下载。</li>
-                                <li><strong>浏览器限制：</strong>某些浏览器可能限制自动下载，需要手动允许。</li>
-                                <li><strong>打包失败：</strong>文件数量过多或过大可能导致打包失败，建议分批下载。</li>
-                            </ul>
-                        </div>
-                    </article>
                 </div>
 
                 <div id="downloadProgress" class="progress-container">
@@ -764,40 +686,183 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
 
             <div class="tool-card">
                 <div class="quick-links">
-                    <h4>常用CDN资源快速下载</h4>
+                    <h4 data-i18n="download.resource.quickLinksTitle">常用CDN资源快速下载</h4>
                     <div class="link-item" data-url="https://code.jquery.com/jquery-3.7.1.min.js">
-                        <span>📦 jQuery 3.7.1</span>
+                        <span data-i18n="download.resource.quickJquery">📦 jQuery 3.7.1</span>
                     </div>
                     <div class="link-item" data-url="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js">
-                        <span>📦 Vue 3.4.21</span>
+                        <span data-i18n="download.resource.quickVue">📦 Vue 3.4.21</span>
                     </div>
                     <div class="link-item"
                         data-url="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js">
-                        <span>📦 React 18.2.0</span>
+                        <span data-i18n="download.resource.quickReact">📦 React 18.2.0</span>
                     </div>
                     <div class="link-item"
                         data-url="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                        <span>📦 Bootstrap 5.3.3 CSS</span>
+                        <span data-i18n="download.resource.quickBootstrap">📦 Bootstrap 5.3.3 CSS</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="info-section">
+                <article class="info-details">
+                    <header>
+                        <h3 data-i18n="download.resource.infoIntro">工具介绍</h3>
+                    </header>
+                    <div class="info-content">
+                        <h4 data-i18n="download.resource.problemsTitle">一、解决的问题</h4>
+                        <ul>
+                            <li data-i18n="download.resource.problem1">批量下载网页资源和文件。</li>
+                            <li data-i18n="download.resource.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="download.resource.problem3">无需安装专业软件，随时随地在线使用。</li>
+                        </ul>
+                        <h4 data-i18n="download.resource.formatTitle">二、支持的格式</h4>
+                        <ul>
+                            <li data-i18n="download.resource.formatFile"><strong>文件：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="download.resource.formatResource"><strong>资源：</strong>支持该格式的完整处理功能。</li>
+                        </ul>
+                        <h4 data-i18n="download.resource.featuresTitle">三、核心功能</h4>
+                        <ul>
+                            <li data-i18n="download.resource.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="download.resource.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="download.resource.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="download.resource.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="info-details">
+                    <header>
+                        <h3 data-i18n="download.resource.infoUsage">使用说明</h3>
+                    </header>
+                    <div class="info-content">
+                        <h4 data-i18n="download.resource.usageUrlTitle">一、直接URL下载</h4>
+                        <ul>
+                            <li data-i18n="download.resource.usageUrlInput"><strong>输入URL：</strong>在文本框中输入资源文件的URL地址，每行一个。
+                            </li>
+                            <li data-i18n="download.resource.usageUrlSupport">
+                                <strong>支持格式：</strong>支持JS、CSS、字体（.ttf/.woff/.woff2）、图标等网页静态资源文件。
+                            </li>
+                            <li data-i18n="download.resource.usageUrlFormat"><strong>URL格式化：</strong>系统会自动格式化不规范的URL地址。</li>
+                        </ul>
+                        <h4 data-i18n="download.resource.usageExtractTitle">二、网页资源提取</h4>
+                        <ul>
+                            <li data-i18n="download.resource.usageExtractUrl"><strong>输入网址：</strong>在输入框中输入网页地址，如
+                                <code>https://example.com/page.html</code>。
+                            </li>
+                            <li data-i18n="download.resource.usageExtract">
+                                <strong>提取资源：</strong>点击"提取资源"按钮，系统将尝试提取页面中的JS和CSS资源。
+                            </li>
+                            <li data-i18n="download.resource.usageSelect"><strong>选择资源：</strong>可以勾选或取消勾选资源，选择需要下载的资源。</li>
+                            <li data-i18n="download.resource.usageAddQueue">
+                                <strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的资源添加到下载列表。
+                            </li>
+                        </ul>
+                        <h4 data-i18n="download.resource.usageSettingsTitle">三、下载设置</h4>
+                        <ul>
+                            <li data-i18n="download.resource.usageConcurrency">
+                                <strong>并发下载数：</strong>设置同时下载的文件数量，范围为1-10，默认3。
+                            </li>
+                            <li data-i18n="download.resource.usageFileType">
+                                <strong>文件类型筛选：</strong>可选择"全部类型"、"仅JS文件"、"仅CSS文件"或"仅字体文件"。
+                            </li>
+                            <li data-i18n="download.resource.usagePackZip"><strong>打包为ZIP：</strong>勾选后，下载完成的文件将自动打包为ZIP压缩包下载。
+                            </li>
+                        </ul>
+                        <h4 data-i18n="download.resource.usageQuickTitle">四、常用资源快速下载</h4>
+                        <ul>
+                            <li data-i18n="download.resource.usageQuickLink">
+                                <strong>点击快速链接：</strong>页面下方提供了常用CDN资源的快速下载链接，点击即可添加到下载队列。
+                            </li>
+                            <li data-i18n="download.resource.usageQuickInclude">
+                                <strong>包含资源：</strong>包括jQuery、Vue、React、Bootstrap等常用前端库。
+                            </li>
+                        </ul>
+                        <h4 data-i18n="download.resource.usageStartTitle">五、开始下载</h4>
+                        <ul>
+                            <li data-i18n="download.resource.usageStartClick"><strong>点击下载：</strong>点击"开始下载"按钮开始批量下载。</li>
+                            <li data-i18n="download.resource.usageStartProgress">
+                                <strong>查看进度：</strong>下载进度会实时显示，包括总文件数、已完成数、失败数和跳过数。
+                            </li>
+                            <li data-i18n="download.resource.usageStartClear"><strong>清空列表：</strong>点击"清空列表"按钮可以清除所有下载任务。
+                            </li>
+                            <li data-i18n="download.resource.usageStartDirect">
+                                <strong>直接下载：</strong>对于无法自动下载的资源，可以点击"直接下载"按钮在浏览器中直接下载。
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="info-details">
+                    <header>
+                        <h3 data-i18n="download.resource.infoNotes">注意事项</h3>
+                    </header>
+                    <div class="info-content">
+                        <h4 data-i18n="download.resource.notesLimitTitle">一、下载限制</h4>
+                        <ul>
+                            <li data-i18n="download.resource.noteCors">
+                                <strong>CORS限制：</strong>大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源。
+                            </li>
+                            <li data-i18n="download.resource.noteHotlink"><strong>防盗链保护：</strong>许多资源托管站点实施了防盗链机制，会检查请求的来源。
+                            </li>
+                            <li data-i18n="download.resource.noteAccess"><strong>访问控制：</strong>部分服务器会检测请求是否来自真实的浏览器环境。</li>
+                        </ul>
+                        <h4 data-i18n="download.resource.notesHandleTitle">二、处理方式</h4>
+                        <ul>
+                            <li data-i18n="download.resource.noteHandleUnavailable">
+                                <strong>无法下载的资源：</strong>对于无法自动下载的资源，您可以复制链接在浏览器中直接访问下载。
+                            </li>
+                            <li data-i18n="download.resource.noteHandleDirect">
+                                <strong>直接下载：</strong>点击"直接下载"按钮可以在浏览器中直接打开资源链接。
+                            </li>
+                            <li data-i18n="download.resource.noteHandlePack">
+                                <strong>打包下载：</strong>勾选"打包为ZIP"选项后，所有成功下载的文件会自动打包为ZIP压缩包。
+                            </li>
+                        </ul>
+                        <h4 data-i18n="download.resource.notesSecurityTitle">三、数据安全</h4>
+                        <ul>
+                            <li data-i18n="download.resource.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li data-i18n="download.resource.noteSecurity2">建议不要在公共设备上处理包含敏感信息的资源。</li>
+                        </ul>
+                        <h4 data-i18n="download.resource.notesProcessTitle">四、处理过程</h4>
+                        <ul>
+                            <li data-i18n="download.resource.noteProcess1">处理期间不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失。</li>
+                            <li data-i18n="download.resource.noteProcess2">大文件处理可能需要较长时间，请耐心等待。</li>
+                        </ul>
+                        <h4 data-i18n="download.resource.notesFaqTitle">五、常见问题</h4>
+                        <ul>
+                            <li data-i18n="download.resource.noteFaq1"><strong>下载失败：</strong>检查网络连接，或尝试降低并发下载数。</li>
+                            <li data-i18n="download.resource.noteFaq2">
+                                <strong>提取无结果：</strong>某些网站使用JavaScript动态加载资源，无法通过静态方式提取。
+                            </li>
+                            <li data-i18n="download.resource.noteFaq3"><strong>文件损坏：</strong>服务器可能返回不完整的文件，尝试重新下载。</li>
+                            <li data-i18n="download.resource.noteFaq4"><strong>浏览器限制：</strong>某些浏览器可能限制自动下载，需要手动允许。</li>
+                            <li data-i18n="download.resource.noteFaq5"><strong>打包失败：</strong>文件数量过多或过大可能导致打包失败，建议分批下载。</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
         </div>
 
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script>
@@ -899,11 +964,11 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                         const sizeEl = item.querySelector('.size');
                         statusEl.className = 'status ' + status;
                         statusEl.textContent = {
-                            pending: '等待中',
-                            downloading: '下载中',
-                            completed: '已完成',
-                            failed: '失败',
-                            skipped: '已跳过'
+                            pending: window.t('download.resource.statusPending'),
+                            downloading: window.t('download.resource.statusDownloading'),
+                            completed: window.t('download.resource.statusCompleted'),
+                            failed: window.t('download.resource.statusFailed'),
+                            skipped: window.t('download.resource.statusSkipped')
                         }[status];
                         if (size !== '-') {
                             sizeEl.textContent = formatSize(size);
@@ -1009,7 +1074,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                     .filter(url => url && url.includes('://'));
 
                 if (urls.length === 0) {
-                    showError('请输入资源地址');
+                    showError(window.t('download.resource.errNoResourceUrl'));
                     return;
                 }
 
@@ -1049,7 +1114,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
             document.getElementById('extractResources').addEventListener('click', async () => {
                 const url = document.getElementById('websiteUrl').value.trim();
                 if (!url) {
-                    showError('请输入网站URL');
+                    showError(window.t('download.resource.errNoWebsiteUrl'));
                     return;
                 }
 
@@ -1090,7 +1155,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                         container.appendChild(item);
                     });
                 } catch (error) {
-                    showError('提取资源失败: ' + error.message);
+                    showError(window.t('download.resource.errExtractFailed') + ': ' + error.message);
                 }
             });
 
@@ -1111,7 +1176,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                         textarea.value += (textarea.value ? '\n' : '') + url;
                     }
                 });
-                showSuccess('已添加 ' + selected.length + ' 个资源到下载队列');
+                showSuccess(window.t('download.resource.successAddedToQueue', { count: selected.length }));
             });
         })();
     </script>

@@ -16,6 +16,21 @@
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <link rel="apple-touch-icon" href="../../common/img/helpoke.webp">
     <title>图片格式转换工具 - 在线免费转换Base64/SVG/图片文件</title>
+    <meta property="og:title" content="图片格式转换工具 - 在线免费转换Base64/SVG/图片文件">
+    <meta property="og:description" content="在线免费图片格式转换工具，支持Base64编码、SVG代码、图片文件批量上传转换，输出JPG、PNG、WebP、GIF、BMP、ICO等格式，支持调整图片质量和输出分辨率，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/image/convert/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图片格式转换工具 - 在线免费转换Base64/SVG/图片文件">
+    <meta name="twitter:description" content="在线免费图片格式转换工具，支持Base64编码、SVG代码、图片文件批量上传转换，输出JPG、PNG、WebP、GIF、BMP、ICO等格式，支持调整图片质量和输出分辨率，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/image/convert/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/convert/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/image/convert/">
 
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
@@ -41,6 +56,7 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -52,9 +68,9 @@
         "description": "在线图片格式转换工具，支持Base64编码、SVG代码转换为JPG、PNG、WebP等图片格式。支持调整图片质量和输出分辨率。Online image format converter supporting Base64 to image, SVG to image conversion.",
         "url": "https://helpoke.com/image/convert",
         "applicationCategory": "https://schema.org/ImageProcessing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
-            "支持Base64编码转换为图片",
+            "支持Base64编码转换为图片 (Base64 encoding)",
             "支持SVG矢量图转换为位图",
             "支持图片文件直接上传转换",
             "输出格式：JPG、PNG、WebP、GIF、BMP、ICO",
@@ -84,11 +100,18 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图片格式转换工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>图片格式转换工具，支持Base64编码、SVG代码、图片文件转换为JPG、PNG、WebP、GIF、BMP、ICO等格式，可调节质量和分辨率，支持批量转换</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="image.convert.title">图片格式转换工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与
+                FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="image.convert.intro">
+                图片格式转换工具，支持Base64编码、SVG代码、图片文件转换为JPG、PNG、WebP、GIF、BMP、ICO等格式，可调节质量和分辨率，支持批量转换
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <!-- 主要内容 -->
@@ -96,23 +119,25 @@
             <div class="grid md:grid-cols-2 gap-10">
                 <!-- 输入区域 -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.convert.inputTitle">
                         <i class="fas fa-file-import mr-2"></i>输入
                     </h2>
 
                     <!-- 输入选项卡 -->
                     <div class="flex border-b border-gray-200 mb-4">
-                        <button id="tab-base64"
-                            class="tab-btn px-4 py-2 border-b-2 border-primary font-medium">Base64</button>
-                        <button id="tab-svg" class="tab-btn px-4 py-2">SVG</button>
-                        <button id="tab-upload" class="tab-btn px-4 py-2">上传文件</button>
+                        <button id="tab-base64" class="tab-btn px-4 py-2 border-b-2 border-primary font-medium"
+                            data-i18n="image.convert.tabBase64">Base64</button>
+                        <button id="tab-svg" class="tab-btn px-4 py-2" data-i18n="image.convert.tabSvg">SVG</button>
+                        <button id="tab-upload" class="tab-btn px-4 py-2"
+                            data-i18n="image.convert.tabUpload">上传文件</button>
                     </div>
 
                     <!-- Base64 输入区域 -->
                     <div id="input-base64" class="space-y-4">
                         <div>
                             <!-- Base64格式说明 -->
-                            <div class="format-info rounded-lg p-3 text-sm mb-2">
+                            <div class="format-info rounded-lg p-3 text-sm mb-2"
+                                data-i18n="image.convert.base64FormatInfo">
                                 <i class="fas fa-circle-info mr-1"></i><strong>Base64格式说明：</strong>
                                 请输入完整的Base64图像代码，可以包含或不包含前缀：data:image/xxx;base64,。输入示例如下：
                             </div>
@@ -122,11 +147,13 @@
                             </div>
                             <textarea id="base64-input" rows="23"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus resize-y"
-                                placeholder="请粘贴 Base64 图片代码..."></textarea>
+                                placeholder="请粘贴 Base64 图片代码..."
+                                data-i18n-placeholder="image.convert.base64Placeholder"></textarea>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-sm" id="base64-length">0 字符</div>
-                            <button id="clear-base64" class="text-sm hover:text-red-500 transition-colors">
+                            <div class="text-sm" id="base64-length" data-i18n="image.convert.charCount">0 字符</div>
+                            <button id="clear-base64" class="text-sm hover:text-red-500 transition-colors"
+                                data-i18n="image.convert.clearBtn">
                                 <i class="fas fa-trash-can mr-1"></i>清除
                             </button>
                         </div>
@@ -136,7 +163,8 @@
                     <div id="input-svg" class="space-y-4 hidden">
                         <div>
                             <!-- SVG格式说明 -->
-                            <div class="format-info rounded-lg p-3 text-sm mb-2">
+                            <div class="format-info rounded-lg p-3 text-sm mb-2"
+                                data-i18n="image.convert.svgFormatInfo">
                                 <i class="fas fa-circle-info mr-1"></i><strong>SVG格式说明：</strong>
                                 请输入完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。输入示例如下：
                             </div>
@@ -149,11 +177,13 @@
                             </div>
                             <textarea id="svg-input" rows="28"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus resize-y"
-                                placeholder="请粘贴 SVG 代码..."></textarea>
+                                placeholder="请粘贴 SVG 代码..."
+                                data-i18n-placeholder="image.convert.svgPlaceholder"></textarea>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-sm" id="svg-length">0 字符</div>
-                            <button id="clear-svg" class="text-sm hover:text-red-500 transition-colors">
+                            <div class="text-sm" id="svg-length" data-i18n="image.convert.charCount">0 字符</div>
+                            <button id="clear-svg" class="text-sm hover:text-red-500 transition-colors"
+                                data-i18n="image.convert.clearBtn">
                                 <i class="fas fa-trash-can mr-1"></i>清除
                             </button>
                         </div>
@@ -165,15 +195,18 @@
                             <input type="file" id="file-input" class="hidden" accept="image/*,image/svg+xml,.svg"
                                 multiple>
                             <div class="upload-icon">🖼️</div>
-                            <div class="upload-text">点击上传或拖拽图片到此处</div>
-                            <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP、SVG 格式（最多20张）</div>
+                            <div class="upload-text" data-i18n="image.convert.uploadText">点击上传或拖拽图片到此处</div>
+                            <div class="upload-hint" data-i18n="image.convert.uploadHint">支持 JPG、PNG、WebP、GIF、BMP、SVG
+                                格式（最多20张）</div>
                         </label>
 
                         <!-- 文件列表 -->
                         <div id="file-list" class="hidden">
                             <div class="flex justify-between items-center mb-2">
-                                <span class="text-sm">已选择 <span id="file-count">0</span> 张图片</span>
-                                <button id="clear-files" class="text-xs text-red-500 hover:underline">清空</button>
+                                <span class="text-sm" data-i18n="image.convert.fileSelected">已选择 <span
+                                        id="file-count">0</span> 张图片</span>
+                                <button id="clear-files" class="text-xs text-red-500 hover:underline"
+                                    data-i18n="image.convert.clearFilesBtn">清空</button>
                             </div>
                             <div id="file-items" class="max-h-32 overflow-y-auto space-y-1"></div>
                         </div>
@@ -190,12 +223,13 @@
                         </div>
                         <!-- 预览区域 -->
                         <div class="preview-wrapper rounded-lg p-4">
-                            <h3 class="text-sm font-medium mb-2">预览（可点击放大）：</h3>
+                            <h3 class="text-sm font-medium mb-2" data-i18n="image.convert.previewTitle">预览（可点击放大）：</h3>
                             <div id="upload-container"
                                 class="preview-inner h-[400px] flex items-center justify-center rounded overflow-hidden">
                                 <div class="preview-placeholder text-center">
                                     <i class="fas fa-image text-4xl mb-2"></i>
-                                    <p class="text-sm">上传后图片将在这里显示</p>
+                                    <p class="text-sm" data-i18n="image.convert.uploadPreviewPlaceholder">上传后图片将在这里显示
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -204,43 +238,48 @@
 
                 <!-- 输出和预览区域 -->
                 <div class="bg-white rounded-xl p-6 card-shadow">
-                    <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.convert.outputTitle">
                         <i class="fas fa-file-export mr-2"></i>输出设置
-                        （<a href="note.html" target="" class="block text-sm hover:underline">
-                            <i class="fas fa-circle-info mr-1"></i>转换类型与清晰度说明
-                        </a>）
                     </h2>
 
                     <!-- 输出设置 -->
                     <div class="space-y-4 mb-6">
                         <div>
-                            <label for="output-format" class="block text-sm font-medium mb-1">输出格式：</label>
+                            <label for="output-format" class="block text-sm font-medium mb-1"
+                                data-i18n="image.convert.outputFormatLabel">输出格式：</label>
                             <select id="output-format"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
-                                <option value="image/jpeg">JPG (.jpg)</option>
-                                <option value="image/png">PNG (.png) - 推荐用于SVG转换</option>
-                                <option value="image/webp">WebP (.webp)</option>
-                                <option value="image/gif">GIF (.gif)</option>
-                                <option value="image/bmp">BMP (.bmp)</option>
-                                <option value="image/x-icon">ICO (.ico) - Windows图标格式</option>
-                                <option value="base64">Base64 编码</option>
+                                <option value="image/jpeg" data-i18n="image.convert.optJpg">JPG (.jpg)</option>
+                                <option value="image/png" data-i18n="image.convert.optPng">PNG (.png) - 推荐用于SVG转换
+                                </option>
+                                <option value="image/webp" data-i18n="image.convert.optWebp">WebP (.webp)</option>
+                                <option value="image/gif" data-i18n="image.convert.optGif">GIF (.gif)</option>
+                                <option value="image/bmp" data-i18n="image.convert.optBmp">BMP (.bmp)</option>
+                                <option value="image/x-icon" data-i18n="image.convert.optIco">ICO (.ico) - Windows图标格式
+                                </option>
+                                <option value="base64" data-i18n="image.convert.optBase64">Base64 编码</option>
                             </select>
                         </div>
 
                         <div id="resolution-container">
-                            <label for="resolution-select" class="block text-sm font-medium mb-1">
+                            <label for="resolution-select" class="block text-sm font-medium mb-1"
+                                data-i18n="image.convert.resolutionLabel">
                                 输出分辨率（仅对SVG有效）：
                             </label>
                             <select id="resolution-select"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
-                                <option value="1024" selected>1024x1024（标准质量）</option>
-                                <option value="2048">2048x2048（高质量）</option>
-                                <option value="4096">4096x4096（超高质量）</option>
-                                <option value="8192">8192x8192（无损质量）</option>
+                                <option value="1024" selected data-i18n="image.convert.resolutionStandard">
+                                    1024x1024（标准质量）
+                                </option>
+                                <option value="2048" data-i18n="image.convert.resolutionHigh">2048x2048（高质量）</option>
+                                <option value="4096" data-i18n="image.convert.resolutionUltra">4096x4096（超高质量）</option>
+                                <option value="8192" data-i18n="image.convert.resolutionLossless">8192x8192（无损质量）
+                                </option>
                             </select>
                         </div>
                         <div>
-                            <label for="quality-slider" class="block text-sm font-medium mb-1">
+                            <label for="quality-slider" class="block text-sm font-medium mb-1"
+                                data-i18n="image.convert.qualityLabel">
                                 图片质量：<span id="quality-value">90</span>%
                             </label>
                             <input type="range" id="quality-slider" min="1" max="100" value="90"
@@ -248,7 +287,8 @@
                         </div>
 
                         <div>
-                            <label for="filename" class="block text-sm font-medium mb-1">文件名：</label>
+                            <label for="filename" class="block text-sm font-medium mb-1"
+                                data-i18n="image.convert.filenameLabel">文件名：</label>
                             <input type="text" id="filename" value="helpoke-converted-image"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus">
                         </div>
@@ -257,17 +297,18 @@
                     <!-- 操作按钮 -->
                     <div class="flex gap-3 mb-6">
                         <button id="convert-btn"
-                            class="action-btn action-btn-primary flex-1 font-medium py-3 px-4 rounded-lg flex items-center justify-center">
+                            class="action-btn action-btn-primary flex-1 font-medium py-3 px-4 rounded-lg flex items-center justify-center"
+                            data-i18n="image.convert.convertBtn">
                             <i class="fas fa-arrow-right-arrow-left mr-2"></i>转换
                         </button>
                         <button id="download-btn"
                             class="action-btn action-btn-secondary flex-1 font-medium py-3 px-4 rounded-lg flex items-center justify-center"
-                            disabled>
+                            disabled data-i18n="image.convert.downloadBtn">
                             <i class="fas fa-download mr-2"></i>下载
                         </button>
                         <button id="download-all-btn"
                             class="action-btn action-btn-tertiary flex-1 font-medium py-3 px-4 rounded-lg flex items-center justify-center"
-                            disabled>
+                            disabled data-i18n="image.convert.downloadAllBtn">
                             <i class="fas fa-download mr-2"></i>批量下载
                         </button>
                     </div>
@@ -276,12 +317,13 @@
                     <div class="space-y-4">
                         <!-- 图片预览区域 -->
                         <div id="image-preview-container" class="preview-wrapper">
-                            <h3 class="text-sm font-medium mb-2">预览（可点击放大）：</h3>
+                            <h3 class="text-sm font-medium mb-2" data-i18n="image.convert.previewTitle">预览（可点击放大）：</h3>
                             <div id="preview-container"
                                 class="preview-inner h-[400px] flex items-center justify-center rounded overflow-hidden">
                                 <div class="preview-placeholder text-center">
                                     <i class="fas fa-image text-4xl mb-2"></i>
-                                    <p class="text-sm">转换后图片将在这里显示</p>
+                                    <p class="text-sm" data-i18n="image.convert.outputPreviewPlaceholder">转换后图片将在这里显示
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -289,146 +331,165 @@
                         <!-- Base64 预览输入框 -->
                         <div id="base64-preview-container" class="preview-wrapper hidden">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="text-sm font-medium">Base64 编码：</h3>
-                                <button id="copy-base64" class="text-xs hover:underline">
+                                <h3 class="text-sm font-medium" data-i18n="image.convert.base64PreviewTitle">Base64 编码：
+                                </h3>
+                                <button id="copy-base64" class="text-xs hover:underline"
+                                    data-i18n="image.convert.copyBtn">
                                     <i class="fas fa-copy mr-1"></i>复制
                                 </button>
                             </div>
                             <textarea id="base64-preview" rows="22"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg input-focus resize-y text-xs font-mono"
-                                readonly placeholder="转换为Base64后将显示在这里..."></textarea>
+                                readonly placeholder="转换为Base64后将显示在这里..."
+                                data-i18n-placeholder="image.convert.base64PreviewPlaceholder"></textarea>
                             <div class="text-xs mt-1 text-right">
-                                <span id="base64-size">0 字符</span>
+                                <span id="base64-size" data-i18n="image.convert.charCount">0 字符</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-8 feature-card rounded-xl p-6 card-shadow">
-                <div class="info-section">
-                    <article class="info-details">
-                        <header>
-                            <h3>工具介绍</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4>一、解决的问题</h4>
-                            <ul>
-                                <li>转换图片格式，支持多种格式互转。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
-                            </ul>
-                            <h4>二、支持的格式</h4>
-                            <ul>
-                                <li><strong>JPG：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>PNG：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>WebP：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>GIF：</strong>支持该格式的完整处理功能。</li>
-                            </ul>
-                            <h4>三、核心功能</h4>
-                            <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
-                            </ul>
-                        </div>
-                    </article>
+            <div class="info-section">
+                <article class="info-details">
+                    <header>
+                        <h3 data-i18n="image.convert.infoIntro">工具介绍</h3>
+                    </header>
+                    <div class="info-content">
+                        <h4 data-i18n="image.convert.problemsTitle">一、解决的问题</h4>
+                        <ul>
+                            <li data-i18n="image.convert.problem1">转换图片格式，支持多种格式互转。</li>
+                            <li data-i18n="image.convert.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="image.convert.problem3">无需安装专业软件，随时随地在线使用。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.formatsTitle">二、支持的格式</h4>
+                        <ul>
+                            <li data-i18n="image.convert.formatJpg"><strong>JPG：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.convert.formatPng"><strong>PNG：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.convert.formatWebp"><strong>WebP：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.convert.formatGif"><strong>GIF：</strong>支持该格式的完整处理功能。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.featuresTitle">三、核心功能</h4>
+                        <ul>
+                            <li data-i18n="image.convert.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="image.convert.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="image.convert.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="image.convert.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                            </li>
+                        </ul>
+                    </div>
+                </article>
 
-                    <article class="info-details">
-                        <header>
-                            <h3>使用说明</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4>一、输入方式</h4>
-                            <ul>
-                                <li><strong>Base64输入：</strong>选择"Base64"选项卡，粘贴Base64编码的图片代码。可以包含或不包含前缀data:image/xxx;base64,。
-                                </li>
-                                <li><strong>SVG输入：</strong>选择"SVG"选项卡，粘贴完整的SVG XML代码，需要包含svg、line、text、circle等标签及其内容。
-                                </li>
-                                <li><strong>文件上传：</strong>选择"上传文件"选项卡，点击或拖拽图片到上传区域。支持JPG、PNG、WebP、GIF、BMP、SVG格式，最多20张。
-                                </li>
-                            </ul>
-                            <h4>二、输出设置</h4>
-                            <ul>
-                                <li><strong>输出格式：</strong>选择输出图片格式，包括JPG、PNG、WebP、GIF、BMP、ICO、Base64编码。</li>
-                                <li><strong>输出分辨率：</strong>仅对SVG有效，可选1024x1024、2048x2048、4096x4096、8192x8192。</li>
-                                <li><strong>图片质量：</strong>拖动滑块调整图片质量（1%-100%），质量越高文件越大。</li>
-                                <li><strong>文件名：</strong>设置下载时的文件名。</li>
-                            </ul>
-                            <h4>三、执行转换</h4>
-                            <ul>
-                                <li><strong>点击转换：</strong>点击"转换"按钮执行格式转换。</li>
-                                <li><strong>实时预览：</strong>转换后可预览结果图片或Base64编码。</li>
-                                <li><strong>下载单张：</strong>点击"下载"按钮保存当前转换结果。</li>
-                                <li><strong>批量下载：</strong>点击"批量下载"按钮打包下载所有转换结果。</li>
-                            </ul>
-                            <h4>四、格式说明</h4>
-                            <ul>
-                                <li><strong>JPG：</strong>有损压缩格式，适合照片，不支持透明。</li>
-                                <li><strong>PNG：</strong>无损压缩格式，支持透明通道，推荐用于SVG转换。</li>
-                                <li><strong>WebP：</strong>现代高效格式，支持透明和动画，文件体积小。</li>
-                                <li><strong>GIF：</strong>支持动画，颜色有限（256色）。</li>
-                                <li><strong>BMP：</strong>无压缩位图格式，文件较大。</li>
-                                <li><strong>ICO：</strong>Windows图标格式，支持多种尺寸。</li>
-                                <li><strong>Base64：</strong>将图片编码为字符串，适合嵌入网页。</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3>注意事项</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4>一、数据安全</h4>
-                            <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
-                                <li>建议在处理敏感图片时使用隐私模式浏览。</li>
-                            </ul>
-                            <h4>二、格式限制</h4>
-                            <ul>
-                                <li>SVG转换为位图时，建议选择PNG格式以保留透明效果。</li>
-                                <li>JPG格式不支持透明通道，转换后透明区域会变为黑色或白色。</li>
-                                <li>ICO格式输出为标准图标格式，尺寸较小。</li>
-                                <li>Base64编码会使文件体积增大约33%。</li>
-                            </ul>
-                            <h4>三、SVG转换</h4>
-                            <ul>
-                                <li>SVG代码需要包含完整的xmlns命名空间声明。</li>
-                                <li>复杂SVG可能需要较长时间转换。</li>
-                                <li>高分辨率输出会占用更多内存，建议根据需求选择合适的分辨率。</li>
-                            </ul>
-                            <h4>四、批量处理</h4>
-                            <ul>
-                                <li>批量处理最多支持20张图片。</li>
-                                <li>批量上传时，设置会应用到所有图片。</li>
-                                <li>处理期间不要关闭浏览器或刷新页面。</li>
-                            </ul>
-                            <h4>五、常见问题</h4>
-                            <ul>
-                                <li><strong>转换失败：</strong>检查输入格式是否正确，SVG代码是否完整。</li>
-                                <li><strong>透明消失：</strong>确保输出格式选择PNG或WebP。</li>
-                                <li><strong>图片模糊：</strong>增大图片质量或选择更高分辨率。</li>
-                                <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
+                <article class="info-details">
+                    <header>
+                        <h3 data-i18n="image.convert.infoUsage">使用说明</h3>
+                    </header>
+                    <div class="info-content">
+                        <h4 data-i18n="image.convert.usageInputTitle">一、输入方式</h4>
+                        <ul>
+                            <li data-i18n="image.convert.usageBase64">
+                                <strong>Base64输入：</strong>选择"Base64"选项卡，粘贴Base64编码的图片代码。可以包含或不包含前缀data:image/xxx;base64,。
+                            </li>
+                            <li data-i18n="image.convert.usageSvg"><strong>SVG输入：</strong>选择"SVG"选项卡，粘贴完整的SVG
+                                XML代码，需要包含svg、line、text、circle等标签及其内容。
+                            </li>
+                            <li data-i18n="image.convert.usageUpload">
+                                <strong>文件上传：</strong>选择"上传文件"选项卡，点击或拖拽图片到上传区域。支持JPG、PNG、WebP、GIF、BMP、SVG格式，最多20张。
+                            </li>
+                        </ul>
+                        <h4 data-i18n="image.convert.usageOutputTitle">二、输出设置</h4>
+                        <ul>
+                            <li data-i18n="image.convert.usageOutputFormat">
+                                <strong>输出格式：</strong>选择输出图片格式，包括JPG、PNG、WebP、GIF、BMP、ICO、Base64编码。
+                            </li>
+                            <li data-i18n="image.convert.usageResolution">
+                                <strong>输出分辨率：</strong>仅对SVG有效，可选1024x1024、2048x2048、4096x4096、8192x8192。
+                            </li>
+                            <li data-i18n="image.convert.usageQuality">
+                                <strong>图片质量：</strong>拖动滑块调整图片质量（1%-100%），质量越高文件越大。
+                            </li>
+                            <li data-i18n="image.convert.usageFilename"><strong>文件名：</strong>设置下载时的文件名。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.usageConvertTitle">三、执行转换</h4>
+                        <ul>
+                            <li data-i18n="image.convert.usageConvertClick"><strong>点击转换：</strong>点击"转换"按钮执行格式转换。</li>
+                            <li data-i18n="image.convert.usagePreview"><strong>实时预览：</strong>转换后可预览结果图片或Base64编码。</li>
+                            <li data-i18n="image.convert.usageDownloadOne"><strong>下载单张：</strong>点击"下载"按钮保存当前转换结果。</li>
+                            <li data-i18n="image.convert.usageDownloadAll"><strong>批量下载：</strong>点击"批量下载"按钮打包下载所有转换结果。
+                            </li>
+                        </ul>
+                        <h4 data-i18n="image.convert.usageFormatsTitle">四、格式说明</h4>
+                        <ul>
+                            <li data-i18n="image.convert.formatDescJpg"><strong>JPG：</strong>有损压缩格式，适合照片，不支持透明。</li>
+                            <li data-i18n="image.convert.formatDescPng"><strong>PNG：</strong>无损压缩格式，支持透明通道，推荐用于SVG转换。
+                            </li>
+                            <li data-i18n="image.convert.formatDescWebp"><strong>WebP：</strong>现代高效格式，支持透明和动画，文件体积小。
+                            </li>
+                            <li data-i18n="image.convert.formatDescGif"><strong>GIF：</strong>支持动画，颜色有限（256色）。</li>
+                            <li data-i18n="image.convert.formatDescBmp"><strong>BMP：</strong>无压缩位图格式，文件较大。</li>
+                            <li data-i18n="image.convert.formatDescIco"><strong>ICO：</strong>Windows图标格式，支持多种尺寸。</li>
+                            <li data-i18n="image.convert.formatDescBase64"><strong>Base64：</strong>将图片编码为字符串，适合嵌入网页。
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="info-details">
+                    <header>
+                        <h3 data-i18n="image.convert.infoNotes">注意事项</h3>
+                    </header>
+                    <div class="info-content">
+                        <h4 data-i18n="image.convert.notesSecurityTitle">一、数据安全</h4>
+                        <ul>
+                            <li data-i18n="image.convert.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li data-i18n="image.convert.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                            <li data-i18n="image.convert.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.notesFormatTitle">二、格式限制</h4>
+                        <ul>
+                            <li data-i18n="image.convert.noteFormat1">SVG转换为位图时，建议选择PNG格式以保留透明效果。</li>
+                            <li data-i18n="image.convert.noteFormat2">JPG格式不支持透明通道，转换后透明区域会变为黑色或白色。</li>
+                            <li data-i18n="image.convert.noteFormat3">ICO格式输出为标准图标格式，尺寸较小。</li>
+                            <li data-i18n="image.convert.noteFormat4">Base64编码会使文件体积增大约33%。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.notesSvgTitle">三、SVG转换</h4>
+                        <ul>
+                            <li data-i18n="image.convert.noteSvg1">SVG代码需要包含完整的xmlns命名空间声明。</li>
+                            <li data-i18n="image.convert.noteSvg2">复杂SVG可能需要较长时间转换。</li>
+                            <li data-i18n="image.convert.noteSvg3">高分辨率输出会占用更多内存，建议根据需求选择合适的分辨率。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.notesBatchTitle">四、批量处理</h4>
+                        <ul>
+                            <li data-i18n="image.convert.noteBatch1">批量处理最多支持20张图片。</li>
+                            <li data-i18n="image.convert.noteBatch2">批量上传时，设置会应用到所有图片。</li>
+                            <li data-i18n="image.convert.noteBatch3">处理期间不要关闭浏览器或刷新页面。</li>
+                        </ul>
+                        <h4 data-i18n="image.convert.notesFaqTitle">五、常见问题</h4>
+                        <ul>
+                            <li data-i18n="image.convert.noteFaq1"><strong>转换失败：</strong>检查输入格式是否正确，SVG代码是否完整。</li>
+                            <li data-i18n="image.convert.noteFaq2"><strong>透明消失：</strong>确保输出格式选择PNG或WebP。</li>
+                            <li data-i18n="image.convert.noteFaq3"><strong>图片模糊：</strong>增大图片质量或选择更高分辨率。</li>
+                            <li data-i18n="image.convert.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
 
             <!-- Footer component container -->
             <div id="footer-container">
-            <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
-                <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
-                </p>
-            </footer>
-        </div>
+                <footer class="footer">
+                    <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                    <p>
+                        <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                                class="fas fa-lock"></i> 隐私政策</a> |
+                        <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                                class="fas fa-file-contract"></i> 服务条款</a> |
+                        <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                                class="fas fa-user"></i> 关于我们</a> |
+                        <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                                class="fas fa-envelope"></i> 联系我们</a>
+                    </p>
+                </footer>
+            </div>
         </main>
 
 
@@ -441,6 +502,7 @@
 
     </main>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <!-- 引用JSZip库用于批量下载 -->

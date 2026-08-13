@@ -10,6 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>视频编辑 - 免费在线视频旋转模糊处理工具</title>
+    <meta property="og:title" content="视频编辑 - 免费在线视频旋转模糊处理工具">
+    <meta property="og:description" content="视频编辑在线免费工具，支持视频旋转、翻转、模糊处理，纯前端处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/video/edit/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="视频编辑 - 免费在线视频旋转模糊处理工具">
+    <meta name="twitter:description" content="视频编辑在线免费工具，支持视频旋转、翻转、模糊处理，纯前端处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/video/edit/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/video/edit/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/video/edit/">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
@@ -17,6 +32,7 @@
     <script src="../lib/ffmpeg.js"></script>
     <script src="../common/ffmpeg-parallel.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -26,13 +42,13 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "视频编辑工具",
-        "description": "免费在线视频编辑工具，支持视频旋转、模糊处理。纯前端处理，保护用户隐私数据。",
+        "description": "免费在线视频编辑工具，支持视频旋转、模糊处理。纯前端处理，保护用户隐私数据。Free online video editor supporting rotation and blur effects.",
         "url": "https://helpoke.com/video/edit",
         "applicationCategory": "https://schema.org/VideoEditing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
-            "支持视频旋转（90度、180度、270度、水平翻转、垂直翻转）",
-            "支持视频模糊处理",
+            "支持视频旋转（90度、180度、270度、水平翻转、垂直翻转） (Video rotation)",
+            "支持视频模糊处理 (Video blur)",
             "纯前端处理，视频不上传服务器",
             "实时预览效果",
             "一键下载编辑后的视频"
@@ -58,14 +74,16 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>视频编辑器</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>视频编辑器，支持视频旋转（90/180/270度）、水平/垂直翻转和模糊处理，可自定义模糊类型和强度</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="video.edit.title">视频编辑器</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="video.edit.intro">视频编辑器，支持视频旋转（90/180/270度）、水平/垂直翻转和模糊处理，可自定义模糊类型和强度</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description">
+            <p class="description" data-i18n="video.edit.note">
                 <b>注意：</b> 最大支持200MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
             </p>
 
@@ -73,14 +91,14 @@
                 <label for="videoUpload" class="upload-area">
                     <input type="file" id="videoUpload" accept="video/*" hidden>
                     <div class="upload-icon">🎬</div>
-                    <div class="upload-text">点击上传或拖拽视频到此处</div>
-                    <div class="upload-hint">支持 MP4, WebM, AVI, MOV, MKV 等常见视频格式</div>
+                    <div class="upload-text" data-i18n="video.edit.uploadText">点击上传或拖拽视频到此处</div>
+                    <div class="upload-hint" data-i18n="video.edit.uploadHint">支持 MP4, WebM, AVI, MOV, MKV 等常见视频格式</div>
                 </label>
             </div>
 
             <div class="preview-section" id="previewSection" style="display: none;">
                 <div class="video-info" id="videoInfo">
-                    <p>请上传视频文件</p>
+                    <p data-i18n="video.edit.uploadPrompt">请上传视频文件</p>
                 </div>
                 <div class="video-container">
                     <video id="videoPlayer" controls></video>
@@ -88,79 +106,81 @@
             </div>
 
             <div class="settings-section" id="settingsSection" style="display: none;">
-                <h3>旋转设置</h3>
+                <h3 data-i18n="video.edit.rotationSettings">旋转设置</h3>
                 <div class="setting-row">
                     <div class="input-group">
-                        <label for="rotation">旋转角度：</label>
+                        <label for="rotation" data-i18n="video.edit.rotationAngle">旋转角度：</label>
                         <select id="rotation">
-                            <option value="0">不旋转</option>
-                            <option value="90">顺时针旋转 90°</option>
-                            <option value="180">旋转 180°</option>
-                            <option value="270">顺时针旋转 270° (逆时针90°)</option>
+                            <option value="0" data-i18n="video.edit.rotationNone">不旋转</option>
+                            <option value="90" data-i18n="video.edit.rotation90">顺时针旋转 90°</option>
+                            <option value="180" data-i18n="video.edit.rotation180">旋转 180°</option>
+                            <option value="270" data-i18n="video.edit.rotation270">顺时针旋转 270° (逆时针90°)</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="flipH">水平翻转：</label>
+                        <label for="flipH" data-i18n="video.edit.flipH">水平翻转：</label>
                         <select id="flipH">
-                            <option value="0">不翻转</option>
-                            <option value="1">水平翻转</option>
+                            <option value="0" data-i18n="video.edit.flipNone">不翻转</option>
+                            <option value="1" data-i18n="video.edit.flipHorizontal">水平翻转</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="flipV">垂直翻转：</label>
+                        <label for="flipV" data-i18n="video.edit.flipV">垂直翻转：</label>
                         <select id="flipV">
-                            <option value="0">不翻转</option>
-                            <option value="1">垂直翻转</option>
+                            <option value="0" data-i18n="video.edit.flipNone">不翻转</option>
+                            <option value="1" data-i18n="video.edit.flipVertical">垂直翻转</option>
                         </select>
                     </div>
                 </div>
 
-                <h3>模糊设置</h3>
+                <h3 data-i18n="video.edit.blurSettings">模糊设置</h3>
                 <div class="setting-row">
                     <div class="input-group">
-                        <label for="blurEnable">启用模糊：</label>
+                        <label for="blurEnable" data-i18n="video.edit.blurEnable">启用模糊：</label>
                         <select id="blurEnable">
-                            <option value="0">不模糊</option>
-                            <option value="1">模糊处理</option>
+                            <option value="0" data-i18n="video.edit.blurNone">不模糊</option>
+                            <option value="1" data-i18n="video.edit.blurProcess">模糊处理</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="blurType">模糊类型：</label>
+                        <label for="blurType" data-i18n="video.edit.blurType">模糊类型：</label>
                         <select id="blurType">
-                            <option value="boxblur">方框模糊</option>
-                            <option value="gaussian">高斯模糊</option>
+                            <option value="boxblur" data-i18n="video.edit.blurTypeBox">方框模糊</option>
+                            <option value="gaussian" data-i18n="video.edit.blurTypeGaussian">高斯模糊</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="blurRadius">模糊强度：</label>
+                        <label for="blurRadius" data-i18n="video.edit.blurRadius">模糊强度：</label>
                         <select id="blurRadius">
-                            <option value="3">轻度 (3)</option>
-                            <option value="5" selected>中度 (5)</option>
-                            <option value="10">重度 (10)</option>
-                            <option value="15">极重度 (15)</option>
+                            <option value="3" data-i18n="video.edit.blurLight">轻度 (3)</option>
+                            <option value="5" selected data-i18n="video.edit.blurMedium">中度 (5)</option>
+                            <option value="10" data-i18n="video.edit.blurHeavy">重度 (10)</option>
+                            <option value="15" data-i18n="video.edit.blurExtreme">极重度 (15)</option>
                         </select>
                     </div>
                 </div>
 
-                <h3>时间范围设置</h3>
+                <h3 data-i18n="video.edit.timeRangeSettings">时间范围设置</h3>
                 <div class="setting-row">
                     <div class="input-group">
-                        <label for="startTime">开始时间（秒）：</label>
+                        <label for="startTime" data-i18n="video.edit.startTime">开始时间（秒）：</label>
                         <input type="number" id="startTime" min="0" step="0.1" value="0" placeholder="0">
                     </div>
                     <div class="input-group">
-                        <label for="duration">持续时间（秒）：</label>
-                        <input type="number" id="duration" min="0" step="0.1" placeholder="留空表示应用到结束">
+                        <label for="duration" data-i18n="video.edit.duration">持续时间（秒）：</label>
+                        <input type="number" id="duration" min="0" step="0.1"
+                            data-i18n-placeholder="video.edit.durationPlaceholder" placeholder="留空表示应用到结束">
                     </div>
                 </div>
-                <p class="description" style="font-size: 14px; color: #666; margin-top: 10px;">
+                <p class="description" style="font-size: 14px; color: #666; margin-top: 10px;"
+                    data-i18n="video.edit.timeRangeNote">
                     * 效果仅在指定时间段内应用，该时段外视频保持原样。输出视频时长与原视频保持一致。
                 </p>
 
                 <div class="action-buttons">
                     <button id="processBtn" disabled>
-                        <span id="processBtnText">开始处理</span>
-                        <span id="processBtnLoading" style="display: none;">处理中...</span>
+                        <span id="processBtnText" data-i18n="video.edit.processBtn">开始处理</span>
+                        <span id="processBtnLoading" style="display: none;" data-i18n="video.edit.processing">处理中...</span>
                     </button>
                     <div class="progress-container" id="progressContainer" style="display: none;">
                         <div class="progress-bar" id="progressBar"></div>
@@ -171,140 +191,140 @@
             </div>
 
             <div class="output-section" id="outputSection" style="display: none;">
-                <h2>处理结果</h2>
+                <h2 data-i18n="video.edit.resultTitle">处理结果</h2>
                 <div class="result-info" id="resultInfo"></div>
                 <div class="result-container">
                     <video id="outputVideo" controls></video>
                 </div>
                 <div class="download-buttons">
-                    <button id="downloadBtn">下载处理后视频</button>
+                    <button id="downloadBtn" data-i18n="video.edit.downloadBtn">下载处理后视频</button>
                 </div>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>工具介绍</h3>
+                        <h3 data-i18n="video.edit.infoIntro">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、解决的问题</h4>
+                        <h4 data-i18n="video.edit.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li>在线视频处理，支持旋转（90/180/270°）、翻转和模糊处理。</li>
-                            <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li>无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="video.edit.problem1">在线视频处理，支持旋转（90/180/270°）、翻转和模糊处理。</li>
+                            <li data-i18n="video.edit.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="video.edit.problem3">无需安装专业软件，随时随地在线使用。</li>
                         </ul>
-                        <h4>二、支持的格式</h4>
+                        <h4 data-i18n="video.edit.formatTitle">二、支持的格式</h4>
                         <ul>
-                            <li><strong>MP4：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>AVI：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>MOV：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.edit.formatMp4"><strong>MP4：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.edit.formatAvi"><strong>AVI：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.edit.formatMov"><strong>MOV：</strong>支持该格式的完整处理功能。</li>
                         </ul>
-                        <h4>三、核心功能</h4>
+                        <h4 data-i18n="video.edit.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="video.edit.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="video.edit.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="video.edit.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="video.edit.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>使用说明</h3>
+                        <h3 data-i18n="video.edit.infoUsage">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、上传视频</h4>
+                        <h4 data-i18n="video.edit.usageUploadTitle">一、上传视频</h4>
                         <ul>
-                            <li><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
-                            <li><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
-                            <li><strong>文件大小：</strong>建议单个视频文件不超过 200MB。</li>
-                            <li><strong>预览视频：</strong>上传后可预览视频内容。</li>
+                            <li data-i18n="video.edit.usageUpload1"><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
+                            <li data-i18n="video.edit.usageUpload2"><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
+                            <li data-i18n="video.edit.usageUpload3"><strong>文件大小：</strong>建议单个视频文件不超过 200MB。</li>
+                            <li data-i18n="video.edit.usageUpload4"><strong>预览视频：</strong>上传后可预览视频内容。</li>
                         </ul>
-                        <h4>二、选择编辑模式</h4>
+                        <h4 data-i18n="video.edit.usageModeTitle">二、选择编辑模式</h4>
                         <ul>
-                            <li><strong>旋转模式：</strong>支持90度、180度、270度旋转，以及水平翻转、垂直翻转。</li>
-                            <li><strong>模糊模式：</strong>对视频进行模糊处理，可调整模糊强度。</li>
+                            <li data-i18n="video.edit.usageMode1"><strong>旋转模式：</strong>支持90度、180度、270度旋转，以及水平翻转、垂直翻转。</li>
+                            <li data-i18n="video.edit.usageMode2"><strong>模糊模式：</strong>对视频进行模糊处理，可调整模糊强度。</li>
                         </ul>
-                        <h4>三、设置旋转参数</h4>
+                        <h4 data-i18n="video.edit.usageRotationTitle">三、设置旋转参数</h4>
                         <ul>
-                            <li><strong>旋转角度：</strong>选择旋转角度（90°/180°/270°）。</li>
-                            <li><strong>翻转方式：</strong>选择水平翻转或垂直翻转。</li>
-                            <li><strong>应用范围：</strong>可设置仅对指定时间段应用旋转效果。</li>
+                            <li data-i18n="video.edit.usageRotation1"><strong>旋转角度：</strong>选择旋转角度（90°/180°/270°）。</li>
+                            <li data-i18n="video.edit.usageRotation2"><strong>翻转方式：</strong>选择水平翻转或垂直翻转。</li>
+                            <li data-i18n="video.edit.usageRotation3"><strong>应用范围：</strong>可设置仅对指定时间段应用旋转效果。</li>
                         </ul>
-                        <h4>四、设置模糊参数</h4>
+                        <h4 data-i18n="video.edit.usageBlurTitle">四、设置模糊参数</h4>
                         <ul>
-                            <li><strong>模糊强度：</strong>选择模糊等级（低/中/高），强度越高画面越模糊。</li>
-                            <li><strong>应用范围：</strong>可设置仅对指定时间段应用模糊效果。</li>
+                            <li data-i18n="video.edit.usageBlur1"><strong>模糊强度：</strong>选择模糊等级（低/中/高），强度越高画面越模糊。</li>
+                            <li data-i18n="video.edit.usageBlur2"><strong>应用范围：</strong>可设置仅对指定时间段应用模糊效果。</li>
                         </ul>
-                        <h4>五、设置时间范围</h4>
+                        <h4 data-i18n="video.edit.usageTimeTitle">五、设置时间范围</h4>
                         <ul>
-                            <li><strong>开始时间：</strong>设置效果开始的时间点（秒）。</li>
-                            <li><strong>持续时间：</strong>设置效果持续时间（秒），留空表示应用到视频结束。</li>
-                            <li><strong>范围外保持：</strong>指定时段外视频保持原样，输出视频时长不变。</li>
+                            <li data-i18n="video.edit.usageTime1"><strong>开始时间：</strong>设置效果开始的时间点（秒）。</li>
+                            <li data-i18n="video.edit.usageTime2"><strong>持续时间：</strong>设置效果持续时间（秒），留空表示应用到视频结束。</li>
+                            <li data-i18n="video.edit.usageTime3"><strong>范围外保持：</strong>指定时段外视频保持原样，输出视频时长不变。</li>
                         </ul>
-                        <h4>六、开始处理</h4>
+                        <h4 data-i18n="video.edit.usageProcessTitle">六、开始处理</h4>
                         <ul>
-                            <li><strong>点击处理：</strong>点击"开始处理"按钮开始编辑。</li>
-                            <li><strong>进度显示：</strong>实时显示处理进度。</li>
-                            <li><strong>等待时间：</strong>处理时间取决于视频长度和参数设置。</li>
+                            <li data-i18n="video.edit.usageProcess1"><strong>点击处理：</strong>点击"开始处理"按钮开始编辑。</li>
+                            <li data-i18n="video.edit.usageProcess2"><strong>进度显示：</strong>实时显示处理进度。</li>
+                            <li data-i18n="video.edit.usageProcess3"><strong>等待时间：</strong>处理时间取决于视频长度和参数设置。</li>
                         </ul>
-                        <h4>七、查看和下载</h4>
+                        <h4 data-i18n="video.edit.usageDownloadTitle">七、查看和下载</h4>
                         <ul>
-                            <li><strong>预览效果：</strong>处理完成后可预览编辑后的视频。</li>
-                            <li><strong>查看信息：</strong>显示处理后的文件大小等信息。</li>
-                            <li><strong>一键下载：</strong>点击"下载处理后视频"按钮保存到本地。</li>
+                            <li data-i18n="video.edit.usageDownload1"><strong>预览效果：</strong>处理完成后可预览编辑后的视频。</li>
+                            <li data-i18n="video.edit.usageDownload2"><strong>查看信息：</strong>显示处理后的文件大小等信息。</li>
+                            <li data-i18n="video.edit.usageDownload3"><strong>一键下载：</strong>点击"下载处理后视频"按钮保存到本地。</li>
                         </ul>
-                        <h4>八、适用场景</h4>
+                        <h4 data-i18n="video.edit.usageSceneTitle">八、适用场景</h4>
                         <ul>
-                            <li><strong>纠正方向：</strong>旋转拍摄方向错误的视频。</li>
-                            <li><strong>保护隐私：</strong>模糊视频中敏感信息。</li>
-                            <li><strong>创意效果：</strong>制作翻转或模糊的特殊效果。</li>
-                            <li><strong>局部处理：</strong>仅对视频特定时间段应用效果。</li>
+                            <li data-i18n="video.edit.usageScene1"><strong>纠正方向：</strong>旋转拍摄方向错误的视频。</li>
+                            <li data-i18n="video.edit.usageScene2"><strong>保护隐私：</strong>模糊视频中敏感信息。</li>
+                            <li data-i18n="video.edit.usageScene3"><strong>创意效果：</strong>制作翻转或模糊的特殊效果。</li>
+                            <li data-i18n="video.edit.usageScene4"><strong>局部处理：</strong>仅对视频特定时间段应用效果。</li>
                         </ul>
                     </div>
                 </article>
                 <article class="info-details">
                     <header>
-                        <h3>注意事项</h3>
+                        <h3 data-i18n="video.edit.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、数据安全</h4>
+                        <h4 data-i18n="video.edit.notesSecurityTitle">一、数据安全</h4>
                         <ul>
-                            <li>所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
-                            <li>视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                            <li>建议在处理敏感视频时使用隐私模式浏览。</li>
+                            <li data-i18n="video.edit.noteSecurity1">所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
+                            <li data-i18n="video.edit.noteSecurity2">视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                            <li data-i18n="video.edit.noteSecurity3">建议在处理敏感视频时使用隐私模式浏览。</li>
                         </ul>
-                        <h4>二、处理性能</h4>
+                        <h4 data-i18n="video.edit.notesPerfTitle">二、处理性能</h4>
                         <ul>
-                            <li>视频编辑是计算密集型操作，会占用较多CPU资源。</li>
-                            <li>处理时间取决于视频时长和电脑性能。</li>
-                            <li>建议在处理大文件时关闭其他占用CPU的程序。</li>
+                            <li data-i18n="video.edit.notePerf1">视频编辑是计算密集型操作，会占用较多CPU资源。</li>
+                            <li data-i18n="video.edit.notePerf2">处理时间取决于视频时长和电脑性能。</li>
+                            <li data-i18n="video.edit.notePerf3">建议在处理大文件时关闭其他占用CPU的程序。</li>
                         </ul>
-                        <h4>三、格式限制</h4>
+                        <h4 data-i18n="video.edit.notesFormatTitle">三、格式限制</h4>
                         <ul>
-                            <li>支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
-                            <li>不支持的格式可能无法正常处理。</li>
-                            <li>输出格式默认为MP4，兼容性最好。</li>
+                            <li data-i18n="video.edit.noteFormat1">支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
+                            <li data-i18n="video.edit.noteFormat2">不支持的格式可能无法正常处理。</li>
+                            <li data-i18n="video.edit.noteFormat3">输出格式默认为MP4，兼容性最好。</li>
                         </ul>
-                        <h4>四、质量损失</h4>
+                        <h4 data-i18n="video.edit.notesQualityTitle">四、质量损失</h4>
                         <ul>
-                            <li>视频重新编码会导致一定的画质损失。</li>
-                            <li>模糊处理是不可逆的，处理后无法恢复原始清晰度。</li>
-                            <li>建议处理前备份原始视频文件。</li>
+                            <li data-i18n="video.edit.noteQuality1">视频重新编码会导致一定的画质损失。</li>
+                            <li data-i18n="video.edit.noteQuality2">模糊处理是不可逆的，处理后无法恢复原始清晰度。</li>
+                            <li data-i18n="video.edit.noteQuality3">建议处理前备份原始视频文件。</li>
                         </ul>
-                        <h4>五、时间范围</h4>
+                        <h4 data-i18n="video.edit.notesTimeTitle">五、时间范围</h4>
                         <ul>
-                            <li>时间范围设置仅影响效果应用，不改变视频总时长。</li>
-                            <li>超出视频时长的时间设置会被自动忽略。</li>
-                            <li>建议先预览视频确定需要处理的时间点。</li>
+                            <li data-i18n="video.edit.noteTime1">时间范围设置仅影响效果应用，不改变视频总时长。</li>
+                            <li data-i18n="video.edit.noteTime2">超出视频时长的时间设置会被自动忽略。</li>
+                            <li data-i18n="video.edit.noteTime3">建议先预览视频确定需要处理的时间点。</li>
                         </ul>
-                        <h4>六、常见问题</h4>
+                        <h4 data-i18n="video.edit.notesFaqTitle">六、常见问题</h4>
                         <ul>
-                            <li><strong>处理失败：</strong>检查视频文件是否损坏或格式不支持。</li>
-                            <li><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
-                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li><strong>效果异常：</strong>检查时间范围设置是否正确。</li>
+                            <li data-i18n="video.edit.noteFaq1"><strong>处理失败：</strong>检查视频文件是否损坏或格式不支持。</li>
+                            <li data-i18n="video.edit.noteFaq2"><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
+                            <li data-i18n="video.edit.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="video.edit.noteFaq4"><strong>效果异常：</strong>检查时间范围设置是否正确。</li>
                         </ul>
                     </div>
                 </article>
@@ -313,18 +333,23 @@
 
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

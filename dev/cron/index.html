@@ -10,6 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>Cron表达式解析工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="Cron表达式解析工具 - Helpoke 助点站">
+    <meta property="og:description" content="Cron表达式在线解析工具, Cron定时任务可视化, 支持最近执行时间预测, 免费Cron解析器">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/cron/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cron表达式解析工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="Cron表达式在线解析工具, Cron定时任务可视化, 支持最近执行时间预测, 免费Cron解析器">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/cron/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/cron/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/cron/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -31,9 +46,9 @@
         "description": "Cron表达式在线解析工具，支持定时任务可视化和最近执行时间预测。免费Cron解析器。Online Cron expression parser with execution time prediction.",
         "url": "https://helpoke.com/dev/cron",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
-            "Cron表达式解析",
+            "Cron表达式解析 (Cron expression parser)",
             "定时任务可视化",
             "最近执行时间预测",
             "支持多种Cron格式",
@@ -54,6 +69,7 @@
         }
     }
     </script>
+    <script src="../../common/js/i18n/i18n.js"></script>
 </head>
 
 <body>
@@ -62,36 +78,40 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>Cron表达式解析工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>Cron表达式解析工具，支持5位和6位格式，提供表达式解析、生成和执行时间预测功能，支持中文描述</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="dev.cron.title">Cron表达式解析工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.cron.intro">Cron表达式解析工具，支持5位和6位格式，提供表达式解析、生成和执行时间预测功能，支持中文描述</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <!-- Tab 切换 -->
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="parse">解析 Cron</button>
-                    <button class="tab-btn" data-tab="generate">生成 Cron</button>
+                    <button class="tab-btn active" data-tab="parse" data-i18n="dev.cron.tabParse">解析 Cron</button>
+                    <button class="tab-btn" data-tab="generate" data-i18n="dev.cron.tabGenerate">生成 Cron</button>
                 </div>
 
                 <!-- 格式切换 -->
                 <div class="format-switch">
-                    <label>格式:</label>
-                    <button class="format-btn active" data-format="5">5位（不含秒）</button>
-                    <button class="format-btn" data-format="6">6位（含秒）</button>
+                    <label data-i18n="dev.cron.formatLabel">格式:</label>
+                    <button class="format-btn active" data-format="5" data-i18n="dev.cron.format5">5位（不含秒）</button>
+                    <button class="format-btn" data-format="6" data-i18n="dev.cron.format6">6位（含秒）</button>
                 </div>
 
                 <!-- ========== 解析 Tab ========== -->
                 <div class="tab-panel active" id="tab-parse">
                     <div class="input-group">
-                        <label for="cron-input">输入 Cron 表达式</label>
+                        <label for="cron-input" data-i18n="dev.cron.inputLabel">输入 Cron 表达式</label>
                         <div class="input-row">
                             <input type="text" id="cron-input" placeholder="例如: */5 * * * *" value="*/5 * * * *"
-                                data-name="Cron表达式">
-                            <button class="btn" id="parse-btn">解析</button>
+                                data-name="Cron表达式" data-i18n-placeholder="dev.cron.inputPlaceholder">
+                            <button class="btn" id="parse-btn" data-i18n="dev.cron.parseBtn">解析</button>
                         </div>
                     </div>
 
@@ -104,155 +124,155 @@
                         每隔 <strong>5</strong> 分钟执行一次
                     </div>
 
-                    <div class="section-title">最近执行时间</div>
+                    <div class="section-title" data-i18n="dev.cron.scheduleTitle">最近执行时间</div>
                     <table class="schedule-table" id="schedule-table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>执行时间</th>
-                                <th>距离现在</th>
+                                <th data-i18n="dev.cron.thExecTime">执行时间</th>
+                                <th data-i18n="dev.cron.thFromNow">距离现在</th>
                             </tr>
                         </thead>
                         <tbody id="schedule-body"></tbody>
                     </table>
 
-                    <div class="section-title">常见预设表达式</div>
+                    <div class="section-title" data-i18n="dev.cron.presetsTitle">常见预设表达式</div>
                     <div class="presets-grid">
                         <button class="preset-btn" data-preset="* * * * *">
-                            <div class="preset-name">每分钟</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryMinute">每分钟</div>
                             <div class="preset-cron">* * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="*/5 * * * *">
-                            <div class="preset-name">每 5 分钟</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery5Minutes">每 5 分钟</div>
                             <div class="preset-cron">*/5 * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="*/10 * * * *">
-                            <div class="preset-name">每 10 分钟</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery10Minutes">每 10 分钟</div>
                             <div class="preset-cron">*/10 * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="*/30 * * * *">
-                            <div class="preset-name">每 30 分钟</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery30Minutes">每 30 分钟</div>
                             <div class="preset-cron">*/30 * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 * * * *">
-                            <div class="preset-name">每小时</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryHour">每小时</div>
                             <div class="preset-cron">0 * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 */2 * * *">
-                            <div class="preset-name">每 2 小时</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery2Hours">每 2 小时</div>
                             <div class="preset-cron">0 */2 * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 * * *">
-                            <div class="preset-name">每天午夜</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetMidnight">每天午夜</div>
                             <div class="preset-cron">0 0 * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 9 * * *">
-                            <div class="preset-name">每天早上 9 点</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryDay9am">每天早上 9 点</div>
                             <div class="preset-cron">0 9 * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 9-18 * * *">
-                            <div class="preset-name">每天 9-18 点</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryDay918">每天 9-18 点</div>
                             <div class="preset-cron">0 9-18 * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 * * 1">
-                            <div class="preset-name">每周一</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryMonday">每周一</div>
                             <div class="preset-cron">0 0 * * 1</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 * * 1-5">
-                            <div class="preset-name">工作日</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetWeekdays">工作日</div>
                             <div class="preset-cron">0 0 * * 1-5</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 * * 0">
-                            <div class="preset-name">每周日</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEverySunday">每周日</div>
                             <div class="preset-cron">0 0 * * 0</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 1 * *">
-                            <div class="preset-name">每月 1 号</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetFirstOfMonth">每月 1 号</div>
                             <div class="preset-cron">0 0 1 * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 1 1 *">
-                            <div class="preset-name">每年 1 月 1 日</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetJan1">每年 1 月 1 日</div>
                             <div class="preset-cron">0 0 1 1 *</div>
                         </button>
                         <button class="preset-btn" data-preset="30 8 * * *">
-                            <div class="preset-name">每天 8:30</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryDay830">每天 8:30</div>
                             <div class="preset-cron">30 8 * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 */6 * * *">
-                            <div class="preset-name">每 6 小时</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery6Hours">每 6 小时</div>
                             <div class="preset-cron">0 */6 * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="* * * * * *">
-                            <div class="preset-name">每秒</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEverySecond">每秒</div>
                             <div class="preset-cron">* * * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="*/5 * * * * *">
-                            <div class="preset-name">每 5 秒</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery5Seconds">每 5 秒</div>
                             <div class="preset-cron">*/5 * * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="*/10 * * * * *">
-                            <div class="preset-name">每 10 秒</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery10Seconds">每 10 秒</div>
                             <div class="preset-cron">*/10 * * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="*/30 * * * * *">
-                            <div class="preset-name">每 30 秒</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEvery30Seconds">每 30 秒</div>
                             <div class="preset-cron">*/30 * * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 * * * * *">
-                            <div class="preset-name">每分钟第 0 秒</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetSecond0">每分钟第 0 秒</div>
                             <div class="preset-cron">0 * * * * *</div>
                         </button>
                         <button class="preset-btn" data-preset="0 0 9 * * *">
-                            <div class="preset-name">每天 9:00:00</div>
+                            <div class="preset-name" data-i18n="dev.cron.presetEveryDay900">每天 9:00:00</div>
                             <div class="preset-cron">0 0 9 * * *</div>
                         </button>
                     </div>
 
                     <div class="collapsible">
                         <div class="collapsible-header" id="collapsible-header">
-                            <span>字段参考说明</span>
+                            <span data-i18n="dev.cron.fieldRefTitle">字段参考说明</span>
                             <span class="arrow">▶</span>
                         </div>
                         <div class="collapsible-body">
                             <table class="ref-table">
                                 <tr>
-                                    <th>位置</th>
-                                    <th>字段</th>
-                                    <th>取值范围</th>
-                                    <th>特殊字符</th>
+                                    <th data-i18n="dev.cron.thPosition">位置</th>
+                                    <th data-i18n="dev.cron.thField">字段</th>
+                                    <th data-i18n="dev.cron.thRange">取值范围</th>
+                                    <th data-i18n="dev.cron.thSpecialChars">特殊字符</th>
                                 </tr>
                                 <tr>
                                     <td>1</td>
-                                    <td>分钟</td>
+                                    <td data-i18n="dev.cron.fieldMinute">分钟</td>
                                     <td>0-59</td>
                                     <td>, - * /</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>小时</td>
+                                    <td data-i18n="dev.cron.fieldHour">小时</td>
                                     <td>0-23</td>
                                     <td>, - * /</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>日期</td>
+                                    <td data-i18n="dev.cron.fieldDay">日期</td>
                                     <td>1-31</td>
                                     <td>, - * ? / L W</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>月份</td>
+                                    <td data-i18n="dev.cron.fieldMonth">月份</td>
                                     <td>1-12</td>
                                     <td>, - * /</td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td>星期</td>
-                                    <td>0-6（0=周日）</td>
+                                    <td data-i18n="dev.cron.fieldWeekday">星期</td>
+                                    <td data-i18n="dev.cron.fieldWeekdayRange">0-6（0=周日）</td>
                                     <td>, - * ? / L #</td>
                                 </tr>
                             </table>
-                            <p style="font-size:13px;color:#666;margin-top:8px;">
+                            <p style="font-size:13px;color:#666;margin-top:8px;" data-i18n="dev.cron.specialCharLegend">
                                 <strong>*</strong> 任意值 &nbsp;
                                 <strong>,</strong> 枚举 &nbsp;
                                 <strong>-</strong> 范围 &nbsp;
@@ -266,7 +286,8 @@
                     </div>
 
                     <div class="result-actions">
-                        <button class="btn copy-btn" id="copy-cron-btn">复制 Cron 表达式</button>
+                        <button class="btn copy-btn" id="copy-cron-btn" data-i18n="dev.cron.copyCronBtn">复制 Cron
+                            表达式</button>
                     </div>
                 </div>
 
@@ -275,24 +296,26 @@
 
                     <!-- 秒 -->
                     <div class="gen-section" id="gen-second">
-                        <div class="gen-section-title">秒 <span class="badge">0-59</span></div>
+                        <div class="gen-section-title" data-i18n="dev.cron.genSecondTitle">秒 <span class="badge">0-59</span>
+                        </div>
                         <div class="gen-mode-row" data-field="second">
-                            <button class="gen-mode-btn active" data-mode="every">每秒</button>
-                            <button class="gen-mode-btn" data-mode="step">每隔 N 秒</button>
-                            <button class="gen-mode-btn" data-mode="range">范围选择</button>
-                            <button class="gen-mode-btn" data-mode="specific">指定值</button>
+                            <button class="gen-mode-btn active" data-mode="every"
+                                data-i18n="dev.cron.genSecondEvery">每秒</button>
+                            <button class="gen-mode-btn" data-mode="step" data-i18n="dev.cron.genSecondStep">每隔 N 秒</button>
+                            <button class="gen-mode-btn" data-mode="range" data-i18n="dev.cron.genRange">范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific" data-i18n="dev.cron.genSpecific">指定值</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-step-row" style="display:none">
-                                <label>每隔</label>
+                                <label data-i18n="dev.cron.genEvery">每隔</label>
                                 <input type="number" min="1" max="59" value="5">
-                                <span>秒</span>
+                                <span data-i18n="dev.cron.genUnitSecond">秒</span>
                             </div>
                             <div class="gen-range-row" style="display:none">
-                                <label>从</label>
+                                <label data-i18n="dev.cron.genFrom">从</label>
                                 <input type="number" min="0" max="59" value="0"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
-                                <span>到</span>
+                                <span data-i18n="dev.cron.genTo">到</span>
                                 <input type="number" min="0" max="59" value="30"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                             </div>
@@ -304,24 +327,27 @@
 
                     <!-- 分钟 -->
                     <div class="gen-section" id="gen-minute">
-                        <div class="gen-section-title">分钟 <span class="badge">0-59</span></div>
+                        <div class="gen-section-title" data-i18n="dev.cron.genMinuteTitle">分钟 <span
+                                class="badge">0-59</span></div>
                         <div class="gen-mode-row" data-field="minute">
-                            <button class="gen-mode-btn active" data-mode="every">每分钟</button>
-                            <button class="gen-mode-btn" data-mode="step">每隔 N 分钟</button>
-                            <button class="gen-mode-btn" data-mode="range">范围选择</button>
-                            <button class="gen-mode-btn" data-mode="specific">指定值</button>
+                            <button class="gen-mode-btn active" data-mode="every"
+                                data-i18n="dev.cron.genMinuteEvery">每分钟</button>
+                            <button class="gen-mode-btn" data-mode="step" data-i18n="dev.cron.genMinuteStep">每隔 N
+                                分钟</button>
+                            <button class="gen-mode-btn" data-mode="range" data-i18n="dev.cron.genRange">范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific" data-i18n="dev.cron.genSpecific">指定值</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-step-row" style="display:none">
-                                <label>每隔</label>
+                                <label data-i18n="dev.cron.genEvery">每隔</label>
                                 <input type="number" min="1" max="59" value="5">
-                                <span>分钟</span>
+                                <span data-i18n="dev.cron.genUnitMinute">分钟</span>
                             </div>
                             <div class="gen-range-row" style="display:none">
-                                <label>从</label>
+                                <label data-i18n="dev.cron.genFrom">从</label>
                                 <input type="number" min="0" max="59" value="0"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
-                                <span>到</span>
+                                <span data-i18n="dev.cron.genTo">到</span>
                                 <input type="number" min="0" max="59" value="30"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                             </div>
@@ -333,24 +359,26 @@
 
                     <!-- 小时 -->
                     <div class="gen-section" id="gen-hour">
-                        <div class="gen-section-title">小时 <span class="badge">0-23</span></div>
+                        <div class="gen-section-title" data-i18n="dev.cron.genHourTitle">小时 <span class="badge">0-23</span>
+                        </div>
                         <div class="gen-mode-row" data-field="hour">
-                            <button class="gen-mode-btn active" data-mode="every">每小时</button>
-                            <button class="gen-mode-btn" data-mode="step">每隔 N 小时</button>
-                            <button class="gen-mode-btn" data-mode="range">范围选择</button>
-                            <button class="gen-mode-btn" data-mode="specific">指定值</button>
+                            <button class="gen-mode-btn active" data-mode="every"
+                                data-i18n="dev.cron.genHourEvery">每小时</button>
+                            <button class="gen-mode-btn" data-mode="step" data-i18n="dev.cron.genHourStep">每隔 N 小时</button>
+                            <button class="gen-mode-btn" data-mode="range" data-i18n="dev.cron.genRange">范围选择</button>
+                            <button class="gen-mode-btn" data-mode="specific" data-i18n="dev.cron.genSpecific">指定值</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-step-row" style="display:none">
-                                <label>每隔</label>
+                                <label data-i18n="dev.cron.genEvery">每隔</label>
                                 <input type="number" min="1" max="23" value="2">
-                                <span>小时</span>
+                                <span data-i18n="dev.cron.genUnitHour">小时</span>
                             </div>
                             <div class="gen-range-row" style="display:none">
-                                <label>从</label>
+                                <label data-i18n="dev.cron.genFrom">从</label>
                                 <input type="number" min="0" max="23" value="9"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
-                                <span>到</span>
+                                <span data-i18n="dev.cron.genTo">到</span>
                                 <input type="number" min="0" max="23" value="18"
                                     style="width:60px;padding:6px 8px;border:1px solid #eaeaea;border-radius:6px;font-size:14px;">
                             </div>
@@ -362,10 +390,13 @@
 
                     <!-- 日 -->
                     <div class="gen-section" id="gen-day">
-                        <div class="gen-section-title">日 <span class="badge">1-31</span></div>
+                        <div class="gen-section-title" data-i18n="dev.cron.genDayTitle">日 <span class="badge">1-31</span>
+                        </div>
                         <div class="gen-mode-row" data-field="day">
-                            <button class="gen-mode-btn active" data-mode="every">每日</button>
-                            <button class="gen-mode-btn" data-mode="specific">指定日期</button>
+                            <button class="gen-mode-btn active" data-mode="every"
+                                data-i18n="dev.cron.genDayEvery">每日</button>
+                            <button class="gen-mode-btn" data-mode="specific"
+                                data-i18n="dev.cron.genDaySpecific">指定日期</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-specific-row" style="display:none">
@@ -376,10 +407,13 @@
 
                     <!-- 月 -->
                     <div class="gen-section" id="gen-month">
-                        <div class="gen-section-title">月 <span class="badge">1-12</span></div>
+                        <div class="gen-section-title" data-i18n="dev.cron.genMonthTitle">月 <span class="badge">1-12</span>
+                        </div>
                         <div class="gen-mode-row" data-field="month">
-                            <button class="gen-mode-btn active" data-mode="every">每月</button>
-                            <button class="gen-mode-btn" data-mode="specific">指定月份</button>
+                            <button class="gen-mode-btn active" data-mode="every"
+                                data-i18n="dev.cron.genMonthEvery">每月</button>
+                            <button class="gen-mode-btn" data-mode="specific"
+                                data-i18n="dev.cron.genMonthSpecific">指定月份</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-specific-row" style="display:none">
@@ -390,10 +424,13 @@
 
                     <!-- 星期 -->
                     <div class="gen-section" id="gen-weekday">
-                        <div class="gen-section-title">星期 <span class="badge">0-6（0=周日）</span></div>
+                        <div class="gen-section-title" data-i18n="dev.cron.genWeekdayTitle">星期 <span
+                                class="badge">0-6（0=周日）</span></div>
                         <div class="gen-mode-row" data-field="weekday">
-                            <button class="gen-mode-btn active" data-mode="every">不限</button>
-                            <button class="gen-mode-btn" data-mode="specific">指定星期</button>
+                            <button class="gen-mode-btn active" data-mode="every"
+                                data-i18n="dev.cron.genWeekdayEvery">不限</button>
+                            <button class="gen-mode-btn" data-mode="specific"
+                                data-i18n="dev.cron.genWeekdaySpecific">指定星期</button>
                         </div>
                         <div class="gen-mode-content">
                             <div class="gen-specific-row" style="display:none">
@@ -404,12 +441,14 @@
 
                     <!-- 生成结果 -->
                     <div class="gen-result">
-                        <div class="section-title">生成结果</div>
-                        <div class="gen-result-cron" id="gen-result-cron">* * * * *</div>
                         <div class="gen-result-desc" id="gen-result-desc">每分钟执行一次</div>
+                        <div class="gen-result-cron" id="gen-result-cron">* * * * *</div>
+                        <div class="gen-result-desc" id="gen-result-desc"></div>
                         <div class="result-actions" style="margin-top:16px;">
-                            <button class="btn copy-btn" id="copy-gen-btn">复制 Cron 表达式</button>
-                            <button class="btn btn-sm" id="send-to-parse-btn">发送到解析</button>
+                            <button class="btn copy-btn" id="copy-gen-btn" data-i18n="dev.cron.copyGenBtn">复制 Cron
+                                表达式</button>
+                            <button class="btn btn-sm" id="send-to-parse-btn"
+                                data-i18n="dev.cron.sendToParseBtn">发送到解析</button>
                         </div>
                     </div>
                 </div>
@@ -417,117 +456,139 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="dev.cron.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="dev.cron.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>Cron表达式是定时任务调度的核心语法，但对于初学者来说，5位或6位的时间字段组合难以理解和编写。</li>
-                                <li>手动计算Cron表达式的执行时间非常繁琐且容易出错，特别是涉及复杂的步长和范围表达式时。</li>
-                                <li>不同调度器（如Linux Cron、Spring Scheduler、Quartz）对Cron表达式的解析规则略有差异，容易造成混淆。</li>
+                                <li data-i18n="dev.cron.problem1">Cron表达式是定时任务调度的核心语法，但对于初学者来说，5位或6位的时间字段组合难以理解和编写。</li>
+                                <li data-i18n="dev.cron.problem2">手动计算Cron表达式的执行时间非常繁琐且容易出错，特别是涉及复杂的步长和范围表达式时。</li>
+                                <li data-i18n="dev.cron.problem3">不同调度器（如Linux Cron、Spring
+                                    Scheduler、Quartz）对Cron表达式的解析规则略有差异，容易造成混淆。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="dev.cron.supportedFormatsTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>5位标准格式：</strong>分 时 日 月 星期，适用于大多数标准Cron调度器。</li>
-                                <li><strong>6位扩展格式：</strong>秒 分 时 日 月 星期，适用于支持秒级精度的调度器（如Quartz、Spring）。</li>
-                                <li><strong>特殊字符：</strong>支持 *（任意）、,（枚举）、-（范围）、/（步长）、?（不指定）、L（最后）等所有标准Cron特殊字符。</li>
+                                <li data-i18n="dev.cron.formatStandard5"><strong>5位标准格式：</strong>分 时 日 月 星期，适用于大多数标准Cron调度器。
+                                </li>
+                                <li data-i18n="dev.cron.formatExtended6"><strong>6位扩展格式：</strong>秒 分 时 日 月
+                                    星期，适用于支持秒级精度的调度器（如Quartz、Spring）。</li>
+                                <li data-i18n="dev.cron.formatSpecialChars"><strong>特殊字符：</strong>支持
+                                    *（任意）、,（枚举）、-（范围）、/（步长）、?（不指定）、L（最后）等所有标准Cron特殊字符。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="dev.cron.coreFeaturesTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>表达式解析：</strong>将Cron表达式转换为人类可读的中文描述，让您一目了然。</li>
-                                <li><strong>表达式生成：</strong>通过可视化界面配置各字段规则，自动生成对应的Cron表达式。</li>
-                                <li><strong>执行时间预测：</strong>根据当前时间计算最近10次执行时间，方便规划任务执行计划。</li>
-                                <li><strong>格式切换：</strong>支持5位和6位格式之间的快速切换，自动添加或移除秒字段。</li>
+                                <li data-i18n="dev.cron.featureParse"><strong>表达式解析：</strong>将Cron表达式转换为人类可读的中文描述，让您一目了然。
+                                </li>
+                                <li data-i18n="dev.cron.featureGenerate">
+                                    <strong>表达式生成：</strong>通过可视化界面配置各字段规则，自动生成对应的Cron表达式。
+                                </li>
+                                <li data-i18n="dev.cron.featurePredict">
+                                    <strong>执行时间预测：</strong>根据当前时间计算最近10次执行时间，方便规划任务执行计划。
+                                </li>
+                                <li data-i18n="dev.cron.featureFormatSwitch">
+                                    <strong>格式切换：</strong>支持5位和6位格式之间的快速切换，自动添加或移除秒字段。
+                                </li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="dev.cron.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解析 Cron 表达式</h4>
+                            <h4 data-i18n="dev.cron.usageParseTitle">一、解析 Cron 表达式</h4>
                             <ul>
-                                <li><strong>输入表达式：</strong>在输入框中输入5位或6位Cron表达式，如 <code>*/5 * * * *</code> 或
+                                <li data-i18n="dev.cron.usageInput"><strong>输入表达式：</strong>在输入框中输入5位或6位Cron表达式，如
+                                    <code>*/5 * * * *</code> 或
                                     <code>0 */5 * * * *</code>。
                                 </li>
-                                <li><strong>自动解析：</strong>输入后系统会自动解析表达式，并实时更新可视化展示和执行时间预测。</li>
-                                <li><strong>可视化展示：</strong>解析结果会以卡片形式展示每个字段的含义（秒、分、时、日、月、星期）。</li>
-                                <li><strong>查看执行时间：</strong>系统会预测最近的执行时间列表，方便您了解任务的执行计划。</li>
-                                <li><strong>使用预设：</strong>点击下方的预设按钮（如每分钟、每小时、每天等）可以快速填入常用表达式。</li>
+                                <li data-i18n="dev.cron.usageAutoParse">
+                                    <strong>自动解析：</strong>输入后系统会自动解析表达式，并实时更新可视化展示和执行时间预测。
+                                </li>
+                                <li data-i18n="dev.cron.usageVisual">
+                                    <strong>可视化展示：</strong>解析结果会以卡片形式展示每个字段的含义（秒、分、时、日、月、星期）。
+                                </li>
+                                <li data-i18n="dev.cron.usageExecTime"><strong>查看执行时间：</strong>系统会预测最近的执行时间列表，方便您了解任务的执行计划。
+                                </li>
+                                <li data-i18n="dev.cron.usagePresets">
+                                    <strong>使用预设：</strong>点击下方的预设按钮（如每分钟、每小时、每天等）可以快速填入常用表达式。
+                                </li>
                             </ul>
-                            <h4>二、生成 Cron 表达式</h4>
+                            <h4 data-i18n="dev.cron.usageGenerateTitle">二、生成 Cron 表达式</h4>
                             <ul>
-                                <li><strong>选择生成模式：</strong>切换到"生成 Cron"标签页，通过可视化界面配置各字段的执行规则。</li>
-                                <li><strong>格式切换：</strong>点击"5位"或"6位（含秒）"按钮切换生成格式。</li>
-                                <li><strong>秒配置：</strong>6位格式下支持每秒、每隔N秒、范围选择、指定值四种模式。</li>
-                                <li><strong>分钟配置：</strong>支持每分钟、每隔N分钟、范围选择、指定值四种模式。</li>
-                                <li><strong>小时配置：</strong>支持每小时、每隔N小时、范围选择、指定值四种模式。</li>
-                                <li><strong>日期配置：</strong>支持每日或指定日期。</li>
-                                <li><strong>月份配置：</strong>支持每月或指定月份。</li>
-                                <li><strong>星期配置：</strong>支持不限或指定星期几。</li>
-                                <li><strong>查看结果：</strong>配置完成后自动生成对应的Cron表达式和描述。</li>
+                                <li data-i18n="dev.cron.usageGenMode"><strong>选择生成模式：</strong>切换到"生成
+                                    Cron"标签页，通过可视化界面配置各字段的执行规则。</li>
+                                <li data-i18n="dev.cron.usageGenFormat"><strong>格式切换：</strong>点击"5位"或"6位（含秒）"按钮切换生成格式。</li>
+                                <li data-i18n="dev.cron.usageGenSecond"><strong>秒配置：</strong>6位格式下支持每秒、每隔N秒、范围选择、指定值四种模式。
+                                </li>
+                                <li data-i18n="dev.cron.usageGenMinute"><strong>分钟配置：</strong>支持每分钟、每隔N分钟、范围选择、指定值四种模式。</li>
+                                <li data-i18n="dev.cron.usageGenHour"><strong>小时配置：</strong>支持每小时、每隔N小时、范围选择、指定值四种模式。</li>
+                                <li data-i18n="dev.cron.usageGenDay"><strong>日期配置：</strong>支持每日或指定日期。</li>
+                                <li data-i18n="dev.cron.usageGenMonth"><strong>月份配置：</strong>支持每月或指定月份。</li>
+                                <li data-i18n="dev.cron.usageGenWeekday"><strong>星期配置：</strong>支持不限或指定星期几。</li>
+                                <li data-i18n="dev.cron.usageGenResult"><strong>查看结果：</strong>配置完成后自动生成对应的Cron表达式和描述。</li>
                             </ul>
-                            <h4>三、Cron 表达式格式</h4>
+                            <h4 data-i18n="dev.cron.usageFormatTitle">三、Cron 表达式格式</h4>
                             <ul>
-                                <li><strong>5位格式：</strong>分 时 日 月 星期</li>
-                                <li><strong>6位格式：</strong>秒 分 时 日 月 星期</li>
-                                <li><strong>秒(0-59)：</strong>指定任务在分钟的第几秒执行（仅6位格式）。</li>
-                                <li><strong>分钟(0-59)：</strong>指定任务在小时的第几分钟执行。</li>
-                                <li><strong>小时(0-23)：</strong>指定任务在一天的第几小时执行。</li>
-                                <li><strong>日期(1-31)：</strong>指定任务在月的第几天执行。</li>
-                                <li><strong>月份(1-12)：</strong>指定任务在一年的第几月执行。</li>
-                                <li><strong>星期(0-6)：</strong>指定任务在星期几执行（0=周日）。</li>
+                                <li data-i18n="dev.cron.usageFmt5"><strong>5位格式：</strong>分 时 日 月 星期</li>
+                                <li data-i18n="dev.cron.usageFmt6"><strong>6位格式：</strong>秒 分 时 日 月 星期</li>
+                                <li data-i18n="dev.cron.usageFmtSecond"><strong>秒(0-59)：</strong>指定任务在分钟的第几秒执行（仅6位格式）。</li>
+                                <li data-i18n="dev.cron.usageFmtMinute"><strong>分钟(0-59)：</strong>指定任务在小时的第几分钟执行。</li>
+                                <li data-i18n="dev.cron.usageFmtHour"><strong>小时(0-23)：</strong>指定任务在一天的第几小时执行。</li>
+                                <li data-i18n="dev.cron.usageFmtDay"><strong>日期(1-31)：</strong>指定任务在月的第几天执行。</li>
+                                <li data-i18n="dev.cron.usageFmtMonth"><strong>月份(1-12)：</strong>指定任务在一年的第几月执行。</li>
+                                <li data-i18n="dev.cron.usageFmtWeekday"><strong>星期(0-6)：</strong>指定任务在星期几执行（0=周日）。</li>
                             </ul>
-                            <h4>四、特殊字符说明</h4>
+                            <h4 data-i18n="dev.cron.specialCharsTitle">四、特殊字符说明</h4>
                             <ul>
-                                <li><strong>*</strong>：任意值，表示该字段的所有可能值。</li>
-                                <li><strong>,</strong>：枚举，列出多个值，如 <code>1,3,5</code>。</li>
-                                <li><strong>-</strong>：范围，指定值的范围，如 <code>1-5</code>。</li>
-                                <li><strong>/</strong>：步长，指定间隔，如 <code>*/5</code> 表示每5个单位。</li>
-                                <li><strong>?</strong>：不指定，通常用于日期和星期字段冲突时。</li>
-                                <li><strong>L</strong>：最后，如日期字段的 <code>L</code> 表示当月最后一天。</li>
+                                <li data-i18n="dev.cron.scAsterisk"><strong>*</strong>：任意值，表示该字段的所有可能值。</li>
+                                <li data-i18n="dev.cron.scComma"><strong>,</strong>：枚举，列出多个值，如 <code>1,3,5</code>。</li>
+                                <li data-i18n="dev.cron.scDash"><strong>-</strong>：范围，指定值的范围，如 <code>1-5</code>。</li>
+                                <li data-i18n="dev.cron.scSlash"><strong>/</strong>：步长，指定间隔，如 <code>*/5</code> 表示每5个单位。</li>
+                                <li data-i18n="dev.cron.scQuestion"><strong>?</strong>：不指定，通常用于日期和星期字段冲突时。</li>
+                                <li data-i18n="dev.cron.scL"><strong>L</strong>：最后，如日期字段的 <code>L</code> 表示当月最后一天。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="dev.cron.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式规范</h4>
+                            <h4 data-i18n="dev.cron.notesFormatTitle">一、格式规范</h4>
                             <ul>
-                                <li>Cron表达式必须为5位或6位格式，各字段之间用空格分隔。</li>
-                                <li>每个字段的值必须在规定范围内，超出范围会导致解析失败。</li>
-                                <li>星期字段0表示周日，1-6分别表示周一到周六。</li>
+                                <li data-i18n="dev.cron.noteFormat1">Cron表达式必须为5位或6位格式，各字段之间用空格分隔。</li>
+                                <li data-i18n="dev.cron.noteFormat2">每个字段的值必须在规定范围内，超出范围会导致解析失败。</li>
+                                <li data-i18n="dev.cron.noteFormat3">星期字段0表示周日，1-6分别表示周一到周六。</li>
                             </ul>
-                            <h4>二、常见示例</h4>
+                            <h4 data-i18n="dev.cron.notesExamplesTitle">二、常见示例</h4>
                             <ul>
-                                <li><code>* * * * *</code> - 每分钟执行（5位）</li>
-                                <li><code>* * * * * *</code> - 每秒执行（6位）</li>
-                                <li><code>0 * * * *</code> - 每小时执行</li>
-                                <li><code>0 0 * * *</code> - 每天午夜执行</li>
-                                <li><code>0 9 * * 1-5</code> - 工作日上午9点执行</li>
-                                <li><code>0 0 1 * *</code> - 每月1号执行</li>
-                                <li><code>10 */5 * * * *</code> - 每隔5分钟的第10秒执行（6位）</li>
+                                <li data-i18n="dev.cron.noteExample1"><code>* * * * *</code> - 每分钟执行（5位）</li>
+                                <li data-i18n="dev.cron.noteExample2"><code>* * * * * *</code> - 每秒执行（6位）</li>
+                                <li data-i18n="dev.cron.noteExample3"><code>0 * * * *</code> - 每小时执行</li>
+                                <li data-i18n="dev.cron.noteExample4"><code>0 0 * * *</code> - 每天午夜执行</li>
+                                <li data-i18n="dev.cron.noteExample5"><code>0 9 * * 1-5</code> - 工作日上午9点执行</li>
+                                <li data-i18n="dev.cron.noteExample6"><code>0 0 1 * *</code> - 每月1号执行</li>
+                                <li data-i18n="dev.cron.noteExample7"><code>10 */5 * * * *</code> - 每隔5分钟的第10秒执行（6位）</li>
                             </ul>
-                            <h4>三、执行时间预测</h4>
+                            <h4 data-i18n="dev.cron.notesPredictTitle">三、执行时间预测</h4>
                             <ul>
-                                <li>执行时间预测基于当前时间计算，仅供参考。</li>
-                                <li>实际执行时间可能受系统时区和任务调度器影响。</li>
-                                <li>6位格式支持秒级精度的执行时间计算。</li>
+                                <li data-i18n="dev.cron.notePredict1">执行时间预测基于当前时间计算，仅供参考。</li>
+                                <li data-i18n="dev.cron.notePredict2">实际执行时间可能受系统时区和任务调度器影响。</li>
+                                <li data-i18n="dev.cron.notePredict3">6位格式支持秒级精度的执行时间计算。</li>
                             </ul>
-                            <h4>四、数据安全</h4>
+                            <h4 data-i18n="dev.cron.notesSecurityTitle">四、数据安全</h4>
                             <ul>
-                                <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
-                                <li>建议不要在公共设备上处理包含敏感信息的Cron表达式。</li>
+                                <li data-i18n="dev.cron.noteSecurity1">所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li data-i18n="dev.cron.noteSecurity2">建议不要在公共设备上处理包含敏感信息的Cron表达式。</li>
                             </ul>
-                            <h4>五、常见问题</h4>
+                            <h4 data-i18n="dev.cron.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li><strong>解析失败：</strong>检查Cron表达式格式是否正确，字段值是否在有效范围内。</li>
-                                <li><strong>执行时间异常：</strong>确认时区设置是否正确，某些调度器可能使用不同的时区。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
-                                <li><strong>格式切换后无变化：</strong>请确保在解析Tab中输入表达式后再切换格式。</li>
+                                <li data-i18n="dev.cron.faqParseFail"><strong>解析失败：</strong>检查Cron表达式格式是否正确，字段值是否在有效范围内。
+                                </li>
+                                <li data-i18n="dev.cron.faqExecTime"><strong>执行时间异常：</strong>确认时区设置是否正确，某些调度器可能使用不同的时区。</li>
+                                <li data-i18n="dev.cron.faqCopyFail"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="dev.cron.faqNoChange"><strong>格式切换后无变化：</strong>请确保在解析Tab中输入表达式后再切换格式。</li>
                             </ul>
                         </div>
                     </article>
@@ -538,12 +599,15 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" title="隐私政策" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms.html" title="服务条款" data-i18n="footer.terms"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about.html" title="关于我们" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们" data-i18n="footer.contact"><i class="fas fa-envelope"></i>
+                        联系我们</a>
                 </p>
             </footer>
         </div>
@@ -551,6 +615,7 @@
 
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="cron6.js"></script>
     <script src="script.js"></script>

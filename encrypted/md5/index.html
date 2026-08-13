@@ -10,12 +10,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>MD5在线加密工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="MD5在线加密工具 - Helpoke 助点站">
+    <meta property="og:description" content="MD5在线加密工具, MD5哈希生成, MD5校验, 批量MD5生成, 支持16位32位大小写输出, 离线工具保护数据安全">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/md5/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="MD5在线加密工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="MD5在线加密工具, MD5哈希生成, MD5校验, 批量MD5生成, 支持16位32位大小写输出, 离线工具保护数据安全">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/md5/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/md5/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/md5/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script> -->
     <script src="./lib/crypto-js.min.js"></script>
+    <script src="../../common/js/i18n/i18n.js"></script>
+
     <style>
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
@@ -619,9 +636,9 @@
         "description": "MD5在线加密工具，支持16位、32位大小写输出，支持批量生成和哈希校验。离线工具，数据本地处理保护隐私。MD5 hash generator with offline processing.",
         "url": "https://helpoke.com/encrypted/md5",
         "applicationCategory": "https://schema.org/SecurityTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
-            "MD5加密生成",
+            "MD5加密生成 (MD5 encryption)",
             "支持16位/32位输出",
             "支持大写/小写格式",
             "批量MD5生成",
@@ -650,56 +667,66 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>MD5哈希工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>MD5哈希工具，支持计算文本的MD5哈希值，16位/32位和大小写输出，支持哈希校验和批量生成</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="encrypted.md5.title">MD5哈希工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.md5.intro">MD5哈希工具，支持计算文本的MD5哈希值，16位/32位和大小写输出，支持哈希校验和批量生成</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tabs">
-                <button class="tab-btn active" data-tab="generate">MD5 生成</button>
-                <button class="tab-btn" data-tab="verify">MD5 校验</button>
-                <button class="tab-btn" data-tab="batch">批量生成</button>
+                <button class="tab-btn active" data-tab="generate" data-i18n="encrypted.md5.tabGenerate">MD5 生成</button>
+                <button class="tab-btn" data-tab="verify" data-i18n="encrypted.md5.tabVerify">MD5 校验</button>
+                <button class="tab-btn" data-tab="batch" data-i18n="encrypted.md5.tabBatch">批量生成</button>
             </div>
 
             <!-- MD5 生成 -->
             <div id="tab-generate" class="tab-pane active">
                 <div class="tool-card">
                     <div class="form-group">
-                        <label for="gen-input">输入文本</label>
-                        <textarea id="gen-input" placeholder="请输入要计算 MD5 的文本..."></textarea>
+                        <label for="gen-input" data-i18n="encrypted.md5.genInputLabel">输入文本</label>
+                        <textarea id="gen-input" data-i18n-placeholder="encrypted.md5.genInputPlaceholder"
+                            placeholder="请输入要计算 MD5 的文本..."></textarea>
                     </div>
 
                     <div class="options-row">
                         <div class="option-group">
-                            <label>输出大小写</label>
+                            <label data-i18n="encrypted.md5.caseLabel">输出大小写</label>
                             <div class="radio-group">
-                                <label><input type="radio" name="gen-case" value="lower" checked> 小写</label>
-                                <label><input type="radio" name="gen-case" value="upper"> 大写</label>
+                                <label><input type="radio" name="gen-case" value="lower" checked> <span
+                                        data-i18n="encrypted.md5.lower">小写</span></label>
+                                <label><input type="radio" name="gen-case" value="upper"> <span
+                                        data-i18n="encrypted.md5.upper">大写</span></label>
                             </div>
                         </div>
                         <div class="option-group">
-                            <label>输出位数</label>
+                            <label data-i18n="encrypted.md5.bitsLabel">输出位数</label>
                             <div class="radio-group">
-                                <label><input type="radio" name="gen-bits" value="32" checked> 32位</label>
-                                <label><input type="radio" name="gen-bits" value="16"> 16位</label>
+                                <label><input type="radio" name="gen-bits" value="32" checked> <span
+                                        data-i18n="encrypted.md5.bits32">32位</span></label>
+                                <label><input type="radio" name="gen-bits" value="16"> <span
+                                        data-i18n="encrypted.md5.bits16">16位</span></label>
                             </div>
                         </div>
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="generateMD5()">生成 MD5</button>
-                        <button class="btn btn-outline" onclick="clearGenerate()">清空</button>
+                        <button class="btn btn-primary" onclick="generateMD5()" data-i18n="encrypted.md5.genBtn">生成 MD5</button>
+                        <button class="btn btn-outline" onclick="clearGenerate()" data-i18n="encrypted.md5.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section">
-                        <h4>MD5 结果</h4>
+                        <h4 data-i18n="encrypted.md5.genResultTitle">MD5 结果</h4>
                         <div class="result-content" id="gen-result">
-                            <span class="result-text result-placeholder">等待生成...</span>
-                            <button class="copy-icon-btn" title="复制结果" onclick="copyResult('gen-result')"
-                                style="display:none;">📋</button>
+                            <span class="result-text result-placeholder"
+                                data-i18n="encrypted.md5.genResultPlaceholder">等待生成...</span>
+                            <button class="copy-icon-btn" data-i18n-title="encrypted.md5.copyResultTitle" title="复制结果"
+                                onclick="copyResult('gen-result')" style="display:none;">📋</button>
                         </div>
                     </div>
                 </div>
@@ -709,18 +736,20 @@
             <div id="tab-verify" class="tab-pane">
                 <div class="tool-card">
                     <div class="form-group">
-                        <label for="verify-input">原始文本</label>
-                        <textarea id="verify-input" placeholder="请输入原始文本..."></textarea>
+                        <label for="verify-input" data-i18n="encrypted.md5.verifyInputLabel">原始文本</label>
+                        <textarea id="verify-input" data-i18n-placeholder="encrypted.md5.verifyInputPlaceholder"
+                            placeholder="请输入原始文本..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="verify-hash">待校验的 MD5 哈希值</label>
-                        <input type="text" id="verify-hash" placeholder="请输入 MD5 哈希值（不区分大小写）...">
+                        <label for="verify-hash" data-i18n="encrypted.md5.verifyHashLabel">待校验的 MD5 哈希值</label>
+                        <input type="text" id="verify-hash" data-i18n-placeholder="encrypted.md5.verifyHashPlaceholder"
+                            placeholder="请输入 MD5 哈希值（不区分大小写）...">
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="verifyMD5()">校验 MD5</button>
-                        <button class="btn btn-outline" onclick="clearVerify()">清空</button>
+                        <button class="btn btn-primary" onclick="verifyMD5()" data-i18n="encrypted.md5.verifyBtn">校验 MD5</button>
+                        <button class="btn btn-outline" onclick="clearVerify()" data-i18n="encrypted.md5.clearBtn">清空</button>
                     </div>
 
                     <div id="verify-result" style="display:none;"></div>
@@ -731,42 +760,47 @@
             <div id="tab-batch" class="tab-pane">
                 <div class="tool-card">
                     <div class="form-group">
-                        <label for="batch-input">输入文本（每行一个）</label>
-                        <textarea id="batch-input" placeholder="请输入要批量计算 MD5 的文本，每行一个..."></textarea>
+                        <label for="batch-input" data-i18n="encrypted.md5.batchInputLabel">输入文本（每行一个）</label>
+                        <textarea id="batch-input" data-i18n-placeholder="encrypted.md5.batchInputPlaceholder"
+                            placeholder="请输入要批量计算 MD5 的文本，每行一个..."></textarea>
                     </div>
 
                     <div class="options-row">
                         <div class="option-group">
-                            <label>输出大小写</label>
+                            <label data-i18n="encrypted.md5.caseLabel">输出大小写</label>
                             <div class="radio-group">
-                                <label><input type="radio" name="batch-case" value="lower" checked> 小写</label>
-                                <label><input type="radio" name="batch-case" value="upper"> 大写</label>
+                                <label><input type="radio" name="batch-case" value="lower" checked> <span
+                                        data-i18n="encrypted.md5.lower">小写</span></label>
+                                <label><input type="radio" name="batch-case" value="upper"> <span
+                                        data-i18n="encrypted.md5.upper">大写</span></label>
                             </div>
                         </div>
                         <div class="option-group">
-                            <label>输出位数</label>
+                            <label data-i18n="encrypted.md5.bitsLabel">输出位数</label>
                             <div class="radio-group">
-                                <label><input type="radio" name="batch-bits" value="32" checked> 32位</label>
-                                <label><input type="radio" name="batch-bits" value="16"> 16位</label>
+                                <label><input type="radio" name="batch-bits" value="32" checked> <span
+                                        data-i18n="encrypted.md5.bits32">32位</span></label>
+                                <label><input type="radio" name="batch-bits" value="16"> <span
+                                        data-i18n="encrypted.md5.bits16">16位</span></label>
                             </div>
                         </div>
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="batchMD5()">批量生成</button>
+                        <button class="btn btn-primary" onclick="batchMD5()" data-i18n="encrypted.md5.batchBtn">批量生成</button>
                         <button class="btn btn-success" onclick="copyBatchResult()" id="batch-copy-btn"
-                            style="display:none;">复制全部结果</button>
-                        <button class="btn btn-outline" onclick="clearBatch()">清空</button>
+                            style="display:none;" data-i18n="encrypted.md5.copyAllBtn">复制全部结果</button>
+                        <button class="btn btn-outline" onclick="clearBatch()" data-i18n="encrypted.md5.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section" id="batch-result-section" style="display:none;">
-                        <h4>批量结果</h4>
+                        <h4 data-i18n="encrypted.md5.batchResultTitle">批量结果</h4>
                         <div style="overflow-x:auto;">
                             <table class="batch-table" id="batch-table">
                                 <thead>
                                     <tr>
                                         <th style="width:48px;">#</th>
-                                        <th>原文</th>
+                                        <th data-i18n="encrypted.md5.colOriginal">原文</th>
                                         <th>MD5</th>
                                     </tr>
                                 </thead>
@@ -780,92 +814,97 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>工具介绍</h3>
+                        <h3 data-i18n="encrypted.md5.infoIntro">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、解决的问题</h4>
+                        <h4 data-i18n="encrypted.md5.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li>计算文件或文本的MD5哈希值，验证数据完整性。</li>
-                            <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li>无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="encrypted.md5.problem1">计算文件或文本的MD5哈希值，验证数据完整性。</li>
+                            <li data-i18n="encrypted.md5.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="encrypted.md5.problem3">无需安装专业软件，随时随地在线使用。</li>
                         </ul>
-                        <h4>二、支持的格式</h4>
+                        <h4 data-i18n="encrypted.md5.formatTitle">二、支持的格式</h4>
                         <ul>
-                            <li><strong>MD5：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="encrypted.md5.formatMD5"><strong>MD5：</strong>支持该格式的完整处理功能。</li>
                         </ul>
-                        <h4>三、核心功能</h4>
+                        <h4 data-i18n="encrypted.md5.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="encrypted.md5.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="encrypted.md5.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="encrypted.md5.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="encrypted.md5.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>使用说明</h3>
+                        <h3 data-i18n="encrypted.md5.infoUsage">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、MD5生成</h4>
+                        <h4 data-i18n="encrypted.md5.usageGenTitle">一、MD5生成</h4>
                         <ul>
-                            <li><strong>输入文本：</strong>在文本框中输入需要计算MD5的文本内容。</li>
-                            <li><strong>选择输出格式：</strong>可选择输出大小写（小写/大写）和位数（32位/16位）。</li>
-                            <li><strong>点击生成：</strong>点击"生成 MD5"按钮计算MD5哈希值。</li>
-                            <li><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
+                            <li data-i18n="encrypted.md5.usageGenInput"><strong>输入文本：</strong>在文本框中输入需要计算MD5的文本内容。</li>
+                            <li data-i18n="encrypted.md5.usageGenFormat"><strong>选择输出格式：</strong>可选择输出大小写（小写/大写）和位数（32位/16位）。</li>
+                            <li data-i18n="encrypted.md5.usageGenClick"><strong>点击生成：</strong>点击"生成 MD5"按钮计算MD5哈希值。</li>
+                            <li data-i18n="encrypted.md5.usageGenCopy"><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
                         </ul>
-                        <h4>二、MD5校验</h4>
+                        <h4 data-i18n="encrypted.md5.usageVerifyTitle">二、MD5校验</h4>
                         <ul>
-                            <li><strong>输入原始文本：</strong>在"原始文本"文本框中输入原始内容。</li>
-                            <li><strong>输入待校验哈希值：</strong>在"待校验的 MD5 哈希值"输入框中输入要验证的MD5值。</li>
-                            <li><strong>点击校验：</strong>点击"校验 MD5"按钮验证文本与哈希值是否匹配。</li>
-                            <li><strong>查看结果：</strong>校验结果会显示匹配或不匹配，并给出实际计算的MD5值。</li>
+                            <li data-i18n="encrypted.md5.usageVerifyInput"><strong>输入原始文本：</strong>在"原始文本"文本框中输入原始内容。</li>
+                            <li data-i18n="encrypted.md5.usageVerifyHash"><strong>输入待校验哈希值：</strong>在"待校验的 MD5 哈希值"输入框中输入要验证的MD5值。
+                            </li>
+                            <li data-i18n="encrypted.md5.usageVerifyClick"><strong>点击校验：</strong>点击"校验 MD5"按钮验证文本与哈希值是否匹配。</li>
+                            <li data-i18n="encrypted.md5.usageVerifyResult"><strong>查看结果：</strong>校验结果会显示匹配或不匹配，并给出实际计算的MD5值。</li>
                         </ul>
-                        <h4>三、批量生成</h4>
+                        <h4 data-i18n="encrypted.md5.usageBatchTitle">三、批量生成</h4>
                         <ul>
-                            <li><strong>输入文本：</strong>在文本框中输入多行文本，每行一个，用于批量计算MD5。</li>
-                            <li><strong>选择输出格式：</strong>可选择输出大小写和位数。</li>
-                            <li><strong>点击批量生成：</strong>点击"批量生成"按钮计算所有行的MD5值。</li>
-                            <li><strong>复制结果：</strong>点击"复制全部结果"按钮复制所有MD5值，或点击每行的复制按钮单独复制。</li>
+                            <li data-i18n="encrypted.md5.usageBatchInput"><strong>输入文本：</strong>在文本框中输入多行文本，每行一个，用于批量计算MD5。</li>
+                            <li data-i18n="encrypted.md5.usageBatchFormat"><strong>选择输出格式：</strong>可选择输出大小写和位数。</li>
+                            <li data-i18n="encrypted.md5.usageBatchClick"><strong>点击批量生成：</strong>点击"批量生成"按钮计算所有行的MD5值。</li>
+                            <li data-i18n="encrypted.md5.usageBatchCopy">
+                                <strong>复制结果：</strong>点击"复制全部结果"按钮复制所有MD5值，或点击每行的复制按钮单独复制。
+                            </li>
                         </ul>
-                        <h4>四、MD5 基础</h4>
+                        <h4 data-i18n="encrypted.md5.usageBasicTitle">四、MD5 基础</h4>
                         <ul>
-                            <li><strong>哈希算法：</strong>MD5是一种单向哈希算法，将任意长度的数据转换为128位的哈希值。</li>
-                            <li><strong>32位MD5：</strong>完整的MD5哈希值，由32个十六进制字符组成。</li>
-                            <li><strong>16位MD5：</strong>截取32位MD5的中间16位，常用于数据库存储。</li>
-                            <li><strong>特点：</strong>相同输入总是产生相同输出，不同输入产生不同输出（极高概率）。</li>
+                            <li data-i18n="encrypted.md5.usageBasicHash"><strong>哈希算法：</strong>MD5是一种单向哈希算法，将任意长度的数据转换为128位的哈希值。
+                            </li>
+                            <li data-i18n="encrypted.md5.usageBasic32"><strong>32位MD5：</strong>完整的MD5哈希值，由32个十六进制字符组成。</li>
+                            <li data-i18n="encrypted.md5.usageBasic16"><strong>16位MD5：</strong>截取32位MD5的中间16位，常用于数据库存储。</li>
+                            <li data-i18n="encrypted.md5.usageBasicFeature"><strong>特点：</strong>相同输入总是产生相同输出，不同输入产生不同输出（极高概率）。
+                            </li>
                         </ul>
                     </div>
                 </article>
                 <article class="info-details">
                     <header>
-                        <h3>注意事项</h3>
+                        <h3 data-i18n="encrypted.md5.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、数据安全</h4>
+                        <h4 data-i18n="encrypted.md5.notesSecurityTitle">一、数据安全</h4>
                         <ul>
-                            <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li>MD5是不可逆的哈希算法，无法从MD5值还原原始数据。</li>
-                            <li>不要将MD5作为密码存储方案，建议使用更安全的哈希算法如bcrypt。</li>
+                            <li data-i18n="encrypted.md5.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li data-i18n="encrypted.md5.noteSecurity2">MD5是不可逆的哈希算法，无法从MD5值还原原始数据。</li>
+                            <li data-i18n="encrypted.md5.noteSecurity3">不要将MD5作为密码存储方案，建议使用更安全的哈希算法如bcrypt。</li>
                         </ul>
-                        <h4>二、MD5局限性</h4>
+                        <h4 data-i18n="encrypted.md5.notesLimitTitle">二、MD5局限性</h4>
                         <ul>
-                            <li>MD5已被证明存在碰撞漏洞，不适合用于安全关键场景。</li>
-                            <li>对于密码存储，建议使用SHA-256、bcrypt、Argon2等更安全的算法。</li>
-                            <li>MD5仍可用于文件校验、数据完整性验证等非安全场景。</li>
+                            <li data-i18n="encrypted.md5.noteLimit1">MD5已被证明存在碰撞漏洞，不适合用于安全关键场景。</li>
+                            <li data-i18n="encrypted.md5.noteLimit2">对于密码存储，建议使用SHA-256、bcrypt、Argon2等更安全的算法。</li>
+                            <li data-i18n="encrypted.md5.noteLimit3">MD5仍可用于文件校验、数据完整性验证等非安全场景。</li>
                         </ul>
-                        <h4>三、格式规范</h4>
+                        <h4 data-i18n="encrypted.md5.notesFormatTitle">三、格式规范</h4>
                         <ul>
-                            <li>MD5校验不区分大小写，输入大写或小写的哈希值都可以正确校验。</li>
-                            <li>16位MD5是32位MD5的中间16位，即第9-24位。</li>
-                            <li>批量生成时，空行会被视为空字符串计算MD5。</li>
+                            <li data-i18n="encrypted.md5.noteFormat1">MD5校验不区分大小写，输入大写或小写的哈希值都可以正确校验。</li>
+                            <li data-i18n="encrypted.md5.noteFormat2">16位MD5是32位MD5的中间16位，即第9-24位。</li>
+                            <li data-i18n="encrypted.md5.noteFormat3">批量生成时，空行会被视为空字符串计算MD5。</li>
                         </ul>
-                        <h4>四、常见问题</h4>
+                        <h4 data-i18n="encrypted.md5.notesFaqTitle">四、常见问题</h4>
                         <ul>
-                            <li><strong>校验不匹配：</strong>检查原始文本是否与生成MD5时的文本完全一致，包括空格和换行符。</li>
-                            <li><strong>结果为空：</strong>确认输入内容不为空。</li>
-                            <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                            <li data-i18n="encrypted.md5.noteFaq1"><strong>校验不匹配：</strong>检查原始文本是否与生成MD5时的文本完全一致，包括空格和换行符。</li>
+                            <li data-i18n="encrypted.md5.noteFaq2"><strong>结果为空：</strong>确认输入内容不为空。</li>
+                            <li data-i18n="encrypted.md5.noteFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
                         </ul>
                     </div>
                 </article>
@@ -875,12 +914,16 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -888,6 +931,7 @@
 
     <script src="../../common/js/utils.js"></script>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script>
         function computeMD5(text) {
@@ -921,7 +965,7 @@
             var textSpan = resultEl.querySelector('.result-text');
 
             if (!input.trim()) {
-                textSpan.textContent = '请输入文本';
+                textSpan.textContent = window.t('encrypted.md5.placeholderEnterText');
                 textSpan.className = 'result-text result-placeholder';
                 copyBtn.style.display = 'none';
                 return;
@@ -941,7 +985,7 @@
             document.getElementById('gen-input').value = '';
             var resultEl = document.getElementById('gen-result');
             var textSpan = resultEl.querySelector('.result-text');
-            textSpan.textContent = '等待生成...';
+            textSpan.textContent = window.t('encrypted.md5.placeholderWaiting');
             textSpan.className = 'result-text result-placeholder';
             resultEl.querySelector('.copy-icon-btn').style.display = 'none';
         }
@@ -953,12 +997,12 @@
             var resultEl = document.getElementById('verify-result');
 
             if (!input.trim()) {
-                utils.showError('请输入原始文本');
+                utils.showError(window.t('encrypted.md5.errEnterOriginal'));
                 return;
             }
 
             if (!expectedHash) {
-                utils.showError('请输入待校验的 MD5 哈希值');
+                utils.showError(window.t('encrypted.md5.errEnterHash'));
                 return;
             }
 
@@ -972,11 +1016,11 @@
             resultEl.style.display = 'flex';
             if (match) {
                 resultEl.className = 'verify-result match';
-                resultEl.innerHTML = 'MD5 校验通过 — 文本与哈希值匹配';
+                resultEl.innerHTML = window.t('encrypted.md5.verifyMatch');
             } else {
                 resultEl.className = 'verify-result mismatch';
                 var actualDisplay = actualHash32.toLowerCase() === normalizedExpected ? actualHash32.toLowerCase() : actualHash32.toLowerCase();
-                resultEl.innerHTML = 'MD5 校验不匹配<br><small>实际 32位 MD5：' + actualHash32.toLowerCase() + '</small><br><small>实际 16位 MD5：' + actualHash16.toLowerCase() + '</small>';
+                resultEl.innerHTML = window.t('encrypted.md5.verifyMismatch') + '<br><small>' + window.t('encrypted.md5.actualHash32') + '：' + actualHash32.toLowerCase() + '</small><br><small>' + window.t('encrypted.md5.actualHash16') + '：' + actualHash16.toLowerCase() + '</small>';
             }
         }
 
@@ -996,7 +1040,7 @@
             var copyBtn = document.getElementById('batch-copy-btn');
 
             if (!input.trim()) {
-                utils.showError('请输入文本');
+                utils.showError(window.t('encrypted.md5.placeholderEnterText'));
                 return;
             }
 
@@ -1012,7 +1056,7 @@
                 rows += '<tr>' +
                     '<td class="line-num">' + (i + 1) + '</td>' +
                     '<td>' + escapeHtml(text || '&nbsp;') + '</td>' +
-                    '<td><div class="hash-cell"><span>' + result + '</span><button class="copy-icon-btn" onclick="copySingleHash(this)" title="复制">📋</button></div></td>' +
+                    '<td><div class="hash-cell"><span>' + result + '</span><button class="copy-icon-btn" onclick="copySingleHash(this)" title="' + window.t('encrypted.md5.titleCopy') + '">📋</button></div></td>' +
                     '</tr>';
             }
 
@@ -1040,14 +1084,14 @@
             });
 
             if (!text) {
-                utils.showError('请先生成批量结果');
+                utils.showError(window.t('encrypted.md5.errGenerateBatch'));
                 return;
             }
 
             navigator.clipboard.writeText(text.trim()).then(function () {
-                utils.showSuccess('已复制全部 MD5 结果');
+                utils.showSuccess(window.t('encrypted.md5.successCopiedAll'));
             }).catch(function () {
-                utils.showError('复制失败，请手动复制');
+                utils.showError(window.t('encrypted.md5.errCopyManual'));
             });
         }
 
@@ -1067,9 +1111,9 @@
                     copyBtn.classList.remove('copied');
                     copyBtn.textContent = '📋';
                 }, 1500);
-                utils.showSuccess('已复制');
+                utils.showSuccess(window.t('encrypted.md5.successCopied'));
             }).catch(function () {
-                utils.showError('复制失败');
+                utils.showError(window.t('encrypted.md5.errCopyFailed'));
             });
         }
 
@@ -1082,9 +1126,9 @@
                     btn.classList.remove('copied');
                     btn.textContent = '📋';
                 }, 1500);
-                utils.showSuccess('已复制');
+                utils.showSuccess(window.t('encrypted.md5.successCopied'));
             }).catch(function () {
-                utils.showError('复制失败');
+                utils.showError(window.t('encrypted.md5.errCopyFailed'));
             });
         }
 

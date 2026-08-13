@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,6 @@
     <meta name="keywords" content="Base64,编码转换,数据URI,邮件传输,二进制编码,Base64变体">
     <link rel="icon" href="../../common/img/helpoke.webp">
     <link rel="stylesheet" href="../../common/css/style.css">
-    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     {
@@ -27,8 +27,8 @@
     }
     </script>
 </head>
+
 <body>
-    <div id="nav-container"></div>
     <main class="article-container">
         <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
         <header class="article-header">
@@ -41,12 +41,15 @@
         </header>
         <article class="article-content">
             <h2>引言：无处不在的Base64</h2>
-            <p>Base64编码是计算机领域最基础、最广泛使用的编码方式之一。从邮件附件传输到JWT Token，从图片内嵌到配置文件加密，Base64无处不在。然而，许多开发者只知道Base64是用来"编码"的，却不理解其背后的原理，甚至将其误认为是"加密"。本文将深入解析Base64的编码原理、变体形式和应用场景，助您彻底掌握这一重要技术。</p>
+            <p>Base64编码是计算机领域最基础、最广泛使用的编码方式之一。从邮件附件传输到JWT
+                Token，从图片内嵌到配置文件加密，Base64无处不在。然而，许多开发者只知道Base64是用来"编码"的，却不理解其背后的原理，甚至将其误认为是"加密"。本文将深入解析Base64的编码原理、变体形式和应用场景，助您彻底掌握这一重要技术。
+            </p>
 
             <h2>一、Base64编码原理：64字符映射表</h2>
             <h3>1.1 为什么需要Base64？</h3>
-            <p>计算机中的数据本质上是二进制（0和1），但早期的通信系统（如SMTP邮件协议）只能传输可打印的ASCII字符（33-127）。当需要在邮件中传输二进制数据（如图片、可执行文件）时，直接传输这些包含不可打印字符的数据会导致乱码或数据丢失。</p>
-            
+            <p>计算机中的数据本质上是二进制（0和1），但早期的通信系统（如SMTP邮件协议）只能传输可打印的ASCII字符（33-127）。当需要在邮件中传输二进制数据（如图片、可执行文件）时，直接传输这些包含不可打印字符的数据会导致乱码或数据丢失。
+            </p>
+
             <p>Base64的作用就是将任意二进制数据转换为只包含可打印ASCII字符的文本，从而确保数据在不同系统间安全传输。</p>
 
             <h3>1.2 编码原理</h3>
@@ -57,7 +60,7 @@
                 <li><strong>映射</strong>：将每组6位（值范围0-63）映射到Base64字符表</li>
                 <li><strong>输出</strong>：得到4个Base64字符</li>
             </ol>
-            
+
             <p>数学关系：3字节（24位）→ 4个Base64字符</p>
 
             <h3>1.3 64字符映射表</h3>
@@ -79,7 +82,7 @@
 13    N      29   d      45   t      61   9
 14    O      30   e      46   u      62   +
 15    P      31   f      47   v      63   /</code></pre>
-            
+
             <p>字符集包括：</p>
             <ul>
                 <li>大写字母：A-Z（索引0-25）</li>
@@ -90,30 +93,30 @@
 
             <h3>1.4 编码示例</h3>
             <p>以字符串"Man"为例：</p>
-            
+
             <p><strong>步骤1：转换为ASCII二进制</strong></p>
             <pre><code>M (77)  → 01001101
 a (97)  → 01100001
 n (110) → 01101110</code></pre>
-            
+
             <p><strong>步骤2：合并为24位</strong></p>
             <pre><code>010011010110000101101110</code></pre>
-            
+
             <p><strong>步骤3：重新分组为4组，每组6位</strong></p>
             <pre><code>010011 010110 000101 101110
   19     22      5     46</code></pre>
-            
+
             <p><strong>步骤4：映射到Base64字符</strong></p>
             <pre><code>19 → T
 22 → W
  5 → F
 46 → u</code></pre>
-            
+
             <p>结果：<code>TWFu</code></p>
 
             <h3>1.5 填充处理</h3>
             <p>当输入数据长度不是3的倍数时，Base64使用"="作为填充字符：</p>
-            
+
             <p><strong>情况1：剩余1个字节（8位）</strong></p>
             <ul>
                 <li>补零到12位，分为2组6位</li>
@@ -121,7 +124,7 @@ n (110) → 01101110</code></pre>
                 <li>填充2个"="</li>
             </ul>
             <p>示例："A" → "QQ=="</p>
-            
+
             <p><strong>情况2：剩余2个字节（16位）</strong></p>
             <ul>
                 <li>补零到18位，分为3组6位</li>
@@ -173,7 +176,7 @@ n (110) → 01101110</code></pre>
                 <li>"/" 替换为 "_"</li>
                 <li>通常省略填充字符"="</li>
             </ul>
-            
+
             <p>应用场景：</p>
             <ul>
                 <li>JWT Token（Header、Payload、Signature三部分）</li>
@@ -188,7 +191,7 @@ n (110) → 01101110</code></pre>
                 <li>使用"\r\n"作为行分隔符</li>
                 <li>用于邮件附件编码</li>
             </ul>
-            
+
             <p>MIME Base64示例：</p>
             <pre><code>Content-Transfer-Encoding: base64
 
@@ -206,21 +209,21 @@ VGhpcyBpcyBhIHRlc3QgbWVzc2FnZS4=</code></pre>
             <p>数据URI允许将小文件直接嵌入HTML或CSS中：</p>
             <pre><code>&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEA
 AAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="&gt;</code></pre>
-            
+
             <p>优点：</p>
             <ul>
                 <li>减少HTTP请求数量</li>
                 <li>适合小图标、小图片</li>
                 <li>便于单文件分发</li>
             </ul>
-            
+
             <p>缺点：</p>
             <ul>
                 <li>增加HTML/CSS文件大小（约33%膨胀）</li>
                 <li>无法缓存（每次都随HTML一起下载）</li>
                 <li>不适合大文件</li>
             </ul>
-            
+
             <p>最佳实践：仅对小于几KB的静态资源使用Data URI，大文件仍使用传统URL方式。</p>
 
             <h3>4.2 邮件附件传输</h3>
@@ -248,14 +251,14 @@ ZXMgMiAwIFIvPj4KZW5kb2JqCjIgMCBvYmoKPDwvVHlwZS9QYWdlcy9D
             <pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIi
 wibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF
 2QT4fwpMeJf36POk6yJV_adQssw5c</code></pre>
-            
+
             <p>注意：JWT使用Base64URL，不是标准Base64。</p>
 
             <h3>4.4 配置文件加密</h3>
             <p>在配置文件中存储敏感信息（如数据库密码、API密钥）：</p>
             <pre><code># application.properties
 database.password=c2VjcmV0UGFzc3dvcmQxMjM=</code></pre>
-            
+
             <p>注意：这只是编码，不是加密，安全性很弱。推荐使用专业加密方案（如Jasypt、Vault）。</p>
 
             <h2>五、Base64使数据膨胀的原因</h2>
@@ -266,10 +269,10 @@ database.password=c2VjcmV0UGFzc3dvcmQxMjM=</code></pre>
                 <li>编码后：每6位表示一个字符（需要8位存储）</li>
                 <li>膨胀比例：8/6 = 4/3 ≈ 1.333</li>
             </ul>
-            
+
             <p>计算公式：</p>
             <pre><code>编码后长度 = ceil(原始字节数 / 3) * 4</code></pre>
-            
+
             <p>示例：</p>
             <ul>
                 <li>1字节 → ceil(1/3)*4 = 4字符（实际2字符+2个"="）</li>
@@ -296,7 +299,7 @@ database.password=c2VjcmV0UGFzc3dvcmQxMjM=</code></pre>
                 <li>需要在URL中传递二进制数据</li>
                 <li>配置文件中存储少量二进制数据</li>
             </ul>
-            
+
             <p>不适合使用Base64的场景：</p>
             <ul>
                 <li>大文件传输（应直接传输二进制）</li>
@@ -323,9 +326,9 @@ database.password=c2VjcmV0UGFzc3dvcmQxMjM=</code></pre>
 
             <h2>结语</h2>
             <p>Base64编码虽然原理简单，但在计算机系统和网络通信中扮演着不可或缺的角色。从邮件附件到JWT Token，从Data URI到配置文件，Base64的应用场景广泛而深入。</p>
-            
+
             <p>理解Base64的编码原理，有助于我们在实际开发中做出合理的技术决策：何时使用Base64，何时避免使用；如何权衡存储效率与传输安全；如何在性能与便利性之间找到平衡点。</p>
-            
+
             <p>最后提醒：Base64是编码，不是加密。不要将敏感信息仅通过Base64"加密"后存储或传输，这没有任何安全性可言。对于敏感数据，必须使用专业的加密算法（如AES、RSA）进行保护。</p>
         </article>
         <section class="related-tools">
@@ -353,8 +356,6 @@ database.password=c2VjcmV0UGFzc3dvcmQxMjM=</code></pre>
             </footer>
         </div>
     </main>
-    <script src="../../common/js/theme.js"></script>
-    <script src="../../common/js/nav.js"></script>
-    <script src="../../common/js/utils.js"></script>
 </body>
+
 </html>

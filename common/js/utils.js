@@ -3,6 +3,17 @@
  */
 
 /**
+ * 多语言：动态文本翻译统一入口
+ * 优先使用 i18n 的 window.t（i18n.js 已加载时）；i18n 未加载时兜底返回 key 原文，避免报错。
+ * 各工具脚本无需再各自定义翻译辅助函数。
+ */
+if (typeof window !== 'undefined') {
+    window.t = window.t || function (key, params) {
+        return key;
+    };
+}
+
+/**
  * 显示右下角弹框
  * @param {string} message - 弹框消息
  * @param {string} type - 弹框类型：success, error, info, warning

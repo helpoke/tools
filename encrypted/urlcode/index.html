@@ -10,7 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>URL 编码/解码工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="URL 编码/解码工具 - Helpoke 助点站">
+    <meta property="og:description" content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/urlcode/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="URL 编码/解码工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/urlcode/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/urlcode/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/urlcode/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -369,7 +385,7 @@
         "description": "在线URL编码解码工具，支持encodeURI和encodeURIComponent模式。免费在线URL转码工具。Online URL encoder/decoder supporting multiple encoding modes.",
         "url": "https://helpoke.com/encrypted/urlcode",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "URL编码(Encode)",
             "URL解码(Decode)",
@@ -400,31 +416,38 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>URL编码工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>URL编码工具，支持URL编码和解码，处理中文和特殊字符，支持encodeURI和encodeURIComponent两种模式</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="encrypted.urlcode.title">URL编码工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.urlcode.intro">URL编码工具，支持URL编码和解码，处理中文和特殊字符，支持encodeURI和encodeURIComponent两种模式</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('encode')">URL 编码</button>
-                    <button class="tab-btn" onclick="switchTab('decode')">URL 解码</button>
+                    <button class="tab-btn active" onclick="switchTab('encode')" data-i18n="encrypted.urlcode.tabEncode">URL
+                        编码</button>
+                    <button class="tab-btn" onclick="switchTab('decode')" data-i18n="encrypted.urlcode.tabDecode">URL 解码</button>
                 </div>
 
                 <!-- Encode Tab -->
                 <div class="tab-panel active" id="tab-encode">
                     <div class="input-group">
-                        <label for="encode-input">输入原始文本</label>
-                        <textarea id="encode-input" placeholder="输入需要编码的文本或 URL..."></textarea>
+                        <label for="encode-input" data-i18n="encrypted.urlcode.encodeInputLabel">输入原始文本</label>
+                        <textarea id="encode-input" data-i18n-placeholder="encrypted.urlcode.encodeInputPlaceholder"
+                            placeholder="输入需要编码的文本或 URL..."></textarea>
                         <div class="char-count" id="encode-count">字符数: 0</div>
                     </div>
 
                     <div class="actions-row">
-                        <button class="btn" onclick="doEncode()">编码</button>
-                        <button class="btn btn-outline" onclick="clearAll('encode')">清空</button>
+                        <button class="btn" onclick="doEncode()" data-i18n="encrypted.urlcode.encodeBtn">编码</button>
+                        <button class="btn btn-outline" onclick="clearAll('encode')"
+                            data-i18n="encrypted.urlcode.clearBtn">清空</button>
                         <div class="mode-toggle">
                             <button class="active" data-mode="component"
                                 onclick="switchEncodeMode(this, 'component')">encodeURIComponent</button>
@@ -433,134 +456,167 @@
                     </div>
 
                     <div class="input-group" style="margin-top:20px;">
-                        <label for="encode-output">编码结果</label>
-                        <textarea id="encode-output" readonly placeholder="编码结果将显示在这里..."></textarea>
+                        <label for="encode-output" data-i18n="encrypted.urlcode.encodeOutputLabel">编码结果</label>
+                        <textarea id="encode-output" readonly data-i18n-placeholder="encrypted.urlcode.encodeOutputPlaceholder"
+                            placeholder="编码结果将显示在这里..."></textarea>
                         <div class="char-count" id="encode-out-count">字符数: 0</div>
                     </div>
 
                     <div class="actions-row">
-                        <button class="btn btn-copy" onclick="copyResult('encode-output')">复制结果</button>
+                        <button class="btn btn-copy" onclick="copyResult('encode-output')"
+                            data-i18n="encrypted.urlcode.copyResult">复制结果</button>
                     </div>
                 </div>
 
                 <!-- Decode Tab -->
                 <div class="tab-panel" id="tab-decode">
                     <div class="input-group">
-                        <label for="decode-input">输入编码文本</label>
-                        <textarea id="decode-input" placeholder="输入需要解码的 URL 编码文本..."></textarea>
+                        <label for="decode-input" data-i18n="encrypted.urlcode.decodeInputLabel">输入编码文本</label>
+                        <textarea id="decode-input" data-i18n-placeholder="encrypted.urlcode.decodeInputPlaceholder"
+                            placeholder="输入需要解码的 URL 编码文本..."></textarea>
                         <div class="char-count" id="decode-count">字符数: 0</div>
                     </div>
 
                     <div class="actions-row">
-                        <button class="btn" onclick="doDecode()">解码</button>
-                        <button class="btn btn-outline" onclick="clearAll('decode')">清空</button>
+                        <button class="btn" onclick="doDecode()" data-i18n="encrypted.urlcode.decodeBtn">解码</button>
+                        <button class="btn btn-outline" onclick="clearAll('decode')"
+                            data-i18n="encrypted.urlcode.clearBtn">清空</button>
                     </div>
 
                     <div class="input-group" style="margin-top:20px;">
-                        <label for="decode-output">解码结果</label>
-                        <textarea id="decode-output" readonly placeholder="解码结果将显示在这里..."></textarea>
+                        <label for="decode-output" data-i18n="encrypted.urlcode.decodeOutputLabel">解码结果</label>
+                        <textarea id="decode-output" readonly data-i18n-placeholder="encrypted.urlcode.decodeOutputPlaceholder"
+                            placeholder="解码结果将显示在这里..."></textarea>
                         <div class="char-count" id="decode-out-count">字符数: 0</div>
                     </div>
 
                     <div class="actions-row">
-                        <button class="btn btn-copy" onclick="copyResult('decode-output')">复制结果</button>
+                        <button class="btn btn-copy" onclick="copyResult('decode-output')"
+                            data-i18n="encrypted.urlcode.copyResult">复制结果</button>
                     </div>
                 </div>
 
                 <div class="info-section" style="margin-top:24px;">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="encrypted.urlcode.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="encrypted.urlcode.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>对URL进行编码和解码，处理特殊字符。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="encrypted.urlcode.problem1">对URL进行编码和解码，处理特殊字符。</li>
+                                <li data-i18n="encrypted.urlcode.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="encrypted.urlcode.problem3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="encrypted.urlcode.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>URL编码：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>UTF-8：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.urlcode.formatUrl"><strong>URL编码：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.urlcode.formatUtf8"><strong>UTF-8：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="encrypted.urlcode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="encrypted.urlcode.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="encrypted.urlcode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li data-i18n="encrypted.urlcode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li data-i18n="encrypted.urlcode.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="encrypted.urlcode.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、URL编码</h4>
+                            <h4 data-i18n="encrypted.urlcode.usageEncodeTitle">一、URL编码</h4>
                             <ul>
-                                <li><strong>输入原始文本：</strong>在"输入原始文本"文本框中输入需要编码的文本或URL。</li>
-                                <li><strong>选择编码模式：</strong>选择encodeURIComponent或encodeURI模式。</li>
-                                <li><strong>点击编码：</strong>点击"编码"按钮将文本编码为URL安全格式。</li>
-                                <li><strong>查看结果：</strong>编码结果会显示在"编码结果"文本框中。</li>
-                                <li><strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。</li>
-                            </ul>
-                            <h4>二、URL解码</h4>
-                            <ul>
-                                <li><strong>输入编码文本：</strong>在"输入编码文本"文本框中输入需要解码的URL编码文本。</li>
-                                <li><strong>点击解码：</strong>点击"解码"按钮将URL编码文本解码为原始文本。</li>
-                                <li><strong>查看结果：</strong>解码结果会显示在"解码结果"文本框中。</li>
-                                <li><strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。</li>
-                            </ul>
-                            <h4>三、编码模式说明</h4>
-                            <ul>
-                                <li><strong>encodeURIComponent：</strong>编码所有非字母数字字符，包括:/?#等特殊字符，适合编码URL参数值。</li>
-                                <li><strong>encodeURI：</strong>只编码非字母数字字符和部分特殊字符，保留:/?#等字符，适合编码完整URL。</li>
-                                <li><strong>区别：</strong>encodeURIComponent编码范围更广，encodeURI保留更多字符。</li>
-                            </ul>
-                            <h4>四、URL编码基础</h4>
-                            <ul>
-                                <li><strong>编码原理：</strong>将非ASCII字符和特殊字符转换为%XX格式，其中XX是字符的十六进制ASCII码。</li>
-                                <li><strong>空格编码：</strong>空格会被编码为%20（encodeURI/encodeURIComponent）或+（application/x-www-form-urlencoded）。
+                                <li data-i18n="encrypted.urlcode.usageEncodeInput">
+                                    <strong>输入原始文本：</strong>在"输入原始文本"文本框中输入需要编码的文本或URL。
                                 </li>
-                                <li><strong>中文编码：</strong>中文字符会被编码为UTF-8字节的十六进制表示，如"中"编码为%E4%B8%AD。</li>
-                                <li><strong>编码长度：</strong>编码后的文本长度通常会增加，特别是包含中文或特殊字符时。</li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeMode">
+                                    <strong>选择编码模式：</strong>选择encodeURIComponent或encodeURI模式。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeClick"><strong>点击编码：</strong>点击"编码"按钮将文本编码为URL安全格式。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeView"><strong>查看结果：</strong>编码结果会显示在"编码结果"文本框中。</li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeCopy"><strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。
+                                </li>
+                            </ul>
+                            <h4 data-i18n="encrypted.urlcode.usageDecodeTitle">二、URL解码</h4>
+                            <ul>
+                                <li data-i18n="encrypted.urlcode.usageDecodeInput">
+                                    <strong>输入编码文本：</strong>在"输入编码文本"文本框中输入需要解码的URL编码文本。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeClick"><strong>点击解码：</strong>点击"解码"按钮将URL编码文本解码为原始文本。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeView"><strong>查看结果：</strong>解码结果会显示在"解码结果"文本框中。</li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeCopy"><strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。
+                                </li>
+                            </ul>
+                            <h4 data-i18n="encrypted.urlcode.usageModeTitle">三、编码模式说明</h4>
+                            <ul>
+                                <li data-i18n="encrypted.urlcode.usageModeComponent">
+                                    <strong>encodeURIComponent：</strong>编码所有非字母数字字符，包括:/?#等特殊字符，适合编码URL参数值。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageModeUri">
+                                    <strong>encodeURI：</strong>只编码非字母数字字符和部分特殊字符，保留:/?#等字符，适合编码完整URL。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageModeDiff">
+                                    <strong>区别：</strong>encodeURIComponent编码范围更广，encodeURI保留更多字符。
+                                </li>
+                            </ul>
+                            <h4 data-i18n="encrypted.urlcode.usageBaseTitle">四、URL编码基础</h4>
+                            <ul>
+                                <li data-i18n="encrypted.urlcode.usageBasePrinciple">
+                                    <strong>编码原理：</strong>将非ASCII字符和特殊字符转换为%XX格式，其中XX是字符的十六进制ASCII码。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageBaseSpace">
+                                    <strong>空格编码：</strong>空格会被编码为%20（encodeURI/encodeURIComponent）或+（application/x-www-form-urlencoded）。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageBaseChinese">
+                                    <strong>中文编码：</strong>中文字符会被编码为UTF-8字节的十六进制表示，如"中"编码为%E4%B8%AD。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageBaseLength">
+                                    <strong>编码长度：</strong>编码后的文本长度通常会增加，特别是包含中文或特殊字符时。
+                                </li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="encrypted.urlcode.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、编码模式选择</h4>
+                            <h4 data-i18n="encrypted.urlcode.notesModeTitle">一、编码模式选择</h4>
                             <ul>
-                                <li>编码URL参数值时，建议使用encodeURIComponent，确保参数值中的特殊字符被正确编码。</li>
-                                <li>编码完整URL时，建议使用encodeURI，保留URL结构字符。</li>
-                                <li>如果不确定使用哪种模式，encodeURIComponent是更安全的选择。</li>
+                                <li data-i18n="encrypted.urlcode.noteMode1">编码URL参数值时，建议使用encodeURIComponent，确保参数值中的特殊字符被正确编码。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.noteMode2">编码完整URL时，建议使用encodeURI，保留URL结构字符。</li>
+                                <li data-i18n="encrypted.urlcode.noteMode3">如果不确定使用哪种模式，encodeURIComponent是更安全的选择。</li>
                             </ul>
-                            <h4>二、数据安全</h4>
+                            <h4 data-i18n="encrypted.urlcode.notesSecurityTitle">二、数据安全</h4>
                             <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>URL编码只是字符转换，不是加密，敏感信息不应通过URL传输。</li>
-                                <li>建议对密码等敏感信息使用HTTPS传输，确保数据安全。</li>
+                                <li data-i18n="encrypted.urlcode.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li data-i18n="encrypted.urlcode.noteSecurity2">URL编码只是字符转换，不是加密，敏感信息不应通过URL传输。</li>
+                                <li data-i18n="encrypted.urlcode.noteSecurity3">建议对密码等敏感信息使用HTTPS传输，确保数据安全。</li>
                             </ul>
-                            <h4>三、格式规范</h4>
+                            <h4 data-i18n="encrypted.urlcode.notesFormatTitle">三、格式规范</h4>
                             <ul>
-                                <li>URL编码使用%XX格式，其中XX是两位十六进制数字。</li>
-                                <li>十六进制数字不区分大小写，%20和%20效果相同。</li>
-                                <li>解码时会自动处理%XX格式的编码字符。</li>
-                                <li>如果编码文本包含无效的%XX格式，可能会导致解码失败。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat1">URL编码使用%XX格式，其中XX是两位十六进制数字。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat2">十六进制数字不区分大小写，%20和%20效果相同。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat3">解码时会自动处理%XX格式的编码字符。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat4">如果编码文本包含无效的%XX格式，可能会导致解码失败。</li>
                             </ul>
-                            <h4>四、常见问题</h4>
+                            <h4 data-i18n="encrypted.urlcode.notesFaqTitle">四、常见问题</h4>
                             <ul>
-                                <li><strong>解码失败：</strong>检查输入是否为有效的URL编码文本，确保%XX格式正确。</li>
-                                <li><strong>编码结果过长：</strong>包含大量中文或特殊字符的文本编码后长度会显著增加，这是正常现象。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
-                                <li><strong>编码模式选择：</strong>不确定时使用encodeURIComponent，兼容性更好。</li>
-                                <li><strong>字符计数：</strong>字符计数显示的是文本长度，不是字节数。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq1"><strong>解码失败：</strong>检查输入是否为有效的URL编码文本，确保%XX格式正确。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq2">
+                                    <strong>编码结果过长：</strong>包含大量中文或特殊字符的文本编码后长度会显著增加，这是正常现象。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.noteFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq4"><strong>编码模式选择：</strong>不确定时使用encodeURIComponent，兼容性更好。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.noteFaq5"><strong>字符计数：</strong>字符计数显示的是文本长度，不是字节数。</li>
                             </ul>
                         </div>
                     </article>
@@ -571,12 +627,16 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -584,6 +644,7 @@
 
     <script src="../../common/js/utils.js"></script>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script>
         var encodeMode = 'component';
@@ -593,8 +654,8 @@
             document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
             document.getElementById('tab-' + tab).classList.add('active');
             document.querySelectorAll('.tab-btn').forEach(function (b) {
-                if ((tab === 'encode' && b.textContent.indexOf('编码') !== -1 && b.textContent.indexOf('解码') === -1) ||
-                    (tab === 'decode' && b.textContent.indexOf('解码') !== -1)) {
+                if ((tab === 'encode' && b.textContent.indexOf(window.t('encrypted.urlcode.tabEncodeKeyword')) !== -1 && b.textContent.indexOf(window.t('encrypted.urlcode.tabDecodeKeyword')) === -1) ||
+                    (tab === 'decode' && b.textContent.indexOf(window.t('encrypted.urlcode.tabDecodeKeyword')) !== -1)) {
                     b.classList.add('active');
                 }
             });
@@ -613,7 +674,7 @@
             var output = document.getElementById('encode-output');
             if (!input) {
                 output.value = '';
-                document.getElementById('encode-out-count').textContent = '字符数: 0';
+                document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
                 return;
             }
             try {
@@ -622,9 +683,9 @@
                 } else {
                     output.value = encodeURI(input);
                 }
-                document.getElementById('encode-out-count').textContent = '字符数: ' + output.value.length;
+                document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: output.value.length });
             } catch (e) {
-                utils.showError('编码失败: ' + e.message);
+                utils.showError(window.t('encrypted.urlcode.errEncodeFailed') + ': ' + e.message);
             }
         }
 
@@ -633,19 +694,19 @@
             var output = document.getElementById('decode-output');
             if (!input) {
                 output.value = '';
-                document.getElementById('decode-out-count').textContent = '字符数: 0';
+                document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
                 return;
             }
             try {
                 output.value = decodeURIComponent(input);
-                document.getElementById('decode-out-count').textContent = '字符数: ' + output.value.length;
+                document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: output.value.length });
             } catch (e) {
                 // Try decodeURI as fallback
                 try {
                     output.value = decodeURI(input);
-                    document.getElementById('decode-out-count').textContent = '字符数: ' + output.value.length;
+                    document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: output.value.length });
                 } catch (e2) {
-                    utils.showError('解码失败，请检查输入是否为有效的 URL 编码文本');
+                    utils.showError(window.t('encrypted.urlcode.errDecodeFailed'));
                 }
             }
         }
@@ -653,35 +714,43 @@
         function copyResult(textareaId) {
             var textarea = document.getElementById(textareaId);
             var val = textarea.value;
-            if (!val) { utils.showError('没有可复制的内容'); return; }
+            if (!val) { utils.showError(window.t('encrypted.urlcode.errNothingToCopy')); return; }
             navigator.clipboard.writeText(val).then(function () {
-                utils.showSuccess('已复制到剪贴板！');
-            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+                utils.showSuccess(window.t('encrypted.urlcode.successCopiedClipboard'));
+            }).catch(function () { utils.showError(window.t('encrypted.urlcode.errCopyManual')); });
         }
 
         function clearAll(tab) {
             var prefix = tab === 'encode' ? 'encode' : 'decode';
             document.getElementById(prefix + '-input').value = '';
             document.getElementById(prefix + '-output').value = '';
-            document.getElementById(prefix + '-count').textContent = '字符数: 0';
-            document.getElementById(prefix + '-out-count').textContent = '字符数: 0';
+            document.getElementById(prefix + '-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
+            document.getElementById(prefix + '-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
         }
 
         // Real-time encode/decode
         document.getElementById('encode-input').addEventListener('input', function () {
-            document.getElementById('encode-count').textContent = '字符数: ' + this.value.length;
+            document.getElementById('encode-count').textContent = window.t('encrypted.urlcode.charCount', { count: this.value.length });
             if (this.value) doEncode(); else {
                 document.getElementById('encode-output').value = '';
-                document.getElementById('encode-out-count').textContent = '字符数: 0';
+                document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
             }
         });
 
         document.getElementById('decode-input').addEventListener('input', function () {
-            document.getElementById('decode-count').textContent = '字符数: ' + this.value.length;
+            document.getElementById('decode-count').textContent = window.t('encrypted.urlcode.charCount', { count: this.value.length });
             if (this.value) doDecode(); else {
                 document.getElementById('decode-output').value = '';
-                document.getElementById('decode-out-count').textContent = '字符数: 0';
+                document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
             }
+        });
+
+        // 语言包加载完成后重新渲染字符数
+        window.addEventListener('i18n:loaded', function () {
+            document.getElementById('encode-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('encode-input').value.length });
+            document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('encode-output').value.length });
+            document.getElementById('decode-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('decode-input').value.length });
+            document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('decode-output').value.length });
         });
     </script>
 </body>

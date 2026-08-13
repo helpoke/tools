@@ -10,6 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>Unicode 编码/解码工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="Unicode 编码/解码工具 - Helpoke 助点站">
+    <meta property="og:description" content="在线Unicode编码解码工具, Unicode/中文互转, 支持中文转Unicode、Unicode转中文, 免费在线Unicode转换工具">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/encoding-unicode/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Unicode 编码/解码工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="在线Unicode编码解码工具, Unicode/中文互转, 支持中文转Unicode、Unicode转中文, 免费在线Unicode转换工具">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/encoding-unicode/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/encoding-unicode/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/encoding-unicode/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -18,6 +33,7 @@
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
     </style>
+    <script src="../../common/js/i18n/i18n.js"></script>
     <style>
         .container {
             padding: 40px 20px;
@@ -313,7 +329,7 @@
         "description": "在线Unicode编码解码工具，支持Unicode/中文互转。免费在线Unicode转换工具。Online Unicode encoder/decoder supporting Chinese character conversion.",
         "url": "https://helpoke.com/encrypted/encoding-unicode",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "中文转Unicode",
             "Unicode转中文",
@@ -343,53 +359,69 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>Unicode编码工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>Unicode编码工具，支持Unicode编码和解码，处理中文和特殊字符，支持多种编码格式转换</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="encrypted.encoding-unicode.title">Unicode编码工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.encoding-unicode.intro">Unicode编码工具，支持Unicode编码和解码，处理中文和特殊字符，支持多种编码格式转换</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="encode">中文 → Unicode</button>
-                    <button class="tab-btn" data-tab="decode">Unicode → 中文</button>
+                    <button class="tab-btn active" data-tab="encode" data-i18n="encrypted.encoding-unicode.tabEncode">中文 →
+                        Unicode</button>
+                    <button class="tab-btn" data-tab="decode" data-i18n="encrypted.encoding-unicode.tabDecode">Unicode →
+                        中文</button>
                 </div>
 
                 <div id="encode" class="tab-content active">
                     <div class="input-group">
-                        <label for="unicode-input">输入中文文本 <input type="checkbox" id="encode-chinese-only" checked
+                        <label for="unicode-input"><span data-i18n="encrypted.encoding-unicode.encodeLabel">输入中文文本</span> <input
+                                type="checkbox" id="encode-chinese-only" checked
                                 style="margin-left: 10px; cursor: pointer;">
-                            <span style="font-weight: normal;">仅编码中文</span></label>
-                        <textarea id="unicode-input" placeholder="请输入要转换的中文文本..."></textarea>
+                            <span style="font-weight: normal;"
+                                data-i18n="encrypted.encoding-unicode.encodeChineseOnly">仅编码中文</span></label>
+                        <textarea id="unicode-input" data-i18n-placeholder="encrypted.encoding-unicode.inputPlaceholder"
+                            placeholder="请输入要转换的中文文本..."></textarea>
                     </div>
                     <div class="actions-row">
-                        <button class="btn" id="encode-btn">转换</button>
-                        <button class="btn btn-copy" id="copy-encoded-btn" style="display: none;">复制结果</button>
-                        <button class="btn btn-clear" id="clear-encode-btn">内容清空</button>
-                        <button class="btn btn-swap" id="swap-btn" title="切换到解码">⇄</button>
+                        <button class="btn" id="encode-btn" data-i18n="encrypted.encoding-unicode.convertBtn">转换</button>
+                        <button class="btn btn-copy" id="copy-encoded-btn" style="display: none;"
+                            data-i18n="encrypted.encoding-unicode.copyResult">复制结果</button>
+                        <button class="btn btn-clear" id="clear-encode-btn"
+                            data-i18n="encrypted.encoding-unicode.clearContent">内容清空</button>
+                        <button class="btn btn-swap" id="swap-btn" data-i18n-title="encrypted.encoding-unicode.swapToDecode"
+                            title="切换到解码">⇄</button>
                     </div>
                     <div class="result-area" id="encode-result" style="display: none;">
-                        <h4>Unicode 编码结果</h4>
+                        <h4 data-i18n="encrypted.encoding-unicode.encodeResult">Unicode 编码结果</h4>
                         <div class="result-content" id="encoded-text"></div>
                     </div>
                 </div>
 
                 <div id="decode" class="tab-content">
                     <div class="input-group">
-                        <label for="unicode-decode-input">输入 Unicode 字符串</label>
-                        <textarea id="unicode-decode-input"
+                        <label for="unicode-decode-input" data-i18n="encrypted.encoding-unicode.decodeLabel">输入 Unicode
+                            字符串</label>
+                        <textarea id="unicode-decode-input" data-i18n-placeholder="encrypted.encoding-unicode.decodePlaceholder"
                             placeholder="请输入 Unicode 字符串，如 \u4e2d\u6587 或 4e2d6587..."></textarea>
                     </div>
                     <div class="actions-row">
-                        <button class="btn" id="decode-btn">转换</button>
-                        <button class="btn btn-copy" id="copy-decoded-btn" style="display: none;">复制结果</button>
-                        <button class="btn btn-clear" id="clear-decode-btn">内容清空</button>
-                        <button class="btn btn-swap" id="swap-btn-2" title="切换到编码">⇄</button>
+                        <button class="btn" id="decode-btn" data-i18n="encrypted.encoding-unicode.convertBtn">转换</button>
+                        <button class="btn btn-copy" id="copy-decoded-btn" style="display: none;"
+                            data-i18n="encrypted.encoding-unicode.copyResult">复制结果</button>
+                        <button class="btn btn-clear" id="clear-decode-btn"
+                            data-i18n="encrypted.encoding-unicode.clearContent">内容清空</button>
+                        <button class="btn btn-swap" id="swap-btn-2" data-i18n-title="encrypted.encoding-unicode.swapToEncode"
+                            title="切换到编码">⇄</button>
                     </div>
                     <div class="result-area" id="decode-result" style="display: none;">
-                        <h4>中文结果</h4>
+                        <h4 data-i18n="encrypted.encoding-unicode.decodeResult">中文结果</h4>
                         <div class="result-content" id="decoded-text"></div>
                     </div>
                 </div>
@@ -397,93 +429,116 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="encrypted.encoding-unicode.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>进行Unicode编码和解码，处理中文和特殊字符。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="encrypted.encoding-unicode.problem1">进行Unicode编码和解码，处理中文和特殊字符。</li>
+                                <li data-i18n="encrypted.encoding-unicode.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="encrypted.encoding-unicode.problem3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>Unicode：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>UTF-8：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>UTF-16：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.encoding-unicode.formatUnicode"><strong>Unicode：</strong>支持该格式的完整处理功能。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.formatUtf8"><strong>UTF-8：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.encoding-unicode.formatUtf16"><strong>UTF-16：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="encrypted.encoding-unicode.featureOnline">
+                                    <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="encrypted.encoding-unicode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.featureSecurity">
+                                    <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="encrypted.encoding-unicode.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、中文转Unicode</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.usageEncodeTitle">一、中文转Unicode</h4>
                             <ul>
-                                <li><strong>输入文本：</strong>在文本框中输入需要转换的中文文本。</li>
-                                <li><strong>仅编码中文：</strong>勾选"仅编码中文"选项，可以只转换中文字符，保留其他字符不变。</li>
-                                <li><strong>点击转换：</strong>点击"转换"按钮，将中文文本转换为Unicode编码格式。</li>
-                                <li><strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。</li>
-                                <li><strong>清空内容：</strong>点击"内容清空"按钮可以清除输入和输出。</li>
-                                <li><strong>切换模式：</strong>点击双向箭头按钮可以快速切换到Unicode转中文模式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeInput">
+                                    <strong>输入文本：</strong>在文本框中输入需要转换的中文文本。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeChineseOnly">
+                                    <strong>仅编码中文：</strong>勾选"仅编码中文"选项，可以只转换中文字符，保留其他字符不变。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeConvert">
+                                    <strong>点击转换：</strong>点击"转换"按钮，将中文文本转换为Unicode编码格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.copyResultDesc">
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.encoding-unicode.clearContentDesc">
+                                    <strong>清空内容：</strong>点击"内容清空"按钮可以清除输入和输出。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeSwap">
+                                    <strong>切换模式：</strong>点击双向箭头按钮可以快速切换到Unicode转中文模式。</li>
                             </ul>
-                            <h4>二、Unicode转中文</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.usageDecodeTitle">二、Unicode转中文</h4>
                             <ul>
-                                <li><strong>输入Unicode：</strong>在文本框中输入Unicode编码的字符串，支持多种格式。</li>
-                                <li><strong>支持格式：</strong>支持
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeInput">
+                                    <strong>输入Unicode：</strong>在文本框中输入Unicode编码的字符串，支持多种格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeFormats"><strong>支持格式：</strong>支持
                                     <code>\u4e2d\u6587</code>、<code>\u{4e2d}\u{6587}</code>、<code>4e2d6587</code> 等格式。
                                 </li>
-                                <li><strong>点击转换：</strong>点击"转换"按钮，将Unicode编码还原为中文字符。</li>
-                                <li><strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。</li>
-                                <li><strong>清空内容：</strong>点击"内容清空"按钮可以清除输入和输出。</li>
-                                <li><strong>切换模式：</strong>点击双向箭头按钮可以快速切换到中文转Unicode模式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeConvert">
+                                    <strong>点击转换：</strong>点击"转换"按钮，将Unicode编码还原为中文字符。</li>
+                                <li data-i18n="encrypted.encoding-unicode.copyResultDesc">
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.encoding-unicode.clearContentDesc">
+                                    <strong>清空内容：</strong>点击"内容清空"按钮可以清除输入和输出。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeSwap">
+                                    <strong>切换模式：</strong>点击双向箭头按钮可以快速切换到中文转Unicode模式。</li>
                             </ul>
-                            <h4>三、Unicode 编码格式说明</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.usageFormatTitle">三、Unicode 编码格式说明</h4>
                             <ul>
-                                <li><strong>\uXXXX 格式：</strong>4位十六进制编码，如 <code>\u4e2d</code> 表示"中"。</li>
-                                <li><strong>\u{XXXXXX} 格式：</strong>ES6扩展格式，支持4-6位十六进制编码。</li>
-                                <li><strong>纯十六进制格式：</strong>如 <code>4e2d6587</code>，系统会自动按4位分割解析。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageFormatUxxxx"><strong>\uXXXX 格式：</strong>4位十六进制编码，如
+                                    <code>\u4e2d</code> 表示"中"。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageFormatUbrace"><strong>\u{XXXXXX}
+                                        格式：</strong>ES6扩展格式，支持4-6位十六进制编码。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageFormatHex"><strong>纯十六进制格式：</strong>如
+                                    <code>4e2d6587</code>，系统会自动按4位分割解析。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="encrypted.encoding-unicode.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式规范</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.notesFormatTitle">一、格式规范</h4>
                             <ul>
-                                <li>Unicode编码是4位或更多位的十六进制数，范围为U+0000到U+10FFFF。</li>
-                                <li>输入的Unicode字符串必须符合格式要求，否则可能无法正确解码。</li>
-                                <li>纯十六进制格式需要连续输入，不能包含空格或其他分隔符。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFormat1">Unicode编码是4位或更多位的十六进制数，范围为U+0000到U+10FFFF。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFormat2">输入的Unicode字符串必须符合格式要求，否则可能无法正确解码。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFormat3">纯十六进制格式需要连续输入，不能包含空格或其他分隔符。</li>
                             </ul>
-                            <h4>二、编码范围</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.notesRangeTitle">二、编码范围</h4>
                             <ul>
-                                <li>中文汉字的Unicode编码范围是U+4E00到U+9FFF。</li>
-                                <li>基本ASCII字符（0-127）的Unicode编码与ASCII码相同。</li>
-                                <li>扩展字符需要使用4位以上的十六进制编码。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteRange1">中文汉字的Unicode编码范围是U+4E00到U+9FFF。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteRange2">基本ASCII字符（0-127）的Unicode编码与ASCII码相同。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteRange3">扩展字符需要使用4位以上的十六进制编码。</li>
                             </ul>
-                            <h4>三、数据安全</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.notesSecurityTitle">三、数据安全</h4>
                             <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>Unicode编码不是加密算法，只是字符的数字表示。</li>
-                                <li>不要使用Unicode编码传输敏感信息。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteSecurity2">Unicode编码不是加密算法，只是字符的数字表示。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteSecurity3">不要使用Unicode编码传输敏感信息。</li>
                             </ul>
-                            <h4>四、常见问题</h4>
+                            <h4 data-i18n="encrypted.encoding-unicode.notesFaqTitle">四、常见问题</h4>
                             <ul>
-                                <li><strong>转换失败：</strong>检查Unicode字符串格式是否正确，确保没有多余空格。</li>
-                                <li><strong>结果为空：</strong>确认输入内容不为空，且符合Unicode编码格式。</li>
-                                <li><strong>部分字符未转换：</strong>非中文字符默认不会转换，可以取消"仅编码中文"选项。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq1">
+                                    <strong>转换失败：</strong>检查Unicode字符串格式是否正确，确保没有多余空格。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq2">
+                                    <strong>结果为空：</strong>确认输入内容不为空，且符合Unicode编码格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq3">
+                                    <strong>部分字符未转换：</strong>非中文字符默认不会转换，可以取消"仅编码中文"选项。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq4"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
                             </ul>
                         </div>
                     </article>
@@ -492,18 +547,23 @@
         </div>
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

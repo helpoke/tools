@@ -10,11 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>图像去水印工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="图像去水印工具 - Helpoke 助点站">
+    <meta property="og:description" content="图像去水印工具, 图片去水印, 图像水印去除, 图片模糊去水印, 图像马赛克去水印, 本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/image/watermark-remove/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图像去水印工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="图像去水印工具, 图片去水印, 图像水印去除, 图片模糊去水印, 图像马赛克去水印, 本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/image/watermark-remove/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/watermark-remove/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/image/watermark-remove/">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -26,7 +42,7 @@
         "description": "免费在线图像去水印工具，支持智能填充、模糊处理、马赛克覆盖等多种去水印方式，本地处理保护隐私。Free online image watermark removal tool with multiple removal methods.",
         "url": "https://helpoke.com/image/watermark-remove",
         "applicationCategory": "https://schema.org/ImageProcessing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "支持模糊法去水印",
             "支持马赛克覆盖去水印",
@@ -58,11 +74,14 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图片去水印工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>图片去水印工具，支持去除图片中的水印、文字和其他遮挡物，支持多种图片格式</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="image.watermark-remove.title">图片去水印工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="image.watermark-remove.intro">图片去水印工具，支持去除图片中的水印、文字和其他遮挡物，支持多种图片格式</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
             <div class="tool-layout">
@@ -70,20 +89,23 @@
                     <label for="fileInput" class="upload-area" id="uploadArea">
                         <input type="file" id="fileInput" accept="image/*" multiple hidden>
                         <div class="upload-icon">🖼️</div>
-                        <div class="upload-text">点击或拖拽上传图片</div>
-                        <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选）</div>
+                        <div class="upload-text" data-i18n="image.watermark-remove.uploadText">点击或拖拽上传图片</div>
+                        <div class="upload-hint" data-i18n="image.watermark-remove.uploadHint">支持 JPG、PNG、WebP、GIF、BMP
+                            格式（支持多选）</div>
                     </label>
 
 
                     <div class="preview-section" id="previewSection" style="display: none;">
-                        <h3>图片预览</h3>
+                        <h3 data-i18n="image.watermark-remove.previewTitle">图片预览</h3>
                         <div class="file-info" id="fileInfo" style="display: none;">
                             <div class="file-details">
-                                <button class="btn btn-secondary" id="prevBtn" disabled>上一张</button>
+                                <button class="btn btn-secondary" id="prevBtn" disabled
+                                    data-i18n="image.watermark-remove.prevBtn">上一张</button>
                                 <span class="file-name" id="fileName"></span>
                                 <span class="file-size" id="fileSize"></span>
                                 <span class="file-index" id="fileIndex"></span>
-                                <button class="btn btn-secondary" id="nextBtn" disabled>下一张</button>
+                                <button class="btn btn-secondary" id="nextBtn" disabled
+                                    data-i18n="image.watermark-remove.nextBtn">下一张</button>
                             </div>
                         </div>
                         <div class="preview-container">
@@ -92,84 +114,92 @@
                                 <div id="watermarkOverlay"></div>
                             </div>
                             <div class="preview-controls">
-                                <button class="btn btn-secondary" id="addAreaBtn">添加区域</button>
-                                <button class="btn btn-danger" id="deleteAreaBtn" disabled>删除当前区域</button>
-                                <span id="areaCount" style="margin-left: 10px; color: #666;">区域数量：0</span>
+                                <button class="btn btn-secondary" id="addAreaBtn"
+                                    data-i18n="image.watermark-remove.addAreaBtn">添加区域</button>
+                                <button class="btn btn-danger" id="deleteAreaBtn" disabled
+                                    data-i18n="image.watermark-remove.deleteAreaBtn">删除当前区域</button>
+                                <span id="areaCount" style="margin-left: 10px; color: #666;"
+                                    data-i18n="image.watermark-remove.areaCount">区域数量：0</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="settings-section" id="settingsSection" style="display: none;">
-                        <h3>去水印设置</h3>
+                        <h3 data-i18n="image.watermark-remove.settingsTitle">去水印设置</h3>
 
                         <div class="setting-group">
-                            <label>去水印方式：</label>
+                            <label data-i18n="image.watermark-remove.methodLabel">去水印方式：</label>
                             <div class="radio-group">
                                 <label class="radio-label">
                                     <input type="radio" name="removeMethod" value="fill" checked>
-                                    <span>智能填充</span>
+                                    <span data-i18n="image.watermark-remove.methodFill">智能填充</span>
                                 </label>
                                 <label class="radio-label">
                                     <input type="radio" name="removeMethod" value="blur">
-                                    <span>模糊处理</span>
+                                    <span data-i18n="image.watermark-remove.methodBlur">模糊处理</span>
                                 </label>
                                 <label class="radio-label">
                                     <input type="radio" name="removeMethod" value="mosaic">
-                                    <span>马赛克覆盖</span>
+                                    <span data-i18n="image.watermark-remove.methodMosaic">马赛克覆盖</span>
                                 </label>
                                 <label class="radio-label">
                                     <input type="radio" name="removeMethod" value="feather">
-                                    <span>羽化边缘</span>
+                                    <span data-i18n="image.watermark-remove.methodFeather">羽化边缘</span>
                                 </label>
                                 <label class="radio-label">
                                     <input type="radio" name="removeMethod" value="color">
-                                    <span>颜色覆盖</span>
+                                    <span data-i18n="image.watermark-remove.methodColor">颜色覆盖</span>
                                 </label>
                                 <label class="radio-label">
                                     <input type="radio" name="removeMethod" value="median">
-                                    <span>中值模糊</span>
+                                    <span data-i18n="image.watermark-remove.methodMedian">中值模糊</span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="setting-row">
                             <div class="setting-group" id="setting-blur">
-                                <label for="blurRadius">模糊半径：</label>
+                                <label for="blurRadius" data-i18n="image.watermark-remove.blurLabel">模糊半径：</label>
                                 <input type="range" id="blurRadius" min="1" max="50" value="10" step="1">
                                 <span id="blurValue">10</span>
                             </div>
                             <div class="setting-group" id="setting-mosaic">
-                                <label for="mosaicSize">马赛克大小：</label>
+                                <label for="mosaicSize" data-i18n="image.watermark-remove.mosaicLabel">马赛克大小：</label>
                                 <input type="range" id="mosaicSize" min="2" max="30" value="8" step="1">
                                 <span id="mosaicValue">8</span>
                             </div>
                             <div class="setting-group" id="setting-feather">
-                                <label for="featherStrength">羽化强度：</label>
+                                <label for="featherStrength" data-i18n="image.watermark-remove.featherLabel">羽化强度：</label>
                                 <input type="range" id="featherStrength" min="50" max="100" value="90" step="5">
                                 <span id="featherValue">90%</span>
                             </div>
                             <div class="setting-group" id="setting-color">
-                                <label for="colorPicker">覆盖颜色：</label>
+                                <label for="colorPicker" data-i18n="image.watermark-remove.colorLabel">覆盖颜色：</label>
                                 <input type="color" id="colorPicker" value="#ffffff">
-                                <button class="btn btn-sm btn-secondary" id="autoColorBtn">自动检测</button>
+                                <button class="btn btn-sm btn-secondary" id="autoColorBtn"
+                                    data-i18n="image.watermark-remove.autoColorBtn">自动检测</button>
                             </div>
                         </div>
 
                         <div class="action-buttons">
-                            <button class="btn btn-primary" id="applyBtn">应用去水印</button>
-                            <button class="btn btn-secondary" id="downloadBtn" disabled>下载单个图片</button>
-                            <button class="btn btn-secondary" id="downloadAllBtn" disabled>下载全部图片</button>
+                            <button class="btn btn-primary" id="applyBtn"
+                                data-i18n="image.watermark-remove.applyBtn">应用去水印</button>
+                            <button class="btn btn-secondary" id="downloadBtn" disabled
+                                data-i18n="image.watermark-remove.downloadBtn">下载单个图片</button>
+                            <button class="btn btn-secondary" id="downloadAllBtn" disabled
+                                data-i18n="image.watermark-remove.downloadAllBtn">下载全部图片</button>
                         </div>
                     </div>
 
                     <div class="result-section" id="resultSection" style="display: none;">
-                        <h3>处理结果</h3>
+                        <h3 data-i18n="image.watermark-remove.resultTitle">处理结果</h3>
                         <div class="result-container">
                             <div class="result-image">
-                                <img id="resultImage" alt="处理后的图片">
+                                <img id="resultImage" alt="处理后的图片" data-i18n="image.watermark-remove.resultAlt">
                             </div>
                             <div class="result-info">
-                                <button class="btn btn-primary" id="saveResultBtn">保存图片</button>
+                                <button class="btn btn-primary" id="saveResultBtn"
+                                    data-i18n="image.watermark-remove.saveResultBtn">保存图片</button>
                             </div>
                         </div>
                     </div>
@@ -177,125 +207,177 @@
                     <div class="info-section">
                         <article class="info-details">
                             <header>
-                                <h3>工具介绍</h3>
+                                <h3 data-i18n="image.watermark-remove.infoIntro">工具介绍</h3>
                             </header>
                             <div class="info-content">
-                                <h4>一、解决的问题</h4>
+                                <h4 data-i18n="image.watermark-remove.problemsTitle">一、解决的问题</h4>
                                 <ul>
-                                    <li>去除图片中的水印和文字。</li>
-                                    <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                    <li>无需安装专业软件，随时随地在线使用。</li>
+                                    <li data-i18n="image.watermark-remove.problem1">去除图片中的水印和文字。</li>
+                                    <li data-i18n="image.watermark-remove.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                    <li data-i18n="image.watermark-remove.problem3">无需安装专业软件，随时随地在线使用。</li>
                                 </ul>
-                                <h4>二、支持的格式</h4>
+                                <h4 data-i18n="image.watermark-remove.formatTitle">二、支持的格式</h4>
                                 <ul>
-                                    <li><strong>JPG：</strong>支持该格式的完整处理功能。</li>
-                                    <li><strong>PNG：</strong>支持该格式的完整处理功能。</li>
-                                    <li><strong>WebP：</strong>支持该格式的完整处理功能。</li>
+                                    <li data-i18n="image.watermark-remove.formatJpg"><strong>JPG：</strong>支持该格式的完整处理功能。</li>
+                                    <li data-i18n="image.watermark-remove.formatPng"><strong>PNG：</strong>支持该格式的完整处理功能。</li>
+                                    <li data-i18n="image.watermark-remove.formatWebp"><strong>WebP：</strong>支持该格式的完整处理功能。</li>
                                 </ul>
-                                <h4>三、核心功能</h4>
+                                <h4 data-i18n="image.watermark-remove.featuresTitle">三、核心功能</h4>
                                 <ul>
-                                    <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                    <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                    <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                    <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                    <li data-i18n="image.watermark-remove.featureOnline">
+                                        <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.featurePreview">
+                                        <strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.featureExport">
+                                        <strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.featureSecurity">
+                                        <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                                    </li>
                                 </ul>
                             </div>
                         </article>
 
                         <article class="info-details">
                             <header>
-                                <h3>使用说明</h3>
+                                <h3 data-i18n="image.watermark-remove.infoUsage">使用说明</h3>
                             </header>
                             <div class="info-content">
-                                <h4>一、上传图片</h4>
+                                <h4 data-i18n="image.watermark-remove.usageUploadTitle">一、上传图片</h4>
                                 <ul>
-                                    <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
-                                    <li><strong>批量上传：</strong>支持多选上传。</li>
-                                    <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                                    <li data-i18n="image.watermark-remove.usageUploadClick">
+                                        <strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageUploadBatch"><strong>批量上传：</strong>支持多选上传。</li>
+                                    <li data-i18n="image.watermark-remove.usageUploadFormat"><strong>支持格式：</strong>支持
+                                        JPG、PNG、WebP、GIF、BMP 格式。</li>
                                 </ul>
-                                <h4>二、添加去水印区域</h4>
+                                <h4 data-i18n="image.watermark-remove.usageAreaTitle">二、添加去水印区域</h4>
                                 <ul>
-                                    <li><strong>添加区域：</strong>点击"添加区域"按钮，在图片上绘制去水印区域。</li>
-                                    <li><strong>绘制区域：</strong>拖动鼠标绘制矩形区域覆盖水印。</li>
-                                    <li><strong>删除区域：</strong>点击"删除当前区域"按钮删除选中区域。</li>
-                                    <li><strong>多个区域：</strong>支持添加多个去水印区域。</li>
+                                    <li data-i18n="image.watermark-remove.usageAreaAdd">
+                                        <strong>添加区域：</strong>点击"添加区域"按钮，在图片上绘制去水印区域。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageAreaDraw"><strong>绘制区域：</strong>拖动鼠标绘制矩形区域覆盖水印。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageAreaDelete">
+                                        <strong>删除区域：</strong>点击"删除当前区域"按钮删除选中区域。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageAreaMultiple">
+                                        <strong>多个区域：</strong>支持添加多个去水印区域。
+                                    </li>
                                 </ul>
-                                <h4>三、选择去水印方式</h4>
+                                <h4 data-i18n="image.watermark-remove.usageMethodTitle">三、选择去水印方式</h4>
                                 <ul>
-                                    <li><strong>智能填充：</strong>使用周围像素智能填充水印区域，效果自然。</li>
-                                    <li><strong>模糊处理：</strong>对水印区域进行高斯模糊处理。</li>
-                                    <li><strong>马赛克覆盖：</strong>使用马赛克效果覆盖水印区域。</li>
-                                    <li><strong>羽化边缘：</strong>对水印区域进行边缘羽化处理。</li>
-                                    <li><strong>颜色覆盖：</strong>使用指定颜色覆盖水印区域。</li>
-                                    <li><strong>中值模糊：</strong>使用中值滤波算法去除水印。</li>
+                                    <li data-i18n="image.watermark-remove.usageMethodFill">
+                                        <strong>智能填充：</strong>使用周围像素智能填充水印区域，效果自然。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageMethodBlur">
+                                        <strong>模糊处理：</strong>对水印区域进行高斯模糊处理。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageMethodMosaic">
+                                        <strong>马赛克覆盖：</strong>使用马赛克效果覆盖水印区域。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageMethodFeather">
+                                        <strong>羽化边缘：</strong>对水印区域进行边缘羽化处理。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageMethodColor">
+                                        <strong>颜色覆盖：</strong>使用指定颜色覆盖水印区域。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageMethodMedian">
+                                        <strong>中值模糊：</strong>使用中值滤波算法去除水印。
+                                    </li>
                                 </ul>
-                                <h4>四、调整参数</h4>
+                                <h4 data-i18n="image.watermark-remove.usageParamTitle">四、调整参数</h4>
                                 <ul>
-                                    <li><strong>模糊半径：</strong>调整模糊处理的半径（1-50）。</li>
-                                    <li><strong>马赛克大小：</strong>调整马赛克块的大小（2-30）。</li>
-                                    <li><strong>羽化强度：</strong>调整羽化边缘的强度（50%-100%）。</li>
-                                    <li><strong>覆盖颜色：</strong>选择颜色覆盖的颜色，可点击"自动检测"自动选择。</li>
+                                    <li data-i18n="image.watermark-remove.usageParamBlur">
+                                        <strong>模糊半径：</strong>调整模糊处理的半径（1-50）。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageParamMosaic">
+                                        <strong>马赛克大小：</strong>调整马赛克块的大小（2-30）。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageParamFeather">
+                                        <strong>羽化强度：</strong>调整羽化边缘的强度（50%-100%）。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageParamColor">
+                                        <strong>覆盖颜色：</strong>选择颜色覆盖的颜色，可点击"自动检测"自动选择。
+                                    </li>
                                 </ul>
-                                <h4>五、应用去水印</h4>
+                                <h4 data-i18n="image.watermark-remove.usageApplyTitle">五、应用去水印</h4>
                                 <ul>
-                                    <li><strong>点击应用：</strong>点击"应用去水印"按钮执行处理。</li>
-                                    <li><strong>查看结果：</strong>处理结果显示在结果区域。</li>
-                                    <li><strong>保存图片：</strong>点击"保存图片"或"下载单个图片"按钮保存结果。</li>
-                                    <li><strong>批量下载：</strong>点击"下载全部图片"按钮打包下载所有处理后的图片。</li>
+                                    <li data-i18n="image.watermark-remove.usageApplyClick">
+                                        <strong>点击应用：</strong>点击"应用去水印"按钮执行处理。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageApplyResult"><strong>查看结果：</strong>处理结果显示在结果区域。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageApplySave">
+                                        <strong>保存图片：</strong>点击"保存图片"或"下载单个图片"按钮保存结果。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageApplyBatch">
+                                        <strong>批量下载：</strong>点击"下载全部图片"按钮打包下载所有处理后的图片。
+                                    </li>
                                 </ul>
-                                <h4>六、去水印方式选择建议</h4>
+                                <h4 data-i18n="image.watermark-remove.usageAdviceTitle">六、去水印方式选择建议</h4>
                                 <ul>
-                                    <li><strong>复杂背景：</strong>使用智能填充，效果最自然。</li>
-                                    <li><strong>纯色背景：</strong>使用颜色覆盖或智能填充。</li>
-                                    <li><strong>文字水印：</strong>使用智能填充或模糊处理。</li>
-                                    <li><strong>需要掩盖：</strong>使用马赛克覆盖。</li>
+                                    <li data-i18n="image.watermark-remove.usageAdviceComplex">
+                                        <strong>复杂背景：</strong>使用智能填充，效果最自然。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageAdviceSolid"><strong>纯色背景：</strong>使用颜色覆盖或智能填充。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageAdviceText"><strong>文字水印：</strong>使用智能填充或模糊处理。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.usageAdviceCover"><strong>需要掩盖：</strong>使用马赛克覆盖。
+                                    </li>
                                 </ul>
                             </div>
                         </article>
                         <article class="info-details">
                             <header>
-                                <h3>注意事项</h3>
+                                <h3 data-i18n="image.watermark-remove.infoNotes">注意事项</h3>
                             </header>
                             <div class="info-content">
-                                <h4>一、数据安全</h4>
+                                <h4 data-i18n="image.watermark-remove.notesSecurityTitle">一、数据安全</h4>
                                 <ul>
-                                    <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                    <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
-                                    <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                                    <li data-i18n="image.watermark-remove.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                    <li data-i18n="image.watermark-remove.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                                    <li data-i18n="image.watermark-remove.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
                                 </ul>
-                                <h4>二、去水印效果</h4>
+                                <h4 data-i18n="image.watermark-remove.notesEffectTitle">二、去水印效果</h4>
                                 <ul>
-                                    <li>去水印效果取决于图片背景复杂度和水印位置。</li>
-                                    <li>复杂背景下智能填充效果最好。</li>
-                                    <li>纯色背景下颜色覆盖效果更精确。</li>
-                                    <li>建议尝试不同的去水印方式找到最佳效果。</li>
+                                    <li data-i18n="image.watermark-remove.noteEffect1">去水印效果取决于图片背景复杂度和水印位置。</li>
+                                    <li data-i18n="image.watermark-remove.noteEffect2">复杂背景下智能填充效果最好。</li>
+                                    <li data-i18n="image.watermark-remove.noteEffect3">纯色背景下颜色覆盖效果更精确。</li>
+                                    <li data-i18n="image.watermark-remove.noteEffect4">建议尝试不同的去水印方式找到最佳效果。</li>
                                 </ul>
-                                <h4>三、区域选择</h4>
+                                <h4 data-i18n="image.watermark-remove.notesAreaTitle">三、区域选择</h4>
                                 <ul>
-                                    <li>区域应完全覆盖水印，不要过大以免影响其他内容。</li>
-                                    <li>可以添加多个区域处理不同位置的水印。</li>
-                                    <li>区域数量显示在预览区域下方。</li>
+                                    <li data-i18n="image.watermark-remove.noteArea1">区域应完全覆盖水印，不要过大以免影响其他内容。</li>
+                                    <li data-i18n="image.watermark-remove.noteArea2">可以添加多个区域处理不同位置的水印。</li>
+                                    <li data-i18n="image.watermark-remove.noteArea3">区域数量显示在预览区域下方。</li>
                                 </ul>
-                                <h4>四、参数调整</h4>
+                                <h4 data-i18n="image.watermark-remove.notesParamTitle">四、参数调整</h4>
                                 <ul>
-                                    <li>模糊半径过大可能导致过度模糊。</li>
-                                    <li>马赛克大小过大可能影响周围区域。</li>
-                                    <li>羽化强度越高，边缘越自然。</li>
-                                    <li>自动检测颜色可能不完全准确，可手动调整。</li>
+                                    <li data-i18n="image.watermark-remove.noteParam1">模糊半径过大可能导致过度模糊。</li>
+                                    <li data-i18n="image.watermark-remove.noteParam2">马赛克大小过大可能影响周围区域。</li>
+                                    <li data-i18n="image.watermark-remove.noteParam3">羽化强度越高，边缘越自然。</li>
+                                    <li data-i18n="image.watermark-remove.noteParam4">自动检测颜色可能不完全准确，可手动调整。</li>
                                 </ul>
-                                <h4>五、性能提示</h4>
+                                <h4 data-i18n="image.watermark-remove.notesPerfTitle">五、性能提示</h4>
                                 <ul>
-                                    <li>大尺寸图片处理需要较长时间，请耐心等待。</li>
-                                    <li>处理期间不要关闭浏览器或刷新页面。</li>
-                                    <li>建议在去水印前先压缩图片以提高处理速度。</li>
-                                    <li>批量下载会打包为ZIP文件。</li>
+                                    <li data-i18n="image.watermark-remove.notePerf1">大尺寸图片处理需要较长时间，请耐心等待。</li>
+                                    <li data-i18n="image.watermark-remove.notePerf2">处理期间不要关闭浏览器或刷新页面。</li>
+                                    <li data-i18n="image.watermark-remove.notePerf3">建议在去水印前先压缩图片以提高处理速度。</li>
+                                    <li data-i18n="image.watermark-remove.notePerf4">批量下载会打包为ZIP文件。</li>
                                 </ul>
-                                <h4>六、常见问题</h4>
+                                <h4 data-i18n="image.watermark-remove.notesFaqTitle">六、常见问题</h4>
                                 <ul>
-                                    <li><strong>去水印效果不佳：</strong>尝试选择不同的去水印方式。</li>
-                                    <li><strong>区域无法绘制：</strong>确保已添加区域并在图片上拖动。</li>
-                                    <li><strong>颜色检测不准确：</strong>手动选择合适的颜色。</li>
-                                    <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                                    <li data-i18n="image.watermark-remove.noteFaq1"><strong>去水印效果不佳：</strong>尝试选择不同的去水印方式。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.noteFaq2"><strong>区域无法绘制：</strong>确保已添加区域并在图片上拖动。
+                                    </li>
+                                    <li data-i18n="image.watermark-remove.noteFaq3"><strong>颜色检测不准确：</strong>手动选择合适的颜色。</li>
+                                    <li data-i18n="image.watermark-remove.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                                 </ul>
                             </div>
                         </article>
@@ -307,12 +389,16 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -320,6 +406,7 @@
 
     <script src="../../common/lib/jszip.min.js"></script>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

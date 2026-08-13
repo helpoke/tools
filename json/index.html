@@ -10,11 +10,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>JSON在线格式化对比工具</title>
+    <meta property="og:title" content="JSON在线格式化对比工具">
+    <meta property="og:description" content="JSON格式化工具,可以手动选择折叠节点,JSON比对工具,可高亮展示节点，指出所有不同点，JSON与Java Bean互转支持值自动填充">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/json/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="JSON在线格式化对比工具">
+    <meta name="twitter:description" content="JSON格式化工具,可以手动选择折叠节点,JSON比对工具,可高亮展示节点，指出所有不同点，JSON与Java Bean互转支持值自动填充">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/json/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/json/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/json/">
 
     <link rel="stylesheet" href="../common/css/style.css">
     <link rel="stylesheet" href="../common/css/utils.css">
+    <link rel="stylesheet" href="../common/css/i18n.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- i18n Script -->
+    <script src="../common/js/i18n/i18n.js"></script>
 
     <!-- "codemirror": "https://esm.sh/codemirror@6.0.1?deps=@codemirror/state@6.5.2", -->
     <!-- "@codemirror/lang-json": "https://esm.sh/@codemirror/lang-json@6.0.1?deps=@codemirror/state@6.5.2" -->
@@ -53,7 +72,7 @@
         "description": "JSON格式化、JSON比对、JSON与Java Bean互转工具。支持节点折叠、差异高亮、值自动填充等功能。免费在线JSON工具。JSON formatting, comparison and conversion tool with node folding and diff highlighting.",
         "url": "https://helpoke.com/json",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "JSON格式化与压缩",
             "JSON比对，高亮显示差异",
@@ -85,20 +104,23 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>JSON工具集</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>JSON工具集，包含格式化、比对、Java Bean互转、XML互转、压缩等功能，支持节点折叠与差异高亮，支持语法校验</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="tool.json.title">JSON工具集</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与
+                    FAQ</span></a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.json.desc">JSON工具集，包含格式化、比对、Java Bean互转、XML互转、压缩等功能，支持节点折叠与差异高亮，支持语法校验</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
 
             <!-- Tab导航 -->
             <div class="tabs">
-                <button class="tab-btn active" data-tab="format"><b>格式化</b></button>
-                <button class="tab-btn" data-tab="compare"><b>比对</b></button>
-                <button class="tab-btn" data-tab="javabean"><b>转Java</b></button>
-                <button class="tab-btn" data-tab="xml"><b>转XML</b></button>
+                <button class="tab-btn active" data-tab="format"><b data-i18n="tool.json.tabs.format">格式化</b></button>
+                <button class="tab-btn" data-tab="compare"><b data-i18n="tool.json.tabs.compare">比对</b></button>
+                <button class="tab-btn" data-tab="javabean"><b data-i18n="tool.json.tabs.javabean">转Java</b></button>
+                <button class="tab-btn" data-tab="xml"><b data-i18n="tool.json.tabs.xml">转XML</b></button>
             </div>
 
             <!-- Tab内容区域 -->
@@ -107,16 +129,16 @@
                 <div id="format-tab" class="tab-pane active">
                     <div class="tool-container">
                         <div class="compare-header">
-                            <h2>格式化</h2>
+                            <h2 data-i18n="tool.json.tabs.format">格式化</h2>
                             <div class="button-group">
-                                <button id="paste-btn">粘贴</button>
-                                <button id="copy-btn">复制</button>
-                                <button id="format-btn">格式化</button>
-                                <button id="collapse-btn">折叠</button>
-                                <button id="minify-btn">压缩</button>
-                                <button id="escape-btn">转义</button>
-                                <button id="line-feed-btn">换行</button>
-                                <button id="clear-btn">清空</button>
+                                <button id="paste-btn" data-i18n="common.buttons.paste">粘贴</button>
+                                <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                                <button id="format-btn" data-i18n="common.buttons.format">格式化</button>
+                                <button id="collapse-btn" data-i18n="common.buttons.collapse">折叠</button>
+                                <button id="minify-btn" data-i18n="common.buttons.minify">压缩</button>
+                                <button id="escape-btn" data-i18n="common.buttons.escape">转义</button>
+                                <button id="line-feed-btn" data-i18n="common.buttons.newLine">换行</button>
+                                <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
                             </div>
                         </div>
                         <div class="input-box">
@@ -128,14 +150,14 @@
                                 <div id="format-tree-view" class="format-tree-view" style="display:none;"></div>
                             </div>
                             <div class="bottom-buttons">
-                                <button id="example-btn">示例</button>
-                                <button id="copy-btn-bottom">复制</button>
-                                <button id="format-btn-bottom">格式化</button>
-                                <button id="collapse-btn-bottom">折叠</button>
-                                <button id="minify-btn-bottom">压缩</button>
-                                <button id="escape-btn-bottom">转义</button>
-                                <button id="paste-btn-bottom" hidden>粘贴</button>
-                                <button id="clear-btn-bottom">清空</button>
+                                <button id="example-btn" data-i18n="common.buttons.example">示例</button>
+                                <button id="copy-btn-bottom" data-i18n="common.buttons.copy">复制</button>
+                                <button id="format-btn-bottom" data-i18n="common.buttons.format">格式化</button>
+                                <button id="collapse-btn-bottom" data-i18n="common.buttons.collapse">折叠</button>
+                                <button id="minify-btn-bottom" data-i18n="common.buttons.minify">压缩</button>
+                                <button id="escape-btn-bottom" data-i18n="common.buttons.escape">转义</button>
+                                <button id="paste-btn-bottom" hidden data-i18n="common.buttons.paste">粘贴</button>
+                                <button id="clear-btn-bottom" data-i18n="common.buttons.clear">清空</button>
                             </div>
                         </div>
                     </div>
@@ -145,13 +167,13 @@
                 <div id="compare-tab" class="tab-pane">
                     <div class="compare-container">
                         <div class="compare-header">
-                            <h2>比对</h2>
+                            <h2 data-i18n="tool.json.tabs.compare">比对</h2>
                             <div class="button-group">
-                                <button id="start-compare-btn">开始比对</button>
-                                <button id="sync-format-btn">同步格式化</button>
-                                <button id="sync-minify-btn">同步压缩</button>
-                                <button id="sync-escape-btn" hidden>同步转义</button>
-                                <button id="clear-compare-btn">同步清除</button>
+                                <button id="start-compare-btn" data-i18n="common.buttons.startCompare">开始比对</button>
+                                <button id="sync-format-btn" data-i18n="common.buttons.syncFormat">同步格式化</button>
+                                <button id="sync-minify-btn" data-i18n="common.buttons.syncMinify">同步压缩</button>
+                                <button id="sync-escape-btn" hidden data-i18n="common.buttons.syncEscape">同步转义</button>
+                                <button id="clear-compare-btn" data-i18n="common.buttons.syncClear">同步清除</button>
                             </div>
                         </div>
                         <div class="compare-actions">
@@ -160,12 +182,16 @@
                         <div class="compare-content">
                             <div class="compare-box original">
                                 <div class="button-content">
-                                    <h3>原始JSON</h3>
+                                    <h3 data-i18n="tool.json.labels.originalJSON">原始JSON</h3>
                                     <div class="button-group">
-                                        <button id="copy-original-btn" class="copy-btn">复制</button>
-                                        <button id="format-original-btn" class="format-btn">格式化</button>
-                                        <button id="minify-original-btn" class="minify-btn">压缩</button>
-                                        <button id="clear-original-btn" class="clear-btn">清除</button>
+                                        <button id="copy-original-btn" class="copy-btn"
+                                            data-i18n="common.buttons.copy">复制</button>
+                                        <button id="format-original-btn" class="format-btn"
+                                            data-i18n="common.buttons.format">格式化</button>
+                                        <button id="minify-original-btn" class="minify-btn"
+                                            data-i18n="common.buttons.minify">压缩</button>
+                                        <button id="clear-original-btn" class="clear-btn"
+                                            data-i18n="common.buttons.clear">清除</button>
                                     </div>
                                     <span class="iconfont"></span>
                                 </div>
@@ -173,12 +199,16 @@
                             </div>
                             <div class="compare-box target">
                                 <div class="button-content">
-                                    <h3>目标JSON</h3>
+                                    <h3 data-i18n="tool.json.labels.targetJSON">目标JSON</h3>
                                     <div class="button-group">
-                                        <button id="copy-target-btn" class="copy-btn">复制</button>
-                                        <button id="format-target-btn" class="format-btn">格式化</button>
-                                        <button id="minify-target-btn" class="minify-btn">压缩</button>
-                                        <button id="clear-target-btn" class="clear-btn">清除</button>
+                                        <button id="copy-target-btn" class="copy-btn"
+                                            data-i18n="common.buttons.copy">复制</button>
+                                        <button id="format-target-btn" class="format-btn"
+                                            data-i18n="common.buttons.format">格式化</button>
+                                        <button id="minify-target-btn" class="minify-btn"
+                                            data-i18n="common.buttons.minify">压缩</button>
+                                        <button id="clear-target-btn" class="clear-btn"
+                                            data-i18n="common.buttons.clear">清除</button>
                                     </div>
                                     <button id="compare-fullscreen-btn" class="fullscreen-btn">
                                         <span class="iconfont">&#xe8fa;</span>
@@ -194,22 +224,26 @@
                 <div id="xml-tab" class="tab-pane">
                     <div class="xml-container">
                         <div class="compare-header">
-                            <h2>JSON 转 XML</h2>
+                            <h2 data-i18n="tool.json.convert.jsonToXml">JSON 转 XML</h2>
                             <div class="button-group">
-                                <button id="json-to-xml-btn">转XML</button>
-                                <button id="xml-to-json-btn">转JSON</button>
-                                <button id="sync-clear-xml-btn">同步清空</button>
+                                <button id="json-to-xml-btn" data-i18n="common.buttons.toJson">转XML</button>
+                                <button id="xml-to-json-btn" data-i18n="common.buttons.toJson">转JSON</button>
+                                <button id="sync-clear-xml-btn" data-i18n="common.buttons.syncClear">同步清空</button>
                             </div>
                         </div>
                         <div class="compare-content">
                             <div class="compare-box original">
                                 <div class="button-content">
-                                    <h3>JSON</h3>
+                                    <h3 data-i18n="tool.json.labels.json">JSON</h3>
                                     <div class="button-group">
-                                        <button id="copy-xml-json-btn" class="copy-btn">复制</button>
-                                        <button id="format-xml-json-btn" class="format-btn">格式化</button>
-                                        <button id="minify-xml-json-btn" class="minify-btn">压缩</button>
-                                        <button id="clear-xml-json-btn" class="clear-btn">清除</button>
+                                        <button id="copy-xml-json-btn" class="copy-btn"
+                                            data-i18n="common.buttons.copy">复制</button>
+                                        <button id="format-xml-json-btn" class="format-btn"
+                                            data-i18n="common.buttons.format">格式化</button>
+                                        <button id="minify-xml-json-btn" class="minify-btn"
+                                            data-i18n="common.buttons.minify">压缩</button>
+                                        <button id="clear-xml-json-btn" class="clear-btn"
+                                            data-i18n="common.buttons.clear">清除</button>
                                     </div>
                                 </div>
                                 <div class="editor-container-wrapper">
@@ -218,6 +252,7 @@
                                             <div class="line-number">1</div>
                                         </div>
                                         <div id="xml-json-editor" class="json-editor" contenteditable="true"
+                                            data-i18n-placeholder="common.placeholder.jsonInput"
                                             data-placeholder="请输入JSON数据...">
                                         </div>
                                     </div>
@@ -225,11 +260,14 @@
                             </div>
                             <div class="compare-box target">
                                 <div class="button-content">
-                                    <h3>XML</h3>
+                                    <h3 data-i18n="tool.json.labels.xml">XML</h3>
                                     <div class="button-group">
-                                        <button id="copy-xml-output-btn" class="copy-btn">复制</button>
-                                        <button id="format-xml-output-btn" class="format-btn">格式化</button>
-                                        <button id="clear-xml-output-btn" class="clear-btn">清除</button>
+                                        <button id="copy-xml-output-btn" class="copy-btn"
+                                            data-i18n="common.buttons.copy">复制</button>
+                                        <button id="format-xml-output-btn" class="format-btn"
+                                            data-i18n="common.buttons.format">格式化</button>
+                                        <button id="clear-xml-output-btn" class="clear-btn"
+                                            data-i18n="common.buttons.clear">清除</button>
                                     </div>
                                 </div>
                                 <div class="editor-container-wrapper">
@@ -238,6 +276,7 @@
                                             <div class="line-number">1</div>
                                         </div>
                                         <div id="xml-output-editor" class="json-editor" contenteditable="true"
+                                            data-i18n-placeholder="common.placeholder.xmlOutput"
                                             data-placeholder="XML转换结果将显示在这里...">
                                         </div>
                                     </div>
@@ -251,22 +290,26 @@
                 <div id="javabean-tab" class="tab-pane">
                     <div class="javabean-container">
                         <div class="compare-header">
-                            <h2>转Java Bean</h2>
+                            <h2 data-i18n="tool.json.tabs.javabean">转Java Bean</h2>
                             <div class="button-group">
-                                <button id="json-to-bean-btn">转Bean</button>
-                                <button id="bean-to-json-btn">转JSON</button>
-                                <button id="clear-bean-btn">同步清空</button>
+                                <button id="json-to-bean-btn" data-i18n="common.buttons.toBean">转Bean</button>
+                                <button id="bean-to-json-btn" data-i18n="common.buttons.toJson">转JSON</button>
+                                <button id="clear-bean-btn" data-i18n="common.buttons.syncClear">同步清空</button>
                             </div>
                         </div>
                         <div class="compare-content">
                             <div class="compare-box original">
                                 <div class="button-content">
-                                    <h3>JSON</h3>
+                                    <h3 data-i18n="tool.json.labels.json">JSON</h3>
                                     <div class="button-group">
-                                        <button id="copy-input-btn" class="copy-btn">复制</button>
-                                        <button id="format-input-btn" class="format-btn">格式化</button>
-                                        <button id="minify-input-btn" class="minify-btn">压缩</button>
-                                        <button id="clear-input-btn" class="clear-btn">清除</button>
+                                        <button id="copy-input-btn" class="copy-btn"
+                                            data-i18n="common.buttons.copy">复制</button>
+                                        <button id="format-input-btn" class="format-btn"
+                                            data-i18n="common.buttons.format">格式化</button>
+                                        <button id="minify-input-btn" class="minify-btn"
+                                            data-i18n="common.buttons.minify">压缩</button>
+                                        <button id="clear-input-btn" class="clear-btn"
+                                            data-i18n="common.buttons.clear">清除</button>
                                     </div>
                                 </div>
                                 <div class="editor-container-wrapper">
@@ -275,6 +318,7 @@
                                             <div class="line-number">1</div>
                                         </div>
                                         <div id="input-content" class="json-editor" contenteditable="true"
+                                            data-i18n-placeholder="common.placeholder.jsonInput"
                                             data-placeholder="请输入JSON代码...">
                                         </div>
                                     </div>
@@ -282,11 +326,14 @@
                             </div>
                             <div class="compare-box target">
                                 <div class="button-content">
-                                    <h3>Java Bean</h3>
+                                    <h3 data-i18n="tool.json.labels.javaBean">Java Bean</h3>
                                     <div class="button-group">
-                                        <button id="copy-output-btn" class="copy-btn">复制</button>
-                                        <button id="format-output-btn" class="format-btn" hidden>格式化</button>
-                                        <button id="clear-output-btn" class="clear-btn">清除</button>
+                                        <button id="copy-output-btn" class="copy-btn"
+                                            data-i18n="common.buttons.copy">复制</button>
+                                        <button id="format-output-btn" class="format-btn" hidden
+                                            data-i18n="common.buttons.format">格式化</button>
+                                        <button id="clear-output-btn" class="clear-btn"
+                                            data-i18n="common.buttons.clear">清除</button>
                                     </div>
                                 </div>
                                 <div class="editor-container-wrapper">
@@ -295,6 +342,7 @@
                                             <div class="line-number">1</div>
                                         </div>
                                         <div id="output-content" class="json-editor" contenteditable="true"
+                                            data-i18n-placeholder="common.placeholder.javaBeanInput"
                                             data-placeholder="请输入Java Bean代码...">
                                         </div>
                                     </div>
@@ -307,79 +355,116 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="tool.json.instructions.title">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式化功能</h4>
+                            <h4 data-i18n="tool.json.instructions.format.title">一、格式化功能</h4>
                             <ul>
-                                <li><strong>格式化：</strong>将压缩的JSON字符串转换为带缩进的易读格式，支持多级缩进和语法高亮显示，便于阅读和调试。</li>
-                                <li><strong>压缩：</strong>将格式化的JSON压缩为一行，并保持转义字符，适用于传输和存储场景。</li>
-                                <li><strong>转义/去转义：</strong>将JSON中的特殊字符（如引号、换行符等）进行转义/去转义处理，适用于需要在代码中嵌入JSON字符串的场景。</li>
-                                <li><strong>折叠：</strong>对于复杂的嵌套JSON结构，可以一键折叠所有节点，方便快速概览整体结构。</li>
-                                <li><strong>换行：</strong>将一行压缩的JSON字符串按结构自动换行，便于查看长字符串内容。</li>
+                                <li data-i18n="tool.json.instructions.format.item1">
+                                    <strong>格式化：</strong>将压缩的JSON字符串转换为带缩进的易读格式，支持多级缩进和语法高亮显示，便于阅读和调试。
+                                </li>
+                                <li data-i18n="tool.json.instructions.format.item2">
+                                    <strong>压缩：</strong>将格式化的JSON压缩为一行，并保持转义字符，适用于传输和存储场景。
+                                </li>
+                                <li data-i18n="tool.json.instructions.format.item3">
+                                    <strong>转义/去转义：</strong>将JSON中的特殊字符（如引号、换行符等）进行转义/去转义处理，适用于需要在代码中嵌入JSON字符串的场景。
+                                </li>
+                                <li data-i18n="tool.json.instructions.format.item4">
+                                    <strong>折叠：</strong>对于复杂的嵌套JSON结构，可以一键折叠所有节点，方便快速概览整体结构。
+                                </li>
+                                <li data-i18n="tool.json.instructions.format.item5">
+                                    <strong>换行：</strong>将一行压缩的JSON字符串按结构自动换行，便于查看长字符串内容。
+                                </li>
                             </ul>
-                            <h4>二、比对功能</h4>
+                            <h4 data-i18n="tool.json.instructions.compare.title">二、比对功能</h4>
                             <ul>
-                                <li><strong>差异高亮：</strong>同时输入两段JSON数据，系统会逐行对比并高亮显示所有差异点，支持新增、删除、修改三种差异类型。</li>
-                                <li><strong>同步操作：</strong>支持同步格式化、同步压缩、同步转义和同步清除两个编辑框的内容，提高比对效率。</li>
-                                <li><strong>节点标记：</strong>对于数组和对象，会标记出具体是哪个元素或属性发生了变化。</li>
+                                <li data-i18n="tool.json.instructions.compare.item1">
+                                    <strong>差异高亮：</strong>同时输入两段JSON数据，系统会逐行对比并高亮显示所有差异点，支持新增、删除、修改三种差异类型。
+                                </li>
+                                <li data-i18n="tool.json.instructions.compare.item2">
+                                    <strong>同步操作：</strong>支持同步格式化、同步压缩、同步转义和同步清除两个编辑框的内容，提高比对效率。
+                                </li>
+                                <li data-i18n="tool.json.instructions.compare.item3">
+                                    <strong>节点标记：</strong>对于数组和对象，会标记出具体是哪个元素或属性发生了变化。
+                                </li>
                             </ul>
-                            <h4>三、JSON转Java Bean</h4>
+                            <h4 data-i18n="tool.json.instructions.javabean.title">三、JSON转Java Bean</h4>
                             <ul>
-                                <li><strong>自动转换：</strong>根据JSON结构自动生成对应的Java实体类代码，包括字段名、类型、getter/setter方法。</li>
-                                <li><strong>类型推断：</strong>自动识别JSON中的数据类型（字符串、数字、布尔值、数组、对象等）并映射为Java类型。</li>
-                                <li><strong>值自动填充：</strong>转换时会保留JSON中的实际值作为示例，便于理解和测试。</li>
-                                <li><strong>Java Bean转JSON：</strong>支持反向转换，将Java Bean代码转换回JSON格式。</li>
+                                <li data-i18n="tool.json.instructions.javabean.item1">
+                                    <strong>自动转换：</strong>根据JSON结构自动生成对应的Java实体类代码，包括字段名、类型、getter/setter方法。
+                                </li>
+                                <li data-i18n="tool.json.instructions.javabean.item2">
+                                    <strong>类型推断：</strong>自动识别JSON中的数据类型（字符串、数字、布尔值、数组、对象等）并映射为Java类型。
+                                </li>
+                                <li data-i18n="tool.json.instructions.javabean.item3">
+                                    <strong>值自动填充：</strong>转换时会保留JSON中的实际值作为示例，便于理解和测试。
+                                </li>
+                                <li data-i18n="tool.json.instructions.javabean.item4"><strong>Java
+                                        Bean转JSON：</strong>支持反向转换，将Java Bean代码转换回JSON格式。</li>
                             </ul>
-                            <h4>四、JSON与XML互转</h4>
+                            <h4 data-i18n="tool.json.instructions.xml.title">四、JSON与XML互转</h4>
                             <ul>
-                                <li><strong>JSON转XML：</strong>将JSON数据结构转换为标准的XML格式，支持嵌套结构和数组的正确转换。</li>
-                                <li><strong>XML转JSON：</strong>将XML文档转换为JSON格式，保留元素名称、属性和文本内容。</li>
-                                <li><strong>格式优化：</strong>转换后的XML会自动格式化，便于阅读和编辑。</li>
+                                <li data-i18n="tool.json.instructions.xml.item1">
+                                    <strong>JSON转XML：</strong>将JSON数据结构转换为标准的XML格式，支持嵌套结构和数组的正确转换。
+                                </li>
+                                <li data-i18n="tool.json.instructions.xml.item2">
+                                    <strong>XML转JSON：</strong>将XML文档转换为JSON格式，保留元素名称、属性和文本内容。
+                                </li>
+                                <li data-i18n="tool.json.instructions.xml.item3">
+                                    <strong>格式优化：</strong>转换后的XML会自动格式化，便于阅读和编辑。
+                                </li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="tool.json.notes.title">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、数据安全</h4>
+                            <h4 data-i18n="tool.json.notes.security.title">一、数据安全</h4>
                             <ul>
-                                <li>所有处理均在本地浏览器中完成，数据不会上传到服务器，也不会被记录或存储。</li>
-                                <li>建议不要在公共设备上处理包含敏感信息的JSON数据。</li>
-                                <li>处理完成后建议清空编辑框内容，避免敏感信息残留。</li>
+                                <li data-i18n="tool.json.notes.security.item1">所有处理均在本地浏览器中完成，数据不会上传到服务器，也不会被记录或存储。</li>
+                                <li data-i18n="tool.json.notes.security.item2">建议不要在公共设备上处理包含敏感信息的JSON数据。</li>
+                                <li data-i18n="tool.json.notes.security.item3">处理完成后建议清空编辑框内容，避免敏感信息残留。</li>
                             </ul>
-                            <h4>二、格式要求</h4>
+                            <h4 data-i18n="tool.json.notes.format.title">二、格式要求</h4>
                             <ul>
-                                <li>输入的JSON数据必须符合标准JSON语法规范，否则会提示语法错误。</li>
-                                <li>JSON中的字符串必须使用双引号包裹，不能使用单引号。</li>
-                                <li>对象的最后一个属性和数组的最后一个元素后面不能有逗号。</li>
-                                <li>支持的JSON值类型包括：字符串、数字、布尔值、null、数组、对象。</li>
+                                <li data-i18n="tool.json.notes.format.item1">输入的JSON数据必须符合标准JSON语法规范，否则会提示语法错误。</li>
+                                <li data-i18n="tool.json.notes.format.item2">JSON中的字符串必须使用双引号包裹，不能使用单引号。</li>
+                                <li data-i18n="tool.json.notes.format.item3">对象的最后一个属性和数组的最后一个元素后面不能有逗号。</li>
+                                <li data-i18n="tool.json.notes.format.item4">支持的JSON值类型包括：字符串、数字、布尔值、null、数组、对象。</li>
                             </ul>
-                            <h4>三、性能提示</h4>
+                            <h4 data-i18n="tool.json.notes.performance.title">三、性能提示</h4>
                             <ul>
-                                <li>处理超大JSON数据（超过10MB）时可能会导致浏览器卡顿或响应变慢。</li>
-                                <li>对于特别复杂的嵌套结构，折叠和展开操作可能会有延迟。</li>
-                                <li>建议将大型JSON文件分段处理，避免一次性加载过多数据。</li>
+                                <li data-i18n="tool.json.notes.performance.item1">处理超大JSON数据（超过10MB）时可能会导致浏览器卡顿或响应变慢。
+                                </li>
+                                <li data-i18n="tool.json.notes.performance.item2">对于特别复杂的嵌套结构，折叠和展开操作可能会有延迟。</li>
+                                <li data-i18n="tool.json.notes.performance.item3">建议将大型JSON文件分段处理，避免一次性加载过多数据。</li>
                             </ul>
-                            <h4>四、浏览器兼容性</h4>
+                            <h4 data-i18n="tool.json.notes.compatibility.title">四、浏览器兼容性</h4>
                             <ul>
-                                <li>建议使用现代浏览器（Chrome 80+、Firefox 75+、Edge 80+、Safari 13+）以获得最佳体验。</li>
-                                <li>旧版浏览器可能不支持某些高级功能，如语法高亮和节点折叠。</li>
-                                <li>移动端浏览器支持有限，建议在桌面端使用以获得更好的编辑体验。</li>
+                                <li data-i18n="tool.json.notes.compatibility.item1">建议使用现代浏览器（Chrome 80+、Firefox
+                                    75+、Edge 80+、Safari 13+）以获得最佳体验。</li>
+                                <li data-i18n="tool.json.notes.compatibility.item2">旧版浏览器可能不支持某些高级功能，如语法高亮和节点折叠。</li>
+                                <li data-i18n="tool.json.notes.compatibility.item3">移动端浏览器支持有限，建议在桌面端使用以获得更好的编辑体验。</li>
                             </ul>
-                            <h4>五、编码问题</h4>
+                            <h4 data-i18n="tool.json.notes.encoding.title">五、编码问题</h4>
                             <ul>
-                                <li>确保输入数据使用UTF-8编码，避免中文和其他非ASCII字符出现乱码。</li>
-                                <li>如果从其他文件复制JSON数据，注意检查是否包含不可见字符或BOM头。</li>
-                                <li>转义功能会自动处理中文和特殊字符，确保转换后的JSON可以正确解析。</li>
+                                <li data-i18n="tool.json.notes.encoding.item1">确保输入数据使用UTF-8编码，避免中文和其他非ASCII字符出现乱码。</li>
+                                <li data-i18n="tool.json.notes.encoding.item2">如果从其他文件复制JSON数据，注意检查是否包含不可见字符或BOM头。</li>
+                                <li data-i18n="tool.json.notes.encoding.item3">转义功能会自动处理中文和特殊字符，确保转换后的JSON可以正确解析。</li>
                             </ul>
-                            <h4>六、常见问题</h4>
+                            <h4 data-i18n="tool.json.notes.faq.title">六、常见问题</h4>
                             <ul>
-                                <li><strong>格式化报错：</strong>请检查JSON语法是否正确，特别是括号是否匹配、逗号位置是否正确。</li>
-                                <li><strong>比对结果不准确：</strong>确保两段JSON的结构相似，建议先分别格式化后再进行比对。</li>
-                                <li><strong>转换结果不符合预期：</strong>复杂的嵌套结构可能需要手动调整，建议检查生成的代码是否符合业务需求。</li>
+                                <li data-i18n="tool.json.notes.faq.item1">
+                                    <strong>格式化报错：</strong>请检查JSON语法是否正确，特别是括号是否匹配、逗号位置是否正确。
+                                </li>
+                                <li data-i18n="tool.json.notes.faq.item2">
+                                    <strong>比对结果不准确：</strong>确保两段JSON的结构相似，建议先分别格式化后再进行比对。
+                                </li>
+                                <li data-i18n="tool.json.notes.faq.item3">
+                                    <strong>转换结果不符合预期：</strong>复杂的嵌套结构可能需要手动调整，建议检查生成的代码是否符合业务需求。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -390,12 +475,15 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms.html" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about.html" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
                 </p>
             </footer>
         </div>
@@ -406,6 +494,7 @@
     <script src="script.js"></script>
     <script src="../common/js/utils.js"></script>
     <script src="../common/js/theme.js"></script>
+    <script src="../common/js/tools-data.js"></script>
     <script src="../common/js/nav.js"></script>
 </body>
 

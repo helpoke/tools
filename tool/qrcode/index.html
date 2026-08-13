@@ -10,9 +10,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>二维码生成/解析工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="二维码生成/解析工具 - Helpoke 助点站">
+    <meta property="og:description" content="在线二维码生成解析工具, 免费生成二维码, 二维码解码, 支持自定义颜色尺寸, 纯前端本地处理">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/qrcode/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="二维码生成/解析工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="在线二维码生成解析工具, 免费生成二维码, 二维码解码, 支持自定义颜色尺寸, 纯前端本地处理">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/qrcode/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/qrcode/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/qrcode/">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -448,9 +464,9 @@
         "description": "在线二维码生成解析工具，支持自定义颜色尺寸，纯前端本地处理。免费二维码工具。Online QR code generator and decoder with customization options.",
         "url": "https://helpoke.com/tool/qrcode",
         "applicationCategory": "https://schema.org/ProductivityApplication",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
-            "二维码生成",
+            "二维码生成 (QR code generation)",
             "二维码解析",
             "自定义颜色尺寸",
             "支持多种纠错级别",
@@ -479,48 +495,55 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>二维码生成工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>二维码生成工具，支持自定义内容、尺寸、容错级别、前景色和背景色，支持解析图片中的二维码，可下载PNG图片或复制到剪贴板</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="tool.qrcode.title">二维码生成工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与
+                FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="tool.qrcode.intro">二维码生成工具，支持自定义内容、尺寸、容错级别、前景色和背景色，支持解析图片中的二维码，可下载PNG图片或复制到剪贴板</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('generate')">生成二维码</button>
-                    <button class="tab-btn" onclick="switchTab('parse')">解析二维码</button>
+                    <button class="tab-btn active" onclick="switchTab('generate')"
+                        data-i18n="tool.qrcode.tabGenerate">生成二维码</button>
+                    <button class="tab-btn" onclick="switchTab('parse')" data-i18n="tool.qrcode.tabParse">解析二维码</button>
                 </div>
 
                 <!-- Generate Tab -->
                 <div class="tab-panel active" id="tab-generate">
                     <div class="input-group">
-                        <label for="qr-text">输入内容（文本 / 网址 / 数字）</label>
-                        <textarea id="qr-text" placeholder="输入要生成二维码的内容，例如：https://helpoke.com"></textarea>
-                        <div class="char-count" id="qr-char-count">字符数: 0</div>
+                        <label for="qr-text" data-i18n="tool.qrcode.generateLabel">输入内容（文本 / 网址 / 数字）</label>
+                        <textarea id="qr-text" placeholder="输入要生成二维码的内容，例如：https://helpoke.com"
+                            data-i18n-placeholder="tool.qrcode.generatePlaceholder"></textarea>
+                        <div class="char-count" id="qr-char-count" data-i18n="tool.qrcode.charCount">字符数: 0</div>
                     </div>
 
                     <div class="options-row">
                         <div class="option">
-                            <label>尺寸 (px)</label>
+                            <label data-i18n="tool.qrcode.sizeLabel">尺寸 (px)</label>
                             <input type="number" id="qr-size" value="260" min="100" max="600" step="20">
                         </div>
                         <div class="option">
-                            <label>容错等级</label>
+                            <label data-i18n="tool.qrcode.eccLabel">容错等级</label>
                             <select id="qr-ecc">
-                                <option value="L">L - 低 (7%)</option>
-                                <option value="M" selected>M - 中 (15%)</option>
-                                <option value="Q">Q - 较高 (25%)</option>
-                                <option value="H">H - 高 (30%)</option>
+                                <option value="L" data-i18n="tool.qrcode.eccL">L - 低 (7%)</option>
+                                <option value="M" selected data-i18n="tool.qrcode.eccM">M - 中 (15%)</option>
+                                <option value="Q" data-i18n="tool.qrcode.eccQ">Q - 较高 (25%)</option>
+                                <option value="H" data-i18n="tool.qrcode.eccH">H - 高 (30%)</option>
                             </select>
                         </div>
                         <div class="option">
-                            <label>前景色</label>
+                            <label data-i18n="tool.qrcode.fgLabel">前景色</label>
                             <input type="color" id="qr-fg" value="#000000">
                         </div>
                         <div class="option">
-                            <label>背景色</label>
+                            <label data-i18n="tool.qrcode.bgLabel">背景色</label>
                             <input type="color" id="qr-bg" value="#ffffff">
                         </div>
                     </div>
@@ -528,12 +551,14 @@
                     <div class="qr-result" id="qr-result" style="display:none;">
                         <canvas id="qr-canvas"></canvas>
                         <div class="qr-result-actions">
-                            <button class="btn btn-download" onclick="downloadQR()">下载图片</button>
-                            <button class="btn btn-outline" onclick="copyQRImage()">复制图片</button>
+                            <button class="btn btn-download" onclick="downloadQR()"
+                                data-i18n="tool.qrcode.downloadBtn">下载图片</button>
+                            <button class="btn btn-outline" onclick="copyQRImage()"
+                                data-i18n="tool.qrcode.copyImageBtn">复制图片</button>
                         </div>
                     </div>
                     <div id="qr-placeholder" class="qr-result">
-                        <p style="color:#94a3b8;">在上方输入内容后自动生成</p>
+                        <p style="color:#94a3b8;" data-i18n="tool.qrcode.autoGenerate">在上方输入内容后自动生成</p>
                     </div>
                 </div>
 
@@ -541,142 +566,146 @@
                 <div class="tab-panel" id="tab-parse">
                     <div class="drop-zone" id="drop-zone">
                         <div class="drop-icon">📷</div>
-                        <p>拖拽图片到此处，或点击上传</p>
-                        <p style="font-size:12px;color:#94a3b8;">支持 PNG / JPG / GIF / BMP</p>
+                        <p data-i18n="tool.qrcode.dropText">拖拽图片到此处，或点击上传</p>
+                        <p style="font-size:12px;color:#94a3b8;" data-i18n="tool.qrcode.dropSupport">支持 PNG / JPG / GIF / BMP
+                        </p>
                         <input type="file" id="qr-file" accept="image/*">
                         <img id="qr-preview" style="display:none;">
                     </div>
 
                     <button class="btn btn-outline" onclick="pasteFromClipboard()"
-                        style="width:100%;margin-bottom:16px;">从剪贴板粘贴图片</button>
+                        style="width:100%;margin-bottom:16px;" data-i18n="tool.qrcode.pasteBtn">从剪贴板粘贴图片</button>
 
-                    <div id="qr-decode-status" style="display:none;text-align:center;padding:16px;color:#64748b;">
+                    <div id="qr-decode-status" style="display:none;text-align:center;padding:16px;color:#64748b;"
+                        data-i18n="tool.qrcode.decoding">
                         正在解析...
                     </div>
 
                     <div class="parse-result" id="parse-result" style="display:none;">
-                        <div class="result-label">解析结果</div>
+                        <div class="result-label" data-i18n="tool.qrcode.parseResultLabel">解析结果</div>
                         <div class="result-text" id="parse-text"></div>
-                        <button class="btn" onclick="copyParseResult()">复制结果</button>
+                        <button class="btn" onclick="copyParseResult()" data-i18n="tool.qrcode.copyResultBtn">复制结果</button>
                     </div>
                 </div>
 
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="tool.qrcode.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="tool.qrcode.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>生成二维码，支持自定义内容和样式。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="tool.qrcode.problem1">生成二维码，支持自定义内容和样式。</li>
+                                <li data-i18n="tool.qrcode.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="tool.qrcode.problem3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="tool.qrcode.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>QR Code：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="tool.qrcode.formatQr"><strong>QR Code：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="tool.qrcode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="tool.qrcode.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="tool.qrcode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li data-i18n="tool.qrcode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li data-i18n="tool.qrcode.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="tool.qrcode.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、生成二维码</h4>
+                            <h4 data-i18n="tool.qrcode.usageGenerateTitle">一、生成二维码</h4>
                             <ul>
-                                <li><strong>输入内容：</strong>在文本框中输入要生成二维码的内容（文本、网址、数字等）。</li>
-                                <li><strong>自动生成：</strong>输入内容后自动生成二维码，无需点击按钮。</li>
-                                <li><strong>字符计数：</strong>实时显示输入字符数。</li>
-                                <li><strong>中文支持：</strong>支持中文内容，自动使用UTF-8编码。</li>
+                                <li data-i18n="tool.qrcode.usageInputContent">
+                                    <strong>输入内容：</strong>在文本框中输入要生成二维码的内容（文本、网址、数字等）。
+                                </li>
+                                <li data-i18n="tool.qrcode.usageAutoGenerate"><strong>自动生成：</strong>输入内容后自动生成二维码，无需点击按钮。</li>
+                                <li data-i18n="tool.qrcode.usageCharCount"><strong>字符计数：</strong>实时显示输入字符数。</li>
+                                <li data-i18n="tool.qrcode.usageChinese"><strong>中文支持：</strong>支持中文内容，自动使用UTF-8编码。</li>
                             </ul>
-                            <h4>二、自定义二维码</h4>
+                            <h4 data-i18n="tool.qrcode.usageCustomizeTitle">二、自定义二维码</h4>
                             <ul>
-                                <li><strong>尺寸调整：</strong>设置二维码大小（100-600px）。</li>
-                                <li><strong>容错等级：</strong>选择容错等级（L/M/Q/H），越高容错能力越强。</li>
-                                <li><strong>前景色：</strong>设置二维码图案颜色。</li>
-                                <li><strong>背景色：</strong>设置二维码背景颜色。</li>
+                                <li data-i18n="tool.qrcode.usageSize"><strong>尺寸调整：</strong>设置二维码大小（100-600px）。</li>
+                                <li data-i18n="tool.qrcode.usageEcc"><strong>容错等级：</strong>选择容错等级（L/M/Q/H），越高容错能力越强。</li>
+                                <li data-i18n="tool.qrcode.usageFg"><strong>前景色：</strong>设置二维码图案颜色。</li>
+                                <li data-i18n="tool.qrcode.usageBg"><strong>背景色：</strong>设置二维码背景颜色。</li>
                             </ul>
-                            <h4>三、容错等级说明</h4>
+                            <h4 data-i18n="tool.qrcode.usageEccTitle">三、容错等级说明</h4>
                             <ul>
-                                <li><strong>L级：</strong>低容错（7%），适合内容少、打印质量好的场合。</li>
-                                <li><strong>M级：</strong>中容错（15%），默认推荐，适合大多数场合。</li>
-                                <li><strong>Q级：</strong>较高容错（25%），适合可能有遮挡或污损的场合。</li>
-                                <li><strong>H级：</strong>高容错（30%），适合大面积遮挡或特殊需求。</li>
+                                <li data-i18n="tool.qrcode.eccLevelL"><strong>L级：</strong>低容错（7%），适合内容少、打印质量好的场合。</li>
+                                <li data-i18n="tool.qrcode.eccLevelM"><strong>M级：</strong>中容错（15%），默认推荐，适合大多数场合。</li>
+                                <li data-i18n="tool.qrcode.eccLevelQ"><strong>Q级：</strong>较高容错（25%），适合可能有遮挡或污损的场合。</li>
+                                <li data-i18n="tool.qrcode.eccLevelH"><strong>H级：</strong>高容错（30%），适合大面积遮挡或特殊需求。</li>
                             </ul>
-                            <h4>四、下载和复制</h4>
+                            <h4 data-i18n="tool.qrcode.usageDownloadTitle">四、下载和复制</h4>
                             <ul>
-                                <li><strong>下载图片：</strong>点击"下载图片"按钮保存PNG格式二维码。</li>
-                                <li><strong>复制图片：</strong>点击"复制图片"按钮复制到剪贴板。</li>
-                                <li><strong>图片命名：</strong>自动使用内容前20个字符作为文件名。</li>
+                                <li data-i18n="tool.qrcode.usageDownload"><strong>下载图片：</strong>点击"下载图片"按钮保存PNG格式二维码。</li>
+                                <li data-i18n="tool.qrcode.usageCopy"><strong>复制图片：</strong>点击"复制图片"按钮复制到剪贴板。</li>
+                                <li data-i18n="tool.qrcode.usageNaming"><strong>图片命名：</strong>自动使用内容前20个字符作为文件名。</li>
                             </ul>
-                            <h4>五、解析二维码</h4>
+                            <h4 data-i18n="tool.qrcode.usageParseTitle">五、解析二维码</h4>
                             <ul>
-                                <li><strong>切换标签：</strong>点击"解析二维码"标签切换到解析模式。</li>
-                                <li><strong>上传图片：</strong>拖拽图片到上传区域或点击上传。</li>
-                                <li><strong>剪贴板粘贴：</strong>点击"从剪贴板粘贴图片"按钮。</li>
-                                <li><strong>自动识别：</strong>上传后自动解析二维码内容。</li>
-                                <li><strong>复制结果：</strong>点击"复制结果"按钮复制解析内容。</li>
+                                <li data-i18n="tool.qrcode.usageSwitchTab"><strong>切换标签：</strong>点击"解析二维码"标签切换到解析模式。</li>
+                                <li data-i18n="tool.qrcode.usageUpload"><strong>上传图片：</strong>拖拽图片到上传区域或点击上传。</li>
+                                <li data-i18n="tool.qrcode.usagePaste"><strong>剪贴板粘贴：</strong>点击"从剪贴板粘贴图片"按钮。</li>
+                                <li data-i18n="tool.qrcode.usageAutoDetect"><strong>自动识别：</strong>上传后自动解析二维码内容。</li>
+                                <li data-i18n="tool.qrcode.usageCopyResult"><strong>复制结果：</strong>点击"复制结果"按钮复制解析内容。</li>
                             </ul>
-                            <h4>六、适用场景</h4>
+                            <h4 data-i18n="tool.qrcode.usageScenariosTitle">六、适用场景</h4>
                             <ul>
-                                <li><strong>网址链接：</strong>生成网站URL二维码，方便手机访问。</li>
-                                <li><strong>联系方式：</strong>生成名片信息二维码。</li>
-                                <li><strong>文本信息：</strong>生成文本内容二维码。</li>
-                                <li><strong>支付码：</strong>生成支付链接二维码。</li>
+                                <li data-i18n="tool.qrcode.scenarioUrl"><strong>网址链接：</strong>生成网站URL二维码，方便手机访问。</li>
+                                <li data-i18n="tool.qrcode.scenarioContact"><strong>联系方式：</strong>生成名片信息二维码。</li>
+                                <li data-i18n="tool.qrcode.scenarioText"><strong>文本信息：</strong>生成文本内容二维码。</li>
+                                <li data-i18n="tool.qrcode.scenarioPayment"><strong>支付码：</strong>生成支付链接二维码。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="tool.qrcode.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、数据安全</h4>
+                            <h4 data-i18n="tool.qrcode.notesSecurityTitle">一、数据安全</h4>
                             <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>二维码内容仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                                <li>建议在处理敏感数据时使用隐私模式浏览。</li>
+                                <li data-i18n="tool.qrcode.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li data-i18n="tool.qrcode.noteSecurity2">二维码内容仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                                <li data-i18n="tool.qrcode.noteSecurity3">建议在处理敏感数据时使用隐私模式浏览。</li>
                             </ul>
-                            <h4>二、内容限制</h4>
+                            <h4 data-i18n="tool.qrcode.notesLimitTitle">二、内容限制</h4>
                             <ul>
-                                <li>二维码容量有限，过多内容会使二维码过于密集。</li>
-                                <li>建议单二维码内容不超过500个字符。</li>
-                                <li>长网址建议使用短链接服务缩短后再生成。</li>
+                                <li data-i18n="tool.qrcode.noteLimit1">二维码容量有限，过多内容会使二维码过于密集。</li>
+                                <li data-i18n="tool.qrcode.noteLimit2">建议单二维码内容不超过500个字符。</li>
+                                <li data-i18n="tool.qrcode.noteLimit3">长网址建议使用短链接服务缩短后再生成。</li>
                             </ul>
-                            <h4>三、颜色搭配</h4>
+                            <h4 data-i18n="tool.qrcode.notesColorTitle">三、颜色搭配</h4>
                             <ul>
-                                <li>前景色和背景色要有明显对比度，否则难以扫描。</li>
-                                <li>建议使用深色前景、浅色背景。</li>
-                                <li>避免使用相近颜色或渐变效果。</li>
+                                <li data-i18n="tool.qrcode.noteColor1">前景色和背景色要有明显对比度，否则难以扫描。</li>
+                                <li data-i18n="tool.qrcode.noteColor2">建议使用深色前景、浅色背景。</li>
+                                <li data-i18n="tool.qrcode.noteColor3">避免使用相近颜色或渐变效果。</li>
                             </ul>
-                            <h4>四、扫描问题</h4>
+                            <h4 data-i18n="tool.qrcode.notesScanTitle">四、扫描问题</h4>
                             <ul>
-                                <li>确保二维码足够大（建议至少200px）。</li>
-                                <li>打印时使用高分辨率，避免模糊。</li>
-                                <li>容错等级越高，越能容忍二维码的损坏。</li>
+                                <li data-i18n="tool.qrcode.noteScan1">确保二维码足够大（建议至少200px）。</li>
+                                <li data-i18n="tool.qrcode.noteScan2">打印时使用高分辨率，避免模糊。</li>
+                                <li data-i18n="tool.qrcode.noteScan3">容错等级越高，越能容忍二维码的损坏。</li>
                             </ul>
-                            <h4>五、解析限制</h4>
+                            <h4 data-i18n="tool.qrcode.notesParseTitle">五、解析限制</h4>
                             <ul>
-                                <li>支持PNG、JPG、GIF、BMP格式的图片。</li>
-                                <li>图片中需要包含清晰的二维码。</li>
-                                <li>模糊、变形或遮挡严重的二维码可能无法解析。</li>
+                                <li data-i18n="tool.qrcode.noteParse1">支持PNG、JPG、GIF、BMP格式的图片。</li>
+                                <li data-i18n="tool.qrcode.noteParse2">图片中需要包含清晰的二维码。</li>
+                                <li data-i18n="tool.qrcode.noteParse3">模糊、变形或遮挡严重的二维码可能无法解析。</li>
                             </ul>
-                            <h4>六、常见问题</h4>
+                            <h4 data-i18n="tool.qrcode.notesFaqTitle">六、常见问题</h4>
                             <ul>
-                                <li><strong>无法扫描：</strong>检查二维码是否清晰、颜色对比度是否足够。</li>
-                                <li><strong>生成失败：</strong>检查内容是否过长或格式不支持。</li>
-                                <li><strong>解析失败：</strong>检查图片中是否包含清晰的二维码。</li>
-                                <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                                <li data-i18n="tool.qrcode.noteFaq1"><strong>无法扫描：</strong>检查二维码是否清晰、颜色对比度是否足够。</li>
+                                <li data-i18n="tool.qrcode.noteFaq2"><strong>生成失败：</strong>检查内容是否过长或格式不支持。</li>
+                                <li data-i18n="tool.qrcode.noteFaq3"><strong>解析失败：</strong>检查图片中是否包含清晰的二维码。</li>
+                                <li data-i18n="tool.qrcode.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                             </ul>
                         </div>
                     </article>
@@ -687,12 +716,16 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -734,7 +767,7 @@
 
             try {
                 if (typeof qrcode !== 'function') {
-                    throw new Error('qrcode-generator库未加载');
+                    throw new Error(window.t('tool.qrcode.errLibNotLoaded'));
                 }
                 // 根据是否包含中文选择编码类型
                 var hasChinese = /[^\x00-\x7F]/.test(text);
@@ -778,13 +811,13 @@
                 var errorDiv = document.createElement('div');
                 errorDiv.className = 'error-message';
                 errorDiv.style.cssText = 'color:#e74c3c;padding:12px;text-align:center;';
-                errorDiv.textContent = '生成失败：' + (e.message || '内容过长或格式不支持');
+                errorDiv.textContent = window.t('tool.qrcode.errGenerateFailed', { message: e.message || window.t('tool.qrcode.errContentTooLong') });
                 result.insertBefore(errorDiv, canvas.nextSibling);
             }
         }
 
         document.getElementById('qr-text').addEventListener('input', function () {
-            document.getElementById('qr-char-count').textContent = '字符数: ' + this.value.length;
+            document.getElementById('qr-char-count').textContent = window.t('tool.qrcode.charCount', { count: this.value.length });
             clearTimeout(genTimer);
             genTimer = setTimeout(generateQR, 300);
         });
@@ -806,7 +839,7 @@
             link.download = name;
             link.href = canvas.toDataURL('image/png');
             link.click();
-            utils.showSuccess('下载完成！');
+            utils.showSuccess(window.t('tool.qrcode.successDownload'));
         }
 
         function copyQRImage() {
@@ -815,9 +848,9 @@
                 navigator.clipboard.write([
                     new ClipboardItem({ 'image/png': blob })
                 ]).then(function () {
-                    utils.showSuccess('已复制到剪贴板！');
+                    utils.showSuccess(window.t('tool.qrcode.successCopyClipboard'));
                 }).catch(function () {
-                    utils.showError('复制失败，请尝试下载');
+                    utils.showError(window.t('tool.qrcode.errCopyImage'));
                 });
             });
         }
@@ -851,7 +884,7 @@
 
         function decodeFile(file) {
             if (!file.type.match(/image\/(png|jpeg|gif|bmp|webp)/)) {
-                utils.showError('请选择图片文件（PNG/JPG/GIF/BMP）');
+                utils.showError(window.t('tool.qrcode.errSelectImage'));
                 return;
             }
 
@@ -888,7 +921,7 @@
                     status.style.display = 'none';
                     result.style.display = 'block';
                     result.className = 'parse-result error';
-                    document.getElementById('parse-text').textContent = '无法读取图片数据，可能存在跨域问题';
+                    document.getElementById('parse-text').textContent = window.t('tool.qrcode.errReadImageData');
                     return;
                 }
 
@@ -924,12 +957,12 @@
                     document.getElementById('parse-text').textContent = decodedText;
                 } else {
                     result.classList.add('error');
-                    document.getElementById('parse-text').textContent = '未检测到二维码，请确认图片中包含清晰的二维码';
+                    document.getElementById('parse-text').textContent = window.t('tool.qrcode.errNoQrCode');
                 }
             };
             img.onerror = function () {
                 status.style.display = 'none';
-                utils.showError('图片加载失败');
+                utils.showError(window.t('tool.qrcode.errImageLoad'));
             };
             img.src = dataUrl;
         }
@@ -979,9 +1012,9 @@
                         }
                     }
                 }
-                utils.showError('剪贴板中没有图片');
+                utils.showError(window.t('tool.qrcode.errNoClipboardImage'));
             }).catch(function () {
-                utils.showError('无法读取剪贴板，请尝试上传图片');
+                utils.showError(window.t('tool.qrcode.errReadClipboard'));
             });
         }
 
@@ -989,14 +1022,15 @@
             var text = document.getElementById('parse-text').textContent;
             if (!text) return;
             navigator.clipboard.writeText(text).then(function () {
-                utils.showSuccess('已复制解析结果！');
-            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+                utils.showSuccess(window.t('tool.qrcode.successCopyParse'));
+            }).catch(function () { utils.showError(window.t('tool.qrcode.errCopyParse')); });
         }
 
         // Init
         generateQR();
     </script>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
 </body>
 

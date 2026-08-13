@@ -10,6 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>进制转换工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="进制转换工具 - Helpoke 助点站">
+    <meta property="og:description" content="在线进制转换工具, 二进制八进制十进制十六进制互转, 支持2/8/10/16进制实时转换, 免费在线进制转换器">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/base-convert/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="进制转换工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="在线进制转换工具, 二进制八进制十进制十六进制互转, 支持2/8/10/16进制实时转换, 免费在线进制转换器">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/base-convert/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/base-convert/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/base-convert/">
+    <script src="../../common/js/i18n/i18n.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -509,11 +525,11 @@
         "description": "在线进制转换工具，支持二进制、八进制、十进制、十六进制实时互转。免费在线进制转换器。Online base conversion tool supporting binary, octal, decimal and hexadecimal.",
         "url": "https://helpoke.com/dev/base-convert",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "二进制转十进制",
             "十进制转十六进制",
-            "八进制转换",
+            "八进制转换 (Base conversion)",
             "支持2/8/10/16进制互转",
             "实时转换显示",
             "免费在线使用"
@@ -540,30 +556,41 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>进制转换工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>进制转换工具，支持二进制、八进制、十进制、十六进制之间的快速互转，实时显示转换结果，自动识别 0b/0o/0x 进制前缀</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="dev.base-convert.title">进制转换工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与
+                FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.base-convert.intro">进制转换工具，支持二进制、八进制、十进制、十六进制之间的快速互转，实时显示转换结果，自动识别 0b/0o/0x 进制前缀</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <div class="base-select-row">
-                    <span class="label-text">源进制：</span>
+                    <span class="label-text" data-i18n="dev.base-convert.sourceBaseLabel">源进制：</span>
                     <div class="base-tabs">
-                        <button class="base-tab" data-base="2" onclick="switchBase(2)">BIN(二)</button>
-                        <button class="base-tab" data-base="8" onclick="switchBase(8)">OCT(八)</button>
-                        <button class="base-tab active" data-base="10" onclick="switchBase(10)">DEC(十)</button>
-                        <button class="base-tab" data-base="16" onclick="switchBase(16)">HEX(十六)</button>
+                        <button class="base-tab" data-base="2" onclick="switchBase(2)"
+                            data-i18n="dev.base-convert.tabBin">BIN(二)</button>
+                        <button class="base-tab" data-base="8" onclick="switchBase(8)"
+                            data-i18n="dev.base-convert.tabOct">OCT(八)</button>
+                        <button class="base-tab active" data-base="10" onclick="switchBase(10)"
+                            data-i18n="dev.base-convert.tabDec">DEC(十)</button>
+                        <button class="base-tab" data-base="16" onclick="switchBase(16)"
+                            data-i18n="dev.base-convert.tabHex">HEX(十六)</button>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <div class="input-row">
-                        <input type="text" id="num-input" placeholder="输入数字..." value="255" data-name="输入值">
-                        <button class="btn" onclick="convert()">转换</button>
-                        <button class="btn btn-outline" onclick="clearInput()">清空</button>
+                        <input type="text" id="num-input" placeholder="输入数字..." value="255" data-name="输入值"
+                            data-i18n-placeholder="dev.base-convert.inputPlaceholder">
+                        <button class="btn" onclick="convert()" data-i18n="dev.base-convert.convertBtn">转换</button>
+                        <button class="btn btn-outline" onclick="clearInput()"
+                            data-i18n="dev.base-convert.clearBtn">清空</button>
                     </div>
                     <div class="presets">
                         <button class="preset-tag" onclick="usePreset('255', 10)">255</button>
@@ -580,111 +607,145 @@
 
                 <div class="result-grid" id="result-grid">
                     <div class="result-card bin">
-                        <div class="result-badge">BIN(二)</div>
+                        <div class="result-badge" data-i18n="dev.base-convert.badgeBin">BIN(二)</div>
                         <div class="result-value" id="val-bin">-</div>
-                        <button class="btn-copy-sm" onclick="copyVal('val-bin', '二进制')">复制</button>
+                        <button class="btn-copy-sm" onclick="copyVal('val-bin')"
+                            data-i18n="dev.base-convert.copyBtn">复制</button>
                     </div>
                     <div class="result-card oct">
-                        <div class="result-badge">OCT(八)</div>
+                        <div class="result-badge" data-i18n="dev.base-convert.badgeOct">OCT(八)</div>
                         <div class="result-value" id="val-oct">-</div>
-                        <button class="btn-copy-sm" onclick="copyVal('val-oct', '八进制')">复制</button>
+                        <button class="btn-copy-sm" onclick="copyVal('val-oct')"
+                            data-i18n="dev.base-convert.copyBtn">复制</button>
                     </div>
                     <div class="result-card dec">
-                        <div class="result-badge">DEC(十)</div>
+                        <div class="result-badge" data-i18n="dev.base-convert.badgeDec">DEC(十)</div>
                         <div class="result-value" id="val-dec">-</div>
-                        <button class="btn-copy-sm" onclick="copyVal('val-dec', '十进制')">复制</button>
+                        <button class="btn-copy-sm" onclick="copyVal('val-dec')"
+                            data-i18n="dev.base-convert.copyBtn">复制</button>
                     </div>
                     <div class="result-card hex">
-                        <div class="result-badge">HEX(十六)</div>
+                        <div class="result-badge" data-i18n="dev.base-convert.badgeHex">HEX(十六)</div>
                         <div class="result-value" id="val-hex">-</div>
-                        <button class="btn-copy-sm" onclick="copyVal('val-hex', '十六进制')">复制</button>
+                        <button class="btn-copy-sm" onclick="copyVal('val-hex')"
+                            data-i18n="dev.base-convert.copyBtn">复制</button>
                     </div>
                 </div>
 
-                <button class="btn btn-copy-all" onclick="copyAll()" style="margin-top:16px;">复制全部</button>
+                <button class="btn btn-copy-all" onclick="copyAll()" style="margin-top:16px;"
+                    data-i18n="dev.base-convert.copyAllBtn">复制全部</button>
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="dev.base-convert.toolIntroTitle">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="dev.base-convert.problemTitle">一、解决的问题</h4>
                             <ul>
-                                <li>进制转换是编程和计算机操作中常见的需求，但手动进行进制转换容易出错且效率低下。</li>
-                                <li>不同进制的数字表示方式差异较大，开发者需要频繁在二进制、八进制、十进制、十六进制之间切换。</li>
-                                <li>对于非专业人士来说，理解和转换不同进制的数字是一项挑战。</li>
+                                <li data-i18n="dev.base-convert.problem1">进制转换是编程和计算机操作中常见的需求，但手动进行进制转换容易出错且效率低下。</li>
+                                <li data-i18n="dev.base-convert.problem2">不同进制的数字表示方式差异较大，开发者需要频繁在二进制、八进制、十进制、十六进制之间切换。</li>
+                                <li data-i18n="dev.base-convert.problem3">对于非专业人士来说，理解和转换不同进制的数字是一项挑战。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="dev.base-convert.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>二进制(BIN)：</strong>仅包含数字 0 和 1，支持前缀 <code>0b</code>。</li>
-                                <li><strong>八进制(OCT)：</strong>包含数字 0-7，支持前缀 <code>0o</code>。</li>
-                                <li><strong>十进制(DEC)：</strong>包含数字 0-9，日常最常用的进制。</li>
-                                <li><strong>十六进制(HEX)：</strong>包含数字 0-9 和字母 A-F（大小写均可），支持前缀 <code>0x</code>。</li>
+                                <li data-i18n="dev.base-convert.formatBin"><strong>二进制(BIN)：</strong>仅包含数字 0 和 1，支持前缀
+                                    <code>0b</code>。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatOct"><strong>八进制(OCT)：</strong>包含数字 0-7，支持前缀
+                                    <code>0o</code>。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatDec"><strong>十进制(DEC)：</strong>包含数字 0-9，日常最常用的进制。</li>
+                                <li data-i18n="dev.base-convert.formatHex"><strong>十六进制(HEX)：</strong>包含数字 0-9 和字母
+                                    A-F（大小写均可），支持前缀 <code>0x</code>。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="dev.base-convert.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>实时转换：</strong>输入数字后立即显示所有进制的转换结果，无需手动触发。</li>
-                                <li><strong>一键复制：</strong>支持单独复制某个进制的结果，或一次性复制全部结果。</li>
-                                <li><strong>预设值：</strong>提供常用数值的快速输入，方便测试和学习。</li>
-                                <li><strong>自动识别：</strong>智能识别进制前缀，自动切换到对应的进制输入模式。</li>
+                                <li data-i18n="dev.base-convert.featureRealTime">
+                                    <strong>实时转换：</strong>输入数字后立即显示所有进制的转换结果，无需手动触发。
+                                </li>
+                                <li data-i18n="dev.base-convert.featureCopy"><strong>一键复制：</strong>支持单独复制某个进制的结果，或一次性复制全部结果。
+                                </li>
+                                <li data-i18n="dev.base-convert.featurePreset"><strong>预设值：</strong>提供常用数值的快速输入，方便测试和学习。
+                                </li>
+                                <li data-i18n="dev.base-convert.featureAutoDetect">
+                                    <strong>自动识别：</strong>智能识别进制前缀，自动切换到对应的进制输入模式。
+                                </li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="dev.base-convert.usageTitle">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、进制转换功能</h4>
+                            <h4 data-i18n="dev.base-convert.convertFunctionTitle">一、进制转换功能</h4>
                             <ul>
-                                <li><strong>选择源进制：</strong>点击上方的进制标签（BIN/OCT/DEC/HEX）选择输入数字的进制类型。</li>
-                                <li><strong>输入数字：</strong>在输入框中输入需要转换的数字，系统会自动进行实时转换。</li>
-                                <li><strong>查看结果：</strong>转换结果会同时显示为二进制、八进制、十进制、十六进制四种格式。</li>
-                                <li><strong>复制结果：</strong>点击每个结果右侧的"复制"按钮可以单独复制该进制的数值，或点击"复制全部"一次性复制所有结果。</li>
-                                <li><strong>使用预设：</strong>点击下方的预设标签（如255、1024、0xFF等）可以快速填入常用数值进行转换。</li>
+                                <li data-i18n="dev.base-convert.usageSelectBase">
+                                    <strong>选择源进制：</strong>点击上方的进制标签（BIN/OCT/DEC/HEX）选择输入数字的进制类型。
+                                </li>
+                                <li data-i18n="dev.base-convert.usageInputNumber">
+                                    <strong>输入数字：</strong>在输入框中输入需要转换的数字，系统会自动进行实时转换。
+                                </li>
+                                <li data-i18n="dev.base-convert.usageViewResult">
+                                    <strong>查看结果：</strong>转换结果会同时显示为二进制、八进制、十进制、十六进制四种格式。
+                                </li>
+                                <li data-i18n="dev.base-convert.usageCopyResult">
+                                    <strong>复制结果：</strong>点击每个结果右侧的"复制"按钮可以单独复制该进制的数值，或点击"复制全部"一次性复制所有结果。
+                                </li>
+                                <li data-i18n="dev.base-convert.usagePreset">
+                                    <strong>使用预设：</strong>点击下方的预设标签（如255、1024、0xFF等）可以快速填入常用数值进行转换。
+                                </li>
                             </ul>
-                            <h4>二、进制格式说明</h4>
+                            <h4 data-i18n="dev.base-convert.formatExplainTitle">二、进制格式说明</h4>
                             <ul>
-                                <li><strong>二进制(BIN)：</strong>仅包含数字 0 和 1，如 101010。</li>
-                                <li><strong>八进制(OCT)：</strong>包含数字 0-7，如 777。</li>
-                                <li><strong>十进制(DEC)：</strong>包含数字 0-9，如 255。</li>
-                                <li><strong>十六进制(HEX)：</strong>包含数字 0-9 和字母 A-F（大小写均可），如 FF。</li>
+                                <li data-i18n="dev.base-convert.formatDetailBin"><strong>二进制(BIN)：</strong>仅包含数字 0 和 1，如
+                                    101010。</li>
+                                <li data-i18n="dev.base-convert.formatDetailOct"><strong>八进制(OCT)：</strong>包含数字 0-7，如 777。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatDetailDec"><strong>十进制(DEC)：</strong>包含数字 0-9，如 255。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatDetailHex"><strong>十六进制(HEX)：</strong>包含数字 0-9 和字母
+                                    A-F（大小写均可），如 FF。</li>
                             </ul>
-                            <h4>三、快捷操作</h4>
+                            <h4 data-i18n="dev.base-convert.shortcutTitle">三、快捷操作</h4>
                             <ul>
-                                <li>支持自动识别常见前缀：<code>0b</code>（二进制）、<code>0o</code>（八进制）、<code>0x</code>（十六进制）。</li>
-                                <li>按 Enter 键可触发转换。</li>
-                                <li>切换进制时，当前输入值会自动转换为新进制表示。</li>
+                                <li data-i18n="dev.base-convert.shortcutPrefix">
+                                    支持自动识别常见前缀：<code>0b</code>（二进制）、<code>0o</code>（八进制）、<code>0x</code>（十六进制）。</li>
+                                <li data-i18n="dev.base-convert.shortcutEnter">按 Enter 键可触发转换。</li>
+                                <li data-i18n="dev.base-convert.shortcutSwitch">切换进制时，当前输入值会自动转换为新进制表示。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="dev.base-convert.notesTitle">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式规范</h4>
+                            <h4 data-i18n="dev.base-convert.formatRulesTitle">一、格式规范</h4>
                             <ul>
-                                <li>输入的数字必须符合所选进制的格式要求，否则会提示错误。</li>
-                                <li>二进制仅允许 0 和 1，八进制仅允许 0-7，十进制仅允许 0-9，十六进制允许 0-9 和 A-F。</li>
-                                <li>数字不能包含空格、逗号或其他分隔符。</li>
+                                <li data-i18n="dev.base-convert.formatRule1">输入的数字必须符合所选进制的格式要求，否则会提示错误。</li>
+                                <li data-i18n="dev.base-convert.formatRule2">二进制仅允许 0 和 1，八进制仅允许 0-7，十进制仅允许 0-9，十六进制允许 0-9 和
+                                    A-F。</li>
+                                <li data-i18n="dev.base-convert.formatRule3">数字不能包含空格、逗号或其他分隔符。</li>
                             </ul>
-                            <h4>二、数值范围</h4>
+                            <h4 data-i18n="dev.base-convert.rangeTitle">二、数值范围</h4>
                             <ul>
-                                <li>支持的数值范围为 -2^53 ~ 2^53（JavaScript 的安全整数范围）。</li>
-                                <li>超出安全范围的超大数字可能会丢失精度。</li>
-                                <li>负数转换时，十六进制结果会显示为负号加绝对值的十六进制表示。</li>
+                                <li data-i18n="dev.base-convert.range1">支持的数值范围为 -2^53 ~ 2^53（JavaScript 的安全整数范围）。</li>
+                                <li data-i18n="dev.base-convert.range2">超出安全范围的超大数字可能会丢失精度。</li>
+                                <li data-i18n="dev.base-convert.range3">负数转换时，十六进制结果会显示为负号加绝对值的十六进制表示。</li>
                             </ul>
-                            <h4>三、数据安全</h4>
+                            <h4 data-i18n="dev.base-convert.securityTitle">三、数据安全</h4>
                             <ul>
-                                <li>所有转换均在本地浏览器完成，数据不会上传到服务器。</li>
-                                <li>建议不要在公共设备上处理包含敏感信息的数值。</li>
+                                <li data-i18n="dev.base-convert.security1">所有转换均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li data-i18n="dev.base-convert.security2">建议不要在公共设备上处理包含敏感信息的数值。</li>
                             </ul>
-                            <h4>四、常见问题</h4>
+                            <h4 data-i18n="dev.base-convert.faqTitle">四、常见问题</h4>
                             <ul>
-                                <li><strong>转换报错：</strong>检查输入是否符合所选进制的格式要求。</li>
-                                <li><strong>数值异常：</strong>超大数字可能超出 JavaScript 的安全整数范围，建议分段处理。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="dev.base-convert.faqConvertError"><strong>转换报错：</strong>检查输入是否符合所选进制的格式要求。
+                                </li>
+                                <li data-i18n="dev.base-convert.faqValueAbnormal"><strong>数值异常：</strong>超大数字可能超出 JavaScript
+                                    的安全整数范围，建议分段处理。</li>
+                                <li data-i18n="dev.base-convert.faqCopyFailed"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
                             </ul>
                         </div>
                     </article>
@@ -696,29 +757,37 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms.html" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about.html" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script>
         var sourceBase = 10;
 
         var BASE_CONFIG = {
-            2: { id: 'bin', name: '二进制', regex: /^[01]+$/ },
-            8: { id: 'oct', name: '八进制', regex: /^[0-7]+$/ },
-            10: { id: 'dec', name: '十进制', regex: /^[0-9]+$/ },
-            16: { id: 'hex', name: '十六进制', regex: /^[0-9a-fA-F]+$/ }
+            2: { id: 'bin', nameKey: 'base.binName', regex: /^[01]+$/ },
+            8: { id: 'oct', nameKey: 'base.octName', regex: /^[0-7]+$/ },
+            10: { id: 'dec', nameKey: 'base.decName', regex: /^[0-9]+$/ },
+            16: { id: 'hex', nameKey: 'base.hexName', regex: /^[0-9a-fA-F]+$/ }
         };
+
+        function getBaseName(base) {
+            return window.t(BASE_CONFIG[base].nameKey);
+        }
 
         function switchBase(base) {
             var oldBase = sourceBase;
@@ -751,7 +820,7 @@
             input.classList.remove('error');
 
             if (!raw) {
-                showError('请输入数字');
+                showError(window.t('dev.base-convert.msgInputRequired'));
                 return;
             }
 
@@ -760,7 +829,7 @@
 
             // Validate against source base
             if (!BASE_CONFIG[sourceBase].regex.test(raw)) {
-                showError('输入不符合' + BASE_CONFIG[sourceBase].name + '格式（' + getBaseHint(sourceBase) + '）');
+                showError(window.t('dev.base-convert.msgInvalidFormat', { base: getBaseName(sourceBase), hint: getBaseHint(sourceBase) }));
                 return;
             }
 
@@ -768,17 +837,17 @@
             try {
                 decimalVal = parseInt(raw, sourceBase);
             } catch (e) {
-                showError('解析失败');
+                showError(window.t('dev.base-convert.msgParseFailed'));
                 return;
             }
 
             if (isNaN(decimalVal)) {
-                showError('无法解析为有效数字');
+                showError(window.t('dev.base-convert.msgInvalidNumber'));
                 return;
             }
 
             if (!isFinite(decimalVal) || decimalVal > Number.MAX_SAFE_INTEGER || decimalVal < Number.MIN_SAFE_INTEGER) {
-                showError('数字超出安全范围（-2^53 ~ 2^53）');
+                showError(window.t('dev.base-convert.msgOutOfRange'));
                 return;
             }
 
@@ -803,10 +872,10 @@
         }
 
         function getBaseHint(base) {
-            if (base === 2) return '仅允许 0-1';
-            if (base === 8) return '仅允许 0-7';
-            if (base === 10) return '仅允许 0-9';
-            if (base === 16) return '仅允许 0-9、A-F';
+            if (base === 2) return window.t('dev.base-convert.hintBin');
+            if (base === 8) return window.t('dev.base-convert.hintOct');
+            if (base === 10) return window.t('dev.base-convert.hintDec');
+            if (base === 16) return window.t('dev.base-convert.hintHex');
             return '';
         }
 
@@ -816,11 +885,11 @@
             navigator.clipboard.writeText(val).then(function () {
                 var btn = document.querySelector('#val-' + id.split('-')[1]).parentElement.querySelector('.btn-copy-sm');
                 var orig = btn.textContent;
-                btn.textContent = '已复制';
+                btn.textContent = window.t('common.messages.copied');
                 btn.classList.add('copied');
                 setTimeout(function () { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
-                utils.showSuccess('已复制' + label + '！');
-            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+                utils.showSuccess(window.t('dev.base-convert.msgCopied'));
+            }).catch(function () { utils.showError(window.t('common.messages.copyFailed')); });
         }
 
         function copyAll() {
@@ -828,11 +897,11 @@
             var oct = document.getElementById('val-oct').textContent;
             var dec = document.getElementById('val-dec').textContent;
             var hex = document.getElementById('val-hex').textContent;
-            if (bin === '-') { utils.showError('没有可复制的内容'); return; }
+            if (bin === '-') { utils.showError(window.t('common.messages.noContentToCopy')); return; }
             var text = 'BIN: ' + bin + '\nOCT: ' + oct + '\nDEC: ' + dec + '\nHEX: ' + hex;
             navigator.clipboard.writeText(text).then(function () {
-                utils.showSuccess('已复制全部结果！');
-            }).catch(function () { utils.showError('复制失败，请手动复制'); });
+                utils.showSuccess(window.t('dev.base-convert.msgCopiedAll'));
+            }).catch(function () { utils.showError(window.t('common.messages.copyFailed')); });
         }
 
         function clearInput() {

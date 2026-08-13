@@ -10,6 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>XML 格式化工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="XML 格式化工具 - Helpoke 助点站">
+    <meta property="og:description" content="XML在线格式化工具, XML压缩, XML与JSON互转, 免费XML格式化工具">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/xml/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="XML 格式化工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="XML在线格式化工具, XML压缩, XML与JSON互转, 免费XML格式化工具">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/xml/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/xml/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/xml/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -282,7 +297,7 @@
         "description": "XML在线格式化工具，支持XML压缩、XML与JSON互转功能。免费在线XML处理工具。Online XML formatter with compression and JSON conversion features.",
         "url": "https://helpoke.com/dev/xml",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "XML代码格式化美化",
             "XML压缩功能",
@@ -305,6 +320,7 @@
         }
     }
     </script>
+    <script src="../../common/js/i18n/i18n.js"></script>
 </head>
 
 <body>
@@ -313,29 +329,35 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>XML格式化工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>XML格式化工具，支持XML代码格式化美化与压缩，支持XML与JSON互转，提供语法错误检测与提示</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="dev.xml.title">XML格式化工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.xml.desc">XML格式化工具，支持XML代码格式化美化与压缩，支持XML与JSON互转，提供语法错误检测与提示</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <div class="toolbar">
-                    <button class="btn" onclick="doFormat()" title="格式化 XML（缩进美化）">格式化</button>
-                    <button class="btn" onclick="doMinify()" title="压缩 XML（去除空白）">压缩</button>
-                    <button class="btn accent" onclick="doXml2Json()" title="XML 转 JSON">转 JSON</button>
-                    <button class="btn accent" onclick="doJson2Xml()" title="JSON 转 XML">转 XML</button>
-                    <button class="btn copy" onclick="doCopy()">复制</button>
-                    <button class="btn gray" onclick="doClear()">清空</button>
+                    <button class="btn" onclick="doFormat()" title="格式化 XML（缩进美化）" data-i18n="dev.xml.formatBtn"
+                        data-i18n-title="dev.xml.formatBtnTitle">格式化</button>
+                    <button class="btn" onclick="doMinify()" title="压缩 XML（去除空白）" data-i18n="dev.xml.minifyBtn"
+                        data-i18n-title="dev.xml.minifyBtnTitle">压缩</button>
+                    <button class="btn accent" onclick="doXml2Json()" title="XML 转 JSON" data-i18n="dev.xml.toJsonBtn"
+                        data-i18n-title="dev.xml.toJsonBtnTitle">转 JSON</button>
+                    <button class="btn accent" onclick="doJson2Xml()" title="JSON 转 XML" data-i18n="dev.xml.toXmlBtn"
+                        data-i18n-title="dev.xml.toXmlBtnTitle">转 XML</button>
+                    <button class="btn copy" onclick="doCopy()" data-i18n="dev.xml.copyBtn">复制</button>
+                    <button class="btn gray" onclick="doClear()" data-i18n="dev.xml.clearBtn">清空</button>
                 </div>
 
                 <div class="error-msg" id="error"></div>
 
                 <div class="io-panels">
                     <div class="io-panel">
-                        <label for="input-xml">输入</label>
+                        <label for="input-xml" data-i18n="dev.xml.inputLabel">输入</label>
                         <textarea id="input-xml" placeholder='&lt;?xml version="1.0"?&gt;
 &lt;root&gt;
 &lt;item id="1"&gt;示例&lt;/item&gt;
@@ -346,109 +368,122 @@
 &lt;/root&gt;</textarea>
                     </div>
                     <div class="io-panel">
-                        <label for="output-xml">输出</label>
-                        <textarea id="output-xml" readonly placeholder="处理结果将显示在此"></textarea>
+                        <label for="output-xml" data-i18n="dev.xml.outputLabel">输出</label>
+                        <textarea id="output-xml" readonly placeholder="处理结果将显示在此"
+                            data-i18n-placeholder="dev.xml.outputPlaceholder"></textarea>
                     </div>
                 </div>
 
                 <div class="stats" id="stats">
-                    <span>字符: <strong id="stat-chars">0</strong></span>
-                    <span>行数: <strong id="stat-lines">0</strong></span>
+                    <span data-i18n="dev.xml.statsChars">字符: <strong id="stat-chars">0</strong></span>
+                    <span data-i18n="dev.xml.statsLines">行数: <strong id="stat-lines">0</strong></span>
                 </div>
 
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="dev.xml.introTitle">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="dev.xml.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>解析和格式化XML文档，支持XML与JSON互转。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="dev.xml.problems1">解析和格式化XML文档，支持XML与JSON互转。</li>
+                                <li data-i18n="dev.xml.problems2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="dev.xml.problems3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="dev.xml.formatsTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>XML：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>JSON：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.xml.formats1"><strong>XML：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.xml.formats2"><strong>JSON：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="dev.xml.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="dev.xml.features1"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="dev.xml.features2"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li data-i18n="dev.xml.features3"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li data-i18n="dev.xml.features4"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="dev.xml.guideTitle">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式化功能</h4>
+                            <h4 data-i18n="dev.xml.guideFormatTitle">一、格式化功能</h4>
                             <ul>
-                                <li><strong>格式化：</strong>将压缩或杂乱的XML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
-                                <li><strong>压缩：</strong>将格式化的XML代码压缩为紧凑格式，去除空白字符，减小文件体积。</li>
-                                <li><strong>转 JSON：</strong>将XML格式转换为JSON格式，便于数据交换和处理。</li>
-                                <li><strong>转 XML：</strong>将JSON格式转换为XML格式，便于与传统系统集成。</li>
-                                <li><strong>复制结果：</strong>一键复制处理后的代码到剪贴板。</li>
-                                <li><strong>快捷键：</strong>按 Ctrl+Enter 可以快速触发格式化。</li>
+                                <li data-i18n="dev.xml.guideFormat1">
+                                    <strong>格式化：</strong>将压缩或杂乱的XML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。
+                                </li>
+                                <li data-i18n="dev.xml.guideFormat2"><strong>压缩：</strong>将格式化的XML代码压缩为紧凑格式，去除空白字符，减小文件体积。
+                                </li>
+                                <li data-i18n="dev.xml.guideFormat3"><strong>转 JSON：</strong>将XML格式转换为JSON格式，便于数据交换和处理。</li>
+                                <li data-i18n="dev.xml.guideFormat4"><strong>转 XML：</strong>将JSON格式转换为XML格式，便于与传统系统集成。</li>
+                                <li data-i18n="dev.xml.guideFormat5"><strong>复制结果：</strong>一键复制处理后的代码到剪贴板。</li>
+                                <li data-i18n="dev.xml.guideFormat6"><strong>快捷键：</strong>按 Ctrl+Enter 可以快速触发格式化。</li>
                             </ul>
-                            <h4>二、XML 语法基础</h4>
+                            <h4 data-i18n="dev.xml.guideSyntaxTitle">二、XML 语法基础</h4>
                             <ul>
-                                <li><strong>声明：</strong>XML文档开头通常包含声明 <code>&lt;?xml version="1.0"?&gt;</code>。</li>
-                                <li><strong>根元素：</strong>XML必须有且仅有一个根元素，如 <code>&lt;root&gt;&lt;/root&gt;</code>。</li>
-                                <li><strong>标签：</strong>标签必须成对出现，且区分大小写。</li>
-                                <li><strong>属性：</strong>元素可以包含属性，如 <code>&lt;item id="1"&gt;</code>。</li>
-                                <li><strong>特殊字符：</strong>&lt;、&gt;、&amp;、"、' 必须使用实体引用。</li>
-                                <li><strong>CDATA：</strong>使用 <code>&lt;![CDATA[...]]&gt;</code> 包裹特殊字符内容。</li>
+                                <li data-i18n="dev.xml.guideSyntax1"><strong>声明：</strong>XML文档开头通常包含声明
+                                    <code>&lt;?xml version="1.0"?&gt;</code>。
+                                </li>
+                                <li data-i18n="dev.xml.guideSyntax2"><strong>根元素：</strong>XML必须有且仅有一个根元素，如
+                                    <code>&lt;root&gt;&lt;/root&gt;</code>。
+                                </li>
+                                <li data-i18n="dev.xml.guideSyntax3"><strong>标签：</strong>标签必须成对出现，且区分大小写。</li>
+                                <li data-i18n="dev.xml.guideSyntax4"><strong>属性：</strong>元素可以包含属性，如
+                                    <code>&lt;item id="1"&gt;</code>。
+                                </li>
+                                <li data-i18n="dev.xml.guideSyntax5"><strong>特殊字符：</strong>&lt;、&gt;、&amp;、"、' 必须使用实体引用。
+                                </li>
+                                <li data-i18n="dev.xml.guideSyntax6"><strong>CDATA：</strong>使用
+                                    <code>&lt;![CDATA[...]]&gt;</code> 包裹特殊字符内容。
+                                </li>
                             </ul>
-                            <h4>三、XML 与 JSON 转换规则</h4>
+                            <h4 data-i18n="dev.xml.guideConvertTitle">三、XML 与 JSON 转换规则</h4>
                             <ul>
-                                <li><strong>XML 属性：</strong>转换为JSON对象的键值对。</li>
-                                <li><strong>文本内容：</strong>使用 <code>value</code> 键存储。</li>
-                                <li><strong>同名子元素：</strong>转换为JSON数组。</li>
-                                <li><strong>嵌套结构：</strong>保持层级关系。</li>
+                                <li data-i18n="dev.xml.guideConvert1"><strong>XML 属性：</strong>转换为JSON对象的键值对。</li>
+                                <li data-i18n="dev.xml.guideConvert2"><strong>文本内容：</strong>使用 <code>value</code> 键存储。</li>
+                                <li data-i18n="dev.xml.guideConvert3"><strong>同名子元素：</strong>转换为JSON数组。</li>
+                                <li data-i18n="dev.xml.guideConvert4"><strong>嵌套结构：</strong>保持层级关系。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="dev.xml.notesTitle">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式规范</h4>
+                            <h4 data-i18n="dev.xml.notesFormatTitle">一、格式规范</h4>
                             <ul>
-                                <li>XML标签必须正确闭合，且区分大小写。</li>
-                                <li>属性值必须用引号包裹。</li>
-                                <li>特殊字符必须使用实体引用，如 <code>&amp;</code> 表示 &。</li>
-                                <li>根元素必须唯一，不能有多个根元素。</li>
+                                <li data-i18n="dev.xml.notesFormat1">XML标签必须正确闭合，且区分大小写。</li>
+                                <li data-i18n="dev.xml.notesFormat2">属性值必须用引号包裹。</li>
+                                <li data-i18n="dev.xml.notesFormat3">特殊字符必须使用实体引用，如 <code>&amp;</code> 表示 &。</li>
+                                <li data-i18n="dev.xml.notesFormat4">根元素必须唯一，不能有多个根元素。</li>
                             </ul>
-                            <h4>二、转换规则</h4>
+                            <h4 data-i18n="dev.xml.notesConvertTitle">二、转换规则</h4>
                             <ul>
-                                <li>XML转JSON时，属性直接放在对象上，文本内容使用 <code>value</code> 键。</li>
-                                <li>JSON转XML时，<code>value</code> 键会转换为文本内容。</li>
-                                <li>数组会转换为多个同名子元素。</li>
-                                <li>复杂嵌套结构可能导致转换结果不符合预期，建议简化数据结构。</li>
+                                <li data-i18n="dev.xml.notesConvert1">XML转JSON时，属性直接放在对象上，文本内容使用 <code>value</code> 键。</li>
+                                <li data-i18n="dev.xml.notesConvert2">JSON转XML时，<code>value</code> 键会转换为文本内容。</li>
+                                <li data-i18n="dev.xml.notesConvert3">数组会转换为多个同名子元素。</li>
+                                <li data-i18n="dev.xml.notesConvert4">复杂嵌套结构可能导致转换结果不符合预期，建议简化数据结构。</li>
                             </ul>
-                            <h4>三、性能提示</h4>
+                            <h4 data-i18n="dev.xml.notesPerfTitle">三、性能提示</h4>
                             <ul>
-                                <li>处理超大XML文件（超过1MB）时可能会导致浏览器卡顿。</li>
-                                <li>建议将大型XML文件分段处理。</li>
+                                <li data-i18n="dev.xml.notesPerf1">处理超大XML文件（超过1MB）时可能会导致浏览器卡顿。</li>
+                                <li data-i18n="dev.xml.notesPerf2">建议将大型XML文件分段处理。</li>
                             </ul>
-                            <h4>四、数据安全</h4>
+                            <h4 data-i18n="dev.xml.notesSecurityTitle">四、数据安全</h4>
                             <ul>
-                                <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
-                                <li>建议不要在公共设备上处理包含敏感信息的XML代码。</li>
+                                <li data-i18n="dev.xml.notesSecurity1">所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li data-i18n="dev.xml.notesSecurity2">建议不要在公共设备上处理包含敏感信息的XML代码。</li>
                             </ul>
-                            <h4>五、常见问题</h4>
+                            <h4 data-i18n="dev.xml.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li><strong>解析失败：</strong>检查XML语法是否正确，特别是标签闭合和特殊字符。</li>
-                                <li><strong>转换异常：</strong>复杂嵌套结构可能导致转换结果不符合预期。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="dev.xml.notesFaq1"><strong>解析失败：</strong>检查XML语法是否正确，特别是标签闭合和特殊字符。</li>
+                                <li data-i18n="dev.xml.notesFaq2"><strong>转换异常：</strong>复杂嵌套结构可能导致转换结果不符合预期。</li>
+                                <li data-i18n="dev.xml.notesFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
                             </ul>
                         </div>
                     </article>
@@ -459,18 +494,22 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" title="隐私政策" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms.html" title="服务条款" data-i18n="footer.terms"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about.html" title="关于我们" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们" data-i18n="footer.contact"><i class="fas fa-envelope"></i>
+                        联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script>
@@ -561,11 +600,11 @@
         function doFormat() {
             hideError();
             var xml = getInput().trim();
-            if (!xml) { showError('请输入 XML 内容'); return; }
+            if (!xml) { showError(window.t('dev.xml.msgInputRequired')); return; }
             try {
                 setOutput(formatXml(xml));
             } catch (e) {
-                showError('XML 解析错误: ' + e.message);
+                showError(window.t('dev.xml.msgParseError') + e.message);
             }
         }
 
@@ -573,13 +612,13 @@
         function doMinify() {
             hideError();
             var xml = getInput().trim();
-            if (!xml) { showError('请输入 XML 内容'); return; }
+            if (!xml) { showError(window.t('dev.xml.msgInputRequired')); return; }
             try {
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(xml, 'text/xml');
                 var err = doc.querySelector('parsererror');
                 if (err) {
-                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    showError(window.t('dev.xml.msgParseError') + err.textContent.replace(/\n/g, ' ').substring(0, 200));
                     return;
                 }
                 var serializer = new XMLSerializer();
@@ -589,7 +628,7 @@
                 minified = minified.replace(/\?>\s+</g, '?><');
                 setOutput(minified);
             } catch (e) {
-                showError('压缩失败: ' + e.message);
+                showError(window.t('dev.xml.msgMinifyError') + e.message);
             }
         }
 
@@ -647,13 +686,13 @@
         function doXml2Json() {
             hideError();
             var xml = getInput().trim();
-            if (!xml) { showError('请输入 XML 内容'); return; }
+            if (!xml) { showError(window.t('dev.xml.msgInputRequired')); return; }
             try {
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(xml, 'text/xml');
                 var err = doc.querySelector('parsererror');
                 if (err) {
-                    showError('XML 解析错误: ' + err.textContent.replace(/\n/g, ' ').substring(0, 200));
+                    showError(window.t('dev.xml.msgParseError') + err.textContent.replace(/\n/g, ' ').substring(0, 200));
                     return;
                 }
                 var result = xmlToJson(doc.documentElement);
@@ -661,7 +700,7 @@
                 wrapper[doc.documentElement.nodeName] = result;
                 setOutput(JSON.stringify(wrapper, null, 2));
             } catch (e) {
-                showError('转换失败: ' + e.message);
+                showError(window.t('dev.xml.msgConvertError') + e.message);
             }
         }
 
@@ -731,13 +770,13 @@
         function doJson2Xml() {
             hideError();
             var input = getInput().trim();
-            if (!input) { showError('请输入 JSON 内容'); return; }
+            if (!input) { showError(window.t('dev.xml.msgJsonInputRequired')); return; }
             try {
                 var obj = JSON.parse(input);
                 var xml = jsonToXml(obj);
                 setOutput(xml);
             } catch (e) {
-                showError('JSON 解析错误: ' + e.message);
+                showError(window.t('dev.xml.msgJsonParseError') + e.message);
             }
         }
 
@@ -751,9 +790,9 @@
         function doCopy() {
             var text = document.getElementById('output-xml').value;
             navigator.clipboard.writeText(text).then(function () {
-                utils.showSuccess('已复制到剪贴板！');
+                utils.showSuccess(window.t('common.messages.copied'));
             }).catch(function () {
-                utils.showError('复制失败，请手动复制');
+                utils.showError(window.t('common.messages.copyFailed'));
             });
         }
 

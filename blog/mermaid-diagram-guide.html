@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,6 @@
     <meta name="keywords" content="Mermaid,流程图,时序图,架构图,Markdown,代码绘图">
     <link rel="icon" href="../../common/img/helpoke.webp">
     <link rel="stylesheet" href="../../common/css/style.css">
-    <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     {
@@ -27,6 +27,7 @@
     }
     </script>
 </head>
+
 <body>
     <div id="nav-container"></div>
     <main class="article-container">
@@ -41,12 +42,16 @@
         </header>
         <article class="article-content">
             <h2>前言：为什么要用代码画图</h2>
-            <p>在软件开发过程中，架构图、流程图、时序图是沟通系统设计的重要工具。传统的绘图工具（如 Visio、Draw.io）虽然功能强大，但存在诸多问题：版本控制困难、协作效率低、修改成本高、图片与代码分离。Mermaid 作为一种基于文本的图表定义语言，完美解决了这些痛点。通过简单的文本描述，就能生成专业的技术图表，支持版本控制、团队协作和自动化渲染，正成为现代开发团队的首选绘图工具。</p>
-            
+            <p>在软件开发过程中，架构图、流程图、时序图是沟通系统设计的重要工具。传统的绘图工具（如
+                Visio、Draw.io）虽然功能强大，但存在诸多问题：版本控制困难、协作效率低、修改成本高、图片与代码分离。Mermaid
+                作为一种基于文本的图表定义语言，完美解决了这些痛点。通过简单的文本描述，就能生成专业的技术图表，支持版本控制、团队协作和自动化渲染，正成为现代开发团队的首选绘图工具。</p>
+
             <h2>一、Mermaid 简介：什么是 Mermaid，优势何在</h2>
             <h3>1.1 什么是 Mermaid</h3>
-            <p>Mermaid 是一个基于 JavaScript 的图表绘制工具，它使用 Markdown 启发的文本定义来创建和动态修改图表。其核心理念是"文档即图表"——通过编写简单的文本代码，即可生成复杂的可视化图表。Mermaid 由 Knut Sveidqvist 在 2014 年创建，现已被 GitHub、GitLab、Notion 等主流平台原生支持。</p>
-            
+            <p>Mermaid 是一个基于 JavaScript 的图表绘制工具，它使用 Markdown
+                启发的文本定义来创建和动态修改图表。其核心理念是"文档即图表"——通过编写简单的文本代码，即可生成复杂的可视化图表。Mermaid 由 Knut Sveidqvist 在 2014 年创建，现已被
+                GitHub、GitLab、Notion 等主流平台原生支持。</p>
+
             <h3>1.2 Mermaid 的核心优势</h3>
             <table>
                 <thead>
@@ -89,11 +94,12 @@
                     </tr>
                 </tbody>
             </table>
-            
+
             <div class="tip-box">
-                <p><strong>真实案例</strong>：某团队将架构图从 Visio 迁移到 Mermaid 后，图表修改时间从平均 30 分钟降低到 5 分钟，且每次修改都有清晰的 Git 记录，团队协作效率提升 60%。</p>
+                <p><strong>真实案例</strong>：某团队将架构图从 Visio 迁移到 Mermaid 后，图表修改时间从平均 30 分钟降低到 5 分钟，且每次修改都有清晰的 Git 记录，团队协作效率提升
+                    60%。</p>
             </div>
-            
+
             <h3>1.3 支持的图表类型</h3>
             <ul>
                 <li><strong>流程图（Flowchart）</strong>：用于表示算法、工作流程</li>
@@ -105,11 +111,11 @@
                 <li><strong>用户旅程图（User Journey）</strong>：用户体验流程</li>
                 <li><strong>饼图（Pie Chart）</strong>：数据占比展示</li>
             </ul>
-            
+
             <h2>二、基础语法：流程图、时序图、甘特图、类图</h2>
             <h3>2.1 流程图基础</h3>
             <p>流程图是最常用的图表类型，用于表示工作流程或算法逻辑。</p>
-            
+
             <h4>基本语法：</h4>
             <pre><code>graph TD
     A[开始] --&gt; B{判断条件}
@@ -117,7 +123,7 @@
     B --&gt;|否| D[执行操作2]
     C --&gt; E[结束]
     D --&gt; E</code></pre>
-            
+
             <h4>节点形状：</h4>
             <pre><code>graph LR
     A[矩形节点]
@@ -129,7 +135,7 @@
     G((圆形))
     H>不对称形状]
     I{{六边形}}</code></pre>
-            
+
             <h4>连接线类型：</h4>
             <pre><code>graph LR
     A --&gt; B     # 实线箭头
@@ -138,10 +144,10 @@
     A -.-> B    # 虚线箭头
     A ==> B     # 粗线箭头
     A --&gt; B --&gt; C  # 链式连接</code></pre>
-            
+
             <h3>2.2 时序图基础</h3>
             <p>时序图用于展示对象之间的交互顺序，特别适合表示 API 调用流程。</p>
-            
+
             <h4>基本语法：</h4>
             <pre><code>sequenceDiagram
     participant 用户 as User
@@ -155,7 +161,7 @@
     Database--&gt;&gt;Backend: 返回结果
     Backend--&gt;&gt;Frontend: 响应数据
     Frontend--&gt;&gt;User: 展示结果</code></pre>
-            
+
             <h4>消息类型：</h4>
             <pre><code>sequenceDiagram
     A-&gt;B: 实线箭头
@@ -164,7 +170,7 @@
     A--&gt;&gt;B: 虚线空心箭头
     A-xB: 实线叉号
     A--xB: 虚线叉号</code></pre>
-            
+
             <h4>生命线控制：</h4>
             <pre><code>sequenceDiagram
     A-&gt;&gt;B: 请求
@@ -176,10 +182,10 @@
     deactivate C
     B--&gt;&gt;A: 返回
     deactivate B</code></pre>
-            
+
             <h3>2.3 甘特图基础</h3>
             <p>甘特图用于项目管理和时间线规划，可以直观展示任务进度和依赖关系。</p>
-            
+
             <h4>基本语法：</h4>
             <pre><code>gantt
     title 项目开发计划
@@ -198,10 +204,10 @@
     section 发布阶段
     部署上线     :c1, after b3, 3d
     监控优化     :c2, after c1, 7d</code></pre>
-            
+
             <h3>2.4 类图基础</h3>
             <p>类图用于面向对象设计，展示类的关系和结构。</p>
-            
+
             <h4>基本语法：</h4>
             <pre><code>classDiagram
     class Animal {
@@ -222,7 +228,7 @@
     
     Animal &lt;|-- Dog
     Animal &lt;|-- Cat</code></pre>
-            
+
             <h4>关系类型：</h4>
             <pre><code>classDiagram
     A &lt;|-- B  # 继承
@@ -231,11 +237,11 @@
     A --&gt; B   # 关联
     A --&lt; B   # 实现
     A ..&gt; B   # 依赖</code></pre>
-            
+
             <h2>三、高级用法：子图、样式、交互</h2>
             <h3>3.1 子图（Subgraph）</h3>
             <p>子图用于将相关节点分组，增强图表的组织性。</p>
-            
+
             <h4>流程图中的子图：</h4>
             <pre><code>graph TB
     subgraph 前端系统
@@ -250,7 +256,7 @@
     
     C --&gt; D
     F --&gt; G[(数据库)]</code></pre>
-            
+
             <h4>时序图中的子图：</h4>
             <pre><code>sequenceDiagram
     participant 用户
@@ -265,17 +271,17 @@
     前端-&gt;&gt;后端: 请求
     后端--&gt;&gt;前端: 响应
     前端--&gt;&gt;用户: 结果</code></pre>
-            
+
             <h3>3.2 样式定制</h3>
             <p>通过 style 和 classDef 命令可以自定义节点样式。</p>
-            
+
             <h4>节点样式：</h4>
             <pre><code>graph LR
     A[节点A] --&gt; B[节点B]
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff</code></pre>
-            
+
             <h4>样式类：</h4>
             <pre><code>graph LR
     A[节点A] --&gt; B[节点B] --&gt; C[节点C]
@@ -285,10 +291,10 @@
     
     class A important
     class B,C minor</code></pre>
-            
+
             <h3>3.3 交互功能</h3>
             <p>Mermaid 支持点击事件和工具提示，增强图表交互性。</p>
-            
+
             <h4>点击事件：</h4>
             <pre><code>graph LR
     A[文档] --&gt; B[代码]
@@ -297,11 +303,11 @@
     click A "https://example.com/doc" "查看文档"
     click B "https://example.com/code" "查看代码"
     click C "https://example.com/test" "运行测试"</code></pre>
-            
+
             <div class="warning-box">
                 <p><strong>注意</strong>：点击事件需要在支持 JavaScript 的环境中才能正常工作。在某些 Markdown 渲染器中可能被禁用。</p>
             </div>
-            
+
             <h2>四、实战案例：绘制系统架构图</h2>
             <h3>4.1 电商系统架构示例</h3>
             <pre><code>graph TB
@@ -358,7 +364,7 @@
     style G fill:#f0f0f0
     style H fill:#f0f0f0
     style I fill:#f0f0f0</code></pre>
-            
+
             <h3>4.2 API 调用时序图示例</h3>
             <pre><code>sequenceDiagram
     actor 用户
@@ -395,16 +401,16 @@
     前端--&gt;&gt;用户: 显示下单成功
     
     Note over 订单,库存: 分布式事务保证一致性</code></pre>
-            
+
             <h2>五、Mermaid 与 Markdown 集成</h2>
             <h3>5.1 GitHub/GitLab 集成</h3>
             <p>GitHub 和 GitLab 原生支持 Mermaid，只需使用代码块语法：</p>
-            
+
             <pre><code>```mermaid
 graph LR
     A[开始] --&gt; B[结束]
 ```</code></pre>
-            
+
             <h3>5.2 VS Code 插件</h3>
             <p>推荐安装以下 VS Code 插件：</p>
             <ul>
@@ -412,14 +418,15 @@ graph LR
                 <li><strong>Mermaid Editor</strong>：实时预览</li>
                 <li><strong>Markdown Preview Mermaid Support</strong>：Markdown 预览支持</li>
             </ul>
-            
+
             <h3>5.3 在线编辑器</h3>
             <p>推荐使用在线编辑器进行快速原型设计：</p>
             <ul>
                 <li><a href="https://mermaid.live" target="_blank">Mermaid Live Editor</a>：官方在线编辑器</li>
-                <li><a href="https://mermaid-js.github.io/mermaid-live-editor" target="_blank">Mermaid Live Editor (备用)</a></li>
+                <li><a href="https://mermaid-js.github.io/mermaid-live-editor" target="_blank">Mermaid Live Editor
+                        (备用)</a></li>
             </ul>
-            
+
             <h3>5.4 文档系统集成</h3>
             <h4>在静态网站中使用：</h4>
             <pre><code>&lt;!-- 引入 Mermaid CDN --&gt;
@@ -437,7 +444,7 @@ graph LR
 graph LR
     A --&gt; B
 &lt;/div&gt;</code></pre>
-            
+
             <h2>六、常见问题与解决方案</h2>
             <h3>6.1 图表渲染失败</h3>
             <p><strong>问题</strong>：图表无法渲染，显示错误信息。</p>
@@ -448,14 +455,14 @@ graph LR
                 <li>转义特殊字符：<code>#quot;</code> 代替引号，<code>#lt;</code> 和 <code>#gt;</code> 代替尖括号</li>
                 <li>检查节点 ID 是否唯一</li>
             </ol>
-            
+
             <h3>6.2 中文显示问题</h3>
             <p><strong>问题</strong>：中文节点名称显示异常。</p>
             <p><strong>解决方案</strong>：</p>
             <pre><code># 使用引号包裹中文
 graph LR
     A["开始节点"] --&gt; B["结束节点"]</code></pre>
-            
+
             <h3>6.3 图表过于复杂</h3>
             <p><strong>问题</strong>：大型图表难以阅读和维护。</p>
             <p><strong>最佳实践</strong>：</p>
@@ -465,7 +472,7 @@ graph LR
                 <li><strong>抽象层次</strong>：合理设置抽象层次，避免过度细节</li>
                 <li><strong>命名规范</strong>：使用有意义的节点 ID 和标签</li>
             </ul>
-            
+
             <h3>6.4 版本控制冲突</h3>
             <p><strong>问题</strong>：多人修改同一图表导致冲突。</p>
             <p><strong>解决方案</strong>：</p>
@@ -474,9 +481,10 @@ graph LR
                 <li>使用有意义的节点 ID，避免随意重命名</li>
                 <li>在提交前与团队成员协调修改内容</li>
             </ol>
-            
+
             <h2>总结</h2>
-            <p>Mermaid 作为代码驱动的图表工具，完美契合现代开发工作流，显著提升了文档编写和团队协作效率。通过简单的文本语法，开发者可以快速绘制流程图、时序图、甘特图等多种图表，并轻松集成到 Markdown 文档、Git 工作流和自动化流程中。掌握 Mermaid 语法和最佳实践，是提升技术文档编写效率的重要技能。</p>
+            <p>Mermaid 作为代码驱动的图表工具，完美契合现代开发工作流，显著提升了文档编写和团队协作效率。通过简单的文本语法，开发者可以快速绘制流程图、时序图、甘特图等多种图表，并轻松集成到 Markdown
+                文档、Git 工作流和自动化流程中。掌握 Mermaid 语法和最佳实践，是提升技术文档编写效率的重要技能。</p>
         </article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
@@ -499,8 +507,6 @@ graph LR
             </footer>
         </div>
     </main>
-    <script src="../../common/js/theme.js"></script>
-    <script src="../../common/js/nav.js"></script>
-    <script src="../../common/js/utils.js"></script>
 </body>
+
 </html>

@@ -8,38 +8,85 @@
     <meta name="description" content="在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私">
     <meta name="keywords" content="图片背景色切换, 更换背景色, 图片换背景, 背景色替换, 在线图片处理, 免费图片工具">
     <title>图片背景色切换工具</title>
+    <meta property="og:title" content="图片背景色切换工具">
+    <meta property="og:description" content="在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/image/backcolor/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图片背景色切换工具">
+    <meta name="twitter:description" content="在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/image/backcolor/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/backcolor/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/image/backcolor/">
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "图片背景色切换工具",
+        "description": "在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私。Online image background color switcher with smart detection and tolerance control.",
+        "url": "https://helpoke.com/image/backcolor",
+        "applicationCategory": "https://schema.org/ImageProcessing",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "智能识别图片背景色并一键替换",
+            "提供多种预设背景颜色",
+            "支持自定义颜色选择",
+            "可调节容差精准识别复杂背景",
+            "纯前端处理，图片不上传服务器",
+            "一键下载处理后的图片"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
 </head>
 
 <body>
     <main class="main">
         <section class="page-hero">
-            <h1>图片背景色切换工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="image.backcolor.title">图片背景色切换工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="image.backcolor.intro">图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景</p>
+            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
 
             <label for="imageUpload" class="upload-area">
                 <input type="file" id="imageUpload" accept="image/*" style="display:none;">
                 <div class="upload-icon">🖼️</div>
-                <div class="upload-text">点击上传或拖拽图片到此处</div>
-                <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式</div>
+                <div class="upload-text" data-i18n="image.backcolor.uploadText">点击上传或拖拽图片到此处</div>
+                <div class="upload-hint" data-i18n="image.backcolor.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式</div>
             </label>
 
             <div class="preview-section">
                 <div class="image-container">
-                    <img id="previewImage" src="" alt="预览图片" style="display: none;">
-                    <div id="placeholder" class="placeholder">请上传一张图片</div>
+                    <img id="previewImage" src="" alt="预览图片" style="display: none;" data-i18n="image.backcolor.previewAlt">
+                    <div id="placeholder" class="placeholder" data-i18n="image.backcolor.placeholder">请上传一张图片</div>
                 </div>
             </div>
 
             <div class="color-section">
-                <h2>选择背景颜色</h2>
+                <h2 data-i18n="image.backcolor.colorTitle">选择背景颜色</h2>
                 <div class="color-palette">
                     <div class="color-swatch" data-color="#ffffff"></div>
                     <div class="color-swatch" data-color="#000000"></div>
@@ -54,114 +101,114 @@
             </div>
 
             <div class="tolerance-section">
-                <h2>背景检测容差</h2>
+                <h2 data-i18n="image.backcolor.toleranceTitle">背景检测容差</h2>
                 <div class="tolerance-control">
                     <input type="range" id="tolerance" min="0" max="100" value="30">
                     <span id="toleranceValue">30</span>
                 </div>
-                <p>调整容差值可以更好地识别复杂背景，值越大识别范围越广。</p>
+                <p data-i18n="image.backcolor.toleranceTip">调整容差值可以更好地识别复杂背景，值越大识别范围越广。</p>
             </div>
 
             <div class="action-buttons">
-                <button id="replaceBgColorBtn" disabled>应用背景替换</button>
-                <button id="downloadBtn" disabled>下载结果图片</button>
+                <button id="replaceBgColorBtn" disabled data-i18n="image.backcolor.replaceBtn">应用背景替换</button>
+                <button id="downloadBtn" disabled data-i18n="image.backcolor.downloadBtn">下载结果图片</button>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>工具介绍</h3>
+                        <h3 data-i18n="image.backcolor.infoIntro">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、解决的问题</h4>
+                        <h4 data-i18n="image.backcolor.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li>为图片添加或更换背景色。</li>
-                            <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li>无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="image.backcolor.problem1">为图片添加或更换背景色。</li>
+                            <li data-i18n="image.backcolor.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="image.backcolor.problem3">无需安装专业软件，随时随地在线使用。</li>
                         </ul>
-                        <h4>二、支持的格式</h4>
+                        <h4 data-i18n="image.backcolor.formatTitle">二、支持的格式</h4>
                         <ul>
-                            <li><strong>JPG：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>PNG：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>GIF：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.backcolor.formatJpg"><strong>JPG：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.backcolor.formatPng"><strong>PNG：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.backcolor.formatGif"><strong>GIF：</strong>支持该格式的完整处理功能。</li>
                         </ul>
-                        <h4>三、核心功能</h4>
+                        <h4 data-i18n="image.backcolor.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="image.backcolor.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="image.backcolor.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="image.backcolor.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="image.backcolor.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>使用说明</h3>
+                        <h3 data-i18n="image.backcolor.infoUsage">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、上传图片</h4>
+                        <h4 data-i18n="image.backcolor.usageUploadTitle">一、上传图片</h4>
                         <ul>
-                            <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
-                            <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
-                            <li><strong>图片预览：</strong>上传后图片会显示在预览区域。</li>
+                            <li data-i18n="image.backcolor.usageClickUpload"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                            <li data-i18n="image.backcolor.usageFormats"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                            <li data-i18n="image.backcolor.usagePreview"><strong>图片预览：</strong>上传后图片会显示在预览区域。</li>
                         </ul>
-                        <h4>二、选择背景颜色</h4>
+                        <h4 data-i18n="image.backcolor.usageColorTitle">二、选择背景颜色</h4>
                         <ul>
-                            <li><strong>预设颜色：</strong>点击颜色面板中的预设颜色块选择背景色。</li>
-                            <li><strong>自定义颜色：</strong>使用颜色选择器自定义背景颜色。</li>
-                            <li><strong>颜色值：</strong>颜色选择器显示当前颜色的十六进制值。</li>
+                            <li data-i18n="image.backcolor.usagePreset"><strong>预设颜色：</strong>点击颜色面板中的预设颜色块选择背景色。</li>
+                            <li data-i18n="image.backcolor.usageCustom"><strong>自定义颜色：</strong>使用颜色选择器自定义背景颜色。</li>
+                            <li data-i18n="image.backcolor.usageColorValue"><strong>颜色值：</strong>颜色选择器显示当前颜色的十六进制值。</li>
                         </ul>
-                        <h4>三、调整容差值</h4>
+                        <h4 data-i18n="image.backcolor.usageToleranceTitle">三、调整容差值</h4>
                         <ul>
-                            <li><strong>容差定义：</strong>容差值决定了背景颜色的识别范围。</li>
-                            <li><strong>值越大：</strong>识别范围越广，会包含更多相似颜色。</li>
-                            <li><strong>值越小：</strong>识别范围越精确，只识别完全匹配的颜色。</li>
-                            <li><strong>默认值：</strong>默认容差值为30，适合大多数场景。</li>
+                            <li data-i18n="image.backcolor.usageToleranceDef"><strong>容差定义：</strong>容差值决定了背景颜色的识别范围。</li>
+                            <li data-i18n="image.backcolor.usageToleranceLarge"><strong>值越大：</strong>识别范围越广，会包含更多相似颜色。</li>
+                            <li data-i18n="image.backcolor.usageToleranceSmall"><strong>值越小：</strong>识别范围越精确，只识别完全匹配的颜色。</li>
+                            <li data-i18n="image.backcolor.usageToleranceDefault"><strong>默认值：</strong>默认容差值为30，适合大多数场景。</li>
                         </ul>
-                        <h4>四、应用背景替换</h4>
+                        <h4 data-i18n="image.backcolor.usageReplaceTitle">四、应用背景替换</h4>
                         <ul>
-                            <li><strong>点击应用：</strong>点击"应用背景替换"按钮进行背景替换。</li>
-                            <li><strong>实时预览：</strong>替换后会实时显示处理结果。</li>
-                            <li><strong>下载结果：</strong>点击"下载结果图片"保存处理后的图片。</li>
+                            <li data-i18n="image.backcolor.usageApply"><strong>点击应用：</strong>点击"应用背景替换"按钮进行背景替换。</li>
+                            <li data-i18n="image.backcolor.usageRealPreview"><strong>实时预览：</strong>替换后会实时显示处理结果。</li>
+                            <li data-i18n="image.backcolor.usageDownload"><strong>下载结果：</strong>点击"下载结果图片"保存处理后的图片。</li>
                         </ul>
-                        <h4>五、背景替换原理</h4>
+                        <h4 data-i18n="image.backcolor.usagePrincipleTitle">五、背景替换原理</h4>
                         <ul>
-                            <li><strong>颜色识别：</strong>通过颜色容差算法识别图片中的背景区域。</li>
-                            <li><strong>像素替换：</strong>将识别到的背景像素替换为所选颜色。</li>
-                            <li><strong>边缘处理：</strong>智能处理颜色边界，避免生硬的边缘效果。</li>
+                            <li data-i18n="image.backcolor.usageColorDetect"><strong>颜色识别：</strong>通过颜色容差算法识别图片中的背景区域。</li>
+                            <li data-i18n="image.backcolor.usagePixelReplace"><strong>像素替换：</strong>将识别到的背景像素替换为所选颜色。</li>
+                            <li data-i18n="image.backcolor.usageEdge"><strong>边缘处理：</strong>智能处理颜色边界，避免生硬的边缘效果。</li>
                         </ul>
                     </div>
                 </article>
                 <article class="info-details">
                     <header>
-                        <h3>注意事项</h3>
+                        <h3 data-i18n="image.backcolor.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、数据安全</h4>
+                        <h4 data-i18n="image.backcolor.notesSecurityTitle">一、数据安全</h4>
                         <ul>
-                            <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
-                            <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                            <li data-i18n="image.backcolor.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li data-i18n="image.backcolor.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                            <li data-i18n="image.backcolor.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
                         </ul>
-                        <h4>二、容差设置</h4>
+                        <h4 data-i18n="image.backcolor.notesToleranceTitle">二、容差设置</h4>
                         <ul>
-                            <li>复杂背景建议适当增大容差值（40-60）。</li>
-                            <li>纯色背景可以减小容差值（10-20）以获得更精确的效果。</li>
-                            <li>如果替换效果不理想，可以尝试调整容差值重新处理。</li>
+                            <li data-i18n="image.backcolor.noteTolerance1">复杂背景建议适当增大容差值（40-60）。</li>
+                            <li data-i18n="image.backcolor.noteTolerance2">纯色背景可以减小容差值（10-20）以获得更精确的效果。</li>
+                            <li data-i18n="image.backcolor.noteTolerance3">如果替换效果不理想，可以尝试调整容差值重新处理。</li>
                         </ul>
-                        <h4>三、图片格式</h4>
+                        <h4 data-i18n="image.backcolor.notesFormatTitle">三、图片格式</h4>
                         <ul>
-                            <li>PNG 格式支持透明背景，替换效果更好。</li>
-                            <li>JPG 格式为压缩格式，边缘可能有轻微色差。</li>
-                            <li>GIF 格式仅处理第一帧。</li>
+                            <li data-i18n="image.backcolor.noteFormat1">PNG 格式支持透明背景，替换效果更好。</li>
+                            <li data-i18n="image.backcolor.noteFormat2">JPG 格式为压缩格式，边缘可能有轻微色差。</li>
+                            <li data-i18n="image.backcolor.noteFormat3">GIF 格式仅处理第一帧。</li>
                         </ul>
-                        <h4>四、常见问题</h4>
+                        <h4 data-i18n="image.backcolor.notesFaqTitle">四、常见问题</h4>
                         <ul>
-                            <li><strong>替换效果不佳：</strong>调整容差值，尝试不同的颜色选择。</li>
-                            <li><strong>部分区域未替换：</strong>增大容差值或选择更接近的颜色。</li>
-                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li><strong>图片加载失败：</strong>检查图片格式是否正确。</li>
+                            <li data-i18n="image.backcolor.noteFaq1"><strong>替换效果不佳：</strong>调整容差值，尝试不同的颜色选择。</li>
+                            <li data-i18n="image.backcolor.noteFaq2"><strong>部分区域未替换：</strong>增大容差值或选择更接近的颜色。</li>
+                            <li data-i18n="image.backcolor.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="image.backcolor.noteFaq4"><strong>图片加载失败：</strong>检查图片格式是否正确。</li>
                         </ul>
                     </div>
                 </article>

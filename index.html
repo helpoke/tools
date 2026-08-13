@@ -10,6 +10,12 @@
         content="Helpoke 由 Help + Poke 组合而生，寓意随时帮忙、一键轻点即用。聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。（离线亦可用）">
     <meta name="keywords" content="在线工具,免费工具,图像压缩,图像水印,视频裁剪,JSON格式化,密码生成,UUID生成,Mermaid图表,文档签名,批量下载,隐私保护">
     <link rel="canonical" href="https://helpoke.com/" />
+
+    <!-- Hreflang tags for multilingual SEO -->
+    <link rel="alternate" hreflang="zh-CN" href="https://helpoke.com/" />
+    <link rel="alternate" hreflang="en" href="https://helpoke.com/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/" />
+
     <meta property="og:title" content="Helpoke 小助点 - 身边的万能在线工具箱">
     <meta property="og:description" content="聚合各类日常刚需在线工具，无需安装、无需注册、打开即用，极简操作、安全隐私，高效解决生活与办公各类小问题。">
     <meta property="og:type" content="website">
@@ -26,6 +32,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="common/css/utils.css">
     <link rel="stylesheet" href="common/css/style.css">
+    <link rel="stylesheet" href="common/css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Open Graph / Facebook -->
@@ -111,1028 +118,12 @@
     }
     </script>
 
-    <style>
-        /* ========== Homepage Specific Styles ========== */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 48px 32px;
-            border-radius: 16px;
-            margin-bottom: 32px;
-            text-align: center;
-            position: relative;
-        }
 
-        .hero p {
-            text-align: left;
-        }
-
-        .hero::before {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        /* 主题切换按钮 */
-        .hero .theme-toggle {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 10;
-        }
-
-        .hero .theme-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .hero {
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-        }
-
-        body.dark-mode .footer-note {
-            color: #94a3b8;
-            background: #1e293b;
-            border-top-color: #334155;
-            border-bottom-color: #334155;
-        }
-
-        body.dark-mode .footer-note a {
-            color: #94a3b8;
-        }
-
-        body.dark-mode .footer-note a:hover {
-            color: #6366f1;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero p {
-            font-size: 1rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto 12px;
-            line-height: 1.7;
-            position: relative;
-        }
-
-        .hero a {
-            color: #fff;
-            text-decoration: underline;
-        }
-
-        .hero a:hover {
-            color: #e0e7ff;
-        }
-
-        /* ========== Search Box ========== */
-        .search-container {
-            margin-top: 24px;
-            position: relative;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            max-width: 60%;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 4px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .search-icon {
-            padding: 12px 16px;
-            font-size: 18px;
-            color: var(--text-secondary);
-        }
-
-        .search-input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 15px;
-            padding: 12px 8px;
-            color: var(--text-primary);
-            background: transparent;
-        }
-
-        .search-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .search-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-        }
-
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 500px;
-            margin-top: 8px;
-            background: var(--bg-card);
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            display: none;
-            z-index: 9999;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .search-results.active {
-            display: block;
-        }
-
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .search-result-item:hover {
-            background: var(--bg-secondary);
-        }
-
-        .search-result-item .icon {
-            font-size: 18px;
-            color: var(--text-primary);
-        }
-
-        .search-result-item .name {
-            flex: 1;
-            color: var(--text-primary);
-        }
-
-        .search-result-item .category {
-            font-size: 12px;
-            color: var(--text-secondary);
-            padding: 2px 8px;
-            background: var(--bg-secondary);
-            border-radius: 4px;
-        }
-
-        .search-no-results {
-            padding: 24px;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-
-        .category-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .category-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border-light);
-        }
-
-        .category-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .category-icon.img {
-            background: #fef3c7;
-        }
-
-        .category-icon.video {
-            background: #dbeafe;
-        }
-
-        .category-icon.data {
-            background: #d1fae5;
-        }
-
-        .category-icon.security {
-            background: #fee2e2;
-        }
-
-        .category-icon.util {
-            background: #e0e7ff;
-        }
-
-        .category-icon.doc {
-            background: #fce7f3;
-        }
-
-        .category-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .tools-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .tool-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            background: var(--bg-secondary);
-        }
-
-        .tool-link:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-color);
-            transform: translateX(4px);
-        }
-
-        .tool-link .icon {
-            font-size: 16px;
-            width: 24px;
-            text-align: center;
-        }
-
-        .tool-link .badge {
-            margin-left: auto;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-color);
-        }
-
-        .tool-link .badge.sign {
-            background: #fed7aa;
-            color: #ea580c;
-        }
-
-        .tool-link .badge.watermark {
-            background: #d1fae5;
-            color: #059669;
-        }
-
-        .tool-link .badge.download {
-            background: #fce7f3;
-            color: #db2777;
-        }
-
-        .tool-link .badge.resource {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-color);
-        }
-
-        /* ========== Stats Row ========== */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-color);
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .stat-icon.blue {
-            background: #dbeafe;
-        }
-
-        .stat-icon.green {
-            background: #d1fae5;
-        }
-
-        .stat-icon.purple {
-            background: #e0e7ff;
-        }
-
-        .stat-icon.orange {
-            background: #fed7aa;
-        }
-
-        .stat-icon.pink {
-            background: #fce7f3;
-        }
-
-        .stat-icon.yellow {
-            background: #fef3c7;
-        }
-
-        .stat-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* ========== Recent Section ========== */
-        .recent-section {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-color);
-        }
-
-        .recent-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .recent-icon {
-            font-size: 20px;
-        }
-
-        .recent-title {
-            font-weight: 700;
-            color: var(--text-primary);
-            flex: 1;
-        }
-
-        .recent-clear {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 14px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .recent-clear:hover {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error-color);
-        }
-
-        .badge.popular {
-            background: #c2cfc9;
-            color: #e60a0a;
-        }
-
-        .recent-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .recent-empty {
-            color: var(--text-muted);
-            font-size: 14px;
-            padding: 8px 0;
-        }
-
-        .recent-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 14px;
-            transition: all 0.2s;
-            cursor: pointer;
-            pointer-events: auto;
-        }
-
-        .recent-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-color);
-        }
-
-        /* ========== Page Hero ========== */
-        .page-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 24px 32px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-        }
-
-        .page-hero h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .page-hero p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        /* ========== Ad Sidebar Right ========== */
-        .ad-sidebar-right {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 200px;
-            height: 100vh;
-            background: var(--bg-secondary);
-            border-left: 1px solid var(--border-color);
-            padding: 16px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            overflow-y: auto;
-            z-index: 50;
-        }
-
-        .ad-slot {
-            background: var(--bg-card);
-            border-radius: 8px;
-            padding: 8px 0;
-            height: 50%;
-            max-height: 50%;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-        }
-
-        .ad-label {
-            display: block;
-            font-size: 10px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 4px;
-        }
-
-        /* Site intro */
-        .site-intro {
-            margin-top: 36px;
-            padding: 28px 32px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .site-intro h2 {
-            font-size: 20px;
-            color: var(--text-primary);
-            margin-bottom: 14px;
-        }
-
-        .site-intro h3 {
-            font-size: 16px;
-            color: var(--text-primary);
-            margin: 18px 0 8px;
-        }
-
-        .site-intro p {
-            font-size: 14px;
-            line-height: 1.9;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-
-        /* Footer note */
-        .footer-note {
-            text-align: center;
-            margin-top: 40px;
-            padding: 24px 24px;
-            color: #e4e9ef;
-            background: #85a290;
-            font-size: 13px;
-            border-top: 3px solid var(--border-light);
-            border-bottom: 3px solid var(--border-light);
-        }
-
-        .footer-note a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer-note a:hover {
-            color: var(--accent-color);
-        }
-
-        /* ========== Responsive ========== */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 30px 15px;
-            }
-
-            .hero a {
-                font-size: 0.75rem;
-            }
-
-            .hero h1 {
-                font-size: 1rem;
-            }
-
-            .hero p {
-                font-size: 0.8rem;
-            }
-
-            .search-box {
-                /* flex-direction: column; */
-                gap: 6px;
-                padding: 8px;
-                max-width: 95%;
-            }
-
-            .search-btn,
-            .search-icon {
-                padding: 8px 15px;
-            }
-
-            .search-input {
-                width: 100%;
-            }
-
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stat-card {
-                padding: 16px;
-            }
-
-            .stat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-
-            .stat-value {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-row {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                max-width: 100% !important;
-            }
-
-            .page-layout main.main {
-                width: 100% !important;
-                margin: 0 2% !important;
-            }
-
-        }
-
-        /* ========== Page Layout Container ========== */
-        .page-layout {
-            display: flex;
-            flex: 1;
-            min-height: 100vh;
-        }
-
-        .page-layout main.main {
-            flex: 1;
-            margin-left: 15%;
-            /* 左间距2% + 导航栏15% */
-            transition: margin-left 0.3s ease;
-        }
-
-        /* 默认隐藏广告栏 */
-        .page-layout .ad-sidebar-right {
-            display: none;
-        }
-
-        /* 默认container宽度100% */
-        .container {
-            max-width: 100%;
-        }
-
-        /* Sidebar collapsed state - 折叠后扩展主内容区域 */
-        body.sidebar-collapsed .page-layout main.main {
-            margin-left: 2%;
-        }
-
-        /* 宽度>1000px时显示广告栏 */
-        @media (min-width: 1001px) {
-            .page-layout .ad-sidebar-right {
-                display: block;
-                position: fixed;
-                right: 1%;
-                top: var(--header-height);
-                width: 12%;
-                /* 广告栏11% */
-                /* height: calc(100vh - var(--header-height)); */
-                height: 100%;
-                overflow-y: auto;
-                border-left: 1px solid var(--border-color);
-                background: var(--bg-secondary);
-                z-index: 100;
-            }
-
-            .page-layout main.main {
-                margin-left: 15%;
-            }
-
-            /* container宽度85% */
-            /* .container {
-                max-width: 85%;
-            } */
-        }
-
-        /* ========== Page Ad ========== */
-        .page-ad {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-            text-align: center;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-color);
-        }
-
-        .page-ad amp-ad {
-            display: inline-block;
-            max-width: 100%;
-        }
-
-        /* ========== Giscus Comments ========== */
-        .comments-section {
-            margin-top: 40px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .comments-section h3 {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-
-        /* ========== Blog Section ========== */
-        .blog-section {
-            margin-top: 40px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title .icon {
-            font-size: 1.3rem;
-        }
-
-        .blog-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .blog-card-mini {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .blog-card-mini:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent-color);
-        }
-
-        .blog-card-mini .card-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .blog-card-mini .card-category {
-            font-size: 0.75rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .blog-card-mini .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.4;
-            margin-bottom: 8px;
-        }
-
-        .blog-card-mini .card-excerpt {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .blog-link-more {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .blog-link-more a {
-            display: inline-block;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .blog-link-more a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-        }
-
-        /* ========== About Section ========== */
-        .about-section {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 32px;
-            margin-top: 40px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--box-shadow);
-        }
-
-        .about-section h2 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .about-section p {
-            font-size: 1rem;
-            line-height: 1.9;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .about-feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-        }
-
-        .about-feature-item .feature-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .about-feature-item .feature-text h4 {
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .about-feature-item .feature-text p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-
-        /* ========== FAQ Section ========== */
-        .faq-section {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 32px;
-            margin-top: 40px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--box-shadow);
-        }
-
-        .faq-section h2 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .faq-item {
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            background: var(--bg-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        .faq-question h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-            flex: 1;
-        }
-
-        .faq-toggle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-
-        .faq-answer-content {
-            padding: 16px 20px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            border-top: 1px solid var(--border-color);
-        }
-
-        @media (max-width: 992px) {
-            .blog-cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .about-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .blog-cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 
 <body>
     <!-- Navigation component container -->
-    <div id="nav-container"></div>
+    <!-- <div id="nav-container"></div> -->
 
     <!-- Page Layout Container -->
     <div class="page-layout">
@@ -1141,6 +132,13 @@
             <div class="container">
                 <!-- Hero Section -->
                 <section class="hero">
+                    <!-- Language Switch -->
+                    <div style="position: absolute; top: 16px; left: 16px;">
+                        <a href="/en/" id="lang-switch"
+                            style="display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: 20px; color: #fff; text-decoration: none; font-size: 14px; transition: all 0.3s;">
+                            🇺🇸 English
+                        </a>
+                    </div>
                     <button id="theme-toggle" class="theme-toggle" title="切换夜间模式">🌙</button>
                     <h1>Helpoke（小助点），一点即用</h1>
                     <p>Helpoke = Help + Poke，寓意随时帮忙、一键轻点即用。极简操作、安全隐私。</p>
@@ -1183,21 +181,21 @@
                         <div class="stat-icon blue">🖼️</div>
                         <div class="stat-info">
                             <div class="stat-value">8</div>
-                            <div class="stat-label">图像处理</div>
+                            <div class="stat-label" data-i18n="home.stats.image">图像处理</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon green">🎬</div>
                         <div class="stat-info">
                             <div class="stat-value">9</div>
-                            <div class="stat-label">视频处理</div>
+                            <div class="stat-label" data-i18n="home.stats.video">视频处理</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon pink">📝</div>
                         <div class="stat-info">
                             <div class="stat-value">7</div>
-                            <div class="stat-label">文档下载</div>
+                            <div class="stat-label" data-i18n="home.stats.document">文档下载</div>
                         </div>
                     </div>
 
@@ -1205,21 +203,21 @@
                         <div class="stat-icon purple">💻</div>
                         <div class="stat-info">
                             <div class="stat-value">9</div>
-                            <div class="stat-label">数据开发</div>
+                            <div class="stat-label" data-i18n="home.stats.data">数据开发</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon orange">🔐</div>
                         <div class="stat-info">
                             <div class="stat-value">9</div>
-                            <div class="stat-label">加密转换</div>
+                            <div class="stat-label" data-i18n="home.stats.security">加密转换</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon yellow">🛠️</div>
                         <div class="stat-info">
                             <div class="stat-value">10</div>
-                            <div class="stat-label">实用工具</div>
+                            <div class="stat-label" data-i18n="home.stats.utility">实用工具</div>
                         </div>
                     </div>
                 </div>
@@ -1230,42 +228,45 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon img">🖼️</div>
-                            <span class="category-title">图像处理工具</span>
+                            <span class="category-title" data-i18n="tool.categories.image">图像处理工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/image/compressor/note.html" class="tool-link">
-                                <span class="icon">📦</span><b>图像压缩</b>(JPG/PNG/WebP)
-                                <span class="badge popular">热门</span>
+                            <a href="/image/compressor/" class="tool-link">
+                                <span class="icon">📦</span><b
+                                    data-i18n="nav.tools.imageCompress">图像压缩</b>(JPG/PNG/WebP)
+                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
                             </a>
-                            <a href="/image/convert/note.html" class="tool-link">
-                                <span class="icon">🔄</span><b>图像转换</b>(SVG/Base64/PNG)
-                                <span class="badge">转换</span>
+                            <a href="/image/convert/" class="tool-link">
+                                <span class="icon">🔄</span><b
+                                    data-i18n="nav.tools.imageConvert">图像转换</b>(SVG/Base64/PNG)
+                                <span class="badge" data-i18n="tool.badges.convert">转换</span>
                             </a>
-                            <a href="/image/gif/note.html" class="tool-link">
-                                <span class="icon">GIF</span><b>图像转GIF</b>(多图拼接)
-                                <span class="badge">GIF</span>
+                            <a href="/image/gif/" class="tool-link">
+                                <span class="icon">GIF</span><b data-i18n="nav.tools.imageGif">图像转GIF</b>(多图拼接)
+                                <span class="badge" data-i18n="tool.badges.gif">GIF</span>
                             </a>
-                            <a href="/image/watermark-add/note.html" class="tool-link">
-                                <span class="icon">💧</span><b>图像加水印</b>(文字+图像)
-                                <span class="badge">水印</span>
+                            <a href="/image/watermark-add/" class="tool-link">
+                                <span class="icon">💧</span><b data-i18n="nav.tools.imageWatermarkAdd">图像加水印</b>(文字+图像)
+                                <span class="badge" data-i18n="tool.badges.watermark">水印</span>
                             </a>
-                            <a href="/image/watermark-remove/note.html" class="tool-link">
-                                <span class="icon">✨</span><b>图像去水印</b>(模糊+马赛克)
-                                <span class="badge">水印</span>
+                            <a href="/image/watermark-remove/" class="tool-link">
+                                <span class="icon">✨</span><b
+                                    data-i18n="nav.tools.imageWatermarkRemove">图像去水印</b>(模糊+马赛克)
+                                <span class="badge" data-i18n="tool.badges.watermark">水印</span>
                             </a>
-                            <a href="/image/cropping/note.html" class="tool-link">
-                                <span class="icon">✂️</span><b>图像裁剪</b>(精确比例)
-                                <span class="badge">裁剪</span>
+                            <a href="/image/cropping/" class="tool-link">
+                                <span class="icon">✂️</span><b data-i18n="nav.tools.imageCropping">图像裁剪</b>(精确比例)
+                                <span class="badge" data-i18n="tool.badges.cropping">裁剪</span>
                             </a>
                             <!-- 图像处理 -->
-                            <a href="/image/edit/note.html" class="tool-link">
-                                <span class="icon">🛠️</span><b>图像编辑</b>(旋转+模糊)
-                                <span class="badge">编辑</span>
+                            <a href="/image/edit/" class="tool-link">
+                                <span class="icon">🛠️</span><b data-i18n="nav.tools.imageEdit">图像编辑</b>(旋转+模糊)
+                                <span class="badge" data-i18n="tool.badges.edit">编辑</span>
                             </a>
                             <!-- 图像合并 -->
-                            <a href="/image/stitch/note.html" class="tool-link">
-                                <span class="icon">🖼️</span><b>图像合并</b>(多图拼接)
-                                <span class="badge">拼接</span>
+                            <a href="/image/stitch/" class="tool-link">
+                                <span class="icon">🖼️</span><b data-i18n="nav.tools.imageStitch">图像合并</b>(多图拼接)
+                                <span class="badge" data-i18n="tool.badges.stitch">拼接</span>
                             </a>
                         </div>
                     </div>
@@ -1274,44 +275,46 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon video">🎬</div>
-                            <span class="category-title">视频处理工具</span>
+                            <span class="category-title" data-i18n="tool.categories.video">视频处理工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/video/cropping/note.html" class="tool-link">
-                                <span class="icon">✂️</span><b>视频裁剪</b>(尺寸+时长)
-                                <span class="badge popular">热门</span>
+                            <a href="/video/cropping/" class="tool-link">
+                                <span class="icon">✂️</span><b data-i18n="nav.tools.videoCropping">视频裁剪</b>(尺寸+时长)
+                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
                             </a>
-                            <a href="/video/compress/note.html" class="tool-link">
-                                <span class="icon">🗜️</span><b>视频压缩</b>(智能压缩)
-                                <span class="badge">压缩</span>
+                            <a href="/video/compress/" class="tool-link">
+                                <span class="icon">🗜️</span><b data-i18n="nav.tools.videoCompress">视频压缩</b>(智能压缩)
+                                <span class="badge" data-i18n="tool.badges.compress">压缩</span>
                             </a>
-                            <a href="/video/watermarks-add/note.html" class="tool-link">
-                                <span class="icon">🎥</span><b>视频加水印</b>(滚动文字+图像)
-                                <span class="badge">水印</span>
+                            <a href="/video/watermarks-add/" class="tool-link">
+                                <span class="icon">🎥</span><b
+                                    data-i18n="nav.tools.videoWatermarkAdd">视频加水印</b>(滚动文字+图像)
+                                <span class="badge" data-i18n="tool.badges.watermark">水印</span>
                             </a>
-                            <a href="/video/watermarks-remove/note.html" class="tool-link">
-                                <span class="icon">🎥</span><b>视频去水印</b>(裁剪/覆盖)
-                                <span class="badge">水印</span>
+                            <a href="/video/watermarks-remove/" class="tool-link">
+                                <span class="icon">🎥</span><b
+                                    data-i18n="nav.tools.videoWatermarkRemove">视频去水印</b>(裁剪/覆盖)
+                                <span class="badge" data-i18n="tool.badges.watermark">水印</span>
                             </a>
-                            <a href="/video/convert/note.html" class="tool-link">
-                                <span class="icon">🔄</span><b>视频转换</b>(WebM/MP4)
-                                <span class="badge">转换</span>
+                            <a href="/video/convert/" class="tool-link">
+                                <span class="icon">🔄</span><b data-i18n="nav.tools.videoConvert">视频转换</b>(WebM/MP4)
+                                <span class="badge" data-i18n="tool.badges.convert">转换</span>
                             </a>
-                            <a href="/video/gif/note.html" class="tool-link">
-                                <span class="icon">🖼️</span><b>视频转GIF</b>(动图制作)
-                                <span class="badge">GIF</span>
+                            <a href="/video/gif/" class="tool-link">
+                                <span class="icon">🖼️</span><b data-i18n="nav.tools.videoGif">视频转GIF</b>(动图制作)
+                                <span class="badge" data-i18n="tool.badges.gif">GIF</span>
                             </a>
-                            <a href="/video/audio/note.html" class="tool-link">
-                                <span class="icon">🔊</span><b>视频转音频</b>(提取音频)
-                                <span class="badge">音频</span>
+                            <a href="/video/audio/" class="tool-link">
+                                <span class="icon">🔊</span><b data-i18n="nav.tools.videoAudio">视频转音频</b>(提取音频)
+                                <span class="badge" data-i18n="tool.badges.time">音频</span>
                             </a>
-                            <a href="/video/edit/note.html" class="tool-link">
-                                <span class="icon">🛠️</span><b>视频编辑</b>(旋转+模糊)
-                                <span class="badge">编辑</span>
+                            <a href="/video/edit/" class="tool-link">
+                                <span class="icon">🛠️</span><b data-i18n="nav.tools.videoEdit">视频编辑</b>(旋转+模糊)
+                                <span class="badge" data-i18n="tool.badges.edit">编辑</span>
                             </a>
-                            <a href="/video/merge/note.html" class="tool-link">
-                                <span class="icon">🎬</span><b>视频合并</b>(多视频拼接)
-                                <span class="badge">合并</span>
+                            <a href="/video/merge/" class="tool-link">
+                                <span class="icon">🎬</span><b data-i18n="nav.tools.videoMerge">视频合并</b>(多视频拼接)
+                                <span class="badge" data-i18n="tool.badges.stitch">合并</span>
                             </a>
                         </div>
                     </div>
@@ -1320,36 +323,37 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon doc">📥</div>
-                            <span class="category-title">文档与下载工具</span>
+                            <span class="category-title" data-i18n="tool.categories.document">文档与下载工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/docu/signature/note.html" class="tool-link">
-                                <span class="icon">✍️</span><b>文档在线签名</b>(手写签名)
-                                <span class="badge sign">签名</span>
+                            <a href="/docu/signature/" class="tool-link">
+                                <span class="icon">✍️</span><b data-i18n="nav.tools.docSignature">文档在线签名</b>(手写签名)
+                                <span class="badge sign" data-i18n="tool.badges.sign">签名</span>
                             </a>
-                            <a href="/docu/watermark/note.html" class="tool-link">
-                                <span class="icon">🛡️</span><b>文档添加水印</b>(多种格式)
-                                <span class="badge watermark">水印</span>
+                            <a href="/docu/watermark/" class="tool-link">
+                                <span class="icon">🛡️</span><b data-i18n="nav.tools.docWatermark">文档添加水印</b>(多种格式)
+                                <span class="badge watermark" data-i18n="tool.badges.watermark">水印</span>
                             </a>
-                            <a href="/docu/blurr/note.html" class="tool-link">
-                                <span class="icon">📋</span><b>文档模糊处理</b>(内容模糊)
-                                <span class="badge">模糊</span>
+                            <a href="/docu/blurr/" class="tool-link">
+                                <span class="icon">📋</span><b data-i18n="nav.tools.docBlurr">文档模糊处理</b>(内容模糊)
+                                <span class="badge" data-i18n="tool.badges.edit">模糊</span>
                             </a>
-                            <a href="/docu/rotate/note.html" class="tool-link">
-                                <span class="icon">🔄</span><b>文档旋转翻转</b>(水平/垂直)
-                                <span class="badge">旋转</span>
+                            <a href="/docu/rotate/" class="tool-link">
+                                <span class="icon">🔄</span><b data-i18n="nav.tools.docRotate">文档旋转翻转</b>(水平/垂直)
+                                <span class="badge" data-i18n="tool.badges.convert">旋转</span>
                             </a>
-                            <a href="/docu/filter/note.html" class="tool-link">
-                                <span class="icon">🔍</span><b>文档页面筛选</b>(页面裁撤)
-                                <span class="badge filter">筛选</span>
+                            <a href="/docu/filter/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.docFilter">文档页面筛选</b>(页面裁撤)
+                                <span class="badge filter" data-i18n="tool.badges.edit">筛选</span>
                             </a>
-                            <a href="/download/media/note.html" class="tool-link">
-                                <span class="icon">⬇️</span><b>视频图像下载</b>(批量+爬取)
-                                <span class="badge download">下载</span>
+                            <a href="/download/media/" class="tool-link">
+                                <span class="icon">⬇️</span><b data-i18n="nav.tools.downloadMedia">视频图像下载</b>(批量+爬取)
+                                <span class="badge download" data-i18n="tool.badges.download">下载</span>
                             </a>
-                            <a href="/download/resource/note.html" class="tool-link">
-                                <span class="icon">📦</span><b>资源文件下载</b>(JS/CSS/字体)
-                                <span class="badge resource">资源</span>
+                            <a href="/download/resource/" class="tool-link">
+                                <span class="icon">📦</span><b
+                                    data-i18n="nav.tools.downloadResource">资源文件下载</b>(JS/CSS/字体)
+                                <span class="badge resource" data-i18n="tool.badges.resource">资源</span>
                             </a>
                         </div>
                     </div>
@@ -1358,48 +362,48 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon util">🛠️</div>
-                            <span class="category-title">生活实用工具</span>
+                            <span class="category-title" data-i18n="tool.categories.utility">生活实用工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/mermaid/note.html" class="tool-link">
-                                <span class="icon">📊</span><b>Mermaid 图表</b>(UML图)
-                                <span class="badge popular">热门</span>
+                            <a href="/mermaid/" class="tool-link">
+                                <span class="icon">📊</span><b data-i18n="nav.tools.mermaid">Mermaid 图表</b>(UML图)
+                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
                             </a>
-                            <a href="/tool/diff/note.html" class="tool-link">
-                                <span class="icon">📋</span><b>文本内容对比器</b>(内容差异)
-                                <span class="badge">对比</span>
+                            <a href="/tool/diff/" class="tool-link">
+                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">文本内容对比器</b>(内容差异)
+                                <span class="badge" data-i18n="tool.badges.edit">对比</span>
                             </a>
-                            <a href="/tool/duplicate-finder/note.html" class="tool-link">
-                                <span class="icon">🔍</span><b>重复内容查找器</b>(查重复项)
-                                <span class="badge">重复</span>
+                            <a href="/tool/duplicate-finder/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">重复内容查找器</b>(查重复项)
+                                <span class="badge" data-i18n="tool.badges.edit">重复</span>
                             </a>
-                            <a href="/tool/color-picker/note.html" class="tool-link">
-                                <span class="icon">🎨</span><b>颜色选择器</b>(HEX/RGB/HSL)
-                                <span class="badge">颜色</span>
+                            <a href="/tool/color-picker/" class="tool-link">
+                                <span class="icon">🎨</span><b data-i18n="nav.tools.colorPicker">颜色选择器</b>(HEX/RGB/HSL)
+                                <span class="badge" data-i18n="tool.badges.color">颜色</span>
                             </a>
-                            <a href="/tool/timestamp/note.html" class="tool-link">
-                                <span class="icon">🕐</span><b>时间戳转换器</b>(秒/毫秒)
-                                <span class="badge">时间</span>
+                            <a href="/tool/timestamp/" class="tool-link">
+                                <span class="icon">🕐</span><b data-i18n="nav.tools.timestamp">时间戳转换器</b>(秒/毫秒)
+                                <span class="badge" data-i18n="tool.badges.time">时间</span>
                             </a>
-                            <a href="/tool/num-to-chinese/note.html" class="tool-link">
-                                <span class="icon">🔢</span><b>中文大写数字转换器</b>
-                                <span class="badge">钱币</span>
+                            <a href="/tool/num-to-chinese/" class="tool-link">
+                                <span class="icon">🔢</span><b data-i18n="nav.tools.numToChinese">中文大写数字转换器</b>
+                                <span class="badge" data-i18n="tool.badges.time">钱币</span>
                             </a>
-                            <a href="/tool/text-transform/note.html" class="tool-link">
-                                <span class="icon">ABC</span><b>大小写字母转换器</b>(驼峰)
-                                <span class="badge">字母</span>
+                            <a href="/tool/text-transform/" class="tool-link">
+                                <span class="icon">ABC</span><b data-i18n="nav.tools.textTransform">大小写字母转换器</b>(驼峰)
+                                <span class="badge" data-i18n="tool.badges.edit">字母</span>
                             </a>
-                            <a href="/tool/qrcode/note.html" class="tool-link">
-                                <span class="icon">📱</span><b>二维码生成器</b>(生成+解析)
-                                <span class="badge">QR</span>
+                            <a href="/tool/qrcode/" class="tool-link">
+                                <span class="icon">📱</span><b data-i18n="nav.tools.qrcode">二维码生成器</b>(生成+解析)
+                                <span class="badge" data-i18n="tool.badges.qr">QR</span>
                             </a>
-                            <a href="/tool/barcode/note.html" class="tool-link">
-                                <span class="icon">🏷️</span><b>条形码生成器</b>(CODE/EAN)
-                                <span class="badge">条码</span>
+                            <a href="/tool/barcode/" class="tool-link">
+                                <span class="icon">🏷️</span><b data-i18n="nav.tools.barcode">条形码生成器</b>(CODE/EAN)
+                                <span class="badge" data-i18n="tool.badges.barcode">条码</span>
                             </a>
                             <a href="https://remind.helpoke.com" class="tool-link" target="_blank">
-                                <span class="icon">⏰</span><b>防久坐健康提醒</b>(定时提醒)
-                                <span class="badge">EXE</span>
+                                <span class="icon">⏰</span><b data-i18n="nav.tools.healthReminder">防久坐健康提醒</b>(定时提醒)
+                                <span class="badge" data-i18n="tool.badges.exe">EXE</span>
                             </a>
                         </div>
                     </div>
@@ -1408,45 +412,45 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon data">💻</div>
-                            <span class="category-title">数据开发工具</span>
+                            <span class="category-title" data-i18n="tool.categories.data">数据开发工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/json/note.html" class="tool-link">
-                                <span class="icon">{ }</span><b>JSON 格式化</b>(比对+转换)
-                                <span class="badge popular">热门</span>
+                            <a href="/json/" class="tool-link">
+                                <span class="icon">{ }</span><b data-i18n="nav.tools.json">JSON 格式化</b>(比对+转换)
+                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
                             </a>
-                            <a href="/dev/yaml/note.html" class="tool-link">
-                                <span class="icon">⚙️</span><b>YAML 格式化</b>(校验)
-                                <span class="badge">YAML</span>
+                            <a href="/dev/yaml/" class="tool-link">
+                                <span class="icon">⚙️</span><b data-i18n="nav.tools.yaml">YAML 格式化</b>(校验)
+                                <span class="badge" data-i18n="tool.badges.yaml">YAML</span>
                             </a>
-                            <a href="/dev/pug/note.html" class="tool-link">
-                                <span class="icon">🌿</span><b>Pug 格式化</b>(校验)
-                                <span class="badge">Pug</span>
+                            <a href="/dev/pug/" class="tool-link">
+                                <span class="icon">🌿</span><b data-i18n="nav.tools.pug">Pug 格式化</b>(校验)
+                                <span class="badge" data-i18n="tool.badges.pug">Pug</span>
                             </a>
-                            <a href="/dev/xml/note.html" class="tool-link">
-                                <span class="icon">📐</span><b>XML 格式化</b>(转换)
-                                <span class="badge">XML</span>
+                            <a href="/dev/xml/" class="tool-link">
+                                <span class="icon">📐</span><b data-i18n="nav.tools.xml">XML 格式化</b>(转换)
+                                <span class="badge" data-i18n="tool.badges.xml">XML</span>
                             </a>
-                            <a href="/dev/sql/note.html" class="tool-link">
-                                <span class="icon">🗃️</span><b>SQL 格式化</b>
-                                <span class="badge">SQL</span>
+                            <a href="/dev/sql/" class="tool-link">
+                                <span class="icon">🗃️</span><b data-i18n="nav.tools.sql">SQL 格式化</b>
+                                <span class="badge" data-i18n="tool.badges.sql">SQL</span>
                             </a>
-                            <a href="/dev/htm5/note.html" class="tool-link">
-                                <span class="icon">CSS</span><b>HTML 格式化</b>(HTML/CSS)
-                                <span class="badge">HTML</span>
+                            <a href="/dev/htm5/" class="tool-link">
+                                <span class="icon">CSS</span><b data-i18n="nav.tools.html">HTML 格式化</b>(HTML/CSS)
+                                <span class="badge" data-i18n="tool.badges.html">HTML</span>
                             </a>
                             <!-- 其他工具 -->
-                            <a href="/dev/cron/note.html" class="tool-link">
-                                <span class="icon">⏰</span><b>Cron 解析器</b>
-                                <span class="badge">Cron</span>
+                            <a href="/dev/cron/" class="tool-link">
+                                <span class="icon">⏰</span><b data-i18n="nav.tools.cron">Cron 解析器</b>
+                                <span class="badge" data-i18n="tool.badges.cron">Cron</span>
                             </a>
-                            <a href="/dev/regex/note.html" class="tool-link">
-                                <span class="icon">🔍</span><b>正则表达式</b>(校验+提取)
-                                <span class="badge">Regex</span>
+                            <a href="/dev/regex/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.regex">正则表达式</b>(校验+提取)
+                                <span class="badge" data-i18n="tool.badges.regex">Regex</span>
                             </a>
-                            <a href="/dev/base-convert/note.html" class="tool-link">
-                                <span class="icon">🧮</span><b>进制转换器</b>(2/8/10/16)
-                                <span class="badge">进制</span>
+                            <a href="/dev/base-convert/" class="tool-link">
+                                <span class="icon">🧮</span><b data-i18n="nav.tools.baseConvert">进制转换器</b>(2/8/10/16)
+                                <span class="badge" data-i18n="tool.badges.base">进制</span>
                             </a>
 
                         </div>
@@ -1456,44 +460,44 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon security">🔐</div>
-                            <span class="category-title">加密转换工具</span>
+                            <span class="category-title" data-i18n="tool.categories.security">加密转换工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/encrypted/pwd/note.html" class="tool-link">
-                                <span class="icon">🔑</span><b>随机密码生成器</b>
-                                <span class="badge popular">热门</span>
+                            <a href="/encrypted/pwd/" class="tool-link">
+                                <span class="icon">🔑</span><b data-i18n="nav.tools.pwd">随机密码生成器</b>
+                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
                             </a>
-                            <a href="/encrypted/uuid/note.html" class="tool-link">
-                                <span class="icon">🆔</span><b>UUID 生成器</b>(批量)
-                                <span class="badge">UUID</span>
+                            <a href="/encrypted/uuid/" class="tool-link">
+                                <span class="icon">🆔</span><b data-i18n="nav.tools.uuid">UUID 生成器</b>(批量)
+                                <span class="badge" data-i18n="tool.badges.uuid">UUID</span>
                             </a>
-                            <a href="/encrypted/token/note.html" class="tool-link">
-                                <span class="icon">🎫</span><b>JWT Token 生成解析器</b>
-                                <span class="badge">Token</span>
+                            <a href="/encrypted/token/" class="tool-link">
+                                <span class="icon">🎫</span><b data-i18n="nav.tools.token">JWT Token 生成解析器</b>
+                                <span class="badge" data-i18n="tool.badges.token">Token</span>
                             </a>
-                            <a href="/encrypted/md5/note.html" class="tool-link">
-                                <span class="icon">🔐</span><b>MD5 加密器</b>(加密+校验)
-                                <span class="badge">MD5</span>
+                            <a href="/encrypted/md5/" class="tool-link">
+                                <span class="icon">🔐</span><b data-i18n="nav.tools.md5">MD5 加密器</b>(加密+校验)
+                                <span class="badge" data-i18n="tool.badges.md5">MD5</span>
                             </a>
-                            <a href="/encrypted/sha/note.html" class="tool-link">
-                                <span class="icon">🔏</span><b>SHA 加密器</b>(加密+校验)
-                                <span class="badge">SHA</span>
+                            <a href="/encrypted/sha/" class="tool-link">
+                                <span class="icon">🔏</span><b data-i18n="nav.tools.sha">SHA 加密器</b>(加密+校验)
+                                <span class="badge" data-i18n="tool.badges.sha">SHA</span>
                             </a>
-                            <a href="/encrypted/js-secrecy/note.html" class="tool-link">
-                                <span class="icon">🛡️</span><b>JS 混淆加密器</b>(JS代码)
-                                <span class="badge">JS</span>
+                            <a href="/encrypted/js-secrecy/" class="tool-link">
+                                <span class="icon">🛡️</span><b data-i18n="nav.tools.jsSecrecy">JS 混淆加密器</b>(JS代码)
+                                <span class="badge" data-i18n="tool.badges.js">JS</span>
                             </a>
-                            <a href="/encrypted/urlcode/note.html" class="tool-link">
-                                <span class="icon">🔗</span><b>URL 编解码器</b>
-                                <span class="badge">URL</span>
+                            <a href="/encrypted/urlcode/" class="tool-link">
+                                <span class="icon">🔗</span><b data-i18n="nav.tools.urlcode">URL 编解码器</b>
+                                <span class="badge" data-i18n="tool.badges.url">URL</span>
                             </a>
-                            <a href="/encrypted/encoding-base64/note.html" class="tool-link">
-                                <span class="icon">🔐</span><b>Base64 编解码器</b>
-                                <span class="badge">Base64</span>
+                            <a href="/encrypted/encoding-base64/" class="tool-link">
+                                <span class="icon">🔐</span><b data-i18n="nav.tools.base64">Base64 编解码器</b>
+                                <span class="badge" data-i18n="tool.badges.base64">Base64</span>
                             </a>
-                            <a href="/encrypted/encoding-unicode/note.html" class="tool-link">
-                                <span class="icon">🔐</span><b>Unicode 编解码器</b>(中文)
-                                <span class="badge">Unicode</span>
+                            <a href="/encrypted/encoding-unicode/" class="tool-link">
+                                <span class="icon">🔐</span><b data-i18n="nav.tools.unicode">Unicode 编解码器</b>(中文)
+                                <span class="badge" data-i18n="tool.badges.unicode">Unicode</span>
                             </a>
                         </div>
                     </div>
@@ -1502,21 +506,23 @@
 
                 <!-- Site Intro -->
                 <section class="site-intro">
-                    <h2>为什么选择 Helpoke 助点站？</h2>
-                    <p>Helpoke
+                    <h2 data-i18n="about.title">为什么选择 Helpoke 助点站？</h2>
+                    <p data-i18n="about.desc1">Helpoke
                         助点站是一个免费、免注册、打开即用的在线工具箱，聚合了图像处理、视频处理、文档处理、数据开发、加密转换与日常实用工具等六大类数十款工具。无论是压缩图片、转换格式、裁剪视频，还是格式化
                         JSON、生成密码、制作二维码，都可以在浏览器中一键完成，无需下载安装任何软件。</p>
-                    <h3>数据不上传，隐私更安全</h3>
-                    <p>与大多数在线工具不同，本站所有工具均在您的浏览器本地运行：文件不离开您的设备，处理过程不经过任何服务器，处理完成后也不会留下任何痕迹。即使断开网络，大部分工具依然可以正常使用，特别适合处理涉及隐私或敏感内容的文件。
+                    <h3 data-i18n="about.subtitle1">数据不上传，隐私更安全</h3>
+                    <p data-i18n="about.desc2">
+                        与大多数在线工具不同，本站所有工具均在您的浏览器本地运行：文件不离开您的设备，处理过程不经过任何服务器，处理完成后也不会留下任何痕迹。即使断开网络，大部分工具依然可以正常使用，特别适合处理涉及隐私或敏感内容的文件。
                     </p>
-                    <h3>每个工具都配有详细文档</h3>
-                    <p>每款工具都附有独立的使用文档与常见问题（FAQ），点击工具页面中的"查看详细使用文档与
+                    <h3 data-i18n="about.subtitle2">每个工具都配有详细文档</h3>
+                    <p data-i18n="about.desc3">每款工具都附有独立的使用文档与常见问题（FAQ），点击工具页面中的"查看详细使用文档与
                         FAQ"即可阅读功能说明、操作步骤与实战案例，帮助您快速上手。我们会持续更新工具功能与文档内容，如果您有任何建议，欢迎通过页面底部的联系方式或评论区反馈给我们。</p>
                 </section>
 
                 <!-- Blog Section: 热门技术教程 -->
                 <section class="blog-section">
-                    <h2 class="section-title"><span class="icon">📖</span>热门技术教程</h2>
+                    <h2 class="section-title"><span class="icon">📖</span><span data-i18n="blog.title">热门技术教程</span>
+                    </h2>
                     <div class="blog-cards-grid">
                         <a href="/blog/json-xml-comparison.html" class="blog-card-mini">
                             <div class="card-icon">📊</div>
@@ -1538,57 +544,60 @@
                         </a>
                     </div>
                     <div class="blog-link-more">
-                        <a href="/blog/">查看全部文章 →</a>
+                        <a href="/blog/" data-i18n="blog.viewAll">查看全部文章 →</a>
                     </div>
                 </section>
 
                 <!-- About Section: 关于 Helpoke -->
                 <section class="about-section">
-                    <h2><span class="icon">💡</span>关于 Helpoke 小助点</h2>
-                    <p>Helpoke（小助点）的名字来源于 Help + Poke 的组合，寓意"随时帮忙、一键轻点即用"。我们致力于打造一个简洁高效、安全隐私的在线工具平台，让每个人都能在没有技术门槛的情况下完成日常办公和生活中的各类处理任务。</p>
-                    <p>我们深知数据安全的重要性。在这个数据泄露事件频发的时代，我们选择了一条与众不同的技术路线：<strong>所有工具均在浏览器本地运行</strong>。这意味着您的文件永远不会上传到任何服务器，处理过程完全在您的设备上完成，断网也能使用。无论是个人隐私照片、商业机密文档，还是敏感的代码文件，都可以放心地在 Helpoke 处理。</p>
-                    <p>我们承诺：不收集、不存储、不上传用户的任何数据。您来去自由，无需注册账号，无需提供任何个人信息，打开浏览器即可使用。这正是 Helpoke 的初心——做一个真正站在用户角度、尊重用户隐私的在线工具站。</p>
+                    <h2><span class="icon">💡</span><span data-i18n="home.about">关于 Helpoke 小助点</span></h2>
+                    <p>Helpoke（小助点）的名字来源于 Help + Poke
+                        的组合，寓意"随时帮忙、一键轻点即用"。我们致力于打造一个简洁高效、安全隐私的在线工具平台，让每个人都能在没有技术门槛的情况下完成日常办公和生活中的各类处理任务。</p>
+                    <p>我们深知数据安全的重要性。在这个数据泄露事件频发的时代，我们选择了一条与众不同的技术路线：<strong>所有工具均在浏览器本地运行</strong>。这意味着您的文件永远不会上传到任何服务器，处理过程完全在您的设备上完成，断网也能使用。无论是个人隐私照片、商业机密文档，还是敏感的代码文件，都可以放心地在
+                        Helpoke 处理。</p>
+                    <p>我们承诺：不收集、不存储、不上传用户的任何数据。您来去自由，无需注册账号，无需提供任何个人信息，打开浏览器即可使用。这正是 Helpoke
+                        的初心——做一个真正站在用户角度、尊重用户隐私的在线工具站。</p>
                     <div class="about-features">
                         <div class="about-feature-item">
                             <span class="feature-icon">🔒</span>
                             <div class="feature-text">
-                                <h4>本地处理</h4>
-                                <p>所有数据在浏览器中处理，不上传服务器</p>
+                                <h4 data-i18n="features.localProcess.title">本地处理</h4>
+                                <p data-i18n="features.localProcess.desc">所有数据在浏览器中处理，不上传服务器</p>
                             </div>
                         </div>
                         <div class="about-feature-item">
                             <span class="feature-icon">🚫</span>
                             <div class="feature-text">
-                                <h4>无需注册</h4>
-                                <p>免登录即用，不收集任何个人信息</p>
+                                <h4 data-i18n="features.noRegister.title">无需注册</h4>
+                                <p data-i18n="features.noRegister.desc">免登录即用，不收集任何个人信息</p>
                             </div>
                         </div>
                         <div class="about-feature-item">
                             <span class="feature-icon">🌐</span>
                             <div class="feature-text">
-                                <h4>离线可用</h4>
-                                <p>断网也能使用大部分工具功能</p>
+                                <h4 data-i18n="features.offline.title">离线可用</h4>
+                                <p data-i18n="features.offline.desc">断网也能使用大部分工具功能</p>
                             </div>
                         </div>
                         <div class="about-feature-item">
                             <span class="feature-icon">📱</span>
                             <div class="feature-text">
-                                <h4>全端适配</h4>
-                                <p>PC、平板、手机均可流畅使用</p>
+                                <h4 data-i18n="features.responsive.title">全端适配</h4>
+                                <p data-i18n="features.responsive.desc">PC、平板、手机均可流畅使用</p>
                             </div>
                         </div>
                         <div class="about-feature-item">
                             <span class="feature-icon">🎯</span>
                             <div class="feature-text">
-                                <h4>极简设计</h4>
-                                <p>无广告干扰，专注工具本身</p>
+                                <h4 data-i18n="features.minimal.title">极简设计</h4>
+                                <p data-i18n="features.minimal.desc">无广告干扰，专注工具本身</p>
                             </div>
                         </div>
                         <div class="about-feature-item">
                             <span class="feature-icon">🆓</span>
                             <div class="feature-text">
-                                <h4>完全免费</h4>
-                                <p>所有工具永久免费开放使用</p>
+                                <h4 data-i18n="features.free.title">完全免费</h4>
+                                <p data-i18n="features.free.desc">所有工具永久免费开放使用</p>
                             </div>
                         </div>
                     </div>
@@ -1596,83 +605,91 @@
 
                 <!-- FAQ Section -->
                 <section class="faq-section">
-                    <h2><span class="icon">❓</span>常见问题 FAQ</h2>
+                    <h2><span class="icon">❓</span><span data-i18n="faq.title">常见问题 FAQ</span></h2>
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>为什么说数据是本地处理的？是如何实现的？</h3>
+                            <h3 data-i18n="faq.questions.q1">为什么说数据是本地处理的？是如何实现的？</h3>
                             <span class="faq-toggle">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                Helpoke 使用现代浏览器的 Web API（如 FileReader、Canvas、WebAssembly 等）在客户端实现文件处理。当您上传文件时，文件仅存在于浏览器的内存中，JavaScript 代码直接读取并处理这些数据，处理完成后生成结果文件供您下载。整个过程数据从未离开您的设备，服务器只是提供网页代码，不参与数据处理。
+                            <div class="faq-answer-content" data-i18n="faq.questions.a1">
+                                Helpoke 使用现代浏览器的 Web API（如 FileReader、Canvas、WebAssembly
+                                等）在客户端实现文件处理。当您上传文件时，文件仅存在于浏览器的内存中，JavaScript
+                                代码直接读取并处理这些数据，处理完成后生成结果文件供您下载。整个过程数据从未离开您的设备，服务器只是提供网页代码，不参与数据处理。
                             </div>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>哪些浏览器可以使用这些工具？</h3>
+                            <h3 data-i18n="faq.questions.q2">哪些浏览器可以使用这些工具？</h3>
                             <span class="faq-toggle">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                我们的工具支持所有现代浏览器，包括 Chrome、Firefox、Safari、Edge 等最新版本。为了获得最佳体验，建议使用 Chrome 或 Firefox 浏览器。部分工具使用了较新的 Web 技术（如 WebCodecs、WebAssembly），建议保持浏览器版本为最新。
+                            <div class="faq-answer-content" data-i18n="faq.questions.a2">
+                                我们的工具支持所有现代浏览器，包括 Chrome、Firefox、Safari、Edge 等最新版本。为了获得最佳体验，建议使用 Chrome 或 Firefox
+                                浏览器。部分工具使用了较新的 Web 技术（如 WebCodecs、WebAssembly），建议保持浏览器版本为最新。
                             </div>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>处理大文件时浏览器崩溃怎么办？</h3>
+                            <h3 data-i18n="faq.questions.q3">处理大文件时浏览器崩溃怎么办？</h3>
                             <span class="faq-toggle">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                由于所有处理都在浏览器内存中进行，处理超大文件（如高清视频、大量图片）时可能会占用较多内存。建议：1) 关闭其他占用内存的网页和程序；2) 分批处理文件；3) 使用 64 位浏览器；4) 确保电脑有足够的可用内存。如果仍然崩溃，可以尝试使用桌面版工具。
+                            <div class="faq-answer-content" data-i18n="faq.questions.a3">
+                                由于所有处理都在浏览器内存中进行，处理超大文件（如高清视频、大量图片）时可能会占用较多内存。建议：1) 关闭其他占用内存的网页和程序；2) 分批处理文件；3) 使用 64
+                                位浏览器；4) 确保电脑有足够的可用内存。如果仍然崩溃，可以尝试使用桌面版工具。
                             </div>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>视频处理工具支持哪些格式？</h3>
+                            <h3 data-i18n="faq.questions.q4">视频处理工具支持哪些格式？</h3>
                             <span class="faq-toggle">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                视频工具基于 FFmpeg（通过 WebAssembly 运行在浏览器中），支持主流格式包括：MP4、WebM、MOV、AVI、MKV、GIF 等。输出格式支持 MP4、WebM、GIF。由于浏览器安全限制，部分加密或特殊编码的视频可能无法处理。
+                            <div class="faq-answer-content" data-i18n="faq.questions.a4">
+                                视频工具基于 FFmpeg（通过 WebAssembly 运行在浏览器中），支持主流格式包括：MP4、WebM、MOV、AVI、MKV、GIF 等。输出格式支持
+                                MP4、WebM、GIF。由于浏览器安全限制，部分加密或特殊编码的视频可能无法处理。
                             </div>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>为什么有些工具在离线状态下无法使用？</h3>
+                            <h3 data-i18n="faq.questions.q5">为什么有些工具在离线状态下无法使用？</h3>
                             <span class="faq-toggle">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                大部分工具在首次加载后可以离线使用，但以下情况需要网络：1) 首次访问某工具时需要加载网页代码；2) 部分工具依赖外部库（如 FFmpeg、Mermaid），首次使用时需要下载；3) 使用 CDN 加速的资源需要网络。建议在网络良好时预先访问需要使用的工具，之后即可离线使用。
+                            <div class="faq-answer-content" data-i18n="faq.questions.a5">
+                                大部分工具在首次加载后可以离线使用，但以下情况需要网络：1) 首次访问某工具时需要加载网页代码；2) 部分工具依赖外部库（如
+                                FFmpeg、Mermaid），首次使用时需要下载；3) 使用 CDN 加速的资源需要网络。建议在网络良好时预先访问需要使用的工具，之后即可离线使用。
                             </div>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>如何反馈问题或提出功能建议？</h3>
+                            <h3 data-i18n="faq.questions.q6">如何反馈问题或提出功能建议？</h3>
                             <span class="faq-toggle">▼</span>
                         </div>
                         <div class="faq-answer">
-                            <div class="faq-answer-content">
-                                我们欢迎任何反馈和建议！您可以通过以下方式联系我们：1) 在页面底部的评论区留言；2) 发送邮件至 contact@helpoke.com；3) 访问关于我们页面获取更多联系方式。我们会认真阅读每一条反馈，并持续改进工具。
+                            <div class="faq-answer-content" data-i18n="faq.questions.a6">
+                                我们欢迎任何反馈和建议！您可以通过以下方式联系我们：1) 在页面底部的评论区留言；2) 发送邮件至 contact@helpoke.com；3)
+                                访问关于我们页面获取更多联系方式。我们会认真阅读每一条反馈，并持续改进工具。
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <div class="footer-note">
-                    <p>&copy; 2026 Helpoke 助点站 · 离线工具 · 数据本地处理 · 保护隐私安全. <a href="https://pengline.cn"
-                            rel="sponsored nofollow noopener" target="_blank">余一叶知秋尽</a> 保留所有权利</p>
+                    <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站 · 离线工具 · 数据本地处理 · 保护隐私安全. <a
+                            href="https://pengline.cn" rel="sponsored nofollow noopener" target="_blank"><span
+                                data-i18n="footer.author">余一叶知秋尽</span></a> 保留所有权利</p>
                 </div>
 
                 <!-- Comments Section -->
                 <div class="comments-section">
-                    <h3>💬 评论</h3>
+                    <h3 data-i18n="comments.title">💬 评论</h3>
                     <div id="giscus-container"></div>
                 </div>
             </div>
@@ -1680,139 +697,11 @@
 
     </div>
 
-    <script src="common/js/nav.js"></script>
+    <!-- Scripts -->
+    <script src="common/js/tools-data.js"></script>
+    <!-- <script src="common/js/nav.js"></script> -->
     <script src="common/js/theme.js"></script>
-    <script>
-        // 主题切换功能
-        var themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', function () {
-                var body = document.body;
-                var isDarkMode = body.classList.contains('dark-mode');
-
-                if (isDarkMode) {
-                    body.classList.remove('dark-mode');
-                    localStorage.setItem('darkMode', 'false');
-                    themeToggle.innerHTML = '🌙';
-                } else {
-                    body.classList.add('dark-mode');
-                    localStorage.setItem('darkMode', 'true');
-                    themeToggle.innerHTML = '☀️';
-                }
-            });
-
-            // 初始化主题
-            var savedTheme = localStorage.getItem('darkMode');
-            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            if (savedTheme !== null) {
-                if (savedTheme === 'true') {
-                    document.body.classList.add('dark-mode');
-                    themeToggle.innerHTML = '☀️';
-                }
-            } else if (prefersDark) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'true');
-                themeToggle.innerHTML = '☀️';
-            }
-        }
-
-        // 搜索功能
-        var searchInput = document.getElementById('searchInput');
-        var searchBtn = document.getElementById('searchBtn');
-        var searchResults = document.getElementById('searchResults');
-
-        function performSearch() {
-            var query = searchInput.value.trim().toLowerCase();
-
-            if (!query) {
-                searchResults.classList.remove('active');
-                return;
-            }
-
-            var results = window.toolsData.filter(function (tool) {
-                return tool.name.toLowerCase().includes(query) ||
-                    tool.category.toLowerCase().includes(query) ||
-                    (tool.keywords && tool.keywords.toLowerCase().includes(query));
-            });
-
-            if (results.length === 0) {
-                searchResults.innerHTML = '<div class="search-no-results">未找到匹配的工具</div>';
-                searchResults.classList.add('active');
-                return;
-            }
-
-            searchResults.innerHTML = results.map(function (tool) {
-                return '<div class="search-result-item" onclick="goToTool(\'' + tool.url + '\')">' +
-                    '<span class="icon">' + tool.icon + '</span>' +
-                    '<span class="name">' + tool.name + '</span>' +
-                    '<span class="category">' + tool.category + '</span>' +
-                    '</div>';
-            }).join('');
-
-            searchResults.classList.add('active');
-        }
-
-        function goToTool(url) {
-            window.location.href = url;
-        }
-
-        searchInput.addEventListener('input', performSearch);
-        searchBtn.addEventListener('click', performSearch);
-
-        // 点击页面其他地方关闭搜索结果
-        document.addEventListener('click', function (e) {
-            if (!searchInput.contains(e.target) &&
-                !searchResults.contains(e.target) &&
-                !searchBtn.contains(e.target)) {
-                searchResults.classList.remove('active');
-            }
-        });
-
-        // 渲染最近使用
-        function renderRecentTools() {
-            var recentList = document.getElementById('recentList');
-            var recentTools = JSON.parse(localStorage.getItem('helpoke_recent_tools') || '[]');
-
-            if (recentTools.length === 0) {
-                recentList.innerHTML = '<div class="recent-empty">暂无记录</div>';
-                return;
-            }
-
-            var html = '';
-            for (var i = 0; i < recentTools.length; i++) {
-                var tool = recentTools[i];
-                html += '<div class="recent-item" data-url="' + tool.url + '" style="cursor: pointer; pointer-events: auto;">' + tool.icon + ' ' + tool.name + '</div>';
-            }
-            recentList.innerHTML = html;
-
-            // 添加点击事件监听
-            var items = recentList.querySelectorAll('.recent-item');
-            items.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    var url = this.getAttribute('data-url');
-                    if (url) {
-                        window.location.href = url;
-                    }
-                });
-            });
-        }
-
-        // 清空历史
-        document.getElementById('recentClear').addEventListener('click', function () {
-            localStorage.removeItem('helpoke_recent_tools');
-            renderRecentTools();
-        });
-
-        // 页面加载时渲染
-        renderRecentTools();
-
-        // FAQ 展开/收起功能
-        function toggleFaq(element) {
-            var faqItem = element.parentElement;
-            faqItem.classList.toggle('active');
-        }
-    </script>
+    <script src="common/js/index.js"></script>
 </body>
 
 </html>

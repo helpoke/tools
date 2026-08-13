@@ -10,11 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>批量图像加水印，图像免费加水印，图片加水印，隐私图像加水印</title>
+    <meta property="og:title" content="批量图像加水印，图像免费加水印，图片加水印，隐私图像加水印">
+    <meta property="og:description" content="批量图像免费添加水印, 批量图像本地添加水印, 隐私批量图像添加水印,批量图像本地加水印, 图像添加文字水印, 图像添加图片水印">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/image/watermark-add/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="批量图像加水印，图像免费加水印，图片加水印，隐私图像加水印">
+    <meta name="twitter:description" content="批量图像免费添加水印, 批量图像本地添加水印, 隐私批量图像添加水印,批量图像本地加水印, 图像添加文字水印, 图像添加图片水印">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/image/watermark-add/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/watermark-add/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/image/watermark-add/">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -27,7 +43,7 @@
         "description": "批量图片水印添加工具，支持文字水印和图片水印两种模式。可自定义水印位置、大小、透明度等参数。本地处理，保护隐私安全。Batch image watermark tool supporting text and image watermarks with customizable options.",
         "url": "https://helpoke.com/image/watermark-add",
         "applicationCategory": "https://schema.org/ImageProcessing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "支持文字水印和图片水印两种模式",
             "批量处理，最多支持20张图片",
@@ -59,51 +75,58 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>图片加水印工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>图片加水印工具，支持为图片添加文字水印和图片水印，自定义位置、大小、透明度、字体、旋转角度等参数</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="image.watermark-add.title">图片加水印工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与
+                FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="image.watermark-add.intro">图片加水印工具，支持为图片添加文字水印和图片水印，自定义位置、大小、透明度、字体、旋转角度等参数</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
             <label for="imageUpload" class="upload-area">
                 <input type="file" id="imageUpload" accept="image/*" multiple hidden>
                 <div class="upload-icon">🖼️</div>
                 <div class="upload-text">
-                    <span id="uploadBtnText">点击上传或拖拽图片到此处</span>
-                    <span id="uploadLoading" style="display: none;">图片加载中...</span>
+                    <span id="uploadBtnText" data-i18n="image.watermark-add.uploadBtnText">点击上传或拖拽图片到此处</span>
+                    <span id="uploadLoading" style="display: none;"
+                        data-i18n="image.watermark-add.uploadLoading">图片加载中...</span>
                 </div>
-                <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）</div>
+                <div class="upload-hint" data-i18n="image.watermark-add.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）
+                </div>
             </label>
 
             <div id="fileList" class="file-list" style="display: none;">
-                <div class="file-list-empty">请上传图片以显示文件列表</div>
+                <div class="file-list-empty" data-i18n="image.watermark-add.fileListEmpty">请上传图片以显示文件列表</div>
             </div>
 
             <div class="preview-section" style="display: none;">
                 <div id="previewContainer">
-                    <p>请上传图片以查看预览</p>
-                    <p id="manualPositionInfo" class="manual-position-info" style="display: none;">提示：点击并拖动水印可以调整位置</p>
+                    <p data-i18n="image.watermark-add.previewPlaceholder">请上传图片以查看预览</p>
+                    <p id="manualPositionInfo" class="manual-position-info" style="display: none;"
+                        data-i18n="image.watermark-add.manualPositionInfo">提示：点击并拖动水印可以调整位置</p>
                 </div>
             </div>
 
             <div class="watermark-settings" style="display: none;">
                 <div class="setting-group">
-                    <label>水印类型：</label>
+                    <label data-i18n="image.watermark-add.watermarkTypeLabel">水印类型：</label>
                     <div class="radio-group">
                         <label class="radio-label">
                             <input type="radio" name="watermarkType" value="text" checked>
-                            <span>文字水印</span>
+                            <span data-i18n="image.watermark-add.watermarkTypeText">文字水印</span>
                         </label>
                         <label class="radio-label">
                             <input type="radio" name="watermarkType" value="image">
-                            <span>图片水印</span>
+                            <span data-i18n="image.watermark-add.watermarkTypeImage">图片水印</span>
                         </label>
 
                         <label class="checkbox-label">
                             <input type="checkbox" id="applyToAllImages" value="applyToAll">
-                            <span>以下设置改动时应用到所有图片<span class="tooltip-icon">ℹ</span></span>
-                            <p class="tooltip">
+                            <span data-i18n="image.watermark-add.applyToAllLabel">以下设置改动时应用到所有图片<span
+                                    class="tooltip-icon">ℹ</span></span>
+                            <p class="tooltip" data-i18n="image.watermark-add.applyToAllTooltip">
                                 勾选后，对水印（类型、位置、颜色、大小、透明度）等的设置，会应用到所有已上传图片中，所有图片保持样式一致。</br>
                                 不勾选则仅对当前选中图片生效。
                             </p>
@@ -113,51 +136,53 @@
 
                 <div class="setting-row">
                     <div class="setting-group" id="textWatermarkGroup">
-                        <label for="watermarkText">水印文字：</label>
-                        <input type="text" id="watermarkText" placeholder="请输入水印文字（最多30个字符）" maxlength="30">
+                        <label for="watermarkText" data-i18n="image.watermark-add.watermarkTextLabel">水印文字：</label>
+                        <input type="text" id="watermarkText"
+                            data-i18n-placeholder="image.watermark-add.watermarkTextPlaceholder"
+                            placeholder="请输入水印文字（最多30个字符）" maxlength="30">
                     </div>
                     <div class="setting-group" id="colorWatermarkGroup">
-                        <label for="watermarkColor">文字颜色：</label>
+                        <label for="watermarkColor" data-i18n="image.watermark-add.watermarkColorLabel">文字颜色：</label>
                         <input type="color" id="watermarkColor" value="#000000">
                     </div>
                 </div>
 
                 <div class="setting-group" id="imageWatermarkGroup" style="display: none;">
-                    <label for="imageWatermarkUpload">选择水印图片：</label>
+                    <label for="imageWatermarkUpload" data-i18n="image.watermark-add.imageWatermarkLabel">选择水印图片：</label>
                     <input type="file" id="imageWatermarkUpload" accept="image/*">
                 </div>
 
                 <div class="setting-row">
                     <div class="setting-group">
-                        <label for="watermarkPosition">水印位置：</label>
+                        <label for="watermarkPosition" data-i18n="image.watermark-add.positionLabel">水印位置：</label>
                         <select id="watermarkPosition">
-                            <option value="top-left">左上角</option>
-                            <option value="top-right">右上角</option>
-                            <option value="bottom-left">左下角</option>
-                            <option value="bottom-right">右下角</option>
-                            <option value="center">居中</option>
-                            <option value="tiled">平铺（重复铺满）</option>
-                            <option value="manual">手动定位 (拖动水印)</option>
+                            <option value="top-left" data-i18n="image.watermark-add.positionTopLeft">左上角</option>
+                            <option value="top-right" data-i18n="image.watermark-add.positionTopRight">右上角</option>
+                            <option value="bottom-left" data-i18n="image.watermark-add.positionBottomLeft">左下角</option>
+                            <option value="bottom-right" data-i18n="image.watermark-add.positionBottomRight">右下角</option>
+                            <option value="center" data-i18n="image.watermark-add.positionCenter">居中</option>
+                            <option value="tiled" data-i18n="image.watermark-add.positionTiled">平铺（重复铺满）</option>
+                            <option value="manual" data-i18n="image.watermark-add.positionManual">手动定位 (拖动水印)</option>
                         </select>
                     </div>
 
                     <div class="setting-group">
-                        <label for="watermarkDensity">平铺稀疏度：</label>
+                        <label for="watermarkDensity" data-i18n="image.watermark-add.densityLabel">平铺稀疏度：</label>
                         <input type="range" id="watermarkDensity" min="1" max="10" value="4" step="1">
                         <span id="densityValue">4</span>
-                        <p class="tooltip">（值越大，水印间距越大）</p>
+                        <p class="tooltip" data-i18n="image.watermark-add.densityTooltip">（值越大，水印间距越大）</p>
                     </div>
                 </div>
 
                 <div class="setting-row">
                     <div class="setting-group">
-                        <label for="watermarkOpacity">水印透明度：</label>
+                        <label for="watermarkOpacity" data-i18n="image.watermark-add.opacityLabel">水印透明度：</label>
                         <input type="range" id="watermarkOpacity" min="10" max="100" value="30">
                         <span id="opacityValue">30%</span>
                     </div>
 
                     <div class="setting-group">
-                        <label for="watermarkSize">水印大小：</label>
+                        <label for="watermarkSize" data-i18n="image.watermark-add.sizeLabel">水印大小：</label>
                         <input type="range" id="watermarkSize" min="10" max="100" value="20">
                         <span id="sizeValue">20px</span>
                     </div>
@@ -166,124 +191,140 @@
 
             <div class="action-buttons" style="display: none;">
                 <button id="downloadCurrentImage" disabled>
-                    <span id="downloadCurrentText">下载当前图片</span>
-                    <span id="downloadCurrentLoading" style="display: none;">图片生成中...</span>
+                    <span id="downloadCurrentText" data-i18n="image.watermark-add.downloadCurrentText">下载当前图片</span>
+                    <span id="downloadCurrentLoading" style="display: none;"
+                        data-i18n="image.watermark-add.downloadCurrentLoading">图片生成中...</span>
                 </button>
                 <button id="downloadAllImages" disabled>
-                    <span id="downloadAllText">打包下载所有</span>
-                    <span id="downloadAllLoading" style="display: none;">图片打包中...</span>
+                    <span id="downloadAllText" data-i18n="image.watermark-add.downloadAllText">打包下载所有</span>
+                    <span id="downloadAllLoading" style="display: none;"
+                        data-i18n="image.watermark-add.downloadAllLoading">图片打包中...</span>
                 </button>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>工具介绍</h3>
+                        <h3 data-i18n="image.watermark-add.infoIntro">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、解决的问题</h4>
+                        <h4 data-i18n="image.watermark-add.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li>为图片添加文字或图片水印。</li>
-                            <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li>无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="image.watermark-add.problem1">为图片添加文字或图片水印。</li>
+                            <li data-i18n="image.watermark-add.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="image.watermark-add.problem3">无需安装专业软件，随时随地在线使用。</li>
                         </ul>
-                        <h4>二、支持的格式</h4>
+                        <h4 data-i18n="image.watermark-add.formatTitle">二、支持的格式</h4>
                         <ul>
-                            <li><strong>JPG：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>PNG：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>WebP：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.watermark-add.formatJpg"><strong>JPG：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.watermark-add.formatPng"><strong>PNG：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.watermark-add.formatWebp"><strong>WebP：</strong>支持该格式的完整处理功能。</li>
                         </ul>
-                        <h4>三、核心功能</h4>
+                        <h4 data-i18n="image.watermark-add.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="image.watermark-add.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="image.watermark-add.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="image.watermark-add.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="image.watermark-add.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                            </li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>使用说明</h3>
+                        <h3 data-i18n="image.watermark-add.infoUsage">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、上传图片</h4>
+                        <h4 data-i18n="image.watermark-add.usageUploadTitle">一、上传图片</h4>
                         <ul>
-                            <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
-                            <li><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
-                            <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                            <li data-i18n="image.watermark-add.usageUploadClick"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                            <li data-i18n="image.watermark-add.usageUploadBatch"><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
+                            <li data-i18n="image.watermark-add.usageUploadFormat"><strong>支持格式：</strong>支持
+                                JPG、PNG、WebP、GIF、BMP 格式。</li>
                         </ul>
-                        <h4>二、选择水印类型</h4>
+                        <h4 data-i18n="image.watermark-add.usageTypeTitle">二、选择水印类型</h4>
                         <ul>
-                            <li><strong>文字水印：</strong>选择"文字水印"，输入文字内容作为水印。</li>
-                            <li><strong>图片水印：</strong>选择"图片水印"，上传图片作为水印。</li>
-                            <li><strong>应用到所有：</strong>勾选后水印设置会应用到所有已上传图片。</li>
+                            <li data-i18n="image.watermark-add.usageTypeText"><strong>文字水印：</strong>选择"文字水印"，输入文字内容作为水印。</li>
+                            <li data-i18n="image.watermark-add.usageTypeImage"><strong>图片水印：</strong>选择"图片水印"，上传图片作为水印。</li>
+                            <li data-i18n="image.watermark-add.usageTypeApplyAll"><strong>应用到所有：</strong>勾选后水印设置会应用到所有已上传图片。
+                            </li>
                         </ul>
-                        <h4>三、文字水印设置</h4>
+                        <h4 data-i18n="image.watermark-add.usageTextTitle">三、文字水印设置</h4>
                         <ul>
-                            <li><strong>水印文字：</strong>输入水印文字，最多30个字符。</li>
-                            <li><strong>文字颜色：</strong>选择水印文字的颜色。</li>
-                            <li><strong>水印大小：</strong>调整水印文字的大小（10-100px）。</li>
-                            <li><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。</li>
+                            <li data-i18n="image.watermark-add.usageTextText"><strong>水印文字：</strong>输入水印文字，最多30个字符。</li>
+                            <li data-i18n="image.watermark-add.usageTextColor"><strong>文字颜色：</strong>选择水印文字的颜色。</li>
+                            <li data-i18n="image.watermark-add.usageTextSize"><strong>水印大小：</strong>调整水印文字的大小（10-100px）。</li>
+                            <li data-i18n="image.watermark-add.usageTextOpacity"><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。
+                            </li>
                         </ul>
-                        <h4>四、图片水印设置</h4>
+                        <h4 data-i18n="image.watermark-add.usageImageTitle">四、图片水印设置</h4>
                         <ul>
-                            <li><strong>上传水印图片：</strong>点击上传按钮选择水印图片。</li>
-                            <li><strong>水印大小：</strong>调整水印图片的大小（10-100px）。</li>
-                            <li><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。</li>
+                            <li data-i18n="image.watermark-add.usageImageUpload"><strong>上传水印图片：</strong>点击上传按钮选择水印图片。</li>
+                            <li data-i18n="image.watermark-add.usageImageSize"><strong>水印大小：</strong>调整水印图片的大小（10-100px）。</li>
+                            <li data-i18n="image.watermark-add.usageImageOpacity"><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。
+                            </li>
                         </ul>
-                        <h4>五、水印位置</h4>
+                        <h4 data-i18n="image.watermark-add.usagePositionTitle">五、水印位置</h4>
                         <ul>
-                            <li><strong>预设位置：</strong>选择左上角、右上角、左下角、右下角、居中。</li>
-                            <li><strong>平铺模式：</strong>选择"平铺"，水印会重复铺满整个图片。</li>
-                            <li><strong>手动定位：</strong>选择"手动定位"，拖动水印调整位置。</li>
-                            <li><strong>平铺密度：</strong>调整平铺模式下水印的间距（1-10），值越大间距越大。</li>
+                            <li data-i18n="image.watermark-add.usagePositionPreset">
+                                <strong>预设位置：</strong>选择左上角、右上角、左下角、右下角、居中。
+                            </li>
+                            <li data-i18n="image.watermark-add.usagePositionTiled"><strong>平铺模式：</strong>选择"平铺"，水印会重复铺满整个图片。
+                            </li>
+                            <li data-i18n="image.watermark-add.usagePositionManual"><strong>手动定位：</strong>选择"手动定位"，拖动水印调整位置。
+                            </li>
+                            <li data-i18n="image.watermark-add.usagePositionDensity">
+                                <strong>平铺密度：</strong>调整平铺模式下水印的间距（1-10），值越大间距越大。
+                            </li>
                         </ul>
-                        <h4>六、下载结果</h4>
+                        <h4 data-i18n="image.watermark-add.usageDownloadTitle">六、下载结果</h4>
                         <ul>
-                            <li><strong>下载当前：</strong>点击"下载当前图片"按钮保存当前图片。</li>
-                            <li><strong>打包下载：</strong>点击"打包下载所有"按钮打包下载所有加水印的图片。</li>
+                            <li data-i18n="image.watermark-add.usageDownloadCurrent"><strong>下载当前：</strong>点击"下载当前图片"按钮保存当前图片。
+                            </li>
+                            <li data-i18n="image.watermark-add.usageDownloadAll">
+                                <strong>打包下载：</strong>点击"打包下载所有"按钮打包下载所有加水印的图片。
+                            </li>
                         </ul>
                     </div>
                 </article>
                 <article class="info-details">
                     <header>
-                        <h3>注意事项</h3>
+                        <h3 data-i18n="image.watermark-add.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、数据安全</h4>
+                        <h4 data-i18n="image.watermark-add.notesSecurityTitle">一、数据安全</h4>
                         <ul>
-                            <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
-                            <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                            <li data-i18n="image.watermark-add.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li data-i18n="image.watermark-add.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                            <li data-i18n="image.watermark-add.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
                         </ul>
-                        <h4>二、水印设置</h4>
+                        <h4 data-i18n="image.watermark-add.notesSettingsTitle">二、水印设置</h4>
                         <ul>
-                            <li>水印透明度建议设置在20%-40%之间，既保护版权又不影响观看。</li>
-                            <li>文字水印支持中英文，最多30个字符。</li>
-                            <li>图片水印建议使用PNG透明格式，效果更好。</li>
-                            <li>平铺模式下，密度值越大水印越稀疏。</li>
+                            <li data-i18n="image.watermark-add.noteSettings1">水印透明度建议设置在20%-40%之间，既保护版权又不影响观看。</li>
+                            <li data-i18n="image.watermark-add.noteSettings2">文字水印支持中英文，最多30个字符。</li>
+                            <li data-i18n="image.watermark-add.noteSettings3">图片水印建议使用PNG透明格式，效果更好。</li>
+                            <li data-i18n="image.watermark-add.noteSettings4">平铺模式下，密度值越大水印越稀疏。</li>
                         </ul>
-                        <h4>三、批量处理</h4>
+                        <h4 data-i18n="image.watermark-add.notesBatchTitle">三、批量处理</h4>
                         <ul>
-                            <li>批量处理最多支持20张图片。</li>
-                            <li>勾选"应用到所有图片"后，设置会同步到所有图片。</li>
-                            <li>不勾选时，设置仅对当前选中的图片生效。</li>
-                            <li>处理期间不要关闭浏览器或刷新页面。</li>
+                            <li data-i18n="image.watermark-add.noteBatch1">批量处理最多支持20张图片。</li>
+                            <li data-i18n="image.watermark-add.noteBatch2">勾选"应用到所有图片"后，设置会同步到所有图片。</li>
+                            <li data-i18n="image.watermark-add.noteBatch3">不勾选时，设置仅对当前选中的图片生效。</li>
+                            <li data-i18n="image.watermark-add.noteBatch4">处理期间不要关闭浏览器或刷新页面。</li>
                         </ul>
-                        <h4>四、性能提示</h4>
+                        <h4 data-i18n="image.watermark-add.notesPerfTitle">四、性能提示</h4>
                         <ul>
-                            <li>大尺寸图片添加水印需要较长时间，请耐心等待。</li>
-                            <li>建议在添加水印前先压缩图片以提高处理速度。</li>
-                            <li>批量下载会打包为ZIP文件。</li>
+                            <li data-i18n="image.watermark-add.notePerf1">大尺寸图片添加水印需要较长时间，请耐心等待。</li>
+                            <li data-i18n="image.watermark-add.notePerf2">建议在添加水印前先压缩图片以提高处理速度。</li>
+                            <li data-i18n="image.watermark-add.notePerf3">批量下载会打包为ZIP文件。</li>
                         </ul>
-                        <h4>五、常见问题</h4>
+                        <h4 data-i18n="image.watermark-add.notesFaqTitle">五、常见问题</h4>
                         <ul>
-                            <li><strong>水印不显示：</strong>检查水印文字是否为空，透明度是否设置过低。</li>
-                            <li><strong>水印模糊：</strong>增大水印大小或调整透明度。</li>
-                            <li><strong>图片水印变形：</strong>确保水印图片比例合适。</li>
-                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="image.watermark-add.noteFaq1"><strong>水印不显示：</strong>检查水印文字是否为空，透明度是否设置过低。</li>
+                            <li data-i18n="image.watermark-add.noteFaq2"><strong>水印模糊：</strong>增大水印大小或调整透明度。</li>
+                            <li data-i18n="image.watermark-add.noteFaq3"><strong>图片水印变形：</strong>确保水印图片比例合适。</li>
+                            <li data-i18n="image.watermark-add.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                         </ul>
                     </div>
                 </article>
@@ -293,18 +334,23 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

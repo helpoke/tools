@@ -10,6 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>视频去水印、视频水印去除工具</title>
+    <meta property="og:title" content="视频去水印、视频水印去除工具">
+    <meta property="og:description" content="视频去水印工具, 视频免费去水印, 视频水印去除, 视频本地处理">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/video/watermarks-remove/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="视频去水印、视频水印去除工具">
+    <meta name="twitter:description" content="视频去水印工具, 视频免费去水印, 视频水印去除, 视频本地处理">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/video/watermarks-remove/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/video/watermarks-remove/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/video/watermarks-remove/">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
@@ -17,6 +32,7 @@
     <script src="../lib/ffmpeg.js"></script>
     <script src="../common/ffmpeg-parallel.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -29,7 +45,7 @@
         "description": "免费在线视频去水印工具，支持多种去水印方式，本地处理保护隐私。Free online video watermark removal tool with multiple removal methods.",
         "url": "https://helpoke.com/video/watermarks-remove",
         "applicationCategory": "https://schema.org/VideoEditing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "支持裁剪法去水印",
             "支持模糊法去水印",
@@ -59,14 +75,17 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>视频去水印工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>视频去水印工具，支持从视频中去除水印、Logo和其他遮挡物，支持多种视频格式，保持画质</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="video.watermarks-remove.title">视频去水印工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="video.watermarks-remove.intro">视频去水印工具，支持从视频中去除水印、Logo和其他遮挡物，支持多种视频格式，保持画质</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description">
+            <p class="description" data-i18n="video.watermarks-remove.note">
                 <b>注意：</b> 最大支持200MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
             </p>
 
@@ -74,8 +93,8 @@
                 <input type="file" id="fileInput" accept="video/*" style="display: none;">
                 <div class="upload-content">
                     <div class="upload-icon">📹</div>
-                    <p>点击或拖拽上传视频文件</p>
-                    <p class="hint">支持 MP4、WebM、MOV、AVI、MKV 等格式</p>
+                    <p data-i18n="video.watermarks-remove.uploadText">点击或拖拽上传视频文件</p>
+                    <p class="hint" data-i18n="video.watermarks-remove.uploadHint">支持 MP4、WebM、MOV、AVI、MKV 等格式</p>
                 </div>
             </div>
 
@@ -88,50 +107,53 @@
             </div>
 
             <div class="preview-section" id="previewSection" style="display: none;">
-                <h3>视频预览</h3>
+                <h3 data-i18n="video.watermarks-remove.previewTitle">视频预览</h3>
                 <div class="preview-container">
                     <video id="videoPlayer" controls playsinline></video>
                     <div id="watermarkOverlay"></div>
                 </div>
                 <!-- <p class="hint">点击视频画面可以选择去水印区域</p> -->
                 <div class="area-controls" id="areaControls" style="display: none;">
-                    <button class="btn btn-secondary" id="addAreaBtn">添加区域</button>
-                    <button class="btn btn-danger" id="deleteAreaBtn" disabled>删除当前区域</button>
-                    <span id="areaCount" style="margin-left: 10px; color: #666;">区域数量：1</span>
+                    <button class="btn btn-secondary" id="addAreaBtn"
+                        data-i18n="video.watermarks-remove.addAreaBtn">添加区域</button>
+                    <button class="btn btn-danger" id="deleteAreaBtn" disabled
+                        data-i18n="video.watermarks-remove.deleteAreaBtn">删除当前区域</button>
+                    <span id="areaCount" style="margin-left: 10px; color: #666;"
+                        data-i18n="video.watermarks-remove.areaCount">区域数量：1</span>
                 </div>
             </div>
 
             <div class="settings-section" id="settingsSection" style="display: none;">
-                <h3>去水印设置</h3>
+                <h3 data-i18n="video.watermarks-remove.settingsTitle">去水印设置</h3>
 
                 <div class="setting-group">
-                    <label for="removeMethod">去水印方式：</label>
+                    <label for="removeMethod" data-i18n="video.watermarks-remove.methodLabel">去水印方式：</label>
                     <select id="removeMethod">
-                        <option value="blur">模糊处理</option>
-                        <option value="mosaic">马赛克覆盖</option>
-                        <option value="pixelate">像素化</option>
-                        <option value="brightness">亮度降低</option>
-                        <option value="contrast">对比度降低</option>
-                        <option value="crop">裁剪去除</option>
-                        <option value="cover">纯色覆盖</option>
+                        <option value="blur" data-i18n="video.watermarks-remove.optionBlur">模糊处理</option>
+                        <option value="mosaic" data-i18n="video.watermarks-remove.optionMosaic">马赛克覆盖</option>
+                        <option value="pixelate" data-i18n="video.watermarks-remove.optionPixelate">像素化</option>
+                        <option value="brightness" data-i18n="video.watermarks-remove.optionBrightness">亮度降低</option>
+                        <option value="contrast" data-i18n="video.watermarks-remove.optionContrast">对比度降低</option>
+                        <option value="crop" data-i18n="video.watermarks-remove.optionCrop">裁剪去除</option>
+                        <option value="cover" data-i18n="video.watermarks-remove.optionCover">纯色覆盖</option>
                     </select>
                 </div>
 
                 <div class="setting-group">
-                    <label for="areaPreset">预设位置：</label>
+                    <label for="areaPreset" data-i18n="video.watermarks-remove.presetLabel">预设位置：</label>
                     <select id="areaPreset">
-                        <option value="custom">自定义区域</option>
-                        <option value="top-left">左上角</option>
-                        <option value="top-right">右上角</option>
-                        <option value="bottom-left">左下角</option>
-                        <option value="bottom-right">右下角</option>
-                        <option value="top-center">顶部居中</option>
-                        <option value="bottom-center">底部居中</option>
+                        <option value="custom" data-i18n="video.watermarks-remove.optionCustom">自定义区域</option>
+                        <option value="top-left" data-i18n="video.watermarks-remove.optionTopLeft">左上角</option>
+                        <option value="top-right" data-i18n="video.watermarks-remove.optionTopRight">右上角</option>
+                        <option value="bottom-left" data-i18n="video.watermarks-remove.optionBottomLeft">左下角</option>
+                        <option value="bottom-right" data-i18n="video.watermarks-remove.optionBottomRight">右下角</option>
+                        <option value="top-center" data-i18n="video.watermarks-remove.optionTopCenter">顶部居中</option>
+                        <option value="bottom-center" data-i18n="video.watermarks-remove.optionBottomCenter">底部居中</option>
                     </select>
                 </div>
 
                 <div class="setting-group">
-                    <label>区域大小：</label>
+                    <label data-i18n="video.watermarks-remove.areaSizeLabel">区域大小：</label>
                     <div class="range-group">
                         <input type="range" id="areaWidth" min="5" max="50" value="15" step="1">
                         <span id="areaWidthValue">15%</span>
@@ -139,7 +161,7 @@
                 </div>
 
                 <div class="setting-group" id="blurSettings">
-                    <label>模糊强度：</label>
+                    <label data-i18n="video.watermarks-remove.blurStrengthLabel">模糊强度：</label>
                     <div class="range-group">
                         <input type="range" id="blurStrength" min="5" max="50" value="20" step="1">
                         <span id="blurStrengthValue">20px</span>
@@ -147,7 +169,7 @@
                 </div>
 
                 <div class="setting-group" id="mosaicSettings">
-                    <label>马赛克大小：</label>
+                    <label data-i18n="video.watermarks-remove.mosaicSizeLabel">马赛克大小：</label>
                     <div class="range-group">
                         <input type="range" id="mosaicSize" min="4" max="32" value="16" step="2">
                         <span id="mosaicSizeValue">16px</span>
@@ -155,38 +177,41 @@
                 </div>
 
                 <div class="setting-group" id="colorSettings">
-                    <label>覆盖颜色：</label>
+                    <label data-i18n="video.watermarks-remove.coverColorLabel">覆盖颜色：</label>
                     <input type="color" id="coverColor" value="#000000">
                 </div>
 
                 <div class="setting-group">
-                    <label for="outputFormat">输出格式：</label>
+                    <label for="outputFormat" data-i18n="video.watermarks-remove.outputFormatLabel">输出格式：</label>
                     <select id="outputFormat">
-                        <option value="original">保留原格式</option>
-                        <option value="mp4">MP4 (H.264)</option>
-                        <option value="webm">WebM</option>
+                        <option value="original" data-i18n="video.watermarks-remove.optionOriginal">保留原格式</option>
+                        <option value="mp4" data-i18n="video.watermarks-remove.optionMp4">MP4 (H.264)</option>
+                        <option value="webm" data-i18n="video.watermarks-remove.optionWebm">WebM</option>
                     </select>
                 </div>
 
                 <div class="setting-group">
-                    <label>处理时间范围 <span class="hint">（仅处理该时段内的水印）</span></label>
+                    <label data-i18n="video.watermarks-remove.timeRangeLabel">处理时间范围 <span
+                            class="hint">（仅处理该时段内的水印）</span></label>
                     <div class="time-range-group">
                         <div class="time-input">
-                            <label for="trimStart">开始时间</label>
+                            <label for="trimStart" data-i18n="video.watermarks-remove.startTimeLabel">开始时间</label>
                             <input type="number" id="trimStart" value="0" min="0" step="0.1" placeholder="0">
-                            <span class="time-unit">秒</span>
+                            <span class="time-unit" data-i18n="video.watermarks-remove.timeUnit">秒</span>
                         </div>
                         <div class="time-input">
-                            <label for="trimDuration">持续时长</label>
-                            <input type="number" id="trimDuration" value="0" min="0" step="0.1" placeholder="视频总时长">
-                            <span class="time-unit">秒</span>
+                            <label for="trimDuration" data-i18n="video.watermarks-remove.durationLabel">持续时长</label>
+                            <input type="number" id="trimDuration" value="0" min="0" step="0.1"
+                                data-i18n-placeholder="video.watermarks-remove.durationPlaceholder" placeholder="视频总时长">
+                            <span class="time-unit" data-i18n="video.watermarks-remove.timeUnit">秒</span>
                         </div>
                     </div>
                 </div>
 
                 <button class="btn btn-primary" id="processBtn">
-                    <span id="processBtnText">开始去水印处理</span>
-                    <span id="processBtnLoading" style="display: none;">处理中...</span>
+                    <span id="processBtnText" data-i18n="video.watermarks-remove.processBtn">开始去水印处理</span>
+                    <span id="processBtnLoading" style="display: none;"
+                        data-i18n="video.watermarks-remove.processBtnLoading">处理中...</span>
                 </button>
             </div>
 
@@ -196,23 +221,23 @@
                     <span id="progressPercentage">0%</span>
                 </div>
                 <div class="progress-text">
-                    <span id="progressStatus">准备就绪</span>
+                    <span id="progressStatus" data-i18n="video.watermarks-remove.progressReady">准备就绪</span>
                 </div>
             </div>
 
             <div class="output-section" id="outputSection" style="display: none;">
-                <h3>处理结果</h3>
+                <h3 data-i18n="video.watermarks-remove.resultTitle">处理结果</h3>
                 <div class="result-info">
                     <div class="info-item">
-                        <span class="label">原文件大小：</span>
+                        <span class="label" data-i18n="video.watermarks-remove.originalSizeLabel">原文件大小：</span>
                         <span id="originalSize"></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">处理后大小：</span>
+                        <span class="label" data-i18n="video.watermarks-remove.outputSizeLabel">处理后大小：</span>
                         <span id="outputSize"></span>
                     </div>
                     <div class="info-item">
-                        <span class="label">去水印方式：</span>
+                        <span class="label" data-i18n="video.watermarks-remove.methodLabel">去水印方式：</span>
                         <span id="usedMethod"></span>
                     </div>
                 </div>
@@ -220,134 +245,152 @@
                     <video id="outputVideo" controls></video>
                 </div>
                 <div class="download-buttons">
-                    <button class="btn btn-primary" id="downloadBtn">下载处理后的视频</button>
-                    <button class="btn btn-secondary" id="resetBtn">重新处理</button>
+                    <button class="btn btn-primary" id="downloadBtn"
+                        data-i18n="video.watermarks-remove.downloadBtn">下载处理后的视频</button>
+                    <button class="btn btn-secondary" id="resetBtn" data-i18n="video.watermarks-remove.resetBtn">重新处理</button>
                 </div>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>工具介绍</h3>
+                        <h3 data-i18n="video.watermarks-remove.infoIntro">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、解决的问题</h4>
+                        <h4 data-i18n="video.watermarks-remove.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li>去除视频中的水印和Logo。</li>
-                            <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li>无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="video.watermarks-remove.problem1">去除视频中的水印和Logo。</li>
+                            <li data-i18n="video.watermarks-remove.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="video.watermarks-remove.problem3">无需安装专业软件，随时随地在线使用。</li>
                         </ul>
-                        <h4>二、支持的格式</h4>
+                        <h4 data-i18n="video.watermarks-remove.formatTitle">二、支持的格式</h4>
                         <ul>
-                            <li><strong>MP4：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>AVI：</strong>支持该格式的完整处理功能。</li>
-                            <li><strong>MOV：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.watermarks-remove.formatMp4"><strong>MP4：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.watermarks-remove.formatAvi"><strong>AVI：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.watermarks-remove.formatMov"><strong>MOV：</strong>支持该格式的完整处理功能。</li>
                         </ul>
-                        <h4>三、核心功能</h4>
+                        <h4 data-i18n="video.watermarks-remove.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="video.watermarks-remove.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                            </li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>使用说明</h3>
+                        <h3 data-i18n="video.watermarks-remove.infoUsage">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、上传视频</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageUploadTitle">一、上传视频</h4>
                         <ul>
-                            <li><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
-                            <li><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
-                            <li><strong>文件大小：</strong>建议单个视频文件不超过 200MB。</li>
-                            <li><strong>预览视频：</strong>上传后可预览视频内容。</li>
+                            <li data-i18n="video.watermarks-remove.usageSelectFile"><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageFormats"><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI
+                                等常见视频格式。</li>
+                            <li data-i18n="video.watermarks-remove.usageFileSize"><strong>文件大小：</strong>建议单个视频文件不超过 200MB。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usagePreview"><strong>预览视频：</strong>上传后可预览视频内容。</li>
                         </ul>
-                        <h4>二、选择去水印方式</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageMethodTitle">二、选择去水印方式</h4>
                         <ul>
-                            <li><strong>裁剪法：</strong>通过裁剪视频边缘去除水印，适合水印位于边缘的情况。</li>
-                            <li><strong>模糊法：</strong>对水印区域进行模糊处理，掩盖水印内容。</li>
-                            <li><strong>马赛克法：</strong>对水印区域添加马赛克效果，完全遮挡水印。</li>
+                            <li data-i18n="video.watermarks-remove.usageCrop"><strong>裁剪法：</strong>通过裁剪视频边缘去除水印，适合水印位于边缘的情况。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageBlur"><strong>模糊法：</strong>对水印区域进行模糊处理，掩盖水印内容。</li>
+                            <li data-i18n="video.watermarks-remove.usageMosaic"><strong>马赛克法：</strong>对水印区域添加马赛克效果，完全遮挡水印。
+                            </li>
                         </ul>
-                        <h4>三、设置去水印区域</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageAreaTitle">三、设置去水印区域</h4>
                         <ul>
-                            <li><strong>拖动选择：</strong>在预览画面上拖动鼠标选择水印区域。</li>
-                            <li><strong>精确调整：</strong>可手动输入区域坐标和尺寸。</li>
-                            <li><strong>区域预览：</strong>实时预览选中的水印区域。</li>
+                            <li data-i18n="video.watermarks-remove.usageDrag"><strong>拖动选择：</strong>在预览画面上拖动鼠标选择水印区域。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdjust"><strong>精确调整：</strong>可手动输入区域坐标和尺寸。</li>
+                            <li data-i18n="video.watermarks-remove.usageAreaPreview"><strong>区域预览：</strong>实时预览选中的水印区域。</li>
                         </ul>
-                        <h4>四、选择方法建议</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageAdviceTitle">四、选择方法建议</h4>
                         <ul>
-                            <li><strong>水印在边缘：</strong>使用裁剪法，效果最好。</li>
-                            <li><strong>水印在中间：</strong>使用模糊法或马赛克法。</li>
-                            <li><strong>需要保留画面：</strong>使用模糊法，对画面影响较小。</li>
-                            <li><strong>完全遮挡：</strong>使用马赛克法，遮挡效果最好。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice1"><strong>水印在边缘：</strong>使用裁剪法，效果最好。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice2"><strong>水印在中间：</strong>使用模糊法或马赛克法。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice3"><strong>需要保留画面：</strong>使用模糊法，对画面影响较小。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice4"><strong>完全遮挡：</strong>使用马赛克法，遮挡效果最好。</li>
                         </ul>
-                        <h4>五、开始处理</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageProcessTitle">五、开始处理</h4>
                         <ul>
-                            <li><strong>点击处理：</strong>点击"开始去水印"按钮开始处理。</li>
-                            <li><strong>进度显示：</strong>实时显示处理进度。</li>
-                            <li><strong>等待时间：</strong>处理时间取决于视频长度和电脑性能。</li>
+                            <li data-i18n="video.watermarks-remove.usageProcessClick"><strong>点击处理：</strong>点击"开始去水印"按钮开始处理。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageProgress"><strong>进度显示：</strong>实时显示处理进度。</li>
+                            <li data-i18n="video.watermarks-remove.usageWait"><strong>等待时间：</strong>处理时间取决于视频长度和电脑性能。</li>
                         </ul>
-                        <h4>六、查看和下载</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageDownloadTitle">六、查看和下载</h4>
                         <ul>
-                            <li><strong>预览效果：</strong>处理完成后可预览去水印后的视频。</li>
-                            <li><strong>查看信息：</strong>显示处理前后文件大小和使用的去水印方式。</li>
-                            <li><strong>一键下载：</strong>点击"下载处理后的视频"按钮保存到本地。</li>
-                            <li><strong>重新处理：</strong>点击"重新处理"按钮调整参数后重新处理。</li>
+                            <li data-i18n="video.watermarks-remove.usagePreviewResult"><strong>预览效果：</strong>处理完成后可预览去水印后的视频。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageViewInfo"><strong>查看信息：</strong>显示处理前后文件大小和使用的去水印方式。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageDownloadOneClick">
+                                <strong>一键下载：</strong>点击"下载处理后的视频"按钮保存到本地。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageReprocess"><strong>重新处理：</strong>点击"重新处理"按钮调整参数后重新处理。
+                            </li>
                         </ul>
-                        <h4>七、适用场景</h4>
+                        <h4 data-i18n="video.watermarks-remove.usageScenesTitle">七、适用场景</h4>
                         <ul>
-                            <li><strong>去除平台水印：</strong>去除视频平台添加的水印。</li>
-                            <li><strong>去除版权水印：</strong>去除视频中的版权标识。</li>
-                            <li><strong>去除字幕水印：</strong>去除视频中的字幕或台标。</li>
-                            <li><strong>隐私保护：</strong>模糊视频中的敏感信息。</li>
+                            <li data-i18n="video.watermarks-remove.usageScenePlatform"><strong>去除平台水印：</strong>去除视频平台添加的水印。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageSceneCopyright"><strong>去除版权水印：</strong>去除视频中的版权标识。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.sceneSubtitle"><strong>去除字幕水印：</strong>去除视频中的字幕或台标。</li>
+                            <li data-i18n="video.watermarks-remove.usageScenePrivacy"><strong>隐私保护：</strong>模糊视频中的敏感信息。</li>
                         </ul>
                     </div>
                 </article>
                 <article class="info-details">
                     <header>
-                        <h3>注意事项</h3>
+                        <h3 data-i18n="video.watermarks-remove.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、数据安全</h4>
+                        <h4 data-i18n="video.watermarks-remove.notesSecurityTitle">一、数据安全</h4>
                         <ul>
-                            <li>所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
-                            <li>视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                            <li>建议在处理敏感视频时使用隐私模式浏览。</li>
+                            <li data-i18n="video.watermarks-remove.noteSecurity1">所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
+                            <li data-i18n="video.watermarks-remove.noteSecurity2">视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
+                            <li data-i18n="video.watermarks-remove.noteSecurity3">建议在处理敏感视频时使用隐私模式浏览。</li>
                         </ul>
-                        <h4>二、处理性能</h4>
+                        <h4 data-i18n="video.watermarks-remove.notesPerfTitle">二、处理性能</h4>
                         <ul>
-                            <li>视频去水印是计算密集型操作，会占用较多CPU资源。</li>
-                            <li>处理时间取决于视频时长和电脑性能。</li>
-                            <li>建议在处理大文件时关闭其他占用CPU的程序。</li>
+                            <li data-i18n="video.watermarks-remove.notePerf1">视频去水印是计算密集型操作，会占用较多CPU资源。</li>
+                            <li data-i18n="video.watermarks-remove.notePerf2">处理时间取决于视频时长和电脑性能。</li>
+                            <li data-i18n="video.watermarks-remove.notePerf3">建议在处理大文件时关闭其他占用CPU的程序。</li>
                         </ul>
-                        <h4>三、格式限制</h4>
+                        <h4 data-i18n="video.watermarks-remove.notesFormatTitle">三、格式限制</h4>
                         <ul>
-                            <li>支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
-                            <li>不支持的格式可能无法正常处理。</li>
-                            <li>输出格式默认为MP4，兼容性最好。</li>
+                            <li data-i18n="video.watermarks-remove.noteFormat1">支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
+                            <li data-i18n="video.watermarks-remove.noteFormat2">不支持的格式可能无法正常处理。</li>
+                            <li data-i18n="video.watermarks-remove.noteFormat3">输出格式默认为MP4，兼容性最好。</li>
                         </ul>
-                        <h4>四、效果说明</h4>
+                        <h4 data-i18n="video.watermarks-remove.notesEffectTitle">四、效果说明</h4>
                         <ul>
-                            <li>裁剪法会改变视频画面尺寸，可能影响构图。</li>
-                            <li>模糊法可能在水印区域留下模糊痕迹。</li>
-                            <li>马赛克法会完全遮挡水印区域，但会破坏画面完整性。</li>
-                            <li>建议尝试不同方法选择最佳效果。</li>
+                            <li data-i18n="video.watermarks-remove.noteEffect1">裁剪法会改变视频画面尺寸，可能影响构图。</li>
+                            <li data-i18n="video.watermarks-remove.noteEffect2">模糊法可能在水印区域留下模糊痕迹。</li>
+                            <li data-i18n="video.watermarks-remove.noteEffect3">马赛克法会完全遮挡水印区域，但会破坏画面完整性。</li>
+                            <li data-i18n="video.watermarks-remove.noteEffect4">建议尝试不同方法选择最佳效果。</li>
                         </ul>
-                        <h4>五、质量损失</h4>
+                        <h4 data-i18n="video.watermarks-remove.notesQualityTitle">五、质量损失</h4>
                         <ul>
-                            <li>视频重新编码会导致一定的画质损失。</li>
-                            <li>建议处理前备份原始视频文件。</li>
-                            <li>多次处理会累积画质损失。</li>
+                            <li data-i18n="video.watermarks-remove.noteQuality1">视频重新编码会导致一定的画质损失。</li>
+                            <li data-i18n="video.watermarks-remove.noteQuality2">建议处理前备份原始视频文件。</li>
+                            <li data-i18n="video.watermarks-remove.noteQuality3">多次处理会累积画质损失。</li>
                         </ul>
-                        <h4>六、常见问题</h4>
+                        <h4 data-i18n="video.watermarks-remove.notesFaqTitle">六、常见问题</h4>
                         <ul>
-                            <li><strong>处理失败：</strong>检查视频文件是否损坏或格式不支持。</li>
-                            <li><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
-                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li><strong>效果不佳：</strong>尝试调整去水印区域或更换去水印方法。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq1"><strong>处理失败：</strong>检查视频文件是否损坏或格式不支持。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq2"><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq4"><strong>效果不佳：</strong>尝试调整去水印区域或更换去水印方法。</li>
                         </ul>
                     </div>
                 </article>
@@ -356,18 +399,22 @@
 
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

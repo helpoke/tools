@@ -10,11 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>视频转音频 - 免费在线视频音频提取工具</title>
+    <meta property="og:title" content="视频转音频 - 免费在线视频音频提取工具">
+    <meta property="og:description" content="视频转音频在线免费工具，支持从视频中提取音频，转换为MP3、WAV、AAC等格式，纯前端处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/video/audio/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="视频转音频 - 免费在线视频音频提取工具">
+    <meta name="twitter:description" content="视频转音频在线免费工具，支持从视频中提取音频，转换为MP3、WAV、AAC等格式，纯前端处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/video/audio/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/video/audio/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/video/audio/">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -26,10 +42,10 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "视频转音频工具",
-        "description": "免费在线视频转音频工具，支持从视频中提取音频并转换为MP3、WAV、AAC等格式。纯前端处理，保护用户隐私数据。",
+        "description": "免费在线视频转音频工具，支持从视频中提取音频并转换为MP3、WAV、AAC等格式。纯前端处理，保护用户隐私数据。Free online video to audio converter extracting MP3, WAV, AAC.",
         "url": "https://helpoke.com/video/audio",
         "applicationCategory": "https://schema.org/AudioEditing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "支持从各种视频格式提取音频",
             "支持MP3、WAV、AAC、M4A等音频格式",
@@ -59,15 +75,17 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>音频提取工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>视频音频提取工具，支持从视频中提取音频，支持转换为MP3、WAV、AAC、M4A、OGG等多种格式，自定义比特率，支持截取片段</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="video.audio.title">音频提取工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="video.audio.intro">视频音频提取工具，支持从视频中提取音频，支持转换为MP3、WAV、AAC、M4A、OGG等多种格式，自定义比特率，支持截取片段</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
-            <p class="description">
+            <p class="description" data-i18n="video.audio.note">
                 <b>注意：</b> 为保证浏览器运算流畅，建议上传 <b>200MB 以内</b> 的视频文件。支持 MP4、WebM、AVI、MOV、MKV 等常见格式。
             </p>
 
@@ -75,14 +93,15 @@
                 <label for="videoUpload" class="upload-area">
                     <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv" hidden>
                     <div class="upload-icon">🎬</div>
-                    <div class="upload-text">点击上传或拖拽视频到此处</div>
-                    <div class="upload-hint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 格式</div>
+                    <div class="upload-text" data-i18n="video.audio.uploadText">点击上传或拖拽视频到此处</div>
+                    <div class="upload-hint" data-i18n="video.audio.uploadHint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV,
+                        3GP 格式</div>
                 </label>
             </div>
 
             <div class="preview-section" id="previewSection" style="display: none;">
                 <div class="video-info" id="videoInfo">
-                    <p>请上传视频文件</p>
+                    <p data-i18n="video.audio.uploadPrompt">请上传视频文件</p>
                 </div>
                 <div class="video-container">
                     <video id="videoPlayer" controls></video>
@@ -90,39 +109,40 @@
             </div>
 
             <div class="settings-section" id="settingsSection" style="display: none;">
-                <h3>音频输出设置</h3>
+                <h3 data-i18n="video.audio.settingsTitle">音频输出设置</h3>
 
                 <div class="setting-row">
                     <div class="input-group">
-                        <label for="outputFormat">目标格式：</label>
+                        <label for="outputFormat" data-i18n="video.audio.outputFormat">目标格式：</label>
                         <select id="outputFormat">
-                            <option value="mp3">MP3 (推荐，兼容性最佳)</option>
-                            <option value="wav">WAV (无损音质)</option>
-                            <option value="aac">AAC (高品质压缩)</option>
-                            <option value="m4a">M4A (Apple设备推荐)</option>
-                            <option value="ogg">OGG (开源格式)</option>
+                            <option value="mp3" data-i18n="video.audio.formatMp3">MP3 (推荐，兼容性最佳)</option>
+                            <option value="wav" data-i18n="video.audio.formatWav">WAV (无损音质)</option>
+                            <option value="aac" data-i18n="video.audio.formatAac">AAC (高品质压缩)</option>
+                            <option value="m4a" data-i18n="video.audio.formatM4a">M4A (Apple设备推荐)</option>
+                            <option value="ogg" data-i18n="video.audio.formatOgg">OGG (开源格式)</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="audioQuality">音频比特率：</label>
+                        <label for="audioQuality" data-i18n="video.audio.audioQuality">音频比特率：</label>
                         <select id="audioQuality">
-                            <option value="320">高质量 (320 kbps)</option>
-                            <option value="256">高品质 (256 kbps)</option>
-                            <option value="192">中等 (192 kbps)</option>
-                            <option value="128" selected>标准 (128 kbps)</option>
-                            <option value="96">较小文件 (96 kbps)</option>
+                            <option value="320" data-i18n="video.audio.quality320">高质量 (320 kbps)</option>
+                            <option value="256" data-i18n="video.audio.quality256">高品质 (256 kbps)</option>
+                            <option value="192" data-i18n="video.audio.quality192">中等 (192 kbps)</option>
+                            <option value="128" selected data-i18n="video.audio.quality128">标准 (128 kbps)</option>
+                            <option value="96" data-i18n="video.audio.quality96">较小文件 (96 kbps)</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="setting-row">
                     <div class="input-group">
-                        <label for="startTime">开始截取时间 (秒)：</label>
+                        <label for="startTime" data-i18n="video.audio.startTime">开始截取时间 (秒)：</label>
                         <input type="number" id="startTime" min="0" step="0.1" value="0" placeholder="0">
                     </div>
                     <div class="input-group">
-                        <label for="duration">提取时长 (秒)：</label>
-                        <input type="number" id="duration" min="0" step="0.1" placeholder="留空表示提取全部音频">
+                        <label for="duration" data-i18n="video.audio.duration">提取时长 (秒)：</label>
+                        <input type="number" id="duration" min="0" step="0.1" placeholder="留空表示提取全部音频"
+                            data-i18n-placeholder="video.audio.durationPlaceholder">
                     </div>
                 </div>
 
@@ -132,8 +152,8 @@
 
                 <div class="action-buttons">
                     <button id="convertBtn" disabled>
-                        <span id="convertBtnText">开始提取音频</span>
-                        <span id="convertBtnLoading" style="display: none;">提取中...</span>
+                        <span id="convertBtnText" data-i18n="video.audio.startConvert">开始提取音频</span>
+                        <span id="convertBtnLoading" style="display: none;" data-i18n="video.audio.converting">提取中...</span>
                     </button>
                     <div class="progress-container" id="progressContainer" style="display: none;">
                         <div class="progress-bar" id="progressBar"></div>
@@ -144,64 +164,73 @@
             </div>
 
             <div class="output-section" id="outputSection">
-                <h2>提取结果</h2>
+                <h2 data-i18n="video.audio.resultTitle">提取结果</h2>
                 <div class="result-info" id="resultInfo"></div>
                 <div class="audio-container">
                     <audio id="outputAudio" controls></audio>
                 </div>
                 <div class="download-buttons">
-                    <button id="downloadBtn">下载提取的音频文件</button>
+                    <button id="downloadBtn" data-i18n="video.audio.download">下载提取的音频文件</button>
                 </div>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>使用说明与操作步骤</h3>
+                        <h3 data-i18n="video.audio.infoUsage">使用说明与操作步骤</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、选择并预览视频</h4>
+                        <h4 data-i18n="video.audio.usageSelectTitle">一、选择并预览视频</h4>
                         <ul>
-                            <li>点击上传区域或拖拽视频文件至本页面，系统会自动解析视频轨与音频轨。</li>
-                            <li>上传完成后可在浏览器内置播放器中进行视频预览。</li>
+                            <li data-i18n="video.audio.select1">点击上传区域或拖拽视频文件至本页面，系统会自动解析视频轨与音频轨。</li>
+                            <li data-i18n="video.audio.select2">上传完成后可在浏览器内置播放器中进行视频预览。</li>
                         </ul>
-                        <h4>二、配置输出格式与品质</h4>
+                        <h4 data-i18n="video.audio.usageFormatTitle">二、配置输出格式与品质</h4>
                         <ul>
-                            <li><strong>选择格式：</strong>通用分享建议选 <strong>MP3</strong>；追求原音质量建议选
-                                <strong>WAV</strong>；苹果系列设备建议选择 <strong>M4A / AAC</strong>。</li>
-                            <li><strong>码率选择：</strong>码率（kbps）越高音质越好，文件也越大。日常听音推荐 128 kbps 或 192 kbps。</li>
-                            <li><strong>区间提取：</strong>若只需视频中的某一段配乐，可精准设置“开始时间”与“提取时长”。</li>
+                            <li data-i18n="video.audio.formatChoice"><strong>选择格式：</strong>通用分享建议选
+                                <strong>MP3</strong>；追求原音质量建议选
+                                <strong>WAV</strong>；苹果系列设备建议选择 <strong>M4A / AAC</strong>。
+                            </li>
+                            <li data-i18n="video.audio.bitrateChoice"><strong>码率选择：</strong>码率（kbps）越高音质越好，文件也越大。日常听音推荐 128
+                                kbps 或 192 kbps。</li>
+                            <li data-i18n="video.audio.segmentExtract"><strong>区间提取：</strong>若只需视频中的某一段配乐，可精准设置“开始时间”与“提取时长”。
+                            </li>
                         </ul>
-                        <h4>三、转换导出</h4>
+                        <h4 data-i18n="video.audio.usageConvertTitle">三、转换导出</h4>
                         <ul>
-                            <li>点击“开始提取音频”，等待进度条完成，即可在下方在线试听并一键保存到本地。</li>
+                            <li data-i18n="video.audio.convertStep1">点击“开始提取音频”，等待进度条完成，即可在下方在线试听并一键保存到本地。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>工具特色与优势</h3>
+                        <h3 data-i18n="video.audio.infoFeatures">工具特色与优势</h3>
                     </header>
                     <div class="info-content">
                         <ul>
-                            <li><strong>纯前端本地计算：</strong>基于 WebAssembly (FFmpeg) 引擎解析，文件无需上传到云端服务器，完全保障个人视频隐密性。</li>
-                            <li><strong>零依赖，即开即用：</strong>无需安装额外的格式转换软件或浏览器插件。</li>
-                            <li><strong>多格式强力兼容：</strong>支持将主流视频格式（MP4, WebM, AVI, MOV, MKV 等）直接剥离出音频。</li>
+                            <li data-i18n="video.audio.feature1"><strong>纯前端本地计算：</strong>基于 WebAssembly (FFmpeg)
+                                引擎解析，文件无需上传到云端服务器，完全保障个人视频隐密性。</li>
+                            <li data-i18n="video.audio.feature2"><strong>零依赖，即开即用：</strong>无需安装额外的格式转换软件或浏览器插件。</li>
+                            <li data-i18n="video.audio.feature3"><strong>多格式强力兼容：</strong>支持将主流视频格式（MP4, WebM, AVI, MOV, MKV
+                                等）直接剥离出音频。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>常见问题解答 (FAQ)</h3>
+                        <h3 data-i18n="video.audio.infoFaq">常见问题解答 (FAQ)</h3>
                     </header>
                     <div class="info-content">
                         <ul>
-                            <li><strong>为什么提取出来的音频没有声音？</strong><br>请确认上传的原始视频文件本身是否包含声音轨（如某些监控视频或无声动画）。</li>
-                            <li><strong>转换出来的 MP3 音质会比原视频更好吗？</strong><br>不会。提取音频的质量上限取决于源视频中音频轨的采样率与码率，升高码率（如
+                            <li data-i18n="video.audio.faq1">
+                                <strong>为什么提取出来的音频没有声音？</strong><br>请确认上传的原始视频文件本身是否包含声音轨（如某些监控视频或无声动画）。
+                            </li>
+                            <li data-i18n="video.audio.faq2"><strong>转换出来的 MP3
+                                    音质会比原视频更好吗？</strong><br>不会。提取音频的质量上限取决于源视频中音频轨的采样率与码率，升高码率（如
                                 320kbps）只会增加体积，不会提升原本受损的音质。</li>
-                            <li><strong>为什么大文件提取速度比较慢？</strong><br>由于所有音视频解码工作均由您本地设备的 CPU
+                            <li data-i18n="video.audio.faq3"><strong>为什么大文件提取速度比较慢？</strong><br>由于所有音视频解码工作均由您本地设备的 CPU
                                 完成，大文件（或高码率视频）需要更长的解码时间，属正常现象。</li>
                         </ul>
                     </div>
@@ -211,18 +240,23 @@
 
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

@@ -10,6 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>SQL格式化工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="SQL格式化工具 - Helpoke 助点站">
+    <meta property="og:description" content="SQL在线格式化美化工具，支持SQL语法高亮、关键字大写、格式化压缩、错误检测。免费在线SQL格式化工具。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/sql/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SQL格式化工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="SQL在线格式化美化工具，支持SQL语法高亮、关键字大写、格式化压缩、错误检测。免费在线SQL格式化工具。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/sql/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/sql/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/sql/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -383,7 +398,7 @@
         "description": "SQL在线格式化美化工具，支持SQL语法高亮、关键字大写、格式化压缩、错误检测。免费在线SQL格式化工具。Online SQL formatter with syntax highlighting and beautification.",
         "url": "https://helpoke.com/dev/sql",
         "applicationCategory": "https://schema.org/DeveloperTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "SQL代码格式化美化",
             "SQL关键字大写转换",
@@ -406,6 +421,7 @@
         }
     }
     </script>
+    <script src="../../common/js/i18n/i18n.js"></script>
 </head>
 
 <body>
@@ -414,175 +430,193 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>SQL格式化工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>SQL格式化工具，支持格式化SQL语句，提高可读性和维护性，支持语法高亮，支持自定义缩进、关键字大小写、语句空行等格式选项</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="dev.sql.title">SQL格式化工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.sql.intro">SQL格式化工具，支持格式化SQL语句，提高可读性和维护性，支持语法高亮，支持自定义缩进、关键字大小写、语句空行等格式选项</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container" data-theme="light">
             <div class="tool-card">
                 <div class="options-bar">
                     <div class="option-group">
-                        <label for="indent">缩进:</label>
+                        <label for="indent" data-i18n="dev.sql.indentLabel">缩进:</label>
                         <select id="indent">
-                            <option value="2">2 空格</option>
-                            <option value="4" selected>4 空格</option>
+                            <option value="2" data-i18n="dev.sql.indent2">2 空格</option>
+                            <option value="4" selected data-i18n="dev.sql.indent4">4 空格</option>
                             <option value="tab">Tab</option>
                         </select>
                     </div>
                     <div class="option-group">
-                        <label for="uppercase">关键字:</label>
+                        <label for="uppercase" data-i18n="dev.sql.keywordLabel">关键字:</label>
                         <select id="uppercase">
-                            <option value="upper">大写</option>
-                            <option value="lower">小写</option>
-                            <option value="preserve" selected>保持原样</option>
+                            <option value="upper" data-i18n="dev.sql.keywordUpper">大写</option>
+                            <option value="lower" data-i18n="dev.sql.keywordLower">小写</option>
+                            <option value="preserve" selected data-i18n="dev.sql.keywordPreserve">保持原样</option>
                         </select>
                     </div>
                     <div class="option-group">
-                        <label for="linesBetween">语句间空行:</label>
+                        <label for="linesBetween" data-i18n="dev.sql.linesBetweenLabel">语句间空行:</label>
                         <input type="number" id="linesBetween" min="0" max="3" value="1">
                     </div>
                     <div class="option-group">
                         <input type="checkbox" id="breakBeforeAnd" checked>
-                        <label for="breakBeforeAnd">AND/OR 换行</label>
+                        <label for="breakBeforeAnd" data-i18n="dev.sql.breakBeforeAndLabel">AND/OR 换行</label>
                     </div>
                     <div class="option-group">
                         <input type="checkbox" id="showLineNumbers">
-                        <label for="showLineNumbers">行号</label>
+                        <label for="showLineNumbers" data-i18n="dev.sql.lineNumbersLabel">行号</label>
                     </div>
                 </div>
 
                 <div class="toolbar">
-                    <button id="formatBtn" class="btn">✨ 格式化</button>
-                    <button id="compressBtn" class="btn secondary">🗜️ 压缩</button>
-                    <button id="clearBtn" class="btn secondary">🗑️ 清空</button>
-                    <button id="sampleBtn" class="btn secondary">📝 示例SQL</button>
+                    <button id="formatBtn" class="btn" data-i18n="dev.sql.formatBtn">✨ 格式化</button>
+                    <button id="compressBtn" class="btn secondary" data-i18n="dev.sql.compressBtn">🗜️ 压缩</button>
+                    <button id="clearBtn" class="btn secondary" data-i18n="dev.sql.clearBtn">🗑️ 清空</button>
+                    <button id="sampleBtn" class="btn secondary" data-i18n="dev.sql.sampleBtn">📝 示例SQL</button>
                     <div class="btn-group" style="margin-left: auto;">
-                        <button id="copyBtn" class="btn">📋 复制</button>
+                        <button id="copyBtn" class="btn" data-i18n="dev.sql.copyBtn">📋 复制</button>
                     </div>
                 </div>
 
                 <div class="stats">
-                    <span id="lineCount">行数: 0</span>
-                    <span id="charCount">字符: 0</span>
-                    <span id="keywordCount">关键词: 0</span>
+                    <span id="lineCount" data-i18n="dev.sql.lineCount">行数: 0</span>
+                    <span id="charCount" data-i18n="dev.sql.charCount">字符: 0</span>
+                    <span id="keywordCount" data-i18n="dev.sql.keywordCount">关键词: 0</span>
                 </div>
 
                 <div class="error-msg" id="errorMsg"></div>
 
                 <div class="io-panel">
                     <div class="input-panel">
-                        <label for="inputSql">输入 SQL:</label>
-                        <textarea id="inputSql" placeholder="请输入或粘贴您的 SQL 语句..."></textarea>
+                        <label for="inputSql" data-i18n="dev.sql.inputLabel">输入 SQL:</label>
+                        <textarea id="inputSql" placeholder="请输入或粘贴您的 SQL 语句..."
+                            data-i18n-placeholder="dev.sql.inputPlaceholder"></textarea>
                     </div>
                     <div class="output-panel">
-                        <label for="outputSql">格式化结果:</label>
-                        <textarea id="outputSql" class="output-textarea" readonly
-                            placeholder="格式化后的 SQL 将显示在这里..."></textarea>
+                        <label for="outputSql" data-i18n="dev.sql.outputLabel">格式化结果:</label>
+                        <textarea id="outputSql" class="output-textarea" readonly placeholder="格式化后的 SQL 将显示在这里..."
+                            data-i18n-placeholder="dev.sql.outputPlaceholder"></textarea>
                     </div>
                 </div>
 
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="dev.sql.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="dev.sql.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>格式化SQL语句，提高可读性和维护性。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="dev.sql.problem1">格式化SQL语句，提高可读性和维护性。</li>
+                                <li data-i18n="dev.sql.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="dev.sql.problem3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="dev.sql.supportedFormatsTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>SQL：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>MySQL：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>PostgreSQL：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.sql.formatSql"><strong>SQL：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.sql.formatMysql"><strong>MySQL：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.sql.formatPostgresql"><strong>PostgreSQL：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="dev.sql.coreFeaturesTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="dev.sql.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="dev.sql.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li data-i18n="dev.sql.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li data-i18n="dev.sql.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="dev.sql.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式化功能</h4>
+                            <h4 data-i18n="dev.sql.usageFormatTitle">一、格式化功能</h4>
                             <ul>
-                                <li><strong>格式化：</strong>将压缩或杂乱的SQL代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
-                                <li><strong>压缩：</strong>将格式化的SQL代码压缩为紧凑格式，去除多余空白，减小文件体积。</li>
-                                <li><strong>复制结果：</strong>一键复制格式化或压缩后的代码到剪贴板。</li>
-                                <li><strong>示例SQL：</strong>点击"示例SQL"按钮可以查看格式化效果的示例代码。</li>
-                                <li><strong>清空：</strong>快速清除所有输入和输出内容。</li>
+                                <li data-i18n="dev.sql.usageFormat">
+                                    <strong>格式化：</strong>将压缩或杂乱的SQL代码转换为结构清晰、缩进正确的格式，便于阅读和维护。
+                                </li>
+                                <li data-i18n="dev.sql.usageCompress"><strong>压缩：</strong>将格式化的SQL代码压缩为紧凑格式，去除多余空白，减小文件体积。
+                                </li>
+                                <li data-i18n="dev.sql.usageCopy"><strong>复制结果：</strong>一键复制格式化或压缩后的代码到剪贴板。</li>
+                                <li data-i18n="dev.sql.usageSample"><strong>示例SQL：</strong>点击"示例SQL"按钮可以查看格式化效果的示例代码。</li>
+                                <li data-i18n="dev.sql.usageClear"><strong>清空：</strong>快速清除所有输入和输出内容。</li>
                             </ul>
-                            <h4>二、格式化选项</h4>
+                            <h4 data-i18n="dev.sql.usageOptionsTitle">二、格式化选项</h4>
                             <ul>
-                                <li><strong>缩进：</strong>可选择2空格、4空格或Tab作为缩进单位，默认为4空格。</li>
-                                <li><strong>关键字：</strong>可选择大写、小写或保持原样，默认为保持原样。</li>
-                                <li><strong>语句间空行：</strong>设置每个SQL语句之间的空行数量，默认为1行。</li>
-                                <li><strong>AND/OR 换行：</strong>勾选后，AND/OR 关键字会单独换行显示。</li>
+                                <li data-i18n="dev.sql.optIndent"><strong>缩进：</strong>可选择2空格、4空格或Tab作为缩进单位，默认为4空格。</li>
+                                <li data-i18n="dev.sql.optUppercase"><strong>关键字：</strong>可选择大写、小写或保持原样，默认为保持原样。</li>
+                                <li data-i18n="dev.sql.optLinesBetween"><strong>语句间空行：</strong>设置每个SQL语句之间的空行数量，默认为1行。</li>
+                                <li data-i18n="dev.sql.optBreakBeforeAnd"><strong>AND/OR 换行：</strong>勾选后，AND/OR 关键字会单独换行显示。
+                                </li>
                             </ul>
-                            <h4>三、支持的 SQL 语法</h4>
+                            <h4 data-i18n="dev.sql.usageSyntaxTitle">三、支持的 SQL 语法</h4>
                             <ul>
-                                <li><strong>数据查询：</strong>SELECT、FROM、WHERE、JOIN（INNER/LEFT/RIGHT/FULL/CROSS）</li>
-                                <li><strong>数据操作：</strong>INSERT、UPDATE、DELETE、VALUES、SET</li>
-                                <li><strong>数据定义：</strong>CREATE、ALTER、DROP、TABLE、INDEX、VIEW、DATABASE</li>
-                                <li><strong>查询子句：</strong>ORDER BY、GROUP BY、HAVING、LIMIT、OFFSET</li>
-                                <li><strong>条件表达式：</strong>AND、OR、NOT、IN、LIKE、BETWEEN、IS NULL</li>
-                                <li><strong>流程控制：</strong>CASE、WHEN、THEN、ELSE、END</li>
-                                <li><strong>聚合函数：</strong>COUNT、SUM、AVG、MIN、MAX</li>
+                                <li data-i18n="dev.sql.syntaxSelect">
+                                    <strong>数据查询：</strong>SELECT、FROM、WHERE、JOIN（INNER/LEFT/RIGHT/FULL/CROSS）
+                                </li>
+                                <li data-i18n="dev.sql.syntaxManip"><strong>数据操作：</strong>INSERT、UPDATE、DELETE、VALUES、SET
+                                </li>
+                                <li data-i18n="dev.sql.syntaxDefine">
+                                    <strong>数据定义：</strong>CREATE、ALTER、DROP、TABLE、INDEX、VIEW、DATABASE
+                                </li>
+                                <li data-i18n="dev.sql.syntaxClause"><strong>查询子句：</strong>ORDER BY、GROUP
+                                    BY、HAVING、LIMIT、OFFSET</li>
+                                <li data-i18n="dev.sql.syntaxCondition"><strong>条件表达式：</strong>AND、OR、NOT、IN、LIKE、BETWEEN、IS
+                                    NULL</li>
+                                <li data-i18n="dev.sql.syntaxControl"><strong>流程控制：</strong>CASE、WHEN、THEN、ELSE、END</li>
+                                <li data-i18n="dev.sql.syntaxAggregate"><strong>聚合函数：</strong>COUNT、SUM、AVG、MIN、MAX</li>
                             </ul>
-                            <h4>四、快捷操作</h4>
+                            <h4 data-i18n="dev.sql.usageShortcutsTitle">四、快捷操作</h4>
                             <ul>
-                                <li>输入和输出区域都支持独立复制操作。</li>
-                                <li>状态栏会实时显示行数、字符数和关键词数量。</li>
+                                <li data-i18n="dev.sql.shortcut1">输入和输出区域都支持独立复制操作。</li>
+                                <li data-i18n="dev.sql.shortcut2">状态栏会实时显示行数、字符数和关键词数量。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="dev.sql.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、格式规范</h4>
+                            <h4 data-i18n="dev.sql.notesFormatTitle">一、格式规范</h4>
                             <ul>
-                                <li>SQL语句必须以分号 <code>;</code> 结尾。</li>
-                                <li>字符串必须用单引号或双引号包裹。</li>
-                                <li>注释支持 <code>--</code>（单行）和 <code>/* ... */</code>（多行）。</li>
-                                <li>标识符（表名、列名）可以用反引号 <code>`</code> 包裹。</li>
+                                <li data-i18n="dev.sql.noteSemicolon">SQL语句必须以分号 <code>;</code> 结尾。</li>
+                                <li data-i18n="dev.sql.noteQuotes">字符串必须用单引号或双引号包裹。</li>
+                                <li data-i18n="dev.sql.noteComments">注释支持 <code>--</code>（单行）和 <code>/* ... */</code>（多行）。
+                                </li>
+                                <li data-i18n="dev.sql.noteBacktick">标识符（表名、列名）可以用反引号 <code>`</code> 包裹。</li>
                             </ul>
-                            <h4>二、关键字处理</h4>
+                            <h4 data-i18n="dev.sql.notesKeywordTitle">二、关键字处理</h4>
                             <ul>
-                                <li>选择"大写"选项时，所有SQL关键字都会转换为大写。</li>
-                                <li>选择"小写"选项时，所有SQL关键字都会转换为小写。</li>
-                                <li>选择"保持原样"选项时，关键字保持原始大小写。</li>
-                                <li>函数名默认转换为大写。</li>
+                                <li data-i18n="dev.sql.noteUpper">选择"大写"选项时，所有SQL关键字都会转换为大写。</li>
+                                <li data-i18n="dev.sql.noteLower">选择"小写"选项时，所有SQL关键字都会转换为小写。</li>
+                                <li data-i18n="dev.sql.notePreserve">选择"保持原样"选项时，关键字保持原始大小写。</li>
+                                <li data-i18n="dev.sql.noteFunctions">函数名默认转换为大写。</li>
                             </ul>
-                            <h4>三、性能提示</h4>
+                            <h4 data-i18n="dev.sql.notesPerfTitle">三、性能提示</h4>
                             <ul>
-                                <li>处理超大SQL文件（超过1MB）时可能会导致浏览器卡顿。</li>
-                                <li>建议将大型SQL文件分段处理。</li>
+                                <li data-i18n="dev.sql.noteLarge">处理超大SQL文件（超过1MB）时可能会导致浏览器卡顿。</li>
+                                <li data-i18n="dev.sql.noteSegment">建议将大型SQL文件分段处理。</li>
                             </ul>
-                            <h4>四、数据安全</h4>
+                            <h4 data-i18n="dev.sql.notesSecurityTitle">四、数据安全</h4>
                             <ul>
-                                <li>所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
-                                <li>建议不要在公共设备上处理包含敏感信息的SQL代码。</li>
+                                <li data-i18n="dev.sql.noteLocal">所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
+                                <li data-i18n="dev.sql.noteSensitive">建议不要在公共设备上处理包含敏感信息的SQL代码。</li>
                             </ul>
-                            <h4>五、常见问题</h4>
+                            <h4 data-i18n="dev.sql.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li><strong>格式化失败：</strong>检查SQL语法是否正确，特别是括号和引号是否匹配。</li>
-                                <li><strong>关键字未转换：</strong>确保选择了正确的关键字大小写选项。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="dev.sql.faqFormatFail"><strong>格式化失败：</strong>检查SQL语法是否正确，特别是括号和引号是否匹配。</li>
+                                <li data-i18n="dev.sql.faqKeywordNotConverted"><strong>关键字未转换：</strong>确保选择了正确的关键字大小写选项。
+                                </li>
+                                <li data-i18n="dev.sql.faqCopyFail"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
                             </ul>
                         </div>
                     </article>
@@ -593,17 +627,21 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" title="隐私政策" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms.html" title="服务条款" data-i18n="footer.terms"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about.html" title="关于我们" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们" data-i18n="footer.contact"><i class="fas fa-envelope"></i>
+                        联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/utils.js"></script>
@@ -907,9 +945,9 @@
                 const lines = sql.split('\n').filter(l => l.trim()).length;
                 const chars = sql.length;
                 const keywords = (sql.match(/\b(SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|AND|OR|JOIN|ON|ORDER|GROUP|BY|LIMIT|OFFSET)\b/gi) || []).length;
-                lineCount.textContent = '行数: ' + lines;
-                charCount.textContent = '字符: ' + chars;
-                keywordCount.textContent = '关键词: ' + keywords;
+                lineCount.textContent = window.t('dev.sql.lineCountPrefix') + lines;
+                charCount.textContent = window.t('dev.sql.charCountPrefix') + chars;
+                keywordCount.textContent = window.t('dev.sql.keywordCountPrefix') + keywords;
             }
 
             function showError(msg) {
@@ -924,7 +962,7 @@
             document.getElementById('formatBtn').addEventListener('click', function () {
                 const sql = inputSql.value.trim();
                 if (!sql) {
-                    showError('请输入 SQL 语句');
+                    showError(window.t('dev.sql.msgInputRequired'));
                     return;
                 }
                 hideError();
@@ -946,14 +984,14 @@
                     outputSql.value = formatted;
                     updateStats(formatted);
                 } catch (e) {
-                    showError('格式化失败: ' + e.message);
+                    showError(window.t('dev.sql.msgFormatError') + e.message);
                 }
             });
 
             document.getElementById('compressBtn').addEventListener('click', function () {
                 const sql = inputSql.value.trim();
                 if (!sql) {
-                    showError('请输入 SQL 语句');
+                    showError(window.t('dev.sql.msgInputRequired'));
                     return;
                 }
                 hideError();
@@ -970,7 +1008,7 @@
                     outputSql.value = compressed;
                     updateStats(compressed);
                 } catch (e) {
-                    showError('压缩失败: ' + e.message);
+                    showError(window.t('dev.sql.msgCompressError') + e.message);
                 }
             });
 
@@ -991,25 +1029,25 @@ WHERE u.status='active' AND o.total_amount>100 ORDER BY o.created_at DESC LIMIT 
             document.getElementById('copyBtn').addEventListener('click', function () {
                 const text = outputSql.value;
                 if (!text) {
-                    showError('没有内容可复制');
+                    showError(window.t('common.messages.noContentToCopy'));
                     return;
                 }
                 navigator.clipboard.writeText(text).then(function () {
                     const btn = document.getElementById('copyBtn');
                     const originalText = btn.innerHTML;
-                    btn.innerHTML = '已复制';
+                    btn.innerHTML = window.t('common.messages.copied');
                     btn.style.backgroundColor = '#059669';
                     setTimeout(function () {
                         btn.innerHTML = originalText;
                         btn.style.backgroundColor = '';
                     }, 2000);
                 }).catch(function () {
-                    showError('复制失败，请手动选择复制');
+                    showError(window.t('common.messages.copyFailed'));
                 });
             });
 
             inputSql.addEventListener('input', function () {
-                if (!outputSql.value || outputSql.value === '格式化后的 SQL 将显示在这里...') {
+                if (!outputSql.value || outputSql.value === window.t('dev.sql.outputPlaceholder')) {
                     updateStats(inputSql.value);
                 }
             });

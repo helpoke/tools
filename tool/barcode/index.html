@@ -10,7 +10,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>条形码生成工具 - Helpoke 助点站</title>
+    <meta property="og:title" content="条形码生成工具 - Helpoke 助点站">
+    <meta property="og:description" content="在线条形码生成工具, 支持CODE128/EAN/CODE39等格式, 免费在线条形码制作工具">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/barcode/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="条形码生成工具 - Helpoke 助点站">
+    <meta name="twitter:description" content="在线条形码生成工具, 支持CODE128/EAN/CODE39等格式, 免费在线条形码制作工具">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/barcode/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/barcode/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/barcode/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -287,7 +303,7 @@
         "description": "在线条形码生成工具，支持CODE128、CODE39、EAN等多种条形码格式。免费在线条形码生成器。Online barcode generator supporting multiple formats.",
         "url": "https://helpoke.com/tool/barcode",
         "applicationCategory": "https://schema.org/ProductivityApplication",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "多种条形码格式支持",
             "CODE128条形码",
@@ -317,181 +333,181 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>条形码生成工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>条形码生成工具，支持CODE128、EAN-13、EAN-8、UPC-A、CODE39、ITF-14等多种条形码格式，自定义尺寸和文字显示</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="tool.barcode.title">条形码生成工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="tool.barcode.intro">条形码生成工具，支持CODE128、EAN-13、EAN-8、UPC-A、CODE39、ITF-14等多种条形码格式，自定义尺寸和文字显示</p>
+            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tool-card">
                 <div class="input-group">
-                    <label for="barcode-value">条形码内容</label>
-                    <input type="text" id="barcode-value" placeholder="输入条形码内容，如：1234567890128">
+                    <label for="barcode-value" data-i18n="tool.barcode.contentLabel">条形码内容</label>
+                    <input type="text" id="barcode-value" data-i18n-placeholder="tool.barcode.contentPlaceholder" placeholder="输入条形码内容，如：1234567890128">
                     <div class="format-hint" id="format-hint"></div>
                 </div>
 
                 <div class="options-row">
                     <div class="option-item">
-                        <label>条形码格式</label>
+                        <label data-i18n="tool.barcode.formatLabel">条形码格式</label>
                         <select id="barcode-format">
-                            <option value="CODE128">CODE128（通用）</option>
-                            <option value="EAN13">EAN-13（商品）</option>
-                            <option value="EAN8">EAN-8（小型商品）</option>
-                            <option value="UPC">UPC-A（美国）</option>
-                            <option value="CODE39">CODE39</option>
-                            <option value="ITF14">ITF-14（物流）</option>
-                            <option value="MSI">MSI</option>
-                            <option value="pharmacode">Pharmacode</option>
+                            <option value="CODE128" data-i18n="tool.barcode.formatOptionCode128">CODE128（通用）</option>
+                            <option value="EAN13" data-i18n="tool.barcode.formatOptionEan13">EAN-13（商品）</option>
+                            <option value="EAN8" data-i18n="tool.barcode.formatOptionEan8">EAN-8（小型商品）</option>
+                            <option value="UPC" data-i18n="tool.barcode.formatOptionUpc">UPC-A（美国）</option>
+                            <option value="CODE39" data-i18n="tool.barcode.formatOptionCode39">CODE39</option>
+                            <option value="ITF14" data-i18n="tool.barcode.formatOptionItf14">ITF-14（物流）</option>
+                            <option value="MSI" data-i18n="tool.barcode.formatOptionMsi">MSI</option>
+                            <option value="pharmacode" data-i18n="tool.barcode.formatOptionPharmacode">Pharmacode</option>
                         </select>
                     </div>
                     <div class="option-item">
-                        <label>显示值</label>
+                        <label data-i18n="tool.barcode.showValueLabel">显示值</label>
                         <select id="show-value">
-                            <option value="true">显示</option>
-                            <option value="false">隐藏</option>
+                            <option value="true" data-i18n="tool.barcode.showValueShow">显示</option>
+                            <option value="false" data-i18n="tool.barcode.showValueHide">隐藏</option>
                         </select>
                     </div>
                     <div class="option-item">
-                        <label>宽度</label>
+                        <label data-i18n="tool.barcode.widthLabel">宽度</label>
                         <select id="barcode-width">
-                            <option value="1">细</option>
-                            <option value="2" selected>正常</option>
-                            <option value="3">宽</option>
+                            <option value="1" data-i18n="tool.barcode.widthThin">细</option>
+                            <option value="2" selected data-i18n="tool.barcode.widthNormal">正常</option>
+                            <option value="3" data-i18n="tool.barcode.widthWide">宽</option>
                         </select>
                     </div>
                     <div class="option-item">
-                        <label>高度</label>
+                        <label data-i18n="tool.barcode.heightLabel">高度</label>
                         <select id="barcode-height">
-                            <option value="50">矮 (50px)</option>
-                            <option value="80" selected>正常 (80px)</option>
-                            <option value="120">高 (120px)</option>
-                            <option value="150">超高 (150px)</option>
+                            <option value="50" data-i18n="tool.barcode.heightShort">矮 (50px)</option>
+                            <option value="80" selected data-i18n="tool.barcode.heightNormal">正常 (80px)</option>
+                            <option value="120" data-i18n="tool.barcode.heightTall">高 (120px)</option>
+                            <option value="150" data-i18n="tool.barcode.heightExtraTall">超高 (150px)</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="actions-row">
-                    <button class="btn" id="generate-btn">生成条形码</button>
-                    <button class="btn btn-download" id="download-btn" style="display: none;">下载 PNG</button>
+                    <button class="btn" id="generate-btn" data-i18n="tool.barcode.generateBtn">生成条形码</button>
+                    <button class="btn btn-download" id="download-btn" style="display: none;" data-i18n="tool.barcode.downloadBtn">下载 PNG</button>
                 </div>
 
                 <div class="barcode-preview" id="barcode-preview">
-                    <div class="barcode-placeholder">输入内容后点击"生成条形码"</div>
+                    <div class="barcode-placeholder" data-i18n="tool.barcode.placeholder">输入内容后点击"生成条形码"</div>
                 </div>
 
                 <div class="barcode-info" id="barcode-info" style="display: none;">
-                    <div>格式：<span id="info-format"></span></div>
-                    <div>内容：<span class="barcode-value" id="info-value"></span></div>
-                    <div>宽度：<span id="info-width"></span>px</div>
-                    <div>高度：<span id="info-height"></span>px</div>
+                    <div data-i18n="tool.barcode.infoFormat">格式：<span id="info-format"></span></div>
+                    <div data-i18n="tool.barcode.infoContent">内容：<span class="barcode-value" id="info-value"></span></div>
+                    <div data-i18n="tool.barcode.infoWidth">宽度：<span id="info-width"></span>px</div>
+                    <div data-i18n="tool.barcode.infoHeight">高度：<span id="info-height"></span>px</div>
                 </div>
 
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="tool.barcode.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="tool.barcode.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>生成条形码，支持多种编码格式。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="tool.barcode.problem1">生成条形码，支持多种编码格式。</li>
+                                <li data-i18n="tool.barcode.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="tool.barcode.problem3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="tool.barcode.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>Code 128：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>EAN-13：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>UPC-A：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="tool.barcode.formatCode128"><strong>Code 128：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="tool.barcode.formatEan13"><strong>EAN-13：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="tool.barcode.formatUpc"><strong>UPC-A：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="tool.barcode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="tool.barcode.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="tool.barcode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li data-i18n="tool.barcode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li data-i18n="tool.barcode.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="tool.barcode.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、输入条形码内容</h4>
+                            <h4 data-i18n="tool.barcode.usageInputTitle">一、输入条形码内容</h4>
                             <ul>
-                                <li><strong>输入内容：</strong>在输入框中输入要生成条形码的内容。</li>
-                                <li><strong>内容限制：</strong>不同格式有不同的内容要求，请参考格式说明。</li>
-                                <li><strong>格式提示：</strong>页面会根据输入内容自动提示适合的格式。</li>
+                                <li data-i18n="tool.barcode.usageInput1"><strong>输入内容：</strong>在输入框中输入要生成条形码的内容。</li>
+                                <li data-i18n="tool.barcode.usageInput2"><strong>内容限制：</strong>不同格式有不同的内容要求，请参考格式说明。</li>
+                                <li data-i18n="tool.barcode.usageInput3"><strong>格式提示：</strong>页面会根据输入内容自动提示适合的格式。</li>
                             </ul>
-                            <h4>二、选择条形码格式</h4>
+                            <h4 data-i18n="tool.barcode.usageFormatTitle">二、选择条形码格式</h4>
                             <ul>
-                                <li><strong>CODE128：</strong>通用格式，支持数字、字母和特殊字符，兼容性最好。</li>
-                                <li><strong>EAN-13：</strong>商品条形码标准，13位数字，最后一位为校验码。</li>
-                                <li><strong>EAN-8：</strong>小型商品条形码，8位数字。</li>
-                                <li><strong>UPC-A：</strong>美国商品条形码，12位数字。</li>
-                                <li><strong>CODE39：</strong>工业标准，支持字母数字和特殊符号。</li>
-                                <li><strong>ITF-14：</strong>物流条形码，用于零售包装。</li>
+                                <li data-i18n="tool.barcode.usageFormat1"><strong>CODE128：</strong>通用格式，支持数字、字母和特殊字符，兼容性最好。</li>
+                                <li data-i18n="tool.barcode.usageFormat2"><strong>EAN-13：</strong>商品条形码标准，13位数字，最后一位为校验码。</li>
+                                <li data-i18n="tool.barcode.usageFormat3"><strong>EAN-8：</strong>小型商品条形码，8位数字。</li>
+                                <li data-i18n="tool.barcode.usageFormat4"><strong>UPC-A：</strong>美国商品条形码，12位数字。</li>
+                                <li data-i18n="tool.barcode.usageFormat5"><strong>CODE39：</strong>工业标准，支持字母数字和特殊符号。</li>
+                                <li data-i18n="tool.barcode.usageFormat6"><strong>ITF-14：</strong>物流条形码，用于零售包装。</li>
                             </ul>
-                            <h4>三、调整条形码样式</h4>
+                            <h4 data-i18n="tool.barcode.usageStyleTitle">三、调整条形码样式</h4>
                             <ul>
-                                <li><strong>显示值：</strong>选择是否在条形码下方显示数字。</li>
-                                <li><strong>宽度：</strong>调整条形码线条的粗细（细/正常/宽）。</li>
-                                <li><strong>高度：</strong>调整条形码的高度（50-150px）。</li>
+                                <li data-i18n="tool.barcode.usageStyle1"><strong>显示值：</strong>选择是否在条形码下方显示数字。</li>
+                                <li data-i18n="tool.barcode.usageStyle2"><strong>宽度：</strong>调整条形码线条的粗细（细/正常/宽）。</li>
+                                <li data-i18n="tool.barcode.usageStyle3"><strong>高度：</strong>调整条形码的高度（50-150px）。</li>
                             </ul>
-                            <h4>四、生成和下载</h4>
+                            <h4 data-i18n="tool.barcode.usageGenerateTitle">四、生成和下载</h4>
                             <ul>
-                                <li><strong>点击生成：</strong>点击"生成条形码"按钮生成条形码。</li>
-                                <li><strong>预览效果：</strong>生成后在预览区域显示条形码效果。</li>
-                                <li><strong>下载PNG：</strong>点击"下载 PNG"按钮保存条形码图片。</li>
+                                <li data-i18n="tool.barcode.usageGenerate1"><strong>点击生成：</strong>点击"生成条形码"按钮生成条形码。</li>
+                                <li data-i18n="tool.barcode.usageGenerate2"><strong>预览效果：</strong>生成后在预览区域显示条形码效果。</li>
+                                <li data-i18n="tool.barcode.usageGenerate3"><strong>下载PNG：</strong>点击"下载 PNG"按钮保存条形码图片。</li>
                             </ul>
-                            <h4>五、格式选择建议</h4>
+                            <h4 data-i18n="tool.barcode.usageAdviceTitle">五、格式选择建议</h4>
                             <ul>
-                                <li><strong>通用用途：</strong>使用CODE128格式，兼容性最广。</li>
-                                <li><strong>商品标签：</strong>使用EAN-13格式。</li>
-                                <li><strong>小型商品：</strong>使用EAN-8格式。</li>
-                                <li><strong>物流仓储：</strong>使用ITF-14格式。</li>
+                                <li data-i18n="tool.barcode.usageAdvice1"><strong>通用用途：</strong>使用CODE128格式，兼容性最广。</li>
+                                <li data-i18n="tool.barcode.usageAdvice2"><strong>商品标签：</strong>使用EAN-13格式。</li>
+                                <li data-i18n="tool.barcode.usageAdvice3"><strong>小型商品：</strong>使用EAN-8格式。</li>
+                                <li data-i18n="tool.barcode.usageAdvice4"><strong>物流仓储：</strong>使用ITF-14格式。</li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="tool.barcode.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、数据安全</h4>
+                            <h4 data-i18n="tool.barcode.notesSecurityTitle">一、数据安全</h4>
                             <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>条形码内容仅在浏览器内存中处理，处理完成后自动清除。</li>
-                                <li>建议在处理敏感数据时使用隐私模式浏览。</li>
+                                <li data-i18n="tool.barcode.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li data-i18n="tool.barcode.noteSecurity2">条形码内容仅在浏览器内存中处理，处理完成后自动清除。</li>
+                                <li data-i18n="tool.barcode.noteSecurity3">建议在处理敏感数据时使用隐私模式浏览。</li>
                             </ul>
-                            <h4>二、格式限制</h4>
+                            <h4 data-i18n="tool.barcode.notesFormatTitle">二、格式限制</h4>
                             <ul>
-                                <li>EAN-13格式必须输入13位数字。</li>
-                                <li>EAN-8格式必须输入8位数字。</li>
-                                <li>UPC-A格式必须输入12位数字。</li>
-                                <li>CODE128格式支持字母、数字和特殊字符。</li>
+                                <li data-i18n="tool.barcode.noteFormat1">EAN-13格式必须输入13位数字。</li>
+                                <li data-i18n="tool.barcode.noteFormat2">EAN-8格式必须输入8位数字。</li>
+                                <li data-i18n="tool.barcode.noteFormat3">UPC-A格式必须输入12位数字。</li>
+                                <li data-i18n="tool.barcode.noteFormat4">CODE128格式支持字母、数字和特殊字符。</li>
                             </ul>
-                            <h4>三、校验码</h4>
+                            <h4 data-i18n="tool.barcode.notesCheckTitle">三、校验码</h4>
                             <ul>
-                                <li>EAN和UPC格式需要正确的校验码。</li>
-                                <li>校验码计算错误会导致条形码无法扫描。</li>
-                                <li>建议使用标准的校验码生成工具计算。</li>
+                                <li data-i18n="tool.barcode.noteCheck1">EAN和UPC格式需要正确的校验码。</li>
+                                <li data-i18n="tool.barcode.noteCheck2">校验码计算错误会导致条形码无法扫描。</li>
+                                <li data-i18n="tool.barcode.noteCheck3">建议使用标准的校验码生成工具计算。</li>
                             </ul>
-                            <h4>四、打印建议</h4>
+                            <h4 data-i18n="tool.barcode.notesPrintTitle">四、打印建议</h4>
                             <ul>
-                                <li>条形码打印时建议使用300dpi以上的分辨率。</li>
-                                <li>避免在条形码周围放置过多装饰元素。</li>
-                                <li>确保条形码足够大，便于扫描设备读取。</li>
+                                <li data-i18n="tool.barcode.notePrint1">条形码打印时建议使用300dpi以上的分辨率。</li>
+                                <li data-i18n="tool.barcode.notePrint2">避免在条形码周围放置过多装饰元素。</li>
+                                <li data-i18n="tool.barcode.notePrint3">确保条形码足够大，便于扫描设备读取。</li>
                             </ul>
-                            <h4>五、常见问题</h4>
+                            <h4 data-i18n="tool.barcode.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li><strong>无法扫描：</strong>检查格式是否正确，校验码是否正确。</li>
-                                <li><strong>生成失败：</strong>检查输入内容是否符合所选格式的要求。</li>
-                                <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                                <li data-i18n="tool.barcode.noteFaq1"><strong>无法扫描：</strong>检查格式是否正确，校验码是否正确。</li>
+                                <li data-i18n="tool.barcode.noteFaq2"><strong>生成失败：</strong>检查输入内容是否符合所选格式的要求。</li>
+                                <li data-i18n="tool.barcode.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                             </ul>
                         </div>
                     </article>
@@ -500,18 +516,19 @@
         </div>
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
     </main>
 
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script src="../../common/js/utils.js"></script>
     <script src="script.js"></script>

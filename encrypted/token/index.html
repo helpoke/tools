@@ -10,12 +10,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>Token在线工具 - JWT解析、Token生成、Base64编解码</title>
+    <meta property="og:title" content="Token在线工具 - JWT解析、Token生成、Base64编解码">
+    <meta property="og:description" content="在线Token工具, JWT解析验证, Token随机生成, Base64编解码, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/token/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Token在线工具 - JWT解析、Token生成、Base64编解码">
+    <meta name="twitter:description" content="在线Token工具, JWT解析验证, Token随机生成, Base64编解码, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/token/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/token/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/token/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script> -->
     <script src="./lib/crypto-js.min.js"></script>
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <style>
         @import '../../common/css/style.css';
@@ -681,12 +697,12 @@
         "description": "在线Token工具，支持JWT解析验证、Token随机生成、Base64编解码功能。离线工具，数据本地处理保护隐私。Online JWT parser and token generator.",
         "url": "https://helpoke.com/encrypted/token",
         "applicationCategory": "https://schema.org/SecurityTool",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "JWT完整解码",
             "JWT过期时间校验",
             "随机Token生成",
-            "Base64编码解码",
+            "Base64编码解码 (Base64 encoding)",
             "本地处理，保护隐私",
             "免费在线使用"
         ],
@@ -712,18 +728,22 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>Token在线工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>Token在线工具，支持JWT解析验证（含签名与过期校验）、随机Token生成和Base64编解码</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="encrypted.token.title">Token在线工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.token.intro">Token在线工具，支持JWT解析验证（含签名与过期校验）、随机Token生成和Base64编解码</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tabs">
-                <button class="tab-btn active" data-tab="jwt-decode">JWT 解析</button>
-                <button class="tab-btn" data-tab="token-gen">Token 生成</button>
-                <button class="tab-btn" data-tab="base64">Base64 编解码</button>
+                <button class="tab-btn active" data-tab="jwt-decode" data-i18n="encrypted.token.tabJwtDecode">JWT 解析</button>
+                <button class="tab-btn" data-tab="token-gen" data-i18n="encrypted.token.tabTokenGen">Token 生成</button>
+                <button class="tab-btn" data-tab="base64" data-i18n="encrypted.token.tabBase64">Base64 编解码</button>
             </div>
 
             <!-- ========== JWT 解析 ========== -->
@@ -731,42 +751,45 @@
                 <div class="tool-card">
                     <div class="form-group">
                         <label for="jwt-input">JWT Token</label>
-                        <textarea id="jwt-input" placeholder="请输入 JWT Token（格式：header.payload.signature）..."></textarea>
+                        <textarea id="jwt-input" data-i18n-placeholder="encrypted.token.jwtInputPlaceholder"
+                            placeholder="请输入 JWT Token（格式：header.payload.signature）..."></textarea>
                     </div>
 
                     <div class="form-group" style="margin-bottom:16px;">
-                        <label for="jwt-secret">签名密钥（可选，用于验证签名）</label>
-                        <input type="text" id="jwt-secret" placeholder="输入密钥以验证 HMAC 签名...">
+                        <label for="jwt-secret" data-i18n="encrypted.token.jwtSecretLabel">签名密钥（可选，用于验证签名）</label>
+                        <input type="text" id="jwt-secret" data-i18n-placeholder="encrypted.token.jwtSecretPlaceholder"
+                            placeholder="输入密钥以验证 HMAC 签名...">
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="decodeJWT()">解析 JWT</button>
-                        <button class="btn btn-outline" onclick="clearJWT()">清空</button>
+                        <button class="btn btn-primary" onclick="decodeJWT()" data-i18n="encrypted.token.jwtDecodeBtn">解析
+                            JWT</button>
+                        <button class="btn btn-outline" onclick="clearJWT()" data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section" id="jwt-header-section" style="display:none;">
-                        <h4>📋 Header（头部）</h4>
+                        <h4 data-i18n="encrypted.token.jwtHeaderTitle">📋 Header（头部）</h4>
                         <div class="result-content json-block" id="jwt-header-content"></div>
                     </div>
 
                     <div class="result-section" id="jwt-payload-section" style="display:none;">
-                        <h4>📦 Payload（载荷）</h4>
+                        <h4 data-i18n="encrypted.token.jwtPayloadTitle">📦 Payload（载荷）</h4>
                         <div class="result-content json-block" id="jwt-payload-content"></div>
                     </div>
 
                     <div class="result-section" id="jwt-claims-section" style="display:none;">
-                        <h4>⏱️ 时间校验</h4>
+                        <h4 data-i18n="encrypted.token.jwtClaimsTitle">⏱️ 时间校验</h4>
                         <table class="jwt-claims-table" id="jwt-claims-table">
                             <tbody id="jwt-claims-body"></tbody>
                         </table>
                     </div>
 
                     <div class="result-section" id="jwt-signature-section" style="display:none;">
-                        <h4>🔏 签名</h4>
+                        <h4 data-i18n="encrypted.token.jwtSignatureTitle">🔏 签名</h4>
                         <div class="copy-row">
                             <span class="text" id="jwt-signature-text"></span>
                             <button class="copy-icon-btn" onclick="copyText('jwt-signature-text', this)"
-                                title="复制">📋</button>
+                                data-i18n-title="encrypted.token.copyTitle" title="复制">📋</button>
                         </div>
                     </div>
 
@@ -779,44 +802,51 @@
                 <div class="tool-card">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="token-length">Token 长度</label>
+                            <label for="token-length" data-i18n="encrypted.token.tokenLengthLabel">Token 长度</label>
                             <input type="number" id="token-length" min="8" max="256" value="32">
                         </div>
                         <div class="form-group">
-                            <label for="token-count">生成数量</label>
+                            <label for="token-count" data-i18n="encrypted.token.tokenCountLabel">生成数量</label>
                             <input type="number" id="token-count" min="1" max="50" value="1">
                         </div>
                     </div>
 
                     <div class="checkbox-group">
-                        <label><input type="checkbox" id="include-upper" checked> 大写字母 A-Z</label>
-                        <label><input type="checkbox" id="include-lower" checked> 小写字母 a-z</label>
-                        <label><input type="checkbox" id="include-digits" checked> 数字 0-9</label>
-                        <label><input type="checkbox" id="include-symbols"> 特殊字符</label>
+                        <label><input type="checkbox" id="include-upper" checked> <span
+                                data-i18n="encrypted.token.includeUpperLabel">大写字母 A-Z</span></label>
+                        <label><input type="checkbox" id="include-lower" checked> <span
+                                data-i18n="encrypted.token.includeLowerLabel">小写字母 a-z</span></label>
+                        <label><input type="checkbox" id="include-digits" checked> <span
+                                data-i18n="encrypted.token.includeDigitsLabel">数字 0-9</span></label>
+                        <label><input type="checkbox" id="include-symbols"> <span
+                                data-i18n="encrypted.token.includeSymbolsLabel">特殊字符</span></label>
                     </div>
 
                     <div class="option-group" style="margin-bottom:20px;">
-                        <label>输出格式</label>
+                        <label data-i18n="encrypted.token.formatLabel">输出格式</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="token-format" value="raw" checked> 纯文本</label>
+                            <label><input type="radio" name="token-format" value="raw" checked> <span
+                                    data-i18n="encrypted.token.formatRaw">纯文本</span></label>
                             <label><input type="radio" name="token-format" value="hex"> Hex</label>
                             <label><input type="radio" name="token-format" value="base64"> Base64</label>
                         </div>
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="generateTokens()">生成 Token</button>
-                        <button class="btn btn-outline" onclick="clearTokens()">清空</button>
+                        <button class="btn btn-primary" onclick="generateTokens()" data-i18n="encrypted.token.generateBtn">生成
+                            Token</button>
+                        <button class="btn btn-outline" onclick="clearTokens()" data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section" id="token-result-section">
-                        <h4>生成结果</h4>
+                        <h4 data-i18n="encrypted.token.resultTitle">生成结果</h4>
                         <div id="token-result-container">
-                            <div class="result-content result-placeholder">等待生成...</div>
+                            <div class="result-content result-placeholder" data-i18n="encrypted.token.resultPlaceholder">等待生成...
+                            </div>
                         </div>
                         <div style="margin-top:12px;">
                             <button class="btn btn-success" onclick="copyAllTokens()" id="token-copy-all-btn"
-                                style="display:none;">复制全部 Token</button>
+                                style="display:none;" data-i18n="encrypted.token.copyAllBtn">复制全部 Token</button>
                         </div>
                     </div>
                 </div>
@@ -826,33 +856,39 @@
             <div id="tab-base64" class="tab-pane">
                 <div class="tool-card">
                     <div class="form-group">
-                        <label for="base64-input">输入文本</label>
-                        <textarea id="base64-input" placeholder="请输入要编码/解码的文本..."></textarea>
+                        <label for="base64-input" data-i18n="encrypted.token.base64InputLabel">输入文本</label>
+                        <textarea id="base64-input" data-i18n-placeholder="encrypted.token.base64InputPlaceholder"
+                            placeholder="请输入要编码/解码的文本..."></textarea>
                     </div>
 
                     <div class="option-group" style="margin-bottom:20px;">
-                        <label>编码模式</label>
+                        <label data-i18n="encrypted.token.base64ModeLabel">编码模式</label>
                         <div class="radio-group">
                             <label><input type="radio" name="base64-mode" value="urlsafe" checked>
-                                Base64URL（URL安全）</label>
-                            <label><input type="radio" name="base64-mode" value="standard"> Base64（标准）</label>
+                                <span data-i18n="encrypted.token.base64UrlLabel">Base64URL（URL安全）</span></label>
+                            <label><input type="radio" name="base64-mode" value="standard"> <span
+                                    data-i18n="encrypted.token.base64StandardLabel">Base64（标准）</span></label>
                         </div>
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="base64Encode()">Base64 编码</button>
-                        <button class="btn btn-primary" onclick="base64Decode()">Base64 解码</button>
-                        <button class="btn btn-outline" onclick="clearBase64()">清空</button>
+                        <button class="btn btn-primary" onclick="base64Encode()"
+                            data-i18n="encrypted.token.base64EncodeBtn">Base64 编码</button>
+                        <button class="btn btn-primary" onclick="base64Decode()"
+                            data-i18n="encrypted.token.base64DecodeBtn">Base64 解码</button>
+                        <button class="btn btn-outline" onclick="clearBase64()" data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
 
                     <div id="base64-error" style="display:none;color:#ef4444;font-size:13px;margin-bottom:12px;"></div>
 
                     <div class="result-section">
-                        <h4>输出结果</h4>
+                        <h4 data-i18n="encrypted.token.outputTitle">输出结果</h4>
                         <div class="copy-row">
-                            <span class="text result-placeholder" id="base64-output">等待操作...</span>
-                            <button class="copy-icon-btn" onclick="copyText('base64-output', this)" title="复制"
-                                id="base64-copy-btn" style="display:none;">📋</button>
+                            <span class="text result-placeholder" id="base64-output"
+                                data-i18n="encrypted.token.outputPlaceholder">等待操作...</span>
+                            <button class="copy-icon-btn" onclick="copyText('base64-output', this)"
+                                data-i18n-title="encrypted.token.copyTitle" title="复制" id="base64-copy-btn"
+                                style="display:none;">📋</button>
                         </div>
                     </div>
                 </div>
@@ -862,112 +898,137 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3>工具介绍</h3>
+                            <h3 data-i18n="encrypted.token.infoIntro">工具介绍</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、解决的问题</h4>
+                            <h4 data-i18n="encrypted.token.problemsTitle">一、解决的问题</h4>
                             <ul>
-                                <li>生成随机Token和验证码，用于身份验证。</li>
-                                <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li>无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="encrypted.token.problem1">生成随机Token和验证码，用于身份验证。</li>
+                                <li data-i18n="encrypted.token.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                                <li data-i18n="encrypted.token.problem3">无需安装专业软件，随时随地在线使用。</li>
                             </ul>
-                            <h4>二、支持的格式</h4>
+                            <h4 data-i18n="encrypted.token.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li><strong>JWT：</strong>支持该格式的完整处理功能。</li>
-                                <li><strong>随机Token：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.token.formatJWT"><strong>JWT：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.token.formatToken"><strong>随机Token：</strong>支持该格式的完整处理功能。</li>
                             </ul>
-                            <h4>三、核心功能</h4>
+                            <h4 data-i18n="encrypted.token.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="encrypted.token.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                                <li data-i18n="encrypted.token.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                                <li data-i18n="encrypted.token.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                                <li data-i18n="encrypted.token.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3>使用说明</h3>
+                            <h3 data-i18n="encrypted.token.infoUsage">使用说明</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、JWT解析</h4>
+                            <h4 data-i18n="encrypted.token.usageJwtTitle">一、JWT解析</h4>
                             <ul>
-                                <li><strong>输入JWT Token：</strong>在文本框中输入完整的JWT Token（格式：header.payload.signature）。</li>
-                                <li><strong>输入签名密钥（可选）：</strong>如果需要验证HMAC签名，输入密钥。</li>
-                                <li><strong>点击解析：</strong>点击"解析 JWT"按钮解析Token的各个部分。</li>
-                                <li><strong>查看Header：</strong>显示Token的头部信息，包括算法和类型。</li>
-                                <li><strong>查看Payload：</strong>显示Token的载荷信息，包括用户数据和声明。</li>
-                                <li><strong>查看时间校验：</strong>显示签发时间(iat)、过期时间(exp)、生效时间(nbf)等的状态。</li>
-                                <li><strong>查看签名：</strong>显示Token的签名部分，并可复制。</li>
+                                <li data-i18n="encrypted.token.usageJwtInput"><strong>输入JWT Token：</strong>在文本框中输入完整的JWT
+                                    Token（格式：header.payload.signature）。</li>
+                                <li data-i18n="encrypted.token.usageJwtSecret"><strong>输入签名密钥（可选）：</strong>如果需要验证HMAC签名，输入密钥。</li>
+                                <li data-i18n="encrypted.token.usageJwtClick"><strong>点击解析：</strong>点击"解析 JWT"按钮解析Token的各个部分。</li>
+                                <li data-i18n="encrypted.token.usageJwtHeader"><strong>查看Header：</strong>显示Token的头部信息，包括算法和类型。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtPayload"><strong>查看Payload：</strong>显示Token的载荷信息，包括用户数据和声明。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtTime">
+                                    <strong>查看时间校验：</strong>显示签发时间(iat)、过期时间(exp)、生效时间(nbf)等的状态。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtSignature"><strong>查看签名：</strong>显示Token的签名部分，并可复制。</li>
                             </ul>
-                            <h4>二、Token生成</h4>
+                            <h4 data-i18n="encrypted.token.usageTokenTitle">二、Token生成</h4>
                             <ul>
-                                <li><strong>设置Token长度：</strong>设置生成Token的字符长度，范围为8-256位。</li>
-                                <li><strong>设置生成数量：</strong>设置一次性生成的Token数量，范围为1-50个。</li>
-                                <li><strong>选择字符类型：</strong>可选择包含大写字母、小写字母、数字、特殊字符。</li>
-                                <li><strong>选择输出格式：</strong>可选择纯文本、Hex或Base64格式。</li>
-                                <li><strong>点击生成：</strong>点击"生成 Token"按钮生成随机Token。</li>
-                                <li><strong>复制Token：</strong>点击复制按钮复制单个Token，或点击"复制全部 Token"复制所有Token。</li>
+                                <li data-i18n="encrypted.token.usageTokenLength">
+                                    <strong>设置Token长度：</strong>设置生成Token的字符长度，范围为8-256位。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenCount"><strong>设置生成数量：</strong>设置一次性生成的Token数量，范围为1-50个。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenCharset"><strong>选择字符类型：</strong>可选择包含大写字母、小写字母、数字、特殊字符。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenFormat"><strong>选择输出格式：</strong>可选择纯文本、Hex或Base64格式。</li>
+                                <li data-i18n="encrypted.token.usageTokenClick"><strong>点击生成：</strong>点击"生成 Token"按钮生成随机Token。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenCopy"><strong>复制Token：</strong>点击复制按钮复制单个Token，或点击"复制全部
+                                    Token"复制所有Token。</li>
                             </ul>
-                            <h4>三、Base64编解码</h4>
+                            <h4 data-i18n="encrypted.token.usageBase64Title">三、Base64编解码</h4>
                             <ul>
-                                <li><strong>输入文本：</strong>在文本框中输入需要编码或解码的文本。</li>
-                                <li><strong>选择编码模式：</strong>选择Base64URL（URL安全）或标准Base64模式。</li>
-                                <li><strong>点击编码：</strong>点击"Base64 编码"按钮将文本编码为Base64格式。</li>
-                                <li><strong>点击解码：</strong>点击"Base64 解码"按钮将Base64文本解码为原始文本。</li>
-                                <li><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.token.usageBase64Input"><strong>输入文本：</strong>在文本框中输入需要编码或解码的文本。</li>
+                                <li data-i18n="encrypted.token.usageBase64Mode">
+                                    <strong>选择编码模式：</strong>选择Base64URL（URL安全）或标准Base64模式。
+                                </li>
+                                <li data-i18n="encrypted.token.usageBase64Encode"><strong>点击编码：</strong>点击"Base64
+                                    编码"按钮将文本编码为Base64格式。</li>
+                                <li data-i18n="encrypted.token.usageBase64Decode"><strong>点击解码：</strong>点击"Base64
+                                    解码"按钮将Base64文本解码为原始文本。</li>
+                                <li data-i18n="encrypted.token.usageBase64Copy"><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
                             </ul>
-                            <h4>四、JWT基础</h4>
+                            <h4 data-i18n="encrypted.token.usageJwtBasicTitle">四、JWT基础</h4>
                             <ul>
-                                <li><strong>结构：</strong>JWT由三部分组成，用点号分隔：Header.Payload.Signature。</li>
-                                <li><strong>Header：</strong>包含算法(alg)和类型(typ)信息，Base64URL编码。</li>
-                                <li><strong>Payload：</strong>包含声明信息，如iss（签发者）、exp（过期时间）、sub（主题）等。</li>
-                                <li><strong>Signature：</strong>使用Header指定的算法对前两部分签名，确保数据完整性。</li>
-                                <li><strong>常用声明：</strong>iat（签发时间）、exp（过期时间）、nbf（生效时间）、iss（签发者）、sub（主题）、aud（受众）、jti（JWT
-                                    ID）。</li>
+                                <li data-i18n="encrypted.token.usageJwtBasicStructure">
+                                    <strong>结构：</strong>JWT由三部分组成，用点号分隔：Header.Payload.Signature。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtBasicHeader">
+                                    <strong>Header：</strong>包含算法(alg)和类型(typ)信息，Base64URL编码。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtBasicPayload">
+                                    <strong>Payload：</strong>包含声明信息，如iss（签发者）、exp（过期时间）、sub（主题）等。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtBasicSignature">
+                                    <strong>Signature：</strong>使用Header指定的算法对前两部分签名，确保数据完整性。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtBasicClaims">
+                                    <strong>常用声明：</strong>iat（签发时间）、exp（过期时间）、nbf（生效时间）、iss（签发者）、sub（主题）、aud（受众）、jti（JWT
+                                    ID）。
+                                </li>
                             </ul>
                         </div>
                     </article>
                     <article class="info-details">
                         <header>
-                            <h3>注意事项</h3>
+                            <h3 data-i18n="encrypted.token.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4>一、数据安全</h4>
+                            <h4 data-i18n="encrypted.token.notesSecurityTitle">一、数据安全</h4>
                             <ul>
-                                <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li>JWT的Payload部分只是Base64编码，不是加密，敏感信息不应存储在Payload中。</li>
-                                <li>生成的Token仅供参考，请勿直接用于生产环境，建议使用更安全的生成方式。</li>
+                                <li data-i18n="encrypted.token.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                                <li data-i18n="encrypted.token.noteSecurity2">JWT的Payload部分只是Base64编码，不是加密，敏感信息不应存储在Payload中。</li>
+                                <li data-i18n="encrypted.token.noteSecurity3">生成的Token仅供参考，请勿直接用于生产环境，建议使用更安全的生成方式。</li>
                             </ul>
-                            <h4>二、JWT解析</h4>
+                            <h4 data-i18n="encrypted.token.notesJwtTitle">二、JWT解析</h4>
                             <ul>
-                                <li>JWT格式必须为三段式：header.payload.signature，缺少任何部分都会解析失败。</li>
-                                <li>签名验证需要提供正确的密钥，否则验证将失败。</li>
-                                <li>过期时间(exp)已过的Token会被标记为无效。</li>
-                                <li>生效时间(nbf)未到的Token会被标记为警告。</li>
-                                <li>签发时间(iat)在未来的Token会被标记为警告。</li>
+                                <li data-i18n="encrypted.token.noteJwt1">JWT格式必须为三段式：header.payload.signature，缺少任何部分都会解析失败。</li>
+                                <li data-i18n="encrypted.token.noteJwt2">签名验证需要提供正确的密钥，否则验证将失败。</li>
+                                <li data-i18n="encrypted.token.noteJwt3">过期时间(exp)已过的Token会被标记为无效。</li>
+                                <li data-i18n="encrypted.token.noteJwt4">生效时间(nbf)未到的Token会被标记为警告。</li>
+                                <li data-i18n="encrypted.token.noteJwt5">签发时间(iat)在未来的Token会被标记为警告。</li>
                             </ul>
-                            <h4>三、Token生成</h4>
+                            <h4 data-i18n="encrypted.token.notesTokenTitle">三、Token生成</h4>
                             <ul>
-                                <li>Token长度建议至少32位，太短的Token安全性较低。</li>
-                                <li>建议至少选择两种字符类型，增加Token的复杂度。</li>
-                                <li>特殊字符可能在某些场景下不兼容，如URL参数。</li>
-                                <li>批量生成时，建议每次生成不超过20个Token。</li>
+                                <li data-i18n="encrypted.token.noteToken1">Token长度建议至少32位，太短的Token安全性较低。</li>
+                                <li data-i18n="encrypted.token.noteToken2">建议至少选择两种字符类型，增加Token的复杂度。</li>
+                                <li data-i18n="encrypted.token.noteToken3">特殊字符可能在某些场景下不兼容，如URL参数。</li>
+                                <li data-i18n="encrypted.token.noteToken4">批量生成时，建议每次生成不超过20个Token。</li>
                             </ul>
-                            <h4>四、Base64编解码</h4>
+                            <h4 data-i18n="encrypted.token.notesBase64Title">四、Base64编解码</h4>
                             <ul>
-                                <li>Base64URL格式将+替换为-，/替换为_，去掉末尾的=，适合URL传输。</li>
-                                <li>标准Base64格式包含+、/和=字符，不适合直接用于URL参数。</li>
-                                <li>解码时如果输入不是有效的Base64字符串，会显示错误信息。</li>
+                                <li data-i18n="encrypted.token.noteBase641">Base64URL格式将+替换为-，/替换为_，去掉末尾的=，适合URL传输。</li>
+                                <li data-i18n="encrypted.token.noteBase642">标准Base64格式包含+、/和=字符，不适合直接用于URL参数。</li>
+                                <li data-i18n="encrypted.token.noteBase643">解码时如果输入不是有效的Base64字符串，会显示错误信息。</li>
                             </ul>
-                            <h4>五、常见问题</h4>
+                            <h4 data-i18n="encrypted.token.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li><strong>JWT解析失败：</strong>检查Token格式是否正确，确保是三段式结构。</li>
-                                <li><strong>签名不匹配：</strong>检查密钥是否正确，算法是否匹配。</li>
-                                <li><strong>Token生成失败：</strong>请至少选择一种字符类型。</li>
-                                <li><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
-                                <li><strong>Base64解码失败：</strong>检查输入是否为有效的Base64字符串。</li>
+                                <li data-i18n="encrypted.token.noteFaq1"><strong>JWT解析失败：</strong>检查Token格式是否正确，确保是三段式结构。</li>
+                                <li data-i18n="encrypted.token.noteFaq2"><strong>签名不匹配：</strong>检查密钥是否正确，算法是否匹配。</li>
+                                <li data-i18n="encrypted.token.noteFaq3"><strong>Token生成失败：</strong>请至少选择一种字符类型。</li>
+                                <li data-i18n="encrypted.token.noteFaq4"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="encrypted.token.noteFaq5"><strong>Base64解码失败：</strong>检查输入是否为有效的Base64字符串。</li>
                             </ul>
                         </div>
                     </article>
@@ -978,12 +1039,16 @@
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -991,6 +1056,7 @@
 
     <script src="../../common/js/utils.js"></script>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <script>
         // ===== Tab switching =====
@@ -1021,13 +1087,13 @@
             var secret = document.getElementById('jwt-secret').value.trim();
 
             if (!input) {
-                utils.showError('请输入 JWT Token');
+                utils.showError(window.t('encrypted.token.errEnterJwtToken'));
                 return;
             }
 
             var parts = input.split('.');
             if (parts.length !== 3) {
-                utils.showError('JWT 格式错误，应为 header.payload.signature 三段式');
+                utils.showError(window.t('encrypted.token.errJwtFormat'));
                 hideJWTSections();
                 return;
             }
@@ -1037,7 +1103,7 @@
                 headerJson = base64UrlDecode(parts[0]);
                 headerObj = JSON.parse(headerJson);
             } catch (e) {
-                utils.showError('Header 解析失败：' + e.message);
+                utils.showError(window.t('encrypted.token.errHeaderParse') + '：' + e.message);
                 hideJWTSections();
                 return;
             }
@@ -1046,7 +1112,7 @@
                 payloadJson = base64UrlDecode(parts[1]);
                 payloadObj = JSON.parse(payloadJson);
             } catch (e) {
-                utils.showError('Payload 解析失败：' + e.message);
+                utils.showError(window.t('encrypted.token.errPayloadParse') + '：' + e.message);
                 hideJWTSections();
                 return;
             }
@@ -1069,27 +1135,27 @@
                 var statusClass = '';
                 if (checkFn) {
                     var result = checkFn(value);
-                    if (result === 'ok') { statusHtml = '有效'; statusClass = 'badge-ok'; }
-                    else if (result === 'warn') { statusHtml = '警告'; statusClass = 'badge-warn'; allOk = false; }
-                    else { statusHtml = '无效'; statusClass = 'badge-err'; allOk = false; }
+                    if (result === 'ok') { statusHtml = window.t('encrypted.token.statusValid'); statusClass = 'badge-ok'; }
+                    else if (result === 'warn') { statusHtml = window.t('encrypted.token.statusWarning'); statusClass = 'badge-warn'; allOk = false; }
+                    else { statusHtml = window.t('encrypted.token.statusInvalid'); statusClass = 'badge-err'; allOk = false; }
                 }
                 var timeStr = value ? new Date(value * 1000).toLocaleString('zh-CN') : '—';
                 claimsHtml += '<tr><th>' + label + '</th><td>' + (value || '—') + (value ? '（' + timeStr + '）' : '') + '</td><td>' + (statusHtml ? '<span class="badge ' + statusClass + '">' + statusHtml + '</span>' : '') + '</td></tr>';
             }
 
-            addClaim('签发时间 (iat)', payloadObj.iat, function (v) {
+            addClaim(window.t('encrypted.token.claimIat'), payloadObj.iat, function (v) {
                 return v <= now ? 'ok' : 'warn';
             });
-            addClaim('过期时间 (exp)', payloadObj.exp, function (v) {
+            addClaim(window.t('encrypted.token.claimExp'), payloadObj.exp, function (v) {
                 return v > now ? 'ok' : 'err';
             });
-            addClaim('生效时间 (nbf)', payloadObj.nbf, function (v) {
+            addClaim(window.t('encrypted.token.claimNbf'), payloadObj.nbf, function (v) {
                 return v <= now ? 'ok' : 'warn';
             });
-            addClaim('当前时间 (now)', now);
-            addClaim('签发者 (iss)', payloadObj.iss);
-            addClaim('主题 (sub)', payloadObj.sub);
-            addClaim('受众 (aud)', payloadObj.aud);
+            addClaim(window.t('encrypted.token.claimNow'), now);
+            addClaim(window.t('encrypted.token.claimIss'), payloadObj.iss);
+            addClaim(window.t('encrypted.token.claimSub'), payloadObj.sub);
+            addClaim(window.t('encrypted.token.claimAud'), payloadObj.aud);
             addClaim('JWT ID (jti)', payloadObj.jti);
 
             document.getElementById('jwt-claims-section').style.display = 'block';
@@ -1119,15 +1185,15 @@
                 verifyEl.style.display = 'flex';
                 if (parts[2] === expectedSig) {
                     verifyEl.className = 'verify-result pass';
-                    verifyEl.innerHTML = 'HMAC 签名验证通过（算法：' + headerObj.alg + '）';
+                    verifyEl.innerHTML = window.t('encrypted.token.verifyPass', { alg: headerObj.alg });
                 } else {
                     verifyEl.className = 'verify-result fail';
-                    verifyEl.innerHTML = '签名不匹配 — 密钥不正确或算法不同';
+                    verifyEl.innerHTML = window.t('encrypted.token.verifyFail');
                 }
             } else {
                 verifyEl.style.display = 'flex';
                 verifyEl.className = 'verify-result pass';
-                verifyEl.innerHTML = '未提供密钥，跳过签名验证。已验证 Header 和 Payload 解析成功。';
+                verifyEl.innerHTML = window.t('encrypted.token.verifySkip');
             }
         }
 
@@ -1155,7 +1221,7 @@
             var format = document.querySelector('input[name="token-format"]:checked').value;
 
             if (length < 8 || length > 256) {
-                utils.showError('Token 长度需在 8-256 之间');
+                utils.showError(window.t('encrypted.token.errTokenLength'));
                 return;
             }
 
@@ -1166,7 +1232,7 @@
             if (includeSymbols) charset += '!@#$%^&*()-_=+[]{}|;:,.<>?/~`';
 
             if (!charset) {
-                utils.showError('请至少选择一种字符类型');
+                utils.showError(window.t('encrypted.token.errNoCharType'));
                 return;
             }
 
@@ -1185,11 +1251,11 @@
             var copyAllBtn = document.getElementById('token-copy-all-btn');
 
             if (tokens.length === 1) {
-                container.innerHTML = '<div class="copy-row"><span class="text">' + escapeHtml(tokens[0]) + '</span><button class="copy-icon-btn" onclick="copySingleToken(this)" title="复制">📋</button></div>';
+                container.innerHTML = '<div class="copy-row"><span class="text">' + escapeHtml(tokens[0]) + '</span><button class="copy-icon-btn" onclick="copySingleToken(this)" title="' + window.t('encrypted.token.titleCopy') + '">📋</button></div>';
             } else {
                 var html = '';
                 tokens.forEach(function (t, idx) {
-                    html += '<div class="copy-row" style="margin-bottom:6px;"><span style="color:#94a3b8;margin-right:8px;">#' + (idx + 1) + '</span><span class="text">' + escapeHtml(t) + '</span><button class="copy-icon-btn" onclick="copySingleToken(this)" title="复制">📋</button></div>';
+                    html += '<div class="copy-row" style="margin-bottom:6px;"><span style="color:#94a3b8;margin-right:8px;">#' + (idx + 1) + '</span><span class="text">' + escapeHtml(t) + '</span><button class="copy-icon-btn" onclick="copySingleToken(this)" title="' + window.t('encrypted.token.titleCopy') + '">📋</button></div>';
                 });
                 container.innerHTML = html;
             }
@@ -1206,9 +1272,9 @@
                     btn.classList.remove('copied');
                     btn.textContent = '📋';
                 }, 1500);
-                utils.showSuccess('已复制');
+                utils.showSuccess(window.t('encrypted.token.successCopied'));
             }).catch(function () {
-                utils.showError('复制失败');
+                utils.showError(window.t('encrypted.token.errCopyFailed'));
             });
         }
 
@@ -1218,19 +1284,19 @@
             texts.forEach(function (t) { all += t.textContent + '\n'; });
 
             if (!all.trim()) {
-                utils.showError('请先生成 Token');
+                utils.showError(window.t('encrypted.token.errGenerateFirst'));
                 return;
             }
 
             navigator.clipboard.writeText(all.trim()).then(function () {
-                utils.showSuccess('已复制全部 Token');
+                utils.showSuccess(window.t('encrypted.token.successCopiedAll'));
             }).catch(function () {
-                utils.showError('复制失败');
+                utils.showError(window.t('encrypted.token.errCopyFailed'));
             });
         }
 
         function clearTokens() {
-            document.getElementById('token-result-container').innerHTML = '<div class="result-content result-placeholder">等待生成...</div>';
+            document.getElementById('token-result-container').innerHTML = '<div class="result-content result-placeholder">' + window.t('encrypted.token.placeholderWaiting') + '</div>';
             document.getElementById('token-copy-all-btn').style.display = 'none';
         }
 
@@ -1245,7 +1311,7 @@
             errorEl.style.display = 'none';
 
             if (!input) {
-                outputEl.textContent = '请输入文本';
+                outputEl.textContent = window.t('encrypted.token.placeholderEnterText');
                 outputEl.className = 'text result-placeholder';
                 copyBtn.style.display = 'none';
                 return;
@@ -1261,7 +1327,7 @@
                 copyBtn.style.display = 'flex';
             } catch (e) {
                 errorEl.style.display = 'block';
-                errorEl.textContent = '编码失败：' + e.message;
+                errorEl.textContent = window.t('encrypted.token.errEncodeFailed') + '：' + e.message;
             }
         }
 
@@ -1275,7 +1341,7 @@
             errorEl.style.display = 'none';
 
             if (!input) {
-                outputEl.textContent = '请输入文本';
+                outputEl.textContent = window.t('encrypted.token.placeholderEnterText');
                 outputEl.className = 'text result-placeholder';
                 copyBtn.style.display = 'none';
                 return;
@@ -1294,7 +1360,7 @@
                 copyBtn.style.display = 'flex';
             } catch (e) {
                 errorEl.style.display = 'block';
-                errorEl.textContent = '解码失败，请检查输入是否为有效的 Base64 字符串';
+                errorEl.textContent = window.t('encrypted.token.errDecodeFailed');
             }
         }
 
@@ -1302,7 +1368,7 @@
             document.getElementById('base64-input').value = '';
             document.getElementById('base64-error').style.display = 'none';
             var outputEl = document.getElementById('base64-output');
-            outputEl.textContent = '等待操作...';
+            outputEl.textContent = window.t('encrypted.token.placeholderWaitingOp');
             outputEl.className = 'text result-placeholder';
             document.getElementById('base64-copy-btn').style.display = 'none';
         }
@@ -1310,7 +1376,7 @@
         // ===== Utilities =====
         function copyText(elementId, btn) {
             var text = document.getElementById(elementId).textContent;
-            if (!text || text === '等待操作...') return;
+            if (!text || text === window.t('encrypted.token.placeholderWaitingOp')) return;
             navigator.clipboard.writeText(text).then(function () {
                 btn.classList.add('copied');
                 btn.textContent = '✓';
@@ -1318,9 +1384,9 @@
                     btn.classList.remove('copied');
                     btn.textContent = '📋';
                 }, 1500);
-                utils.showSuccess('已复制');
+                utils.showSuccess(window.t('encrypted.token.successCopied'));
             }).catch(function () {
-                utils.showError('复制失败');
+                utils.showError(window.t('encrypted.token.errCopyFailed'));
             });
         }
 

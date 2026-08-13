@@ -1,0 +1,316 @@
+/**
+ * 语言切换器样式
+ * 用于美化语言切换按钮和语言选择器组件
+ */
+
+/* ========== 语言切换器容器 ========== */
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    background: var(--bg-secondary, rgba(255, 255, 255, 0.1));
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.2));
+}
+
+/* ========== 语言切换按钮 ========== */
+.lang-switch-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-width: 60px;
+}
+
+.lang-switch-btn:hover {
+    background: var(--bg-card, rgba(255, 255, 255, 0.15));
+    color: var(--text-primary, #fff);
+    transform: translateY(-1px);
+}
+
+.lang-switch-btn.active {
+    background: var(--accent-color, #6366f1);
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.lang-switch-btn.active:hover {
+    background: var(--accent-hover, #4f46e5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+/* 按钮内的图标 */
+.lang-switch-btn .lang-icon {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* 按钮内的文本 */
+.lang-switch-btn .lang-text {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ========== 下拉式语言选择器 ========== */
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.language-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+    border-radius: 20px;
+    background: var(--bg-card, rgba(255, 255, 255, 0.1));
+    color: var(--text-primary, #fff);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.language-dropdown-btn:hover {
+    background: var(--bg-hover, rgba(255, 255, 255, 0.15));
+    border-color: var(--accent-color, #6366f1);
+}
+
+.language-dropdown-btn .dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.language-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.language-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 140px;
+    background: var(--bg-card, #fff);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    padding: 8px;
+    display: none;
+    z-index: 1000;
+    animation: fadeInDown 0.2s ease;
+}
+
+.language-dropdown.open .language-dropdown-menu {
+    display: block;
+}
+
+.language-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-primary, #333);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.language-dropdown-item:hover {
+    background: var(--bg-secondary, rgba(99, 102, 241, 0.1));
+    color: var(--accent-color, #6366f1);
+}
+
+.language-dropdown-item.active {
+    background: var(--accent-color, #6366f1);
+    color: white;
+}
+
+.language-dropdown-item.active:hover {
+    background: var(--accent-hover, #4f46e5);
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 768px) {
+    .language-switcher {
+        padding: 2px;
+        gap: 4px;
+    }
+
+    .lang-switch-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+        min-width: 50px;
+    }
+
+    .lang-switch-btn .lang-icon {
+        font-size: 13px;
+    }
+
+    .lang-switch-btn .lang-text {
+        font-size: 12px;
+    }
+
+    .language-dropdown-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .language-dropdown-menu {
+        right: -10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lang-switch-btn {
+        padding: 3px 8px;
+        min-width: 45px;
+    }
+
+    .lang-switch-btn .lang-text {
+        display: none;
+    }
+
+    .lang-switch-btn .lang-icon {
+        font-size: 16px;
+    }
+}
+
+/* ========== 深色模式适配 ========== */
+body.dark-mode .language-switcher {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .language-switcher:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .lang-switch-btn {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .lang-switch-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-mode .language-dropdown-btn {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .language-dropdown-menu {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .language-dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .language-dropdown-item:hover {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+}
+
+/* ========== 动画效果 ========== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== 无障碍支持 ========== */
+.lang-switch-btn:focus,
+.language-dropdown-btn:focus,
+.language-dropdown-item:focus {
+    outline: 2px solid var(--accent-color, #6366f1);
+    outline-offset: 2px;
+}
+
+.lang-switch-btn:focus:not(:focus-visible),
+.language-dropdown-btn:focus:not(:focus-visible),
+.language-dropdown-item:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ========== 导航栏中的语言切换器特殊样式 ========== */
+.sidebar .language-switcher,
+#nav-container .language-switcher {
+    margin: 16px 0;
+    padding: 8px 12px;
+    justify-content: center;
+}
+
+.sidebar .lang-switch-btn,
+#nav-container .lang-switch-btn {
+    flex: 1;
+}
+
+/* Hero 区域中的语言切换器 */
+.hero .language-switcher {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.hero .lang-switch-btn {
+    color: white;
+}
+
+.hero .lang-switch-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.hero .lang-switch-btn.active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ========== 加载状态 ========== */
+.lang-switch-btn.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.lang-switch-btn.loading::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 6px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

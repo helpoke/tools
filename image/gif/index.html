@@ -10,11 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>图片转GIF - 免费在线图片合成GIF动图工具</title>
+    <meta property="og:title" content="图片转GIF - 免费在线图片合成GIF动图工具">
+    <meta property="og:description" content="图片转GIF在线工具，支持多张图片合成GIF动图，可自定义帧率、尺寸和循环次数，纯前端处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/image/gif/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="图片转GIF - 免费在线图片合成GIF动图工具">
+    <meta name="twitter:description" content="图片转GIF在线工具，支持多张图片合成GIF动图，可自定义帧率、尺寸和循环次数，纯前端处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/image/gif/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/gif/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/image/gif/">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../../common/css/style.css">
     <link rel="stylesheet" href="../../common/css/utils.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -27,7 +43,7 @@
         "description": "免费在线图片转GIF动图工具，支持多张图片合成GIF，可自定义帧率、尺寸和循环次数。纯前端处理，保护用户隐私数据。Free online image to GIF converter.",
         "url": "https://helpoke.com/image/gif",
         "applicationCategory": "https://schema.org/ImageEditing",
-        "inLanguage": ["zh-CN"],
+        "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "支持JPG、PNG、WebP、GIF等多种图片格式",
             "支持批量上传多张图片",
@@ -58,40 +74,42 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1>GIF制作工具</h1>
-            <a href="note.html" class="doc-link"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="/" title="返回首页"><i class="fas fa-home"></i> 返回首页</a>
-            <p>GIF制作工具，支持多图合成和帧编辑，制作高质量GIF动图，支持调整帧率、尺寸、循环模式</p>
-            <p class="description">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <h1 data-i18n="image.gif.title">GIF制作工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="image.gif.intro">GIF制作工具，支持多图合成和帧编辑，制作高质量GIF动图，支持调整帧率、尺寸、循环模式</p>
+            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="row">
                 <div class="col-6">
                     <div class="upload-section">
-                        <h3>图片文件</h3>
+                        <h3 data-i18n="image.gif.uploadTitle">图片文件</h3>
                         <label for="imageUpload" class="upload-area" id="uploadArea">
                             <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
                             <div class="upload-icon">🖼️</div>
-                            <div class="upload-text">点击上传或拖拽图片到此处</div>
-                            <div class="upload-hint">支持 JPG、PNG、WebP、GIF、BMP 格式（最多5张）</div>
+                            <div class="upload-text" data-i18n="image.gif.uploadText">点击上传或拖拽图片到此处</div>
+                            <div class="upload-hint" data-i18n="image.gif.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（最多5张）</div>
                         </label>
                         <div class="image-list-container">
                             <div class="image-list-header">
-                                <span class="image-count">已上传 <strong id="imageCount">0</strong> 个图片</span>
-                                <button id="clearAll" class="btn-text" style="display: none;">清空全部</button>
+                                <span class="image-count" data-i18n="image.gif.imageCount">已上传 <strong
+                                        id="imageCount">0</strong> 个图片</span>
+                                <button id="clearAll" class="btn-text" style="display: none;"
+                                    data-i18n="image.gif.clearAllBtn">清空全部</button>
                             </div>
                             <ul id="imageList" class="image-list"></ul>
-                            <div id="emptyTip" class="empty-tip">请上传图片文件</div>
+                            <div id="emptyTip" class="empty-tip" data-i18n="image.gif.emptyTip">请上传图片文件</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="preview-section">
-                        <h3>预览</h3>
+                        <h3 data-i18n="image.gif.previewTitle">预览</h3>
                         <div class="preview-container">
-                            <img id="previewImage" alt="预览图片"
+                            <img id="previewImage" data-i18n="image.gif.previewImageAlt" alt="预览图片"
                                 style="max-width: 100%; max-height: 300px; object-fit: contain;">
                             <canvas id="previewCanvas"
                                 style="display: none; max-width: 100%; max-height: 300px;"></canvas>
@@ -99,40 +117,40 @@
                     </div>
 
                     <div class="settings-section">
-                        <h3>GIF设置</h3>
+                        <h3 data-i18n="image.gif.settingsTitle">GIF设置</h3>
 
                         <div class="setting-row">
                             <div class="input-group">
-                                <label for="frameDelay">帧延迟 (毫秒)：</label>
+                                <label for="frameDelay" data-i18n="image.gif.frameDelayLabel">帧延迟 (毫秒)：</label>
                                 <input type="number" id="frameDelay" min="100" max="5000" value="500" step="100">
                             </div>
                             <div class="input-group">
-                                <label for="loopCount">循环次数：</label>
+                                <label for="loopCount" data-i18n="image.gif.loopCountLabel">循环次数：</label>
                                 <select id="loopCount">
-                                    <option value="0" selected>无限循环</option>
-                                    <option value="1">播放1次</option>
-                                    <option value="2">播放2次</option>
-                                    <option value="3">播放3次</option>
-                                    <option value="5">播放5次</option>
+                                    <option value="0" selected data-i18n="image.gif.loopInfinite">无限循环</option>
+                                    <option value="1" data-i18n="image.gif.loopOnce">播放1次</option>
+                                    <option value="2" data-i18n="image.gif.loopTwice">播放2次</option>
+                                    <option value="3" data-i18n="image.gif.loopThree">播放3次</option>
+                                    <option value="5" data-i18n="image.gif.loopFive">播放5次</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="setting-row">
                             <div class="input-group">
-                                <label for="outputWidth">输出宽度：</label>
+                                <label for="outputWidth" data-i18n="image.gif.outputWidthLabel">输出宽度：</label>
                                 <input type="number" id="outputWidth" min="100" max="800" value="512">
                             </div>
                             <div class="input-group">
-                                <label for="maintainAspect">保持宽高比：</label>
+                                <label for="maintainAspect" data-i18n="image.gif.maintainAspectLabel">保持宽高比：</label>
                                 <input type="checkbox" id="maintainAspect" checked>
                             </div>
                         </div>
 
                         <div class="action-buttons">
                             <button id="generateBtn" disabled>
-                                <span id="generateBtnText">生成GIF</span>
-                                <span id="generateBtnLoading" style="display: none;">生成中...</span>
+                                <span id="generateBtnText" data-i18n="image.gif.generateBtnText">生成GIF</span>
+                                <span id="generateBtnLoading" style="display: none;" data-i18n="image.gif.generateBtnLoading">生成中...</span>
                             </button>
                             <div class="progress-container" id="progressContainer" style="display: none;">
                                 <div class="progress-bar" id="progressBar"></div>
@@ -144,119 +162,120 @@
             </div>
 
             <div class="output-section" id="outputSection">
-                <h2>生成结果</h2>
+                <h2 data-i18n="image.gif.outputTitle">生成结果</h2>
                 <div class="result-info" id="resultInfo"></div>
                 <div class="result-container">
-                    <img id="outputGif" alt="生成的GIF" style="max-width: 100%;">
+                    <img id="outputGif" data-i18n="image.gif.outputGifAlt" alt="生成的GIF" style="max-width: 100%;">
                 </div>
                 <div class="download-buttons">
-                    <button id="downloadBtn">下载GIF动图</button>
+                    <button id="downloadBtn" data-i18n="image.gif.downloadBtn">下载GIF动图</button>
                 </div>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3>工具介绍</h3>
+                        <h3 data-i18n="image.gif.infoIntro">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、解决的问题</h4>
+                        <h4 data-i18n="image.gif.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li>制作GIF动图，支持多图合成和帧编辑。</li>
-                            <li>简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li>无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="image.gif.problem1">制作GIF动图，支持多图合成和帧编辑。</li>
+                            <li data-i18n="image.gif.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
+                            <li data-i18n="image.gif.problem3">无需安装专业软件，随时随地在线使用。</li>
                         </ul>
-                        <h4>二、支持的格式</h4>
+                        <h4 data-i18n="image.gif.formatTitle">二、支持的格式</h4>
                         <ul>
-                            <li><strong>GIF：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.gif.formatGif"><strong>GIF：</strong>支持该格式的完整处理功能。</li>
                         </ul>
-                        <h4>三、核心功能</h4>
+                        <h4 data-i18n="image.gif.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="image.gif.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="image.gif.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
+                            <li data-i18n="image.gif.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
+                            <li data-i18n="image.gif.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3>使用说明</h3>
+                        <h3 data-i18n="image.gif.infoUsage">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、上传图片</h4>
+                        <h4 data-i18n="image.gif.usageUploadTitle">一、上传图片</h4>
                         <ul>
-                            <li><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
-                            <li><strong>批量上传：</strong>支持多选上传，最多5张图片。</li>
-                            <li><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                            <li data-i18n="image.gif.usageUpload1"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                            <li data-i18n="image.gif.usageUpload2"><strong>批量上传：</strong>支持多选上传，最多5张图片。</li>
+                            <li data-i18n="image.gif.usageUpload3"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
                         </ul>
-                        <h4>二、调整顺序</h4>
+                        <h4 data-i18n="image.gif.usageOrderTitle">二、调整顺序</h4>
                         <ul>
-                            <li><strong>查看列表：</strong>已上传图片会显示在图片列表中。</li>
-                            <li><strong>拖拽排序：</strong>拖拽图片调整GIF播放顺序。</li>
-                            <li><strong>清空全部：</strong>点击"清空全部"按钮删除所有图片。</li>
+                            <li data-i18n="image.gif.usageOrder1"><strong>查看列表：</strong>已上传图片会显示在图片列表中。</li>
+                            <li data-i18n="image.gif.usageOrder2"><strong>拖拽排序：</strong>拖拽图片调整GIF播放顺序。</li>
+                            <li data-i18n="image.gif.usageOrder3"><strong>清空全部：</strong>点击“清空全部”按钮删除所有图片。</li>
                         </ul>
-                        <h4>三、GIF设置</h4>
+                        <h4 data-i18n="image.gif.usageSettingsTitle">三、GIF设置</h4>
                         <ul>
-                            <li><strong>帧延迟：</strong>设置每帧之间的延迟时间（100-5000毫秒），值越小动画越快。</li>
-                            <li><strong>循环次数：</strong>选择播放次数，包括无限循环、播放1/2/3/5次。</li>
-                            <li><strong>输出宽度：</strong>设置GIF的输出宽度（100-800像素）。</li>
-                            <li><strong>保持宽高比：</strong>勾选后自动保持图片宽高比。</li>
+                            <li data-i18n="image.gif.usageSettings1"><strong>帧延迟：</strong>设置每帧之间的延迟时间（100-5000毫秒），值越小动画越快。
+                            </li>
+                            <li data-i18n="image.gif.usageSettings2"><strong>循环次数：</strong>选择播放次数，包括无限循环、播放1/2/3/5次。</li>
+                            <li data-i18n="image.gif.usageSettings3"><strong>输出宽度：</strong>设置GIF的输出宽度（100-800像素）。</li>
+                            <li data-i18n="image.gif.usageSettings4"><strong>保持宽高比：</strong>勾选后自动保持图片宽高比。</li>
                         </ul>
-                        <h4>四、生成GIF</h4>
+                        <h4 data-i18n="image.gif.usageGenerateTitle">四、生成GIF</h4>
                         <ul>
-                            <li><strong>点击生成：</strong>点击"生成GIF"按钮开始生成动图。</li>
-                            <li><strong>进度显示：</strong>生成过程中显示进度条。</li>
-                            <li><strong>预览效果：</strong>生成完成后自动预览GIF效果。</li>
-                            <li><strong>下载GIF：</strong>点击"下载GIF动图"按钮保存结果。</li>
+                            <li data-i18n="image.gif.usageGenerate1"><strong>点击生成：</strong>点击“生成GIF”按钮开始生成动图。</li>
+                            <li data-i18n="image.gif.usageGenerate2"><strong>进度显示：</strong>生成过程中显示进度条。</li>
+                            <li data-i18n="image.gif.usageGenerate3"><strong>预览效果：</strong>生成完成后自动预览GIF效果。</li>
+                            <li data-i18n="image.gif.usageGenerate4"><strong>下载GIF：</strong>点击“下载GIF动图”按钮保存结果。</li>
                         </ul>
-                        <h4>五、参数建议</h4>
+                        <h4 data-i18n="image.gif.usageSuggestTitle">五、参数建议</h4>
                         <ul>
-                            <li><strong>流畅动画：</strong>帧延迟设置为100-300毫秒。</li>
-                            <li><strong>慢速动画：</strong>帧延迟设置为500-1000毫秒。</li>
-                            <li><strong>表情动图：</strong>输出宽度设置为200-300像素。</li>
-                            <li><strong>分享动图：</strong>输出宽度设置为400-512像素。</li>
+                            <li data-i18n="image.gif.usageSuggest1"><strong>流畅动画：</strong>帧延迟设置为100-300毫秒。</li>
+                            <li data-i18n="image.gif.usageSuggest2"><strong>慢速动画：</strong>帧延迟设置为500-1000毫秒。</li>
+                            <li data-i18n="image.gif.usageSuggest3"><strong>表情动图：</strong>输出宽度设置为200-300像素。</li>
+                            <li data-i18n="image.gif.usageSuggest4"><strong>分享动图：</strong>输出宽度设置为400-512像素。</li>
                         </ul>
                     </div>
                 </article>
                 <article class="info-details">
                     <header>
-                        <h3>注意事项</h3>
+                        <h3 data-i18n="image.gif.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4>一、数据安全</h4>
+                        <h4 data-i18n="image.gif.notesSecurityTitle">一、数据安全</h4>
                         <ul>
-                            <li>所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li>图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
-                            <li>建议在处理敏感图片时使用隐私模式浏览。</li>
+                            <li data-i18n="image.gif.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
+                            <li data-i18n="image.gif.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                            <li data-i18n="image.gif.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
                         </ul>
-                        <h4>二、GIF限制</h4>
+                        <h4 data-i18n="image.gif.notesLimitTitle">二、GIF限制</h4>
                         <ul>
-                            <li>最多支持5张图片合成GIF。</li>
-                            <li>GIF颜色数量限制为256色，可能导致色彩损失。</li>
-                            <li>输出宽度最大为800像素，过大尺寸会自动缩小。</li>
-                            <li>大尺寸GIF文件可能较大，建议控制输出宽度。</li>
+                            <li data-i18n="image.gif.noteLimit1">最多支持5张图片合成GIF。</li>
+                            <li data-i18n="image.gif.noteLimit2">GIF颜色数量限制为256色，可能导致色彩损失。</li>
+                            <li data-i18n="image.gif.noteLimit3">输出宽度最大为800像素，过大尺寸会自动缩小。</li>
+                            <li data-i18n="image.gif.noteLimit4">大尺寸GIF文件可能较大，建议控制输出宽度。</li>
                         </ul>
-                        <h4>三、帧延迟设置</h4>
+                        <h4 data-i18n="image.gif.notesDelayTitle">三、帧延迟设置</h4>
                         <ul>
-                            <li>帧延迟过短（小于100毫秒）可能导致动画过快。</li>
-                            <li>帧延迟过长（大于2000毫秒）可能导致动画卡顿。</li>
-                            <li>建议根据动画内容调整合适的帧延迟。</li>
+                            <li data-i18n="image.gif.noteDelay1">帧延迟过短（小于100毫秒）可能导致动画过快。</li>
+                            <li data-i18n="image.gif.noteDelay2">帧延迟过长（大于2000毫秒）可能导致动画卡顿。</li>
+                            <li data-i18n="image.gif.noteDelay3">建议根据动画内容调整合适的帧延迟。</li>
                         </ul>
-                        <h4>四、性能提示</h4>
+                        <h4 data-i18n="image.gif.notesPerfTitle">四、性能提示</h4>
                         <ul>
-                            <li>大尺寸图片生成GIF需要较长时间，请耐心等待。</li>
-                            <li>生成过程中不要关闭浏览器或刷新页面。</li>
-                            <li>建议在生成前先压缩图片以提高处理速度。</li>
-                            <li>GIF文件大小与帧数、尺寸、颜色数量相关。</li>
+                            <li data-i18n="image.gif.notePerf1">大尺寸图片生成GIF需要较长时间，请耐心等待。</li>
+                            <li data-i18n="image.gif.notePerf2">生成过程中不要关闭浏览器或刷新页面。</li>
+                            <li data-i18n="image.gif.notePerf3">建议在生成前先压缩图片以提高处理速度。</li>
+                            <li data-i18n="image.gif.notePerf4">GIF文件大小与帧数、尺寸、颜色数量相关。</li>
                         </ul>
-                        <h4>五、常见问题</h4>
+                        <h4 data-i18n="image.gif.notesFaqTitle">五、常见问题</h4>
                         <ul>
-                            <li><strong>生成失败：</strong>检查图片格式和大小，尝试减少图片数量。</li>
-                            <li><strong>颜色失真：</strong>GIF格式仅支持256色，这是正常现象。</li>
-                            <li><strong>动画不流畅：</strong>调整帧延迟或减少图片数量。</li>
-                            <li><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="image.gif.noteFaq1"><strong>生成失败：</strong>检查图片格式和大小，尝试减少图片数量。</li>
+                            <li data-i18n="image.gif.noteFaq2"><strong>颜色失真：</strong>GIF格式仅支持256色，这是正常现象。</li>
+                            <li data-i18n="image.gif.noteFaq3"><strong>动画不流畅：</strong>调整帧延迟或减少图片数量。</li>
+                            <li data-i18n="image.gif.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                         </ul>
                     </div>
                 </article>
@@ -265,12 +284,16 @@
 
         <div id="footer-container">
             <footer class="footer">
-                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -278,6 +301,7 @@
 
     <script src="../../common/js/utils.js"></script>
     <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/omggif@1.0.10/omggif.min.js"></script> -->
     <script src="../lib/omggif.min.js"></script>
