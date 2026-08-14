@@ -8,10 +8,14 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>URL 编码/解码工具 - Helpoke 助点站</title>
     <meta property="og:title" content="URL 编码/解码工具 - Helpoke 助点站">
-    <meta property="og:description" content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
+    <meta property="og:description"
+        content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://helpoke.com/encrypted/urlcode/">
     <meta property="og:site_name" content="Helpoke">
@@ -20,12 +24,15 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="URL 编码/解码工具 - Helpoke 助点站">
-    <meta name="twitter:description" content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
+    <meta name="twitter:description"
+        content="在线URL编码解码工具, URL Encode/Decode, 支持encodeURI和encodeURIComponent模式, 免费在线URL转码工具">
     <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
     <link rel="canonical" href="https://helpoke.com/encrypted/urlcode/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/urlcode/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/urlcode/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous">
     <script src="../../common/js/i18n/i18n.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
@@ -34,349 +41,8 @@
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
     </style>
-    <style>
-        .container {
-            max-width: 100%;
-            padding: 40px 0;
-        }
-
-        .tool-card {
-            background-color: var(--bg-card);
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 32px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #eaeaea;
-            margin-bottom: 24px;
-        }
-
-        .tab-btn {
-            padding: 12px 24px;
-            border: none;
-            background: none;
-            font-size: 15px;
-            font-weight: 600;
-            color: #7f8c8d;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-            transition: all 0.2s;
-        }
-
-        .tab-btn:hover {
-            color: #3498db;
-        }
-
-        .tab-btn.active {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .tab-panel {
-            display: none;
-        }
-
-        .tab-panel.active {
-            display: block;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-
-        .input-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: var(--input-bg);
-            border: 1px solid #eaeaea;
-            border-radius: 8px;
-            font-size: 15px;
-            font-family: 'Courier New', monospace;
-            resize: vertical;
-            transition: border-color 0.3s;
-            min-height: 260px;
-            line-height: 1.6;
-        }
-
-        .input-group textarea:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-        }
-
-        .btn-outline {
-            background: white;
-            color: #3498db;
-            border: 1px solid #3498db;
-        }
-
-        .btn-outline:hover {
-            background: #f0f7ff;
-        }
-
-        .btn-copy {
-            background-color: #27ae60;
-        }
-
-        .btn-copy:hover {
-            background-color: #229954;
-        }
-
-        .btn-copy.copied {
-            background-color: #1e8449;
-        }
-
-        .btn-swap {
-            background: #f8f9fa;
-            border: 1px solid #eaeaea;
-            color: #555;
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s;
-            line-height: 1;
-        }
-
-        .btn-swap:hover {
-            background: #eef2f7;
-            color: #2c3e50;
-        }
-
-        .actions-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .mode-toggle {
-            display: flex;
-            gap: 0;
-            margin-left: auto;
-        }
-
-        .mode-toggle button {
-            padding: 6px 14px;
-            border: 1px solid #eaeaea;
-            background: white;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 500;
-            color: #7f8c8d;
-            transition: all 0.2s;
-        }
-
-        .mode-toggle button:first-child {
-            border-radius: 6px 0 0 6px;
-        }
-
-        .mode-toggle button:last-child {
-            border-radius: 0 6px 6px 0;
-            border-left: none;
-        }
-
-        .mode-toggle button.active {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-
-        .char-count {
-            font-size: 12px;
-            color: #7f8c8d;
-            text-align: right;
-            margin-top: 4px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 16px;
-            }
-
-            .tool-card {
-                padding: 24px;
-            }
-
-            .actions-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .mode-toggle {
-                margin-left: 0;
-            }
-
-            .tab-btn {
-                padding: 10px 16px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 24px 12px;
-            }
-
-            .tool-card {
-                padding: 18px;
-            }
-        }
-
-        /* ==================== 夜间模式样式 ==================== */
-        body.dark-mode .tool-card {
-            background-color: var(--bg-card);
-            box-shadow: var(--box-shadow);
-        }
-
-        body.dark-mode .tabs {
-            border-bottom-color: var(--border-color);
-        }
-
-        body.dark-mode .tab-btn {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .tab-btn:hover,
-        body.dark-mode .tab-btn.active {
-            color: var(--primary-color);
-        }
-
-        body.dark-mode .tab-btn.active {
-            border-bottom-color: var(--primary-color);
-        }
-
-        body.dark-mode .input-group label {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode textarea {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode textarea:focus {
-            border-color: var(--primary-color);
-        }
-
-        body.dark-mode .btn {
-            background-color: var(--primary-color);
-        }
-
-        body.dark-mode .btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        body.dark-mode .btn-outline {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .btn-outline:hover {
-            background-color: var(--bg-secondary);
-        }
-
-        body.dark-mode .btn-swap {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .btn-swap:hover {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .mode-toggle button {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .mode-toggle button:hover:not(.active) {
-            background-color: var(--bg-secondary);
-        }
-
-        body.dark-mode .mode-toggle button.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: white;
-        }
-
-        body.dark-mode .char-count {
-            color: var(--text-muted);
-        }
-
-        body.dark-mode .result-box {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .copy-btn {
-            background-color: var(--success-color);
-            border-color: var(--success-color);
-            color: white;
-        }
-
-        body.dark-mode .copy-btn:hover {
-            background-color: #229954;
-            border-color: #229954;
-        }
-
-        /* ==================== 边框颜色覆盖 ==================== */
-        body.dark-mode .tabs {
-            border-bottom-color: var(--border-color);
-        }
-
-        body.dark-mode .tab-btn {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode textarea {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .result-box {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .copy-btn {
-            border-color: var(--success-color);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -419,9 +85,8 @@
             <h1 data-i18n="encrypted.urlcode.title">URL编码工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="encrypted.urlcode.intro">URL编码工具，支持URL编码和解码，处理中文和特殊字符，支持encodeURI和encodeURIComponent两种模式</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -429,72 +94,56 @@
 
         <div class="container">
             <div class="tool-card">
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('encode')" data-i18n="encrypted.urlcode.tabEncode">URL
-                        编码</button>
-                    <button class="tab-btn" onclick="switchTab('decode')" data-i18n="encrypted.urlcode.tabDecode">URL 解码</button>
+                <!-- 顶部操作按钮 -->
+                <div class="top-actions">
+                    <button class="btn btn-clear" id="clear-all-btn"
+                        data-i18n="encrypted.urlcode.clearAllBtn">全部清空</button>
+                    <div class="mode-selector">
+                        <button class="active" data-mode="component" id="mode-component"
+                            data-i18n="encrypted.urlcode.modeComponent">encodeURIComponent</button>
+                        <button data-mode="uri" id="mode-uri" data-i18n="encrypted.urlcode.modeUri">encodeURI</button>
+                    </div>
                 </div>
 
-                <!-- Encode Tab -->
-                <div class="tab-panel active" id="tab-encode">
-                    <div class="input-group">
-                        <label for="encode-input" data-i18n="encrypted.urlcode.encodeInputLabel">输入原始文本</label>
-                        <textarea id="encode-input" data-i18n-placeholder="encrypted.urlcode.encodeInputPlaceholder"
-                            placeholder="输入需要编码的文本或 URL..."></textarea>
-                        <div class="char-count" id="encode-count">字符数: 0</div>
-                    </div>
-
-                    <div class="actions-row">
-                        <button class="btn" onclick="doEncode()" data-i18n="encrypted.urlcode.encodeBtn">编码</button>
-                        <button class="btn btn-outline" onclick="clearAll('encode')"
-                            data-i18n="encrypted.urlcode.clearBtn">清空</button>
-                        <div class="mode-toggle">
-                            <button class="active" data-mode="component"
-                                onclick="switchEncodeMode(this, 'component')">encodeURIComponent</button>
-                            <button data-mode="uri" onclick="switchEncodeMode(this, 'uri')">encodeURI</button>
+                <!-- 左右布局：输入框 + 转换按钮 + 输出框 -->
+                <div class="converter-layout">
+                    <div class="input-panel">
+                        <div class="panel-header">
+                            <div class="panel-label" data-i18n="encrypted.urlcode.inputLabel">原文</div>
+                            <div class="panel-actions">
+                                <button class="panel-btn copy-btn" id="copy-input-btn"
+                                    data-i18n="encrypted.urlcode.copyBtn">复制</button>
+                                <button class="panel-btn clear-btn" id="clear-input-btn"
+                                    data-i18n="encrypted.urlcode.clearBtn">清空</button>
+                            </div>
                         </div>
+                        <textarea id="input-text" data-i18n-placeholder="encrypted.urlcode.inputPlaceholder"
+                            placeholder="请输入文本..."></textarea>
+                        <div class="char-count" id="input-count">字符数: 0</div>
                     </div>
-
-                    <div class="input-group" style="margin-top:20px;">
-                        <label for="encode-output" data-i18n="encrypted.urlcode.encodeOutputLabel">编码结果</label>
-                        <textarea id="encode-output" readonly data-i18n-placeholder="encrypted.urlcode.encodeOutputPlaceholder"
-                            placeholder="编码结果将显示在这里..."></textarea>
-                        <div class="char-count" id="encode-out-count">字符数: 0</div>
+                    <div class="convert-btn-wrapper">
+                        <button class="btn-convert encode-btn" id="encode-btn" title="编码"
+                            data-i18n-title="encrypted.urlcode.encodeBtn">→</button>
+                        <button class="btn-convert decode-btn" id="decode-btn" title="解码"
+                            data-i18n-title="encrypted.urlcode.decodeBtn">←</button>
                     </div>
-
-                    <div class="actions-row">
-                        <button class="btn btn-copy" onclick="copyResult('encode-output')"
-                            data-i18n="encrypted.urlcode.copyResult">复制结果</button>
-                    </div>
-                </div>
-
-                <!-- Decode Tab -->
-                <div class="tab-panel" id="tab-decode">
-                    <div class="input-group">
-                        <label for="decode-input" data-i18n="encrypted.urlcode.decodeInputLabel">输入编码文本</label>
-                        <textarea id="decode-input" data-i18n-placeholder="encrypted.urlcode.decodeInputPlaceholder"
-                            placeholder="输入需要解码的 URL 编码文本..."></textarea>
-                        <div class="char-count" id="decode-count">字符数: 0</div>
-                    </div>
-
-                    <div class="actions-row">
-                        <button class="btn" onclick="doDecode()" data-i18n="encrypted.urlcode.decodeBtn">解码</button>
-                        <button class="btn btn-outline" onclick="clearAll('decode')"
-                            data-i18n="encrypted.urlcode.clearBtn">清空</button>
-                    </div>
-
-                    <div class="input-group" style="margin-top:20px;">
-                        <label for="decode-output" data-i18n="encrypted.urlcode.decodeOutputLabel">解码结果</label>
-                        <textarea id="decode-output" readonly data-i18n-placeholder="encrypted.urlcode.decodeOutputPlaceholder"
-                            placeholder="解码结果将显示在这里..."></textarea>
-                        <div class="char-count" id="decode-out-count">字符数: 0</div>
-                    </div>
-
-                    <div class="actions-row">
-                        <button class="btn btn-copy" onclick="copyResult('decode-output')"
-                            data-i18n="encrypted.urlcode.copyResult">复制结果</button>
+                    <div class="output-panel">
+                        <div class="panel-header">
+                            <div class="panel-label" data-i18n="encrypted.urlcode.outputLabel">URL 编码</div>
+                            <div class="panel-actions">
+                                <button class="panel-btn copy-btn" id="copy-output-btn"
+                                    data-i18n="encrypted.urlcode.copyBtn">复制</button>
+                                <button class="panel-btn clear-btn" id="clear-output-btn"
+                                    data-i18n="encrypted.urlcode.clearBtn">清空</button>
+                            </div>
+                        </div>
+                        <textarea id="output-text" data-i18n-placeholder="encrypted.urlcode.outputPlaceholder"
+                            placeholder="URL 编码将显示在这里..."></textarea>
+                        <div class="char-count" id="output-count">字符数: 0</div>
                     </div>
                 </div>
+
+                <div id="error-message" class="error-msg" style="display: none;"></div>
 
                 <div class="info-section" style="margin-top:24px;">
                     <article class="info-details">
@@ -515,10 +164,16 @@
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="encrypted.urlcode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="encrypted.urlcode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="encrypted.urlcode.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="encrypted.urlcode.featureOnline">
+                                    <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.featureSecurity">
+                                    <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -536,10 +191,14 @@
                                 <li data-i18n="encrypted.urlcode.usageEncodeMode">
                                     <strong>选择编码模式：</strong>选择encodeURIComponent或encodeURI模式。
                                 </li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeClick"><strong>点击编码：</strong>点击"编码"按钮将文本编码为URL安全格式。
+                                <li data-i18n="encrypted.urlcode.usageEncodeClick">
+                                    <strong>点击编码：</strong>点击"编码"按钮将文本编码为URL安全格式。
                                 </li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeView"><strong>查看结果：</strong>编码结果会显示在"编码结果"文本框中。</li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeCopy"><strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。
+                                <li data-i18n="encrypted.urlcode.usageEncodeView">
+                                    <strong>查看结果：</strong>编码结果会显示在"编码结果"文本框中。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeCopy">
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。
                                 </li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.usageDecodeTitle">二、URL解码</h4>
@@ -547,10 +206,14 @@
                                 <li data-i18n="encrypted.urlcode.usageDecodeInput">
                                     <strong>输入编码文本：</strong>在"输入编码文本"文本框中输入需要解码的URL编码文本。
                                 </li>
-                                <li data-i18n="encrypted.urlcode.usageDecodeClick"><strong>点击解码：</strong>点击"解码"按钮将URL编码文本解码为原始文本。
+                                <li data-i18n="encrypted.urlcode.usageDecodeClick">
+                                    <strong>点击解码：</strong>点击"解码"按钮将URL编码文本解码为原始文本。
                                 </li>
-                                <li data-i18n="encrypted.urlcode.usageDecodeView"><strong>查看结果：</strong>解码结果会显示在"解码结果"文本框中。</li>
-                                <li data-i18n="encrypted.urlcode.usageDecodeCopy"><strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。
+                                <li data-i18n="encrypted.urlcode.usageDecodeView">
+                                    <strong>查看结果：</strong>解码结果会显示在"解码结果"文本框中。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeCopy">
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。
                                 </li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.usageModeTitle">三、编码模式说明</h4>
@@ -589,7 +252,8 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.urlcode.notesModeTitle">一、编码模式选择</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.noteMode1">编码URL参数值时，建议使用encodeURIComponent，确保参数值中的特殊字符被正确编码。
+                                <li data-i18n="encrypted.urlcode.noteMode1">
+                                    编码URL参数值时，建议使用encodeURIComponent，确保参数值中的特殊字符被正确编码。
                                 </li>
                                 <li data-i18n="encrypted.urlcode.noteMode2">编码完整URL时，建议使用encodeURI，保留URL结构字符。</li>
                                 <li data-i18n="encrypted.urlcode.noteMode3">如果不确定使用哪种模式，encodeURIComponent是更安全的选择。</li>
@@ -609,14 +273,18 @@
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.notesFaqTitle">四、常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.noteFaq1"><strong>解码失败：</strong>检查输入是否为有效的URL编码文本，确保%XX格式正确。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq1">
+                                    <strong>解码失败：</strong>检查输入是否为有效的URL编码文本，确保%XX格式正确。
+                                </li>
                                 <li data-i18n="encrypted.urlcode.noteFaq2">
                                     <strong>编码结果过长：</strong>包含大量中文或特殊字符的文本编码后长度会显著增加，这是正常现象。
                                 </li>
                                 <li data-i18n="encrypted.urlcode.noteFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
-                                <li data-i18n="encrypted.urlcode.noteFaq4"><strong>编码模式选择：</strong>不确定时使用encodeURIComponent，兼容性更好。
+                                <li data-i18n="encrypted.urlcode.noteFaq4">
+                                    <strong>编码模式选择：</strong>不确定时使用encodeURIComponent，兼容性更好。
                                 </li>
-                                <li data-i18n="encrypted.urlcode.noteFaq5"><strong>字符计数：</strong>字符计数显示的是文本长度，不是字节数。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq5"><strong>字符计数：</strong>字符计数显示的是文本长度，不是字节数。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -642,117 +310,11 @@
         </div>
     </main>
 
-    <script src="../../common/js/utils.js"></script>
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
-    <script>
-        var encodeMode = 'component';
-
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-            document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
-            document.getElementById('tab-' + tab).classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(function (b) {
-                if ((tab === 'encode' && b.textContent.indexOf(window.t('encrypted.urlcode.tabEncodeKeyword')) !== -1 && b.textContent.indexOf(window.t('encrypted.urlcode.tabDecodeKeyword')) === -1) ||
-                    (tab === 'decode' && b.textContent.indexOf(window.t('encrypted.urlcode.tabDecodeKeyword')) !== -1)) {
-                    b.classList.add('active');
-                }
-            });
-        }
-
-        function switchEncodeMode(btn, mode) {
-            encodeMode = mode;
-            btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            // Re-encode if output already exists
-            if (document.getElementById('encode-output').value) doEncode();
-        }
-
-        function doEncode() {
-            var input = document.getElementById('encode-input').value;
-            var output = document.getElementById('encode-output');
-            if (!input) {
-                output.value = '';
-                document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
-                return;
-            }
-            try {
-                if (encodeMode === 'component') {
-                    output.value = encodeURIComponent(input);
-                } else {
-                    output.value = encodeURI(input);
-                }
-                document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: output.value.length });
-            } catch (e) {
-                utils.showError(window.t('encrypted.urlcode.errEncodeFailed') + ': ' + e.message);
-            }
-        }
-
-        function doDecode() {
-            var input = document.getElementById('decode-input').value;
-            var output = document.getElementById('decode-output');
-            if (!input) {
-                output.value = '';
-                document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
-                return;
-            }
-            try {
-                output.value = decodeURIComponent(input);
-                document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: output.value.length });
-            } catch (e) {
-                // Try decodeURI as fallback
-                try {
-                    output.value = decodeURI(input);
-                    document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: output.value.length });
-                } catch (e2) {
-                    utils.showError(window.t('encrypted.urlcode.errDecodeFailed'));
-                }
-            }
-        }
-
-        function copyResult(textareaId) {
-            var textarea = document.getElementById(textareaId);
-            var val = textarea.value;
-            if (!val) { utils.showError(window.t('encrypted.urlcode.errNothingToCopy')); return; }
-            navigator.clipboard.writeText(val).then(function () {
-                utils.showSuccess(window.t('encrypted.urlcode.successCopiedClipboard'));
-            }).catch(function () { utils.showError(window.t('encrypted.urlcode.errCopyManual')); });
-        }
-
-        function clearAll(tab) {
-            var prefix = tab === 'encode' ? 'encode' : 'decode';
-            document.getElementById(prefix + '-input').value = '';
-            document.getElementById(prefix + '-output').value = '';
-            document.getElementById(prefix + '-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
-            document.getElementById(prefix + '-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
-        }
-
-        // Real-time encode/decode
-        document.getElementById('encode-input').addEventListener('input', function () {
-            document.getElementById('encode-count').textContent = window.t('encrypted.urlcode.charCount', { count: this.value.length });
-            if (this.value) doEncode(); else {
-                document.getElementById('encode-output').value = '';
-                document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
-            }
-        });
-
-        document.getElementById('decode-input').addEventListener('input', function () {
-            document.getElementById('decode-count').textContent = window.t('encrypted.urlcode.charCount', { count: this.value.length });
-            if (this.value) doDecode(); else {
-                document.getElementById('decode-output').value = '';
-                document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: 0 });
-            }
-        });
-
-        // 语言包加载完成后重新渲染字符数
-        window.addEventListener('i18n:loaded', function () {
-            document.getElementById('encode-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('encode-input').value.length });
-            document.getElementById('encode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('encode-output').value.length });
-            document.getElementById('decode-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('decode-input').value.length });
-            document.getElementById('decode-out-count').textContent = window.t('encrypted.urlcode.charCount', { count: document.getElementById('decode-output').value.length });
-        });
-    </script>
+    <script src="../../common/js/utils.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

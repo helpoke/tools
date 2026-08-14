@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Token工具说明，支持JWT解析验证、Token随机生成、Base64编解码，本地处理保护隐私">
-    <meta name="keywords" content="JWT解析, JWT验证, Token生成, 随机Token, Base64编码, Base64解码, JWT在线解码, 免费Token工具">
+    <meta name="description" content="Token工具说明，支持JWT解析验证、Token随机生成、JWT生成签名，本地处理保护隐私">
+    <meta name="keywords" content="JWT解析, JWT验证, Token生成, 随机Token, JWT生成, JWT签名, HS256, HS384, HS512, 免费Token工具">
     <meta name="author" content="Helpoke">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -205,7 +205,7 @@
     <div class="note-container">
         <header>
             <h1>Token 在线工具</h1>
-            <p class="subtitle">支持JWT解析验证、Token随机生成、Base64编解码，本地处理保护隐私</p>
+            <p class="subtitle">支持JWT解析验证、Token随机生成、JWT生成签名，本地处理保护隐私</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
@@ -215,8 +215,9 @@
                 <h2>什么是Token在线工具？</h2>
                 <p>Token在线工具是一款专业的Token处理工具集，专为需要解析、生成和管理Token的用户设计。Token（令牌）是现代网络应用中广泛使用的身份认证和数据传输载体，特别是在RESTful
                     API设计、微服务架构、单页应用（SPA）等场景中扮演着核心角色。相比传统的Session认证，Token具有无状态、可扩展、支持跨域等优势，是现代Web应用首选的身份认证方案。</p>
-                <p>工具提供三种核心功能：JWT解析验证、随机Token生成和Base64编解码。JWT（JSON Web
-                    Token）是目前最流行的Token格式，由三部分组成：Header（头部，存储Token类型和签名算法）、Payload（载荷，存储用户信息和声明）和Signature（签名，确保Token未被篡改）。工具可以完整解析JWT各部分内容，验证签名格式，检查Token是否过期。同时，工具可以生成各种类型的随机Token字符串，用于API密钥、会话标识、临时验证码等场景。
+                <p>工具提供三种核心功能：JWT解析验证、随机Token生成和JWT生成签名。JWT（JSON Web
+                    Token）是目前最流行的Token格式，由三部分组成：Header（头部，存储Token类型和签名算法）、Payload（载荷，存储用户信息和声明）和Signature（签名，确保Token未被篡改）。工具可以完整解析JWT各部分内容，使用密钥验证HMAC签名，检查Token是否过期。同时，工具可以生成各种类型的随机Token字符串，用于API密钥、会话标识、临时验证码等场景。此外，工具还支持JWT生成签名功能，可选择HS256/HS384/HS512算法，填写标准声明和自定义Claims，一键生成完整签名的JWT
+                    Token。
                 </p>
                 <p>所有处理均在浏览器本地完成，Token内容不会上传到任何服务器。这意味着您的敏感Token信息始终处于您的完全控制之下，不会经过任何第三方服务器。</p>
 
@@ -230,12 +231,13 @@
                 <p>选择Token长度（16位、32位、64位、128位可选）和字符类型（纯数字、字母、字母数字混合、全部字符）。点击"生成"按钮，工具会基于加密安全的随机数生成器生成符合要求的随机Token字符串。生成的Token可用于API密钥生成、会话标识创建、临时验证码制作等场景。您可以多次生成直到获得满意的Token。
                 </p>
 
-                <h3>Base64编解码功能</h3>
-                <p>JWT的Header和Payload部分使用Base64URL编码。工具提供独立的Base64编解码功能，方便您手动编码自定义数据或解码JWT内容进行验证。输入需要编码的内容，点击"编码"获取Base64字符串；输入Base64编码的字符串，点击"解码"还原原始内容。工具使用URL安全的Base64URL编码变体（将+替换为-，将/替换为_），符合JWT规范。
+                <h3>JWT生成功能</h3>
+                <p>输入签名密钥（Secret），选择签名算法（HS256、HS384或HS512），填写Payload中的标准声明（iss签发者、sub主题、aud受众、jti唯一ID）和时间声明（iat签发时间、nbf生效时间、exp过期时间），还可输入自定义Claims（JSON格式）。点击"生成
+                    JWT"按钮，工具自动构建Header和Payload，使用HMAC算法计算签名，生成完整的JWT Token。生成的JWT可直接粘贴到JWT解析功能中进行验证。
                 </p>
 
                 <h3>实战案例：调试第三方API认证</h3>
-                <p>假设您正在开发一个需要对接第三方支付API的项目，第三方返回的响应头中包含一个JWT格式的访问令牌。使用本工具进行调试的步骤如下：首先从响应头或响应体中复制完整的JWT字符串；然后粘贴到JWT解析框，工具立即显示Header、Payload和Signature三部分；如果Payload中包含用户ID、权限列表、过期时间等信息，可以验证这些数据是否符合预期；检查exp字段确认Token是否已过期；在开发过程中发现问题时，可以利用Base64编解码功能手动构造测试数据，验证系统的解析逻辑是否正确。
+                <p>假设您正在开发一个需要对接第三方支付API的项目，第三方返回的响应头中包含一个JWT格式的访问令牌。使用本工具进行调试的步骤如下：首先从响应头或响应体中复制完整的JWT字符串；然后粘贴到JWT解析框，工具立即显示Header、Payload和Signature三部分；如果Payload中包含用户ID、权限列表、过期时间等信息，可以验证这些数据是否符合预期；检查exp字段确认Token是否已过期；在开发过程中，可使用JWT生成功能快速构造测试Token，设置自定义Claims和过期时间，验证系统的认证逻辑是否正确。
                 </p>
             </div>
 
@@ -252,8 +254,8 @@
                         <div class="mode-desc">生成API密钥、会话标识、临时验证码</div>
                     </div>
                     <div class="token-mode">
-                        <div class="mode-name">Base64编解码</div>
-                        <div class="mode-desc">解码JWT内容，编码自定义数据</div>
+                        <div class="mode-name">JWT生成签名</div>
+                        <div class="mode-desc">选择算法，填写Claims，一键生成JWT</div>
                     </div>
                 </div>
 
@@ -271,19 +273,19 @@
                     <span class="feature-tag">格式验证</span>
                     <span class="feature-tag">过期时间检查</span>
                     <span class="feature-tag">随机Token生成</span>
-                    <span class="feature-tag">Base64编解码</span>
+                    <span class="feature-tag">JWT生成签名</span>
                     <span class="feature-tag">一键复制结果</span>
-                    <span class="feature-tag">URL安全编码</span>
+                    <span class="feature-tag">HMAC签名验证</span>
                     <span class="feature-tag">完全免费</span>
                 </div>
-                <p>工具采用纯前端技术实现，所有Token解析和生成都在您的浏览器中完成，Token内容不会上传到任何服务器。这意味着您的敏感Token信息始终处于您的完全控制之下。同时，工具提供完整的JWT解析功能，包括Header和Payload的JSON格式化显示、签名格式验证、过期时间检测，帮助您全面了解Token状态，快速定位认证问题。
+                <p>工具采用纯前端技术实现，所有Token解析和生成都在您的浏览器中完成，Token内容不会上传到任何服务器。这意味着您的敏感Token信息始终处于您的完全控制之下。同时，工具提供完整的JWT解析功能，包括Header和Payload的JSON格式化显示、HMAC签名验证、过期时间检测，帮助您全面了解Token状态，快速定位认证问题。
                 </p>
 
                 <div class="warning-box">
                     <p><strong>注意事项：</strong></p>
                     <ul>
                         <li>解析JWT时请确保Token来源可信，勿解析来路不明的Token，Token可能包含敏感信息</li>
-                        <li>本工具仅解析JWT格式和验证签名格式，无法验证签名的真实有效性（需要密钥）</li>
+                        <li>本工具支持JWT解析和HMAC签名验证（需提供密钥）</li>
                         <li>JWT的Signature部分仅验证格式正确性，不代表Token是可信的</li>
                         <li>生成的随机Token仅供测试使用，不适合作为生产环境的API密钥</li>
                         <li>Token过期时间由发行方控制，本工具显示的是Token中声明的过期时间</li>
@@ -323,11 +325,17 @@
                     RSA签名：使用私钥签名，任何人可用公钥验证，但只有私钥持有者能签名。签名过程是：对Header和Payload的Base64URL字符串拼接后计算哈希，攻击者没有密钥无法计算出正确的签名值。本工具仅验证签名格式正确性（是否为有效的Base64URL编码的HMAC值），无法验证签名真实性（需要密钥）。
                 </p>
 
-                <h3>问：Base64和Base64URL有什么区别？</h3>
-                <p><strong>答：</strong>Base64和Base64URL的区别：1) 字符集：标准Base64使用A-Z、a-z、0-9、+、/，Base64URL使用A-Z、a-z、0-9、-、_；2)
+                <h3>问：JWT生成签名功能支持哪些算法？</h3>
+                <p><strong>答：</strong>本工具支持三种HMAC签名算法：1) HS256：使用SHA-256哈希算法，安全性高，适用于大多数场景，是默认推荐；2)
+                    HS384：使用SHA-384哈希算法，安全性更高，适用于对安全要求较高的场景；3)
+                    HS512：使用SHA-512哈希算法，安全性最高，但生成的签名较长。所有算法均使用对称密钥（Secret）进行签名，签名密钥应妥善保管，不要在不安全的环境中输入。</p>
+
+                <h3>问：Base64URL编码和标准Base64有什么区别？</h3>
+                <p><strong>答：</strong>Base64URL和标准Base64的区别：1)
+                    字符集：标准Base64使用A-Z、a-z、0-9、+、/，Base64URL使用A-Z、a-z、0-9、-、_；2)
                     URL兼容性：Base64的+和/在URL中具有特殊含义，Base64URL将它们替换为-和_，可直接用于URL参数；3)
                     填充规则：标准Base64通常需要=填充，Base64URL通常省略尾部=填充；4)
-                    JWT使用：JWT规范强制使用Base64URL编码，Header和Payload必须使用URL安全的字符集。本工具使用Base64URL编码，符合JWT规范要求。</p>
+                    JWT使用：JWT规范强制使用Base64URL编码，Header和Payload必须使用URL安全的字符集。本工具的JWT生成和解析均使用Base64URL编码，符合JWT规范要求。</p>
             </div>
         </div>
 

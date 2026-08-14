@@ -3,15 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="在线Token工具, JWT解析验证, Token随机生成, Base64编解码, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
-    <meta name="keywords" content="JWT解析, JWT验证, Token生成, 随机Token, Base64编码, Base64解码, JWT在线解码, 免费Token工具">
+    <meta name="description" content="在线Token工具, JWT解析验证, Token随机生成, JWT生成签名, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
+    <meta name="keywords" content="JWT解析, JWT验证, Token生成, 随机Token, JWT生成, JWT签名, JWT在线解码, 免费Token工具">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
     <meta name="robots" content="index, follow">
-    <title>Token在线工具 - JWT解析、Token生成、Base64编解码</title>
-    <meta property="og:title" content="Token在线工具 - JWT解析、Token生成、Base64编解码">
-    <meta property="og:description" content="在线Token工具, JWT解析验证, Token随机生成, Base64编解码, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
+    <title>Token在线工具 - JWT解析、Token生成、JWT签名</title>
+    <meta property="og:title" content="Token在线工具 - JWT解析、Token生成、JWT签名">
+    <meta property="og:description" content="在线Token工具, JWT解析验证, Token随机生成, JWT生成签名, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://helpoke.com/encrypted/token/">
     <meta property="og:site_name" content="Helpoke">
@@ -19,13 +22,15 @@
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Token在线工具 - JWT解析、Token生成、Base64编解码">
-    <meta name="twitter:description" content="在线Token工具, JWT解析验证, Token随机生成, Base64编解码, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
+    <meta name="twitter:title" content="Token在线工具 - JWT解析、Token生成、JWT签名">
+    <meta name="twitter:description" content="在线Token工具, JWT解析验证, Token随机生成, JWT生成签名, 支持JWT完整解码与过期校验, 离线工具保护数据安全">
     <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
     <link rel="canonical" href="https://helpoke.com/encrypted/token/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/token/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/token/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -33,668 +38,13 @@
     <script src="./lib/crypto-js.min.js"></script>
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <style>
-        @import '../../common/css/style.css';
-        @import '../../common/css/utils.css';
-    </style>
-    <style>
-        .container {
-            max-width: 100%;
-            padding: 40px 0;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 24px;
-            background: #fff;
-            border-radius: 10px;
-            padding: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px 20px;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn.active {
-            background: #4f46e5;
-            color: #fff;
-        }
-
-        .tab-btn:hover:not(.active) {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
-        }
-
-        .tool-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-            padding: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 8px;
-        }
-
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background-color: var(--input-bg);
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Courier New', Consolas, monospace;
-            resize: vertical;
-            min-height: 120px;
-            transition: border-color 0.2s;
-            line-height: 1.6;
-        }
-
-        .form-group textarea:focus,
-        .form-group input[type="text"]:focus,
-        .form-group input[type="number"]:focus,
-        .form-group input[type="password"]:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="number"],
-        .form-group input[type="password"] {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Courier New', Consolas, monospace;
-            transition: border-color 0.2s;
-        }
-
-        .options-row {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .option-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .option-group>label {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 0;
-            font-weight: 500;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: #475569;
-            cursor: pointer;
-            font-weight: 400;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: #475569;
-            cursor: pointer;
-            font-weight: 400;
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background: #4f46e5;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: #4338ca;
-        }
-
-        .btn-outline {
-            background: #fff;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-
-        .btn-outline:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-        }
-
-        .btn-success {
-            background: #10b981;
-            color: #fff;
-        }
-
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .result-section {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-
-        .result-section h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .result-content {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .result-content.json-block {
-            color: #1e293b;
-        }
-
-        .copy-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 8px 12px 8px 16px;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 13px;
-            word-break: break-all;
-        }
-
-        .copy-row .text {
-            flex: 1;
-            word-break: break-all;
-        }
-
-        .copy-icon-btn {
-            flex-shrink: 0;
-            width: 32px;
-            height: 32px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            background: #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s ease;
-            font-size: 14px;
-        }
-
-        .copy-icon-btn:hover {
-            background: #f1f5f9;
-            border-color: #cbd5e1;
-        }
-
-        .copy-icon-btn.copied {
-            background: #d1fae5;
-            border-color: #10b981;
-            color: #059669;
-        }
-
-        .jwt-claims-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .jwt-claims-table th {
-            text-align: left;
-            padding: 8px 12px;
-            background: #f1f5f9;
-            color: #475569;
-            font-weight: 600;
-            font-size: 12px;
-            width: 160px;
-        }
-
-        .jwt-claims-table td {
-            padding: 8px 12px;
-            border-bottom: 1px solid #f1f5f9;
-            font-family: 'Courier New', Consolas, monospace;
-            word-break: break-all;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .badge-ok {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .badge-warn {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .badge-err {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .badge-info {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .verify-result {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 16px;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .verify-result.pass {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-
-        .verify-result.fail {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-
-        .result-placeholder {
-            color: #94a3b8;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 24px 16px;
-            }
-
-            .tool-card {
-                padding: 20px;
-            }
-
-            .options-row {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .tabs {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .form-row {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .jwt-claims-table th {
-                width: 100px;
-            }
-
-            .btn {
-                padding: 8px 16px;
-                font-size: 13px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 16px 12px;
-            }
-
-            .tool-card {
-                padding: 16px;
-            }
-
-            .tabs {
-                padding: 4px;
-            }
-
-            .tab-btn {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .btn {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .form-group textarea {
-                min-height: 80px;
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-
-            .form-group input[type="text"],
-            .form-group input[type="number"],
-            .form-group input[type="password"] {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
-
-            .result-content {
-                padding: 10px 12px;
-                font-size: 12px;
-            }
-
-            .result-section {
-                padding: 14px;
-            }
-
-            .jwt-claims-table th {
-                width: 80px;
-                font-size: 11px;
-                padding: 6px 8px;
-            }
-
-            .jwt-claims-table td {
-                font-size: 12px;
-                padding: 6px 8px;
-            }
-
-            .radio-group label,
-            .checkbox-group label {
-                font-size: 12px;
-            }
-
-            .copy-row {
-                padding: 6px 10px;
-                font-size: 12px;
-            }
-        }
-
-        /* ==================== 夜间模式样式 ==================== */
-        body.dark-mode .tabs {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .tab-btn {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .tab-btn:hover:not(.active) {
-            background-color: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .tab-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        body.dark-mode .tool-card {
-            background-color: var(--bg-card);
-            box-shadow: var(--box-shadow);
-        }
-
-        body.dark-mode .form-group label {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .form-group textarea,
-        body.dark-mode .form-group input[type="text"],
-        body.dark-mode .form-group input[type="number"],
-        body.dark-mode .form-group input[type="password"] {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .form-group textarea:focus,
-        body.dark-mode .form-group input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
-
-        body.dark-mode .option-group label {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .radio-group label,
-        body.dark-mode .checkbox-group label {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .radio-group label input,
-        body.dark-mode .checkbox-group label input {
-            accent-color: var(--primary-color);
-        }
-
-        body.dark-mode .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        body.dark-mode .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        body.dark-mode .btn-outline {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .btn-outline:hover {
-            background-color: var(--border-color);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .btn-success {
-            background-color: #10b981;
-            color: white;
-        }
-
-        body.dark-mode .btn-success:hover {
-            background-color: #059669;
-        }
-
-        body.dark-mode .result-section {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .result-section h4 {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .result-content {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .copy-row {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .copy-row .text {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .copy-icon-btn {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .copy-icon-btn:hover {
-            background-color: var(--border-color);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .copy-icon-btn.copied {
-            background-color: rgba(16, 185, 129, 0.2);
-            border-color: #10b981;
-            color: #10b981;
-        }
-
-        body.dark-mode .jwt-claims-table th {
-            background-color: var(--bg-card);
-            color: var(--text-secondary);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .jwt-claims-table td {
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .badge-ok {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-        }
-
-        body.dark-mode .badge-warn {
-            background-color: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-        }
-
-        body.dark-mode .badge-err {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
-
-        body.dark-mode .badge-info {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: #3b82f6;
-        }
-
-        body.dark-mode .verify-result.pass {
-            background-color: rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.3);
-            color: #10b981;
-        }
-
-        body.dark-mode .verify-result.fail {
-            background-color: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: #ef4444;
-        }
-
-        body.dark-mode .result-placeholder {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode #base64-error {
-            color: #ef4444;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Token在线工具",
-        "description": "在线Token工具，支持JWT解析验证、Token随机生成、Base64编解码功能。离线工具，数据本地处理保护隐私。Online JWT parser and token generator.",
+        "description": "在线Token工具，支持JWT解析验证、Token随机生成、JWT生成签名功能。离线工具，数据本地处理保护隐私。Online JWT parser and token generator.",
         "url": "https://helpoke.com/encrypted/token",
         "applicationCategory": "https://schema.org/SecurityTool",
         "inLanguage": ["zh-CN", "en-US"],
@@ -702,7 +52,7 @@
             "JWT完整解码",
             "JWT过期时间校验",
             "随机Token生成",
-            "Base64编码解码 (Base64 encoding)",
+            "JWT生成签名 (JWT Generation)",
             "本地处理，保护隐私",
             "免费在线使用"
         ],
@@ -731,19 +81,19 @@
             <h1 data-i18n="encrypted.token.title">Token在线工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
-            <p data-i18n="encrypted.token.intro">Token在线工具，支持JWT解析验证（含签名与过期校验）、随机Token生成和Base64编解码</p>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.token.intro">Token在线工具，支持JWT解析验证（含签名与过期校验）、随机Token生成和JWT生成签名</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
             <div class="tabs">
-                <button class="tab-btn active" data-tab="jwt-decode" data-i18n="encrypted.token.tabJwtDecode">JWT 解析</button>
+                <button class="tab-btn" data-tab="jwt-gen" data-i18n="encrypted.token.tabJwtGen">JWT 生成</button>
+                <button class="tab-btn active" data-tab="jwt-decode" data-i18n="encrypted.token.tabJwtDecode">JWT
+                    解析</button>
                 <button class="tab-btn" data-tab="token-gen" data-i18n="encrypted.token.tabTokenGen">Token 生成</button>
-                <button class="tab-btn" data-tab="base64" data-i18n="encrypted.token.tabBase64">Base64 编解码</button>
             </div>
 
             <!-- ========== JWT 解析 ========== -->
@@ -761,10 +111,22 @@
                             placeholder="输入密钥以验证 HMAC 签名...">
                     </div>
 
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label data-i18n="encrypted.token.jwtDecodeAlgLabel">签名算法</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="jwt-decode-alg" value="auto" checked> <span
+                                    data-i18n="encrypted.token.jwtDecodeAlgAuto">自动（从 Header 读取）</span></label>
+                            <label><input type="radio" name="jwt-decode-alg" value="HS256"> HS256</label>
+                            <label><input type="radio" name="jwt-decode-alg" value="HS384"> HS384</label>
+                            <label><input type="radio" name="jwt-decode-alg" value="HS512"> HS512</label>
+                        </div>
+                    </div>
+
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="decodeJWT()" data-i18n="encrypted.token.jwtDecodeBtn">解析
+                        <button class="btn btn-primary" id="jwt-decode-btn" data-i18n="encrypted.token.jwtDecodeBtn">解析
                             JWT</button>
-                        <button class="btn btn-outline" onclick="clearJWT()" data-i18n="encrypted.token.clearBtn">清空</button>
+                        <button class="btn btn-outline" id="jwt-clear-btn"
+                            data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section" id="jwt-header-section" style="display:none;">
@@ -788,7 +150,7 @@
                         <h4 data-i18n="encrypted.token.jwtSignatureTitle">🔏 签名</h4>
                         <div class="copy-row">
                             <span class="text" id="jwt-signature-text"></span>
-                            <button class="copy-icon-btn" onclick="copyText('jwt-signature-text', this)"
+                            <button class="copy-icon-btn" id="jwt-signature-copy-btn"
                                 data-i18n-title="encrypted.token.copyTitle" title="复制">📋</button>
                         </div>
                     </div>
@@ -833,62 +195,118 @@
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="generateTokens()" data-i18n="encrypted.token.generateBtn">生成
+                        <button class="btn btn-primary" id="token-generate-btn"
+                            data-i18n="encrypted.token.generateBtn">生成
                             Token</button>
-                        <button class="btn btn-outline" onclick="clearTokens()" data-i18n="encrypted.token.clearBtn">清空</button>
+                        <button class="btn btn-outline" id="token-clear-btn"
+                            data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section" id="token-result-section">
                         <h4 data-i18n="encrypted.token.resultTitle">生成结果</h4>
                         <div id="token-result-container">
-                            <div class="result-content result-placeholder" data-i18n="encrypted.token.resultPlaceholder">等待生成...
+                            <div class="result-content result-placeholder"
+                                data-i18n="encrypted.token.resultPlaceholder">等待生成...
                             </div>
                         </div>
                         <div style="margin-top:12px;">
-                            <button class="btn btn-success" onclick="copyAllTokens()" id="token-copy-all-btn"
-                                style="display:none;" data-i18n="encrypted.token.copyAllBtn">复制全部 Token</button>
+                            <button class="btn btn-success" id="token-copy-all-btn" style="display:none;"
+                                data-i18n="encrypted.token.copyAllBtn">复制全部 Token</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Base64 编解码 ========== -->
-            <div id="tab-base64" class="tab-pane">
+            <!-- ========== JWT 生成 ========== -->
+            <div id="tab-jwt-gen" class="tab-pane">
                 <div class="tool-card">
                     <div class="form-group">
-                        <label for="base64-input" data-i18n="encrypted.token.base64InputLabel">输入文本</label>
-                        <textarea id="base64-input" data-i18n-placeholder="encrypted.token.base64InputPlaceholder"
-                            placeholder="请输入要编码/解码的文本..."></textarea>
+                        <label for="jwt-gen-secret" data-i18n="encrypted.token.jwtGenSecretLabel">签名密钥（Secret）</label>
+                        <input type="password" id="jwt-gen-secret"
+                            data-i18n-placeholder="encrypted.token.jwtGenSecretPlaceholder" placeholder="输入签名密钥...">
                     </div>
 
-                    <div class="option-group" style="margin-bottom:20px;">
-                        <label data-i18n="encrypted.token.base64ModeLabel">编码模式</label>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.token.jwtGenAlgLabel">签名算法</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="base64-mode" value="urlsafe" checked>
-                                <span data-i18n="encrypted.token.base64UrlLabel">Base64URL（URL安全）</span></label>
-                            <label><input type="radio" name="base64-mode" value="standard"> <span
-                                    data-i18n="encrypted.token.base64StandardLabel">Base64（标准）</span></label>
+                            <label><input type="radio" name="jwt-gen-alg" value="HS256" checked> HS256</label>
+                            <label><input type="radio" name="jwt-gen-alg" value="HS384"> HS384</label>
+                            <label><input type="radio" name="jwt-gen-alg" value="HS512"> HS512</label>
                         </div>
                     </div>
 
-                    <div class="btn-row">
-                        <button class="btn btn-primary" onclick="base64Encode()"
-                            data-i18n="encrypted.token.base64EncodeBtn">Base64 编码</button>
-                        <button class="btn btn-primary" onclick="base64Decode()"
-                            data-i18n="encrypted.token.base64DecodeBtn">Base64 解码</button>
-                        <button class="btn btn-outline" onclick="clearBase64()" data-i18n="encrypted.token.clearBtn">清空</button>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.token.jwtGenPayloadTitle">Payload（载荷）</label>
+                        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                            <div>
+                                <label for="jwt-gen-iss"
+                                    style="font-size:12px; font-weight:500; color:#64748b;">iss（签发者）</label>
+                                <input type="text" id="jwt-gen-iss"
+                                    data-i18n-placeholder="encrypted.token.jwtGenIssPlaceholder"
+                                    placeholder="例：helpoke.com">
+                            </div>
+                            <div>
+                                <label for="jwt-gen-sub"
+                                    style="font-size:12px; font-weight:500; color:#64748b;">sub（主题）</label>
+                                <input type="text" id="jwt-gen-sub"
+                                    data-i18n-placeholder="encrypted.token.jwtGenSubPlaceholder"
+                                    placeholder="例：user123">
+                            </div>
+                            <div>
+                                <label for="jwt-gen-aud"
+                                    style="font-size:12px; font-weight:500; color:#64748b;">aud（受众）</label>
+                                <input type="text" id="jwt-gen-aud"
+                                    data-i18n-placeholder="encrypted.token.jwtGenAudPlaceholder" placeholder="例：my-app">
+                            </div>
+                            <div>
+                                <label for="jwt-gen-jti" style="font-size:12px; font-weight:500; color:#64748b;">jti（JWT
+                                    ID）</label>
+                                <input type="text" id="jwt-gen-jti"
+                                    data-i18n-placeholder="encrypted.token.jwtGenJtiPlaceholder"
+                                    placeholder="例：unique-id-123">
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="base64-error" style="display:none;color:#ef4444;font-size:13px;margin-bottom:12px;"></div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="jwt-gen-iat" checked> <span
+                                data-i18n="encrypted.token.jwtGenIatLabel">iat（签发时间）- 自动填充当前时间</span></label>
+                        <label><input type="checkbox" id="jwt-gen-nbf"> <span
+                                data-i18n="encrypted.token.jwtGenNbfLabel">nbf（生效时间）- 自动填充当前时间</span></label>
+                        <label><input type="checkbox" id="jwt-gen-exp" checked> <span
+                                data-i18n="encrypted.token.jwtGenExpLabel">exp（过期时间）</span></label>
+                    </div>
 
-                    <div class="result-section">
-                        <h4 data-i18n="encrypted.token.outputTitle">输出结果</h4>
+                    <div class="form-group" id="jwt-gen-exp-group" style="display:none;">
+                        <label for="jwt-gen-exp-minutes"
+                            data-i18n="encrypted.token.jwtGenExpMinutesLabel">过期时间（分钟）</label>
+                        <input type="number" id="jwt-gen-exp-minutes" min="1" max="525600" value="60"
+                            data-i18n-placeholder="encrypted.token.jwtGenExpMinutesPlaceholder" placeholder="60">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jwt-gen-custom" data-i18n="encrypted.token.jwtGenCustomLabel">自定义 Claims（JSON
+                            格式，可选）</label>
+                        <textarea id="jwt-gen-custom" rows="3"
+                            data-i18n-placeholder="encrypted.token.jwtGenCustomPlaceholder"
+                            placeholder='例：{"name":"张三","role":"admin"}'></textarea>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="btn btn-primary" id="jwt-gen-btn" data-i18n="encrypted.token.jwtGenBtn">生成
+                            JWT</button>
+                        <button class="btn btn-outline" id="jwt-gen-clear-btn"
+                            data-i18n="encrypted.token.clearBtn">清空</button>
+                    </div>
+
+                    <div id="jwt-gen-error" style="display:none;color:#ef4444;font-size:13px;margin-top:12px;"></div>
+
+                    <div class="result-section" id="jwt-gen-result-section" style="display:none;">
+                        <h4 data-i18n="encrypted.token.jwtGenResultTitle">生成结果</h4>
                         <div class="copy-row">
-                            <span class="text result-placeholder" id="base64-output"
-                                data-i18n="encrypted.token.outputPlaceholder">等待操作...</span>
-                            <button class="copy-icon-btn" onclick="copyText('base64-output', this)"
-                                data-i18n-title="encrypted.token.copyTitle" title="复制" id="base64-copy-btn"
-                                style="display:none;">📋</button>
+                            <span class="text" id="jwt-gen-output" style="word-break:break-all;"></span>
+                            <button class="copy-icon-btn" id="jwt-gen-copy-btn"
+                                data-i18n-title="encrypted.token.copyTitle" title="复制">📋</button>
                         </div>
                     </div>
                 </div>
@@ -914,10 +332,16 @@
                             </ul>
                             <h4 data-i18n="encrypted.token.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="encrypted.token.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="encrypted.token.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="encrypted.token.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="encrypted.token.featureOnline">
+                                    <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
+                                </li>
+                                <li data-i18n="encrypted.token.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                                </li>
+                                <li data-i18n="encrypted.token.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
+                                </li>
+                                <li data-i18n="encrypted.token.featureSecurity">
+                                    <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -931,43 +355,60 @@
                             <ul>
                                 <li data-i18n="encrypted.token.usageJwtInput"><strong>输入JWT Token：</strong>在文本框中输入完整的JWT
                                     Token（格式：header.payload.signature）。</li>
-                                <li data-i18n="encrypted.token.usageJwtSecret"><strong>输入签名密钥（可选）：</strong>如果需要验证HMAC签名，输入密钥。</li>
-                                <li data-i18n="encrypted.token.usageJwtClick"><strong>点击解析：</strong>点击"解析 JWT"按钮解析Token的各个部分。</li>
-                                <li data-i18n="encrypted.token.usageJwtHeader"><strong>查看Header：</strong>显示Token的头部信息，包括算法和类型。
+                                <li data-i18n="encrypted.token.usageJwtSecret">
+                                    <strong>输入签名密钥（可选）：</strong>如果需要验证HMAC签名，输入密钥。
                                 </li>
-                                <li data-i18n="encrypted.token.usageJwtPayload"><strong>查看Payload：</strong>显示Token的载荷信息，包括用户数据和声明。
+                                <li data-i18n="encrypted.token.usageJwtClick"><strong>点击解析：</strong>点击"解析
+                                    JWT"按钮解析Token的各个部分。</li>
+                                <li data-i18n="encrypted.token.usageJwtHeader">
+                                    <strong>查看Header：</strong>显示Token的头部信息，包括算法和类型。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtPayload">
+                                    <strong>查看Payload：</strong>显示Token的载荷信息，包括用户数据和声明。
                                 </li>
                                 <li data-i18n="encrypted.token.usageJwtTime">
                                     <strong>查看时间校验：</strong>显示签发时间(iat)、过期时间(exp)、生效时间(nbf)等的状态。
                                 </li>
-                                <li data-i18n="encrypted.token.usageJwtSignature"><strong>查看签名：</strong>显示Token的签名部分，并可复制。</li>
+                                <li data-i18n="encrypted.token.usageJwtSignature">
+                                    <strong>查看签名：</strong>显示Token的签名部分，并可复制。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.token.usageTokenTitle">二、Token生成</h4>
                             <ul>
                                 <li data-i18n="encrypted.token.usageTokenLength">
                                     <strong>设置Token长度：</strong>设置生成Token的字符长度，范围为8-256位。
                                 </li>
-                                <li data-i18n="encrypted.token.usageTokenCount"><strong>设置生成数量：</strong>设置一次性生成的Token数量，范围为1-50个。
+                                <li data-i18n="encrypted.token.usageTokenCount">
+                                    <strong>设置生成数量：</strong>设置一次性生成的Token数量，范围为1-50个。
                                 </li>
-                                <li data-i18n="encrypted.token.usageTokenCharset"><strong>选择字符类型：</strong>可选择包含大写字母、小写字母、数字、特殊字符。
+                                <li data-i18n="encrypted.token.usageTokenCharset">
+                                    <strong>选择字符类型：</strong>可选择包含大写字母、小写字母、数字、特殊字符。
                                 </li>
-                                <li data-i18n="encrypted.token.usageTokenFormat"><strong>选择输出格式：</strong>可选择纯文本、Hex或Base64格式。</li>
-                                <li data-i18n="encrypted.token.usageTokenClick"><strong>点击生成：</strong>点击"生成 Token"按钮生成随机Token。
+                                <li data-i18n="encrypted.token.usageTokenFormat">
+                                    <strong>选择输出格式：</strong>可选择纯文本、Hex或Base64格式。
                                 </li>
-                                <li data-i18n="encrypted.token.usageTokenCopy"><strong>复制Token：</strong>点击复制按钮复制单个Token，或点击"复制全部
-                                    Token"复制所有Token。</li>
+                                <li data-i18n="encrypted.token.usageTokenClick"><strong>点击生成：</strong>点击"生成
+                                    Token"按钮生成随机Token。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenCopy">
+                                    <strong>复制Token：</strong>点击复制按钮复制单个Token，或点击"复制全部
+                                    Token"复制所有Token。
+                                </li>
                             </ul>
-                            <h4 data-i18n="encrypted.token.usageBase64Title">三、Base64编解码</h4>
+                            <h4 data-i18n="encrypted.token.usageJwtGenTitle">三、JWT生成</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.usageBase64Input"><strong>输入文本：</strong>在文本框中输入需要编码或解码的文本。</li>
-                                <li data-i18n="encrypted.token.usageBase64Mode">
-                                    <strong>选择编码模式：</strong>选择Base64URL（URL安全）或标准Base64模式。
-                                </li>
-                                <li data-i18n="encrypted.token.usageBase64Encode"><strong>点击编码：</strong>点击"Base64
-                                    编码"按钮将文本编码为Base64格式。</li>
-                                <li data-i18n="encrypted.token.usageBase64Decode"><strong>点击解码：</strong>点击"Base64
-                                    解码"按钮将Base64文本解码为原始文本。</li>
-                                <li data-i18n="encrypted.token.usageBase64Copy"><strong>复制结果：</strong>点击复制按钮将结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenSecret"><strong>输入签名密钥：</strong>输入用于签名的密钥，JWT
+                                    解析时需使用相同密钥验证。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenAlg"><strong>选择签名算法：</strong>选择 HS256、HS384 或
+                                    HS512 算法。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenPayload"><strong>填写载荷信息：</strong>填写
+                                    iss、sub、aud、jti 等标准声明。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenTime"><strong>设置时间声明：</strong>勾选
+                                    iat、nbf、exp，设置过期时间。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenCustom"><strong>自定义 Claims：</strong>在 JSON
+                                    格式中输入自定义声明。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenClick"><strong>点击生成：</strong>点击“生成 JWT”按钮生成签名的
+                                    JWT Token。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.usageJwtBasicTitle">四、JWT基础</h4>
                             <ul>
@@ -998,12 +439,14 @@
                             <h4 data-i18n="encrypted.token.notesSecurityTitle">一、数据安全</h4>
                             <ul>
                                 <li data-i18n="encrypted.token.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li data-i18n="encrypted.token.noteSecurity2">JWT的Payload部分只是Base64编码，不是加密，敏感信息不应存储在Payload中。</li>
+                                <li data-i18n="encrypted.token.noteSecurity2">
+                                    JWT的Payload部分只是Base64编码，不是加密，敏感信息不应存储在Payload中。</li>
                                 <li data-i18n="encrypted.token.noteSecurity3">生成的Token仅供参考，请勿直接用于生产环境，建议使用更安全的生成方式。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.notesJwtTitle">二、JWT解析</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteJwt1">JWT格式必须为三段式：header.payload.signature，缺少任何部分都会解析失败。</li>
+                                <li data-i18n="encrypted.token.noteJwt1">
+                                    JWT格式必须为三段式：header.payload.signature，缺少任何部分都会解析失败。</li>
                                 <li data-i18n="encrypted.token.noteJwt2">签名验证需要提供正确的密钥，否则验证将失败。</li>
                                 <li data-i18n="encrypted.token.noteJwt3">过期时间(exp)已过的Token会被标记为无效。</li>
                                 <li data-i18n="encrypted.token.noteJwt4">生效时间(nbf)未到的Token会被标记为警告。</li>
@@ -1016,19 +459,23 @@
                                 <li data-i18n="encrypted.token.noteToken3">特殊字符可能在某些场景下不兼容，如URL参数。</li>
                                 <li data-i18n="encrypted.token.noteToken4">批量生成时，建议每次生成不超过20个Token。</li>
                             </ul>
-                            <h4 data-i18n="encrypted.token.notesBase64Title">四、Base64编解码</h4>
+                            <h4 data-i18n="encrypted.token.notesJwtGenTitle">四、JWT生成</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteBase641">Base64URL格式将+替换为-，/替换为_，去掉末尾的=，适合URL传输。</li>
-                                <li data-i18n="encrypted.token.noteBase642">标准Base64格式包含+、/和=字符，不适合直接用于URL参数。</li>
-                                <li data-i18n="encrypted.token.noteBase643">解码时如果输入不是有效的Base64字符串，会显示错误信息。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen1">JWT 生成后，可使用“JWT 解析”功能解码验证。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen2">签名密钥应妥善保管，不要在不安全的环境中输入。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen3">建议设置合理的过期时间，避免 Token 长期有效。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen4">自定义 Claims 必须为合法的 JSON 格式。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteFaq1"><strong>JWT解析失败：</strong>检查Token格式是否正确，确保是三段式结构。</li>
+                                <li data-i18n="encrypted.token.noteFaq1">
+                                    <strong>JWT解析失败：</strong>检查Token格式是否正确，确保是三段式结构。
+                                </li>
                                 <li data-i18n="encrypted.token.noteFaq2"><strong>签名不匹配：</strong>检查密钥是否正确，算法是否匹配。</li>
                                 <li data-i18n="encrypted.token.noteFaq3"><strong>Token生成失败：</strong>请至少选择一种字符类型。</li>
                                 <li data-i18n="encrypted.token.noteFaq4"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
-                                <li data-i18n="encrypted.token.noteFaq5"><strong>Base64解码失败：</strong>检查输入是否为有效的Base64字符串。</li>
+                                <li data-i18n="encrypted.token.noteFaq5"><strong>JWT生成失败：</strong>检查密钥是否为空，自定义 Claims
+                                    是否为合法 JSON。</li>
                             </ul>
                         </div>
                     </article>
@@ -1058,344 +505,7 @@
     <script src="../../common/js/theme.js"></script>
     <script src="../../common/js/tools-data.js"></script>
     <script src="../../common/js/nav.js"></script>
-    <script>
-        // ===== Tab switching =====
-        document.querySelectorAll('.tab-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-                document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
-                btn.classList.add('active');
-                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-            });
-        });
-
-        // ===== JWT Decode =====
-        function base64UrlDecode(str) {
-            str = str.replace(/-/g, '+').replace(/_/g, '/');
-            while (str.length % 4) str += '=';
-            try {
-                return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
-                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                }).join(''));
-            } catch (e) {
-                return atob(str);
-            }
-        }
-
-        function decodeJWT() {
-            var input = document.getElementById('jwt-input').value.trim();
-            var secret = document.getElementById('jwt-secret').value.trim();
-
-            if (!input) {
-                utils.showError(window.t('encrypted.token.errEnterJwtToken'));
-                return;
-            }
-
-            var parts = input.split('.');
-            if (parts.length !== 3) {
-                utils.showError(window.t('encrypted.token.errJwtFormat'));
-                hideJWTSections();
-                return;
-            }
-
-            var headerJson, payloadJson, headerObj, payloadObj;
-            try {
-                headerJson = base64UrlDecode(parts[0]);
-                headerObj = JSON.parse(headerJson);
-            } catch (e) {
-                utils.showError(window.t('encrypted.token.errHeaderParse') + '：' + e.message);
-                hideJWTSections();
-                return;
-            }
-
-            try {
-                payloadJson = base64UrlDecode(parts[1]);
-                payloadObj = JSON.parse(payloadJson);
-            } catch (e) {
-                utils.showError(window.t('encrypted.token.errPayloadParse') + '：' + e.message);
-                hideJWTSections();
-                return;
-            }
-
-            // Header
-            document.getElementById('jwt-header-section').style.display = 'block';
-            document.getElementById('jwt-header-content').textContent = JSON.stringify(headerObj, null, 2);
-
-            // Payload
-            document.getElementById('jwt-payload-section').style.display = 'block';
-            document.getElementById('jwt-payload-content').textContent = JSON.stringify(payloadObj, null, 2);
-
-            // Time claims
-            var now = Math.floor(Date.now() / 1000);
-            var claimsHtml = '';
-            var allOk = true;
-
-            function addClaim(label, value, checkFn) {
-                var statusHtml = '';
-                var statusClass = '';
-                if (checkFn) {
-                    var result = checkFn(value);
-                    if (result === 'ok') { statusHtml = window.t('encrypted.token.statusValid'); statusClass = 'badge-ok'; }
-                    else if (result === 'warn') { statusHtml = window.t('encrypted.token.statusWarning'); statusClass = 'badge-warn'; allOk = false; }
-                    else { statusHtml = window.t('encrypted.token.statusInvalid'); statusClass = 'badge-err'; allOk = false; }
-                }
-                var timeStr = value ? new Date(value * 1000).toLocaleString('zh-CN') : '—';
-                claimsHtml += '<tr><th>' + label + '</th><td>' + (value || '—') + (value ? '（' + timeStr + '）' : '') + '</td><td>' + (statusHtml ? '<span class="badge ' + statusClass + '">' + statusHtml + '</span>' : '') + '</td></tr>';
-            }
-
-            addClaim(window.t('encrypted.token.claimIat'), payloadObj.iat, function (v) {
-                return v <= now ? 'ok' : 'warn';
-            });
-            addClaim(window.t('encrypted.token.claimExp'), payloadObj.exp, function (v) {
-                return v > now ? 'ok' : 'err';
-            });
-            addClaim(window.t('encrypted.token.claimNbf'), payloadObj.nbf, function (v) {
-                return v <= now ? 'ok' : 'warn';
-            });
-            addClaim(window.t('encrypted.token.claimNow'), now);
-            addClaim(window.t('encrypted.token.claimIss'), payloadObj.iss);
-            addClaim(window.t('encrypted.token.claimSub'), payloadObj.sub);
-            addClaim(window.t('encrypted.token.claimAud'), payloadObj.aud);
-            addClaim('JWT ID (jti)', payloadObj.jti);
-
-            document.getElementById('jwt-claims-section').style.display = 'block';
-            document.getElementById('jwt-claims-body').innerHTML = claimsHtml;
-
-            // Signature
-            document.getElementById('jwt-signature-section').style.display = 'block';
-            document.getElementById('jwt-signature-text').textContent = parts[2];
-
-            // Verify signature
-            var verifyEl = document.getElementById('jwt-verify-result');
-            if (secret) {
-                var alg = (headerObj.alg || 'HS256').replace('HS', 'SHA');
-                var data = parts[0] + '.' + parts[1];
-                var expectedSig = CryptoJS.HmacSHA256(data, secret).toString(CryptoJS.enc.Base64)
-                    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-                var expectedSig384, expectedSig512;
-
-                if (alg === 'SHA384') {
-                    expectedSig = CryptoJS.HmacSHA384(data, secret).toString(CryptoJS.enc.Base64)
-                        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-                } else if (alg === 'SHA512') {
-                    expectedSig = CryptoJS.HmacSHA512(data, secret).toString(CryptoJS.enc.Base64)
-                        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-                }
-
-                verifyEl.style.display = 'flex';
-                if (parts[2] === expectedSig) {
-                    verifyEl.className = 'verify-result pass';
-                    verifyEl.innerHTML = window.t('encrypted.token.verifyPass', { alg: headerObj.alg });
-                } else {
-                    verifyEl.className = 'verify-result fail';
-                    verifyEl.innerHTML = window.t('encrypted.token.verifyFail');
-                }
-            } else {
-                verifyEl.style.display = 'flex';
-                verifyEl.className = 'verify-result pass';
-                verifyEl.innerHTML = window.t('encrypted.token.verifySkip');
-            }
-        }
-
-        function hideJWTSections() {
-            ['jwt-header-section', 'jwt-payload-section', 'jwt-claims-section', 'jwt-signature-section'].forEach(function (id) {
-                document.getElementById(id).style.display = 'none';
-            });
-            document.getElementById('jwt-verify-result').style.display = 'none';
-        }
-
-        function clearJWT() {
-            document.getElementById('jwt-input').value = '';
-            document.getElementById('jwt-secret').value = '';
-            hideJWTSections();
-        }
-
-        // ===== Token Generate =====
-        function generateTokens() {
-            var length = parseInt(document.getElementById('token-length').value);
-            var count = parseInt(document.getElementById('token-count').value);
-            var includeUpper = document.getElementById('include-upper').checked;
-            var includeLower = document.getElementById('include-lower').checked;
-            var includeDigits = document.getElementById('include-digits').checked;
-            var includeSymbols = document.getElementById('include-symbols').checked;
-            var format = document.querySelector('input[name="token-format"]:checked').value;
-
-            if (length < 8 || length > 256) {
-                utils.showError(window.t('encrypted.token.errTokenLength'));
-                return;
-            }
-
-            var charset = '';
-            if (includeUpper) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            if (includeLower) charset += 'abcdefghijklmnopqrstuvwxyz';
-            if (includeDigits) charset += '0123456789';
-            if (includeSymbols) charset += '!@#$%^&*()-_=+[]{}|;:,.<>?/~`';
-
-            if (!charset) {
-                utils.showError(window.t('encrypted.token.errNoCharType'));
-                return;
-            }
-
-            var tokens = [];
-            for (var i = 0; i < count; i++) {
-                var raw = '';
-                var array = new Uint8Array(length);
-                crypto.getRandomValues(array);
-                for (var j = 0; j < length; j++) {
-                    raw += charset[array[j] % charset.length];
-                }
-                tokens.push(raw);
-            }
-
-            var container = document.getElementById('token-result-container');
-            var copyAllBtn = document.getElementById('token-copy-all-btn');
-
-            if (tokens.length === 1) {
-                container.innerHTML = '<div class="copy-row"><span class="text">' + escapeHtml(tokens[0]) + '</span><button class="copy-icon-btn" onclick="copySingleToken(this)" title="' + window.t('encrypted.token.titleCopy') + '">📋</button></div>';
-            } else {
-                var html = '';
-                tokens.forEach(function (t, idx) {
-                    html += '<div class="copy-row" style="margin-bottom:6px;"><span style="color:#94a3b8;margin-right:8px;">#' + (idx + 1) + '</span><span class="text">' + escapeHtml(t) + '</span><button class="copy-icon-btn" onclick="copySingleToken(this)" title="' + window.t('encrypted.token.titleCopy') + '">📋</button></div>';
-                });
-                container.innerHTML = html;
-            }
-
-            copyAllBtn.style.display = 'inline-block';
-        }
-
-        function copySingleToken(btn) {
-            var text = btn.parentElement.querySelector('.text').textContent;
-            navigator.clipboard.writeText(text).then(function () {
-                btn.classList.add('copied');
-                btn.textContent = '✓';
-                setTimeout(function () {
-                    btn.classList.remove('copied');
-                    btn.textContent = '📋';
-                }, 1500);
-                utils.showSuccess(window.t('encrypted.token.successCopied'));
-            }).catch(function () {
-                utils.showError(window.t('encrypted.token.errCopyFailed'));
-            });
-        }
-
-        function copyAllTokens() {
-            var texts = document.querySelectorAll('#token-result-container .text');
-            var all = '';
-            texts.forEach(function (t) { all += t.textContent + '\n'; });
-
-            if (!all.trim()) {
-                utils.showError(window.t('encrypted.token.errGenerateFirst'));
-                return;
-            }
-
-            navigator.clipboard.writeText(all.trim()).then(function () {
-                utils.showSuccess(window.t('encrypted.token.successCopiedAll'));
-            }).catch(function () {
-                utils.showError(window.t('encrypted.token.errCopyFailed'));
-            });
-        }
-
-        function clearTokens() {
-            document.getElementById('token-result-container').innerHTML = '<div class="result-content result-placeholder">' + window.t('encrypted.token.placeholderWaiting') + '</div>';
-            document.getElementById('token-copy-all-btn').style.display = 'none';
-        }
-
-        // ===== Base64 =====
-        function base64Encode() {
-            var input = document.getElementById('base64-input').value;
-            var mode = document.querySelector('input[name="base64-mode"]:checked').value;
-            var errorEl = document.getElementById('base64-error');
-            var outputEl = document.getElementById('base64-output');
-            var copyBtn = document.getElementById('base64-copy-btn');
-
-            errorEl.style.display = 'none';
-
-            if (!input) {
-                outputEl.textContent = window.t('encrypted.token.placeholderEnterText');
-                outputEl.className = 'text result-placeholder';
-                copyBtn.style.display = 'none';
-                return;
-            }
-
-            try {
-                var wordArray = CryptoJS.enc.Utf8.parse(input);
-                var encoded = mode === 'urlsafe'
-                    ? CryptoJS.enc.Base64url.stringify(wordArray)
-                    : CryptoJS.enc.Base64.stringify(wordArray);
-                outputEl.textContent = encoded;
-                outputEl.className = 'text';
-                copyBtn.style.display = 'flex';
-            } catch (e) {
-                errorEl.style.display = 'block';
-                errorEl.textContent = window.t('encrypted.token.errEncodeFailed') + '：' + e.message;
-            }
-        }
-
-        function base64Decode() {
-            var input = document.getElementById('base64-input').value.trim();
-            var mode = document.querySelector('input[name="base64-mode"]:checked').value;
-            var errorEl = document.getElementById('base64-error');
-            var outputEl = document.getElementById('base64-output');
-            var copyBtn = document.getElementById('base64-copy-btn');
-
-            errorEl.style.display = 'none';
-
-            if (!input) {
-                outputEl.textContent = window.t('encrypted.token.placeholderEnterText');
-                outputEl.className = 'text result-placeholder';
-                copyBtn.style.display = 'none';
-                return;
-            }
-
-            try {
-                var decoded;
-                if (mode === 'urlsafe') {
-                    decoded = CryptoJS.enc.Base64url.parse(input);
-                } else {
-                    decoded = CryptoJS.enc.Base64.parse(input);
-                }
-                var result = CryptoJS.enc.Utf8.stringify(decoded);
-                outputEl.textContent = result;
-                outputEl.className = 'text';
-                copyBtn.style.display = 'flex';
-            } catch (e) {
-                errorEl.style.display = 'block';
-                errorEl.textContent = window.t('encrypted.token.errDecodeFailed');
-            }
-        }
-
-        function clearBase64() {
-            document.getElementById('base64-input').value = '';
-            document.getElementById('base64-error').style.display = 'none';
-            var outputEl = document.getElementById('base64-output');
-            outputEl.textContent = window.t('encrypted.token.placeholderWaitingOp');
-            outputEl.className = 'text result-placeholder';
-            document.getElementById('base64-copy-btn').style.display = 'none';
-        }
-
-        // ===== Utilities =====
-        function copyText(elementId, btn) {
-            var text = document.getElementById(elementId).textContent;
-            if (!text || text === window.t('encrypted.token.placeholderWaitingOp')) return;
-            navigator.clipboard.writeText(text).then(function () {
-                btn.classList.add('copied');
-                btn.textContent = '✓';
-                setTimeout(function () {
-                    btn.classList.remove('copied');
-                    btn.textContent = '📋';
-                }, 1500);
-                utils.showSuccess(window.t('encrypted.token.successCopied'));
-            }).catch(function () {
-                utils.showError(window.t('encrypted.token.errCopyFailed'));
-            });
-        }
-
-        function escapeHtml(text) {
-            var div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
 

@@ -1,0 +1,391 @@
+        .container {
+            padding: 40px 20px;
+            max-width: 1400px;
+            box-sizing: border-box;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 0;
+            margin-left: auto;
+        }
+
+        .mode-selector button {
+            padding: 6px 14px;
+            border: 1px solid #eaeaea;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.2s;
+        }
+
+        .mode-selector button:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .mode-selector button:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .mode-selector button.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .mode-selector button:hover:not(.active) {
+            background: #f5f5f5;
+        }
+
+        .converter-layout {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .input-panel, .output-panel {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .panel-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .panel-btn {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .panel-btn:hover {
+            background: #f5f5f5;
+            border-color: #999;
+        }
+
+        .panel-btn.copy-btn {
+            color: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .panel-btn.copy-btn:hover {
+            background: #27ae60;
+            color: white;
+        }
+
+        .panel-btn.copy-btn.copied {
+            background: #1e8449;
+            color: white;
+            border-color: #1e8449;
+        }
+
+        .panel-btn.clear-btn {
+            color: #95a5a6;
+            border-color: #95a5a6;
+        }
+
+        .panel-btn.clear-btn:hover {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 600px;
+            padding: 12px;
+            background-color: var(--input-bg);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .convert-btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-convert {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-convert:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .btn-convert.encode-btn {
+            background: #3498db;
+        }
+
+        .btn-convert.encode-btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-convert.decode-btn {
+            background: #27ae60;
+        }
+
+        .btn-convert.decode-btn:hover {
+            background: #229954;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-clear {
+            background-color: #95a5a6;
+        }
+
+        .btn-clear:hover {
+            background-color: #7f8c8d;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .converter-layout {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .convert-btn-wrapper {
+                justify-content: center;
+                flex-direction: row;
+            }
+
+            .btn-convert {
+                transform: none !important;
+            }
+
+            textarea {
+                min-height: 300px;
+            }
+
+            .panel-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .panel-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .mode-selector {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mode-selector button {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tool-card {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .top-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* ==================== 夜间模式样式 ==================== */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .panel-label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-convert.encode-btn {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-convert.encode-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        body.dark-mode .btn-convert.decode-btn {
+            background-color: #27ae60;
+        }
+
+        body.dark-mode .btn-convert.decode-btn:hover {
+            background-color: #229954;
+        }
+
+        body.dark-mode .btn-clear {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .btn-clear:hover {
+            background-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .panel-btn {
+            background: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .panel-btn:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .panel-btn.copy-btn {
+            color: #27ae60;
+            border-color: #27ae60;
+        }
+
+        body.dark-mode .panel-btn.copy-btn:hover {
+            background: #27ae60;
+            color: white;
+        }
+
+        body.dark-mode .panel-btn.clear-btn {
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .panel-btn.clear-btn:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .mode-selector button {
+            background: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        body.dark-mode .mode-selector button.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .mode-selector button:hover:not(.active) {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .char-count {
+            color: var(--text-secondary);
+        }

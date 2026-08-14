@@ -8,6 +8,9 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Base64 编解码工具 - Helpoke 助点站</title>
     <meta property="og:title" content="Base64 编解码工具 - Helpoke 助点站">
@@ -25,7 +28,9 @@
     <link rel="canonical" href="https://helpoke.com/encrypted/encoding-base64/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/encoding-base64/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/encoding-base64/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
         crossorigin="anonymous"></script>
@@ -34,361 +39,7 @@
         @import '../../common/css/utils.css';
     </style>
     <script src="../../common/js/i18n/i18n.js"></script>
-    <style>
-        .container {
-            padding: 40px 20px;
-            max-width: 1200px;
-            box-sizing: border-box;
-        }
-
-        .tool-card {
-            background-color: var(--bg-card);
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 32px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #eaeaea;
-            margin-bottom: 24px;
-        }
-
-        .tab-btn {
-            padding: 12px 24px;
-            border: none;
-            background: none;
-            font-size: 15px;
-            font-weight: 600;
-            color: #7f8c8d;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-            transition: all 0.2s;
-        }
-
-        .tab-btn:hover {
-            color: #3498db;
-        }
-
-        .tab-btn.active {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 320px;
-            padding: 12px;
-            background-color: var(--input-bg);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            resize: vertical;
-            transition: border-color 0.2s;
-            box-sizing: border-box;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-        }
-
-        .btn-copy {
-            background-color: #27ae60;
-        }
-
-        .btn-copy:hover {
-            background-color: #229954;
-        }
-
-        .btn-copy.copied {
-            background-color: #1e8449;
-        }
-
-        .btn-swap {
-            background: #f8f9fa;
-            border: 1px solid #eaeaea;
-            color: #555;
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s;
-            line-height: 1;
-        }
-
-        .btn-swap:hover {
-            background: #eef2f7;
-            color: #2c3e50;
-        }
-
-        .actions-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .file-input {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-input-label {
-            display: inline-block;
-            background-color: #9b59b6;
-            color: white;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .file-input-wrapper:hover .file-input-label {
-            background-color: #8e44ad;
-        }
-
-        .file-info {
-            margin-top: 10px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #666;
-        }
-
-        .file-name {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .file-size {
-            color: #7f8c8d;
-            margin-left: 10px;
-        }
-
-        .result-area {
-            margin-top: 20px;
-            padding: 16px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #eaeaea;
-        }
-
-        .result-area h4 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
-            color: #2c3e50;
-        }
-
-        .result-content {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 13px;
-            word-break: break-all;
-            max-height: 300px;
-            overflow-y: auto;
-            background: white;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-        }
-
-        .error-msg {
-            color: #e74c3c;
-            font-size: 13px;
-            margin-top: 8px;
-        }
-
-        .success-msg {
-            color: #27ae60;
-            font-size: 13px;
-            margin-top: 8px;
-        }
-
-        @media (max-width: 600px) {
-            .tool-card {
-                padding: 20px;
-                margin: 0 10px;
-            }
-
-            .actions-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        /* ==================== 夜间模式样式 ==================== */
-        body.dark-mode .tool-card {
-            background-color: var(--bg-card);
-            box-shadow: var(--box-shadow);
-        }
-
-        body.dark-mode .tabs {
-            border-bottom-color: var(--border-color);
-        }
-
-        body.dark-mode .tab-btn {
-            color: var(--text-secondary);
-            border-color: transparent;
-        }
-
-        body.dark-mode .tab-btn:hover {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .tab-btn.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-        }
-
-        body.dark-mode .input-group label {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode textarea {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
-
-        body.dark-mode .btn {
-            background-color: var(--primary-color);
-        }
-
-        body.dark-mode .btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        body.dark-mode .btn-copy {
-            background-color: #10b981;
-        }
-
-        body.dark-mode .btn-copy:hover {
-            background-color: #059669;
-        }
-
-        body.dark-mode .btn-copy.copied {
-            background-color: #047857;
-        }
-
-        body.dark-mode .btn-swap {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .btn-swap:hover {
-            background-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .file-info {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .file-name {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .file-size {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .result-area {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .result-area h4 {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .result-content {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-            color: #ffffff !important;
-        }
-
-        body.dark-mode .result-content pre {
-            background-color: transparent;
-            color: #ffffff !important;
-        }
-
-        body.dark-mode .result-content img {
-            border: 1px solid var(--border-color);
-        }
-
-        body.dark-mode .result-content strong {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .result-content pre[style*="background: #f5f5f5"],
-        body.dark-mode .result-content pre[style*="background:#f5f5f5"] {
-            background-color: var(--bg-tertiary) !important;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -430,9 +81,8 @@
             <h1 data-i18n="encrypted.encoding-base64.title">Base64编码工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="encrypted.encoding-base64.intro">Base64编码工具，支持文本和文件的Base64编码与解码，编码解码一键切换</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -440,107 +90,63 @@
 
         <div class="container">
             <div class="tool-card">
-
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="text-encode"
-                        data-i18n="encrypted.encoding-base64.tabTextEncode">文本编码</button>
-                    <button class="tab-btn" data-tab="text-decode"
-                        data-i18n="encrypted.encoding-base64.tabTextDecode">文本解码</button>
-                    <button class="tab-btn" data-tab="file-encode"
-                        data-i18n="encrypted.encoding-base64.tabFileEncode">文件编码</button>
-                    <button class="tab-btn" data-tab="file-decode"
-                        data-i18n="encrypted.encoding-base64.tabFileDecode">文件解码</button>
-                </div>
-
-                <div id="text-encode" class="tab-content active">
-                    <div class="input-group">
-                        <label for="encode-text" data-i18n="encrypted.encoding-base64.encodeLabel">输入文本</label>
-                        <textarea id="encode-text" data-i18n-placeholder="encrypted.encoding-base64.encodePlaceholder"
-                            placeholder="请输入要编码的文本..."></textarea>
+                <!-- 顶部操作按钮 -->
+                <div class="top-actions">
+                    <button class="btn btn-clear" id="clear-all-btn"
+                        data-i18n="encrypted.encoding-base64.clearAllBtn">全部清空</button>
+                    <div class="file-input-wrapper">
+                        <input type="file" class="file-input" id="file-input">
+                        <span class="file-input-label" data-i18n="encrypted.encoding-base64.selectFile">选择文件</span>
                     </div>
-                    <div class="actions-row">
-                        <button class="btn" id="encode-btn" data-i18n="encrypted.encoding-base64.encodeBtn">编码</button>
-                        <button class="btn btn-copy" id="copy-encoded-btn" style="display: none;"
-                            data-i18n="encrypted.encoding-base64.copyResult">复制结果</button>
-                        <button class="btn btn-swap" id="swap-encode-decode"
-                            data-i18n-title="encrypted.encoding-base64.swapToDecode" title="切换到解码">⇄</button>
-                    </div>
-                    <div class="result-area" id="encode-result" style="display: none;">
-                        <h4 data-i18n="encrypted.encoding-base64.encodeResult">编码结果</h4>
-                        <div class="result-content" id="encoded-text"></div>
+                    <button class="btn btn-download" id="download-result-btn" style="display: none;"
+                        data-i18n="encrypted.encoding-base64.downloadResult">下载结果</button>
+                    <div class="mode-selector">
+                        <button class="active" data-mode="standard" id="mode-standard" data-i18n="encrypted.encoding-base64.modeStandard">Base64（标准）</button>
+                        <button data-mode="url" id="mode-url" data-i18n="encrypted.encoding-base64.modeUrl">Base64URL（URL安全）</button>
                     </div>
                 </div>
-
-                <div id="text-decode" class="tab-content">
-                    <div class="input-group">
-                        <label for="decode-text" data-i18n="encrypted.encoding-base64.decodeLabel">输入 Base64 文本</label>
-                        <textarea id="decode-text" data-i18n-placeholder="encrypted.encoding-base64.decodePlaceholder"
-                            placeholder="请输入 Base64 字符串..."></textarea>
-                    </div>
-                    <div class="actions-row">
-                        <button class="btn" id="decode-btn" data-i18n="encrypted.encoding-base64.decodeBtn">解码</button>
-                        <button class="btn btn-copy" id="copy-decoded-btn" style="display: none;"
-                            data-i18n="encrypted.encoding-base64.copyResult">复制结果</button>
-                        <button class="btn btn-swap" id="swap-decode-encode"
-                            data-i18n-title="encrypted.encoding-base64.swapToEncode" title="切换到编码">⇄</button>
-                    </div>
-                    <div class="result-area" id="decode-result" style="display: none;">
-                        <h4 data-i18n="encrypted.encoding-base64.decodeResult">解码结果</h4>
-                        <div class="result-content" id="decoded-text"></div>
-                    </div>
+                <div class="file-info" id="file-info" style="display: none;">
+                    <span class="file-name" id="file-name"></span>
+                    <span class="file-size" id="file-size"></span>
                 </div>
 
-                <div id="file-encode" class="tab-content">
-                    <div class="input-group">
-                        <label data-i18n="encrypted.encoding-base64.selectFile">选择文件</label>
-                        <div class="file-input-wrapper">
-                            <input type="file" class="file-input" id="file-to-encode">
-                            <span class="file-input-label" data-i18n="encrypted.encoding-base64.selectFile">选择文件</span>
+                <!-- 左右布局：输入框 + 转换按钮 + 输出框 -->
+                <div class="converter-layout">
+                    <div class="input-panel">
+                        <div class="panel-header">
+                            <div class="panel-label" data-i18n="encrypted.encoding-base64.inputLabel">原文</div>
+                            <div class="panel-actions">
+                                <button class="panel-btn copy-btn" id="copy-input-btn"
+                                    data-i18n="encrypted.encoding-base64.copyBtn">复制</button>
+                                <button class="panel-btn clear-btn" id="clear-input-btn"
+                                    data-i18n="encrypted.encoding-base64.clearBtn">清空</button>
+                            </div>
                         </div>
-                        <div class="file-info" id="file-encode-info" style="display: none;">
-                            <span class="file-name" id="file-encode-name"></span>
-                            <span class="file-size" id="file-encode-size"></span>
+                        <textarea id="input-text" data-i18n-placeholder="encrypted.encoding-base64.inputPlaceholder"
+                            placeholder="请输入文本或上传文件..."></textarea>
+                    </div>
+                    <div class="convert-btn-wrapper">
+                        <button class="btn-convert encode-btn" id="encode-btn" title="编码"
+                            data-i18n-title="encrypted.encoding-base64.encodeBtn">→</button>
+                        <button class="btn-convert decode-btn" id="decode-btn" title="解码"
+                            data-i18n-title="encrypted.encoding-base64.decodeBtn">←</button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="panel-header">
+                            <div class="panel-label" data-i18n="encrypted.encoding-base64.outputLabel">Base64 编码</div>
+                            <div class="panel-actions">
+                                <button class="panel-btn copy-btn" id="copy-output-btn"
+                                    data-i18n="encrypted.encoding-base64.copyBtn">复制</button>
+                                <button class="panel-btn clear-btn" id="clear-output-btn"
+                                    data-i18n="encrypted.encoding-base64.clearBtn">清空</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="actions-row">
-                        <button class="btn" id="encode-file-btn" disabled
-                            data-i18n="encrypted.encoding-base64.encodeFileBtn">编码文件</button>
-                        <button class="btn btn-copy" id="copy-encoded-file-btn" style="display: none;"
-                            data-i18n="encrypted.encoding-base64.copyResult">复制结果</button>
-                        <button class="btn btn-copy" id="download-encoded-btn" style="display: none;"
-                            data-i18n="encrypted.encoding-base64.downloadResult">下载结果</button>
-                    </div>
-                    <div class="result-area" id="file-encode-result" style="display: none;">
-                        <h4 data-i18n="encrypted.encoding-base64.encodeResult">编码结果</h4>
-                        <div class="result-content" id="encoded-file-content"></div>
+                        <textarea id="output-text" data-i18n-placeholder="encrypted.encoding-base64.outputPlaceholder"
+                            placeholder="Base64 编码将显示在这里..."></textarea>
                     </div>
                 </div>
 
-                <div id="file-decode" class="tab-content">
-                    <div class="input-group">
-                        <label for="file-to-decode" data-i18n="encrypted.encoding-base64.decodeFileLabel">选择 Base64 文件</label>
-                        <div class="file-input-wrapper">
-                            <input type="file" class="file-input" id="file-to-decode" accept=".txt,.base64">
-                            <span class="file-input-label" data-i18n="encrypted.encoding-base64.selectFile">选择文件</span>
-                        </div>
-                        <div class="file-info" id="file-decode-info" style="display: none;">
-                            <span class="file-name" id="file-decode-name"></span>
-                            <span class="file-size" id="file-decode-size"></span>
-                        </div>
-                    </div>
-                    <div class="actions-row">
-                        <button class="btn" id="decode-file-btn" disabled
-                            data-i18n="encrypted.encoding-base64.decodeFileBtn">解码文件</button>
-                        <button class="btn btn-copy" id="copy-decoded-file-btn" style="display: none;"
-                            data-i18n="encrypted.encoding-base64.copyResult">复制结果</button>
-                        <button class="btn btn-copy" id="download-decoded-btn" style="display: none;"
-                            data-i18n="encrypted.encoding-base64.downloadResult">下载结果</button>
-                    </div>
-                    <div class="result-area" id="file-decode-result" style="display: none;">
-                        <h4 data-i18n="encrypted.encoding-base64.decodeResultPreview">解码结果预览</h4>
-                        <div class="result-content" id="decoded-file-preview"></div>
-                    </div>
-                </div>
+                <div id="error-message" class="error-msg" style="display: none;"></div>
 
                 <div class="info-section">
                     <article class="info-details">
@@ -556,18 +162,24 @@
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.formatTitle">二、支持的格式</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.formatBase64"><strong>Base64：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="encrypted.encoding-base64.formatBase64">
+                                    <strong>Base64：</strong>支持该格式的完整处理功能。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.featuresTitle">三、核心功能</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.featureOnline">
-                                    <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="encrypted.encoding-base64.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                                    <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
                                 </li>
-                                <li data-i18n="encrypted.encoding-base64.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
+                                <li data-i18n="encrypted.encoding-base64.featurePreview">
+                                    <strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.featureExport">
+                                    <strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
                                 </li>
                                 <li data-i18n="encrypted.encoding-base64.featureSecurity">
-                                    <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                    <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -580,57 +192,77 @@
                             <h4 data-i18n="encrypted.encoding-base64.usageTextEncodeTitle">一、文本编码</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.usageTextEncodeInput">
-                                    <strong>输入文本：</strong>在文本框中输入需要编码的文本内容。</li>
+                                    <strong>输入文本：</strong>在文本框中输入需要编码的文本内容。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageTextEncodeClick">
-                                    <strong>点击编码：</strong>点击"编码"按钮，将文本转换为Base64格式。</li>
+                                    <strong>点击编码：</strong>点击"编码"按钮，将文本转换为Base64格式。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.copyResultDesc">
-                                    <strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。</li>
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageTextEncodeSwap">
-                                    <strong>切换模式：</strong>点击双向箭头按钮可以快速切换到文本解码模式。</li>
+                                    <strong>切换模式：</strong>点击双向箭头按钮可以快速切换到文本解码模式。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageTextDecodeTitle">二、文本解码</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.usageTextDecodeInput">
-                                    <strong>输入Base64：</strong>在文本框中输入Base64编码的字符串。</li>
+                                    <strong>输入Base64：</strong>在文本框中输入Base64编码的字符串。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageTextDecodeClick">
-                                    <strong>点击解码：</strong>点击"解码"按钮，将Base64字符串还原为原始文本。</li>
+                                    <strong>点击解码：</strong>点击"解码"按钮，将Base64字符串还原为原始文本。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageTextDecodeCopy">
-                                    <strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。</li>
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将解码结果复制到剪贴板。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageTextDecodeSwap">
-                                    <strong>切换模式：</strong>点击双向箭头按钮可以快速切换到文本编码模式。</li>
+                                    <strong>切换模式：</strong>点击双向箭头按钮可以快速切换到文本编码模式。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageFileEncodeTitle">三、文件编码</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.usageFileEncodeSelect">
-                                    <strong>选择文件：</strong>点击"选择文件"按钮，选择需要编码的文件。</li>
+                                    <strong>选择文件：</strong>点击"选择文件"按钮，选择需要编码的文件。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageFileEncodeClick">
-                                    <strong>点击编码：</strong>点击"编码文件"按钮，将文件转换为Base64格式。</li>
+                                    <strong>点击编码：</strong>点击"编码文件"按钮，将文件转换为Base64格式。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.copyResultDesc">
-                                    <strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。</li>
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageFileEncodeDownload">
-                                    <strong>下载结果：</strong>点击"下载结果"按钮将Base64编码保存为文件。</li>
+                                    <strong>下载结果：</strong>点击"下载结果"按钮将Base64编码保存为文件。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageFileDecodeTitle">四、文件解码</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.usageFileDecodeSelect">
-                                    <strong>选择文件：</strong>点击"选择文件"按钮，选择包含Base64编码的文本文件。</li>
+                                    <strong>选择文件：</strong>点击"选择文件"按钮，选择包含Base64编码的文本文件。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageFileDecodeClick">
-                                    <strong>点击解码：</strong>点击"解码文件"按钮，将Base64编码还原为原始文件。</li>
+                                    <strong>点击解码：</strong>点击"解码文件"按钮，将Base64编码还原为原始文件。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageFileDecodePreview">
-                                    <strong>预览结果：</strong>解码后的文件会在结果区域预览（图片文件会显示预览图）。</li>
+                                    <strong>预览结果：</strong>解码后的文件会在结果区域预览（图片文件会显示预览图）。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageFileDecodeDownload">
-                                    <strong>下载结果：</strong>点击"下载结果"按钮将解码后的文件保存到本地。</li>
+                                    <strong>下载结果：</strong>点击"下载结果"按钮将解码后的文件保存到本地。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageBasicsTitle">五、Base64 基础</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.usageBasicsPrinciple">
-                                    <strong>编码原理：</strong>Base64将二进制数据编码为ASCII字符，便于在文本协议中传输。</li>
+                                    <strong>编码原理：</strong>Base64将二进制数据编码为ASCII字符，便于在文本协议中传输。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageBasicsCharset">
-                                    <strong>字符集：</strong>使用64个字符（A-Z、a-z、0-9、+、/）和填充符（=）。</li>
+                                    <strong>字符集：</strong>使用64个字符（A-Z、a-z、0-9、+、/）和填充符（=）。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageBasicsSize">
-                                    <strong>编码后大小：</strong>编码后的数据大小约为原始数据的1.33倍。</li>
+                                    <strong>编码后大小：</strong>编码后的数据大小约为原始数据的1.33倍。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.usageBasicsUsage">
-                                    <strong>用途：</strong>常用于邮件附件、图片内嵌、URL参数传递等场景。</li>
+                                    <strong>用途：</strong>常用于邮件附件、图片内嵌、URL参数传递等场景。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -641,8 +273,10 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-base64.notesFormatTitle">一、格式规范</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.noteFormat1">Base64字符串仅包含A-Z、a-z、0-9、+、/和=字符。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFormat2">解码时请确保输入的Base64字符串格式正确，否则会提示解码失败。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFormat1">Base64字符串仅包含A-Z、a-z、0-9、+、/和=字符。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.noteFormat2">解码时请确保输入的Base64字符串格式正确，否则会提示解码失败。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.noteFormat3">文件编码后会生成非常长的字符串，大文件不建议使用此方法。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.notesSizeTitle">二、文件大小限制</h4>
@@ -654,17 +288,24 @@
                             <h4 data-i18n="encrypted.encoding-base64.notesSecurityTitle">三、数据安全</h4>
                             <ul>
                                 <li data-i18n="encrypted.encoding-base64.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteSecurity2">Base64不是加密算法，只是一种编码方式，编码后的数据可以被任何人解码。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteSecurity3">不要使用Base64传输敏感信息，敏感数据需要使用加密算法进行加密。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSecurity2">
+                                    Base64不是加密算法，只是一种编码方式，编码后的数据可以被任何人解码。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSecurity3">
+                                    不要使用Base64传输敏感信息，敏感数据需要使用加密算法进行加密。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.notesFaqTitle">四、常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq1"><strong>解码失败：</strong>检查Base64字符串是否完整，是否包含非法字符。
+                                <li data-i18n="encrypted.encoding-base64.noteFaq1">
+                                    <strong>解码失败：</strong>检查Base64字符串是否完整，是否包含非法字符。
                                 </li>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq2"><strong>文件损坏：</strong>编码过程中断可能导致文件损坏，建议重新上传。
+                                <li data-i18n="encrypted.encoding-base64.noteFaq2">
+                                    <strong>文件损坏：</strong>编码过程中断可能导致文件损坏，建议重新上传。
                                 </li>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq3"><strong>编码缓慢：</strong>大文件编码时间较长，请耐心等待。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq4"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFaq3">
+                                    <strong>编码缓慢：</strong>大文件编码时间较长，请耐心等待。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.noteFaq4"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。
+                                </li>
                             </ul>
                         </div>
                     </article>

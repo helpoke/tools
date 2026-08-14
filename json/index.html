@@ -8,6 +8,9 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>JSON在线格式化对比工具</title>
     <meta property="og:title" content="JSON在线格式化对比工具">
@@ -30,7 +33,9 @@
     <link rel="stylesheet" href="../common/css/utils.css">
     <link rel="stylesheet" href="../common/css/i18n.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous">
 
     <!-- i18n Script -->
     <script src="../common/js/i18n/i18n.js"></script>
@@ -107,7 +112,7 @@
             <h1 data-i18n="tool.json.title">JSON工具集</h1>
             <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与
                     FAQ</span></a>
-            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" title="to home"><span
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
                     data-i18n="common.buttons.backHome">返回首页</span></a>
             <p data-i18n="tool.json.desc">JSON工具集，包含格式化、比对、Java Bean互转、XML互转、压缩等功能，支持节点折叠与差异高亮，支持语法校验</p>
             <p class="description" data-i18n="common.privacyNote">
@@ -226,7 +231,7 @@
                         <div class="compare-header">
                             <h2 data-i18n="tool.json.convert.jsonToXml">JSON 转 XML</h2>
                             <div class="button-group">
-                                <button id="json-to-xml-btn" data-i18n="common.buttons.toJson">转XML</button>
+                                <button id="json-to-xml-btn" data-i18n="common.buttons.toXml">转XML</button>
                                 <button id="xml-to-json-btn" data-i18n="common.buttons.toJson">转JSON</button>
                                 <button id="sync-clear-xml-btn" data-i18n="common.buttons.syncClear">同步清空</button>
                             </div>

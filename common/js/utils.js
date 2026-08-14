@@ -3,6 +3,24 @@
  */
 
 /**
+ * HTML转义函数（安全方式，不使用innerHTML，避免XSS风险）
+ * 将特殊字符转义为HTML实体，防止用户输入被当作HTML/脚本执行
+ * 如果页面工具脚本已定义本地版本（如 json/script.js），保留本地版本
+ * @param {*} text - 需要转义的文本
+ * @returns {string} 转义后的安全字符串
+ */
+if (typeof window.escapeHtml !== 'function') {
+    window.escapeHtml = function(text) {
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    };
+}
+
+/**
  * 多语言：动态文本翻译统一入口
  * 优先使用 i18n 的 window.t（i18n.js 已加载时）；i18n 未加载时兜底返回 key 原文，避免报错。
  * 各工具脚本无需再各自定义翻译辅助函数。
@@ -191,6 +209,29 @@ function formatDuration(seconds) {
 function showFileSizeToast(file, maxFileSize) {
     showError(`文件大小超过限制（最大 ${formatSize(maxFileSize)}）。当前：${formatSize(file.size)}`);
 }
+
+// ================= goHome 返回首页按钮事件绑定 =================
+// 所有工具页的"返回首页"链接统一使用 id="back-home-link"，
+// 此处通过事件监听替代内联 onclick，符合 CSP 安全规范
+(function bindGoHome() {
+    function setup() {
+        var link = document.getElementById('back-home-link');
+        if (link && !link._goHomeBound) {
+            link._goHomeBound = true;
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (typeof window.goHome === 'function') {
+                    window.goHome();
+                }
+            });
+        }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setup);
+    } else {
+        setup();
+    }
+})();
 
 // ================= info-section 折叠功能 =================
 /**
