@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google; frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
     <meta name="robots" content="index, follow">
     <title>SQL格式化工具 - Helpoke 助点站</title>
     <meta property="og:title" content="SQL格式化工具 - Helpoke 助点站">
@@ -240,6 +240,29 @@
             color: #fd7e14;
         }
 
+        .output-highlight {
+            width: 100%;
+            min-height: 600px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            box-sizing: border-box;
+            background: var(--input-bg, #fff);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-y: auto;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .output-highlight:empty::before {
+            content: attr(data-placeholder);
+            color: #94a3b8;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 24px 16px;
@@ -366,13 +389,10 @@
             border-color: var(--border-color);
         }
 
-        body.dark-mode .output-textarea {
+        body.dark-mode .output-highlight {
             background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
             color: var(--text-primary);
-        }
-
-        body.dark-mode .output-textarea:focus {
-            background-color: var(--bg-tertiary);
         }
 
         body.dark-mode .tool-card h3 {
@@ -427,6 +447,10 @@
     }
     </script>
     <script src="../../common/js/i18n/i18n.js"></script>
+    <script type="module">
+        import { format as sqlFormat } from 'https://esm.sh/sql-formatter@15';
+        window.sqlFormat = sqlFormat;
+    </script>
 </head>
 
 <body>
@@ -438,9 +462,8 @@
             <h1 data-i18n="dev.sql.title">SQL格式化工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="dev.sql.intro">SQL格式化工具，支持格式化SQL语句，提高可读性和维护性，支持语法高亮，支持自定义缩进、关键字大小写、语句空行等格式选项</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -504,9 +527,8 @@
                             data-i18n-placeholder="dev.sql.inputPlaceholder"></textarea>
                     </div>
                     <div class="output-panel">
-                        <label for="outputSql" data-i18n="dev.sql.outputLabel">格式化结果:</label>
-                        <textarea id="outputSql" class="output-textarea" readonly placeholder="格式化后的 SQL 将显示在这里..."
-                            data-i18n-placeholder="dev.sql.outputPlaceholder"></textarea>
+                        <label data-i18n="dev.sql.outputLabel">格式化结果:</label>
+                        <pre id="outputHighlight" class="output-highlight" data-placeholder="格式化后的 SQL 将显示在这里..."></pre>
                     </div>
                 </div>
 
@@ -548,18 +570,22 @@
                                 <li data-i18n="dev.sql.usageFormat">
                                     <strong>格式化：</strong>将压缩或杂乱的SQL代码转换为结构清晰、缩进正确的格式，便于阅读和维护。
                                 </li>
-                                <li data-i18n="dev.sql.usageCompress"><strong>压缩：</strong>将格式化的SQL代码压缩为紧凑格式，去除多余空白，减小文件体积。
+                                <li data-i18n="dev.sql.usageCompress">
+                                    <strong>压缩：</strong>将格式化的SQL代码压缩为紧凑格式，去除多余空白，减小文件体积。
                                 </li>
                                 <li data-i18n="dev.sql.usageCopy"><strong>复制结果：</strong>一键复制格式化或压缩后的代码到剪贴板。</li>
-                                <li data-i18n="dev.sql.usageSample"><strong>示例SQL：</strong>点击"示例SQL"按钮可以查看格式化效果的示例代码。</li>
+                                <li data-i18n="dev.sql.usageSample"><strong>示例SQL：</strong>点击"示例SQL"按钮可以查看格式化效果的示例代码。
+                                </li>
                                 <li data-i18n="dev.sql.usageClear"><strong>清空：</strong>快速清除所有输入和输出内容。</li>
                             </ul>
                             <h4 data-i18n="dev.sql.usageOptionsTitle">二、格式化选项</h4>
                             <ul>
                                 <li data-i18n="dev.sql.optIndent"><strong>缩进：</strong>可选择2空格、4空格或Tab作为缩进单位，默认为4空格。</li>
                                 <li data-i18n="dev.sql.optUppercase"><strong>关键字：</strong>可选择大写、小写或保持原样，默认为保持原样。</li>
-                                <li data-i18n="dev.sql.optLinesBetween"><strong>语句间空行：</strong>设置每个SQL语句之间的空行数量，默认为1行。</li>
-                                <li data-i18n="dev.sql.optBreakBeforeAnd"><strong>AND/OR 换行：</strong>勾选后，AND/OR 关键字会单独换行显示。
+                                <li data-i18n="dev.sql.optLinesBetween"><strong>语句间空行：</strong>设置每个SQL语句之间的空行数量，默认为1行。
+                                </li>
+                                <li data-i18n="dev.sql.optBreakBeforeAnd"><strong>AND/OR 换行：</strong>勾选后，AND/OR
+                                    关键字会单独换行显示。
                                 </li>
                             </ul>
                             <h4 data-i18n="dev.sql.usageSyntaxTitle">三、支持的 SQL 语法</h4>
@@ -567,15 +593,18 @@
                                 <li data-i18n="dev.sql.syntaxSelect">
                                     <strong>数据查询：</strong>SELECT、FROM、WHERE、JOIN（INNER/LEFT/RIGHT/FULL/CROSS）
                                 </li>
-                                <li data-i18n="dev.sql.syntaxManip"><strong>数据操作：</strong>INSERT、UPDATE、DELETE、VALUES、SET
+                                <li data-i18n="dev.sql.syntaxManip">
+                                    <strong>数据操作：</strong>INSERT、UPDATE、DELETE、VALUES、SET
                                 </li>
                                 <li data-i18n="dev.sql.syntaxDefine">
                                     <strong>数据定义：</strong>CREATE、ALTER、DROP、TABLE、INDEX、VIEW、DATABASE
                                 </li>
                                 <li data-i18n="dev.sql.syntaxClause"><strong>查询子句：</strong>ORDER BY、GROUP
                                     BY、HAVING、LIMIT、OFFSET</li>
-                                <li data-i18n="dev.sql.syntaxCondition"><strong>条件表达式：</strong>AND、OR、NOT、IN、LIKE、BETWEEN、IS
-                                    NULL</li>
+                                <li data-i18n="dev.sql.syntaxCondition">
+                                    <strong>条件表达式：</strong>AND、OR、NOT、IN、LIKE、BETWEEN、IS
+                                    NULL
+                                </li>
                                 <li data-i18n="dev.sql.syntaxControl"><strong>流程控制：</strong>CASE、WHEN、THEN、ELSE、END</li>
                                 <li data-i18n="dev.sql.syntaxAggregate"><strong>聚合函数：</strong>COUNT、SUM、AVG、MIN、MAX</li>
                             </ul>
@@ -595,7 +624,8 @@
                             <ul>
                                 <li data-i18n="dev.sql.noteSemicolon">SQL语句必须以分号 <code>;</code> 结尾。</li>
                                 <li data-i18n="dev.sql.noteQuotes">字符串必须用单引号或双引号包裹。</li>
-                                <li data-i18n="dev.sql.noteComments">注释支持 <code>--</code>（单行）和 <code>/* ... */</code>（多行）。
+                                <li data-i18n="dev.sql.noteComments">注释支持 <code>--</code>（单行）和
+                                    <code>/* ... */</code>（多行）。
                                 </li>
                                 <li data-i18n="dev.sql.noteBacktick">标识符（表名、列名）可以用反引号 <code>`</code> 包裹。</li>
                             </ul>
@@ -618,7 +648,8 @@
                             </ul>
                             <h4 data-i18n="dev.sql.notesFaqTitle">五、常见问题</h4>
                             <ul>
-                                <li data-i18n="dev.sql.faqFormatFail"><strong>格式化失败：</strong>检查SQL语法是否正确，特别是括号和引号是否匹配。</li>
+                                <li data-i18n="dev.sql.faqFormatFail"><strong>格式化失败：</strong>检查SQL语法是否正确，特别是括号和引号是否匹配。
+                                </li>
                                 <li data-i18n="dev.sql.faqKeywordNotConverted"><strong>关键字未转换：</strong>确保选择了正确的关键字大小写选项。
                                 </li>
                                 <li data-i18n="dev.sql.faqCopyFail"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
@@ -682,11 +713,12 @@
             ];
 
             const inputSql = document.getElementById('inputSql');
-            const outputSql = document.getElementById('outputSql');
+            const outputHighlight = document.getElementById('outputHighlight');
             const errorMsg = document.getElementById('errorMsg');
             const lineCount = document.getElementById('lineCount');
             const charCount = document.getElementById('charCount');
             const keywordCount = document.getElementById('keywordCount');
+            let plainOutput = '';
 
             function tokenize(sql) {
                 const tokens = [];
@@ -770,6 +802,50 @@
                 return tokens;
             }
 
+            function escapeHtml(str) {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            function highlightSql(sql) {
+                const tokens = tokenize(sql);
+                let html = '';
+                for (const token of tokens) {
+                    const escaped = escapeHtml(token.value);
+                    switch (token.type) {
+                        case 'keyword':
+                            html += '<span class="keyword">' + escaped + '</span>';
+                            break;
+                        case 'function':
+                            html += '<span class="function">' + escaped + '</span>';
+                            break;
+                        case 'string':
+                            html += '<span class="string">' + escaped + '</span>';
+                            break;
+                        case 'number':
+                            html += '<span class="number">' + escaped + '</span>';
+                            break;
+                        case 'comment':
+                            html += '<span class="comment">' + escaped + '</span>';
+                            break;
+                        case 'operator':
+                            html += '<span class="operator">' + escaped + '</span>';
+                            break;
+                        default:
+                            html += escaped;
+                    }
+                }
+                return html;
+            }
+
+            function setOutput(sql) {
+                plainOutput = sql;
+                if (sql) {
+                    outputHighlight.innerHTML = highlightSql(sql);
+                } else {
+                    outputHighlight.innerHTML = '';
+                }
+            }
+
             function formatKeyword(word, uppercase) {
                 if (uppercase === 'upper') return word.toUpperCase();
                 if (uppercase === 'lower') return word.toLowerCase();
@@ -785,146 +861,19 @@
                     breakBeforeAndOr = true
                 } = options;
 
-                const indentStr = indentChar === 'tab' ? '\t' : indentChar.repeat(indent);
-                const tokens = tokenize(sql);
-                const lines = [];
-                let currentLine = '';
-                let currentIndent = 0;
-                let i = 0;
-
-                const topLevelKeywords = ['SELECT', 'INSERT', 'UPDATE', 'DELETE', 'CREATE', 'ALTER', 'DROP', 'GRANT', 'REVOKE', 'EXPLAIN', 'DESCRIBE', 'SHOW', 'USE', 'BEGIN', 'COMMIT', 'ROLLBACK', 'TRUNCATE', 'REPLACE', 'MERGE'];
-                const clauseKeywords = ['FROM', 'WHERE', 'AND', 'OR', 'SET', 'VALUES', 'ORDER BY', 'GROUP BY', 'HAVING', 'LIMIT', 'OFFSET', 'ON', 'INTO', 'TABLE', 'INDEX', 'VIEW'];
-                const breakKeywords = ['AND', 'OR'];
-
-                for (let j = 0; j < tokens.length; j++) {
-                    const token = tokens[j];
-
-                    if (token.type === 'whitespace') {
-                        if (token.value.includes('\n')) {
-                            if (currentLine.trim()) {
-                                lines.push(currentLine);
-                                currentLine = '';
-                            }
-                        } else {
-                            currentLine += ' ';
-                        }
-                        continue;
-                    }
-
-                    if (token.type === 'comment') {
-                        if (currentLine.trim()) {
-                            lines.push(currentLine);
-                        }
-                        lines.push(token.value);
-                        currentLine = '';
-                        continue;
-                    }
-
-                    if (token.type === 'keyword') {
-                        const upperToken = token.value.toUpperCase();
-
-                        if (upperToken === 'FROM' || upperToken === 'WHERE' || upperToken === 'SET') {
-                            if (currentLine.trim()) {
-                                lines.push(currentLine);
-                            }
-                            currentIndent = 1;
-                            currentLine = indentStr + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'AND' || upperToken === 'OR') {
-                            if (breakBeforeAndOr && currentLine.trim() && !currentLine.trim().startsWith('(')) {
-                                lines.push(currentLine);
-                                currentLine = indentStr + formatKeyword(token.value, uppercase);
-                            } else {
-                                currentLine += ' ' + formatKeyword(token.value, uppercase);
-                            }
-                        } else if (upperToken === 'SELECT' && j > 0 && tokens[j - 1].value.toUpperCase() !== ')' && j > 0) {
-                            if (currentLine.trim() && !currentLine.trim().startsWith('(')) {
-                                lines.push(currentLine);
-                            }
-                            currentIndent = 1;
-                            currentLine = indentStr + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'JOIN' || upperToken === 'INNER' || upperToken === 'LEFT' || upperToken === 'RIGHT' || upperToken === 'FULL' || upperToken === 'CROSS' || upperToken === 'OUTER') {
-                            if (currentLine.trim() && !currentLine.trim().startsWith('(')) {
-                                lines.push(currentLine);
-                            }
-                            currentIndent = 1;
-                            currentLine = indentStr + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'ORDER' || upperToken === 'GROUP' || upperToken === 'HAVING' || upperToken === 'LIMIT' || upperToken === 'OFFSET') {
-                            if (currentLine.trim()) {
-                                lines.push(currentLine);
-                            }
-                            currentIndent = 0;
-                            currentLine = indentStr + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'BY') {
-                            currentLine += ' ' + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'AS') {
-                            currentLine += ' ' + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'CASE') {
-                            if (currentLine.trim()) {
-                                lines.push(currentLine);
-                            }
-                            currentLine = indentStr + 'CASE';
-                            currentIndent++;
-                        } else if (upperToken === 'WHEN' || upperToken === 'THEN' || upperToken === 'ELSE') {
-                            if (currentLine.trim()) {
-                                lines.push(currentLine);
-                            }
-                            currentLine = indentStr + formatKeyword(token.value, uppercase);
-                        } else if (upperToken === 'END') {
-                            if (currentLine.trim()) {
-                                lines.push(currentLine);
-                            }
-                            currentIndent = Math.max(0, currentIndent - 1);
-                            currentLine = indentStr + 'END';
-                        } else if (upperToken === 'IN' || upperToken === 'NOT') {
-                            currentLine += ' ' + formatKeyword(token.value, uppercase);
-                        } else {
-                            currentLine += ' ' + formatKeyword(token.value, uppercase);
-                        }
-                    } else if (token.type === 'function') {
-                        currentLine += ' ' + token.value.toUpperCase();
-                    } else if (token.type === 'string') {
-                        currentLine += token.value;
-                    } else if (token.type === 'number') {
-                        currentLine += token.value;
-                    } else if (token.type === 'punctuation') {
-                        if (token.value === ',') {
-                            currentLine += ',';
-                        } else if (token.value === '(') {
-                            currentLine += '(';
-                            currentIndent++;
-                        } else if (token.value === ')') {
-                            currentIndent = Math.max(0, currentIndent - 1);
-                            currentLine += ')';
-                        } else if (token.value === ';') {
-                            currentLine += ';';
-                            lines.push(currentLine);
-                            currentLine = '';
-                            currentIndent = 0;
-                        } else {
-                            currentLine += token.value;
-                        }
-                    } else if (token.type === 'operator') {
-                        currentLine += ' ' + token.value + ' ';
-                    } else if (token.type === 'identifier') {
-                        currentLine += ' ' + token.value;
-                    } else {
-                        currentLine += token.value;
-                    }
+                if (typeof window.sqlFormat !== 'function') {
+                    throw new Error('SQL formatter library not loaded');
                 }
 
-                if (currentLine.trim()) {
-                    lines.push(currentLine);
-                }
+                const fmtOptions = {
+                    tabWidth: indent,
+                    useTabs: indentChar === 'tab',
+                    keywordCase: uppercase === 'preserve' ? 'preserve' : uppercase,
+                    linesBetween: linesBetween,
+                    logicalOperatorNewline: breakBeforeAndOr ? 'before' : undefined
+                };
 
-                let result = lines.join('\n');
-
-                if (linesBetween > 0) {
-                    for (let k = 0; k < linesBetween; k++) {
-                        result = result.replace(/\n\n\n+/g, '\n\n');
-                    }
-                }
-
-                return result;
+                return window.sqlFormat(sql, fmtOptions);
             }
 
             function compressSql(sql) {
@@ -986,7 +935,7 @@
                         linesBetween,
                         breakBeforeAndOr
                     });
-                    outputSql.value = formatted;
+                    setOutput(formatted);
                     updateStats(formatted);
                 } catch (e) {
                     showError(window.t('dev.sql.msgFormatError') + e.message);
@@ -1010,7 +959,7 @@
                         breakBeforeAndOr: false
                     });
                     const compressed = compressSql(formatted);
-                    outputSql.value = compressed;
+                    setOutput(compressed);
                     updateStats(compressed);
                 } catch (e) {
                     showError(window.t('dev.sql.msgCompressError') + e.message);
@@ -1019,7 +968,7 @@
 
             document.getElementById('clearBtn').addEventListener('click', function () {
                 inputSql.value = '';
-                outputSql.value = '';
+                setOutput('');
                 hideError();
                 updateStats('');
             });
@@ -1032,7 +981,7 @@ WHERE u.status='active' AND o.total_amount>100 ORDER BY o.created_at DESC LIMIT 
             });
 
             document.getElementById('copyBtn').addEventListener('click', function () {
-                const text = outputSql.value;
+                const text = plainOutput;
                 if (!text) {
                     showError(window.t('common.messages.noContentToCopy'));
                     return;
@@ -1052,7 +1001,7 @@ WHERE u.status='active' AND o.total_amount>100 ORDER BY o.created_at DESC LIMIT 
             });
 
             inputSql.addEventListener('input', function () {
-                if (!outputSql.value || outputSql.value === window.t('dev.sql.outputPlaceholder')) {
+                if (!plainOutput) {
                     updateStats(inputSql.value);
                 }
             });

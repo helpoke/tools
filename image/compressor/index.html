@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google; frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
     <meta name="robots" content="index, follow">
     <title>图像无损压缩工具，隐私图像压缩工具，本地化压缩</title>
     <meta property="og:title" content="图像无损压缩工具，隐私图像压缩工具，本地化压缩">
@@ -81,10 +81,13 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="image.compressor.title">图片压缩工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="image.compressor.intro">图片压缩工具，支持JPG、PNG、WebP等格式压缩，自定义压缩质量、尺寸、格式，批量压缩，保持画质</p>
-            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
             <label for="fileInput" class="upload-area">
@@ -92,7 +95,8 @@
                     hidden>
                 <div class="upload-icon">🖼️</div>
                 <div class="upload-text" data-i18n="image.compressor.uploadText">点击上传或拖拽图片到此处</div>
-                <div class="upload-hint" data-i18n="image.compressor.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）</div>
+                <div class="upload-hint" data-i18n="image.compressor.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）
+                </div>
             </label>
             <div id="fileInfo" class="file-info"></div>
             <div id="fileList" class="file-list hidden">
@@ -124,15 +128,21 @@
             <div class="settings" style="display: none;">
                 <div class="settings-section">
                     <div class="settings-row">
-                        <label for="compressionAlgorithm" class="settings-label settings-label-bold" data-i18n="image.compressor.algorithmLabel">压缩算法:</label>
+                        <label for="compressionAlgorithm" class="settings-label settings-label-bold"
+                            data-i18n="image.compressor.algorithmLabel">压缩算法:</label>
                         <select id="compressionAlgorithm" class="compression-algorithm">
-                            <option value="default" data-i18n="image.compressor.optionDefault">默认压缩 (平衡质量和大小，保持原始图片格式)</option>
-                            <option value="lossless" data-i18n="image.compressor.optionLossless">无损压缩 (保持最高质量，保持原始扩展名，适用于PNG透明图片)</option>
-                            <option value="aggressive" data-i18n="image.compressor.optionAggressive">强力压缩 (优先减小文件大小，统一转换为JPG格式)</option>
-                            <option value="webp" data-i18n="image.compressor.optionWebp">WebP格式 (现代浏览器高效格式，保持较小体积)</option>
+                            <option value="default" data-i18n="image.compressor.optionDefault">默认压缩 (平衡质量和大小，保持原始图片格式)
+                            </option>
+                            <option value="lossless" data-i18n="image.compressor.optionLossless">无损压缩
+                                (保持最高质量，保持原始扩展名，适用于PNG透明图片)</option>
+                            <option value="aggressive" data-i18n="image.compressor.optionAggressive">强力压缩
+                                (优先减小文件大小，统一转换为JPG格式)</option>
+                            <option value="webp" data-i18n="image.compressor.optionWebp">WebP格式 (现代浏览器高效格式，保持较小体积)
+                            </option>
                         </select>
                     </div>
-                    <p class="setting-tip" data-i18n="image.compressor.algorithmTip"><b>没有最优的压缩算法，只有最适合自己的压缩策略</b>。不同的压缩算法适用于不同的场景：</br>
+                    <p class="setting-tip" data-i18n="image.compressor.algorithmTip">
+                        <b>没有最优的压缩算法，只有最适合自己的压缩策略</b>。不同的压缩算法适用于不同的场景：</br>
                         - <b>默认压缩</b>：平衡质量和大小，保持原始图片格式。<span
                             class="orange-text">不适用于PNG透明图片</span>。<b>推荐场景</b>：一般JPG图片，需要保持原始格式的非透明图片</br>
                         - <b>无损压缩</b>：保持最高质量和原始扩展名。<span
@@ -142,7 +152,8 @@
                 </div>
                 <div class="settings-section-lg">
                     <div class="settings-row-no-margin">
-                        <label for="qualityRange" class="settings-label settings-label-bold" data-i18n="image.compressor.qualityLabel">压缩质量: </label>
+                        <label for="qualityRange" class="settings-label settings-label-bold"
+                            data-i18n="image.compressor.qualityLabel">压缩质量: </label>
                         <input type="range" id="qualityRange" min="1" max="100" value="80" class="quality-range">
                         <span id="qualityValue" class="quality-value">80%</span>
                     </div>
@@ -164,22 +175,27 @@
                     </div>
                     <div class="dimension-item">
                         <label for="maxSizeKB" data-i18n="image.compressor.maxSizeLabel">最大大小 (KB):</label>
-                        <input type="number" id="maxSizeKB" value="" min="20" placeholder="自动" data-i18n-placeholder="image.compressor.maxSizePlaceholder">
+                        <input type="number" id="maxSizeKB" value="" min="20" placeholder="自动"
+                            data-i18n-placeholder="image.compressor.maxSizePlaceholder">
                         <div id="maxSizeError" class="error-message"></div>
                     </div>
-                    <p class="setting-tip" data-i18n="image.compressor.dimensionTip">提示：最大尺寸限制图片的上限（100-16384px）；最大文件大小限制压缩后的文件大小，范围20KB到原文件大小，用户可在此范围内随意输入。</p>
+                    <p class="setting-tip" data-i18n="image.compressor.dimensionTip">
+                        提示：最大尺寸限制图片的上限（100-16384px）；最大文件大小限制压缩后的文件大小，范围20KB到原文件大小，用户可在此范围内随意输入。</p>
                 </div>
 
                 <div class="buttons-container">
-                    <button id="compressBtn" class="compress-btn" disabled data-i18n="image.compressor.compressBtn">压缩当前图片</button>
-                    <button id="batchCompressBtn" class="compress-btn batch-compress-btn" disabled data-i18n="image.compressor.batchCompressBtn">批量压缩所有图片</button>
+                    <button id="compressBtn" class="compress-btn" disabled
+                        data-i18n="image.compressor.compressBtn">压缩当前图片</button>
+                    <button id="batchCompressBtn" class="compress-btn batch-compress-btn" disabled
+                        data-i18n="image.compressor.batchCompressBtn">批量压缩所有图片</button>
                 </div>
                 <div class="compression-stats"></div>
             </div>
 
             <div id="downloadArea" class="download-area hidden">
                 <div class="download-buttons-container">
-                    <a id="mainDownloadLink" class="download-btn" href="#" download disabled data-i18n="image.compressor.downloadBtn">下载压缩图片</a>
+                    <a id="mainDownloadLink" class="download-btn" href="#" download disabled
+                        data-i18n="image.compressor.downloadBtn">下载压缩图片</a>
                 </div>
             </div>
 
@@ -203,10 +219,12 @@
                         </ul>
                         <h4 data-i18n="image.compressor.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="image.compressor.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="image.compressor.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
+                            </li>
                             <li data-i18n="image.compressor.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
                             <li data-i18n="image.compressor.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="image.compressor.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="image.compressor.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -218,29 +236,40 @@
                     <div class="info-content">
                         <h4 data-i18n="image.compressor.usageUploadTitle">一、上传图片</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageClickUpload"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                            <li data-i18n="image.compressor.usageClickUpload"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。
+                            </li>
                             <li data-i18n="image.compressor.usageBatchUpload"><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
-                            <li data-i18n="image.compressor.usageFormats"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
+                            <li data-i18n="image.compressor.usageFormats"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP
+                                格式。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageAlgorithmTitle">二、选择压缩算法</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageDefault"><strong>默认压缩：</strong>平衡质量和大小，保持原始图片格式。不适用于PNG透明图片。</li>
-                            <li data-i18n="image.compressor.usageLossless"><strong>无损压缩：</strong>保持最高质量和原始扩展名。推荐用于PNG透明图片。</li>
-                            <li data-i18n="image.compressor.usageAggressive"><strong>强力压缩：</strong>优先减小文件大小，统一转换为JPG格式。</li>
-                            <li data-i18n="image.compressor.usageWebp"><strong>WebP格式：</strong>现代浏览器高效图像格式，保持较高质量和小体积。</li>
+                            <li data-i18n="image.compressor.usageDefault">
+                                <strong>默认压缩：</strong>平衡质量和大小，保持原始图片格式。不适用于PNG透明图片。</li>
+                            <li data-i18n="image.compressor.usageLossless">
+                                <strong>无损压缩：</strong>保持最高质量和原始扩展名。推荐用于PNG透明图片。</li>
+                            <li data-i18n="image.compressor.usageAggressive"><strong>强力压缩：</strong>优先减小文件大小，统一转换为JPG格式。
+                            </li>
+                            <li data-i18n="image.compressor.usageWebp"><strong>WebP格式：</strong>现代浏览器高效图像格式，保持较高质量和小体积。
+                            </li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageQualityTitle">三、调整压缩质量</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageQualitySlider"><strong>质量滑块：</strong>拖动滑块调整压缩质量（1%-100%）。</li>
+                            <li data-i18n="image.compressor.usageQualitySlider">
+                                <strong>质量滑块：</strong>拖动滑块调整压缩质量（1%-100%）。</li>
                             <li data-i18n="image.compressor.usageQualityHigh"><strong>质量越高：</strong>图像质量越好，但文件大小越大。</li>
                             <li data-i18n="image.compressor.usageQualityLow"><strong>质量越低：</strong>压缩率越高，但可能损失图像细节。</li>
-                            <li data-i18n="image.compressor.usageQualityRange"><strong>推荐范围：</strong>70-90之间，可根据实际需求调整。</li>
+                            <li data-i18n="image.compressor.usageQualityRange"><strong>推荐范围：</strong>70-90之间，可根据实际需求调整。
+                            </li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageDimensionTitle">四、设置最大尺寸</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageMaxWidth"><strong>最大宽度：</strong>设置图片压缩后的最大宽度（100-16384px）。</li>
-                            <li data-i18n="image.compressor.usageMaxHeight"><strong>最大高度：</strong>设置图片压缩后的最大高度（100-16384px）。</li>
-                            <li data-i18n="image.compressor.usageMaxSize"><strong>最大大小：</strong>设置压缩后文件的最大大小（20KB到原文件大小）。</li>
+                            <li data-i18n="image.compressor.usageMaxWidth">
+                                <strong>最大宽度：</strong>设置图片压缩后的最大宽度（100-16384px）。</li>
+                            <li data-i18n="image.compressor.usageMaxHeight">
+                                <strong>最大高度：</strong>设置图片压缩后的最大高度（100-16384px）。</li>
+                            <li data-i18n="image.compressor.usageMaxSize">
+                                <strong>最大大小：</strong>设置压缩后文件的最大大小（20KB到原文件大小）。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageCompressTitle">五、执行压缩</h4>
                         <ul>
@@ -300,10 +329,14 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

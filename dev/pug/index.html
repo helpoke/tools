@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://*.doubleclick.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://pagead2.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://*.doubleclick.net;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google; frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
     <meta name="robots" content="index, follow">
     <title>Pug在线格式化校验工具</title>
     <meta property="og:title" content="Pug在线格式化校验工具">
@@ -88,10 +88,13 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="dev.pug.title">Pug 格式化校验工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="dev.pug.intro">Pug格式化校验工具，支持Pug/Jade代码格式化美化、语法校验与错误行定位、代码压缩</p>
-            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
             <div class="tool-header">
@@ -115,7 +118,8 @@
                     <div class="panel-body">
                         <div class="input-with-lines">
                             <div class="line-numbers" id="input-lines"><span>1</span></div>
-                            <textarea id="pug-input" data-i18n-placeholder="dev.pug.inputPlaceholder" placeholder="请在此输入 Pug 内容，或点击「示例数据」查看效果..."></textarea>
+                            <textarea id="pug-input" data-i18n-placeholder="dev.pug.inputPlaceholder"
+                                placeholder="请在此输入 Pug 内容，或点击「示例数据」查看效果..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -131,7 +135,8 @@
             </div>
 
             <div class="panel error-panel" id="error-panel" style="display:none;">
-                <div class="panel-header" data-i18n="dev.pug.errorTitle">语法错误 <span id="error-count" style="color:#ef4444;"></span></div>
+                <div class="panel-header" data-i18n="dev.pug.errorTitle">语法错误 <span id="error-count"
+                        style="color:#ef4444;"></span></div>
                 <div id="error-list"></div>
             </div>
 
@@ -169,24 +174,32 @@
                     <div class="info-content">
                         <h4 data-i18n="dev.pug.usageFormatTitle">一、格式化功能</h4>
                         <ul>
-                            <li data-i18n="dev.pug.usageFormat"><strong>格式化：</strong>将压缩或杂乱的Pug代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
+                            <li data-i18n="dev.pug.usageFormat">
+                                <strong>格式化：</strong>将压缩或杂乱的Pug代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
                             <li data-i18n="dev.pug.usageValidate"><strong>校验语法：</strong>检查Pug代码的语法正确性，精确指出错误行号和上下文。</li>
-                            <li data-i18n="dev.pug.usageMinify"><strong>压缩：</strong>将格式化的Pug代码压缩为紧凑格式，去除空白字符，减小文件体积。</li>
+                            <li data-i18n="dev.pug.usageMinify"><strong>压缩：</strong>将格式化的Pug代码压缩为紧凑格式，去除空白字符，减小文件体积。
+                            </li>
                             <li data-i18n="dev.pug.usageCopy"><strong>复制结果：</strong>一键复制格式化或压缩后的代码到剪贴板。</li>
                             <li data-i18n="dev.pug.usageSample"><strong>示例数据：</strong>点击"示例数据"按钮可以查看格式化效果的示例代码。</li>
                             <li data-i18n="dev.pug.usageClear"><strong>清空：</strong>快速清除所有输入和输出内容。</li>
                         </ul>
                         <h4 data-i18n="dev.pug.usageSyntaxTitle">二、Pug 语法基础</h4>
                         <ul>
-                            <li data-i18n="dev.pug.syntaxTag"><strong>标签：</strong>Pug使用缩进表示层级，标签名后跟内容，如 <code>div Hello</code>。</li>
-                            <li data-i18n="dev.pug.syntaxClassId"><strong>类和ID：</strong>使用 <code>.</code> 表示类，<code>#</code> 表示ID，如
+                            <li data-i18n="dev.pug.syntaxTag"><strong>标签：</strong>Pug使用缩进表示层级，标签名后跟内容，如
+                                <code>div Hello</code>。</li>
+                            <li data-i18n="dev.pug.syntaxClassId"><strong>类和ID：</strong>使用 <code>.</code>
+                                表示类，<code>#</code> 表示ID，如
                                 <code>div.container#main</code>。
                             </li>
-                            <li data-i18n="dev.pug.syntaxAttr"><strong>属性：</strong>使用括号包裹属性，如 <code>a(href="#") Link</code>。</li>
+                            <li data-i18n="dev.pug.syntaxAttr"><strong>属性：</strong>使用括号包裹属性，如
+                                <code>a(href="#") Link</code>。</li>
                             <li data-i18n="dev.pug.syntaxText"><strong>文本：</strong>使用竖线 <code>|</code> 或缩进后跟文本。</li>
-                            <li data-i18n="dev.pug.syntaxVariable"><strong>变量：</strong>使用 <code>=</code> 插入变量，如 <code>p= title</code>。</li>
-                            <li data-i18n="dev.pug.syntaxComment"><strong>注释：</strong>使用 <code>//</code> 单行注释，<code>//-</code> 不输出注释。</li>
-                            <li data-i18n="dev.pug.syntaxCondition"><strong>条件：</strong>使用 <code>if</code>、<code>else</code>、<code>else if</code>。</li>
+                            <li data-i18n="dev.pug.syntaxVariable"><strong>变量：</strong>使用 <code>=</code> 插入变量，如
+                                <code>p= title</code>。</li>
+                            <li data-i18n="dev.pug.syntaxComment"><strong>注释：</strong>使用 <code>//</code>
+                                单行注释，<code>//-</code> 不输出注释。</li>
+                            <li data-i18n="dev.pug.syntaxCondition"><strong>条件：</strong>使用
+                                <code>if</code>、<code>else</code>、<code>else if</code>。</li>
                             <li data-i18n="dev.pug.syntaxLoop"><strong>循环：</strong>使用 <code>each</code> 遍历数组或对象。</li>
                         </ul>
                         <h4 data-i18n="dev.pug.usageShortcutsTitle">三、快捷操作</h4>
@@ -242,10 +255,14 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
