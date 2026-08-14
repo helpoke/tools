@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="文件大小换算工具说明文档，B/KB/MB/GB/TB/PB全单位互转，SI与IEC双标准详解，常见文件大小参考表">
+    <meta name="keywords" content="文件大小换算, KB转MB, GB转TB, 存储单位换算, SI与IEC区别, 硬盘容量计算">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>文件大小换算工具 - 使用文档与常见问题</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #10B981;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: var(--text-primary);
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        ul,
+        ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .highlight-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10B981;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #065f46;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .related-tools {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .related-tools h2 {
+            margin-bottom: 15px;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 8px 18px;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .tool-link:hover {
+            background: #10B981;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #10B981;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>📏 文件大小换算工具</h1>
+            <p class="subtitle">B / KB / MB / GB / TB / PB 全单位互转，SI 与 IEC 双标准支持</p>
+            <a href="index.html" class="back-btn">← 返回工具</a>
+        </header>
+
+        <div class="content-section">
+            <h2>📖 工具简介</h2>
+            <p>文件大小换算工具是一款在线存储单位转换工具，支持字节（B）、千字节（KB）、兆字节（MB）、吉字节（GB）、太字节（TB）、拍字节（PB）、艾字节（EB）之间的快速互转。</p>
+            <p>工具同时支持 <strong>IEC（1024 进制）</strong>和 <strong>SI（1000 进制）</strong>两种换算标准，帮助用户在不同场景下准确理解文件大小。</p>
+
+            <div class="highlight-box">
+                <p><strong>💡 提示：</strong>输入数值后自动实时转换，无需点击按钮，所有单位的结果同时显示。</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 文件大小单位对照表</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>单位</th>
+                        <th>全称</th>
+                        <th>IEC (1024)</th>
+                        <th>SI (1000)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>B</strong></td>
+                        <td>Byte</td>
+                        <td>1 B</td>
+                        <td>1 B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>KB</strong></td>
+                        <td>Kilobyte</td>
+                        <td>1,024 B</td>
+                        <td>1,000 B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MB</strong></td>
+                        <td>Megabyte</td>
+                        <td>1,048,576 B</td>
+                        <td>1,000,000 B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GB</strong></td>
+                        <td>Gigabyte</td>
+                        <td>1,073,741,824 B</td>
+                        <td>1,000,000,000 B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TB</strong></td>
+                        <td>Terabyte</td>
+                        <td>1,099,511,627,776 B</td>
+                        <td>1,000,000,000,000 B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PB</strong></td>
+                        <td>Petabyte</td>
+                        <td>1,125,899,906,842,624 B</td>
+                        <td>1,000,000,000,000,000 B</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EB</strong></td>
+                        <td>Exabyte</td>
+                        <td>1,152,921,504,606,846,976 B</td>
+                        <td>1,000,000,000,000,000,000 B</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section">
+            <h2>🔍 SI 与 IEC 的区别</h2>
+            <h3>IEC 标准（1024 进制）</h3>
+            <p>IEC（国际电工委员会）标准使用 2 的幂次方计算：</p>
+            <ul>
+                <li><code>1 KiB = 1024 B</code></li>
+                <li><code>1 MiB = 1024 KiB = 1,048,576 B</code></li>
+                <li><code>1 GiB = 1024 MiB</code></li>
+            </ul>
+            <p><strong>使用场景：</strong>Windows 操作系统、内存容量、文件大小显示</p>
+
+            <h3>SI 标准（1000 进制）</h3>
+            <p>SI（国际单位制）标准使用 10 的幂次方计算：</p>
+            <ul>
+                <li><code>1 KB = 1000 B</code></li>
+                <li><code>1 MB = 1000 KB = 1,000,000 B</code></li>
+                <li><code>1 GB = 1000 MB</code></li>
+            </ul>
+            <p><strong>使用场景：</strong>硬盘/U盘厂商标注容量、网络带宽、数据传输</p>
+
+            <div class="highlight-box">
+                <p><strong>⚠️ 注意：</strong>这就是为什么 500GB 硬盘在 Windows 中只显示约 465GB —— 厂商用 1000 进制标注，系统用 1024 进制显示。</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📋 常见文件大小参考</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>文件类型</th>
+                        <th>典型大小</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>纯文本文件（1页）</td>
+                        <td>约 2-5 KB</td>
+                    </tr>
+                    <tr>
+                        <td>手机照片（JPEG）</td>
+                        <td>约 2-5 MB</td>
+                    </tr>
+                    <tr>
+                        <td>MP3 歌曲（3分钟）</td>
+                        <td>约 3-8 MB</td>
+                    </tr>
+                    <tr>
+                        <td>高清电影（1080p，2小时）</td>
+                        <td>约 2-8 GB</td>
+                    </tr>
+                    <tr>
+                        <td>DVD 光盘容量</td>
+                        <td>4.7 GB</td>
+                    </tr>
+                    <tr>
+                        <td>蓝光光盘容量</td>
+                        <td>25-50 GB</td>
+                    </tr>
+                    <tr>
+                        <td>Windows 11 系统</td>
+                        <td>约 20-40 GB</td>
+                    </tr>
+                    <tr>
+                        <td>常见 U 盘容量</td>
+                        <td>16 / 32 / 64 / 128 GB</td>
+                    </tr>
+                    <tr>
+                        <td>常见机械硬盘容量</td>
+                        <td>1 / 2 / 4 / 8 TB</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content-section">
+            <h2>❓ 常见问题 FAQ</h2>
+
+            <h3>1. 1 KB 到底等于 1024 B 还是 1000 B？</h3>
+            <p>取决于使用的标准。在计算机内存和操作系统中，通常使用 1024（IEC 标准）；在硬盘厂商标注和网络传输中，通常使用 1000（SI 标准）。本工具支持两种标准，可一键切换。</p>
+
+            <h3>2. 为什么我的硬盘实际容量比标注的小？</h3>
+            <p>硬盘厂商使用 SI 标准（1000 进制）标注容量，而操作系统使用 IEC 标准（1024 进制）显示。例如：</p>
+            <ul>
+                <li>厂商标注 500 GB = 500,000,000,000 字节</li>
+                <li>系统显示 = 500,000,000,000 ÷ 1024³ ≈ 465 GiB</li>
+            </ul>
+            <p>这不是质量问题，而是标准差异导致的正常现象。</p>
+
+            <h3>3. 如何快速估算文件大小？</h3>
+            <p>简单记忆法则（IEC 标准）：</p>
+            <ul>
+                <li>1024 B ≈ 1 KB（约一千字节）</li>
+                <li>1024 KB ≈ 1 MB（约一百万字节）</li>
+                <li>1024 MB ≈ 1 GB（约十亿字节）</li>
+                <li>1024 GB ≈ 1 TB（约一万亿字节）</li>
+            </ul>
+
+            <h3>4. KiB 和 KB 有什么区别？</h3>
+            <p>严格来说，KiB（Kibibyte）= 1024 B 是 IEC 标准命名，KB（Kilobyte）= 1000 B 是 SI 标准命名。但实际使用中，很多场景（包括
+                Windows）混用了这两个名称。本工具中统一使用 KB/MB/GB 等常见名称。</p>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../base-convert/index.html" class="tool-link">进制转换器</a>
+                <a href="../cron/index.html" class="tool-link">Cron 解析器</a>
+                <a href="../regex/index.html" class="tool-link">正则表达式测试</a>
+                <a href="../../tool/timestamp/index.html" class="tool-link">时间戳转换器</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>

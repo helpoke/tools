@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="RSA密钥对在线生成工具，支持1024/2048/3072/4096位密钥长度，生成PEM格式公钥私钥，纯前端本地处理保护隐私。Free online RSA key pair generator.">
+    <meta name="keywords"
+        content="RSA密钥生成, RSA密钥对生成器, RSA公钥私钥生成, 在线RSA生成, RSA PEM格式, RSA密钥对在线, 免费RSA工具, RSA key generator">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>RSA密钥对生成工具 - 在线免费生成RSA公钥私钥</title>
+    <meta property="og:title" content="RSA密钥对生成工具 - 在线免费生成RSA公钥私钥">
+    <meta property="og:description"
+        content="RSA密钥对在线生成工具，支持1024/2048/3072/4096位密钥长度，生成PEM格式公钥私钥，纯前端本地处理保护隐私。Free online RSA key pair generator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/rsa/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RSA密钥对生成工具 - 在线免费生成RSA公钥私钥">
+    <meta name="twitter:description"
+        content="RSA密钥对在线生成工具，支持1024/2048/3072/4096位密钥长度，生成PEM格式公钥私钥，纯前端本地处理保护隐私。Free online RSA key pair generator.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/rsa/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/rsa/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/rsa/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/i18n/i18n.js"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2048978820706528"
+        crossorigin="anonymous"></script>
+    <style>
+        @import '../../common/css/style.css';
+        @import '../../common/css/utils.css';
+    </style>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 40px 0;
+        }
+
+        .tool-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-group.half {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .key-output {
+            margin-bottom: 20px;
+        }
+
+        .key-output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .key-output-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .key-output-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .key-textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            resize: vertical;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .key-textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .key-textarea::placeholder {
+            color: #aaa;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 13px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-copy {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-copy.copied {
+            background-color: #27ae60;
+        }
+
+        .btn-download {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background-color: #229954;
+        }
+
+        .btn-generate {
+            background-color: #e67e22;
+            color: white;
+            padding: 12px 32px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-generate:hover {
+            background-color: #d35400;
+        }
+
+        .btn-generate:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .status-bar {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .status-bar.loading {
+            display: block;
+            background-color: #fef3cd;
+            color: #856404;
+            border: 1px solid #ffc107;
+        }
+
+        .status-bar.success {
+            display: block;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-bar.error {
+            display: block;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .key-info {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background-color: var(--bg-tertiary);
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .tool-card {
+                padding: 24px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .form-group.half {
+                margin-bottom: 5px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .key-output-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tool-card {
+                padding: 18px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .key-textarea {
+                min-height: 140px;
+                font-size: 11px;
+            }
+        }
+
+        /* 夜间模式 */
+        body.dark-mode .tool-card {
+            background-color: var(--bg-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .form-group select {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .key-output-header h3 {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .key-textarea {
+            background-color: var(--bg-tertiary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "RSA密钥对生成工具",
+        "description": "免费在线RSA密钥对生成工具，支持1024/2048/3072/4096位密钥，生成PEM格式公钥和私钥。Free online RSA key pair generator with multiple key sizes.",
+        "url": "https://helpoke.com/encrypted/rsa",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "RSA Key Pair Generation",
+            "支持多种密钥长度 (1024-4096位)",
+            "PEM格式公钥私钥输出",
+            "一键复制与下载",
+            "Web Crypto API 安全生成",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.rsa.title">RSA密钥对生成工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()"
+                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
+                    class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.rsa.intro">在线生成RSA密钥对，支持多种密钥长度，输出PEM格式公钥和私钥，适用于加密通信、数字签名等场景</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="key-size" data-i18n="encrypted.rsa.keySizeLabel">密钥长度（位）</label>
+                        <select id="key-size">
+                            <option value="1024">1024 位</option>
+                            <option value="2048" selected>2048 位（推荐）</option>
+                            <option value="3072">3072 位</option>
+                            <option value="4096">4096 位</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label for="key-format" data-i18n="encrypted.rsa.keyFormatLabel">导出格式</label>
+                        <select id="key-format">
+                            <option value="pem" selected>PEM（文本格式，最常用）</option>
+                            <option value="der">DER（Base64 二进制）</option>
+                            <option value="ssh">SSH（OpenSSH 公钥格式）</option>
+                            <option value="jwk">JWK（JSON Web Key）</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-generate" id="generate-btn" onclick="generateKeyPair()"
+                    data-i18n="encrypted.rsa.generateBtn">
+                    <i class="fas fa-key"></i> 生成密钥对
+                </button>
+
+                <div class="status-bar" id="status-bar"></div>
+
+                <div class="key-output" style="margin-top: 24px;">
+                    <div class="key-output-header">
+                        <h3><i class="fas fa-lock"></i> <span data-i18n="encrypted.rsa.publicKeyTitle">公钥 (Public
+                                Key)</span></h3>
+                        <div class="key-output-actions">
+                            <button class="btn-sm btn-copy" onclick="copyKey('public-key')"
+                                data-i18n="encrypted.rsa.copyBtn">复制</button>
+                            <button class="btn-sm btn-download" onclick="downloadKey('public-key', 'public')"
+                                data-i18n="encrypted.rsa.downloadBtn">下载</button>
+                        </div>
+                    </div>
+                    <textarea class="key-textarea" id="public-key" readonly
+                        data-i18n-placeholder="encrypted.rsa.publicKeyPlaceholder"
+                        placeholder="点击「生成密钥对」按钮后，公钥将显示在此处..."></textarea>
+                    <div class="key-info" id="public-key-info" style="display:none;"></div>
+                </div>
+
+                <div class="key-output">
+                    <div class="key-output-header">
+                        <h3><i class="fas fa-lock-open"></i> <span data-i18n="encrypted.rsa.privateKeyTitle">私钥 (Private
+                                Key)</span></h3>
+                        <div class="key-output-actions">
+                            <button class="btn-sm btn-copy" onclick="copyKey('private-key')"
+                                data-i18n="encrypted.rsa.copyBtn">复制</button>
+                            <button class="btn-sm btn-download" onclick="downloadKey('private-key', 'private')"
+                                data-i18n="encrypted.rsa.downloadBtn">下载</button>
+                        </div>
+                    </div>
+                    <textarea class="key-textarea" id="private-key" readonly
+                        data-i18n-placeholder="encrypted.rsa.privateKeyPlaceholder"
+                        placeholder="点击「生成密钥对」按钮后，私钥将显示在此处..."></textarea>
+                    <div class="key-info" id="private-key-info" style="display:none;"></div>
+                </div>
+
+                <div class="info-section">
+                    <article class="info-details">
+                        <header>
+                            <h3 data-i18n="encrypted.rsa.infoIntro">工具介绍</h3>
+                        </header>
+                        <div class="info-content">
+                            <h4 data-i18n="encrypted.rsa.problemsTitle">一、解决的问题</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.problem1">生成RSA公钥和私钥密钥对，用于加密通信和数字签名。</li>
+                                <li data-i18n="encrypted.rsa.problem2">简化密钥生成流程，无需安装OpenSSL等工具。</li>
+                                <li data-i18n="encrypted.rsa.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            </ul>
+                            <h4 data-i18n="encrypted.rsa.formatTitle">二、支持的格式</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.formatPem">
+                                    <strong>PEM格式：</strong>Base64编码的文本格式，广泛用于Web和SSL/TLS场景，最常用的格式。
+                                </li>
+                                <li data-i18n="encrypted.rsa.formatDer">
+                                    <strong>DER格式：</strong>二进制格式的Base64编码，常用于Java等编程语言。</li>
+                                <li data-i18n="encrypted.rsa.formatSsh">
+                                    <strong>SSH格式：</strong>OpenSSH公钥格式，用于SSH登录和Git配置。</li>
+                                <li data-i18n="encrypted.rsa.formatJwk"><strong>JWK格式：</strong>JSON Web
+                                    Key格式，用于JWT和Web加密。</li>
+                            </ul>
+                            <h4 data-i18n="encrypted.rsa.featuresTitle">三、核心功能</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.featureWebCrypto"><strong>Web Crypto
+                                        API：</strong>使用浏览器原生加密API，安全可靠。</li>
+                                <li data-i18n="encrypted.rsa.featureMultiSize">
+                                    <strong>多种密钥长度：</strong>支持1024/2048/3072/4096位密钥。
+                                </li>
+                                <li data-i18n="encrypted.rsa.featureExport">
+                                    <strong>多种导出格式：</strong>支持PEM、DER、SSH、JWK四种格式导出。</li>
+                                <li data-i18n="encrypted.rsa.featureSecurity"><strong>数据安全：</strong>所有密钥仅在本地生成，不会上传到服务器。
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="info-details">
+                        <header>
+                            <h3 data-i18n="encrypted.rsa.infoUsage">使用说明</h3>
+                        </header>
+                        <div class="info-content">
+                            <h4 data-i18n="encrypted.rsa.usageStep1Title">一、选择密钥参数</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.usageKeySize">
+                                    <strong>密钥长度：</strong>选择RSA密钥的位长度。推荐2048位（安全且性能好），4096位安全性最高但生成较慢。
+                                </li>
+                                <li data-i18n="encrypted.rsa.usageFormat">
+                                    <strong>导出格式：</strong>支持PEM（最常用）、DER（二进制）、SSH（OpenSSH）、JWK（JSON）四种格式。</li>
+                            </ul>
+                            <h4 data-i18n="encrypted.rsa.usageStep2Title">二、生成密钥对</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.usageClickGenerate">
+                                    <strong>点击生成：</strong>点击「生成密钥对」按钮，等待密钥生成完成。密钥长度越大，生成时间越长。
+                                </li>
+                                <li data-i18n="encrypted.rsa.usageViewResult">
+                                    <strong>查看结果：</strong>生成的公钥和私钥将分别显示在对应的文本框中。
+                                </li>
+                                <li data-i18n="encrypted.rsa.usageCopyDownload">
+                                    <strong>复制/下载：</strong>点击「复制」按钮复制到剪贴板，或点击「下载」按钮保存为.pem文件。
+                                </li>
+                            </ul>
+                            <h4 data-i18n="encrypted.rsa.usageStep3Title">三、密钥使用说明</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.usagePublicKey"><strong>公钥：</strong>可以公开分享，用于加密数据或验证签名。
+                                </li>
+                                <li data-i18n="encrypted.rsa.usagePrivateKey"><strong>私钥：</strong>必须严格保密，用于解密数据或创建数字签名。
+                                </li>
+                                <li data-i18n="encrypted.rsa.usageSecurity">
+                                    <strong>安全建议：</strong>私钥请妥善保管，不要通过网络传输或存储在不安全的位置。
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header>
+                            <h3 data-i18n="encrypted.rsa.infoNotes">注意事项</h3>
+                        </header>
+                        <div class="info-content">
+                            <h4 data-i18n="encrypted.rsa.notesSecurityTitle">一、密钥安全</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.noteSecurity1">所有密钥在本地浏览器中生成，数据不会上传到服务器。</li>
+                                <li data-i18n="encrypted.rsa.noteSecurity2">私钥必须严格保密，切勿泄露给他人。</li>
+                                <li data-i18n="encrypted.rsa.noteSecurity3">建议使用安全的密钥管理方案存储私钥。</li>
+                            </ul>
+                            <h4 data-i18n="encrypted.rsa.notesKeySizeTitle">二、密钥长度选择</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.noteKeySize1"><strong>1024位：</strong>已不推荐用于生产环境，安全性较低。</li>
+                                <li data-i18n="encrypted.rsa.noteKeySize2"><strong>2048位：</strong>当前推荐标准，安全性足够大多数场景。
+                                </li>
+                                <li data-i18n="encrypted.rsa.noteKeySize3"><strong>3072/4096位：</strong>更高安全性，但生成和使用速度较慢。
+                                </li>
+                            </ul>
+                            <h4 data-i18n="encrypted.rsa.notesFaqTitle">三、常见问题</h4>
+                            <ul>
+                                <li data-i18n="encrypted.rsa.noteFaq1"><strong>生成很慢：</strong>密钥长度越大，生成时间越长。4096位可能需要数秒。
+                                </li>
+                                <li data-i18n="encrypted.rsa.noteFaq2"><strong>浏览器不支持：</strong>本工具需要Web Crypto
+                                    API支持，请使用现代浏览器（Chrome、Firefox、Edge、Safari）。</li>
+                                <li data-i18n="encrypted.rsa.noteFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问权限。</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy.html" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="../../common/js/utils.js"></script>
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/tools-data.js"></script>
+    <script src="../../common/js/nav.js"></script>
+    <script>
+        /**
+         * 生成RSA密钥对
+         */
+        async function generateKeyPair() {
+            const keySize = parseInt(document.getElementById('key-size').value);
+            const keyFormat = document.getElementById('key-format').value;
+            const generateBtn = document.getElementById('generate-btn');
+            const statusBar = document.getElementById('status-bar');
+            const publicKeyArea = document.getElementById('public-key');
+            const privateKeyArea = document.getElementById('private-key');
+            const publicKeyInfo = document.getElementById('public-key-info');
+            const privateKeyInfo = document.getElementById('private-key-info');
+
+            // 检查浏览器支持
+            if (!window.crypto || !window.crypto.subtle) {
+                showStatus(window.t('encrypted.rsa.errNoCrypto'), 'error');
+                return;
+            }
+
+            // 禁用按钮，显示加载状态
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + window.t('encrypted.rsa.generating');
+            showStatus(window.t('encrypted.rsa.statusGenerating', { size: keySize }), 'loading');
+
+            try {
+                const startTime = performance.now();
+
+                // 使用 Web Crypto API 生成 RSA 密钥对
+                const keyPair = await window.crypto.subtle.generateKey(
+                    {
+                        name: 'RSA-OAEP',
+                        modulusLength: keySize,
+                        publicExponent: new Uint8Array([1, 0, 1]), // 65537
+                        hash: 'SHA-256'
+                    },
+                    true, // 可导出
+                    ['encrypt', 'decrypt']
+                );
+
+                let publicKeyText = '';
+                let privateKeyText = '';
+                let publicFormatInfo = '';
+                let privateFormatInfo = '';
+
+                // 根据选择的格式导出
+                switch (keyFormat) {
+                    case 'pem':
+                        publicKeyText = await exportPublicKeyPem(keyPair.publicKey);
+                        privateKeyText = await exportPrivateKeyPem(keyPair.privateKey);
+                        publicFormatInfo = 'PEM (SPKI)';
+                        privateFormatInfo = 'PEM (PKCS#8)';
+                        break;
+                    case 'der':
+                        publicKeyText = await exportPublicKeyDer(keyPair.publicKey);
+                        privateKeyText = await exportPrivateKeyDer(keyPair.privateKey);
+                        publicFormatInfo = 'DER (Base64)';
+                        privateFormatInfo = 'DER (Base64)';
+                        break;
+                    case 'ssh':
+                        publicKeyText = await exportPublicKeySsh(keyPair.publicKey);
+                        privateKeyText = await exportPrivateKeyPem(keyPair.privateKey); // SSH无私钥标准格式，用PEM
+                        publicFormatInfo = 'SSH (OpenSSH)';
+                        privateFormatInfo = 'PEM (PKCS#8)';
+                        break;
+                    case 'jwk':
+                        publicKeyText = await exportKeyJwk(keyPair.publicKey);
+                        privateKeyText = await exportKeyJwk(keyPair.privateKey);
+                        publicFormatInfo = 'JWK (JSON)';
+                        privateFormatInfo = 'JWK (JSON)';
+                        break;
+                }
+
+                const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+
+                // 显示结果
+                publicKeyArea.value = publicKeyText;
+                privateKeyArea.value = privateKeyText;
+
+                // 显示密钥信息
+                publicKeyInfo.textContent = window.t('encrypted.rsa.keyInfoDetail', {
+                    size: keySize,
+                    format: publicFormatInfo,
+                    chars: publicKeyText.length
+                });
+                publicKeyInfo.style.display = 'block';
+                privateKeyInfo.textContent = window.t('encrypted.rsa.keyInfoDetail', {
+                    size: keySize,
+                    format: privateFormatInfo,
+                    chars: privateKeyText.length
+                });
+                privateKeyInfo.style.display = 'block';
+
+                showStatus(window.t('encrypted.rsa.statusSuccess', { size: keySize, time: elapsed }), 'success');
+            } catch (err) {
+                console.error('Key generation error:', err);
+                showStatus(window.t('encrypted.rsa.errGenerate') + err.message, 'error');
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fas fa-key"></i> ' + window.t('encrypted.rsa.generateBtn');
+            }
+        }
+
+        /**
+         * ArrayBuffer 转 PEM 格式
+         */
+        function arrayBufferToPem(buffer, label) {
+            const base64 = arrayBufferToBase64(buffer);
+            const lines = wrapBase64(base64);
+            return `-----BEGIN ${label}-----\n${lines}\n-----END ${label}-----`;
+        }
+
+        /**
+         * ArrayBuffer 转 Base64
+         */
+        function arrayBufferToBase64(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary);
+        }
+
+        /**
+         * Base64 字符串按64字符换行
+         */
+        function wrapBase64(base64) {
+            const lines = [];
+            for (let i = 0; i < base64.length; i += 64) {
+                lines.push(base64.substring(i, i + 64));
+            }
+            return lines.join('\n');
+        }
+
+        /**
+         * 导出公钥为 PEM 格式
+         */
+        async function exportPublicKeyPem(publicKey) {
+            const buffer = await window.crypto.subtle.exportKey('spki', publicKey);
+            return arrayBufferToPem(buffer, 'PUBLIC KEY');
+        }
+
+        /**
+         * 导出私钥为 PEM 格式
+         */
+        async function exportPrivateKeyPem(privateKey) {
+            const buffer = await window.crypto.subtle.exportKey('pkcs8', privateKey);
+            return arrayBufferToPem(buffer, 'PRIVATE KEY');
+        }
+
+        /**
+         * 导出公钥为 DER (Base64) 格式
+         */
+        async function exportPublicKeyDer(publicKey) {
+            const buffer = await window.crypto.subtle.exportKey('spki', publicKey);
+            return arrayBufferToBase64(buffer);
+        }
+
+        /**
+         * 导出私钥为 DER (Base64) 格式
+         */
+        async function exportPrivateKeyDer(privateKey) {
+            const buffer = await window.crypto.subtle.exportKey('pkcs8', privateKey);
+            return arrayBufferToBase64(buffer);
+        }
+
+        /**
+         * 导出公钥为 SSH (OpenSSH) 格式
+         */
+        async function exportPublicKeySsh(publicKey) {
+            const jwk = await window.crypto.subtle.exportKey('jwk', publicKey);
+
+            // 解析 JWK 中的 n (modulus) 和 e (exponent)
+            const n = base64UrlToUint8Array(jwk.n);
+            const e = base64UrlToUint8Array(jwk.e);
+
+            // SSH 公钥格式: ssh-rsa <base64 encoded data>
+            // 数据结构: string "ssh-rsa" + string e + string n
+            const sshKey = encodeSshPublicKey(n, e);
+            return 'ssh-rsa ' + sshKey;
+        }
+
+        /**
+         * 编码 SSH 公钥
+         */
+        function encodeSshPublicKey(n, e) {
+            const type = new TextEncoder().encode('ssh-rsa');
+
+            // 计算总长度
+            const totalLength = 4 + type.length + 4 + e.length + 4 + n.length;
+            const buffer = new Uint8Array(totalLength);
+            let offset = 0;
+
+            // 写入 type
+            writeUint32(buffer, offset, type.length);
+            offset += 4;
+            buffer.set(type, offset);
+            offset += type.length;
+
+            // 写入 exponent
+            writeUint32(buffer, offset, e.length);
+            offset += 4;
+            buffer.set(e, offset);
+            offset += e.length;
+
+            // 写入 modulus
+            writeUint32(buffer, offset, n.length);
+            offset += 4;
+            buffer.set(n, offset);
+
+            return arrayBufferToBase64(buffer.buffer);
+        }
+
+        /**
+         * 写入 32 位整数到大端序数组
+         */
+        function writeUint32(buffer, offset, value) {
+            buffer[offset] = (value >>> 24) & 0xff;
+            buffer[offset + 1] = (value >>> 16) & 0xff;
+            buffer[offset + 2] = (value >>> 8) & 0xff;
+            buffer[offset + 3] = value & 0xff;
+        }
+
+        /**
+         * Base64URL 转 Uint8Array
+         */
+        function base64UrlToUint8Array(base64url) {
+            const base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+            const binary = atob(base64);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        /**
+         * 导出密钥为 JWK (JSON Web Key) 格式
+         */
+        async function exportKeyJwk(key) {
+            const jwk = await window.crypto.subtle.exportKey('jwk', key);
+            return JSON.stringify(jwk, null, 2);
+        }
+
+        /**
+         * 复制密钥到剪贴板
+         */
+        async function copyKey(elementId) {
+            const textarea = document.getElementById(elementId);
+            if (!textarea.value) {
+                showWarning(window.t('encrypted.rsa.errNoKey'));
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(textarea.value);
+                showSuccess(window.t('encrypted.rsa.notifyCopied'));
+            } catch (err) {
+                // 降级方案
+                textarea.select();
+                document.execCommand('copy');
+                showSuccess(window.t('encrypted.rsa.notifyCopied'));
+            }
+        }
+
+        /**
+         * 下载密钥为文件
+         */
+        function downloadKey(elementId, type) {
+            const textarea = document.getElementById(elementId);
+            if (!textarea.value) {
+                showWarning(window.t('encrypted.rsa.errNoKey'));
+                return;
+            }
+
+            const keyFormat = document.getElementById('key-format').value;
+            let extension = 'pem';
+            let mimeType = 'application/x-pem-file';
+
+            switch (keyFormat) {
+                case 'pem':
+                    extension = 'pem';
+                    mimeType = 'application/x-pem-file';
+                    break;
+                case 'der':
+                    extension = 'der';
+                    mimeType = 'application/octet-stream';
+                    break;
+                case 'ssh':
+                    extension = type === 'public' ? 'pub' : 'pem';
+                    mimeType = 'text/plain';
+                    break;
+                case 'jwk':
+                    extension = 'json';
+                    mimeType = 'application/json';
+                    break;
+            }
+
+            const blob = new Blob([textarea.value], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `rsa_${type}_key.${extension}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showSuccess(window.t('encrypted.rsa.notifyDownloaded'));
+        }
+
+        /**
+         * 显示状态信息
+         */
+        function showStatus(message, type) {
+            const statusBar = document.getElementById('status-bar');
+            statusBar.textContent = message;
+            statusBar.className = 'status-bar ' + type;
+        }
+    </script>
+</body>
+
+</html>

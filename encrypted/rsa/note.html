@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="RSA密钥对生成工具说明，在线生成RSA公钥私钥，支持多种密钥长度，PEM格式输出，本地处理保护隐私">
+    <meta name="keywords" content="RSA密钥生成, RSA密钥对生成器, RSA公钥私钥生成, 在线RSA生成, RSA PEM格式, 免费RSA工具">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>RSA密钥对生成工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #e67e22 0%, #d35400 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #e67e22;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #e67e22;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: #e67e22;
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #e67e22;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
+    <script src="../../common/js/layout.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>RSA密钥对生成工具</h1>
+            <p class="subtitle">在线生成RSA公钥私钥，支持多种密钥长度，PEM格式输出，本地处理保护隐私</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是RSA密钥对生成工具？</h2>
+                <p>RSA密钥对生成工具是一款基于Web Crypto
+                    API的在线RSA密钥生成器，专为需要创建RSA公钥和私钥的开发者与安全工程师设计。RSA（Rivest-Shamir-Adleman）是最广泛使用的非对称加密算法之一，它使用一对数学上相关联的密钥：公钥可以公开分享，用于加密数据或验证数字签名；私钥必须严格保密，用于解密数据或创建数字签名。
+                </p>
+                <p>在现代互联网安全中，RSA算法扮演着至关重要的角色。从HTTPS网站的SSL/TLS证书、SSH远程登录、电子邮件加密（PGP/GPG），到数字签名和身份认证，RSA都是核心基础设施。本工具可以帮助您快速生成符合标准的RSA密钥对，输出PEM格式，可直接用于各种加密和签名场景。
+                </p>
+                <p>所有密钥生成过程均在浏览器本地完成，使用浏览器原生的Web Crypto API进行密码学安全的随机数生成和密钥计算。密钥不会上传到任何服务器，完全在您的控制之下。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：选择密钥参数</h3>
+                <p>首先选择密钥长度。RSA密钥长度直接影响安全性和性能：1024位已不推荐用于生产环境（安全性较低）；2048位是当前推荐标准，安全性足够大多数场景，生成速度快；3072位提供更高安全性，适合中长期安全规划；4096位安全性最高，但生成速度较慢，加密解密性能也较低。建议一般场景使用2048位，高安全需求场景使用3072或4096位。
+                </p>
+
+                <h3>第二步：生成密钥对</h3>
+                <p>点击「生成密钥对」按钮，工具会使用Web Crypto
+                    API生成RSA密钥对。密钥长度越大，生成所需时间越长。2048位通常在1秒内完成，4096位可能需要数秒。生成完成后，公钥和私钥将分别显示在对应的文本框中，采用PEM（Privacy
+                    Enhanced Mail）格式，这是最通用的密钥文本格式。
+                </p>
+
+                <h3>第三步：复制与下载</h3>
+                <p>生成的密钥可以通过两种方式获取：点击「复制」按钮将密钥内容复制到系统剪贴板，然后粘贴到需要的地方；或点击「下载」按钮将密钥保存为.pem文件。公钥文件通常命名为public_key.pem，私钥文件命名为private_key.pem。请务必安全保管私钥文件。
+                </p>
+
+                <h3>实战案例：API接口签名认证</h3>
+                <p>某开发团队需要实现API接口的RSA签名认证。使用本工具生成2048位RSA密钥对后，将私钥保存在服务端用于对API响应进行数字签名，将公钥分发给客户端用于验证签名。具体步骤：服务端使用私钥对响应数据的哈希值进行签名，将签名附加在响应头中；客户端收到响应后，使用公钥验证签名的有效性，确认数据未被篡改且确实来自可信的服务端。这种方案既保证了数据的完整性，又实现了身份认证。
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>后端开发者：</strong>为API接口生成RSA密钥对，实现数据加密传输和数字签名认证。</p>
+                <p><strong>前端开发者：</strong>在前端使用公钥加密敏感数据（如密码），确保数据在传输过程中的安全性。</p>
+                <p><strong>运维工程师：</strong>为SSH登录、SSL证书、安全通信等场景生成RSA密钥对。</p>
+                <p><strong>安全工程师：</strong>为安全评估、渗透测试、密码学研究等场景快速生成测试用密钥。</p>
+                <p><strong>区块链开发者：</strong>为区块链应用生成加密密钥对，用于数据加密和身份验证。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">Web Crypto API</span>
+                    <span class="feature-tag">多种密钥长度</span>
+                    <span class="feature-tag">PEM格式输出</span>
+                    <span class="feature-tag">一键复制下载</span>
+                    <span class="feature-tag">本地处理</span>
+                    <span class="feature-tag">保护隐私</span>
+                    <span class="feature-tag">完全免费</span>
+                    <span class="feature-tag">无需安装</span>
+                </div>
+                <p>工具使用浏览器原生的Web Crypto API实现RSA密钥生成，这是一种密码学安全的实现方式，生成的密钥质量等同于专业加密库。所有计算在浏览器本地完成，密钥不会经过任何网络传输，确保密钥的机密性。
+                </p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>生成的私钥请务必妥善保管，不要通过网络传输或存储在不安全的位置</li>
+                        <li>建议使用专业的密钥管理工具（如SSH Agent、GPG Agent）管理密钥</li>
+                        <li>生产环境建议使用2048位或更长的密钥，1024位已不再安全</li>
+                        <li>私钥文件权限应设置为仅所有者可读（如Linux的chmod 600）</li>
+                        <li>定期更换密钥对，特别是私钥可能泄露时应立即更换</li>
+                        <li>不要在代码仓库中硬编码私钥，应使用环境变量或密钥管理服务</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：RSA公钥和私钥有什么区别？</h3>
+                <p><strong>答：</strong>RSA是非对称加密算法，使用一对数学上相关联的密钥。公钥可以公开分享，任何人用它加密的数据只有对应的私钥才能解密；私钥必须严格保密，用它解密公钥加密的数据，或用它创建数字签名。简单来说：公钥加密→私钥解密（保密通信）；私钥签名→公钥验签（身份认证）。
+                </p>
+
+                <h3>问：密钥长度应该选多少？</h3>
+                <p><strong>答：</strong>密钥长度直接决定安全等级。1024位：已被认为不安全，不推荐用于生产环境。2048位：当前推荐标准，安全强度约等于112位对称密钥，足以应对大多数场景，预计到2030年前仍然安全。3072位：安全强度约等于128位对称密钥，适合中长期安全规划。4096位：安全强度约等于140位对称密钥，最高安全等级，但性能开销较大。建议：一般用途选2048位，重要系统选3072位，极高安全需求选4096位。
+                </p>
+
+                <h3>问：PEM格式是什么？</h3>
+                <p><strong>答：</strong>PEM（Privacy Enhanced Mail）是一种Base64编码的文本格式，以"-----BEGIN ...-----"开头，"-----END
+                    ...-----"结尾。它是存储和传输加密密钥最通用的格式，几乎所有加密工具和编程语言都支持PEM格式。公钥使用SPKI（SubjectPublicKeyInfo）格式封装，私钥使用PKCS#8格式封装，这两种都是标准格式，兼容性极好。
+                </p>
+
+                <h3>问：生成的密钥可以用于SSH登录吗？</h3>
+                <p><strong>答：</strong>本工具生成的是标准RSA密钥对（PKCS#8/SPKI
+                    PEM格式），可以用于大多数需要RSA密钥的场景。但SSH默认使用OpenSSH格式，可能需要使用ssh-keygen工具进行格式转换。对于SSL/TLS证书、API签名、数据加密等场景，本工具生成的PEM格式密钥可以直接使用。
+                </p>
+
+                <h3>问：为什么生成4096位密钥很慢？</h3>
+                <p><strong>答：</strong>RSA密钥生成需要寻找两个大素数，密钥长度越大，素数越大，寻找过程越耗时。这是数学计算的固有特性，不是工具的性能问题。2048位通常1秒内完成，4096位可能需要3-10秒，取决于设备性能。建议耐心等待，不要中途刷新页面。
+                </p>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#e67e22"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+                <a href="../pwd/index.html" class="tool-link">密码生成工具</a>
+                <a href="../token/index.html" class="tool-link">Token生成工具</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>

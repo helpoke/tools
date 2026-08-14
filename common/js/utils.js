@@ -103,11 +103,8 @@ function showToast(message, type = 'info', duration = 3000) {
  * @param {string} message - 弹框消息
  * @param {number} duration - 弹框显示时间（毫秒），默认3000
  */
-function showSuccess(message, duration) {
+function showSuccess(message, duration = 3000) {
     showToast(message, 'success', duration);
-}
-function showSuccess(message) {
-    showToast(message, 'success', 3000);
 }
 
 /**
@@ -115,11 +112,8 @@ function showSuccess(message) {
  * @param {string} message - 弹框消息
  * @param {number} duration - 弹框显示时间（毫秒），默认3000
  */
-function showError(message, duration) {
+function showError(message, duration = 3000) {
     showToast(message, 'error', duration);
-}
-function showError(message) {
-    showToast(message, 'error', 3000);
 }
 
 /**
@@ -127,11 +121,8 @@ function showError(message) {
  * @param {string} message - 弹框消息
  * @param {number} duration - 弹框显示时间（毫秒），默认3000
  */
-function showInfo(message, duration) {
+function showInfo(message, duration = 3000) {
     showToast(message, 'info', duration);
-}
-function showInfo(message) {
-    showToast(message, 'info', 3000);
 }
 
 /**
@@ -139,11 +130,8 @@ function showInfo(message) {
  * @param {string} message - 弹框消息
  * @param {number} duration - 弹框显示时间（毫秒），默认3000
  */
-function showWarning(message, duration) {
+function showWarning(message, duration = 3000) {
     showToast(message, 'warning', duration);
-}
-function showWarning(message) {
-    showToast(message, 'warning', 3000);
 }
 
 /**
