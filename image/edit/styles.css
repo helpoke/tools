@@ -138,13 +138,19 @@
 .preview-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 30px;
     margin-bottom: 20px;
+    width: 100%;
+}
+
+.preview-layout.hidden {
+    display: none;
 }
 
 .preview-column {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .preview-title {
@@ -159,13 +165,14 @@
     background: var(--bg-primary);
     border: 2px dashed var(--border-color);
     border-radius: 12px;
-    padding: 30px;
-    min-height: 500px;
+    padding: 10px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    flex: 1;
+    overflow: auto;
+    width: 100%;
+    box-sizing: border-box;
     cursor: zoom-in;
 }
 
@@ -176,7 +183,7 @@
 
 .preview-image {
     max-width: 100%;
-    max-height: 550px;
+    max-height: 100vh;
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -303,6 +310,69 @@
 .quick-btn:hover {
     background: var(--border-color);
     color: var(--text-primary);
+}
+
+.quick-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.flip-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.reset-all-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.reset-all-btn {
+    padding: 10px 24px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-all-btn:hover {
+    background: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #dc2626;
 }
 
 .action-buttons {

@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="图片旋转与模糊工具说明，在线图片处理工具，支持任意角度旋转和高斯模糊效果，批量处理最多30张图片，本地处理保护隐私">
-    <meta name="keywords" content="图片旋转, 图片模糊, 高斯模糊, 批量处理, 图像旋转, 在线图片处理">
+    <meta name="description" content="图片编辑器使用指南：详细介绍旋转、模糊、亮度、对比度、饱和度、色相、翻转、滤镜等功能的使用方法、参数范围和实用技巧，帮助您快速掌握在线图片处理">
+    <meta name="keywords" content="图片编辑器使用教程, 图片编辑参数, 旋转角度, 模糊程度, 亮度对比度, 饱和度色相, 翻转滤镜, 图片处理技巧, 批量编辑图片">
     <meta name="author" content="Helpoke">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
-    <title>图片旋转与模糊工具 - 免费、安全、快速</title>
+    <title>图片编辑器 - 使用指南与常见问题解答</title>
 
     <style>
         * {
@@ -192,6 +192,71 @@
             font-size: 0.85rem;
         }
 
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .param-table th {
+            background: rgba(245, 158, 11, 0.15);
+            color: #D97706;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #F59E0B;
+        }
+
+        .param-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .param-table tr:hover td {
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .param-table code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #D97706;
+        }
+
+        .tip-box {
+            background: rgba(34, 197, 94, 0.08);
+            border-left: 4px solid #22c55e;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid rgba(34, 197, 94, 0.2);
+            border-right: 1px solid rgba(34, 197, 94, 0.2);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .tip-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+            color: #166534;
+        }
+
+        .highlight-num {
+            display: inline-block;
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
         @media (max-width: 768px) {
             .content-wrapper {
                 grid-template-columns: 1fr;
@@ -221,134 +286,237 @@
 <body>
     <div class="note-container">
         <header>
-            <h1>图片旋转与模糊工具</h1>
-            <p class="subtitle">支持图片任意角度旋转和高斯模糊效果调节，批量处理最多30张图片，实时预览处理效果</p>
+            <h1>图片编辑器</h1>
+            <p class="subtitle">一站式在线图片处理工具，集旋转、模糊、亮度/对比度/饱和度调节、翻转、滤镜于一体</p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px;">
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">🔄
+                    旋转</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">🌫️
+                    模糊</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">☀️
+                    亮度</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">🎨
+                    色彩</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">🔃
+                    翻转</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">📷
+                    滤镜</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">📦
+                    批量</span>
+                <span style="background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:0.9rem;">🔒
+                    安全</span>
+            </div>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
 
         <div class="content-wrapper">
             <div class="info-section">
-                <h2>什么是图片旋转与模糊工具？</h2>
-                <p>图片旋转与模糊工具是一款基于浏览器端Canvas技术的综合性图片编辑工具，集图片旋转和高斯模糊两大核心功能于一体。它专为需要快速处理图片方向和保护隐私信息的用户设计，能够满足从日常照片处理到专业设计的各种需求。无论是摄影爱好者纠正拍摄角度、社交媒体用户模糊敏感信息，还是设计师创建艺术效果，这款工具都能提供高效、便捷的解决方案。
+                <h2>什么是图片编辑器？</h2>
+                <p>图片编辑器是一款基于浏览器端 Canvas 技术的在线图片处理工具，将旋转、模糊、亮度/对比度/饱和度/色相调节、翻转、滤镜等多种编辑功能集成在一个界面中。无需下载安装任何软件，打开浏览器即可使用。
                 </p>
-                <p>旋转功能采用高质量的双线性插值算法，支持 -180° 到 180°
-                    的任意角度调整，确保旋转后的图片保持清晰锐利，不会出现模糊或锯齿。工具还提供了快捷旋转按钮（-90°、+90°、180°），方便用户快速完成常见的旋转操作。模糊功能则采用先进的高斯模糊算法，通过计算像素周围的加权平均值来实现平滑效果，支持
-                    0 到 20 级的模糊程度调节，可根据需要实现从轻微柔化到完全模糊的效果。</p>
-                <p>批量处理功能是工具的一大亮点，支持单次上传最多30张图片，用户可以选择将设置应用到所有图片或仅应用到当前选中的图片。处理过程中，左侧显示原图，右侧实时预览处理后的效果，让用户随时查看处理结果。双击预览图片可以全屏查看，方便仔细检查处理效果。所有处理均在浏览器本地完成，无需上传图片，保护用户隐私和数据安全。
+                <p>与传统的图片处理软件不同，本工具专注于<strong>快速、轻量化的图片编辑需求</strong>。您不需要学习复杂的操作流程，只需上传图片、调整参数、点击应用，三步即可完成。所有效果支持实时预览和自由叠加，满意后再下载。
                 </p>
+                <p>工具支持单次上传最多 20
+                    张图片进行批量处理，左侧显示原图，右侧实时对比处理效果，双击可全屏查看。所有处理均在浏览器本地完成，<strong>图片数据不会上传到任何服务器</strong>，充分保护您的隐私安全。</p>
 
                 <h2>如何使用？</h2>
-                <h3>第一步：上传图片</h3>
-                <p>点击上传区域或拖拽图片到指定位置，支持同时选择多张图片。工具支持 JPG、PNG、WebP、GIF、BMP 等多种图片格式，单次最多可上传30张图片。上传后，图片列表会显示在页面上，方便您查看和管理。
-                </p>
+                <h3><span class="highlight-num">1</span>上传图片</h3>
+                <p>点击上传区域或直接拖拽图片到指定位置，支持同时选择多张图片（最多 20 张）。工具支持 JPG、PNG、WebP、GIF、BMP 等常见图片格式。</p>
 
-                <h3>第二步：选择处理方式</h3>
-                <p>在处理设置区域，您可以同时设置旋转角度和模糊程度。通过拖动旋转滑块调整角度，或点击快捷旋转按钮快速旋转。拖动模糊滑块调整模糊程度，数值越大，模糊效果越明显。</p>
+                <h3><span class="highlight-num">2</span>调整参数</h3>
+                <p>在设置区域自由组合各种效果：拖动滑块或点击快捷按钮调整旋转角度；调节模糊程度；分别控制亮度和对比度；调整饱和度和色相旋转；点击按钮切换翻转状态；选择预设滤镜。所有参数可叠加使用，互不冲突。</p>
 
-                <h3>第三步：应用效果</h3>
-                <p>点击"应用效果"按钮，工具会根据您的设置处理图片。右侧预览区域会实时显示处理后的效果。如果勾选了"应用到所有图片"选项，所有已上传的图片都会应用相同的设置。</p>
+                <h3><span class="highlight-num">3</span>应用并预览</h3>
+                <p>点击"应用效果"按钮执行处理。右侧预览区域即时展示处理结果，与左侧原图形成直观对比。勾选"应用到所有图片"可统一处理全部图片；不满意可随时点击"重置全部"恢复默认值。</p>
 
-                <h3>第四步：下载处理后的图片</h3>
-                <p>处理完成后，您可以点击"下载单张"下载当前选中的图片，或点击"批量下载"一次性下载所有处理后的图片。批量下载时，工具会自动将所有图片打包为 ZIP 文件。</p>
+                <h3><span class="highlight-num">4</span>下载保存</h3>
+                <p>处理完成后，点击"下载单张"保存当前图片，或点击"批量下载"一次性打包下载所有处理后的图片（自动压缩为 ZIP 文件）。</p>
+
+                <div class="tip-box">
+                    <p><strong>💡 小贴士：</strong>建议先对一张图片调整到满意效果后，再勾选"应用到所有图片"进行批量处理，避免反复调整。</p>
+                </div>
             </div>
 
             <div class="info-section">
                 <h2>功能效果详解</h2>
+                <p style="text-indent:0;color:var(--text-muted);font-size:0.95rem;margin-bottom:20px;">
+                    所有效果可自由组合叠加，处理顺序为：翻转 → 旋转 → 滤镜 → 模糊/亮度/对比度/饱和度/色相</p>
 
                 <div class="effect-card">
-                    <h4>旋转功能</h4>
-                    <p>支持 -180° 到 180° 的任意角度旋转，采用高质量插值算法，确保旋转后的图片保持清晰锐利。</p>
+                    <h4>🔄 旋转功能</h4>
+                    <p>支持 -180° 到 180° 的任意角度精细旋转，提供 -90°、+90°、180° 三个快捷按钮一键操作。滑块支持实时拖动，松手后即可看到角度数值。</p>
                     <div class="effect-scenarios">
-                        <span class="effect-scenario">纠正拍摄角度</span>
+                        <span class="effect-scenario">纠正倾斜照片</span>
                         <span class="effect-scenario">调整图片方向</span>
-                        <span class="effect-scenario">创建特殊角度</span>
-                        <span class="effect-scenario">批量处理照片</span>
+                        <span class="effect-scenario">批量旋转照片</span>
+                        <span class="effect-scenario">创意角度排版</span>
                     </div>
                 </div>
 
                 <div class="effect-card">
-                    <h4>高斯模糊功能</h4>
-                    <p>采用先进的高斯模糊算法，支持 0 到 20 级模糊程度调节。高斯模糊是图像处理中最常用的模糊技术，能产生自然柔和的模糊效果。</p>
+                    <h4>🌫️ 模糊功能</h4>
+                    <p>采用高斯模糊算法，支持 0~20 级精细调节。轻微模糊（1~5）可柔化边缘；中等模糊（6~12）适合保护隐私信息；重度模糊（13~20）可完全遮盖内容。</p>
                     <div class="effect-scenarios">
-                        <span class="effect-scenario">保护隐私信息</span>
-                        <span class="effect-scenario">创建背景虚化</span>
-                        <span class="effect-scenario">艺术效果处理</span>
-                        <span class="effect-scenario">突出主体内容</span>
+                        <span class="effect-scenario">遮挡敏感信息</span>
+                        <span class="effect-scenario">背景虚化效果</span>
+                        <span class="effect-scenario">艺术朦胧处理</span>
                     </div>
                 </div>
+
+                <div class="effect-card">
+                    <h4>☀️ 亮度与对比度</h4>
+                    <p>亮度控制图片整体明暗（0% 全黑 → 100% 原始 → 200% 最亮），对比度控制明暗差异（0% 灰色 → 100% 原始 → 200% 高对比）。两者独立调节，可精确修复曝光问题。</p>
+                    <div class="effect-scenarios">
+                        <span class="effect-scenario">修复曝光不足</span>
+                        <span class="effect-scenario">增强画面层次</span>
+                        <span class="effect-scenario">降低对比度营造柔和感</span>
+                        <span class="effect-scenario">高对比度增强视觉冲击</span>
+                    </div>
+                </div>
+
+                <div class="effect-card">
+                    <h4>🎨 饱和度与色相</h4>
+                    <p>饱和度控制色彩鲜艳程度：0% 为完全灰度，100% 保持原始色彩，200% 超鲜艳。色相旋转（0°~360°）可整体偏移色调，创造完全不同的色彩风格。</p>
+                    <div class="effect-scenarios">
+                        <span class="effect-scenario">增强照片色彩</span>
+                        <span class="effect-scenario">改变整体色调</span>
+                        <span class="effect-scenario">创建特殊色彩风格</span>
+                        <span class="effect-scenario">去色转黑白</span>
+                    </div>
+                </div>
+
+                <div class="effect-card">
+                    <h4>🔃 翻转与 📷 滤镜</h4>
+                    <p>支持水平翻转（左右镜像）和垂直翻转（上下镜像），可同时启用。预设三种艺术滤镜：灰度（去除色彩，经典黑白风格）、复古（暖色调怀旧效果）、反色（底片效果，色彩互补）。滤镜可与所有参数叠加使用。
+                    </p>
+                    <div class="effect-scenarios">
+                        <span class="effect-scenario">镜像翻转</span>
+                        <span class="effect-scenario">经典黑白风格</span>
+                        <span class="effect-scenario">复古怀旧色调</span>
+                        <span class="effect-scenario">反色艺术效果</span>
+                    </div>
+                </div>
+
+                <h2>参数速查表</h2>
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>参数</th>
+                            <th>范围</th>
+                            <th>默认值</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>旋转角度</strong></td>
+                            <td><code>-180° ~ 180°</code></td>
+                            <td><code>0°</code></td>
+                            <td>负值逆时针，正值顺时针</td>
+                        </tr>
+                        <tr>
+                            <td><strong>模糊程度</strong></td>
+                            <td><code>0 ~ 20</code></td>
+                            <td><code>0</code></td>
+                            <td>值越大越模糊，步进 0.5</td>
+                        </tr>
+                        <tr>
+                            <td><strong>亮度</strong></td>
+                            <td><code>0% ~ 200%</code></td>
+                            <td><code>100%</code></td>
+                            <td>100% 为原始亮度</td>
+                        </tr>
+                        <tr>
+                            <td><strong>对比度</strong></td>
+                            <td><code>0% ~ 200%</code></td>
+                            <td><code>100%</code></td>
+                            <td>100% 为原始对比度</td>
+                        </tr>
+                        <tr>
+                            <td><strong>饱和度</strong></td>
+                            <td><code>0% ~ 200%</code></td>
+                            <td><code>100%</code></td>
+                            <td>0% 为灰度，100% 为原始</td>
+                        </tr>
+                        <tr>
+                            <td><strong>色相旋转</strong></td>
+                            <td><code>0° ~ 360°</code></td>
+                            <td><code>0°</code></td>
+                            <td>整体偏移色调角度</td>
+                        </tr>
+                        <tr>
+                            <td><strong>翻转</strong></td>
+                            <td>水平 / 垂直</td>
+                            <td>关闭</td>
+                            <td>可同时启用两种翻转</td>
+                        </tr>
+                        <tr>
+                            <td><strong>滤镜</strong></td>
+                            <td>原图/灰度/复古/反色</td>
+                            <td>原图</td>
+                            <td>可与其他参数叠加</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <h2>适用场景与人群</h2>
-                <p><strong>摄影爱好者：</strong>批量纠正拍摄角度，调整照片方向，创建艺术效果，提升作品质量。</p>
-                <p><strong>社交媒体用户：</strong>处理分享图片，模糊敏感信息，调整图片方向，让分享更加安全和美观。</p>
-                <p><strong>内容创作者：</strong>在视频剪辑、图文创作中处理素材图片，创建模糊背景突出主体。</p>
-                <p><strong>企业办公人员：</strong>处理文档中的图片，模糊保密信息，确保信息安全。</p>
-                <p><strong>设计师：</strong>在设计过程中快速处理图片，创建各种视觉效果，提高工作效率。</p>
+                <p><strong>📸 摄影爱好者：</strong>批量纠正拍摄角度，调整亮度对比度修复曝光，使用滤镜创建艺术风格。</p>
+                <p><strong>📱 社交媒体用户：</strong>快速处理分享图片，模糊敏感信息，调整色彩让图片更吸引关注。</p>
+                <p><strong>✍️ 内容创作者：</strong>在图文创作中高效处理素材，翻转、调色、加滤镜一站完成，无需切换多个工具。</p>
+                <p><strong>💼 企业办公人员：</strong>处理文档截图和证件图片，模糊保密信息后分享，确保信息安全合规。</p>
+                <p><strong>🎨 设计师：</strong>快速预览色彩和色调调整效果，对比原图确认方案，提高工作效率。</p>
 
                 <h2>特点与优势</h2>
                 <div class="feature-list">
-                    <span class="feature-tag">本地处理，保护隐私</span>
-                    <span class="feature-tag">支持批量处理（30张）</span>
-                    <span class="feature-tag">任意角度旋转</span>
-                    <span class="feature-tag">快捷旋转按钮</span>
-                    <span class="feature-tag">可调高斯模糊</span>
-                    <span class="feature-tag">实时预览效果</span>
-                    <span class="feature-tag">应用到全部/单张</span>
-                    <span class="feature-tag">一键批量下载</span>
+                    <span class="feature-tag">🔒 本地处理，保护隐私</span>
+                    <span class="feature-tag">📦 批量处理（最多20张）</span>
+                    <span class="feature-tag">🔄 任意角度旋转</span>
+                    <span class="feature-tag">🌫️ 高斯模糊</span>
+                    <span class="feature-tag">☀️ 亮度/对比度调节</span>
+                    <span class="feature-tag">🎨 饱和度/色相调节</span>
+                    <span class="feature-tag">🔃 水平/垂直翻转</span>
+                    <span class="feature-tag">📷 预设滤镜效果</span>
+                    <span class="feature-tag">⚡ 一键重置全部</span>
+                    <span class="feature-tag">👁️ 原图对比预览</span>
+                    <span class="feature-tag">📥 一键批量下载</span>
+                    <span class="feature-tag">🆓 完全免费使用</span>
                 </div>
-                <p>工具的"应用到所有图片"功能非常实用，当您需要对多张图片应用相同的旋转角度和模糊程度时，只需设置一次，即可批量处理所有图片，大大提高工作效率。同时，双击预览图片可以全屏查看，方便您仔细检查处理效果。
-                </p>
 
                 <div class="warning-box">
-                    <p><strong>注意事项：</strong></p>
+                    <p><strong>⚠️ 注意事项：</strong></p>
                     <ul>
-                        <li>旋转角度设置范围为 -180° 到 180°，超出范围会自动调整到有效范围内</li>
-                        <li>模糊程度设置范围为 0 到 20，值越大模糊效果越明显</li>
-                        <li>勾选"应用到所有图片"后，设置会自动应用到所有已上传的图片</li>
-                        <li>GIF 动态图片仅处理第一帧，如需处理完整动图请使用其他工具</li>
-                        <li>处理期间请勿关闭浏览器或刷新页面，否则会导致处理失效、数据丢失</li>
-                        <li>建议使用 Chrome、Firefox、Safari 等现代浏览器以获得最佳性能</li>
+                        <li>所有效果可自由组合叠加，点击"重置全部"可一键恢复默认值重新调整</li>
+                        <li>亮度、对比度、饱和度默认值为 100%（即不变），色相默认值为 0°</li>
+                        <li>勾选"应用到所有图片"后，当前所有设置会统一应用到每一张已上传的图片</li>
+                        <li>GIF 动态图片仅处理第一帧，处理后保存为静态图片</li>
+                        <li>处理大量或大尺寸图片时可能需要较长时间，请勿关闭或刷新页面</li>
+                        <li>建议使用 Chrome、Firefox、Edge、Safari 等现代浏览器以获得最佳性能</li>
                     </ul>
                 </div>
-
-                <h2>实战案例：会议文档图片处理</h2>
-                <p>小陈是一名企业秘书，负责整理和分享公司会议资料。在一次重要会议后，她收到了20张会议现场的照片和文档扫描件，但这些图片存在两个问题：部分照片拍摄角度不正确，需要旋转；部分文档包含敏感信息，需要模糊处理后才能分享。
-                </p>
-                <p><strong>处理流程：</strong></p>
-                <ol>
-                    <li>小陈将所有20张图片上传到图片旋转与模糊工具中。</li>
-                    <li>对于拍摄角度不正确的照片，使用快捷旋转按钮（+90°或-90°）快速调整到正确方向。</li>
-                    <li>对于需要微调角度的照片，使用旋转滑块精确调整到合适角度。</li>
-                    <li>对于包含敏感信息的文档图片，使用高斯模糊功能，设置模糊程度为15，确保敏感信息无法辨认。</li>
-                    <li>勾选"应用到所有图片"选项，将相同的模糊设置应用到所有需要处理的文档图片。</li>
-                    <li>处理完成后，双击预览图片全屏查看效果，确认无误后点击"批量下载"保存所有图片。</li>
-                </ol>
-                <p><strong>效果对比：</strong>处理前，图片角度不一，敏感信息暴露；处理后，所有图片方向正确，敏感信息得到有效保护，文档可以安全地分享给相关人员查看。整个处理过程仅用了5分钟，大大提高了工作效率。
-                </p>
 
                 <h2>常见问题与解答</h2>
 
                 <h3>Q1：旋转后的图片为什么会出现黑边？</h3>
-                <p>这是因为图片旋转后，原有的矩形区域变成了菱形，超出原边界的部分需要填充颜色。工具默认使用黑色填充，这是正常现象。如果需要透明背景，可以将图片保存为PNG格式。建议在旋转前确保图片有足够的边缘空间，或使用裁剪工具去除黑边。
-                </p>
+                <p>非 90° 整数倍旋转时，超出原边界的部分需要填充颜色。JPG 格式不支持透明，默认使用黑色填充；PNG 格式旋转后填充透明背景，不会出现黑边。如果不需要黑边，建议使用 PNG 格式。</p>
 
-                <h3>Q2：高斯模糊和普通模糊有什么区别？</h3>
-                <p>高斯模糊采用加权平均算法，距离中心越近的像素权重越高，产生的模糊效果更加自然柔和，边缘过渡平滑。普通模糊（如均值模糊）对所有像素一视同仁，模糊效果较为生硬。高斯模糊是图像处理中最常用的模糊技术，适合保护隐私、创建艺术效果等场景。
-                </p>
+                <h3>Q2：如何精确控制模糊程度？</h3>
+                <p>模糊程度范围为 0~20，步进 0.5，值越大模糊效果越明显。推荐参考值：1~5 为轻微模糊，适合柔化边缘；6~12 为中等模糊，适合保护隐私文字；13~20 为重度模糊，适合完全遮盖敏感内容。</p>
 
-                <h3>Q3：如何精确控制模糊程度？</h3>
-                <p>模糊程度设置范围为0-20，值越大模糊效果越明显。一般来说：1-5为轻微模糊，适合柔化边缘；6-12为中等模糊，适合保护隐私信息；13-20为重度模糊，适合完全遮盖内容。建议根据实际需求逐步调整，观察效果后再决定。
-                </p>
+                <h3>Q3：滤镜效果可以和其他参数叠加吗？</h3>
+                <p>可以。滤镜效果可以与旋转、模糊、亮度、对比度、饱和度、色相等所有参数自由叠加。例如：灰度滤镜 + 高对比度 = 强烈黑白风格；复古滤镜 + 降低饱和度 = 怀旧照片效果。</p>
 
-                <h3>Q4：可以同时使用旋转和模糊功能吗？</h3>
-                <p>是的，工具支持同时设置旋转角度和模糊程度。您可以先调整旋转角度，再设置模糊程度，工具会同时应用这两种效果。处理顺序是先旋转后模糊，确保模糊效果在正确方向上应用。</p>
+                <h3>Q4：可以同时使用多种效果吗？</h3>
+                <p>可以，这正是本工具的核心优势。所有参数（旋转、模糊、亮度、对比度、饱和度、色相、翻转、滤镜）可以同时应用，互不限制。处理顺序为：翻转 → 旋转 → 滤镜 → 其他调整。</p>
 
                 <h3>Q5：批量处理时可以为每张图片设置不同的参数吗？</h3>
-                <p>目前工具的批量处理功能支持将相同设置应用到所有图片。如果需要为每张图片设置不同的参数，建议取消勾选"应用到所有图片"选项，然后依次处理每张图片。我们正在开发更灵活的批量处理功能，敬请期待。</p>
+                <p>可以。取消勾选"应用到所有图片"后，在文件列表中点击切换不同图片，分别为每张图片设置不同的参数，然后逐一点击"应用效果"即可。</p>
 
-                <h3>Q6：为什么处理后的图片会变小？</h3>
-                <p>处理后的图片尺寸不会变小，但文件大小可能会有所变化。旋转操作本身不会改变文件大小；模糊操作可能会使图片数据更加均匀，从而在保存时获得更好的压缩率。如果文件大小明显变小，可能是因为工具自动进行了轻微的压缩优化。
-                </p>
+                <h3>Q6：效果不满意怎么办？</h3>
+                <p>点击"重置全部"按钮可一键恢复所有参数到默认值，然后重新调整。您也可以单独调整某个参数（如点击旋转区域的"重置"按钮恢复旋转角度），不影响其他已调好的参数。</p>
+
+                <h3>Q7：处理后的图片质量会下降吗？</h3>
+                <p>工具使用 Canvas 进行高质量渲染处理，尽可能保持原始图片质量。但 JPG 格式在保存时会进行有损压缩，多次编辑可能导致质量轻微下降。如需最佳质量，建议使用 PNG 格式保存。</p>
             </div>
         </div>
 

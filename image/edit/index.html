@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="在线免费图片旋转工具，支持任意角度旋转。在线免费图片模糊工具，支持高斯模糊。批量处理，保护隐私安全。">
-    <meta name="keywords" content="图片旋转, 图片模糊, 在线图片处理, 批量处理, 图像旋转, 图像模糊, 免费图片工具">
+    <meta name="description" content="在线免费图片编辑器，支持旋转、模糊、亮度、对比度、饱和度、色相调节、水平/垂直翻转、滤镜（灰度/复古/反色）等功能。批量处理，本地处理，保护隐私安全。">
+    <meta name="keywords" content="图片编辑器, 在线图片处理, 图片旋转, 图片模糊, 亮度调节, 对比度, 饱和度, 翻转, 滤镜, 灰度, 复古, 批量处理, 免费图片工具">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,9 +12,9 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google; frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
     <meta name="robots" content="index, follow">
-    <title>图片旋转与模糊工具 - 在线免费图像处理</title>
-    <meta property="og:title" content="图片旋转与模糊工具 - 在线免费图像处理">
-    <meta property="og:description" content="在线免费图片旋转工具，支持任意角度旋转。在线免费图片模糊工具，支持高斯模糊。批量处理，保护隐私安全。">
+    <title>图片编辑器 - 在线免费图像处理（旋转/模糊/亮度/翻转/滤镜）</title>
+    <meta property="og:title" content="图片编辑器 - 在线免费图像处理（旋转/模糊/亮度/翻转/滤镜）">
+    <meta property="og:description" content="在线免费图片编辑器，支持旋转、模糊、亮度、对比度、饱和度、色相调节、翻转、滤镜等多种功能。批量处理，本地处理，保护隐私安全。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://helpoke.com/image/edit/">
     <meta property="og:site_name" content="Helpoke">
@@ -22,8 +22,8 @@
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="图片旋转与模糊工具 - 在线免费图像处理">
-    <meta name="twitter:description" content="在线免费图片旋转工具，支持任意角度旋转。在线免费图片模糊工具，支持高斯模糊。批量处理，保护隐私安全。">
+    <meta name="twitter:title" content="图片编辑器 - 在线免费图像处理（旋转/模糊/亮度/翻转/滤镜）">
+    <meta name="twitter:description" content="在线免费图片编辑器，支持旋转、模糊、亮度、对比度、饱和度、色相调节、翻转、滤镜等多种功能。批量处理，本地处理，保护隐私安全。">
     <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
     <link rel="canonical" href="https://helpoke.com/image/edit/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/edit/">
@@ -43,17 +43,21 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "图片旋转与模糊工具",
-        "description": "在线图片旋转与模糊处理工具，支持任意角度旋转和不同程度的高斯模糊。支持批量处理，本地处理，保护隐私安全。Online image rotation and blur tool supporting batch processing.",
+        "name": "图片编辑器",
+        "description": "在线图片编辑工具，支持旋转、模糊、亮度、对比度、饱和度、色相调节、水平/垂直翻转、滤镜（灰度/复古/反色）等功能。支持批量处理，本地处理，保护隐私安全。Online image editor supporting rotation, blur, brightness, contrast, saturation, flip, filters and batch processing.",
         "url": "https://helpoke.com/image/edit",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
-            "支持图片任意角度旋转",
-            "支持高斯模糊效果",
-            "可调节模糊程度",
+            "支持图片任意角度旋转（-180°~180°）",
+            "高斯模糊效果调节",
+            "亮度与对比度调节",
+            "饱和度与色相旋转",
+            "水平/垂直翻转",
+            "预设滤镜（灰度/复古/反色）",
+            "一键重置全部参数",
             "支持批量处理（最多20张）",
-            "实时预览处理效果",
+            "原图与处理后实时对比预览",
             "本地处理，保护隐私安全"
         ],
         "operatingSystem": "Web",
@@ -81,7 +85,7 @@
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
-            <p data-i18n="image.edit.intro">图片编辑器，支持图片批量旋转（-180°~180°任意角度）和模糊处理，可统一应用或单独设置每张图片</p>
+            <p data-i18n="image.edit.intro">一站式在线图片编辑工具，集旋转、模糊、亮度/对比度/饱和度调节、翻转、滤镜于一体，支持批量处理，原图与处理后实时对比预览，本地处理保护隐私</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
@@ -106,7 +110,7 @@
                 当前图片：<span id="currentFileName"></span>
             </div>
 
-            <div class="preview-layout" style="display: none;">
+            <div id="previewLayout" class="preview-layout hidden">
                 <div class="preview-column">
                     <h3 class="preview-title" data-i18n="image.edit.originalTitle">原图（双击放大）</h3>
                     <div id="originalPreview" class="preview-box">
@@ -157,6 +161,62 @@
                     </div>
                 </div>
 
+                <div class="settings-row">
+                    <div class="setting-group">
+                        <h3 data-i18n="image.edit.adjustTitle">调整</h3>
+                        <div class="setting-row">
+                            <label for="brightnessSlider" data-i18n="image.edit.brightnessLabel">亮度：</label>
+                            <input type="range" id="brightnessSlider" min="0" max="200" value="100">
+                            <span id="brightnessValue">100%</span>
+                        </div>
+                        <div class="setting-row">
+                            <label for="contrastSlider" data-i18n="image.edit.contrastLabel">对比度：</label>
+                            <input type="range" id="contrastSlider" min="0" max="200" value="100">
+                            <span id="contrastValue">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3 data-i18n="image.edit.colorTitle">色彩</h3>
+                        <div class="setting-row">
+                            <label for="saturateSlider" data-i18n="image.edit.saturateLabel">饱和度：</label>
+                            <input type="range" id="saturateSlider" min="0" max="200" value="100">
+                            <span id="saturateValue">100%</span>
+                        </div>
+                        <div class="setting-row">
+                            <label for="hueSlider" data-i18n="image.edit.hueLabel">色相旋转：</label>
+                            <input type="range" id="hueSlider" min="0" max="360" value="0">
+                            <span id="hueValue">0°</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-row">
+                    <div class="setting-group">
+                        <h3 data-i18n="image.edit.flipTitle">翻转</h3>
+                        <div class="flip-buttons">
+                            <button class="quick-btn" id="flipHBtn" data-i18n="image.edit.flipHBtn">↔ 水平翻转</button>
+                            <button class="quick-btn" id="flipVBtn" data-i18n="image.edit.flipVBtn">↕ 垂直翻转</button>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3 data-i18n="image.edit.filterTitle">滤镜</h3>
+                        <div class="filter-buttons">
+                            <button class="filter-btn" data-filter="none" data-i18n="image.edit.filterNone">原图</button>
+                            <button class="filter-btn" data-filter="grayscale" data-i18n="image.edit.filterGrayscale">灰度</button>
+                            <button class="filter-btn" data-filter="sepia" data-i18n="image.edit.filterSepia">复古</button>
+                            <button class="filter-btn" data-filter="invert" data-i18n="image.edit.filterInvert">反色</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reset-all-row">
+                    <button class="reset-all-btn" id="resetAllBtn" data-i18n="image.edit.resetAllBtn">
+                        <i class="fas fa-undo"></i> 重置全部
+                    </button>
+                </div>
+
                 <div class="action-buttons">
                     <button id="applyBtn" class="primary-btn" data-i18n="image.edit.applyBtn">
                         <i class="fas fa-check"></i> 应用效果
@@ -183,22 +243,26 @@
                     <div class="info-content">
                         <h4 data-i18n="image.edit.problemsTitle">一、解决的问题</h4>
                         <ul>
-                            <li data-i18n="image.edit.problem1">在线批量旋转图片和添加模糊效果，支持任意角度旋转（-180°~180°）。</li>
-                            <li data-i18n="image.edit.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="image.edit.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="image.edit.problem1">一站式图片编辑：旋转、模糊、亮度、对比度、饱和度、色相、翻转、滤镜，打开浏览器即可使用，无需安装任何软件。</li>
+                            <li data-i18n="image.edit.problem2">原图与处理后实时对比预览，所有效果可自由叠加，满意后再下载。</li>
+                            <li data-i18n="image.edit.problem3">支持批量处理（最多20张），一次设置即可统一应用到多张图片，大幅提升效率。</li>
                         </ul>
                         <h4 data-i18n="image.edit.formatsTitle">二、支持的格式</h4>
                         <ul>
-                            <li data-i18n="image.edit.formatJpg"><strong>JPG：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="image.edit.formatPng"><strong>PNG：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="image.edit.formatWebp"><strong>WebP：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.edit.formatJpg"><strong>JPG：</strong>支持完整处理，旋转后非90°整数倍时自动填充黑色背景。</li>
+                            <li data-i18n="image.edit.formatPng"><strong>PNG：</strong>支持完整处理，透明区域旋转后保持透明，推荐用于需要透明背景的图片。</li>
+                            <li data-i18n="image.edit.formatWebp"><strong>WebP：</strong>支持完整处理，现代浏览器均兼容。</li>
                         </ul>
                         <h4 data-i18n="image.edit.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="image.edit.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="image.edit.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="image.edit.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="image.edit.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="image.edit.featureRotate"><strong>旋转：</strong>-180°~180° 任意角度精细旋转，快捷按钮一键旋转 -90°/+90°/180°。</li>
+                            <li data-i18n="image.edit.featureBlur"><strong>模糊：</strong>高斯模糊算法，0~20 级精细调节，轻松保护隐私或创建艺术效果。</li>
+                            <li data-i18n="image.edit.featureAdjust"><strong>调整：</strong>亮度与对比度独立调节（均为 0~200%），精确修复曝光问题。</li>
+                            <li data-i18n="image.edit.featureColor"><strong>色彩：</strong>饱和度（0~200%）控制色彩鲜艳度，色相旋转（0°~360°）改变整体色调。</li>
+                            <li data-i18n="image.edit.featureFlip"><strong>翻转：</strong>支持水平翻转（左右镜像）和垂直翻转（上下镜像），可同时启用。</li>
+                            <li data-i18n="image.edit.featureFilter"><strong>滤镜：</strong>预设灰度（黑白）、复古（怀旧）、反色（底片）三种艺术滤镜。</li>
+                            <li data-i18n="image.edit.featureReset"><strong>重置：</strong>一键恢复所有参数到默认值，也可单独重置旋转角度。</li>
+                            <li data-i18n="image.edit.featureSecurity"><strong>安全：</strong>所有处理完全在本地浏览器完成，图片数据绝不上传服务器。</li>
                         </ul>
                     </div>
                 </article>
@@ -212,36 +276,30 @@
                         <ul>
                             <li data-i18n="image.edit.usageUploadClick"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
                             <li data-i18n="image.edit.usageUploadBatch"><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
-                            <li data-i18n="image.edit.usageUploadFormats"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。
-                            </li>
+                            <li data-i18n="image.edit.usageUploadFormats"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
                         </ul>
-                        <h4 data-i18n="image.edit.usageRotateTitle">二、旋转图片</h4>
+                        <h4 data-i18n="image.edit.usageEditTitle">二、编辑图片</h4>
                         <ul>
-                            <li data-i18n="image.edit.usageRotateAngle"><strong>旋转角度：</strong>拖动滑块调整旋转角度（-180°到180°）。</li>
-                            <li data-i18n="image.edit.usageRotateQuick"><strong>快捷旋转：</strong>点击-90°、+90°、180°按钮快速旋转。</li>
-                            <li data-i18n="image.edit.usageRotateReset"><strong>重置旋转：</strong>点击"重置"按钮恢复原始角度。</li>
-                            <li data-i18n="image.edit.usageRotatePreview"><strong>实时预览：</strong>旋转效果实时显示在预览区域。</li>
+                            <li data-i18n="image.edit.usageEditRotate"><strong>旋转：</strong>拖动滑块调整角度，或点击快捷按钮（-90°/+90°/180°）快速旋转，点击"重置"恢复旋转角度。</li>
+                            <li data-i18n="image.edit.usageEditBlur"><strong>模糊：</strong>拖动滑块调整高斯模糊程度（0~20，步进0.5），值越大越模糊。</li>
+                            <li data-i18n="image.edit.usageEditAdjust"><strong>亮度/对比度：</strong>分别拖动滑块调节，默认值100%表示不变，0%最暗/最灰，200%最亮/最强。</li>
+                            <li data-i18n="image.edit.usageEditColor"><strong>饱和度/色相：</strong>饱和度控制色彩鲜艳程度，色相旋转可改变整体色调。</li>
+                            <li data-i18n="image.edit.usageEditFlip"><strong>翻转：</strong>点击“水平翻转”或“垂直翻转”按钮切换翻转状态。</li>
+                            <li data-i18n="image.edit.usageEditFilter"><strong>滤镜：</strong>点击滤镜按钮选择效果（原图/灰度/复古/反色），选中后高亮显示。</li>
+                            <li data-i18n="image.edit.usageEditReset"><strong>重置全部：</strong>点击“重置全部”按钮恢复所有参数到默认值。</li>
                         </ul>
-                        <h4 data-i18n="image.edit.usageBlurTitle">三、模糊处理</h4>
+                        <h4 data-i18n="image.edit.usageApplyTitle">三、应用与下载</h4>
                         <ul>
-                            <li data-i18n="image.edit.usageBlurLevel"><strong>模糊程度：</strong>拖动滑块调整高斯模糊程度（0到20）。</li>
-                            <li data-i18n="image.edit.usageBlurMore"><strong>值越大：</strong>模糊效果越明显。</li>
-                            <li data-i18n="image.edit.usageBlurZero"><strong>值为0：</strong>不应用模糊效果。</li>
-                            <li data-i18n="image.edit.usageBlurPreview"><strong>实时预览：</strong>模糊效果实时显示在预览区域。</li>
+                            <li data-i18n="image.edit.usageApplyAll"><strong>应用到所有：</strong>勾选“应用到所有图片”，设置会应用到所有已上传图片。</li>
+                            <li data-i18n="image.edit.usageApplyClick"><strong>应用效果：</strong>点击“应用效果”按钮执行处理，左侧原图与右侧处理后实时对比。</li>
+                            <li data-i18n="image.edit.usageApplyDownloadOne"><strong>下载单张：</strong>点击“下载单张”按钮保存当前图片。</li>
+                            <li data-i18n="image.edit.usageApplyDownloadAll"><strong>批量下载：</strong>点击“批量下载”按钮打包下载所有处理后的图片。</li>
                         </ul>
-                        <h4 data-i18n="image.edit.usageApplyTitle">四、应用效果</h4>
-                        <ul>
-                            <li data-i18n="image.edit.usageApplyAll"><strong>应用到所有：</strong>勾选"应用到所有图片"，设置会应用到所有已上传图片。</li>
-                            <li data-i18n="image.edit.usageApplyClick"><strong>点击应用：</strong>点击"应用效果"按钮执行旋转和模糊处理。</li>
-                            <li data-i18n="image.edit.usageApplyDownloadOne"><strong>下载单张：</strong>点击"下载单张"按钮保存当前图片。</li>
-                            <li data-i18n="image.edit.usageApplyDownloadAll"><strong>批量下载：</strong>点击"批量下载"按钮打包下载所有处理后的图片。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.edit.usageTipsTitle">五、操作技巧</h4>
+                        <h4 data-i18n="image.edit.usageTipsTitle">四、操作技巧</h4>
                         <ul>
                             <li data-i18n="image.edit.usageTipsDblclick"><strong>双击放大：</strong>双击原图或处理后图片可全屏查看。</li>
                             <li data-i18n="image.edit.usageTipsSwitch"><strong>切换图片：</strong>在文件列表中点击图片切换当前处理图片。</li>
-                            <li data-i18n="image.edit.usageTipsClear"><strong>清空列表：</strong>点击"清空"按钮删除所有已上传图片。</li>
+                            <li data-i18n="image.edit.usageTipsCompare"><strong>对比效果：</strong>左侧始终显示原图，右侧显示处理后的效果，方便对比。</li>
                         </ul>
                     </div>
                 </article>
@@ -253,36 +311,29 @@
                         <h4 data-i18n="image.edit.notesSecurityTitle">一、数据安全</h4>
                         <ul>
                             <li data-i18n="image.edit.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="image.edit.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
+                            <li data-i18n="image.edit.noteSecurity2">图片文件仅在浏览器内存中处理，关闭页面后自动清除。</li>
                             <li data-i18n="image.edit.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
                         </ul>
-                        <h4 data-i18n="image.edit.notesRotateTitle">二、旋转处理</h4>
+                        <h4 data-i18n="image.edit.notesEditTitle">二、编辑说明</h4>
                         <ul>
-                            <li data-i18n="image.edit.noteRotate1">旋转后图片会自动填充背景色，默认白色。</li>
-                            <li data-i18n="image.edit.noteRotate2">PNG透明图片旋转后透明区域保持不变。</li>
-                            <li data-i18n="image.edit.noteRotate3">GIF图片仅处理第一帧。</li>
-                            <li data-i18n="image.edit.noteRotate4">旋转角度支持小数，可精确调整。</li>
+                            <li data-i18n="image.edit.noteEdit1">旋转后图片会自动填充背景色（JPG填充黑色，PNG填充透明），非90°整数倍旋转时尤为明显。</li>
+                            <li data-i18n="image.edit.noteEdit2">亮度、对比度、饱和度默认值为 100%（即不变），色相默认值为 0°，所有参数可自由叠加。</li>
+                            <li data-i18n="image.edit.noteEdit3">所有效果（旋转、模糊、亮度、对比度、饱和度、色相、翻转、滤镜）可同时应用，互不限制。</li>
+                            <li data-i18n="image.edit.noteEdit4">GIF 动态图片仅处理第一帧。</li>
                         </ul>
-                        <h4 data-i18n="image.edit.notesBlurTitle">三、模糊处理</h4>
-                        <ul>
-                            <li data-i18n="image.edit.noteBlur1">高斯模糊算法会使图片边缘柔和。</li>
-                            <li data-i18n="image.edit.noteBlur2">高模糊值（15以上）可能导致图片过度模糊。</li>
-                            <li data-i18n="image.edit.noteBlur3">模糊处理是不可逆的，请谨慎使用。</li>
-                            <li data-i18n="image.edit.noteBlur4">建议先预览效果再应用到所有图片。</li>
-                        </ul>
-                        <h4 data-i18n="image.edit.notesBatchTitle">四、批量处理</h4>
+                        <h4 data-i18n="image.edit.notesBatchTitle">三、批量处理</h4>
                         <ul>
                             <li data-i18n="image.edit.noteBatch1">批量处理最多支持20张图片。</li>
-                            <li data-i18n="image.edit.noteBatch2">处理期间不要关闭浏览器或刷新页面。</li>
+                            <li data-i18n="image.edit.noteBatch2">勾选“应用到所有图片”时，当前所有设置会统一应用。</li>
                             <li data-i18n="image.edit.noteBatch3">大文件处理可能需要较长时间，请耐心等待。</li>
-                            <li data-i18n="image.edit.noteBatch4">批量下载会打包为ZIP文件。</li>
+                            <li data-i18n="image.edit.noteBatch4">批量下载会打包为 ZIP 文件。</li>
                         </ul>
-                        <h4 data-i18n="image.edit.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="image.edit.notesFaqTitle">四、常见问题</h4>
                         <ul>
-                            <li data-i18n="image.edit.noteFaq1"><strong>旋转后有黑边：</strong>图片格式为JPG，旋转后填充黑色背景。</li>
-                            <li data-i18n="image.edit.noteFaq2"><strong>模糊效果不明显：</strong>增大模糊程度值。</li>
-                            <li data-i18n="image.edit.noteFaq3"><strong>处理失败：</strong>检查图片格式和大小，尝试单张处理。</li>
-                            <li data-i18n="image.edit.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="image.edit.noteFaq1"><strong>旋转后有黑边：</strong>JPG 格式非90°旋转时填充黑色背景，PNG 格式填充透明。建议使用 PNG 格式避免黑边。</li>
+                            <li data-i18n="image.edit.noteFaq2"><strong>效果不满意：</strong>点击"重置全部"按钮一键恢复默认值，也可单独重置某个参数。</li>
+                            <li data-i18n="image.edit.noteFaq3"><strong>处理失败：</strong>检查图片格式是否受支持、文件大小是否过大，建议尝试单张处理。</li>
+                            <li data-i18n="image.edit.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置，或尝试更换保存路径。</li>
                         </ul>
                     </div>
                 </article>
