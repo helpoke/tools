@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="批量文档免费添加水印, 批量文档本地添加水印, 隐私批量文档添加水印,批量文档本地加水印">
+    <meta name="description" content="批量文档免费添加水印, 批量文档本地添加水印, 隐私批量PDF添加水印,批量文档本地加水印">
     <meta name="keywords" content="文档批量加水印, 批量文档本地加水印, 隐私批量文档加水印, 无损加水印, 免费文档加水印">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
@@ -14,7 +14,7 @@
     <meta name="robots" content="index, follow">
     <title>文档文字水印工具，免费添加文档水印，隐私保护文档水印，无损添加文档水印, PDF文档加水印</title>
     <meta property="og:title" content="文档文字水印工具，免费添加文档水印，隐私保护文档水印，无损添加文档水印, PDF文档加水印">
-    <meta property="og:description" content="批量文档免费添加水印, 批量文档本地添加水印, 隐私批量文档添加水印,批量文档本地加水印">
+    <meta property="og:description" content="批量文档免费添加水印, 批量文档本地添加水印, 隐私批量PDF添加水印,批量文档本地加水印">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://helpoke.com/docu/watermark/">
     <meta property="og:site_name" content="Helpoke">
@@ -23,7 +23,7 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="文档文字水印工具，免费添加文档水印，隐私保护文档水印，无损添加文档水印, PDF文档加水印">
-    <meta name="twitter:description" content="批量文档免费添加水印, 批量文档本地添加水印, 隐私批量文档添加水印,批量文档本地加水印">
+    <meta name="twitter:description" content="批量文档免费添加水印, 批量文档本地添加水印, 隐私批量PDF添加水印,批量文档本地加水印">
     <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
     <link rel="canonical" href="https://helpoke.com/docu/watermark/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/docu/watermark/">
@@ -90,10 +90,13 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="docu.watermark.title">文档水印工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="docu.watermark.intro">文档水印工具，支持为PDF文档添加文字水印，自定义位置、大小、颜色、透明度等参数，支持铺满整页</p>
-            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
             <!-- 文件上传区域 -->
@@ -104,7 +107,8 @@
                     <span class="upload-icon">+</span>
                     <span class="upload-text" data-i18n="docu.watermark.uploadText">点击选择 PDF 文档</span>
                 </label>
-                <p class="file-info" data-i18n="docu.watermark.fileInfo">注：Word文件需先转换为PDF格式后添加水印。最大支持100MB文件，建议文件大小在50MB以下。</p>
+                <p class="file-info" data-i18n="docu.watermark.fileInfo">
+                    注：Word文件需先转换为PDF格式后添加水印。最大支持200MB文件，建议文件大小在100MB以下。</p>
             </div>
 
             <!-- 预览区域 -->
@@ -113,7 +117,8 @@
                     <div id="pdfPreview" class="pdf-preview"></div>
                     <file id="previewImage" class="preview-image" alt="预览区域">
                         <div id="watermarkContainer" class="watermark-container">
-                            <div id="singleWatermark" class="watermark single-watermark" draggable="true" data-i18n="docu.watermark.singleWatermark">水印文字</div>
+                            <div id="singleWatermark" class="watermark single-watermark" draggable="true"
+                                data-i18n="docu.watermark.singleWatermark">水印文字</div>
                         </div>
                 </div>
             </div>
@@ -123,7 +128,8 @@
                 <div class="control-group">
                     <label for="watermarkPosition" data-i18n="docu.watermark.positionLabel">水印位置:</label>
                     <select id="watermarkPosition">
-                        <option value="tile" selected style="color: #869619; font-weight: 600;" data-i18n="docu.watermark.posTile">铺满（整个页面）</option>
+                        <option value="tile" selected style="color: #869619; font-weight: 600;"
+                            data-i18n="docu.watermark.posTile">铺满（整个页面）</option>
                         <option value="center" data-i18n="docu.watermark.posCenter">居中</option>
                         <option value="top-left" data-i18n="docu.watermark.posTopLeft">左上角</option>
                         <option value="bottom-left" data-i18n="docu.watermark.posBottomLeft">左下角</option>
@@ -133,10 +139,12 @@
                         <option value="bottom-center" data-i18n="docu.watermark.posBottomCenter">底部居中</option>
                         <option value="left-center" data-i18n="docu.watermark.posLeftCenter">左侧居中</option>
                         <option value="right-center" data-i18n="docu.watermark.posRightCenter">右侧居中</option>
-                        <option value="single" style="color: #a3a3bd; font-weight: 500;" data-i18n="docu.watermark.posSingle">其他位置（拖动/点击）</option>
+                        <option value="single" style="color: #a3a3bd; font-weight: 500;"
+                            data-i18n="docu.watermark.posSingle">其他位置（拖动/点击）</option>
                     </select>
                     <label for="watermarkText" data-i18n="docu.watermark.textLabel">水印文字:</label>
-                    <input type="text" id="watermarkText" value="" placeholder="输入水印文字（最多50个字符）" maxLength="50" data-i18n-placeholder="docu.watermark.textPlaceholder">
+                    <input type="text" id="watermarkText" value="" placeholder="输入水印文字（最多50个字符）" maxLength="50"
+                        data-i18n-placeholder="docu.watermark.textPlaceholder">
                 </div>
 
                 <div class="control-group">
@@ -185,10 +193,12 @@
                         </ul>
                         <h4 data-i18n="docu.watermark.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
+                            <li data-i18n="docu.watermark.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
+                            </li>
                             <li data-i18n="docu.watermark.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
                             <li data-i18n="docu.watermark.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="docu.watermark.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="docu.watermark.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -200,31 +210,42 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.watermark.usageUploadTitle">一、上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usageSelectFile"><strong>选择文件：</strong>点击"点击选择 PDF 文档"按钮，从本地选择需要添加水印的PDF文件。</li>
-                            <li data-i18n="docu.watermark.usageFileLimit"><strong>文件限制：</strong>最大支持 100MB 的PDF文件，建议文件大小在50MB以下。</li>
-                            <li data-i18n="docu.watermark.usageWordDoc"><strong>Word文档：</strong>Word文件需先转换为PDF格式后添加水印。</li>
-                            <li data-i18n="docu.watermark.usageAutoPreview"><strong>自动预览：</strong>上传后系统会自动解析PDF并显示第一页预览。</li>
+                            <li data-i18n="docu.watermark.usageSelectFile"><strong>选择文件：</strong>点击"点击选择 PDF
+                                文档"按钮，从本地选择需要添加水印的PDF文件。</li>
+                            <li data-i18n="docu.watermark.usageFileLimit"><strong>文件限制：</strong>最大支持 200MB
+                                的PDF文件，建议文件大小在100MB以下。</li>
+                            <li data-i18n="docu.watermark.usageWordDoc"><strong>Word文档：</strong>Word文件需先转换为PDF格式后添加水印。
+                            </li>
+                            <li data-i18n="docu.watermark.usageAutoPreview"><strong>自动预览：</strong>上传后系统会自动解析PDF并显示第一页预览。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.watermark.usageSettingsTitle">二、设置水印</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usagePosition"><strong>水印位置：</strong>可选择"铺满（整个页面）"或特定位置（居中、左上角、左下角、右上角、右下角等），或选择"其他位置（拖动/点击）"自定义位置。
+                            <li data-i18n="docu.watermark.usagePosition">
+                                <strong>水印位置：</strong>可选择"铺满（整个页面）"或特定位置（居中、左上角、左下角、右上角、右下角等），或选择"其他位置（拖动/点击）"自定义位置。
                             </li>
                             <li data-i18n="docu.watermark.usageText"><strong>水印文字：</strong>输入水印文字，最多支持50个字符。</li>
                             <li data-i18n="docu.watermark.usageColor"><strong>文字颜色：</strong>点击颜色选择器设置水印文字颜色。</li>
-                            <li data-i18n="docu.watermark.usageSize"><strong>文字大小：</strong>拖动滑块调整水印文字大小，范围为10-100px。</li>
-                            <li data-i18n="docu.watermark.usageOpacity"><strong>水印透明度：</strong>拖动滑块调整水印透明度，范围为0-1，值越小越透明。</li>
-                            <li data-i18n="docu.watermark.usageSpacing"><strong>水印间距：</strong>拖动滑块调整水印之间的间距，范围为10-200px（仅铺满模式有效）。</li>
+                            <li data-i18n="docu.watermark.usageSize"><strong>文字大小：</strong>拖动滑块调整水印文字大小，范围为10-100px。
+                            </li>
+                            <li data-i18n="docu.watermark.usageOpacity">
+                                <strong>水印透明度：</strong>拖动滑块调整水印透明度，范围为0-1，值越小越透明。</li>
+                            <li data-i18n="docu.watermark.usageSpacing">
+                                <strong>水印间距：</strong>拖动滑块调整水印之间的间距，范围为10-200px（仅铺满模式有效）。</li>
                         </ul>
                         <h4 data-i18n="docu.watermark.usageAdjustTitle">三、调整位置</h4>
                         <ul>
                             <li data-i18n="docu.watermark.usageTileMode"><strong>铺满模式：</strong>水印会均匀铺满整个页面。</li>
                             <li data-i18n="docu.watermark.usageFixedPosition"><strong>固定位置：</strong>水印会显示在所选位置。</li>
-                            <li data-i18n="docu.watermark.usageCustomPosition"><strong>自定义位置：</strong>可以手动拖动水印到任意位置，或点击页面指定位置移动水印。</li>
-                            <li data-i18n="docu.watermark.usageRealtimePreview"><strong>实时预览：</strong>所有设置调整都会实时显示在预览区域。</li>
+                            <li data-i18n="docu.watermark.usageCustomPosition">
+                                <strong>自定义位置：</strong>可以手动拖动水印到任意位置，或点击页面指定位置移动水印。</li>
+                            <li data-i18n="docu.watermark.usageRealtimePreview"><strong>实时预览：</strong>所有设置调整都会实时显示在预览区域。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.watermark.usageDownloadTitle">四、下载文档</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usageClickDownload"><strong>点击下载：</strong>点击"下载水印文档"按钮开始处理并下载。</li>
+                            <li data-i18n="docu.watermark.usageClickDownload"><strong>点击下载：</strong>点击"下载水印文档"按钮开始处理并下载。
+                            </li>
                             <li data-i18n="docu.watermark.usageProgress"><strong>查看进度：</strong>处理过程中会显示进度条和百分比。</li>
                             <li data-i18n="docu.watermark.usageSaveResult"><strong>保存结果：</strong>下载完成后保存到本地。</li>
                         </ul>
@@ -251,21 +272,28 @@
                             <li data-i18n="docu.watermark.noteFormat1">仅支持 PDF 格式文件。</li>
                             <li data-i18n="docu.watermark.noteFormat2">Word文档需先转换为PDF格式。</li>
                             <li data-i18n="docu.watermark.noteFormat3">某些加密或损坏的PDF文件可能无法处理。</li>
-                            <li data-i18n="docu.watermark.noteFormat4">建议文件大小在50MB以下以获得更好的处理体验。</li>
+                            <li data-i18n="docu.watermark.noteFormat4">建议文件大小在100MB以下以获得更好的处理体验。</li>
                         </ul>
                         <h4 data-i18n="docu.watermark.notesEffectTitle">四、水印效果</h4>
                         <ul>
                             <li data-i18n="docu.watermark.noteEffectTile"><strong>铺满模式：</strong>水印会以对角线方式均匀铺满整个页面。</li>
-                            <li data-i18n="docu.watermark.noteEffectOpacity"><strong>透明度：</strong>建议设置为0.2-0.5，既可见又不影响阅读。</li>
-                            <li data-i18n="docu.watermark.noteEffectSize"><strong>文字大小：</strong>建议设置为20-30px，根据文档内容调整。</li>
-                            <li data-i18n="docu.watermark.noteEffectColor"><strong>颜色选择：</strong>建议使用灰色或浅色，避免影响文档可读性。</li>
+                            <li data-i18n="docu.watermark.noteEffectOpacity">
+                                <strong>透明度：</strong>建议设置为0.2-0.5，既可见又不影响阅读。</li>
+                            <li data-i18n="docu.watermark.noteEffectSize"><strong>文字大小：</strong>建议设置为20-30px，根据文档内容调整。
+                            </li>
+                            <li data-i18n="docu.watermark.noteEffectColor"><strong>颜色选择：</strong>建议使用灰色或浅色，避免影响文档可读性。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.watermark.notesFaqTitle">五、常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.faqUploadFail"><strong>上传失败：</strong>检查文件是否为有效的PDF格式，文件大小是否超过限制。</li>
-                            <li data-i18n="docu.watermark.faqWatermarkNotShown"><strong>水印不显示：</strong>确认已输入水印文字，并检查透明度设置。</li>
-                            <li data-i18n="docu.watermark.faqDownloadFail"><strong>下载失败：</strong>检查浏览器下载权限，尝试使用其他浏览器。</li>
-                            <li data-i18n="docu.watermark.faqPositionWrong"><strong>位置不对：</strong>选择正确的位置选项，或使用自定义位置模式拖动调整。</li>
+                            <li data-i18n="docu.watermark.faqUploadFail">
+                                <strong>上传失败：</strong>检查文件是否为有效的PDF格式，文件大小是否超过限制。</li>
+                            <li data-i18n="docu.watermark.faqWatermarkNotShown">
+                                <strong>水印不显示：</strong>确认已输入水印文字，并检查透明度设置。</li>
+                            <li data-i18n="docu.watermark.faqDownloadFail"><strong>下载失败：</strong>检查浏览器下载权限，尝试使用其他浏览器。
+                            </li>
+                            <li data-i18n="docu.watermark.faqPositionWrong">
+                                <strong>位置不对：</strong>选择正确的位置选项，或使用自定义位置模式拖动调整。</li>
                             <li data-i18n="docu.watermark.faqSlow"><strong>处理缓慢：</strong>大文件或多页面PDF处理时间较长，请耐心等待。</li>
                         </ul>
                     </div>
@@ -278,10 +306,14 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

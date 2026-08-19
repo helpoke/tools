@@ -1,0 +1,685 @@
+.container {
+    max-width: 100%;
+    padding: 40px 0;
+}
+
+/* ========== Mode Tabs ========== */
+.mode-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.mode-tab {
+    padding: 12px 36px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.mode-tab:hover {
+    border-color: #2196f3;
+    color: #2196f3;
+}
+
+.mode-tab.active {
+    background: #2196f3;
+    border-color: #2196f3;
+    color: white;
+}
+
+/* ========== Upload ========== */
+.upload-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload-section input[type="file"] {
+    display: none;
+}
+
+.upload-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 120px;
+}
+
+.upload-btn:hover {
+    border-color: #2196f3;
+    background: #f5f9ff;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.file-info {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #999;
+}
+
+/* ========== File List (Merge) ========== */
+.file-list-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.list-header h3 {
+    color: #333;
+    font-size: 16px;
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    transition: all 0.2s;
+}
+
+.file-item:hover {
+    border-color: #90caf9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-order {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2196f3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.file-meta {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.file-name {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-sub {
+    font-size: 12px;
+    color: #999;
+}
+
+.file-ops {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.file-ops .btn-sm:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ========== Settings ========== */
+.settings-panel {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.settings-panel h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 16px;
+}
+
+.settings-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 200px;
+}
+
+.setting-item label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.setting-item select,
+.setting-item input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    max-width: 300px;
+}
+
+.hint {
+    font-size: 12px;
+    color: #999;
+}
+
+/* ========== Preview ========== */
+.preview-section {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.preview-header h3 {
+    color: #333;
+    font-size: 16px;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.btn-sm:hover:not(:disabled) {
+    background: #eef2ff;
+    border-color: #2196f3;
+    color: #2196f3;
+}
+
+.pages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.page-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.page-card:hover {
+    border-color: #90caf9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-card.selected {
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
+}
+
+.page-card.disabled {
+    cursor: default;
+    opacity: 0.85;
+}
+
+.page-card canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.page-card .page-number {
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    color: #666;
+    background: #fafafa;
+    border-top: 1px solid #eee;
+}
+
+.page-card .check-mark {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #2196f3;
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    z-index: 2;
+}
+
+.page-card.selected .check-mark {
+    display: flex;
+}
+
+/* ========== Actions ========== */
+.action-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    padding: 14px 40px;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #1976d2;
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.progress-container {
+    margin-top: 15px;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #2196f3;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* ========== Result ========== */
+.result-section {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result-section h3 {
+    color: #166534;
+    margin-bottom: 10px;
+}
+
+.result-info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.result-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.result-file-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.result-file-meta {
+    font-size: 12px;
+    color: #999;
+    flex-shrink: 0;
+}
+
+.btn-download {
+    padding: 12px 30px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-download:hover {
+    background: #218838;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .settings-grid {
+        flex-direction: column;
+    }
+
+    .pages-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .mode-tab {
+        flex: 1;
+        padding: 12px 10px;
+    }
+
+    .file-item {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .pages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode .mode-tab {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .mode-tab:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .mode-tab.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .upload-section {
+    background: var(--bg-tertiary);
+}
+
+body.dark-mode .upload-btn {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .upload-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .upload-icon {
+    color: var(--text-muted);
+}
+
+body.dark-mode .upload-text {
+    color: var(--text-primary);
+}
+
+body.dark-mode .file-info {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .file-list-section {
+    background: var(--bg-tertiary);
+}
+
+body.dark-mode .list-header h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .file-item {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .file-item:hover {
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .file-order {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .file-name {
+    color: var(--text-primary);
+}
+
+body.dark-mode .file-sub {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .settings-panel {
+    background: var(--bg-tertiary);
+}
+
+body.dark-mode .settings-panel h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .setting-item label {
+    color: var(--text-primary);
+}
+
+body.dark-mode .setting-item select,
+body.dark-mode .setting-item input[type="text"] {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .hint {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .preview-section {
+    background: var(--bg-tertiary);
+}
+
+body.dark-mode .preview-header h3 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn-sm {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .btn-sm:hover:not(:disabled) {
+    background: var(--bg-tertiary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .page-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .page-card:hover {
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .page-card.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+body.dark-mode .page-card .page-number {
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .btn-primary {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+}
+
+body.dark-mode .btn-primary:disabled {
+    background: var(--text-muted);
+}
+
+body.dark-mode .progress-container {
+    background: var(--border-color);
+}
+
+body.dark-mode .progress-bar {
+    background: var(--primary-color);
+}
+
+body.dark-mode .progress-text {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .result-section {
+    background: var(--bg-tertiary);
+    border-color: var(--success-color);
+}
+
+body.dark-mode .result-section h3 {
+    color: var(--success-color);
+}
+
+body.dark-mode .result-info {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .result-file-item {
+    background: var(--bg-card);
+    border-color: var(--success-color);
+}
+
+body.dark-mode .result-file-name {
+    color: var(--text-primary);
+}
+
+body.dark-mode .result-file-meta {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .btn-download {
+    background: var(--success-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn-download:hover {
+    background: #059669;
+}

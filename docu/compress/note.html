@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="PDF压缩工具说明，在线压缩PDF文件体积，支持低中高压缩档位与自定义质量分辨率，本地处理保护隐私">
+    <meta name="keywords" content="PDF压缩, 压缩PDF, PDF减小体积, 在线PDF压缩, PDF瘦身, 文件压缩">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>PDF压缩工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #DC2626 0%, #B91C1C 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #DC2626;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #DC2626;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #DC2626;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .level-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .level-option {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .level-option .option-name {
+            font-weight: 600;
+            color: #DC2626;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .level-option .option-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            .level-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
+    <script src="../../common/js/layout.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>PDF压缩工具</h1>
+            <p class="subtitle">智能压缩仅重编码图片、保留文字可选中，强力压缩逐页栅格化极限瘦身，本地处理保护隐私</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是PDF压缩工具？</h2>
+                <p>PDF压缩工具是一款专业的在线PDF文档体积压缩工具，专为需要减小PDF文件大小的用户设计。在日常工作中，PDF文件过大经常带来各种困扰：邮件附件超过大小限制无法发送、文件传输速度缓慢、云盘存储空间告急、网页上传被拒绝等。尤其是包含大量高清图片、扫描件的PDF文档，动辄几十上百兆的体积让人头疼。这款工具可以帮助您在浏览器中快速压缩PDF文件，将其体积控制在合理范围内。
+                </p>
+                <p>与许多在线压缩工具不同，本工具采用纯前端技术方案，所有压缩处理完全在您本地的浏览器中完成，文件内容不会上传到任何服务器。这意味着您的商业合同、财务报告、个人证件等敏感文档在压缩过程中始终保持私密，彻底消除了数据泄露的风险。工具提供双压缩模式："智能压缩"仅重压缩文档内的
+                    JPEG
+                    图片，文字与矢量内容原样保留、依然可选中可搜索；"强力压缩"逐页栅格化重建文档，适合图片较少但对体积有硬性要求的场景。配合三档预设、自定义参数与压缩前后实时对比，帮助您在体积与清晰度之间找到最佳平衡点。
+                </p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传PDF文档</h3>
+                <p>点击上传按钮选择需要压缩的PDF文件，支持最大200MB的文档。上传后，工具会自动解析文档并在预览区域显示首页的原始效果与当前压缩设置下的效果对比。</p>
+
+                <h3>第二步：选择压缩模式与强度</h3>
+                <p>推荐使用默认的"智能压缩"模式：工具会自动定位文档内所有 JPEG
+                    图片，按所选强度重新编码（降低质量与分辨率），文字、矢量与书签完整保留。若文档图片较少、智能压缩效果有限，可切换"强力压缩"模式：逐页转为图片重建，体积可进一步减小，但文字将不可选中。强度方面："低压缩"适合需要保持较高清晰度的场景；"中压缩"是推荐的均衡选择；"高压缩"追求最小体积，适合仅用于屏幕查看的场景。您也可以选择"自定义"，自由调节图片质量与分辨率缩放。
+                </p>
+
+                <h3>第三步：预览压缩效果</h3>
+                <p>调整参数时，对比预览会实时更新。智能模式下展示文档首张图片的压缩前后效果，并统计检测到的图片数量与总大小；强力模式下展示首页渲染对比与预计体积。建议放大对比文字和图片细节，确认压缩后的清晰度满足您的使用需求。
+                </p>
+
+                <h3>第四步：开始压缩并下载</h3>
+                <p>确认效果满意后，点击"开始压缩"按钮。工具会逐页处理文档，过程中显示进度条。压缩完成后，结果区域会展示原始大小、压缩后大小与节省空间比例，点击"下载压缩后的 PDF"按钮即可保存结果。</p>
+
+                <h3>实战案例：压缩超限的邮件附件</h3>
+                <p>假设您需要通过邮件发送一份扫描版合同，文件大小为45MB，超出了邮箱25MB的附件限制。使用本工具的操作步骤如下：上传合同PDF文件；由于是扫描件（图片密集），保持默认的"智能压缩"模式并选择"中压缩"档位；预览确认合同文字与印章依然清晰可读；点击"开始压缩"；压缩完成后文件变为约11MB，且文字仍可选中检索；下载压缩后的文件并通过邮件发送。整个过程不到两分钟，且合同内容全程未离开您的电脑。
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>双模式与压缩档位详解</h2>
+
+                <p><strong>智能压缩（默认推荐）：</strong>仅重编码文档内检测到的 JPEG 图片（智能模式低/中/高档分别对应图片质量 85%/70%/50%，分辨率缩放
+                    1.0x/0.8x/0.6x），文字、矢量、书签、表单全部原样保留。智能压缩只会替换体积变小的图片，因此不会使文件变大。</p>
+                <p><strong>强力压缩：</strong>逐页渲染为图片后重建文档（低/中/高档分别对应图片质量 80%/60%/45%，页面分辨率
+                    1.0x/0.7x/0.5x），适合图片较少的文档极限瘦身，但文字将不可选中、交互内容不再保留。</p>
+
+                <div class="level-options">
+                    <div class="level-option">
+                        <div class="option-name">低压缩</div>
+                        <div class="option-desc">优先画质，体积小幅缩减<br>适合打印与存档</div>
+                    </div>
+                    <div class="level-option">
+                        <div class="option-name">中压缩（推荐）</div>
+                        <div class="option-desc">均衡选择，兼顾清晰度与体积<br>适合日常分享与传输</div>
+                    </div>
+                    <div class="level-option">
+                        <div class="option-name">高压缩</div>
+                        <div class="option-desc">极限瘦身，体积大幅缩减<br>适合屏幕查看与移动阅读</div>
+                    </div>
+                </div>
+
+                <h2>适用场景与人群</h2>
+                <p><strong>邮件发送：</strong>附件超过邮箱大小限制时，压缩至限制范围内再发送。</p>
+                <p><strong>平台上传：</strong>某些网站、办公系统对上传文件大小有硬性限制，压缩后即可正常上传。</p>
+                <p><strong>存储优化：</strong>扫描件、图片密集型PDF占用空间大，压缩后可节省存储空间。</p>
+                <p><strong>快速分享：</strong>通过即时通讯工具传输PDF时，压缩后传输速度更快。</p>
+                <p><strong>移动阅读：</strong>压缩后的文件加载更快，适合手机、平板等移动设备阅读。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">智能+强力双模式</span>
+                    <span class="feature-tag">三档压缩预设</span>
+                    <span class="feature-tag">自定义质量与分辨率</span>
+                    <span class="feature-tag">压缩效果实时预览</span>
+                    <span class="feature-tag">前后大小对比</span>
+                    <span class="feature-tag">一键下载</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>智能压缩保留文字可选中与矢量清晰度；强力压缩后文本将不可选中、不可搜索</li>
+                        <li>智能压缩仅替换体积变小的图片，不会使文件变大；强力压缩纯文字PDF可能体积反增</li>
+                        <li>未检测到 JPEG 图片的文档（如纯文字PDF）请改用强力压缩模式</li>
+                        <li>强力压缩后书签、目录、表单等交互内容不再保留；智能压缩则完整保留</li>
+                        <li>处理期间请勿关闭浏览器或刷新页面，以免数据丢失</li>
+                        <li>仅支持PDF格式文档，其他格式请先转换</li>
+                        <li>建议在现代浏览器（Chrome、Firefox、Edge）中使用</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：压缩后PDF里的文字还能选中复制吗？</h3>
+                <p><strong>答：</strong>取决于压缩模式。"智能压缩"只重编码图片，文字、矢量内容原样保留，压缩后依然可以选中、复制和搜索，推荐优先使用。"强力压缩"通过重新渲染页面实现，压缩后每页都是一张整页图片，文字不再以文本形式存在，因此无法选中与搜索。如果需要保留文字可选中性，请使用智能压缩模式。
+                </p>
+
+                <h3>问：为什么我的PDF用强力压缩后反而变大了？</h3>
+                <p><strong>答：</strong>如果原始PDF以纯文字或矢量图形为主（如软件生成的电子书、代码文档），其本身结构已经非常紧凑，重新渲染为JPEG图片后体积可能不减反增。工具在结果区域会如实显示大小变化，出现增大时会明确提示。这类文档通常没有压缩的必要；智能压缩模式下不会出现此问题，因为它只替换体积变小的图片。
+                </p>
+
+                <h3>问：压缩强度应该怎么选择？</h3>
+                <p><strong>答：</strong>建议根据文档用途选择：需要打印的文档选择"低压缩"，保证输出清晰度；日常屏幕查看选择"中压缩"；仅在手机上快速浏览或对体积有硬性要求时选择"高压缩"。无论选择哪档，都可以先观察压缩前后对比预览，确认图片可读性后再执行压缩。
+                </p>
+
+                <h3>问：压缩会损坏我的原始文件吗？</h3>
+                <p><strong>答：</strong>不会。所有处理都在浏览器内存中进行，原始文件不会被修改或覆盖。压缩结果是新生成的文件，通过下载按钮保存。即使压缩效果不满意，您的原始文件也完好无损，可以调整参数后重新压缩。
+                </p>
+
+                <h3>问：预计压缩后大小准确吗？</h3>
+                <p><strong>答：</strong>智能模式会显示检测到的图片数量与总大小，压缩结果主要取决于这些图片的重编码收益；强力模式的预计大小基于首页压缩比率估算，仅供参考，实际结果取决于每页内容的复杂程度。首页内容与整体内容差异较大时，估算值会有偏差，请以压缩完成后的实际结果为准。
+                </p>
+
+                <h3>问：处理大文件时有什么建议？</h3>
+                <p><strong>答：</strong>超过200页的大型文档建议分批处理：可以先使用拆分工具将文档拆分为若干部分，分别压缩后再用合并工具合并，这样可以降低单次处理的内存占用，避免浏览器卡顿或崩溃。处理期间请勿同时运行其他占用大量内存的程序。
+                </p>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#DC2626"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../merge/index.html" class="tool-link">PDF合并拆分工具</a>
+                <a href="../filter/index.html" class="tool-link">文档页面筛选工具</a>
+                <a href="../rotate/index.html" class="tool-link">文档旋转翻转工具</a>
+                <a href="../watermark/index.html" class="tool-link">文档水印工具</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>

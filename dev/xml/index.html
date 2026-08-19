@@ -134,7 +134,7 @@
 
         .io-panel textarea {
             width: 100%;
-            height: 600px;
+            height: 800px;
             background: var(--input-bg);
             padding: 12px 16px;
             border: 1px solid #eaeaea;
@@ -149,6 +149,88 @@
         .io-panel textarea:focus {
             outline: none;
             border-color: #3498db;
+        }
+
+        .io-panel pre.output-pre {
+            width: 100%;
+            height: 600px;
+            background: var(--input-bg);
+            padding: 12px 16px;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            box-sizing: border-box;
+            tab-size: 2;
+            margin: 0;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .io-panel pre.output-pre:empty::before {
+            content: attr(data-placeholder);
+            color: #94a3b8;
+        }
+
+        /* 语法高亮 */
+        .output-pre .keyword {
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .output-pre .tag {
+            color: #d63384;
+        }
+
+        .output-pre .attr {
+            color: #6f42c1;
+        }
+
+        .output-pre .string {
+            color: #28a745;
+        }
+
+        .output-pre .number {
+            color: #dc3545;
+        }
+
+        .output-pre .comment {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .output-pre .cdata {
+            color: #0e7490;
+        }
+
+        body.dark-mode .output-pre .keyword {
+            color: #79c0ff;
+        }
+
+        body.dark-mode .output-pre .tag {
+            color: #ff7b72;
+        }
+
+        body.dark-mode .output-pre .attr {
+            color: #d2a8ff;
+        }
+
+        body.dark-mode .output-pre .string {
+            color: #7ee787;
+        }
+
+        body.dark-mode .output-pre .number {
+            color: #ffa657;
+        }
+
+        body.dark-mode .output-pre .comment {
+            color: #8b949e;
+        }
+
+        body.dark-mode .output-pre .cdata {
+            color: #22d3ee;
         }
 
         .output-toolbar {
@@ -335,7 +417,8 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="dev.xml.title">XML格式化工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="dev.xml.desc">XML格式化工具，支持XML代码格式化美化与压缩，支持XML与JSON互转，提供语法错误检测与提示</p>
@@ -374,8 +457,7 @@
                     </div>
                     <div class="io-panel">
                         <label for="output-xml" data-i18n="dev.xml.outputLabel">输出</label>
-                        <textarea id="output-xml" readonly placeholder="处理结果将显示在此"
-                            data-i18n-placeholder="dev.xml.outputPlaceholder"></textarea>
+                        <pre id="output-xml" class="output-pre" data-placeholder="处理结果将显示在此"></pre>
                     </div>
                 </div>
 
@@ -421,10 +503,13 @@
                                 <li data-i18n="dev.xml.guideFormat1">
                                     <strong>格式化：</strong>将压缩或杂乱的XML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。
                                 </li>
-                                <li data-i18n="dev.xml.guideFormat2"><strong>压缩：</strong>将格式化的XML代码压缩为紧凑格式，去除空白字符，减小文件体积。
+                                <li data-i18n="dev.xml.guideFormat2">
+                                    <strong>压缩：</strong>将格式化的XML代码压缩为紧凑格式，去除空白字符，减小文件体积。
                                 </li>
-                                <li data-i18n="dev.xml.guideFormat3"><strong>转 JSON：</strong>将XML格式转换为JSON格式，便于数据交换和处理。</li>
-                                <li data-i18n="dev.xml.guideFormat4"><strong>转 XML：</strong>将JSON格式转换为XML格式，便于与传统系统集成。</li>
+                                <li data-i18n="dev.xml.guideFormat3"><strong>转 JSON：</strong>将XML格式转换为JSON格式，便于数据交换和处理。
+                                </li>
+                                <li data-i18n="dev.xml.guideFormat4"><strong>转 XML：</strong>将JSON格式转换为XML格式，便于与传统系统集成。
+                                </li>
                                 <li data-i18n="dev.xml.guideFormat5"><strong>复制结果：</strong>一键复制处理后的代码到剪贴板。</li>
                                 <li data-i18n="dev.xml.guideFormat6"><strong>快捷键：</strong>按 Ctrl+Enter 可以快速触发格式化。</li>
                             </ul>
@@ -449,7 +534,8 @@
                             <h4 data-i18n="dev.xml.guideConvertTitle">三、XML 与 JSON 转换规则</h4>
                             <ul>
                                 <li data-i18n="dev.xml.guideConvert1"><strong>XML 属性：</strong>转换为JSON对象的键值对。</li>
-                                <li data-i18n="dev.xml.guideConvert2"><strong>文本内容：</strong>使用 <code>value</code> 键存储。</li>
+                                <li data-i18n="dev.xml.guideConvert2"><strong>文本内容：</strong>使用 <code>value</code> 键存储。
+                                </li>
                                 <li data-i18n="dev.xml.guideConvert3"><strong>同名子元素：</strong>转换为JSON数组。</li>
                                 <li data-i18n="dev.xml.guideConvert4"><strong>嵌套结构：</strong>保持层级关系。</li>
                             </ul>
@@ -469,7 +555,8 @@
                             </ul>
                             <h4 data-i18n="dev.xml.notesConvertTitle">二、转换规则</h4>
                             <ul>
-                                <li data-i18n="dev.xml.notesConvert1">XML转JSON时，属性直接放在对象上，文本内容使用 <code>value</code> 键。</li>
+                                <li data-i18n="dev.xml.notesConvert1">XML转JSON时，属性直接放在对象上，文本内容使用 <code>value</code> 键。
+                                </li>
                                 <li data-i18n="dev.xml.notesConvert2">JSON转XML时，<code>value</code> 键会转换为文本内容。</li>
                                 <li data-i18n="dev.xml.notesConvert3">数组会转换为多个同名子元素。</li>
                                 <li data-i18n="dev.xml.notesConvert4">复杂嵌套结构可能导致转换结果不符合预期，建议简化数据结构。</li>
@@ -532,8 +619,79 @@
             return document.getElementById('input-xml').value;
         }
 
+        var plainOutput = '';
+
+        function escHtml(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // XML 语法高亮：注释 / CDATA / 处理指令 / DOCTYPE / 标签 / 属性 / 字符串
+        function highlightXml(xml) {
+            var out = '';
+            var i = 0;
+            var n = xml.length;
+            function span(cls, s) { return '<span class="' + cls + '">' + escHtml(s) + '</span>'; }
+            while (i < n) {
+                if (xml.startsWith('<!--', i)) {
+                    var e1 = xml.indexOf('-->', i);
+                    var s1 = e1 === -1 ? n : e1 + 3;
+                    out += span('comment', xml.slice(i, s1)); i = s1;
+                } else if (xml.startsWith('<![CDATA[', i)) {
+                    var e2 = xml.indexOf(']]>', i);
+                    var s2 = e2 === -1 ? n : e2 + 3;
+                    out += span('cdata', xml.slice(i, s2)); i = s2;
+                } else if (xml.startsWith('<?', i)) {
+                    var e3 = xml.indexOf('?>', i);
+                    var s3 = e3 === -1 ? n : e3 + 2;
+                    out += span('keyword', xml.slice(i, s3)); i = s3;
+                } else if (xml.startsWith('<!', i)) {
+                    var e4 = xml.indexOf('>', i);
+                    var s4 = e4 === -1 ? n : e4 + 1;
+                    out += span('keyword', xml.slice(i, s4)); i = s4;
+                } else if (xml[i] === '<') {
+                    var tm = xml.slice(i).match(/^<\/?[a-zA-Z][\w:.-]*/);
+                    if (tm) {
+                        out += span('tag', tm[0]);
+                        i += tm[0].length;
+                        while (i < n && xml[i] !== '>') {
+                            var wsm = xml.slice(i).match(/^\s+/);
+                            if (wsm) { out += wsm[0]; i += wsm[0].length; continue; }
+                            if (xml[i] === '/' && xml[i + 1] === '>') { out += span('tag', '/>'); i += 2; break; }
+                            if (xml[i] === '/') { out += span('tag', '/'); i++; continue; }
+                            var nm = xml.slice(i).match(/^[a-zA-Z_][\w:.-]*/);
+                            if (nm) {
+                                out += span('attr', nm[0]);
+                                i += nm[0].length;
+                                if (xml[i] === '=') {
+                                    out += '=';
+                                    i++;
+                                    var vm = xml.slice(i).match(/^("[^"]*"|'[^']*')/);
+                                    if (vm) {
+                                        out += span('string', vm[0]);
+                                        i += vm[0].length;
+                                    }
+                                }
+                                continue;
+                            }
+                            out += escHtml(xml[i]); i++;
+                        }
+                        if (i < n && xml[i] === '>') { out += span('tag', '>'); i++; }
+                    } else {
+                        out += escHtml(xml[i]); i++;
+                    }
+                } else {
+                    var j = xml.indexOf('<', i);
+                    if (j === -1) j = n;
+                    out += escHtml(xml.slice(i, j));
+                    i = j;
+                }
+            }
+            return out;
+        }
+
         function setOutput(val) {
-            document.getElementById('output-xml').value = val;
+            plainOutput = val;
+            document.getElementById('output-xml').innerHTML = val ? highlightXml(val) : '';
             updateStats(val);
         }
 
@@ -788,12 +946,11 @@
         function doClear() {
             hideError();
             document.getElementById('input-xml').value = '';
-            document.getElementById('output-xml').value = '';
-            updateStats('');
+            setOutput('');
         }
 
         function doCopy() {
-            var text = document.getElementById('output-xml').value;
+            var text = plainOutput;
             navigator.clipboard.writeText(text).then(function () {
                 utils.showSuccess(window.t('common.messages.copied'));
             }).catch(function () {
