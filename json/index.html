@@ -136,6 +136,7 @@
                         <div class="compare-header">
                             <h2 data-i18n="tool.json.tabs.format">格式化</h2>
                             <div class="button-group">
+                                <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
                                 <button id="paste-btn" data-i18n="common.buttons.paste">粘贴</button>
                                 <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
                                 <button id="format-btn" data-i18n="common.buttons.format">格式化</button>
@@ -143,8 +144,19 @@
                                 <button id="minify-btn" data-i18n="common.buttons.minify">压缩</button>
                                 <button id="escape-btn" data-i18n="common.buttons.escape">转义</button>
                                 <button id="line-feed-btn" data-i18n="common.buttons.newLine">换行</button>
-                                <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                                <button id="search-btn" data-i18n="common.buttons.search">搜索</button>
                             </div>
+                        </div>
+                        <div id="search-panel" class="search-panel" style="display: none;">
+                            <div class="search-input-row">
+                                <input type="text" id="search-input"
+                                    data-i18n-placeholder="common.placeholder.searchJson"
+                                    placeholder="搜索 key 或 value..." autocomplete="off">
+                                <button id="search-start-btn" data-i18n="common.buttons.search">搜索</button>
+                                <button id="search-close-btn" data-i18n="common.buttons.cancel">取消</button>
+                            </div>
+                            <div class="search-results-info" id="search-results-info"></div>
+                            <ul id="search-results-list" class="search-results-list"></ul>
                         </div>
                         <div class="input-box">
                             <div id="error-message" class="error-message"></div>
@@ -156,11 +168,11 @@
                             </div>
                             <div class="bottom-buttons">
                                 <button id="example-btn" data-i18n="common.buttons.example">示例</button>
-                                <button id="copy-btn-bottom" data-i18n="common.buttons.copy">复制</button>
                                 <button id="format-btn-bottom" data-i18n="common.buttons.format">格式化</button>
                                 <button id="collapse-btn-bottom" data-i18n="common.buttons.collapse">折叠</button>
                                 <button id="minify-btn-bottom" data-i18n="common.buttons.minify">压缩</button>
                                 <button id="escape-btn-bottom" data-i18n="common.buttons.escape">转义</button>
+                                <button id="copy-btn-bottom" data-i18n="common.buttons.copy">复制</button>
                                 <button id="paste-btn-bottom" hidden data-i18n="common.buttons.paste">粘贴</button>
                                 <button id="clear-btn-bottom" data-i18n="common.buttons.clear">清空</button>
                             </div>
@@ -360,25 +372,69 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
+                            <h3 data-i18n="tool.json.intro.title">工具介绍</h3>
+                        </header>
+                        <div class="info-content">
+                            <h4 data-i18n="tool.json.intro.aboutTitle">一、工具简介</h4>
+                            <ul>
+                                <li data-i18n="tool.json.intro.about1">JSON（JavaScript Object
+                                    Notation）是当今最主流的轻量级数据交换格式，广泛应用于 API 接口、配置文件、日志数据等场景。</li>
+                                <li data-i18n="tool.json.intro.about2">本工具是一款集格式化、比对、转换于一体的在线 JSON 处理工具，帮助开发者快速阅读、分析和转换
+                                    JSON 数据。</li>
+                                <li data-i18n="tool.json.intro.about3">所有处理均在本地浏览器中完成，数据不上传任何服务器，安全可靠，可放心处理敏感数据。</li>
+                            </ul>
+                            <h4 data-i18n="tool.json.intro.modulesTitle">二、功能模块</h4>
+                            <ul>
+                                <li data-i18n="tool.json.intro.module1"><strong>格式化：</strong>智能容错解析，一键美化压缩的
+                                    JSON，支持折叠/展开与键值搜索。</li>
+                                <li data-i18n="tool.json.intro.module2"><strong>比对：</strong>双栏对比两段 JSON，差异高亮显示，支持同步操作。
+                                </li>
+                                <li data-i18n="tool.json.intro.module3"><strong>转 Java Bean：</strong>根据 JSON 结构自动生成 Java
+                                    实体类代码，支持反向转换。</li>
+                                <li data-i18n="tool.json.intro.module4"><strong>转 XML：</strong>JSON 与 XML 双向互转，保留完整层级结构。
+                                </li>
+                            </ul>
+                            <h4 data-i18n="tool.json.intro.featuresTitle">三、核心特性</h4>
+                            <ul>
+                                <li data-i18n="tool.json.intro.feature1"><strong>智能容错：</strong>自动去除 BOM 头与注释、单引号转双引号、兼容
+                                    Python 风格 True/False/None、容错末尾多余逗号。</li>
+                                <li data-i18n="tool.json.intro.feature2"><strong>键值模糊搜索：</strong>对 key 和 value
+                                    模糊匹配，结果显示行号与完整路径，点击即可跳转定位。</li>
+                                <li data-i18n="tool.json.intro.feature3">
+                                    <strong>转义状态识别：</strong>转义状态下点击格式化会自动先去转义；去转义后自动恢复之前的显示状态。</li>
+                                <li data-i18n="tool.json.intro.feature4"><strong>现代编辑器：</strong>基于 CodeMirror
+                                    6，支持语法高亮、行号、自动换行、全屏与暗色模式。</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="info-details">
+                        <header>
                             <h3 data-i18n="tool.json.instructions.title">使用说明</h3>
                         </header>
                         <div class="info-content">
                             <h4 data-i18n="tool.json.instructions.format.title">一、格式化功能</h4>
                             <ul>
                                 <li data-i18n="tool.json.instructions.format.item1">
-                                    <strong>格式化：</strong>将压缩的JSON字符串转换为带缩进的易读格式，支持多级缩进和语法高亮显示，便于阅读和调试。
+                                    <strong>格式化：</strong>将压缩的JSON字符串转换为带缩进的易读格式，支持语法高亮和行号显示。内置智能容错：自动去除BOM头和注释、单引号转双引号、兼容Python风格的True/False/None、容错末尾多余逗号。
                                 </li>
                                 <li data-i18n="tool.json.instructions.format.item2">
-                                    <strong>压缩：</strong>将格式化的JSON压缩为一行，并保持转义字符，适用于传输和存储场景。
+                                    <strong>压缩：</strong>将格式化的JSON压缩为一行（自动移除注释），适用于传输和存储场景；对转义后的内容也能直接压缩。
                                 </li>
                                 <li data-i18n="tool.json.instructions.format.item3">
-                                    <strong>转义/去转义：</strong>将JSON中的特殊字符（如引号、换行符等）进行转义/去转义处理，适用于需要在代码中嵌入JSON字符串的场景。
+                                    <strong>转义/去转义：</strong>将JSON中的特殊字符（如引号、反斜杠等）进行转义/去转义处理。转义状态下直接点击"格式化"会自动先去转义再格式化；去转义后自动恢复到转义前的显示状态（格式化或压缩）。
                                 </li>
                                 <li data-i18n="tool.json.instructions.format.item4">
-                                    <strong>折叠：</strong>对于复杂的嵌套JSON结构，可以一键折叠所有节点，方便快速概览整体结构。
+                                    <strong>折叠/展开：</strong>对于复杂的嵌套JSON结构，可一键折叠所有节点（对象显示属性个数、数组显示元素个数），再次点击展开恢复。需先执行格式化，未格式化时点击会提示"请先格式化"。
                                 </li>
                                 <li data-i18n="tool.json.instructions.format.item5">
+                                    <strong>搜索：</strong>点击"搜索"按钮打开搜索面板，对JSON中的key和value进行模糊匹配（不区分大小写），结果显示匹配类型、行号和完整路径（如
+                                    address.city），点击结果自动滚动并选中。搜索无需先格式化，内容可解析为JSON即可。
+                                </li>
+                                <li data-i18n="tool.json.instructions.format.item6">
                                     <strong>换行：</strong>将一行压缩的JSON字符串按结构自动换行，便于查看长字符串内容。
+                                </li>
+                                <li data-i18n="tool.json.instructions.format.item7">
+                                    <strong>辅助操作：</strong>支持示例（一键载入示例数据）、粘贴、复制、清空、自动换行和编辑区最大化；页面底部提供同款按钮组，长文档操作更便捷。
                                 </li>
                             </ul>
                             <h4 data-i18n="tool.json.instructions.compare.title">二、比对功能</h4>
@@ -434,32 +490,43 @@
                             </ul>
                             <h4 data-i18n="tool.json.notes.format.title">二、格式要求</h4>
                             <ul>
-                                <li data-i18n="tool.json.notes.format.item1">输入的JSON数据必须符合标准JSON语法规范，否则会提示语法错误。</li>
-                                <li data-i18n="tool.json.notes.format.item2">JSON中的字符串必须使用双引号包裹，不能使用单引号。</li>
-                                <li data-i18n="tool.json.notes.format.item3">对象的最后一个属性和数组的最后一个元素后面不能有逗号。</li>
+                                <li data-i18n="tool.json.notes.format.item1">
+                                    输入的JSON数据应符合标准JSON语法规范；工具内置智能容错，可自动处理BOM头、注释、单引号和末尾多余逗号。</li>
+                                <li data-i18n="tool.json.notes.format.item2">JSON中的字符串建议使用双引号包裹，单引号会被自动转换为双引号。</li>
+                                <li data-i18n="tool.json.notes.format.item3">对象或数组末尾多余的逗号会被自动容错处理，但建议遵循标准语法以确保兼容性。</li>
                                 <li data-i18n="tool.json.notes.format.item4">支持的JSON值类型包括：字符串、数字、布尔值、null、数组、对象。</li>
                             </ul>
-                            <h4 data-i18n="tool.json.notes.performance.title">三、性能提示</h4>
+                            <h4 data-i18n="tool.json.notes.usage.title">三、功能使用</h4>
+                            <ul>
+                                <li data-i18n="tool.json.notes.usage.item1">折叠/展开功能仅在格式化完成后可用，未格式化时点击"折叠"会提示"请先格式化"。
+                                </li>
+                                <li data-i18n="tool.json.notes.usage.item2">
+                                    搜索功能无需先格式化，但输入内容必须是可解析的合法JSON；压缩或转义状态下的内容建议先还原再搜索。</li>
+                                <li data-i18n="tool.json.notes.usage.item3">格式化和压缩操作会自动移除JSONC注释（// 和 /*
+                                    */），如需保留注释请提前备份原始内容。</li>
+                                <li data-i18n="tool.json.notes.usage.item4">比对功能会忽略空白字符和对象字段顺序差异，但数组元素顺序会影响比对结果。</li>
+                            </ul>
+                            <h4 data-i18n="tool.json.notes.performance.title">四、性能提示</h4>
                             <ul>
                                 <li data-i18n="tool.json.notes.performance.item1">处理超大JSON数据（超过10MB）时可能会导致浏览器卡顿或响应变慢。
                                 </li>
                                 <li data-i18n="tool.json.notes.performance.item2">对于特别复杂的嵌套结构，折叠和展开操作可能会有延迟。</li>
                                 <li data-i18n="tool.json.notes.performance.item3">建议将大型JSON文件分段处理，避免一次性加载过多数据。</li>
                             </ul>
-                            <h4 data-i18n="tool.json.notes.compatibility.title">四、浏览器兼容性</h4>
+                            <h4 data-i18n="tool.json.notes.compatibility.title">五、浏览器兼容性</h4>
                             <ul>
                                 <li data-i18n="tool.json.notes.compatibility.item1">建议使用现代浏览器（Chrome 80+、Firefox
                                     75+、Edge 80+、Safari 13+）以获得最佳体验。</li>
                                 <li data-i18n="tool.json.notes.compatibility.item2">旧版浏览器可能不支持某些高级功能，如语法高亮和节点折叠。</li>
                                 <li data-i18n="tool.json.notes.compatibility.item3">移动端浏览器支持有限，建议在桌面端使用以获得更好的编辑体验。</li>
                             </ul>
-                            <h4 data-i18n="tool.json.notes.encoding.title">五、编码问题</h4>
+                            <h4 data-i18n="tool.json.notes.encoding.title">六、编码问题</h4>
                             <ul>
                                 <li data-i18n="tool.json.notes.encoding.item1">确保输入数据使用UTF-8编码，避免中文和其他非ASCII字符出现乱码。</li>
                                 <li data-i18n="tool.json.notes.encoding.item2">如果从其他文件复制JSON数据，注意检查是否包含不可见字符或BOM头。</li>
                                 <li data-i18n="tool.json.notes.encoding.item3">转义功能会自动处理中文和特殊字符，确保转换后的JSON可以正确解析。</li>
                             </ul>
-                            <h4 data-i18n="tool.json.notes.faq.title">六、常见问题</h4>
+                            <h4 data-i18n="tool.json.notes.faq.title">七、常见问题</h4>
                             <ul>
                                 <li data-i18n="tool.json.notes.faq.item1">
                                     <strong>格式化报错：</strong>请检查JSON语法是否正确，特别是括号是否匹配、逗号位置是否正确。

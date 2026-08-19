@@ -431,6 +431,25 @@ h1 {
     transform: translateY(-1px);
 }
 
+#collapse-btn:disabled,
+#collapse-btn.disabled,
+#collapse-btn-bottom:disabled,
+#collapse-btn-bottom.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 搜索按钮样式 */
+#search-btn {
+    background-color: var(--info-color, var(--primary-color));
+    color: white;
+}
+
+#search-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
 /* 转义按钮样式 */
 #escape-btn {
     background-color: var(--accent-color);
@@ -1705,6 +1724,141 @@ textarea {
     scrollbar-color: var(--border-color) var(--bg-secondary);
 }
 
+/* 搜索面板样式 */
+.search-panel {
+    margin: 10px 0;
+    padding: 12px 15px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.search-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-input-row input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input-row input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+.search-input-row button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#search-start-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#search-start-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+#search-close-btn {
+    background-color: var(--text-secondary);
+    color: white;
+}
+
+#search-close-btn:hover {
+    background-color: var(--text-muted);
+}
+
+.search-results-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.search-results-list {
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+}
+
+.search-result-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.search-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.search-result-type {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.search-result-item[data-type="value"] .search-result-type {
+    background-color: var(--accent-color);
+}
+
+.search-result-line {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.search-result-path {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+.search-result-preview {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
 /* 编辑器容器包装器全屏样式 */
 .editor-container-wrapper.maximized {
     position: fixed !important;
@@ -1842,6 +1996,34 @@ body.dark-mode .format-editor .cm-matchingBracket {
 body.dark-mode .format-tree-view {
     background-color: var(--input-bg);
     border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .search-panel {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .search-input-row input[type="text"] {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .search-results-list {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .search-result-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+body.dark-mode .search-result-path {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .search-result-preview {
     color: var(--text-primary);
 }
 

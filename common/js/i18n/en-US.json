@@ -125,15 +125,34 @@
       "convert": {
         "jsonToXml": "JSON to XML"
       },
+      "intro": {
+        "title": "Introduction",
+        "aboutTitle": "1. About",
+        "about1": "JSON (JavaScript Object Notation) is the most popular lightweight data exchange format today, widely used in APIs, configuration files, log data, and more.",
+        "about2": "This tool is an all-in-one online JSON processor combining formatting, comparing, and conversion, helping developers quickly read, analyze, and convert JSON data.",
+        "about3": "All processing is done locally in your browser — no data is uploaded to any server, so it is safe for sensitive data.",
+        "modulesTitle": "2. Modules",
+        "module1": "<strong>Format:</strong> Smart fault-tolerant parsing, one-click beautify, with collapse/expand and key-value search.",
+        "module2": "<strong>Compare:</strong> Dual-pane comparison of two JSON documents with highlighted differences and synchronized operations.",
+        "module3": "<strong>To Java Bean:</strong> Auto-generate Java entity class code from JSON structure, with reverse conversion supported.",
+        "module4": "<strong>To XML:</strong> Two-way conversion between JSON and XML, preserving the complete hierarchy.",
+        "featuresTitle": "3. Core Features",
+        "feature1": "<strong>Smart Tolerance:</strong> Auto-removes BOM and comments, converts single quotes to double quotes, supports Python-style True/False/None, and tolerates trailing commas.",
+        "feature2": "<strong>Fuzzy Key/Value Search:</strong> Fuzzy matching on keys and values, showing line numbers and full paths, with click-to-locate navigation.",
+        "feature3": "<strong>Escape State Awareness:</strong> Clicking Format while escaped auto-unescapes first; unescaping restores the previous display state.",
+        "feature4": "<strong>Modern Editor:</strong> Built on CodeMirror 6 with syntax highlighting, line numbers, word wrap, fullscreen, and dark mode."
+      },
       "instructions": {
         "title": "Instructions",
         "format": {
           "title": "1. Formatting Features",
-          "item1": "<strong>Format:</strong> Converts compressed JSON strings into readable formats with indentation, supporting multi-level indentation and syntax highlighting for easier reading and debugging.",
-          "item2": "<strong>Minify:</strong> Compresses formatted JSON into a single line while preserving escape characters, suitable for transmission and storage scenarios.",
-          "item3": "<strong>Escape/Unescape:</strong> Escapes/unescapes special characters in JSON (such as quotes, newlines, etc.), suitable for scenarios where JSON strings need to be embedded in code.",
-          "item4": "<strong>Collapse:</strong> For complex nested JSON structures, allows one-click collapsing of all nodes for a quick overview of the overall structure.",
-          "item5": "<strong>New Line:</strong> Automatically breaks down a compressed JSON string into multiple lines according to structure, making it easier to view long string content."
+          "item1": "<strong>Format:</strong> Converts compressed JSON strings into readable formats with indentation, syntax highlighting, and line numbers. Built-in smart tolerance: auto-removes BOM and comments, converts single quotes to double quotes, supports Python-style True/False/None, and tolerates trailing commas.",
+          "item2": "<strong>Minify:</strong> Compresses formatted JSON into a single line (comments are automatically removed), suitable for transmission and storage; escaped content can also be minified directly.",
+          "item3": "<strong>Escape/Unescape:</strong> Escapes/unescapes special characters in JSON (such as quotes and backslashes). Clicking \"Format\" while in escaped state auto-unescapes first; unescaping restores the previous display state (formatted or minified).",
+          "item4": "<strong>Collapse/Expand:</strong> For complex nested JSON structures, collapse all nodes with one click (objects show property counts, arrays show item counts); click again to expand. Formatting is required first — otherwise a \"Please format first\" prompt appears.",
+          "item5": "<strong>Search:</strong> Click the \"Search\" button to open the search panel and fuzzy-match keys and values (case-insensitive). Results show match type, line number, and full path (e.g. address.city); click a result to scroll to and select it. Formatting is not required as long as the content is parseable JSON.",
+          "item6": "<strong>New Line:</strong> Automatically breaks down a compressed JSON string into multiple lines according to structure, making it easier to view long string content.",
+          "item7": "<strong>Auxiliary Operations:</strong> Supports Example (load sample data), Paste, Copy, Clear, word wrap, and editor maximizing; a duplicate button group at the page bottom makes long-document operations easier."
         },
         "compare": {
           "title": "2. Comparison Features",
@@ -165,31 +184,38 @@
         },
         "format": {
           "title": "2. Format Requirements",
-          "item1": "Input JSON data must comply with standard JSON syntax specifications, otherwise syntax errors will be prompted.",
-          "item2": "Strings in JSON must be wrapped in double quotes, not single quotes.",
-          "item3": "There should be no comma after the last property of an object or the last element of an array.",
+          "item1": "Input JSON data should comply with standard JSON syntax; built-in smart tolerance automatically handles BOM headers, comments, single quotes, and trailing commas.",
+          "item2": "Strings in JSON should be wrapped in double quotes; single quotes are automatically converted to double quotes.",
+          "item3": "Trailing commas after the last property of an object or the last element of an array are tolerated automatically, but standard syntax is recommended for compatibility.",
           "item4": "Supported JSON value types include: strings, numbers, booleans, null, arrays, objects."
         },
+        "usage": {
+          "title": "3. Feature Usage",
+          "item1": "Collapse/Expand is only available after formatting; clicking \"Collapse\" before formatting shows a \"Please format first\" prompt.",
+          "item2": "Search does not require formatting, but the input must be parseable valid JSON; for minified or escaped content, restore it first before searching.",
+          "item3": "Formatting and minifying automatically remove JSONC comments (// and /* */); back up the original content if you need to keep the comments.",
+          "item4": "Comparison ignores whitespace and object field order differences, but array element order affects the comparison result."
+        },
         "performance": {
-          "title": "3. Performance Tips",
+          "title": "4. Performance Tips",
           "item1": "Processing very large JSON data (over 10MB) may cause browser lag or slow response.",
           "item2": "For particularly complex nested structures, collapse and expand operations may have delayed.",
           "item3": "It is recommended to process large JSON files in segments to avoid loading too much data at once."
         },
         "compatibility": {
-          "title": "4. Browser Compatibility",
+          "title": "5. Browser Compatibility",
           "item1": "It is recommended to use modern browsers (Chrome 80+, Firefox 75+, Edge 80+, Safari 13+) for the best experience.",
           "item2": "Older browsers may not support some advanced features, such as syntax highlighting and node folding.",
           "item3": "Mobile browser support is limited; it is recommended to use on desktop for a better editing experience."
         },
         "encoding": {
-          "title": "5. Encoding Issues",
+          "title": "6. Encoding Issues",
           "item1": "Ensure input data uses UTF-8 encoding to avoid garbled characters in Chinese and other non-ASCII characters.",
           "item2": "When copying JSON data from other files, check for invisible characters or BOM headers.",
           "item3": "The escape function automatically handles Chinese and special characters to ensure converted JSON can be parsed correctly."
         },
         "faq": {
-          "title": "6. Common Issues",
+          "title": "7. Common Issues",
           "item1": "<strong>Format Error:</strong> Please check if JSON syntax is correct, especially if brackets match and commas are positioned correctly.",
           "item2": "<strong>Inaccurate Comparison:</strong> Ensure the two JSON segments have similar structure; it is recommended to format them separately before comparing.",
           "item3": "<strong>Unexpected Conversion Results:</strong> Complex nested structures may require manual adjustment; it is recommended to check if the generated code meets business requirements."
@@ -302,7 +328,16 @@
         "diffMod": "Modified",
         "diffTypeMod": "Type changed",
         "diffArrayMod": "Array length changed",
-        "diffArrayDetail": "{{from}} elements --> {{to}} elements"
+        "diffArrayDetail": "{{from}} elements --> {{to}} elements",
+        "notifyPleaseFormatFirst": "Please format first",
+        "notifySearchNeedFormat": "Please format before searching",
+        "notifySearchInputRequired": "Please enter search content",
+        "notifySearchNoMatches": "No matches found",
+        "notifySearchMatches": "Found {{count}} matches",
+        "searchResultKey": "Key",
+        "searchResultValue": "Value",
+        "searchResultLine": "Line {{line}}",
+        "searchResultPath": "Path"
       }
     },
     "mermaid": {
@@ -478,6 +513,7 @@
       "format": "Format",
       "minify": "Minify",
       "collapse": "Collapse",
+      "search": "Search",
       "escape": "Escape",
       "expand": "Expand",
       "unescape": "Unescape",
@@ -497,6 +533,7 @@
     },
     "placeholder": {
       "jsonInput": "Enter JSON data...",
+      "searchJson": "Search key or value...",
       "xmlOutput": "XML conversion result will appear here...",
       "javaBeanInput": "Enter Java Bean code..."
     },
