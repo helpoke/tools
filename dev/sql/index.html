@@ -426,6 +426,7 @@
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
             "SQL代码格式化美化",
+            "标准/紧凑两种输出格式",
             "SQL关键字大写转换",
             "SQL压缩功能",
             "SQL语法高亮显示",
@@ -464,7 +465,7 @@
                 查看详细使用文档与 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
-            <p data-i18n="dev.sql.intro">SQL格式化工具，支持格式化SQL语句，提高可读性和维护性，支持语法高亮，支持自定义缩进、关键字大小写、语句空行等格式选项</p>
+            <p data-i18n="dev.sql.intro">SQL格式化工具，支持格式化SQL语句，提高可读性和维护性，支持语法高亮，支持标准/紧凑两种输出格式及缩进、关键字大小写、语句空行等格式选项</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
@@ -472,6 +473,13 @@
         <div class="container" data-theme="light">
             <div class="tool-card">
                 <div class="options-bar">
+                    <div class="option-group">
+                        <label for="formatStyle" data-i18n="dev.sql.formatStyleLabel">输出格式:</label>
+                        <select id="formatStyle">
+                            <option value="standard" selected data-i18n="dev.sql.formatStyleStandard">标准（子句分行）</option>
+                            <option value="compact" data-i18n="dev.sql.formatStyleCompact">紧凑（子句同行）</option>
+                        </select>
+                    </div>
                     <div class="option-group">
                         <label for="indent" data-i18n="dev.sql.indentLabel">缩进:</label>
                         <select id="indent">
@@ -491,14 +499,6 @@
                     <div class="option-group">
                         <label for="linesBetween" data-i18n="dev.sql.linesBetweenLabel">语句间空行:</label>
                         <input type="number" id="linesBetween" min="0" max="3" value="1">
-                    </div>
-                    <div class="option-group">
-                        <input type="checkbox" id="breakBeforeAnd" checked>
-                        <label for="breakBeforeAnd" data-i18n="dev.sql.breakBeforeAndLabel">AND/OR 换行</label>
-                    </div>
-                    <div class="option-group">
-                        <input type="checkbox" id="showLineNumbers">
-                        <label for="showLineNumbers" data-i18n="dev.sql.lineNumbersLabel">行号</label>
                     </div>
                 </div>
 
@@ -574,18 +574,19 @@
                                     <strong>压缩：</strong>将格式化的SQL代码压缩为紧凑格式，去除多余空白，减小文件体积。
                                 </li>
                                 <li data-i18n="dev.sql.usageCopy"><strong>复制结果：</strong>一键复制格式化或压缩后的代码到剪贴板。</li>
-                                <li data-i18n="dev.sql.usageSample"><strong>示例SQL：</strong>点击"示例SQL"按钮可以查看格式化效果的示例代码。
+                                <li data-i18n="dev.sql.usageSample"><strong>示例SQL：</strong>点击"示例SQL"按钮载入示例并自动按当前选项执行格式化。
                                 </li>
                                 <li data-i18n="dev.sql.usageClear"><strong>清空：</strong>快速清除所有输入和输出内容。</li>
                             </ul>
                             <h4 data-i18n="dev.sql.usageOptionsTitle">二、格式化选项</h4>
                             <ul>
+                                <li data-i18n="dev.sql.optFormatStyle">
+                                    <strong>输出格式：</strong>标准格式将每个子句关键字单独成行、字段逐行缩进显示；紧凑格式将子句内容与关键字放在同一行，JOIN
+                                    子句保持换行缩进，默认为标准格式。
+                                </li>
                                 <li data-i18n="dev.sql.optIndent"><strong>缩进：</strong>可选择2空格、4空格或Tab作为缩进单位，默认为4空格。</li>
                                 <li data-i18n="dev.sql.optUppercase"><strong>关键字：</strong>可选择大写、小写或保持原样，默认为保持原样。</li>
                                 <li data-i18n="dev.sql.optLinesBetween"><strong>语句间空行：</strong>设置每个SQL语句之间的空行数量，默认为1行。
-                                </li>
-                                <li data-i18n="dev.sql.optBreakBeforeAnd"><strong>AND/OR 换行：</strong>勾选后，AND/OR
-                                    关键字会单独换行显示。
                                 </li>
                             </ul>
                             <h4 data-i18n="dev.sql.usageSyntaxTitle">三、支持的 SQL 语法</h4>
@@ -852,13 +853,69 @@
                 return word;
             }
 
+            // 紧凑模式下需要与内容合并的顶层子句关键字
+            const COMPACT_CLAUSE_KEYWORDS = [
+                'SELECT', 'SELECT DISTINCT', 'FROM', 'WHERE', 'GROUP BY', 'HAVING',
+                'ORDER BY', 'LIMIT', 'OFFSET', 'UNION', 'UNION ALL', 'INTERSECT',
+                'EXCEPT', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM'
+            ];
+
+            // 匹配 JOIN 开头的行（INNER/LEFT/RIGHT/FULL/CROSS/NATURAL/OUTER JOIN）
+            const JOIN_LINE_RE = /^((INNER|LEFT|RIGHT|FULL|CROSS|NATURAL)(\s+OUTER)?\s+)?(OUTER\s+)?JOIN\b/i;
+
+            // 紧凑格式后处理：将子句关键字与后续缩进内容合并到同一行，
+            // JOIN 子句与注释保持原有换行，括号与内容紧贴
+            function compactClauses(sql) {
+                const lines = sql.split('\n');
+                const result = [];
+                let i = 0;
+                while (i < lines.length) {
+                    const line = lines[i];
+                    const trimmed = line.trim();
+                    const isTopLevel = line.length > 0 && line[0] !== ' ' && line[0] !== '\t';
+                    if (isTopLevel && COMPACT_CLAUSE_KEYWORDS.includes(trimmed.toUpperCase())) {
+                        const parts = [];
+                        let j = i + 1;
+                        while (j < lines.length) {
+                            const nextLine = lines[j];
+                            const nextTrimmed = nextLine.trim();
+                            if (nextTrimmed === '') break; // 空行：语句边界
+                            if (nextLine[0] !== ' ' && nextLine[0] !== '\t') break; // 下一子句
+                            if (JOIN_LINE_RE.test(nextTrimmed)) break; // JOIN 子句保持换行
+                            if (nextTrimmed.startsWith('--') || nextTrimmed.startsWith('/*')) break; // 注释保持原样
+                            parts.push(nextTrimmed);
+                            j++;
+                        }
+                        if (parts.length > 0) {
+                            let merged = trimmed;
+                            for (let k = 0; k < parts.length; k++) {
+                                const part = parts[k];
+                                if (merged.endsWith('(')) {
+                                    merged += part;
+                                } else if (part.startsWith(')')) {
+                                    merged += part;
+                                } else {
+                                    merged += ' ' + part;
+                                }
+                            }
+                            result.push(merged);
+                            i = j;
+                            continue;
+                        }
+                    }
+                    result.push(line);
+                    i++;
+                }
+                return result.join('\n');
+            }
+
             function formatSql(sql, options = {}) {
                 const {
                     indent = 4,
                     indentChar = ' ',
                     uppercase = 'preserve',
                     linesBetween = 1,
-                    breakBeforeAndOr = true
+                    formatStyle = 'standard'
                 } = options;
 
                 if (typeof window.sqlFormat !== 'function') {
@@ -869,11 +926,15 @@
                     tabWidth: indent,
                     useTabs: indentChar === 'tab',
                     keywordCase: uppercase === 'preserve' ? 'preserve' : uppercase,
-                    linesBetween: linesBetween,
-                    logicalOperatorNewline: breakBeforeAndOr ? 'before' : undefined
+                    linesBetween: linesBetween
                 };
 
-                return window.sqlFormat(sql, fmtOptions);
+                let formatted = window.sqlFormat(sql, fmtOptions);
+                if (formatStyle === 'compact') {
+                    // 紧凑格式：将子句内容合并到关键字同一行，JOIN 保持缩进换行
+                    formatted = compactClauses(formatted);
+                }
+                return formatted;
             }
 
             function compressSql(sql) {
@@ -925,7 +986,7 @@
                 const indentChar = document.getElementById('indent').value === 'tab' ? '\t' : ' ';
                 const uppercase = document.getElementById('uppercase').value;
                 const linesBetween = parseInt(document.getElementById('linesBetween').value);
-                const breakBeforeAndOr = document.getElementById('breakBeforeAnd').checked;
+                const formatStyle = document.getElementById('formatStyle').value;
 
                 try {
                     const formatted = formatSql(sql, {
@@ -933,7 +994,7 @@
                         indentChar,
                         uppercase,
                         linesBetween,
-                        breakBeforeAndOr
+                        formatStyle
                     });
                     setOutput(formatted);
                     updateStats(formatted);
@@ -955,8 +1016,7 @@
                         indent: 1,
                         indentChar: ' ',
                         uppercase: 'upper',
-                        linesBetween: 0,
-                        breakBeforeAndOr: false
+                        linesBetween: 0
                     });
                     const compressed = compressSql(formatted);
                     setOutput(compressed);
@@ -978,6 +1038,8 @@
 o.created_at AS order_date FROM users u INNER JOIN orders o ON u.id=o.user_id
 WHERE u.status='active' AND o.total_amount>100 ORDER BY o.created_at DESC LIMIT 10;`;
                 hideError();
+                // 载入示例后自动按当前选项执行格式化
+                document.getElementById('formatBtn').click();
             });
 
             document.getElementById('copyBtn').addEventListener('click', function () {

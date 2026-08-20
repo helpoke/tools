@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="Markdown编辑器使用说明，在线Markdown编辑与实时预览，支持语法工具栏、任务列表、脚注、高亮等扩展语法，可下载Markdown、HTML或PDF文件，本地处理保护隐私">
+    <meta name="keywords" content="Markdown编辑器, 在线Markdown, Markdown预览, md编辑器, Markdown转HTML, Markdown转PDF, Markdown下载">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>Markdown编辑器工具 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #0F766E 0%, #065F46 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #0F766E;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0F766E;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #0F766E;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
+    <script src="../../common/js/layout.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>Markdown编辑器工具</h1>
+            <p class="subtitle">在线编写 Markdown 并实时预览，支持语法工具栏、任务列表、脚注、高亮等扩展语法，可一键下载 Markdown、HTML 或 PDF 文件，本地处理保护隐私</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是Markdown编辑器？</h2>
+                <p>Markdown编辑器是一款免费的在线文档写作工具，专为需要快速编写格式化文档的用户设计。Markdown 是一种轻量级标记语言，通过简单的符号（如 #、*、-
+                    等）即可实现标题、加粗、列表、表格等排版效果，被广泛应用于技术文档、博客写作、README
+                    文件编写等场景。本工具提供了所见即所得的写作环境，左侧编辑、右侧实时渲染，让您专注于内容创作而无需担心语法细节。
+                </p>
+                <p>传统的 Markdown 写作往往需要在编辑器和预览工具之间来回切换，或者安装 Typora、VS Code 等本地软件。本工具完全运行在浏览器中，打开网页即可使用，内置语法快捷工具栏，即使不熟悉
+                    Markdown 语法的新手也能快速上手。写作完成后，您可以一键下载 Markdown 源文件，或导出为带样式的 HTML 文件直接发布到网站，也可以复制 HTML
+                    源码粘贴到博客后台，满足多样化的输出需求。
+                </p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：输入或导入内容</h3>
+                <p>在编辑区直接输入 Markdown 文本，或点击"打开文件"按钮导入本地的 .md / .markdown / .txt
+                    文件继续编辑。首次打开工具时会自动加载一份示例文档，帮助您快速了解支持的语法效果。</p>
+
+                <h3>第二步：使用工具栏排版</h3>
+                <p>选中需要排版的文字，点击工具栏上的对应按钮即可快速应用格式。工具栏支持标题（H1-H3）、加粗、斜体、删除线、高亮、引用、行内代码、代码块、无序列表、有序列表、任务列表、链接、图片、表格、分割线、行内公式、块级公式等语法。例如选中一段文字后点击加粗按钮，文字两侧会自动添加
+                    ** 标记。</p>
+
+                <h3>第三步：切换视图模式</h3>
+                <p>工具栏右侧提供三种视图模式：仅编辑模式适合专注写作；编辑+预览模式（默认）左侧输入、右侧实时渲染；仅预览模式用于全屏查看最终排版效果。视图偏好会自动记住，下次打开时保持上次的选择。</p>
+
+                <h3>第四步：导出结果</h3>
+                <p>写作完成后，点击"下载 Markdown"保存 .md 源文件；点击"下载 HTML"获取带完整样式的 HTML 文件，双击即可在浏览器中查看排版效果；点击"下载 PDF"可将渲染结果按
+                    A4 版面自动分页导出为 PDF 文档，适合打印与归档；点击"复制 HTML"可将渲染后的 HTML
+                    源码复制到剪贴板，直接粘贴到博客或 CMS 系统中使用。</p>
+
+                <h3>实战案例：撰写技术博客文章</h3>
+                <p>假设您需要撰写一篇技术博客。打开本工具后，先用工具栏快速搭建文章结构：H1 作为文章标题，H2
+                    划分章节；正文中使用行内代码标记技术术语，使用代码块展示示例代码，使用表格对比不同方案；写作过程中通过右侧预览实时检查排版效果；完成后点击"复制 HTML"，将源码粘贴到博客后台的 HTML
+                    编辑器中直接发布，或下载 HTML 文件存档。整个过程中编辑内容自动保存在浏览器本地，即使意外刷新页面也不会丢失稿件。
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>技术写作者：</strong>撰写技术文档、API 说明、README 文件，代码块和表格语法一应俱全。</p>
+                <p><strong>博客作者：</strong>快速写作并导出 HTML，直接发布到支持 HTML 的博客平台。</p>
+                <p><strong>学生群体：</strong>整理课堂笔记、撰写实验报告，简单的语法让排版不再繁琐。</p>
+                <p><strong>职场人士：</strong>编写会议纪要、工作汇报等结构化文档，导出 HTML 后可直接发送。</p>
+                <p><strong>程序员：</strong>为开源项目编写文档，Markdown 是 GitHub 等平台的标准格式。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">实时预览</span>
+                    <span class="feature-tag">语法工具栏</span>
+                    <span class="feature-tag">三种视图模式</span>
+                    <span class="feature-tag">自动保存</span>
+                    <span class="feature-tag">文件打开与下载</span>
+                    <span class="feature-tag">HTML 导出</span>
+                    <span class="feature-tag">PDF 导出</span>
+                    <span class="feature-tag">脚注/任务列表等扩展语法</span>
+                    <span class="feature-tag">数学公式（KaTeX）</span>
+                    <span class="feature-tag">完全免费</span>
+                </div>
+                <p>工具采用纯前端技术实现，内置轻量级 Markdown
+                    解析器，所有编辑和渲染都在您的浏览器中完成，不会上传到任何服务器。编辑内容会自动保存到浏览器本地存储，刷新或重新打开页面时自动恢复。工具同时支持夜间模式，长时间写作也能保护眼睛。
+                </p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>自动保存的数据存储在浏览器本地，清除站点数据会导致内容丢失</li>
+                        <li>重要文档请及时下载备份，不要仅依赖自动保存</li>
+                        <li>打开文件仅支持 .md / .markdown / .txt 文本格式</li>
+                        <li>复杂嵌套结构的渲染效果可能与部分平台略有差异，导出前请先在预览区确认</li>
+                        <li>建议在现代浏览器（Chrome、Firefox、Edge）中使用</li>
+                        <li>文档中的图片需使用可访问的网络图片地址</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题与解答</h2>
+                <h3>问：编辑内容会自动保存吗？</h3>
+                <p><strong>答：</strong>会。每次输入停止后，工具会自动将内容保存到浏览器本地存储（localStorage），刷新页面或下次访问时会自动恢复。但请注意，自动保存仅保存在当前浏览器中，清除浏览器缓存或更换设备后无法恢复，重要文档请务必下载备份。
+                </p>
+
+                <h3>问：支持哪些 Markdown 语法？</h3>
+                <p><strong>答：</strong>支持标准 Markdown
+                    常用语法与常用扩展语法，包括六级标题（含 Setext
+                    写法）、加粗、斜体、删除线、高亮、上下标、行内代码、代码块、嵌套引用、有序/无序/任务列表（支持多层嵌套）、链接、图片、自动链接、表格、分割线和脚注，以及数学公式（$...$
+                    行内公式、$$...$$ 块级公式，KaTeX 渲染，如 $E=mc^2$）。复杂嵌套结构的渲染效果可能与
+                    GitHub 等平台略有差异。
+                </p>
+
+                <h3>问：如何导出 PDF 文件？</h3>
+                <p><strong>答：</strong>点击"下载 PDF"按钮，工具会将预览区的渲染结果按 A4
+                    版面自动分页生成 PDF 文档。导出生成过程完全在本地浏览器中完成，文档内容不会上传到任何服务器。若文档较长，生成可能需要几秒钟，期间请耐心等待按钮恢复。
+                </p>
+
+                <h3>问：下载的 HTML 文件可以直接发布吗？</h3>
+                <p><strong>答：</strong>可以。下载的 HTML
+                    文件内嵌了完整的排版样式（包括标题、代码块、表格等），无需任何外部资源即可在浏览器中正常显示，可直接用于静态网站发布或邮件发送。如需嵌入现有网站，建议使用"复制 HTML"功能仅复制正文部分的
+                    HTML 代码。
+                </p>
+
+                <h3>问：为什么预览中的图片无法显示？</h3>
+                <p><strong>答：</strong>文档中的图片通过网络地址引用，请确认图片地址正确且可公开访问。部分网站对图片设置了防盗链限制，这类图片无法在第三方页面中显示。此外，出于安全考虑，工具会过滤
+                    javascript: 等危险协议的链接地址。
+                </p>
+
+                <h3>问：清空内容后还能找回吗？</h3>
+                <p><strong>答：</strong>清空操作会同时清除浏览器中自动保存的内容，无法找回。因此清空前工具会弹出确认提示，请务必确认内容已备份。日常使用中建议养成及时下载 .md 源文件的习惯。
+                </p>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#0F766E"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../blurr/index.html" class="tool-link">文档内容模糊工具</a>
+                <a href="../merge/index.html" class="tool-link">PDF合并拆分工具</a>
+                <a href="../compress/index.html" class="tool-link">PDF大小压缩工具</a>
+                <a href="../signature/index.html" class="tool-link">文档在线签名工具</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>
