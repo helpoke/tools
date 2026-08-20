@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图像缩放器使用说明，在线调整图片尺寸，支持自定义尺寸和预设尺寸，可保持宽高比，支持 JPG、PNG、WebP 格式输出">
+    <meta name="keywords" content="图像缩放器, 图片缩放, 在线调整图片大小, 图片尺寸修改, 图片放大缩小, 图片格式转换">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>图像缩放器 - 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .info-section ol {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #059669;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图像缩放器</h1>
+            <p class="subtitle">自定义尺寸和预设尺寸自由缩放图片，支持多格式输出与原图实时对比</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图像缩放器？</h2>
+                <p>图像缩放器是一款基于浏览器端图像处理技术的在线工具，专门用于快速调整图片的尺寸大小。无论您是需要将产品图片统一为电商平台的展示尺寸、将照片缩小后上传到社交网络，还是为网页准备不同分辨率的响应式图片素材，这款工具都能帮助您在几分钟内完成图片的缩放调整。
+                </p>
+                <p>工具的核心技术原理是利用 Canvas 的 drawImage 方法对图片进行重采样缩放。Canvas
+                    内置了先进的图像缩放算法和抗锯齿处理，能够最大程度地保留原图的画质细节。同时，工具支持输出格式转换，您可以在缩放的同时将图片转换为 JPG、PNG 或 WebP 格式，适应不同场景的需求。
+                </p>
+                <p>值得一提的是，所有图像处理操作均在浏览器本地完成，无需将图片上传到服务器。这意味着您可以安全地处理任何图片，包括带有个人隐私或商业机密的素材，完全不用担心数据泄露的风险。工具支持
+                    JPG、PNG、WebP、GIF、BMP 等多种输入格式，兼容性强，使用便捷。
+                </p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域或直接拖拽图片到指定位置。工具支持 JPG、PNG、WebP、GIF、BMP 等多种常见图片格式。上传后，原图会显示在左侧预览区，并标注原始尺寸信息。</p>
+
+                <h3>第二步：设置目标尺寸</h3>
+                <p>在宽度和高度输入框中输入目标像素值。默认勾选了"保持宽高比"，修改宽度时高度会自动按比例变化，确保图片不会变形。您也可以取消勾选以自由设置宽高。同时，工具提供了 7
+                    种常用预设尺寸（1920×1080、1280×720、800×600、640×480、480×320、320×240、240×180），一键点击即可切换。
+                </p>
+
+                <h3>第三步：设置输出参数</h3>
+                <p>选择缩放后的图片格式：可以保持原始格式，也可以统一转换为 JPG、PNG 或 WebP。选择 JPEG 或 WebP 格式时，可以通过质量滑块调整输出图片的质量，值越高画质越好但文件也越大。</p>
+
+                <h3>第四步：应用并下载</h3>
+                <p>点击"应用缩放"按钮执行缩放操作，缩放结果会显示在右侧预览区，方便与左侧原图进行对比。确认满意后，点击"下载缩放图片"即可将结果保存到本地。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>电商卖家：</strong>批量统一产品图片尺寸，保持商品展示页面的整齐划一。</p>
+                <p><strong>网页开发者：</strong>为响应式网站准备不同分辨率的图片素材。</p>
+                <p><strong>社交媒体运营：</strong>将图片缩放至平台建议尺寸，确保展示效果最佳。</p>
+                <p><strong>设计师：</strong>在设计过程中快速调整素材尺寸，提高工作效率。</p>
+                <p><strong>普通用户：</strong>日常图片尺寸调整需求，如缩小照片便于发送或上传。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">自定义宽高</span>
+                    <span class="feature-tag">宽高比锁定</span>
+                    <span class="feature-tag">7种预设尺寸</span>
+                    <span class="feature-tag">支持 JPG/PNG/WebP 输出</span>
+                    <span class="feature-tag">可调节图片质量</span>
+                    <span class="feature-tag">原图对比预览</span>
+                    <span class="feature-tag">无需安装软件</span>
+                </div>
+                <p>工具的核心优势在于其灵活性和易用性。自定义尺寸加宽高比锁定保证了图片不会变形；预设尺寸一键切换满足常见需求；格式转换和质量调节让输出更加可控。原图与缩放图的左右对比预览，让您可以直观地检查缩放效果。
+                </p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>放大图片时分辨率增加但不会增加细节，大比例放大后可能显示模糊</li>
+                        <li>缩小图片时建议保持宽高比，避免图片变形</li>
+                        <li>极小尺寸缩放可能导致文字和细节难以辨认</li>
+                        <li>JPEG 格式不支持透明背景，PNG 格式文件较大但支持透明</li>
+                        <li>处理期间请勿关闭浏览器或刷新页面，以免数据丢失</li>
+                    </ul>
+                </div>
+
+                <h2>实战案例：电商商品图尺寸统一</h2>
+                <p>小张经营着一家手工皮具淘宝店，他拍摄的产品照片尺寸不一，导致商品展示页面看起来非常杂乱。他想将所有产品主图统一调整为 800×800 像素的正方形。</p>
+                <p><strong>使用步骤：</strong></p>
+                <ol>
+                    <li>小张将拍摄好的产品图片一张张上传到图像缩放器中。</li>
+                    <li>在宽度输入框中输入 800，因为勾选了"保持宽高比"，高度自动跟随变化。</li>
+                    <li>他取消勾选"保持宽高比"，将高度也设置为 800，直接生成正方形图片。</li>
+                    <li>选择 JPEG 格式，质量设置为 85%，在文件大小和画质之间取得平衡。</li>
+                    <li>点击"下载缩放图片"，将结果保存到本地。</li>
+                </ol>
+                <p><strong>效果对比：</strong>处理前，产品列表页图片大小不一，整体视觉效果杂乱；处理后，所有商品图片均为统一的 800×800 像素正方形，页面整齐美观，顾客浏览体验全面提升。</p>
+
+                <h2>常见问题与解答</h2>
+
+                <h3>Q1：缩放后的图片为什么会模糊？</h3>
+                <p>将小图放大到较大尺寸时，由于原始图片的像素信息有限，Canvas 的缩放算法无法凭空增加图片细节，因此会出现模糊和锯齿。建议使用原始大图进行缩放，或缩放前评估好目标尺寸与原始尺寸的比例关系。
+                </p>
+
+                <h3>Q2：宽高比锁定有什么作用？</h3>
+                <p>勾选"保持宽高比"后，修改宽度时高度会自动按原始比例同步变化，反之亦然。这样可以确保图片在缩放过程中不会发生拉伸变形，始终保持原始画面的长宽比例。如果不勾选，您可以自由设置宽高值，适用于需要生成固定比例图片的场景。
+                </p>
+
+                <h3>Q3：应该选择哪种输出格式？</h3>
+                <p>JPG 适合照片和渐变丰富的图片，文件体积小；PNG 适合图标、截图和需要透明背景的图片，文件较大但无损；WebP 是 Google 推出的现代格式，兼具小体积和高质量，现代浏览器均可支持，兼容性好。
+                </p>
+
+                <h3>Q4：图片质量设置为多少合适？</h3>
+                <p>质量设置适用于 JPEG 和 WebP 格式。90%-100% 质量最高、文件较大，适合高质量输出场景；75%-85% 在画质和文件大小之间取得良好平衡，适合日常网页使用；60%-75%
+                    适合严格控制文件大小的场景，画质略有下降但可接受。</p>
+
+                <h3>Q5：可以批量处理多张图片吗？</h3>
+                <p>目前工具支持单张图片缩放。您可以通过浏览器的多标签页同时处理多张图片，或逐一上传处理。我们正在开发批量处理功能，敬请期待。</p>
+
+                <h3>Q6：缩放 GIF 动图的效果如何？</h3>
+                <p>GIF 动图在缩放时仅保留第一帧的画面，不会保留动画效果。如果需要处理动图 GIF，建议先分解为单帧再逐帧处理，或使用专门的 GIF 编辑工具。
+                </p>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-title="开始使用" data-tool-url="index.html" data-btn-color="#10B981">
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../convert/index.html" class="tool-link">图像批量转换工具</a>
+                <a href="../cropping/index.html" class="tool-link">图片裁剪工具</a>
+                <a href="../edit/index.html" class="tool-link">图片旋转与模糊工具</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>

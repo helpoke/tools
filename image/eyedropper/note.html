@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="图片取色器使用说明，在线图片吸色工具，鼠标悬停像素级放大取色，一键复制 HEX、RGB、HSL、HSV 颜色值，支持取色历史记录">
+    <meta name="keywords" content="图片取色器, 吸色工具, 图片吸色, 在线取色, 取色器, 颜色吸取, HEX取色, RGB取色">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>图片取色器（吸色工具）- 免费、安全、快速</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #059669;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #059669;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .info-section ol {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #059669;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .tool-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../common/css/style.css">
+    <link rel="stylesheet" href="../../common/css/note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../common/js/theme.js"></script>
+    <script src="../../common/js/note.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>图片取色器（吸色工具）</h1>
+            <p class="subtitle">上传图片，鼠标悬停像素级放大取色，一键复制 HEX、RGB、HSL、HSV 颜色值</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是图片取色器？</h2>
+                <p>图片取色器（也叫吸色工具、吸管工具）是一款基于浏览器端图像处理技术的在线工具，专门用于从图片中快速获取任意位置的精确颜色值。它的工作方式与 Photoshop
+                    中的吸管工具类似：鼠标在图片上移动时，工具会实时显示光标周围区域的像素级放大画面，帮助您精准定位目标像素；点击后即可锁定该位置的颜色，并自动换算为 HEX、RGB、HSL、HSV 四种常用颜色格式。
+                </p>
+                <p>工具的技术原理是通过 Canvas 读取图片在鼠标位置处像素的 RGB 值，再按照标准颜色空间转换算法计算出对应的 HEX 十六进制色值、HSL 色相/饱和度/亮度值以及 HSV
+                    色相/饱和度/明度值。取色基于图片的原始分辨率进行，即使预览时图片被缩放显示，取色结果依然精确到原始像素，不受显示尺寸影响。
+                </p>
+                <p>值得一提的是，所有图像处理操作均在浏览器本地完成，图片不会上传到服务器。这意味着您可以安全地处理任何敏感图片，包括设计稿、产品图、客户素材等，完全不用担心数据泄露的风险。工具支持
+                    JPG、PNG、WebP、GIF、BMP 等多种常见图片格式，兼容性强，使用便捷。</p>
+
+                <h2>如何使用？</h2>
+                <h3>第一步：上传图片</h3>
+                <p>点击上传区域选择本地图片，或将图片直接拖拽到上传区域，也可以直接按 Ctrl+V 粘贴剪贴板中的图片（如截图）。工具支持 JPG、PNG、WebP、GIF、BMP
+                    等多种常见图片格式。上传后，图片会显示在预览区域。</p>
+
+                <h3>第二步：移动鼠标定位</h3>
+                <p>在图片上移动鼠标，光标附近会出现一个像素级放大镜，实时显示光标周围 11×11
+                    像素的放大画面，中心十字所在的格子即为当前取色像素。借助放大镜可以精准定位到图片中最细微的颜色区域，例如图标边缘、文字笔画、渐变过渡处等。</p>
+
+                <h3>第三步：点击吸取颜色</h3>
+                <p>将放大镜中心对准目标像素后，点击鼠标左键即可吸取并锁定该位置的颜色。当前颜色区域会显示大色块和对应的各种颜色值，同时该颜色会自动记录到取色历史中，方便后续对比和复用。</p>
+
+                <h3>第四步：复制颜色值</h3>
+                <p>在颜色值列表中，点击 HEX、RGB、HSL、HSV 对应行右侧的"复制"按钮，即可将该格式的颜色值复制到剪贴板；点击大色块可快速复制 HEX
+                    值。复制成功后会有提示，直接到设计软件或代码编辑器中粘贴使用即可。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>适用场景与人群</h2>
+                <p><strong>前端开发：</strong>从设计稿或网页截图中提取品牌色、主题色，快速编写 CSS 颜色代码。</p>
+                <p><strong>UI/UX 设计师：</strong>分析竞品配色、提取参考图中的颜色，建立自己的配色方案。</p>
+                <p><strong>绘画爱好者：</strong>从照片中吸取颜色用于数字绘画，学习优秀作品的配色思路。</p>
+                <p><strong>电商运营：</strong>提取商品图片的主色调，制作风格统一的店铺装修和宣传素材。</p>
+                <p><strong>普通用户：</strong>获取任意图片中喜欢的颜色，用于文档排版、PPT 配色等日常场景。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">像素级放大镜取色</span>
+                    <span class="feature-tag">HEX/RGB/HSL/HSV 四种格式</span>
+                    <span class="feature-tag">一键复制颜色值</span>
+                    <span class="feature-tag">取色历史自动记录</span>
+                    <span class="feature-tag">支持拖拽与粘贴上传</span>
+                    <span class="feature-tag">原图分辨率精确取色</span>
+                    <span class="feature-tag">无需安装软件</span>
+                </div>
+                <p>工具的核心优势在于像素级的取色精度。放大镜将光标周围区域放大 11
+                    倍显示，每个格子对应一个原始像素，配合中心十字定位框，即使在颜色变化最细微的边缘区域也能准确取色。取色基于图片原始分辨率计算，与预览缩放无关，确保结果始终精确。</p>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>取色基于图片原始像素，预览缩放不影响取色结果</li>
+                        <li>JPG 为有损压缩格式，取色值可能与原始场景存在轻微偏差</li>
+                        <li>GIF 动态图片仅取第一帧的颜色</li>
+                        <li>透明区域取色结果为与白色底合成后的显示颜色</li>
+                        <li>一键复制功能需要浏览器支持剪贴板 API（HTTPS 环境下可用）</li>
+                        <li>粘贴上传功能在部分浏览器中可能受限，可改用点击上传</li>
+                    </ul>
+                </div>
+
+                <h2>实战案例：网页主题色提取</h2>
+                <p>小李是一名前端开发者，接到一个仿站需求：客户提供了一个参考网站截图，要求新页面使用与截图一致的主题色。参考页面中按钮、标题、链接使用了多种深浅不一的蓝色，肉眼很难判断准确的色值。</p>
+                <p><strong>使用步骤：</strong></p>
+                <ol>
+                    <li>小李将参考网站截图保存到本地，上传到图片取色器中。</li>
+                    <li>将鼠标移动到截图中的主按钮上，通过放大镜定位到按钮的纯色区域，点击吸取，得到主色 #2563EB。</li>
+                    <li>继续吸取标题文字颜色 #1E40AF、链接颜色 #3B82F6、页面背景色 #F8FAFC，共取色 6 次。</li>
+                    <li>每次取色后直接点击对应格式行的复制按钮，将 HEX 值粘贴到 CSS 变量定义中。</li>
+                    <li>对于不确定的取色点，他利用取色历史反复对比不同位置的色块，最终确认了完整的配色方案。</li>
+                </ol>
+                <p><strong>效果对比：</strong>手动肉眼估色通常会出现明显的色差，导致整站风格不统一；使用取色器后，新页面的配色与参考网站完全一致，客户一次验收通过，返工时间为零。</p>
+
+                <h2>常见问题与解答</h2>
+
+                <h3>Q1：为什么取色位置总是不准确？</h3>
+                <p>请借助放大镜进行精确定位：放大镜中心十字所在的格子就是当前取色像素。对于颜色过渡复杂的区域（如渐变、抗锯齿边缘），建议将中心十字对准颜色最纯粹的区域中心，避免取到边缘的混合色。
+                </p>
+
+                <h3>Q2：取到的颜色值应该用哪种格式？</h3>
+                <p>四种格式表达的是同一种颜色，按使用场景选择即可：网页开发中最常用 HEX（如 #2563EB）和 RGB（如 rgb(37, 99, 235)）；需要调整颜色明暗时 HSL/HSV 更直观，HSL
+                    常用于 CSS，HSV 常用于设计软件的取色器。工具同时输出四种格式，无需手动换算。
+                </p>
+
+                <h3>Q3：图片很大，取色会受预览缩放影响吗？</h3>
+                <p>不会。工具在取色时会将鼠标位置换算为图片原始分辨率的坐标，从原始像素中读取颜色。无论预览时图片被缩小到多少倍，取色结果都对应原始图片中的精确像素位置。
+                </p>
+
+                <h3>Q4：为什么透明背景的 PNG 取色结果是白色？</h3>
+                <p>工具在加载图片时将透明像素与白色背景合成，保证取色结果与图片在白色背景下的显示效果一致。这与其他设计软件在白色画布上取色的行为相同。</p>
+
+                <h3>Q5：取色历史最多能保存多少条？会占用我电脑空间吗？</h3>
+                <p>取色历史最多保留最近 15 条，超出后自动移除最早的记录，重复取色会置顶而不重复记录。历史记录仅保存在当前页面的内存中，不上传服务器，也不写入本地磁盘，关闭页面后自动清除。</p>
+
+                <h3>Q6：点击复制按钮没有反应怎么办？</h3>
+                <p>一键复制依赖浏览器剪贴板 API，需要 HTTPS 环境和浏览器授权。如果复制失败，可以手动选中文本框中的颜色值进行复制，或检查浏览器是否禁用了剪贴板权限。也可以点击历史色块再次尝试复制。
+                </p>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-title="开始使用" data-tool-url="index.html" data-btn-color="#10B981">
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../../tool/color-picker/index.html" class="tool-link">颜色选择器与颜色转换工具</a>
+                <a href="../compressor/index.html" class="tool-link">图像批量压缩工具</a>
+                <a href="../convert/index.html" class="tool-link">图像批量转换工具</a>
+                <a href="../edit/index.html" class="tool-link">图片旋转与模糊工具</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../common/js/utils.js"></script>
+</body>
+
+</html>
