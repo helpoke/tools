@@ -86,10 +86,9 @@ body {
     background: var(--bg-secondary);
     color: var(--text-primary);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     z-index: 100;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     border-right: 1px solid var(--border-color);
     transition: transform 0.3s ease;
 }
@@ -99,21 +98,41 @@ body {
     text-decoration: none;
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar-content::-webkit-scrollbar {
     width: 6px;
 }
 
-.sidebar::-webkit-scrollbar-track {
+.sidebar-content::-webkit-scrollbar-track {
     background: var(--bg-secondary);
 }
 
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar-content::-webkit-scrollbar-thumb {
     background: var(--border-color);
     border-radius: 3px;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
+.sidebar-content::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
+}
+
+/* ========== Sidebar Content Wrapper ========== */
+.sidebar-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-content.has-handle {
+    grid-template-columns: 1fr 8px;
+}
+
+.sidebar-content-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 .sidebar-brand {
@@ -417,6 +436,47 @@ body.sidebar-collapsed main.main {
     margin-left: 1% !important;
     width: 100% !important;
     flex: none !important;
+}
+
+/* ========== Sidebar Resize Handle ========== */
+.sidebar-resize-handle {
+    grid-column: 2;
+    grid-row: 1;
+    width: 8px;
+    cursor: col-resize;
+    z-index: 102;
+    background: transparent;
+    position: relative;
+}
+
+.sidebar-resize-handle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 3px;
+    width: 2px;
+    height: 100%;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.sidebar-resize-handle:hover::after,
+.sidebar-resize-handle.active::after {
+    background: var(--accent-color);
+    opacity: 0.35;
+}
+
+/* Disable transitions during drag resize */
+html[data-sidebar-resizing] .sidebar,
+html[data-sidebar-resizing] .main {
+    transition: none;
+}
+
+/* Hide resize handle on mobile */
+@media (max-width: 768px) {
+    .sidebar-resize-handle {
+        display: none;
+    }
 }
 
 
