@@ -325,6 +325,24 @@ body.dark-mode .ratio-btn.active {
     color: var(--success-color);
 }
 
+/* 手机端预设按钮 */
+.mobile-preset-btn:hover {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.mobile-preset-btn.active {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+body.dark-mode .mobile-preset-btn.active {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+}
+
 /* 宽高比信息 */
 .aspect-ratio-info {
     font-size: 12px;
@@ -379,10 +397,6 @@ body.dark-mode .ratio-btn.active {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .container {
-        margin: 20px;
-        padding: 20px;
-    }
 
     h1 {
         font-size: 24px;
@@ -442,4 +456,56 @@ body.dark-mode .quality-control input[type="range"]::-webkit-slider-thumb {
 
 body.dark-mode #qualityValue {
     color: var(--primary-color);
+}
+
+/* ==================== 图片全屏预览 ==================== */
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    cursor: zoom-out;
+}
+
+.fullscreen-overlay img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.close-fullscreen {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 48px;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.close-fullscreen:hover {
+    transform: scale(1.2);
+}
+
+/* 预览图可点击提示 */
+.image-container img {
+    cursor: zoom-in;
 }
