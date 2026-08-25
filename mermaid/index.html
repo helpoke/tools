@@ -36,10 +36,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../common/lib/font-awesome/css/all.min.css">
 
-    <script src="../common/js/ads.js"></script>
+    <script src="../common/js/ads.js" async></script>
 
-    <script src="./lib/mermaid.min.js" async></script>
-    <script src="./lib/html2canvas.min.js" async></script>
+    <script src="./lib/mermaid.min.js"></script>
+    <script src="./lib/html2canvas.min.js"></script>
     <script src="../common/js/i18n/i18n.js" async></script>
     <script type="application/ld+json">
     {
@@ -176,22 +176,41 @@ flowchart LR
                         <h3 data-i18n="tool.mermaid.intro.title">工具介绍</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="tool.mermaid.intro.problemTitle">一、解决的问题</h4>
+                        <h4 data-i18n="tool.mermaid.intro.problemTitle">一、图表即代码</h4>
                         <ul>
-                            <li data-i18n="tool.mermaid.intro.problem1">使用Mermaid语法绘制流程图、时序图等图表。</li>
-                            <li data-i18n="tool.mermaid.intro.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="tool.mermaid.intro.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="tool.mermaid.intro.problem1">软件工程师画图一直有个矛盾：用 Visio、Figma
+                                等图形工具画的流程图、架构图确实好看，但修改成本极高——拖拽对齐半天，改一个节点又要重新排版。更麻烦的是，这些工具生成的二进制文件无法纳入 Git
+                                版本管理，团队协作时经常出现"你的图和我看到的不一样"的混乱。Mermaid 的出现解决了这个矛盾——它用纯文本语法定义图表，代码即图表，修改文字就能更新图形，天然支持
+                                diff 和版本控制。</li>
+                            <li data-i18n="tool.mermaid.intro.problem2">本工具是一个完整的 Mermaid 在线工作台：左侧是基于 CodeMirror 6
+                                的代码编辑器（语法高亮、自动换行、全屏），右侧是实时预览区（修改代码后 300ms 自动重新渲染）。支持流程图、时序图、状态图、类图、ER 图、饼图、甘特图、用户旅程图共 8
+                                种图表类型。内置电商场景示例——从订单流程到用户旅程，点击即可查看复杂图表示例。</li>
+                            <li data-i18n="tool.mermaid.intro.problem3">
+                                所有渲染和导出都在浏览器本地完成——你的系统架构图、数据库设计、业务流程不会上传到任何服务器。渲染结果可导出为 PNG（2倍分辨率，适合文档插入）或
+                                SVG（矢量无损，适合网页嵌入和印刷）。GitHub、GitLab、Notion、Typora 等平台已原生支持 Mermaid
+                                渲染——在这里画好的图，复制代码粘贴到文档中即可直接显示。</li>
                         </ul>
-                        <h4 data-i18n="tool.mermaid.intro.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="tool.mermaid.intro.formatTitle">二、Mermaid 简史</h4>
                         <ul>
-                            <li data-i18n="tool.mermaid.intro.format1"><strong>Mermaid：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="tool.mermaid.intro.format1">Mermaid 由 Knut Sveidqvist 于 2016
+                                年创建，最初只是为了简化流程图绘制。经过社区多年发展，已成为最流行的"图表即代码"工具——GitHub 原生支持、VS Code
+                                有数十个相关插件、Notion/Obsidian/Typora 等笔记工具均已集成。Mermaid
+                                语法的设计哲学是"用最少的代码表达最多的信息"——一个简单的流程图只需三行代码：<code>flowchart TD</code>、<code>A[开始]</code>、<code>A --> B[结束]</code>。本工具始终跟踪
+                                Mermaid 最新稳定版，确保支持所有已发布的图表类型和语法特性。</li>
                         </ul>
-                        <h4 data-i18n="tool.mermaid.intro.coreTitle">三、核心功能</h4>
+                        <h4 data-i18n="tool.mermaid.intro.coreTitle">三、工作台功能</h4>
                         <ul>
-                            <li data-i18n="tool.mermaid.intro.core1"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="tool.mermaid.intro.core2"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="tool.mermaid.intro.core3"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="tool.mermaid.intro.core4"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="tool.mermaid.intro.core1"><strong>实时预览引擎：</strong>代码修改后 300ms
+                                防抖自动重新渲染——既保证即时反馈，又避免频繁输入导致的渲染风暴。语法错误时预览区显示错误位置和原因（精确到行号），帮助快速定位拼写错误或未闭合的括号。支持 10
+                                种主题色切换，一键改变图表视觉风格。</li>
+                            <li data-i18n="tool.mermaid.intro.core2"><strong>交互导航：</strong>大型图表（50+
+                                节点）难免超出屏幕。滚轮缩放（10%-500%）+ 鼠标拖拽平移，可以自由浏览图表的任意区域。全屏模式隐藏所有 UI 元素，只保留图表本身，适合演示和截图。</li>
+                            <li data-i18n="tool.mermaid.intro.core3"><strong>双格式导出：</strong>PNG 使用 Canvas 光栅化，默认 2
+                                倍分辨率（Retina 级别），适合插入 Word/PPT/邮件。SVG 直接输出矢量文件，无论放大多少倍都不失真，适合网页嵌入、印刷设计、导入 Figma 进一步编辑。
+                            </li>
+                            <li data-i18n="tool.mermaid.intro.core4">
+                                <strong>数据安全：</strong>纯前端渲染，无网络传输。绘制的架构图、数据库设计、业务流程始终在本地浏览器中，不会被上传或缓存到任何服务器。关闭标签页即彻底清除。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -200,26 +219,40 @@ flowchart LR
                         <h3 data-i18n="tool.mermaid.instructions.title">使用说明</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="tool.mermaid.instructions.chartTypesTitle">一、图表类型介绍</h4>
+                        <h4 data-i18n="tool.mermaid.instructions.chartTypesTitle">一、八种图表实战手册</h4>
                         <ul>
                             <li data-i18n="tool.mermaid.instructions.chart1">
-                                <strong>流程图(Flowchart)：</strong>使用流程图展示流程步骤和决策路径，支持多种形状、箭头样式和布局方向（从上到下、从左到右等）。
+                                <strong>流程图（Flowchart）——描述步骤与决策：</strong>用节点表示步骤，连接线表示流向，菱形表示判断分支。节点形状有矩形
+                                <code>[文本]</code>、圆角矩形 <code>(文本)</code>、菱形 <code>{条件}</code>、平行四边形 <code>>输入]</code>
+                                等。连接线支持实线 <code>--></code>、虚线 <code>-.-&gt;</code>、粗线 <code>==&gt;</code>，可附带文字标签
+                                <code>-->|是|</code>。布局方向用 <code>TD</code>（上→下）或
+                                <code>LR</code>（左→右）。适合展示审批流程、算法逻辑、系统部署架构。</li>
+                            <li data-i18n="tool.mermaid.instructions.chart2"><strong>时序图（Sequence
+                                    Diagram）——描述交互顺序：</strong>多个参与者（人、系统、微服务）之间的消息传递。用 <code>->></code>
+                                表示同步请求，<code>-->></code> 表示响应，<code>-x</code> 表示失败。组合片段支持
+                                <code>loop</code>（循环）、<code>alt/else</code>（条件分支）、<code>par</code>（并行）、<code>opt</code>（可选）。适合描述
+                                API 调用链、登录认证流程、微服务交互。</li>
+                            <li data-i18n="tool.mermaid.instructions.chart3"><strong>状态图（State
+                                    Diagram）——描述状态流转：</strong>对象在生命周期中的所有状态，以及触发转换的事件。用 <code>[*]</code>
+                                表示起始/终止态，<code>--></code> 表示转换，箭头上标注触发条件。支持复合状态（<code>state</code>
+                                嵌套）和并行区域。适合展示订单状态机（待支付→已支付→已发货→已完成）、设备运行状态、审批流转。</li>
+                            <li data-i18n="tool.mermaid.instructions.chart4"><strong>类图（Class
+                                    Diagram）——描述面向对象结构：</strong>每个类分三层：类名、属性、方法。关系类型：继承 <code><|--</code>、实现
+                                <code>..|></code>、关联 <code>--</code>、组合 <code>*--</code>、聚合 <code>o--</code>、依赖
+                                <code>..></code>。支持标注多重性（1:1、1:N）。是表达系统架构、领域模型、数据库设计的标准图表。</li>
+                            <li data-i18n="tool.mermaid.instructions.chart5"><strong>实体关系图（ER
+                                    Diagram）——描述数据库结构：</strong>实体（表）包含名称和属性列表（可标注类型）。关系支持一对一 <code>||--||</code>、一对多
+                                <code>||--o{</code>、多对多 <code>}o--o{</code>。适合在开发前展示表结构设计和约束条件，是数据库建模的标准表达方式。</li>
+                            <li data-i18n="tool.mermaid.instructions.chart6"><strong>饼图（Pie
+                                    Chart）——展示比例分布：</strong>语法极简——<code>"标签" : 数值</code>，数值自动计算百分比。适合展示市场份额、预算分配、用户构成等"部分与整体"的关系。支持
+                                <code>show-data</code> 显示具体数值。</li>
+                            <li data-i18n="tool.mermaid.instructions.chart7"><strong>甘特图（Gantt Chart）——展示项目进度：</strong>用
+                                <code>section</code>
+                                分组，每个任务标注起止时间和持续天数。状态标记：<code>done</code>（已完成）、<code>active</code>（进行中）、<code>crit</code>（关键路径）、<code>milestone</code>（里程碑）。适合展示迭代计划、项目排期、开发进度。
                             </li>
-                            <li data-i18n="tool.mermaid.instructions.chart2"><strong>时序图(Sequence
-                                    Diagram)：</strong>展示对象之间的交互顺序，常用于描述系统调用流程、API请求时序等场景。</li>
-                            <li data-i18n="tool.mermaid.instructions.chart3"><strong>状态图(State
-                                    Diagram)：</strong>描述对象在生命周期中的状态变化和转换条件，适合展示状态机逻辑。</li>
-                            <li data-i18n="tool.mermaid.instructions.chart4"><strong>类图(Class
-                                    Diagram)：</strong>展示类之间的关系（继承、关联、依赖等），是面向对象设计的核心图表。</li>
-                            <li data-i18n="tool.mermaid.instructions.chart5"><strong>实体关系图(ER
-                                    Diagram)：</strong>描述数据库表结构和表之间的关系，支持一对一、一对多、多对多等关系类型。</li>
-                            <li data-i18n="tool.mermaid.instructions.chart6"><strong>饼图(Pie
-                                    Chart)：</strong>展示数据的比例分布，适合展示分类数据的占比情况。</li>
-                            <li data-i18n="tool.mermaid.instructions.chart7"><strong>甘特图(Gantt
-                                    Chart)：</strong>展示项目进度和时间安排，支持任务分组、依赖关系和里程碑标记。</li>
                             <li data-i18n="tool.mermaid.instructions.chart8">
-                                <strong>用户旅程图(Journey)：</strong>描述用户在使用产品过程中的体验和情感变化，帮助优化用户体验。
-                            </li>
+                                <strong>用户旅程图（Journey）——展示体验流程：</strong>每个步骤标注参与角色和体验评分（1-5分）。以时间轴展示用户从初始接触到完成任务的完整路径，帮助识别痛点环节。适合
+                                UX 研究——注册流程体验、购物路径分析、功能可用性评估。</li>
                         </ul>
                         <h4 data-i18n="tool.mermaid.instructions.basicTitle">二、基本使用方法</h4>
                         <ul>
@@ -283,50 +316,79 @@ flowchart LR
                         <h3 data-i18n="tool.mermaid.notes.title">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="tool.mermaid.notes.syntaxTitle">一、语法规范</h4>
+                        <h4 data-i18n="tool.mermaid.notes.syntaxTitle">一、语法避坑指南</h4>
                         <ul>
-                            <li data-i18n="tool.mermaid.notes.syntax1">
-                                Mermaid语法对大小写敏感，关键字（如flowchart、sequenceDiagram）必须使用正确的大小写。</li>
-                            <li data-i18n="tool.mermaid.notes.syntax2">节点之间必须使用连接线连接，否则图表可能无法正确渲染。</li>
-                            <li data-i18n="tool.mermaid.notes.syntax3">特殊字符（如中文、空格、特殊符号）需要使用引号包裹或进行转义。</li>
-                            <li data-i18n="tool.mermaid.notes.syntax4">确保语法结构完整，闭合所有括号和引号。</li>
-                        </ul>
-                        <h4 data-i18n="tool.mermaid.notes.performanceTitle">二、性能提示</h4>
-                        <ul>
-                            <li data-i18n="tool.mermaid.notes.performance1">过于复杂的图表（超过50个节点或多层嵌套）可能会导致渲染延迟。</li>
-                            <li data-i18n="tool.mermaid.notes.performance2">建议将大型图表拆分为多个子图，提高可读性和渲染性能。</li>
-                            <li data-i18n="tool.mermaid.notes.performance3">使用浏览器的缩放功能可以查看图表细节，避免过度放大。</li>
-                        </ul>
-                        <h4 data-i18n="tool.mermaid.notes.compatibilityTitle">三、浏览器兼容性</h4>
-                        <ul>
-                            <li data-i18n="tool.mermaid.notes.compatibility1">建议使用现代浏览器（Chrome 80+、Firefox 75+、Edge
-                                80+、Safari 13+）以获得最佳渲染效果。</li>
-                            <li data-i18n="tool.mermaid.notes.compatibility2">旧版浏览器可能不支持某些图表类型或交互功能。</li>
-                            <li data-i18n="tool.mermaid.notes.compatibility3">移动端浏览器支持有限，建议在桌面端使用以获得更好的编辑体验。</li>
-                        </ul>
-                        <h4 data-i18n="tool.mermaid.notes.exportTitle">四、导出与保存</h4>
-                        <ul>
-                            <li data-i18n="tool.mermaid.notes.export1">PNG格式适合用于文档插入和分享，图片质量较高。</li>
-                            <li data-i18n="tool.mermaid.notes.export2">SVG格式是矢量图，适合用于需要无损缩放的场景，文件体积较小。</li>
-                            <li data-i18n="tool.mermaid.notes.export3">建议同时保存Mermaid源代码和导出图片，方便后续修改和维护。</li>
-                        </ul>
-                        <h4 data-i18n="tool.mermaid.notes.securityTitle">五、数据安全</h4>
-                        <ul>
-                            <li data-i18n="tool.mermaid.notes.security1">所有处理均在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="tool.mermaid.notes.security2">建议不要在公共设备上处理包含敏感信息的图表内容。</li>
-                            <li data-i18n="tool.mermaid.notes.security3">关闭浏览器后，编辑器中的代码会自动清除。</li>
-                        </ul>
-                        <h4 data-i18n="tool.mermaid.notes.faqTitle">六、常见问题</h4>
-                        <ul>
-                            <li data-i18n="tool.mermaid.notes.faq1">
-                                <strong>图表无法渲染：</strong>检查Mermaid语法是否正确，确保所有括号和引号都已闭合。
+                            <li data-i18n="tool.mermaid.notes.syntax1">大小写严格匹配是新手最常踩的坑。<code>flowchart</code> 不能写成
+                                <code>Flowchart</code>，<code>sequenceDiagram</code> 必须驼峰命名，<code>stateDiagram-v2</code>
+                                的 <code>-v2</code> 不能省略。关键字拼写错误会导致整个图表渲染失败，且错误提示有时不够明确——遇到渲染问题时，先逐行检查关键字拼写。</li>
+                            <li data-i18n="tool.mermaid.notes.syntax2">节点 ID
+                                是图表的"变量名"——只能用英文字母、数字和下划线，不能包含空格或特殊字符。如果节点文本需要包含中文、空格或特殊符号，必须用双引号包裹：<code>A["用户登录"]</code>、<code>B["Step 1: Initialize"]</code>。节点
+                                ID 在同一个图表中必须唯一，重复 ID 会被视为同一个节点。</li>
+                            <li data-i18n="tool.mermaid.notes.syntax3">括号闭合是最常见的语法错误。<code>A[文本</code>
+                                缺少右方括号、<code>B(文本</code> 缺少右圆括号，都会导致整个图表崩溃。错误提示会显示在预览区，但有时只说"语法错误"而不指出具体位置。建议每写 3-5
+                                个节点就检查一次预览效果，避免积累大量错误后难以定位。</li>
+                            <li data-i18n="tool.mermaid.notes.syntax4">中文字符在 Mermaid v10+
+                                中已完全支持，但某些特殊标点（如中文引号“”、全角括号）仍可能导致解析异常。建议节点文本使用标准中文标点，连接线上的标签文本用双引号包裹。如果中文节点渲染位置偏移，尝试在文本前后添加空格。
                             </li>
-                            <li data-i18n="tool.mermaid.notes.faq2"><strong>布局混乱：</strong>尝试调整流程图方向（LR/TD）或使用子图进行分组。
+                        </ul>
+                        <h4 data-i18n="tool.mermaid.notes.performanceTitle">二、性能与复杂度平衡</h4>
+                        <ul>
+                            <li data-i18n="tool.mermaid.notes.performance1">经验阈值：流程图 50 个节点、时序图 15 个参与者、甘特图 30
+                                个任务——超过这些数值后渲染时间可能超过 1 秒。超过 100 个节点的大型图表可能导致浏览器明显卡顿。应对策略：使用 <code>subgraph</code>
+                                将相关节点分组（子图嵌套建议不超过 3 层），或将大型图表拆分为多个简单图表分层展示。</li>
+                            <li data-i18n="tool.mermaid.notes.performance2">实时预览在每次代码修改后触发渲染。工具内置 300ms
+                                防抖——停止输入后才执行渲染，避免频繁按键导致的渲染风暴。渲染大型图表期间编辑器可能有短暂卡顿，这是正常的——Mermaid 的布局算法需要计算每个节点的位置和连线路径。
                             </li>
-                            <li data-i18n="tool.mermaid.notes.faq3"><strong>主题切换不生效：</strong>刷新页面后重新尝试，或检查浏览器缓存是否过期。
+                            <li data-i18n="tool.mermaid.notes.performance3">
+                                如果只需要查看图表结构而不需要精确渲染，可以将图表代码粘贴到纯文本编辑器中阅读——Mermaid 语法本身具有良好的可读性，即使不渲染也能理解图表表达的逻辑。</li>
+                        </ul>
+                        <h4 data-i18n="tool.mermaid.notes.compatibilityTitle">三、跨平台兼容</h4>
+                        <ul>
+                            <li data-i18n="tool.mermaid.notes.compatibility1">本工具使用 Mermaid v10+，支持所有现代浏览器（Chrome
+                                80+、Firefox 75+、Edge 80+、Safari 13+）。推荐 Chrome/Edge 获得最佳渲染性能。IE 不支持——Mermaid 依赖 SVG 和
+                                ES6 特性。移动端可以查看和分享图表，但编辑大型图表体验不佳。</li>
+                            <li data-i18n="tool.mermaid.notes.compatibility2">Mermaid 代码具有跨平台可移植性——在本工具中编写的代码可以直接粘贴到
+                                GitHub README、GitLab Wiki、Notion、Obsidian、Typora 等支持 Mermaid
+                                的平台中渲染。如果你的代码在其他平台无法渲染，可能是对方使用的 Mermaid 版本较旧——本工具始终使用最新稳定版。</li>
+                            <li data-i18n="tool.mermaid.notes.compatibility3">导出的 PNG 图片在所有平台和设备上都能正常查看。SVG
+                                文件可以用浏览器直接打开，也可以导入 Figma、Illustrator 等设计工具进一步编辑。建议同时保存源代码和导出图片——源代码便于修改，图片用于当前展示。</li>
+                        </ul>
+                        <h4 data-i18n="tool.mermaid.notes.exportTitle">四、导出最佳实践</h4>
+                        <ul>
+                            <li data-i18n="tool.mermaid.notes.export1">PNG 导出使用 Canvas 光栅化 SVG，默认 2 倍分辨率（约 192 DPI），在
+                                Retina 屏幕上清晰锐利。适合插入 Word 文档、PPT 演示、邮件、即时通讯。文件体积取决于图表复杂度——简单图表约 50-200KB，复杂图表可能超过 1MB。
                             </li>
-                            <li data-i18n="tool.mermaid.notes.faq4"><strong>下载失败：</strong>确保图表已正确渲染，检查浏览器是否允许弹出下载窗口。
+                            <li data-i18n="tool.mermaid.notes.export2">SVG 是矢量格式，无论放大多少倍都不会失真。文件体积通常比 PNG 更小（简单图表约
+                                5-30KB）。适合嵌入网页（可直接用 <code>&lt;img&gt;</code> 标签引用）、用于印刷品设计、导入设计工具编辑。SVG 文件本质是 XML
+                                文本，可以用文本编辑器打开查看和修改。</li>
+                            <li data-i18n="tool.mermaid.notes.export3">最佳实践：将 .mmd 源文件与项目文档一起存放在 Git
+                                仓库中。每次修改图表只需改几个文字，无需重新绘制。导出图片用于当前文档展示，源文件用于后续维护。这种"代码即图表"的方式比维护一堆 .png/.vsdx 文件高效得多。
                             </li>
+                        </ul>
+                        <h4 data-i18n="tool.mermaid.notes.securityTitle">五、隐私保护</h4>
+                        <ul>
+                            <li data-i18n="tool.mermaid.notes.security1">你绘制的系统架构图、数据库 ER 图、业务流程图——所有 Mermaid
+                                代码的编辑和渲染完全在浏览器本地完成。即使图表中包含内部系统名称、API 地址、数据库表结构等敏感信息，也不会通过网络传输到任何服务器。可以用 F12 开发者工具的
+                                Network 面板验证。</li>
+                            <li data-i18n="tool.mermaid.notes.security2">
+                                在公共设备上使用时请注意：虽然数据不会上传，但浏览器可能缓存页面内容。离开前请关闭所有相关标签页。本工具不使用 localStorage
+                                持久化编辑内容，关闭标签页后代码和图表立即从内存中清除。</li>
+                            <li data-i18n="tool.mermaid.notes.security3">
+                                如果需要绘制包含商业机密的架构图，建议在个人电脑的无痕模式下使用——无痕模式关闭后不保留任何浏览记录、缓存和 Cookie。</li>
+                        </ul>
+                        <h4 data-i18n="tool.mermaid.notes.faqTitle">六、排错与技巧</h4>
+                        <ul>
+                            <li data-i18n="tool.mermaid.notes.faq1"><strong>图表渲染为空白或报错？</strong>逐行检查：1)
+                                关键字拼写和大小写（flowchart 不是 Flowchart）；2) 所有括号和引号是否闭合；3) 节点 ID 是否包含非法字符；4)
+                                连接线语法是否正确（<code>--></code> 不能写成 <code>-></code>）。预览区的错误提示会指出大致位置。</li>
+                            <li data-i18n="tool.mermaid.notes.faq2"><strong>流程图节点重叠或布局混乱？</strong>尝试：1) 切换布局方向（TD↔LR）；2)
+                                用 <code>subgraph</code> 分组相关节点；3) 缩短节点文本（过长文本导致节点过宽）；4)
+                                减少节点数量，拆分为多个子图。不同方向的布局算法差异很大，有时换个方向问题就解决了。</li>
+                            <li data-i18n="tool.mermaid.notes.faq3">
+                                <strong>想自定义主题颜色？</strong>在代码开头添加初始化指令：<code>%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#EA580C', 'lineColor': '#333'}}}%%</code>。可以自定义主色、线条颜色、文字颜色等。修改后预览区立即更新。这比使用预设主题圆点更灵活。
+                            </li>
+                            <li data-i18n="tool.mermaid.notes.faq4"><strong>导出的 PNG 模糊？</strong>可能是浏览器缩放导致的。本工具默认 2
+                                倍分辨率渲染。如果需要更高分辨率（如用于大幅面印刷），建议下载 SVG 后在专业工具中导出所需分辨率，或在浏览器中放大图表后截图。</li>
                         </ul>
                     </div>
                 </article>

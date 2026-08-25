@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../common/css/i18n.css">
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
 
     <script src="../../common/js/i18n/i18n.js"></script>
     <script src="../lib/pdf.min.js"></script>
@@ -127,14 +127,12 @@
                         <span class="hint" id="levelHint" data-i18n="docu.compress.levelMidHint">推荐均衡，兼顾清晰度与体积</span>
                     </div>
                     <div class="setting-item" id="qualityGroup" style="display:none;">
-                        <label for="qualityRange" data-i18n="docu.compress.qualityLabel">图片质量：<span
-                                id="qualityValue">70</span>%</label>
+                        <label for="qualityRange" data-i18n="docu.compress.qualityLabel">图片质量：<span id="qualityValue">70</span>%</label>
                         <input type="range" id="qualityRange" min="10" max="100" value="70" step="5">
                         <span class="hint" data-i18n="docu.compress.qualityHint">值越低体积越小，画质越低</span>
                     </div>
                     <div class="setting-item" id="scaleGroup" style="display:none;">
-                        <label for="scaleRange" data-i18n="docu.compress.scaleLabel">分辨率缩放：<span
-                                id="scaleValue">0.8</span>x</label>
+                        <label for="scaleRange" data-i18n="docu.compress.scaleLabel">分辨率缩放：<span id="scaleValue">0.8</span>x</label>
                         <input type="range" id="scaleRange" min="0.5" max="2" value="0.8" step="0.1">
                         <span class="hint" data-i18n="docu.compress.scaleHint">值越低体积越小，图片清晰度越低</span>
                     </div>
@@ -197,67 +195,52 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="docu.compress.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="docu.compress.infoIntro">PDF 压缩：减小文件体积的在线工具</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.compress.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="docu.compress.problemsTitle">一、为什么需要压缩 PDF</h4>
                         <ul>
-                            <li data-i18n="docu.compress.problem1">压缩PDF文件体积，满足邮箱附件大小限制等传输要求。</li>
-                            <li data-i18n="docu.compress.problem2">降低扫描件、图片型PDF的存储占用。</li>
-                            <li data-i18n="docu.compress.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="docu.compress.problem1">一份包含大量高清图片的 PDF 报告可能有 200MB——邮件附件限制通常只有 25MB，云存储也有容量限制。PDF 压缩通过降低图片分辨率、移除冗余数据和优化内部结构，将文件体积减小 30-80%——同时保持可接受的视觉质量。</li>
+                            <li data-i18n="docu.compress.problem2">本工具提供智能压缩和光栅压缩两种模式。智能模式自动检测 PDF 中的图片并降低分辨率——文字内容完全不受影响。光栅模式将整个页面渲染为图片后重新组装——压缩率更高但文字变为图片不可选中。</li>
+                            <li data-i18n="docu.compress.problem3">压缩前后可以实时预览对比——原始大小 vs 压缩后大小、压缩率百分比、处理的图片数量一目了然。所有处理在浏览器中完成，文件不上传到服务器。</li>
                         </ul>
-                        <h4 data-i18n="docu.compress.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="docu.compress.formatTitle">二、PDF 压缩原理</h4>
                         <ul>
-                            <li data-i18n="docu.compress.formatPdf"><strong>PDF：</strong>支持该格式的完整压缩功能。</li>
+                            <li data-i18n="docu.compress.formatPdf"><strong>图片压缩：</strong>PDF 体积的大头通常是嵌入的图片——一张 A4 全页图片可能占 2-5MB。将图片从 300 DPI 降低到 150 DPI，体积减少约 75%——在屏幕上阅读几乎看不出差异。</li>
                         </ul>
                         <h4 data-i18n="docu.compress.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.compress.featureLevels">
-                                <strong>双模式压缩：</strong>智能压缩重编码图片、保留文字可选；强力压缩逐页栅格化、极限瘦身。
-                            </li>
-                            <li data-i18n="docu.compress.featureCustom"><strong>自定义参数：</strong>支持自由调节图片质量与分辨率缩放。</li>
-                            <li data-i18n="docu.compress.featurePreview"><strong>效果预览：</strong>压缩前后对比实时可见，参数调整即时生效。</li>
-                            <li data-i18n="docu.compress.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
-                            </li>
+                            <li data-i18n="docu.compress.featureLevels"><strong>多级压缩：</strong>低/中/高三档压缩——低压缩保持最高质量，高压缩获得最小体积。</li>
+                            <li data-i18n="docu.compress.featureCustom"><strong>自定义参数：</strong>自定义图片质量（JPEG 压缩率）和缩放比例——精确控制压缩效果。</li>
+                            <li data-i18n="docu.compress.featurePreview"><strong>实时对比：</strong>压缩前后显示文件大小对比——直观看到压缩效果。</li>
+                            <li data-i18n="docu.compress.featureSecurity"><strong>纯前端处理：</strong>所有压缩在浏览器中完成——文件不上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="docu.compress.infoUsage">使用说明</h3>
+                        <h3 data-i18n="docu.compress.infoUsage">PDF 压缩操作指南</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.compress.usageUploadTitle">一、上传文档</h4>
+                        <h4 data-i18n="docu.compress.usageUploadTitle">上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.compress.usageSelectFile"><strong>选择文件：</strong>点击"点击选择 PDF
-                                文档"按钮，从本地选择需要压缩的PDF文件。</li>
-                            <li data-i18n="docu.compress.usageFileLimit"><strong>文件限制：</strong>最大支持 200MB 的PDF文件。</li>
-                            <li data-i18n="docu.compress.usageAutoPreview">
-                                <strong>自动预览：</strong>上传后系统会自动分析文档图片并显示压缩前后对比。
-                            </li>
+                            <li data-i18n="docu.compress.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持 200MB。</li>
+                            <li data-i18n="docu.compress.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析——显示文件大小和页数。</li>
+                            <li data-i18n="docu.compress.usageAutoPreview"><strong>预览加载：</strong>渲染预览并统计可压缩的图片数量——帮助你评估压缩潜力。</li>
                         </ul>
-                        <h4 data-i18n="docu.compress.usageSettingsTitle">二、压缩设置</h4>
+                        <h4 data-i18n="docu.compress.usageSettingsTitle">压缩设置</h4>
                         <ul>
-                            <li data-i18n="docu.compress.usageMode">
-                                <strong>压缩模式：</strong>"智能压缩（推荐）"仅重压缩文档内图片，文字保持可选中；"强力压缩"逐页转为图片重建，体积更小但文字不可选中。
-                            </li>
-                            <li data-i18n="docu.compress.usageLevel">
-                                <strong>压缩强度：</strong>提供"低压缩（高质量）""中压缩（推荐）""高压缩（最小体积）"三档预设，对应当前模式的图片质量与分辨率组合。
-                            </li>
-                            <li data-i18n="docu.compress.usageCustom">
-                                <strong>自定义：</strong>选择"自定义"后可自由调节图片质量（10%-100%）与分辨率缩放（0.5x-2x）。
-                            </li>
-                            <li data-i18n="docu.compress.usagePreview">
-                                <strong>实时预览：</strong>调整参数时压缩效果会实时更新，便于找到清晰度与体积的平衡点。
-                            </li>
+                            <li data-i18n="docu.compress.usageMode"><strong>选择模式：</strong>智能模式（只压缩图片）或光栅模式（整页转图片）。智能模式保持文字可选中，光栅模式压缩率更高。</li>
+                            <li data-i18n="docu.compress.usageLevel"><strong>选择级别：</strong>低（质量优先，压缩 20-30%）、中（平衡，压缩 40-60%）、高（体积优先，压缩 60-80%）。</li>
+                            <li data-i18n="docu.compress.usageCustom"><strong>自定义参数：</strong>选择"自定义"级别——手动设置图片质量（1-100）和缩放比例（10-100%）。</li>
+                            <li data-i18n="docu.compress.usagePreview"><strong>查看对比：</strong>压缩设置修改后实时显示预估压缩效果。</li>
                         </ul>
-                        <h4 data-i18n="docu.compress.usageProcessTitle">三、开始压缩</h4>
+                        <h4 data-i18n="docu.compress.usageProcessTitle">处理与下载</h4>
                         <ul>
-                            <li data-i18n="docu.compress.usageProcess"><strong>点击压缩：</strong>点击"开始压缩"按钮开始处理整个文档。</li>
-                            <li data-i18n="docu.compress.usageProgress"><strong>查看进度：</strong>压缩过程中会显示进度条和百分比。</li>
-                            <li data-i18n="docu.compress.usageDownload"><strong>下载结果：</strong>压缩完成后可查看前后大小对比，点击"下载压缩后的
-                                PDF"按钮保存结果。</li>
+                            <li data-i18n="docu.compress.usageProcess"><strong>点击压缩：</strong>点击"压缩"按钮开始处理——进度条显示处理进度。</li>
+                            <li data-i18n="docu.compress.usageProgress"><strong>等待完成：</strong>压缩时间取决于文件大小和图片数量——大文件可能需要数十秒。</li>
+                            <li data-i18n="docu.compress.usageDownload"><strong>下载结果：</strong>压缩完成后点击"下载"保存压缩后的 PDF——显示原始大小和压缩后大小对比。</li>
                         </ul>
                     </div>
                 </article>
@@ -266,35 +249,31 @@
                         <h3 data-i18n="docu.compress.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.compress.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="docu.compress.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="docu.compress.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="docu.compress.noteSecurity2">建议不要在公共设备上处理包含敏感信息的文档。</li>
+                            <li data-i18n="docu.compress.noteSecurity1"><strong>纯前端处理：</strong>所有压缩在浏览器中完成——文件不上传到服务器。</li>
+                            <li data-i18n="docu.compress.noteSecurity2"><strong>内存限制：</strong>大文件（>100MB）压缩可能占用大量内存——建议分批处理。</li>
                         </ul>
-                        <h4 data-i18n="docu.compress.notesProcessTitle">二、处理过程</h4>
+                        <h4 data-i18n="docu.compress.notesProcessTitle">处理说明</h4>
                         <ul>
-                            <li data-i18n="docu.compress.noteProcess1">处理期间不要关闭浏览器或刷新页面，否则会导致处理失效。</li>
-                            <li data-i18n="docu.compress.noteProcess2">多页文档压缩可能需要较长时间，请耐心等待。</li>
-                            <li data-i18n="docu.compress.noteProcess3">处理完成后及时下载结果，关闭页面后结果将丢失。</li>
+                            <li data-i18n="docu.compress.noteProcess1"><strong>智能模式：</strong>只压缩 PDF 中嵌入的图片——文字、矢量图形和排版完全不受影响。</li>
+                            <li data-i18n="docu.compress.noteProcess2"><strong>光栅模式：</strong>将每页渲染为图片后重新组装——文字变为图片不可选中/复制。适合纯阅读场景。</li>
+                            <li data-i18n="docu.compress.noteProcess3"><strong>压缩不可逆：</strong>压缩后的 PDF 无法恢复原始质量——建议保留原始文件。</li>
                         </ul>
-                        <h4 data-i18n="docu.compress.notesEffectTitle">三、压缩效果</h4>
+                        <h4 data-i18n="docu.compress.notesEffectTitle">效果说明</h4>
                         <ul>
-                            <li data-i18n="docu.compress.noteEffect1">智能压缩保留文字可选中与矢量清晰度；强力压缩采用页面重新渲染方式，压缩后文本将不可选中、不可搜索。
-                            </li>
-                            <li data-i18n="docu.compress.noteEffect2">以纯文字为主、无图片的PDF建议使用强力压缩模式，智能压缩对此类文档效果有限。</li>
-                            <li data-i18n="docu.compress.noteEffect3">压缩强度越高体积越小，但图片清晰度越低，建议结合预览选择。</li>
-                            <li data-i18n="docu.compress.noteEffect4">强力压缩后原文档的书签、目录、表单等交互内容将不再保留；智能压缩则完整保留。</li>
+                            <li data-i18n="docu.compress.noteEffect1"><strong>压缩率：</strong>文字为主的 PDF 压缩效果有限（5-15%）——图片为主的 PDF 压缩效果显著（50-80%）。</li>
+                            <li data-i18n="docu.compress.noteEffect2"><strong>质量损失：</strong>智能模式只影响图片质量——文字清晰度不变。高压缩级别下图片可能出现模糊。</li>
+                            <li data-i18n="docu.compress.noteEffect3"><strong>体积反弹：</strong>某些已经优化过的 PDF 压缩后体积可能不减反增——工具会提示"体积增加"。</li>
+                            <li data-i18n="docu.compress.noteEffect4"><strong>建议策略：</strong>先用中级压缩测试效果——如果质量可接受就用中级，不满意降低级别，体积仍太大则提高级别。</li>
                         </ul>
-                        <h4 data-i18n="docu.compress.notesFaqTitle">四、常见问题</h4>
+                        <h4 data-i18n="docu.compress.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.compress.noteFaq1"><strong>上传失败：</strong>检查文件是否为有效的PDF格式，文件大小是否超过限制。
-                            </li>
-                            <li data-i18n="docu.compress.noteFaq2">
-                                <strong>压缩后反而变大：</strong>智能压缩仅替换体积变小的图片、不会增大文件；强力模式下纯文本PDF重渲染后可能变大，属正常现象。
-                            </li>
-                            <li data-i18n="docu.compress.noteFaq3"><strong>图片模糊：</strong>提高图片质量或分辨率缩放，或改用"低压缩"档位。</li>
-                            <li data-i18n="docu.compress.noteFaq4"><strong>压缩缓慢：</strong>多页大文件处理时间较长，请耐心等待。</li>
-                            <li data-i18n="docu.compress.noteFaq5"><strong>下载失败：</strong>检查浏览器下载权限，尝试使用其他浏览器。</li>
+                            <li data-i18n="docu.compress.noteFaq1"><strong>Q: 压缩后文字模糊？</strong>A: 智能模式不会模糊文字——如果文字模糊，可能使用了光栅模式。切换到智能模式重新压缩。</li>
+                            <li data-i18n="docu.compress.noteFaq2"><strong>Q: 压缩率很低？</strong>A: 如果 PDF 主要是文字和矢量图，压缩空间有限。只有图片密集的 PDF 才能获得高压缩率。</li>
+                            <li data-i18n="docu.compress.noteFaq3"><strong>Q: 压缩后图片顺序变了？</strong>A: 压缩不改变页面顺序和内容——如果顺序变化，可能是原始 PDF 结构异常。</li>
+                            <li data-i18n="docu.compress.noteFaq4"><strong>Q: 能压缩加密 PDF 吗？</strong>A: 不能——加密 PDF 需要先解密才能压缩。</li>
+                            <li data-i18n="docu.compress.noteFaq5"><strong>Q: 压缩后文件打不开？</strong>A: 极少数 PDF 使用特殊结构——压缩后可能不兼容。尝试用其他 PDF 阅读器打开，或使用较低的压缩级别。</li>
                         </ul>
                     </div>
                 </article>

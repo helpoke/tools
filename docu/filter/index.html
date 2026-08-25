@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
 
     <script src="../lib/pdf.min.js"></script>
     <script src="../lib/jspdf.umd.min.js"></script>
@@ -159,59 +159,59 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="docu.filter.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="docu.filter.infoIntro">PDF 页面过滤：按关键词精准提取或删除 PDF 页面</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.filter.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="docu.filter.problemsTitle">一、PDF 页面过滤的应用场景</h4>
                         <ul>
-                            <li data-i18n="docu.filter.problem1">从PDF文档中提取特定内容或筛选页面。</li>
-                            <li data-i18n="docu.filter.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="docu.filter.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="docu.filter.problem1">一份 200 页的合同，你只需要其中包含"违约条款"的 5 页——手动翻页查找效率极低。或者一份报告需要删除所有包含"机密"标记的页面再分享给外部合作方——逐页检查同样耗时。PDF 页面过滤工具通过全文搜索自动定位包含指定关键词的页面，然后保留或删除这些页面。</li>
+                            <li data-i18n="docu.filter.problem2">本工具支持两种过滤模式：保留模式（只保留包含关键词的页面）和删除模式（删除包含关键词的页面）。搜索支持全文匹配——不只是标题，正文中的关键词也会被匹配。还支持手动选择——在预览中逐页勾选需要保留或删除的页面。</li>
+                            <li data-i18n="docu.filter.problem3">与合并/拆分工具不同，过滤工具的核心价值在于"按内容筛选"——你不需要知道目标内容在第几页，只需要告诉工具你要什么关键词。这对于处理大量标准化文档（如合同、报告、论文）特别高效。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="docu.filter.formatTitle">二、PDF 过滤的技术原理</h4>
                         <ul>
-                            <li data-i18n="docu.filter.formatPdf"><strong>PDF：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="docu.filter.formatPdf"><strong>文本提取：</strong>使用 PDF.js 逐页解析 PDF 的文本层——提取每页的所有文字内容。然后用关键词匹配算法检查每页是否包含目标关键词——匹配的页面被标记为"命中"。</li>
                         </ul>
                         <h4 data-i18n="docu.filter.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.filter.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="docu.filter.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="docu.filter.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="docu.filter.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="docu.filter.featureOnline"><strong>关键词搜索：</strong>输入关键词自动搜索全文——显示匹配页数和每页的匹配数量。</li>
+                            <li data-i18n="docu.filter.featurePreview"><strong>页面预览：</strong>逐页渲染 PDF 预览——命中的页面标记为保留/删除状态，支持缩放和翻页。</li>
+                            <li data-i18n="docu.filter.featureExport"><strong>反向选择：</strong>一键反转选择状态——将"保留"变为"删除"，"删除"变为"保留"。</li>
+                            <li data-i18n="docu.filter.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——PDF 文件不上传到任何服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="docu.filter.infoUsage">使用说明</h3>
+                        <h3 data-i18n="docu.filter.infoUsage">PDF 过滤操作指南</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.filter.usageUploadTitle">一、上传文档</h4>
+                        <h4 data-i18n="docu.filter.usageUploadTitle">上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usageSelectFile"><strong>选择文件：</strong>点击"点击选择 PDF 文档"按钮，从本地选择需要处理的PDF文件。</li>
-                            <li data-i18n="docu.filter.usageFileLimit"><strong>文件限制：</strong>最大支持 200MB 的PDF文件。</li>
-                            <li data-i18n="docu.filter.usageAutoParse"><strong>自动解析：</strong>上传后系统会自动解析PDF并显示所有页面预览。</li>
+                            <li data-i18n="docu.filter.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持 200MB。</li>
+                            <li data-i18n="docu.filter.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析文本层——显示总页数和文件大小。</li>
+                            <li data-i18n="docu.filter.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF 预览——可以在预览中浏览文档内容。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.usageFilterTitle">二、筛选设置</h4>
+                        <h4 data-i18n="docu.filter.usageFilterTitle">设置过滤</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usageSearch"><strong>内容搜索：</strong>输入关键词可以搜索PDF中的文本内容，快速定位相关页面。</li>
-                            <li data-i18n="docu.filter.usagePageMode"><strong>页面范围：</strong>可选择"全部保留"或"自定义页面"。</li>
-                            <li data-i18n="docu.filter.usageCustomPages"><strong>自定义页码：</strong>选择自定义页面时，输入需要保留的页码，支持逗号分隔和范围表示（如 1,3,5-8）。</li>
+                            <li data-i18n="docu.filter.usageSearch"><strong>输入关键词：</strong>在搜索框中输入过滤关键词——工具自动搜索并标记匹配页面。</li>
+                            <li data-i18n="docu.filter.usagePageMode"><strong>页面范围：</strong>选择"全部页面"或"自定义页面"——自定义模式可以指定搜索范围。</li>
+                            <li data-i18n="docu.filter.usageCustomPages"><strong>指定页码：</strong>输入页码范围（如 1-10,15,20-30）——只在指定范围内搜索。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.usageSelectTitle">三、页面选择</h4>
+                        <h4 data-i18n="docu.filter.usageSelectTitle">选择页面</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usagePreview"><strong>预览页面：</strong>查看所有页面的缩略图预览。</li>
-                            <li data-i18n="docu.filter.usageSelectPage"><strong>选择页面：</strong>点击页面缩略图可以单独选择或取消选择该页面。</li>
-                            <li data-i18n="docu.filter.usageSelectAll"><strong>全选/取消全选：</strong>使用按钮快速选择或取消所有页面。</li>
-                            <li data-i18n="docu.filter.usageInvert"><strong>反选：</strong>点击"反选"按钮可以反转当前选择状态。</li>
-                            <li data-i18n="docu.filter.usageZoom"><strong>放大查看：</strong>点击页面缩略图可以放大查看详细内容。</li>
+                            <li data-i18n="docu.filter.usagePreview"><strong>查看预览：</strong>在预览区查看每页内容——命中的页面有特殊标记。</li>
+                            <li data-i18n="docu.filter.usageSelectPage"><strong>手动选择：</strong>点击页面缩略图切换保留/删除状态——可以手动调整搜索结果。</li>
+                            <li data-i18n="docu.filter.usageSelectAll"><strong>全选/取消：</strong>点击"全选"选择所有页面，"取消全选"取消所有选择。</li>
+                            <li data-i18n="docu.filter.usageInvert"><strong>反向选择：</strong>点击"反选"按钮——保留变删除，删除变保留。</li>
+                            <li data-i18n="docu.filter.usageZoom"><strong>缩放预览：</strong>使用缩放功能查看页面细节——确认内容是否正确匹配。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.usageProcessTitle">四、开始筛选</h4>
+                        <h4 data-i18n="docu.filter.usageProcessTitle">处理与下载</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usageProcess"><strong>点击筛选：</strong>点击"开始筛选"按钮开始筛选选中的页面。</li>
-                            <li data-i18n="docu.filter.usageProgress"><strong>查看进度：</strong>筛选过程中会显示进度条和百分比。</li>
-                            <li data-i18n="docu.filter.usageDownload"><strong>下载结果：</strong>筛选完成后点击"下载筛选后的 PDF"按钮保存结果。</li>
+                            <li data-i18n="docu.filter.usageProcess"><strong>点击处理：</strong>点击"处理"按钮开始过滤——工具根据选择结果生成新的 PDF。</li>
+                            <li data-i18n="docu.filter.usageProgress"><strong>等待完成：</strong>进度条显示处理进度——大文件可能需要数十秒。</li>
+                            <li data-i18n="docu.filter.usageDownload"><strong>下载结果：</strong>处理完成后点击"下载"保存过滤后的 PDF。</li>
                         </ul>
                     </div>
                 </article>
@@ -220,35 +220,35 @@
                         <h3 data-i18n="docu.filter.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.filter.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="docu.filter.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="docu.filter.noteSecurity2">建议不要在公共设备上处理包含敏感信息的文档。</li>
+                            <li data-i18n="docu.filter.noteSecurity1"><strong>纯前端处理：</strong>所有 PDF 处理在浏览器中完成——文件不上传到服务器。</li>
+                            <li data-i18n="docu.filter.noteSecurity2"><strong>内存管理：</strong>大文件处理完毕后浏览器会自动释放内存——如果内存不足，建议分批处理。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.notesProcessTitle">二、处理过程</h4>
+                        <h4 data-i18n="docu.filter.notesProcessTitle">处理说明</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteProcess1">处理期间不要关闭浏览器或刷新页面，否则会导致处理失效。</li>
-                            <li data-i18n="docu.filter.noteProcess2">大文件处理可能需要较长时间，请耐心等待。</li>
-                            <li data-i18n="docu.filter.noteProcess3">处理完成后及时下载结果，关闭页面后结果将丢失。</li>
+                            <li data-i18n="docu.filter.noteProcess1"><strong>扫描版 PDF：</strong>扫描版 PDF（图片型）没有文本层——搜索功能无法使用，需要手动逐页选择。</li>
+                            <li data-i18n="docu.filter.noteProcess2"><strong>至少保留一页：</strong>过滤结果不能为空——至少保留一页内容。如果所有页面都被删除，工具会提示错误。</li>
+                            <li data-i18n="docu.filter.noteProcess3"><strong>排版保留：</strong>过滤只删除整页——保留页面的排版、字体、图片完全不变。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.notesFormatTitle">三、文件格式</h4>
+                        <h4 data-i18n="docu.filter.notesFormatTitle">格式说明</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteFormat1">仅支持 PDF 格式文件。</li>
-                            <li data-i18n="docu.filter.noteFormat2">某些加密或损坏的PDF文件可能无法处理。</li>
-                            <li data-i18n="docu.filter.noteFormat3">扫描件PDF可能无法识别文本内容。</li>
+                            <li data-i18n="docu.filter.noteFormat1"><strong>输入格式：</strong>仅支持 PDF 格式——不支持 Word、Excel 等其他文档。</li>
+                            <li data-i18n="docu.filter.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——保留原始页面质量和排版。</li>
+                            <li data-i18n="docu.filter.noteFormat3"><strong>页码连续：</strong>输出 PDF 的页码自动重新编号——不保留原始页码。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.notesRulesTitle">四、筛选规则</h4>
+                        <h4 data-i18n="docu.filter.notesRulesTitle">搜索规则</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteRule1">未被选中的页面将被剔除，选中的页面将被保留。</li>
-                            <li data-i18n="docu.filter.noteRule2">页面顺序保持与原文档一致。</li>
-                            <li data-i18n="docu.filter.noteRule3">如果没有选择任何页面，默认保留所有页面。</li>
+                            <li data-i18n="docu.filter.noteRule1"><strong>精确匹配：</strong>搜索使用精确字符串匹配——"合同"不会匹配"合同书"中的"合同"（实际会匹配，因为包含关系）。</li>
+                            <li data-i18n="docu.filter.noteRule2"><strong>区分大小写：</strong>英文搜索区分大小写——"PDF" 和 "pdf" 是不同的搜索结果。</li>
+                            <li data-i18n="docu.filter.noteRule3"><strong>多关键词：</strong>每次搜索一个关键词——需要多个关键词过滤时，分别搜索后手动合并选择。</li>
                         </ul>
-                        <h4 data-i18n="docu.filter.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="docu.filter.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteFaq1"><strong>上传失败：</strong>检查文件是否为有效的PDF格式，文件大小是否超过限制。</li>
-                            <li data-i18n="docu.filter.noteFaq2"><strong>处理缓慢：</strong>大文件或多页面PDF处理时间较长，请耐心等待。</li>
-                            <li data-i18n="docu.filter.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限，尝试使用其他浏览器。</li>
-                            <li data-i18n="docu.filter.noteFaq4"><strong>搜索无结果：</strong>扫描件PDF或加密PDF可能无法搜索文本内容。</li>
+                            <li data-i18n="docu.filter.noteFaq1"><strong>Q: 搜索不到结果？</strong>A: 可能是扫描版 PDF（没有文本层）或关键词拼写不匹配——尝试不同的关键词。</li>
+                            <li data-i18n="docu.filter.noteFaq2"><strong>Q: 过滤后页面顺序？</strong>A: 保留的页面按原始顺序排列——不会重新排序。</li>
+                            <li data-i18n="docu.filter.noteFaq3"><strong>Q: 能按图片内容过滤吗？</strong>A: 不能——只能按文本内容过滤。图片中的文字无法被搜索到。</li>
+                            <li data-i18n="docu.filter.noteFaq4"><strong>Q: 过滤后文件会变小吗？</strong>A: 是的——删除的页面不再占用空间。但如果删除的页面包含高分辨率图片，文件可能不会显著变小（PDF 内部资源可能未完全清理）。</li>
                         </ul>
                     </div>
                 </article>
@@ -274,7 +274,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="modal-nav-btn" id="modalPrev" data-i18n-title="docu.filter.modalPrevTitle">◀</button>
-                <span class="modal-title" id="modalTitle" data-i18n="docu.filter.modalTitle">第 1 页</span>
+                <span class="modal-title" id="modalTitle" data-i18n="docu.filter.modalTitle">第 {{page}} 页 / 共 {{total}} 页</span>
                 <button class="modal-nav-btn" id="modalNext" data-i18n-title="docu.filter.modalNextTitle">▶</button>
                 <button class="modal-close" id="modalClose">×</button>
             </div>

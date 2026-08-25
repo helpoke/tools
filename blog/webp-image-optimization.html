@@ -506,6 +506,97 @@ images.forEach(img =&gt; imageObserver.observe(img));</code></pre>
                 <li><strong>预加载</strong>：对关键图片使用 &lt;link rel="preload"&gt;</li>
             </ul>
 
+            <h2>七、痛点深挖：WebP 落地时的"兼容性翻车"现场</h2>
+            <p>WebP 的压缩优势毋庸置疑，但落地时踩坑的开发者不在少数。以下几类问题几乎每个团队都会遇到：</p>
+            <ul>
+                <li><strong>旧版 Safari 不支持：</strong>iOS 14 以下、macOS Big Sur 以下的 Safari 不识别
+                    WebP，<code>&lt;img src="x.webp"&gt;</code> 直接裂图。这是 WebP 推广中最经典的坑。标准解法是 <code>&lt;picture&gt;</code>
+                    + <code>&lt;source type="image/webp"&gt;</code> 回退 JPEG/PNG；判断支持用
+                    <code>canvas.toDataURL('image/webp')</code> 是否返回 <code>data:image/webp</code> 前缀。
+                </li>
+                <li><strong>透明通道选了有损压缩：</strong>带 alpha 的图片用默认质量参数压成有损
+                    WebP，透明边缘会出现白色或灰色"晕边"。透明图必须用无损模式（<code>-lossless</code>），或 cwebp 的 <code>-alpha_q</code> 单独调透明度质量。
+                </li>
+                <li><strong>质量参数 "q" 不是百分比：</strong><code>q=75</code> 不等于 "75% 质量"。q 影响压缩强度而非线性质量，同一 q
+                    值在不同图片上的观感差异巨大。压缩后务必人眼抽查，而不是只看体积数字。</li>
+                <li><strong>动画 WebP 的坑：</strong>动图转 WebP 后帧数/循环设置错误，出现"只播一遍"或"闪帧"。cwebp 转换 GIF 时默认丢帧率较高，需要调
+                    <code>-f</code>（帧混合）参数；另外动画 WebP 的文件头不含帧数，部分看图软件会误判为静态图。
+                </li>
+                <li><strong>CDN/服务器 MIME 类型错误：</strong>nginx 默认不识别 <code>.webp</code>，返回
+                    <code>application/octet-stream</code> 导致浏览器直接下载而不是显示。服务器要显式配置 <code>image/webp</code> MIME 类型，并让
+                    <code>Content-Type</code> 与 <code>Accept</code> 协商一致。
+                </li>
+                <li><strong>二压导致的"双压缩劣化"：</strong>JPEG→WebP 直接转，WebP 内部会先解压再编码，产生二次有损。正确流程是从原始 PSD/PNG 源文件直接导出
+                    WebP，质量最好、体积最小。</li>
+            </ul>
+            <div class="tip-box">
+                <p><strong>自查建议：</strong>上线前用 Chrome 的 Lighthouse 检查图片是否真的生效了 WebP（Network 面板看响应头），并强制清缓存验证
+                    <code>&lt;picture&gt;</code> 回退路径——回退路径只有在 WebP 不支持时才生效，本地开发经常测不到。
+                </p>
+            </div>
+
+            <h2>八、深入原理：WebP 的压缩算法内部机制与 AVIF 对比</h2>
+            <p>前面提到 WebP 比 PNG 节省 30% 体积，但它的压缩算法内部到底怎么工作的？新兴的 AVIF 格式又凭什么挑战 WebP？</p>
+
+            <h3>8.1 WebP 压缩管线拆解</h3>
+            <pre><code>WebP 有损压缩管线（基于 VP8 视频编码）：
+
+  1. 颜色空间转换
+     RGB → YUV（亮度 + 色度分离）
+     人眼对亮度敏感，对色度不敏感
+     → 色度可以下采样（4:2:0）而不影响感知质量
+
+  2. 块划分
+     图像分为 16×16 宏块（macroblock）
+     每个宏块可进一步分为 4×4 子块
+
+  3. 预测（关键步骤）
+     有损模式使用空间预测：
+     • 用相邻已解码块预测当前块
+     • 4 种预测模式（DC、H、V、TM）
+     • 选择误差最小的模式
+     • 只存储“预测残差”而非原始像素
+
+  4. DCT 变换 + 量化
+     残差块做 DCT 变换 → 量化 → 熵编码
+     与 JPEG 类似，但多了预测步骤
+
+  5. 无损模式完全不同：
+     • 不经过 DCT，直接用预测 + 熵编码
+     • 使用 VP8L 的 Spatial Transform
+     • 压缩率比 PNG 高 20-25%
+
+WebP vs JPEG 的核心差异：
+  • JPEG：每个块独立压缩，不考虑相邻块
+  • WebP：用空间预测利用块间相关性 → 同等画质更小体积</code></pre>
+
+            <h3>8.2 WebP vs AVIF：下一代图片格式之战</h3>
+            <pre><code>WebP vs AVIF 对比：
+┌───────────────┬──────────┬──────────┬──────────────┐
+│   维度         │ WebP     │ AVIF     │ 胜出者       │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ 压缩效率(有损) │ 基准     │ +30%     │ AVIF         │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ 压缩效率(无损) │ 基准     │ +15%     │ AVIF         │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ 编码速度       │ ✓ 快     │ ✗ 慢5-10×│ WebP        │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ 浏览器支持     │ ✓ 97%+   │ △ 90%+   │ WebP         │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ HDR 支持       │ ✗ 无     │ ✓ 支持   │ AVIF         │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ 色深           │ 8位      │ 10/12位  │ AVIF         │
+├───────────────┼──────────┼──────────┼──────────────┤
+│ 专利           │ ✓ 免费   │ ✓ 免费   │ 平手         │
+└───────────────┴──────────┴──────────┴──────────────┘
+
+选型建议：
+  • 当前（2026）：WebP 仍是最佳选择（兼容性+编码速度）
+  • 需要 HDR/广色域 → AVIF
+  • 追求极致压缩且不在意编码时间 → AVIF
+  • 渐进式图片 → JPEG（WebP/AVIF 不支持真正的渐进式）
+  • 未来趋势：AVIF 将逐步取代 WebP</code></pre>
+
             <h2>总结</h2>
             <p>WebP
                 格式凭借先进的压缩算法，在保持高质量的同时显著减小文件体积，是现代网页图片优化的理想选择。通过合理配置压缩参数、实现浏览器兼容性方案、集成自动化转换流程，以及采用懒加载和响应式图片技术，可以大幅提升网页性能，改善用户体验，降低带宽成本。随着浏览器支持的普及，WebP
@@ -524,6 +615,12 @@ images.forEach(img =&gt; imageObserver.observe(img));</code></pre>
                 </a>
             </div>
         </section>
+        <div class="article-bottom-actions">
+            <a href="/blog/index.html" class="back-to-top-btn"><i class="fas fa-arrow-left"></i> 返回列表</a>
+            <a href="#" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                <i class="fas fa-arrow-up"></i> 回到顶部
+            </a>
+        </div>
         <div id="footer-container">
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>

@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
 
     <script type="application/ld+json">
     {
@@ -87,9 +87,7 @@
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description" data-i18n="video.merge.note">
-                最多上传5个视频，每个视频最大200MB。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
-            </p>
+            <p class="description" data-i18n="video.merge.note">最多上传5个视频，每个视频最大200MB。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。</p>
 
             <div class="upload-section">
                 <label for="videoUpload" class="upload-area" id="uploadArea">
@@ -100,8 +98,7 @@
                 </label>
                 <div class="video-list-container">
                     <div class="video-list-header">
-                        <span class="video-count" data-i18n="video.merge.videoCount">已上传 <strong id="videoCount">0</strong>
-                            个视频（拖动/点击调整顺序）</span>
+                        <span class="video-count" data-i18n="video.merge.videoCount">已上传 <strong id="videoCount">0</strong> 个视频（拖动/点击调整顺序）</span>
                         <button id="clearAll" class="btn-text" style="display: none;"
                             data-i18n="video.merge.clearAll">清空全部</button>
                     </div>
@@ -126,8 +123,8 @@
                     <div class="input-group">
                         <label for="scale-mode" data-i18n="video.merge.scaleMode">尺寸处理：</label>
                         <select id="scale-mode">
-                            <option value="none" data-i18n="video.merge.scaleNone">保持原始尺寸</option>
-                            <option value="uniform" data-i18n="video.merge.scaleUniform">统一尺寸（按第一个视频）</option>
+                            <option value="none" data-i18n="video.merge.scaleNone">原始尺寸</option>
+                            <option value="uniform" data-i18n="video.merge.scaleUniform">统一尺寸</option>
                             <option value="aspect" selected data-i18n="video.merge.scaleAspect">保持宽高比（添加黑边）</option>
                         </select>
                     </div>
@@ -217,90 +214,89 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.merge.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="video.merge.infoIntro">视频合并：将多个视频片段无缝拼接为完整作品</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.merge.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="video.merge.problemsTitle">一、视频合并比想象中复杂得多</h4>
                         <ul>
-                            <li data-i18n="video.merge.problem1">将多个视频片段合并为一个视频。</li>
-                            <li data-i18n="video.merge.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="video.merge.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="video.merge.problem1">把三段视频拼在一起看起来很简单——但实际操作中会遇到各种坑：分辨率不同导致画面大小不一、编码格式不同导致拼接处卡顿、音画不同步、帧率不匹配导致播放速度异常。本工具基于 FFmpeg WASM 的 concat 滤镜实现智能合并——自动统一分辨率、编码格式和帧率，确保拼接后的视频流畅无缝。</li>
+                            <li data-i18n="video.merge.problem2">支持最多 20 个视频合并——上传多个视频后，可以拖拽调整播放顺序。提供四种缩放模式处理不同分辨率的视频：不缩放（保持原始）、统一缩放（所有视频缩放到相同尺寸）、保持比例缩放（等比缩放到统一宽度）、自适应（根据第一个视频的尺寸自动适配）。</li>
+                            <li data-i18n="video.merge.problem3">转场效果支持——淡入淡出、左滑、右滑、上滑、下滑五种转场，让视频之间的过渡更自然。还可以添加背景音乐——上传音频文件后自动循环播放覆盖整个合并后的视频。所有处理在浏览器本地完成。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="video.merge.formatTitle">二、合并引擎的技术实现</h4>
                         <ul>
-                            <li data-i18n="video.merge.formatMp4"><strong>MP4：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.merge.formatAvi"><strong>AVI：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.merge.formatMov"><strong>MOV：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.merge.formatMp4"><strong>Concat 滤镜：</strong>FFmpeg 的 concat 滤镜是视频合并的核心——它将多个视频流在时间轴上首尾相连。与简单的文件拼接不同，concat 滤镜会重新编码所有视频——确保编码参数完全一致，拼接处不会出现卡顿或黑屏。</li>
+                            <li data-i18n="video.merge.formatAvi"><strong>分辨率统一：</strong>当输入视频分辨率不同时，工具自动将所有视频缩放到统一尺寸。默认以第一个视频的分辨率为基准——其他视频等比缩放后填充到相同画布。</li>
+                            <li data-i18n="video.merge.formatMov"><strong>帧率统一：</strong>不同视频可能有不同帧率（24fps/30fps/60fps）。合并时统一为第一个视频的帧率——如果 30fps 和 60fps 视频混合，输出为 30fps（60fps 视频丢帧到 30fps）。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.featuresTitle">三、核心功能</h4>
+                        <h4 data-i18n="video.merge.featuresTitle">三、转场与音频</h4>
                         <ul>
-                            <li data-i18n="video.merge.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="video.merge.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="video.merge.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="video.merge.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="video.merge.featureOnline"><strong>淡入淡出（Fade）：</strong>前一段视频逐渐变暗，后一段视频逐渐变亮——最经典的转场效果。持续时间可设置（默认 0.5 秒）。</li>
+                            <li data-i18n="video.merge.featurePreview"><strong>滑动转场：</strong>左滑/右滑/上滑/下滑——后一段视频从指定方向滑入覆盖前一段。适合节奏较快的视频拼接。</li>
+                            <li data-i18n="video.merge.featureExport"><strong>无转场：</strong>直接硬切——前一段结束的瞬间后一段开始。适合同一场景的连续拍摄片段。</li>
+                            <li data-i18n="video.merge.featureSecurity"><strong>背景音乐：</strong>上传音频文件（MP3/WAV/AAC），自动循环播放覆盖整个合并后的视频。音频长度不足时自动循环，超出时自动截断。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.merge.infoUsage">使用说明</h3>
+                        <h3 data-i18n="video.merge.infoUsage">视频合并操作流程</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.merge.usageUploadTitle">一、上传视频</h4>
+                        <h4 data-i18n="video.merge.usageUploadTitle">上传视频</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageUpload1"><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频，支持批量上传。</li>
-                            <li data-i18n="video.merge.usageUpload2"><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
-                            <li data-i18n="video.merge.usageUpload3"><strong>文件大小：</strong>建议单个视频文件不超过 200MB。</li>
-                            <li data-i18n="video.merge.usageUpload4"><strong>预览视频：</strong>上传后可预览每个视频的内容。</li>
+                            <li data-i18n="video.merge.usageUpload1"><strong>批量上传：</strong>点击或拖拽上传 2-20 个视频文件。支持 MP4/WebM/MOV/AVI 等格式。</li>
+                            <li data-i18n="video.merge.usageUpload2"><strong>列表管理：</strong>上传的视频以列表形式显示，每个视频显示文件名、时长和大小。</li>
+                            <li data-i18n="video.merge.usageUpload3"><strong>预览播放：</strong>点击播放按钮可以预览每个视频的内容。</li>
+                            <li data-i18n="video.merge.usageUpload4"><strong>删除视频：</strong>点击删除按钮移除不需要的视频。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageOrderTitle">二、调整视频顺序</h4>
+                        <h4 data-i18n="video.merge.usageOrderTitle">调整顺序</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageOrder1"><strong>拖拽排序：</strong>通过拖拽调整视频的拼接顺序。</li>
-                            <li data-i18n="video.merge.usageOrder2"><strong>向上/向下：</strong>点击箭头按钮调整单个视频的位置。</li>
-                            <li data-i18n="video.merge.usageOrder3"><strong>删除视频：</strong>点击删除按钮移除不需要的视频。</li>
-                            <li data-i18n="video.merge.usageOrder4"><strong>清空列表：</strong>点击清空按钮移除所有视频。</li>
+                            <li data-i18n="video.merge.usageOrder1"><strong>拖拽排序：</strong>拖动视频项调整合并顺序。顺序直接影响最终视频的播放顺序。</li>
+                            <li data-i18n="video.merge.usageOrder2"><strong>顺序建议：</strong>按内容逻辑排列——教程按步骤顺序，Vlog 按时间线，产品演示按功能模块。</li>
+                            <li data-i18n="video.merge.usageOrder3"><strong>清空列表：</strong>点击"清空"按钮移除所有视频，重新上传。</li>
+                            <li data-i18n="video.merge.usageOrder4"><strong>混合格式：</strong>不同格式的视频可以混合合并——工具会自动统一编码格式。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageTransitionTitle">三、设置转场效果</h4>
+                        <h4 data-i18n="video.merge.usageTransitionTitle">设置转场效果</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageTransition1"><strong>淡入淡出：</strong>视频之间平滑过渡。</li>
-                            <li data-i18n="video.merge.usageTransition2"><strong>滑动效果：</strong>视频从左向右或从右向左滑动切换。</li>
-                            <li data-i18n="video.merge.usageTransition3"><strong>无转场：</strong>直接切换，无过渡效果。</li>
-                            <li data-i18n="video.merge.usageTransition4"><strong>转场时长：</strong>设置转场效果的持续时间。</li>
+                            <li data-i18n="video.merge.usageTransition1"><strong>选择转场类型：</strong>淡入淡出、左滑、右滑、上滑、下滑、无转场。</li>
+                            <li data-i18n="video.merge.usageTransition2"><strong>转场时长：</strong>设置转场效果的持续时间（默认 0.5 秒）。时长越长过渡越柔和，但总时长增加。</li>
+                            <li data-i18n="video.merge.usageTransition3"><strong>转场影响：</strong>每个转场会消耗一定的时长——N 个视频有 N-1 个转场点。10 个视频 + 0.5 秒转场 = 总时长减少 4.5 秒。</li>
+                            <li data-i18n="video.merge.usageTransition4"><strong>无转场模式：</strong>选择"无转场"时视频直接硬切——不消耗额外时长，拼接处无过渡效果。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageMusicTitle">四、添加背景音乐</h4>
+                        <h4 data-i18n="video.merge.usageMusicTitle">添加背景音乐</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageMusic1"><strong>上传音频：</strong>点击上传背景音乐文件。</li>
-                            <li data-i18n="video.merge.usageMusic2"><strong>支持格式：</strong>支持 MP3、WAV、AAC、M4A 等音频格式。</li>
-                            <li data-i18n="video.merge.usageMusic3"><strong>音量调整：</strong>调整背景音乐和视频原音的音量。</li>
-                            <li data-i18n="video.merge.usageMusic4"><strong>循环播放：</strong>设置背景音乐是否循环播放。</li>
+                            <li data-i18n="video.merge.usageMusic1"><strong>上传音频：</strong>上传 MP3/WAV/AAC 格式的音频文件。</li>
+                            <li data-i18n="video.merge.usageMusic2"><strong>自动循环：</strong>音频长度不足时自动循环播放，直到覆盖整个视频。</li>
+                            <li data-i18n="video.merge.usageMusic3"><strong>音量控制：</strong>可以调整背景音乐的音量（0%-100%）。</li>
+                            <li data-i18n="video.merge.usageMusic4"><strong>原声处理：</strong>背景音乐会覆盖原始视频的音频——如果需要保留原声，当前版本不支持混音。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageOutputTitle">五、设置输出参数</h4>
+                        <h4 data-i18n="video.merge.usageOutputTitle">输出设置</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageOutput1"><strong>视频质量：</strong>选择输出质量（低/中/高/极高）。</li>
-                            <li data-i18n="video.merge.usageOutput2"><strong>分辨率：</strong>选择输出分辨率，自动适配所有视频。</li>
-                            <li data-i18n="video.merge.usageOutput3"><strong>统一尺寸：</strong>自动将所有视频调整为相同尺寸。</li>
+                            <li data-i18n="video.merge.usageOutput1"><strong>缩放模式：</strong>不缩放（可能不兼容）、统一缩放、保持比例缩放、自适应。推荐"保持比例缩放"。</li>
+                            <li data-i18n="video.merge.usageOutput2"><strong>输出分辨率：</strong>自动（以第一个视频为基准）或手动指定。</li>
+                            <li data-i18n="video.merge.usageOutput3"><strong>输出格式：</strong>统一输出为 MP4（H.264 + AAC），确保最大兼容性。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageMergeTitle">六、开始合成</h4>
+                        <h4 data-i18n="video.merge.usageMergeTitle">执行合并</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageMerge1"><strong>点击合成：</strong>点击"开始合成"按钮开始处理。</li>
-                            <li data-i18n="video.merge.usageMerge2"><strong>进度显示：</strong>实时显示合成进度和处理步骤。</li>
-                            <li data-i18n="video.merge.usageMerge3"><strong>处理步骤：</strong>加载引擎→环境准备→加载视频→统一尺寸→合成片段→编码视频→完成。
-                            </li>
-                            <li data-i18n="video.merge.usageMerge4"><strong>等待时间：</strong>合成时间取决于视频数量、长度和电脑性能。</li>
+                            <li data-i18n="video.merge.usageMerge1"><strong>点击"开始合并"：</strong>FFmpeg 引擎开始处理——加载所有视频、统一参数、应用转场、编码输出。</li>
+                            <li data-i18n="video.merge.usageMerge2"><strong>工作流显示：</strong>实时显示处理阶段（加载视频→统一参数→合并→编码→完成）。</li>
+                            <li data-i18n="video.merge.usageMerge3"><strong>处理时间：</strong>约 2-3x 总视频时长。10 分钟视频合并约 20-30 分钟。</li>
+                            <li data-i18n="video.merge.usageMerge4"><strong>内存占用：</strong>多个视频同时加载到内存中，内存占用较大。建议处理时关闭其他标签页。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageDownloadTitle">七、查看和下载</h4>
+                        <h4 data-i18n="video.merge.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageDownload1"><strong>预览效果：</strong>合成完成后可预览合成后的视频。</li>
-                            <li data-i18n="video.merge.usageDownload2"><strong>查看信息：</strong>显示合成后的文件大小等信息。</li>
-                            <li data-i18n="video.merge.usageDownload3"><strong>一键下载：</strong>点击"下载视频"按钮保存到本地。</li>
+                            <li data-i18n="video.merge.usageDownload1"><strong>预览结果：</strong>合并后的视频可以在页面上播放预览。</li>
+                            <li data-i18n="video.merge.usageDownload2"><strong>下载文件：</strong>点击下载按钮保存合并后的 MP4 文件。</li>
+                            <li data-i18n="video.merge.usageDownload3"><strong>文件命名：</strong>自动命名为 merged_时间戳.mp4。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.usageSceneTitle">八、适用场景</h4>
+                        <h4 data-i18n="video.merge.usageSceneTitle">五、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.merge.usageScene1"><strong>视频拼接：</strong>将多个短视频拼接成一个长视频。</li>
-                            <li data-i18n="video.merge.usageScene2"><strong>制作合集：</strong>将多个相关视频合成为一个合集。</li>
-                            <li data-i18n="video.merge.usageScene3"><strong>添加转场：</strong>为视频添加专业的转场效果。</li>
-                            <li data-i18n="video.merge.usageScene4"><strong>添加配乐：</strong>为视频添加背景音乐。</li>
+                            <li data-i18n="video.merge.usageScene1"><strong>Vlog 拼接：</strong>将一天拍摄的多段素材按时间线合并为一个完整的 Vlog。</li>
+                            <li data-i18n="video.merge.usageScene2"><strong>教程制作：</strong>将每个步骤的录屏合并为一个完整教程视频，添加转场让步骤之间过渡自然。</li>
+                            <li data-i18n="video.merge.usageScene3"><strong>产品演示：</strong>将产品的多个功能演示合并为一个完整的宣传视频。</li>
+                            <li data-i18n="video.merge.usageScene4"><strong>照片/视频混剪：</strong>将照片（转为视频后）和视频片段合并，制作回忆录或年度总结。</li>
                         </ul>
                     </div>
                 </article>
@@ -309,50 +305,50 @@
                         <h3 data-i18n="video.merge.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.merge.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="video.merge.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.merge.noteSecurity1">所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
-                            <li data-i18n="video.merge.noteSecurity2">视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                            <li data-i18n="video.merge.noteSecurity3">建议在处理敏感视频时使用隐私模式浏览。</li>
+                            <li data-i18n="video.merge.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。</li>
+                            <li data-i18n="video.merge.noteSecurity2"><strong>内存管理：</strong>多视频合并占用大量内存。建议至少 4GB 可用内存，处理时关闭其他标签页。</li>
+                            <li data-i18n="video.merge.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.notesPerfTitle">二、处理性能</h4>
+                        <h4 data-i18n="video.merge.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.merge.notePerf1">视频合成是计算密集型操作，会占用较多CPU资源。</li>
-                            <li data-i18n="video.merge.notePerf2">处理时间取决于视频数量、时长和电脑性能。</li>
-                            <li data-i18n="video.merge.notePerf3">建议在合成大文件时关闭其他占用CPU的程序。</li>
-                            <li data-i18n="video.merge.notePerf4">多个视频合成时需要更大的内存，建议分批处理。</li>
+                            <li data-i18n="video.merge.notePerf1"><strong>处理时间：</strong>约 2-3x 总视频时长。合并的视频越多，处理时间越长。</li>
+                            <li data-i18n="video.merge.notePerf2"><strong>视频数量限制：</strong>最多 20 个视频。超过 10 个时内存占用显著增加。</li>
+                            <li data-i18n="video.merge.notePerf3"><strong>内存优化：</strong>工具逐个加载视频并释放前一个的内存——但转场效果需要同时保留相邻两个视频的数据。</li>
+                            <li data-i18n="video.merge.notePerf4"><strong>CPU 占用：</strong>合并过程需要重新编码所有视频，CPU 占用较高。这是正常的。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.notesFormatTitle">三、格式限制</h4>
+                        <h4 data-i18n="video.merge.notesFormatTitle">格式兼容性</h4>
                         <ul>
-                            <li data-i18n="video.merge.noteFormat1">支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
-                            <li data-i18n="video.merge.noteFormat2">不支持的格式可能无法正常合成。</li>
-                            <li data-i18n="video.merge.noteFormat3">输出格式默认为MP4，兼容性最好。</li>
+                            <li data-i18n="video.merge.noteFormat1"><strong>混合格式支持：</strong>不同格式的视频可以混合合并——工具自动统一为 MP4（H.264）。</li>
+                            <li data-i18n="video.merge.noteFormat2"><strong>编码统一：</strong>所有视频重新编码为相同参数——确保拼接处流畅无卡顿。</li>
+                            <li data-i18n="video.merge.noteFormat3"><strong>音频统一：</strong>所有视频的音频统一为 AAC 格式。如果某个视频没有音频，该段为静音。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.notesResolutionTitle">四、分辨率适配</h4>
+                        <h4 data-i18n="video.merge.notesResolutionTitle">分辨率处理</h4>
                         <ul>
-                            <li data-i18n="video.merge.noteResolution1">不同分辨率的视频会自动统一到目标分辨率。</li>
-                            <li data-i18n="video.merge.noteResolution2">分辨率差异较大时可能导致画面拉伸或黑边。</li>
-                            <li data-i18n="video.merge.noteResolution3">建议使用相同分辨率的视频进行合成。</li>
+                            <li data-i18n="video.merge.noteResolution1"><strong>自动适配：</strong>默认以第一个视频的分辨率为基准。其他视频自动缩放适配。</li>
+                            <li data-i18n="video.merge.noteResolution2"><strong>黑边处理：</strong>不同宽高比的视频合并时，不匹配的区域填充黑边——不会拉伸变形。</li>
+                            <li data-i18n="video.merge.noteResolution3"><strong>建议统一：</strong>合并前尽量确保所有视频分辨率一致——可以减少处理时间并避免黑边。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.notesAudioTitle">五、音频处理</h4>
+                        <h4 data-i18n="video.merge.notesAudioTitle">音频处理说明</h4>
                         <ul>
-                            <li data-i18n="video.merge.noteAudio1">视频原音和背景音乐可以独立调整音量。</li>
-                            <li data-i18n="video.merge.noteAudio2">背景音乐过长会被截断，过短会循环播放。</li>
-                            <li data-i18n="video.merge.noteAudio3">建议背景音乐长度与合成后视频长度匹配。</li>
+                            <li data-i18n="video.merge.noteAudio1"><strong>原声保留：</strong>不加背景音乐时，每段视频的原始音频完整保留。</li>
+                            <li data-i18n="video.merge.noteAudio2"><strong>背景音乐覆盖：</strong>添加背景音乐后，原始音频被替换为背景音乐。</li>
+                            <li data-i18n="video.merge.noteAudio3"><strong>音频同步：</strong>转场效果同时应用于音频——淡入淡出转场时音频也淡入淡出。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.notesQualityTitle">六、质量损失</h4>
+                        <h4 data-i18n="video.merge.notesQualityTitle">画质保障</h4>
                         <ul>
-                            <li data-i18n="video.merge.noteQuality1">视频重新编码会导致一定的画质损失。</li>
-                            <li data-i18n="video.merge.noteQuality2">多次合成会累积画质损失。</li>
-                            <li data-i18n="video.merge.noteQuality3">建议合成前备份原始视频文件。</li>
+                            <li data-i18n="video.merge.noteQuality1"><strong>重新编码：</strong>合并过程需要重新编码所有视频——使用与原始视频相近的码率，画质损失极小。</li>
+                            <li data-i18n="video.merge.noteQuality2"><strong>多次合并：</strong>合并后的视频可以再次合并——但每次重新编码都会累积画质损失。建议一次性完成所有合并。</li>
+                            <li data-i18n="video.merge.noteQuality3"><strong>转场质量：</strong>转场效果在编码层面实现，不会引入额外的画质损失。</li>
                         </ul>
-                        <h4 data-i18n="video.merge.notesFaqTitle">七、常见问题</h4>
+                        <h4 data-i18n="video.merge.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.merge.noteFaq1"><strong>合成失败：</strong>检查视频文件是否损坏或格式不支持。</li>
-                            <li data-i18n="video.merge.noteFaq2"><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
-                            <li data-i18n="video.merge.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li data-i18n="video.merge.noteFaq4"><strong>音频不同步：</strong>检查视频和音频的编码格式。</li>
-                            <li data-i18n="video.merge.noteFaq5"><strong>内存不足：</strong>减少视频数量或分段合成。</li>
+                            <li data-i18n="video.merge.noteFaq1"><strong>Q: 合并后拼接处有卡顿？</strong>A: 确保所有视频的帧率一致。不同帧率的视频在拼接处可能出现帧对齐问题。</li>
+                            <li data-i18n="video.merge.noteFaq2"><strong>Q: 合并后画面大小不一致？</strong>A: 选择"保持比例缩放"模式——所有视频统一缩放到相同宽度，高度按比例调整。</li>
+                            <li data-i18n="video.merge.noteFaq3"><strong>Q: 能合并图片和视频吗？</strong>A: 不能直接合并图片。需要先将图片转为视频（如 5 秒的静态视频），然后再合并。</li>
+                            <li data-i18n="video.merge.noteFaq4"><strong>Q: 能保留原始视频的音频并叠加背景音乐吗？</strong>A: 当前版本不支持混音。背景音乐会完全替换原始音频。</li>
+                            <li data-i18n="video.merge.noteFaq5"><strong>Q: 处理时间太长怎么办？</strong>A: 减少视频数量、降低输出分辨率、使用无转场模式——都可以显著缩短处理时间。</li>
                         </ul>
                     </div>
                 </article>

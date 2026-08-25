@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
 
     <script type="application/ld+json">
     {
@@ -85,9 +85,7 @@
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description" data-i18n="video.edit.note">
-                <b>注意：</b> 最大支持200MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。
-            </p>
+            <p class="description" data-i18n="video.edit.note"><b>注意：</b> 最大支持200MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。</p>
 
             <div class="upload-section">
                 <label for="videoUpload" class="upload-area">
@@ -175,14 +173,12 @@
                     </div>
                 </div>
                 <p class="description" style="font-size: 14px; color: #666; margin-top: 10px;"
-                    data-i18n="video.edit.timeRangeNote">
-                    * 效果仅在指定时间段内应用，该时段外视频保持原样。输出视频时长与原视频保持一致。
-                </p>
+                    data-i18n="video.edit.timeRangeNote">* 效果仅在指定时间段内应用，该时段外视频保持原样。输出视频时长与原视频保持一致。</p>
 
                 <div class="action-buttons">
                     <button id="processBtn" disabled>
                         <span id="processBtnText" data-i18n="video.edit.processBtn">开始处理</span>
-                        <span id="processBtnLoading" style="display: none;" data-i18n="video.edit.processing">处理中...</span>
+                        <span id="processBtnLoading" style="display: none;" data-i18n="video.edit.processing">正在处理中...</span>
                     </button>
                     <div class="progress-container" id="progressContainer" style="display: none;">
                         <div class="progress-bar" id="progressBar"></div>
@@ -206,83 +202,83 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.edit.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="video.edit.infoIntro">视频编辑：旋转、翻转、模糊、截取——一个工具搞定</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.edit.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="video.edit.problemsTitle">一、你不需要为简单编辑安装 Premiere</h4>
                         <ul>
-                            <li data-i18n="video.edit.problem1">在线视频处理，支持旋转（90/180/270°）、翻转和模糊处理。</li>
-                            <li data-i18n="video.edit.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="video.edit.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="video.edit.problem1">手机拍的视频方向不对需要旋转、视频会议录屏需要模糊敏感信息、教程视频需要截取某个时间段——这些"小手术"级别的需求，完全不需要打开 Premiere 或 DaVinci Resolve 这种专业剪辑软件。本工具集成 4 种编辑功能：旋转（90/180/270 度）、翻转（水平/垂直）、模糊（区域马赛克/高斯模糊）和时间截取。</li>
+                            <li data-i18n="video.edit.problem2">所有编辑操作基于 FFmpeg WASM 的滤镜系统实现——旋转使用 transpose 滤镜，模糊使用 boxblur/gaussianblur 滤镜，时间截取使用 -ss/-t 参数。每个操作都精确到像素/帧级别，输出质量与原始视频保持一致。</li>
+                            <li data-i18n="video.edit.problem3">多效果叠加支持——可以同时应用旋转 + 模糊 + 时间截取，一次处理完成所有编辑。不需要先旋转、下载、再上传、再模糊的繁琐流程。所有处理在浏览器本地完成。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="video.edit.formatTitle">二、四种编辑功能详解</h4>
                         <ul>
-                            <li data-i18n="video.edit.formatMp4"><strong>MP4：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.edit.formatAvi"><strong>AVI：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.edit.formatMov"><strong>MOV：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.edit.formatMp4"><strong>旋转（Rotation）：</strong>顺时针旋转 90 度、180 度、270 度三个选项。90 度旋转会交换宽高——1920x1080 旋转后变为 1080x1920。180 度旋转不改变宽高（等于水平翻转 + 垂直翻转）。旋转基于 FFmpeg 的 transpose 和 hflip/vflip 滤镜实现。</li>
+                            <li data-i18n="video.edit.formatAvi"><strong>翻转（Flip）：</strong>水平翻转（左右镜像）和垂直翻转（上下镜像）。水平翻转常用于校正前置摄像头拍摄的自拍视频——前置摄像头录制的是镜像画面。翻转操作不改变视频时长和文件大小（几乎）。</li>
+                            <li data-i18n="video.edit.formatMov"><strong>模糊（Blur）：</strong>两种模糊类型——方框模糊（Box Blur，马赛克效果）和高斯模糊（Gaussian Blur，柔和虚化）。模糊强度分四档：轻度（radius=2）、中度（radius=5）、重度（radius=10）、极重（radius=20）。用于遮挡车牌号、人脸、敏感文字等隐私信息。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.featuresTitle">三、核心功能</h4>
+                        <h4 data-i18n="video.edit.featuresTitle">三、时间范围控制</h4>
                         <ul>
-                            <li data-i18n="video.edit.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="video.edit.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="video.edit.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="video.edit.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="video.edit.featureOnline"><strong>精确截取：</strong>设置开始时间和持续时长，从视频中截取指定时间段。时间格式支持 HH:MM:SS 和纯秒数。可以与其他编辑效果叠加——比如只旋转某个时间段。</li>
+                            <li data-i18n="video.edit.featurePreview"><strong>时长设置：</strong>输入持续时长（秒或 HH:MM:SS），工具自动检查不超过视频总时长。留空表示从开始时间到视频结束。</li>
+                            <li data-i18n="video.edit.featureExport"><strong>效果叠加：</strong>旋转 + 翻转 + 模糊 + 时间截取可以同时应用。滤镜链按顺序执行：先旋转/翻转，再模糊，最后截取时间段。</li>
+                            <li data-i18n="video.edit.featureSecurity"><strong>输出格式：</strong>编辑后的视频统一输出为 MP4 格式（H.264 + AAC），确保最大兼容性。原始格式不影响输出——AVI 输入也是 MP4 输出。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.edit.infoUsage">使用说明</h3>
+                        <h3 data-i18n="video.edit.infoUsage">编辑操作流程</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.edit.usageUploadTitle">一、上传视频</h4>
+                        <h4 data-i18n="video.edit.usageUploadTitle">载入视频</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageUpload1"><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
-                            <li data-i18n="video.edit.usageUpload2"><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。</li>
-                            <li data-i18n="video.edit.usageUpload3"><strong>文件大小：</strong>建议单个视频文件不超过 200MB。</li>
-                            <li data-i18n="video.edit.usageUpload4"><strong>预览视频：</strong>上传后可预览视频内容。</li>
+                            <li data-i18n="video.edit.usageUpload1"><strong>上传方式：</strong>点击或拖拽上传，支持 MP4/WebM/MOV/AVI 等格式。</li>
+                            <li data-i18n="video.edit.usageUpload2"><strong>视频信息：</strong>上传后显示文件名、分辨率、时长和文件大小。</li>
+                            <li data-i18n="video.edit.usageUpload3"><strong>预览播放：</strong>可以在页面上播放预览，确认视频内容。</li>
+                            <li data-i18n="video.edit.usageUpload4"><strong>单文件处理：</strong>一次只能编辑一个视频。编辑完成后再处理下一个。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageModeTitle">二、选择编辑模式</h4>
+                        <h4 data-i18n="video.edit.usageModeTitle">选择编辑效果</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageMode1"><strong>旋转模式：</strong>支持90度、180度、270度旋转，以及水平翻转、垂直翻转。</li>
-                            <li data-i18n="video.edit.usageMode2"><strong>模糊模式：</strong>对视频进行模糊处理，可调整模糊强度。</li>
+                            <li data-i18n="video.edit.usageMode1"><strong>旋转：</strong>选择旋转角度（90/180/270 度）。不旋转选"无"。</li>
+                            <li data-i18n="video.edit.usageMode2"><strong>翻转：</strong>选择翻转方向（水平/垂直/无）。翻转可以和旋转叠加使用。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageRotationTitle">三、设置旋转参数</h4>
+                        <h4 data-i18n="video.edit.usageRotationTitle">旋转设置</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageRotation1"><strong>旋转角度：</strong>选择旋转角度（90°/180°/270°）。</li>
-                            <li data-i18n="video.edit.usageRotation2"><strong>翻转方式：</strong>选择水平翻转或垂直翻转。</li>
-                            <li data-i18n="video.edit.usageRotation3"><strong>应用范围：</strong>可设置仅对指定时间段应用旋转效果。</li>
+                            <li data-i18n="video.edit.usageRotation1"><strong>顺时针 90 度：</strong>适合校正竖屏拍摄的视频。宽高会交换。</li>
+                            <li data-i18n="video.edit.usageRotation2"><strong>180 度：</strong>适合校正倒置拍摄的视频。宽高不变。</li>
+                            <li data-i18n="video.edit.usageRotation3"><strong>270 度（逆时针 90 度）：</strong>与顺时针 90 度方向相反。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageBlurTitle">四、设置模糊参数</h4>
+                        <h4 data-i18n="video.edit.usageBlurTitle">模糊设置</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageBlur1"><strong>模糊强度：</strong>选择模糊等级（低/中/高），强度越高画面越模糊。</li>
-                            <li data-i18n="video.edit.usageBlur2"><strong>应用范围：</strong>可设置仅对指定时间段应用模糊效果。</li>
+                            <li data-i18n="video.edit.usageBlur1"><strong>模糊类型：</strong>方框模糊（马赛克效果，像素块化）或高斯模糊（柔和虚化）。</li>
+                            <li data-i18n="video.edit.usageBlur2"><strong>模糊强度：</strong>轻度（几乎看不清模糊区域）、中度（适度遮挡）、重度（强烈遮挡）、极重（完全不可辨认）。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageTimeTitle">五、设置时间范围</h4>
+                        <h4 data-i18n="video.edit.usageTimeTitle">时间范围设置</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageTime1"><strong>开始时间：</strong>设置效果开始的时间点（秒）。</li>
-                            <li data-i18n="video.edit.usageTime2"><strong>持续时间：</strong>设置效果持续时间（秒），留空表示应用到视频结束。</li>
-                            <li data-i18n="video.edit.usageTime3"><strong>范围外保持：</strong>指定时段外视频保持原样，输出视频时长不变。</li>
+                            <li data-i18n="video.edit.usageTime1"><strong>开始时间：</strong>设置效果应用的起始时间点。留空或 0 表示从视频开头开始。</li>
+                            <li data-i18n="video.edit.usageTime2"><strong>持续时长：</strong>设置效果应用的持续时间。留空表示应用到视频结尾。</li>
+                            <li data-i18n="video.edit.usageTime3"><strong>时间 + 效果叠加：</strong>可以只对视频某个时间段应用效果——比如只模糊前 10 秒出现的车牌号。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageProcessTitle">六、开始处理</h4>
+                        <h4 data-i18n="video.edit.usageProcessTitle">执行编辑</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageProcess1"><strong>点击处理：</strong>点击"开始处理"按钮开始编辑。</li>
-                            <li data-i18n="video.edit.usageProcess2"><strong>进度显示：</strong>实时显示处理进度。</li>
-                            <li data-i18n="video.edit.usageProcess3"><strong>等待时间：</strong>处理时间取决于视频长度和参数设置。</li>
+                            <li data-i18n="video.edit.usageProcess1"><strong>点击"开始处理"：</strong>FFmpeg 引擎按照设置的滤镜链处理视频。</li>
+                            <li data-i18n="video.edit.usageProcess2"><strong>进度显示：</strong>实时显示处理进度和预估剩余时间。</li>
+                            <li data-i18n="video.edit.usageProcess3"><strong>处理时间：</strong>约 1-2x 视频时长。5 分钟视频约 5-10 分钟处理时间。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageDownloadTitle">七、查看和下载</h4>
+                        <h4 data-i18n="video.edit.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageDownload1"><strong>预览效果：</strong>处理完成后可预览编辑后的视频。</li>
-                            <li data-i18n="video.edit.usageDownload2"><strong>查看信息：</strong>显示处理后的文件大小等信息。</li>
-                            <li data-i18n="video.edit.usageDownload3"><strong>一键下载：</strong>点击"下载处理后视频"按钮保存到本地。</li>
+                            <li data-i18n="video.edit.usageDownload1"><strong>预览结果：</strong>处理完成后可以在页面上播放预览。</li>
+                            <li data-i18n="video.edit.usageDownload2"><strong>下载文件：</strong>点击下载按钮保存。输出为 MP4 格式。</li>
+                            <li data-i18n="video.edit.usageDownload3"><strong>文件命名：</strong>自动在原文件名后添加 _edited 后缀。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.usageSceneTitle">八、适用场景</h4>
+                        <h4 data-i18n="video.edit.usageSceneTitle">五、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.edit.usageScene1"><strong>纠正方向：</strong>旋转拍摄方向错误的视频。</li>
-                            <li data-i18n="video.edit.usageScene2"><strong>保护隐私：</strong>模糊视频中敏感信息。</li>
-                            <li data-i18n="video.edit.usageScene3"><strong>创意效果：</strong>制作翻转或模糊的特殊效果。</li>
-                            <li data-i18n="video.edit.usageScene4"><strong>局部处理：</strong>仅对视频特定时间段应用效果。</li>
+                            <li data-i18n="video.edit.usageScene1"><strong>自拍视频校正：</strong>前置摄像头拍的视频左右镜像？水平翻转即可校正。</li>
+                            <li data-i18n="video.edit.usageScene2"><strong>隐私保护：</strong>视频教程中需要遮挡车牌号、手机号、地址？用模糊功能覆盖。</li>
+                            <li data-i18n="video.edit.usageScene3"><strong>视频截取：</strong>从长视频中截取精彩片段——设置开始时间和时长即可。</li>
+                            <li data-i18n="video.edit.usageScene4"><strong>竖屏转横屏：</strong>竖屏拍摄的视频旋转 90 度后变为横屏——适合投影演示场景。</li>
                         </ul>
                     </div>
                 </article>
@@ -291,42 +287,42 @@
                         <h3 data-i18n="video.edit.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.edit.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="video.edit.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.edit.noteSecurity1">所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
-                            <li data-i18n="video.edit.noteSecurity2">视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                            <li data-i18n="video.edit.noteSecurity3">建议在处理敏感视频时使用隐私模式浏览。</li>
+                            <li data-i18n="video.edit.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。</li>
+                            <li data-i18n="video.edit.noteSecurity2"><strong>内存管理：</strong>处理完成后自动释放内存。建议处理时关闭不必要的标签页。</li>
+                            <li data-i18n="video.edit.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.notesPerfTitle">二、处理性能</h4>
+                        <h4 data-i18n="video.edit.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.edit.notePerf1">视频编辑是计算密集型操作，会占用较多CPU资源。</li>
-                            <li data-i18n="video.edit.notePerf2">处理时间取决于视频时长和电脑性能。</li>
-                            <li data-i18n="video.edit.notePerf3">建议在处理大文件时关闭其他占用CPU的程序。</li>
+                            <li data-i18n="video.edit.notePerf1"><strong>处理时间：</strong>旋转/翻转约 1x 实时时长（5 分钟视频约 5 分钟）。模糊约 1.5-2x（计算量更大）。</li>
+                            <li data-i18n="video.edit.notePerf2"><strong>CPU 占用：</strong>视频编码是 CPU 密集型任务，处理时占用较高。这是正常的。</li>
+                            <li data-i18n="video.edit.notePerf3"><strong>多效果叠加：</strong>同时应用多个效果时，处理时间不会叠加——一次编码过程完成所有滤镜。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.notesFormatTitle">三、格式限制</h4>
+                        <h4 data-i18n="video.edit.notesFormatTitle">输出格式说明</h4>
                         <ul>
-                            <li data-i18n="video.edit.noteFormat1">支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
-                            <li data-i18n="video.edit.noteFormat2">不支持的格式可能无法正常处理。</li>
-                            <li data-i18n="video.edit.noteFormat3">输出格式默认为MP4，兼容性最好。</li>
+                            <li data-i18n="video.edit.noteFormat1"><strong>统一 MP4 输出：</strong>编辑后输出为 MP4（H.264 + AAC），确保最大兼容性。</li>
+                            <li data-i18n="video.edit.noteFormat2"><strong>画质保持：</strong>使用与原始视频相近的编码参数，画质损失极小。</li>
+                            <li data-i18n="video.edit.noteFormat3"><strong>音频处理：</strong>音频轨道完整保留并重新编码为 AAC。如果原始视频没有音频，输出也不含音频。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.notesQualityTitle">四、质量损失</h4>
+                        <h4 data-i18n="video.edit.notesQualityTitle">编辑效果说明</h4>
                         <ul>
-                            <li data-i18n="video.edit.noteQuality1">视频重新编码会导致一定的画质损失。</li>
-                            <li data-i18n="video.edit.noteQuality2">模糊处理是不可逆的，处理后无法恢复原始清晰度。</li>
-                            <li data-i18n="video.edit.noteQuality3">建议处理前备份原始视频文件。</li>
+                            <li data-i18n="video.edit.noteQuality1"><strong>旋转无损：</strong>旋转操作在编码层面完成，画质不会因旋转而降低。</li>
+                            <li data-i18n="video.edit.noteQuality2"><strong>模糊不可逆：</strong>模糊操作会永久修改像素信息——下载后无法"取消模糊"。如果需要调整模糊强度，请重新处理。</li>
+                            <li data-i18n="video.edit.noteQuality3"><strong>时间裁剪精度：</strong>时间截取精度取决于关键帧间隔，可能偏移 1-2 秒。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.notesTimeTitle">五、时间范围</h4>
+                        <h4 data-i18n="video.edit.notesTimeTitle">时间设置技巧</h4>
                         <ul>
-                            <li data-i18n="video.edit.noteTime1">时间范围设置仅影响效果应用，不改变视频总时长。</li>
-                            <li data-i18n="video.edit.noteTime2">超出视频时长的时间设置会被自动忽略。</li>
-                            <li data-i18n="video.edit.noteTime3">建议先预览视频确定需要处理的时间点。</li>
+                            <li data-i18n="video.edit.noteTime1"><strong>预览定位：</strong>在视频预览中播放到目标位置，记下时间戳再输入。</li>
+                            <li data-i18n="video.edit.noteTime2"><strong>留余量：</strong>开始时间早 0.5 秒，结束时间晚 0.5 秒——避免裁掉内容头尾。</li>
+                            <li data-i18n="video.edit.noteTime3"><strong>时长计算：</strong>如果知道起止时间，用"结束时间 - 开始时间"得到持续时长。</li>
                         </ul>
-                        <h4 data-i18n="video.edit.notesFaqTitle">六、常见问题</h4>
+                        <h4 data-i18n="video.edit.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.edit.noteFaq1"><strong>处理失败：</strong>检查视频文件是否损坏或格式不支持。</li>
-                            <li data-i18n="video.edit.noteFaq2"><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
-                            <li data-i18n="video.edit.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li data-i18n="video.edit.noteFaq4"><strong>效果异常：</strong>检查时间范围设置是否正确。</li>
+                            <li data-i18n="video.edit.noteFaq1"><strong>Q: 旋转后视频方向还是不对？</strong>A: 尝试不同的旋转角度。90 度和 270 度方向相反，180 度是上下颠倒。</li>
+                            <li data-i18n="video.edit.noteFaq2"><strong>Q: 模糊效果不明显？</strong>A: 提高模糊强度等级。轻度模糊在高分辨率视频中可能不够明显。</li>
+                            <li data-i18n="video.edit.noteFaq3"><strong>Q: 能只模糊视频中的某个区域吗？</strong>A: 当前版本对整帧应用模糊效果。如果需要区域模糊，建议使用视频水印工具的区域马赛克功能。</li>
+                            <li data-i18n="video.edit.noteFaq4"><strong>Q: 编辑后的视频能再次编辑吗？</strong>A: 可以。但每次编辑都会重新编码，多次编辑会累积画质损失。建议一次性完成所有编辑。</li>
                         </ul>
                     </div>
                 </article>

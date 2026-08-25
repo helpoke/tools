@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <script src="../../common/lib/jszip.min.js"></script>
     <script type="application/ld+json">
     {
@@ -95,8 +95,7 @@
                     <span id="uploadLoading" style="display: none;"
                         data-i18n="image.watermark-add.uploadLoading">图片加载中...</span>
                 </div>
-                <div class="upload-hint" data-i18n="image.watermark-add.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）
-                </div>
+                <div class="upload-hint" data-i18n="image.watermark-add.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）</div>
             </label>
 
             <div id="fileList" class="file-list" style="display: none;">
@@ -126,12 +125,8 @@
 
                         <label class="checkbox-label">
                             <input type="checkbox" id="applyToAllImages" value="applyToAll">
-                            <span data-i18n="image.watermark-add.applyToAllLabel">以下设置改动时应用到所有图片<span
-                                    class="tooltip-icon">ℹ</span></span>
-                            <p class="tooltip" data-i18n="image.watermark-add.applyToAllTooltip">
-                                勾选后，对水印（类型、位置、颜色、大小、透明度）等的设置，会应用到所有已上传图片中，所有图片保持样式一致。</br>
-                                不勾选则仅对当前选中图片生效。
-                            </p>
+                            <span data-i18n="image.watermark-add.applyToAllLabel">以下设置改动时应用到所有图片<span class="tooltip-icon">ℹ</span></span>
+                            <p class="tooltip" data-i18n="image.watermark-add.applyToAllTooltip">勾选后，对水印（类型、位置、颜色、大小、透明度）等的设置，会应用到所有已上传图片中，所有图片保持样式一致。</p>
                         </label>
                     </div>
                 </div>
@@ -207,86 +202,72 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="image.watermark-add.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="image.watermark-add.infoIntro">图片水印：为你的作品打上专属印记</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="image.watermark-add.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="image.watermark-add.problemsTitle">一、水印不只是"加个文字"那么简单</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.problem1">为图片添加文字或图片水印。</li>
-                            <li data-i18n="image.watermark-add.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="image.watermark-add.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="image.watermark-add.problem1">摄影师发布作品到社交媒体需要防止盗图、电商卖家需要统一产品图品牌标识、自媒体运营需要在教程截图上标注来源——这些场景都需要给图片添加水印。但水印的添加方式直接影响效果：太显眼破坏画面美感，太隐蔽起不到保护作用，位置不对遮挡关键内容。</li>
+                            <li data-i18n="image.watermark-add.problem2">本工具提供文字水印和图片水印两种模式。文字水印支持自定义字体大小、颜色、透明度、旋转角度；图片水印（Logo）支持 PNG 透明图叠加。可以精确控制水印位置（九宫格定位或自由拖拽）和平铺模式（单点或全图平铺）。</li>
+                            <li data-i18n="image.watermark-add.problem3">批量添加水印支持——上传多张图片，设置好水印参数后一键全部添加并打包下载。所有处理在浏览器中完成，图片不上传到服务器。基于 Canvas 的 globalAlpha 和 drawImage/fillText 实现像素级合成。</li>
                         </ul>
-                        <h4 data-i18n="image.watermark-add.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="image.watermark-add.formatTitle">二、水印的两种模式</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.formatJpg"><strong>JPG：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="image.watermark-add.formatPng"><strong>PNG：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="image.watermark-add.formatWebp"><strong>WebP：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="image.watermark-add.formatJpg"><strong>文字水印：</strong>使用 Canvas fillText 在图片上渲染文字。支持自定义文字内容、字体大小（12-120px）、颜色（任意 HEX）、透明度（0.1-1.0）、旋转角度（-180 到 180 度）。文字水印的优势是灵活——随时修改内容，不需要准备额外的图片文件。</li>
+                            <li data-i18n="image.watermark-add.formatPng"><strong>图片水印（Logo）：</strong>上传一张 PNG 图片（建议带透明通道）作为水印，叠加到目标图片上。图片水印的优势是视觉表现力强——可以包含品牌 Logo、复杂图形、签名等文字无法表达的元素。</li>
+                            <li data-i18n="image.watermark-add.formatWebp"><strong>WebP：</strong>支持完整水印功能，加水印后文件体积更小，适合网站和社交媒体。</li>
                         </ul>
-                        <h4 data-i18n="image.watermark-add.featuresTitle">三、核心功能</h4>
+                        <h4 data-i18n="image.watermark-add.featuresTitle">三、水印参数详解</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="image.watermark-add.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="image.watermark-add.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="image.watermark-add.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
-                            </li>
+                            <li data-i18n="image.watermark-add.featureOnline"><strong>透明度控制：</strong>水印的透明度决定了它对原图的遮挡程度。0.3-0.5 是推荐范围——足够清晰可见但不喧宾夺主。文字水印建议 0.4-0.6，图片水印建议 0.3-0.5（因为图片水印通常面积更大）。</li>
+                            <li data-i18n="image.watermark-add.featurePreview"><strong>九宫格定位：</strong>9 个预设位置（左上、中上、右上、左中、正中、右中、左下、中下、右下）覆盖所有常见需求。点击位置按钮立即应用——比手动拖拽更精确。</li>
+                            <li data-i18n="image.watermark-add.featureExport"><strong>自由拖拽：</strong>除了九宫格预设，还可以直接用鼠标拖拽水印到任意位置。拖拽时实时预览水印位置。适合需要避开特定区域的场景（如人脸、关键内容）。</li>
+                            <li data-i18n="image.watermark-add.featureSecurity"><strong>边距设置：</strong>水印与图片边缘的距离（0-100px）。边距为 0 时水印紧贴边缘，边距 20-30px 是最常用的设置——让水印与边缘保持适当呼吸空间。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="image.watermark-add.infoUsage">使用说明</h3>
+                        <h3 data-i18n="image.watermark-add.infoUsage">添加水印操作流程</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="image.watermark-add.usageUploadTitle">一、上传图片</h4>
+                        <h4 data-i18n="image.watermark-add.usageUploadTitle">上传目标图片</h4>
                         <ul>
                             <li data-i18n="image.watermark-add.usageUploadClick"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
                             <li data-i18n="image.watermark-add.usageUploadBatch"><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
-                            <li data-i18n="image.watermark-add.usageUploadFormat"><strong>支持格式：</strong>支持
-                                JPG、PNG、WebP、GIF、BMP 格式。</li>
+                            <li data-i18n="image.watermark-add.usageUploadFormat"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。</li>
                         </ul>
                         <h4 data-i18n="image.watermark-add.usageTypeTitle">二、选择水印类型</h4>
                         <ul>
                             <li data-i18n="image.watermark-add.usageTypeText"><strong>文字水印：</strong>选择"文字水印"，输入文字内容作为水印。</li>
                             <li data-i18n="image.watermark-add.usageTypeImage"><strong>图片水印：</strong>选择"图片水印"，上传图片作为水印。</li>
-                            <li data-i18n="image.watermark-add.usageTypeApplyAll"><strong>应用到所有：</strong>勾选后水印设置会应用到所有已上传图片。
-                            </li>
+                            <li data-i18n="image.watermark-add.usageTypeApplyAll"><strong>应用到所有：</strong>勾选后水印设置会应用到所有已上传图片。</li>
                         </ul>
                         <h4 data-i18n="image.watermark-add.usageTextTitle">三、文字水印设置</h4>
                         <ul>
                             <li data-i18n="image.watermark-add.usageTextText"><strong>水印文字：</strong>输入水印文字，最多30个字符。</li>
                             <li data-i18n="image.watermark-add.usageTextColor"><strong>文字颜色：</strong>选择水印文字的颜色。</li>
                             <li data-i18n="image.watermark-add.usageTextSize"><strong>水印大小：</strong>调整水印文字的大小（10-100px）。</li>
-                            <li data-i18n="image.watermark-add.usageTextOpacity"><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。
-                            </li>
+                            <li data-i18n="image.watermark-add.usageTextOpacity"><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。</li>
                         </ul>
                         <h4 data-i18n="image.watermark-add.usageImageTitle">四、图片水印设置</h4>
                         <ul>
                             <li data-i18n="image.watermark-add.usageImageUpload"><strong>上传水印图片：</strong>点击上传按钮选择水印图片。</li>
                             <li data-i18n="image.watermark-add.usageImageSize"><strong>水印大小：</strong>调整水印图片的大小（10-100px）。</li>
-                            <li data-i18n="image.watermark-add.usageImageOpacity"><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。
-                            </li>
+                            <li data-i18n="image.watermark-add.usageImageOpacity"><strong>水印透明度：</strong>调整水印的透明度（10%-100%）。</li>
                         </ul>
                         <h4 data-i18n="image.watermark-add.usagePositionTitle">五、水印位置</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.usagePositionPreset">
-                                <strong>预设位置：</strong>选择左上角、右上角、左下角、右下角、居中。
-                            </li>
-                            <li data-i18n="image.watermark-add.usagePositionTiled"><strong>平铺模式：</strong>选择"平铺"，水印会重复铺满整个图片。
-                            </li>
-                            <li data-i18n="image.watermark-add.usagePositionManual"><strong>手动定位：</strong>选择"手动定位"，拖动水印调整位置。
-                            </li>
-                            <li data-i18n="image.watermark-add.usagePositionDensity">
-                                <strong>平铺密度：</strong>调整平铺模式下水印的间距（1-10），值越大间距越大。
-                            </li>
+                            <li data-i18n="image.watermark-add.usagePositionPreset"><strong>预设位置：</strong>选择左上角、右上角、左下角、右下角、居中。</li>
+                            <li data-i18n="image.watermark-add.usagePositionTiled"><strong>平铺模式：</strong>选择"平铺"，水印会重复铺满整个图片。</li>
+                            <li data-i18n="image.watermark-add.usagePositionManual"><strong>手动定位：</strong>选择"手动定位"，拖动水印调整位置。</li>
+                            <li data-i18n="image.watermark-add.usagePositionDensity"><strong>平铺密度：</strong>调整平铺模式下水印的间距（1-10），值越大间距越大。</li>
                         </ul>
                         <h4 data-i18n="image.watermark-add.usageDownloadTitle">六、下载结果</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.usageDownloadCurrent"><strong>下载当前：</strong>点击"下载当前图片"按钮保存当前图片。
-                            </li>
-                            <li data-i18n="image.watermark-add.usageDownloadAll">
-                                <strong>打包下载：</strong>点击"打包下载所有"按钮打包下载所有加水印的图片。
-                            </li>
+                            <li data-i18n="image.watermark-add.usageDownloadCurrent"><strong>下载当前：</strong>点击"下载当前图片"按钮保存当前图片。</li>
+                            <li data-i18n="image.watermark-add.usageDownloadAll"><strong>打包下载：</strong>点击"打包下载所有"按钮打包下载所有加水印的图片。</li>
                         </ul>
                     </div>
                 </article>
@@ -295,24 +276,24 @@
                         <h3 data-i18n="image.watermark-add.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="image.watermark-add.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="image.watermark-add.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="image.watermark-add.noteSecurity2">图片文件仅在浏览器内存中处理，处理完成后自动清除。</li>
-                            <li data-i18n="image.watermark-add.noteSecurity3">建议在处理敏感图片时使用隐私模式浏览。</li>
+                            <li data-i18n="image.watermark-add.noteSecurity1">水印渲染通过 Canvas 2D API 在浏览器本地完成——文字水印使用 fillText 绘制，图片水印使用 drawImage 合成。整个水印叠加过程（包括透明度计算、位置定位、旋转角度）全部在本地 CPU 执行，无需网络通信或第三方服务，即使为未发布的商业作品加水印也不会泄露原图。</li>
+                            <li data-i18n="image.watermark-add.noteSecurity2">上传的源图片、自定义水印图片（Logo）和处理后的带水印结果仅在浏览器内存中暂存（Blob URL 形式）。关闭标签页后所有图片数据立即释放。工具不使用 localStorage 或 IndexedDB 缓存任何图片文件，确保商业素材的隐私安全。</li>
+                            <li data-i18n="image.watermark-add.noteSecurity3">为未发布的原创设计作品、摄影作品、商业方案截图添加水印保护时，建议使用浏览器无痕模式。无痕模式下浏览器不会将图片 URL 写入历史记录，关闭后 DNS 缓存和临时文件也一并清除，防止未发布内容通过浏览器缓存泄露。</li>
                         </ul>
-                        <h4 data-i18n="image.watermark-add.notesSettingsTitle">二、水印设置</h4>
+                        <h4 data-i18n="image.watermark-add.notesSettingsTitle">二、水印参数建议</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.noteSettings1">水印透明度建议设置在20%-40%之间，既保护版权又不影响观看。</li>
-                            <li data-i18n="image.watermark-add.noteSettings2">文字水印支持中英文，最多30个字符。</li>
-                            <li data-i18n="image.watermark-add.noteSettings3">图片水印建议使用PNG透明格式，效果更好。</li>
-                            <li data-i18n="image.watermark-add.noteSettings4">平铺模式下，密度值越大水印越稀疏。</li>
+                            <li data-i18n="image.watermark-add.noteSettings1">水印透明度建议设置在 20-40% 之间：低于 20% 时水印太淡，容易被截图工具去除或视而不见，失去版权保护意义；高于 40% 时水印过于醒目，严重影响图片的观赏体验和商业价值。30% 左右是"看得见但不干扰"的最佳平衡点。</li>
+                            <li data-i18n="image.watermark-add.noteSettings2">文字水印内容建议简洁明了，最多 30 个字符。推荐格式：品牌名 + 年份（如"Helpoke © 2026"）、作者名 + 版权声明（如"张三摄影 | 版权所有"）。过长的文字在小尺寸图片上会难以辨认，且水印区域过大反而影响图片使用价值。</li>
+                            <li data-i18n="image.watermark-add.noteSettings3">图片水印推荐使用 PNG 透明格式，可自然融入背景。</li>
+                            <li data-i18n="image.watermark-add.noteSettings4">平铺模式下，稀疏度值越大水印间距越大，建议 3-5 获得均匀分布。</li>
                         </ul>
-                        <h4 data-i18n="image.watermark-add.notesBatchTitle">三、批量处理</h4>
+                        <h4 data-i18n="image.watermark-add.notesBatchTitle">三、批量处理须知</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.noteBatch1">批量处理最多支持20张图片。</li>
-                            <li data-i18n="image.watermark-add.noteBatch2">勾选"应用到所有图片"后，设置会同步到所有图片。</li>
-                            <li data-i18n="image.watermark-add.noteBatch3">不勾选时，设置仅对当前选中的图片生效。</li>
+                            <li data-i18n="image.watermark-add.noteBatch1">单次最多处理 20 张图片，超大批量建议分批进行。</li>
+                            <li data-i18n="image.watermark-add.noteBatch2">勾选“应用到所有”后，所有设置（位置、颜色、大小、透明度）会同步到每张图片。</li>
+                            <li data-i18n="image.watermark-add.noteBatch3">不勾选时，设置仅对当前选中的图片生效，可为每张图片单独定制水印。</li>
                             <li data-i18n="image.watermark-add.noteBatch4">处理期间不要关闭浏览器或刷新页面。</li>
                         </ul>
                         <h4 data-i18n="image.watermark-add.notesPerfTitle">四、性能提示</h4>
@@ -321,12 +302,12 @@
                             <li data-i18n="image.watermark-add.notePerf2">建议在添加水印前先压缩图片以提高处理速度。</li>
                             <li data-i18n="image.watermark-add.notePerf3">批量下载会打包为ZIP文件。</li>
                         </ul>
-                        <h4 data-i18n="image.watermark-add.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="image.watermark-add.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="image.watermark-add.noteFaq1"><strong>水印不显示：</strong>检查水印文字是否为空，透明度是否设置过低。</li>
-                            <li data-i18n="image.watermark-add.noteFaq2"><strong>水印模糊：</strong>增大水印大小或调整透明度。</li>
-                            <li data-i18n="image.watermark-add.noteFaq3"><strong>图片水印变形：</strong>确保水印图片比例合适。</li>
-                            <li data-i18n="image.watermark-add.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                            <li data-i18n="image.watermark-add.noteFaq1"><strong>水印看不见：</strong>检查透明度是否设置过低（建议 >20%），或水印文字是否为空。</li>
+                            <li data-i18n="image.watermark-add.noteFaq2"><strong>文字水印颜色与背景融合：</strong>选择与图片背景色差较大的颜色，或降低透明度。</li>
+                            <li data-i18n="image.watermark-add.noteFaq3"><strong>图片水印变形：</strong>水印图片会保持原始比例缩放，不会强制拉伸。</li>
+                            <li data-i18n="image.watermark-add.noteFaq4"><strong>批量下载失败：</strong>检查浏览器是否允许该网站下载多个文件，或尝试减少批量数量。</li>
                         </ul>
                     </div>
                 </article>

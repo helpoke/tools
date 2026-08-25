@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
 
     <script type="application/ld+json">
     {
@@ -88,17 +88,14 @@
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description" data-i18n="video.thumbnail.note">
-                <b>注意：</b> 最大支持300MB视频文件。提取封面基于浏览器原生解码，推荐使用 MP4/H.264、WebM 格式。
-            </p>
+            <p class="description" data-i18n="video.thumbnail.note"><b>注意：</b> 最大支持300MB视频文件。提取封面基于浏览器原生解码，推荐使用 MP4/H.264、WebM 格式。</p>
 
             <div class="upload-section">
                 <label for="videoUpload" class="upload-area">
                     <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv" hidden>
                     <div class="upload-icon">🖼️</div>
                     <div class="upload-text" data-i18n="video.thumbnail.uploadText">点击上传或拖拽视频到此处</div>
-                    <div class="upload-hint" data-i18n="video.thumbnail.uploadHint">支持 MP4, WebM, OGV, MOV 等浏览器可播放格式
-                    </div>
+                    <div class="upload-hint" data-i18n="video.thumbnail.uploadHint">支持 MP4, WebM, OGV, MOV 等浏览器可播放格式</div>
                 </label>
             </div>
 
@@ -205,94 +202,80 @@
                 <div class="result-info" id="resultInfo"></div>
                 <div class="thumbnails-grid" id="thumbnailsGrid"></div>
                 <div class="download-buttons">
-                    <button id="downloadAllBtn" style="display: none;" data-i18n="video.thumbnail.downloadAllBtn">打包下载全部
-                        (ZIP)</button>
+                    <button id="downloadAllBtn" style="display: none;" data-i18n="video.thumbnail.downloadAllBtn">打包下载全部 (ZIP)</button>
                 </div>
             </div>
 
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.thumbnail.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="video.thumbnail.infoIntro">视频封面提取：从视频中精确截取任意帧作为图片</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.thumbnail.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="video.thumbnail.problemsTitle">一、为什么需要视频帧提取工具</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.problem1">从视频中快速截取高清封面图片。</li>
-                            <li data-i18n="video.thumbnail.problem2">无需安装截图软件或专业视频编辑工具。</li>
-                            <li data-i18n="video.thumbnail.problem3">支持批量提取候选封面，挑选最满意的一张。</li>
+                            <li data-i18n="video.thumbnail.problem1">为视频选择最佳封面图、从教程视频中截取关键步骤图、从监控录像中提取特定时刻画面、从运动视频中截取动作瞬间——这些场景都需要从视频中精确提取某一帧作为图片。手动截图？分辨率低、时机不精确、还可能截到模糊的过渡帧。</li>
+                            <li data-i18n="video.thumbnail.problem2">本工具基于 FFmpeg WASM 实现精确帧提取——输入时间点（精确到秒），工具从视频中提取该时刻的完整帧并保存为高清图片。支持单帧提取和批量提取两种模式。单帧模式提取一个时间点的画面；批量模式按指定数量均匀提取多帧。</li>
+                            <li data-i18n="video.thumbnail.problem3">输出格式支持 PNG（无损）、JPG（有损压缩，文件更小）、WebP（高压缩率）。可以缩放输出尺寸——原始分辨率保真度最高，缩放到 50% 或 25% 适合网页缩略图。所有处理在浏览器本地完成。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="video.thumbnail.formatTitle">二、两种提取模式</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.formatMp4"><strong>MP4：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.thumbnail.formatWebm"><strong>WebM：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.thumbnail.formatOgv"><strong>OGV：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.thumbnail.formatMp4"><strong>单帧提取：</strong>输入一个时间点（如 00:01:30），提取该时刻的视频帧。适合"我知道要哪一帧"的场景——比如选择视频封面、截取教程中的关键步骤。</li>
+                            <li data-i18n="video.thumbnail.formatWebm"><strong>批量提取：</strong>设置提取数量（如 10 张），工具从视频中均匀提取指定数量的帧。适合"我想从整个视频中选最好的一帧"的场景——提取 10-20 张候选帧后逐张查看选择。</li>
+                            <li data-i18n="video.thumbnail.formatOgv"><strong>时间精度：</strong>提取精度取决于视频的关键帧间隔。MP4 视频的关键帧间隔通常 2-10 秒——指定时间点的帧可能需要从最近的关键帧解码，但工具会自动处理这个过程。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.featuresTitle">三、核心功能</h4>
+                        <h4 data-i18n="video.thumbnail.featuresTitle">三、输出参数控制</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
-                            </li>
-                            <li data-i18n="video.thumbnail.featurePreview"><strong>实时预览：</strong>拖动时间轴即可预览对应帧画面。</li>
-                            <li data-i18n="video.thumbnail.featureExport"><strong>一键导出：</strong>支持单张下载和批量打包ZIP下载。</li>
-                            <li data-i18n="video.thumbnail.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
-                            </li>
+                            <li data-i18n="video.thumbnail.featureOnline"><strong>格式选择：</strong>PNG（无损，文件较大）、JPG（有损，文件小，可调质量）、WebP（高压缩率，现代浏览器支持）。推荐 JPG + 高质量作为平衡选择。</li>
+                            <li data-i18n="video.thumbnail.featurePreview"><strong>尺寸缩放：</strong>原始分辨率（保真度最高）、75%、50%、25%。缩放到 50% 后文件体积约减少 75%——适合网页缩略图。</li>
+                            <li data-i18n="video.thumbnail.featureExport"><strong>质量设置：</strong>JPG/WebP 输出时可设置质量（高/中/低）。高质量保留更多细节但文件较大。PNG 不受质量设置影响（始终无损）。</li>
+                            <li data-i18n="video.thumbnail.featureSecurity"><strong>批量打包：</strong>批量提取的多张图片可以逐张下载，也可以打包为 ZIP 文件一次性下载。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.thumbnail.infoUsage">使用说明</h3>
+                        <h3 data-i18n="video.thumbnail.infoUsage">封面提取操作步骤</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.thumbnail.usageUploadTitle">一、上传视频</h4>
+                        <h4 data-i18n="video.thumbnail.usageUploadTitle">载入视频</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.usageUpload1"><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
-                            <li data-i18n="video.thumbnail.usageUpload2"><strong>支持格式：</strong>支持 MP4、WebM、MOV
-                                等浏览器可播放格式。</li>
-                            <li data-i18n="video.thumbnail.usageUpload3"><strong>文件大小：</strong>建议单个视频文件不超过 300MB。</li>
-                            <li data-i18n="video.thumbnail.usageUpload4"><strong>预览视频：</strong>上传后可播放预览视频内容。</li>
+                            <li data-i18n="video.thumbnail.usageUpload1"><strong>上传方式：</strong>点击或拖拽上传视频文件。支持 MP4/WebM/MOV/AVI 等格式。</li>
+                            <li data-i18n="video.thumbnail.usageUpload2"><strong>视频信息：</strong>上传后显示文件名、大小、时长和分辨率。</li>
+                            <li data-i18n="video.thumbnail.usageUpload3"><strong>视频预览：</strong>可以在页面上播放视频，找到想要截取的时间点。</li>
+                            <li data-i18n="video.thumbnail.usageUpload4"><strong>文件大小：</strong>建议不超过 500MB。超大视频的加载时间较长。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.usageModeTitle">二、选择提取模式</h4>
+                        <h4 data-i18n="video.thumbnail.usageModeTitle">选择提取模式</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.usageMode1">
-                                <strong>单张提取：</strong>拖动时间轴或输入时间点，也可播放视频后点击"使用当前播放位置"。
-                            </li>
-                            <li data-i18n="video.thumbnail.usageMode2"><strong>批量提取：</strong>设置张数（3-12张），从视频中均匀截取多张候选封面。
-                            </li>
-                            <li data-i18n="video.thumbnail.usageMode3"><strong>模式切换：</strong>两种模式可随时切换，重新提取会覆盖之前的结果。
-                            </li>
+                            <li data-i18n="video.thumbnail.usageMode1"><strong>单帧模式：</strong>输入时间点，提取该时刻的一帧。适合精确截取。</li>
+                            <li data-i18n="video.thumbnail.usageMode2"><strong>批量模式：</strong>设置提取数量，均匀提取多帧。适合从整个视频中选取最佳帧。</li>
+                            <li data-i18n="video.thumbnail.usageMode3"><strong>模式选择建议：</strong>做封面选单帧模式（精确控制），做缩略图选批量模式（多候选）。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.usageParamTitle">三、调整输出参数</h4>
+                        <h4 data-i18n="video.thumbnail.usageParamTitle">设置输出参数</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.usageParam1">
-                                <strong>输出格式：</strong>PNG无损画质，JPG体积小通用性强，WebP压缩比高。
-                            </li>
-                            <li data-i18n="video.thumbnail.usageParam2"><strong>图片质量：</strong>JPG和WebP格式可调整质量（高/中/低）。
-                            </li>
-                            <li data-i18n="video.thumbnail.usageParam3"><strong>尺寸缩放：</strong>支持原始尺寸至25%缩放，缩小尺寸可减小文件体积。
-                            </li>
+                            <li data-i18n="video.thumbnail.usageParam1"><strong>输出格式：</strong>PNG（无损）、JPG（推荐，文件小）、WebP（高压缩率）。</li>
+                            <li data-i18n="video.thumbnail.usageParam2"><strong>尺寸缩放：</strong>原始（最大文件）、75%、50%、25%。网页用建议 50%。</li>
+                            <li data-i18n="video.thumbnail.usageParam3"><strong>质量设置：</strong>JPG/WebP 输出时选择质量等级。PNG 不受影响。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.usageExtractTitle">四、开始提取</h4>
+                        <h4 data-i18n="video.thumbnail.usageExtractTitle">执行提取</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.usageExtract1"><strong>点击提取：</strong>点击"提取封面"按钮开始截取。</li>
-                            <li data-i18n="video.thumbnail.usageExtract2"><strong>进度显示：</strong>批量提取时实时显示处理进度。</li>
-                            <li data-i18n="video.thumbnail.usageExtract3">
-                                <strong>等待时间：</strong>基于浏览器原生解码，提取速度快，无需加载转码引擎。
-                            </li>
+                            <li data-i18n="video.thumbnail.usageExtract1"><strong>点击"提取"按钮：</strong>FFmpeg 引擎开始提取帧。单帧提取通常 1-3 秒完成。</li>
+                            <li data-i18n="video.thumbnail.usageExtract2"><strong>批量提取：</strong>批量模式提取多帧时，每帧约 1-3 秒。10 帧约 10-30 秒。</li>
+                            <li data-i18n="video.thumbnail.usageExtract3"><strong>进度显示：</strong>实时显示提取进度。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.usageDownloadTitle">五、查看和下载</h4>
+                        <h4 data-i18n="video.thumbnail.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.usageDownload1"><strong>预览效果：</strong>提取完成后以网格展示全部封面。</li>
-                            <li data-i18n="video.thumbnail.usageDownload2"><strong>查看信息：</strong>每张封面显示时间点、尺寸和文件大小。</li>
-                            <li data-i18n="video.thumbnail.usageDownload3"><strong>一键下载：</strong>支持单张下载或打包ZIP批量下载。</li>
+                            <li data-i18n="video.thumbnail.usageDownload1"><strong>预览帧图：</strong>提取的帧以缩略图形式显示——可以逐张查看选择最佳帧。</li>
+                            <li data-i18n="video.thumbnail.usageDownload2"><strong>单张下载：</strong>点击每张帧图下方的下载按钮单独保存。</li>
+                            <li data-i18n="video.thumbnail.usageDownload3"><strong>批量下载：</strong>点击"全部下载"打包为 ZIP 文件。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.usageSceneTitle">六、适用场景</h4>
+                        <h4 data-i18n="video.thumbnail.usageSceneTitle">五、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.usageScene1"><strong>视频封面：</strong>为上传的视频制作平台封面图。</li>
-                            <li data-i18n="video.thumbnail.usageScene2"><strong>内容配图：</strong>从视频中截取画面作为文章配图。</li>
-                            <li data-i18n="video.thumbnail.usageScene3"><strong>缩略图制作：</strong>为视频列表批量生成缩略图。</li>
-                            <li data-i18n="video.thumbnail.usageScene4"><strong>精彩瞬间：</strong>定格保存视频中的精彩画面。</li>
+                            <li data-i18n="video.thumbnail.usageScene1"><strong>视频封面：</strong>为 YouTube/B站/抖音 视频选择最佳封面图——从视频中提取最吸引眼球的一帧。</li>
+                            <li data-i18n="video.thumbnail.usageScene2"><strong>教程截图：</strong>从教程视频中截取每个关键步骤的画面——替代手动截图的低效流程。</li>
+                            <li data-i18n="video.thumbnail.usageScene3"><strong>缩略图生成：</strong>批量提取多帧作为视频预览缩略图——视频编辑软件的"时间线缩略图"就是这个原理。</li>
+                            <li data-i18n="video.thumbnail.usageScene4"><strong>证据提取：</strong>从监控录像或行车记录仪视频中提取特定时刻的画面——用于记录或举证。</li>
                         </ul>
                     </div>
                 </article>
@@ -301,37 +284,36 @@
                         <h3 data-i18n="video.thumbnail.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.thumbnail.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="video.thumbnail.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.noteSecurity1">所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
-                            <li data-i18n="video.thumbnail.noteSecurity2">视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                            <li data-i18n="video.thumbnail.noteSecurity3">建议在处理敏感视频时使用隐私模式浏览。</li>
+                            <li data-i18n="video.thumbnail.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。</li>
+                            <li data-i18n="video.thumbnail.noteSecurity2"><strong>内存管理：</strong>处理完成后自动释放内存。</li>
+                            <li data-i18n="video.thumbnail.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.notesPerfTitle">二、处理性能</h4>
+                        <h4 data-i18n="video.thumbnail.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.notePerf1">提取封面基于浏览器原生视频解码，速度快、资源占用低。</li>
-                            <li data-i18n="video.thumbnail.notePerf2">批量提取时需要逐帧定位，张数越多耗时越长。</li>
-                            <li data-i18n="video.thumbnail.notePerf3">超大分辨率视频（如4K）提取时会占用较多内存。</li>
+                            <li data-i18n="video.thumbnail.notePerf1"><strong>单帧速度：</strong>单帧提取通常 1-3 秒完成——FFmpeg 直接 seek 到目标时间点解码一帧。</li>
+                            <li data-i18n="video.thumbnail.notePerf2"><strong>批量速度：</strong>批量提取需要逐帧 seek 和解码——每帧约 1-3 秒。10 帧约 10-30 秒。</li>
+                            <li data-i18n="video.thumbnail.notePerf3"><strong>大文件影响：</strong>超大视频的 seek 时间可能较长——但提取本身很快。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.notesFormatTitle">三、格式限制</h4>
+                        <h4 data-i18n="video.thumbnail.notesFormatTitle">输出格式说明</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.noteFormat1">依赖浏览器解码能力，推荐 MP4 (H.264) 和 WebM 格式。</li>
-                            <li data-i18n="video.thumbnail.noteFormat2">部分格式（如某些编码的 MOV、MKV）可能无法预览或提取。</li>
-                            <li data-i18n="video.thumbnail.noteFormat3">格式不支持时可先用视频格式转换工具转为 MP4。</li>
+                            <li data-i18n="video.thumbnail.noteFormat1"><strong>PNG：</strong>无损格式——画质最好但文件最大。适合需要后期编辑的场景。</li>
+                            <li data-i18n="video.thumbnail.noteFormat2"><strong>JPG：</strong>有损压缩——文件小、兼容性好。推荐高质量设置用于封面图。</li>
+                            <li data-i18n="video.thumbnail.noteFormat3"><strong>WebP：</strong>高压缩率——同等画质比 JPG 小 25%-34%。现代浏览器支持。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.notesSizeTitle">四、文件大小</h4>
+                        <h4 data-i18n="video.thumbnail.notesSizeTitle">尺寸与文件大小</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.noteSize1">PNG为无损格式，高分辨率视频截取的图片文件较大。</li>
-                            <li data-i18n="video.thumbnail.noteSize2">对体积敏感时建议选择 JPG 或 WebP 格式。</li>
-                            <li data-i18n="video.thumbnail.noteSize3">缩小尺寸缩放比例可显著减小图片体积。</li>
+                            <li data-i18n="video.thumbnail.noteSize1"><strong>原始分辨率：</strong>1080p 视频的帧图约 200 万像素——PNG 约 2-5MB，JPG 约 200-500KB。</li>
+                            <li data-i18n="video.thumbnail.noteSize2"><strong>50% 缩放：</strong>像素总量减少 75%——文件大小约减少 70%-80%。适合网页使用。</li>
+                            <li data-i18n="video.thumbnail.noteSize3"><strong>批量 ZIP：</strong>10 张 JPG 帧图打包后约 2-5MB——方便一次性下载。</li>
                         </ul>
-                        <h4 data-i18n="video.thumbnail.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="video.thumbnail.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.thumbnail.noteFaq1"><strong>提取失败：</strong>检查视频文件是否损坏或格式受浏览器支持。</li>
-                            <li data-i18n="video.thumbnail.noteFaq2"><strong>画面黑屏：</strong>部分视频开头为黑帧，建议避开开头几秒或使用批量模式。
-                            </li>
-                            <li data-i18n="video.thumbnail.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li data-i18n="video.thumbnail.noteFaq4"><strong>定位慢：</strong>时长较长的视频定位到后面的时间点需要更多解码时间。</li>
+                            <li data-i18n="video.thumbnail.noteFaq1"><strong>Q: 提取的帧是模糊的？</strong>A: 可能截取到了运动模糊的帧。尝试前后调整时间点——选择画面最清晰的瞬间。</li>
+                            <li data-i18n="video.thumbnail.noteFaq2"><strong>Q: 时间点不精确？</strong>A: MP4 的关键帧间隔导致 seek 精度有限。通常偏差在 1-2 秒内。</li>
+                            <li data-i18n="video.thumbnail.noteFaq3"><strong>Q: 能提取 4K 视频的帧吗？</strong>A: 可以。4K 帧图约 800 万像素——PNG 可能 10MB+，建议用 JPG 格式。</li>
+                            <li data-i18n="video.thumbnail.noteFaq4"><strong>Q: 能提取特定区域的帧吗？</strong>A: 当前版本提取完整帧。如需裁剪，提取后使用图片裁剪工具处理。</li>
                         </ul>
                     </div>
                 </article>

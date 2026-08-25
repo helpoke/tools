@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
 
     <!-- 引入PDF.js和jsPDF库 -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script> -->
@@ -104,8 +104,7 @@
                     <span class="upload-icon">+</span>
                     <span class="upload-text" data-i18n="docu.watermark.uploadText">点击选择 PDF 文档</span>
                 </label>
-                <p class="file-info" data-i18n="docu.watermark.fileInfo">
-                    注：Word文件需先转换为PDF格式后添加水印。最大支持200MB文件，建议文件大小在100MB以下。</p>
+                <p class="file-info" data-i18n="docu.watermark.fileInfo">注：Word文件需先转换为PDF格式后添加水印。最大支持200MB文件，建议文件大小在100MB以下。</p>
             </div>
 
             <!-- 预览区域 -->
@@ -175,76 +174,62 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="docu.watermark.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="docu.watermark.infoIntro">PDF 水印添加：为文档添加文字水印保护版权</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.watermark.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="docu.watermark.problemsTitle">一、PDF 水印的实际用途</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.problem1">为PDF文档添加文字水印。</li>
-                            <li data-i18n="docu.watermark.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="docu.watermark.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="docu.watermark.problem1">企业内部报告需要标注"机密"或"内部资料"才能分发——防止文档被随意传播。设计稿、论文草稿需要添加"DRAFT"水印——避免被误认为最终版本。商业文档需要添加公司名称 Logo 水印——保护知识产权。</li>
+                            <li data-i18n="docu.watermark.problem2">本工具支持单页水印和平铺水印两种模式——单页模式在指定位置放置一个水印（如页面中央、右下角），平铺模式将整个页面铺满重复水印（类似防伪水印效果）。自定义水印文字、颜色、大小、透明度和间距。</li>
+                            <li data-i18n="docu.watermark.problem3">水印以半透明文字的形式叠加在 PDF 页面上——不影响正文内容的阅读，但在视觉上明确标识文档归属。支持 PDF 和 Word 输入格式，处理后的 PDF 保持原始排版和文字质量。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.formatsTitle">二、支持的格式</h4>
+                        <h4 data-i18n="docu.watermark.formatsTitle">二、水印格式</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.formatPdf"><strong>PDF：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="docu.watermark.formatPdf"><strong>文字水印：</strong>使用指定字体、颜色和透明度渲染的文字——叠加在 PDF 页面内容之上。水印可以是单行文字（如"机密"）或多行文字。</li>
                         </ul>
                         <h4 data-i18n="docu.watermark.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
-                            </li>
-                            <li data-i18n="docu.watermark.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="docu.watermark.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="docu.watermark.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
-                            </li>
+                            <li data-i18n="docu.watermark.featureOnline"><strong>自定义水印：</strong>设置水印文字、颜色、大小、透明度和间距——精确控制水印效果。</li>
+                            <li data-i18n="docu.watermark.featurePreview"><strong>实时预览：</strong>修改水印参数后预览区立即更新——所见即所得。</li>
+                            <li data-i18n="docu.watermark.featureExport"><strong>多种位置：</strong>9 种预设位置（九宫格）+ 平铺模式——覆盖所有常见水印布局需求。</li>
+                            <li data-i18n="docu.watermark.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——文档不上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="docu.watermark.infoUsage">使用说明</h3>
+                        <h3 data-i18n="docu.watermark.infoUsage">PDF 水印操作指南</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.watermark.usageUploadTitle">一、上传文档</h4>
+                        <h4 data-i18n="docu.watermark.usageUploadTitle">上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usageSelectFile"><strong>选择文件：</strong>点击"点击选择 PDF
-                                文档"按钮，从本地选择需要添加水印的PDF文件。</li>
-                            <li data-i18n="docu.watermark.usageFileLimit"><strong>文件限制：</strong>最大支持 200MB
-                                的PDF文件，建议文件大小在100MB以下。</li>
-                            <li data-i18n="docu.watermark.usageWordDoc"><strong>Word文档：</strong>Word文件需先转换为PDF格式后添加水印。
-                            </li>
-                            <li data-i18n="docu.watermark.usageAutoPreview"><strong>自动预览：</strong>上传后系统会自动解析PDF并显示第一页预览。
-                            </li>
+                            <li data-i18n="docu.watermark.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——支持 PDF 和 Word 格式。</li>
+                            <li data-i18n="docu.watermark.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析并渲染预览。</li>
+                            <li data-i18n="docu.watermark.usageWordDoc"><strong>Word 支持：</strong>Word 文件自动转换后处理——水印效果与 PDF 一致。</li>
+                            <li data-i18n="docu.watermark.usageAutoPreview"><strong>预览加载：</strong>逐页渲染预览——可以在预览中查看水印效果。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.usageSettingsTitle">二、设置水印</h4>
+                        <h4 data-i18n="docu.watermark.usageSettingsTitle">水印设置</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usagePosition">
-                                <strong>水印位置：</strong>可选择"铺满（整个页面）"或特定位置（居中、左上角、左下角、右上角、右下角等），或选择"其他位置（拖动/点击）"自定义位置。
-                            </li>
-                            <li data-i18n="docu.watermark.usageText"><strong>水印文字：</strong>输入水印文字，最多支持50个字符。</li>
-                            <li data-i18n="docu.watermark.usageColor"><strong>文字颜色：</strong>点击颜色选择器设置水印文字颜色。</li>
-                            <li data-i18n="docu.watermark.usageSize"><strong>文字大小：</strong>拖动滑块调整水印文字大小，范围为10-100px。
-                            </li>
-                            <li data-i18n="docu.watermark.usageOpacity">
-                                <strong>水印透明度：</strong>拖动滑块调整水印透明度，范围为0-1，值越小越透明。</li>
-                            <li data-i18n="docu.watermark.usageSpacing">
-                                <strong>水印间距：</strong>拖动滑块调整水印之间的间距，范围为10-200px（仅铺满模式有效）。</li>
+                            <li data-i18n="docu.watermark.usagePosition"><strong>选择位置：</strong>从九宫格中选择水印位置——中央、四角、四边中点共 9 种预设。</li>
+                            <li data-i18n="docu.watermark.usageText"><strong>输入文字：</strong>在水印文字输入框中输入水印内容——如"机密"、"DRAFT"、"内部资料"。</li>
+                            <li data-i18n="docu.watermark.usageColor"><strong>选择颜色：</strong>点击颜色选择器设置水印颜色——建议使用浅灰色（#CCCCCC）降低对正文的干扰。</li>
+                            <li data-i18n="docu.watermark.usageSize"><strong>调整大小：</strong>设置水印字体大小——建议 30-60px，太大影响阅读，太小不够醒目。</li>
+                            <li data-i18n="docu.watermark.usageOpacity"><strong>调整透明度：</strong>设置水印透明度——建议 0.1-0.3，半透明效果最佳。</li>
+                            <li data-i18n="docu.watermark.usageSpacing"><strong>调整间距：</strong>平铺模式下设置水印之间的间距——间距越小水印越密集。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.usageAdjustTitle">三、调整位置</h4>
+                        <h4 data-i18n="docu.watermark.usageAdjustTitle">调整效果</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usageTileMode"><strong>铺满模式：</strong>水印会均匀铺满整个页面。</li>
-                            <li data-i18n="docu.watermark.usageFixedPosition"><strong>固定位置：</strong>水印会显示在所选位置。</li>
-                            <li data-i18n="docu.watermark.usageCustomPosition">
-                                <strong>自定义位置：</strong>可以手动拖动水印到任意位置，或点击页面指定位置移动水印。</li>
-                            <li data-i18n="docu.watermark.usageRealtimePreview"><strong>实时预览：</strong>所有设置调整都会实时显示在预览区域。
-                            </li>
+                            <li data-i18n="docu.watermark.usageTileMode"><strong>平铺模式：</strong>选择"平铺"位置——水印自动重复铺满整个页面。</li>
+                            <li data-i18n="docu.watermark.usageFixedPosition"><strong>固定位置：</strong>选择九宫格中的某个位置——水印只出现在指定位置。</li>
+                            <li data-i18n="docu.watermark.usageCustomPosition"><strong>自定义：</strong>平铺模式支持自定义旋转角度——斜向水印更专业。</li>
+                            <li data-i18n="docu.watermark.usageRealtimePreview"><strong>实时预览：</strong>修改任何参数后预览立即更新——确认效果满意后再处理。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.usageDownloadTitle">四、下载文档</h4>
+                        <h4 data-i18n="docu.watermark.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.usageClickDownload"><strong>点击下载：</strong>点击"下载水印文档"按钮开始处理并下载。
-                            </li>
-                            <li data-i18n="docu.watermark.usageProgress"><strong>查看进度：</strong>处理过程中会显示进度条和百分比。</li>
-                            <li data-i18n="docu.watermark.usageSaveResult"><strong>保存结果：</strong>下载完成后保存到本地。</li>
+                            <li data-i18n="docu.watermark.usageClickDownload"><strong>点击下载：</strong>点击"下载"按钮保存添加水印后的 PDF。</li>
+                            <li data-i18n="docu.watermark.usageProgress"><strong>等待完成：</strong>进度条显示处理进度——大文件可能需要数十秒。</li>
+                            <li data-i18n="docu.watermark.usageSaveResult"><strong>检查结果：</strong>下载后打开 PDF 确认水印位置和效果——必要时调整参数重新处理。</li>
                         </ul>
                     </div>
                 </article>
@@ -253,45 +238,38 @@
                         <h3 data-i18n="docu.watermark.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="docu.watermark.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="docu.watermark.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="docu.watermark.noteSecurity2">建议不要在公共设备上处理包含敏感信息的文档。</li>
+                            <li data-i18n="docu.watermark.noteSecurity1"><strong>纯前端处理：</strong>所有处理在浏览器中完成——文档不上传到服务器。</li>
+                            <li data-i18n="docu.watermark.noteSecurity2"><strong>水印不可删除：</strong>添加水印后的 PDF 中，水印已嵌入页面内容——普通用户无法轻易去除。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.notesProcessTitle">二、处理过程</h4>
+                        <h4 data-i18n="docu.watermark.notesProcessTitle">处理说明</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.noteProcess1">处理期间不要关闭浏览器或刷新页面，否则会导致处理失效。</li>
-                            <li data-i18n="docu.watermark.noteProcess2">大文件处理可能需要较长时间，请耐心等待。</li>
-                            <li data-i18n="docu.watermark.noteProcess3">处理完成后及时下载结果，关闭页面后结果将丢失。</li>
+                            <li data-i18n="docu.watermark.noteProcess1"><strong>水印层级：</strong>水印叠加在页面内容之上——可能遮挡部分正文文字。调整透明度可以减少遮挡。</li>
+                            <li data-i18n="docu.watermark.noteProcess2"><strong>批量处理：</strong>水印自动应用到所有页面——不支持只对部分页面添加水印。</li>
+                            <li data-i18n="docu.watermark.noteProcess3"><strong>排版影响：</strong>水印不影响原始文字的可选中和可复制性——水印是独立的图像层。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.notesFormatTitle">三、文件格式</h4>
+                        <h4 data-i18n="docu.watermark.notesFormatTitle">格式说明</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.noteFormat1">仅支持 PDF 格式文件。</li>
-                            <li data-i18n="docu.watermark.noteFormat2">Word文档需先转换为PDF格式。</li>
-                            <li data-i18n="docu.watermark.noteFormat3">某些加密或损坏的PDF文件可能无法处理。</li>
-                            <li data-i18n="docu.watermark.noteFormat4">建议文件大小在100MB以下以获得更好的处理体验。</li>
+                            <li data-i18n="docu.watermark.noteFormat1"><strong>输入格式：</strong>支持 PDF 和 Word（.docx）格式。</li>
+                            <li data-i18n="docu.watermark.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——水印以半透明文字嵌入。</li>
+                            <li data-i18n="docu.watermark.noteFormat3"><strong>字体支持：</strong>水印使用系统默认字体——不支持自定义字体文件。</li>
+                            <li data-i18n="docu.watermark.noteFormat4"><strong>中文支持：</strong>水印文字支持中文——确保浏览器安装了中文字体。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.notesEffectTitle">四、水印效果</h4>
+                        <h4 data-i18n="docu.watermark.notesEffectTitle">效果说明</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.noteEffectTile"><strong>铺满模式：</strong>水印会以对角线方式均匀铺满整个页面。</li>
-                            <li data-i18n="docu.watermark.noteEffectOpacity">
-                                <strong>透明度：</strong>建议设置为0.2-0.5，既可见又不影响阅读。</li>
-                            <li data-i18n="docu.watermark.noteEffectSize"><strong>文字大小：</strong>建议设置为20-30px，根据文档内容调整。
-                            </li>
-                            <li data-i18n="docu.watermark.noteEffectColor"><strong>颜色选择：</strong>建议使用灰色或浅色，避免影响文档可读性。
-                            </li>
+                            <li data-i18n="docu.watermark.noteEffectTile"><strong>平铺效果：</strong>平铺模式下水印自动重复铺满页面——类似防伪水印效果。</li>
+                            <li data-i18n="docu.watermark.noteEffectOpacity"><strong>透明度建议：</strong>0.1-0.2 适合正式文档（低调标识），0.3-0.5 适合草稿/内部文档（醒目提示）。</li>
+                            <li data-i18n="docu.watermark.noteEffectSize"><strong>大小建议：</strong>单页模式 40-60px，平铺模式 20-40px——根据页面大小调整。</li>
+                            <li data-i18n="docu.watermark.noteEffectColor"><strong>颜色建议：</strong>浅灰色（#CCCCCC）最通用——不干扰正文阅读。红色适合"机密"标记，蓝色适合"DRAFT"标记。</li>
                         </ul>
-                        <h4 data-i18n="docu.watermark.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="docu.watermark.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.watermark.faqUploadFail">
-                                <strong>上传失败：</strong>检查文件是否为有效的PDF格式，文件大小是否超过限制。</li>
-                            <li data-i18n="docu.watermark.faqWatermarkNotShown">
-                                <strong>水印不显示：</strong>确认已输入水印文字，并检查透明度设置。</li>
-                            <li data-i18n="docu.watermark.faqDownloadFail"><strong>下载失败：</strong>检查浏览器下载权限，尝试使用其他浏览器。
-                            </li>
-                            <li data-i18n="docu.watermark.faqPositionWrong">
-                                <strong>位置不对：</strong>选择正确的位置选项，或使用自定义位置模式拖动调整。</li>
-                            <li data-i18n="docu.watermark.faqSlow"><strong>处理缓慢：</strong>大文件或多页面PDF处理时间较长，请耐心等待。</li>
+                            <li data-i18n="docu.watermark.faqUploadFail"><strong>Q: 上传失败？</strong>A: 检查文件格式是否为 PDF 或 Word——加密 PDF 不支持。</li>
+                            <li data-i18n="docu.watermark.faqWatermarkNotShown"><strong>Q: 水印看不到？</strong>A: 检查透明度是否设得太低——0.05 以下几乎不可见。也检查颜色是否与背景色接近。</li>
+                            <li data-i18n="docu.watermark.faqDownloadFail"><strong>Q: 下载失败？</strong>A: 大文件处理可能需要较长时间——确保网络连接稳定。</li>
+                            <li data-i18n="docu.watermark.faqPositionWrong"><strong>Q: 水印位置偏移？</strong>A: 不同页面尺寸可能导致位置差异——预览中检查各页面效果。</li>
+                            <li data-i18n="docu.watermark.faqSlow"><strong>Q: 处理很慢？</strong>A: 大文件（>50MB）或高页数（>100 页）处理较慢——这是正常的。</li>
                         </ul>
                     </div>
                 </article>

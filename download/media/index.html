@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <script src="../lib/jszip.min.js"></script>
     <title>媒体文件批量下载工具</title>
     <meta property="og:title" content="媒体文件批量下载工具">
@@ -98,16 +98,14 @@
 
                     <div id="url-tab" class="tab-content active">
                         <label for="streamUrls" data-i18n="download.media.urlLabel">输入资源地址 (每行一个):</label>
-                        <p class="helper-text" data-i18n="download.media.urlHelper">系统会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议
-                        </p>
+                        <p class="helper-text" data-i18n="download.media.urlHelper">系统会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议</p>
                         <textarea id="streamUrls" data-i18n-placeholder="download.media.urlPlaceholder"
                             placeholder="例如: https://example.com/image.jpg 或 example.com/video.mp4 或 任何包含http的地址"></textarea>
                     </div>
 
                     <div id="extract-tab" class="tab-content">
                         <label for="websiteUrl" data-i18n="download.media.websiteLabel">输入网站URL:</label>
-                        <p class="helper-text" data-i18n="download.media.extractHelper">输入完整的网页地址，系统将尝试提取页面中的所有图片（仅限当前页面的静态图片）
-                        </p>
+                        <p class="helper-text" data-i18n="download.media.extractHelper">输入完整的网页地址，系统将尝试提取页面中的所有图片（仅限当前页面的静态图片）</p>
                         <input type="text" id="websiteUrl" data-i18n-placeholder="download.media.websitePlaceholder"
                             placeholder="例如: https://example.com/page.html" class="website-input">
                         <button id="extractImages" class="extract-btn" data-i18n="download.media.extractBtn">提取图片</button>
@@ -189,85 +187,67 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="download.media.infoIntro">工具介绍</h3>
+                            <h3 data-i18n="download.media.infoIntro">媒体下载：网页图片/视频提取与批量下载工具</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="download.media.problemsTitle">一、解决的问题</h4>
+                            <h4 data-i18n="download.media.problemsTitle">一、媒体下载的应用场景</h4>
                             <ul>
-                                <li data-i18n="download.media.problem1">从网页下载图片、视频、音频等媒体文件。</li>
-                                <li data-i18n="download.media.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li data-i18n="download.media.problem3">无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="download.media.problem1">设计师需要从参考网站批量下载高清图片——手动右键保存效率极低。开发者需要提取网页中所有图标资源——逐张查找费时费力。用户需要下载网页中嵌入的视频——但视频地址被隐藏在页面源码中。</li>
+                                <li data-i18n="download.media.problem2">本工具提供三种下载模式：直接 URL 批量下载（粘贴多个文件链接，一键下载）、网页图片提取（输入网页地址，自动提取页面中所有图片）、网页视频提取（输入网页地址，自动检测页面中的视频源地址）。</li>
+                                <li data-i18n="download.media.problem3">支持并发下载（同时下载多个文件）、文件类型筛选（只下载图片/视频/全部）、最小文件大小过滤（跳过小图标）、ZIP 打包下载（所有文件打包为一个 ZIP）。所有下载通过浏览器原生 fetch API 完成。</li>
                             </ul>
-                            <h4 data-i18n="download.media.formatTitle">二、支持的格式</h4>
+                            <h4 data-i18n="download.media.formatTitle">二、支持的媒体格式</h4>
                             <ul>
-                                <li data-i18n="download.media.formatImage"><strong>图片：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="download.media.formatVideo"><strong>视频：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="download.media.formatAudio"><strong>音频：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="download.media.formatImage"><strong>图片格式：</strong>JPG、PNG、GIF、WebP、SVG、ICO、BMP——覆盖所有常见图片格式。提取时自动检测图片 MIME 类型。</li>
+                                <li data-i18n="download.media.formatVideo"><strong>视频格式：</strong>MP4、WebM、OGG、M3U8（HLS 流媒体）——支持直接链接和流媒体地址。注意：DRM 保护的视频无法下载。</li>
+                                <li data-i18n="download.media.formatAudio"><strong>音频格式：</strong>MP3、AAC、OGG、WAV——网页中嵌入的音频文件也可以提取。</li>
                             </ul>
                             <h4 data-i18n="download.media.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="download.media.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="download.media.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="download.media.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="download.media.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="download.media.featureOnline"><strong>URL 批量下载：</strong>粘贴多个文件链接（每行一个）——支持自动修正不规范的 URL 格式。</li>
+                                <li data-i18n="download.media.featurePreview"><strong>网页提取：</strong>输入网页地址——自动提取页面中的图片/视频缩略图和源地址。</li>
+                                <li data-i18n="download.media.featureExport"><strong>ZIP 打包：</strong>多个文件自动打包为 ZIP 下载——不需要逐个保存。</li>
+                                <li data-i18n="download.media.featureSecurity"><strong>浏览器下载：</strong>使用浏览器原生 fetch API——下载行为与正常浏览一致。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="download.media.infoUsage">使用说明</h3>
+                            <h3 data-i18n="download.media.infoUsage">媒体下载操作指南</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="download.media.usageUrlTitle">一、直接URL下载</h4>
+                            <h4 data-i18n="download.media.usageUrlTitle">直接 URL 下载</h4>
                             <ul>
-                                <li data-i18n="download.media.usageUrlInput"><strong>输入URL：</strong>在文本框中输入媒体文件的URL地址，每行一个。</li>
-                                <li data-i18n="download.media.usageUrlFormat">
-                                    <strong>URL格式化：</strong>系统会自动格式化不规范的URL地址，包括移除http/https之前的符号和添加缺失的协议。
-                                </li>
-                                <li data-i18n="download.media.usageUrlFormatSupport">
-                                    <strong>支持格式：</strong>支持图片（JPG、PNG、GIF、WebP等）和视频（MP4、WebM、FLV等）格式。
-                                </li>
+                                <li data-i18n="download.media.usageUrlInput"><strong>输入链接：</strong>每行输入一个文件下载链接——支持 HTTP/HTTPS 协议。</li>
+                                <li data-i18n="download.media.usageUrlFormat"><strong>自动修正：</strong>工具自动格式化不规范的 URL——移除前导符号、补充缺失的协议头。</li>
+                                <li data-i18n="download.media.usageUrlFormatSupport"><strong>批量支持：</strong>支持数百个链接同时下载——并发数可配置。</li>
                             </ul>
-                            <h4 data-i18n="download.media.usageExtractImageTitle">二、网页图片提取</h4>
+                            <h4 data-i18n="download.media.usageExtractImageTitle">网页图片提取</h4>
                             <ul>
-                                <li data-i18n="download.media.usageExtractUrl"><strong>输入网址：</strong>在输入框中输入网页地址，如
-                                    <code>https://example.com/page.html</code>。
-                                </li>
-                                <li data-i18n="download.media.usageExtractImage">
-                                    <strong>提取图片：</strong>点击"提取图片"按钮，系统将尝试提取页面中的所有静态图片。
-                                </li>
-                                <li data-i18n="download.media.usageSelectImage"><strong>选择图片：</strong>可以勾选或取消勾选图片，选择需要下载的图片。</li>
-                                <li data-i18n="download.media.usageAddToQueue"><strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的图片添加到下载列表。
-                                </li>
+                                <li data-i18n="download.media.usageExtractUrl"><strong>输入网页地址：</strong>输入完整的网页 URL——工具自动请求页面并提取图片。</li>
+                                <li data-i18n="download.media.usageExtractImage"><strong>自动提取：</strong>解析页面 HTML 提取所有 img 标签的 src 属性——包括懒加载图片。</li>
+                                <li data-i18n="download.media.usageSelectImage"><strong>选择图片：</strong>提取结果显示缩略图——勾选需要下载的图片。</li>
+                                <li data-i18n="download.media.usageAddToQueue"><strong>添加到队列：</strong>选中的图片添加到下载队列——可以多次提取不同页面后统一下载。</li>
                             </ul>
-                            <h4 data-i18n="download.media.usageExtractVideoTitle">三、网页视频提取</h4>
+                            <h4 data-i18n="download.media.usageExtractVideoTitle">网页视频提取</h4>
                             <ul>
-                                <li data-i18n="download.media.usageVideoUrl"><strong>输入网址：</strong>在输入框中输入包含视频的网页地址。</li>
-                                <li data-i18n="download.media.usageExtractVideo">
-                                    <strong>提取视频：</strong>点击"提取视频"按钮，系统将尝试提取页面中的所有视频资源。
-                                </li>
-                                <li data-i18n="download.media.usageSelectVideo"><strong>选择视频：</strong>可以勾选或取消勾选视频，选择需要下载的视频。</li>
-                                <li data-i18n="download.media.usageAddVideoQueue">
-                                    <strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的视频添加到下载列表。
-                                </li>
+                                <li data-i18n="download.media.usageVideoUrl"><strong>输入网页地址：</strong>输入包含视频的网页 URL。</li>
+                                <li data-i18n="download.media.usageExtractVideo"><strong>自动检测：</strong>解析页面中的 video/source 标签和 JavaScript 中的视频源地址。</li>
+                                <li data-i18n="download.media.usageSelectVideo"><strong>选择视频：</strong>检测到的视频显示列表——勾选需要下载的视频。</li>
+                                <li data-i18n="download.media.usageAddVideoQueue"><strong>添加到队列：</strong>选中的视频添加到下载队列。</li>
                             </ul>
-                            <h4 data-i18n="download.media.usageSettingsTitle">四、下载设置</h4>
+                            <h4 data-i18n="download.media.usageSettingsTitle">下载设置</h4>
                             <ul>
-                                <li data-i18n="download.media.usageConcurrency"><strong>并发下载数：</strong>设置同时下载的文件数量，范围为1-10，默认3。
-                                </li>
-                                <li data-i18n="download.media.usageFileType"><strong>文件类型筛选：</strong>可选择"全部类型"、"仅图片"或"仅视频"。</li>
-                                <li data-i18n="download.media.usageMinSize">
-                                    <strong>最小图片尺寸：</strong>设置过滤的最小图片尺寸，可选择不限制、100×100、200×200或500×500。
-                                </li>
+                                <li data-i18n="download.media.usageConcurrency"><strong>并发数：</strong>设置同时下载的文件数——建议 3-5 个，过多可能触发网站反爬。</li>
+                                <li data-i18n="download.media.usageFileType"><strong>文件类型：</strong>筛选下载的文件类型——全部、仅图片、仅视频。</li>
+                                <li data-i18n="download.media.usageMinSize"><strong>最小大小：</strong>设置最小文件大小——过滤掉小图标和缩略图。</li>
                             </ul>
-                            <h4 data-i18n="download.media.usageStartTitle">五、开始下载</h4>
+                            <h4 data-i18n="download.media.usageStartTitle">开始下载</h4>
                             <ul>
-                                <li data-i18n="download.media.usageStartClick"><strong>点击下载：</strong>点击"开始下载"按钮开始批量下载。</li>
-                                <li data-i18n="download.media.usageStartProgress">
-                                    <strong>查看进度：</strong>下载进度会实时显示，包括总文件数、已完成数、失败数和跳过数。
-                                </li>
-                                <li data-i18n="download.media.usageStartClear"><strong>清空列表：</strong>点击"清空列表"按钮可以清除所有下载任务。</li>
+                                <li data-i18n="download.media.usageStartClick"><strong>点击下载：</strong>点击"开始下载"按钮——队列中的文件按顺序下载。</li>
+                                <li data-i18n="download.media.usageStartProgress"><strong>查看进度：</strong>进度面板显示每个文件的下载状态——等待中、下载中、完成、失败。</li>
+                                <li data-i18n="download.media.usageStartClear"><strong>清除队列：</strong>点击"清除"按钮清空下载队列——重新开始。</li>
                             </ul>
                         </div>
                     </article>
@@ -276,43 +256,34 @@
                             <h3 data-i18n="download.media.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="download.media.notesLimitTitle">一、下载限制</h4>
+                            <h4 data-i18n="download.media.notesLimitTitle">限制说明</h4>
                             <ul>
-                                <li data-i18n="download.media.noteCors">
-                                    <strong>CORS限制：</strong>大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源。
-                                </li>
-                                <li data-i18n="download.media.noteHotlink">
-                                    <strong>防盗链保护：</strong>许多图片托管站点实施了防盗链机制，会检查请求的Referer头部。
-                                </li>
-                                <li data-i18n="download.media.noteAccess"><strong>访问控制：</strong>部分服务器会检测请求是否来自真实的浏览器环境。</li>
-                                <li data-i18n="download.media.noteNetwork"><strong>网络限制：</strong>某些服务器可能故意设置连接超时或不稳定来阻止批量下载。</li>
+                                <li data-i18n="download.media.noteCors"><strong>CORS 限制：</strong>跨域请求受浏览器安全策略限制——某些网站的资源可能无法提取。工具会提示 CORS 错误。</li>
+                                <li data-i18n="download.media.noteHotlink"><strong>防盗链：</strong>某些网站设置了防盗链——直接下载链接可能返回 403 错误。</li>
+                                <li data-i18n="download.media.noteAccess"><strong>登录资源：</strong>需要登录才能访问的资源无法提取——工具不携带登录 Cookie。</li>
+                                <li data-i18n="download.media.noteNetwork"><strong>网络依赖：</strong>下载需要网络连接——提取结果取决于目标网站的响应。</li>
                             </ul>
-                            <h4 data-i18n="download.media.notesHandleTitle">二、处理方式</h4>
+                            <h4 data-i18n="download.media.notesHandleTitle">处理建议</h4>
                             <ul>
-                                <li data-i18n="download.media.noteHandleUnavailable">
-                                    <strong>无法下载的资源：</strong>系统会将其标记为"链接已保存"状态，您可以通过"在新标签页中打开保存的链接"按钮在浏览器中访问这些资源。
-                                </li>
-                                <li data-i18n="download.media.noteHandleManual">
-                                    <strong>手动下载：</strong>对于无法自动下载的资源，可以右键点击链接，选择"在新标签页中打开"，然后右键保存。
-                                </li>
+                                <li data-i18n="download.media.noteHandleUnavailable"><strong>资源不可用：</strong>如果提取失败，尝试直接在浏览器中打开资源链接——确认资源是否可访问。</li>
+                                <li data-i18n="download.media.noteHandleManual"><strong>手动下载：</strong>自动提取失败时，可以在浏览器开发者工具的 Network 面板中手动查找资源链接。</li>
                             </ul>
-                            <h4 data-i18n="download.media.notesSecurityTitle">三、数据安全</h4>
+                            <h4 data-i18n="download.media.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="download.media.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li data-i18n="download.media.noteSecurity2">建议不要在公共设备上处理包含敏感信息的资源。</li>
+                                <li data-i18n="download.media.noteSecurity1"><strong>浏览器下载：</strong>所有下载通过浏览器原生 API 完成——不经过第三方服务器中转。</li>
+                                <li data-i18n="download.media.noteSecurity2"><strong>版权提醒：</strong>下载的媒体文件可能受版权保护——仅用于个人学习和合理使用。</li>
                             </ul>
-                            <h4 data-i18n="download.media.notesProcessTitle">四、处理过程</h4>
+                            <h4 data-i18n="download.media.notesProcessTitle">处理说明</h4>
                             <ul>
-                                <li data-i18n="download.media.noteProcess1">处理期间不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失。</li>
-                                <li data-i18n="download.media.noteProcess2">大文件处理可能需要较长时间，请耐心等待。</li>
+                                <li data-i18n="download.media.noteProcess1"><strong>提取范围：</strong>只提取当前页面的静态资源——不递归提取子页面或 iframe 中的资源。</li>
+                                <li data-i18n="download.media.noteProcess2"><strong>动态加载：</strong>JavaScript 动态加载的图片/视频可能无法提取——工具只解析初始 HTML。</li>
                             </ul>
-                            <h4 data-i18n="download.media.notesFaqTitle">五、常见问题</h4>
+                            <h4 data-i18n="download.media.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="download.media.noteFaq1"><strong>下载失败：</strong>检查网络连接，或尝试降低并发下载数。</li>
-                                <li data-i18n="download.media.noteFaq2"><strong>提取无结果：</strong>某些网站使用JavaScript动态加载图片，无法通过静态方式提取。
-                                </li>
-                                <li data-i18n="download.media.noteFaq3"><strong>文件损坏：</strong>服务器可能返回不完整的文件，尝试重新下载。</li>
-                                <li data-i18n="download.media.noteFaq4"><strong>浏览器限制：</strong>某些浏览器可能限制自动下载，需要手动允许。</li>
+                                <li data-i18n="download.media.noteFaq1"><strong>Q: 提取不到图片？</strong>A: 可能是 CORS 限制或图片通过 JavaScript 动态加载——尝试在浏览器开发者工具中手动查找。</li>
+                                <li data-i18n="download.media.noteFaq2"><strong>Q: 下载失败 403？</strong>A: 目标网站设置了防盗链——尝试直接在浏览器中打开链接下载。</li>
+                                <li data-i18n="download.media.noteFaq3"><strong>Q: 视频无法播放？</strong>A: M3U8/HLS 流媒体地址不能直接下载——需要使用专用 HLS 下载工具。</li>
+                                <li data-i18n="download.media.noteFaq4"><strong>Q: 能下载需要登录的资源吗？</strong>A: 不能——工具不携带登录凭证。需要登录的资源请手动下载。</li>
                             </ul>
                         </div>
                     </article>

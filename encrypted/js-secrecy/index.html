@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -206,13 +206,10 @@
                                 <label for="identifierNamesGenerator"
                                     data-i18n="encrypted.js-secrecy.identifierNamesGeneratorLabel">标识符名称生成器:</label>
                                 <select id="identifierNamesGenerator">
-                                    <option value="hexadecimal" selected data-i18n="encrypted.js-secrecy.optionHexadecimal">
-                                        十六进制(hexadecimal)</option>
+                                    <option value="hexadecimal" selected data-i18n="encrypted.js-secrecy.optionHexadecimal">十六进制(hexadecimal)</option>
                                     <option value="mangled" data-i18n="encrypted.js-secrecy.optionMangled">短名称(mangled)</option>
-                                    <option value="dictionary" data-i18n="encrypted.js-secrecy.optionDictionary">字典(dictionary)
-                                    </option>
-                                    <option value="mangled-shuffled" data-i18n="encrypted.js-secrecy.optionMangledShuffled">
-                                        乱七八糟(mangled-shuffled)</option>
+                                    <option value="dictionary" data-i18n="encrypted.js-secrecy.optionDictionary">字典(dictionary)</option>
+                                    <option value="mangled-shuffled" data-i18n="encrypted.js-secrecy.optionMangledShuffled">乱七八糟(mangled-shuffled)</option>
                                 </select>
                             </div>
 
@@ -241,10 +238,8 @@
                                 <label for="stringArrayWrappersType"
                                     data-i18n="encrypted.js-secrecy.stringArrayWrappersTypeLabel">字符串数组包装器类型:</label>
                                 <select id="stringArrayWrappersType">
-                                    <option value="function" selected data-i18n="encrypted.js-secrecy.optionWrappersFunction">
-                                        功能(function)</option>
-                                    <option value="variable" data-i18n="encrypted.js-secrecy.optionWrappersVariable">变量(variable)
-                                    </option>
+                                    <option value="function" selected data-i18n="encrypted.js-secrecy.optionWrappersFunction">功能(function)</option>
+                                    <option value="variable" data-i18n="encrypted.js-secrecy.optionWrappersVariable">变量(variable)</option>
                                 </select>
                             </div>
 
@@ -262,8 +257,7 @@
 
                             <!-- 字符串数组包装器设置 -->
                             <div class="string-array-wrapper-settings">
-                                <h4 data-i18n="encrypted.js-secrecy.wrapperSettingsTitle"><i class="fas fa-cog"></i> 字符串数组包装器设置
-                                </h4>
+                                <h4 data-i18n="encrypted.js-secrecy.wrapperSettingsTitle"><i class="fas fa-cog"></i> 字符串数组包装器设置</h4>
                                 <div class="string-array-grid">
                                     <div class="number-input-container">
                                         <label for="stringArrayWrappersCount"
@@ -429,8 +423,7 @@
 
                             <div class="input-group">
                                 <div class="input-group-header">
-                                    <div class="input-group-title" data-i18n="encrypted.js-secrecy.domainLockRedirectUrl">域锁定重定向
-                                        URL</div>
+                                    <div class="input-group-title" data-i18n="encrypted.js-secrecy.domainLockRedirectUrl">域锁定重定向 URL</div>
                                 </div>
                                 <div class="input-wrapper">
                                     <input type="text" id="domainLockRedirectUrl"
@@ -484,8 +477,7 @@
 
                         <div class="file-info" id="fileInfo" style="display: none;">
                             <i class="fas fa-file-code"></i>
-                            <span data-i18n="encrypted.js-secrecy.fileInfo">已选择文件: <span id="fileName">未选择文件</span> (<span
-                                    id="fileSize">0</span> KB)</span>
+                            <span data-i18n="encrypted.js-secrecy.fileInfo">已选择文件: <span id="fileName">未选择文件</span> (<span id="fileSize">0</span> KB)</span>
                         </div>
 
                         <!-- 文件列表 -->
@@ -529,108 +521,77 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="encrypted.js-secrecy.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="encrypted.js-secrecy.infoIntro">JavaScript 代码混淆：保护前端代码逻辑的专业工具</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="encrypted.js-secrecy.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.problemsTitle">一、为什么需要 JS 代码混淆</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.problem1">对JavaScript代码进行加密混淆，保护源代码。</li>
-                            <li data-i18n="encrypted.js-secrecy.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="encrypted.js-secrecy.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="encrypted.js-secrecy.problem1">前端代码（JavaScript）完全暴露在浏览器中——任何人都能通过开发者工具查看源代码。如果你的项目包含商业逻辑、API 密钥、加密算法或防作弊机制——源码暴露意味着被抄袭、被逆向、被利用。</li>
+                            <li data-i18n="encrypted.js-secrecy.problem2">代码混淆（Obfuscation）通过一系列变换让代码功能不变但人类不可读——变量名替换为无意义字符、控制流扁平化、字符串数组抽取、死代码注入等。混淆后的代码仍然可以正常运行，但逆向分析的难度呈指数增长。</li>
+                            <li data-i18n="encrypted.js-secrecy.problem3">本工具基于 javascript-obfuscator 库，提供从低到高的多级混淆预设——默认模式、低强度、中强度、高强度。每个预设调整字符串数组、控制流扁平化、死代码注入等参数的组合。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.formatTitle">二、混淆技术详解</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.formatJs"><strong>JavaScript：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="encrypted.js-secrecy.formatJs"><strong>JavaScript 混淆：</strong>通过变量重命名、控制流变换、字符串加密等手段，使代码在功能不变的前提下变得不可读。混淆不是加密——代码仍然被浏览器执行，但人类难以理解逻辑。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.featuresTitle">三、核心功能</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.featuresTitle">三、核心混淆能力</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="encrypted.js-secrecy.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="encrypted.js-secrecy.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
-                            </li>
+                            <li data-i18n="encrypted.js-secrecy.featureOnline"><strong>字符串数组：</strong>将所有字符串抽取到一个数组中——代码中的字符串引用替换为数组索引。配合字符串旋转和索引偏移，大幅增加静态分析难度。</li>
+                            <li data-i18n="encrypted.js-secrecy.featurePreview"><strong>控制流扁平化：</strong>将 if/else、for、while 等结构化控制流转为 switch-case 状态机——消除代码的层级结构，使逻辑追踪极其困难。</li>
+                            <li data-i18n="encrypted.js-secrecy.featureExport"><strong>死代码注入：</strong>插入永远不会执行的代码块——干扰逆向分析者，使其难以区分真实逻辑和干扰代码。</li>
+                            <li data-i18n="encrypted.js-secrecy.featureSecurity"><strong>纯前端处理：</strong>所有混淆在浏览器中完成——代码不上传到服务器。支持批量文件处理（ZIP 打包下载）。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="encrypted.js-secrecy.infoUsage">使用说明</h3>
+                        <h3 data-i18n="encrypted.js-secrecy.infoUsage">混淆操作指南</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="encrypted.js-secrecy.usagePresetsTitle">一、混淆预设</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.usagePresetsTitle">预设模式</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.usagePresetDefault">
-                                <strong>默认，高性能：</strong>平衡混淆程度和代码性能，适合大多数场景。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usagePresetLow"><strong>低混淆，高性能：</strong>轻度混淆，代码体积小，执行速度快。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usagePresetMedium"><strong>中等混淆，性能均衡：</strong>适度混淆，保持较好的性能。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usagePresetHigh">
-                                <strong>高混淆，低性能：</strong>最大程度混淆，代码体积增大，执行速度降低。
-                            </li>
+                            <li data-i18n="encrypted.js-secrecy.usagePresetDefault"><strong>默认模式：</strong>平衡混淆强度和代码体积——适合大多数场景。启用字符串数组和基本重命名。</li>
+                            <li data-i18n="encrypted.js-secrecy.usagePresetLow"><strong>低强度：</strong>轻度混淆——变量重命名 + 基础字符串数组。代码体积增加约 20%，逆向难度低。</li>
+                            <li data-i18n="encrypted.js-secrecy.usagePresetMedium"><strong>中强度：</strong>中等混淆——字符串数组 + 控制流扁平化 + 变量重命名。代码体积增加约 100%，逆向难度中等。</li>
+                            <li data-i18n="encrypted.js-secrecy.usagePresetHigh"><strong>高强度：</strong>最大混淆——全部技术启用。代码体积增加 200-500%，逆向难度极高。适合保护核心商业逻辑。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.usageBasicTitle">二、基础设置</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.usageBasicTitle">基础选项</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.usageCompactCode"><strong>紧凑的代码：</strong>压缩代码，减少空白字符。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageDisableFormatting"><strong>禁止格式化：</strong>阻止代码被美化工具格式化。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageDisableConsoleDebug">
-                                <strong>禁止控制台调试：</strong>阻止通过控制台调试代码。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageDisableConsoleOutput">
-                                <strong>禁止控制台输出：</strong>禁用console.log等输出。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageNumberConversion"><strong>数值转表达式：</strong>将数字转换为表达式形式。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageOptimizeCode"><strong>优化代码结构：</strong>优化代码结构，提高混淆效果。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageSplitStrings"><strong>分割字符串：</strong>将字符串分割成多个部分。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageUnicodeEscape">
-                                <strong>转义Unicode：</strong>将字符转义为Unicode编码。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageRenameGlobals"><strong>重命名全局变量：</strong>混淆全局变量名称。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageRenameMethods"><strong>重命名方法及属性：</strong>混淆方法和属性名称。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageTransformObjectKeys"><strong>转换对象键名：</strong>混淆对象属性键名。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageStringArray"><strong>字符串数组：</strong>将字符串提取到数组中。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageControlFlowFlattening"><strong>控制流平坦化：</strong>打乱代码执行流程。
-                            </li>
+                            <li data-i18n="encrypted.js-secrecy.usageCompactCode"><strong>压缩代码：</strong>去除空白和注释——减小输出体积。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageDisableFormatting"><strong>禁用格式化：</strong>使输出代码无法被格式化工具还原——增加逆向难度。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageDisableConsoleDebug"><strong>禁用调试：</strong>插入反调试代码——阻止开发者工具检查。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageDisableConsoleOutput"><strong>禁用输出：</strong>阻止 console.log 等输出——防止信息泄露。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageNumberConversion"><strong>数字转换：</strong>将数字字面量转为表达式——如 100 变为 0x64 或 (50+50)。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageOptimizeCode"><strong>代码优化：</strong>优化混淆后的代码——去除冗余变换，减小体积。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageSplitStrings"><strong>字符串拆分：</strong>将长字符串拆分为多个短片段——如 "hello" 变为 "hel" + "lo"。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageUnicodeEscape"><strong>Unicode 转义：</strong>将字符串中的字符转为 Unicode 转义序列——增加可读性难度。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageRenameGlobals"><strong>重命名全局变量：</strong>将全局变量名替换为无意义字符——注意：可能影响外部引用。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageRenameMethods"><strong>重命名方法：</strong>将对象方法名替换为无意义字符——注意：可能影响 API 调用。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageTransformObjectKeys"><strong>转换对象键：</strong>将对象字面量的键名转为数组索引访问——如 {name:"John"} 变为 arr[0]:"John"。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageStringArray"><strong>字符串数组：</strong>抽取所有字符串到数组——代码中用函数调用替代直接字符串引用。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageControlFlowFlattening"><strong>控制流扁平化：</strong>将结构化代码转为状态机——消除 if/for/while 的层级结构。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.usageEncryptionTitle">三、加密系数</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.usageEncryptionTitle">加密选项</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.usageDeadCodeInjection">
-                                <strong>注入死代码：</strong>在代码中插入不会执行的代码，增加逆向难度。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageControlFlowThreshold">
-                                <strong>控制流平坦化阈值：</strong>控制控制流平坦化的程度。
-                            </li>
+                            <li data-i18n="encrypted.js-secrecy.usageDeadCodeInjection"><strong>死代码注入：</strong>插入永远不会执行的代码块——干扰逆向分析。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageControlFlowThreshold"><strong>阈值控制：</strong>控制各变换的应用比例——0.75 表示 75% 的代码块被变换。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.usageAdvancedTitle">四、高级设置</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.usageAdvancedTitle">高级选项</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.usageReserveVarNames">
-                                <strong>保留变量名：</strong>指定不被混淆的变量名，如API密钥。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageReserveStrings"><strong>保留字符串：</strong>指定不被混淆的字符串。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageConvertStrings"><strong>强制转换字符串：</strong>指定需要强制转换的字符串。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageDomainLock"><strong>域锁定：</strong>限制代码只能在特定域名下运行。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageDebugProtection"><strong>调试保护间隔：</strong>设置调试保护的检查间隔。
-                            </li>
+                            <li data-i18n="encrypted.js-secrecy.usageReserveVarNames"><strong>保留变量名：</strong>指定不被重命名的变量名列表——保护外部 API 引用。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageReserveStrings"><strong>保留字符串：</strong>指定不被抽取到字符串数组的字符串——保护配置值。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageConvertStrings"><strong>字符串转换：</strong>将字符串属性访问转为括号表示法——如 obj.name 变为 obj["name"]。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageDomainLock"><strong>域名锁定：</strong>限制代码只能在指定域名运行——防止代码被盗用到其他网站。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageDebugProtection"><strong>调试保护：</strong>插入反调试代码——检测并阻止开发者工具的使用。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.usageStepsTitle">五、操作步骤</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.usageStepsTitle">操作步骤</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.usageStepInput">
-                                <strong>输入代码：</strong>在输入框中输入JavaScript代码，或点击"上传JS文件"上传文件。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageStepPreset"><strong>选择预设：</strong>选择合适的混淆预设，或自定义各项设置。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageStepObfuscate"><strong>点击混淆：</strong>点击"混淆加密"按钮开始混淆。</li>
-                            <li data-i18n="encrypted.js-secrecy.usageStepCopy"><strong>复制结果：</strong>点击"复制"按钮将混淆后的代码复制到剪贴板。
-                            </li>
-                            <li data-i18n="encrypted.js-secrecy.usageStepDownload"><strong>下载结果：</strong>点击"下载"按钮将混淆后的代码保存为文件。
-                            </li>
+                            <li data-i18n="encrypted.js-secrecy.usageStepInput"><strong>输入代码：</strong>在编辑器中粘贴 JavaScript 代码，或上传 .js 文件。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageStepPreset"><strong>选择预设：</strong>从默认/低/中/高四个预设中选择——或手动调整各参数。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageStepObfuscate"><strong>点击混淆：</strong>代码立即混淆——输出框显示混淆后的代码。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageStepCopy"><strong>复制结果：</strong>点击"复制"按钮复制混淆后的代码。</li>
+                            <li data-i18n="encrypted.js-secrecy.usageStepDownload"><strong>下载：</strong>点击"下载"按钮保存混淆后的文件。多文件时打包为 ZIP 下载。</li>
                         </ul>
                     </div>
                 </article>
@@ -639,34 +600,34 @@
                         <h3 data-i18n="encrypted.js-secrecy.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="encrypted.js-secrecy.notesPerformanceTitle">一、混淆程度与性能</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.notesPerformanceTitle">性能影响</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.notePerformance1">混淆程度越高，代码执行性能越低，文件体积越大。</li>
-                            <li data-i18n="encrypted.js-secrecy.notePerformance2">高混淆模式可能会导致某些代码无法正常运行，请先测试。</li>
-                            <li data-i18n="encrypted.js-secrecy.notePerformance3">建议在生产环境使用前进行充分测试。</li>
+                            <li data-i18n="encrypted.js-secrecy.notePerformance1"><strong>体积膨胀：</strong>高强度混淆可能使代码体积增加 2-5 倍——字符串数组和控制流扁平化是主要的体积来源。</li>
+                            <li data-i18n="encrypted.js-secrecy.notePerformance2"><strong>运行速度：</strong>混淆后的代码运行速度可能降低 10-30%——控制流扁平化和死代码注入是主要的性能损耗来源。</li>
+                            <li data-i18n="encrypted.js-secrecy.notePerformance3"><strong>权衡建议：</strong>非核心代码使用低强度混淆（保护变量名即可），核心逻辑使用高强度混淆。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.notesReserveTitle">二、保留重要内容</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.notesReserveTitle">保留设置</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.noteReserve1">如果代码中包含外部调用的API密钥、全局变量等，需要添加到"保留变量名"中。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteReserve2">如果代码中包含动态属性访问（如obj[key]），需要添加到"保留字符串"中。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteReserve3">域锁定功能可以防止代码在未授权域名下运行。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteReserve1"><strong>DOM API：</strong>document、window、console 等浏览器 API 不需要保留——混淆器自动识别。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteReserve2"><strong>外部库：</strong>jQuery、Vue 等外部库的全局变量需要添加到保留列表——否则会被重命名导致引用失败。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteReserve3"><strong>动态属性：</strong>通过 obj[key] 动态访问的属性不会被 transformObjectKeys 影响——但 obj.key 形式的直接访问会被变换。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.notesSizeTitle">三、文件大小限制</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.notesSizeTitle">体积控制</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.noteSize1">建议处理的文件大小不超过5MB，过大文件可能导致浏览器卡顿。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteSize2">混淆后的代码体积通常会比原始代码大。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteSize1"><strong>按需混淆：</strong>不是所有代码都需要高强度混淆——公共工具函数可以跳过混淆。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteSize2"><strong>分模块混淆：</strong>核心模块高强度，辅助模块低强度——平衡安全性和性能。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.notesSecurityTitle">四、数据安全</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.notesSecurityTitle">安全声明</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteSecurity2">混淆不是加密，无法完全防止代码被逆向分析，但可以大大增加难度。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteSecurity1"><strong>混淆非加密：</strong>混淆只能增加逆向难度——不能阻止有经验的逆向工程师。不要依赖混淆保护真正的秘密（如 API 密钥）。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteSecurity2"><strong>纯前端处理：</strong>所有混淆在浏览器中完成——代码不上传到服务器。</li>
                         </ul>
-                        <h4 data-i18n="encrypted.js-secrecy.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="encrypted.js-secrecy.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="encrypted.js-secrecy.noteFaq1"><strong>混淆后代码报错：</strong>检查是否有需要保留的变量名或字符串。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteFaq2"><strong>代码执行异常：</strong>降低混淆程度，或检查代码中是否有动态属性访问。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteFaq3"><strong>混淆缓慢：</strong>大文件混淆时间较长，请耐心等待。</li>
-                            <li data-i18n="encrypted.js-secrecy.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteFaq1"><strong>Q: 混淆后代码运行报错？</strong>A: 检查是否重命名了外部引用的变量——将外部变量添加到"保留变量名"列表。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteFaq2"><strong>Q: 混淆后代码体积太大？</strong>A: 降低混淆强度——关闭死代码注入和控制流扁平化可以显著减小体积。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteFaq3"><strong>Q: 混淆能防止代码被复制吗？</strong>A: 不能。混淆只能增加理解难度——代码仍然可以被复制和运行。</li>
+                            <li data-i18n="encrypted.js-secrecy.noteFaq4"><strong>Q: Source Map 能还原混淆吗？</strong>A: 如果有 Source Map 可以完全还原——生产环境部署时务必删除 Source Map 文件。</li>
                         </ul>
                     </div>
                 </article>

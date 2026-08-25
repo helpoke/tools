@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -176,79 +176,78 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.cropping.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="video.cropping.infoIntro">视频裁剪：时间裁剪与画面裁剪的双重精确控制</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.cropping.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="video.cropping.problemsTitle">一、视频裁剪的两个维度</h4>
                         <ul>
-                            <li data-i18n="video.cropping.problem1">裁剪视频片段，支持精确时间定位。</li>
-                            <li data-i18n="video.cropping.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="video.cropping.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="video.cropping.problem1">视频裁剪包含两个完全不同的维度：时间裁剪（截取视频的一段时长）和画面裁剪（裁切视频的画面区域）。录制了一段 10 分钟的视频只需要其中 30 秒？时间裁剪。视频画面边缘有多余内容需要去掉？画面裁剪。本工具同时支持这两种裁剪模式，可以单独使用也可以组合使用。</li>
+                            <li data-i18n="video.cropping.problem2">时间裁剪精确到秒——设置开始时间和结束时间（或开始时间 + 时长），工具从视频中精确截取指定时间段。画面裁剪支持拖拽选区——在视频画面上拖出矩形区域，设置裁剪的坐标和尺寸。两种裁剪都基于 FFmpeg WASM 实现，输出质量与原始视频一致。</li>
+                            <li data-i18n="video.cropping.problem3">画面裁剪还支持实时拖拽选区——在视频帧上直接拖动裁剪框调整位置和大小，所见即所得。裁剪后的视频保持原始编码参数（码率、帧率），不会因为裁剪而损失画质。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="video.cropping.formatTitle">二、时间裁剪的精确控制</h4>
                         <ul>
-                            <li data-i18n="video.cropping.formatMp4"><strong>MP4：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.cropping.formatAvi"><strong>AVI：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="video.cropping.formatMov"><strong>MOV：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="video.cropping.formatMp4"><strong>开始时间 + 结束时间：</strong>直接设置截取的起止时间点。比如从 01:30 截取到 03:45，工具提取这段时间内的所有帧。时间格式支持 HH:MM:SS 和纯秒数两种输入方式。</li>
+                            <li data-i18n="video.cropping.formatAvi"><strong>开始时间 + 时长：</strong>设置开始时间和持续时长。比如从 01:30 开始截取 30 秒。这种模式适合"我知道要截取哪段，但不确定结束时间"的场景。</li>
+                            <li data-i18n="video.cropping.formatMov"><strong>总时长显示：</strong>上传视频后自动显示视频总时长，方便计算截取范围。开始时间和结束时间都不能超过总时长。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.featuresTitle">三、核心功能</h4>
+                        <h4 data-i18n="video.cropping.featuresTitle">三、画面裁剪的交互设计</h4>
                         <ul>
-                            <li data-i18n="video.cropping.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="video.cropping.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="video.cropping.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="video.cropping.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="video.cropping.featureOnline"><strong>拖拽选区：</strong>在视频画面上按住鼠标左键拖动，画出矩形裁剪区域。选区实时显示坐标（X, Y）和尺寸（宽 x 高），精确到像素。</li>
+                            <li data-i18n="video.cropping.featurePreview"><strong>实时预览：</strong>裁剪框拖动时，视频画面实时显示裁剪后的效果——被裁掉的部分半透明遮罩覆盖，保留的部分正常显示。</li>
+                            <li data-i18n="video.cropping.featureExport"><strong>保持宽高比：</strong>可选锁定宽高比（如 16:9、4:3、1:1）——拖动裁剪框时只会等比缩放，不会变形。适合需要特定比例输出的场景。</li>
+                            <li data-i18n="video.cropping.featureSecurity"><strong>坐标精确输入：</strong>除了拖拽选区，还可以直接输入裁剪参数：起始 X/Y 坐标和裁剪宽度/高度。适合需要精确到像素的裁剪场景。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="video.cropping.infoUsage">使用说明</h3>
+                        <h3 data-i18n="video.cropping.infoUsage">裁剪操作流程</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.cropping.usageUploadTitle">一、上传视频</h4>
+                        <h4 data-i18n="video.cropping.usageUploadTitle">载入视频</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageSelectFile"><strong>选择文件：</strong>点击"选择视频文件"按钮上传视频。</li>
-                            <li data-i18n="video.cropping.usageFormats"><strong>支持格式：</strong>支持 MP4、WebM、MOV、AVI 等常见视频格式。
-                            </li>
-                            <li data-i18n="video.cropping.usageFileSize"><strong>文件大小：</strong>建议单个视频文件不超过 200MB。</li>
-                            <li data-i18n="video.cropping.usagePreview"><strong>预览视频：</strong>上传后可预览视频内容和总时长。</li>
+                            <li data-i18n="video.cropping.usageSelectFile"><strong>上传方式：</strong>点击或拖拽上传，支持 MP4/WebM/MOV/AVI 等格式。</li>
+                            <li data-i18n="video.cropping.usageFormats"><strong>格式支持：</strong>支持所有浏览器可播放的视频格式。上传后自动加载视频元信息（时长、分辨率）。</li>
+                            <li data-i18n="video.cropping.usageFileSize"><strong>文件大小：</strong>建议不超过 500MB。超大视频的加载时间较长。</li>
+                            <li data-i18n="video.cropping.usagePreview"><strong>视频预览：</strong>上传后可以在页面上播放预览，确认视频内容和时长。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.usageModeTitle">二、选择裁剪模式</h4>
+                        <h4 data-i18n="video.cropping.usageModeTitle">选择裁剪模式</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageTimeMode"><strong>时间裁剪：</strong>按时间长度裁剪视频，截取指定时间段。</li>
-                            <li data-i18n="video.cropping.usageRangeMode"><strong>范围裁剪：</strong>按画面范围裁剪视频，裁剪指定区域。</li>
+                            <li data-i18n="video.cropping.usageTimeMode"><strong>时间裁剪：</strong>设置开始时间和结束时间（或时长），截取视频的时间段。适合"只需要视频中某一段"的场景。</li>
+                            <li data-i18n="video.cropping.usageRangeMode"><strong>画面裁剪：</strong>在视频画面上拖拽选区，裁切画面区域。适合"去掉画面边缘多余内容"的场景。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.usageTimeSettingsTitle">三、时间裁剪设置</h4>
+                        <h4 data-i18n="video.cropping.usageTimeSettingsTitle">时间裁剪设置</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageStartTime"><strong>开始时间：</strong>设置裁剪开始的时间点（秒）。</li>
-                            <li data-i18n="video.cropping.usageEndTime"><strong>结束时间：</strong>设置裁剪结束的时间点（秒）。</li>
-                            <li data-i18n="video.cropping.usageTimeFormat"><strong>时间格式：</strong>支持精确到小数点后一位（0.1秒）。</li>
-                            <li data-i18n="video.cropping.usageDuration"><strong>视频时长：</strong>显示视频总时长，方便设置裁剪范围。</li>
+                            <li data-i18n="video.cropping.usageStartTime"><strong>开始时间：</strong>输入截取的起始时间点（HH:MM:SS 格式）。</li>
+                            <li data-i18n="video.cropping.usageEndTime"><strong>结束时间/时长：</strong>输入截取结束时间点或持续时长。</li>
+                            <li data-i18n="video.cropping.usageTimeFormat"><strong>时间格式：</strong>支持 HH:MM:SS 和纯秒数。比如 90 秒可以输入 00:01:30 或 90。</li>
+                            <li data-i18n="video.cropping.usageDuration"><strong>时长验证：</strong>工具自动检查开始时间 + 时长不超过视频总时长。超出时会提示错误。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.usageRangeSettingsTitle">四、范围裁剪设置</h4>
+                        <h4 data-i18n="video.cropping.usageRangeSettingsTitle">画面裁剪设置</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageCropArea"><strong>裁剪区域：</strong>在预览画面上拖动选择要保留的区域。</li>
-                            <li data-i18n="video.cropping.usageAdjust"><strong>精确调整：</strong>可手动输入裁剪区域的坐标和尺寸。</li>
-                            <li data-i18n="video.cropping.usageKeepRatio"><strong>保持比例：</strong>裁剪后保持原始宽高比。</li>
+                            <li data-i18n="video.cropping.usageCropArea"><strong>拖拽选区：</strong>在视频画面上按住鼠标拖动，画出裁剪区域。选区显示为实线框，外部区域半透明遮罩。</li>
+                            <li data-i18n="video.cropping.usageAdjust"><strong>调整选区：</strong>拖动选区内部移动位置，拖动边角调整大小。坐标和尺寸实时更新。</li>
+                            <li data-i18n="video.cropping.usageKeepRatio"><strong>锁定比例：</strong>可选锁定 16:9、4:3、1:1 等比例——适合需要特定比例输出的场景。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.usageStartTitle">五、开始裁剪</h4>
+                        <h4 data-i18n="video.cropping.usageStartTitle">执行裁剪</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageClickCrop"><strong>点击裁剪：</strong>点击"开始执行裁剪"按钮开始处理。</li>
-                            <li data-i18n="video.cropping.usageProgress"><strong>进度显示：</strong>实时显示裁剪进度。</li>
-                            <li data-i18n="video.cropping.usageWait"><strong>等待时间：</strong>裁剪时间取决于视频长度和电脑性能。</li>
+                            <li data-i18n="video.cropping.usageClickCrop"><strong>点击"开始裁剪"：</strong>FFmpeg WASM 引擎开始处理。时间裁剪速度很快（接近实时），画面裁剪需要重新编码（约 1-2x 实时时长）。</li>
+                            <li data-i18n="video.cropping.usageProgress"><strong>进度显示：</strong>实时显示处理进度和预估剩余时间。</li>
+                            <li data-i18n="video.cropping.usageWait"><strong>处理时间：</strong>5 分钟视频的时间裁剪约 10-30 秒；画面裁剪约 2-5 分钟（需要重新编码）。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.usageDownloadTitle">六、查看和下载</h4>
+                        <h4 data-i18n="video.cropping.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageResultPreview"><strong>预览效果：</strong>裁剪完成后可预览裁剪后的视频。</li>
-                            <li data-i18n="video.cropping.usageDownload"><strong>一键下载：</strong>点击"下载裁剪视频"按钮保存到本地。</li>
+                            <li data-i18n="video.cropping.usageResultPreview"><strong>预览结果：</strong>裁剪后的视频可以直接在页面上播放预览。</li>
+                            <li data-i18n="video.cropping.usageDownload"><strong>下载文件：</strong>点击下载按钮保存。文件名自动添加 _cropped 后缀。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.usageScenesTitle">七、适用场景</h4>
+                        <h4 data-i18n="video.cropping.usageScenesTitle">五、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.cropping.usageSceneClip"><strong>截取片段：</strong>从长视频中截取精彩片段。</li>
-                            <li data-i18n="video.cropping.usageSceneBorders"><strong>去除黑边：</strong>裁剪视频中的黑边或上下边框。</li>
-                            <li data-i18n="video.cropping.usageSceneFrame"><strong>调整画面：</strong>裁剪出特定区域的画面内容。</li>
-                            <li data-i18n="video.cropping.usageSceneShort"><strong>制作短视频：</strong>截取长视频中的精华部分。</li>
+                            <li data-i18n="video.cropping.usageSceneClip"><strong>视频片段提取：</strong>从长视频中截取精彩片段——演讲的高潮部分、教程的关键步骤、Vlog 的亮点。</li>
+                            <li data-i18n="video.cropping.usageSceneBorders"><strong>去除黑边：</strong>老电影或宽银幕视频的上下黑边可以通过画面裁剪去掉——设置 Y 坐标跳过黑边区域。</li>
+                            <li data-i18n="video.cropping.usageSceneFrame"><strong>制作封面图：</strong>截取视频中某一帧作为封面——先时间定位到目标帧，再画面裁剪到合适区域。</li>
+                            <li data-i18n="video.cropping.usageSceneShort"><strong>制作短视频：</strong>从长视频中截取 15-60 秒片段，裁剪为 9:16 竖屏比例，制作抖音/Reels 短视频。</li>
                         </ul>
                     </div>
                 </article>
@@ -257,42 +256,42 @@
                         <h3 data-i18n="video.cropping.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="video.cropping.notesSecurityTitle">一、数据安全</h4>
+                        <h4 data-i18n="video.cropping.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.cropping.noteSecurity1">所有处理完全在本地浏览器中完成，视频文件不会上传到服务器。</li>
-                            <li data-i18n="video.cropping.noteSecurity2">视频数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                            <li data-i18n="video.cropping.noteSecurity3">建议在处理敏感视频时使用隐私模式浏览。</li>
+                            <li data-i18n="video.cropping.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。</li>
+                            <li data-i18n="video.cropping.noteSecurity2"><strong>内存管理：</strong>处理完成后自动释放内存。大文件建议关闭其他标签页释放内存。</li>
+                            <li data-i18n="video.cropping.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.notesPerfTitle">二、处理性能</h4>
+                        <h4 data-i18n="video.cropping.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.cropping.notePerf1">视频裁剪是计算密集型操作，会占用较多CPU资源。</li>
-                            <li data-i18n="video.cropping.notePerf2">处理时间取决于视频时长和电脑性能。</li>
-                            <li data-i18n="video.cropping.notePerf3">建议在处理大文件时关闭其他占用CPU的程序。</li>
+                            <li data-i18n="video.cropping.notePerf1"><strong>时间裁剪速度：</strong>如果输入输出编码相同，时间裁剪可以"流复制"——不需要重新编码，速度接近实时（5 分钟视频约 10-30 秒）。</li>
+                            <li data-i18n="video.cropping.notePerf2"><strong>画面裁剪速度：</strong>画面裁剪必须重新编码（因为像素数据变了），处理时间约 1-2x 视频时长。5 分钟视频约 5-10 分钟。</li>
+                            <li data-i18n="video.cropping.notePerf3"><strong>组合裁剪：</strong>同时进行时间裁剪和画面裁剪时，处理时间以画面裁剪为准（因为必须重新编码）。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.notesLimitTitle">三、格式限制</h4>
+                        <h4 data-i18n="video.cropping.notesLimitTitle">精度与限制</h4>
                         <ul>
-                            <li data-i18n="video.cropping.noteLimit1">支持的格式：MP4、WebM、MOV、AVI、FLV、MKV等。</li>
-                            <li data-i18n="video.cropping.noteLimit2">不支持的格式可能无法正常处理。</li>
-                            <li data-i18n="video.cropping.noteLimit3">输出格式默认为MP4，兼容性最好。</li>
+                            <li data-i18n="video.cropping.noteLimit1"><strong>时间精度：</strong>时间裁剪的精度取决于视频的关键帧间隔。MP4 的关键帧间隔通常 2-10 秒——开始时间可能偏移 1-2 秒。如果需要帧级精度，建议先用关键帧密度高的格式。</li>
+                            <li data-i18n="video.cropping.noteLimit2"><strong>画面裁剪尺寸：</strong>裁剪区域的宽高必须是偶数像素（H.264 编码要求）。如果设置了奇数值，工具自动调整为最近的偶数。</li>
+                            <li data-i18n="video.cropping.noteLimit3"><strong>音频同步：</strong>时间裁剪时音频同步截取。画面裁剪时音频完整保留（因为画面变化不影响音频）。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.notesTimeTitle">四、时间设置</h4>
+                        <h4 data-i18n="video.cropping.notesTimeTitle">时间裁剪技巧</h4>
                         <ul>
-                            <li data-i18n="video.cropping.noteTime1">开始时间必须小于结束时间。</li>
-                            <li data-i18n="video.cropping.noteTime2">时间不能超出视频总时长范围。</li>
-                            <li data-i18n="video.cropping.noteTime3">超出范围的时间设置会被自动调整。</li>
+                            <li data-i18n="video.cropping.noteTime1"><strong>预览定位：</strong>在视频预览中播放到目标位置，记下时间戳，再输入到开始时间字段——比手动估算时间更精确。</li>
+                            <li data-i18n="video.cropping.noteTime2"><strong>留余量：</strong>截取开始时间比预期早 0.5-1 秒，结束时间晚 0.5-1 秒——避免裁掉内容的开头/结尾。</li>
+                            <li data-i18n="video.cropping.noteTime3"><strong>多次裁剪：</strong>如果需要从长视频中截取多个片段，分别进行多次时间裁剪——本工具一次只能截取一个连续时间段。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.notesQualityTitle">五、质量损失</h4>
+                        <h4 data-i18n="video.cropping.notesQualityTitle">画质保障</h4>
                         <ul>
-                            <li data-i18n="video.cropping.noteQuality1">视频重新编码会导致一定的画质损失。</li>
-                            <li data-i18n="video.cropping.noteQuality2">建议裁剪前备份原始视频文件。</li>
-                            <li data-i18n="video.cropping.noteQuality3">范围裁剪会改变视频分辨率。</li>
+                            <li data-i18n="video.cropping.noteQuality1"><strong>时间裁剪无损：</strong>纯时间裁剪（不改变画面）使用流复制模式，画质与原始视频完全一致——零损失。</li>
+                            <li data-i18n="video.cropping.noteQuality2"><strong>画面裁剪质量：</strong>画面裁剪需要重新编码，使用与原始视频相近的码率——画质损失极小，肉眼通常不可见。</li>
+                            <li data-i18n="video.cropping.noteQuality3"><strong>输出格式：</strong>裁剪后输出格式与输入一致。MP4 输入就是 MP4 输出。</li>
                         </ul>
-                        <h4 data-i18n="video.cropping.notesFaqTitle">六、常见问题</h4>
+                        <h4 data-i18n="video.cropping.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.cropping.noteFaq1"><strong>裁剪失败：</strong>检查视频文件是否损坏或格式不支持。</li>
-                            <li data-i18n="video.cropping.noteFaq2"><strong>处理缓慢：</strong>关闭其他程序或使用更高配置的设备。</li>
-                            <li data-i18n="video.cropping.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
-                            <li data-i18n="video.cropping.noteFaq4"><strong>时间错误：</strong>检查开始时间和结束时间设置是否正确。</li>
+                            <li data-i18n="video.cropping.noteFaq1"><strong>Q: 裁剪后开始时间有偏差？</strong>A: MP4 的关键帧间隔导致。开始时间会对齐到最近的关键帧——可能偏移 1-2 秒。这是 MP4 格式的固有限制。</li>
+                            <li data-i18n="video.cropping.noteFaq2"><strong>Q: 画面裁剪后文件变大了？</strong>A: 画面裁剪需要重新编码，如果原始视频使用了高效的编码参数，重新编码可能使用稍高的码率以保证质量。</li>
+                            <li data-i18n="video.cropping.noteFaq3"><strong>Q: 能同时裁剪时间和画面吗？</strong>A: 可以。先设置时间范围，再设置画面裁剪区域，点击开始后两者同时执行。</li>
+                            <li data-i18n="video.cropping.noteFaq4"><strong>Q: 裁剪后的视频能再裁剪吗？</strong>A: 可以。下载裁剪后的视频，重新上传后再裁剪。但多次重新编码会累积画质损失。</li>
                         </ul>
                     </div>
                 </article>

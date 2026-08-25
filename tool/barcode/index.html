@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script> -->
     <script src="./lib/JsBarcode.all.min.js"></script>
     <style>
@@ -409,69 +409,69 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="tool.barcode.infoIntro">工具介绍</h3>
+                            <h3 data-i18n="tool.barcode.infoIntro">条形码生成：从数字到可扫描的视觉编码</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="tool.barcode.problemsTitle">一、解决的问题</h4>
+                            <h4 data-i18n="tool.barcode.problemsTitle">一、条形码背后的编码规则</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.problem1">生成条形码，支持多种编码格式。</li>
-                                <li data-i18n="tool.barcode.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li data-i18n="tool.barcode.problem3">无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="tool.barcode.problem1">超市收银台"滴"的一声、快递单上的黑色条纹、图书封底的数字图案——这些都是条形码，但它们遵循完全不同的编码标准。CODE128 可以编码任意 ASCII 字符，EAN-13 只能编码 13 位数字但全球通用，UPC-A 是北美商品标准，CODE39 用于工业和军事领域——选错编码格式，扫描枪就读不出来。</li>
+                                <li data-i18n="tool.barcode.problem2">本工具支持 8 种条形码标准：CODE128（通用）、EAN-13（商品）、EAN-8（小型商品）、UPC-A（美国）、CODE39（工业）、ITF-14（物流外箱）、MSI（库存）、Pharmacode（药品）。每种格式都有严格的字符集和位数限制——工具自动校验输入是否符合所选格式的要求，避免生成无法扫描的"废码"。</li>
+                                <li data-i18n="tool.barcode.problem3">基于 JsBarcode 库在浏览器中生成矢量条形码——输出为 SVG 格式，无论放大多少倍都不会模糊。可以自定义宽度、高度、是否显示文字等参数。生成的条形码可以直接下载为 SVG 文件或打印到标签上。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.formatTitle">二、支持的格式</h4>
+                            <h4 data-i18n="tool.barcode.formatTitle">二、八种编码标准的适用场景</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.formatCode128"><strong>Code 128：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="tool.barcode.formatEan13"><strong>EAN-13：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="tool.barcode.formatUpc"><strong>UPC-A：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="tool.barcode.formatCode128"><strong>CODE128：</strong>最通用的条形码格式——可以编码全部 128 个 ASCII 字符（数字、字母、符号）。密度高、容量大，广泛用于物流包裹、资产管理、内部编号。没有限制位数，理论上可以编码任意长度的字符串。</li>
+                                <li data-i18n="tool.barcode.formatEan13"><strong>EAN-13：</strong>全球零售商品的"身份证"——13 位数字，前 2-3 位是国家代码（中国是 690-699），接着是厂商代码、商品代码，最后一位是校验码。如果你要给产品生成可以在超市扫码的条形码，选 EAN-13。</li>
+                                <li data-i18n="tool.barcode.formatUpc"><strong>UPC-A：</strong>北美商品标准——12 位数字，本质上是 EAN-13 去掉国家代码的版本（美国国家代码隐含为 0）。如果你的产品主要在北美市场销售，选 UPC-A。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.featuresTitle">三、核心功能</h4>
+                            <h4 data-i18n="tool.barcode.featuresTitle">三、生成参数详解</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="tool.barcode.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="tool.barcode.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="tool.barcode.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="tool.barcode.featureOnline"><strong>SVG 矢量输出：</strong>条形码使用 SVG 格式渲染——每条线都是矢量路径，不是像素。这意味着无论放大到多大，线条边缘都锐利清晰。打印到标签上、嵌入到文档中、显示在网页上——都不会模糊。</li>
+                                <li data-i18n="tool.barcode.featurePreview"><strong>实时预览：</strong>输入内容后条形码立即生成并显示。切换格式、调整宽度/高度时实时更新——不需要点击"生成"按钮。</li>
+                                <li data-i18n="tool.barcode.featureExport"><strong>自定义尺寸：</strong>宽度（单条线的粗细，1-5px）和高度（条形码整体高度，20-200px）都可以调节。宽度过小可能导致扫描枪无法识别——建议不低于 2px。</li>
+                                <li data-i18n="tool.barcode.featureSecurity"><strong>显示/隐藏文字：</strong>条形码下方的文字（人类可读字符）可以选择显示或隐藏。显示文字方便人工核对，隐藏文字适合只需要机器扫描的场景。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="tool.barcode.infoUsage">使用说明</h3>
+                            <h3 data-i18n="tool.barcode.infoUsage">条形码生成步骤</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="tool.barcode.usageInputTitle">一、输入条形码内容</h4>
+                            <h4 data-i18n="tool.barcode.usageInputTitle">输入内容</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.usageInput1"><strong>输入内容：</strong>在输入框中输入要生成条形码的内容。</li>
-                                <li data-i18n="tool.barcode.usageInput2"><strong>内容限制：</strong>不同格式有不同的内容要求，请参考格式说明。</li>
-                                <li data-i18n="tool.barcode.usageInput3"><strong>格式提示：</strong>页面会根据输入内容自动提示适合的格式。</li>
+                                <li data-i18n="tool.barcode.usageInput1"><strong>输入编码内容：</strong>根据选择的格式输入对应内容——CODE128 可以输入任意文字，EAN-13 必须输入 13 位数字，UPC-A 必须输入 12 位数字。</li>
+                                <li data-i18n="tool.barcode.usageInput2"><strong>格式校验：</strong>工具实时检查输入是否符合格式要求。不符合时显示红色提示——比如 EAN-13 输入了字母会提示"只能包含数字"。</li>
+                                <li data-i18n="tool.barcode.usageInput3"><strong>校验码：</strong>EAN-13/UPC-A 的最后一位是校验码——如果输入位数少一位，工具自动计算并补全校验码。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.usageFormatTitle">二、选择条形码格式</h4>
+                            <h4 data-i18n="tool.barcode.usageFormatTitle">选择格式</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.usageFormat1"><strong>CODE128：</strong>通用格式，支持数字、字母和特殊字符，兼容性最好。</li>
-                                <li data-i18n="tool.barcode.usageFormat2"><strong>EAN-13：</strong>商品条形码标准，13位数字，最后一位为校验码。</li>
-                                <li data-i18n="tool.barcode.usageFormat3"><strong>EAN-8：</strong>小型商品条形码，8位数字。</li>
-                                <li data-i18n="tool.barcode.usageFormat4"><strong>UPC-A：</strong>美国商品条形码，12位数字。</li>
-                                <li data-i18n="tool.barcode.usageFormat5"><strong>CODE39：</strong>工业标准，支持字母数字和特殊符号。</li>
-                                <li data-i18n="tool.barcode.usageFormat6"><strong>ITF-14：</strong>物流条形码，用于零售包装。</li>
+                                <li data-i18n="tool.barcode.usageFormat1"><strong>CODE128：</strong>通用格式，支持任意 ASCII 字符。适合内部编号、资产管理。</li>
+                                <li data-i18n="tool.barcode.usageFormat2"><strong>EAN-13：</strong>商品标准，13 位数字。适合零售产品。</li>
+                                <li data-i18n="tool.barcode.usageFormat3"><strong>EAN-8：</strong>小型商品标准，8 位数字。适合小包装产品（面积不够放 EAN-13）。</li>
+                                <li data-i18n="tool.barcode.usageFormat4"><strong>UPC-A：</strong>北美商品标准，12 位数字。适合北美市场。</li>
+                                <li data-i18n="tool.barcode.usageFormat5"><strong>CODE39：</strong>工业标准，支持数字和大写字母。适合制造业、军事。</li>
+                                <li data-i18n="tool.barcode.usageFormat6"><strong>ITF-14：</strong>物流外箱标准，14 位数字。适合外箱标识。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.usageStyleTitle">三、调整条形码样式</h4>
+                            <h4 data-i18n="tool.barcode.usageStyleTitle">调整样式</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.usageStyle1"><strong>显示值：</strong>选择是否在条形码下方显示数字。</li>
-                                <li data-i18n="tool.barcode.usageStyle2"><strong>宽度：</strong>调整条形码线条的粗细（细/正常/宽）。</li>
-                                <li data-i18n="tool.barcode.usageStyle3"><strong>高度：</strong>调整条形码的高度（50-150px）。</li>
+                                <li data-i18n="tool.barcode.usageStyle1"><strong>宽度：</strong>每条线的粗细（1-5px）。打印用途建议 2-3px，屏幕显示可以 1-2px。</li>
+                                <li data-i18n="tool.barcode.usageStyle2"><strong>高度：</strong>条形码整体高度（20-200px）。建议不低于 50px——太矮的条形码扫描枪可能难以识别。</li>
+                                <li data-i18n="tool.barcode.usageStyle3"><strong>显示文字：</strong>条形码下方是否显示编码内容。打印标签建议显示，嵌入网页可以隐藏。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.usageGenerateTitle">四、生成和下载</h4>
+                            <h4 data-i18n="tool.barcode.usageGenerateTitle">下载结果</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.usageGenerate1"><strong>点击生成：</strong>点击"生成条形码"按钮生成条形码。</li>
-                                <li data-i18n="tool.barcode.usageGenerate2"><strong>预览效果：</strong>生成后在预览区域显示条形码效果。</li>
-                                <li data-i18n="tool.barcode.usageGenerate3"><strong>下载PNG：</strong>点击"下载 PNG"按钮保存条形码图片。</li>
+                                <li data-i18n="tool.barcode.usageGenerate1"><strong>SVG 下载：</strong>点击下载按钮保存 SVG 文件。SVG 是矢量格式，可以无损缩放。</li>
+                                <li data-i18n="tool.barcode.usageGenerate2"><strong>打印使用：</strong>SVG 可以直接导入到 AI/CDR 等设计软件中排版打印。也可以直接在浏览器中打印。</li>
+                                <li data-i18n="tool.barcode.usageGenerate3"><strong>PNG 需求：</strong>如果目标系统不支持 SVG，可以在设计软件中导出为 PNG——建议分辨率不低于 300dpi。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.usageAdviceTitle">五、格式选择建议</h4>
+                            <h4 data-i18n="tool.barcode.usageAdviceTitle">五、条形码设计建议</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.usageAdvice1"><strong>通用用途：</strong>使用CODE128格式，兼容性最广。</li>
-                                <li data-i18n="tool.barcode.usageAdvice2"><strong>商品标签：</strong>使用EAN-13格式。</li>
-                                <li data-i18n="tool.barcode.usageAdvice3"><strong>小型商品：</strong>使用EAN-8格式。</li>
-                                <li data-i18n="tool.barcode.usageAdvice4"><strong>物流仓储：</strong>使用ITF-14格式。</li>
+                                <li data-i18n="tool.barcode.usageAdvice1"><strong>对比度：</strong>条形码必须高对比度——黑条白底是最安全的组合。避免使用彩色条码（红色条码很多扫描枪读不出来）。</li>
+                                <li data-i18n="tool.barcode.usageAdvice2"><strong>留白区域：</strong>条形码左右两侧需要留出"静区"（至少 5mm 的空白区域）——扫描枪依靠静区识别条形码的起始和结束位置。</li>
+                                <li data-i18n="tool.barcode.usageAdvice3"><strong>最小尺寸：</strong>EAN-13 的标准尺寸是 37.29mm x 25.93mm，可以缩小到 80%（约 30mm 宽）。低于 80% 可能影响扫描成功率。</li>
+                                <li data-i18n="tool.barcode.usageAdvice4"><strong>打印质量：</strong>打印时确保条形码区域没有折痕、污渍或油墨扩散——这些都会导致扫描失败。建议使用热转印或激光打印。</li>
                             </ul>
                         </div>
                     </article>
@@ -480,36 +480,36 @@
                             <h3 data-i18n="tool.barcode.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="tool.barcode.notesSecurityTitle">一、数据安全</h4>
+                            <h4 data-i18n="tool.barcode.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li data-i18n="tool.barcode.noteSecurity2">条形码内容仅在浏览器内存中处理，处理完成后自动清除。</li>
-                                <li data-i18n="tool.barcode.noteSecurity3">建议在处理敏感数据时使用隐私模式浏览。</li>
+                                <li data-i18n="tool.barcode.noteSecurity1"><strong>纯前端生成：</strong>条形码完全在浏览器中生成——不上传到任何服务器。你的编码内容始终在本地。</li>
+                                <li data-i18n="tool.barcode.noteSecurity2"><strong>无依赖：</strong>不需要安装任何软件或字体。JsBarcode 库已内嵌在页面中。</li>
+                                <li data-i18n="tool.barcode.noteSecurity3"><strong>离线可用：</strong>页面加载完成后，即使断网也能正常生成条形码。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.notesFormatTitle">二、格式限制</h4>
+                            <h4 data-i18n="tool.barcode.notesFormatTitle">格式选择指南</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.noteFormat1">EAN-13格式必须输入13位数字。</li>
-                                <li data-i18n="tool.barcode.noteFormat2">EAN-8格式必须输入8位数字。</li>
-                                <li data-i18n="tool.barcode.noteFormat3">UPC-A格式必须输入12位数字。</li>
-                                <li data-i18n="tool.barcode.noteFormat4">CODE128格式支持字母、数字和特殊字符。</li>
+                                <li data-i18n="tool.barcode.noteFormat1"><strong>不确定选哪个？</strong>如果是商品零售选 EAN-13，如果是内部管理选 CODE128，如果是北美市场选 UPC-A，如果是物流外箱选 ITF-14。</li>
+                                <li data-i18n="tool.barcode.noteFormat2"><strong>EAN-13 校验码：</strong>最后一位是 Modulo 10 校验码——工具自动计算，你只需输入前 12 位（或 13 位含校验码）。</li>
+                                <li data-i18n="tool.barcode.noteFormat3"><strong>CODE128 字符集：</strong>支持全部 ASCII 字符（0-127），包括大小写字母、数字、标点符号和空格。</li>
+                                <li data-i18n="tool.barcode.noteFormat4"><strong>ITF-14 特点：</strong>只能编码 14 位数字，专门用于物流外箱标识。与 EAN-13 使用不同的编码算法。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.notesCheckTitle">三、校验码</h4>
+                            <h4 data-i18n="tool.barcode.notesCheckTitle">校验与测试</h4>
                             <ul>
                                 <li data-i18n="tool.barcode.noteCheck1">EAN和UPC格式需要正确的校验码。</li>
                                 <li data-i18n="tool.barcode.noteCheck2">校验码计算错误会导致条形码无法扫描。</li>
                                 <li data-i18n="tool.barcode.noteCheck3">建议使用标准的校验码生成工具计算。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.notesPrintTitle">四、打印建议</h4>
+                            <h4 data-i18n="tool.barcode.notesPrintTitle">打印注意事项</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.notePrint1">条形码打印时建议使用300dpi以上的分辨率。</li>
-                                <li data-i18n="tool.barcode.notePrint2">避免在条形码周围放置过多装饰元素。</li>
-                                <li data-i18n="tool.barcode.notePrint3">确保条形码足够大，便于扫描设备读取。</li>
+                                <li data-i18n="tool.barcode.notePrint1">条码印刷需要足够的对比度——黑色条码配白色背景是最安全的组合。避免使用红色条码（许多扫描枪使用红光，红色条码会被"看不见"）或彩色背景上的深色条码。</li>
+                                <li data-i18n="tool.barcode.notePrint2">条码尺寸不能随意缩放——每个条码模块的宽度不能小于 0.19mm（7.5 mil），否则扫描枪可能无法读取。下载的高清 PNG 在 300 DPI 印刷时可以保证模块宽度足够。</li>
+                                <li data-i18n="tool.barcode.notePrint3">条码周围需要留出"静区"（空白区域）——至少 10 个模块宽度。如果静区不足，扫描枪可能无法正确识别条码边界。本工具生成的图片已包含适当的静区。</li>
                             </ul>
-                            <h4 data-i18n="tool.barcode.notesFaqTitle">五、常见问题</h4>
+                            <h4 data-i18n="tool.barcode.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="tool.barcode.noteFaq1"><strong>无法扫描：</strong>检查格式是否正确，校验码是否正确。</li>
-                                <li data-i18n="tool.barcode.noteFaq2"><strong>生成失败：</strong>检查输入内容是否符合所选格式的要求。</li>
-                                <li data-i18n="tool.barcode.noteFaq3"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
+                                <li data-i18n="tool.barcode.noteFaq1"><strong>Q: 生成的条形码扫描枪读不出来？</strong>A: 检查：1) 格式是否正确（EAN-13 内容必须是 13 位数字）；2) 宽度是否太小（建议 ≥2px）；3) 打印是否清晰（无模糊/断线）。</li>
+                                <li data-i18n="tool.barcode.noteFaq2"><strong>Q: 能生成彩色条形码吗？</strong>A: 技术上可以，但强烈不建议。大多数扫描枪使用红色 LED，红色条码在红光下几乎不可见——扫描枪会认为"没有条形码"。</li>
+                                <li data-i18n="tool.barcode.noteFaq3"><strong>Q: 能一次生成多个条形码吗？</strong>A: 当前版本一次生成一个。如需批量生成，可以修改输入内容后逐个生成下载。</li>
                             </ul>
                         </div>
                     </article>

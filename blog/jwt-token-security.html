@@ -359,6 +359,74 @@ try {
   return response.status(401).json({ error: 'Invalid token' });
 }</code></pre>
 
+            <h2>七、痛点深挖：JWT 认证"看似安全"却常见的致命失误</h2>
+            <p>JWT 的安全问题几乎都不是算法本身的缺陷，而是使用方式错误。以下是安全审计中反复出现的"教科书级"失误，每一个都可能导致认证体系被击穿：</p>
+            <ul>
+                <li><strong>alg=none 伪造攻击：</strong>攻击者把 Header 里的算法改成
+                    <code>none</code>（不签名），如果服务端验签逻辑没做算法白名单校验，就能伪造任意身份的 Token。这是 JWT 历史上最著名的攻击之一，多发生在使用旧版本库或手写验签逻辑的项目中。
+                </li>
+                <li><strong>HS256/RS256 算法混淆攻击：</strong>服务端用 RS256（非对称）签发，但攻击者可以伪造一个用 HS256（对称 HMAC）签名的 Token，并把公钥作为
+                    HMAC 密钥提交——如果验签时没有显式限定 <code>algorithms: ['RS256']</code>，公钥本身就是"公开的密钥"，攻击直接得手。</li>
+                <li><strong>密钥硬编码与泄露：</strong>私钥直接写在代码里、提交进 Git 仓库、出现在配置文件注释或日志中。密钥泄露后，攻击者可以签发任意权限的
+                    Token，且难以察觉。密钥必须放在环境变量/密钥管理服务（KMS）中，并定期轮换。</li>
+                <li><strong>过期时间形同虚设：</strong>Access Token 有效期设成 30 天甚至更长，泄露后长期有效；Refresh Token 不轮换、不吊销。标准做法是 Access
+                    Token 15 分钟以内 + Refresh Token 7 天，Refresh 时重新签发并废弃旧 Token。</li>
+                <li><strong>把敏感信息塞进 Payload：</strong>Payload 只做 Base64 编码，任何人解码即可见。把身份证号、手机号、密码哈希放进
+                    Payload，等于把敏感信息印在公开的铭牌上。Payload 只放 <code>sub</code>、<code>role</code> 等非敏感标识，敏感数据走服务端查询。</li>
+                <li><strong>无 jti、无吊销机制：</strong>Token 一旦签发，服务端默认无法让其失效——用户"退出登录"只是前端删了 Token，泄露的 Token 依旧有效。必须为 Token
+                    生成唯一 <code>jti</code>，配合黑名单/Token 版本号实现主动吊销。</li>
+                <li><strong>时间精度错误：</strong><code>exp</code>/<code>iat</code> 要求 Unix 秒，但很多人用 <code>Date.now()</code>
+                    的毫秒值，导致 Token 立即过期或有效期被放大 1000 倍。签发与校验两侧的时钟偏差也要留缓冲（<code>clockTolerance</code>）。</li>
+                <li><strong>前端存储位置不当：</strong>把 Token 放 localStorage，一旦页面存在 XSS 漏洞，Token 可被直接读取窃取。优先放
+                    <code>HttpOnly + Secure + SameSite</code> 的 Cookie（由服务端注入），让脚本无法触及。
+                </li>
+            </ul>
+            <div class="warning-box">
+                <p><strong>验签自查清单：</strong>① <code>verify</code> 时显式传入 <code>algorithms</code> 白名单；② 私钥只存在服务端且不入库不入仓；③
+                    校验 <code>exp</code>、<code>iss</code>、<code>aud</code>；④ 登录/登出/改密后令旧 Token 失效；⑤ 依赖库保持最新，关注 JWT 相关
+                    CVE。任何一项缺失，都意味着认证边界存在可被利用的缺口。</p>
+            </div>
+
+            <h2>八、深入原理：JWT 签名算法的内部机制与选型决策</h2>
+            <p>JWT 支持多种签名算法（HS256、RS256、ES256 等），但不同算法的安全特性、性能和适用场景差异巨大。选错算法可能导致性能瓶颈或安全漏洞。</p>
+
+            <h3>8.1 三种主流签名算法对比</h3>
+            <pre><code>JWT 签名算法对比：
+
+  HS256（HMAC + SHA-256）：
+    • 类型：对称加密（同一个密钥既签名又验签）
+    • 速度：✓ 最快（~10μs/次）
+    • 密钥大小：256 位
+    • 适用场景：单体应用、内部服务
+    • 风险：密钥泄露 = 任何人可伪造 Token
+
+  RS256（RSA + SHA-256）：
+    • 类型：非对称加密（私钥签名，公钥验签）
+    • 速度：△ 签名慢（~100μs），验签快（~10μs）
+    • 密钥大小：2048 位
+    • 适用场景：微服务、第三方验证
+    • 优势：公钥可公开分发，无需共享密钥
+
+  ES256（ECDSA + SHA-256）：
+    • 类型：非对称加密（椭圆曲线）
+    • 速度：✓ 签名快（~50μs），验签稍慢
+    • 密钥大小：256 位（同等安全下比 RSA 小 8×）
+    • 适用场景：移动设备、IoT、区块链
+    • 风险：随机数重复 = 私钥泄露（PlayStation 3 被黑事件）
+
+选型决策树：
+  你的架构是什么？
+  ├── 单体应用 / 同一服务签名+验签 → HS256
+  ├── 微服务 / 多服务验签 → RS256（公钥分发）
+  ├── 移动/IoT / 资源受限 → ES256（密钥小、速度快）
+  └── 未来安全要求 → 考虑 EdDSA (Ed25519)
+
+关键原则：
+  ✓ 永远在 verify 时显式指定算法白名单（防止 none 攻击）
+  ✓ 对称算法（HS256）的密钥必须足够随机（≥256 位）
+  ✓ 非对称算法（RS256）的私钥绝对不能入库或进日志
+  ✗ 不要用 HS256 的密钥做 RS256 的密钥（跨算法攻击）</code></pre>
+
             <h2>结语</h2>
             <p>JWT作为现代Web认证的主流方案，其安全性直接影响整个系统的安全。从算法选择到密钥管理，从Token存储到过期策略，每一个环节都需要谨慎处理。理解JWT的安全风险，遵循最佳实践，才能构建真正安全的认证系统。
             </p>
@@ -378,6 +446,12 @@ try {
                 </a>
             </div>
         </section>
+        <div class="article-bottom-actions">
+            <a href="/blog/index.html" class="back-to-top-btn"><i class="fas fa-arrow-left"></i> 返回列表</a>
+            <a href="#" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                <i class="fas fa-arrow-up"></i> 回到顶部
+            </a>
+        </div>
         <div id="footer-container">
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>

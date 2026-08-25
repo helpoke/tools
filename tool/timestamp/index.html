@@ -30,7 +30,7 @@
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/timestamp/">
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <style>
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
@@ -675,9 +675,8 @@
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与
                 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="tool.timestamp.intro">Unix 时间戳与日期时间互转工具，支持秒/毫秒精度切换、实时显示当前时间戳、时区选择和多种日期格式输出</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -690,8 +689,7 @@
                     <div>
                         <div class="current-ts-label" data-i18n="tool.timestamp.currentTsLabel">当前时间戳</div>
                         <div class="current-ts-value" id="live-ts">-</div>
-                        <div class="current-ts-live" data-i18n="tool.timestamp.liveUpdate">
-                            <span class="dot"></span>实时更新
+                        <div class="current-ts-live" data-i18n="tool.timestamp.liveUpdate"><span class="dot"></span>实时更新
                         </div>
                     </div>
                     <button class="btn-copy-ts" onclick="copyLiveTs()" data-i18n="tool.timestamp.copyBtn">复制</button>
@@ -699,8 +697,8 @@
 
                 <!-- Tabs -->
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('ts2date')" data-i18n="tool.timestamp.tabTs2Date">时间戳 →
-                        日期</button>
+                    <button class="tab-btn active" onclick="switchTab('ts2date')"
+                        data-i18n="tool.timestamp.tabTs2Date">时间戳 → 日期</button>
                     <button class="tab-btn" onclick="switchTab('date2ts')" data-i18n="tool.timestamp.tabDate2Ts">日期 →
                         时间戳</button>
                 </div>
@@ -718,7 +716,8 @@
                         <div class="input-row">
                             <input type="text" id="ts-input" data-i18n-placeholder="tool.timestamp.tsInputPlaceholder"
                                 placeholder="例如: 1700000000" value="" data-name="时间戳">
-                            <button class="btn" onclick="convertTs2Date()" data-i18n="tool.timestamp.convertBtn">转换</button>
+                            <button class="btn" onclick="convertTs2Date()"
+                                data-i18n="tool.timestamp.convertBtn">转换</button>
                             <button class="btn btn-outline" onclick="useCurrentTs()"
                                 data-i18n="tool.timestamp.currentBtn">当前</button>
                         </div>
@@ -770,79 +769,111 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="tool.timestamp.infoIntro">工具介绍</h3>
+                            <h3 data-i18n="tool.timestamp.infoIntro">时间戳转换：Unix 时间戳与人类可读日期的双向翻译</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="tool.timestamp.problemsTitle">一、解决的问题</h4>
+                            <h4 data-i18n="tool.timestamp.problemsTitle">一、为什么程序员需要和时间戳打交道</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.problem1">在时间戳和日期时间之间进行转换。</li>
-                                <li data-i18n="tool.timestamp.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li data-i18n="tool.timestamp.problem3">无需安装专业软件，随时随地在线使用。</li>
-                            </ul>
-                            <h4 data-i18n="tool.timestamp.formatTitle">二、支持的格式</h4>
-                            <ul>
-                                <li data-i18n="tool.timestamp.formatTs"><strong>时间戳：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="tool.timestamp.formatDt"><strong>日期时间：</strong>支持该格式的完整处理功能。</li>
-                            </ul>
-                            <h4 data-i18n="tool.timestamp.featuresTitle">三、核心功能</h4>
-                            <ul>
-                                <li data-i18n="tool.timestamp.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="tool.timestamp.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="tool.timestamp.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="tool.timestamp.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。
+                                <li data-i18n="tool.timestamp.problem1">Unix 时间戳——从 1970 年 1 月 1 日 00:00:00 UTC
+                                    到现在的秒数（或毫秒数）。数据库里存的是 1693814400、API 返回的是 1693814400000、日志文件里写的是
+                                    1693814400——但人类需要看到的是"2023-09-04 16:00:00"。在时间戳和可读日期之间转换是开发者、运维工程师、数据分析师的日常高频操作。
                                 </li>
+                                <li data-i18n="tool.timestamp.problem2">本工具支持双向转换：时间戳 → 可读日期（输入 1693814400 得到 2023-09-04
+                                    16:00:00）和可读日期 → 时间戳（输入 2023-09-04 16:00:00 得到 1693814400）。自动识别秒级（10 位）和毫秒级（13
+                                    位）时间戳。同时显示当前时间的时间戳——方便调试和日志记录。</li>
+                                <li data-i18n="tool.timestamp.problem3">
+                                    支持时区选择——UTC、北京时间（UTC+8）、东京时间（UTC+9）、纽约时间（UTC-5）等。同一个时间戳在不同时区显示不同的本地时间。所有转换在浏览器中完成，使用
+                                    JavaScript 原生的 Date 对象和 Intl.DateTimeFormat API。</li>
+                            </ul>
+                            <h4 data-i18n="tool.timestamp.formatTitle">二、时间戳的基础知识</h4>
+                            <ul>
+                                <li data-i18n="tool.timestamp.formatTs"><strong>Unix 时间戳：</strong>从 1970-01-01 00:00:00
+                                    UTC 起经过的秒数（10 位数字）或毫秒数（13 位数字）。时间戳是与时区无关的绝对时间表示——同一时刻在全球任何地方都是相同的时间戳值。本工具自动识别 10
+                                    位（秒级）和 13 位（毫秒级）输入。</li>
+                                <li data-i18n="tool.timestamp.formatDt">
+                                    <strong>日期时间格式：</strong>支持多种可读的日期时间输出格式——中文格式（2024年1月15日 星期一
+                                    14:30:00）、标准格式（2024-01-15 14:30:00）、UTC 时间、ISO 8601
+                                    格式（2024-01-15T14:30:00.000Z）等。转换结果同时提供多种格式，方便在不同场景中使用。</li>
+                            </ul>
+                            <h4 data-i18n="tool.timestamp.featuresTitle">三、转换功能详解</h4>
+                            <ul>
+                                <li data-i18n="tool.timestamp.featureOnline"><strong>时间戳 → 日期：</strong>输入 10 位（秒）或 13
+                                    位（毫秒）时间戳，工具自动识别并转换为可读日期。显示年-月-日 时:分:秒 格式，同时显示星期几。</li>
+                                <li data-i18n="tool.timestamp.featurePreview"><strong>日期 → 时间戳：</strong>输入日期时间（如
+                                    2023-09-04 16:00:00），工具计算对应的 Unix 时间戳（秒和毫秒两种格式）。</li>
+                                <li data-i18n="tool.timestamp.featureExport">
+                                    <strong>当前时间：</strong>实时显示当前时间的时间戳（秒/毫秒）和可读日期——方便调试和日志记录。每秒自动更新。</li>
+                                <li data-i18n="tool.timestamp.featureSecurity">
+                                    <strong>时区支持：</strong>支持全球主要时区——UTC、北京时间（UTC+8）、东京（UTC+9）、纽约（UTC-5）、伦敦（UTC+0/UTC+1
+                                    夏令时）等。同一个时间戳在不同时区显示不同的本地时间。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="tool.timestamp.infoUsage">使用说明</h3>
+                            <h3 data-i18n="tool.timestamp.infoUsage">时间戳转换步骤</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="tool.timestamp.usageTs2DateTitle">一、时间戳转日期</h4>
+                            <h4 data-i18n="tool.timestamp.usageTs2DateTitle">一、时间戳转日期时间</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.usageInputTs"><strong>输入时间戳：</strong>在输入框中输入Unix时间戳（数字）。</li>
-                                <li data-i18n="tool.timestamp.usageSelectUnit"><strong>选择单位：</strong>切换秒/毫秒精度，工具会自动识别。</li>
-                                <li data-i18n="tool.timestamp.usageClickConvert"><strong>点击转换：</strong>点击"转换"按钮或按Enter键进行转换。
+                                <li data-i18n="tool.timestamp.usageInputTs"><strong>输入时间戳：</strong>在"时间戳 → 日期"标签页的输入框中输入
+                                    Unix 时间戳（纯数字）。支持 10 位秒级时间戳（如 1700000000）和 13 位毫秒级时间戳（如
+                                    1700000000000）。系统根据数字位数自动判断精度。</li>
+                                <li data-i18n="tool.timestamp.usageSelectUnit">
+                                    <strong>选择精度单位：</strong>如果自动识别不准确，可以手动切换"秒"或"毫秒"单位。10 位数字通常为秒级，13
+                                    位数字通常为毫秒级。选择正确的精度单位对转换结果至关重要——差 1000 倍。</li>
+                                <li data-i18n="tool.timestamp.usageClickConvert"><strong>点击转换：</strong>点击"转换"按钮（或按 Enter
+                                    键）执行转换。结果区域立即显示该时间戳对应的多种日期时间格式——中文格式、标准格式、UTC 时间、ISO 8601、星期几等。</li>
+                                <li data-i18n="tool.timestamp.usageUseCurrent"><strong>使用当前时间：</strong>点击"当前时间"按钮自动填入当前的
+                                    Unix 时间戳，方便快速查看"现在是几点"的时间戳表示。页面顶部也会实时显示当前时间戳。</li>
+                                <li data-i18n="tool.timestamp.usageLiveDisplay"><strong>实时显示：</strong>页面顶部实时显示当前时间戳（秒）。
                                 </li>
-                                <li data-i18n="tool.timestamp.usageUseCurrent"><strong>一键使用：</strong>点击"使用当前时间"按钮使用当前时间戳。
-                                </li>
-                                <li data-i18n="tool.timestamp.usageLiveDisplay"><strong>实时显示：</strong>页面顶部实时显示当前时间戳（秒）。</li>
                             </ul>
-                            <h4 data-i18n="tool.timestamp.usageDate2TsTitle">二、日期转时间戳</h4>
+                            <h4 data-i18n="tool.timestamp.usageDate2TsTitle">二、日期时间转时间戳</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.usageSelectDate"><strong>选择日期：</strong>点击日期选择器选择日期时间。</li>
-                                <li data-i18n="tool.timestamp.usageSelectTz"><strong>选择时区：</strong>选择目标时区（默认本地时区）。</li>
-                                <li data-i18n="tool.timestamp.usageConvert"><strong>点击转换：</strong>点击"转换"按钮生成时间戳。</li>
+                                <li data-i18n="tool.timestamp.usageSelectDate"><strong>选择日期时间：</strong>在"日期 →
+                                    时间戳"标签页中，通过日期时间选择器选择目标日期和时间。也可以使用"当前时间"按钮快速填入当前日期时间。</li>
+                                <li data-i18n="tool.timestamp.usageSelectTz">
+                                    <strong>选择时区：</strong>从时区下拉菜单中选择目标时区——默认使用浏览器本地时区，也可以选择 UTC 或其他时区（如 UTC+8 北京时间、UTC+9
+                                    东京时间）。时区选择直接影响转换得到的时间戳值。</li>
+                                <li data-i18n="tool.timestamp.usageConvert">
+                                    <strong>点击转换：</strong>点击"转换"按钮后，结果区域同时显示秒级（10 位）和毫秒级（13
+                                    位）两种时间戳。根据目标系统的要求选择对应精度的时间戳使用。</li>
                                 <li data-i18n="tool.timestamp.usageResult"><strong>结果显示：</strong>同时显示秒级和毫秒级时间戳。</li>
                             </ul>
                             <h4 data-i18n="tool.timestamp.usageTsFormatTitle">三、时间戳格式说明</h4>
                             <ul>
                                 <li data-i18n="tool.timestamp.usageSecTs"><strong>秒级时间戳：</strong>10位数字，如
                                     1700000000（约2023年11月）。</li>
-                                <li data-i18n="tool.timestamp.usageMsTs"><strong>毫秒级时间戳：</strong>13位数字，如 1700000000000。</li>
-                                <li data-i18n="tool.timestamp.usageAutoDetect"><strong>自动识别：</strong>工具会根据数字位数自动判断精度。</li>
+                                <li data-i18n="tool.timestamp.usageMsTs"><strong>毫秒级时间戳：</strong>13位数字，如 1700000000000。
+                                </li>
+                                <li data-i18n="tool.timestamp.usageAutoDetect"><strong>自动识别：</strong>工具会根据数字位数自动判断精度。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.timestamp.usageTzTitle">四、时区说明</h4>
                             <ul>
                                 <li data-i18n="tool.timestamp.usageTzLocal"><strong>本地时区：</strong>默认使用浏览器所在时区。</li>
                                 <li data-i18n="tool.timestamp.usageTzUtc"><strong>UTC时区：</strong>协调世界时，不考虑夏令时。</li>
-                                <li data-i18n="tool.timestamp.usageTzOther"><strong>其他时区：</strong>支持多种时区选择，如北京时间（UTC+8）。</li>
+                                <li data-i18n="tool.timestamp.usageTzOther"><strong>其他时区：</strong>支持多种时区选择，如北京时间（UTC+8）。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.timestamp.usageTipsTitle">五、操作技巧</h4>
                             <ul>
                                 <li data-i18n="tool.timestamp.usageTipLive"><strong>实时更新：</strong>页面顶部时间戳每秒自动更新。</li>
-                                <li data-i18n="tool.timestamp.usageTipCopy"><strong>一键复制：</strong>点击"复制"按钮复制时间戳或转换结果。</li>
+                                <li data-i18n="tool.timestamp.usageTipCopy"><strong>一键复制：</strong>点击"复制"按钮复制时间戳或转换结果。
+                                </li>
                                 <li data-i18n="tool.timestamp.usageTipSwitchTab"><strong>切换标签：</strong>点击标签切换转换方向。</li>
-                                <li data-i18n="tool.timestamp.usageTipFormats"><strong>常用格式：</strong>转换结果提供多种日期格式供复制。</li>
+                                <li data-i18n="tool.timestamp.usageTipFormats"><strong>常用格式：</strong>转换结果提供多种日期格式供复制。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.timestamp.usageScenariosTitle">六、适用场景</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.usageScenarioDebug"><strong>开发调试：</strong>查看日志中的时间戳对应的具体时间。
-                                </li>
+                                <li data-i18n="tool.timestamp.usageScenarioDebug">
+                                    <strong>开发调试：</strong>查看日志中的时间戳对应的具体时间。</li>
                                 <li data-i18n="tool.timestamp.usageScenarioDb"><strong>数据库查询：</strong>构造时间范围查询条件。</li>
-                                <li data-i18n="tool.timestamp.usageScenarioApi"><strong>API开发：</strong>生成或解析时间戳格式的接口参数。</li>
+                                <li data-i18n="tool.timestamp.usageScenarioApi"><strong>API开发：</strong>生成或解析时间戳格式的接口参数。
+                                </li>
                                 <li data-i18n="tool.timestamp.usageScenarioData"><strong>数据分析：</strong>处理时间序列数据。</li>
                             </ul>
                         </div>
@@ -852,37 +883,54 @@
                             <h3 data-i18n="tool.timestamp.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="tool.timestamp.notesSecurityTitle">一、数据安全</h4>
+                            <h4 data-i18n="tool.timestamp.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li data-i18n="tool.timestamp.noteSecurity2">时间戳数据仅在浏览器内存中处理，关闭页面后自动清除。</li>
-                                <li data-i18n="tool.timestamp.noteSecurity3">建议在处理敏感时间数据时使用隐私模式浏览。</li>
+                                <li data-i18n="tool.timestamp.noteSecurity1"><strong>纯前端计算：</strong>时间戳转换完全在浏览器中完成——使用
+                                    JavaScript 原生 Date 对象。</li>
+                                <li data-i18n="tool.timestamp.noteSecurity2"><strong>无网络依赖：</strong>不依赖任何外部 API
+                                    或服务——离线也能正常使用。</li>
+                                <li data-i18n="tool.timestamp.noteSecurity3"><strong>无数据存储：</strong>不保存转换历史——每次打开都是全新开始。
+                                </li>
                             </ul>
-                            <h4 data-i18n="tool.timestamp.notesPrecisionTitle">二、精度说明</h4>
+                            <h4 data-i18n="tool.timestamp.notesPrecisionTitle">一、精度说明</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.notePrecision1">秒级精度：精确到秒，适用于大多数场景。</li>
-                                <li data-i18n="tool.timestamp.notePrecision2">毫秒级精度：精确到毫秒，适用于需要高精度的场景。</li>
-                                <li data-i18n="tool.timestamp.notePrecision3">输入13位数字时自动按毫秒处理，10位数字按秒处理。</li>
+                                <li data-i18n="tool.timestamp.notePrecision1">秒级时间戳为 10 位数字（如 1700000000），精确到 1 秒。适用于
+                                    Linux/Unix 系统、Python、PHP、Go 等大多数后端语言。这是 Unix 时间戳的标准精度。</li>
+                                <li data-i18n="tool.timestamp.notePrecision2">毫秒级时间戳为 13 位数字（如 1700000000000），精确到 1/1000
+                                    秒。适用于 JavaScript（Date.now()）、Java（System.currentTimeMillis()）等需要毫秒精度的语言。注意
+                                    JavaScript 的 Date 构造函数接受毫秒级时间戳。</li>
+                                <li data-i18n="tool.timestamp.notePrecision3">输入 10 位数字时系统按秒级处理，输入 13
+                                    位数字时按毫秒级处理。如果输入位数不标准（如 11 或 12 位），请手动选择精度单位以避免转换错误。</li>
                             </ul>
-                            <h4 data-i18n="tool.timestamp.notesTzTitle">三、时区问题</h4>
+                            <h4 data-i18n="tool.timestamp.notesTzTitle">二、时区问题</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.noteTz1">时间戳转日期时，默认使用本地时区显示。</li>
-                                <li data-i18n="tool.timestamp.noteTz2">日期转时间戳时，选择的时区会影响结果。</li>
-                                <li data-i18n="tool.timestamp.noteTz3">UTC时区与本地时区可能相差8小时（北京时间）。</li>
+                                <li data-i18n="tool.timestamp.noteTz1">Unix 时间戳本身不包含时区信息——它表示的是从 UTC 1970-01-01 00:00:00
+                                    起经过的时间，是全球统一的绝对时间值。时区只在将时间戳转换为"年月日时分秒"格式时才需要考虑。</li>
+                                <li data-i18n="tool.timestamp.noteTz2">北京时间（UTC+8）比 UTC 快 8 小时。例如 UTC 时间戳 1700000000 对应
+                                    UTC 时间 2023-11-14 22:13:20，对应北京时间 2023-11-15 06:13:20。跨时区协作时务必确认使用哪个时区的时间。</li>
+                                <li data-i18n="tool.timestamp.noteTz3">夏令时（DST）会影响部分时区的转换结果——如美国东部时间在夏季为 UTC-4，冬季为
+                                    UTC-5。本工具的时区转换基于浏览器内置的 Intl.DateTimeFormat API，会自动处理目标时区的夏令时规则。</li>
                                 <li data-i18n="tool.timestamp.noteTz4">夏令时可能影响部分时区的转换结果。</li>
                             </ul>
-                            <h4 data-i18n="tool.timestamp.notesRangeTitle">四、时间范围</h4>
+                            <h4 data-i18n="tool.timestamp.notesRangeTitle">三、时间范围</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.noteRange1">支持的时间范围：1970年1月1日至2038年1月19日（Unix时间戳范围）。</li>
-                                <li data-i18n="tool.timestamp.noteRange2">超出范围的时间戳可能无法正确转换。</li>
+                                <li data-i18n="tool.timestamp.noteRange1">标准 Unix 时间戳的有效范围为 1970-01-01 到 2038-01-19（32
+                                    位有符号整数上限）。JavaScript 的 Date 对象支持更大的范围（约 ±285,616 年），本工具基于 JavaScript Date 实现，因此支持超出
+                                    2038 年限制的时间转换。</li>
+                                <li data-i18n="tool.timestamp.noteRange2">负数时间戳表示 1970 年 1 月 1 日之前的时间。例如 -86400 表示
+                                    1969-12-31 00:00:00 UTC。虽然技术上支持，但在实际应用中很少遇到负数时间戳。</li>
                                 <li data-i18n="tool.timestamp.noteRange3">负数时间戳表示1970年1月1日之前的时间。</li>
                             </ul>
-                            <h4 data-i18n="tool.timestamp.notesFaqTitle">五、常见问题</h4>
+                            <h4 data-i18n="tool.timestamp.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="tool.timestamp.noteFaq1"><strong>转换错误：</strong>检查输入是否为纯数字。</li>
-                                <li data-i18n="tool.timestamp.noteFaq2"><strong>时间显示异常：</strong>检查时区选择是否正确。</li>
-                                <li data-i18n="tool.timestamp.noteFaq3"><strong>精度错误：</strong>确认使用秒还是毫秒精度。</li>
-                                <li data-i18n="tool.timestamp.noteFaq4"><strong>复制失败：</strong>检查浏览器是否允许访问剪贴板。</li>
+                                <li data-i18n="tool.timestamp.noteFaq1"><strong>Q: 时间戳转换结果不对？</strong>A: 检查时区设置——10
+                                    位时间戳是 UTC 秒数，需要加上时区偏移才是本地时间。</li>
+                                <li data-i18n="tool.timestamp.noteFaq2"><strong>Q: 显示 1970 年的日期？</strong>A:
+                                    可能把毫秒级时间戳当作秒级处理了——13 位数字应该用毫秒模式。</li>
+                                <li data-i18n="tool.timestamp.noteFaq3"><strong>Q: 能转换 1970 年之前的日期吗？</strong>A:
+                                    可以。负数时间戳表示 1970 年之前的时间——如 -86400 = 1969-12-31 00:00:00 UTC。</li>
+                                <li data-i18n="tool.timestamp.noteFaq4"><strong>复制失败？</strong><br>检查浏览器是否允许访问剪贴板
+                                    API。部分浏览器（特别是 Firefox）对剪贴板权限有严格限制。如果复制按钮不生效，可以手动选中时间戳文本后使用 Ctrl+C 复制。</li>
                             </ul>
                         </div>
                     </article>
@@ -1148,10 +1196,49 @@
 
         document.getElementById('ts-input').addEventListener('input', function () {
             var raw = this.value.trim();
-            if (raw && /^\d{10,16}$/.test(raw)) convertTs2Date();
+            if (raw && /^\d{10,16}$/.test(raw)) {
+                var detectedUnit = raw.length >= 13 ? 'ms' : 's';
+                if (detectedUnit !== currentUnit) {
+                    currentUnit = detectedUnit;
+                    document.querySelectorAll('.unit-toggle button').forEach(function (b) {
+                        b.classList.toggle('active', b.getAttribute('data-unit') === detectedUnit);
+                    });
+                }
+                convertTs2Date();
+            }
         });
 
-        document.getElementById('dt-picker').addEventListener('change', convertDate2Ts);
+        document.getElementById('dt-picker').addEventListener('change', function () {
+            var raw = this.value.trim();
+            if (raw && /^\d{10,16}$/.test(raw)) {
+                document.getElementById('ts-input').value = raw;
+                var detectedUnit = raw.length >= 13 ? 'ms' : 's';
+                currentUnit = detectedUnit;
+                document.querySelectorAll('.unit-toggle button').forEach(function (b) {
+                    b.classList.toggle('active', b.getAttribute('data-unit') === detectedUnit);
+                });
+                switchTab('ts2date');
+                convertTs2Date();
+                return;
+            }
+            convertDate2Ts();
+        });
+
+        document.getElementById('dt-picker').addEventListener('paste', function (e) {
+            var text = (e.clipboardData || window.clipboardData).getData('text');
+            if (/^\d{10,16}$/.test(text.trim())) {
+                e.preventDefault();
+                var trimmed = text.trim();
+                document.getElementById('ts-input').value = trimmed;
+                var detectedUnit = trimmed.length >= 13 ? 'ms' : 's';
+                currentUnit = detectedUnit;
+                document.querySelectorAll('.unit-toggle button').forEach(function (b) {
+                    b.classList.toggle('active', b.getAttribute('data-unit') === detectedUnit);
+                });
+                switchTab('ts2date');
+                convertTs2Date();
+            }
+        });
 
         // ===== Init =====
         useCurrentTs();

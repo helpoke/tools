@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
     <script src="../../common/js/i18n/i18n.js"></script>
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <script type="module">
         import * as YAML from 'https://esm.sh/yaml@2';
         window.YAML = YAML;
@@ -132,57 +132,57 @@
             <div class="info-section">
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="dev.yaml.infoIntro">工具介绍</h3>
+                        <h3 data-i18n="dev.yaml.infoIntro">YAML 格式化：配置文件的整理与验证工具</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="dev.yaml.problemsTitle">一、解决的问题</h4>
+                        <h4 data-i18n="dev.yaml.problemsTitle">一、YAML 为什么成为配置文件的首选</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.problem1">编辑和验证YAML配置文件，支持与JSON互转。</li>
-                            <li data-i18n="dev.yaml.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                            <li data-i18n="dev.yaml.problem3">无需安装专业软件，随时随地在线使用。</li>
+                            <li data-i18n="dev.yaml.problem1">YAML（YAML Ain't Markup Language）用缩进和简洁语法表示数据结构——比 JSON 更易读，比 XML 更简洁。Kubernetes 配置、Docker Compose、GitHub Actions、Ansible、Spring Boot——现代 DevOps 工具链几乎全部使用 YAML 作为配置格式。</li>
+                            <li data-i18n="dev.yaml.problem2">但 YAML 的缩进语法也是双刃剑——一个空格错位就可能导致整个配置文件解析失败。Kubernetes 的 YAML 配置动辄数百行，缩进错误是新手最常遇到的问题。本工具提供 YAML 的格式化、验证、压缩和转换功能。</li>
+                            <li data-i18n="dev.yaml.problem3">支持 YAML 转 Properties 格式——Java/Spring 项目中经常需要将 YAML 配置转换为 .properties 文件。也支持 YAML 到 JSON 的互转——方便在不同工具间迁移配置。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.formatTitle">二、支持的格式</h4>
+                        <h4 data-i18n="dev.yaml.formatTitle">二、YAML 语法特点</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.formatYaml"><strong>YAML：</strong>支持该格式的完整处理功能。</li>
-                            <li data-i18n="dev.yaml.formatJson"><strong>JSON：</strong>支持该格式的完整处理功能。</li>
+                            <li data-i18n="dev.yaml.formatYaml"><strong>YAML 语法：</strong>键值对用冒号分隔（key: value），列表用短横线（- item），嵌套用缩进表示。不支持 Tab 缩进——必须使用空格。字符串可以不加引号——除非包含特殊字符。</li>
+                            <li data-i18n="dev.yaml.formatJson"><strong>YAML vs JSON：</strong>YAML 是 JSON 的超集——任何合法的 JSON 都是合法的 YAML。但 YAML 支持注释（# 开头）、多行字符串（| 和 >）、锚点和引用（& 和 *）等 JSON 不支持的特性。</li>
                         </ul>
                         <h4 data-i18n="dev.yaml.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                            <li data-i18n="dev.yaml.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                            <li data-i18n="dev.yaml.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                            <li data-i18n="dev.yaml.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                            <li data-i18n="dev.yaml.featureOnline"><strong>格式化与验证：</strong>一键格式化 YAML 代码——自动修正缩进和对齐。验证模式检查语法错误并精确定位行号和列号。</li>
+                            <li data-i18n="dev.yaml.featurePreview"><strong>压缩输出：</strong>去除空行和注释，生成紧凑的 YAML 代码——适合嵌入其他配置文件。</li>
+                            <li data-i18n="dev.yaml.featureExport"><strong>格式转换：</strong>YAML 转 JSON（标准数据结构映射）、YAML 转 Properties（Java/Spring 配置格式）。每种转换保留完整的层级信息。</li>
+                            <li data-i18n="dev.yaml.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——配置文件不上传到服务器。</li>
                         </ul>
                     </div>
                 </article>
 
                 <article class="info-details">
                     <header>
-                        <h3 data-i18n="dev.yaml.infoUsage">使用说明</h3>
+                        <h3 data-i18n="dev.yaml.infoUsage">YAML 操作指南</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="dev.yaml.usageFormatTitle">一、格式化功能</h4>
+                        <h4 data-i18n="dev.yaml.usageFormatTitle">格式化步骤</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.usageFormat"><strong>格式化：</strong>将压缩或杂乱的YAML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。</li>
-                            <li data-i18n="dev.yaml.usageValidate"><strong>校验语法：</strong>检查YAML代码的语法正确性，精确指出错误行号和上下文。</li>
-                            <li data-i18n="dev.yaml.usageMinify"><strong>压缩：</strong>将格式化的YAML代码压缩为紧凑格式，减小文件体积。</li>
-                            <li data-i18n="dev.yaml.usageToProperties"><strong>转 Properties：</strong>将YAML格式转换为Java Properties格式，便于配置文件迁移。</li>
-                            <li data-i18n="dev.yaml.usageCopy"><strong>复制结果：</strong>一键复制格式化或转换后的代码到剪贴板。</li>
+                            <li data-i18n="dev.yaml.usageFormat"><strong>粘贴 YAML：</strong>将 YAML 内容粘贴到输入框——支持从 Kubernetes 配置、Docker Compose、GitHub Actions 等文件中直接复制。</li>
+                            <li data-i18n="dev.yaml.usageValidate"><strong>格式化/验证：</strong>点击"格式化"按钮自动修正缩进；点击"验证"按钮检查语法错误。</li>
+                            <li data-i18n="dev.yaml.usageMinify"><strong>压缩：</strong>点击"压缩"按钮去除空行和注释——输出紧凑的 YAML。</li>
+                            <li data-i18n="dev.yaml.usageToProperties"><strong>转 Properties：</strong>点击"转 Properties"按钮将 YAML 配置转换为 Java .properties 格式——嵌套键用点号连接（server.port=8080）。</li>
+                            <li data-i18n="dev.yaml.usageCopy"><strong>复制结果：</strong>点击"复制"按钮将输出复制到剪贴板。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.usageSyntaxTitle">二、YAML 语法基础</h4>
+                        <h4 data-i18n="dev.yaml.usageSyntaxTitle">五、YAML 语法详解</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.syntaxIndent"><strong>缩进：</strong>YAML使用空格缩进表示层级结构，不支持Tab键。</li>
-                            <li data-i18n="dev.yaml.syntaxKeyValue"><strong>键值对：</strong>使用冒号分隔键和值，如 <code>name: value</code>。</li>
-                            <li data-i18n="dev.yaml.syntaxList"><strong>列表：</strong>使用短横线 <code>-</code> 表示列表项。</li>
-                            <li data-i18n="dev.yaml.syntaxMultiline"><strong>多行文本：</strong>使用 <code>|</code> 保留换行，使用 <code>&gt;</code> 折叠换行。</li>
-                            <li data-i18n="dev.yaml.syntaxComment"><strong>注释：</strong>使用 <code>#</code> 开头的行作为注释。</li>
-                            <li data-i18n="dev.yaml.syntaxSpecial"><strong>特殊字符：</strong>包含特殊字符的值需要用引号包裹。</li>
+                            <li data-i18n="dev.yaml.syntaxIndent"><strong>缩进规则：</strong>使用空格缩进（不能用 Tab）——同一层级的缩进空格数必须一致。通常使用 2 个空格。</li>
+                            <li data-i18n="dev.yaml.syntaxKeyValue"><strong>键值对：</strong>key: value——冒号后必须有空格。值可以是字符串、数字、布尔值、null、数组或嵌套对象。</li>
+                            <li data-i18n="dev.yaml.syntaxList"><strong>列表：</strong>用短横线加空格表示列表项（- item）——列表可以嵌套在键值对的值中。</li>
+                            <li data-i18n="dev.yaml.syntaxMultiline"><strong>多行字符串：</strong>| 保留换行（literal），> 折叠换行为空格（folded）。适合表示长文本内容。</li>
+                            <li data-i18n="dev.yaml.syntaxComment"><strong>注释：</strong># 开头为注释——YAML 是少数支持注释的数据序列化格式（JSON 不支持）。</li>
+                            <li data-i18n="dev.yaml.syntaxSpecial"><strong>锚点和引用：</strong>&anchor 定义锚点，*anchor 引用锚点——避免重复定义相同的数据结构。<<: *anchor 实现合并/继承。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.usageShortcutsTitle">三、快捷操作</h4>
+                        <h4 data-i18n="dev.yaml.usageShortcutsTitle">六、注意事项</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.shortcut1">点击"示例数据"按钮可以查看格式化效果的示例代码。</li>
-                            <li data-i18n="dev.yaml.shortcut2">清空按钮可以快速清除所有内容。</li>
-                            <li data-i18n="dev.yaml.shortcut3">状态栏会显示当前YAML的解析状态。</li>
+                            <li data-i18n="dev.yaml.shortcut1"><strong>布尔值：</strong>YAML 中 true/false、yes/no、on/off 都表示布尔值——不同解析器可能有差异。建议统一使用 true/false。</li>
+                            <li data-i18n="dev.yaml.shortcut2"><strong>数字格式：</strong>YAML 自动识别数字类型——123（整数）、3.14（浮点数）、0x1A（十六进制）、0o17（八进制）。带引号的数字被视为字符串。</li>
+                            <li data-i18n="dev.yaml.shortcut3"><strong>null 值：</strong>null、~、空值都表示 null——不同解析器可能有差异。建议统一使用 null。</li>
                         </ul>
                     </div>
                 </article>
@@ -191,36 +191,36 @@
                         <h3 data-i18n="dev.yaml.infoNotes">注意事项</h3>
                     </header>
                     <div class="info-content">
-                        <h4 data-i18n="dev.yaml.notesFormatTitle">一、格式规范</h4>
+                        <h4 data-i18n="dev.yaml.notesFormatTitle">格式注意</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.noteFormat1">YAML对缩进非常敏感，必须使用空格，不能使用Tab。</li>
-                            <li data-i18n="dev.yaml.noteFormat2">同级元素的缩进必须一致。</li>
-                            <li data-i18n="dev.yaml.noteFormat3">键名后必须有冒号和空格。</li>
-                            <li data-i18n="dev.yaml.noteFormat4">字符串中的冒号和井号需要用引号包裹。</li>
-                            <li data-i18n="dev.yaml.noteFormat5">列表项前的短横线后必须有空格。</li>
+                            <li data-i18n="dev.yaml.noteFormat1"><strong>缩进一致性：</strong>YAML 严格依赖缩进表示层级——同一层级必须使用相同数量的空格。格式化会自动统一缩进。</li>
+                            <li data-i18n="dev.yaml.noteFormat2"><strong>冒号空格：</strong>键值对的冒号后必须有空格——key:value 会被解析为字符串而不是键值对。</li>
+                            <li data-i18n="dev.yaml.noteFormat3"><strong>特殊字符引号：</strong>包含 :、#、{、}、[、] 等特殊字符的字符串需要用引号包裹——否则会被解析为其他类型。</li>
+                            <li data-i18n="dev.yaml.noteFormat4"><strong>Tab 禁止：</strong>YAML 规范禁止使用 Tab 缩进——只能用空格。工具自动将 Tab 转换为空格。</li>
+                            <li data-i18n="dev.yaml.noteFormat5"><strong>文档分隔：</strong>--- 表示文档开始，... 表示文档结束——一个 YAML 文件可以包含多个文档。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.notesErrorTitle">二、常见错误</h4>
+                        <h4 data-i18n="dev.yaml.notesErrorTitle">错误处理</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.noteError1"><strong>缩进错误：</strong>混用空格和Tab，或缩进不一致。</li>
-                            <li data-i18n="dev.yaml.noteError2"><strong>冒号缺失：</strong>键名后忘记加冒号或空格。</li>
-                            <li data-i18n="dev.yaml.noteError3"><strong>引号问题：</strong>包含特殊字符的字符串未加引号。</li>
-                            <li data-i18n="dev.yaml.noteError4"><strong>语法错误：</strong>使用了YAML不支持的语法结构。</li>
+                            <li data-i18n="dev.yaml.noteError1"><strong>缩进错误：</strong>最常见的 YAML 错误——"mapping values are not allowed here"通常意味着缩进不一致。</li>
+                            <li data-i18n="dev.yaml.noteError2"><strong>类型歧义：</strong>某些值可能被意外解析为非字符串类型——如 yes 被解析为 true，123 被解析为整数。用引号包裹可以避免。</li>
+                            <li data-i18n="dev.yaml.noteError3"><strong>锚点引用：</strong>引用不存在的锚点会报错——确保 &anchor 定义在 *anchor 引用之前。</li>
+                            <li data-i18n="dev.yaml.noteError4"><strong>多行字符串：</strong>多行字符串的缩进必须比父键多——否则会被解析为下一个键值对。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.notesPerfTitle">三、性能提示</h4>
+                        <h4 data-i18n="dev.yaml.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.notePerf1">处理超大YAML文件（超过1MB）时可能会导致浏览器卡顿。</li>
-                            <li data-i18n="dev.yaml.notePerf2">建议将大型YAML文件分段处理。</li>
+                            <li data-i18n="dev.yaml.notePerf1"><strong>大文件：</strong>超过 1000 行的 YAML 文件格式化可能较慢——建议按模块拆分。</li>
+                            <li data-i18n="dev.yaml.notePerf2"><strong>复杂结构：</strong>深层嵌套和大量锚点引用可能影响解析性能——保持 YAML 结构扁平化。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.notesSecurityTitle">四、数据安全</h4>
+                        <h4 data-i18n="dev.yaml.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.noteSecurity1">所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
-                            <li data-i18n="dev.yaml.noteSecurity2">建议不要在公共设备上处理包含敏感信息的YAML代码。</li>
+                            <li data-i18n="dev.yaml.noteSecurity1"><strong>纯前端处理：</strong>所有 YAML 处理在浏览器中完成——配置文件不上传到服务器。</li>
+                            <li data-i18n="dev.yaml.noteSecurity2"><strong>敏感配置：</strong>Kubernetes Secret、数据库密码等敏感配置在处理完毕后请清空输入。</li>
                         </ul>
-                        <h4 data-i18n="dev.yaml.notesFaqTitle">五、常见问题</h4>
+                        <h4 data-i18n="dev.yaml.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="dev.yaml.noteFaq1"><strong>格式化失败：</strong>检查YAML语法是否正确，特别是缩进和冒号。</li>
-                            <li data-i18n="dev.yaml.noteFaq2"><strong>校验报错：</strong>根据错误提示定位问题行，修正语法错误。</li>
-                            <li data-i18n="dev.yaml.noteFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                            <li data-i18n="dev.yaml.noteFaq1"><strong>Q: YAML 和 JSON 有什么区别？</strong>A: YAML 更易读（支持注释、多行字符串）、更简洁（不需要引号和花括号）。JSON 更通用（所有语言原生支持）、更严格（没有歧义）。</li>
+                            <li data-i18n="dev.yaml.noteFaq2"><strong>Q: 格式化后配置行为变了？</strong>A: 格式化只调整缩进和空白——不改变数据结构。如果行为变化，原始 YAML 可能有缩进错误。</li>
+                            <li data-i18n="dev.yaml.noteFaq3"><strong>Q: 支持 YAML 1.2 吗？</strong>A: 支持 YAML 1.1 和 1.2 语法——包括锚点、引用、多行字符串、自定义标签等。</li>
                         </ul>
                     </div>
                 </article>

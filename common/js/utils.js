@@ -235,15 +235,17 @@ function showFileSizeToast(file, maxFileSize) {
 
 // ================= info-section 折叠功能 =================
 /**
- * info-section 中的 article 支持点击 header 折叠/展开，默认折叠
+ * info-section 中的 article 支持点击 header 折叠/展开，默认展开
  */
 (function initInfoSectionToggle() {
     function setup() {
         document.querySelectorAll('.info-details > header').forEach(function (header) {
             header.setAttribute('role', 'button');
-            // true表示默认折叠，false表示默认展开
-            header.setAttribute('aria-expanded', 'false');
-            header.parentElement.classList.add('collapsed');
+            // 默认折叠
+            // header.setAttribute('aria-expanded', 'false');
+            // header.parentElement.classList.add('collapsed');
+            // 默认展开
+            header.setAttribute('aria-expanded', 'true');
         });
     }
 

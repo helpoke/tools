@@ -30,7 +30,7 @@
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/xml/">
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <style>
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
@@ -131,7 +131,7 @@
 
         .io-panel textarea {
             width: 100%;
-            height: 800px;
+            height: 700px;
             background: var(--input-bg);
             padding: 12px 16px;
             border: 1px solid #eaeaea;
@@ -150,7 +150,7 @@
 
         .io-panel pre.output-pre {
             width: 100%;
-            height: 600px;
+            height: 700px;
             background: var(--input-bg);
             padding: 12px 16px;
             border: 1px solid #eaeaea;
@@ -466,75 +466,88 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="dev.xml.introTitle">工具介绍</h3>
+                            <h3 data-i18n="dev.xml.introTitle">XML 格式化与转换：数据交换格式的整理专家</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="dev.xml.problemsTitle">一、解决的问题</h4>
+                            <h4 data-i18n="dev.xml.problemsTitle">一、XML 格式化的必要性</h4>
                             <ul>
-                                <li data-i18n="dev.xml.problems1">解析和格式化XML文档，支持XML与JSON互转。</li>
-                                <li data-i18n="dev.xml.problems2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li data-i18n="dev.xml.problems3">无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="dev.xml.problems1">XML 是数据交换的经典格式——SOAP 接口、配置文件（pom.xml、web.xml）、RSS/Atom
+                                    订阅源、SVG 图形都使用 XML。但从 API 返回的 XML 往往是一整行——没有缩进、没有换行，标签嵌套关系完全看不出来。XML
+                                    格式化工具自动添加缩进和换行，将紧凑的 XML 还原为清晰的树形结构。</li>
+                                <li data-i18n="dev.xml.problems2">除了格式化，本工具还支持 XML 压缩（去除多余空白）、XML 与 JSON 的互转——将 XML
+                                    文档转换为 JSON 格式，或将 JSON 转换为规范的 XML。每种转换都保留原始数据结构。</li>
+                                <li data-i18n="dev.xml.problems3">XML 比 JSON
+                                    更严格——所有标签必须闭合、属性值必须加引号、大小写敏感。格式化工具会检查这些规则，遇到格式错误时报告具体位置。</li>
                             </ul>
-                            <h4 data-i18n="dev.xml.formatsTitle">二、支持的格式</h4>
+                            <h4 data-i18n="dev.xml.formatsTitle">二、XML 的技术特点</h4>
                             <ul>
-                                <li data-i18n="dev.xml.formats1"><strong>XML：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="dev.xml.formats2"><strong>JSON：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.xml.formats1"><strong>标签结构：</strong>XML 由开始标签（<tag>）、结束标签（</tag>
+                                    ）和内容组成。自闭合标签（
+                                    <tag />）等价于 <tag></tag>。属性在开始标签内声明——<tag attr="value">。
+                                </li>
+                                <li data-i18n="dev.xml.formats2"><strong>严格语法：</strong>XML
+                                    要求所有标签必须闭合、属性值必须加引号、标签名大小写敏感、必须有且仅有一个根元素。任何违反规则的地方都会导致解析错误。</li>
                             </ul>
                             <h4 data-i18n="dev.xml.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="dev.xml.features1"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="dev.xml.features2"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="dev.xml.features3"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="dev.xml.features4"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="dev.xml.features1"><strong>格式化与压缩：</strong>一键将 XML
+                                    格式化为带缩进的树形结构，或压缩为无多余空白的紧凑格式。支持 2 空格和 4 空格缩进。</li>
+                                <li data-i18n="dev.xml.features2"><strong>XML 与 JSON 互转：</strong>XML 转 JSON
+                                    将标签结构映射为键值对——属性转为 @attr 键，文本内容转为 #text 键。JSON 转 XML 将键值对还原为标签结构。</li>
+                                <li data-i18n="dev.xml.features3"><strong>错误检测：</strong>格式化时自动检查 XML
+                                    语法——标签不匹配、属性值缺少引号、特殊字符未转义等错误都会报告具体行号和列号。</li>
+                                <li data-i18n="dev.xml.features4"><strong>纯前端处理：</strong>所有格式化和转换在浏览器中完成——数据不上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="dev.xml.guideTitle">使用说明</h3>
+                            <h3 data-i18n="dev.xml.guideTitle">XML 操作指南</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="dev.xml.guideFormatTitle">一、格式化功能</h4>
+                            <h4 data-i18n="dev.xml.guideFormatTitle">格式化步骤</h4>
                             <ul>
-                                <li data-i18n="dev.xml.guideFormat1">
-                                    <strong>格式化：</strong>将压缩或杂乱的XML代码转换为结构清晰、缩进正确的格式，便于阅读和维护。
+                                <li data-i18n="dev.xml.guideFormat1"><strong>粘贴 XML：</strong>将 XML 文档粘贴到输入框——支持从 API
+                                    响应、配置文件、SOAP 消息中直接复制。</li>
+                                <li data-i18n="dev.xml.guideFormat2"><strong>格式化：</strong>点击"格式化"按钮，输出框显示带缩进的 XML 树形结构。
                                 </li>
-                                <li data-i18n="dev.xml.guideFormat2">
-                                    <strong>压缩：</strong>将格式化的XML代码压缩为紧凑格式，去除空白字符，减小文件体积。
-                                </li>
-                                <li data-i18n="dev.xml.guideFormat3"><strong>转 JSON：</strong>将XML格式转换为JSON格式，便于数据交换和处理。
-                                </li>
-                                <li data-i18n="dev.xml.guideFormat4"><strong>转 XML：</strong>将JSON格式转换为XML格式，便于与传统系统集成。
-                                </li>
-                                <li data-i18n="dev.xml.guideFormat5"><strong>复制结果：</strong>一键复制处理后的代码到剪贴板。</li>
-                                <li data-i18n="dev.xml.guideFormat6"><strong>快捷键：</strong>按 Ctrl+Enter 可以快速触发格式化。</li>
-                            </ul>
-                            <h4 data-i18n="dev.xml.guideSyntaxTitle">二、XML 语法基础</h4>
-                            <ul>
-                                <li data-i18n="dev.xml.guideSyntax1"><strong>声明：</strong>XML文档开头通常包含声明
-                                    <code>&lt;?xml version="1.0"?&gt;</code>。
-                                </li>
-                                <li data-i18n="dev.xml.guideSyntax2"><strong>根元素：</strong>XML必须有且仅有一个根元素，如
-                                    <code>&lt;root&gt;&lt;/root&gt;</code>。
-                                </li>
-                                <li data-i18n="dev.xml.guideSyntax3"><strong>标签：</strong>标签必须成对出现，且区分大小写。</li>
-                                <li data-i18n="dev.xml.guideSyntax4"><strong>属性：</strong>元素可以包含属性，如
-                                    <code>&lt;item id="1"&gt;</code>。
-                                </li>
-                                <li data-i18n="dev.xml.guideSyntax5"><strong>特殊字符：</strong>&lt;、&gt;、&amp;、"、' 必须使用实体引用。
-                                </li>
-                                <li data-i18n="dev.xml.guideSyntax6"><strong>CDATA：</strong>使用
-                                    <code>&lt;![CDATA[...]]&gt;</code> 包裹特殊字符内容。
+                                <li data-i18n="dev.xml.guideFormat3"><strong>压缩：</strong>点击"压缩"按钮去除多余空白——输出紧凑的 XML。</li>
+                                <li data-i18n="dev.xml.guideFormat4"><strong>复制：</strong>点击"复制"按钮将结果复制到剪贴板。</li>
+                                <li data-i18n="dev.xml.guideFormat5"><strong>清空：</strong>点击"清空"按钮清除输入和输出。</li>
+                                <li data-i18n="dev.xml.guideFormat6"><strong>统计：</strong>格式化后显示字符数和行数——帮助了解 XML 文档规模。
                                 </li>
                             </ul>
-                            <h4 data-i18n="dev.xml.guideConvertTitle">三、XML 与 JSON 转换规则</h4>
+                            <h4 data-i18n="dev.xml.guideSyntaxTitle">五、XML 语法要点</h4>
                             <ul>
-                                <li data-i18n="dev.xml.guideConvert1"><strong>XML 属性：</strong>转换为JSON对象的键值对。</li>
-                                <li data-i18n="dev.xml.guideConvert2"><strong>文本内容：</strong>使用 <code>value</code> 键存储。
+                                <li data-i18n="dev.xml.guideSyntax1"><strong>声明：</strong>
+                                    <?xml version="1.0" encoding="UTF-8"?> 是 XML 文档的声明——指定版本和编码。
                                 </li>
-                                <li data-i18n="dev.xml.guideConvert3"><strong>同名子元素：</strong>转换为JSON数组。</li>
-                                <li data-i18n="dev.xml.guideConvert4"><strong>嵌套结构：</strong>保持层级关系。</li>
+                                <li data-i18n="dev.xml.guideSyntax2"><strong>根元素：</strong>XML 文档必须有且仅有一个根元素——所有内容都在根元素内。
+                                </li>
+                                <li data-i18n="dev.xml.guideSyntax3"><strong>标签闭合：</strong>每个开始标签必须有对应的结束标签——<tag>内容
+                                    </tag>。自闭合标签用
+                                    <tag /> 表示。
+                                </li>
+                                <li data-i18n="dev.xml.guideSyntax4"><strong>属性引号：</strong>属性值必须用引号包裹——attr="value" 或
+                                    attr='value'。</li>
+                                <li data-i18n="dev.xml.guideSyntax5"><strong>特殊字符：</strong>& 用 &amp; 表示，< 用 &lt; 表示，> 用
+                                        &gt; 表示。CDATA 段（
+                                        <![CDATA[...]]>）中的内容不需要转义。</li>
+                                <li data-i18n="dev.xml.guideSyntax6"><strong>命名空间：</strong>xmlns 属性声明命名空间——<root
+                                        xmlns:ns="http://example.com">。使用命名空间前缀的元素需要对应命名空间声明。</li>
+                            </ul>
+                            <h4 data-i18n="dev.xml.guideConvertTitle">格式转换</h4>
+                            <ul>
+                                <li data-i18n="dev.xml.guideConvert1"><strong>XML 转 JSON：</strong>点击"转 JSON"按钮——XML
+                                    标签映射为 JSON 键，属性转为 @attr 键，文本内容转为 #text 键。</li>
+                                <li data-i18n="dev.xml.guideConvert2"><strong>JSON 转 XML：</strong>切换到 JSON 输入，粘贴 JSON
+                                    数据，点击"转 XML"按钮——JSON 键映射为 XML 标签。</li>
+                                <li data-i18n="dev.xml.guideConvert3"><strong>数组处理：</strong>XML 中的重复元素转为 JSON
+                                    时自动合并为数组。JSON 数组转为 XML 时每个元素生成独立标签。</li>
+                                <li data-i18n="dev.xml.guideConvert4"><strong>属性处理：</strong>XML 属性在 JSON 中以 @ 前缀表示——<tag
+                                        attr="val"> 转为 {"@attr": "val"}。</li>
                             </ul>
                         </div>
                     </article>
@@ -543,36 +556,53 @@
                             <h3 data-i18n="dev.xml.notesTitle">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="dev.xml.notesFormatTitle">一、格式规范</h4>
+                            <h4 data-i18n="dev.xml.notesFormatTitle">格式化注意</h4>
                             <ul>
-                                <li data-i18n="dev.xml.notesFormat1">XML标签必须正确闭合，且区分大小写。</li>
-                                <li data-i18n="dev.xml.notesFormat2">属性值必须用引号包裹。</li>
-                                <li data-i18n="dev.xml.notesFormat3">特殊字符必须使用实体引用，如 <code>&amp;</code> 表示 &。</li>
-                                <li data-i18n="dev.xml.notesFormat4">根元素必须唯一，不能有多个根元素。</li>
-                            </ul>
-                            <h4 data-i18n="dev.xml.notesConvertTitle">二、转换规则</h4>
-                            <ul>
-                                <li data-i18n="dev.xml.notesConvert1">XML转JSON时，属性直接放在对象上，文本内容使用 <code>value</code> 键。
+                                <li data-i18n="dev.xml.notesFormat1"><strong>空白敏感：</strong>XML
+                                    中的空白可能是有意义的——格式化添加的缩进空白在某些场景下可能影响数据处理。对于空白敏感的 XML（如 SOAP 消息），请验证格式化后的结果。</li>
+                                <li data-i18n="dev.xml.notesFormat2"><strong>CDATA 保留：</strong>CDATA 段（
+                                    <![CDATA[...]]>）中的内容在格式化时保持原样——不被格式化引擎修改。
                                 </li>
-                                <li data-i18n="dev.xml.notesConvert2">JSON转XML时，<code>value</code> 键会转换为文本内容。</li>
-                                <li data-i18n="dev.xml.notesConvert3">数组会转换为多个同名子元素。</li>
-                                <li data-i18n="dev.xml.notesConvert4">复杂嵌套结构可能导致转换结果不符合预期，建议简化数据结构。</li>
+                                <li data-i18n="dev.xml.notesFormat3"><strong>命名空间保留：</strong>格式化保留所有命名空间声明和前缀——不改变 XML
+                                    的命名空间结构。</li>
+                                <li data-i18n="dev.xml.notesFormat4"><strong>处理指令：</strong>
+                                    <?...?> 处理指令（如 <?xml-stylesheet?>）在格式化时保留——不被删除或修改。
+                                </li>
                             </ul>
-                            <h4 data-i18n="dev.xml.notesPerfTitle">三、性能提示</h4>
+                            <h4 data-i18n="dev.xml.notesConvertTitle">转换注意</h4>
                             <ul>
-                                <li data-i18n="dev.xml.notesPerf1">处理超大XML文件（超过1MB）时可能会导致浏览器卡顿。</li>
-                                <li data-i18n="dev.xml.notesPerf2">建议将大型XML文件分段处理。</li>
+                                <li data-i18n="dev.xml.notesConvert1"><strong>属性丢失风险：</strong>XML 转 JSON
+                                    时，如果元素同时有属性和文本内容，转换结构可能较复杂——需要特殊处理。</li>
+                                <li data-i18n="dev.xml.notesConvert2"><strong>数组与对象：</strong>只有一个子元素时转 JSON
+                                    是对象，多个同名子元素时转 JSON 是数组——转换规则需要理解。</li>
+                                <li data-i18n="dev.xml.notesConvert3"><strong>编码问题：</strong>XML 声明的编码（如 UTF-8）在 JSON
+                                    中没有对应概念——JSON 默认使用 Unicode。</li>
+                                <li data-i18n="dev.xml.notesConvert4"><strong>顺序保留：</strong>JSON 对象的键顺序不保证——XML 转 JSON
+                                    再转回 XML 时，属性顺序可能改变。</li>
                             </ul>
-                            <h4 data-i18n="dev.xml.notesSecurityTitle">四、数据安全</h4>
+                            <h4 data-i18n="dev.xml.notesPerfTitle">性能说明</h4>
                             <ul>
-                                <li data-i18n="dev.xml.notesSecurity1">所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
-                                <li data-i18n="dev.xml.notesSecurity2">建议不要在公共设备上处理包含敏感信息的XML代码。</li>
+                                <li data-i18n="dev.xml.notesPerf1"><strong>大文件：</strong>超过 5MB 的 XML 文件格式化可能较慢——建议分段处理。
+                                </li>
+                                <li data-i18n="dev.xml.notesPerf2"><strong>深层嵌套：</strong>超过 50 层的嵌套结构可能导致格式化性能下降——检查 XML
+                                    结构是否合理。</li>
                             </ul>
-                            <h4 data-i18n="dev.xml.notesFaqTitle">五、常见问题</h4>
+                            <h4 data-i18n="dev.xml.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="dev.xml.notesFaq1"><strong>解析失败：</strong>检查XML语法是否正确，特别是标签闭合和特殊字符。</li>
-                                <li data-i18n="dev.xml.notesFaq2"><strong>转换异常：</strong>复杂嵌套结构可能导致转换结果不符合预期。</li>
-                                <li data-i18n="dev.xml.notesFaq3"><strong>复制失败：</strong>检查浏览器是否允许剪贴板访问。</li>
+                                <li data-i18n="dev.xml.notesSecurity1">
+                                    <strong>纯前端处理：</strong>所有格式化和转换在浏览器中完成——数据不上传到服务器。
+                                </li>
+                                <li data-i18n="dev.xml.notesSecurity2"><strong>XXE 防护：</strong>工具不解析外部实体引用——不受 XXE（XML
+                                    External Entity）攻击影响。</li>
+                            </ul>
+                            <h4 data-i18n="dev.xml.notesFaqTitle">常见问题</h4>
+                            <ul>
+                                <li data-i18n="dev.xml.notesFaq1"><strong>Q: 格式化后 XML 内容变了？</strong>A:
+                                    格式化只添加缩进和换行——不修改标签、属性或文本内容。如果内容变化，原始 XML 可能有语法错误。</li>
+                                <li data-i18n="dev.xml.notesFaq2"><strong>Q: XML 转 JSON 后数据丢失？</strong>A:
+                                    检查是否有同名属性或混合内容（标签内同时有文本和子标签）——这些情况需要特殊处理。</li>
+                                <li data-i18n="dev.xml.notesFaq3"><strong>Q: 支持 XSD/DTD 验证吗？</strong>A: 本工具只做格式化和转换——不支持
+                                    XSD/DTD Schema 验证。</li>
                             </ul>
                         </div>
                     </article>
@@ -610,6 +640,7 @@
             var el = document.getElementById('error');
             el.textContent = msg;
             el.classList.add('show');
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function getInput() {

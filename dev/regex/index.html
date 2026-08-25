@@ -31,7 +31,7 @@
     <script src="../../common/js/i18n/i18n.js"></script>
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <style>
         @import '../../common/css/style.css';
         @import '../../common/css/utils.css';
@@ -761,13 +761,7 @@
                             <span class="regex-delimiter">/</span>
                             <input type="text" id="regex-flags" class="flags-input" placeholder="gm" value="g">
                         </div>
-                        <div class="flags-hint" data-i18n="dev.regex.flagsHint">
-                            标志：<span onclick="toggleFlag('g')">g</span> 全局 &nbsp;
-                            <span onclick="toggleFlag('i')">i</span> 忽略大小写 &nbsp;
-                            <span onclick="toggleFlag('m')">m</span> 多行 &nbsp;
-                            <span onclick="toggleFlag('s')">s</span> 点匹配换行 &nbsp;
-                            <span onclick="toggleFlag('u')">u</span> Unicode
-                        </div>
+                        <div class="flags-hint" data-i18n="dev.regex.flagsHint">标志：<span onclick="toggleFlag('g')">g</span> 全局 &nbsp; <span onclick="toggleFlag('i')">i</span> 忽略大小写 &nbsp; <span onclick="toggleFlag('m')">m</span> 多行 &nbsp; <span onclick="toggleFlag('s')">s</span> 点匹配换行 &nbsp; <span onclick="toggleFlag('u')">u</span> Unicode</div>
                     </div>
 
                     <div class="form-group">
@@ -832,82 +826,66 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="dev.regex.introTitle">工具介绍</h3>
+                            <h3 data-i18n="dev.regex.introTitle">正则表达式：文本处理的瑞士军刀</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="dev.regex.problemsTitle">一、解决的问题</h4>
+                            <h4 data-i18n="dev.regex.problemsTitle">一、正则表达式为什么让人又爱又恨</h4>
                             <ul>
-                                <li data-i18n="dev.regex.problem1">测试和验证正则表达式，支持实时匹配和替换。</li>
-                                <li data-i18n="dev.regex.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li data-i18n="dev.regex.problem3">无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="dev.regex.problem1">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b ——这串"天书"匹配的是邮箱地址。正则表达式（Regular Expression）是文本搜索和替换的终极工具——几乎所有编程语言、文本编辑器、命令行工具都支持它。但正则的语法极其晦涩，一个括号漏写就可能导致整个匹配失败。</li>
+                                <li data-i18n="dev.regex.problem2">本工具提供可视化的正则表达式测试环境——输入正则表达式和测试文本，工具实时高亮所有匹配结果，显示匹配位置、捕获组内容和匹配统计。支持 JavaScript 和 Python 两种正则语法。</li>
+                                <li data-i18n="dev.regex.problem3">内置 12 个常用正则预设——邮箱、手机号、URL、IP 地址、身份证号、中文字符等——一键加载，不需要从零编写。还提供正则语法速查表——字符类、量词、锚点、分组、断言——方便随时查阅。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.formatsTitle">二、支持的格式</h4>
+                            <h4 data-i18n="dev.regex.formatsTitle">二、正则表达式语法</h4>
                             <ul>
-                                <li data-i18n="dev.regex.formatRegex"><strong>正则表达式：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="dev.regex.formatJs"><strong>JavaScript：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="dev.regex.formatPython"><strong>Python：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="dev.regex.formatRegex"><strong>通用语法：</strong>正则表达式由字面字符和元字符组成。^ 匹配开头，$ 匹配结尾，. 匹配任意字符，* 匹配 0 次或多次，+ 匹配 1 次或多次，? 匹配 0 次或 1 次，[] 匹配字符集，() 分组捕获，| 表示或。</li>
+                                <li data-i18n="dev.regex.formatJs"><strong>JavaScript 语法：</strong>支持 /pattern/flags 字面量语法。常用标志：g（全局匹配）、i（忽略大小写）、m（多行模式）。支持命名捕获组 (?<name>...) 和前后瞻 (?=...) / (?!...)。</li>
+                                <li data-i18n="dev.regex.formatPython"><strong>Python 风格参考：</strong>虽然浏览器环境使用 JavaScript 正则引擎，但本工具的语法速查表同时标注了 Python re 模块的等价语法。大部分基础语法（字符类、量词、分组）在两种风格中通用，少数高级特性（如命名分组语法）有差异。</li>
                             </ul>
                             <h4 data-i18n="dev.regex.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="dev.regex.featureOnline"><strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="dev.regex.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。</li>
-                                <li data-i18n="dev.regex.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。</li>
-                                <li data-i18n="dev.regex.featureSecurity"><strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="dev.regex.featureOnline"><strong>实时匹配：</strong>输入正则表达式后，匹配结果立即在测试文本中高亮显示——不需要点击"测试"按钮。修改正则或测试文本都会实时更新。</li>
+                                <li data-i18n="dev.regex.featurePreview"><strong>匹配详情：</strong>每个匹配结果显示起始位置、结束位置和匹配内容。捕获组单独列出——方便提取子匹配。</li>
+                                <li data-i18n="dev.regex.featureExport"><strong>搜索替换：</strong>输入正则表达式和替换文本，工具执行全局替换并显示替换后结果——支持 $1、$2 等反向引用。</li>
+                                <li data-i18n="dev.regex.featureSecurity"><strong>纯前端处理：</strong>所有正则匹配在浏览器中完成——测试文本不上传到服务器。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="dev.regex.usageTitle">使用说明</h3>
+                            <h3 data-i18n="dev.regex.usageTitle">正则表达式操作指南</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="dev.regex.matchGuideTitle">一、正则匹配功能</h4>
+                            <h4 data-i18n="dev.regex.matchGuideTitle">匹配测试</h4>
                             <ul>
-                                <li data-i18n="dev.regex.guideInputRegex"><strong>输入正则表达式：</strong>在正则表达式输入框中输入要测试的正则模式，如
-                                    <code>\d{4}-\d{2}-\d{2}</code>。</li>
-                                <li data-i18n="dev.regex.guideSelectFlags"><strong>选择标志：</strong>点击标志按钮设置正则标志（g: 全局匹配，i:
-                                    忽略大小写，m: 多行模式，s: 点匹配换行，u: Unicode）。
-                                </li>
-                                <li data-i18n="dev.regex.guideInputText"><strong>输入测试文本：</strong>在测试文本区域输入要匹配的文本内容。</li>
-                                <li data-i18n="dev.regex.guideRealtime"><strong>实时匹配：</strong>系统会实时显示匹配结果，高亮显示所有匹配项。</li>
-                                <li data-i18n="dev.regex.guideDetails">
-                                    <strong>查看匹配详情：</strong>在下方列表中查看每个匹配的详细信息，包括位置、长度和捕获分组。</li>
-                                <li data-i18n="dev.regex.guideLocate"><strong>定位匹配：</strong>点击"定位"按钮可以跳转到对应匹配项的高亮位置。</li>
+                                <li data-i18n="dev.regex.guideInputRegex"><strong>输入正则：</strong>在正则输入框中输入表达式——不需要写 / 分隔符，直接写 pattern 部分。</li>
+                                <li data-i18n="dev.regex.guideSelectFlags"><strong>选择标志：</strong>勾选 g（全局）、i（忽略大小写）、m（多行）等标志。</li>
+                                <li data-i18n="dev.regex.guideInputText"><strong>输入测试文本：</strong>在测试文本框中输入或粘贴需要匹配的文本。</li>
+                                <li data-i18n="dev.regex.guideRealtime"><strong>实时匹配：</strong>匹配结果自动高亮显示——每个匹配用不同颜色标记。</li>
+                                <li data-i18n="dev.regex.guideDetails"><strong>查看详情：</strong>匹配列表显示每个匹配的起始位置、结束位置和匹配内容。</li>
+                                <li data-i18n="dev.regex.guideLocate"><strong>定位匹配：</strong>点击匹配列表中的某项，测试文本自动滚动到对应位置。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.replaceGuideTitle">二、正则替换功能</h4>
+                            <h4 data-i18n="dev.regex.replaceGuideTitle">搜索替换</h4>
                             <ul>
-                                <li data-i18n="dev.regex.guideSwitchReplace"><strong>切换到替换：</strong>点击"正则替换"标签页切换到替换模式。</li>
-                                <li data-i18n="dev.regex.guideSetRegex"><strong>输入正则表达式：</strong>设置要匹配的正则模式。</li>
-                                <li data-i18n="dev.regex.guideInputSource"><strong>输入原始文本：</strong>在原始文本区域输入要替换的内容。</li>
-                                <li data-i18n="dev.regex.guideSetReplace"><strong>设置替换内容：</strong>在"替换为"输入框中输入替换后的内容，支持
-                                    <code>$1</code>、<code>$2</code>
-                                    等捕获分组引用。</li>
-                                <li data-i18n="dev.regex.guideDoReplace"><strong>执行替换：</strong>点击"替换"按钮或等待自动执行替换。</li>
+                                <li data-i18n="dev.regex.guideSwitchReplace"><strong>切换到替换模式：</strong>点击"替换"标签页进入替换模式。</li>
+                                <li data-i18n="dev.regex.guideSetRegex"><strong>设置正则：</strong>输入用于匹配的正则表达式——支持捕获组。</li>
+                                <li data-i18n="dev.regex.guideInputSource"><strong>输入源文本：</strong>输入需要替换的原始文本。</li>
+                                <li data-i18n="dev.regex.guideSetReplace"><strong>设置替换文本：</strong>输入替换内容——$1 引用第一个捕获组，$2 引用第二个，以此类推。</li>
+                                <li data-i18n="dev.regex.guideDoReplace"><strong>执行替换：</strong>点击"替换"按钮，显示替换后的结果。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.cheatsheetTitle">三、常用正则速查</h4>
+                            <h4 data-i18n="dev.regex.cheatsheetTitle">五、正则语法速查</h4>
                             <ul>
-                                <li data-i18n="dev.regex.guideClickPreset"><strong>点击预设：</strong>点击下方的预设正则表达式可以快速填入。</li>
-                                <li data-i18n="dev.regex.guidePresetContent">
-                                    <strong>预设内容：</strong>包含日期、手机号、邮箱、URL、IP地址、身份证、中文汉字、空白行、HTML标签、十六进制颜色、数字、单词等常用正则。
-                                </li>
+                                <li data-i18n="dev.regex.guideClickPreset"><strong>预设模板：</strong>点击预设按钮快速加载常用正则——邮箱、手机号、URL 等。</li>
+                                <li data-i18n="dev.regex.guidePresetContent"><strong>预设内容：</strong>每个预设都经过实际验证——可以直接使用或在此基础上修改。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.syntaxTitle">四、正则语法基础</h4>
+                            <h4 data-i18n="dev.regex.syntaxTitle">语法速查</h4>
                             <ul>
-                                <li data-i18n="dev.regex.syntaxCharClass"><strong>字符类：</strong><code>.</code>
-                                    匹配任意字符，<code>\d</code> 匹配数字，<code>\w</code>
-                                    匹配字母数字下划线，<code>\s</code> 匹配空白字符。</li>
-                                <li data-i18n="dev.regex.syntaxQuantifier"><strong>量词：</strong><code>*</code>
-                                    零次或多次，<code>+</code> 一次或多次，<code>?</code>
-                                    零次或一次，<code>{n}</code> 恰好n次，<code>{n,m}</code> n到m次。</li>
-                                <li data-i18n="dev.regex.syntaxAnchor"><strong>锚点：</strong><code>^</code> 行首，<code>$</code>
-                                    行尾，<code>\b</code> 单词边界。</li>
-                                <li data-i18n="dev.regex.syntaxGroup"><strong>分组：</strong><code>(pattern)</code>
-                                    捕获分组，<code>(?:pattern)</code> 非捕获分组。</li>
-                                <li data-i18n="dev.regex.syntaxAlternation"><strong>或：</strong><code>a|b</code> 匹配a或b。</li>
-                                <li data-i18n="dev.regex.syntaxCharSet"><strong>字符集：</strong><code>[abc]</code>
-                                    匹配a、b或c，<code>[^abc]</code> 匹配除a、b、c外的任意字符。
-                                </li>
+                                <li data-i18n="dev.regex.syntaxCharClass"><strong>字符类：</strong>\d（数字）、\w（字母数字下划线）、\s（空白）、.（任意字符）。反义：\D、\W、\S。</li>
+                                <li data-i18n="dev.regex.syntaxQuantifier"><strong>量词：</strong>*（0+）、+（1+）、?（0/1）、{n}（恰好 n 次）、{n,m}（n 到 m 次）、{n,}（至少 n 次）。</li>
+                                <li data-i18n="dev.regex.syntaxAnchor"><strong>锚点：</strong>^（开头）、$（结尾）、\b（单词边界）、\B（非单词边界）。</li>
+                                <li data-i18n="dev.regex.syntaxGroup"><strong>分组：</strong>(...)（捕获组）、(?:...)（非捕获组）、(?<name>...)（命名捕获组）。</li>
+                                <li data-i18n="dev.regex.syntaxAlternation"><strong>选择：</strong>|（或）——如 cat|dog 匹配 cat 或 dog。优先级最低，需要时用括号分组。</li>
+                                <li data-i18n="dev.regex.syntaxCharSet"><strong>字符集：</strong>[abc]（a 或 b 或 c）、[a-z]（范围）、[^abc]（排除）。</li>
                             </ul>
                         </div>
                     </article>
@@ -916,45 +894,37 @@
                             <h3 data-i18n="dev.regex.notesTitle">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="dev.regex.notesSyntaxTitle">一、正则语法</h4>
+                            <h4 data-i18n="dev.regex.notesSyntaxTitle">语法注意</h4>
                             <ul>
-                                <li data-i18n="dev.regex.notesEscape">特殊字符需要转义，如
-                                    <code>\</code>、<code>.</code>、<code>*</code>、<code>+</code>、<code>?</code>、<code>()</code>、<code>[]</code>、<code>{}</code>、<code>^</code>、<code>$</code>、<code>|</code>。
-                                </li>
-                                <li data-i18n="dev.regex.notesDoubleEscape">在JavaScript正则中，反斜杠需要双重转义，如 <code>\\d</code>。
-                                </li>
-                                <li data-i18n="dev.regex.notesGroupNumbering">捕获分组从 <code>$1</code> 开始编号，<code>$0</code>
-                                    表示完整匹配。</li>
+                                <li data-i18n="dev.regex.notesEscape"><strong>转义字符：</strong>在正则中匹配特殊字符（.、*、+、?、(、) 等）需要用反斜杠转义——\. 匹配实际的点号。</li>
+                                <li data-i18n="dev.regex.notesDoubleEscape"><strong>双重转义：</strong>在 JavaScript 字符串中写正则需要双重转义——\d 写成 \\d。建议使用正则字面量 /pattern/。</li>
+                                <li data-i18n="dev.regex.notesGroupNumbering"><strong>捕获组编号：</strong>捕获组按左括号顺序编号——$1 是第一个 (，$2 是第二个。嵌套括号按左括号出现顺序编号。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.notesFlagsTitle">二、标志说明</h4>
+                            <h4 data-i18n="dev.regex.notesFlagsTitle">标志说明</h4>
                             <ul>
-                                <li data-i18n="dev.regex.flagGlobal"><strong>g（全局）：</strong>查找所有匹配项，而非只匹配第一个。</li>
-                                <li data-i18n="dev.regex.flagInsensitive"><strong>i（忽略大小写）：</strong>匹配时不区分大小写。</li>
-                                <li data-i18n="dev.regex.flagMultiline"><strong>m（多行）：</strong><code>^</code> 和
-                                    <code>$</code> 匹配每行的开头和结尾。</li>
-                                <li data-i18n="dev.regex.flagDotAll"><strong>s（点匹配换行）：</strong><code>.</code> 可以匹配换行符。</li>
-                                <li data-i18n="dev.regex.flagUnicode"><strong>u（Unicode）：</strong>启用Unicode匹配模式。</li>
+                                <li data-i18n="dev.regex.flagGlobal"><strong>g（全局）：</strong>匹配所有结果——不勾选时只返回第一个匹配。</li>
+                                <li data-i18n="dev.regex.flagInsensitive"><strong>i（忽略大小写）：</strong>匹配时不区分大小写——abc 也能匹配 ABC。</li>
+                                <li data-i18n="dev.regex.flagMultiline"><strong>m（多行）：</strong>^ 和 $ 匹配每行的开头和结尾——而不只是整个字符串的开头和结尾。</li>
+                                <li data-i18n="dev.regex.flagDotAll"><strong>s（点号匹配全部）：</strong>. 也匹配换行符——默认情况下 . 不匹配 \n。</li>
+                                <li data-i18n="dev.regex.flagUnicode"><strong>u（Unicode）：</strong>启用 Unicode 模式——正确处理 emoji 和其他 Unicode 字符。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.performanceTitle">三、性能提示</h4>
+                            <h4 data-i18n="dev.regex.performanceTitle">性能注意</h4>
                             <ul>
-                                <li data-i18n="dev.regex.perfComplex">复杂正则表达式可能导致性能问题，特别是在处理大量文本时。</li>
-                                <li data-i18n="dev.regex.perfGreedy">
-                                    避免使用贪婪量词（<code>*</code>、<code>+</code>），考虑使用非贪婪量词（<code>*?</code>、<code>+?</code>）。
-                                </li>
-                                <li data-i18n="dev.regex.perfLargeText">测试超大文本（超过100KB）时可能会导致浏览器卡顿。</li>
+                                <li data-i18n="dev.regex.perfComplex"><strong>回溯陷阱：</strong>某些正则可能导致指数级回溯——如 (a+)+b 匹配 aaaaaaaaaac 时。避免嵌套量词。</li>
+                                <li data-i18n="dev.regex.perfGreedy"><strong>贪婪 vs 惰性：</strong>默认量词是贪婪的（匹配尽可能多）——加 ? 变为惰性（匹配尽可能少）。如 .*? 匹配到第一个可能位置就停止。</li>
+                                <li data-i18n="dev.regex.perfLargeText"><strong>大文本性能：</strong>对超大文本（>1MB）使用复杂正则时，匹配可能变慢——建议分段处理或简化正则。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.securityTitle">四、数据安全</h4>
+                            <h4 data-i18n="dev.regex.securityTitle">安全注意</h4>
                             <ul>
-                                <li data-i18n="dev.regex.securityLocal">所有处理均在本地浏览器完成，数据不会上传到服务器。</li>
-                                <li data-i18n="dev.regex.securityPublicDevice">建议不要在公共设备上处理包含敏感信息的文本。</li>
+                                <li data-i18n="dev.regex.securityLocal"><strong>纯前端处理：</strong>所有正则匹配在浏览器中完成——测试文本不上传。</li>
+                                <li data-i18n="dev.regex.securityPublicDevice"><strong>公共设备：</strong>如果在公共设备上测试包含敏感信息的文本，使用完毕后请清空输入。</li>
                             </ul>
-                            <h4 data-i18n="dev.regex.faqTitle">五、常见问题</h4>
+                            <h4 data-i18n="dev.regex.faqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="dev.regex.faqSyntax"><strong>语法错误：</strong>检查正则表达式中的特殊字符是否正确转义。</li>
-                                <li data-i18n="dev.regex.faqNoMatch"><strong>无匹配：</strong>确认正则表达式和测试文本是否正确，检查标志设置。</li>
-                                <li data-i18n="dev.regex.faqPartialMatch"><strong>匹配不全：</strong>确保启用了 <code>g</code>（全局）标志。
-                                </li>
-                                <li data-i18n="dev.regex.faqReplaceIssue"><strong>替换异常：</strong>检查替换内容中的捕获分组引用是否正确。</li>
+                                <li data-i18n="dev.regex.faqSyntax"><strong>Q: 正则语法因语言而异？</strong>A: 基础语法（.、*、+、[]、()）通用。高级特性（前后瞻、命名捕获组、Unicode 属性）因语言而异——本工具支持 JS 和 Python 语法。</li>
+                                <li data-i18n="dev.regex.faqNoMatch"><strong>Q: 正则正确但没有匹配？</strong>A: 检查是否勾选了 g 标志（全局匹配）。不勾选时只返回第一个匹配。也检查大小写是否需要 i 标志。</li>
+                                <li data-i18n="dev.regex.faqPartialMatch"><strong>Q: 匹配结果不完整？</strong>A: 可能是贪婪/惰性量词的问题——.* 会匹配到最后一个可能位置，.*? 匹配到第一个。根据需求选择。</li>
+                                <li data-i18n="dev.regex.faqReplaceIssue"><strong>Q: 替换结果不对？</strong>A: 检查反向引用编号——$1 对应第一个捕获组。如果用了命名捕获组，可以用 $<name> 引用。</li>
                             </ul>
                         </div>
                     </article>

@@ -378,6 +378,101 @@
                 <li><strong>数据筛选</strong>：服务端只返回必要字段</li>
             </ul>
 
+            <h2>七、痛点深挖：JSON 解析与 XML 安全的"隐形炸弹"</h2>
+            <p>除了语法错误，两类问题在真实项目中造成的破坏最大：JSON 的<strong>精度静默丢失</strong>和 XML 的<strong>外部实体攻击</strong>。它们都不报错，但后果严重：</p>
+            <ul>
+                <li><strong>JSON 大数字精度丢失：</strong>很多语言把 JSON 数字解析成浮点数。订单号、微信 openid（19 位）、雪花 ID 超过 2^53 后，尾数会被静默截断——两个不同
+                    ID 解析后变成同一个。这是"数据没报错但错了"的典型。对策：解析时用字符串模式（<code>bigint</code> 模式 / <code>parseFloat</code>
+                    前先判断位数），或在接口层约定大数一律用字符串传输。</li>
+                <li><strong>重复键与类型漂移：</strong><code>{"a":1,"a":2}</code> 在多数解析器里静默取最后一个值；<code>{"count":"10"}</code> 与
+                    <code>{"count":10}</code> 在不同客户端行为不同。接口契约应该用 JSON Schema 约束类型，并在 CI 里跑校验。</li>
+                <li><strong>XXE（XML 外部实体注入）：</strong>XML 解析器默认支持 <code>&lt;!DOCTYPE&gt;</code>
+                    外部实体，攻击者可以构造：<code>&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;]&gt;</code>
+                    读取服务器文件、发起 SSRF。这是 OWASP Top 10 常客。对策：解析 XML 前关闭 DTD/外部实体（Python <code>defusedxml</code>、Java
+                    <code>setFeature(disallow-doctype-decl, true)</code>、PHP 禁用
+                    <code>libxml_disable_entity_loader</code>）。</li>
+                <li><strong>解析器差异导致的不兼容：</strong>同一份 JSON，Python 的 <code>json.loads</code> 接受
+                    <code>NaN</code>/<code>Infinity</code>，Java 的 Jackson 默认拒绝；XML 的注释位置、CDATA
+                    处理在不同语言实现里也有细微差别。跨语言对接时，优先用严格模式解析。</li>
+                <li><strong>超大 payload 拖垮进程：</strong>深层嵌套 JSON（<code>[[[[[...]]]]]</code>
+                    十万层）会触发栈溢出，巨型数组耗尽内存。所有解析入口都应限制最大深度和体积，并把解析放入受控资源池。</li>
+            </ul>
+            <div class="warning-box">
+                <p><strong>审计提示：</strong>如果代码库里出现过
+                    <code>DocumentBuilderFactory</code>、<code>SimpleXML</code>、<code>lxml</code> 处理外部输入，第一时间检查是否禁用了
+                    DTD——XXE 修复往往只需一行配置，但默认配置几乎都是不安全的。</p>
+            </div>
+
+            <h2>八、深入原理：JSON Schema 与 XML Schema 的验证体系对比</h2>
+            <p>前面讲了 JSON 和 XML 的语法差异，但在数据验证层面，两者都有成熟的 Schema 体系。理解这些验证工具的原理，才能在实际项目中做好数据契约管理。</p>
+
+            <h3>8.1 JSON Schema 验证体系</h3>
+            <pre><code>JSON Schema 示例（验证用户注册数据）：
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["username", "email", "age"],
+  "properties": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 20,
+      "pattern": "^[a-zA-Z0-9_]+$"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 10,
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}
+
+JSON Schema 核心特性：
+  • 类型验证：string/number/integer/boolean/array/object/null
+  • 字符串约束：minLength, maxLength, pattern, format
+  • 数字约束：minimum, maximum, multipleOf
+  • 数组约束：items, minItems, maxItems, uniqueItems
+  • 组合逻辑：allOf, anyOf, oneOf, not
+  • 条件验证：if/then/else（Draft 7+）</code></pre>
+
+            <h3>8.2 技术选型决策：JSON vs XML 的最终建议</h3>
+            <pre><code>数据格式选型决策矩阵：
+┌─────────────────┬───────────┬───────────┬──────────────┐
+│   场景           │ 推荐格式  │ 理由       │ 替代方案     │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ RESTful API     │ JSON      │ 轻量、解析快│ GraphQL      │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ 配置文件        │ YAML/TOML │ 可读性更好 │ JSON         │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ 文档存储        │ XML       │ 结构复杂   │ JSON         │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ 数据交换(企业)  │ XML       │ Schema严格 │ Protobuf     │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ 实时通信        │ JSON      │ WebSocket │ MessagePack  │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ 高性能 RPC      │ Protobuf  │ 二进制编码 │ gRPC         │
+├─────────────────┼───────────┼───────────┼──────────────┤
+│ 日志/事件流     │ JSON      │ 可追加     │ Avro         │
+└─────────────────┴───────────┴───────────┴──────────────┘
+
+关键原则：
+  ✓ 新项目默认用 JSON（生态最完善）
+  ✓ 需要严格数据契约 → JSON Schema 或 Protobuf
+  ✓ 需要处理复杂文档结构 → XML + XSD
+  ✓ 高性能场景 → Protobuf / MessagePack（二进制）
+  ✗ 不要在新项目中使用 XML（除非行业标准要求）</code></pre>
+
             <h2>总结</h2>
             <p>JSON 和 XML 各有所长，选择合适的格式需要综合考虑性能需求、数据复杂度和应用场景。对于现代 Web 开发，JSON 因其简洁高效而成为主流选择；而对于复杂数据结构、文档处理和需要严格验证的场景，XML
                 依然不可替代。掌握两者的语法规则和常见错误排查方法，是每个开发者必备的技能。</p>
@@ -395,6 +490,12 @@
                 </a>
             </div>
         </section>
+        <div class="article-bottom-actions">
+            <a href="/blog/index.html" class="back-to-top-btn"><i class="fas fa-arrow-left"></i> 返回列表</a>
+            <a href="#" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                <i class="fas fa-arrow-up"></i> 回到顶部
+            </a>
+        </div>
         <div id="footer-container">
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>

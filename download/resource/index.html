@@ -30,7 +30,7 @@
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/download/resource/">
     <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
 
-    <script src="../../common/js/ads.js"></script>
+    <script src="../../common/js/ads.js" async></script>
     <script src="../lib/jszip.min.js"></script>
     <script src="../../common/js/i18n/i18n.js"></script>
     <style>
@@ -608,9 +608,7 @@
 
                     <div id="url-tab" class="tab-content active">
                         <label for="resourceUrls" data-i18n="download.resource.urlLabel">输入资源地址 (每行一个):</label>
-                        <p class="helper-text" data-i18n="download.resource.urlHelper">支持
-                            JS、CSS、字体(.ttf/.woff/.woff2)、图标等资源文件的下载
-                        </p>
+                        <p class="helper-text" data-i18n="download.resource.urlHelper">支持 JS、CSS、字体(.ttf/.woff/.woff2)、图标等资源文件的下载</p>
                         <textarea id="resourceUrls" data-i18n-placeholder="download.resource.urlPlaceholder"
                             placeholder="例如:
 https://cdn.example.com/jquery.min.js
@@ -620,8 +618,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
 
                     <div id="extract-tab" class="tab-content">
                         <label for="websiteUrl" data-i18n="download.resource.websiteLabel">输入网站URL:</label>
-                        <p class="helper-text" data-i18n="download.resource.extractHelper">输入网页地址，系统将尝试提取页面中的JS和CSS资源
-                        </p>
+                        <p class="helper-text" data-i18n="download.resource.extractHelper">输入网页地址，系统将尝试提取页面中的JS和CSS资源</p>
                         <input type="text" id="websiteUrl" data-i18n-placeholder="download.resource.websitePlaceholder"
                             placeholder="例如: https://example.com/page.html" class="website-input">
                         <button id="extractResources" class="btn extract-btn"
@@ -677,8 +674,7 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                     <h2 data-i18n="download.resource.progressTitle">下载进度</h2>
                     <div class="stats">
                         <span id="totalFiles">0</span><span data-i18n="download.resource.statFiles"> 个文件 |</span>
-                        <span id="completedFiles">0</span><span data-i18n="download.resource.statCompleted"> 已完成
-                            |</span>
+                        <span id="completedFiles">0</span><span data-i18n="download.resource.statCompleted"> 已完成 |</span>
                         <span id="failedFiles">0</span><span data-i18n="download.resource.statFailed"> 失败 |</span>
                         <span id="skippedFiles">0</span><span data-i18n="download.resource.statSkipped"> 跳过</span>
                     </div>
@@ -712,98 +708,65 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="download.resource.infoIntro">工具介绍</h3>
+                            <h3 data-i18n="download.resource.infoIntro">网页资源提取：JS/CSS/字体等前端资源批量下载工具</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="download.resource.problemsTitle">一、解决的问题</h4>
+                            <h4 data-i18n="download.resource.problemsTitle">一、网页资源提取的应用场景</h4>
                             <ul>
-                                <li data-i18n="download.resource.problem1">批量下载网页资源和文件。</li>
-                                <li data-i18n="download.resource.problem2">简化繁琐的手动操作，提高工作效率和准确性。</li>
-                                <li data-i18n="download.resource.problem3">无需安装专业软件，随时随地在线使用。</li>
+                                <li data-i18n="download.resource.problem1">看到一个网站效果很酷——想下载它的 CSS 样式文件学习。需要某个 CDN 上的 JavaScript 库——但不知道具体版本号。想提取网页使用的 Web 字体文件——用于本地开发。网页资源提取工具自动解析页面中的所有外部资源链接。</li>
+                                <li data-i18n="download.resource.problem2">本工具支持两种模式：直接 URL 下载（粘贴资源链接批量下载）和网页提取（输入网页地址自动提取 JS/CSS/字体资源）。支持并发下载、文件类型筛选和 ZIP 打包。</li>
+                                <li data-i18n="download.resource.problem3">与媒体下载工具不同，本工具专注于前端开发资源——JavaScript 库、CSS 样式表、Web 字体文件。适合前端开发者学习参考、离线备份和代码分析。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.formatTitle">二、支持的格式</h4>
+                            <h4 data-i18n="download.resource.formatTitle">二、支持的资源格式</h4>
                             <ul>
-                                <li data-i18n="download.resource.formatFile"><strong>文件：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="download.resource.formatResource"><strong>资源：</strong>支持该格式的完整处理功能。</li>
+                                <li data-i18n="download.resource.formatFile"><strong>文件类型：</strong>JavaScript（.js）、CSS（.css）、Web 字体（.woff/.woff2/.ttf/.eot）——覆盖前端开发中最常用的资源类型。</li>
+                                <li data-i18n="download.resource.formatResource"><strong>提取范围：</strong>解析页面 HTML 中的 link（CSS/字体）、script（JS）标签的 href/src 属性——包括 CDN 链接和相对路径。</li>
                             </ul>
                             <h4 data-i18n="download.resource.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="download.resource.featureOnline">
-                                    <strong>在线处理：</strong>所有操作均在浏览器中完成，无需下载或安装。</li>
-                                <li data-i18n="download.resource.featurePreview"><strong>实时预览：</strong>处理结果即时显示，方便调整和确认。
-                                </li>
-                                <li data-i18n="download.resource.featureExport"><strong>一键导出：</strong>支持快速导出处理后的文件或复制结果。
-                                </li>
-                                <li data-i18n="download.resource.featureSecurity">
-                                    <strong>数据安全：</strong>所有数据仅在本地处理，不会上传到服务器。</li>
+                                <li data-i18n="download.resource.featureOnline"><strong>URL 批量下载：</strong>粘贴多个资源链接——一键批量下载。</li>
+                                <li data-i18n="download.resource.featurePreview"><strong>网页提取：</strong>输入网页地址——自动提取页面引用的所有 JS/CSS/字体文件。</li>
+                                <li data-i18n="download.resource.featureExport"><strong>ZIP 打包：</strong>多个文件自动打包为 ZIP——方便离线使用。</li>
+                                <li data-i18n="download.resource.featureSecurity"><strong>浏览器下载：</strong>使用浏览器原生 fetch API——下载行为与正常浏览一致。</li>
                             </ul>
                         </div>
                     </article>
 
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="download.resource.infoUsage">使用说明</h3>
+                            <h3 data-i18n="download.resource.infoUsage">资源下载操作指南</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="download.resource.usageUrlTitle">一、直接URL下载</h4>
+                            <h4 data-i18n="download.resource.usageUrlTitle">直接 URL 下载</h4>
                             <ul>
-                                <li data-i18n="download.resource.usageUrlInput">
-                                    <strong>输入URL：</strong>在文本框中输入资源文件的URL地址，每行一个。
-                                </li>
-                                <li data-i18n="download.resource.usageUrlSupport">
-                                    <strong>支持格式：</strong>支持JS、CSS、字体（.ttf/.woff/.woff2）、图标等网页静态资源文件。
-                                </li>
-                                <li data-i18n="download.resource.usageUrlFormat">
-                                    <strong>URL格式化：</strong>系统会自动格式化不规范的URL地址。</li>
+                                <li data-i18n="download.resource.usageUrlInput"><strong>输入链接：</strong>每行输入一个资源文件链接——支持 JS/CSS/字体等任意文件类型。</li>
+                                <li data-i18n="download.resource.usageUrlSupport"><strong>CDN 支持：</strong>支持从 cdnjs、unpkg、jsDelivr 等 CDN 下载——自动处理跨域请求。</li>
+                                <li data-i18n="download.resource.usageUrlFormat"><strong>自动修正：</strong>工具自动格式化不规范的 URL——移除前导符号、补充协议头。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.usageExtractTitle">二、网页资源提取</h4>
+                            <h4 data-i18n="download.resource.usageExtractTitle">网页提取</h4>
                             <ul>
-                                <li data-i18n="download.resource.usageExtractUrl"><strong>输入网址：</strong>在输入框中输入网页地址，如
-                                    <code>https://example.com/page.html</code>。
-                                </li>
-                                <li data-i18n="download.resource.usageExtract">
-                                    <strong>提取资源：</strong>点击"提取资源"按钮，系统将尝试提取页面中的JS和CSS资源。
-                                </li>
-                                <li data-i18n="download.resource.usageSelect">
-                                    <strong>选择资源：</strong>可以勾选或取消勾选资源，选择需要下载的资源。</li>
-                                <li data-i18n="download.resource.usageAddQueue">
-                                    <strong>添加到队列：</strong>点击"添加选中到下载队列"将选中的资源添加到下载列表。
-                                </li>
+                                <li data-i18n="download.resource.usageExtractUrl"><strong>输入网页地址：</strong>输入完整的网页 URL——工具自动解析页面中的资源链接。</li>
+                                <li data-i18n="download.resource.usageExtract"><strong>自动提取：</strong>解析 HTML 提取所有 link 和 script 标签的资源地址。</li>
+                                <li data-i18n="download.resource.usageSelect"><strong>选择资源：</strong>提取结果显示资源列表——勾选需要下载的资源。</li>
+                                <li data-i18n="download.resource.usageAddQueue"><strong>添加到队列：</strong>选中的资源添加到下载队列。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.usageSettingsTitle">三、下载设置</h4>
+                            <h4 data-i18n="download.resource.usageSettingsTitle">下载设置</h4>
                             <ul>
-                                <li data-i18n="download.resource.usageConcurrency">
-                                    <strong>并发下载数：</strong>设置同时下载的文件数量，范围为1-10，默认3。
-                                </li>
-                                <li data-i18n="download.resource.usageFileType">
-                                    <strong>文件类型筛选：</strong>可选择"全部类型"、"仅JS文件"、"仅CSS文件"或"仅字体文件"。
-                                </li>
-                                <li data-i18n="download.resource.usagePackZip">
-                                    <strong>打包为ZIP：</strong>勾选后，下载完成的文件将自动打包为ZIP压缩包下载。
-                                </li>
+                                <li data-i18n="download.resource.usageConcurrency"><strong>并发数：</strong>设置同时下载的文件数——建议 3-5 个。</li>
+                                <li data-i18n="download.resource.usageFileType"><strong>文件类型：</strong>筛选下载的资源类型——全部、仅 JS、仅 CSS、仅字体。</li>
+                                <li data-i18n="download.resource.usagePackZip"><strong>ZIP 打包：</strong>勾选后所有文件打包为 ZIP 下载——不勾选则逐个下载。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.usageQuickTitle">四、常用资源快速下载</h4>
+                            <h4 data-i18n="download.resource.usageQuickTitle">五、快速链接</h4>
                             <ul>
-                                <li data-i18n="download.resource.usageQuickLink">
-                                    <strong>点击快速链接：</strong>页面下方提供了常用CDN资源的快速下载链接，点击即可添加到下载队列。
-                                </li>
-                                <li data-i18n="download.resource.usageQuickInclude">
-                                    <strong>包含资源：</strong>包括jQuery、Vue、React、Bootstrap等常用前端库。
-                                </li>
+                                <li data-i18n="download.resource.usageQuickLink"><strong>常用 CDN：</strong>提供 jQuery、Vue、React、Bootstrap 等常用库的快速下载链接。</li>
+                                <li data-i18n="download.resource.usageQuickInclude"><strong>版本选择：</strong>快速链接包含最新版本——也可以修改 URL 中的版本号指定特定版本。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.usageStartTitle">五、开始下载</h4>
+                            <h4 data-i18n="download.resource.usageStartTitle">开始下载</h4>
                             <ul>
-                                <li data-i18n="download.resource.usageStartClick">
-                                    <strong>点击下载：</strong>点击"开始下载"按钮开始批量下载。</li>
-                                <li data-i18n="download.resource.usageStartProgress">
-                                    <strong>查看进度：</strong>下载进度会实时显示，包括总文件数、已完成数、失败数和跳过数。
-                                </li>
-                                <li data-i18n="download.resource.usageStartClear">
-                                    <strong>清空列表：</strong>点击"清空列表"按钮可以清除所有下载任务。
-                                </li>
-                                <li data-i18n="download.resource.usageStartDirect">
-                                    <strong>直接下载：</strong>对于无法自动下载的资源，可以点击"直接下载"按钮在浏览器中直接下载。
-                                </li>
+                                <li data-i18n="download.resource.usageStartClick"><strong>点击下载：</strong>点击"开始下载"按钮——队列中的文件按顺序下载。</li>
+                                <li data-i18n="download.resource.usageStartProgress"><strong>查看进度：</strong>进度面板显示每个文件的下载状态。</li>
+                                <li data-i18n="download.resource.usageStartClear"><strong>清除队列：</strong>清空下载队列重新开始。</li>
+                                <li data-i18n="download.resource.usageStartDirect"><strong>直接打开：</strong>某些资源可以直接在浏览器中打开查看源码。</li>
                             </ul>
                         </div>
                     </article>
@@ -812,51 +775,35 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
                             <h3 data-i18n="download.resource.infoNotes">注意事项</h3>
                         </header>
                         <div class="info-content">
-                            <h4 data-i18n="download.resource.notesLimitTitle">一、下载限制</h4>
+                            <h4 data-i18n="download.resource.notesLimitTitle">限制说明</h4>
                             <ul>
-                                <li data-i18n="download.resource.noteCors">
-                                    <strong>CORS限制：</strong>大多数网站实施了CORS策略，限制来自不同域名的JavaScript直接访问其资源。
-                                </li>
-                                <li data-i18n="download.resource.noteHotlink">
-                                    <strong>防盗链保护：</strong>许多资源托管站点实施了防盗链机制，会检查请求的来源。
-                                </li>
-                                <li data-i18n="download.resource.noteAccess">
-                                    <strong>访问控制：</strong>部分服务器会检测请求是否来自真实的浏览器环境。</li>
+                                <li data-i18n="download.resource.noteCors"><strong>CORS 限制：</strong>跨域请求受浏览器安全策略限制——某些 CDN 可能阻止跨域下载。</li>
+                                <li data-i18n="download.resource.noteHotlink"><strong>防盗链：</strong>某些网站阻止外部直接引用其资源——下载可能返回 403 错误。</li>
+                                <li data-i18n="download.resource.noteAccess"><strong>私有资源：</strong>需要认证的资源无法提取——工具不携带登录凭证。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.notesHandleTitle">二、处理方式</h4>
+                            <h4 data-i18n="download.resource.notesHandleTitle">处理建议</h4>
                             <ul>
-                                <li data-i18n="download.resource.noteHandleUnavailable">
-                                    <strong>无法下载的资源：</strong>对于无法自动下载的资源，您可以复制链接在浏览器中直接访问下载。
-                                </li>
-                                <li data-i18n="download.resource.noteHandleDirect">
-                                    <strong>直接下载：</strong>点击"直接下载"按钮可以在浏览器中直接打开资源链接。
-                                </li>
-                                <li data-i18n="download.resource.noteHandlePack">
-                                    <strong>打包下载：</strong>勾选"打包为ZIP"选项后，所有成功下载的文件会自动打包为ZIP压缩包。
-                                </li>
+                                <li data-i18n="download.resource.noteHandleUnavailable"><strong>资源不可用：</strong>如果提取失败，尝试直接在浏览器中打开资源链接确认可访问性。</li>
+                                <li data-i18n="download.resource.noteHandleDirect"><strong>直接下载：</strong>某些资源可以直接在新标签页中打开——右键另存为即可下载。</li>
+                                <li data-i18n="download.resource.noteHandlePack"><strong>打包建议：</strong>大量文件建议使用 ZIP 打包——避免浏览器弹出大量下载对话框。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.notesSecurityTitle">三、数据安全</h4>
+                            <h4 data-i18n="download.resource.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="download.resource.noteSecurity1">所有处理完全在本地浏览器中完成，数据不会上传到服务器。</li>
-                                <li data-i18n="download.resource.noteSecurity2">建议不要在公共设备上处理包含敏感信息的资源。</li>
+                                <li data-i18n="download.resource.noteSecurity1"><strong>浏览器下载：</strong>所有下载通过浏览器原生 API 完成——不经过第三方服务器。</li>
+                                <li data-i18n="download.resource.noteSecurity2"><strong>版权提醒：</strong>下载的 JS/CSS 文件可能受开源协议保护——使用时遵守对应的许可证。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.notesProcessTitle">四、处理过程</h4>
+                            <h4 data-i18n="download.resource.notesProcessTitle">处理说明</h4>
                             <ul>
-                                <li data-i18n="download.resource.noteProcess1">处理期间不要关闭浏览器或刷新页面，否则会导致处理失效、数据丢失。</li>
-                                <li data-i18n="download.resource.noteProcess2">大文件处理可能需要较长时间，请耐心等待。</li>
+                                <li data-i18n="download.resource.noteProcess1"><strong>提取范围：</strong>只提取当前页面直接引用的资源——不递归分析 JS 文件中动态加载的资源。</li>
+                                <li data-i18n="download.resource.noteProcess2"><strong>内联资源：</strong>内联在 HTML 中的 CSS/JS（style/script 标签内的代码）不会被提取——只提取外部文件链接。</li>
                             </ul>
-                            <h4 data-i18n="download.resource.notesFaqTitle">五、常见问题</h4>
+                            <h4 data-i18n="download.resource.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="download.resource.noteFaq1"><strong>下载失败：</strong>检查网络连接，或尝试降低并发下载数。</li>
-                                <li data-i18n="download.resource.noteFaq2">
-                                    <strong>提取无结果：</strong>某些网站使用JavaScript动态加载资源，无法通过静态方式提取。
-                                </li>
-                                <li data-i18n="download.resource.noteFaq3"><strong>文件损坏：</strong>服务器可能返回不完整的文件，尝试重新下载。
-                                </li>
-                                <li data-i18n="download.resource.noteFaq4"><strong>浏览器限制：</strong>某些浏览器可能限制自动下载，需要手动允许。
-                                </li>
-                                <li data-i18n="download.resource.noteFaq5">
-                                    <strong>打包失败：</strong>文件数量过多或过大可能导致打包失败，建议分批下载。</li>
+                                <li data-i18n="download.resource.noteFaq1"><strong>Q: 提取不到资源？</strong>A: 可能是 CORS 限制或资源通过 JavaScript 动态加载——尝试在开发者工具 Network 面板中手动查找。</li>
+                                <li data-i18n="download.resource.noteFaq2"><strong>Q: 下载的 JS 是压缩版？</strong>A: 网站通常引用压缩版（.min.js）——如需源码版本，使用 .js 后缀的链接或从 GitHub 下载。</li>
+                                <li data-i18n="download.resource.noteFaq3"><strong>Q: 字体文件下载失败？</strong>A: Web 字体通常有 CORS 和域名限制——确认字体文件允许跨域访问。</li>
+                                <li data-i18n="download.resource.noteFaq4"><strong>Q: 能提取图片资源吗？</strong>A: 本工具专注于 JS/CSS/字体——图片提取请使用媒体下载工具。</li>
+                                <li data-i18n="download.resource.noteFaq5"><strong>Q: 快速链接的版本会更新吗？</strong>A: 快速链接指向发布时的最新版本——不会自动更新。建议从官方 CDN 获取最新版本。</li>
                             </ul>
                         </div>
                     </article>
