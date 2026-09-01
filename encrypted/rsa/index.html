@@ -493,6 +493,7 @@
                                 <li data-i18n="encrypted.rsa.noteFaq1"><strong>Q: RSA 能加密大文件吗？</strong>A: RSA 只能加密小于密钥长度的数据——2048 位 RSA 最多加密 245 字节。大文件应使用混合加密（AES 加密数据 + RSA 加密 AES 密钥）。</li>
                                 <li data-i18n="encrypted.rsa.noteFaq2"><strong>Q: 公钥和私钥能互换吗？</strong>A: 技术上 RSA 的公钥和私钥可以互换使用——但语义上不应互换。公钥加密的数据只有私钥能解密，反之亦然。</li>
                                 <li data-i18n="encrypted.rsa.noteFaq3"><strong>Q: 生成的密钥安全吗？</strong>A: 使用 Web Crypto API——浏览器底层的密码学安全随机数生成器。与 OpenSSL 等系统级工具的安全级别相同。</li>
+                                <li data-i18n="encrypted.rsa.noteFaq5"><strong>Q: 生成的 SSH 格式为什么不能直接用于 GitHub？</strong>A: 选择 SSH 格式时，公钥为 <code>ssh-rsa</code> 单行格式，私钥为 <code>-----BEGIN OPENSSH PRIVATE KEY-----</code> 格式。GitHub 要求 RSA 密钥至少 3072 位，请在此选择 3072 或 4096 位；2048 位及以下会被 GitHub 拒绝。将公钥内容粘贴到 GitHub 的 SSH Keys 页面，私钥保存到本地 <code>~/.ssh/id_rsa</code> 即可使用。</li>
                             </ul>
                         </div>
                     </article>
@@ -581,10 +582,10 @@
                         privateFormatInfo = 'DER (Base64)';
                         break;
                     case 'ssh':
-                        publicKeyText = await exportPublicKeySsh(keyPair.publicKey);
-                        privateKeyText = await exportPrivateKeyPem(keyPair.privateKey); // SSH无私钥标准格式，用PEM
+                        publicKeyText = await exportPublicKeySsh(keyPair.publicKey, keySize);
+                        privateKeyText = await exportPrivateKeySsh(keyPair.privateKey, keySize);
                         publicFormatInfo = 'SSH (OpenSSH)';
-                        privateFormatInfo = 'PEM (PKCS#8)';
+                        privateFormatInfo = 'OpenSSH PRIVATE KEY';
                         break;
                     case 'jwk':
                         publicKeyText = await exportKeyJwk(keyPair.publicKey);
@@ -691,21 +692,28 @@
         /**
          * 导出公钥为 SSH (OpenSSH) 格式
          */
-        async function exportPublicKeySsh(publicKey) {
+        async function exportPublicKeySsh(publicKey, keySize) {
             const jwk = await window.crypto.subtle.exportKey('jwk', publicKey);
 
             // 解析 JWK 中的 n (modulus) 和 e (exponent)
-            const n = base64UrlToUint8Array(jwk.n);
-            const e = base64UrlToUint8Array(jwk.e);
+            let n = base64UrlToUint8Array(jwk.n);
+            let e = base64UrlToUint8Array(jwk.e);
+
+            // JWK 会去掉前导零，需要补齐到密钥长度的完整字节数，避免被识别为低位数
+            const expectedLength = keySize / 8;
+            n = padUint8Array(n, expectedLength);
+
+            // SSH mpint 要求最高位为 1 时补 0x00 表示无符号数
+            n = ensureUnsignedMpint(n);
+            e = ensureUnsignedMpint(e);
 
             // SSH 公钥格式: ssh-rsa <base64 encoded data>
-            // 数据结构: string "ssh-rsa" + string e + string n
-            const sshKey = encodeSshPublicKey(n, e);
-            return 'ssh-rsa ' + sshKey;
+            const sshKeyBytes = encodeSshPublicKey(n, e);
+            return 'ssh-rsa ' + arrayBufferToBase64(sshKeyBytes.buffer);
         }
 
         /**
-         * 编码 SSH 公钥
+         * 编码 SSH 公钥为二进制格式
          */
         function encodeSshPublicKey(n, e) {
             const type = new TextEncoder().encode('ssh-rsa');
@@ -732,7 +740,143 @@
             offset += 4;
             buffer.set(n, offset);
 
-            return arrayBufferToBase64(buffer.buffer);
+            return buffer;
+        }
+
+        /**
+         * 将 Uint8Array 补齐到指定长度（前面补零）
+         */
+        function padUint8Array(bytes, length) {
+            if (bytes.length >= length) return bytes;
+            const padded = new Uint8Array(length);
+            padded.set(bytes, length - bytes.length);
+            return padded;
+        }
+
+        /**
+         * 确保 mpint 是无符号整数（最高位为 1 时补 0x00）
+         */
+        function ensureUnsignedMpint(bytes) {
+            if (bytes.length > 0 && bytes[0] >= 0x80) {
+                const padded = new Uint8Array(bytes.length + 1);
+                padded[0] = 0x00;
+                padded.set(bytes, 1);
+                return padded;
+            }
+            return bytes;
+        }
+
+        /**
+         * SSH 字符串编码：4 字节长度 + 数据
+         */
+        function encodeSshString(bytes) {
+            const result = new Uint8Array(4 + bytes.length);
+            writeUint32(result, 0, bytes.length);
+            result.set(bytes, 4);
+            return result;
+        }
+
+        /**
+         * SSH mpint 编码
+         */
+        function encodeSshMpint(bytes) {
+            return encodeSshString(ensureUnsignedMpint(bytes));
+        }
+
+        /**
+         * 编码 32 位无符号整数
+         */
+        function encodeUint32(value) {
+            const result = new Uint8Array(4);
+            writeUint32(result, 0, value);
+            return result;
+        }
+
+        /**
+         * 拼接两个 Uint8Array
+         */
+        function concatUint8Arrays(a, b) {
+            const result = new Uint8Array(a.length + b.length);
+            result.set(a, 0);
+            result.set(b, a.length);
+            return result;
+        }
+
+        /**
+         * 导出私钥为 OpenSSH 私钥格式
+         */
+        async function exportPrivateKeySsh(privateKey, keySize) {
+            const jwk = await window.crypto.subtle.exportKey('jwk', privateKey);
+
+            const halfSize = keySize / 16;
+            const fullSize = keySize / 8;
+
+            // 补齐长度并确保 mpint 无符号表示，与公钥编码保持一致
+            const n = ensureUnsignedMpint(padUint8Array(base64UrlToUint8Array(jwk.n), fullSize));
+            const e = ensureUnsignedMpint(base64UrlToUint8Array(jwk.e));
+            const d = ensureUnsignedMpint(padUint8Array(base64UrlToUint8Array(jwk.d), fullSize));
+            const p = ensureUnsignedMpint(padUint8Array(base64UrlToUint8Array(jwk.p), halfSize));
+            const q = ensureUnsignedMpint(padUint8Array(base64UrlToUint8Array(jwk.q), halfSize));
+            const qi = ensureUnsignedMpint(base64UrlToUint8Array(jwk.qi));
+
+            return encodeOpenSshPrivateKey(n, e, d, p, q, qi);
+        }
+
+        /**
+         * 编码 OpenSSH 新格式私钥（未加密）
+         */
+        function encodeOpenSshPrivateKey(n, e, d, p, q, qi) {
+            const publicKeyBytes = encodeSshPublicKey(n, e);
+
+            // 构造私钥列表
+            let priv = new Uint8Array(0);
+
+            // checkint (4 字节随机，重复两次用于校验)
+            const checkint = new Uint8Array(4);
+            window.crypto.getRandomValues(checkint);
+            priv = concatUint8Arrays(priv, checkint);
+            priv = concatUint8Arrays(priv, checkint);
+
+            // keytype
+            priv = concatUint8Arrays(priv, encodeSshString(new TextEncoder().encode('ssh-rsa')));
+
+            // RSA 参数: n, e, d, iqmp, p, q
+            priv = concatUint8Arrays(priv, encodeSshMpint(n));
+            priv = concatUint8Arrays(priv, encodeSshMpint(e));
+            priv = concatUint8Arrays(priv, encodeSshMpint(d));
+            priv = concatUint8Arrays(priv, encodeSshMpint(qi));
+            priv = concatUint8Arrays(priv, encodeSshMpint(p));
+            priv = concatUint8Arrays(priv, encodeSshMpint(q));
+
+            // comment (空)
+            priv = concatUint8Arrays(priv, encodeSshString(new TextEncoder().encode('')));
+
+            // 按 8 字节对齐填充
+            const paddingNeeded = (8 - (priv.length % 8)) % 8;
+            const padding = new Uint8Array(paddingNeeded);
+            for (let i = 0; i < paddingNeeded; i++) {
+                padding[i] = i + 1;
+            }
+            priv = concatUint8Arrays(priv, padding);
+
+            // 构造完整私钥
+            let buffer = new Uint8Array(0);
+            buffer = concatUint8Arrays(buffer, new TextEncoder().encode('openssh-key-v1'));
+            buffer = concatUint8Arrays(buffer, new Uint8Array([0])); // null 终止符
+            buffer = concatUint8Arrays(buffer, encodeSshString(new TextEncoder().encode('none')));
+            buffer = concatUint8Arrays(buffer, encodeSshString(new TextEncoder().encode('none')));
+            buffer = concatUint8Arrays(buffer, encodeSshString(new Uint8Array(0)));
+            buffer = concatUint8Arrays(buffer, encodeUint32(1));
+            buffer = concatUint8Arrays(buffer, encodeSshString(publicKeyBytes));
+            buffer = concatUint8Arrays(buffer, encodeSshString(priv));
+
+            const base64 = arrayBufferToBase64(buffer.buffer);
+            // OpenSSH 私钥文件标准行长度为 70 字符
+            const lines = [];
+            for (let i = 0; i < base64.length; i += 70) {
+                lines.push(base64.substring(i, i + 70));
+            }
+            return `-----BEGIN OPENSSH PRIVATE KEY-----\n${lines.join('\n')}\n-----END OPENSSH PRIVATE KEY-----`;
         }
 
         /**
@@ -811,7 +955,7 @@
                     mimeType = 'application/octet-stream';
                     break;
                 case 'ssh':
-                    extension = type === 'public' ? 'pub' : 'pem';
+                    extension = type === 'public' ? 'pub' : 'key';
                     mimeType = 'text/plain';
                     break;
                 case 'jwk':

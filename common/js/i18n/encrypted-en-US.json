@@ -994,7 +994,7 @@
     "formatTitle": "2. Supported Formats",
     "formatPem": "PEM Format: Base64-encoded text format, widely used in Web and SSL/TLS scenarios, the most common format.",
     "formatDer": "DER Format: Base64-encoded binary format, commonly used in Java and other programming languages.",
-    "formatSsh": "SSH Format: OpenSSH public key format, used for SSH login and Git configuration.",
+    "formatSsh": "SSH Format: Generates OpenSSH-compatible public key (<code>ssh-rsa AAAA...</code> single line) and private key (<code>-----BEGIN OPENSSH PRIVATE KEY-----</code>). Ready for SSH login and Git hosting platforms like GitHub/GitLab. GitHub requires RSA keys of at least 3072 bits.",
     "formatJwk": "JWK Format: JSON Web Key format, used for JWT and Web encryption.",
     "featuresTitle": "3. Core Features",
     "featureWebCrypto": "Web Crypto API: Uses native browser encryption API, secure and reliable.",
@@ -1004,7 +1004,7 @@
     "infoUsage": "Usage Guide",
     "usageStep1Title": "1. Select Key Parameters",
     "usageKeySize": "Key Size: Select the bit length of the RSA key. 2048-bit recommended (secure and fast), 4096-bit most secure but slower.",
-    "usageFormat": "Export Format: Supports PEM (most common), DER (binary), SSH (OpenSSH), and JWK (JSON) formats.",
+    "usageFormat": "Export Format: PEM (Base64 text, most common) is suitable for config files or code. SSH format is for SSH login and Git authentication; select 3072 or 4096 bits for GitHub.",
     "usageStep2Title": "2. Generate Key Pair",
     "usageClickGenerate": "Click Generate: Click 'Generate Key Pair' button and wait. Larger keys take longer.",
     "usageViewResult": "View Results: Generated public and private keys will be displayed in the text areas.",
@@ -1026,6 +1026,7 @@
     "noteFaq1": "Slow generation: Larger key sizes take longer. 4096-bit may take several seconds.",
     "noteFaq2": "Browser not supported: This tool requires Web Crypto API. Use modern browsers (Chrome, Firefox, Edge, Safari).",
     "noteFaq3": "Copy failed: Check if your browser allows clipboard access.",
-    "noteFaq4": "<strong>Q: PEM vs DER — which to choose?</strong>A: PEM is text format — convenient for copy-paste and version control. DER is binary format — suitable for program reading. Most scenarios use PEM."
+    "noteFaq4": "<strong>Q: PEM vs DER — which to choose?</strong>A: PEM is text format — convenient for copy-paste and version control. DER is binary format — suitable for program reading. Most scenarios use PEM.",
+    "noteFaq5": "<strong>Q: Why doesn't the generated SSH format work directly with GitHub?</strong>A: When SSH format is selected, the public key is a single-line <code>ssh-rsa</code> key and the private key uses <code>-----BEGIN OPENSSH PRIVATE KEY-----</code>. GitHub requires RSA keys of at least 3072 bits, so select 3072 or 4096 bits here; 2048 bits or below will be rejected by GitHub. Paste the public key into GitHub's SSH Keys page and save the private key to <code>~/.ssh/id_rsa</code>."
   }
 }

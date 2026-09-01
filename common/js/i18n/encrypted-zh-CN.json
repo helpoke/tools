@@ -994,7 +994,7 @@
     "formatTitle": "二、密钥格式",
     "formatPem": "<strong>PEM 格式：</strong>Base64 编码的密钥，用 -----BEGIN PUBLIC KEY----- 和 -----END PUBLIC KEY----- 包裹。最通用的格式——几乎所有编程语言和工具都支持。",
     "formatDer": "<strong>DER 格式：</strong>二进制编码的密钥——PEM 就是 DER 的 Base64 编码版本。某些 Java 和 Windows API 直接使用 DER 格式。",
-    "formatSsh": "<strong>SSH 格式：</strong>OpenSSH 使用的公钥格式——以 ssh-rsa 开头，一行包含算法、指数和模数。用于 SSH 登录认证。",
+    "formatSsh": "<strong>SSH 格式：</strong>生成 OpenSSH 兼容的公钥（<code>ssh-rsa AAAA...</code> 单行）和私钥（<code>-----BEGIN OPENSSH PRIVATE KEY-----</code>）。可直接用于 SSH 登录、GitHub/GitLab 等 Git 托管平台的 SSH 认证。GitHub 要求 RSA 密钥至少 3072 位。",
     "formatJwk": "<strong>JWK 格式：</strong>JSON Web Key——JSON 格式表示的密钥，包含 n（模数）和 e（指数）等参数。用于 JWT 和 Web 加密。",
     "featuresTitle": "三、核心功能",
     "featureWebCrypto": "<strong>Web Crypto API：</strong>使用浏览器原生加密接口生成密钥——性能接近系统级工具，安全性由浏览器引擎保证。",
@@ -1004,7 +1004,7 @@
     "infoUsage": "RSA 密钥生成步骤",
     "usageStep1Title": "第一步：配置参数",
     "usageKeySize": "<strong>密钥长度：</strong>2048 位（通用，安全级别足够）或 4096 位（高安全，生成较慢）。一般场景 2048 位即可。",
-    "usageFormat": "<strong>输出格式：</strong>PEM 格式（Base64 文本，最通用）——适合直接粘贴到配置文件或代码中。",
+    "usageFormat": "<strong>输出格式：</strong>PEM 格式（Base64 文本，最通用）适合粘贴到配置文件或代码；SSH 格式适合 SSH 登录和 Git 认证，GitHub 需选择 3072 或 4096 位。",
     "usageStep2Title": "第二步：生成密钥",
     "usageClickGenerate": "<strong>点击生成：</strong>点击\"生成密钥对\"按钮——浏览器使用密码学安全随机数生成 RSA 密钥对。",
     "usageViewResult": "<strong>查看结果：</strong>公钥和私钥分别显示在两个区域——公钥可以分享，私钥必须保密。",
@@ -1026,6 +1026,7 @@
     "noteFaq1": "<strong>Q: RSA 能加密大文件吗？</strong>A: RSA 只能加密小于密钥长度的数据——2048 位 RSA 最多加密 245 字节。大文件应使用混合加密（AES 加密数据 + RSA 加密 AES 密钥）。",
     "noteFaq2": "<strong>Q: 公钥和私钥能互换吗？</strong>A: 技术上 RSA 的公钥和私钥可以互换使用——但语义上不应互换。公钥加密的数据只有私钥能解密，反之亦然。",
     "noteFaq3": "<strong>Q: 生成的密钥安全吗？</strong>A: 使用 Web Crypto API——浏览器底层的密码学安全随机数生成器。与 OpenSSL 等系统级工具的安全级别相同。",
-    "noteFaq4": "<strong>Q: PEM 和 DER 怎么选？</strong>A: PEM 是文本格式——方便复制粘贴和版本控制。DER 是二进制格式——适合程序读取。大多数场景用 PEM。"
+    "noteFaq4": "<strong>Q: PEM 和 DER 怎么选？</strong>A: PEM 是文本格式——方便复制粘贴和版本控制。DER 是二进制格式——适合程序读取。大多数场景用 PEM。",
+    "noteFaq5": "<strong>Q: 生成的 SSH 格式为什么不能直接用于 GitHub？</strong>A: 选择 SSH 格式时，公钥为 ssh-rsa 单行格式，私钥为 -----BEGIN OPENSSH PRIVATE KEY----- 格式。GitHub 要求 RSA 密钥至少 3072 位，请在此选择 3072 或 4096 位；2048 位及以下会被 GitHub 拒绝。将公钥内容粘贴到 GitHub 的 SSH Keys 页面，私钥保存到本地 ~/.ssh/id_rsa 即可使用。"
   }
 }

@@ -255,9 +255,8 @@
                     ...-----"结尾。它是存储和传输加密密钥最通用的格式，几乎所有加密工具和编程语言都支持PEM格式。公钥使用SPKI（SubjectPublicKeyInfo）格式封装，私钥使用PKCS#8格式封装，这两种都是标准格式，兼容性极好。
                 </p>
 
-                <h3>问：生成的密钥可以用于SSH登录吗？</h3>
-                <p><strong>答：</strong>本工具生成的是标准RSA密钥对（PKCS#8/SPKI
-                    PEM格式），可以用于大多数需要RSA密钥的场景。但SSH默认使用OpenSSH格式，可能需要使用ssh-keygen工具进行格式转换。对于SSL/TLS证书、API签名、数据加密等场景，本工具生成的PEM格式密钥可以直接使用。
+                <h3>问：生成的密钥可以用于SSH登录或GitHub吗？</h3>
+                <p><strong>答：</strong>可以。在导出格式中选择"SSH"，工具会生成 OpenSSH 兼容的公钥（<code>ssh-rsa AAAA...</code> 单行）和私钥（<code>-----BEGIN OPENSSH PRIVATE KEY-----</code>），可直接用于 SSH 登录、GitHub/GitLab 等 Git 托管平台。注意：GitHub 要求 RSA 密钥至少 3072 位，请在本工具中选择 3072 或 4096 位，2048 位及以下会被 GitHub 拒绝。对于 SSL/TLS 证书、API 签名、数据加密等场景，建议选择 PEM 格式。
                 </p>
 
                 <h3>问：为什么生成4096位密钥很慢？</h3>
