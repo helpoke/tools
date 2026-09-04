@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://unpkg.com https://cdn.jsdelivr.net; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://unpkg.com https://cdn.jsdelivr.net; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>视频转GIF - 免费在线视频转GIF动图工具</title>
     <meta property="og:title" content="视频转GIF - 免费在线视频转GIF动图工具">
@@ -45,7 +53,7 @@
         "@type": "WebApplication",
         "name": "视频转GIF工具",
         "description": "免费在线视频转GIF动图工具，支持从视频中提取精彩片段制作GIF，可自定义帧率、尺寸和质量。纯前端处理，保护用户隐私数据。Free online video to GIF converter.",
-        "url": "https://helpoke.com/video/gif",
+        "url": "https://helpoke.com/video/gif/",
         "applicationCategory": "https://schema.org/VideoEditing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -60,7 +68,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -78,7 +86,8 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="video.gif.title">视频转GIF工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="video.gif.intro">视频转GIF工具，支持从视频中提取片段制作GIF动图，自定义帧率、尺寸、循环次数、画质等参数</p>
@@ -93,7 +102,8 @@
                     <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv" hidden>
                     <div class="upload-icon">🎬</div>
                     <div class="upload-text" data-i18n="video.gif.uploadText">点击上传或拖拽视频到此处</div>
-                    <div class="upload-hint" data-i18n="video.gif.uploadHint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 格式</div>
+                    <div class="upload-hint" data-i18n="video.gif.uploadHint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV,
+                        OGV, 3GP 格式</div>
                 </label>
             </div>
 
@@ -164,7 +174,8 @@
                 <div class="action-buttons">
                     <button id="convertBtn" disabled>
                         <span id="convertBtnText" data-i18n="video.gif.convertBtn">生成GIF</span>
-                        <span id="convertBtnLoading" style="display: none;" data-i18n="video.gif.converting">生成中...</span>
+                        <span id="convertBtnLoading" style="display: none;"
+                            data-i18n="video.gif.converting">生成中...</span>
                     </button>
                     <div class="progress-container" id="progressContainer" style="display: none;">
                         <div class="progress-bar" id="progressBar"></div>
@@ -193,22 +204,38 @@
                     <div class="info-content">
                         <h4 data-i18n="video.gif.problemsTitle">一、为什么选择 GIF 而不是短视频</h4>
                         <ul>
-                            <li data-i18n="video.gif.problem1">一段产品演示、一个搞笑瞬间、一个教程步骤——这些内容用 GIF 动图表达比视频更合适：自动播放无需点击、循环播放反复展示、体积小方便嵌入文档和聊天。但把视频转成 GIF 不是简单地"改个后缀"——需要处理帧率、分辨率、颜色量化等一系列技术问题。</li>
-                            <li data-i18n="video.gif.problem2">本工具基于 FFmpeg WASM 实现高质量视频转 GIF——支持设置开始时间、持续时长、帧率（5/15/30fps）、缩放比例和画质等级。可以从长视频中精确截取任意时间段转为 GIF 动图。输出为标准 GIF 格式，所有浏览器和即时通讯软件都支持。</li>
-                            <li data-i18n="video.gif.problem3">GIF 生成的核心挑战是文件大小——GIF 格式限制 256 色，且帧率越高、分辨率越大文件越大。本工具提供多种参数控制，帮你在画质和文件大小之间找到平衡。社交媒体用 GIF 建议控制在 2-5MB 以内。</li>
+                            <li data-i18n="video.gif.problem1">一段产品演示、一个搞笑瞬间、一个教程步骤——这些内容用 GIF
+                                动图表达比视频更合适：自动播放无需点击、循环播放反复展示、体积小方便嵌入文档和聊天。但把视频转成 GIF
+                                不是简单地"改个后缀"——需要处理帧率、分辨率、颜色量化等一系列技术问题。</li>
+                            <li data-i18n="video.gif.problem2">本工具基于 FFmpeg WASM 实现高质量视频转
+                                GIF——支持设置开始时间、持续时长、帧率（5/15/30fps）、缩放比例和画质等级。可以从长视频中精确截取任意时间段转为 GIF 动图。输出为标准 GIF
+                                格式，所有浏览器和即时通讯软件都支持。</li>
+                            <li data-i18n="video.gif.problem3">GIF 生成的核心挑战是文件大小——GIF 格式限制 256
+                                色，且帧率越高、分辨率越大文件越大。本工具提供多种参数控制，帮你在画质和文件大小之间找到平衡。社交媒体用 GIF 建议控制在 2-5MB 以内。</li>
                         </ul>
                         <h4 data-i18n="video.gif.formatTitle">二、GIF 编码的技术挑战</h4>
                         <ul>
-                            <li data-i18n="video.gif.formatMp4"><strong>256 色限制：</strong>GIF 格式每帧最多使用 256 种颜色——而视频每帧有数百万种颜色。FFmpeg 使用调色板生成（palettegen）+ 调色板使用（paletteuse）两步流程：先分析所有帧的颜色分布生成最优调色板，然后将每帧颜色映射到调色板中最近的颜色。</li>
-                            <li data-i18n="video.gif.formatAvi"><strong>帧率选择：</strong>帧率直接决定流畅度和文件大小。5fps 适合幻灯片式展示（文件最小），15fps 适合一般动画（平衡选择），30fps 适合需要流畅运动的场景（文件最大）。推荐 10-15fps 作为起始值。</li>
-                            <li data-i18n="video.gif.formatGif"><strong>分辨率缩放：</strong>原始视频通常是 1080p 甚至 4K——直接转 GIF 文件会非常大。将宽度缩放到 320-480px 是社交媒体友好的尺寸——文件通常控制在 1-5MB。</li>
+                            <li data-i18n="video.gif.formatMp4"><strong>256 色限制：</strong>GIF 格式每帧最多使用 256
+                                种颜色——而视频每帧有数百万种颜色。FFmpeg 使用调色板生成（palettegen）+
+                                调色板使用（paletteuse）两步流程：先分析所有帧的颜色分布生成最优调色板，然后将每帧颜色映射到调色板中最近的颜色。</li>
+                            <li data-i18n="video.gif.formatAvi"><strong>帧率选择：</strong>帧率直接决定流畅度和文件大小。5fps
+                                适合幻灯片式展示（文件最小），15fps 适合一般动画（平衡选择），30fps 适合需要流畅运动的场景（文件最大）。推荐 10-15fps 作为起始值。</li>
+                            <li data-i18n="video.gif.formatGif"><strong>分辨率缩放：</strong>原始视频通常是 1080p 甚至 4K——直接转 GIF
+                                文件会非常大。将宽度缩放到 320-480px 是社交媒体友好的尺寸——文件通常控制在 1-5MB。</li>
                         </ul>
                         <h4 data-i18n="video.gif.featuresTitle">三、GIF 参数控制</h4>
                         <ul>
-                            <li data-i18n="video.gif.featureOnline"><strong>时间范围控制：</strong>设置开始时间和持续时长，从视频中精确截取目标片段。支持 HH:MM:SS 格式。建议 GIF 时长控制在 3-10 秒——太长文件大且注意力分散。</li>
-                            <li data-i18n="video.gif.featurePreview"><strong>循环设置：</strong>GIF 的循环次数——无限循环（默认）、循环 1/2/3/5 次。大多数场景使用无限循环。</li>
-                            <li data-i18n="video.gif.featureExport"><strong>帧率控制：</strong>5fps（静态展示）、15fps（一般动画）、30fps（流畅运动）。帧率越高文件越大——5fps 到 30fps 文件大小差异约 6 倍。</li>
-                            <li data-i18n="video.gif.featureSecurity"><strong>画质等级：</strong>高/中/低三档。高质量保留更多颜色细节但文件更大，低质量颜色简化更激进但文件更小。推荐中质量作为平衡选择。</li>
+                            <li data-i18n="video.gif.featureOnline"><strong>时间范围控制：</strong>设置开始时间和持续时长，从视频中精确截取目标片段。支持
+                                HH:MM:SS 格式。建议 GIF 时长控制在 3-10 秒——太长文件大且注意力分散。</li>
+                            <li data-i18n="video.gif.featurePreview"><strong>循环设置：</strong>GIF 的循环次数——无限循环（默认）、循环
+                                1/2/3/5 次。大多数场景使用无限循环。</li>
+                            <li data-i18n="video.gif.featureExport">
+                                <strong>帧率控制：</strong>5fps（静态展示）、15fps（一般动画）、30fps（流畅运动）。帧率越高文件越大——5fps 到 30fps 文件大小差异约
+                                6 倍。
+                            </li>
+                            <li data-i18n="video.gif.featureSecurity">
+                                <strong>画质等级：</strong>高/中/低三档。高质量保留更多颜色细节但文件更大，低质量颜色简化更激进但文件更小。推荐中质量作为平衡选择。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -220,7 +247,8 @@
                     <div class="info-content">
                         <h4 data-i18n="video.gif.usageUploadTitle">载入视频</h4>
                         <ul>
-                            <li data-i18n="video.gif.usageUpload1"><strong>上传方式：</strong>点击或拖拽上传视频文件。支持 MP4/WebM/MOV/AVI 等格式。</li>
+                            <li data-i18n="video.gif.usageUpload1"><strong>上传方式：</strong>点击或拖拽上传视频文件。支持 MP4/WebM/MOV/AVI
+                                等格式。</li>
                             <li data-i18n="video.gif.usageUpload2"><strong>视频信息：</strong>上传后显示文件名、大小、时长和分辨率。</li>
                             <li data-i18n="video.gif.usageUpload3"><strong>预览定位：</strong>在视频预览中播放到 GIF 起始位置，记下时间戳。</li>
                             <li data-i18n="video.gif.usageUpload4"><strong>文件大小：</strong>建议不超过 200MB。超大视频的处理时间较长。</li>
@@ -228,19 +256,25 @@
                         <h4 data-i18n="video.gif.usageRangeTitle">设置时间范围</h4>
                         <ul>
                             <li data-i18n="video.gif.usageRange1"><strong>开始时间：</strong>GIF 的起始时间点。建议从动作开始的位置开始。</li>
-                            <li data-i18n="video.gif.usageRange2"><strong>持续时长：</strong>GIF 的时间长度。建议 3-10 秒——太长文件大且效果差。</li>
-                            <li data-i18n="video.gif.usageRange3"><strong>时长建议：</strong>表情包 1-3 秒，产品展示 3-5 秒，教程步骤 5-10 秒。</li>
+                            <li data-i18n="video.gif.usageRange2"><strong>持续时长：</strong>GIF 的时间长度。建议 3-10 秒——太长文件大且效果差。
+                            </li>
+                            <li data-i18n="video.gif.usageRange3"><strong>时长建议：</strong>表情包 1-3 秒，产品展示 3-5 秒，教程步骤 5-10
+                                秒。</li>
                         </ul>
                         <h4 data-i18n="video.gif.usageParamTitle">设置 GIF 参数</h4>
                         <ul>
-                            <li data-i18n="video.gif.usageParam1"><strong>帧率：</strong>5fps（最小文件）、15fps（推荐）、30fps（最流畅）。</li>
-                            <li data-i18n="video.gif.usageParam2"><strong>缩放比例：</strong>原始（最大文件）、75%、50%、25%。推荐 50% 作为平衡。</li>
+                            <li data-i18n="video.gif.usageParam1"><strong>帧率：</strong>5fps（最小文件）、15fps（推荐）、30fps（最流畅）。
+                            </li>
+                            <li data-i18n="video.gif.usageParam2"><strong>缩放比例：</strong>原始（最大文件）、75%、50%、25%。推荐 50%
+                                作为平衡。</li>
                             <li data-i18n="video.gif.usageParam3"><strong>画质：</strong>高（最多颜色）、中（推荐）、低（最少颜色）。</li>
                         </ul>
                         <h4 data-i18n="video.gif.usageGenerateTitle">生成与下载</h4>
                         <ul>
-                            <li data-i18n="video.gif.usageGenerate1"><strong>点击"开始转换"：</strong>FFmpeg 开始处理——先生成调色板，再逐帧编码 GIF。</li>
-                            <li data-i18n="video.gif.usageGenerate2"><strong>进度显示：</strong>实时显示转换进度。通常 10 秒视频约 10-30 秒完成。</li>
+                            <li data-i18n="video.gif.usageGenerate1"><strong>点击"开始转换"：</strong>FFmpeg 开始处理——先生成调色板，再逐帧编码
+                                GIF。</li>
+                            <li data-i18n="video.gif.usageGenerate2"><strong>进度显示：</strong>实时显示转换进度。通常 10 秒视频约 10-30
+                                秒完成。</li>
                             <li data-i18n="video.gif.usageGenerate3"><strong>生成信息：</strong>完成后显示 GIF 文件大小、帧率和尺寸信息。</li>
                         </ul>
                         <h4 data-i18n="video.gif.usageDownloadTitle">下载结果</h4>
@@ -251,10 +285,14 @@
                         </ul>
                         <h4 data-i18n="video.gif.usageSceneTitle">五、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.gif.usageScene1"><strong>表情包制作：</strong>从电影或综艺视频中截取搞笑片段，转为 3 秒 GIF 表情包。</li>
-                            <li data-i18n="video.gif.usageScene2"><strong>产品演示：</strong>将产品操作的 5 秒关键步骤转为 GIF，嵌入产品文档或邮件中。</li>
-                            <li data-i18n="video.gif.usageScene3"><strong>教程步骤：</strong>将软件操作的每个关键步骤分别转为 GIF，制作图文教程。</li>
-                            <li data-i18n="video.gif.usageScene4"><strong>数据可视化：</strong>将动态图表的变化过程转为 GIF，方便在 PPT 和文档中展示。</li>
+                            <li data-i18n="video.gif.usageScene1"><strong>表情包制作：</strong>从电影或综艺视频中截取搞笑片段，转为 3 秒 GIF 表情包。
+                            </li>
+                            <li data-i18n="video.gif.usageScene2"><strong>产品演示：</strong>将产品操作的 5 秒关键步骤转为 GIF，嵌入产品文档或邮件中。
+                            </li>
+                            <li data-i18n="video.gif.usageScene3"><strong>教程步骤：</strong>将软件操作的每个关键步骤分别转为 GIF，制作图文教程。
+                            </li>
+                            <li data-i18n="video.gif.usageScene4"><strong>数据可视化：</strong>将动态图表的变化过程转为 GIF，方便在 PPT
+                                和文档中展示。</li>
                         </ul>
                     </div>
                 </article>
@@ -265,34 +303,49 @@
                     <div class="info-content">
                         <h4 data-i18n="video.gif.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.gif.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。</li>
-                            <li data-i18n="video.gif.noteSecurity2"><strong>内存管理：</strong>GIF 编码需要较多内存（所有帧数据同时在内存中）。建议处理时关闭不必要的标签页。</li>
+                            <li data-i18n="video.gif.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。
+                            </li>
+                            <li data-i18n="video.gif.noteSecurity2"><strong>内存管理：</strong>GIF
+                                编码需要较多内存（所有帧数据同时在内存中）。建议处理时关闭不必要的标签页。</li>
                             <li data-i18n="video.gif.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。</li>
                         </ul>
                         <h4 data-i18n="video.gif.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.gif.notePerf1"><strong>处理时间：</strong>约 2-3x 视频时长。10 秒视频约 20-30 秒完成。</li>
-                            <li data-i18n="video.gif.notePerf2"><strong>文件大小因素：</strong>帧率 x 分辨率 x 时长 x 颜色复杂度 共同决定最终文件大小。</li>
-                            <li data-i18n="video.gif.notePerf3"><strong>内存需求：</strong>30fps 的 10 秒 GIF 需要存储 300 帧数据——内存占用较大。建议降低帧率或时长。</li>
+                            <li data-i18n="video.gif.notePerf1"><strong>处理时间：</strong>约 2-3x 视频时长。10 秒视频约 20-30 秒完成。
+                            </li>
+                            <li data-i18n="video.gif.notePerf2"><strong>文件大小因素：</strong>帧率 x 分辨率 x 时长 x 颜色复杂度
+                                共同决定最终文件大小。</li>
+                            <li data-i18n="video.gif.notePerf3"><strong>内存需求：</strong>30fps 的 10 秒 GIF 需要存储 300
+                                帧数据——内存占用较大。建议降低帧率或时长。</li>
                         </ul>
                         <h4 data-i18n="video.gif.notesFormatTitle">GIF 格式说明</h4>
                         <ul>
-                            <li data-i18n="video.gif.noteFormat1"><strong>通用兼容：</strong>GIF 是历史最悠久的网络图片格式之一——所有浏览器、操作系统、即时通讯软件都支持。</li>
-                            <li data-i18n="video.gif.noteFormat2"><strong>无音频：</strong>GIF 格式不支持音频。转换时音频轨道被丢弃——如果需要保留声音，应该使用视频格式。</li>
-                            <li data-i18n="video.gif.noteFormat3"><strong>动画原理：</strong>GIF 动图本质上是多张图片的快速切换——每帧独立显示指定时长后切换到下一帧。</li>
+                            <li data-i18n="video.gif.noteFormat1"><strong>通用兼容：</strong>GIF
+                                是历史最悠久的网络图片格式之一——所有浏览器、操作系统、即时通讯软件都支持。</li>
+                            <li data-i18n="video.gif.noteFormat2"><strong>无音频：</strong>GIF
+                                格式不支持音频。转换时音频轨道被丢弃——如果需要保留声音，应该使用视频格式。</li>
+                            <li data-i18n="video.gif.noteFormat3"><strong>动画原理：</strong>GIF
+                                动图本质上是多张图片的快速切换——每帧独立显示指定时长后切换到下一帧。</li>
                         </ul>
                         <h4 data-i18n="video.gif.notesSizeTitle">文件大小优化</h4>
                         <ul>
-                            <li data-i18n="video.gif.noteSize1"><strong>降低帧率：</strong>从 30fps 降到 15fps，文件大小减半。大多数 GIF 动画 15fps 已经足够流畅。</li>
-                            <li data-i18n="video.gif.noteSize2"><strong>缩小分辨率：</strong>宽度从 480px 降到 320px，像素总量减少 56%。社交媒体上 320px 宽度已经足够。</li>
-                            <li data-i18n="video.gif.noteSize3"><strong>缩短时长：</strong>GIF 时长从 10 秒缩短到 5 秒，文件大小减半。只保留最关键的片段。</li>
+                            <li data-i18n="video.gif.noteSize1"><strong>降低帧率：</strong>从 30fps 降到 15fps，文件大小减半。大多数 GIF 动画
+                                15fps 已经足够流畅。</li>
+                            <li data-i18n="video.gif.noteSize2"><strong>缩小分辨率：</strong>宽度从 480px 降到 320px，像素总量减少
+                                56%。社交媒体上 320px 宽度已经足够。</li>
+                            <li data-i18n="video.gif.noteSize3"><strong>缩短时长：</strong>GIF 时长从 10 秒缩短到 5
+                                秒，文件大小减半。只保留最关键的片段。</li>
                         </ul>
                         <h4 data-i18n="video.gif.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.gif.noteFaq1"><strong>Q: GIF 文件太大怎么办？</strong>A: 降低帧率（15fps→5fps）、缩小分辨率（50%→25%）、缩短时长。三者叠加可以将文件缩小 80%+。</li>
-                            <li data-i18n="video.gif.noteFaq2"><strong>Q: GIF 画质不好怎么办？</strong>A: 选择"高质量"模式保留更多颜色。但 GIF 的 256 色限制是格式固有的——如果需要更好画质，考虑使用视频格式。</li>
-                            <li data-i18n="video.gif.noteFaq3"><strong>Q: 能生成透明背景的 GIF 吗？</strong>A: 当前版本不支持透明 GIF。GIF 的透明是布尔值（全透或全不透），效果有限。</li>
-                            <li data-i18n="video.gif.noteFaq4"><strong>Q: 生成的 GIF 不循环？</strong>A: 检查循环设置——选择"无限循环"。某些 GIF 查看器可能不支持有限循环次数。</li>
+                            <li data-i18n="video.gif.noteFaq1"><strong>Q: GIF 文件太大怎么办？</strong>A:
+                                降低帧率（15fps→5fps）、缩小分辨率（50%→25%）、缩短时长。三者叠加可以将文件缩小 80%+。</li>
+                            <li data-i18n="video.gif.noteFaq2"><strong>Q: GIF 画质不好怎么办？</strong>A: 选择"高质量"模式保留更多颜色。但 GIF
+                                的 256 色限制是格式固有的——如果需要更好画质，考虑使用视频格式。</li>
+                            <li data-i18n="video.gif.noteFaq3"><strong>Q: 能生成透明背景的 GIF 吗？</strong>A: 当前版本不支持透明 GIF。GIF
+                                的透明是布尔值（全透或全不透），效果有限。</li>
+                            <li data-i18n="video.gif.noteFaq4"><strong>Q: 生成的 GIF 不循环？</strong>A: 检查循环设置——选择"无限循环"。某些
+                                GIF 查看器可能不支持有限循环次数。</li>
                         </ul>
                     </div>
                 </article>
@@ -303,13 +356,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

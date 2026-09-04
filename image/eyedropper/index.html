@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <meta name="description" content="在线图片取色器（吸色工具），上传图片后鼠标悬停即可像素级放大取色，一键复制 HEX、RGB、HSL、HSV 颜色值，支持取色历史记录，纯本地处理保护隐私">
     <meta name="keywords" content="图片取色器, 吸色工具, 图片吸色, 在线取色, 取色器, 颜色吸取, HEX取色, RGB取色, 颜色识别">
@@ -42,7 +50,7 @@
         "@type": "WebApplication",
         "name": "图片取色器（吸色工具）",
         "description": "在线图片取色器（吸色工具），上传图片后鼠标悬停即可像素级放大取色，一键复制 HEX、RGB、HSL、HSV 颜色值，支持取色历史记录，纯本地处理保护隐私。Online image color picker with pixel-level magnifier, one-click copy of HEX/RGB/HSL/HSV values and color history.",
-        "url": "https://helpoke.com/image/eyedropper",
+        "url": "https://helpoke.com/image/eyedropper/",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -57,7 +65,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -87,155 +95,179 @@
                 <input type="file" id="imageUpload" accept="image/*" style="display:none;">
                 <div class="upload-icon">🎨</div>
                 <div class="upload-text" data-i18n="image.eyedropper.uploadText">点击上传或拖拽图片到此处</div>
-                <div class="upload-hint" data-i18n="image.eyedropper.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式，也可直接 Ctrl+V 粘贴</div>
+                <div class="upload-hint" data-i18n="image.eyedropper.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式，也可直接 Ctrl+V
+                    粘贴</div>
             </label>
 
             <div class="preview-section hidden-before-upload">
                 <div class="image-container" id="imageContainer">
                     <img id="previewImage" src="" alt="预览图片" style="display: none;"
-                        data-i18n="image.eyedropper.previewAlt">预览图片</div>
-                </div>
-                <p class="hover-tip" data-i18n="image.eyedropper.hoverTip">在图片上移动鼠标查看放大像素，点击即可吸取并锁定颜色</p>
-            </div>
-
-            <div class="result-section hidden-before-upload">
-                <h2 data-i18n="image.eyedropper.resultTitle">当前颜色</h2>
-                <div class="color-result">
-                    <div class="color-display" id="colorDisplay">
-                        <span id="colorHexBig">#FFFFFF</span>
-                    </div>
-                    <div class="color-formats">
-                        <div class="format-row">
-                            <span class="format-label">HEX</span>
-                            <code id="hexValue">#FFFFFF</code>
-                            <button class="copy-btn" data-format="hex" data-i18n="image.eyedropper.copyBtn">复制</button>
-                        </div>
-                        <div class="format-row">
-                            <span class="format-label">RGB</span>
-                            <code id="rgbValue">rgb(255, 255, 255)</code>
-                            <button class="copy-btn" data-format="rgb" data-i18n="image.eyedropper.copyBtn">复制</button>
-                        </div>
-                        <div class="format-row">
-                            <span class="format-label">HSL</span>
-                            <code id="hslValue">hsl(0, 0%, 100%)</code>
-                            <button class="copy-btn" data-format="hsl" data-i18n="image.eyedropper.copyBtn">复制</button>
-                        </div>
-                        <div class="format-row">
-                            <span class="format-label">HSV</span>
-                            <code id="hsvValue">hsv(0, 0%, 100%)</code>
-                            <button class="copy-btn" data-format="hsv" data-i18n="image.eyedropper.copyBtn">复制</button>
-                        </div>
-                    </div>
+                        data-i18n="image.eyedropper.previewAlt">预览图片
                 </div>
             </div>
+            <p class="hover-tip" data-i18n="image.eyedropper.hoverTip">在图片上移动鼠标查看放大像素，点击即可吸取并锁定颜色</p>
+        </div>
 
-            <div class="history-section hidden-before-upload">
-                <div class="history-header">
-                    <h2 data-i18n="image.eyedropper.historyTitle">取色历史</h2>
-                    <button id="clearHistoryBtn" data-i18n="image.eyedropper.clearHistoryBtn">清空历史</button>
+        <div class="result-section hidden-before-upload">
+            <h2 data-i18n="image.eyedropper.resultTitle">当前颜色</h2>
+            <div class="color-result">
+                <div class="color-display" id="colorDisplay">
+                    <span id="colorHexBig">#FFFFFF</span>
                 </div>
-                <div class="color-history" id="colorHistory">
-                    <p class="empty-history" id="emptyHistory" data-i18n="image.eyedropper.emptyHistory">暂无取色记录，点击图片中的任意位置吸取颜色</p>
+                <div class="color-formats">
+                    <div class="format-row">
+                        <span class="format-label">HEX</span>
+                        <code id="hexValue">#FFFFFF</code>
+                        <button class="copy-btn" data-format="hex" data-i18n="image.eyedropper.copyBtn">复制</button>
+                    </div>
+                    <div class="format-row">
+                        <span class="format-label">RGB</span>
+                        <code id="rgbValue">rgb(255, 255, 255)</code>
+                        <button class="copy-btn" data-format="rgb" data-i18n="image.eyedropper.copyBtn">复制</button>
+                    </div>
+                    <div class="format-row">
+                        <span class="format-label">HSL</span>
+                        <code id="hslValue">hsl(0, 0%, 100%)</code>
+                        <button class="copy-btn" data-format="hsl" data-i18n="image.eyedropper.copyBtn">复制</button>
+                    </div>
+                    <div class="format-row">
+                        <span class="format-label">HSV</span>
+                        <code id="hsvValue">hsv(0, 0%, 100%)</code>
+                        <button class="copy-btn" data-format="hsv" data-i18n="image.eyedropper.copyBtn">复制</button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.eyedropper.infoIntro">图片取色器：从任意图片中精确提取颜色值</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.eyedropper.problemsTitle">一、你看到的颜色，和真实颜色可能不一样</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.problem1">设计师看到网页上一个按钮颜色很好看，想在自己的项目里复用——截图、PS 打开、吸管工具、读色值……流程太重了。前端开发想还原设计稿中的配色，对着图片猜颜色？差一个色阶整个视觉感受就变了。本工具让你在图片上任意位置点击，立即获得该像素的精确颜色值——HEX、RGB、HSL 三种格式同时显示。</li>
-                            <li data-i18n="image.eyedropper.problem2">取色器基于 Canvas 的 getImageData API——直接从图片的像素数据中读取指定坐标的 RGBA 值。精度达到像素级，不存在"肉眼估算"的误差。放大镜功能让你精确定位到具体哪个像素——特别是在边缘区域，一个像素的偏差可能导致取到完全不同的颜色。</li>
-                            <li data-i18n="image.eyedropper.problem3">除了单点取色，还支持区域取色——框选一个矩形区域后，工具计算该区域内所有像素的平均颜色。这对于获取渐变背景的主色调、模糊区域的整体色彩倾向特别有用。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.formatTitle">二、三种颜色格式的应用场景</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.formatImage"><strong>图片格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 常见图片格式，也可直接 Ctrl+V 粘贴剪贴板图片。</li>
-                            <li data-i18n="image.eyedropper.formatColor"><strong>颜色格式：</strong>同时输出 HEX、RGB、HSL、HSV 四种颜色值，覆盖设计软件、CSS 代码、打印配色等多种场景。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.featuresTitle">三、取色器的核心功能</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.featureMagnifier"><strong>像素级放大镜：</strong>鼠标悬停在图片上时，取色点周围 8×8 像素区域会以放大网格形式显示在放大镜面板中。当前取色像素以高亮边框标识，帮助在密集色彩区域中精确定位目标像素——特别适合从截图中小字体或细线条上提取准确颜色。</li>
-                            <li data-i18n="image.eyedropper.featureCopy"><strong>四格式一键复制：</strong>HEX、RGB、HSL、HSV 四种颜色格式各自带有独立的复制按钮。点击即复制到剪贴板，并显示"已复制"提示。HEX 适合 CSS 代码，RGB 适合 Canvas/图像处理编程，HSL 适合直觉调色，HSV 适合色彩理论分析——四种格式覆盖所有开发设计场景。</li>
-                            <li data-i18n="image.eyedropper.featureHistory"><strong>取色历史：</strong>自动记录取色历史，点击色块即可复用。</li>
-                            <li data-i18n="image.eyedropper.featureSecurity"><strong>区域平均色：</strong>框选矩形区域后计算所有像素的算术平均颜色——适合获取大面积区域的主色调。算法对每个像素的 RGB 分别求和后除以像素数量。</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.eyedropper.infoUsage">取色操作流程</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.eyedropper.usageUploadTitle">载入图片</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.usageClickUpload"><strong>上传方式：</strong>点击或拖拽上传，支持 JPG/PNG/WebP/BMP/GIF。</li>
-                            <li data-i18n="image.eyedropper.usageDragPaste"><strong>拖拽或粘贴：</strong>支持拖拽图片到上传区域，或直接 Ctrl+V 粘贴剪贴板中的图片。</li>
-                            <li data-i18n="image.eyedropper.usagePreview"><strong>预览区域：</strong>图片显示在取色区域，鼠标变为十字准心。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.usagePickTitle">二、取色操作</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.usageHover"><strong>移动鼠标：</strong>在图片上移动鼠标，放大镜会跟随光标显示周围像素。</li>
-                            <li data-i18n="image.eyedropper.usageZoom"><strong>像素定位：</strong>放大镜中心十字所在的位置即为当前取色像素。</li>
-                            <li data-i18n="image.eyedropper.usageClick"><strong>点击锁定：</strong>点击图片中的任意位置即可吸取并锁定该位置的颜色。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.usageCopyTitle">三、复制颜色值</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.usageCopyRow"><strong>格式复制：</strong>点击对应格式行右侧的“复制”按钮，复制该格式的颜色值。</li>
-                            <li data-i18n="image.eyedropper.usageCopyDisplay"><strong>点击色块：</strong>点击当前颜色的大色块，可快速复制 HEX 值。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.usageHistoryTitle">四、取色历史</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.usageHistoryAuto"><strong>自动记录：</strong>每次点击取色都会自动记录到取色历史。</li>
-                            <li data-i18n="image.eyedropper.usageHistoryClick"><strong>点击复用：</strong>点击历史色块可将其设为当前颜色并复制 HEX 值。</li>
-                            <li data-i18n="image.eyedropper.usageHistoryClear"><strong>清空历史：</strong>点击“清空历史”按钮可删除全部取色记录。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.usagePrincipleTitle">六、取色器的技术原理</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.usagePrinciplePixel"><strong>像素读取：</strong>通过 Canvas 读取鼠标所在位置像素的 RGB 值。</li>
-                            <li data-i18n="image.eyedropper.usagePrincipleConvert"><strong>格式转换：</strong>将 RGB 值换算为 HEX、HSL、HSV 等常用颜色格式。</li>
-                            <li data-i18n="image.eyedropper.usagePrincipleZoom"><strong>原图取色：</strong>取色基于图片原始分辨率，不受预览缩放影响。</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.eyedropper.infoNotes">注意事项</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.eyedropper.notesSecurityTitle">数据安全</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.noteSecurity1">取色操作通过 Canvas getImageData 读取像素，全程在浏览器本地完成，不发送任何网络请求。</li>
-                            <li data-i18n="image.eyedropper.noteSecurity2">上传的图片和取色历史记录仅存在于当前会话，关闭页面后自动清除。</li>
-                            <li data-i18n="image.eyedropper.noteSecurity3">吸取的颜色值可能来自机密设计稿，无痕模式可避免历史记录残留。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.notesPrecisionTitle">二、取色精度</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.notePrecision1">取色基于图片原始像素，预览缩放不影响取色结果。</li>
-                            <li data-i18n="image.eyedropper.notePrecision2">JPG 为有损压缩格式，取色值可能与原始场景存在轻微偏差。</li>
-                            <li data-i18n="image.eyedropper.notePrecision3">GIF 动态图片仅取第一帧的颜色。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.notesCompatTitle">三、浏览器兼容</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.noteCompat1">建议使用 Chrome、Edge、Firefox 等现代浏览器。</li>
-                            <li data-i18n="image.eyedropper.noteCompat2">一键复制功能需要浏览器支持剪贴板 API（HTTPS 环境下可用）。</li>
-                            <li data-i18n="image.eyedropper.noteCompat3">粘贴上传功能在部分浏览器中可能受限，可改用点击上传。</li>
-                        </ul>
-                        <h4 data-i18n="image.eyedropper.notesFaqTitle">常见问题</h4>
-                        <ul>
-                            <li data-i18n="image.eyedropper.noteFaq1"><strong>取色位置不准：</strong>借助放大镜中心十字精确定位目标像素。</li>
-                            <li data-i18n="image.eyedropper.noteFaq2"><strong>复制失败：</strong>可手动选中文本复制，或检查浏览器剪贴板权限。</li>
-                            <li data-i18n="image.eyedropper.noteFaq3"><strong>图片加载失败：</strong>检查图片格式是否正确或图片是否损坏。</li>
-                            <li data-i18n="image.eyedropper.noteFaq4"><strong>透明区域取色：</strong>透明像素的取色结果为该位置的合成显示颜色。</li>
-                        </ul>
-                    </div>
-                </article>
+        <div class="history-section hidden-before-upload">
+            <div class="history-header">
+                <h2 data-i18n="image.eyedropper.historyTitle">取色历史</h2>
+                <button id="clearHistoryBtn" data-i18n="image.eyedropper.clearHistoryBtn">清空历史</button>
             </div>
+            <div class="color-history" id="colorHistory">
+                <p class="empty-history" id="emptyHistory" data-i18n="image.eyedropper.emptyHistory">
+                    暂无取色记录，点击图片中的任意位置吸取颜色</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.eyedropper.infoIntro">图片取色器：从任意图片中精确提取颜色值</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.eyedropper.problemsTitle">一、你看到的颜色，和真实颜色可能不一样</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.problem1">设计师看到网页上一个按钮颜色很好看，想在自己的项目里复用——截图、PS
+                            打开、吸管工具、读色值……流程太重了。前端开发想还原设计稿中的配色，对着图片猜颜色？差一个色阶整个视觉感受就变了。本工具让你在图片上任意位置点击，立即获得该像素的精确颜色值——HEX、RGB、HSL
+                            三种格式同时显示。</li>
+                        <li data-i18n="image.eyedropper.problem2">取色器基于 Canvas 的 getImageData API——直接从图片的像素数据中读取指定坐标的
+                            RGBA 值。精度达到像素级，不存在"肉眼估算"的误差。放大镜功能让你精确定位到具体哪个像素——特别是在边缘区域，一个像素的偏差可能导致取到完全不同的颜色。</li>
+                        <li data-i18n="image.eyedropper.problem3">
+                            除了单点取色，还支持区域取色——框选一个矩形区域后，工具计算该区域内所有像素的平均颜色。这对于获取渐变背景的主色调、模糊区域的整体色彩倾向特别有用。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.formatTitle">二、三种颜色格式的应用场景</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.formatImage"><strong>图片格式：</strong>支持 JPG、PNG、WebP、GIF、BMP
+                            常见图片格式，也可直接 Ctrl+V 粘贴剪贴板图片。</li>
+                        <li data-i18n="image.eyedropper.formatColor"><strong>颜色格式：</strong>同时输出 HEX、RGB、HSL、HSV
+                            四种颜色值，覆盖设计软件、CSS 代码、打印配色等多种场景。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.featuresTitle">三、取色器的核心功能</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.featureMagnifier"><strong>像素级放大镜：</strong>鼠标悬停在图片上时，取色点周围 8×8
+                            像素区域会以放大网格形式显示在放大镜面板中。当前取色像素以高亮边框标识，帮助在密集色彩区域中精确定位目标像素——特别适合从截图中小字体或细线条上提取准确颜色。</li>
+                        <li data-i18n="image.eyedropper.featureCopy"><strong>四格式一键复制：</strong>HEX、RGB、HSL、HSV
+                            四种颜色格式各自带有独立的复制按钮。点击即复制到剪贴板，并显示"已复制"提示。HEX 适合 CSS 代码，RGB 适合 Canvas/图像处理编程，HSL 适合直觉调色，HSV
+                            适合色彩理论分析——四种格式覆盖所有开发设计场景。</li>
+                        <li data-i18n="image.eyedropper.featureHistory"><strong>取色历史：</strong>自动记录取色历史，点击色块即可复用。</li>
+                        <li data-i18n="image.eyedropper.featureSecurity">
+                            <strong>区域平均色：</strong>框选矩形区域后计算所有像素的算术平均颜色——适合获取大面积区域的主色调。算法对每个像素的 RGB 分别求和后除以像素数量。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.eyedropper.infoUsage">取色操作流程</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.eyedropper.usageUploadTitle">载入图片</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.usageClickUpload"><strong>上传方式：</strong>点击或拖拽上传，支持
+                            JPG/PNG/WebP/BMP/GIF。</li>
+                        <li data-i18n="image.eyedropper.usageDragPaste"><strong>拖拽或粘贴：</strong>支持拖拽图片到上传区域，或直接 Ctrl+V
+                            粘贴剪贴板中的图片。</li>
+                        <li data-i18n="image.eyedropper.usagePreview"><strong>预览区域：</strong>图片显示在取色区域，鼠标变为十字准心。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.usagePickTitle">二、取色操作</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.usageHover"><strong>移动鼠标：</strong>在图片上移动鼠标，放大镜会跟随光标显示周围像素。</li>
+                        <li data-i18n="image.eyedropper.usageZoom"><strong>像素定位：</strong>放大镜中心十字所在的位置即为当前取色像素。</li>
+                        <li data-i18n="image.eyedropper.usageClick"><strong>点击锁定：</strong>点击图片中的任意位置即可吸取并锁定该位置的颜色。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.usageCopyTitle">三、复制颜色值</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.usageCopyRow"><strong>格式复制：</strong>点击对应格式行右侧的“复制”按钮，复制该格式的颜色值。
+                        </li>
+                        <li data-i18n="image.eyedropper.usageCopyDisplay"><strong>点击色块：</strong>点击当前颜色的大色块，可快速复制 HEX 值。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.usageHistoryTitle">四、取色历史</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.usageHistoryAuto"><strong>自动记录：</strong>每次点击取色都会自动记录到取色历史。</li>
+                        <li data-i18n="image.eyedropper.usageHistoryClick"><strong>点击复用：</strong>点击历史色块可将其设为当前颜色并复制 HEX
+                            值。</li>
+                        <li data-i18n="image.eyedropper.usageHistoryClear"><strong>清空历史：</strong>点击“清空历史”按钮可删除全部取色记录。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.usagePrincipleTitle">六、取色器的技术原理</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.usagePrinciplePixel"><strong>像素读取：</strong>通过 Canvas 读取鼠标所在位置像素的
+                            RGB 值。</li>
+                        <li data-i18n="image.eyedropper.usagePrincipleConvert"><strong>格式转换：</strong>将 RGB 值换算为
+                            HEX、HSL、HSV 等常用颜色格式。</li>
+                        <li data-i18n="image.eyedropper.usagePrincipleZoom"><strong>原图取色：</strong>取色基于图片原始分辨率，不受预览缩放影响。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.eyedropper.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.eyedropper.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.noteSecurity1">取色操作通过 Canvas getImageData
+                            读取像素，全程在浏览器本地完成，不发送任何网络请求。</li>
+                        <li data-i18n="image.eyedropper.noteSecurity2">上传的图片和取色历史记录仅存在于当前会话，关闭页面后自动清除。</li>
+                        <li data-i18n="image.eyedropper.noteSecurity3">吸取的颜色值可能来自机密设计稿，无痕模式可避免历史记录残留。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.notesPrecisionTitle">二、取色精度</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.notePrecision1">取色基于图片原始像素，预览缩放不影响取色结果。</li>
+                        <li data-i18n="image.eyedropper.notePrecision2">JPG 为有损压缩格式，取色值可能与原始场景存在轻微偏差。</li>
+                        <li data-i18n="image.eyedropper.notePrecision3">GIF 动态图片仅取第一帧的颜色。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.notesCompatTitle">三、浏览器兼容</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.noteCompat1">建议使用 Chrome、Edge、Firefox 等现代浏览器。</li>
+                        <li data-i18n="image.eyedropper.noteCompat2">一键复制功能需要浏览器支持剪贴板 API（HTTPS 环境下可用）。</li>
+                        <li data-i18n="image.eyedropper.noteCompat3">粘贴上传功能在部分浏览器中可能受限，可改用点击上传。</li>
+                    </ul>
+                    <h4 data-i18n="image.eyedropper.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="image.eyedropper.noteFaq1"><strong>取色位置不准：</strong>借助放大镜中心十字精确定位目标像素。</li>
+                        <li data-i18n="image.eyedropper.noteFaq2"><strong>复制失败：</strong>可手动选中文本复制，或检查浏览器剪贴板权限。</li>
+                        <li data-i18n="image.eyedropper.noteFaq3"><strong>图片加载失败：</strong>检查图片格式是否正确或图片是否损坏。</li>
+                        <li data-i18n="image.eyedropper.noteFaq4"><strong>透明区域取色：</strong>透明像素的取色结果为该位置的合成显示颜色。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
         </div>
 
         <!-- Footer component container -->
@@ -243,14 +275,14 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i>
                         关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

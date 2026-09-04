@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>YAML格式化校验工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="YAML格式化校验工具 - 免费、安全、快速">
+    <meta property="og:description" content="YAML格式化校验工具说明，YAML语法检查，YAML格式化高亮，详细错误行定位，YAML压缩，免费在线YAML工具，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/yaml/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="YAML格式化校验工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="YAML格式化校验工具说明，YAML语法检查，YAML格式化高亮，详细错误行定位，YAML压缩，免费在线YAML工具，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/yaml/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/yaml/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/yaml/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "YAML和JSON有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "YAML和JSON都是数据序列化格式，但特点不同：YAML更注重人类可读性，语法简洁，支持注释、多行字符串、锚点引用等高级特性；JSON更注重机器解析效率，语法严格，不支持注释，结构简单。YAML适合配置文件、CI/CD流程等人工编辑场景；JSON适合API数据传输、程序间通信等自动化场景。本工具可以帮助您在两种格式间转换，适应不同需求。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么YAML对缩进要求如此严格？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "YAML通过缩进定义数据层级结构，不使用括号或标签。缩进决定数据项的父子关系，缩进错误会导致解析失败或数据结构错误。例如，缩进少一格可能导致子项被解析为父项的同级元素，缩进多一格可能导致同级项被解析为子项。建议在项目中统一缩进风格（推荐2空格），并使用本工具的格式化和校验功能确保缩进正确。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "YAML支持哪些数据类型？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "YAML支持丰富的数据类型：字符串（支持单引号、双引号、无引号三种形式）；数值（整数、浮点数、科学计数法）；布尔值（true/false、yes/no、on/off）；null值（null、~、空）；日期和时间（ISO 8601格式）；列表（使用-前缀）；字典（使用键:值格式）；多行字符串（使用|保留换行或\u003e折叠换行）。本工具的校验功能会检查这些数据类型的语法是否正确。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "YAML转Properties有什么限制？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "YAML转Properties功能有以下限制：仅支持扁平化的键值对结构，嵌套的字典和列表无法完美转换；不支持YAML的高级特性（如锚点引用、多行字符串）；不支持复杂的注释保留；某些YAML数据类型（如布尔值、null）转换后可能变为字符串。建议对简单的配置型YAML使用转Properties功能，复杂结构建议直接使用YAML或转换为JSON。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何在YAML中编写多行字符串？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "YAML提供两种多行字符串语法：使用竖线符号|（Literal Block Scalar），保留所有换行符，字符串中的每行都会原样保留；使用大于符号\u003e（Folded Block Scalar），将换行符替换为空格，整个块折叠为一行。例如，key: |后的多行文本会保留换行，key: \u003e后的多行文本会合并为一行。本工具会正确处理这些多行字符串的格式化和校验。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "YAML注释有什么特点？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "YAML注释使用井号#开头，从#到行尾都是注释内容。注释可以出现在行的任何位置，可以在数据项前面、后面或单独一行。但YAML不支持多行注释（类似/* */），每行注释都需要单独的#。本工具的格式化功能会保留注释内容，但可能调整注释的位置和缩进以匹配数据结构。压缩功能会移除所有注释，生成无注释的纯净YAML代码。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -286,10 +357,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

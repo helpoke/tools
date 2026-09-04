@@ -11,7 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>文件大小换算工具 - 在线免费转换KB/MB/GB/TB/PB</title>
     <meta property="og:title" content="文件大小换算工具 - 在线免费转换KB/MB/GB/TB/PB">
@@ -359,7 +367,7 @@
         "@type": "WebApplication",
         "name": "文件大小换算工具",
         "description": "在线文件大小换算工具，支持B/KB/MB/GB/TB/PB等单位互转，同时支持SI和IEC两种标准。Free online file size unit converter.",
-        "url": "https://helpoke.com/dev/file-size",
+        "url": "https://helpoke.com/dev/file-size/",
         "applicationCategory": "https://schema.org/UtilityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -374,7 +382,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -394,10 +402,10 @@
             <h1 data-i18n="dev.file-size.title">文件大小换算工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
-            <p data-i18n="dev.file-size.intro">在线文件大小换算工具，支持 B/KB/MB/GB/TB/PB 全单位互转，同时支持 SI（1000进制）和 IEC（1024进制）两种标准，输入即转换</p>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.file-size.intro">在线文件大小换算工具，支持 B/KB/MB/GB/TB/PB 全单位互转，同时支持 SI（1000进制）和
+                IEC（1024进制）两种标准，输入即转换</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
@@ -408,11 +416,14 @@
                 <div class="standard-row">
                     <span class="label-text" data-i18n="dev.file-size.standardLabel">换算标准：</span>
                     <div class="standard-tabs">
-                        <div class="standard-tab active" data-standard="iec" data-i18n="dev.file-size.standardIec">IEC (1024)</div>
-                        <div class="standard-tab" data-standard="si" data-i18n="dev.file-size.standardSi">SI (1000)</div>
+                        <div class="standard-tab active" data-standard="iec" data-i18n="dev.file-size.standardIec">IEC
+                            (1024)</div>
+                        <div class="standard-tab" data-standard="si" data-i18n="dev.file-size.standardSi">SI (1000)
+                        </div>
                     </div>
                 </div>
-                <p class="standard-desc" data-i18n="dev.file-size.standardDesc">IEC：1 KB = 1024 B（操作系统常用）；SI：1 KB = 1000 B（硬盘厂商标注）</p>
+                <p class="standard-desc" data-i18n="dev.file-size.standardDesc">IEC：1 KB = 1024 B（操作系统常用）；SI：1 KB = 1000
+                    B（硬盘厂商标注）</p>
 
                 <!-- Input -->
                 <div class="input-group">
@@ -463,9 +474,13 @@
                         <div class="info-content">
                             <h4 data-i18n="dev.file-size.problemsTitle">一、1KB 到底等于多少字节</h4>
                             <ul>
-                                <li data-i18n="dev.file-size.problem1">硬盘厂商标称 1TB = 1000GB，但操作系统显示只有 931GB——因为硬盘厂商用十进制（1KB = 1000B），而操作系统用二进制（1KiB = 1024B）。这个"1000 vs 1024"的争议已经持续了几十年。本工具同时支持两种标准：SI 标准（1000 进制，用于硬盘/网络）和 IEC 标准（1024 进制，用于内存/操作系统）。</li>
-                                <li data-i18n="dev.file-size.problem2">输入任意数值和单位，工具立即转换为所有其他单位的值——从字节（B）到 YB（约字节），覆盖 17 个数量级。支持小数输入和科学计数法——如 1.5e9 表示 15 亿字节。</li>
-                                <li data-i18n="dev.file-size.problem3">除了手动输入，还提供常见文件大小参考——一首 MP3 歌曲约 5MB、一张手机照片约 3-5MB、一部 1080p 电影约 2GB、一个 Windows 系统约 30GB——帮助你建立对文件大小的直觉感知。</li>
+                                <li data-i18n="dev.file-size.problem1">硬盘厂商标称 1TB = 1000GB，但操作系统显示只有
+                                    931GB——因为硬盘厂商用十进制（1KB = 1000B），而操作系统用二进制（1KiB = 1024B）。这个"1000 vs
+                                    1024"的争议已经持续了几十年。本工具同时支持两种标准：SI 标准（1000 进制，用于硬盘/网络）和 IEC 标准（1024 进制，用于内存/操作系统）。</li>
+                                <li data-i18n="dev.file-size.problem2">输入任意数值和单位，工具立即转换为所有其他单位的值——从字节（B）到 YB（约字节），覆盖 17
+                                    个数量级。支持小数输入和科学计数法——如 1.5e9 表示 15 亿字节。</li>
+                                <li data-i18n="dev.file-size.problem3">除了手动输入，还提供常见文件大小参考——一首 MP3 歌曲约 5MB、一张手机照片约
+                                    3-5MB、一部 1080p 电影约 2GB、一个 Windows 系统约 30GB——帮助你建立对文件大小的直觉感知。</li>
                             </ul>
                             <h4 data-i18n="dev.file-size.unitsTitle">二、支持的单位</h4>
                             <ul>
@@ -479,10 +494,18 @@
                             </ul>
                             <h4 data-i18n="dev.file-size.featuresTitle">三、转换功能</h4>
                             <ul>
-                                <li data-i18n="dev.file-size.featureRealtime"><strong>实时双标准换算：</strong>输入任意数值后，同时显示 IEC 标准（1024 进制：KiB/MiB/GiB/TiB）和 SI 标准（1000 进制：KB/MB/GB/TB）的换算结果。两套标准并列显示，方便对比差异。所有换算基于 JavaScript BigInt 精确计算，不存在浮点精度丢失。</li>
-                                <li data-i18n="dev.file-size.featureDualStandard"><strong>IEC 与 SI 双标准对照：</strong>清晰标注每个单位的换算基准——IEC 标准中 1 MiB = 1,048,576 字节（2^20），SI 标准中 1 MB = 1,000,000 字节（10^6）。结果面板同时显示精确字节数和人类可读的格式化结果，消除"500GB 硬盘为什么只显示 465GB"的困惑。</li>
-                                <li data-i18n="dev.file-size.featureCopy"><strong>一键复制结果：</strong>每个换算结果旁都有独立的复制按钮，可以单独复制某个单位的数值。也可以复制完整的换算表格，方便粘贴到文档、表格或代码注释中。复制格式自动适配——纯数值或带单位的可读格式。</li>
-                                <li data-i18n="dev.file-size.featureSecurity"><strong>纯前端计算：</strong>所有转换在浏览器中完成——不上传任何数据。</li>
+                                <li data-i18n="dev.file-size.featureRealtime"><strong>实时双标准换算：</strong>输入任意数值后，同时显示 IEC
+                                    标准（1024 进制：KiB/MiB/GiB/TiB）和 SI 标准（1000 进制：KB/MB/GB/TB）的换算结果。两套标准并列显示，方便对比差异。所有换算基于
+                                    JavaScript BigInt 精确计算，不存在浮点精度丢失。</li>
+                                <li data-i18n="dev.file-size.featureDualStandard"><strong>IEC 与 SI
+                                        双标准对照：</strong>清晰标注每个单位的换算基准——IEC 标准中 1 MiB = 1,048,576 字节（2^20），SI 标准中 1 MB =
+                                    1,000,000 字节（10^6）。结果面板同时显示精确字节数和人类可读的格式化结果，消除"500GB 硬盘为什么只显示 465GB"的困惑。</li>
+                                <li data-i18n="dev.file-size.featureCopy">
+                                    <strong>一键复制结果：</strong>每个换算结果旁都有独立的复制按钮，可以单独复制某个单位的数值。也可以复制完整的换算表格，方便粘贴到文档、表格或代码注释中。复制格式自动适配——纯数值或带单位的可读格式。
+                                </li>
+                                <li data-i18n="dev.file-size.featureSecurity">
+                                    <strong>纯前端计算：</strong>所有转换在浏览器中完成——不上传任何数据。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -494,19 +517,32 @@
                         <div class="info-content">
                             <h4 data-i18n="dev.file-size.usageStep1Title">一、选择换算标准</h4>
                             <ul>
-                                <li data-i18n="dev.file-size.usageIec"><strong>IEC 标准（1024 进制）：</strong>这是计算机科学中传统的单位定义。1 KiB = 1024 字节，1 MiB = 1024 KiB = 1,048,576 字节，1 GiB = 1024 MiB，1 TiB = 1024 GiB。操作系统（Windows、macOS、Linux）显示的文件大小和磁盘容量通常使用此标准（尽管 Windows 错误地标注为 KB/MB/GB）。</li>
-                                <li data-i18n="dev.file-size.usageSi"><strong>SI 标准（1000 进制）：</strong>这是国际单位制（SI）的定义，也是硬盘厂商和通信运营商使用的标准。1 KB = 1000 字节，1 MB = 1000 KB = 1,000,000 字节，1 GB = 1000 MB，1 TB = 1000 GB。这就是为什么标称 1TB 的硬盘在操作系统中只显示约 931 GiB。</li>
+                                <li data-i18n="dev.file-size.usageIec"><strong>IEC 标准（1024
+                                        进制）：</strong>这是计算机科学中传统的单位定义。1 KiB = 1024 字节，1 MiB = 1024 KiB = 1,048,576 字节，1
+                                    GiB = 1024 MiB，1 TiB = 1024 GiB。操作系统（Windows、macOS、Linux）显示的文件大小和磁盘容量通常使用此标准（尽管
+                                    Windows 错误地标注为 KB/MB/GB）。</li>
+                                <li data-i18n="dev.file-size.usageSi"><strong>SI 标准（1000
+                                        进制）：</strong>这是国际单位制（SI）的定义，也是硬盘厂商和通信运营商使用的标准。1 KB = 1000 字节，1 MB = 1000 KB =
+                                    1,000,000 字节，1 GB = 1000 MB，1 TB = 1000 GB。这就是为什么标称 1TB 的硬盘在操作系统中只显示约 931 GiB。</li>
                             </ul>
                             <h4 data-i18n="dev.file-size.usageStep2Title">二、输入数值与选择单位</h4>
                             <ul>
-                                <li data-i18n="dev.file-size.usageInput"><strong>输入数值：</strong>在输入框中键入需要换算的文件大小数值。支持整数和小数（如 1.5、0.25）。输入后系统立即触发换算，所有单位的结果实时更新。</li>
-                                <li data-i18n="dev.file-size.usageUnit"><strong>选择源单位：</strong>通过下拉菜单选择输入数值的单位——从 B（字节）到 PB（拍字节）共 10 个级别。选择单位后换算结果立即更新。也可以直接在输入框中输入带单位的表达式（如 "100MB"），系统自动识别单位。</li>
-                                <li data-i18n="dev.file-size.usagePreset"><strong>文件大小参考：</strong>一首 MP3 约 5MB、一张照片约 3-5MB、一部电影约 2GB。帮你建立直觉。</li>
+                                <li data-i18n="dev.file-size.usageInput">
+                                    <strong>输入数值：</strong>在输入框中键入需要换算的文件大小数值。支持整数和小数（如
+                                    1.5、0.25）。输入后系统立即触发换算，所有单位的结果实时更新。
+                                </li>
+                                <li data-i18n="dev.file-size.usageUnit"><strong>选择源单位：</strong>通过下拉菜单选择输入数值的单位——从 B（字节）到
+                                    PB（拍字节）共 10 个级别。选择单位后换算结果立即更新。也可以直接在输入框中输入带单位的表达式（如 "100MB"），系统自动识别单位。</li>
+                                <li data-i18n="dev.file-size.usagePreset"><strong>文件大小参考：</strong>一首 MP3 约 5MB、一张照片约
+                                    3-5MB、一部电影约 2GB。帮你建立直觉。</li>
                             </ul>
                             <h4 data-i18n="dev.file-size.usageStep3Title">三、查看换算结果</h4>
                             <ul>
-                                <li data-i18n="dev.file-size.usageResults"><strong>全单位换算结果：</strong>换算面板同时显示 IEC 和 SI 两套标准下的完整结果——从字节（B）到拍字节（PB/ PiB）的每个单位都有精确的换算值。结果以精确数字和人类可读格式双重显示，大数值自动添加千位分隔符。</li>
-                                <li data-i18n="dev.file-size.usageCopyResult"><strong>复制结果：</strong>点击任意结果旁的复制按钮可以单独复制该单位的数值。复制格式为纯数字（方便粘贴到代码或表格中）。如需带单位的格式，可以手动选中包含单位的文本后复制。</li>
+                                <li data-i18n="dev.file-size.usageResults"><strong>全单位换算结果：</strong>换算面板同时显示 IEC 和 SI
+                                    两套标准下的完整结果——从字节（B）到拍字节（PB/ PiB）的每个单位都有精确的换算值。结果以精确数字和人类可读格式双重显示，大数值自动添加千位分隔符。</li>
+                                <li data-i18n="dev.file-size.usageCopyResult">
+                                    <strong>复制结果：</strong>点击任意结果旁的复制按钮可以单独复制该单位的数值。复制格式为纯数字（方便粘贴到代码或表格中）。如需带单位的格式，可以手动选中包含单位的文本后复制。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -517,13 +553,21 @@
                         </header>
                         <div class="info-content">
                             <h4 data-i18n="dev.file-size.notesDiffTitle">一、IEC 与 SI 标准的差异</h4>
-                            <p data-i18n="dev.file-size.noteDiff">计算机领域存在两套文件大小标准：IEC 标准使用 1024 进制（2 的幂次），SI 标准使用 1000 进制（10 的幂次）。两者在 KB 级别差异约 2.4%，到 TB 级别差异扩大到约 10%。这就是硬盘厂商标称的 1TB（SI）在操作系统中只显示约 931GB（IEC）的原因。本工具同时显示两套标准的结果，帮你准确理解实际容量。</p>
+                            <p data-i18n="dev.file-size.noteDiff">计算机领域存在两套文件大小标准：IEC 标准使用 1024 进制（2 的幂次），SI 标准使用 1000
+                                进制（10 的幂次）。两者在 KB 级别差异约 2.4%，到 TB 级别差异扩大到约 10%。这就是硬盘厂商标称的 1TB（SI）在操作系统中只显示约
+                                931GB（IEC）的原因。本工具同时显示两套标准的结果，帮你准确理解实际容量。</p>
                             <h4 data-i18n="dev.file-size.notesPrecisionTitle">二、精度说明</h4>
-                            <p data-i18n="dev.file-size.notePrecision">本工具使用 JavaScript BigInt 类型进行字节级精确计算，不存在浮点精度丢失问题。对于超过 2^53 字节的超大数值（约 9 EB，远超当前人类数据总量），系统会自动切换到浮点计算并标注精度可能受限。日常使用的所有文件大小换算都能获得精确结果。</p>
+                            <p data-i18n="dev.file-size.notePrecision">本工具使用 JavaScript BigInt
+                                类型进行字节级精确计算，不存在浮点精度丢失问题。对于超过 2^53 字节的超大数值（约 9
+                                EB，远超当前人类数据总量），系统会自动切换到浮点计算并标注精度可能受限。日常使用的所有文件大小换算都能获得精确结果。</p>
                             <h4 data-i18n="dev.file-size.notesIecTitle">三、IEC 标准单位对照</h4>
                             <ul>
-                                <li data-i18n="dev.file-size.noteIec1">IEC 标准使用 1024 进制：1 KiB = 1024 B，1 MiB = 1024 KiB = 1,048,576 B，1 GiB = 1024 MiB ≈ 107 万 KB，1 TiB = 1024 GiB ≈ 1.1 万亿字节。注意 IEC 标准使用 KiB/MiB/GiB 后缀（带 "i" 字母），以区别于 SI 标准的 KB/MB/GB。</li>
-                                <li data-i18n="dev.file-size.noteSi1">SI 标准使用 1000 进制：1 KB = 1000 B，1 MB = 1000 KB = 100 万字节，1 GB = 1000 MB = 10 亿字节，1 TB = 1000 GB = 1 万亿字节。硬盘厂商、SSD 制造商和通信运营商通常使用 SI 标准标注容量和带宽。网络带宽的 Mbps 也使用 1000 进制（1 Mbps = 1000 bps）。</li>
+                                <li data-i18n="dev.file-size.noteIec1">IEC 标准使用 1024 进制：1 KiB = 1024 B，1 MiB = 1024 KiB
+                                    = 1,048,576 B，1 GiB = 1024 MiB ≈ 107 万 KB，1 TiB = 1024 GiB ≈ 1.1 万亿字节。注意 IEC 标准使用
+                                    KiB/MiB/GiB 后缀（带 "i" 字母），以区别于 SI 标准的 KB/MB/GB。</li>
+                                <li data-i18n="dev.file-size.noteSi1">SI 标准使用 1000 进制：1 KB = 1000 B，1 MB = 1000 KB = 100
+                                    万字节，1 GB = 1000 MB = 10 亿字节，1 TB = 1000 GB = 1 万亿字节。硬盘厂商、SSD 制造商和通信运营商通常使用 SI
+                                    标准标注容量和带宽。网络带宽的 Mbps 也使用 1000 进制（1 Mbps = 1000 bps）。</li>
                             </ul>
                         </div>
                     </article>

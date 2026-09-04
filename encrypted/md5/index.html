@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>MD5在线加密工具 - Helpoke 助点站</title>
     <meta property="og:title" content="MD5在线加密工具 - Helpoke 助点站">
@@ -636,7 +644,7 @@
         "@type": "WebApplication",
         "name": "MD5在线加密工具",
         "description": "MD5在线加密工具，支持16位、32位大小写输出，支持批量生成和哈希校验。离线工具，数据本地处理保护隐私。MD5 hash generator with offline processing.",
-        "url": "https://helpoke.com/encrypted/md5",
+        "url": "https://helpoke.com/encrypted/md5/",
         "applicationCategory": "https://schema.org/SecurityTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -651,7 +659,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -672,9 +680,8 @@
             <h1 data-i18n="encrypted.md5.title">MD5哈希工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="encrypted.md5.intro">MD5哈希工具，支持计算文本的MD5哈希值，16位/32位和大小写输出，支持哈希校验和批量生成</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -718,8 +725,10 @@
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="generateMD5()" data-i18n="encrypted.md5.genBtn">生成 MD5</button>
-                        <button class="btn btn-outline" onclick="clearGenerate()" data-i18n="encrypted.md5.clearBtn">清空</button>
+                        <button class="btn btn-primary" onclick="generateMD5()" data-i18n="encrypted.md5.genBtn">生成
+                            MD5</button>
+                        <button class="btn btn-outline" onclick="clearGenerate()"
+                            data-i18n="encrypted.md5.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section">
@@ -750,8 +759,10 @@
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="verifyMD5()" data-i18n="encrypted.md5.verifyBtn">校验 MD5</button>
-                        <button class="btn btn-outline" onclick="clearVerify()" data-i18n="encrypted.md5.clearBtn">清空</button>
+                        <button class="btn btn-primary" onclick="verifyMD5()" data-i18n="encrypted.md5.verifyBtn">校验
+                            MD5</button>
+                        <button class="btn btn-outline" onclick="clearVerify()"
+                            data-i18n="encrypted.md5.clearBtn">清空</button>
                     </div>
 
                     <div id="verify-result" style="display:none;"></div>
@@ -789,10 +800,12 @@
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" onclick="batchMD5()" data-i18n="encrypted.md5.batchBtn">批量生成</button>
+                        <button class="btn btn-primary" onclick="batchMD5()"
+                            data-i18n="encrypted.md5.batchBtn">批量生成</button>
                         <button class="btn btn-success" onclick="copyBatchResult()" id="batch-copy-btn"
                             style="display:none;" data-i18n="encrypted.md5.copyAllBtn">复制全部结果</button>
-                        <button class="btn btn-outline" onclick="clearBatch()" data-i18n="encrypted.md5.clearBtn">清空</button>
+                        <button class="btn btn-outline" onclick="clearBatch()"
+                            data-i18n="encrypted.md5.clearBtn">清空</button>
                     </div>
 
                     <div class="result-section" id="batch-result-section" style="display:none;">
@@ -821,20 +834,29 @@
                     <div class="info-content">
                         <h4 data-i18n="encrypted.md5.problemsTitle">一、MD5 的应用场景</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.problem1">从网上下载了一个 2GB 的安装包——如何确认文件没有损坏或被篡改？MD5 哈希就是答案。将文件输入 MD5 算法，得到一个 32 位十六进制字符串——与官方公布的哈希值对比，完全一致说明文件完整。</li>
-                            <li data-i18n="encrypted.md5.problem2">本工具支持三种模式：单文本 MD5 生成（支持 16 位/32 位、大小写切换）、MD5 校验（输入文本和预期哈希值，自动对比）、批量生成（一次计算多行文本的 MD5）。</li>
-                            <li data-i18n="encrypted.md5.problem3">MD5 由 Ronald Rivest 于 1991 年设计，输出 128 位（16 字节）哈希值。虽然已被证明存在碰撞漏洞（不适合密码存储和安全签名），但在文件校验、数据去重、缓存键生成等非安全场景中仍被广泛使用。</li>
+                            <li data-i18n="encrypted.md5.problem1">从网上下载了一个 2GB 的安装包——如何确认文件没有损坏或被篡改？MD5 哈希就是答案。将文件输入
+                                MD5 算法，得到一个 32 位十六进制字符串——与官方公布的哈希值对比，完全一致说明文件完整。</li>
+                            <li data-i18n="encrypted.md5.problem2">本工具支持三种模式：单文本 MD5 生成（支持 16 位/32 位、大小写切换）、MD5
+                                校验（输入文本和预期哈希值，自动对比）、批量生成（一次计算多行文本的 MD5）。</li>
+                            <li data-i18n="encrypted.md5.problem3">MD5 由 Ronald Rivest 于 1991 年设计，输出 128 位（16
+                                字节）哈希值。虽然已被证明存在碰撞漏洞（不适合密码存储和安全签名），但在文件校验、数据去重、缓存键生成等非安全场景中仍被广泛使用。</li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.formatTitle">二、MD5 输出格式</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.formatMD5"><strong>32 位 MD5：</strong>128 位哈希值的完整十六进制表示——如 5d41402abc4b2a76b9719d911017c592。这是最常用的格式。</li>
+                            <li data-i18n="encrypted.md5.formatMD5"><strong>32 位 MD5：</strong>128 位哈希值的完整十六进制表示——如
+                                5d41402abc4b2a76b9719d911017c592。这是最常用的格式。</li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.featureOnline"><strong>单文本生成：</strong>输入任意文本，立即计算 MD5 哈希——支持 16 位/32 位输出和大小写切换。</li>
-                            <li data-i18n="encrypted.md5.featurePreview"><strong>MD5 校验：</strong>输入文本和预期哈希值，工具自动计算并对比——显示匹配或不匹配结果。</li>
-                            <li data-i18n="encrypted.md5.featureExport"><strong>批量生成：</strong>每行一个文本，一键计算所有行的 MD5 哈希——适合批量校验和数据去重。</li>
-                            <li data-i18n="encrypted.md5.featureSecurity"><strong>纯前端计算：</strong>所有哈希计算在浏览器中完成——文本不上传到服务器。基于 Web Crypto API 或原生 JS 实现。</li>
+                            <li data-i18n="encrypted.md5.featureOnline"><strong>单文本生成：</strong>输入任意文本，立即计算 MD5 哈希——支持 16
+                                位/32 位输出和大小写切换。</li>
+                            <li data-i18n="encrypted.md5.featurePreview"><strong>MD5
+                                    校验：</strong>输入文本和预期哈希值，工具自动计算并对比——显示匹配或不匹配结果。</li>
+                            <li data-i18n="encrypted.md5.featureExport"><strong>批量生成：</strong>每行一个文本，一键计算所有行的 MD5
+                                哈希——适合批量校验和数据去重。</li>
+                            <li data-i18n="encrypted.md5.featureSecurity">
+                                <strong>纯前端计算：</strong>所有哈希计算在浏览器中完成——文本不上传到服务器。基于 Web Crypto API 或原生 JS 实现。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -847,30 +869,41 @@
                         <h4 data-i18n="encrypted.md5.usageGenTitle">生成模式</h4>
                         <ul>
                             <li data-i18n="encrypted.md5.usageGenInput"><strong>输入文本：</strong>在输入框中输入需要计算哈希的文本。</li>
-                            <li data-i18n="encrypted.md5.usageGenFormat"><strong>选择格式：</strong>32 位（完整哈希）或 16 位（取中间 16 字符）。大写或小写输出。</li>
+                            <li data-i18n="encrypted.md5.usageGenFormat"><strong>选择格式：</strong>32 位（完整哈希）或 16 位（取中间 16
+                                字符）。大写或小写输出。</li>
                             <li data-i18n="encrypted.md5.usageGenClick"><strong>点击生成：</strong>点击"生成 MD5"按钮，结果立即显示。</li>
                             <li data-i18n="encrypted.md5.usageGenCopy"><strong>复制结果：</strong>点击"复制"按钮将哈希值复制到剪贴板。</li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.usageVerifyTitle">校验模式</h4>
                         <ul>
                             <li data-i18n="encrypted.md5.usageVerifyInput"><strong>输入原文：</strong>输入需要校验的原始文本。</li>
-                            <li data-i18n="encrypted.md5.usageVerifyHash"><strong>输入哈希：</strong>输入预期的 MD5 哈希值——工具自动忽略大小写对比。</li>
-                            <li data-i18n="encrypted.md5.usageVerifyClick"><strong>点击校验：</strong>工具计算文本的 MD5 并与预期值对比。</li>
-                            <li data-i18n="encrypted.md5.usageVerifyResult"><strong>查看结果：</strong>匹配显示绿色提示，不匹配显示红色提示和实际哈希值。</li>
+                            <li data-i18n="encrypted.md5.usageVerifyHash"><strong>输入哈希：</strong>输入预期的 MD5
+                                哈希值——工具自动忽略大小写对比。</li>
+                            <li data-i18n="encrypted.md5.usageVerifyClick"><strong>点击校验：</strong>工具计算文本的 MD5 并与预期值对比。
+                            </li>
+                            <li data-i18n="encrypted.md5.usageVerifyResult">
+                                <strong>查看结果：</strong>匹配显示绿色提示，不匹配显示红色提示和实际哈希值。
+                            </li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.usageBatchTitle">批量模式</h4>
                         <ul>
                             <li data-i18n="encrypted.md5.usageBatchInput"><strong>输入文本：</strong>每行输入一个需要计算哈希的文本。</li>
                             <li data-i18n="encrypted.md5.usageBatchFormat"><strong>选择格式：</strong>32 位或 16 位，大写或小写。</li>
-                            <li data-i18n="encrypted.md5.usageBatchClick"><strong>点击批量生成：</strong>所有行的 MD5 哈希一次性计算完成。</li>
-                            <li data-i18n="encrypted.md5.usageBatchCopy"><strong>复制全部：</strong>点击"复制全部"按钮将所有结果复制到剪贴板。</li>
+                            <li data-i18n="encrypted.md5.usageBatchClick"><strong>点击批量生成：</strong>所有行的 MD5 哈希一次性计算完成。
+                            </li>
+                            <li data-i18n="encrypted.md5.usageBatchCopy"><strong>复制全部：</strong>点击"复制全部"按钮将所有结果复制到剪贴板。
+                            </li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.usageBasicTitle">五、MD5 技术背景</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.usageBasicHash"><strong>哈希函数：</strong>将任意长度的输入映射为固定长度的输出——MD5 输出始终为 128 位（32 位十六进制）。</li>
-                            <li data-i18n="encrypted.md5.usageBasic32"><strong>32 位 vs 16 位：</strong>32 位是完整哈希，16 位取中间 16 字符（第 9-24 字符）。16 位碰撞概率更高，仅用于非安全场景。</li>
-                            <li data-i18n="encrypted.md5.usageBasic16"><strong>十六进制表示：</strong>每 4 位二进制用 1 个十六进制字符表示——128 位 = 32 个十六进制字符。</li>
-                            <li data-i18n="encrypted.md5.usageBasicFeature"><strong>雪崩效应：</strong>输入改变一个字符，输出的每一位都有约 50% 概率改变——确保哈希值均匀分布。</li>
+                            <li data-i18n="encrypted.md5.usageBasicHash"><strong>哈希函数：</strong>将任意长度的输入映射为固定长度的输出——MD5
+                                输出始终为 128 位（32 位十六进制）。</li>
+                            <li data-i18n="encrypted.md5.usageBasic32"><strong>32 位 vs 16 位：</strong>32 位是完整哈希，16 位取中间
+                                16 字符（第 9-24 字符）。16 位碰撞概率更高，仅用于非安全场景。</li>
+                            <li data-i18n="encrypted.md5.usageBasic16"><strong>十六进制表示：</strong>每 4 位二进制用 1
+                                个十六进制字符表示——128 位 = 32 个十六进制字符。</li>
+                            <li data-i18n="encrypted.md5.usageBasicFeature"><strong>雪崩效应：</strong>输入改变一个字符，输出的每一位都有约 50%
+                                概率改变——确保哈希值均匀分布。</li>
                         </ul>
                     </div>
                 </article>
@@ -881,27 +914,39 @@
                     <div class="info-content">
                         <h4 data-i18n="encrypted.md5.notesSecurityTitle">安全警告</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.noteSecurity1"><strong>不适合密码存储：</strong>MD5 碰撞攻击已被实际演示——不要用于密码哈希。密码存储请使用 bcrypt、scrypt 或 Argon2。</li>
-                            <li data-i18n="encrypted.md5.noteSecurity2"><strong>不适合数字签名：</strong>MD5 的碰撞抗性已被打破——攻击者可以构造两个不同文件但哈希相同。数字签名请使用 SHA-256。</li>
-                            <li data-i18n="encrypted.md5.noteSecurity3"><strong>适合文件校验：</strong>在非对抗性场景中（如文件传输完整性检查），MD5 仍然可靠——意外损坏导致哈希匹配的概率极低。</li>
+                            <li data-i18n="encrypted.md5.noteSecurity1"><strong>不适合密码存储：</strong>MD5
+                                碰撞攻击已被实际演示——不要用于密码哈希。密码存储请使用 bcrypt、scrypt 或 Argon2。</li>
+                            <li data-i18n="encrypted.md5.noteSecurity2"><strong>不适合数字签名：</strong>MD5
+                                的碰撞抗性已被打破——攻击者可以构造两个不同文件但哈希相同。数字签名请使用 SHA-256。</li>
+                            <li data-i18n="encrypted.md5.noteSecurity3"><strong>适合文件校验：</strong>在非对抗性场景中（如文件传输完整性检查），MD5
+                                仍然可靠——意外损坏导致哈希匹配的概率极低。</li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.notesLimitTitle">局限性</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.noteLimit1"><strong>碰撞攻击：</strong>2004 年王小云教授团队首次实现 MD5 碰撞攻击——可在秒级构造碰撞对。</li>
-                            <li data-i18n="encrypted.md5.noteLimit2"><strong>长度扩展攻击：</strong>MD5 的 Merkle-Damgård 结构存在长度扩展漏洞——攻击者可在不知道原始输入的情况下追加数据。</li>
-                            <li data-i18n="encrypted.md5.noteLimit3"><strong>替代方案：</strong>安全场景请使用 SHA-256（通用）或 SHA-3（最新标准）。密码场景请使用 bcrypt 或 Argon2。</li>
+                            <li data-i18n="encrypted.md5.noteLimit1"><strong>碰撞攻击：</strong>2004 年王小云教授团队首次实现 MD5
+                                碰撞攻击——可在秒级构造碰撞对。</li>
+                            <li data-i18n="encrypted.md5.noteLimit2"><strong>长度扩展攻击：</strong>MD5 的 Merkle-Damgård
+                                结构存在长度扩展漏洞——攻击者可在不知道原始输入的情况下追加数据。</li>
+                            <li data-i18n="encrypted.md5.noteLimit3"><strong>替代方案：</strong>安全场景请使用 SHA-256（通用）或
+                                SHA-3（最新标准）。密码场景请使用 bcrypt 或 Argon2。</li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.notesFormatTitle">格式说明</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.noteFormat1"><strong>大小写：</strong>MD5 哈希的十六进制表示不区分大小写——5D41402A 和 5d41402a 是同一个哈希。</li>
-                            <li data-i18n="encrypted.md5.noteFormat2"><strong>16 位格式：</strong>取 32 位哈希的第 9-24 个字符——这是一种非标准的简写格式，仅用于降低显示长度。</li>
-                            <li data-i18n="encrypted.md5.noteFormat3"><strong>空字符串：</strong>空字符串的 MD5 是 d41d8cd98f00b204e9800998ecf8427e——不是空值。</li>
+                            <li data-i18n="encrypted.md5.noteFormat1"><strong>大小写：</strong>MD5 哈希的十六进制表示不区分大小写——5D41402A
+                                和 5d41402a 是同一个哈希。</li>
+                            <li data-i18n="encrypted.md5.noteFormat2"><strong>16 位格式：</strong>取 32 位哈希的第 9-24
+                                个字符——这是一种非标准的简写格式，仅用于降低显示长度。</li>
+                            <li data-i18n="encrypted.md5.noteFormat3"><strong>空字符串：</strong>空字符串的 MD5 是
+                                d41d8cd98f00b204e9800998ecf8427e——不是空值。</li>
                         </ul>
                         <h4 data-i18n="encrypted.md5.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="encrypted.md5.noteFaq1"><strong>Q: MD5 能解密吗？</strong>A: MD5 是单向哈希——理论上不可逆。但常见弱密码的 MD5 已被收录到彩虹表中——可以通过查表"反查"。</li>
-                            <li data-i18n="encrypted.md5.noteFaq2"><strong>Q: 不同工具计算的 MD5 不一样？</strong>A: 检查编码格式——UTF-8 和 GBK 编码的同一文字产生不同的 MD5。本工具使用 UTF-8 编码。</li>
-                            <li data-i18n="encrypted.md5.noteFaq3"><strong>Q: 文件也能算 MD5 吗？</strong>A: 可以——但本工具仅支持文本输入。文件 MD5 请使用命令行工具（如 md5sum）或专用文件哈希工具。</li>
+                            <li data-i18n="encrypted.md5.noteFaq1"><strong>Q: MD5 能解密吗？</strong>A: MD5
+                                是单向哈希——理论上不可逆。但常见弱密码的 MD5 已被收录到彩虹表中——可以通过查表"反查"。</li>
+                            <li data-i18n="encrypted.md5.noteFaq2"><strong>Q: 不同工具计算的 MD5 不一样？</strong>A: 检查编码格式——UTF-8
+                                和 GBK 编码的同一文字产生不同的 MD5。本工具使用 UTF-8 编码。</li>
+                            <li data-i18n="encrypted.md5.noteFaq3"><strong>Q: 文件也能算 MD5 吗？</strong>A: 可以——但本工具仅支持文本输入。文件
+                                MD5 请使用命令行工具（如 md5sum）或专用文件哈希工具。</li>
                         </ul>
                     </div>
                 </article>
@@ -913,13 +958,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

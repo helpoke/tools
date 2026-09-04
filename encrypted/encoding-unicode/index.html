@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Unicode 编码/解码工具 - Helpoke 助点站</title>
     <meta property="og:title" content="Unicode 编码/解码工具 - Helpoke 助点站">
@@ -432,7 +440,7 @@
         "@type": "WebApplication",
         "name": "Unicode编码解码工具",
         "description": "在线Unicode编码解码工具，支持Unicode/中文互转。免费在线Unicode转换工具。Online Unicode encoder/decoder supporting Chinese character conversion.",
-        "url": "https://helpoke.com/encrypted/encoding-unicode",
+        "url": "https://helpoke.com/encrypted/encoding-unicode/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -447,7 +455,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -529,27 +537,45 @@
                 <div class="info-section">
                     <article class="info-details">
                         <header>
-                            <h3 data-i18n="encrypted.encoding-unicode.infoIntro">Unicode 编码转换：Unicode、UTF-8、UTF-16 的互转工具</h3>
+                            <h3 data-i18n="encrypted.encoding-unicode.infoIntro">Unicode 编码转换：Unicode、UTF-8、UTF-16 的互转工具
+                            </h3>
                         </header>
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-unicode.problemsTitle">一、Unicode 编码的困惑</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.problem1">"你好"这两个汉字在计算机中如何表示？Unicode 给出的答案是 U+4F60 U+597D——两个码点。但这两个码点在文件中如何存储？UTF-8 用 3 字节表示每个汉字（E4 BD A0 E5 A5 BD），UTF-16 用 2 字节（4F60 597D），UTF-32 用 4 字节。同一段文字，三种编码占用的空间完全不同。</li>
-                                <li data-i18n="encrypted.encoding-unicode.problem2">本工具支持 Unicode 编码的各种转换——将中文文本转为 Unicode 转义序列（\u4F60\u597D），也可将转义序列还原为原始文字。支持 \uXXXX 和 \u{XXXXX} 两种格式，支持只编码中文字符（保留 ASCII 不变）。</li>
-                                <li data-i18n="encrypted.encoding-unicode.problem3">在 JavaScript、Java、JSON 等语言中，Unicode 转义序列有特殊的语法规则——本工具生成的格式与这些语言完全兼容，可以直接粘贴到代码中使用。</li>
+                                <li data-i18n="encrypted.encoding-unicode.problem1">"你好"这两个汉字在计算机中如何表示？Unicode 给出的答案是
+                                    U+4F60 U+597D——两个码点。但这两个码点在文件中如何存储？UTF-8 用 3 字节表示每个汉字（E4 BD A0 E5 A5 BD），UTF-16 用 2
+                                    字节（4F60 597D），UTF-32 用 4 字节。同一段文字，三种编码占用的空间完全不同。</li>
+                                <li data-i18n="encrypted.encoding-unicode.problem2">本工具支持 Unicode 编码的各种转换——将中文文本转为
+                                    Unicode 转义序列（\u4F60\u597D），也可将转义序列还原为原始文字。支持 \uXXXX 和 \u{XXXXX} 两种格式，支持只编码中文字符（保留
+                                    ASCII 不变）。</li>
+                                <li data-i18n="encrypted.encoding-unicode.problem3">在 JavaScript、Java、JSON 等语言中，Unicode
+                                    转义序列有特殊的语法规则——本工具生成的格式与这些语言完全兼容，可以直接粘贴到代码中使用。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.formatTitle">二、Unicode 编码格式</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.formatUnicode"><strong>Unicode 码点：</strong>每个字符对应一个唯一的码点（code point），用 U+ 前缀表示——如 U+4E2D（中）、U+6587（文）。基本平面（BMP）范围 U+0000 到 U+FFFF，扩展平面范围 U+10000 到 U+10FFFF。</li>
-                                <li data-i18n="encrypted.encoding-unicode.formatUtf8"><strong>UTF-8 编码：</strong>可变长度编码——ASCII 字符 1 字节，拉丁字符 2 字节，中文/日文 3 字节，emoji 4 字节。互联网上最流行的编码格式——兼容 ASCII，无字节序问题。</li>
-                                <li data-i18n="encrypted.encoding-unicode.formatUtf16"><strong>UTF-16 编码：</strong>BMP 字符 2 字节，扩展字符 4 字节（用代理对表示）。Java 和 JavaScript 内部使用 UTF-16 表示字符串——这就是为什么 JavaScript 的 .length 属性对 emoji 返回 2。</li>
+                                <li data-i18n="encrypted.encoding-unicode.formatUnicode"><strong>Unicode
+                                        码点：</strong>每个字符对应一个唯一的码点（code point），用 U+ 前缀表示——如
+                                    U+4E2D（中）、U+6587（文）。基本平面（BMP）范围 U+0000 到 U+FFFF，扩展平面范围 U+10000 到 U+10FFFF。</li>
+                                <li data-i18n="encrypted.encoding-unicode.formatUtf8"><strong>UTF-8
+                                        编码：</strong>可变长度编码——ASCII 字符 1 字节，拉丁字符 2 字节，中文/日文 3 字节，emoji 4
+                                    字节。互联网上最流行的编码格式——兼容 ASCII，无字节序问题。</li>
+                                <li data-i18n="encrypted.encoding-unicode.formatUtf16"><strong>UTF-16 编码：</strong>BMP 字符
+                                    2 字节，扩展字符 4 字节（用代理对表示）。Java 和 JavaScript 内部使用 UTF-16 表示字符串——这就是为什么 JavaScript 的
+                                    .length 属性对 emoji 返回 2。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.featureOnline"><strong>编码转换：</strong>中文文本 → Unicode 转义序列（\u4F60\u597D）。支持只编码中文字符——英文和数字保持原样不变。</li>
-                                <li data-i18n="encrypted.encoding-unicode.featurePreview"><strong>解码还原：</strong>Unicode 转义序列 → 原始文本。支持 \uXXXX 和 \u{XXXXX} 两种格式混合解码。</li>
-                                <li data-i18n="encrypted.encoding-unicode.featureExport"><strong>批量处理：</strong>支持大段文本的一次性编解码——适合处理配置文件、国际化资源文件。</li>
-                                <li data-i18n="encrypted.encoding-unicode.featureSecurity"><strong>纯前端处理：</strong>所有转换在浏览器中完成——文本不上传到服务器。</li>
+                                <li data-i18n="encrypted.encoding-unicode.featureOnline"><strong>编码转换：</strong>中文文本 →
+                                    Unicode 转义序列（\u4F60\u597D）。支持只编码中文字符——英文和数字保持原样不变。</li>
+                                <li data-i18n="encrypted.encoding-unicode.featurePreview"><strong>解码还原：</strong>Unicode
+                                    转义序列 → 原始文本。支持 \uXXXX 和 \u{XXXXX} 两种格式混合解码。</li>
+                                <li data-i18n="encrypted.encoding-unicode.featureExport">
+                                    <strong>批量处理：</strong>支持大段文本的一次性编解码——适合处理配置文件、国际化资源文件。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.featureSecurity">
+                                    <strong>纯前端处理：</strong>所有转换在浏览器中完成——文本不上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -561,31 +587,54 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-unicode.usageEncodeTitle">编码步骤</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.usageEncodeInput"><strong>输入文本：</strong>在输入框中输入需要编码的文字——支持中文、日文、韩文、emoji 等。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageEncodeChineseOnly"><strong>仅编码中文：</strong>勾选此选项后，英文字母和数字保持原样——只将非 ASCII 字符转为 \uXXXX 格式。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageEncodeConvert"><strong>点击编码：</strong>文本自动转为 Unicode 转义序列。</li>
-                                <li data-i18n="encrypted.encoding-unicode.copyResultDesc"><strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。</li>
-                                <li data-i18n="encrypted.encoding-unicode.clearContentDesc"><strong>清空内容：</strong>点击"清空"按钮清除输入和输出。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageEncodeSwap"><strong>切换方向：</strong>交换输入输出可快速进行反向解码。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeInput">
+                                    <strong>输入文本：</strong>在输入框中输入需要编码的文字——支持中文、日文、韩文、emoji 等。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeChineseOnly">
+                                    <strong>仅编码中文：</strong>勾选此选项后，英文字母和数字保持原样——只将非 ASCII 字符转为 \uXXXX 格式。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeConvert">
+                                    <strong>点击编码：</strong>文本自动转为 Unicode 转义序列。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.copyResultDesc">
+                                    <strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.clearContentDesc">
+                                    <strong>清空内容：</strong>点击"清空"按钮清除输入和输出。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.usageEncodeSwap">
+                                    <strong>切换方向：</strong>交换输入输出可快速进行反向解码。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.usageDecodeTitle">解码步骤</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.usageDecodeInput"><strong>输入转义序列：</strong>粘贴 \uXXXX 格式的 Unicode 转义文本。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageDecodeFormats"><strong>混合格式：</strong>支持 \uXXXX（4 位）和 \u{XXXXX}（可变长度）两种格式混合。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageDecodeConvert"><strong>点击解码：</strong>转义序列自动还原为原始文字。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeInput"><strong>输入转义序列：</strong>粘贴
+                                    \uXXXX 格式的 Unicode 转义文本。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeFormats"><strong>混合格式：</strong>支持
+                                    \uXXXX（4 位）和 \u{XXXXX}（可变长度）两种格式混合。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeConvert">
+                                    <strong>点击解码：</strong>转义序列自动还原为原始文字。
+                                </li>
                                 <li data-i18n="encrypted.encoding-unicode.copyResultDesc">
                                     <strong>复制结果：</strong>点击"复制结果"按钮将转换结果复制到剪贴板。
                                 </li>
                                 <li data-i18n="encrypted.encoding-unicode.clearContentDesc">
                                     <strong>清空内容：</strong>点击"内容清空"按钮可以清除输入和输出。
                                 </li>
-                                <li data-i18n="encrypted.encoding-unicode.usageDecodeSwap"><strong>来回切换：</strong>编码和解码模式可随时切换。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageDecodeSwap">
+                                    <strong>来回切换：</strong>编码和解码模式可随时切换。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.usageFormatTitle">五、Unicode 格式详解</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.usageFormatUxxxx"><strong>\uXXXX 格式：</strong>4 位十六进制——覆盖 BMP 平面（U+0000 到 U+FFFF）。JavaScript、Java、JSON 使用此格式。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageFormatUbrace"><strong>\u{XXXXX} 格式：</strong>可变长度——覆盖全部 Unicode 范围（到 U+10FFFF）。ES6+ JavaScript 和 Python 3.3+ 支持此格式。</li>
-                                <li data-i18n="encrypted.encoding-unicode.usageFormatHex"><strong>十六进制表示：</strong>Unicode 码点通常用十六进制表示——如 U+4E2D = 中，U+1F600 = 笑脸 emoji。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageFormatUxxxx"><strong>\uXXXX 格式：</strong>4
+                                    位十六进制——覆盖 BMP 平面（U+0000 到 U+FFFF）。JavaScript、Java、JSON 使用此格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageFormatUbrace"><strong>\u{XXXXX}
+                                        格式：</strong>可变长度——覆盖全部 Unicode 范围（到 U+10FFFF）。ES6+ JavaScript 和 Python 3.3+
+                                    支持此格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.usageFormatHex">
+                                    <strong>十六进制表示：</strong>Unicode 码点通常用十六进制表示——如 U+4E2D = 中，U+1F600 = 笑脸 emoji。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -596,28 +645,44 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-unicode.notesFormatTitle">格式注意</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.noteFormat1"><strong>代理对：</strong>超过 U+FFFF 的字符（如 emoji）在 UTF-16 中用两个 16 位单元表示——称为代理对（surrogate pair）。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteFormat2"><strong>BOM 标记：</strong>UTF-16 文件可能以 BOM（Byte Order Mark）开头——标识字节序。本工具处理的是文本层面的 Unicode，不涉及 BOM。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteFormat3"><strong>编码兼容：</strong>UTF-8 完全兼容 ASCII——纯 ASCII 文本同时也是合法的 UTF-8 文本。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFormat1"><strong>代理对：</strong>超过 U+FFFF
+                                    的字符（如 emoji）在 UTF-16 中用两个 16 位单元表示——称为代理对（surrogate pair）。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFormat2"><strong>BOM 标记：</strong>UTF-16
+                                    文件可能以 BOM（Byte Order Mark）开头——标识字节序。本工具处理的是文本层面的 Unicode，不涉及 BOM。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFormat3"><strong>编码兼容：</strong>UTF-8 完全兼容
+                                    ASCII——纯 ASCII 文本同时也是合法的 UTF-8 文本。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.notesRangeTitle">字符范围</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.noteRange1"><strong>基本多文种平面（BMP）：</strong>U+0000 到 U+FFFF——包含几乎所有常用文字。\uXXXX 格式可覆盖此范围。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteRange2"><strong>扩展平面：</strong>U+10000 到 U+10FFFF——包含罕见汉字、历史文字、emoji 等。需要 \u{XXXXX} 格式。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteRange3"><strong>私有区域：</strong>U+E000 到 U+F8FF 为私有使用区域——不同字体可能显示不同字符。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteRange1">
+                                    <strong>基本多文种平面（BMP）：</strong>U+0000 到 U+FFFF——包含几乎所有常用文字。\uXXXX 格式可覆盖此范围。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.noteRange2"><strong>扩展平面：</strong>U+10000 到
+                                    U+10FFFF——包含罕见汉字、历史文字、emoji 等。需要 \u{XXXXX} 格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteRange3"><strong>私有区域：</strong>U+E000 到
+                                    U+F8FF 为私有使用区域——不同字体可能显示不同字符。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.noteSecurity1"><strong>纯前端处理：</strong>所有转换在浏览器中完成——文本不上传到服务器。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteSecurity2"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteSecurity3"><strong>编码非加密：</strong>Unicode 编码转换不提供安全性——任何人都能解码。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteSecurity1">
+                                    <strong>纯前端处理：</strong>所有转换在浏览器中完成——文本不上传到服务器。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.noteSecurity2">
+                                    <strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。
+                                </li>
+                                <li data-i18n="encrypted.encoding-unicode.noteSecurity3"><strong>编码非加密：</strong>Unicode
+                                    编码转换不提供安全性——任何人都能解码。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-unicode.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-unicode.noteFaq1"><strong>Q: \u 和 \U 有什么区别？</strong>A: \u 后跟 4 位十六进制（JavaScript/Java），\U 后跟 8 位（Python/C++）。本工具支持 \u 格式。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteFaq2"><strong>Q: emoji 编码后变成两个 \u？</strong>A: emoji 在 BMP 之外——UTF-16 用代理对表示，所以一个 emoji 变成两个 \uXXXX。这是正常的。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteFaq3"><strong>Q: 编码结果在 JSON 中能用吗？</strong>A: 可以。JSON 规范支持 \uXXXX 转义——编码结果可直接放入 JSON 字符串值中。</li>
-                                <li data-i18n="encrypted.encoding-unicode.noteFaq4"><strong>Q: 只编码中文是什么意思？</strong>A: 勾选后，ASCII 字符（英文、数字、标点）保持原样——只有非 ASCII 字符被转为 \uXXXX。适合在保留可读性的同时编码特殊字符。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq1"><strong>Q: \u 和 \U 有什么区别？</strong>A:
+                                    \u 后跟 4 位十六进制（JavaScript/Java），\U 后跟 8 位（Python/C++）。本工具支持 \u 格式。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq2"><strong>Q: emoji 编码后变成两个
+                                        \u？</strong>A: emoji 在 BMP 之外——UTF-16 用代理对表示，所以一个 emoji 变成两个 \uXXXX。这是正常的。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq3"><strong>Q: 编码结果在 JSON
+                                        中能用吗？</strong>A: 可以。JSON 规范支持 \uXXXX 转义——编码结果可直接放入 JSON 字符串值中。</li>
+                                <li data-i18n="encrypted.encoding-unicode.noteFaq4"><strong>Q: 只编码中文是什么意思？</strong>A:
+                                    勾选后，ASCII 字符（英文、数字、标点）保持原样——只有非 ASCII 字符被转为 \uXXXX。适合在保留可读性的同时编码特殊字符。</li>
                             </ul>
                         </div>
                     </article>
@@ -628,13 +693,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' data: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="description"
         content="在线免费图片格式转换工具，支持Base64编码、SVG代码、图片文件批量上传转换，输出JPG、PNG、WebP、GIF、BMP、ICO等格式，支持调整图片质量和输出分辨率，本地处理保护隐私">
     <meta name="keywords"
@@ -70,7 +78,7 @@
         "@type": "WebApplication",
         "name": "图片格式转换工具",
         "description": "在线图片格式转换工具，支持Base64编码、SVG代码转换为JPG、PNG、WebP等图片格式。支持调整图片质量和输出分辨率。Online image format converter supporting Base64 to image, SVG to image conversion.",
-        "url": "https://helpoke.com/image/convert",
+        "url": "https://helpoke.com/image/convert/",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -86,7 +94,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -489,13 +497,13 @@
                 <footer class="footer">
                     <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                     <p>
-                        <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                        <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                                 class="fas fa-lock"></i> 隐私政策</a> |
-                        <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                        <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                                 class="fas fa-file-contract"></i> 服务条款</a> |
-                        <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                        <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                                 class="fas fa-user"></i> 关于我们</a> |
-                        <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                        <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                                 class="fas fa-envelope"></i> 联系我们</a>
                     </p>
                 </footer>

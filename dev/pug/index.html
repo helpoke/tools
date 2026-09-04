@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://esm.sh; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://esm.sh; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Pug在线格式化校验工具</title>
     <meta property="og:title" content="Pug在线格式化校验工具">
@@ -51,7 +59,7 @@
         "@type": "WebApplication",
         "name": "Pug格式化工具",
         "description": "Pug/Jade在线格式化工具，支持代码美化、语法校验和错误定位。免费在线Pug开发工具。Online Pug/Jade formatter with syntax validation and code beautification.",
-        "url": "https://helpoke.com/dev/pug",
+        "url": "https://helpoke.com/dev/pug/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -66,7 +74,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -183,7 +191,8 @@
                         <ul>
                             <li data-i18n="dev.pug.usageFormat"><strong>粘贴代码：</strong>将 Pug 代码粘贴到输入框——支持从项目文件中直接复制。</li>
                             <li data-i18n="dev.pug.usageValidate">
-                                <strong>格式化/验证：</strong>点击"格式化"按钮自动修正缩进；点击"验证"按钮检查语法错误。</li>
+                                <strong>格式化/验证：</strong>点击"格式化"按钮自动修正缩进；点击"验证"按钮检查语法错误。
+                            </li>
                             <li data-i18n="dev.pug.usageMinify"><strong>压缩：</strong>点击"压缩"按钮去除空行和注释——输出紧凑代码。</li>
                             <li data-i18n="dev.pug.usageCopy"><strong>复制结果：</strong>点击"复制"按钮将输出复制到剪贴板。</li>
                             <li data-i18n="dev.pug.usageSample"><strong>示例加载：</strong>点击"示例"按钮加载 Pug 代码示例——快速体验工具功能。
@@ -278,13 +287,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

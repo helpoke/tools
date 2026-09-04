@@ -11,7 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Markdown编辑器 - 在线Markdown编辑预览与下载工具</title>
     <meta property="og:title" content="Markdown编辑器 - 在线Markdown编辑预览与下载工具">
@@ -45,7 +53,7 @@
         "@type": "WebApplication",
         "name": "Markdown编辑器",
         "description": "免费在线Markdown编辑器，支持实时预览、语法快捷工具栏、本地文件打开与自动保存，可一键下载Markdown或HTML文件。纯前端本地处理，保护用户隐私。Free online Markdown editor with live preview and download.",
-        "url": "https://helpoke.com/docu/markdown",
+        "url": "https://helpoke.com/docu/markdown/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -61,7 +69,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -223,13 +231,16 @@
                             <li data-i18n="docu.markdown.featureEdit"><strong>实时编辑：</strong>左侧编辑器输入 Markdown
                                 语法，右侧立即显示渲染效果——所见即所得的写作体验。</li>
                             <li data-i18n="docu.markdown.featurePreview">
-                                <strong>三种视图：</strong>纯编辑模式（全屏编辑）、分屏模式（左编辑右预览）、纯预览模式（全屏预览）——一键切换。</li>
+                                <strong>三种视图：</strong>纯编辑模式（全屏编辑）、分屏模式（左编辑右预览）、纯预览模式（全屏预览）——一键切换。
+                            </li>
                             <li data-i18n="docu.markdown.featureFile"><strong>文件操作：</strong>打开本地 .md 文件编辑，导出为
                                 .md（源文件）、.html（网页）或 .pdf（文档）格式。</li>
                             <li data-i18n="docu.markdown.featureAutoSave">
-                                <strong>自动保存：</strong>编辑内容自动保存到浏览器本地存储——刷新页面或意外关闭后自动恢复。</li>
+                                <strong>自动保存：</strong>编辑内容自动保存到浏览器本地存储——刷新页面或意外关闭后自动恢复。
+                            </li>
                             <li data-i18n="docu.markdown.featureSecurity">
-                                <strong>纯前端处理：</strong>所有编辑和导出在浏览器中完成——文档内容不上传到服务器。</li>
+                                <strong>纯前端处理：</strong>所有编辑和导出在浏览器中完成——文档内容不上传到服务器。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -244,7 +255,8 @@
                             <li data-i18n="docu.markdown.usageEdit1"><strong>直接输入：</strong>在编辑器中直接输入 Markdown 文本——支持所有标准
                                 Markdown 语法。</li>
                             <li data-i18n="docu.markdown.usageEdit2">
-                                <strong>工具栏：</strong>使用工具栏按钮快速插入格式——标题、加粗、斜体、引用、代码、表格等。</li>
+                                <strong>工具栏：</strong>使用工具栏按钮快速插入格式——标题、加粗、斜体、引用、代码、表格等。
+                            </li>
                             <li data-i18n="docu.markdown.usageEdit3"><strong>快捷键：</strong>Ctrl+B 加粗、Ctrl+I 斜体、Ctrl+K
                                 链接——常用格式一键插入。</li>
                         </ul>
@@ -276,7 +288,8 @@
                         <h4 data-i18n="docu.markdown.notesSecurityTitle">数据安全</h4>
                         <ul>
                             <li data-i18n="docu.markdown.noteSecurity1">
-                                <strong>纯前端处理：</strong>所有编辑和导出在浏览器中完成——文档内容不上传到服务器。</li>
+                                <strong>纯前端处理：</strong>所有编辑和导出在浏览器中完成——文档内容不上传到服务器。
+                            </li>
                             <li data-i18n="docu.markdown.noteSecurity2"><strong>本地存储：</strong>自动保存使用浏览器
                                 localStorage——清除浏览器数据会丢失自动保存的内容。</li>
                         </ul>
@@ -327,13 +340,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

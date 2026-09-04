@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>二维码生成解析工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="二维码生成解析工具 - 免费、安全、快速">
+    <meta property="og:description" content="二维码生成解析工具说明，免费生成二维码，二维码解码，支持自定义颜色尺寸，纯前端本地处理">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/qrcode/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="二维码生成解析工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="二维码生成解析工具说明，免费生成二维码，二维码解码，支持自定义颜色尺寸，纯前端本地处理">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/qrcode/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/qrcode/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/qrcode/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "二维码可以存储多少信息？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "二维码的存储容量取决于版本和纠错级别。标准二维码（Version 1）可存储约25个数字或15个字母，最高版本（Version 40）可存储约1850个字母或2953个数字。建议控制内容长度，过长会导致二维码过于密集，影响扫描成功率。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "什么是纠错级别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "纠错级别表示二维码的容错能力，分为L（7%）、M（15%）、Q（25%）、H（30%）四个级别。纠错级别越高，二维码越复杂但容错能力越强。例如，H级别的二维码即使30%的区域被遮挡或损坏，仍能正常扫描。建议根据使用场景选择：普通场景使用M级，需要印刷或可能损坏的场景使用Q或H级。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "可以使用彩色二维码吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以，但需要注意颜色对比度。工具支持自定义前景色和背景色，但建议使用高对比度的颜色组合，如黑色前景配白色背景、深蓝色前景配白色背景等。避免使用低对比度的颜色组合，如灰色前景配白色背景，可能导致扫描器无法识别。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "解析二维码需要联网吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不需要。工具的解析功能完全在浏览器本地完成，不需要联网。上传的二维码图片会在本地进行解析，不会发送到任何服务器。但如果二维码包含网址链接，访问链接时需要联网。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "摄像头扫描功能如何工作？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "工具使用浏览器的MediaDevices API访问设备摄像头，实时获取视频流并进行帧分析。jsQR库会对每一帧图像进行二维码识别，一旦识别成功就会显示解析结果。使用前需要允许浏览器访问摄像头权限。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "二维码可以用于支付吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以，但需要注意安全。本工具生成的二维码仅包含文本信息，如果需要用于支付，需要遵循支付平台的规范。建议：1. 不要在二维码中存储敏感的支付信息；2. 仅使用正规支付平台生成的支付二维码；3. 扫描支付二维码前确认来源安全。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -392,10 +463,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

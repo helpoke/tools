@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <meta name="description" content="在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私">
     <meta name="keywords" content="图片背景色切换, 更换背景色, 图片换背景, 背景色替换, 在线图片处理, 免费图片工具">
@@ -36,7 +44,7 @@
         "@type": "WebApplication",
         "name": "图片背景色切换工具",
         "description": "在线图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景，本地处理保护隐私。Online image background color switcher with smart detection and tolerance control.",
-        "url": "https://helpoke.com/image/backcolor",
+        "url": "https://helpoke.com/image/backcolor/",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -51,7 +59,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -67,10 +75,13 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="image.backcolor.title">图片背景色切换工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="image.backcolor.intro">图片背景色切换工具，智能识别并替换图片背景色，提供多种预设颜色和自定义颜色，调整容差精准识别复杂背景</p>
-            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
 
@@ -83,138 +94,179 @@
 
             <div class="preview-section">
                 <div class="image-container">
-                    <img id="previewImage" src="" alt="预览图片" style="display: none;" data-i18n="image.backcolor.previewAlt">预览图片</div>
+                    <img id="previewImage" src="" alt="预览图片" style="display: none;"
+                        data-i18n="image.backcolor.previewAlt">预览图片
                 </div>
             </div>
+        </div>
 
-            <div class="color-section">
-                <h2 data-i18n="image.backcolor.colorTitle">选择背景颜色</h2>
-                <div class="color-palette">
-                    <div class="color-swatch" data-color="#ffffff"></div>
-                    <div class="color-swatch" data-color="#000000"></div>
-                    <div class="color-swatch" data-color="#ff0000"></div>
-                    <div class="color-swatch" data-color="#00ff00"></div>
-                    <div class="color-swatch" data-color="#0000ff"></div>
-                    <div class="color-swatch" data-color="#ffff00"></div>
-                    <div class="color-swatch" data-color="#ff00ff"></div>
-                    <div class="color-swatch" data-color="#00ffff"></div>
+        <div class="color-section">
+            <h2 data-i18n="image.backcolor.colorTitle">选择背景颜色</h2>
+            <div class="color-palette">
+                <div class="color-swatch" data-color="#ffffff"></div>
+                <div class="color-swatch" data-color="#000000"></div>
+                <div class="color-swatch" data-color="#ff0000"></div>
+                <div class="color-swatch" data-color="#00ff00"></div>
+                <div class="color-swatch" data-color="#0000ff"></div>
+                <div class="color-swatch" data-color="#ffff00"></div>
+                <div class="color-swatch" data-color="#ff00ff"></div>
+                <div class="color-swatch" data-color="#00ffff"></div>
+            </div>
+            <input type="color" id="customColor" value="#ffffff">
+        </div>
+
+        <div class="tolerance-section">
+            <h2 data-i18n="image.backcolor.toleranceTitle">背景检测容差</h2>
+            <div class="tolerance-control">
+                <input type="range" id="tolerance" min="0" max="100" value="30">
+                <span id="toleranceValue">30</span>
+            </div>
+            <p data-i18n="image.backcolor.toleranceTip">调整容差值可以更好地识别复杂背景，值越大识别范围越广。</p>
+        </div>
+
+        <div class="action-buttons">
+            <button id="replaceBgColorBtn" disabled data-i18n="image.backcolor.replaceBtn">应用背景替换</button>
+            <button id="downloadBtn" disabled data-i18n="image.backcolor.downloadBtn">下载结果图片</button>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.backcolor.infoIntro">给图片换背景色，远比你想象的有趣</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.backcolor.problemsTitle">一、一张图片的背景色到底有多少种像素</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.problem1">产品图要换白底、证件照要换蓝底、社交媒体头像想换个鲜艳背景——这些需求在 Photoshop
+                            里可能要折腾半小时，而本工具只需四步：上传图片、选颜色、调容差、点应用。Canvas API 在像素级别工作，逐个检查每个像素的颜色值，将符合背景条件的像素替换为目标颜色。</li>
+                        <li data-i18n="image.backcolor.problem2">
+                            背景替换的核心难点不是"换颜色"，而是"识别哪些像素属于背景"。纯色背景很简单——取左上角像素的颜色值，找出所有相近像素即可。但真实照片的背景往往有光照渐变、阴影过渡、边缘混合——这就需要容差算法来界定"多近算同色"。本工具的容差滑块基于
+                            CIE76 色彩距离公式，比简单的 RGB 欧氏距离更符合人眼感知。</li>
+                        <li data-i18n="image.backcolor.problem3">完全在浏览器中完成——图片不上传到任何服务器。基于 Canvas 的
+                            getImageData/putImageData 实现像素级操作，处理速度与图片分辨率直接相关。一张 1920x1080 的照片通常在 1-2 秒内完成背景替换。</li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.formatTitle">二、容差：决定"哪些像素算背景"的那把尺子</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.formatJpg"><strong>JPG 格式注意：</strong>JPG
+                            是有损压缩格式，纯色背景在压缩后会产生微弱的色块噪声（比如纯白背景实际包含 #FEFFFE、#FFFDFB 等微小差异）。建议将容差调到 10-20
+                            来覆盖这些噪声像素，否则替换后背景会出现"斑点"。</li>
+                        <li data-i18n="image.backcolor.formatPng"><strong>PNG 格式优势：</strong>PNG
+                            支持透明通道（Alpha），本工具可以将背景替换为完全透明——这是抠图的核心原理。替换为透明后的 PNG 可以叠加在任何背景上，是电商产品图和 UI 设计的首选方案。</li>
+                        <li data-i18n="image.backcolor.formatGif"><strong>GIF 格式限制：</strong>GIF 仅支持 256
+                            色调色板，背景替换后的颜色会被量化到最近的调色板颜色，可能出现色差。动态 GIF 只处理第一帧。</li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.featuresTitle">三、Canvas 像素级色彩替换是如何工作的</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.featureOnline"><strong>纯浏览器端处理：</strong>基于 Canvas 2D API 的
+                            getImageData 获取每个像素的 RGBA 值，在内存中完成所有计算后通过 putImageData 写回。整个过程不产生任何网络请求。</li>
+                        <li data-i18n="image.backcolor.featurePreview">
+                            <strong>智能边缘过渡：</strong>简单的二值判断会产生锯齿边缘。本工具在颜色边界区域使用 alpha 混合——距离背景越远的像素，替换程度越低，形成自然过渡。
+                        </li>
+                        <li data-i18n="image.backcolor.featureExport"><strong>8 种预设色 +
+                                自定义取色器：</strong>内置白、黑、红、绿、蓝、青、品红、黄 8 种常用背景色。自定义取色器支持输入任意 HEX 颜色值，满足品牌配色需求。</li>
+                        <li data-i18n="image.backcolor.featureSecurity"><strong>容差 0-100
+                                精细调控：</strong>容差值决定了"与背景色多接近才算背景"。一般建议：纯色背景 5-15，渐变背景 20-40，复杂背景 40-60。</li>
+                    </ul>
                 </div>
-                <input type="color" id="customColor" value="#ffffff">
-            </div>
+            </article>
 
-            <div class="tolerance-section">
-                <h2 data-i18n="image.backcolor.toleranceTitle">背景检测容差</h2>
-                <div class="tolerance-control">
-                    <input type="range" id="tolerance" min="0" max="100" value="30">
-                    <span id="toleranceValue">30</span>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.backcolor.infoUsage">从上传到出图的完整流程</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.backcolor.usageUploadTitle">第一步：载入原图</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.usageClickUpload"><strong>点击上传或拖拽：</strong>支持 JPG、PNG、WebP、BMP
+                            格式。上传后工具自动读取四角像素作为背景色基准。</li>
+                        <li data-i18n="image.backcolor.usageFormats"><strong>格式兼容性：</strong>JPG 和 PNG 效果最佳。WebP 和 BMP
+                            也可以处理但输出统一为 PNG。</li>
+                        <li data-i18n="image.backcolor.usagePreview"><strong>预览区域：</strong>左侧原图，右侧处理后效果，两张图同步缩放方便对比。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.usageColorTitle">第二步：选择目标背景色</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.usagePreset">
+                            <strong>预设颜色：</strong>点击颜色圆点直接应用——白色（产品图）、蓝色（证件照）、红色（签证照）等。
+                        </li>
+                        <li data-i18n="image.backcolor.usageCustom"><strong>自定义颜色：</strong>点击取色器输入任意 HEX 值，满足品牌配色需求。
+                        </li>
+                        <li data-i18n="image.backcolor.usageColorValue"><strong>颜色预览：</strong>选中的目标颜色显示在下方，方便确认。</li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.usageToleranceTitle">第三步：调整容差值</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.usageToleranceDef"><strong>容差是什么：</strong>容差决定了"与背景色多接近的像素会被替换"。
+                        </li>
+                        <li data-i18n="image.backcolor.usageToleranceLarge"><strong>大容差（40-60）：</strong>适合渐变背景、光照不均匀的照片。
+                        </li>
+                        <li data-i18n="image.backcolor.usageToleranceSmall">
+                            <strong>小容差（5-15）：</strong>适合纯色背景，精确替换，对前景影响最小。
+                        </li>
+                        <li data-i18n="image.backcolor.usageToleranceDefault"><strong>默认值（20）：</strong>适合大多数场景，效果不理想再调整。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.usageReplaceTitle">第四步：应用与下载</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.usageApply"><strong>点击"应用背景替换"：</strong>1080p 图片约 1-2 秒，4K 图片可能需要
+                            5-8 秒。</li>
+                        <li data-i18n="image.backcolor.usageRealPreview"><strong>实时预览 vs
+                                最终效果：</strong>调整容差时实时更新预览（快速近似），点击"应用"使用完整算法。</li>
+                        <li data-i18n="image.backcolor.usageDownload"><strong>下载结果：</strong>处理满意后保存为 PNG 格式（保留透明通道）。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.usagePrincipleTitle">五、背景替换的技术原理</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.usageColorDetect">
+                            <strong>背景色检测：</strong>从图片四个角落采样，取出现频率最高的颜色作为背景色基准——比只取一个像素更可靠。
+                        </li>
+                        <li data-i18n="image.backcolor.usagePixelReplace"><strong>像素替换逻辑：</strong>对每个像素计算与背景色的 CIE76
+                            色彩距离，小于容差阈值的被替换，边缘像素使用 alpha 混合平滑过渡。</li>
+                        <li data-i18n="image.backcolor.usageEdge"><strong>边缘处理：</strong>前景与背景交界处使用渐变过渡算法，避免"剪纸"般的生硬边缘。
+                        </li>
+                    </ul>
                 </div>
-                <p data-i18n="image.backcolor.toleranceTip">调整容差值可以更好地识别复杂背景，值越大识别范围越广。</p>
-            </div>
-
-            <div class="action-buttons">
-                <button id="replaceBgColorBtn" disabled data-i18n="image.backcolor.replaceBtn">应用背景替换</button>
-                <button id="downloadBtn" disabled data-i18n="image.backcolor.downloadBtn">下载结果图片</button>
-            </div>
-
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.backcolor.infoIntro">给图片换背景色，远比你想象的有趣</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.backcolor.problemsTitle">一、一张图片的背景色到底有多少种像素</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.problem1">产品图要换白底、证件照要换蓝底、社交媒体头像想换个鲜艳背景——这些需求在 Photoshop 里可能要折腾半小时，而本工具只需四步：上传图片、选颜色、调容差、点应用。Canvas API 在像素级别工作，逐个检查每个像素的颜色值，将符合背景条件的像素替换为目标颜色。</li>
-                            <li data-i18n="image.backcolor.problem2">背景替换的核心难点不是"换颜色"，而是"识别哪些像素属于背景"。纯色背景很简单——取左上角像素的颜色值，找出所有相近像素即可。但真实照片的背景往往有光照渐变、阴影过渡、边缘混合——这就需要容差算法来界定"多近算同色"。本工具的容差滑块基于 CIE76 色彩距离公式，比简单的 RGB 欧氏距离更符合人眼感知。</li>
-                            <li data-i18n="image.backcolor.problem3">完全在浏览器中完成——图片不上传到任何服务器。基于 Canvas 的 getImageData/putImageData 实现像素级操作，处理速度与图片分辨率直接相关。一张 1920x1080 的照片通常在 1-2 秒内完成背景替换。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.formatTitle">二、容差：决定"哪些像素算背景"的那把尺子</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.formatJpg"><strong>JPG 格式注意：</strong>JPG 是有损压缩格式，纯色背景在压缩后会产生微弱的色块噪声（比如纯白背景实际包含 #FEFFFE、#FFFDFB 等微小差异）。建议将容差调到 10-20 来覆盖这些噪声像素，否则替换后背景会出现"斑点"。</li>
-                            <li data-i18n="image.backcolor.formatPng"><strong>PNG 格式优势：</strong>PNG 支持透明通道（Alpha），本工具可以将背景替换为完全透明——这是抠图的核心原理。替换为透明后的 PNG 可以叠加在任何背景上，是电商产品图和 UI 设计的首选方案。</li>
-                            <li data-i18n="image.backcolor.formatGif"><strong>GIF 格式限制：</strong>GIF 仅支持 256 色调色板，背景替换后的颜色会被量化到最近的调色板颜色，可能出现色差。动态 GIF 只处理第一帧。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.featuresTitle">三、Canvas 像素级色彩替换是如何工作的</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.featureOnline"><strong>纯浏览器端处理：</strong>基于 Canvas 2D API 的 getImageData 获取每个像素的 RGBA 值，在内存中完成所有计算后通过 putImageData 写回。整个过程不产生任何网络请求。</li>
-                            <li data-i18n="image.backcolor.featurePreview"><strong>智能边缘过渡：</strong>简单的二值判断会产生锯齿边缘。本工具在颜色边界区域使用 alpha 混合——距离背景越远的像素，替换程度越低，形成自然过渡。</li>
-                            <li data-i18n="image.backcolor.featureExport"><strong>8 种预设色 + 自定义取色器：</strong>内置白、黑、红、绿、蓝、青、品红、黄 8 种常用背景色。自定义取色器支持输入任意 HEX 颜色值，满足品牌配色需求。</li>
-                            <li data-i18n="image.backcolor.featureSecurity"><strong>容差 0-100 精细调控：</strong>容差值决定了"与背景色多接近才算背景"。一般建议：纯色背景 5-15，渐变背景 20-40，复杂背景 40-60。</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.backcolor.infoUsage">从上传到出图的完整流程</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.backcolor.usageUploadTitle">第一步：载入原图</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.usageClickUpload"><strong>点击上传或拖拽：</strong>支持 JPG、PNG、WebP、BMP 格式。上传后工具自动读取四角像素作为背景色基准。</li>
-                            <li data-i18n="image.backcolor.usageFormats"><strong>格式兼容性：</strong>JPG 和 PNG 效果最佳。WebP 和 BMP 也可以处理但输出统一为 PNG。</li>
-                            <li data-i18n="image.backcolor.usagePreview"><strong>预览区域：</strong>左侧原图，右侧处理后效果，两张图同步缩放方便对比。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.usageColorTitle">第二步：选择目标背景色</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.usagePreset"><strong>预设颜色：</strong>点击颜色圆点直接应用——白色（产品图）、蓝色（证件照）、红色（签证照）等。</li>
-                            <li data-i18n="image.backcolor.usageCustom"><strong>自定义颜色：</strong>点击取色器输入任意 HEX 值，满足品牌配色需求。</li>
-                            <li data-i18n="image.backcolor.usageColorValue"><strong>颜色预览：</strong>选中的目标颜色显示在下方，方便确认。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.usageToleranceTitle">第三步：调整容差值</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.usageToleranceDef"><strong>容差是什么：</strong>容差决定了"与背景色多接近的像素会被替换"。</li>
-                            <li data-i18n="image.backcolor.usageToleranceLarge"><strong>大容差（40-60）：</strong>适合渐变背景、光照不均匀的照片。</li>
-                            <li data-i18n="image.backcolor.usageToleranceSmall"><strong>小容差（5-15）：</strong>适合纯色背景，精确替换，对前景影响最小。</li>
-                            <li data-i18n="image.backcolor.usageToleranceDefault"><strong>默认值（20）：</strong>适合大多数场景，效果不理想再调整。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.usageReplaceTitle">第四步：应用与下载</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.usageApply"><strong>点击"应用背景替换"：</strong>1080p 图片约 1-2 秒，4K 图片可能需要 5-8 秒。</li>
-                            <li data-i18n="image.backcolor.usageRealPreview"><strong>实时预览 vs 最终效果：</strong>调整容差时实时更新预览（快速近似），点击"应用"使用完整算法。</li>
-                            <li data-i18n="image.backcolor.usageDownload"><strong>下载结果：</strong>处理满意后保存为 PNG 格式（保留透明通道）。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.usagePrincipleTitle">五、背景替换的技术原理</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.usageColorDetect"><strong>背景色检测：</strong>从图片四个角落采样，取出现频率最高的颜色作为背景色基准——比只取一个像素更可靠。</li>
-                            <li data-i18n="image.backcolor.usagePixelReplace"><strong>像素替换逻辑：</strong>对每个像素计算与背景色的 CIE76 色彩距离，小于容差阈值的被替换，边缘像素使用 alpha 混合平滑过渡。</li>
-                            <li data-i18n="image.backcolor.usageEdge"><strong>边缘处理：</strong>前景与背景交界处使用渐变过渡算法，避免"剪纸"般的生硬边缘。</li>
-                        </ul>
-                    </div>
-                </article>
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.backcolor.infoNotes">使用建议与注意事项</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.backcolor.notesSecurityTitle">本地处理与隐私保护</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.noteSecurity1">背景替换基于 Canvas 2D 上下文中的 getImageData/putImageData 像素级运算完成，整个算法在浏览器沙箱内执行。图片数据从上传到下载全程不离开本地设备，无需任何网络请求或第三方服务。</li>
-                            <li data-i18n="image.backcolor.noteSecurity2">替换完成后，原始图片的像素数据仅保留在当前页面的 JavaScript 变量中。关闭标签页或刷新页面后，所有图片数据立即从内存中释放，不会写入 localStorage 或任何持久化存储。</li>
-                            <li data-i18n="image.backcolor.noteSecurity3">处理证件照（含个人面部信息）、公司内部截图（含敏感数据）等敏感图片时，建议开启浏览器无痕模式（Chrome Ctrl+Shift+N / Safari Cmd+Shift+N）。无痕模式关闭后会自动清除所有浏览数据和缓存。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.notesToleranceTitle">容差调节的实用建议</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.noteTolerance1">纯色背景（如白墙、纯色纸）：容差 10-20 即可获得干净边缘。</li>
-                            <li data-i18n="image.backcolor.noteTolerance2">渐变或纹理背景：容差调至 40-60，确保完整识别背景过渡区域。</li>
-                            <li data-i18n="image.backcolor.noteTolerance3">复杂背景（如草地、人群）：建议先用高容差尝试，再逐步微调至最佳效果。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.notesFormatTitle">格式选择指南</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.noteFormat1">需要透明背景（如电商白底图）：输出 PNG 格式，保留透明通道。</li>
-                            <li data-i18n="image.backcolor.noteFormat2">仅用于网页展示：JPG 格式文件更小，加载更快。</li>
-                            <li data-i18n="image.backcolor.noteFormat3">GIF 动态图片仅处理第一帧，如需处理动图请先提取单帧。</li>
-                        </ul>
-                        <h4 data-i18n="image.backcolor.notesFaqTitle">常见问题</h4>
-                        <ul>
-                            <li data-i18n="image.backcolor.noteFaq1"><strong>背景替换后边缘有残留：</strong>适当增大容差值（+10~20），让算法识别更多过渡像素。</li>
-                            <li data-i18n="image.backcolor.noteFaq2"><strong>前景也被误替换了：</strong>降低容差值，或选择与前景色差更大的背景色。</li>
-                            <li data-i18n="image.backcolor.noteFaq3"><strong>替换后图片出现白边/锯齿：</strong>这是 JPG 有损压缩导致的，建议输出为 PNG 格式。</li>
-                            <li data-i18n="image.backcolor.noteFaq4"><strong>如何替换为透明背景：</strong>选择白色或任意颜色后，输出格式选择 PNG 即可保留透明。</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.backcolor.infoNotes">使用建议与注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.backcolor.notesSecurityTitle">本地处理与隐私保护</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.noteSecurity1">背景替换基于 Canvas 2D 上下文中的 getImageData/putImageData
+                            像素级运算完成，整个算法在浏览器沙箱内执行。图片数据从上传到下载全程不离开本地设备，无需任何网络请求或第三方服务。</li>
+                        <li data-i18n="image.backcolor.noteSecurity2">替换完成后，原始图片的像素数据仅保留在当前页面的 JavaScript
+                            变量中。关闭标签页或刷新页面后，所有图片数据立即从内存中释放，不会写入 localStorage 或任何持久化存储。</li>
+                        <li data-i18n="image.backcolor.noteSecurity3">
+                            处理证件照（含个人面部信息）、公司内部截图（含敏感数据）等敏感图片时，建议开启浏览器无痕模式（Chrome Ctrl+Shift+N / Safari
+                            Cmd+Shift+N）。无痕模式关闭后会自动清除所有浏览数据和缓存。</li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.notesToleranceTitle">容差调节的实用建议</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.noteTolerance1">纯色背景（如白墙、纯色纸）：容差 10-20 即可获得干净边缘。</li>
+                        <li data-i18n="image.backcolor.noteTolerance2">渐变或纹理背景：容差调至 40-60，确保完整识别背景过渡区域。</li>
+                        <li data-i18n="image.backcolor.noteTolerance3">复杂背景（如草地、人群）：建议先用高容差尝试，再逐步微调至最佳效果。</li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.notesFormatTitle">格式选择指南</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.noteFormat1">需要透明背景（如电商白底图）：输出 PNG 格式，保留透明通道。</li>
+                        <li data-i18n="image.backcolor.noteFormat2">仅用于网页展示：JPG 格式文件更小，加载更快。</li>
+                        <li data-i18n="image.backcolor.noteFormat3">GIF 动态图片仅处理第一帧，如需处理动图请先提取单帧。</li>
+                    </ul>
+                    <h4 data-i18n="image.backcolor.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="image.backcolor.noteFaq1">
+                            <strong>背景替换后边缘有残留：</strong>适当增大容差值（+10~20），让算法识别更多过渡像素。
+                        </li>
+                        <li data-i18n="image.backcolor.noteFaq2"><strong>前景也被误替换了：</strong>降低容差值，或选择与前景色差更大的背景色。</li>
+                        <li data-i18n="image.backcolor.noteFaq3"><strong>替换后图片出现白边/锯齿：</strong>这是 JPG 有损压缩导致的，建议输出为 PNG
+                            格式。</li>
+                        <li data-i18n="image.backcolor.noteFaq4"><strong>如何替换为透明背景：</strong>选择白色或任意颜色后，输出格式选择 PNG
+                            即可保留透明。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
         </div>
 
         <script src="../../common/js/theme.js"></script>

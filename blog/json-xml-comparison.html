@@ -385,22 +385,26 @@
                     ID 解析后变成同一个。这是"数据没报错但错了"的典型。对策：解析时用字符串模式（<code>bigint</code> 模式 / <code>parseFloat</code>
                     前先判断位数），或在接口层约定大数一律用字符串传输。</li>
                 <li><strong>重复键与类型漂移：</strong><code>{"a":1,"a":2}</code> 在多数解析器里静默取最后一个值；<code>{"count":"10"}</code> 与
-                    <code>{"count":10}</code> 在不同客户端行为不同。接口契约应该用 JSON Schema 约束类型，并在 CI 里跑校验。</li>
+                    <code>{"count":10}</code> 在不同客户端行为不同。接口契约应该用 JSON Schema 约束类型，并在 CI 里跑校验。
+                </li>
                 <li><strong>XXE（XML 外部实体注入）：</strong>XML 解析器默认支持 <code>&lt;!DOCTYPE&gt;</code>
                     外部实体，攻击者可以构造：<code>&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;]&gt;</code>
                     读取服务器文件、发起 SSRF。这是 OWASP Top 10 常客。对策：解析 XML 前关闭 DTD/外部实体（Python <code>defusedxml</code>、Java
                     <code>setFeature(disallow-doctype-decl, true)</code>、PHP 禁用
-                    <code>libxml_disable_entity_loader</code>）。</li>
+                    <code>libxml_disable_entity_loader</code>）。
+                </li>
                 <li><strong>解析器差异导致的不兼容：</strong>同一份 JSON，Python 的 <code>json.loads</code> 接受
                     <code>NaN</code>/<code>Infinity</code>，Java 的 Jackson 默认拒绝；XML 的注释位置、CDATA
-                    处理在不同语言实现里也有细微差别。跨语言对接时，优先用严格模式解析。</li>
+                    处理在不同语言实现里也有细微差别。跨语言对接时，优先用严格模式解析。
+                </li>
                 <li><strong>超大 payload 拖垮进程：</strong>深层嵌套 JSON（<code>[[[[[...]]]]]</code>
                     十万层）会触发栈溢出，巨型数组耗尽内存。所有解析入口都应限制最大深度和体积，并把解析放入受控资源池。</li>
             </ul>
             <div class="warning-box">
                 <p><strong>审计提示：</strong>如果代码库里出现过
                     <code>DocumentBuilderFactory</code>、<code>SimpleXML</code>、<code>lxml</code> 处理外部输入，第一时间检查是否禁用了
-                    DTD——XXE 修复往往只需一行配置，但默认配置几乎都是不安全的。</p>
+                    DTD——XXE 修复往往只需一行配置，但默认配置几乎都是不安全的。
+                </p>
             </div>
 
             <h2>八、深入原理：JSON Schema 与 XML Schema 的验证体系对比</h2>
@@ -500,10 +504,10 @@ JSON Schema 核心特性：
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

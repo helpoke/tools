@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>JavaScript 混淆加密工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="JavaScript 混淆加密工具 - 免费、安全、快速">
+    <meta property="og:description" content="JavaScript混淆加密工具说明，保护代码安全，支持文件上传、高级配置选项，防止逆向工程，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/js-secrecy/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="JavaScript 混淆加密工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="JavaScript混淆加密工具说明，保护代码安全，支持文件上传、高级配置选项，防止逆向工程，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/js-secrecy/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/js-secrecy/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/js-secrecy/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "混淆和加密有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "混淆（Obfuscation）和加密（Encryption）是不同的概念。加密使用密钥将数据转换为密文，只有持有密钥才能解密还原；混淆不改变代码的功能，只是将代码转换为更难理解的形式，任何人都可以执行但难以理解。JavaScript代码无法真正加密，因为浏览器必须能够执行代码，否则页面将无法工作。因此，保护JavaScript代码的最佳方案是混淆，而非加密。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "混淆会影响代码性能吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "混淆会对代码性能产生一定影响，具体取决于混淆强度和代码特性。变量名混淆对性能影响很小；字符串加密会增加运行时解密开销；控制流平坦化会使代码执行路径变长，可能降低运行速度约10%-30%；死代码注入会增加代码体积，影响加载时间。建议对性能敏感的关键代码进行轻度混淆，对非关键代码进行重度混淆。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "混淆后的代码可以完全防止被破解吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不能。混淆只是增加逆向工程的难度，无法完全防止有决心的攻击者。理论上，任何在客户端运行的代码都可以被逆向。但混淆可以阻止大多数非专业攻击者，使破解成本远高于正常购买或开发成本。对于高价值代码，建议结合其他保护措施，如代码签名、接口签名、后端校验等。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "哪些代码不适合混淆？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "以下代码不适合混淆：1) 第三方库（如jQuery、React等），混淆会破坏其依赖关系；2) 需要SEO的页面代码，混淆可能影响搜索引擎抓取；3) 需要调试的代码，混淆后难以定位问题；4) 依赖eval或Function构造函数的代码，混淆可能破坏其功能；5) 使用动态代码生成的代码（如某些模板引擎）。建议只混淆您自己的核心业务代码。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "混淆后的代码如何调试？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "混淆后的代码极难调试，因此建议：1) 始终保留原始代码的备份，用于调试和维护；2) 在开发环境使用未混淆的代码，只在生产环境部署混淆后的代码；3) 使用Source Map保持代码映射，便于在浏览器开发者工具中查看原始代码；4) 如果必须调试混淆代码，可以使用代码美化工具先格式化，再结合错误信息逐步分析。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何评估混淆效果？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "评估混淆效果可以从以下几个方面：1) 可读性：尝试阅读混淆后的代码，看是否能快速理解逻辑；2) 体积增加：比较混淆前后的代码大小，通常会增加30%-100%；3) 运行性能：运行混淆后的代码，测试性能是否可接受；4) 功能验证：确保混淆后的代码功能完全正常；5) 自动化评估：使用代码复杂度分析工具评估混淆后的代码复杂度。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -336,10 +407,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

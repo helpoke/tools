@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>时间戳转换工具 - Helpoke 助点站</title>
     <meta property="og:title" content="时间戳转换工具 - Helpoke 助点站">
@@ -637,7 +645,7 @@
         "@type": "WebApplication",
         "name": "时间戳转换工具",
         "description": "在线时间戳转换工具，支持Unix时间戳转日期、日期转Unix时间戳，支持秒/毫秒级精度，多时区显示。Online timestamp converter with multi-timezone support.",
-        "url": "https://helpoke.com/tool/timestamp",
+        "url": "https://helpoke.com/tool/timestamp/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -652,7 +660,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -793,7 +801,8 @@
                                 <li data-i18n="tool.timestamp.formatDt">
                                     <strong>日期时间格式：</strong>支持多种可读的日期时间输出格式——中文格式（2024年1月15日 星期一
                                     14:30:00）、标准格式（2024-01-15 14:30:00）、UTC 时间、ISO 8601
-                                    格式（2024-01-15T14:30:00.000Z）等。转换结果同时提供多种格式，方便在不同场景中使用。</li>
+                                    格式（2024-01-15T14:30:00.000Z）等。转换结果同时提供多种格式，方便在不同场景中使用。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.timestamp.featuresTitle">三、转换功能详解</h4>
                             <ul>
@@ -802,10 +811,12 @@
                                 <li data-i18n="tool.timestamp.featurePreview"><strong>日期 → 时间戳：</strong>输入日期时间（如
                                     2023-09-04 16:00:00），工具计算对应的 Unix 时间戳（秒和毫秒两种格式）。</li>
                                 <li data-i18n="tool.timestamp.featureExport">
-                                    <strong>当前时间：</strong>实时显示当前时间的时间戳（秒/毫秒）和可读日期——方便调试和日志记录。每秒自动更新。</li>
+                                    <strong>当前时间：</strong>实时显示当前时间的时间戳（秒/毫秒）和可读日期——方便调试和日志记录。每秒自动更新。
+                                </li>
                                 <li data-i18n="tool.timestamp.featureSecurity">
                                     <strong>时区支持：</strong>支持全球主要时区——UTC、北京时间（UTC+8）、东京（UTC+9）、纽约（UTC-5）、伦敦（UTC+0/UTC+1
-                                    夏令时）等。同一个时间戳在不同时区显示不同的本地时间。</li>
+                                    夏令时）等。同一个时间戳在不同时区显示不同的本地时间。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -822,7 +833,8 @@
                                     1700000000000）。系统根据数字位数自动判断精度。</li>
                                 <li data-i18n="tool.timestamp.usageSelectUnit">
                                     <strong>选择精度单位：</strong>如果自动识别不准确，可以手动切换"秒"或"毫秒"单位。10 位数字通常为秒级，13
-                                    位数字通常为毫秒级。选择正确的精度单位对转换结果至关重要——差 1000 倍。</li>
+                                    位数字通常为毫秒级。选择正确的精度单位对转换结果至关重要——差 1000 倍。
+                                </li>
                                 <li data-i18n="tool.timestamp.usageClickConvert"><strong>点击转换：</strong>点击"转换"按钮（或按 Enter
                                     键）执行转换。结果区域立即显示该时间戳对应的多种日期时间格式——中文格式、标准格式、UTC 时间、ISO 8601、星期几等。</li>
                                 <li data-i18n="tool.timestamp.usageUseCurrent"><strong>使用当前时间：</strong>点击"当前时间"按钮自动填入当前的
@@ -836,10 +848,12 @@
                                     时间戳"标签页中，通过日期时间选择器选择目标日期和时间。也可以使用"当前时间"按钮快速填入当前日期时间。</li>
                                 <li data-i18n="tool.timestamp.usageSelectTz">
                                     <strong>选择时区：</strong>从时区下拉菜单中选择目标时区——默认使用浏览器本地时区，也可以选择 UTC 或其他时区（如 UTC+8 北京时间、UTC+9
-                                    东京时间）。时区选择直接影响转换得到的时间戳值。</li>
+                                    东京时间）。时区选择直接影响转换得到的时间戳值。
+                                </li>
                                 <li data-i18n="tool.timestamp.usageConvert">
                                     <strong>点击转换：</strong>点击"转换"按钮后，结果区域同时显示秒级（10 位）和毫秒级（13
-                                    位）两种时间戳。根据目标系统的要求选择对应精度的时间戳使用。</li>
+                                    位）两种时间戳。根据目标系统的要求选择对应精度的时间戳使用。
+                                </li>
                                 <li data-i18n="tool.timestamp.usageResult"><strong>结果显示：</strong>同时显示秒级和毫秒级时间戳。</li>
                             </ul>
                             <h4 data-i18n="tool.timestamp.usageTsFormatTitle">三、时间戳格式说明</h4>
@@ -870,7 +884,8 @@
                             <h4 data-i18n="tool.timestamp.usageScenariosTitle">六、适用场景</h4>
                             <ul>
                                 <li data-i18n="tool.timestamp.usageScenarioDebug">
-                                    <strong>开发调试：</strong>查看日志中的时间戳对应的具体时间。</li>
+                                    <strong>开发调试：</strong>查看日志中的时间戳对应的具体时间。
+                                </li>
                                 <li data-i18n="tool.timestamp.usageScenarioDb"><strong>数据库查询：</strong>构造时间范围查询条件。</li>
                                 <li data-i18n="tool.timestamp.usageScenarioApi"><strong>API开发：</strong>生成或解析时间戳格式的接口参数。
                                 </li>
@@ -943,13 +958,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

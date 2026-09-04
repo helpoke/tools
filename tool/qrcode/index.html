@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>二维码生成/解析工具 - Helpoke 助点站</title>
     <meta property="og:title" content="二维码生成/解析工具 - Helpoke 助点站">
@@ -464,7 +472,7 @@
         "@type": "WebApplication",
         "name": "二维码生成/解析工具",
         "description": "在线二维码生成解析工具，支持自定义颜色尺寸，纯前端本地处理。免费二维码工具。Online QR code generator and decoder with customization options.",
-        "url": "https://helpoke.com/tool/qrcode",
+        "url": "https://helpoke.com/tool/qrcode/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -479,7 +487,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -501,9 +509,8 @@
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与
                 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="tool.qrcode.intro">二维码生成工具，支持自定义内容、尺寸、容错级别、前景色和背景色，支持解析图片中的二维码，可下载PNG图片或复制到剪贴板</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -523,7 +530,8 @@
                         <label for="qr-text" data-i18n="tool.qrcode.generateLabel">输入内容（文本 / 网址 / 数字）</label>
                         <textarea id="qr-text" placeholder="输入要生成二维码的内容，例如：https://helpoke.com"
                             data-i18n-placeholder="tool.qrcode.generatePlaceholder"></textarea>
-                        <div class="char-count" id="qr-char-count" data-i18n="tool.qrcode.charCount">字符数: {{count}}</div>
+                        <div class="char-count" id="qr-char-count" data-i18n="tool.qrcode.charCount">字符数: {{count}}
+                        </div>
                     </div>
 
                     <div class="options-row">
@@ -569,7 +577,8 @@
                     <div class="drop-zone" id="drop-zone">
                         <div class="drop-icon">📷</div>
                         <p data-i18n="tool.qrcode.dropText">拖拽图片到此处，或点击上传</p>
-                        <p style="font-size:12px;color:#94a3b8;" data-i18n="tool.qrcode.dropSupport">支持 PNG / JPG / GIF / BMP</p>
+                        <p style="font-size:12px;color:#94a3b8;" data-i18n="tool.qrcode.dropSupport">支持 PNG / JPG / GIF
+                            / BMP</p>
                         <input type="file" id="qr-file" accept="image/*">
                         <img id="qr-preview" style="display:none;">
                     </div>
@@ -583,7 +592,8 @@
                     <div class="parse-result" id="parse-result" style="display:none;">
                         <div class="result-label" data-i18n="tool.qrcode.parseResultLabel">解析结果</div>
                         <div class="result-text" id="parse-text"></div>
-                        <button class="btn" onclick="copyParseResult()" data-i18n="tool.qrcode.copyResultBtn">复制结果</button>
+                        <button class="btn" onclick="copyParseResult()"
+                            data-i18n="tool.qrcode.copyResultBtn">复制结果</button>
                     </div>
                 </div>
 
@@ -595,9 +605,14 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.qrcode.problemsTitle">一、二维码比你想象的更精密</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.problem1">一个 30x30 像素的黑白方块能存储多少信息？答案是 174 个数字字符或 98 个字母——这就是 QR Code 标准版本 3 的容量。二维码使用四种编码模式（数字、字母数字、字节、汉字）自动选择最紧凑的表示方式。更神奇的是，即使遮挡 30% 的面积，二维码仍然可以被正确读取——这归功于 Reed-Solomon 纠错算法。</li>
-                                <li data-i18n="tool.qrcode.problem2">本工具基于 qrcode-generator 库生成标准 QR Code——支持四种纠错等级（L/M/Q/H）、自定义尺寸、前景色/背景色自定义。可以嵌入 Logo 图片到二维码中心——品牌二维码的标准做法。生成的二维码符合 ISO/IEC 18004 标准，所有手机扫码应用都能识别。</li>
-                                <li data-i18n="tool.qrcode.problem3">纯前端生成——输入内容后实时预览二维码，调整参数即时更新。支持下载为 PNG 或 SVG 格式。SVG 格式是矢量的，打印时不会模糊。</li>
+                                <li data-i18n="tool.qrcode.problem1">一个 30x30 像素的黑白方块能存储多少信息？答案是 174 个数字字符或 98 个字母——这就是
+                                    QR Code 标准版本 3 的容量。二维码使用四种编码模式（数字、字母数字、字节、汉字）自动选择最紧凑的表示方式。更神奇的是，即使遮挡 30%
+                                    的面积，二维码仍然可以被正确读取——这归功于 Reed-Solomon 纠错算法。</li>
+                                <li data-i18n="tool.qrcode.problem2">本工具基于 qrcode-generator 库生成标准 QR
+                                    Code——支持四种纠错等级（L/M/Q/H）、自定义尺寸、前景色/背景色自定义。可以嵌入 Logo 图片到二维码中心——品牌二维码的标准做法。生成的二维码符合
+                                    ISO/IEC 18004 标准，所有手机扫码应用都能识别。</li>
+                                <li data-i18n="tool.qrcode.problem3">纯前端生成——输入内容后实时预览二维码，调整参数即时更新。支持下载为 PNG 或 SVG 格式。SVG
+                                    格式是矢量的，打印时不会模糊。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.formatTitle">二、纠错等级与容量</h4>
                             <ul>
@@ -605,10 +620,20 @@
                             </ul>
                             <h4 data-i18n="tool.qrcode.featuresTitle">三、二维码参数详解</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.featureOnline"><strong>纠错等级选择：</strong>L（7%）/M（15%）/Q（25%）/H（30%）。嵌入 Logo 时建议选择 H 级——Logo 遮挡了中心区域的数据，需要更高的纠错能力。</li>
-                                <li data-i18n="tool.qrcode.featurePreview"><strong>尺寸设置：</strong>二维码的像素尺寸（100-1000px）。屏幕显示 200-300px 足够，打印建议 500px+。尺寸不影响信息容量——只影响每个"模块"（小方块）的物理大小。</li>
-                                <li data-i18n="tool.qrcode.featureExport"><strong>前景色/背景色：</strong>默认黑底白底——最高对比度，扫描最可靠。可以自定义颜色，但确保对比度足够（深色前景 + 浅色背景）。避免使用红+绿组合——很多扫描枪使用红光。</li>
-                                <li data-i18n="tool.qrcode.featureSecurity"><strong>Logo 嵌入：</strong>上传一张图片作为 Logo 叠加在二维码中心。Logo 大小建议不超过二维码面积的 20%——过大的 Logo 可能导致纠错无法恢复。</li>
+                                <li data-i18n="tool.qrcode.featureOnline">
+                                    <strong>纠错等级选择：</strong>L（7%）/M（15%）/Q（25%）/H（30%）。嵌入 Logo 时建议选择 H 级——Logo
+                                    遮挡了中心区域的数据，需要更高的纠错能力。
+                                </li>
+                                <li data-i18n="tool.qrcode.featurePreview">
+                                    <strong>尺寸设置：</strong>二维码的像素尺寸（100-1000px）。屏幕显示 200-300px 足够，打印建议
+                                    500px+。尺寸不影响信息容量——只影响每个"模块"（小方块）的物理大小。
+                                </li>
+                                <li data-i18n="tool.qrcode.featureExport">
+                                    <strong>前景色/背景色：</strong>默认黑底白底——最高对比度，扫描最可靠。可以自定义颜色，但确保对比度足够（深色前景 +
+                                    浅色背景）。避免使用红+绿组合——很多扫描枪使用红光。
+                                </li>
+                                <li data-i18n="tool.qrcode.featureSecurity"><strong>Logo 嵌入：</strong>上传一张图片作为 Logo
+                                    叠加在二维码中心。Logo 大小建议不超过二维码面积的 20%——过大的 Logo 可能导致纠错无法恢复。</li>
                             </ul>
                         </div>
                     </article>
@@ -620,16 +645,28 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.qrcode.usageGenerateTitle">一、生成二维码</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.usageInputContent"><strong>输入内容：</strong>在文本框中输入需要编码为二维码的内容——可以是网址（如 https://example.com）、文本信息、Wi-Fi 配置或 vCard 名片格式。输入内容后二维码自动生成，无需点击按钮。字符计数实时显示在输入框下方。</li>
-                                <li data-i18n="tool.qrcode.usageAutoGenerate"><strong>自动生成：</strong>输入内容后二维码立即自动更新——无需点击"生成"按钮。修改内容时二维码实时重绘，方便即时预览效果。</li>
+                                <li data-i18n="tool.qrcode.usageInputContent">
+                                    <strong>输入内容：</strong>在文本框中输入需要编码为二维码的内容——可以是网址（如 https://example.com）、文本信息、Wi-Fi
+                                    配置或 vCard 名片格式。输入内容后二维码自动生成，无需点击按钮。字符计数实时显示在输入框下方。
+                                </li>
+                                <li data-i18n="tool.qrcode.usageAutoGenerate">
+                                    <strong>自动生成：</strong>输入内容后二维码立即自动更新——无需点击"生成"按钮。修改内容时二维码实时重绘，方便即时预览效果。
+                                </li>
                                 <li data-i18n="tool.qrcode.usageCharCount"><strong>字符计数：</strong>实时显示输入字符数。</li>
                                 <li data-i18n="tool.qrcode.usageChinese"><strong>中文支持：</strong>支持中文内容，自动使用UTF-8编码。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.usageCustomizeTitle">二、自定义二维码外观</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.usageSize"><strong>尺寸调整：</strong>通过数字输入框设置二维码的图片尺寸（100-600px）。用于屏幕显示可以选择 200-300px，用于印刷建议 400-600px 以获得更高的清晰度。</li>
-                                <li data-i18n="tool.qrcode.usageEcc"><strong>容错等级：</strong>选择 L（7%）、M（15%）、Q（25%）、H（30%）四种容错等级。容错等级越高，二维码被部分遮挡或损坏后仍可扫描的概率越大。如果需要在二维码上叠加 Logo，建议选择 H 级（30% 容错）。</li>
-                                <li data-i18n="tool.qrcode.usageFg"><strong>前景色与背景色：</strong>通过颜色选择器设置二维码的前景（图案）色和背景色。建议使用深色前景+浅色背景的高对比度组合（如黑色+白色）。避免使用相近颜色——对比度不足会导致扫描困难。</li>
+                                <li data-i18n="tool.qrcode.usageSize">
+                                    <strong>尺寸调整：</strong>通过数字输入框设置二维码的图片尺寸（100-600px）。用于屏幕显示可以选择 200-300px，用于印刷建议
+                                    400-600px 以获得更高的清晰度。
+                                </li>
+                                <li data-i18n="tool.qrcode.usageEcc"><strong>容错等级：</strong>选择
+                                    L（7%）、M（15%）、Q（25%）、H（30%）四种容错等级。容错等级越高，二维码被部分遮挡或损坏后仍可扫描的概率越大。如果需要在二维码上叠加 Logo，建议选择
+                                    H 级（30% 容错）。</li>
+                                <li data-i18n="tool.qrcode.usageFg">
+                                    <strong>前景色与背景色：</strong>通过颜色选择器设置二维码的前景（图案）色和背景色。建议使用深色前景+浅色背景的高对比度组合（如黑色+白色）。避免使用相近颜色——对比度不足会导致扫描困难。
+                                </li>
                                 <li data-i18n="tool.qrcode.usageBg"><strong>背景色：</strong>设置二维码背景颜色。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.usageEccTitle">三、容错等级说明</h4>
@@ -641,16 +678,24 @@
                             </ul>
                             <h4 data-i18n="tool.qrcode.usageDownloadTitle">三、下载与复制</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.usageDownload"><strong>下载图片：</strong>点击"下载图片"按钮将二维码保存为 PNG 格式。文件名自动使用内容的前 20 个字符——也可以手动修改文件名。下载的图片可以直接用于印刷、嵌入文档或分享到社交媒体。</li>
-                                <li data-i18n="tool.qrcode.usageCopy"><strong>复制图片：</strong>点击"复制图片"按钮将二维码直接复制到剪贴板——可以粘贴到微信、文档、邮件等应用中。比下载后再上传更方便。</li>
+                                <li data-i18n="tool.qrcode.usageDownload"><strong>下载图片：</strong>点击"下载图片"按钮将二维码保存为 PNG
+                                    格式。文件名自动使用内容的前 20 个字符——也可以手动修改文件名。下载的图片可以直接用于印刷、嵌入文档或分享到社交媒体。</li>
+                                <li data-i18n="tool.qrcode.usageCopy">
+                                    <strong>复制图片：</strong>点击"复制图片"按钮将二维码直接复制到剪贴板——可以粘贴到微信、文档、邮件等应用中。比下载后再上传更方便。
+                                </li>
                                 <li data-i18n="tool.qrcode.usageNaming"><strong>图片命名：</strong>自动使用内容前20个字符作为文件名。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.usageParseTitle">四、解析二维码</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.usageSwitchTab"><strong>切换解析模式：</strong>点击"解析二维码"标签切换到解析模式。上传包含二维码的图片，系统自动识别并解码其中的内容。</li>
-                                <li data-i18n="tool.qrcode.usageUpload"><strong>上传图片：</strong>通过拖拽或点击上传包含二维码的图片。支持 PNG、JPG、GIF、BMP 等常见图片格式。也可以从剪贴板粘贴截图——点击"从剪贴板粘贴图片"按钮。</li>
+                                <li data-i18n="tool.qrcode.usageSwitchTab">
+                                    <strong>切换解析模式：</strong>点击"解析二维码"标签切换到解析模式。上传包含二维码的图片，系统自动识别并解码其中的内容。
+                                </li>
+                                <li data-i18n="tool.qrcode.usageUpload"><strong>上传图片：</strong>通过拖拽或点击上传包含二维码的图片。支持
+                                    PNG、JPG、GIF、BMP 等常见图片格式。也可以从剪贴板粘贴截图——点击"从剪贴板粘贴图片"按钮。</li>
                                 <li data-i18n="tool.qrcode.usagePaste"><strong>剪贴板粘贴：</strong>点击"从剪贴板粘贴图片"按钮。</li>
-                                <li data-i18n="tool.qrcode.usageAutoDetect"><strong>自动解析：</strong>图片上传后系统自动检测图片中的二维码并解码。如果图片中包含清晰的二维码，解析结果立即显示在下方。支持一键复制解析结果。</li>
+                                <li data-i18n="tool.qrcode.usageAutoDetect">
+                                    <strong>自动解析：</strong>图片上传后系统自动检测图片中的二维码并解码。如果图片中包含清晰的二维码，解析结果立即显示在下方。支持一键复制解析结果。
+                                </li>
                                 <li data-i18n="tool.qrcode.usageCopyResult"><strong>复制结果：</strong>点击"复制结果"按钮复制解析内容。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.usageScenariosTitle">六、适用场景</h4>
@@ -669,21 +714,32 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.qrcode.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.noteSecurity1"><strong>纯前端生成：</strong>二维码完全在浏览器中生成——编码内容不上传到任何服务器。</li>
-                                <li data-i18n="tool.qrcode.noteSecurity2"><strong>无依赖：</strong>不需要安装任何软件。qrcode-generator 库已内嵌在页面中。</li>
-                                <li data-i18n="tool.qrcode.noteSecurity3"><strong>离线可用：</strong>页面加载完成后，即使断网也能正常生成二维码。</li>
+                                <li data-i18n="tool.qrcode.noteSecurity1">
+                                    <strong>纯前端生成：</strong>二维码完全在浏览器中生成——编码内容不上传到任何服务器。
+                                </li>
+                                <li data-i18n="tool.qrcode.noteSecurity2">
+                                    <strong>无依赖：</strong>不需要安装任何软件。qrcode-generator 库已内嵌在页面中。
+                                </li>
+                                <li data-i18n="tool.qrcode.noteSecurity3"><strong>离线可用：</strong>页面加载完成后，即使断网也能正常生成二维码。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.notesLimitTitle">二、内容容量限制</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.noteLimit1">二维码的数据容量取决于版本大小和容错等级。最大版本（40×40）在 L 级容错下可存储约 4,296 个字母数字字符或 2,953 个字节。实际使用中，建议单个二维码的内容不超过 500 个字符——内容越多，二维码越密集，扫描难度越大。</li>
-                                <li data-i18n="tool.qrcode.noteLimit2">长 URL 会导致二维码非常密集——建议使用短链接服务（如 bit.ly）缩短 URL 后再生成二维码。短链接不仅使二维码更稀疏易扫，还能提供点击统计和链接管理功能。</li>
-                                <li data-i18n="tool.qrcode.noteLimit3">中文内容使用 UTF-8 编码，每个中文字符占 3 个字节。因此中文二维码的容量比纯英文少约 2/3。如果需要编码大量中文文本，考虑使用短文本配合在线链接的方式。</li>
+                                <li data-i18n="tool.qrcode.noteLimit1">二维码的数据容量取决于版本大小和容错等级。最大版本（40×40）在 L 级容错下可存储约
+                                    4,296 个字母数字字符或 2,953 个字节。实际使用中，建议单个二维码的内容不超过 500 个字符——内容越多，二维码越密集，扫描难度越大。</li>
+                                <li data-i18n="tool.qrcode.noteLimit2">长 URL 会导致二维码非常密集——建议使用短链接服务（如 bit.ly）缩短 URL
+                                    后再生成二维码。短链接不仅使二维码更稀疏易扫，还能提供点击统计和链接管理功能。</li>
+                                <li data-i18n="tool.qrcode.noteLimit3">中文内容使用 UTF-8 编码，每个中文字符占 3 个字节。因此中文二维码的容量比纯英文少约
+                                    2/3。如果需要编码大量中文文本，考虑使用短文本配合在线链接的方式。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.notesColorTitle">三、颜色搭配建议</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.noteColor1">前景色和背景色必须有足够的对比度——深色前景+浅色背景是最安全的组合。黑色前景+白色背景的对比度最高，扫描成功率最高。</li>
-                                <li data-i18n="tool.qrcode.noteColor2">避免使用红色前景（许多扫码器使用红光 LED，红色图案可能被"看不见"）。也避免使用相近颜色（如深蓝前景+浅蓝背景）——低对比度会导致扫描失败。</li>
-                                <li data-i18n="tool.qrcode.noteColor3">如果品牌设计要求使用彩色二维码，建议先在实际设备上测试扫描效果。不同手机摄像头的色彩还原能力不同，某些颜色组合在特定设备上可能无法正确识别。</li>
+                                <li data-i18n="tool.qrcode.noteColor1">
+                                    前景色和背景色必须有足够的对比度——深色前景+浅色背景是最安全的组合。黑色前景+白色背景的对比度最高，扫描成功率最高。</li>
+                                <li data-i18n="tool.qrcode.noteColor2">避免使用红色前景（许多扫码器使用红光
+                                    LED，红色图案可能被"看不见"）。也避免使用相近颜色（如深蓝前景+浅蓝背景）——低对比度会导致扫描失败。</li>
+                                <li data-i18n="tool.qrcode.noteColor3">
+                                    如果品牌设计要求使用彩色二维码，建议先在实际设备上测试扫描效果。不同手机摄像头的色彩还原能力不同，某些颜色组合在特定设备上可能无法正确识别。</li>
                             </ul>
                             <h4 data-i18n="tool.qrcode.notesScanTitle">四、扫描问题</h4>
                             <ul>
@@ -699,9 +755,12 @@
                             </ul>
                             <h4 data-i18n="tool.qrcode.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="tool.qrcode.noteFaq1"><strong>Q: 二维码扫描不出来？</strong>A: 检查：1) 对比度是否足够；2) Logo 是否太大（超过 20% 面积）；3) 尺寸是否太小（打印时模块 <0.5mm）。</li>
-                                <li data-i18n="tool.qrcode.noteFaq2"><strong>Q: 能生成彩色二维码吗？</strong>A: 可以自定义前景色和背景色。但避免使用低对比度或红+绿组合——可能导致扫描失败。</li>
-                                <li data-i18n="tool.qrcode.noteFaq3"><strong>Q: 二维码能存储多少内容？</strong>A: 最大容量约 7089 个数字字符或 4296 个字母字符。实际容量取决于纠错等级——H 级容量最低。</li>
+                                <li data-i18n="tool.qrcode.noteFaq1"><strong>Q: 二维码扫描不出来？</strong>A: 检查：1) 对比度是否足够；2)
+                                    Logo 是否太大（超过 20% 面积）；3) 尺寸是否太小（打印时模块 <0.5mm）。< /li>
+                                <li data-i18n="tool.qrcode.noteFaq2"><strong>Q: 能生成彩色二维码吗？</strong>A:
+                                    可以自定义前景色和背景色。但避免使用低对比度或红+绿组合——可能导致扫描失败。</li>
+                                <li data-i18n="tool.qrcode.noteFaq3"><strong>Q: 二维码能存储多少内容？</strong>A: 最大容量约 7089 个数字字符或
+                                    4296 个字母字符。实际容量取决于纠错等级——H 级容量最低。</li>
                                 <li data-i18n="tool.qrcode.noteFaq4"><strong>下载失败：</strong>检查浏览器下载权限设置。</li>
                             </ul>
                         </div>
@@ -715,13 +774,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

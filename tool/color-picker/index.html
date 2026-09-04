@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>取色器 & 颜色转换 - Helpoke 助点站</title>
     <meta property="og:title" content="取色器 &amp; 颜色转换 - Helpoke 助点站">
@@ -426,7 +434,7 @@
         "@type": "WebApplication",
         "name": "取色器 & 颜色转换",
         "description": "在线取色器和颜色转换工具，支持RGB、HEX、HSL颜色格式互转。免费在线调色工具。Online color picker with RGB, HEX, HSL conversion.",
-        "url": "https://helpoke.com/tool/color-picker",
+        "url": "https://helpoke.com/tool/color-picker/",
         "applicationCategory": "https://schema.org/DesignTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -441,7 +449,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -463,9 +471,8 @@
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与
                 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="tool.color-picker.intro">颜色选择器，支持HEX、RGB、HSL颜色格式互转，可视化取色实时预览，提供常用颜色预设，一键复制</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -491,7 +498,8 @@
                 <!-- HEX -->
                 <div class="format-section">
                     <div class="format-header">
-                        <span class="format-label" data-i18n="tool.color-picker.hexLabel">HEX<span class="badge">十六进制</span></span>
+                        <span class="format-label" data-i18n="tool.color-picker.hexLabel">HEX<span
+                                class="badge">十六进制</span></span>
                         <button class="btn btn-copy" onclick="copyFormat('hex')"
                             data-i18n="tool.color-picker.copy">复制</button>
                     </div>
@@ -504,7 +512,8 @@
                 <!-- RGB -->
                 <div class="format-section">
                     <div class="format-header">
-                        <span class="format-label" data-i18n="tool.color-picker.rgbLabel">RGB<span class="badge">0-255</span></span>
+                        <span class="format-label" data-i18n="tool.color-picker.rgbLabel">RGB<span
+                                class="badge">0-255</span></span>
                         <button class="btn btn-copy" onclick="copyFormat('rgb')"
                             data-i18n="tool.color-picker.copy">复制</button>
                     </div>
@@ -529,7 +538,8 @@
                 <!-- HSL -->
                 <div class="format-section">
                     <div class="format-header">
-                        <span class="format-label" data-i18n="tool.color-picker.hslLabel">HSL<span class="badge">色相/饱和度/亮度</span></span>
+                        <span class="format-label" data-i18n="tool.color-picker.hslLabel">HSL<span
+                                class="badge">色相/饱和度/亮度</span></span>
                         <button class="btn btn-copy" onclick="copyFormat('hsl')"
                             data-i18n="tool.color-picker.copy">复制</button>
                     </div>
@@ -551,7 +561,8 @@
                     </div>
                 </div>
 
-                <button class="btn btn-copy-all" onclick="copyAll()" data-i18n="tool.color-picker.copyAll">复制全部格式</button>
+                <button class="btn btn-copy-all" onclick="copyAll()"
+                    data-i18n="tool.color-picker.copyAll">复制全部格式</button>
 
                 <div class="info-section">
                     <article class="info-details">
@@ -561,9 +572,14 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.color-picker.problemsTitle">一、颜色表示法的"方言"问题</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.problem1">设计师在 Photoshop 里用 HSL 调色，前端工程师在 CSS 里写 HEX，Python 脚本需要 RGB 元组，Java 的 Color 类需要 0-255 整数——同一种颜色在不同工具和语言中有完全不同的表示方式。手动转换不仅繁琐，还容易出错——把 #3B82F6 手动转成 RGB 是多少？大多数人算不对。</li>
-                                <li data-i18n="tool.color-picker.problem2">本工具提供全方位的颜色选择与转换功能：可视化色轮取色、HEX/RGB/HSL/HSV/CMYK 五种格式实时互转、CSS 渐变生成器、调色板提取工具。在色轮上点击任意位置，五种格式的颜色值同时更新——不需要手动输入或计算。</li>
-                                <li data-i18n="tool.color-picker.problem3">支持从 HEX 值反向选色——输入一个颜色代码，色轮自动定位到对应位置。也支持随机生成和谐配色方案（互补色、三色组、四色组、类似色）——帮助设计师快速找到协调的色彩搭配。</li>
+                                <li data-i18n="tool.color-picker.problem1">设计师在 Photoshop 里用 HSL 调色，前端工程师在 CSS 里写
+                                    HEX，Python 脚本需要 RGB 元组，Java 的 Color 类需要 0-255
+                                    整数——同一种颜色在不同工具和语言中有完全不同的表示方式。手动转换不仅繁琐，还容易出错——把 #3B82F6 手动转成 RGB 是多少？大多数人算不对。</li>
+                                <li data-i18n="tool.color-picker.problem2">
+                                    本工具提供全方位的颜色选择与转换功能：可视化色轮取色、HEX/RGB/HSL/HSV/CMYK 五种格式实时互转、CSS
+                                    渐变生成器、调色板提取工具。在色轮上点击任意位置，五种格式的颜色值同时更新——不需要手动输入或计算。</li>
+                                <li data-i18n="tool.color-picker.problem3">支持从 HEX
+                                    值反向选色——输入一个颜色代码，色轮自动定位到对应位置。也支持随机生成和谐配色方案（互补色、三色组、四色组、类似色）——帮助设计师快速找到协调的色彩搭配。</li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.formatTitle">二、五种颜色格式的技术背景</h4>
                             <ul>
@@ -573,10 +589,19 @@
                             </ul>
                             <h4 data-i18n="tool.color-picker.featuresTitle">三、核心功能详解</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.featureOnline"><strong>可视化色轮：</strong>在 HSL 色轮上点击或拖动取色——色轮外圈是色相（H），内部是饱和度（S）和亮度（L）的二维平面。比输入数字更直观——看到什么颜色就点什么位置。</li>
-                                <li data-i18n="tool.color-picker.featurePreview"><strong>五色值同步：</strong>选择任何颜色后，HEX、RGB、HSL、HSV、CMYK 五种格式同时显示并支持一键复制。修改任一格式的值，其他格式自动同步更新。</li>
-                                <li data-i18n="tool.color-picker.featureExport"><strong>CSS 渐变生成器：</strong>选择两种或多种颜色，自动生成 linear-gradient 或 radial-gradient 的 CSS 代码。实时预览渐变效果，支持调整角度和颜色停靠点。</li>
-                                <li data-i18n="tool.color-picker.featureSecurity"><strong>和谐配色方案：</strong>基于色轮角度关系自动生成配色——互补色（180° 对角）、三色组（120° 等分）、四色组（90° 等分）、类似色（±30° 邻近）。帮助快速找到协调的色彩搭配。</li>
+                                <li data-i18n="tool.color-picker.featureOnline"><strong>可视化色轮：</strong>在 HSL
+                                    色轮上点击或拖动取色——色轮外圈是色相（H），内部是饱和度（S）和亮度（L）的二维平面。比输入数字更直观——看到什么颜色就点什么位置。</li>
+                                <li data-i18n="tool.color-picker.featurePreview">
+                                    <strong>五色值同步：</strong>选择任何颜色后，HEX、RGB、HSL、HSV、CMYK
+                                    五种格式同时显示并支持一键复制。修改任一格式的值，其他格式自动同步更新。
+                                </li>
+                                <li data-i18n="tool.color-picker.featureExport"><strong>CSS
+                                        渐变生成器：</strong>选择两种或多种颜色，自动生成 linear-gradient 或 radial-gradient 的 CSS
+                                    代码。实时预览渐变效果，支持调整角度和颜色停靠点。</li>
+                                <li data-i18n="tool.color-picker.featureSecurity">
+                                    <strong>和谐配色方案：</strong>基于色轮角度关系自动生成配色——互补色（180° 对角）、三色组（120° 等分）、四色组（90°
+                                    等分）、类似色（±30° 邻近）。帮助快速找到协调的色彩搭配。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -588,43 +613,68 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.color-picker.usagePickTitle">一、选择颜色</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.usagePick1"><strong>点击色块：</strong>点击左侧颜色预览块打开系统颜色选择器。</li>
+                                <li data-i18n="tool.color-picker.usagePick1"><strong>点击色块：</strong>点击左侧颜色预览块打开系统颜色选择器。
+                                </li>
                                 <li data-i18n="tool.color-picker.usagePick2"><strong>拖动选择：</strong>在颜色选择器中拖动选择所需颜色。</li>
                                 <li data-i18n="tool.color-picker.usagePick3"><strong>预设颜色：</strong>点击下方常用颜色快速选择。</li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.usageHexTitle">二、HEX格式</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.usageHex1"><strong>十六进制：</strong>以#开头，由6位十六进制数字组成（0-9, A-F）。</li>
-                                <li data-i18n="tool.color-picker.usageHex2"><strong>输入方式：</strong>直接输入6位颜色值，自动转换为大写。</li>
-                                <li data-i18n="tool.color-picker.usageHex3"><strong>简写支持：</strong>支持3位简写（如#FFF），自动扩展为6位。</li>
+                                <li data-i18n="tool.color-picker.usageHex1"><strong>十六进制：</strong>以#开头，由6位十六进制数字组成（0-9,
+                                    A-F）。</li>
+                                <li data-i18n="tool.color-picker.usageHex2"><strong>输入方式：</strong>直接输入6位颜色值，自动转换为大写。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageHex3"><strong>简写支持：</strong>支持3位简写（如#FFF），自动扩展为6位。
+                                </li>
                                 <li data-i18n="tool.color-picker.usageHex4"><strong>复制：</strong>点击"复制"按钮复制完整HEX值。</li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.usageRgbTitle">三、RGB格式</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.usageRgb1"><strong>红绿蓝：</strong>由红、绿、蓝三个分量组成，每个分量0-255。</li>
-                                <li data-i18n="tool.color-picker.usageRgb2"><strong>R值：</strong>红色分量，0表示无红色，255表示最大红色。</li>
-                                <li data-i18n="tool.color-picker.usageRgb3"><strong>G值：</strong>绿色分量，0表示无绿色，255表示最大绿色。</li>
-                                <li data-i18n="tool.color-picker.usageRgb4"><strong>B值：</strong>蓝色分量，0表示无蓝色，255表示最大蓝色。</li>
-                                <li data-i18n="tool.color-picker.usageRgb5"><strong>复制：</strong>点击"复制"按钮复制rgb(r, g, b)格式。</li>
+                                <li data-i18n="tool.color-picker.usageRgb1"><strong>红绿蓝：</strong>由红、绿、蓝三个分量组成，每个分量0-255。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageRgb2"><strong>R值：</strong>红色分量，0表示无红色，255表示最大红色。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageRgb3"><strong>G值：</strong>绿色分量，0表示无绿色，255表示最大绿色。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageRgb4"><strong>B值：</strong>蓝色分量，0表示无蓝色，255表示最大蓝色。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageRgb5"><strong>复制：</strong>点击"复制"按钮复制rgb(r, g,
+                                    b)格式。</li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.usageHslTitle">四、HSL格式</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.usageHsl1"><strong>H色相：</strong>颜色的种类，取值0-360度（红色0°，绿色120°，蓝色240°）。</li>
-                                <li data-i18n="tool.color-picker.usageHsl2"><strong>S饱和度：</strong>颜色的纯度，0%-100%（0%为灰色，100%为纯色）。</li>
-                                <li data-i18n="tool.color-picker.usageHsl3"><strong>L亮度：</strong>颜色的明暗，0%-100%（0%为黑色，50%为正常，100%为白色）。</li>
-                                <li data-i18n="tool.color-picker.usageHsl4"><strong>复制：</strong>点击"复制"按钮复制hsl(h, s%, l%)格式。</li>
+                                <li data-i18n="tool.color-picker.usageHsl1">
+                                    <strong>H色相：</strong>颜色的种类，取值0-360度（红色0°，绿色120°，蓝色240°）。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageHsl2">
+                                    <strong>S饱和度：</strong>颜色的纯度，0%-100%（0%为灰色，100%为纯色）。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageHsl3">
+                                    <strong>L亮度：</strong>颜色的明暗，0%-100%（0%为黑色，50%为正常，100%为白色）。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageHsl4"><strong>复制：</strong>点击"复制"按钮复制hsl(h, s%,
+                                    l%)格式。</li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.usageConvertTitle">五、格式转换</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.usageConvert1"><strong>实时转换：</strong>修改任意格式的值，其他格式自动同步更新。</li>
-                                <li data-i18n="tool.color-picker.usageConvert2"><strong>互相转换：</strong>三种格式完全等价，可以任意转换。</li>
-                                <li data-i18n="tool.color-picker.usageConvert3"><strong>复制全部：</strong>点击"复制全部格式"按钮一次性复制三种格式。</li>
+                                <li data-i18n="tool.color-picker.usageConvert1">
+                                    <strong>实时转换：</strong>修改任意格式的值，其他格式自动同步更新。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageConvert2"><strong>互相转换：</strong>三种格式完全等价，可以任意转换。
+                                </li>
+                                <li data-i18n="tool.color-picker.usageConvert3">
+                                    <strong>复制全部：</strong>点击"复制全部格式"按钮一次性复制三种格式。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.usageAdviceTitle">五、色彩设计建议</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.usageAdvice1"><strong>60-30-10 法则：</strong>主色占 60%（背景）、辅色占 30%（内容区域）、强调色占 10%（按钮/链接）。这是最经典的比例分配。</li>
-                                <li data-i18n="tool.color-picker.usageAdvice2"><strong>对比度检查：</strong>文字颜色与背景色的对比度至少 4.5:1（WCAG AA 标准）——确保可读性。白色文字配浅灰色背景是常见的可读性灾难。</li>
-                                <li data-i18n="tool.color-picker.usageAdvice3"><strong>色盲友好：</strong>避免仅用红绿差异传达信息——红绿色盲是最常见的色觉缺陷（约 8% 男性受影响）。使用形状/文字辅助区分。</li>
+                                <li data-i18n="tool.color-picker.usageAdvice1"><strong>60-30-10 法则：</strong>主色占
+                                    60%（背景）、辅色占 30%（内容区域）、强调色占 10%（按钮/链接）。这是最经典的比例分配。</li>
+                                <li data-i18n="tool.color-picker.usageAdvice2"><strong>对比度检查：</strong>文字颜色与背景色的对比度至少
+                                    4.5:1（WCAG AA 标准）——确保可读性。白色文字配浅灰色背景是常见的可读性灾难。</li>
+                                <li data-i18n="tool.color-picker.usageAdvice3">
+                                    <strong>色盲友好：</strong>避免仅用红绿差异传达信息——红绿色盲是最常见的色觉缺陷（约 8% 男性受影响）。使用形状/文字辅助区分。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -635,16 +685,25 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.color-picker.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.noteSecurity1"><strong>纯前端工具：</strong>所有颜色计算在浏览器中完成——不上传到任何服务器。</li>
-                                <li data-i18n="tool.color-picker.noteSecurity2"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。</li>
-                                <li data-i18n="tool.color-picker.noteSecurity3"><strong>无数据存储：</strong>不保存你的颜色选择历史——每次打开都是全新开始。</li>
+                                <li data-i18n="tool.color-picker.noteSecurity1">
+                                    <strong>纯前端工具：</strong>所有颜色计算在浏览器中完成——不上传到任何服务器。
+                                </li>
+                                <li data-i18n="tool.color-picker.noteSecurity2"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。
+                                </li>
+                                <li data-i18n="tool.color-picker.noteSecurity3">
+                                    <strong>无数据存储：</strong>不保存你的颜色选择历史——每次打开都是全新开始。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.notesFormatTitle">格式转换说明</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.noteFormat1"><strong>HEX 与 RGB：</strong>直接对应——HEX 的每两位就是 RGB 一个通道的十六进制值。#FF0000 = RGB(255, 0, 0)。</li>
-                                <li data-i18n="tool.color-picker.noteFormat2"><strong>RGB 与 HSL：</strong>需要数学转换——HSL 的色相由 RGB 三通道中最大值和最小值的差决定，饱和度和亮度由最大值和最小值的和决定。</li>
-                                <li data-i18n="tool.color-picker.noteFormat3"><strong>RGB 与 CMYK：</strong>CMYK 是减色模型（油墨吸收光线），RGB 是加色模型（屏幕发射光线）。两者不能完美对应——某些鲜艳的 RGB 颜色在 CMYK 中无法精确再现。</li>
-                                <li data-i18n="tool.color-picker.noteFormat4"><strong>色域限制：</strong>屏幕显示的是 sRGB 色域，CMYK 印刷色域不同——屏幕上看到的颜色和实际印刷效果可能有差异。重要项目建议打样确认。</li>
+                                <li data-i18n="tool.color-picker.noteFormat1"><strong>HEX 与 RGB：</strong>直接对应——HEX
+                                    的每两位就是 RGB 一个通道的十六进制值。#FF0000 = RGB(255, 0, 0)。</li>
+                                <li data-i18n="tool.color-picker.noteFormat2"><strong>RGB 与 HSL：</strong>需要数学转换——HSL
+                                    的色相由 RGB 三通道中最大值和最小值的差决定，饱和度和亮度由最大值和最小值的和决定。</li>
+                                <li data-i18n="tool.color-picker.noteFormat3"><strong>RGB 与 CMYK：</strong>CMYK
+                                    是减色模型（油墨吸收光线），RGB 是加色模型（屏幕发射光线）。两者不能完美对应——某些鲜艳的 RGB 颜色在 CMYK 中无法精确再现。</li>
+                                <li data-i18n="tool.color-picker.noteFormat4"><strong>色域限制：</strong>屏幕显示的是 sRGB 色域，CMYK
+                                    印刷色域不同——屏幕上看到的颜色和实际印刷效果可能有差异。重要项目建议打样确认。</li>
                             </ul>
                             <h4 data-i18n="tool.color-picker.notesInputTitle">三、输入验证</h4>
                             <ul>
@@ -654,9 +713,12 @@
                             </ul>
                             <h4 data-i18n="tool.color-picker.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="tool.color-picker.noteFaq1"><strong>Q: 颜色在手机上看起来不一样？</strong>A: 不同设备的屏幕色域和色彩校准不同——同一颜色在 iPhone 和 Android 上可能有差异。设计时以 sRGB 标准为准。</li>
-                                <li data-i18n="tool.color-picker.noteFaq2"><strong>Q: 能输入颜色名称吗？</strong>A: 当前版本不支持 CSS 颜色名称（如 red、blue）。请直接输入 HEX 或 RGB 值。</li>
-                                <li data-i18n="tool.color-picker.noteFaq3"><strong>Q: 渐变色代码在旧浏览器中不生效？</strong>A: CSS gradient 需要添加浏览器前缀（-webkit-, -moz-）。现代浏览器（2020 年后）已不需要前缀。</li>
+                                <li data-i18n="tool.color-picker.noteFaq1"><strong>Q: 颜色在手机上看起来不一样？</strong>A:
+                                    不同设备的屏幕色域和色彩校准不同——同一颜色在 iPhone 和 Android 上可能有差异。设计时以 sRGB 标准为准。</li>
+                                <li data-i18n="tool.color-picker.noteFaq2"><strong>Q: 能输入颜色名称吗？</strong>A: 当前版本不支持 CSS
+                                    颜色名称（如 red、blue）。请直接输入 HEX 或 RGB 值。</li>
+                                <li data-i18n="tool.color-picker.noteFaq3"><strong>Q: 渐变色代码在旧浏览器中不生效？</strong>A: CSS
+                                    gradient 需要添加浏览器前缀（-webkit-, -moz-）。现代浏览器（2020 年后）已不需要前缀。</li>
                             </ul>
                         </div>
                     </article>
@@ -669,13 +731,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

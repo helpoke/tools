@@ -6,6 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>SVG图片转换类型与清晰度解决方案</title>
+    <meta name="description" content="SVG图片转换类型与清晰度解决方案，解决SVG转PNG、JPG、WebP等格式后模糊的问题，支持高质量多格式互转，纯前端本地处理保护隐私">
+    <meta name="keywords" content="SVG转换, SVG转PNG, SVG转JPG, SVG转WebP, 图片格式转换, SVG高清转换">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <meta property="og:title" content="SVG图片转换类型与清晰度解决方案">
+    <meta property="og:description" content="SVG图片转换类型与清晰度解决方案，解决SVG转PNG、JPG、WebP等格式后模糊的问题，支持高质量多格式互转，纯前端本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/image/convert/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SVG图片转换类型与清晰度解决方案">
+    <meta name="twitter:description" content="SVG图片转换类型与清晰度解决方案，解决SVG转PNG、JPG、WebP等格式后模糊的问题，支持高质量多格式互转，纯前端本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/image/convert/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/image/convert/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/image/convert/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "为什么SVG转换为PNG后会模糊？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SVG是矢量格式，使用数学公式描述图形，可以无限缩放而不失真。转换为PNG等位图格式后，图像被栅格化为固定数量的像素。当放大这些位图时，像素会被拉伸，导致模糊。这是位图格式的固有特性。解决方案：设置更高的输出分辨率（如2x或3x），或在需要放大的场景中直接使用SVG格式。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "SVG转换为JPG后透明背景会变成什么颜色？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "JPG格式不支持透明度，转换时透明背景会被填充为白色或黑色（取决于工具设置）。如果需要保留透明背景，应选择PNG格式。建议在转换前确认目标格式是否支持透明度，避免意外的背景色填充。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何选择合适的输出格式？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "选择输出格式时应考虑使用场景：网页使用优先选择SVG或PNG；打印用途选择PDF或高分辨率PNG（300DPI以上）；社交媒体头像选择PNG（支持透明背景）；邮件附件选择JPG（文件体积小）；移动应用提供多种分辨率的PNG。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "转换后的图片文件太大怎么办？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以通过以下方法减小文件大小：1. 选择合适的格式（JPG比PNG小）；2. 降低JPG质量参数（建议80%-90%）；3. 缩小输出尺寸；4. 使用图片压缩工具进行二次压缩。工具本身会进行一定的压缩优化，但根据使用场景调整参数可以进一步减小文件体积。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "SVG中的文字转换后会变成图片吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "是的，转换为位图格式（PNG、JPG）后，SVG中的文字会被栅格化为像素，不再是可编辑的文本。如果需要保留文字的可编辑性，应选择PDF格式或保留原始SVG文件。建议在转换前确认是否需要保留文字的可编辑性。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何确保转换后的图片在不同设备上显示一致？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以通过以下方法确保显示一致性：1. 使用标准颜色空间（如sRGB）；2. 避免使用过于特殊的字体，或在SVG中嵌入字体；3. 为不同设备生成不同分辨率的版本；4. 在多种设备上测试转换结果。建议在转换前了解目标设备的显示特性，选择合适的格式和参数。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -484,10 +559,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

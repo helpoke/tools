@@ -4,13 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="文档内容模糊处理工具，支持PDF文档页面内容模糊，可自定义模糊强度和页面范围，纯前端本地处理保护隐私">
-    <meta name="keywords" content="文档模糊, PDF模糊处理, 内容打码, 隐私保护, 在线模糊工具, 文档内容遮盖">
+    <meta name="keywords" content="文档模糊, PDF页面模糊, 内容打码, 隐私保护, 在线模糊工具, 文档内容遮盖">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>文档内容模糊 - PDF文档内容模糊处理工具</title>
     <meta property="og:title" content="文档内容模糊 - PDF文档内容模糊处理工具">
@@ -46,7 +54,7 @@
         "@type": "WebApplication",
         "name": "文档内容模糊工具",
         "description": "免费在线文档内容模糊处理工具，支持PDF文档页面内容模糊，可自定义模糊强度和页面范围。纯前端本地处理，保护用户隐私。Free online document blur tool with privacy protection.",
-        "url": "https://helpoke.com/docu/blurr",
+        "url": "https://helpoke.com/docu/blurr/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -60,7 +68,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -77,12 +85,12 @@
 
     <main class="main">
         <section class="page-hero">
-            <h1 data-i18n="docu.blurr.title">PDF模糊处理工具</h1>
+            <h1 data-i18n="docu.blurr.title">PDF页面模糊工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
-            <p data-i18n="docu.blurr.intro">PDF模糊处理工具，支持搜索定位PDF文档内容并进行模糊处理，自定义模糊强度和页面范围</p>
+            <p data-i18n="docu.blurr.intro">PDF页面模糊工具，支持搜索定位PDF文档内容并进行模糊处理，自定义模糊强度和页面范围</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
@@ -115,7 +123,8 @@
                         <span class="hint" id="searchHint"></span>
                     </div>
                     <div class="setting-item">
-                        <label for="blurRadius" data-i18n="docu.blurr.radiusLabel">模糊强度：<span id="radiusValue">3</span>px</label>
+                        <label for="blurRadius" data-i18n="docu.blurr.radiusLabel">模糊强度：<span
+                                id="radiusValue">3</span>px</label>
                         <input type="range" id="blurRadius" min="1" max="10" value="3" step="1">
                         <span class="hint" data-i18n="docu.blurr.radiusHint">值越大越模糊</span>
                     </div>
@@ -175,20 +184,30 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.blurr.problemsTitle">一、为什么需要模糊 PDF 中的内容</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.problem1">合同、报告、论文等 PDF 文档中常包含敏感信息——身份证号、银行账号、手机号、商业秘密条款。直接删除可能破坏文档排版，涂黑又过于明显。高斯模糊是最佳折中方案——信息不可读但版面结构完整保留，审阅者一眼就知道"这里有敏感内容已被处理"。</li>
-                            <li data-i18n="docu.blurr.problem2">本工具支持搜索定位和手动选择两种模式——输入关键词搜索 PDF 文本内容，定位到的文字区域自动标记为模糊目标；也可以直接在预览中手动框选需要模糊的区域。自定义模糊半径（强度）和页面范围，处理后的 PDF 保持原始排版不变。</li>
-                            <li data-i18n="docu.blurr.problem3">与在线 PDF 编辑工具不同，本工具完全在浏览器中处理——PDF 文件不上传到任何服务器。对于包含商业机密或个人隐私的文档，这是最基本的安全保障。</li>
+                            <li data-i18n="docu.blurr.problem1">合同、报告、论文等 PDF
+                                文档中常包含敏感信息——身份证号、银行账号、手机号、商业秘密条款。直接删除可能破坏文档排版，涂黑又过于明显。高斯模糊是最佳折中方案——信息不可读但版面结构完整保留，审阅者一眼就知道"这里有敏感内容已被处理"。
+                            </li>
+                            <li data-i18n="docu.blurr.problem2">本工具支持搜索定位和手动选择两种模式——输入关键词搜索 PDF
+                                文本内容，定位到的文字区域自动标记为模糊目标；也可以直接在预览中手动框选需要模糊的区域。自定义模糊半径（强度）和页面范围，处理后的 PDF 保持原始排版不变。</li>
+                            <li data-i18n="docu.blurr.problem3">与在线 PDF 编辑工具不同，本工具完全在浏览器中处理——PDF
+                                文件不上传到任何服务器。对于包含商业机密或个人隐私的文档，这是最基本的安全保障。</li>
                         </ul>
                         <h4 data-i18n="docu.blurr.formatTitle">二、PDF 模糊的技术原理</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.formatPdf"><strong>PDF 文本层：</strong>PDF 文件包含文本层（可选中的文字）和渲染层（显示的内容）。本工具解析 PDF 的文本层获取每个字符的坐标位置，然后用 Canvas 在对应区域绘制高斯模糊效果——最后用 pdf-lib 将模糊后的图像重新嵌入 PDF。</li>
+                            <li data-i18n="docu.blurr.formatPdf"><strong>PDF 文本层：</strong>PDF
+                                文件包含文本层（可选中的文字）和渲染层（显示的内容）。本工具解析 PDF 的文本层获取每个字符的坐标位置，然后用 Canvas 在对应区域绘制高斯模糊效果——最后用
+                                pdf-lib 将模糊后的图像重新嵌入 PDF。</li>
                         </ul>
                         <h4 data-i18n="docu.blurr.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.featureOnline"><strong>搜索定位：</strong>输入关键词自动搜索 PDF 中的匹配文本——高亮显示匹配位置，一键将所有匹配区域标记为模糊目标。</li>
-                            <li data-i18n="docu.blurr.featurePreview"><strong>页面预览：</strong>上传后逐页渲染 PDF 预览——支持缩放、翻页、搜索导航。在预览中直观查看哪些区域将被模糊。</li>
-                            <li data-i18n="docu.blurr.featureExport"><strong>自定义范围：</strong>支持全部页面或自定义页码范围（如 1-5,8,10-12）——只对需要处理的页面执行模糊。</li>
-                            <li data-i18n="docu.blurr.featureSecurity"><strong>纯前端处理：</strong>基于 PDF.js 解析 + pdf-lib 生成 + Canvas 渲染——所有处理在浏览器中完成，文件不上传。</li>
+                            <li data-i18n="docu.blurr.featureOnline"><strong>搜索定位：</strong>输入关键词自动搜索 PDF
+                                中的匹配文本——高亮显示匹配位置，一键将所有匹配区域标记为模糊目标。</li>
+                            <li data-i18n="docu.blurr.featurePreview"><strong>页面预览：</strong>上传后逐页渲染 PDF
+                                预览——支持缩放、翻页、搜索导航。在预览中直观查看哪些区域将被模糊。</li>
+                            <li data-i18n="docu.blurr.featureExport"><strong>自定义范围：</strong>支持全部页面或自定义页码范围（如
+                                1-5,8,10-12）——只对需要处理的页面执行模糊。</li>
+                            <li data-i18n="docu.blurr.featureSecurity"><strong>纯前端处理：</strong>基于 PDF.js 解析 + pdf-lib 生成
+                                + Canvas 渲染——所有处理在浏览器中完成，文件不上传。</li>
                         </ul>
                     </div>
                 </article>
@@ -200,29 +219,42 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.blurr.usageUploadTitle">上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.usageUpload1"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持 200MB。</li>
-                            <li data-i18n="docu.blurr.usageUpload2"><strong>自动解析：</strong>文件上传后自动解析文本层并渲染预览——显示总页数和文件大小。</li>
-                            <li data-i18n="docu.blurr.usageUpload3"><strong>翻页查看：</strong>使用预览区的翻页按钮浏览每一页内容——确认需要模糊的位置。</li>
+                            <li data-i18n="docu.blurr.usageUpload1"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持 200MB。
+                            </li>
+                            <li data-i18n="docu.blurr.usageUpload2"><strong>自动解析：</strong>文件上传后自动解析文本层并渲染预览——显示总页数和文件大小。
+                            </li>
+                            <li data-i18n="docu.blurr.usageUpload3"><strong>翻页查看：</strong>使用预览区的翻页按钮浏览每一页内容——确认需要模糊的位置。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.blurr.usageBlurTitle">设置模糊</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.usageBlur1"><strong>搜索定位：</strong>在搜索框中输入关键词——工具自动在全文中搜索并高亮匹配位置。</li>
-                            <li data-i18n="docu.blurr.usageBlur2"><strong>标记区域：</strong>点击搜索结果的区域将其标记为模糊目标——已标记区域会显示模糊效果预览。</li>
-                            <li data-i18n="docu.blurr.usageBlur3"><strong>调整强度：</strong>拖动模糊半径滑块调整模糊强度——值越大越模糊，建议 10-30 之间。</li>
-                            <li data-i18n="docu.blurr.usageBlur4"><strong>清除重选：</strong>点击"清除"按钮取消所有标记——重新选择需要模糊的区域。</li>
+                            <li data-i18n="docu.blurr.usageBlur1"><strong>搜索定位：</strong>在搜索框中输入关键词——工具自动在全文中搜索并高亮匹配位置。
+                            </li>
+                            <li data-i18n="docu.blurr.usageBlur2">
+                                <strong>标记区域：</strong>点击搜索结果的区域将其标记为模糊目标——已标记区域会显示模糊效果预览。
+                            </li>
+                            <li data-i18n="docu.blurr.usageBlur3"><strong>调整强度：</strong>拖动模糊半径滑块调整模糊强度——值越大越模糊，建议 10-30
+                                之间。</li>
+                            <li data-i18n="docu.blurr.usageBlur4"><strong>清除重选：</strong>点击"清除"按钮取消所有标记——重新选择需要模糊的区域。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.blurr.usagePageTitle">页面范围</h4>
                         <ul>
                             <li data-i18n="docu.blurr.usagePage1"><strong>全部页面：</strong>选择"全部页面"模式——对所有页面执行搜索和模糊。</li>
-                            <li data-i18n="docu.blurr.usagePage2"><strong>自定义页面：</strong>选择"自定义页面"模式——输入页码范围（如 1-5,8）。</li>
+                            <li data-i18n="docu.blurr.usagePage2"><strong>自定义页面：</strong>选择"自定义页面"模式——输入页码范围（如 1-5,8）。
+                            </li>
                             <li data-i18n="docu.blurr.usagePage3"><strong>页面提示：</strong>只在指定页面范围内搜索和模糊——其他页面不受影响。</li>
                             <li data-i18n="docu.blurr.usagePage4"><strong>确认范围：</strong>处理前确认页面范围——避免遗漏需要处理的页面。</li>
                         </ul>
                         <h4 data-i18n="docu.blurr.usageProcessTitle">处理与下载</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.usageProcess1"><strong>点击处理：</strong>点击"处理"按钮开始模糊处理——进度条显示处理进度。</li>
-                            <li data-i18n="docu.blurr.usageProcess2"><strong>等待完成：</strong>处理时间取决于文件大小和模糊区域数量——大文件可能需要数十秒。</li>
-                            <li data-i18n="docu.blurr.usageProcess3"><strong>下载结果：</strong>处理完成后点击"下载"按钮保存模糊后的 PDF 文件。</li>
+                            <li data-i18n="docu.blurr.usageProcess1"><strong>点击处理：</strong>点击"处理"按钮开始模糊处理——进度条显示处理进度。
+                            </li>
+                            <li data-i18n="docu.blurr.usageProcess2">
+                                <strong>等待完成：</strong>处理时间取决于文件大小和模糊区域数量——大文件可能需要数十秒。
+                            </li>
+                            <li data-i18n="docu.blurr.usageProcess3"><strong>下载结果：</strong>处理完成后点击"下载"按钮保存模糊后的 PDF 文件。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -233,33 +265,49 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.blurr.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.noteSecurity1"><strong>纯前端处理：</strong>所有 PDF 处理在浏览器中完成——文件内容不上传到任何服务器。</li>
-                            <li data-i18n="docu.blurr.noteSecurity2"><strong>内存限制：</strong>超大 PDF（>100MB）可能占用大量浏览器内存——建议分批处理。</li>
+                            <li data-i18n="docu.blurr.noteSecurity1"><strong>纯前端处理：</strong>所有 PDF
+                                处理在浏览器中完成——文件内容不上传到任何服务器。</li>
+                            <li data-i18n="docu.blurr.noteSecurity2"><strong>内存限制：</strong>超大
+                                PDF（>100MB）可能占用大量浏览器内存——建议分批处理。</li>
                         </ul>
                         <h4 data-i18n="docu.blurr.notesProcessTitle">处理说明</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.noteProcess1"><strong>扫描版 PDF：</strong>扫描版 PDF（图片型）没有文本层——搜索功能无法定位内容，需要手动框选区域。</li>
-                            <li data-i18n="docu.blurr.noteProcess2"><strong>模糊不可逆：</strong>高斯模糊是信息破坏性操作——处理后的区域无法还原为原始文字。</li>
-                            <li data-i18n="docu.blurr.noteProcess3"><strong>排版保留：</strong>模糊处理只影响指定区域的像素——文档的其他内容、排版、字体完全不变。</li>
+                            <li data-i18n="docu.blurr.noteProcess1"><strong>扫描版 PDF：</strong>扫描版
+                                PDF（图片型）没有文本层——搜索功能无法定位内容，需要手动框选区域。</li>
+                            <li data-i18n="docu.blurr.noteProcess2">
+                                <strong>模糊不可逆：</strong>高斯模糊是信息破坏性操作——处理后的区域无法还原为原始文字。
+                            </li>
+                            <li data-i18n="docu.blurr.noteProcess3">
+                                <strong>排版保留：</strong>模糊处理只影响指定区域的像素——文档的其他内容、排版、字体完全不变。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.blurr.notesFormatTitle">格式说明</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.noteFormat1"><strong>输入格式：</strong>仅支持 PDF 格式——不支持 Word、Excel 等其他文档格式。</li>
-                            <li data-i18n="docu.blurr.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——可在任何 PDF 阅读器中打开查看。</li>
-                            <li data-i18n="docu.blurr.noteFormat3"><strong>加密 PDF：</strong>受密码保护的 PDF 需要先解密才能处理——本工具不支持直接处理加密 PDF。</li>
+                            <li data-i18n="docu.blurr.noteFormat1"><strong>输入格式：</strong>仅支持 PDF 格式——不支持 Word、Excel
+                                等其他文档格式。</li>
+                            <li data-i18n="docu.blurr.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——可在任何 PDF
+                                阅读器中打开查看。</li>
+                            <li data-i18n="docu.blurr.noteFormat3"><strong>加密 PDF：</strong>受密码保护的 PDF
+                                需要先解密才能处理——本工具不支持直接处理加密 PDF。</li>
                         </ul>
                         <h4 data-i18n="docu.blurr.notesEffectTitle">效果说明</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.noteEffect1"><strong>模糊半径：</strong>半径 5-10 适合轻度模糊（文字仍可辨认轮廓），15-25 适合中度模糊（文字不可读），30+ 为强模糊（完全不可辨认）。</li>
-                            <li data-i18n="docu.blurr.noteEffect2"><strong>搜索精度：</strong>搜索区分大小写——如果搜索不到结果，尝试使用不同的关键词或检查 PDF 文本层是否完整。</li>
+                            <li data-i18n="docu.blurr.noteEffect1"><strong>模糊半径：</strong>半径 5-10 适合轻度模糊（文字仍可辨认轮廓），15-25
+                                适合中度模糊（文字不可读），30+ 为强模糊（完全不可辨认）。</li>
+                            <li data-i18n="docu.blurr.noteEffect2"><strong>搜索精度：</strong>搜索区分大小写——如果搜索不到结果，尝试使用不同的关键词或检查
+                                PDF 文本层是否完整。</li>
                             <li data-i18n="docu.blurr.noteEffect3"><strong>多关键词：</strong>每次搜索一个关键词——多个敏感词需要分别搜索并标记。</li>
                         </ul>
                         <h4 data-i18n="docu.blurr.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.blurr.noteFaq1"><strong>Q: 模糊后文件变大很多？</strong>A: 模糊效果通过嵌入图像实现——每个模糊区域都会增加文件体积。减少模糊区域数量或使用较低的模糊半径可以控制文件大小。</li>
-                            <li data-i18n="docu.blurr.noteFaq2"><strong>Q: 搜索不到关键词？</strong>A: 可能是扫描版 PDF（没有文本层）或关键词格式不匹配——尝试不同的搜索词或检查 PDF 类型。</li>
-                            <li data-i18n="docu.blurr.noteFaq3"><strong>Q: 能模糊图片中的文字吗？</strong>A: 不能自动识别——PDF 中嵌入的图片没有文本层。需要手动框选图片中的敏感区域。</li>
-                            <li data-i18n="docu.blurr.noteFaq4"><strong>Q: 处理后的 PDF 还能编辑吗？</strong>A: 可以——模糊区域变成了图像嵌入，其他文本内容仍然可选中和复制。</li>
+                            <li data-i18n="docu.blurr.noteFaq1"><strong>Q: 模糊后文件变大很多？</strong>A:
+                                模糊效果通过嵌入图像实现——每个模糊区域都会增加文件体积。减少模糊区域数量或使用较低的模糊半径可以控制文件大小。</li>
+                            <li data-i18n="docu.blurr.noteFaq2"><strong>Q: 搜索不到关键词？</strong>A: 可能是扫描版
+                                PDF（没有文本层）或关键词格式不匹配——尝试不同的搜索词或检查 PDF 类型。</li>
+                            <li data-i18n="docu.blurr.noteFaq3"><strong>Q: 能模糊图片中的文字吗？</strong>A: 不能自动识别——PDF
+                                中嵌入的图片没有文本层。需要手动框选图片中的敏感区域。</li>
+                            <li data-i18n="docu.blurr.noteFaq4"><strong>Q: 处理后的 PDF 还能编辑吗？</strong>A:
+                                可以——模糊区域变成了图像嵌入，其他文本内容仍然可选中和复制。</li>
                         </ul>
                     </div>
                 </article>
@@ -270,13 +318,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
@@ -290,7 +338,8 @@
             <div class="modal-header">
                 <button class="modal-nav-btn" id="modalPrev" title="上一页"
                     data-i18n-title="docu.blurr.modalPrevTitle">◀</button>
-                <span class="modal-title" id="modalTitle" data-i18n="docu.blurr.modalTitle">第 {{page}} 页 / 共 {{total}} 页</span>
+                <span class="modal-title" id="modalTitle" data-i18n="docu.blurr.modalTitle">第 {{page}} 页 / 共 {{total}}
+                    页</span>
                 <button class="modal-nav-btn" id="modalNext" title="下一页"
                     data-i18n-title="docu.blurr.modalNextTitle">▶</button>
                 <button class="modal-close" id="modalClose">×</button>
@@ -299,7 +348,8 @@
                 <canvas id="modalCanvas"></canvas>
             </div>
             <div class="modal-footer">
-                <span class="hint" data-i18n="docu.blurr.modalHint">模糊强度：<strong id="modalBlurRadius">3</strong>px | 状态：<strong id="modalBlurStatus">模糊</strong> | 双击空白处或按 Esc 关闭</span>
+                <span class="hint" data-i18n="docu.blurr.modalHint">模糊强度：<strong id="modalBlurRadius">3</strong>px |
+                    状态：<strong id="modalBlurStatus">模糊</strong> | 双击空白处或按 Esc 关闭</span>
             </div>
         </div>
     </div>

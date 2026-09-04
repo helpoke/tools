@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>大小写批量转换 - Helpoke 助点站</title>
     <meta property="og:title" content="大小写批量转换 - Helpoke 助点站">
@@ -286,7 +294,7 @@
         "@type": "WebApplication",
         "name": "文本转换工具",
         "description": "在线文本转换工具，支持大小写转换、全角半角转换、文本排序等功能。免费在线文本处理工具。Online text transformation tool with case conversion and sorting.",
-        "url": "https://helpoke.com/tool/text-transform",
+        "url": "https://helpoke.com/tool/text-transform/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -301,7 +309,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -338,9 +346,12 @@
                 </div>
 
                 <div class="stats" id="stats-panel">
-                    <div class="stat-item" data-i18n="tool.text-transform.charCount">字符数: <span class="stat-value" id="char-count">0</span></div>
-                    <div class="stat-item" data-i18n="tool.text-transform.wordCount">单词数: <span class="stat-value" id="word-count">0</span></div>
-                    <div class="stat-item" data-i18n="tool.text-transform.lineCount">行数: <span class="stat-value" id="line-count">0</span></div>
+                    <div class="stat-item" data-i18n="tool.text-transform.charCount">字符数: <span class="stat-value"
+                            id="char-count">0</span></div>
+                    <div class="stat-item" data-i18n="tool.text-transform.wordCount">单词数: <span class="stat-value"
+                            id="word-count">0</span></div>
+                    <div class="stat-item" data-i18n="tool.text-transform.lineCount">行数: <span class="stat-value"
+                            id="line-count">0</span></div>
                 </div>
 
                 <div class="actions-row">
@@ -350,14 +361,16 @@
                         data-i18n="tool.text-transform.btnLowercase">转小写</button>
                     <button class="btn btn-primary" id="btn-capitalize"
                         data-i18n="tool.text-transform.btnCapitalize">首字母大写</button>
-                    <button class="btn btn-success" id="btn-title" data-i18n="tool.text-transform.btnTitle">标题格式</button>
+                    <button class="btn btn-success" id="btn-title"
+                        data-i18n="tool.text-transform.btnTitle">标题格式</button>
                     <button class="btn btn-info" id="btn-camel" data-i18n="tool.text-transform.btnCamel">驼峰命名</button>
                     <button class="btn btn-info" id="btn-snake" data-i18n="tool.text-transform.btnSnake">下划线命名</button>
                     <button class="btn btn-info" id="btn-kebab" data-i18n="tool.text-transform.btnKebab">短横线命名</button>
                     <button class="btn btn-warning" id="btn-trim" data-i18n="tool.text-transform.btnTrim">清理空格</button>
                     <button class="btn btn-warning" id="btn-remove-spaces"
                         data-i18n="tool.text-transform.btnRemoveSpaces">删除所有空格</button>
-                    <button class="btn btn-secondary" id="btn-clear" data-i18n="tool.text-transform.btnClear">清空</button>
+                    <button class="btn btn-secondary" id="btn-clear"
+                        data-i18n="tool.text-transform.btnClear">清空</button>
                 </div>
 
                 <div class="output-section">
@@ -380,9 +393,13 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.text-transform.problemsTitle">一、文本格式问题是最容易被忽视的效率漏洞</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.problem1">用户输入的邮箱地址大小写不统一导致数据库出现重复记录、从 PDF 复制的文字全角半角混杂导致代码报错、JSON 中的中文字符需要转义为 Unicode 编码——这些看似琐碎的格式问题每天都在消耗开发者和运营人员的时间。本工具集成 20+ 种文本转换功能，覆盖大小写转换、全半角转换、Unicode 编码/解码、Base64 编码、URL 编码、HTML 实体编码等常见需求。</li>
-                                <li data-i18n="tool.text-transform.problem2">粘贴文本后一键转换——不需要写正则、不需要打开代码编辑器、不需要查 ASCII 表。所有转换在浏览器中完成，处理速度取决于文本长度——通常 10 万字以内的转换在 100ms 内完成。</li>
-                                <li data-i18n="tool.text-transform.problem3">支持链式转换——先转全角，再转大写，再 Base64 编码——每步转换基于上一步的结果。转换结果可以一键复制或直接编辑后继续转换。</li>
+                                <li data-i18n="tool.text-transform.problem1">用户输入的邮箱地址大小写不统一导致数据库出现重复记录、从 PDF
+                                    复制的文字全角半角混杂导致代码报错、JSON 中的中文字符需要转义为 Unicode 编码——这些看似琐碎的格式问题每天都在消耗开发者和运营人员的时间。本工具集成
+                                    20+ 种文本转换功能，覆盖大小写转换、全半角转换、Unicode 编码/解码、Base64 编码、URL 编码、HTML 实体编码等常见需求。</li>
+                                <li data-i18n="tool.text-transform.problem2">粘贴文本后一键转换——不需要写正则、不需要打开代码编辑器、不需要查 ASCII
+                                    表。所有转换在浏览器中完成，处理速度取决于文本长度——通常 10 万字以内的转换在 100ms 内完成。</li>
+                                <li data-i18n="tool.text-transform.problem3">支持链式转换——先转全角，再转大写，再 Base64
+                                    编码——每步转换基于上一步的结果。转换结果可以一键复制或直接编辑后继续转换。</li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.formatTitle">二、转换功能分类</h4>
                             <ul>
@@ -390,10 +407,17 @@
                             </ul>
                             <h4 data-i18n="tool.text-transform.featuresTitle">三、各转换功能的技术细节</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.featureOnline"><strong>大小写规则：</strong>Title Case 将每个单词首字母大写（hello world → Hello World）；Sentence Case 将每句首字母大写（hello world. goodbye → Hello world. Goodbye）；swapCase 将大写变小写、小写变大写。</li>
-                                <li data-i18n="tool.text-transform.featurePreview"><strong>全半角映射：</strong>全角字符的 Unicode 编码 = 半角编码 + 0xFEE0。如全角"A"（U+FF21）= 半角"A"（U+0041）+ 0xFEE0。转换就是在这个数值空间做加减法。</li>
-                                <li data-i18n="tool.text-transform.featureExport"><strong>Base64 编码：</strong>将文本的 UTF-8 字节序列按 6 位一组重新分组，映射到 64 个可打印字符（A-Z, a-z, 0-9, +, /）。编码后体积增加约 33%——适合在 URL、JSON、邮件中传输二进制数据。</li>
-                                <li data-i18n="tool.text-transform.featureSecurity"><strong>URL 编码：</strong>将非 ASCII 字符和特殊字符转换为 %XX 格式（百分号后跟两位十六进制）。如中文"你好"编码为 %E4%BD%A0%E5%A5%BD——每个中文字符编码为 3 个百分号序列。</li>
+                                <li data-i18n="tool.text-transform.featureOnline"><strong>大小写规则：</strong>Title Case
+                                    将每个单词首字母大写（hello world → Hello World）；Sentence Case 将每句首字母大写（hello world. goodbye →
+                                    Hello world. Goodbye）；swapCase 将大写变小写、小写变大写。</li>
+                                <li data-i18n="tool.text-transform.featurePreview"><strong>全半角映射：</strong>全角字符的 Unicode
+                                    编码 = 半角编码 + 0xFEE0。如全角"A"（U+FF21）= 半角"A"（U+0041）+ 0xFEE0。转换就是在这个数值空间做加减法。</li>
+                                <li data-i18n="tool.text-transform.featureExport"><strong>Base64 编码：</strong>将文本的 UTF-8
+                                    字节序列按 6 位一组重新分组，映射到 64 个可打印字符（A-Z, a-z, 0-9, +, /）。编码后体积增加约 33%——适合在
+                                    URL、JSON、邮件中传输二进制数据。</li>
+                                <li data-i18n="tool.text-transform.featureSecurity"><strong>URL 编码：</strong>将非 ASCII
+                                    字符和特殊字符转换为 %XX 格式（百分号后跟两位十六进制）。如中文"你好"编码为 %E4%BD%A0%E5%A5%BD——每个中文字符编码为 3 个百分号序列。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -405,41 +429,75 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.text-transform.usageInputTitle">输入文本</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.usageInputContent"><strong>输入内容：</strong>在输入框中输入或粘贴需要转换的文本。支持中英文混合文本——大小写转换仅对英文字母生效，中文字符不受影响。实时统计面板显示字符数、单词数和行数。</li>
-                                <li data-i18n="tool.text-transform.usageStats"><strong>实时统计：</strong>显示字符数、单词数、行数等统计信息。</li>
-                                <li data-i18n="tool.text-transform.usageBilingual"><strong>中英文支持：</strong>大小写转换仅处理英文字母（A-Z, a-z），中文、数字和标点符号保持不变。命名格式转换将中文字符视为单词分隔符，可以正确处理中英文混合的变量名。</li>
+                                <li data-i18n="tool.text-transform.usageInputContent">
+                                    <strong>输入内容：</strong>在输入框中输入或粘贴需要转换的文本。支持中英文混合文本——大小写转换仅对英文字母生效，中文字符不受影响。实时统计面板显示字符数、单词数和行数。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageStats"><strong>实时统计：</strong>显示字符数、单词数、行数等统计信息。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageBilingual">
+                                    <strong>中英文支持：</strong>大小写转换仅处理英文字母（A-Z,
+                                    a-z），中文、数字和标点符号保持不变。命名格式转换将中文字符视为单词分隔符，可以正确处理中英文混合的变量名。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.usageCaseTitle">二、大小写转换</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.usageUppercase"><strong>转大写：</strong>将所有英文字母转为大写——如 "hello world" → "HELLO WORLD"。适用于 SQL 关键字、常量定义、强调文本等场景。</li>
-                                <li data-i18n="tool.text-transform.usageLowercase"><strong>转小写：</strong>将所有英文字母转为小写——如 "HELLO WORLD" → "hello world"。适用于 URL 路径、邮箱地址、标准化处理等场景。</li>
-                                <li data-i18n="tool.text-transform.usageCapitalize"><strong>首字母大写：</strong>每个单词的首字母转为大写——如 "hello world" → "Hello World"。适用于人名、地名、标题等场景。以空格和标点作为单词分隔符。</li>
-                                <li data-i18n="tool.text-transform.usageTitle"><strong>标题格式：</strong>遵循英文标题规范——实词首字母大写，虚词（a, an, the, in, on, at, to, for, and, or, but 等）小写。适用于文章标题、书名、报告标题等正式场合。</li>
+                                <li data-i18n="tool.text-transform.usageUppercase"><strong>转大写：</strong>将所有英文字母转为大写——如
+                                    "hello world" → "HELLO WORLD"。适用于 SQL 关键字、常量定义、强调文本等场景。</li>
+                                <li data-i18n="tool.text-transform.usageLowercase"><strong>转小写：</strong>将所有英文字母转为小写——如
+                                    "HELLO WORLD" → "hello world"。适用于 URL 路径、邮箱地址、标准化处理等场景。</li>
+                                <li data-i18n="tool.text-transform.usageCapitalize">
+                                    <strong>首字母大写：</strong>每个单词的首字母转为大写——如 "hello world" → "Hello
+                                    World"。适用于人名、地名、标题等场景。以空格和标点作为单词分隔符。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageTitle">
+                                    <strong>标题格式：</strong>遵循英文标题规范——实词首字母大写，虚词（a, an, the, in, on, at, to, for, and, or,
+                                    but 等）小写。适用于文章标题、书名、报告标题等正式场合。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.usageNamingTitle">三、命名格式转换</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.usageCamel"><strong>驼峰命名（camelCase）：</strong>第一个单词全小写，后续单词首字母大写，单词之间无分隔符——如 "hello world" → "helloWorld"。Java、JavaScript、Swift 的变量和方法命名标准。</li>
-                                <li data-i18n="tool.text-transform.usageSnake"><strong>下划线命名（snake_case）：</strong>所有字母小写，单词之间用下划线连接——如 "hello world" → "hello_world"。Python、Ruby、Rust 的变量和函数命名标准。也用于数据库字段名。</li>
-                                <li data-i18n="tool.text-transform.usageKebab"><strong>短横线命名（kebab-case）：</strong>所有字母小写，单词之间用短横线连接——如 "hello world" → "hello-world"。CSS 类名、HTML 属性名、URL 路径的标准格式。Web Components 的标签名也使用此格式。</li>
+                                <li data-i18n="tool.text-transform.usageCamel">
+                                    <strong>驼峰命名（camelCase）：</strong>第一个单词全小写，后续单词首字母大写，单词之间无分隔符——如 "hello world" →
+                                    "helloWorld"。Java、JavaScript、Swift 的变量和方法命名标准。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageSnake">
+                                    <strong>下划线命名（snake_case）：</strong>所有字母小写，单词之间用下划线连接——如 "hello world" →
+                                    "hello_world"。Python、Ruby、Rust 的变量和函数命名标准。也用于数据库字段名。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageKebab">
+                                    <strong>短横线命名（kebab-case）：</strong>所有字母小写，单词之间用短横线连接——如 "hello world" →
+                                    "hello-world"。CSS 类名、HTML 属性名、URL 路径的标准格式。Web Components 的标签名也使用此格式。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.usageSpaceTitle">四、空格处理</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.usageTrim"><strong>清理空格：</strong>去除文本首尾的空白字符，将中间的连续空白字符合并为单个空格。适用于从 PDF、网页或 OCR 识别结果中复制的不规则文本。</li>
-                                <li data-i18n="tool.text-transform.usageRemoveSpaces"><strong>删除所有空格：</strong>去除文本中所有空格字符（包括空格、制表符）。适用于将多行文本压缩为单行，或生成无空格的紧凑格式。</li>
+                                <li data-i18n="tool.text-transform.usageTrim">
+                                    <strong>清理空格：</strong>去除文本首尾的空白字符，将中间的连续空白字符合并为单个空格。适用于从 PDF、网页或 OCR 识别结果中复制的不规则文本。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageRemoveSpaces">
+                                    <strong>删除所有空格：</strong>去除文本中所有空格字符（包括空格、制表符）。适用于将多行文本压缩为单行，或生成无空格的紧凑格式。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.usageTipsTitle">五、操作技巧</h4>
                             <ul>
                                 <li data-i18n="tool.text-transform.usageTipBatch"><strong>批量转换：</strong>支持多行文本批量转换。</li>
-                                <li data-i18n="tool.text-transform.usageTipCopy"><strong>一键复制：</strong>点击"复制"按钮复制转换结果。</li>
-                                <li data-i18n="tool.text-transform.usageTipClear"><strong>清空文本：</strong>点击"清空"按钮清除所有内容。</li>
-                                <li data-i18n="tool.text-transform.usageTipMulti"><strong>连续转换：</strong>可以多次应用不同的转换方式。</li>
+                                <li data-i18n="tool.text-transform.usageTipCopy"><strong>一键复制：</strong>点击"复制"按钮复制转换结果。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageTipClear"><strong>清空文本：</strong>点击"清空"按钮清除所有内容。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageTipMulti"><strong>连续转换：</strong>可以多次应用不同的转换方式。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.usageScenariosTitle">六、适用场景</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.usageScenarioCode"><strong>代码规范：</strong>统一变量命名格式。</li>
-                                <li data-i18n="tool.text-transform.usageScenarioDoc"><strong>文档处理：</strong>格式化标题和段落。</li>
-                                <li data-i18n="tool.text-transform.usageScenarioData"><strong>数据清洗：</strong>处理导入导出数据。</li>
-                                <li data-i18n="tool.text-transform.usageScenarioSeo"><strong>SEO优化：</strong>优化关键词格式。</li>
+                                <li data-i18n="tool.text-transform.usageScenarioCode"><strong>代码规范：</strong>统一变量命名格式。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageScenarioDoc"><strong>文档处理：</strong>格式化标题和段落。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageScenarioData"><strong>数据清洗：</strong>处理导入导出数据。
+                                </li>
+                                <li data-i18n="tool.text-transform.usageScenarioSeo"><strong>SEO优化：</strong>优化关键词格式。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -450,28 +508,44 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.text-transform.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.noteSecurity1"><strong>纯前端处理：</strong>所有文本转换在浏览器中完成——文本内容不上传到任何服务器。</li>
-                                <li data-i18n="tool.text-transform.noteSecurity2"><strong>无数据存储：</strong>不保存转换历史——关闭页面后所有数据清除。</li>
-                                <li data-i18n="tool.text-transform.noteSecurity3"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。</li>
+                                <li data-i18n="tool.text-transform.noteSecurity1">
+                                    <strong>纯前端处理：</strong>所有文本转换在浏览器中完成——文本内容不上传到任何服务器。
+                                </li>
+                                <li data-i18n="tool.text-transform.noteSecurity2">
+                                    <strong>无数据存储：</strong>不保存转换历史——关闭页面后所有数据清除。
+                                </li>
+                                <li data-i18n="tool.text-transform.noteSecurity3">
+                                    <strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.notesRulesTitle">一、转换规则说明</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.noteRule1">大小写转换仅对英文字母（A-Z, a-z）生效——中文字符、数字、标点符号不受影响。"你好Hello世界World" 转大写后为 "你好HELLO世界WORLD"。</li>
-                                <li data-i18n="tool.text-transform.noteRule2">命名格式转换会去除非字母数字字符（如标点、特殊符号），并以空格或特殊字符的位置作为单词分界。例如 "user-name" 转驼峰为 "userName"，"first_name" 转短横线为 "first-name"。</li>
-                                <li data-i18n="tool.text-transform.noteRule3">标题格式遵循英文标题规范——冠词（a, an, the）、短介词（in, on, at, to, for, by）、连词（and, or, but）在标题中间时小写，在标题开头时大写。实词（名词、动词、形容词、副词）始终首字母大写。</li>
-                                <li data-i18n="tool.text-transform.noteRule4">命名格式转换中的"驼峰命名"默认输出小驼峰（camelCase）——首字母小写。如果需要大驼峰（PascalCase），可以先转驼峰后再手动将首字母大写。</li>
+                                <li data-i18n="tool.text-transform.noteRule1">大小写转换仅对英文字母（A-Z,
+                                    a-z）生效——中文字符、数字、标点符号不受影响。"你好Hello世界World" 转大写后为 "你好HELLO世界WORLD"。</li>
+                                <li data-i18n="tool.text-transform.noteRule2">
+                                    命名格式转换会去除非字母数字字符（如标点、特殊符号），并以空格或特殊字符的位置作为单词分界。例如 "user-name" 转驼峰为
+                                    "userName"，"first_name" 转短横线为 "first-name"。</li>
+                                <li data-i18n="tool.text-transform.noteRule3">标题格式遵循英文标题规范——冠词（a, an, the）、短介词（in, on,
+                                    at, to, for, by）、连词（and, or, but）在标题中间时小写，在标题开头时大写。实词（名词、动词、形容词、副词）始终首字母大写。</li>
+                                <li data-i18n="tool.text-transform.noteRule4">
+                                    命名格式转换中的"驼峰命名"默认输出小驼峰（camelCase）——首字母小写。如果需要大驼峰（PascalCase），可以先转驼峰后再手动将首字母大写。</li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.notesPerfTitle">二、性能提示</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.notePerf1">建议单次处理的文本不超过 10 万字符。超大文本的转换可能需要较长时间，特别是命名格式转换涉及正则表达式匹配和替换。</li>
-                                <li data-i18n="tool.text-transform.notePerf2">转换操作是即时的——点击按钮后立即显示结果。如果文本特别大（超过 1MB），浏览器可能短暂卡顿，这是正常的计算开销。</li>
+                                <li data-i18n="tool.text-transform.notePerf1">建议单次处理的文本不超过 10
+                                    万字符。超大文本的转换可能需要较长时间，特别是命名格式转换涉及正则表达式匹配和替换。</li>
+                                <li data-i18n="tool.text-transform.notePerf2">转换操作是即时的——点击按钮后立即显示结果。如果文本特别大（超过
+                                    1MB），浏览器可能短暂卡顿，这是正常的计算开销。</li>
                                 <li data-i18n="tool.text-transform.notePerf3">频繁转换时建议分段处理。</li>
                             </ul>
                             <h4 data-i18n="tool.text-transform.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="tool.text-transform.noteFaq1"><strong>Q: 转换后中文变成乱码？</strong>A: 检查编码方式——URL 编码应使用 UTF-8（本工具默认）。如果目标系统使用 GBK，需要额外转换。</li>
-                                <li data-i18n="tool.text-transform.noteFaq2"><strong>Q: Base64 解码失败？</strong>A: 确保输入的是有效的 Base64 字符串——只包含 A-Z, a-z, 0-9, +, /, = 字符。</li>
-                                <li data-i18n="tool.text-transform.noteFaq3"><strong>Q: 能批量转换多个文件吗？</strong>A: 当前版本只能处理文本框中的内容。如需处理文件，先将文件内容复制粘贴到输入框。</li>
+                                <li data-i18n="tool.text-transform.noteFaq1"><strong>Q: 转换后中文变成乱码？</strong>A:
+                                    检查编码方式——URL 编码应使用 UTF-8（本工具默认）。如果目标系统使用 GBK，需要额外转换。</li>
+                                <li data-i18n="tool.text-transform.noteFaq2"><strong>Q: Base64 解码失败？</strong>A:
+                                    确保输入的是有效的 Base64 字符串——只包含 A-Z, a-z, 0-9, +, /, = 字符。</li>
+                                <li data-i18n="tool.text-transform.noteFaq3"><strong>Q: 能批量转换多个文件吗？</strong>A:
+                                    当前版本只能处理文本框中的内容。如需处理文件，先将文件内容复制粘贴到输入框。</li>
                                 <li data-i18n="tool.text-transform.noteFaq4"><strong>内存不足：</strong>减少文本内容或分段处理。</li>
                             </ul>
                         </div>
@@ -483,13 +557,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

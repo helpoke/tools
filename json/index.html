@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>JSON在线格式化对比工具</title>
     <meta property="og:title" content="JSON在线格式化对比工具">
@@ -72,7 +80,7 @@
         "@type": "WebApplication",
         "name": "JSON工具集",
         "description": "JSON格式化、JSON比对、JSON与Java Bean互转工具。支持节点折叠、差异高亮、值自动填充等功能。免费在线JSON工具。JSON formatting, comparison and conversion tool with node folding and diff highlighting.",
-        "url": "https://helpoke.com/json",
+        "url": "https://helpoke.com/json/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -88,7 +96,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -390,7 +398,8 @@
                                     <strong>格式化模块</strong>不只是"加缩进"那么简单。它内置了一个容错解析引擎：自动剥离 UTF-8 BOM 头（Windows
                                     记事本的"杰作"）、去除 JSONC 注释（VS Code 的 settings.json 风格）、将单引号修正为双引号、兼容 Python 风格的
                                     True/False/None、容忍末尾多余逗号。这些"不标准但常见"的写法，在其他工具中会直接报错，在这里都能被智能修正。格式化后的编辑器基于 CodeMirror
-                                    6，支持语法高亮、行号、模糊搜索、节点折叠——大文件也能快速定位到目标字段。</li>
+                                    6，支持语法高亮、行号、模糊搜索、节点折叠——大文件也能快速定位到目标字段。
+                                </li>
                                 <li data-i18n="tool.json.intro.module2"><strong>比对模块</strong>采用逐行 diff
                                     算法，但不是简单的文本对比——它会先对两段 JSON
                                     做标准化处理（忽略空白和字段顺序），然后精确标记到"哪个数组的第几个元素变了"或"哪个对象的哪个属性被修改"。新增、删除、修改三种差异用不同颜色高亮，一目了然。同步格式化/压缩/转义按钮确保两侧始终处于相同处理状态，避免格式不一致导致的"假差异"。
@@ -401,7 +410,8 @@
                                     String、Long、Double、Boolean、List、嵌套对象等。反向转换同样支持——从 Java Bean 代码生成 JSON 模板。</li>
                                 <li data-i18n="tool.json.intro.module4"><strong>XML 互转模块</strong>处理两种数据格式之间的映射。JSON 转
                                     XML 时，嵌套对象变为子元素，数组元素变为重复标签，支持属性模式；XML 转 JSON 时，元素名变键名，属性以 <code>$</code> 前缀标识，文本以
-                                    <code>_text</code> 存储，同名重复元素自动合并为数组。转换结果自动格式化，可直接用于 SOAP 接口调试、配置文件迁移等场景。</li>
+                                    <code>_text</code> 存储，同名重复元素自动合并为数组。转换结果自动格式化，可直接用于 SOAP 接口调试、配置文件迁移等场景。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.json.intro.featuresTitle">三、核心特性</h4>
                             <ul>
@@ -434,7 +444,8 @@
                                     JavaScript 字符串或日志输出。"去转义"则相反。工具会记住转义前的状态（格式化或压缩），去转义后自动恢复。</li>
                                 <li data-i18n="tool.json.instructions.format.item4">"折叠"按钮一键收起所有嵌套节点——对象显示
                                     <code>{5个属性}</code>，数组显示 <code>[3个元素]</code>，方便快速浏览大型 JSON
-                                    的顶层骨架。再次点击展开所有节点。折叠依赖格式化后的结构信息，未格式化时会提示"请先格式化"。</li>
+                                    的顶层骨架。再次点击展开所有节点。折叠依赖格式化后的结构信息，未格式化时会提示"请先格式化"。
+                                </li>
                                 <li data-i18n="tool.json.instructions.format.item5">
                                     "搜索"按钮打开搜索面板，支持对键名和键值进行模糊匹配（不区分大小写）。每条搜索结果显示匹配类型、行号和完整 JSON 路径（如
                                     <code>data.users[0].address.city</code>），点击结果自动滚动并高亮选中。搜索不要求先格式化，只要内容可解析为 JSON 即可。
@@ -475,7 +486,8 @@
                                     对象的键变为 XML 元素名，字符串/数字值变为元素文本，嵌套对象变为子元素，数组元素变为重复的同名标签。转换结果自动缩进格式化。</li>
                                 <li data-i18n="tool.json.instructions.xml.item2">反向转换（XML→JSON）时，XML 元素名作为 JSON 键名，元素属性以
                                     <code>$</code> 前缀标识（如 <code>$id</code>），文本内容以 <code>_text</code> 键存储。多个同名子元素自动合并为
-                                    JSON 数组。根元素作为最外层对象包裹。</li>
+                                    JSON 数组。根元素作为最外层对象包裹。
+                                </li>
                                 <li data-i18n="tool.json.instructions.xml.item3">两种格式的转换都保留完整的层级结构和数据内容。转换结果可直接用于 SOAP
                                     接口调试、配置文件格式迁移、数据导入导出等场景。</li>
                             </ul>
@@ -505,13 +517,15 @@
                                     JavaScript 配置文件、Python 脚本输出、或手动编辑的内容。本工具的容错引擎覆盖了以下常见"不规范"情况：</li>
                                 <li data-i18n="tool.json.notes.format.item2">单引号字符串：自动将 <code>'value'</code> 修正为
                                     <code>"value"</code>。但如果字符串内容本身包含未转义的单引号（如
-                                    <code>'it's fine'</code>），自动修正可能产生错误结果——建议手动修正后再格式化。</li>
+                                    <code>'it's fine'</code>），自动修正可能产生错误结果——建议手动修正后再格式化。
+                                </li>
                                 <li data-i18n="tool.json.notes.format.item3">末尾多余逗号（trailing
                                     comma）：<code>{"a":1,"b":2,}</code> 中的最后一个逗号会被自动去除。JavaScript 的 JSON.parse
                                     不容忍这种写法，但许多编辑器（VS Code）和语言（Python、Java）的 JSON 库都支持。</li>
                                 <li data-i18n="tool.json.notes.format.item4">JSONC 注释：<code>// 单行注释</code> 和
                                     <code>/* 多行注释 */</code> 会在格式化时自动去除。如果你需要保留注释，请在格式化前备份原始内容。注意：VS Code 的
-                                    settings.json、tsconfig.json 等文件使用 JSONC 格式，格式化后注释会丢失。</li>
+                                    settings.json、tsconfig.json 等文件使用 JSONC 格式，格式化后注释会丢失。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.json.notes.usage.title">三、使用技巧与常见误区</h4>
                             <ul>
@@ -520,10 +534,12 @@
                                     JSON 的顶层骨架。</li>
                                 <li data-i18n="tool.json.notes.usage.item2">
                                     搜索功能不需要先格式化——它直接对原始文本进行正则匹配。但格式化后的搜索结果更直观（有行号、可折叠定位）。搜索面板支持对键名和键值分别匹配，显示完整 JSON 路径（如
-                                    <code>data.users[2].email</code>），点击结果自动滚动到对应位置。</li>
+                                    <code>data.users[2].email</code>），点击结果自动滚动到对应位置。
+                                </li>
                                 <li data-i18n="tool.json.notes.usage.item3">
                                     比对功能在对比前会做标准化处理——忽略空白差异和对象字段顺序。但数组元素的顺序差异会被标记——<code>[1,2,3]</code> 和
-                                    <code>[3,2,1]</code> 被视为不同。如果你只关心内容不关心顺序，建议先对数组排序再比对。</li>
+                                    <code>[3,2,1]</code> 被视为不同。如果你只关心内容不关心顺序，建议先对数组排序再比对。
+                                </li>
                                 <li data-i18n="tool.json.notes.usage.item4">转义功能常用于将 JSON 嵌入到其他格式中（如 JavaScript 字符串、SQL
                                     语句、日志输出）。转义后的 JSON 看起来像一堆带反斜杠的乱码，这是正常的——它仍然是有效的 JSON，只是所有特殊字符都被转义了。去转义后恢复原始可读格式。
                                 </li>
@@ -549,7 +565,8 @@
                                     BOM，但其他不可见字符需要手动清理。</li>
                                 <li data-i18n="tool.json.notes.compatibility.item3">
                                     转义功能处理特殊字符（换行→<code>\n</code>、引号→<code>\"</code>等），中文和 emoji 默认以 Unicode 原样保留，不进行
-                                    <code>\uXXXX</code> 转义，确保转义后的 JSON 仍然可读。</li>
+                                    <code>\uXXXX</code> 转义，确保转义后的 JSON 仍然可读。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.json.notes.encoding.title">六、关于 JSON 的常见疑问</h4>
                             <ul>
@@ -570,7 +587,8 @@
                                 <li data-i18n="tool.json.notes.faq.item2">
                                     <strong>搜索找不到明明存在的内容？</strong>搜索基于正则匹配，如果搜索词包含正则特殊字符（如
                                     <code>.</code>、<code>*</code>、<code>[</code>），需要用反斜杠转义。另外，搜索区分 Unicode 编码和原始字符——如果
-                                    JSON 中的中文被 <code>\uXXXX</code> 编码了，搜索原始中文字符是找不到的。</li>
+                                    JSON 中的中文被 <code>\uXXXX</code> 编码了，搜索原始中文字符是找不到的。
+                                </li>
                                 <li data-i18n="tool.json.notes.faq.item3"><strong>XML 转换结果中有奇怪的 $ 和 _text？</strong>这是
                                     XML 属性与 JSON 键值的映射约定。XML 属性没有对应的 JSON 概念，工具用 <code>$属性名</code>
                                     前缀区分属性和子元素；文本内容和子元素共存时，文本用 <code>_text</code> 键存储。这是业界通用的 XML→JSON 映射规则。</li>
@@ -586,12 +604,12 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
                     |
-                    <a href="/terms.html" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
                         服务条款</a> |
-                    <a href="/about.html" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
                         联系我们</a>
                 </p>
             </footer>

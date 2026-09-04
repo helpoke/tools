@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>Unicode 编码解码工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="Unicode 编码解码工具 - 免费、安全、快速">
+    <meta property="og:description" content="Unicode编解码工具说明，支持Unicode/中文互转，中文转Unicode、Unicode转中文，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/encoding-unicode/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Unicode 编码解码工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="Unicode编解码工具说明，支持Unicode/中文互转，中文转Unicode、Unicode转中文，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/encoding-unicode/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/encoding-unicode/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/encoding-unicode/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Unicode和UTF-8有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unicode是一个字符集，为每个字符分配了唯一的码点（如U+4E2D表示\"中\"）；UTF-8是Unicode的一种编码实现方式，将码点转换为字节序列。Unicode和UTF-8的关系就像字符和它的书写方式：Unicode定义了\"中\"这个字，UTF-8定义了如何用二进制表示\"中\"。UTF-8是变长编码，ASCII字符用1字节，汉字用3字节，是目前互联网最广泛使用的字符编码。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么需要使用Unicode编码？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "使用Unicode编码的主要原因：1) 确保跨平台、跨语言的文本正确显示；2) 避免字符编码不一致导致的乱码问题；3) 在只支持ASCII的环境中传输非ASCII字符；4) JavaScript、JSON等场景需要Unicode转义；5) 程序源代码中处理中文字符串。Unicode提供了统一的字符表示方案，解决了传统编码（如GBK、GB2312）的兼容性问题。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Unicode编码和Base64编码有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unicode编码和Base64编码是完全不同的概念。Unicode编码是将字符转换为该字符在Unicode字符集中的码点表示（如\"中\"→\"\\u4E2D\"），是字符到字符的映射；Base64编码是将任意二进制数据转换为64个可打印字符的表示，是二进制到文本的转换。Unicode编码主要用于字符表示，Base64编码主要用于数据传输。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么有时候Unicode编码显示为\"?\"或乱码？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unicode编码显示为\"?\"或乱码通常是因为：1) 目标环境不支持相应的Unicode字符（如老旧的系统）；2) 字符编码设置错误（如应该用UTF-8却用了GBK）；3) 字体不包含该字符，无法显示；4) 在只支持单字节字符的环境中显示了多字节字符。解决方法包括确保使用正确的编码格式、更换支持更多字符的字体、使用支持Unicode的现代浏览器。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Unicode能表示多少个字符？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unicode的最大编码空间是U+10FFFF（十进制的1114111），理论上可以表示超过100万个字符。目前Unicode 15.0版本已经收录了约14.9万个字符，包括各种语言的字母、汉字、标点符号、表情符号、数学符号等。其中最常用的汉字约2万多个，中日韩统一表意文字（CJK）占了很大一部分。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "在JSON中使用Unicode编码有什么好处？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "在JSON中使用Unicode编码的好处：1) 确保中文字符在不同系统间正确传输；2) 避免编码不一致导致的乱码问题；3) 部分API要求对特殊字符进行Unicode转义；4) 可以安全传输表情符号等特殊字符；5) 提高JSON的可读性（相对于直接使用UTF-8字节）。现代Web应用通常直接使用UTF-8编码JSON，但Unicode转义仍然是一个有用的备选方案。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -287,10 +358,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

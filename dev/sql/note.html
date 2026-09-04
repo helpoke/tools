@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>SQL格式化工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="SQL格式化工具 - 免费、安全、快速">
+    <meta property="og:description" content="SQL格式化工具说明，SQL语法高亮，关键字大写，格式化压缩，错误检测，免费在线SQL格式化工具，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/sql/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SQL格式化工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="SQL格式化工具说明，SQL语法高亮，关键字大写，格式化压缩，错误检测，免费在线SQL格式化工具，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/sql/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/sql/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/sql/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "SQL关键字大写有什么好处？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SQL关键字大写是业界广泛推荐的编码规范，好处包括：提高代码可读性，关键字与表名、字段名清晰区分；便于快速识别SQL操作类型，SELECT、INSERT、UPDATE等关键字一目了然；符合SQL语言的传统书写习惯，大多数教材和文档采用大写格式；团队协作时统一风格，提高代码审查效率。本工具的关键字大写功能可以一键将您的SQL语句转换为符合规范的格式。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何格式化包含多个查询的SQL脚本？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具支持处理包含多个SQL查询的脚本文件。粘贴完整的脚本后，点击\"格式化\"按钮，工具会自动识别每个查询语句（通过分号分隔），并分别进行格式化。每个查询会保持独立的缩进结构，查询之间用分号和换行分隔。格式化后的脚本结构清晰，便于逐个阅读和理解每个查询的逻辑。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "压缩SQL语句会影响执行性能吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会。SQL压缩只是移除空格、换行和注释，不改变查询逻辑和语法结构。数据库引擎在执行SQL时会先进行语法解析，压缩后的SQL解析结果与原始SQL完全一致，执行计划相同，性能不受影响。压缩带来的好处是减小SQL文件体积，减少网络传输时间，特别适合API接口和嵌入式SQL场景。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "SQL格式化如何处理复杂嵌套查询？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具采用智能算法处理复杂嵌套查询：子查询会单独缩进层级，与外层查询清晰区分；JOIN子句会整齐排列，连接条件清晰显示；WHERE、GROUP BY、ORDER BY等子句各占一行，条件项整齐排列。对于特别复杂的嵌套查询，建议格式化后人工检查关键结构，确保嵌套逻辑清晰可读。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "不同数据库的SQL语法有差异，如何处理？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具基于标准SQL语法规则进行格式化，适用于MySQL、PostgreSQL、SQL Server、Oracle等主流数据库。但不同数据库存在语法差异：如MySQL的反引号引用、PostgreSQL的双引号引用、SQL Server的方括号引用等。工具会保留原有的引用符号，不做转换。建议您根据目标数据库的语法习惯编写SQL，然后在本工具中格式化。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "SQL注释会被格式化工具处理吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "格式化功能会保留SQL注释内容，但可能调整注释的位置和格式。单行注释（--）和多行注释（/* */）都会保留，注释内容与代码对齐显示。压缩功能会移除所有注释，生成无注释的纯净SQL代码。如果您的SQL中有重要的注释说明，请在压缩前备份原始代码。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -287,10 +358,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

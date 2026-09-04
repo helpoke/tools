@@ -11,7 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Mermaid在线UML画图工具，免费在线UML画图工具</title>
     <meta property="og:title" content="Mermaid在线UML画图工具，免费在线UML画图工具">
@@ -47,7 +55,7 @@
         "@type": "WebApplication",
         "name": "Mermaid在线UML画图工具",
         "description": "免费在线Mermaid图表工具，支持流程图、时序图、状态图、类图、实体关系图、饼图、甘特图、用户旅程图等多种图表类型。Free online diagramming tool with Mermaid syntax support.",
-        "url": "https://helpoke.com/mermaid",
+        "url": "https://helpoke.com/mermaid/",
         "applicationCategory": "https://schema.org/DesignTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -64,7 +72,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -226,12 +234,14 @@ flowchart LR
                                 <code>[文本]</code>、圆角矩形 <code>(文本)</code>、菱形 <code>{条件}</code>、平行四边形 <code>>输入]</code>
                                 等。连接线支持实线 <code>--></code>、虚线 <code>-.-&gt;</code>、粗线 <code>==&gt;</code>，可附带文字标签
                                 <code>-->|是|</code>。布局方向用 <code>TD</code>（上→下）或
-                                <code>LR</code>（左→右）。适合展示审批流程、算法逻辑、系统部署架构。</li>
+                                <code>LR</code>（左→右）。适合展示审批流程、算法逻辑、系统部署架构。
+                            </li>
                             <li data-i18n="tool.mermaid.instructions.chart2"><strong>时序图（Sequence
                                     Diagram）——描述交互顺序：</strong>多个参与者（人、系统、微服务）之间的消息传递。用 <code>->></code>
                                 表示同步请求，<code>-->></code> 表示响应，<code>-x</code> 表示失败。组合片段支持
                                 <code>loop</code>（循环）、<code>alt/else</code>（条件分支）、<code>par</code>（并行）、<code>opt</code>（可选）。适合描述
-                                API 调用链、登录认证流程、微服务交互。</li>
+                                API 调用链、登录认证流程、微服务交互。
+                            </li>
                             <li data-i18n="tool.mermaid.instructions.chart3"><strong>状态图（State
                                     Diagram）——描述状态流转：</strong>对象在生命周期中的所有状态，以及触发转换的事件。用 <code>[*]</code>
                                 表示起始/终止态，<code>--></code> 表示转换，箭头上标注触发条件。支持复合状态（<code>state</code>
@@ -239,20 +249,24 @@ flowchart LR
                             <li data-i18n="tool.mermaid.instructions.chart4"><strong>类图（Class
                                     Diagram）——描述面向对象结构：</strong>每个类分三层：类名、属性、方法。关系类型：继承 <code><|--</code>、实现
                                 <code>..|></code>、关联 <code>--</code>、组合 <code>*--</code>、聚合 <code>o--</code>、依赖
-                                <code>..></code>。支持标注多重性（1:1、1:N）。是表达系统架构、领域模型、数据库设计的标准图表。</li>
+                                <code>..></code>。支持标注多重性（1:1、1:N）。是表达系统架构、领域模型、数据库设计的标准图表。
+                            </li>
                             <li data-i18n="tool.mermaid.instructions.chart5"><strong>实体关系图（ER
                                     Diagram）——描述数据库结构：</strong>实体（表）包含名称和属性列表（可标注类型）。关系支持一对一 <code>||--||</code>、一对多
-                                <code>||--o{</code>、多对多 <code>}o--o{</code>。适合在开发前展示表结构设计和约束条件，是数据库建模的标准表达方式。</li>
+                                <code>||--o{</code>、多对多 <code>}o--o{</code>。适合在开发前展示表结构设计和约束条件，是数据库建模的标准表达方式。
+                            </li>
                             <li data-i18n="tool.mermaid.instructions.chart6"><strong>饼图（Pie
                                     Chart）——展示比例分布：</strong>语法极简——<code>"标签" : 数值</code>，数值自动计算百分比。适合展示市场份额、预算分配、用户构成等"部分与整体"的关系。支持
-                                <code>show-data</code> 显示具体数值。</li>
+                                <code>show-data</code> 显示具体数值。
+                            </li>
                             <li data-i18n="tool.mermaid.instructions.chart7"><strong>甘特图（Gantt Chart）——展示项目进度：</strong>用
                                 <code>section</code>
                                 分组，每个任务标注起止时间和持续天数。状态标记：<code>done</code>（已完成）、<code>active</code>（进行中）、<code>crit</code>（关键路径）、<code>milestone</code>（里程碑）。适合展示迭代计划、项目排期、开发进度。
                             </li>
                             <li data-i18n="tool.mermaid.instructions.chart8">
                                 <strong>用户旅程图（Journey）——展示体验流程：</strong>每个步骤标注参与角色和体验评分（1-5分）。以时间轴展示用户从初始接触到完成任务的完整路径，帮助识别痛点环节。适合
-                                UX 研究——注册流程体验、购物路径分析、功能可用性评估。</li>
+                                UX 研究——注册流程体验、购物路径分析、功能可用性评估。
+                            </li>
                         </ul>
                         <h4 data-i18n="tool.mermaid.instructions.basicTitle">二、基本使用方法</h4>
                         <ul>
@@ -320,7 +334,8 @@ flowchart LR
                         <ul>
                             <li data-i18n="tool.mermaid.notes.syntax1">大小写严格匹配是新手最常踩的坑。<code>flowchart</code> 不能写成
                                 <code>Flowchart</code>，<code>sequenceDiagram</code> 必须驼峰命名，<code>stateDiagram-v2</code>
-                                的 <code>-v2</code> 不能省略。关键字拼写错误会导致整个图表渲染失败，且错误提示有时不够明确——遇到渲染问题时，先逐行检查关键字拼写。</li>
+                                的 <code>-v2</code> 不能省略。关键字拼写错误会导致整个图表渲染失败，且错误提示有时不够明确——遇到渲染问题时，先逐行检查关键字拼写。
+                            </li>
                             <li data-i18n="tool.mermaid.notes.syntax2">节点 ID
                                 是图表的"变量名"——只能用英文字母、数字和下划线，不能包含空格或特殊字符。如果节点文本需要包含中文、空格或特殊符号，必须用双引号包裹：<code>A["用户登录"]</code>、<code>B["Step 1: Initialize"]</code>。节点
                                 ID 在同一个图表中必须唯一，重复 ID 会被视为同一个节点。</li>
@@ -402,12 +417,12 @@ flowchart LR
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
                     |
-                    <a href="/terms.html" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
                         服务条款</a> |
-                    <a href="/about.html" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
                         联系我们</a>
                 </p>
             </footer>

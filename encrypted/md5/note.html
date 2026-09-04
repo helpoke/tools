@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>MD5 加密工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="MD5 加密工具 - 免费、安全、快速">
+    <meta property="og:description" content="MD5加密工具说明，支持MD5哈希生成、批量MD5生成，16位32位大小写输出，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/md5/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="MD5 加密工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="MD5加密工具说明，支持MD5哈希生成、批量MD5生成，16位32位大小写输出，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/md5/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/md5/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/md5/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "MD5为什么不再安全了？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MD5的安全性问题主要体现在两个方面：碰撞攻击和原像攻击。2004年，王小云教授的研究团队首次展示了如何在短时间内找到两个不同输入产生相同MD5值的方法（碰撞攻击）；后来研究者进一步发现了原像攻击的可能性。虽然在实际应用中寻找特定输入的碰撞仍然困难，但MD5已不适合用于安全敏感场景，如数字签名、证书颁发等。对于需要高安全性的应用，建议使用SHA-256或更安全的算法。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "MD5可以解密吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MD5是单向哈希函数，理论上无法从哈希值还原原始数据。但存在\"彩虹表\"攻击：攻击者预先计算大量常见密码的MD5值并存储，攻击时只需查找即可。对于复杂密码，彩虹表难以覆盖。增加盐值（salt）可以有效抵抗彩虹表攻击：先对密码加盐，再计算MD5，使攻击者需要针对每个盐值重新生成彩虹表。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "MD5和SHA系列有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MD5和SHA系列都是哈希算法，但有重要区别：1) 输出长度：MD5输出128位，SHA-256输出256位，SHA-512输出512位；2) 安全性：MD5已被破解，SHA-1存在弱点，SHA-256/512目前安全；3) 性能：MD5计算最快，SHA系列稍慢；4) 应用场景：MD5仅用于非安全用途的完整性校验，SHA用于安全敏感场景。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何防止彩虹表攻击？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "应对彩虹表攻击的实用方案：1) 加盐哈希：在计算 MD5 前，为每个密码拼接一个随机生成的盐值（Salt），即使相同密码也会产生不同的哈希；2) 使用多次哈希：计算一次MD5后，将结果再次哈希，多次迭代；3) 使用专用算法：使用bcrypt、scrypt、Argon2等专门设计用于密码存储的算法；4) 增加密码复杂度：使用长密码、多字符类型组合，增加攻击者破解难度。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "MD5的文件校验是如何工作的？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MD5文件校验的工作流程：1) 发布者计算文件的MD5值并公开；2) 用户下载文件后，使用MD5工具计算下载文件的MD5值；3) 用户比对两个MD5值是否相同。如果相同，说明文件完整；如果不同，说明文件在传输过程中被篡改或损坏。但注意：MD5只能验证完整性，不能验证文件来源的真实性。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么两个不同的文件可能产生相同的MD5？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "这称为MD5碰撞。理论上，由于MD5输出只有128位，而可能的输入是无限的，根据鸽巢原理，必然存在不同的输入产生相同输出的情况。MD5被破解的标志就是研究者找到了快速构造碰撞的方法。对于文件完整性校验，只要文件不是被人为构造的碰撞文件，MD5仍然有效。但如果攻击者可以同时控制原始文件和目标文件，就可能利用碰撞绕过校验。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -286,10 +357,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

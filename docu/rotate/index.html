@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>文档旋转翻转 - PDF文档页面旋转翻转工具</title>
     <meta property="og:title" content="文档旋转翻转 - PDF文档页面旋转翻转工具">
@@ -47,7 +55,7 @@
         "@type": "WebApplication",
         "name": "文档旋转翻转工具",
         "description": "免费在线文档旋转翻转工具，支持PDF文档页面旋转和翻转处理，可自定义旋转角度和页面范围。纯前端本地处理，保护用户隐私。Free online document rotator for PDF page rotation and flipping.",
-        "url": "https://helpoke.com/docu/rotate",
+        "url": "https://helpoke.com/docu/rotate/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -61,7 +69,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -79,7 +87,8 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="docu.rotate.title">文档旋转工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与
                 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
@@ -124,7 +133,8 @@
                         </select>
                     </div>
                     <div class="setting-item" id="rotateAngleGroup">
-                        <label for="rotateAngle" data-i18n="docu.rotate.rotateAngleLabel">旋转角度：<span id="angleValue">0</span>°</label>
+                        <label for="rotateAngle" data-i18n="docu.rotate.rotateAngleLabel">旋转角度：<span
+                                id="angleValue">0</span>°</label>
                         <input type="range" id="rotateAngle" min="-180" max="180" value="0" step="1">
                         <div class="preset-btns">
                             <button class="preset-btn active" data-angle="0">0°</button>
@@ -190,20 +200,32 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.rotate.problemsTitle">一、为什么需要旋转 PDF 页面</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.problem1">扫描件 PDF 经常出现页面方向错误——横向扫描的文档变成了纵向，某些页面被倒置。阅读和打印这些方向错误的页面极其不便。更常见的场景是：合并多个 PDF 时，不同来源的页面方向不一致——需要统一旋转为同一方向。</li>
-                            <li data-i18n="docu.rotate.problem2">本工具支持三种操作：旋转（顺时针旋转 90°/180°/270°）、水平翻转（镜像）和垂直翻转。可以对全部页面统一操作，也可以只对指定页面执行不同方向的旋转——比如第 3 页旋转 90°，第 7 页旋转 180°。</li>
-                            <li data-i18n="docu.rotate.problem3">旋转操作不改变页面内容质量——只是修改 PDF 的页面方向元数据。处理后的 PDF 保持原始文字清晰度、可搜索性和可复制性——不像截图旋转那样会损失画质。</li>
+                            <li data-i18n="docu.rotate.problem1">扫描件 PDF
+                                经常出现页面方向错误——横向扫描的文档变成了纵向，某些页面被倒置。阅读和打印这些方向错误的页面极其不便。更常见的场景是：合并多个 PDF
+                                时，不同来源的页面方向不一致——需要统一旋转为同一方向。</li>
+                            <li data-i18n="docu.rotate.problem2">本工具支持三种操作：旋转（顺时针旋转
+                                90°/180°/270°）、水平翻转（镜像）和垂直翻转。可以对全部页面统一操作，也可以只对指定页面执行不同方向的旋转——比如第 3 页旋转 90°，第 7 页旋转 180°。
+                            </li>
+                            <li data-i18n="docu.rotate.problem3">旋转操作不改变页面内容质量——只是修改 PDF 的页面方向元数据。处理后的 PDF
+                                保持原始文字清晰度、可搜索性和可复制性——不像截图旋转那样会损失画质。</li>
                         </ul>
                         <h4 data-i18n="docu.rotate.formatTitle">二、PDF 旋转的技术原理</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.formatPdf"><strong>页面旋转：</strong>PDF 规范中每个页面都有一个 /Rotate 属性——值为 0/90/180/270。旋转操作只修改这个属性值，不改变页面内容——因此处理速度极快且无质量损失。翻转操作则需要重新渲染页面内容。</li>
+                            <li data-i18n="docu.rotate.formatPdf"><strong>页面旋转：</strong>PDF 规范中每个页面都有一个 /Rotate 属性——值为
+                                0/90/180/270。旋转操作只修改这个属性值，不改变页面内容——因此处理速度极快且无质量损失。翻转操作则需要重新渲染页面内容。</li>
                         </ul>
                         <h4 data-i18n="docu.rotate.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.featureOnline"><strong>多种操作：</strong>支持旋转（90°/180°/270°）和翻转（水平/垂直）——覆盖所有页面方向调整需求。</li>
-                            <li data-i18n="docu.rotate.featurePreview"><strong>页面预览：</strong>逐页渲染预览——直观查看每页的当前方向，确认旋转效果。</li>
-                            <li data-i18n="docu.rotate.featureExport"><strong>逐页设置：</strong>不同页面可以设置不同的旋转角度——一次性处理所有方向问题。</li>
-                            <li data-i18n="docu.rotate.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——PDF 文件不上传到任何服务器。</li>
+                            <li data-i18n="docu.rotate.featureOnline">
+                                <strong>多种操作：</strong>支持旋转（90°/180°/270°）和翻转（水平/垂直）——覆盖所有页面方向调整需求。
+                            </li>
+                            <li data-i18n="docu.rotate.featurePreview"><strong>页面预览：</strong>逐页渲染预览——直观查看每页的当前方向，确认旋转效果。
+                            </li>
+                            <li data-i18n="docu.rotate.featureExport">
+                                <strong>逐页设置：</strong>不同页面可以设置不同的旋转角度——一次性处理所有方向问题。
+                            </li>
+                            <li data-i18n="docu.rotate.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——PDF
+                                文件不上传到任何服务器。</li>
                         </ul>
                     </div>
                 </article>
@@ -215,17 +237,26 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.rotate.usageUploadTitle">上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持 200MB。</li>
-                            <li data-i18n="docu.rotate.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析并渲染预览——显示总页数和文件大小。</li>
-                            <li data-i18n="docu.rotate.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF 预览——可以在预览中查看每页内容。</li>
+                            <li data-i18n="docu.rotate.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持
+                                200MB。</li>
+                            <li data-i18n="docu.rotate.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析并渲染预览——显示总页数和文件大小。
+                            </li>
+                            <li data-i18n="docu.rotate.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF 预览——可以在预览中查看每页内容。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.rotate.usageOperationTitle">设置操作</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.usageOperation"><strong>选择操作类型：</strong>旋转（指定角度）或翻转（水平/垂直镜像）。</li>
-                            <li data-i18n="docu.rotate.usageAngle"><strong>旋转角度：</strong>选择 90°（顺时针）、180°（倒置）或 270°（逆时针）。</li>
-                            <li data-i18n="docu.rotate.usageAngleHint"><strong>角度说明：</strong>90° 顺时针旋转适合修正横向扫描的页面，180° 适合修正倒置页面。</li>
-                            <li data-i18n="docu.rotate.usagePageMode"><strong>页面范围：</strong>选择"全部页面"或"自定义页面"——自定义模式可以指定页码范围。</li>
-                            <li data-i18n="docu.rotate.usageCustomPages"><strong>指定页码：</strong>输入页码（如 1-5,8,10）——只对指定页面执行旋转。</li>
+                            <li data-i18n="docu.rotate.usageOperation"><strong>选择操作类型：</strong>旋转（指定角度）或翻转（水平/垂直镜像）。
+                            </li>
+                            <li data-i18n="docu.rotate.usageAngle"><strong>旋转角度：</strong>选择 90°（顺时针）、180°（倒置）或
+                                270°（逆时针）。</li>
+                            <li data-i18n="docu.rotate.usageAngleHint"><strong>角度说明：</strong>90° 顺时针旋转适合修正横向扫描的页面，180°
+                                适合修正倒置页面。</li>
+                            <li data-i18n="docu.rotate.usagePageMode">
+                                <strong>页面范围：</strong>选择"全部页面"或"自定义页面"——自定义模式可以指定页码范围。
+                            </li>
+                            <li data-i18n="docu.rotate.usageCustomPages"><strong>指定页码：</strong>输入页码（如
+                                1-5,8,10）——只对指定页面执行旋转。</li>
                             <li data-i18n="docu.rotate.usageSearch"><strong>搜索定位：</strong>输入关键词搜索页面内容——快速定位需要旋转的页面。</li>
                         </ul>
                         <h4 data-i18n="docu.rotate.usageSelectTitle">选择页面</h4>
@@ -250,35 +281,51 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.rotate.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.noteSecurity1"><strong>纯前端处理：</strong>所有处理在浏览器中完成——文件不上传到服务器。</li>
-                            <li data-i18n="docu.rotate.noteSecurity2"><strong>无质量损失：</strong>旋转操作只修改页面方向属性——不重新渲染页面内容，文字清晰度完全保留。</li>
+                            <li data-i18n="docu.rotate.noteSecurity1"><strong>纯前端处理：</strong>所有处理在浏览器中完成——文件不上传到服务器。
+                            </li>
+                            <li data-i18n="docu.rotate.noteSecurity2">
+                                <strong>无质量损失：</strong>旋转操作只修改页面方向属性——不重新渲染页面内容，文字清晰度完全保留。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.rotate.notesProcessTitle">处理说明</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.noteProcess1"><strong>旋转 vs 翻转：</strong>旋转改变页面方向（90°/180°/270°），翻转产生镜像效果——大多数场景用旋转就够了。</li>
-                            <li data-i18n="docu.rotate.noteProcess2"><strong>多次旋转：</strong>对同一页面多次旋转会累加角度——如两次 90° 等于一次 180°。</li>
-                            <li data-i18n="docu.rotate.noteProcess3"><strong>可逆操作：</strong>旋转是可逆的——90° 顺时针旋转后，再 270° 顺时针旋转就恢复原样。</li>
+                            <li data-i18n="docu.rotate.noteProcess1"><strong>旋转 vs
+                                    翻转：</strong>旋转改变页面方向（90°/180°/270°），翻转产生镜像效果——大多数场景用旋转就够了。</li>
+                            <li data-i18n="docu.rotate.noteProcess2"><strong>多次旋转：</strong>对同一页面多次旋转会累加角度——如两次 90° 等于一次
+                                180°。</li>
+                            <li data-i18n="docu.rotate.noteProcess3"><strong>可逆操作：</strong>旋转是可逆的——90° 顺时针旋转后，再 270°
+                                顺时针旋转就恢复原样。</li>
                         </ul>
                         <h4 data-i18n="docu.rotate.notesFormatTitle">格式说明</h4>
                         <ul>
                             <li data-i18n="docu.rotate.noteFormat1"><strong>输入格式：</strong>仅支持 PDF 格式。</li>
                             <li data-i18n="docu.rotate.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——保持原始内容质量。</li>
-                            <li data-i18n="docu.rotate.noteFormat3"><strong>文字可选中：</strong>旋转后文字仍然可以选中和复制——不像图片旋转那样破坏文本层。</li>
+                            <li data-i18n="docu.rotate.noteFormat3">
+                                <strong>文字可选中：</strong>旋转后文字仍然可以选中和复制——不像图片旋转那样破坏文本层。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.rotate.notesFlipTitle">翻转说明</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.noteFlip1"><strong>水平翻转：</strong>页面内容左右镜像——文字会变成"反字"，适合特殊排版需求。</li>
+                            <li data-i18n="docu.rotate.noteFlip1"><strong>水平翻转：</strong>页面内容左右镜像——文字会变成"反字"，适合特殊排版需求。
+                            </li>
                             <li data-i18n="docu.rotate.noteFlip2"><strong>垂直翻转：</strong>页面内容上下镜像——文字会倒置，适合特殊排版需求。</li>
-                            <li data-i18n="docu.rotate.noteFlip3"><strong>翻转影响：</strong>翻转后文字方向改变——中文可能变得不易阅读。主要用于图片型 PDF。</li>
-                            <li data-i18n="docu.rotate.noteFlip4"><strong>组合使用：</strong>水平翻转 + 垂直翻转 = 180° 旋转——效果等价。</li>
+                            <li data-i18n="docu.rotate.noteFlip3"><strong>翻转影响：</strong>翻转后文字方向改变——中文可能变得不易阅读。主要用于图片型
+                                PDF。</li>
+                            <li data-i18n="docu.rotate.noteFlip4"><strong>组合使用：</strong>水平翻转 + 垂直翻转 = 180° 旋转——效果等价。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.rotate.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.rotate.noteFaq1"><strong>Q: 旋转后文字方向对吗？</strong>A: 旋转只改变页面方向——文字随页面一起旋转。如果原始文字是横向的，旋转 90° 后文字变成纵向。</li>
-                            <li data-i18n="docu.rotate.noteFaq2"><strong>Q: 能只旋转部分内容吗？</strong>A: 不能——旋转以整页为单位。如果只需旋转页面中的部分内容，需要使用图像编辑工具。</li>
-                            <li data-i18n="docu.rotate.noteFaq3"><strong>Q: 旋转后页面尺寸变了吗？</strong>A: 旋转 90°/270° 后页面宽高互换——A4 纵向变成 A4 横向。旋转 180° 页面尺寸不变。</li>
-                            <li data-i18n="docu.rotate.noteFaq4"><strong>Q: 扫描件旋转后文字模糊？</strong>A: 旋转不改变分辨率——如果原始扫描件文字模糊，旋转后仍然模糊。需要先提高扫描分辨率。</li>
-                            <li data-i18n="docu.rotate.noteFaq5"><strong>Q: 批量旋转不同方向？</strong>A: 可以——选择"自定义页面"模式，对不同页面设置不同的旋转角度。</li>
+                            <li data-i18n="docu.rotate.noteFaq1"><strong>Q: 旋转后文字方向对吗？</strong>A:
+                                旋转只改变页面方向——文字随页面一起旋转。如果原始文字是横向的，旋转 90° 后文字变成纵向。</li>
+                            <li data-i18n="docu.rotate.noteFaq2"><strong>Q: 能只旋转部分内容吗？</strong>A:
+                                不能——旋转以整页为单位。如果只需旋转页面中的部分内容，需要使用图像编辑工具。</li>
+                            <li data-i18n="docu.rotate.noteFaq3"><strong>Q: 旋转后页面尺寸变了吗？</strong>A: 旋转 90°/270°
+                                后页面宽高互换——A4 纵向变成 A4 横向。旋转 180° 页面尺寸不变。</li>
+                            <li data-i18n="docu.rotate.noteFaq4"><strong>Q: 扫描件旋转后文字模糊？</strong>A:
+                                旋转不改变分辨率——如果原始扫描件文字模糊，旋转后仍然模糊。需要先提高扫描分辨率。</li>
+                            <li data-i18n="docu.rotate.noteFaq5"><strong>Q: 批量旋转不同方向？</strong>A:
+                                可以——选择"自定义页面"模式，对不同页面设置不同的旋转角度。</li>
                         </ul>
                     </div>
                 </article>
@@ -289,13 +336,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
@@ -308,7 +355,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="modal-nav-btn" id="modalPrev" data-i18n-title="docu.rotate.modalPrevTitle">◀</button>
-                <span class="modal-title" id="modalTitle" data-i18n="docu.rotate.modalTitle">第 {{page}} 页 / 共 {{total}} 页</span>
+                <span class="modal-title" id="modalTitle" data-i18n="docu.rotate.modalTitle">第 {{page}} 页 / 共 {{total}}
+                    页</span>
                 <button class="modal-nav-btn" id="modalNext" data-i18n-title="docu.rotate.modalNextTitle">▶</button>
                 <button class="modal-close" id="modalClose">×</button>
             </div>
@@ -316,7 +364,8 @@
                 <canvas id="modalCanvas"></canvas>
             </div>
             <div class="modal-footer">
-                <span class="hint" data-i18n="docu.rotate.modalHint">操作：<strong id="modalOpLabel">旋转 90°</strong> | 状态：<strong id="modalOpStatus">已处理</strong> | 双击空白处或按 Esc 关闭</span>
+                <span class="hint" data-i18n="docu.rotate.modalHint">操作：<strong id="modalOpLabel">旋转 90°</strong> |
+                    状态：<strong id="modalOpStatus">已处理</strong> | 双击空白处或按 Esc 关闭</span>
             </div>
         </div>
     </div>

@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>资源文件下载工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="资源文件下载工具 - 免费、安全、快速">
+    <meta property="og:description" content="资源文件下载工具说明，支持下载JS、CSS、字体、图标等网页资源，批量下载静态资源文件，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/download/resource/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="资源文件下载工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="资源文件下载工具说明，支持下载JS、CSS、字体、图标等网页资源，批量下载静态资源文件，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/download/resource/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/download/resource/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/download/resource/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "为什么有些资源无法被检测到？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "工具主要分析网页的HTML源代码，对于通过JavaScript动态加载的资源（如使用require.js、webpack等模块加载器加载的资源）可能无法被检测到。此外，使用CDN动态生成的资源链接也可能无法被完整识别。如果需要获取这些资源，建议查看网页的开发者工具，手动复制资源链接。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "工具支持下载网页中的图片吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "支持。工具会检测网页中的img标签和背景图片，将其归类为图片文件资源。您可以通过\"图片文件\"筛选按钮查看所有图片资源。但需要注意的是，对于通过CSS background-image方式引用的图片，如果图片URL是相对路径，工具可能无法正确识别，建议使用媒体文件批量下载工具专门下载图片。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "下载的字体文件可以直接使用吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "下载的字体文件可以直接在您的网页项目中使用。您需要在CSS中添加@font-face声明，指定字体文件的路径和字体名称。不同格式的字体文件有不同的浏览器兼容性：woff2格式兼容性最好，支持现代浏览器；woff格式兼容性次之；ttf和otf格式支持较早版本的浏览器。建议根据目标用户群体选择合适的字体格式。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何处理跨域资源的下载问题？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "部分网站设置了跨域限制，导致从其他域名下载资源失败。如果遇到跨域问题，建议尝试以下方法：1) 直接在浏览器中打开资源URL，手动保存；2) 使用浏览器的开发者工具获取资源链接，然后使用直接URL下载工具进行下载；3) 更换浏览器或使用浏览器的扩展程序绕过跨域限制。但请注意，这些方法仅适用于合法用途。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "工具支持分析HTTPS网站吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "支持。工具可以正常分析和提取HTTPS网站的资源。由于工具是在浏览器本地运行的，浏览器会自动处理HTTPS证书验证，无需额外配置。但需要注意的是，如果目标网站使用了严格的内容安全策略（CSP），可能会阻止资源的加载和提取，导致分析不完全。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "下载的资源有版权限制吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "是的，大部分网页资源都受版权保护。本工具仅供学习研究使用，下载的资源不得用于商业用途。在下载和使用资源前，请确保您有合法的使用权限。对于开源项目的资源，请遵守相应的开源协议（如MIT、Apache等）；对于商业网站的资源，请联系网站所有者获取授权。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -343,10 +414,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

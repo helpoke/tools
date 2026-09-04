@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>随机密码生成工具 - Helpoke 助点站</title>
     <meta property="og:title" content="随机密码生成工具 - Helpoke 助点站">
@@ -482,7 +490,7 @@
         "@type": "WebApplication",
         "name": "随机密码生成工具",
         "description": "免费在线随机密码生成工具，支持自定义密码长度、大小写字母、数字和特殊字符组合。批量生成高强度安全密码。Free online password generator with customizable options.",
-        "url": "https://helpoke.com/encrypted/pwd",
+        "url": "https://helpoke.com/encrypted/pwd/",
         "applicationCategory": "https://schema.org/SecurityTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -497,7 +505,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -519,9 +527,8 @@
             <h1 data-i18n="encrypted.pwd.title">密码生成工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="encrypted.pwd.intro">密码生成工具，支持生成高强度密码，自定义长度、字符类型、特殊字符等规则，密码强度检测，支持批量生成</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -563,7 +570,8 @@
                 <div class="form-row">
                     <div class="form-group half">
                         <label for="custom-symbols" data-i18n="encrypted.pwd.customSymbolsLabel">自定义特殊字符</label>
-                        <input type="text" id="custom-symbols" data-i18n-placeholder="encrypted.pwd.customSymbolsPlaceholder"
+                        <input type="text" id="custom-symbols"
+                            data-i18n-placeholder="encrypted.pwd.customSymbolsPlaceholder"
                             placeholder="留空使用默认：!@#$%&*_+-=;:,." value="" class="custom-symbols-input">
                     </div>
 
@@ -591,21 +599,34 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.pwd.problemsTitle">一、为什么需要密码生成器</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.problem1">"123456"、"password"、"qwerty"——这些是全球最常用的密码。黑客的字典攻击首先就尝试这些弱密码。即使是"MyDog2020"这种看似复杂的密码，也很容易被基于规则的 cracking 工具破解——因为人类创造的"随机"密码往往遵循可预测的模式。</li>
-                                <li data-i18n="encrypted.pwd.problem2">真正的安全密码需要满足三个条件：足够长（至少 12 字符）、足够随机（使用密码学安全随机数生成器）、足够复杂（包含大小写、数字、符号）。人脑无法同时满足这三个条件——但计算机可以。</li>
-                                <li data-i18n="encrypted.pwd.problem3">本工具使用 crypto.getRandomValues()（浏览器原生密码学安全随机数 API）生成密码——每次生成都是真正不可预测的随机组合。支持自定义长度、字符集、最小符号数等参数——满足不同网站的密码策略要求。</li>
+                                <li data-i18n="encrypted.pwd.problem1">
+                                    "123456"、"password"、"qwerty"——这些是全球最常用的密码。黑客的字典攻击首先就尝试这些弱密码。即使是"MyDog2020"这种看似复杂的密码，也很容易被基于规则的
+                                    cracking 工具破解——因为人类创造的"随机"密码往往遵循可预测的模式。</li>
+                                <li data-i18n="encrypted.pwd.problem2">真正的安全密码需要满足三个条件：足够长（至少 12
+                                    字符）、足够随机（使用密码学安全随机数生成器）、足够复杂（包含大小写、数字、符号）。人脑无法同时满足这三个条件——但计算机可以。</li>
+                                <li data-i18n="encrypted.pwd.problem3">本工具使用 crypto.getRandomValues()（浏览器原生密码学安全随机数
+                                    API）生成密码——每次生成都是真正不可预测的随机组合。支持自定义长度、字符集、最小符号数等参数——满足不同网站的密码策略要求。</li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.formatTitle">二、密码格式与强度</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.formatRandomPwd"><strong>随机密码：</strong>由密码学安全随机数生成——每个字符的选择独立且不可预测。12 位包含大小写+数字+符号的密码有 128⁶⁴ 种组合——暴力破解需要数十亿年。</li>
-                                <li data-i18n="encrypted.pwd.formatPin"><strong>PIN 码：</strong>纯数字密码——安全性较低（4 位 PIN 只有 10000 种组合），但某些系统只支持数字密码。建议至少 6 位。</li>
+                                <li data-i18n="encrypted.pwd.formatRandomPwd">
+                                    <strong>随机密码：</strong>由密码学安全随机数生成——每个字符的选择独立且不可预测。12 位包含大小写+数字+符号的密码有 128⁶⁴
+                                    种组合——暴力破解需要数十亿年。
+                                </li>
+                                <li data-i18n="encrypted.pwd.formatPin"><strong>PIN 码：</strong>纯数字密码——安全性较低（4 位 PIN 只有
+                                    10000 种组合），但某些系统只支持数字密码。建议至少 6 位。</li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.featureOnline"><strong>自定义生成：</strong>设置密码长度（4-128 位）、字符集（大写/小写/数字/符号）、自定义符号集、最小符号数——精确控制密码格式。</li>
-                                <li data-i18n="encrypted.pwd.featurePreview"><strong>批量生成：</strong>一次生成多个密码——方便为不同账户创建独立密码。</li>
-                                <li data-i18n="encrypted.pwd.featureExport"><strong>强度评估：</strong>实时计算密码熵值（bits of entropy）——直观显示密码的抗破解能力。</li>
-                                <li data-i18n="encrypted.pwd.featureSecurity"><strong>安全随机：</strong>使用 crypto.getRandomValues() 生成——密码学安全随机数，不可预测、不可重现。</li>
+                                <li data-i18n="encrypted.pwd.featureOnline"><strong>自定义生成：</strong>设置密码长度（4-128
+                                    位）、字符集（大写/小写/数字/符号）、自定义符号集、最小符号数——精确控制密码格式。</li>
+                                <li data-i18n="encrypted.pwd.featurePreview">
+                                    <strong>批量生成：</strong>一次生成多个密码——方便为不同账户创建独立密码。
+                                </li>
+                                <li data-i18n="encrypted.pwd.featureExport"><strong>强度评估：</strong>实时计算密码熵值（bits of
+                                    entropy）——直观显示密码的抗破解能力。</li>
+                                <li data-i18n="encrypted.pwd.featureSecurity"><strong>安全随机：</strong>使用
+                                    crypto.getRandomValues() 生成——密码学安全随机数，不可预测、不可重现。</li>
                             </ul>
                         </div>
                     </article>
@@ -617,28 +638,48 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.pwd.usageParamsTitle">参数设置</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.usageLength"><strong>密码长度：</strong>设置密码位数——建议至少 12 位。重要账户（邮箱、银行）建议 16 位以上。</li>
+                                <li data-i18n="encrypted.pwd.usageLength"><strong>密码长度：</strong>设置密码位数——建议至少 12
+                                    位。重要账户（邮箱、银行）建议 16 位以上。</li>
                                 <li data-i18n="encrypted.pwd.usageCount"><strong>生成数量：</strong>设置一次生成几个密码——方便批量创建。</li>
-                                <li data-i18n="encrypted.pwd.usageUpper"><strong>包含大写：</strong>勾选后密码包含 A-Z——大多数网站要求包含大写字母。</li>
-                                <li data-i18n="encrypted.pwd.usageLower"><strong>包含小写：</strong>勾选后密码包含 a-z——大多数网站要求包含小写字母。</li>
-                                <li data-i18n="encrypted.pwd.usageNumber"><strong>包含数字：</strong>勾选后密码包含 0-9——大多数网站要求包含数字。</li>
-                                <li data-i18n="encrypted.pwd.usageSymbol"><strong>包含符号：</strong>勾选后密码包含特殊字符（!@#$%^&*）——显著提升密码强度。</li>
-                                <li data-i18n="encrypted.pwd.usageCustomSymbols"><strong>自定义符号：</strong>输入自定义的符号集——某些网站只接受特定符号（如只允许 @#$_）。</li>
-                                <li data-i18n="encrypted.pwd.usageMinSymbols"><strong>最小符号数：</strong>设置密码中至少包含几个符号——满足某些网站的密码策略（如"至少 2 个特殊字符"）。</li>
+                                <li data-i18n="encrypted.pwd.usageUpper"><strong>包含大写：</strong>勾选后密码包含
+                                    A-Z——大多数网站要求包含大写字母。</li>
+                                <li data-i18n="encrypted.pwd.usageLower"><strong>包含小写：</strong>勾选后密码包含
+                                    a-z——大多数网站要求包含小写字母。</li>
+                                <li data-i18n="encrypted.pwd.usageNumber"><strong>包含数字：</strong>勾选后密码包含
+                                    0-9——大多数网站要求包含数字。</li>
+                                <li data-i18n="encrypted.pwd.usageSymbol">
+                                    <strong>包含符号：</strong>勾选后密码包含特殊字符（!@#$%^&*）——显著提升密码强度。
+                                </li>
+                                <li data-i18n="encrypted.pwd.usageCustomSymbols">
+                                    <strong>自定义符号：</strong>输入自定义的符号集——某些网站只接受特定符号（如只允许 @#$_）。
+                                </li>
+                                <li data-i18n="encrypted.pwd.usageMinSymbols">
+                                    <strong>最小符号数：</strong>设置密码中至少包含几个符号——满足某些网站的密码策略（如"至少 2 个特殊字符"）。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.usageGenerateTitle">生成与复制</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.usageClickGenerate"><strong>点击生成：</strong>点击"生成密码"按钮，密码立即生成。</li>
-                                <li data-i18n="encrypted.pwd.usageViewResult"><strong>查看结果：</strong>每个密码旁显示强度指示器——弱（红色）、中（黄色）、强（绿色）。</li>
-                                <li data-i18n="encrypted.pwd.usageCopySingle"><strong>复制单个：</strong>点击密码旁的复制按钮复制单个密码。</li>
-                                <li data-i18n="encrypted.pwd.usageCopyAll"><strong>复制全部：</strong>点击"复制全部"按钮复制所有生成的密码。</li>
+                                <li data-i18n="encrypted.pwd.usageClickGenerate">
+                                    <strong>点击生成：</strong>点击"生成密码"按钮，密码立即生成。
+                                </li>
+                                <li data-i18n="encrypted.pwd.usageViewResult">
+                                    <strong>查看结果：</strong>每个密码旁显示强度指示器——弱（红色）、中（黄色）、强（绿色）。
+                                </li>
+                                <li data-i18n="encrypted.pwd.usageCopySingle"><strong>复制单个：</strong>点击密码旁的复制按钮复制单个密码。
+                                </li>
+                                <li data-i18n="encrypted.pwd.usageCopyAll"><strong>复制全部：</strong>点击"复制全部"按钮复制所有生成的密码。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.usageStrengthTitle">五、密码强度说明</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.strengthWeak"><strong>弱密码：</strong>熵值 < 40 bits——可在数小时内被破解。典型：8 位纯数字或纯小写。</li>
-                                <li data-i18n="encrypted.pwd.strengthMedium"><strong>中等密码：</strong>熵值 40-60 bits——需要数月到数年才能破解。典型：10 位大小写+数字。</li>
-                                <li data-i18n="encrypted.pwd.strengthStrong"><strong>强密码：</strong>熵值 > 60 bits——以当前计算能力几乎不可能破解。典型：12+ 位包含全部字符类型。</li>
-                                <li data-i18n="encrypted.pwd.strengthCalc"><strong>熵值计算：</strong>熵 = 长度 × log₂(字符集大小)。如 12 位大小写+数字+符号 = 12 × log₂(94) ≈ 79 bits。</li>
+                                <li data-i18n="encrypted.pwd.strengthWeak"><strong>弱密码：</strong>熵值 < 40
+                                        bits——可在数小时内被破解。典型：8 位纯数字或纯小写。</li>
+                                <li data-i18n="encrypted.pwd.strengthMedium"><strong>中等密码：</strong>熵值 40-60
+                                    bits——需要数月到数年才能破解。典型：10 位大小写+数字。</li>
+                                <li data-i18n="encrypted.pwd.strengthStrong"><strong>强密码：</strong>熵值 > 60
+                                    bits——以当前计算能力几乎不可能破解。典型：12+ 位包含全部字符类型。</li>
+                                <li data-i18n="encrypted.pwd.strengthCalc"><strong>熵值计算：</strong>熵 = 长度 × log₂(字符集大小)。如
+                                    12 位大小写+数字+符号 = 12 × log₂(94) ≈ 79 bits。</li>
                             </ul>
                         </div>
                     </article>
@@ -649,27 +690,42 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.pwd.notesSecurityTitle">安全建议</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.noteSecurity1"><strong>密码管理器：</strong>生成的密码应存储在密码管理器中（如 Bitwarden、1Password）——人脑记不住几十个随机密码。</li>
-                                <li data-i18n="encrypted.pwd.noteSecurity2"><strong>唯一密码：</strong>每个账户使用不同的密码——一个账户泄露不会波及其他账户。</li>
-                                <li data-i18n="encrypted.pwd.noteSecurity3"><strong>双因素认证：</strong>强密码 + 2FA（如 Google Authenticator）——即使密码泄露，攻击者也无法登录。</li>
+                                <li data-i18n="encrypted.pwd.noteSecurity1"><strong>密码管理器：</strong>生成的密码应存储在密码管理器中（如
+                                    Bitwarden、1Password）——人脑记不住几十个随机密码。</li>
+                                <li data-i18n="encrypted.pwd.noteSecurity2">
+                                    <strong>唯一密码：</strong>每个账户使用不同的密码——一个账户泄露不会波及其他账户。
+                                </li>
+                                <li data-i18n="encrypted.pwd.noteSecurity3"><strong>双因素认证：</strong>强密码 + 2FA（如 Google
+                                    Authenticator）——即使密码泄露，攻击者也无法登录。</li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.notesLimitTitle">限制说明</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.noteLimit1"><strong>网站限制：</strong>某些网站限制密码长度（如最多 16 位）或禁止某些符号——根据网站要求调整参数。</li>
-                                <li data-i18n="encrypted.pwd.noteLimit2"><strong>PIN 码安全：</strong>PIN 码安全性远低于随机密码——如果网站支持，优先使用字母数字组合。</li>
-                                <li data-i18n="encrypted.pwd.noteLimit3"><strong>剪贴板安全：</strong>复制密码后，剪贴板中的密码可能被其他应用读取——使用完毕后立即清空剪贴板。</li>
+                                <li data-i18n="encrypted.pwd.noteLimit1"><strong>网站限制：</strong>某些网站限制密码长度（如最多 16
+                                    位）或禁止某些符号——根据网站要求调整参数。</li>
+                                <li data-i18n="encrypted.pwd.noteLimit2"><strong>PIN 码安全：</strong>PIN
+                                    码安全性远低于随机密码——如果网站支持，优先使用字母数字组合。</li>
+                                <li data-i18n="encrypted.pwd.noteLimit3">
+                                    <strong>剪贴板安全：</strong>复制密码后，剪贴板中的密码可能被其他应用读取——使用完毕后立即清空剪贴板。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.notesManageTitle">密码管理</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.noteManage1"><strong>定期更换：</strong>重要账户（邮箱、银行）建议每 3-6 个月更换密码——使用密码管理器可以方便地生成和存储新密码。</li>
-                                <li data-i18n="encrypted.pwd.noteManage2"><strong>泄露检测：</strong>使用 Have I Been Pwned 等工具检查你的邮箱/密码是否已泄露——泄露后应立即更换。</li>
-                                <li data-i18n="encrypted.pwd.noteManage3"><strong>密码共享：</strong>不要通过明文消息（短信、邮件）共享密码——使用密码管理器的安全共享功能。</li>
+                                <li data-i18n="encrypted.pwd.noteManage1"><strong>定期更换：</strong>重要账户（邮箱、银行）建议每 3-6
+                                    个月更换密码——使用密码管理器可以方便地生成和存储新密码。</li>
+                                <li data-i18n="encrypted.pwd.noteManage2"><strong>泄露检测：</strong>使用 Have I Been Pwned
+                                    等工具检查你的邮箱/密码是否已泄露——泄露后应立即更换。</li>
+                                <li data-i18n="encrypted.pwd.noteManage3">
+                                    <strong>密码共享：</strong>不要通过明文消息（短信、邮件）共享密码——使用密码管理器的安全共享功能。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.pwd.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.pwd.noteFaq1"><strong>Q: 生成的密码会被记录吗？</strong>A: 不会——所有密码在浏览器中生成，不上传到任何服务器。页面关闭后密码即消失。</li>
-                                <li data-i18n="encrypted.pwd.noteFaq2"><strong>Q: 密码够安全吗？</strong>A: 使用 crypto.getRandomValues() 生成——密码学安全级别。12 位全字符集密码的熵约 79 bits，暴力破解不可行。</li>
-                                <li data-i18n="encrypted.pwd.noteFaq3"><strong>Q: 为什么我的密码被拒绝？</strong>A: 检查网站的密码策略——可能限制了长度、字符类型或特定符号。调整参数重新生成。</li>
+                                <li data-i18n="encrypted.pwd.noteFaq1"><strong>Q: 生成的密码会被记录吗？</strong>A:
+                                    不会——所有密码在浏览器中生成，不上传到任何服务器。页面关闭后密码即消失。</li>
+                                <li data-i18n="encrypted.pwd.noteFaq2"><strong>Q: 密码够安全吗？</strong>A: 使用
+                                    crypto.getRandomValues() 生成——密码学安全级别。12 位全字符集密码的熵约 79 bits，暴力破解不可行。</li>
+                                <li data-i18n="encrypted.pwd.noteFaq3"><strong>Q: 为什么我的密码被拒绝？</strong>A:
+                                    检查网站的密码策略——可能限制了长度、字符类型或特定符号。调整参数重新生成。</li>
                             </ul>
                         </div>
                     </article>
@@ -683,13 +739,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

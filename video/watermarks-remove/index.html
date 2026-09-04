@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://unpkg.com https://cdn.jsdelivr.net; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://unpkg.com https://cdn.jsdelivr.net; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>视频去水印、视频水印去除工具</title>
     <meta property="og:title" content="视频去水印、视频水印去除工具">
@@ -45,7 +53,7 @@
         "@type": "WebApplication",
         "name": "视频去水印工具",
         "description": "免费在线视频去水印工具，支持多种去水印方式，本地处理保护隐私。Free online video watermark removal tool with multiple removal methods.",
-        "url": "https://helpoke.com/video/watermarks-remove",
+        "url": "https://helpoke.com/video/watermarks-remove/",
         "applicationCategory": "https://schema.org/VideoEditing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -60,7 +68,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -87,7 +95,8 @@
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description" data-i18n="video.watermarks-remove.note"><b>注意：</b> 最大支持200MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。</p>
+            <p class="description" data-i18n="video.watermarks-remove.note"><b>注意：</b>
+                最大支持200MB视频文件。使用FFmpeg引擎进行处理，首次使用需下载约30MB引擎文件。</p>
 
             <div class="upload-area" id="uploadArea">
                 <input type="file" id="fileInput" accept="video/*" style="display: none;">
@@ -148,7 +157,8 @@
                         <option value="bottom-left" data-i18n="video.watermarks-remove.optionBottomLeft">左下角</option>
                         <option value="bottom-right" data-i18n="video.watermarks-remove.optionBottomRight">右下角</option>
                         <option value="top-center" data-i18n="video.watermarks-remove.optionTopCenter">顶部居中</option>
-                        <option value="bottom-center" data-i18n="video.watermarks-remove.optionBottomCenter">底部居中</option>
+                        <option value="bottom-center" data-i18n="video.watermarks-remove.optionBottomCenter">底部居中
+                        </option>
                     </select>
                 </div>
 
@@ -191,7 +201,8 @@
                 </div>
 
                 <div class="setting-group">
-                    <label data-i18n="video.watermarks-remove.timeRangeLabel">处理时间范围 <span class="hint">（仅处理该时段内的水印）</span></label>
+                    <label data-i18n="video.watermarks-remove.timeRangeLabel">处理时间范围 <span
+                            class="hint">（仅处理该时段内的水印）</span></label>
                     <div class="time-range-group">
                         <div class="time-input">
                             <label for="trimStart" data-i18n="video.watermarks-remove.startTimeLabel">开始时间</label>
@@ -246,7 +257,8 @@
                 <div class="download-buttons">
                     <button class="btn btn-primary" id="downloadBtn"
                         data-i18n="video.watermarks-remove.downloadBtn">下载处理后的视频</button>
-                    <button class="btn btn-secondary" id="resetBtn" data-i18n="video.watermarks-remove.resetBtn">重新处理</button>
+                    <button class="btn btn-secondary" id="resetBtn"
+                        data-i18n="video.watermarks-remove.resetBtn">重新处理</button>
                 </div>
             </div>
 
@@ -258,22 +270,42 @@
                     <div class="info-content">
                         <h4 data-i18n="video.watermarks-remove.problemsTitle">一、视频水印去除的本质是"逐帧图像修复"</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.problem1">下载的视频带有平台水印、录屏时误留了个人信息、老视频上有不需要的台标——这些场景都需要去除视频中的水印。但视频水印去除比图片复杂得多——每一帧都需要独立修复，且帧与帧之间要保持一致性（不能闪烁）。本工具提供多种去除方法，针对不同类型的水印选择最优策略。</li>
-                            <li data-i18n="video.watermarks-remove.problem2">支持七种去除方法：模糊（Blur）、马赛克（Mosaic）、像素化（Pixelate）、亮度调整（Brightness）、对比度调整（Contrast）、裁剪（Crop）、覆盖（Cover）。每种方法适用于不同的水印类型——半透明文字水印适合用模糊，不透明 Logo 适合用裁剪或覆盖。</li>
-                            <li data-i18n="video.watermarks-remove.problem3">区域选择支持拖拽框选——在视频帧上画出需要去除的水印区域。可以添加多个区域，每个区域独立设置去除方法。时间范围控制——可以只在某个时间段内应用去除效果。所有处理基于 FFmpeg 滤镜，在浏览器本地完成。</li>
+                            <li data-i18n="video.watermarks-remove.problem1">
+                                下载的视频带有平台水印、录屏时误留了个人信息、老视频上有不需要的台标——这些场景都需要去除视频中的水印。但视频水印去除比图片复杂得多——每一帧都需要独立修复，且帧与帧之间要保持一致性（不能闪烁）。本工具提供多种去除方法，针对不同类型的水印选择最优策略。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.problem2">
+                                支持七种去除方法：模糊（Blur）、马赛克（Mosaic）、像素化（Pixelate）、亮度调整（Brightness）、对比度调整（Contrast）、裁剪（Crop）、覆盖（Cover）。每种方法适用于不同的水印类型——半透明文字水印适合用模糊，不透明
+                                Logo 适合用裁剪或覆盖。</li>
+                            <li data-i18n="video.watermarks-remove.problem3">
+                                区域选择支持拖拽框选——在视频帧上画出需要去除的水印区域。可以添加多个区域，每个区域独立设置去除方法。时间范围控制——可以只在某个时间段内应用去除效果。所有处理基于
+                                FFmpeg 滤镜，在浏览器本地完成。</li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.formatTitle">二、七种去除方法的技术原理</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.formatMp4"><strong>模糊（Blur）：</strong>对水印区域应用高斯模糊——将水印像素与周围像素混合，使水印变得不明显。适合半透明文字水印。模糊强度可调——强度越高水印越不明显，但区域也越模糊。</li>
-                            <li data-i18n="video.watermarks-remove.formatAvi"><strong>马赛克（Mosaic）：</strong>将水印区域的像素块化——用大块颜色替代细节。水印被"打碎"成马赛克图案。适合不重要的区域遮挡——效果明显但不自然。</li>
-                            <li data-i18n="video.watermarks-remove.formatMov"><strong>像素化（Pixelate）：</strong>类似马赛克但使用更大的像素块——水印区域变成明显的"马赛克方块"。适合需要明确"这里被处理过"的场景（如隐私保护）。</li>
+                            <li data-i18n="video.watermarks-remove.formatMp4">
+                                <strong>模糊（Blur）：</strong>对水印区域应用高斯模糊——将水印像素与周围像素混合，使水印变得不明显。适合半透明文字水印。模糊强度可调——强度越高水印越不明显，但区域也越模糊。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.formatAvi">
+                                <strong>马赛克（Mosaic）：</strong>将水印区域的像素块化——用大块颜色替代细节。水印被"打碎"成马赛克图案。适合不重要的区域遮挡——效果明显但不自然。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.formatMov">
+                                <strong>像素化（Pixelate）：</strong>类似马赛克但使用更大的像素块——水印区域变成明显的"马赛克方块"。适合需要明确"这里被处理过"的场景（如隐私保护）。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.featuresTitle">三、高级去除方法</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.featureOnline"><strong>亮度调整（Brightness）：</strong>调整水印区域的亮度——如果水印比周围区域更亮或更暗，通过亮度调整使其与背景融合。适合亮度差异明显的水印。</li>
-                            <li data-i18n="video.watermarks-remove.featurePreview"><strong>对比度调整（Contrast）：</strong>调整水印区域的对比度——降低对比度可以使水印与背景的边界变得模糊。适合边界清晰的水印。</li>
-                            <li data-i18n="video.watermarks-remove.featureExport"><strong>裁剪（Crop）：</strong>直接裁掉水印所在的画面区域——如果水印在画面边缘（如角落 Logo），可以裁掉边缘部分。简单粗暴但有效。</li>
-                            <li data-i18n="video.watermarks-remove.featureSecurity"><strong>覆盖（Cover）：</strong>用指定颜色填充水印区域——适合水印在纯色背景上的情况。比如白色背景上的水印，用白色覆盖即可。</li>
+                            <li data-i18n="video.watermarks-remove.featureOnline">
+                                <strong>亮度调整（Brightness）：</strong>调整水印区域的亮度——如果水印比周围区域更亮或更暗，通过亮度调整使其与背景融合。适合亮度差异明显的水印。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.featurePreview">
+                                <strong>对比度调整（Contrast）：</strong>调整水印区域的对比度——降低对比度可以使水印与背景的边界变得模糊。适合边界清晰的水印。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.featureExport">
+                                <strong>裁剪（Crop）：</strong>直接裁掉水印所在的画面区域——如果水印在画面边缘（如角落 Logo），可以裁掉边缘部分。简单粗暴但有效。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.featureSecurity">
+                                <strong>覆盖（Cover）：</strong>用指定颜色填充水印区域——适合水印在纯色背景上的情况。比如白色背景上的水印，用白色覆盖即可。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -285,49 +317,91 @@
                     <div class="info-content">
                         <h4 data-i18n="video.watermarks-remove.usageUploadTitle">载入视频</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usageSelectFile"><strong>上传方式：</strong>点击或拖拽上传需要处理的视频。支持 MP4/WebM/MOV/AVI 等格式。</li>
-                            <li data-i18n="video.watermarks-remove.usageFormats"><strong>格式支持：</strong>所有浏览器可播放的视频格式。</li>
-                            <li data-i18n="video.watermarks-remove.usageFileSize"><strong>文件大小：</strong>建议不超过 500MB。</li>
-                            <li data-i18n="video.watermarks-remove.usagePreview"><strong>视频预览：</strong>上传后播放预览，找到水印出现的位置和时间。</li>
+                            <li data-i18n="video.watermarks-remove.usageSelectFile">
+                                <strong>上传方式：</strong>点击或拖拽上传需要处理的视频。支持 MP4/WebM/MOV/AVI 等格式。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageFormats"><strong>格式支持：</strong>所有浏览器可播放的视频格式。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageFileSize"><strong>文件大小：</strong>建议不超过 500MB。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usagePreview">
+                                <strong>视频预览：</strong>上传后播放预览，找到水印出现的位置和时间。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.usageMethodTitle">选择去除方法</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usageCrop"><strong>裁剪：</strong>适合画面边缘的水印。直接裁掉边缘区域——简单有效但会损失画面内容。</li>
-                            <li data-i18n="video.watermarks-remove.usageBlur"><strong>模糊：</strong>适合半透明文字水印。将水印与周围像素混合使其不明显。</li>
-                            <li data-i18n="video.watermarks-remove.usageMosaic"><strong>马赛克/像素化：</strong>适合不透明 Logo。将水印区域块化——效果明显但不自然。</li>
+                            <li data-i18n="video.watermarks-remove.usageCrop">
+                                <strong>裁剪：</strong>适合画面边缘的水印。直接裁掉边缘区域——简单有效但会损失画面内容。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageBlur">
+                                <strong>模糊：</strong>适合半透明文字水印。将水印与周围像素混合使其不明显。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageMosaic"><strong>马赛克/像素化：</strong>适合不透明
+                                Logo。将水印区域块化——效果明显但不自然。</li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.usageAreaTitle">框选水印区域</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usageDrag"><strong>拖拽选区：</strong>在视频帧上按住鼠标拖动，画出覆盖水印的矩形区域。</li>
-                            <li data-i18n="video.watermarks-remove.usageAdjust"><strong>调整选区：</strong>拖动选区边角调整大小和位置。选区应刚好覆盖水印并留出 2-5px 边距。</li>
-                            <li data-i18n="video.watermarks-remove.usageAreaPreview"><strong>多区域支持：</strong>可以添加多个选区——每个选区独立设置去除方法。适合视频中有多个水印的情况。</li>
+                            <li data-i18n="video.watermarks-remove.usageDrag">
+                                <strong>拖拽选区：</strong>在视频帧上按住鼠标拖动，画出覆盖水印的矩形区域。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageAdjust">
+                                <strong>调整选区：</strong>拖动选区边角调整大小和位置。选区应刚好覆盖水印并留出 2-5px 边距。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageAreaPreview">
+                                <strong>多区域支持：</strong>可以添加多个选区——每个选区独立设置去除方法。适合视频中有多个水印的情况。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.usageAdviceTitle">去除建议</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usageAdvice1"><strong>选区精确：</strong>选区不要太大——只覆盖水印区域即可。过大的选区会影响更多画面内容。</li>
-                            <li data-i18n="video.watermarks-remove.usageAdvice2"><strong>方法匹配：</strong>半透明水印用模糊，不透明 Logo 用裁剪或覆盖，纯色背景水印用覆盖。</li>
-                            <li data-i18n="video.watermarks-remove.usageAdvice3"><strong>时间范围：</strong>如果水印只在某个时间段出现，设置开始和结束时间——避免对不需要处理的帧做修改。</li>
-                            <li data-i18n="video.watermarks-remove.usageAdvice4"><strong>多次处理：</strong>复杂水印可能需要多种方法组合——先模糊再调整亮度，效果优于单一方法。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice1">
+                                <strong>选区精确：</strong>选区不要太大——只覆盖水印区域即可。过大的选区会影响更多画面内容。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice2"><strong>方法匹配：</strong>半透明水印用模糊，不透明 Logo
+                                用裁剪或覆盖，纯色背景水印用覆盖。</li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice3">
+                                <strong>时间范围：</strong>如果水印只在某个时间段出现，设置开始和结束时间——避免对不需要处理的帧做修改。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageAdvice4">
+                                <strong>多次处理：</strong>复杂水印可能需要多种方法组合——先模糊再调整亮度，效果优于单一方法。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.usageProcessTitle">执行处理</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usageProcessClick"><strong>点击"开始处理"：</strong>FFmpeg 引擎逐帧处理水印去除。</li>
-                            <li data-i18n="video.watermarks-remove.usageProgress"><strong>进度显示：</strong>实时显示处理进度和预估剩余时间。</li>
-                            <li data-i18n="video.watermarks-remove.usageWait"><strong>处理时间：</strong>约 1-2x 视频时长。多区域处理时间更长。</li>
+                            <li data-i18n="video.watermarks-remove.usageProcessClick"><strong>点击"开始处理"：</strong>FFmpeg
+                                引擎逐帧处理水印去除。</li>
+                            <li data-i18n="video.watermarks-remove.usageProgress"><strong>进度显示：</strong>实时显示处理进度和预估剩余时间。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageWait"><strong>处理时间：</strong>约 1-2x
+                                视频时长。多区域处理时间更长。</li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usagePreviewResult"><strong>预览效果：</strong>处理完成后播放预览，确认水印去除效果。</li>
-                            <li data-i18n="video.watermarks-remove.usageViewInfo"><strong>效果评估：</strong>纯色背景上的水印去除效果最好，复杂纹理背景可能有轻微痕迹。</li>
-                            <li data-i18n="video.watermarks-remove.usageDownloadOneClick"><strong>下载文件：</strong>点击下载按钮保存处理后的视频。输出为 MP4 格式。</li>
-                            <li data-i18n="video.watermarks-remove.usageReprocess"><strong>重新处理：</strong>效果不满意可以重置后重新设置参数和处理。</li>
+                            <li data-i18n="video.watermarks-remove.usagePreviewResult">
+                                <strong>预览效果：</strong>处理完成后播放预览，确认水印去除效果。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageViewInfo">
+                                <strong>效果评估：</strong>纯色背景上的水印去除效果最好，复杂纹理背景可能有轻微痕迹。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageDownloadOneClick">
+                                <strong>下载文件：</strong>点击下载按钮保存处理后的视频。输出为 MP4 格式。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageReprocess">
+                                <strong>重新处理：</strong>效果不满意可以重置后重新设置参数和处理。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.usageScenesTitle">五、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.usageScenePlatform"><strong>平台水印去除：</strong>从视频平台下载的视频带有平台 Logo——用裁剪或模糊方法去除。</li>
-                            <li data-i18n="video.watermarks-remove.usageSceneCopyright"><strong>字幕水印去除：</strong>视频上的硬字幕（烧录在画面中的文字）——用模糊方法使其不明显。</li>
-                            <li data-i18n="video.watermarks-remove.sceneSubtitle"><strong>台标去除：</strong>视频角落的电视台 Logo——通常在固定位置，用裁剪或覆盖方法处理。</li>
-                            <li data-i18n="video.watermarks-remove.usageScenePrivacy"><strong>隐私信息去除：</strong>录屏时误留的个人信息（地址栏、文件名等）——用马赛克或模糊方法遮挡。</li>
+                            <li data-i18n="video.watermarks-remove.usageScenePlatform">
+                                <strong>平台水印去除：</strong>从视频平台下载的视频带有平台 Logo——用裁剪或模糊方法去除。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.usageSceneCopyright">
+                                <strong>字幕水印去除：</strong>视频上的硬字幕（烧录在画面中的文字）——用模糊方法使其不明显。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.sceneSubtitle"><strong>台标去除：</strong>视频角落的电视台
+                                Logo——通常在固定位置，用裁剪或覆盖方法处理。</li>
+                            <li data-i18n="video.watermarks-remove.usageScenePrivacy">
+                                <strong>隐私信息去除：</strong>录屏时误留的个人信息（地址栏、文件名等）——用马赛克或模糊方法遮挡。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -338,41 +412,68 @@
                     <div class="info-content">
                         <h4 data-i18n="video.watermarks-remove.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理。</li>
-                            <li data-i18n="video.watermarks-remove.noteSecurity2"><strong>内存管理：</strong>处理完成后自动释放内存。</li>
-                            <li data-i18n="video.watermarks-remove.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。</li>
+                            <li data-i18n="video.watermarks-remove.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg
+                                WASM，视频数据完全在浏览器中处理。</li>
+                            <li data-i18n="video.watermarks-remove.noteSecurity2"><strong>内存管理：</strong>处理完成后自动释放内存。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有处理数据自动清除。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.notePerf1"><strong>处理时间：</strong>约 1-2x 视频时长。多区域处理时间更长。</li>
-                            <li data-i18n="video.watermarks-remove.notePerf2"><strong>方法影响：</strong>裁剪方法处理最快（不需要滤镜计算），模糊/马赛克处理较慢。</li>
-                            <li data-i18n="video.watermarks-remove.notePerf3"><strong>CPU 占用：</strong>滤镜处理是 CPU 密集型任务，处理时占用较高。</li>
+                            <li data-i18n="video.watermarks-remove.notePerf1"><strong>处理时间：</strong>约 1-2x
+                                视频时长。多区域处理时间更长。</li>
+                            <li data-i18n="video.watermarks-remove.notePerf2">
+                                <strong>方法影响：</strong>裁剪方法处理最快（不需要滤镜计算），模糊/马赛克处理较慢。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.notePerf3"><strong>CPU 占用：</strong>滤镜处理是 CPU
+                                密集型任务，处理时占用较高。</li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.notesFormatTitle">输出格式</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.noteFormat1"><strong>统一 MP4：</strong>输出为 MP4（H.264 + AAC）。</li>
-                            <li data-i18n="video.watermarks-remove.noteFormat2"><strong>画质保持：</strong>使用与原始视频相近的编码参数。</li>
+                            <li data-i18n="video.watermarks-remove.noteFormat1"><strong>统一 MP4：</strong>输出为 MP4（H.264 +
+                                AAC）。</li>
+                            <li data-i18n="video.watermarks-remove.noteFormat2"><strong>画质保持：</strong>使用与原始视频相近的编码参数。
+                            </li>
                             <li data-i18n="video.watermarks-remove.noteFormat3"><strong>音频保留：</strong>音频轨道完整保留。</li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.notesEffectTitle">效果预期</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.noteEffect1"><strong>模糊效果：</strong>半透明水印可以被很好地"融入"背景，但区域会变得模糊。</li>
-                            <li data-i18n="video.watermarks-remove.noteEffect2"><strong>裁剪效果：</strong>最直接有效——水印被裁掉后完全不存在。但会损失画面边缘内容。</li>
-                            <li data-i18n="video.watermarks-remove.noteEffect3"><strong>覆盖效果：</strong>适合纯色背景——用相同颜色覆盖后几乎看不出痕迹。</li>
-                            <li data-i18n="video.watermarks-remove.noteEffect4"><strong>复杂背景：</strong>纹理复杂的背景上，任何方法都会有轻微痕迹——这是视频修复的固有限制。</li>
+                            <li data-i18n="video.watermarks-remove.noteEffect1">
+                                <strong>模糊效果：</strong>半透明水印可以被很好地"融入"背景，但区域会变得模糊。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.noteEffect2">
+                                <strong>裁剪效果：</strong>最直接有效——水印被裁掉后完全不存在。但会损失画面边缘内容。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.noteEffect3">
+                                <strong>覆盖效果：</strong>适合纯色背景——用相同颜色覆盖后几乎看不出痕迹。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.noteEffect4">
+                                <strong>复杂背景：</strong>纹理复杂的背景上，任何方法都会有轻微痕迹——这是视频修复的固有限制。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.notesQualityTitle">画质保障</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.noteQuality1"><strong>编码损失：</strong>去除水印需要重新编码——使用与原始相近的码率，画质损失极小。</li>
-                            <li data-i18n="video.watermarks-remove.noteQuality2"><strong>非破坏性：</strong>去除效果只影响选区内部的像素，选区外部完全不受影响。</li>
-                            <li data-i18n="video.watermarks-remove.noteQuality3"><strong>可逆性：</strong>处理后的视频无法恢复原始画面——去除效果是永久的。</li>
+                            <li data-i18n="video.watermarks-remove.noteQuality1">
+                                <strong>编码损失：</strong>去除水印需要重新编码——使用与原始相近的码率，画质损失极小。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.noteQuality2">
+                                <strong>非破坏性：</strong>去除效果只影响选区内部的像素，选区外部完全不受影响。
+                            </li>
+                            <li data-i18n="video.watermarks-remove.noteQuality3">
+                                <strong>可逆性：</strong>处理后的视频无法恢复原始画面——去除效果是永久的。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.watermarks-remove.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.watermarks-remove.noteFaq1"><strong>Q: 水印去除后有明显痕迹？</strong>A: 尝试不同的方法——模糊适合半透明水印，裁剪适合边缘水印，覆盖适合纯色背景。</li>
-                            <li data-i18n="video.watermarks-remove.noteFaq2"><strong>Q: 能完全去除水印恢复原始画面吗？</strong>A: 不能。视频水印去除本质是"修复"而非"恢复"——用周围像素近似填充，无法还原被水印覆盖的原始像素。</li>
-                            <li data-i18n="video.watermarks-remove.noteFaq3"><strong>Q: 全屏平铺水印能去除吗？</strong>A: 极其困难。平铺水印覆盖整个画面，没有"干净"的周围像素可以参考。</li>
-                            <li data-i18n="video.watermarks-remove.noteFaq4"><strong>Q: 处理后的视频能再次处理吗？</strong>A: 可以。但多次编码会累积画质损失。建议一次性完成所有区域的去除。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq1"><strong>Q: 水印去除后有明显痕迹？</strong>A:
+                                尝试不同的方法——模糊适合半透明水印，裁剪适合边缘水印，覆盖适合纯色背景。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq2"><strong>Q: 能完全去除水印恢复原始画面吗？</strong>A:
+                                不能。视频水印去除本质是"修复"而非"恢复"——用周围像素近似填充，无法还原被水印覆盖的原始像素。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq3"><strong>Q: 全屏平铺水印能去除吗？</strong>A:
+                                极其困难。平铺水印覆盖整个画面，没有"干净"的周围像素可以参考。</li>
+                            <li data-i18n="video.watermarks-remove.noteFaq4"><strong>Q: 处理后的视频能再次处理吗？</strong>A:
+                                可以。但多次编码会累积画质损失。建议一次性完成所有区域的去除。</li>
                         </ul>
                     </div>
                 </article>
@@ -383,12 +484,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

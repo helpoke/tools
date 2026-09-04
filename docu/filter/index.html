@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>文档页面筛选 - PDF文档页面筛选工具</title>
     <meta property="og:title" content="文档页面筛选 - PDF文档页面筛选工具">
@@ -46,7 +54,7 @@
         "@type": "WebApplication",
         "name": "文档页面筛选工具",
         "description": "免费在线文档页面筛选工具，支持PDF文档页面筛选与内容搜索，可剔除不需要的页面。纯前端本地处理，保护用户隐私。Free online document page filter for PDF page selection and content search.",
-        "url": "https://helpoke.com/docu/filter",
+        "url": "https://helpoke.com/docu/filter/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -60,7 +68,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -78,10 +86,13 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="docu.filter.title">文档筛选工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="docu.filter.intro">文档筛选工具，支持从PDF文档中提取特定内容或筛选页面，支持按页数、关键词等条件筛选</p>
-            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
 
         <div class="container">
@@ -103,9 +114,11 @@
                     <div class="setting-item search-item">
                         <label for="searchInput" data-i18n="docu.filter.searchLabel">内容搜索：</label>
                         <div class="search-row">
-                            <input type="text" id="searchInput" data-i18n-placeholder="docu.filter.searchPlaceholder" placeholder="输入关键词搜索页面内容...">
+                            <input type="text" id="searchInput" data-i18n-placeholder="docu.filter.searchPlaceholder"
+                                placeholder="输入关键词搜索页面内容...">
                             <button id="searchBtn" class="btn-sm" data-i18n="docu.filter.searchBtn">搜索</button>
-                            <button id="clearSearchBtn" class="btn-sm" style="display:none;" data-i18n="docu.filter.clearBtn">清除</button>
+                            <button id="clearSearchBtn" class="btn-sm" style="display:none;"
+                                data-i18n="docu.filter.clearBtn">清除</button>
                         </div>
                         <span class="hint" id="searchHint"></span>
                     </div>
@@ -118,7 +131,8 @@
                     </div>
                     <div class="setting-item" id="customPagesGroup" style="display:none;">
                         <label for="customPages" data-i18n="docu.filter.customPagesLabel">保留页码：</label>
-                        <input type="text" id="customPages" data-i18n-placeholder="docu.filter.customPagesPlaceholder" placeholder="例: 1,3,5-8">
+                        <input type="text" id="customPages" data-i18n-placeholder="docu.filter.customPagesPlaceholder"
+                            placeholder="例: 1,3,5-8">
                         <span class="hint" data-i18n="docu.filter.customPagesHint">逗号分隔，支持范围如 1-5</span>
                     </div>
                 </div>
@@ -141,7 +155,8 @@
             <div class="action-section" id="actionSection" style="display:none;">
                 <button id="processBtn" class="btn-primary">
                     <span id="processBtnText" data-i18n="docu.filter.processBtnText">开始筛选</span>
-                    <span id="processBtnLoading" style="display:none;" data-i18n="docu.filter.processBtnLoading">处理中...</span>
+                    <span id="processBtnLoading" style="display:none;"
+                        data-i18n="docu.filter.processBtnLoading">处理中...</span>
                 </button>
                 <div class="progress-container" id="progressContainer" style="display:none;">
                     <div class="progress-bar" id="progressBar"></div>
@@ -164,20 +179,33 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.filter.problemsTitle">一、PDF 页面过滤的应用场景</h4>
                         <ul>
-                            <li data-i18n="docu.filter.problem1">一份 200 页的合同，你只需要其中包含"违约条款"的 5 页——手动翻页查找效率极低。或者一份报告需要删除所有包含"机密"标记的页面再分享给外部合作方——逐页检查同样耗时。PDF 页面过滤工具通过全文搜索自动定位包含指定关键词的页面，然后保留或删除这些页面。</li>
-                            <li data-i18n="docu.filter.problem2">本工具支持两种过滤模式：保留模式（只保留包含关键词的页面）和删除模式（删除包含关键词的页面）。搜索支持全文匹配——不只是标题，正文中的关键词也会被匹配。还支持手动选择——在预览中逐页勾选需要保留或删除的页面。</li>
-                            <li data-i18n="docu.filter.problem3">与合并/拆分工具不同，过滤工具的核心价值在于"按内容筛选"——你不需要知道目标内容在第几页，只需要告诉工具你要什么关键词。这对于处理大量标准化文档（如合同、报告、论文）特别高效。</li>
+                            <li data-i18n="docu.filter.problem1">一份 200 页的合同，你只需要其中包含"违约条款"的 5
+                                页——手动翻页查找效率极低。或者一份报告需要删除所有包含"机密"标记的页面再分享给外部合作方——逐页检查同样耗时。PDF
+                                页面过滤工具通过全文搜索自动定位包含指定关键词的页面，然后保留或删除这些页面。</li>
+                            <li data-i18n="docu.filter.problem2">
+                                本工具支持两种过滤模式：保留模式（只保留包含关键词的页面）和删除模式（删除包含关键词的页面）。搜索支持全文匹配——不只是标题，正文中的关键词也会被匹配。还支持手动选择——在预览中逐页勾选需要保留或删除的页面。
+                            </li>
+                            <li data-i18n="docu.filter.problem3">
+                                与合并/拆分工具不同，过滤工具的核心价值在于"按内容筛选"——你不需要知道目标内容在第几页，只需要告诉工具你要什么关键词。这对于处理大量标准化文档（如合同、报告、论文）特别高效。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.filter.formatTitle">二、PDF 过滤的技术原理</h4>
                         <ul>
-                            <li data-i18n="docu.filter.formatPdf"><strong>文本提取：</strong>使用 PDF.js 逐页解析 PDF 的文本层——提取每页的所有文字内容。然后用关键词匹配算法检查每页是否包含目标关键词——匹配的页面被标记为"命中"。</li>
+                            <li data-i18n="docu.filter.formatPdf"><strong>文本提取：</strong>使用 PDF.js 逐页解析 PDF
+                                的文本层——提取每页的所有文字内容。然后用关键词匹配算法检查每页是否包含目标关键词——匹配的页面被标记为"命中"。</li>
                         </ul>
                         <h4 data-i18n="docu.filter.featuresTitle">三、核心功能</h4>
                         <ul>
-                            <li data-i18n="docu.filter.featureOnline"><strong>关键词搜索：</strong>输入关键词自动搜索全文——显示匹配页数和每页的匹配数量。</li>
-                            <li data-i18n="docu.filter.featurePreview"><strong>页面预览：</strong>逐页渲染 PDF 预览——命中的页面标记为保留/删除状态，支持缩放和翻页。</li>
-                            <li data-i18n="docu.filter.featureExport"><strong>反向选择：</strong>一键反转选择状态——将"保留"变为"删除"，"删除"变为"保留"。</li>
-                            <li data-i18n="docu.filter.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——PDF 文件不上传到任何服务器。</li>
+                            <li data-i18n="docu.filter.featureOnline">
+                                <strong>关键词搜索：</strong>输入关键词自动搜索全文——显示匹配页数和每页的匹配数量。
+                            </li>
+                            <li data-i18n="docu.filter.featurePreview"><strong>页面预览：</strong>逐页渲染 PDF
+                                预览——命中的页面标记为保留/删除状态，支持缩放和翻页。</li>
+                            <li data-i18n="docu.filter.featureExport">
+                                <strong>反向选择：</strong>一键反转选择状态——将"保留"变为"删除"，"删除"变为"保留"。
+                            </li>
+                            <li data-i18n="docu.filter.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——PDF
+                                文件不上传到任何服务器。</li>
                         </ul>
                     </div>
                 </article>
@@ -189,27 +217,38 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.filter.usageUploadTitle">上传文档</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持 200MB。</li>
-                            <li data-i18n="docu.filter.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析文本层——显示总页数和文件大小。</li>
-                            <li data-i18n="docu.filter.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF 预览——可以在预览中浏览文档内容。</li>
+                            <li data-i18n="docu.filter.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——最大支持
+                                200MB。</li>
+                            <li data-i18n="docu.filter.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析文本层——显示总页数和文件大小。
+                            </li>
+                            <li data-i18n="docu.filter.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF 预览——可以在预览中浏览文档内容。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.filter.usageFilterTitle">设置过滤</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usageSearch"><strong>输入关键词：</strong>在搜索框中输入过滤关键词——工具自动搜索并标记匹配页面。</li>
-                            <li data-i18n="docu.filter.usagePageMode"><strong>页面范围：</strong>选择"全部页面"或"自定义页面"——自定义模式可以指定搜索范围。</li>
-                            <li data-i18n="docu.filter.usageCustomPages"><strong>指定页码：</strong>输入页码范围（如 1-10,15,20-30）——只在指定范围内搜索。</li>
+                            <li data-i18n="docu.filter.usageSearch"><strong>输入关键词：</strong>在搜索框中输入过滤关键词——工具自动搜索并标记匹配页面。
+                            </li>
+                            <li data-i18n="docu.filter.usagePageMode">
+                                <strong>页面范围：</strong>选择"全部页面"或"自定义页面"——自定义模式可以指定搜索范围。
+                            </li>
+                            <li data-i18n="docu.filter.usageCustomPages"><strong>指定页码：</strong>输入页码范围（如
+                                1-10,15,20-30）——只在指定范围内搜索。</li>
                         </ul>
                         <h4 data-i18n="docu.filter.usageSelectTitle">选择页面</h4>
                         <ul>
                             <li data-i18n="docu.filter.usagePreview"><strong>查看预览：</strong>在预览区查看每页内容——命中的页面有特殊标记。</li>
-                            <li data-i18n="docu.filter.usageSelectPage"><strong>手动选择：</strong>点击页面缩略图切换保留/删除状态——可以手动调整搜索结果。</li>
-                            <li data-i18n="docu.filter.usageSelectAll"><strong>全选/取消：</strong>点击"全选"选择所有页面，"取消全选"取消所有选择。</li>
+                            <li data-i18n="docu.filter.usageSelectPage">
+                                <strong>手动选择：</strong>点击页面缩略图切换保留/删除状态——可以手动调整搜索结果。
+                            </li>
+                            <li data-i18n="docu.filter.usageSelectAll"><strong>全选/取消：</strong>点击"全选"选择所有页面，"取消全选"取消所有选择。
+                            </li>
                             <li data-i18n="docu.filter.usageInvert"><strong>反向选择：</strong>点击"反选"按钮——保留变删除，删除变保留。</li>
                             <li data-i18n="docu.filter.usageZoom"><strong>缩放预览：</strong>使用缩放功能查看页面细节——确认内容是否正确匹配。</li>
                         </ul>
                         <h4 data-i18n="docu.filter.usageProcessTitle">处理与下载</h4>
                         <ul>
-                            <li data-i18n="docu.filter.usageProcess"><strong>点击处理：</strong>点击"处理"按钮开始过滤——工具根据选择结果生成新的 PDF。</li>
+                            <li data-i18n="docu.filter.usageProcess"><strong>点击处理：</strong>点击"处理"按钮开始过滤——工具根据选择结果生成新的
+                                PDF。</li>
                             <li data-i18n="docu.filter.usageProgress"><strong>等待完成：</strong>进度条显示处理进度——大文件可能需要数十秒。</li>
                             <li data-i18n="docu.filter.usageDownload"><strong>下载结果：</strong>处理完成后点击"下载"保存过滤后的 PDF。</li>
                         </ul>
@@ -222,33 +261,52 @@
                     <div class="info-content">
                         <h4 data-i18n="docu.filter.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteSecurity1"><strong>纯前端处理：</strong>所有 PDF 处理在浏览器中完成——文件不上传到服务器。</li>
-                            <li data-i18n="docu.filter.noteSecurity2"><strong>内存管理：</strong>大文件处理完毕后浏览器会自动释放内存——如果内存不足，建议分批处理。</li>
+                            <li data-i18n="docu.filter.noteSecurity1"><strong>纯前端处理：</strong>所有 PDF
+                                处理在浏览器中完成——文件不上传到服务器。</li>
+                            <li data-i18n="docu.filter.noteSecurity2">
+                                <strong>内存管理：</strong>大文件处理完毕后浏览器会自动释放内存——如果内存不足，建议分批处理。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.filter.notesProcessTitle">处理说明</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteProcess1"><strong>扫描版 PDF：</strong>扫描版 PDF（图片型）没有文本层——搜索功能无法使用，需要手动逐页选择。</li>
-                            <li data-i18n="docu.filter.noteProcess2"><strong>至少保留一页：</strong>过滤结果不能为空——至少保留一页内容。如果所有页面都被删除，工具会提示错误。</li>
-                            <li data-i18n="docu.filter.noteProcess3"><strong>排版保留：</strong>过滤只删除整页——保留页面的排版、字体、图片完全不变。</li>
+                            <li data-i18n="docu.filter.noteProcess1"><strong>扫描版 PDF：</strong>扫描版
+                                PDF（图片型）没有文本层——搜索功能无法使用，需要手动逐页选择。</li>
+                            <li data-i18n="docu.filter.noteProcess2">
+                                <strong>至少保留一页：</strong>过滤结果不能为空——至少保留一页内容。如果所有页面都被删除，工具会提示错误。
+                            </li>
+                            <li data-i18n="docu.filter.noteProcess3"><strong>排版保留：</strong>过滤只删除整页——保留页面的排版、字体、图片完全不变。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.filter.notesFormatTitle">格式说明</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteFormat1"><strong>输入格式：</strong>仅支持 PDF 格式——不支持 Word、Excel 等其他文档。</li>
-                            <li data-i18n="docu.filter.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——保留原始页面质量和排版。</li>
-                            <li data-i18n="docu.filter.noteFormat3"><strong>页码连续：</strong>输出 PDF 的页码自动重新编号——不保留原始页码。</li>
+                            <li data-i18n="docu.filter.noteFormat1"><strong>输入格式：</strong>仅支持 PDF 格式——不支持 Word、Excel
+                                等其他文档。</li>
+                            <li data-i18n="docu.filter.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——保留原始页面质量和排版。
+                            </li>
+                            <li data-i18n="docu.filter.noteFormat3"><strong>页码连续：</strong>输出 PDF 的页码自动重新编号——不保留原始页码。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.filter.notesRulesTitle">搜索规则</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteRule1"><strong>精确匹配：</strong>搜索使用精确字符串匹配——"合同"不会匹配"合同书"中的"合同"（实际会匹配，因为包含关系）。</li>
-                            <li data-i18n="docu.filter.noteRule2"><strong>区分大小写：</strong>英文搜索区分大小写——"PDF" 和 "pdf" 是不同的搜索结果。</li>
-                            <li data-i18n="docu.filter.noteRule3"><strong>多关键词：</strong>每次搜索一个关键词——需要多个关键词过滤时，分别搜索后手动合并选择。</li>
+                            <li data-i18n="docu.filter.noteRule1">
+                                <strong>精确匹配：</strong>搜索使用精确字符串匹配——"合同"不会匹配"合同书"中的"合同"（实际会匹配，因为包含关系）。
+                            </li>
+                            <li data-i18n="docu.filter.noteRule2"><strong>区分大小写：</strong>英文搜索区分大小写——"PDF" 和 "pdf"
+                                是不同的搜索结果。</li>
+                            <li data-i18n="docu.filter.noteRule3">
+                                <strong>多关键词：</strong>每次搜索一个关键词——需要多个关键词过滤时，分别搜索后手动合并选择。
+                            </li>
                         </ul>
                         <h4 data-i18n="docu.filter.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="docu.filter.noteFaq1"><strong>Q: 搜索不到结果？</strong>A: 可能是扫描版 PDF（没有文本层）或关键词拼写不匹配——尝试不同的关键词。</li>
-                            <li data-i18n="docu.filter.noteFaq2"><strong>Q: 过滤后页面顺序？</strong>A: 保留的页面按原始顺序排列——不会重新排序。</li>
-                            <li data-i18n="docu.filter.noteFaq3"><strong>Q: 能按图片内容过滤吗？</strong>A: 不能——只能按文本内容过滤。图片中的文字无法被搜索到。</li>
-                            <li data-i18n="docu.filter.noteFaq4"><strong>Q: 过滤后文件会变小吗？</strong>A: 是的——删除的页面不再占用空间。但如果删除的页面包含高分辨率图片，文件可能不会显著变小（PDF 内部资源可能未完全清理）。</li>
+                            <li data-i18n="docu.filter.noteFaq1"><strong>Q: 搜索不到结果？</strong>A: 可能是扫描版
+                                PDF（没有文本层）或关键词拼写不匹配——尝试不同的关键词。</li>
+                            <li data-i18n="docu.filter.noteFaq2"><strong>Q: 过滤后页面顺序？</strong>A: 保留的页面按原始顺序排列——不会重新排序。
+                            </li>
+                            <li data-i18n="docu.filter.noteFaq3"><strong>Q: 能按图片内容过滤吗？</strong>A:
+                                不能——只能按文本内容过滤。图片中的文字无法被搜索到。</li>
+                            <li data-i18n="docu.filter.noteFaq4"><strong>Q: 过滤后文件会变小吗？</strong>A:
+                                是的——删除的页面不再占用空间。但如果删除的页面包含高分辨率图片，文件可能不会显著变小（PDF 内部资源可能未完全清理）。</li>
                         </ul>
                     </div>
                 </article>
@@ -259,10 +317,14 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -274,7 +336,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="modal-nav-btn" id="modalPrev" data-i18n-title="docu.filter.modalPrevTitle">◀</button>
-                <span class="modal-title" id="modalTitle" data-i18n="docu.filter.modalTitle">第 {{page}} 页 / 共 {{total}} 页</span>
+                <span class="modal-title" id="modalTitle" data-i18n="docu.filter.modalTitle">第 {{page}} 页 / 共 {{total}}
+                    页</span>
                 <button class="modal-nav-btn" id="modalNext" data-i18n-title="docu.filter.modalNextTitle">▶</button>
                 <button class="modal-close" id="modalClose">×</button>
             </div>
@@ -282,7 +345,8 @@
                 <canvas id="modalCanvas"></canvas>
             </div>
             <div class="modal-footer">
-                <span class="hint" data-i18n="docu.filter.modalHint">状态：<strong id="modalKeepStatus">保留</strong> | 双击空白处或按 Esc 关闭</span>
+                <span class="hint" data-i18n="docu.filter.modalHint">状态：<strong id="modalKeepStatus">保留</strong> |
+                    双击空白处或按 Esc 关闭</span>
             </div>
         </div>
     </div>

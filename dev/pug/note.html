@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>Pug格式化校验工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="Pug格式化校验工具 - 免费、安全、快速">
+    <meta property="og:description" content="Pug格式化校验工具说明，Pug语法校验，Pug代码美化，Pug压缩，Jade格式化，免费在线Pug工具，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/pug/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Pug格式化校验工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="Pug格式化校验工具说明，Pug语法校验，Pug代码美化，Pug压缩，Jade格式化，免费在线Pug工具，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/pug/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/pug/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/pug/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Pug和Jade有什么关系？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pug原名Jade，是一个高效的HTML模板引擎。由于商标问题，项目在2016年更名为Pug。两者语法完全相同，只是名称不同。本工具同时支持Pug和Jade代码，您可以直接使用任何一种名称的代码。现有项目中的Jade代码无需修改，可以直接在本工具中处理。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Pug的缩进错误为什么会导致编译失败？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pug通过缩进来定义HTML标签的嵌套层级，类似Python的代码块定义。如果缩进不一致（如有的地方用空格，有的地方用制表符），或缩进层级错误，编译器无法正确解析标签关系，导致编译失败。建议在项目中统一缩进风格（推荐2空格或4空格），并使用本工具的格式化功能定期整理代码，避免缩进错误。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何在Pug中嵌入JavaScript代码？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pug支持多种方式嵌入JavaScript：使用 script: 标签后跟JavaScript代码块；使用 script. 标签后跟纯文本JavaScript（适合较长代码）；使用 #{expression} 插入表达式结果；使用 !{expression} 插入未转义的表达式。本工具的校验功能会检查这些语法是否正确，帮助您避免常见的嵌入错误。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Pug与HTML相比有什么优势？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pug相比HTML有明显优势：代码量减少30%-50%，无需闭合标签，语法更简洁；通过缩进定义层级，结构更清晰；支持变量、循环、条件判断等编程特性，动态生成HTML更方便；支持模板继承和包含，便于组件化开发；编译后生成标准HTML，兼容所有浏览器。特别适合Express框架和Node.js项目的开发。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "格式化后的Pug代码缩进风格是什么？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具默认使用2空格缩进风格格式化Pug代码，这是Pug项目的推荐风格。如果您的团队使用4空格或制表符缩进，可以在项目中配置编辑器的格式化规则。建议整个团队统一使用相同的缩进风格，避免因风格不一致导致的解析错误。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "压缩后的Pug代码还能使用吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "压缩后的Pug代码仍然有效，只是移除了多余空格和缩进，代码更紧凑。压缩后的代码需要在使用前进行编译，编译器会根据紧凑的格式解析标签关系。建议在开发环境使用格式化代码便于编辑，在生产环境部署前使用压缩代码减小体积。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -281,10 +352,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

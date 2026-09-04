@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>重复内容查找工具 - Helpoke 助点站</title>
     <meta property="og:title" content="重复内容查找工具 - Helpoke 助点站">
@@ -452,7 +460,7 @@
         "@type": "WebApplication",
         "name": "重复内容查找工具",
         "description": "在线重复内容查找工具，检测文本中重复出现的字符、数字、单词等内容，支持多种分隔符自动识别。Online duplicate content finder tool.",
-        "url": "https://helpoke.com/tool/duplicate-finder",
+        "url": "https://helpoke.com/tool/duplicate-finder/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -467,7 +475,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -487,9 +495,8 @@
             <h1 data-i18n="tool.duplicate-finder.title">重复内容查找工具</h1>
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="tool.duplicate-finder.intro">重复内容查找工具，自动识别多种分隔符拆分文本，检测重复内容并统计重复次数，高亮标记预览</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -500,8 +507,10 @@
                 <div class="input-group">
                     <label for="input-text" data-i18n="tool.duplicate-finder.inputLabel">输入文本内容</label>
                     <div class="custom-separator-row">
-                        <label for="custom-separator" data-i18n="tool.duplicate-finder.customSepLabel">自定义分隔符（留空使用默认）</label>
-                        <input type="text" id="custom-separator" data-i18n-placeholder="tool.duplicate-finder.customSepPlaceholder"
+                        <label for="custom-separator"
+                            data-i18n="tool.duplicate-finder.customSepLabel">自定义分隔符（留空使用默认）</label>
+                        <input type="text" id="custom-separator"
+                            data-i18n-placeholder="tool.duplicate-finder.customSepPlaceholder"
                             placeholder="例如：, ; |  支持 \n 换行 \t 制表符">
                     </div>
                     <textarea id="input-text" data-i18n-placeholder="tool.duplicate-finder.inputPlaceholder"
@@ -513,7 +522,9 @@
                 <button id="btn-find" class="btn" data-i18n="tool.duplicate-finder.findBtn">查找重复内容</button>
                 <button id="btn-clear" class="btn btn-outline" data-i18n="tool.duplicate-finder.clearBtn">清空</button>
 
-                <div class="separator-info" data-i18n="tool.duplicate-finder.separatorInfo"><strong>支持的分隔符：</strong><code>空格</code>、<code>,</code>、<code>，</code>、<code>;</code>、<code>；</code>、<code>|</code>、<code>、</code>、<code>·</code>、<code>。</code>、<code>.</code>、<code>？</code>、<code>!</code>、<code>[]</code>、<code>！</code>、<code>：</code>、<code>【】</code>、<code>（）</code>、<code>()</code>、<code>《》</code>、<code>「」</code>、<code>『』</code>、<code>—</code>、<code>_</code>、<code>=</code>、<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>\</code>、<code>~</code>、<code>`</code>、<code>@</code>、<code>#</code>、<code>$</code>、<code>%</code>、<code>^</code>、<code>&</code>、<code>换行</code>、<code>制表符</code></div>
+                <div class="separator-info" data-i18n="tool.duplicate-finder.separatorInfo">
+                    <strong>支持的分隔符：</strong><code>空格</code>、<code>,</code>、<code>，</code>、<code>;</code>、<code>；</code>、<code>|</code>、<code>、</code>、<code>·</code>、<code>。</code>、<code>.</code>、<code>？</code>、<code>!</code>、<code>[]</code>、<code>！</code>、<code>：</code>、<code>【】</code>、<code>（）</code>、<code>()</code>、<code>《》</code>、<code>「」</code>、<code>『』</code>、<code>—</code>、<code>_</code>、<code>=</code>、<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>\</code>、<code>~</code>、<code>`</code>、<code>@</code>、<code>#</code>、<code>$</code>、<code>%</code>、<code>^</code>、<code>&</code>、<code>换行</code>、<code>制表符</code>
+                </div>
 
                 <div id="result-section" class="result-section">
                     <div class="stats-row">
@@ -550,21 +561,40 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.duplicate-finder.problemTitle">一、为什么需要重复内容查找工具</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.problem1">多次下载同一份附件、不同文件夹保存了同一张照片的不同副本、备份时未去重导致数据翻倍——日积月累，重复文件可能占据 20%-40% 的存储空间。手动查找？文件名可能不同（如 report.pdf 和 report(1).pdf），内容却完全一样。本工具使用 SHA-256 哈希算法计算每个文件的"数字指纹"——只有内容完全相同的文件才会产生相同的哈希值。</li>
-                                <li data-i18n="tool.duplicate-finder.problem2">上传多个文件后，工具自动计算每个文件的 SHA-256 哈希值，然后按哈希值分组——相同哈希值的文件被标记为重复组。显示每组重复文件的数量、单个文件大小和浪费的总空间。支持一键下载去重后的文件集合。</li>
-                                <li data-i18n="tool.duplicate-finder.problem3">纯前端实现——文件哈希计算使用 Web Crypto API 的 SubtleCrypto 接口，在浏览器中完成所有计算。文件不上传到任何服务器。使用 Web Worker 并行计算哈希值，不阻塞主线程——即使处理大文件也能保持界面流畅。</li>
+                                <li data-i18n="tool.duplicate-finder.problem1">
+                                    多次下载同一份附件、不同文件夹保存了同一张照片的不同副本、备份时未去重导致数据翻倍——日积月累，重复文件可能占据 20%-40%
+                                    的存储空间。手动查找？文件名可能不同（如 report.pdf 和 report(1).pdf），内容却完全一样。本工具使用 SHA-256
+                                    哈希算法计算每个文件的"数字指纹"——只有内容完全相同的文件才会产生相同的哈希值。</li>
+                                <li data-i18n="tool.duplicate-finder.problem2">上传多个文件后，工具自动计算每个文件的 SHA-256
+                                    哈希值，然后按哈希值分组——相同哈希值的文件被标记为重复组。显示每组重复文件的数量、单个文件大小和浪费的总空间。支持一键下载去重后的文件集合。</li>
+                                <li data-i18n="tool.duplicate-finder.problem3">纯前端实现——文件哈希计算使用 Web Crypto API 的
+                                    SubtleCrypto 接口，在浏览器中完成所有计算。文件不上传到任何服务器。使用 Web Worker
+                                    并行计算哈希值，不阻塞主线程——即使处理大文件也能保持界面流畅。</li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.formatTitle">二、哈希去重的技术原理</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.formatText"><strong>自由文本：</strong>支持以空格、换行符、逗号、分号、顿号、管道符等常见分隔符分隔的文本内容。系统自动识别文本中使用的分隔符并正确拆分条目。例如"苹果，香蕉，苹果，橘子"会被拆分为 4 个条目，其中"苹果"出现 2 次。</li>
-                                <li data-i18n="tool.duplicate-finder.formatCode"><strong>代码数据：</strong>支持从数组、列表等代码结构中提取值——如 <code>[457,569,333,457,888]</code> 会自动提取方括号内的数字并检测重复。也支持 JSON 数组、CSV 列值等结构化数据格式。</li>
+                                <li data-i18n="tool.duplicate-finder.formatText">
+                                    <strong>自由文本：</strong>支持以空格、换行符、逗号、分号、顿号、管道符等常见分隔符分隔的文本内容。系统自动识别文本中使用的分隔符并正确拆分条目。例如"苹果，香蕉，苹果，橘子"会被拆分为
+                                    4 个条目，其中"苹果"出现 2 次。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.formatCode">
+                                    <strong>代码数据：</strong>支持从数组、列表等代码结构中提取值——如 <code>[457,569,333,457,888]</code>
+                                    会自动提取方括号内的数字并检测重复。也支持 JSON 数组、CSV 列值等结构化数据格式。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.featuresTitle">三、去重结果展示</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.featureOnline"><strong>重复分组：</strong>相同内容的文件被分为一组——每组显示文件数量、单个文件大小和浪费的总空间（(数量-1) x 文件大小）。</li>
-                                <li data-i18n="tool.duplicate-finder.featurePreview"><strong>文件详情：</strong>每个文件显示文件名、大小和哈希值（前 16 位）。方便确认哪些文件是重复的。</li>
-                                <li data-i18n="tool.duplicate-finder.featureExport"><strong>去重下载：</strong>每组重复文件中保留一份，其余标记为可删除。点击"下载去重结果"打包下载所有不重复的文件。</li>
-                                <li data-i18n="tool.duplicate-finder.featureSecurity"><strong>Web Worker 并行：</strong>哈希计算在 Web Worker 中执行——不阻塞主线程，处理过程中界面保持流畅。多个文件可以并行计算哈希值。</li>
+                                <li data-i18n="tool.duplicate-finder.featureOnline">
+                                    <strong>重复分组：</strong>相同内容的文件被分为一组——每组显示文件数量、单个文件大小和浪费的总空间（(数量-1) x 文件大小）。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.featurePreview">
+                                    <strong>文件详情：</strong>每个文件显示文件名、大小和哈希值（前 16 位）。方便确认哪些文件是重复的。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.featureExport">
+                                    <strong>去重下载：</strong>每组重复文件中保留一份，其余标记为可删除。点击"下载去重结果"打包下载所有不重复的文件。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.featureSecurity"><strong>Web Worker
+                                        并行：</strong>哈希计算在 Web Worker 中执行——不阻塞主线程，处理过程中界面保持流畅。多个文件可以并行计算哈希值。</li>
                             </ul>
                         </div>
                     </article>
@@ -576,34 +606,62 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.duplicate-finder.usageInputTitle">上传文件</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.usageInputContent"><strong>输入内容：</strong>在文本框中粘贴需要检测重复的内容。支持多种格式——逗号分隔的列表（<code>a,b,c,a</code>）、换行分隔的行列表、方括号内的数组（<code>[1,2,3,1]</code>）、空格分隔的单词等。</li>
-                                <li data-i18n="tool.duplicate-finder.usageExampleFormat"><strong>示例格式：</strong>支持多种格式输入，如 <code>[457,569,333,457,888]</code> 或 <code>你好，好啊，test，你好</code>。系统自动识别分隔符并拆分条目——方括号、圆括号会被自动去除。</li>
-                                <li data-i18n="tool.duplicate-finder.usageSeparator"><strong>自动识别分隔符：</strong>无需手动指定分隔符。系统自动识别文本中使用的分隔方式——空格、逗号、分号、顿号、管道符、句号、换行符等都可以作为分隔符。多种分隔符可以在同一段文本中混合使用。</li>
+                                <li data-i18n="tool.duplicate-finder.usageInputContent">
+                                    <strong>输入内容：</strong>在文本框中粘贴需要检测重复的内容。支持多种格式——逗号分隔的列表（<code>a,b,c,a</code>）、换行分隔的行列表、方括号内的数组（<code>[1,2,3,1]</code>）、空格分隔的单词等。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.usageExampleFormat">
+                                    <strong>示例格式：</strong>支持多种格式输入，如 <code>[457,569,333,457,888]</code> 或
+                                    <code>你好，好啊，test，你好</code>。系统自动识别分隔符并拆分条目——方括号、圆括号会被自动去除。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.usageSeparator">
+                                    <strong>自动识别分隔符：</strong>无需手动指定分隔符。系统自动识别文本中使用的分隔方式——空格、逗号、分号、顿号、管道符、句号、换行符等都可以作为分隔符。多种分隔符可以在同一段文本中混合使用。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.separatorsTitle">二、支持的分隔符</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.separatorCommon"><strong>常见分隔符：</strong>空格、逗号(,)、分号(;)、顿号(、)、管道符(|)、句号(。)、问号(?)、感叹号(!)。</li>
-                                <li data-i18n="tool.duplicate-finder.separatorBrackets"><strong>括号：</strong>[]、()、【】、（）、《》、「」、『』。</li>
-                                <li data-i18n="tool.duplicate-finder.separatorSymbols"><strong>符号：</strong>下划线(_)、等号(=)、加号(+)、减号(-)、星号(*)、斜杠(/)、反斜杠(\)。</li>
-                                <li data-i18n="tool.duplicate-finder.separatorOthers"><strong>其他：</strong>换行符、制表符、波浪号(~)、@、#、$、%、^、&。</li>
+                                <li data-i18n="tool.duplicate-finder.separatorCommon">
+                                    <strong>常见分隔符：</strong>空格、逗号(,)、分号(;)、顿号(、)、管道符(|)、句号(。)、问号(?)、感叹号(!)。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.separatorBrackets">
+                                    <strong>括号：</strong>[]、()、【】、（）、《》、「」、『』。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.separatorSymbols">
+                                    <strong>符号：</strong>下划线(_)、等号(=)、加号(+)、减号(-)、星号(*)、斜杠(/)、反斜杠(\)。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.separatorOthers">
+                                    <strong>其他：</strong>换行符、制表符、波浪号(~)、@、#、$、%、^、&。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.findTitle">三、查找重复内容</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.findClick"><strong>点击查找：</strong>点击"查找重复内容"按钮开始检测。</li>
-                                <li data-i18n="tool.duplicate-finder.findShortcut"><strong>快捷键：</strong>Ctrl+Enter 快捷触发查找。</li>
-                                <li data-i18n="tool.duplicate-finder.findStats"><strong>统计信息：</strong>显示总项数、唯一项数、重复项数。</li>
+                                <li data-i18n="tool.duplicate-finder.findClick"><strong>点击查找：</strong>点击"查找重复内容"按钮开始检测。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.findShortcut"><strong>快捷键：</strong>Ctrl+Enter
+                                    快捷触发查找。</li>
+                                <li data-i18n="tool.duplicate-finder.findStats"><strong>统计信息：</strong>显示总项数、唯一项数、重复项数。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.resultTitle">四、查看结果</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.resultTags"><strong>重复标签：</strong>显示所有重复内容及其重复次数。</li>
-                                <li data-i18n="tool.duplicate-finder.resultFilter"><strong>点击筛选：</strong>点击重复标签可以筛选只显示该重复项。</li>
-                                <li data-i18n="tool.duplicate-finder.resultPreview"><strong>高亮预览：</strong>在原文中高亮显示所有重复内容。</li>
-                                <li data-i18n="tool.duplicate-finder.resultColors"><strong>不同颜色：</strong>不同重复内容用不同颜色高亮标记。</li>
+                                <li data-i18n="tool.duplicate-finder.resultTags"><strong>重复标签：</strong>显示所有重复内容及其重复次数。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.resultFilter">
+                                    <strong>点击筛选：</strong>点击重复标签可以筛选只显示该重复项。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.resultPreview">
+                                    <strong>高亮预览：</strong>在原文中高亮显示所有重复内容。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.resultColors">
+                                    <strong>不同颜色：</strong>不同重复内容用不同颜色高亮标记。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.tipsTitle">五、操作技巧</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.tipClear"><strong>清空文本：</strong>点击"清空"按钮清除所有输入内容。</li>
-                                <li data-i18n="tool.duplicate-finder.tipClickAgain"><strong>再次点击：</strong>在高亮预览中点击重复项标签取消筛选。</li>
+                                <li data-i18n="tool.duplicate-finder.tipClear"><strong>清空文本：</strong>点击"清空"按钮清除所有输入内容。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.tipClickAgain">
+                                    <strong>再次点击：</strong>在高亮预览中点击重复项标签取消筛选。
+                                </li>
                                 <li data-i18n="tool.duplicate-finder.tipCopy"><strong>复制结果：</strong>直接选中文本复制高亮预览内容。</li>
                             </ul>
                         </div>
@@ -615,9 +673,15 @@
                         <div class="info-content">
                             <h4 data-i18n="tool.duplicate-finder.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.noteSecurity1"><strong>纯前端处理：</strong>文件哈希计算完全在浏览器中完成——文件内容不上传到任何服务器。</li>
-                                <li data-i18n="tool.duplicate-finder.noteSecurity2"><strong>内存管理：</strong>大文件分块读取，不会一次性加载到内存。处理完成后自动释放内存。</li>
-                                <li data-i18n="tool.duplicate-finder.noteSecurity3"><strong>数据清除：</strong>关闭页面后所有文件数据和哈希值自动清除。</li>
+                                <li data-i18n="tool.duplicate-finder.noteSecurity1">
+                                    <strong>纯前端处理：</strong>文件哈希计算完全在浏览器中完成——文件内容不上传到任何服务器。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.noteSecurity2">
+                                    <strong>内存管理：</strong>大文件分块读取，不会一次性加载到内存。处理完成后自动释放内存。
+                                </li>
+                                <li data-i18n="tool.duplicate-finder.noteSecurity3">
+                                    <strong>数据清除：</strong>关闭页面后所有文件数据和哈希值自动清除。
+                                </li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.notesSeparatorTitle">二、分隔符处理</h4>
                             <ul>
@@ -633,15 +697,21 @@
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.notesPerfTitle">二、性能说明</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.notePerf1">检测算法基于 JavaScript Map 数据结构，时间复杂度为 O(N)——即使 10 万条目也能在 100 毫秒内完成检测。不存在性能瓶颈。</li>
-                                <li data-i18n="tool.duplicate-finder.notePerf2">高亮预览功能需要在原文中查找所有重复项的位置并添加颜色标注——对于超长文本（超过 10 万字符），高亮渲染可能需要 1-2 秒。这是浏览器 DOM 操作的性能限制，不影响检测结果的准确性。</li>
-                                <li data-i18n="tool.duplicate-finder.notePerf3">建议单次检测的文本不超过 1MB。超大文本可能导致浏览器内存占用过高。对于超大数据集的去重，建议使用命令行工具（如 sort | uniq -d）或数据库查询。</li>
+                                <li data-i18n="tool.duplicate-finder.notePerf1">检测算法基于 JavaScript Map 数据结构，时间复杂度为
+                                    O(N)——即使 10 万条目也能在 100 毫秒内完成检测。不存在性能瓶颈。</li>
+                                <li data-i18n="tool.duplicate-finder.notePerf2">高亮预览功能需要在原文中查找所有重复项的位置并添加颜色标注——对于超长文本（超过
+                                    10 万字符），高亮渲染可能需要 1-2 秒。这是浏览器 DOM 操作的性能限制，不影响检测结果的准确性。</li>
+                                <li data-i18n="tool.duplicate-finder.notePerf3">建议单次检测的文本不超过
+                                    1MB。超大文本可能导致浏览器内存占用过高。对于超大数据集的去重，建议使用命令行工具（如 sort | uniq -d）或数据库查询。</li>
                             </ul>
                             <h4 data-i18n="tool.duplicate-finder.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="tool.duplicate-finder.noteFaq1"><strong>Q: 两个文件大小相同但内容不同，会被误判为重复吗？</strong>A: 不会。哈希算法基于文件内容，不是文件大小。内容不同则哈希值不同。</li>
-                                <li data-i18n="tool.duplicate-finder.noteFaq2"><strong>Q: 能查找整个硬盘的重复文件吗？</strong>A: 不能。本工具只能处理你手动上传的文件——无法访问文件系统。</li>
-                                <li data-i18n="tool.duplicate-finder.noteFaq3"><strong>Q: 处理速度很慢？</strong>A: 哈希计算速度取决于文件大小和数量。SSD + 现代 CPU 环境下，100 个 10MB 文件约需 10-30 秒。</li>
+                                <li data-i18n="tool.duplicate-finder.noteFaq1"><strong>Q:
+                                        两个文件大小相同但内容不同，会被误判为重复吗？</strong>A: 不会。哈希算法基于文件内容，不是文件大小。内容不同则哈希值不同。</li>
+                                <li data-i18n="tool.duplicate-finder.noteFaq2"><strong>Q: 能查找整个硬盘的重复文件吗？</strong>A:
+                                    不能。本工具只能处理你手动上传的文件——无法访问文件系统。</li>
+                                <li data-i18n="tool.duplicate-finder.noteFaq3"><strong>Q: 处理速度很慢？</strong>A:
+                                    哈希计算速度取决于文件大小和数量。SSD + 现代 CPU 环境下，100 个 10MB 文件约需 10-30 秒。</li>
                             </ul>
                         </div>
                     </article>
@@ -653,13 +723,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

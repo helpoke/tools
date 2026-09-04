@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Base64 编解码工具 - Helpoke 助点站</title>
     <meta property="og:title" content="Base64 编解码工具 - Helpoke 助点站">
@@ -43,7 +51,7 @@
         "@type": "WebApplication",
         "name": "Base64编解码工具",
         "description": "在线Base64编码解码工具，支持文本和文件Base64转换。免费在线Base64转码工具。Online Base64 encoder/decoder supporting text and file conversion.",
-        "url": "https://helpoke.com/encrypted/encoding-base64",
+        "url": "https://helpoke.com/encrypted/encoding-base64/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -58,7 +66,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -98,8 +106,10 @@
                     <button class="btn btn-download" id="download-result-btn" style="display: none;"
                         data-i18n="encrypted.encoding-base64.downloadResult">下载结果</button>
                     <div class="mode-selector">
-                        <button class="active" data-mode="standard" id="mode-standard" data-i18n="encrypted.encoding-base64.modeStandard">Base64（标准）</button>
-                        <button data-mode="url" id="mode-url" data-i18n="encrypted.encoding-base64.modeUrl">Base64URL（URL安全）</button>
+                        <button class="active" data-mode="standard" id="mode-standard"
+                            data-i18n="encrypted.encoding-base64.modeStandard">Base64（标准）</button>
+                        <button data-mode="url" id="mode-url"
+                            data-i18n="encrypted.encoding-base64.modeUrl">Base64URL（URL安全）</button>
                     </div>
                 </div>
                 <div class="file-info" id="file-info" style="display: none;">
@@ -153,20 +163,35 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-base64.problemsTitle">一、为什么需要 Base64 编码</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.problem1">电子邮件协议（SMTP）最初只支持 ASCII 字符传输——图片、PDF、音频等二进制数据无法直接通过邮件发送。Base64 编码将任意字节序列转换为 A-Z、a-z、0-9、+、/ 这 64 个可打印字符——使二进制数据能在只支持文本的通道中安全传输。</li>
-                                <li data-i18n="encrypted.encoding-base64.problem2">本工具支持文本和文件两种模式的 Base64 编解码。文本模式：输入任意文字，立即获得 Base64 编码结果，反之亦然。文件模式：上传图片/PDF/音频等，编码为 Base64 字符串（data URI 格式），也可将 Base64 字符串解码还原为原始文件。</li>
-                                <li data-i18n="encrypted.encoding-base64.problem3">支持标准 Base64 和 URL-safe Base64 两种变体——标准变体使用 + 和 /，URL-safe 变体使用 - 和 _（避免在 URL 中产生歧义）。编码结果可直接用于 HTML img 标签的 src 属性、CSS background-image 或 JSON 数据字段。</li>
+                                <li data-i18n="encrypted.encoding-base64.problem1">电子邮件协议（SMTP）最初只支持 ASCII
+                                    字符传输——图片、PDF、音频等二进制数据无法直接通过邮件发送。Base64 编码将任意字节序列转换为 A-Z、a-z、0-9、+、/ 这 64
+                                    个可打印字符——使二进制数据能在只支持文本的通道中安全传输。</li>
+                                <li data-i18n="encrypted.encoding-base64.problem2">本工具支持文本和文件两种模式的 Base64
+                                    编解码。文本模式：输入任意文字，立即获得 Base64 编码结果，反之亦然。文件模式：上传图片/PDF/音频等，编码为 Base64 字符串（data URI
+                                    格式），也可将 Base64 字符串解码还原为原始文件。</li>
+                                <li data-i18n="encrypted.encoding-base64.problem3">支持标准 Base64 和 URL-safe Base64
+                                    两种变体——标准变体使用 + 和 /，URL-safe 变体使用 - 和 _（避免在 URL 中产生歧义）。编码结果可直接用于 HTML img 标签的 src
+                                    属性、CSS background-image 或 JSON 数据字段。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.formatTitle">二、Base64 编码原理</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.formatBase64"><strong>编码规则：</strong>每 3 个字节（24 位）拆分为 4 个 6 位组，每组映射一个 Base64 字符。不足 3 字节时用 = 填充——1 字节余数补 2 个 =，2 字节余数补 1 个 =。因此 Base64 编码后的长度总是 4 的倍数。</li>
+                                <li data-i18n="encrypted.encoding-base64.formatBase64"><strong>编码规则：</strong>每 3 个字节（24
+                                    位）拆分为 4 个 6 位组，每组映射一个 Base64 字符。不足 3 字节时用 = 填充——1 字节余数补 2 个 =，2 字节余数补 1 个 =。因此
+                                    Base64 编码后的长度总是 4 的倍数。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.featureOnline"><strong>文本编解码：</strong>输入任意文本，一键获得 UTF-8 编码的 Base64 结果。支持中文、emoji 等多字节字符——自动处理 UTF-8 编码。</li>
-                                <li data-i18n="encrypted.encoding-base64.featurePreview"><strong>文件编解码：</strong>上传文件自动转为 Base64 data URI（如 data:image/png;base64,iVBOR...）。也可将 Base64 字符串解码还原为文件下载。</li>
-                                <li data-i18n="encrypted.encoding-base64.featureExport"><strong>双变体支持：</strong>标准 Base64（+/=）和 URL-safe Base64（-_=）一键切换——URL-safe 变体适合在 URL 参数和文件名中使用。</li>
-                                <li data-i18n="encrypted.encoding-base64.featureSecurity"><strong>纯前端处理：</strong>所有编解码在浏览器中完成——文件不上传到服务器，适合处理敏感数据。</li>
+                                <li data-i18n="encrypted.encoding-base64.featureOnline">
+                                    <strong>文本编解码：</strong>输入任意文本，一键获得 UTF-8 编码的 Base64 结果。支持中文、emoji 等多字节字符——自动处理 UTF-8
+                                    编码。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.featurePreview"><strong>文件编解码：</strong>上传文件自动转为
+                                    Base64 data URI（如 data:image/png;base64,iVBOR...）。也可将 Base64 字符串解码还原为文件下载。</li>
+                                <li data-i18n="encrypted.encoding-base64.featureExport"><strong>双变体支持：</strong>标准
+                                    Base64（+/=）和 URL-safe Base64（-_=）一键切换——URL-safe 变体适合在 URL 参数和文件名中使用。</li>
+                                <li data-i18n="encrypted.encoding-base64.featureSecurity">
+                                    <strong>纯前端处理：</strong>所有编解码在浏览器中完成——文件不上传到服务器，适合处理敏感数据。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -178,40 +203,73 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-base64.usageTextEncodeTitle">文本编码</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.usageTextEncodeInput"><strong>输入文本：</strong>在输入框中输入或粘贴需要编码的文字——支持中文、日文、emoji 等多语言内容。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageTextEncodeClick"><strong>点击编码：</strong>点击"编码"按钮，文本自动进行 UTF-8 编码后转为 Base64。</li>
-                                <li data-i18n="encrypted.encoding-base64.copyResultDesc"><strong>复制结果：</strong>点击"复制"按钮将 Base64 结果复制到剪贴板。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageTextEncodeSwap"><strong>交换方向：</strong>点击交换按钮可切换到解码模式——将 Base64 还原为原始文本。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextEncodeInput">
+                                    <strong>输入文本：</strong>在输入框中输入或粘贴需要编码的文字——支持中文、日文、emoji 等多语言内容。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextEncodeClick">
+                                    <strong>点击编码：</strong>点击"编码"按钮，文本自动进行 UTF-8 编码后转为 Base64。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.copyResultDesc"><strong>复制结果：</strong>点击"复制"按钮将
+                                    Base64 结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextEncodeSwap">
+                                    <strong>交换方向：</strong>点击交换按钮可切换到解码模式——将 Base64 还原为原始文本。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageTextDecodeTitle">文本解码</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeInput"><strong>输入 Base64：</strong>粘贴需要解码的 Base64 字符串。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeClick"><strong>点击解码：</strong>工具自动检测标准/URL-safe 变体并解码。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeCopy"><strong>复制结果：</strong>解码后的原始文本可直接复制。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeSwap"><strong>来回切换：</strong>编码和解码模式可随时切换——方便反复调试。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeInput"><strong>输入
+                                        Base64：</strong>粘贴需要解码的 Base64 字符串。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeClick">
+                                    <strong>点击解码：</strong>工具自动检测标准/URL-safe 变体并解码。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeCopy">
+                                    <strong>复制结果：</strong>解码后的原始文本可直接复制。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageTextDecodeSwap">
+                                    <strong>来回切换：</strong>编码和解码模式可随时切换——方便反复调试。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageFileEncodeTitle">文件编码</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.usageFileEncodeSelect"><strong>选择文件：</strong>点击"选择文件"按钮上传任意文件——图片、PDF、音频等。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageFileEncodeClick"><strong>自动编码：</strong>文件自动转为 Base64 data URI 格式——可直接嵌入 HTML img 标签。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileEncodeSelect">
+                                    <strong>选择文件：</strong>点击"选择文件"按钮上传任意文件——图片、PDF、音频等。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileEncodeClick">
+                                    <strong>自动编码：</strong>文件自动转为 Base64 data URI 格式——可直接嵌入 HTML img 标签。
+                                </li>
                                 <li data-i18n="encrypted.encoding-base64.copyResultDesc">
                                     <strong>复制结果：</strong>点击"复制结果"按钮将编码结果复制到剪贴板。
                                 </li>
-                                <li data-i18n="encrypted.encoding-base64.usageFileEncodeDownload"><strong>复制 data URI：</strong>编码结果包含 MIME 类型信息——如 data:image/png;base64,...。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileEncodeDownload"><strong>复制 data
+                                        URI：</strong>编码结果包含 MIME 类型信息——如 data:image/png;base64,...。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageFileDecodeTitle">文件解码</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.usageFileDecodeSelect"><strong>输入 Base64：</strong>粘贴包含 data URI 的 Base64 字符串。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageFileDecodeClick"><strong>点击解码：</strong>工具自动提取 MIME 类型和 Base64 数据。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageFileDecodePreview"><strong>预览：</strong>图片类型自动显示预览——确认解码结果正确。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageFileDecodeDownload"><strong>下载：</strong>点击"下载"按钮将解码结果保存为原始文件。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileDecodeSelect"><strong>输入
+                                        Base64：</strong>粘贴包含 data URI 的 Base64 字符串。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileDecodeClick">
+                                    <strong>点击解码：</strong>工具自动提取 MIME 类型和 Base64 数据。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileDecodePreview">
+                                    <strong>预览：</strong>图片类型自动显示预览——确认解码结果正确。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageFileDecodeDownload">
+                                    <strong>下载：</strong>点击"下载"按钮将解码结果保存为原始文件。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.usageBasicsTitle">五、Base64 基础知识</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.usageBasicsPrinciple"><strong>编码原理：</strong>3 字节 → 4 字符。每 6 位二进制映射为一个 Base64 字符——64 = 2⁶，所以 6 位恰好能表示所有字符。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageBasicsCharset"><strong>字符集：</strong>A-Z（26）+ a-z（26）+ 0-9（10）+ /+（2）= 64 个字符。= 是填充符，不属于数据字符。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageBasicsSize"><strong>体积膨胀：</strong>Base64 编码后体积增加约 33%——3 字节变为 4 字符。这是用空间换兼容性的代价。</li>
-                                <li data-i18n="encrypted.encoding-base64.usageBasicsUsage"><strong>典型应用：</strong>邮件附件（MIME）、CSS 内联图片（data URI）、JWT Token 的头部和载荷、HTTP Basic Auth 的凭证编码。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageBasicsPrinciple"><strong>编码原理：</strong>3
+                                    字节 → 4 字符。每 6 位二进制映射为一个 Base64 字符——64 = 2⁶，所以 6 位恰好能表示所有字符。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageBasicsCharset">
+                                    <strong>字符集：</strong>A-Z（26）+ a-z（26）+ 0-9（10）+ /+（2）= 64 个字符。= 是填充符，不属于数据字符。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.usageBasicsSize"><strong>体积膨胀：</strong>Base64
+                                    编码后体积增加约 33%——3 字节变为 4 字符。这是用空间换兼容性的代价。</li>
+                                <li data-i18n="encrypted.encoding-base64.usageBasicsUsage">
+                                    <strong>典型应用：</strong>邮件附件（MIME）、CSS 内联图片（data URI）、JWT Token 的头部和载荷、HTTP Basic Auth
+                                    的凭证编码。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -222,28 +280,44 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.encoding-base64.notesFormatTitle">格式注意</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.noteFormat1"><strong>填充字符 =：</strong>Base64 长度必须是 4 的倍数——不足时用 = 填充。解码时工具自动处理填充。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFormat2"><strong>换行符：</strong>某些 Base64 实现每 76 字符插入换行符（PEM 格式）——本工具输出连续字符串，不含换行。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFormat3"><strong>URL-safe 变体：</strong>将 + 替换为 -，/ 替换为 _，去掉 = 填充——适合在 URL 参数中使用。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFormat1"><strong>填充字符 =：</strong>Base64
+                                    长度必须是 4 的倍数——不足时用 = 填充。解码时工具自动处理填充。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFormat2"><strong>换行符：</strong>某些 Base64 实现每
+                                    76 字符插入换行符（PEM 格式）——本工具输出连续字符串，不含换行。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFormat3"><strong>URL-safe 变体：</strong>将 +
+                                    替换为 -，/ 替换为 _，去掉 = 填充——适合在 URL 参数中使用。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.notesSizeTitle">体积说明</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.noteSize1"><strong>编码膨胀：</strong>Base64 编码后体积增加约 33%——1MB 文件编码后约 1.33MB。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteSize2"><strong>大文件建议：</strong>超过 10MB 的文件不建议用 Base64 内联——体积膨胀会显著增加传输时间。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteSize3"><strong>图片优化：</strong>小图标（< 10KB）适合 Base64 内联减少 HTTP 请求；大图片应使用独立文件。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSize1"><strong>编码膨胀：</strong>Base64
+                                    编码后体积增加约 33%——1MB 文件编码后约 1.33MB。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSize2"><strong>大文件建议：</strong>超过 10MB
+                                    的文件不建议用 Base64 内联——体积膨胀会显著增加传输时间。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSize3"><strong>图片优化：</strong>小图标（< 10KB）适合
+                                        Base64 内联减少 HTTP 请求；大图片应使用独立文件。</li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.noteSecurity1"><strong>非加密：</strong>Base64 是编码而非加密——任何人都能解码。不要用于保护敏感信息。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteSecurity2"><strong>纯前端处理：</strong>所有编解码在浏览器中完成——文件数据不上传到服务器。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteSecurity3"><strong>公共设备：</strong>在公共设备上处理敏感文件后，请清空输入和剪贴板。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSecurity1"><strong>非加密：</strong>Base64
+                                    是编码而非加密——任何人都能解码。不要用于保护敏感信息。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteSecurity2">
+                                    <strong>纯前端处理：</strong>所有编解码在浏览器中完成——文件数据不上传到服务器。
+                                </li>
+                                <li data-i18n="encrypted.encoding-base64.noteSecurity3">
+                                    <strong>公共设备：</strong>在公共设备上处理敏感文件后，请清空输入和剪贴板。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.encoding-base64.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq1"><strong>Q: Base64 能加密吗？</strong>A: 不能。Base64 只是编码——目的是让二进制数据变为可打印文本，不提供任何安全性。需要加密请使用 AES/RSA。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq2"><strong>Q: 编码后中文乱码？</strong>A: 确保使用 UTF-8 编码。如果原始文本是 GBK 编码，需要先转为 UTF-8 再编码。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq3"><strong>Q: 解码报错？</strong>A: 检查 Base64 字符串是否完整——缺少字符或包含非法字符会导致解码失败。URL-safe 变体和标准变体不能混用。</li>
-                                <li data-i18n="encrypted.encoding-base64.noteFaq4"><strong>Q: data URI 怎么用？</strong>A: 直接放入 img 标签的 src 属性——<img src="data:image/png;base64,iVBOR...">。也可用于 CSS background-image。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFaq1"><strong>Q: Base64 能加密吗？</strong>A:
+                                    不能。Base64 只是编码——目的是让二进制数据变为可打印文本，不提供任何安全性。需要加密请使用 AES/RSA。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFaq2"><strong>Q: 编码后中文乱码？</strong>A: 确保使用
+                                    UTF-8 编码。如果原始文本是 GBK 编码，需要先转为 UTF-8 再编码。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFaq3"><strong>Q: 解码报错？</strong>A: 检查 Base64
+                                    字符串是否完整——缺少字符或包含非法字符会导致解码失败。URL-safe 变体和标准变体不能混用。</li>
+                                <li data-i18n="encrypted.encoding-base64.noteFaq4"><strong>Q: data URI 怎么用？</strong>A:
+                                    直接放入 img 标签的 src 属性——<img src="data:image/png;base64,iVBOR...">。也可用于 CSS
+                                    background-image。</li>
                             </ul>
                         </div>
                     </article>
@@ -254,13 +328,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

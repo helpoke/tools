@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>URL 编码/解码工具 - Helpoke 助点站</title>
     <meta property="og:title" content="URL 编码/解码工具 - Helpoke 助点站">
@@ -46,7 +54,7 @@
         "@type": "WebApplication",
         "name": "URL编码/解码工具",
         "description": "在线URL编码解码工具，支持encodeURI和encodeURIComponent模式。免费在线URL转码工具。Online URL encoder/decoder supporting multiple encoding modes.",
-        "url": "https://helpoke.com/encrypted/urlcode",
+        "url": "https://helpoke.com/encrypted/urlcode/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -61,7 +69,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -150,21 +158,37 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.urlcode.problemsTitle">一、URL 为什么需要编码</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.problem1">URL 只能包含有限的 ASCII 字符——字母、数字和少量符号（-_.~）。中文、空格、&、=、# 等字符在 URL 中都有特殊含义或直接被禁止。如果 URL 中包含这些字符，浏览器无法正确解析——空格可能被截断，& 后面的内容可能被误认为参数分隔符。</li>
-                                <li data-i18n="encrypted.urlcode.problem2">URL 编码（也叫百分号编码 Percent-Encoding）将不安全字符转为 %XX 格式——每个字节用两个十六进制数字表示。如空格变为 %20，中文"你好"变为 %E4%BD%A0%E5%A5%BD（UTF-8 编码后每个汉字 3 字节，每字节一个 %XX）。</li>
-                                <li data-i18n="encrypted.urlcode.problem3">本工具支持两种编码模式：标准组件模式（encodeURIComponent，编码除 A-Z a-z 0-9 - _ . ! ~ * ' ( ) 外的所有字符）和 URI 模式（encodeURI，不编码完整的 URI 保留字符如 : / ? #）。</li>
+                                <li data-i18n="encrypted.urlcode.problem1">URL 只能包含有限的 ASCII
+                                    字符——字母、数字和少量符号（-_.~）。中文、空格、&、=、# 等字符在 URL 中都有特殊含义或直接被禁止。如果 URL
+                                    中包含这些字符，浏览器无法正确解析——空格可能被截断，& 后面的内容可能被误认为参数分隔符。</li>
+                                <li data-i18n="encrypted.urlcode.problem2">URL 编码（也叫百分号编码 Percent-Encoding）将不安全字符转为 %XX
+                                    格式——每个字节用两个十六进制数字表示。如空格变为 %20，中文"你好"变为 %E4%BD%A0%E5%A5%BD（UTF-8 编码后每个汉字 3 字节，每字节一个
+                                    %XX）。</li>
+                                <li data-i18n="encrypted.urlcode.problem3">本工具支持两种编码模式：标准组件模式（encodeURIComponent，编码除 A-Z
+                                    a-z 0-9 - _ . ! ~ * ' ( ) 外的所有字符）和 URI 模式（encodeURI，不编码完整的 URI 保留字符如 : / ? #）。</li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.formatTitle">二、URL 编码格式</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.formatUrl"><strong>百分号编码：</strong>每个不安全字节用 % 加两个十六进制数字表示——如空格 → %20，< → %3C，中 → %E4%B8%AD。URL 编码后的字符串可以安全地嵌入任何 URL 中。</li>
-                                <li data-i18n="encrypted.urlcode.formatUtf8"><strong>UTF-8 编码：</strong>非 ASCII 字符先转为 UTF-8 字节序列，每个字节再百分号编码——如"中"的 Unicode 码点是 U+4E2D，UTF-8 编码为 E4 B8 AD，URL 编码为 %E4%B8%AD。</li>
+                                <li data-i18n="encrypted.urlcode.formatUrl"><strong>百分号编码：</strong>每个不安全字节用 %
+                                    加两个十六进制数字表示——如空格 → %20，< → %3C，中 → %E4%B8%AD。URL 编码后的字符串可以安全地嵌入任何 URL 中。</li>
+                                <li data-i18n="encrypted.urlcode.formatUtf8"><strong>UTF-8 编码：</strong>非 ASCII 字符先转为
+                                    UTF-8 字节序列，每个字节再百分号编码——如"中"的 Unicode 码点是 U+4E2D，UTF-8 编码为 E4 B8 AD，URL 编码为
+                                    %E4%B8%AD。</li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.featureOnline"><strong>编码与解码：</strong>输入文本一键编码为 URL 安全格式，或输入编码字符串一键解码还原。实时转换，不需要点击按钮。</li>
-                                <li data-i18n="encrypted.urlcode.featurePreview"><strong>双模式：</strong>标准组件模式（encodeURIComponent）和 URI 模式（encodeURI）——前者编码更彻底，后者保留 URI 结构字符。</li>
-                                <li data-i18n="encrypted.urlcode.featureExport"><strong>批量处理：</strong>支持多行文本的批量编解码——每行独立处理。</li>
-                                <li data-i18n="encrypted.urlcode.featureSecurity"><strong>纯前端处理：</strong>所有编解码在浏览器中完成——文本不上传到服务器。</li>
+                                <li data-i18n="encrypted.urlcode.featureOnline"><strong>编码与解码：</strong>输入文本一键编码为 URL
+                                    安全格式，或输入编码字符串一键解码还原。实时转换，不需要点击按钮。</li>
+                                <li data-i18n="encrypted.urlcode.featurePreview">
+                                    <strong>双模式：</strong>标准组件模式（encodeURIComponent）和 URI 模式（encodeURI）——前者编码更彻底，后者保留 URI
+                                    结构字符。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.featureExport">
+                                    <strong>批量处理：</strong>支持多行文本的批量编解码——每行独立处理。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.featureSecurity">
+                                    <strong>纯前端处理：</strong>所有编解码在浏览器中完成——文本不上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -176,31 +200,55 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.urlcode.usageEncodeTitle">编码步骤</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.usageEncodeInput"><strong>输入文本：</strong>输入需要编码的文本——支持中文、日文、emoji 等多语言内容。</li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeMode"><strong>选择模式：</strong>标准组件模式（编码所有特殊字符）或 URI 模式（保留 URI 结构字符）。</li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeClick"><strong>点击编码：</strong>文本自动转为百分号编码格式。</li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeView"><strong>查看结果：</strong>编码结果显示在输出框中——每个不安全字符变为 %XX 格式。</li>
-                                <li data-i18n="encrypted.urlcode.usageEncodeCopy"><strong>复制结果：</strong>点击"复制"按钮将编码结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeInput">
+                                    <strong>输入文本：</strong>输入需要编码的文本——支持中文、日文、emoji 等多语言内容。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeMode">
+                                    <strong>选择模式：</strong>标准组件模式（编码所有特殊字符）或 URI 模式（保留 URI 结构字符）。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeClick"><strong>点击编码：</strong>文本自动转为百分号编码格式。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeView">
+                                    <strong>查看结果：</strong>编码结果显示在输出框中——每个不安全字符变为 %XX 格式。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageEncodeCopy">
+                                    <strong>复制结果：</strong>点击"复制"按钮将编码结果复制到剪贴板。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.usageDecodeTitle">解码步骤</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.usageDecodeInput"><strong>输入编码：</strong>粘贴需要解码的百分号编码字符串。</li>
-                                <li data-i18n="encrypted.urlcode.usageDecodeClick"><strong>点击解码：</strong>编码自动还原为原始文本。</li>
-                                <li data-i18n="encrypted.urlcode.usageDecodeView"><strong>查看结果：</strong>解码后的原始文本显示在输出框中。</li>
-                                <li data-i18n="encrypted.urlcode.usageDecodeCopy"><strong>复制结果：</strong>点击"复制"按钮将解码结果复制到剪贴板。</li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeInput">
+                                    <strong>输入编码：</strong>粘贴需要解码的百分号编码字符串。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeClick"><strong>点击解码：</strong>编码自动还原为原始文本。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeView"><strong>查看结果：</strong>解码后的原始文本显示在输出框中。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageDecodeCopy">
+                                    <strong>复制结果：</strong>点击"复制"按钮将解码结果复制到剪贴板。
+                                </li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.usageModeTitle">五、两种编码模式</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.usageModeComponent"><strong>标准组件模式（encodeURIComponent）：</strong>编码除 A-Z a-z 0-9 - _ . ! ~ * ' ( ) 外的所有字符。用于编码 URL 参数值——如搜索关键词、用户名等。</li>
-                                <li data-i18n="encrypted.urlcode.usageModeUri"><strong>URI 模式（encodeURI）：</strong>不编码 : / ? # [ ] @ ! $ & ' ( ) * + , ; = ——用于编码完整 URL，保留 URL 结构。</li>
-                                <li data-i18n="encrypted.urlcode.usageModeDiff"><strong>区别：</strong>如果编码 URL 参数值用 encodeURIComponent（编码 / 和 ?），如果编码完整 URL 用 encodeURI（保留 / 和 ?）。</li>
+                                <li data-i18n="encrypted.urlcode.usageModeComponent">
+                                    <strong>标准组件模式（encodeURIComponent）：</strong>编码除 A-Z a-z 0-9 - _ . ! ~ * ' ( )
+                                    外的所有字符。用于编码 URL 参数值——如搜索关键词、用户名等。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.usageModeUri"><strong>URI 模式（encodeURI）：</strong>不编码 :
+                                    / ? # [ ] @ ! $ & ' ( ) * + , ; = ——用于编码完整 URL，保留 URL 结构。</li>
+                                <li data-i18n="encrypted.urlcode.usageModeDiff"><strong>区别：</strong>如果编码 URL 参数值用
+                                    encodeURIComponent（编码 / 和 ?），如果编码完整 URL 用 encodeURI（保留 / 和 ?）。</li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.usageBaseTitle">六、URL 编码基础</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.usageBasePrinciple"><strong>编码原理：</strong>非 ASCII 字符先 UTF-8 编码为字节序列，每个字节转为 %XX。ASCII 不安全字符（如空格、<、>）直接转为 %XX。</li>
-                                <li data-i18n="encrypted.urlcode.usageBaseSpace"><strong>空格编码：</strong>URL 编码中空格变为 %20。但在 application/x-www-form-urlencoded（表单提交）中空格变为 +——这是两种不同的编码标准。</li>
-                                <li data-i18n="encrypted.urlcode.usageBaseChinese"><strong>中文编码：</strong>每个汉字 UTF-8 编码为 3 字节，每字节一个 %XX——所以一个汉字变为 9 个字符（如 %E4%B8%AD）。</li>
-                                <li data-i18n="encrypted.urlcode.usageBaseLength"><strong>长度膨胀：</strong>URL 编码后长度显著增加——中文字符膨胀 3 倍（1 汉字 → 9 字符）。设计 URL 长度限制时需考虑编码膨胀。</li>
+                                <li data-i18n="encrypted.urlcode.usageBasePrinciple"><strong>编码原理：</strong>非 ASCII 字符先
+                                    UTF-8 编码为字节序列，每个字节转为 %XX。ASCII 不安全字符（如空格、<、>）直接转为 %XX。</li>
+                                <li data-i18n="encrypted.urlcode.usageBaseSpace"><strong>空格编码：</strong>URL 编码中空格变为
+                                    %20。但在 application/x-www-form-urlencoded（表单提交）中空格变为 +——这是两种不同的编码标准。</li>
+                                <li data-i18n="encrypted.urlcode.usageBaseChinese"><strong>中文编码：</strong>每个汉字 UTF-8 编码为
+                                    3 字节，每字节一个 %XX——所以一个汉字变为 9 个字符（如 %E4%B8%AD）。</li>
+                                <li data-i18n="encrypted.urlcode.usageBaseLength"><strong>长度膨胀：</strong>URL
+                                    编码后长度显著增加——中文字符膨胀 3 倍（1 汉字 → 9 字符）。设计 URL 长度限制时需考虑编码膨胀。</li>
                             </ul>
                         </div>
                     </article>
@@ -211,30 +259,48 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.urlcode.notesModeTitle">模式选择</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.noteMode1"><strong>参数值编码：</strong>编码 URL 参数值时使用 encodeURIComponent——确保参数中的特殊字符不影响 URL 解析。</li>
-                                <li data-i18n="encrypted.urlcode.noteMode2"><strong>完整 URL 编码：</strong>编码完整 URL 时使用 encodeURI——保留 :// 和 ? 等结构字符。</li>
-                                <li data-i18n="encrypted.urlcode.noteMode3"><strong>双重编码：</strong>不要对已编码的字符串再次编码——%E4 会被编码为 %25E4。解码时同理。</li>
+                                <li data-i18n="encrypted.urlcode.noteMode1"><strong>参数值编码：</strong>编码 URL 参数值时使用
+                                    encodeURIComponent——确保参数中的特殊字符不影响 URL 解析。</li>
+                                <li data-i18n="encrypted.urlcode.noteMode2"><strong>完整 URL 编码：</strong>编码完整 URL 时使用
+                                    encodeURI——保留 :// 和 ? 等结构字符。</li>
+                                <li data-i18n="encrypted.urlcode.noteMode3"><strong>双重编码：</strong>不要对已编码的字符串再次编码——%E4
+                                    会被编码为 %25E4。解码时同理。</li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.noteSecurity1"><strong>纯前端处理：</strong>所有编解码在浏览器中完成——文本不上传到服务器。</li>
-                                <li data-i18n="encrypted.urlcode.noteSecurity2"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。</li>
-                                <li data-i18n="encrypted.urlcode.noteSecurity3"><strong>编码非加密：</strong>URL 编码不是加密——任何人都能解码。不要用于保护敏感信息。</li>
+                                <li data-i18n="encrypted.urlcode.noteSecurity1">
+                                    <strong>纯前端处理：</strong>所有编解码在浏览器中完成——文本不上传到服务器。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.noteSecurity2"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.noteSecurity3"><strong>编码非加密：</strong>URL
+                                    编码不是加密——任何人都能解码。不要用于保护敏感信息。</li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.notesFormatTitle">格式说明</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.noteFormat1"><strong>大小写：</strong>百分号编码的十六进制数字通常大写（%2F）——但小写（%2f）也是合法的。</li>
-                                <li data-i18n="encrypted.urlcode.noteFormat2"><strong>保留字符：</strong>URI 模式不编码的保留字符包括 : / ? # [ ] @ ! $ & ' ( ) * + , ; = ——这些字符在 URL 中有特殊含义。</li>
-                                <li data-i18n="encrypted.urlcode.noteFormat3"><strong>UTF-8 必需：</strong>现代 URL 编码要求使用 UTF-8——旧系统的 GBK/Big5 编码可能导致解码乱码。</li>
-                                <li data-i18n="encrypted.urlcode.noteFormat4"><strong>+ 号歧义：</strong>在 query string 中 + 可能表示空格（表单编码）或字面加号——使用 %20 表示空格更安全。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat1">
+                                    <strong>大小写：</strong>百分号编码的十六进制数字通常大写（%2F）——但小写（%2f）也是合法的。
+                                </li>
+                                <li data-i18n="encrypted.urlcode.noteFormat2"><strong>保留字符：</strong>URI 模式不编码的保留字符包括 : /
+                                    ? # [ ] @ ! $ & ' ( ) * + , ; = ——这些字符在 URL 中有特殊含义。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat3"><strong>UTF-8 必需：</strong>现代 URL 编码要求使用
+                                    UTF-8——旧系统的 GBK/Big5 编码可能导致解码乱码。</li>
+                                <li data-i18n="encrypted.urlcode.noteFormat4"><strong>+ 号歧义：</strong>在 query string 中 +
+                                    可能表示空格（表单编码）或字面加号——使用 %20 表示空格更安全。</li>
                             </ul>
                             <h4 data-i18n="encrypted.urlcode.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.urlcode.noteFaq1"><strong>Q: 编码后 URL 太长？</strong>A: URL 编码会使中文膨胀 3 倍。如果 URL 过长，考虑使用 POST 请求代替 GET，或使用 URL 短链服务。</li>
-                                <li data-i18n="encrypted.urlcode.noteFaq2"><strong>Q: 解码报错？</strong>A: 检查编码字符串是否完整——截断的 %XX 序列会导致解码失败。也检查是否混用了不同编码标准。</li>
-                                <li data-i18n="encrypted.urlcode.noteFaq3"><strong>Q: 中文参数在地址栏显示正常？</strong>A: 现代浏览器会自动对地址栏中的中文进行编码——显示的是编码后的 URL，但实际发送的请求已编码。</li>
-                                <li data-i18n="encrypted.urlcode.noteFaq4"><strong>Q: 表单提交用哪种编码？</strong>A: application/x-www-form-urlencoded——空格编码为 + 而非 %20。这是 HTML 表单的默认编码类型。</li>
-                                <li data-i18n="encrypted.urlcode.noteFaq5"><strong>Q: 文件名中的中文需要编码吗？</strong>A: Content-Disposition 头中的文件名建议使用 RFC 5987 编码——filename*=UTF-8''%E6%96%87%E4%BB%B6%E5%90%8D。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq1"><strong>Q: 编码后 URL 太长？</strong>A: URL
+                                    编码会使中文膨胀 3 倍。如果 URL 过长，考虑使用 POST 请求代替 GET，或使用 URL 短链服务。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq2"><strong>Q: 解码报错？</strong>A: 检查编码字符串是否完整——截断的
+                                    %XX 序列会导致解码失败。也检查是否混用了不同编码标准。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq3"><strong>Q: 中文参数在地址栏显示正常？</strong>A:
+                                    现代浏览器会自动对地址栏中的中文进行编码——显示的是编码后的 URL，但实际发送的请求已编码。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq4"><strong>Q: 表单提交用哪种编码？</strong>A:
+                                    application/x-www-form-urlencoded——空格编码为 + 而非 %20。这是 HTML 表单的默认编码类型。</li>
+                                <li data-i18n="encrypted.urlcode.noteFaq5"><strong>Q: 文件名中的中文需要编码吗？</strong>A:
+                                    Content-Disposition 头中的文件名建议使用 RFC 5987
+                                    编码——filename*=UTF-8''%E6%96%87%E4%BB%B6%E5%90%8D。</li>
                             </ul>
                         </div>
                     </article>
@@ -247,13 +313,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

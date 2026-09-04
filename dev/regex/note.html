@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>正则表达式测试工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="正则表达式测试工具 - 免费、安全、快速">
+    <meta property="og:description" content="正则表达式测试工具说明，正则匹配，正则替换，捕获分组，实时高亮，常用正则速查，免费在线正则工具，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/regex/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="正则表达式测试工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="正则表达式测试工具说明，正则匹配，正则替换，捕获分组，实时高亮，常用正则速查，免费在线正则工具，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/regex/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/regex/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/regex/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "正则表达式中的修饰符有什么作用？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "修饰符改变正则表达式的匹配行为：g（global）全局匹配，查找所有匹配而非仅第一个；i（ignore case）忽略大小写，匹配时不区分大小写；m（multiline）多行模式，使^和$匹配每行的开始和结束而非整个字符串；s（dotAll）单行模式，使.匹配包括换行符在内的所有字符。本工具支持在表达式中添加这些修饰符，例如/pattern/gi表示全局且忽略大小写匹配。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "捕获分组和非捕获分组有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "捕获分组使用小括号(...)，匹配的内容会被保存，可以在替换时通过$1、$2等引用，或在匹配结果中查看分组内容。非捕获分组使用(?:...)，匹配但不保存内容，不占用分组编号，适合仅需要分组逻辑但不需要引用的场景。非捕获分组性能略优，建议在不需要引用时使用非捕获分组。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何理解正则表达式中的贪婪和懒惰匹配？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "贪婪匹配（默认行为）尽可能匹配更多字符，例如.*会匹配到最后一个可能的字符。懒惰匹配（在量词后加?）尽可能匹配更少字符，例如.*?会在匹配到第一个可能字符时停止。例如，对字符串\"abracadabra\"，正则/a.*a/贪婪匹配\"abracadabra\"，而/a.*?a/懒惰匹配\"abra\"。根据需求选择合适的匹配模式。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "正则替换中的$1、$2是什么意思？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "$1、$2等是对捕获分组的引用，称为反向引用。$1引用第一个捕获分组的内容，$2引用第二个，以此类推。例如，使用正则/(\\w+)@(\\w+)/匹配\"hello@world\"，替换文本\"$2@$1\"会将结果变为\"world@hello\"，实现了分组内容的交换。本工具的替换功能支持所有反向引用语法。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么我的正则表达式匹配不到结果？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "常见原因包括：表达式语法错误（未闭合的括号、错误的量词位置等）；缺少必要的修饰符（如忘记添加g导致只匹配第一个）；字符转义问题（特殊字符未转义）；匹配逻辑错误（范围定义错误、逻辑组合错误）。建议先在本工具中输入简单示例测试，逐步构建复杂表达式，使用工具的实时匹配显示功能验证每一步。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "常用正则表达式模板如何使用？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具提供的常用正则模板（如邮箱、电话、身份证等）经过验证，可以直接使用。但实际场景可能需要调整：例如，邮箱正则可能不符合您系统的特定规则（如要求特定域名），电话正则可能不覆盖您国家的号码格式。建议基于模板修改，添加您系统的特定规则。修改后在本工具中测试，确保匹配您的实际数据。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -346,10 +417,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>进制转换工具 - Helpoke 助点站</title>
     <meta property="og:title" content="进制转换工具 - Helpoke 助点站">
@@ -525,7 +533,7 @@
         "@type": "WebApplication",
         "name": "进制转换工具",
         "description": "在线进制转换工具，支持二进制、八进制、十进制、十六进制实时互转。免费在线进制转换器。Online base conversion tool supporting binary, octal, decimal and hexadecimal.",
-        "url": "https://helpoke.com/dev/base-convert",
+        "url": "https://helpoke.com/dev/base-convert/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -540,7 +548,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -562,9 +570,8 @@
             <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
                 查看详细使用文档与
                 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link"
-                data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i
-                    class="fas fa-home"></i> 返回首页</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="dev.base-convert.intro">进制转换工具，支持二进制、八进制、十进制、十六进制之间的快速互转，实时显示转换结果，自动识别 0b/0o/0x 进制前缀</p>
             <p class="description" data-i18n="common.privacyNote">
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
@@ -644,23 +651,49 @@
                         <div class="info-content">
                             <h4 data-i18n="dev.base-convert.problemTitle">一、为什么程序员必须掌握进制转换</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.problem1">计算机的底层只有两种状态——通电和断电，高电平与低电平，1 和 0。所有的文字、图片、视频最终都被编码为一长串二进制数字。但二进制对人类极不友好——一个普通的整数 255 在二进制中是 11111111，八位才能表示两位十进制数的范围。于是我们发明了八进制、十进制、十六进制作为"人类友好"的中间表示——进制转换就是这些表示之间的翻译。</li>
-                                <li data-i18n="dev.base-convert.problem2">本工具支持二进制、八进制、十进制、十六进制之间的实时互转。输入任意进制的数字，其他三种进制的结果立即同步更新。支持小数转换、负数转换和自动识别输入进制——不需要手动选择"这是几进制"，工具会根据数字特征（如 0x 前缀识别十六进制、0b 前缀识别二进制）自动判断。</li>
-                                <li data-i18n="dev.base-convert.problem3">除了数值转换，还提供"位宽可视化"——将数字以 8 位/16 位/32 位二进制形式展示，每一位都标注权重值（128、64、32...1）。对于学习计算机组成原理的学生、调试底层协议的嵌入式工程师、分析网络包的安全研究员来说，这是最直观的进制学习工具。</li>
+                                <li data-i18n="dev.base-convert.problem1">计算机的底层只有两种状态——通电和断电，高电平与低电平，1 和
+                                    0。所有的文字、图片、视频最终都被编码为一长串二进制数字。但二进制对人类极不友好——一个普通的整数 255 在二进制中是
+                                    11111111，八位才能表示两位十进制数的范围。于是我们发明了八进制、十进制、十六进制作为"人类友好"的中间表示——进制转换就是这些表示之间的翻译。</li>
+                                <li data-i18n="dev.base-convert.problem2">
+                                    本工具支持二进制、八进制、十进制、十六进制之间的实时互转。输入任意进制的数字，其他三种进制的结果立即同步更新。支持小数转换、负数转换和自动识别输入进制——不需要手动选择"这是几进制"，工具会根据数字特征（如
+                                    0x 前缀识别十六进制、0b 前缀识别二进制）自动判断。</li>
+                                <li data-i18n="dev.base-convert.problem3">除了数值转换，还提供"位宽可视化"——将数字以 8 位/16 位/32
+                                    位二进制形式展示，每一位都标注权重值（128、64、32...1）。对于学习计算机组成原理的学生、调试底层协议的嵌入式工程师、分析网络包的安全研究员来说，这是最直观的进制学习工具。
+                                </li>
                             </ul>
                             <h4 data-i18n="dev.base-convert.formatTitle">二、四种进制的技术背景</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.formatBin"><strong>二进制（Base-2）：</strong>计算机的"母语"。每个二进制位（bit）只能存储 0 或 1，8 个 bit 组成一个字节（byte），可以表示 0-255 共 256 个值。内存地址、CPU 寄存器、网络协议的数据帧——底层全部是二进制。人类直接阅读二进制极其困难，所以我们需要其他进制作为"桥梁"。</li>
-                                <li data-i18n="dev.base-convert.formatOct"><strong>八进制（Base-8）：</strong>早期计算机系统中广泛使用——因为 8 = 2³，每 3 个二进制位恰好对应 1 个八进制位，转换极其方便。现代编程语言中，八进制字面量以 0 开头（如 0755 表示文件权限 rwxr-xr-x）。Linux 系统的 chmod 命令至今仍在使用八进制。</li>
-                                <li data-i18n="dev.base-convert.formatDec"><strong>十进制（Base-10）：</strong>人类最常用的进制——因为我们有十根手指。但在计算机中，十进制到二进制的转换可能产生无限循环小数（如 0.1 在二进制中是 0.0001100110011... 无限循环）——这就是为什么浮点数运算会有精度问题（0.1 + 0.2 ≠ 0.3）。</li>
-                                <li data-i18n="dev.base-convert.formatHex"><strong>十六进制（Base-16）：</strong>现代编程中最常用的进制——因为 16 = 2⁴，每 4 个二进制位恰好对应 1 个十六进制位。颜色值（#FF0000 = 红色）、内存地址（0x7FFF5FBFF8C0）、Unicode 编码（U+4E2D = 中）——都用十六进制表示。它比二进制紧凑 4 倍，比十进制更容易与二进制互转。</li>
+                                <li data-i18n="dev.base-convert.formatBin">
+                                    <strong>二进制（Base-2）：</strong>计算机的"母语"。每个二进制位（bit）只能存储 0 或 1，8 个 bit
+                                    组成一个字节（byte），可以表示 0-255 共 256 个值。内存地址、CPU
+                                    寄存器、网络协议的数据帧——底层全部是二进制。人类直接阅读二进制极其困难，所以我们需要其他进制作为"桥梁"。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatOct"><strong>八进制（Base-8）：</strong>早期计算机系统中广泛使用——因为
+                                    8 = 2³，每 3 个二进制位恰好对应 1 个八进制位，转换极其方便。现代编程语言中，八进制字面量以 0 开头（如 0755 表示文件权限
+                                    rwxr-xr-x）。Linux 系统的 chmod 命令至今仍在使用八进制。</li>
+                                <li data-i18n="dev.base-convert.formatDec">
+                                    <strong>十进制（Base-10）：</strong>人类最常用的进制——因为我们有十根手指。但在计算机中，十进制到二进制的转换可能产生无限循环小数（如 0.1
+                                    在二进制中是 0.0001100110011... 无限循环）——这就是为什么浮点数运算会有精度问题（0.1 + 0.2 ≠ 0.3）。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatHex">
+                                    <strong>十六进制（Base-16）：</strong>现代编程中最常用的进制——因为 16 = 2⁴，每 4 个二进制位恰好对应 1
+                                    个十六进制位。颜色值（#FF0000 = 红色）、内存地址（0x7FFF5FBFF8C0）、Unicode 编码（U+4E2D =
+                                    中）——都用十六进制表示。它比二进制紧凑 4 倍，比十进制更容易与二进制互转。
+                                </li>
                             </ul>
                             <h4 data-i18n="dev.base-convert.featuresTitle">三、转换工具的核心功能</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.featureRealTime"><strong>实时互转：</strong>在任意进制输入框中输入数字，其他三种进制的结果立即更新——不需要点击"转换"按钮。基于 JavaScript 的 parseInt/toString 方法实现，支持 BigInt 处理超大数字。</li>
-                                <li data-i18n="dev.base-convert.featureCopy"><strong>一键复制：</strong>每种进制结果旁都有复制按钮——方便粘贴到代码、文档或终端中。</li>
-                                <li data-i18n="dev.base-convert.featurePreset"><strong>常用值预设：</strong>内置 255（0xFF）、1024（0x400）、65535（0xFFFF）等常用值的快速加载——一键查看这些"程序员数字"在四种进制中的表示。</li>
-                                <li data-i18n="dev.base-convert.featureAutoDetect"><strong>自动识别进制：</strong>输入 0x 开头的数字自动识别为十六进制，0b 开头识别为二进制，0 开头识别为八进制——不需要手动切换进制。</li>
+                                <li data-i18n="dev.base-convert.featureRealTime">
+                                    <strong>实时互转：</strong>在任意进制输入框中输入数字，其他三种进制的结果立即更新——不需要点击"转换"按钮。基于 JavaScript 的
+                                    parseInt/toString 方法实现，支持 BigInt 处理超大数字。
+                                </li>
+                                <li data-i18n="dev.base-convert.featureCopy">
+                                    <strong>一键复制：</strong>每种进制结果旁都有复制按钮——方便粘贴到代码、文档或终端中。
+                                </li>
+                                <li data-i18n="dev.base-convert.featurePreset"><strong>常用值预设：</strong>内置
+                                    255（0xFF）、1024（0x400）、65535（0xFFFF）等常用值的快速加载——一键查看这些"程序员数字"在四种进制中的表示。</li>
+                                <li data-i18n="dev.base-convert.featureAutoDetect"><strong>自动识别进制：</strong>输入 0x
+                                    开头的数字自动识别为十六进制，0b 开头识别为二进制，0 开头识别为八进制——不需要手动切换进制。</li>
                             </ul>
                         </div>
                     </article>
@@ -671,22 +704,39 @@
                         <div class="info-content">
                             <h4 data-i18n="dev.base-convert.convertFunctionTitle">基本转换</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.usageSelectBase"><strong>选择输入进制：</strong>点击二进制/八进制/十进制/十六进制标签，或让工具自动识别。</li>
-                                <li data-i18n="dev.base-convert.usageInputNumber"><strong>输入数字：</strong>在对应进制的输入框中输入数字。支持负数（-42）和小数（3.14）。</li>
-                                <li data-i18n="dev.base-convert.usageViewResult"><strong>查看结果：</strong>其他三种进制的转换结果实时更新。小数部分可能在不同进制中有不同的精度表现。</li>
-                                <li data-i18n="dev.base-convert.usageCopyResult"><strong>复制结果：</strong>点击任意结果旁的复制按钮，自动复制到剪贴板。</li>
-                                <li data-i18n="dev.base-convert.usagePreset"><strong>加载预设：</strong>点击预设值按钮快速加载常用数字——查看它们在四种进制中的表示。</li>
+                                <li data-i18n="dev.base-convert.usageSelectBase">
+                                    <strong>选择输入进制：</strong>点击二进制/八进制/十进制/十六进制标签，或让工具自动识别。
+                                </li>
+                                <li data-i18n="dev.base-convert.usageInputNumber">
+                                    <strong>输入数字：</strong>在对应进制的输入框中输入数字。支持负数（-42）和小数（3.14）。
+                                </li>
+                                <li data-i18n="dev.base-convert.usageViewResult">
+                                    <strong>查看结果：</strong>其他三种进制的转换结果实时更新。小数部分可能在不同进制中有不同的精度表现。
+                                </li>
+                                <li data-i18n="dev.base-convert.usageCopyResult">
+                                    <strong>复制结果：</strong>点击任意结果旁的复制按钮，自动复制到剪贴板。
+                                </li>
+                                <li data-i18n="dev.base-convert.usagePreset">
+                                    <strong>加载预设：</strong>点击预设值按钮快速加载常用数字——查看它们在四种进制中的表示。
+                                </li>
                             </ul>
                             <h4 data-i18n="dev.base-convert.formatExplainTitle">位宽可视化</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.formatDetailBin"><strong>二进制展示：</strong>将数字以 8/16/32 位二进制形式展示，每一位标注权重值。直观理解"为什么 255 = 11111111"——每一位都是 1，权重之和 = 128+64+32+16+8+4+2+1 = 255。</li>
-                                <li data-i18n="dev.base-convert.formatDetailOct"><strong>八进制展示：</strong>将二进制每 3 位分组，对应一个八进制数字。如 11111111 → 0377。</li>
-                                <li data-i18n="dev.base-convert.formatDetailDec"><strong>十进制展示：</strong>显示数字的十进制表示——人类最熟悉的格式。</li>
-                                <li data-i18n="dev.base-convert.formatDetailHex"><strong>十六进制展示：</strong>将二进制每 4 位分组，对应一个十六进制数字。如 11111111 → 0xFF。</li>
+                                <li data-i18n="dev.base-convert.formatDetailBin"><strong>二进制展示：</strong>将数字以 8/16/32
+                                    位二进制形式展示，每一位标注权重值。直观理解"为什么 255 = 11111111"——每一位都是 1，权重之和 = 128+64+32+16+8+4+2+1 =
+                                    255。</li>
+                                <li data-i18n="dev.base-convert.formatDetailOct"><strong>八进制展示：</strong>将二进制每 3
+                                    位分组，对应一个八进制数字。如 11111111 → 0377。</li>
+                                <li data-i18n="dev.base-convert.formatDetailDec">
+                                    <strong>十进制展示：</strong>显示数字的十进制表示——人类最熟悉的格式。
+                                </li>
+                                <li data-i18n="dev.base-convert.formatDetailHex"><strong>十六进制展示：</strong>将二进制每 4
+                                    位分组，对应一个十六进制数字。如 11111111 → 0xFF。</li>
                             </ul>
                             <h4 data-i18n="dev.base-convert.shortcutTitle">五、进制转换速查</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.shortcutPrefix">支持自动识别常见前缀：<code>0b</code>（二进制）、<code>0o</code>（八进制）、<code>0x</code>（十六进制）。</li>
+                                <li data-i18n="dev.base-convert.shortcutPrefix">
+                                    支持自动识别常见前缀：<code>0b</code>（二进制）、<code>0o</code>（八进制）、<code>0x</code>（十六进制）。</li>
                                 <li data-i18n="dev.base-convert.shortcutEnter">按 Enter 键可触发转换。</li>
                                 <li data-i18n="dev.base-convert.shortcutSwitch">切换进制时，当前输入值会自动转换为新进制表示。</li>
                             </ul>
@@ -699,9 +749,12 @@
                         <div class="info-content">
                             <h4 data-i18n="dev.base-convert.formatRulesTitle">输入规则</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.formatRule1"><strong>二进制：</strong>只接受 0 和 1。如 1010、11111111。</li>
-                                <li data-i18n="dev.base-convert.formatRule2"><strong>八进制：</strong>只接受 0-7。如 755、644。注意 Linux 文件权限就用八进制表示。</li>
-                                <li data-i18n="dev.base-convert.formatRule3"><strong>十六进制：</strong>接受 0-9 和 A-F（大小写均可）。如 FF、0x1A2B。</li>
+                                <li data-i18n="dev.base-convert.formatRule1"><strong>二进制：</strong>只接受 0 和 1。如
+                                    1010、11111111。</li>
+                                <li data-i18n="dev.base-convert.formatRule2"><strong>八进制：</strong>只接受 0-7。如 755、644。注意
+                                    Linux 文件权限就用八进制表示。</li>
+                                <li data-i18n="dev.base-convert.formatRule3"><strong>十六进制：</strong>接受 0-9 和 A-F（大小写均可）。如
+                                    FF、0x1A2B。</li>
                             </ul>
                             <h4 data-i18n="dev.base-convert.rangeTitle">数值范围</h4>
                             <ul>
@@ -711,14 +764,19 @@
                             </ul>
                             <h4 data-i18n="dev.base-convert.securityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.security1"><strong>纯前端计算：</strong>所有进制转换在浏览器中完成——不上传任何数据。</li>
+                                <li data-i18n="dev.base-convert.security1">
+                                    <strong>纯前端计算：</strong>所有进制转换在浏览器中完成——不上传任何数据。
+                                </li>
                                 <li data-i18n="dev.base-convert.security2"><strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。</li>
                             </ul>
                             <h4 data-i18n="dev.base-convert.faqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="dev.base-convert.faqConvertError"><strong>Q: 转换结果报错？</strong>A: 检查输入是否包含非法字符——如二进制中出现了 2，八进制中出现了 8。</li>
-                                <li data-i18n="dev.base-convert.faqValueAbnormal"><strong>Q: 小数转换结果不精确？</strong>A: 某些十进制小数在其他进制中是无限循环小数（如 0.1 在二进制中无限循环）。工具会截断到合理精度。</li>
-                                <li data-i18n="dev.base-convert.faqCopyFailed"><strong>Q: 复制功能不生效？</strong>A: 部分浏览器需要用户授权剪贴板权限。如果复制失败，可以手动选中结果文本复制。</li>
+                                <li data-i18n="dev.base-convert.faqConvertError"><strong>Q: 转换结果报错？</strong>A:
+                                    检查输入是否包含非法字符——如二进制中出现了 2，八进制中出现了 8。</li>
+                                <li data-i18n="dev.base-convert.faqValueAbnormal"><strong>Q: 小数转换结果不精确？</strong>A:
+                                    某些十进制小数在其他进制中是无限循环小数（如 0.1 在二进制中无限循环）。工具会截断到合理精度。</li>
+                                <li data-i18n="dev.base-convert.faqCopyFailed"><strong>Q: 复制功能不生效？</strong>A:
+                                    部分浏览器需要用户授权剪贴板权限。如果复制失败，可以手动选中结果文本复制。</li>
                             </ul>
                         </div>
                     </article>
@@ -732,12 +790,12 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
                     |
-                    <a href="/terms.html" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
                         服务条款</a> |
-                    <a href="/about.html" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
                         联系我们</a>
                 </p>
             </footer>

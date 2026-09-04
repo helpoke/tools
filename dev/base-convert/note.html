@@ -10,6 +10,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>进制转换工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="进制转换工具 - 免费、安全、快速">
+    <meta property="og:description" content="进制转换工具说明，二进制八进制十进制十六进制互转，实时转换，免费在线进制转换器，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/base-convert/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="进制转换工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="进制转换工具说明，二进制八进制十进制十六进制互转，实时转换，免费在线进制转换器，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/base-convert/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/base-convert/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/base-convert/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "为什么十六进制中可以使用大小写字母？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "十六进制的基数是16，需要16个符号来表示0到15。除了0到9十个数字符号，还需要额外的符号表示10到15，这就是A到F（或a到f）。其中A或a表示10，B或b表示11，以此类推，F或f表示15。在编程中，大小写字母都可以使用，本工具支持两种输入方式，转换结果会统一显示为小写形式，方便复制和使用。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何快速理解各进制的用途？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "二进制是计算机内部数据表示的基础，每个bit只能是0或1，所有数据最终都会转换为二进制存储；八进制常用于Unix/Linux系统的文件权限表示，如chmod命令中的755、644等；十进制是人类日常使用的计数方式，最符合直觉；十六进制广泛用于编程领域，如内存地址表示、颜色代码（CSS中的#FFFFFF）、字符编码（Unicode码点）、MAC地址等。每种进制都有其特定的应用场景。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "转换超大数字时结果准确吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具使用JavaScript的BigInt类型处理大数字，理论上可以处理任意长度的整数。但对于数百位甚至上千位的超大数字，浏览器可能会出现性能问题或显示异常。建议您先测试转换一些较小的数字，确认工具工作正常后再处理大数字。如果遇到问题，可以尝试使用专门的数学计算软件或库。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么八进制在编程中不如十六进制常用？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "八进制的基数是8，刚好是2的3次方，每个八进制数字对应3个二进制位。而十六进制的基数是16，是2的4次方，每个十六进制数字对应4个二进制位。由于现代计算机的字长通常是8位、16位、32位、64位等，都是4的倍数，因此十六进制能更整齐地表示这些数据单位。此外，十六进制的信息密度更高，同样长度可以表示更大的数值范围，因此在编程中更受欢迎。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "小数可以在不同进制间转换吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具主要支持整数进制转换。小数的进制转换涉及浮点数精度问题，特别是二进制小数无法精确表示某些十进制小数（如0.1），会导致精度损失。如果您需要精确的小数转换，建议使用专业的数学计算工具或库，或者先转换为整数形式再处理。本工具对小数的支持有限，结果仅供参考。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "负数的转换规则是什么？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "负数的进制转换采用符号分离策略：首先提取负号，然后对数字部分进行进制转换，最后在转换结果前添加负号。例如，十进制-255转换为十六进制是-FF。这与计算机内部的有符号数表示（如补码）不同，本工具仅处理数值本身的转换，不考虑计算机内部的符号位表示方式。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -344,10 +415,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

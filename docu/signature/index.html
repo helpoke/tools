@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' data: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>文档在线免费签名工具，PDF文档在线签名，Word文档在线签名</title>
     <meta property="og:title" content="文档在线免费签名工具，PDF文档在线签名，Word文档在线签名">
@@ -58,7 +66,7 @@
         "@type": "WebApplication",
         "name": "文档在线签名工具",
         "description": "在线文档免费签名工具，支持PDF文档和Word文档在线签名，支持手写签名。免费在线文档签名工具。Online document signature tool supporting PDF and Word files.",
-        "url": "https://helpoke.com/docu/signature",
+        "url": "https://helpoke.com/docu/signature/",
         "applicationCategory": "https://schema.org/ProductivityApplication",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -73,7 +81,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -92,10 +100,13 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="docu.signature.title">文档签名工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与 FAQ</a>
-            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle" data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
             <p data-i18n="docu.signature.intro">文档签名工具，支持为PDF文档添加手写签名，可绘制或上传签名图片，自由调整签名位置和大小</p>
-            <p class="description" data-i18n="common.privacyNote">*（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
 
@@ -138,7 +149,8 @@
                                         <rect width="400" height="200" fill="#f0f0f0" stroke="#ccc" stroke-width="2"
                                             rx="5" ry="5" />
                                         <text x="200" y="100" font-family="Arial, sans-serif" font-size="30"
-                                            text-anchor="middle" fill="#999" data-i18n="docu.signature.uploadSignatureImage">点击上传签名图片</text>
+                                            text-anchor="middle" fill="#999"
+                                            data-i18n="docu.signature.uploadSignatureImage">点击上传签名图片</text>
                                     </svg>
                                 </div>
                                 <!-- 悬浮提示 -->
@@ -170,7 +182,8 @@
                     </div>
 
                     <div class="page-info">
-                        <span id="page-info-text" data-i18n="docu.signature.pageInfo">第 {{current}} 页 / 共 {{total}} 页</span>
+                        <span id="page-info-text" data-i18n="docu.signature.pageInfo">第 {{current}} 页 / 共 {{total}}
+                            页</span>
                     </div>
 
                     <div class="signature-tools">
@@ -192,20 +205,33 @@
                         <div class="info-content">
                             <h4 data-i18n="docu.signature.problemsTitle">一、PDF 电子签名的实际需求</h4>
                             <ul>
-                                <li data-i18n="docu.signature.problem1">打印→手写签名→扫描回 PDF——这个传统流程耗时且降低文档质量。电子签名工具让你在浏览器中直接手写签名或上传签名图片，然后精准放置到 PDF 文档的指定位置——效果等同于手写签名，但全程数字化完成。</li>
-                                <li data-i18n="docu.signature.problem2">本工具支持三种签名创建方式：手写绘制（在画布上手写签名）、上传图片（将纸质签名拍照上传）、横屏绘制（大屏设备上横屏手写更方便）。签名创建后可以调整位置、大小，支持在多个页面添加不同签名。</li>
-                                <li data-i18n="docu.signature.problem3">注意：本工具实现的是视觉签名——将签名图像叠加到 PDF 页面上。这与数字证书签名（如 CA 证书、PDF 数字签名）不同——视觉签名不具有法律上的数字签名效力，但在日常办公场景中广泛使用。</li>
+                                <li data-i18n="docu.signature.problem1">打印→手写签名→扫描回
+                                    PDF——这个传统流程耗时且降低文档质量。电子签名工具让你在浏览器中直接手写签名或上传签名图片，然后精准放置到 PDF
+                                    文档的指定位置——效果等同于手写签名，但全程数字化完成。</li>
+                                <li data-i18n="docu.signature.problem2">
+                                    本工具支持三种签名创建方式：手写绘制（在画布上手写签名）、上传图片（将纸质签名拍照上传）、横屏绘制（大屏设备上横屏手写更方便）。签名创建后可以调整位置、大小，支持在多个页面添加不同签名。
+                                </li>
+                                <li data-i18n="docu.signature.problem3">注意：本工具实现的是视觉签名——将签名图像叠加到 PDF 页面上。这与数字证书签名（如 CA
+                                    证书、PDF 数字签名）不同——视觉签名不具有法律上的数字签名效力，但在日常办公场景中广泛使用。</li>
                             </ul>
                             <h4 data-i18n="docu.signature.formatsTitle">二、签名格式</h4>
                             <ul>
-                                <li data-i18n="docu.signature.formatPdf"><strong>签名叠加：</strong>签名以透明 PNG 图像的形式叠加到 PDF 页面上——不影响原有文字和内容。签名位置用坐标精确定位，支持拖拽调整和缩放。</li>
+                                <li data-i18n="docu.signature.formatPdf"><strong>签名叠加：</strong>签名以透明 PNG 图像的形式叠加到 PDF
+                                    页面上——不影响原有文字和内容。签名位置用坐标精确定位，支持拖拽调整和缩放。</li>
                             </ul>
                             <h4 data-i18n="docu.signature.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="docu.signature.featureOnline"><strong>手写签名：</strong>在画布上直接手写签名——支持鼠标和触屏输入。笔迹实时渲染，可清除重绘。</li>
-                                <li data-i18n="docu.signature.featurePreview"><strong>文档预览：</strong>上传 PDF 后逐页预览——在预览中直观查看签名放置位置。</li>
-                                <li data-i18n="docu.signature.featureExport"><strong>多页签名：</strong>同一签名可添加到多个页面——也可在不同页面添加不同签名。</li>
-                                <li data-i18n="docu.signature.featureSecurity"><strong>纯前端处理：</strong>所有签名处理在浏览器中完成——文档不上传到服务器。</li>
+                                <li data-i18n="docu.signature.featureOnline">
+                                    <strong>手写签名：</strong>在画布上直接手写签名——支持鼠标和触屏输入。笔迹实时渲染，可清除重绘。
+                                </li>
+                                <li data-i18n="docu.signature.featurePreview"><strong>文档预览：</strong>上传 PDF
+                                    后逐页预览——在预览中直观查看签名放置位置。</li>
+                                <li data-i18n="docu.signature.featureExport">
+                                    <strong>多页签名：</strong>同一签名可添加到多个页面——也可在不同页面添加不同签名。
+                                </li>
+                                <li data-i18n="docu.signature.featureSecurity">
+                                    <strong>纯前端处理：</strong>所有签名处理在浏览器中完成——文档不上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -217,31 +243,55 @@
                         <div class="info-content">
                             <h4 data-i18n="docu.signature.usageUploadTitle">上传文档</h4>
                             <ul>
-                                <li data-i18n="docu.signature.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——支持 PDF 和 Word 格式。</li>
-                                <li data-i18n="docu.signature.usageFileLimit"><strong>自动解析：</strong>文件上传后自动解析并渲染预览——显示总页数和文件大小。</li>
-                                <li data-i18n="docu.signature.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF 预览——可以翻页查看文档内容。</li>
+                                <li data-i18n="docu.signature.usageSelectFile"><strong>选择文件：</strong>点击上传区域选择 PDF 文件——支持
+                                    PDF 和 Word 格式。</li>
+                                <li data-i18n="docu.signature.usageFileLimit">
+                                    <strong>自动解析：</strong>文件上传后自动解析并渲染预览——显示总页数和文件大小。
+                                </li>
+                                <li data-i18n="docu.signature.usageAutoParse"><strong>预览加载：</strong>逐页渲染 PDF
+                                    预览——可以翻页查看文档内容。</li>
                             </ul>
                             <h4 data-i18n="docu.signature.usageCreateTitle">创建签名</h4>
                             <ul>
-                                <li data-i18n="docu.signature.usageDraw"><strong>手写绘制：</strong>点击"绘制签名"按钮打开画布——用鼠标或触屏手写签名。</li>
-                                <li data-i18n="docu.signature.usageUpload"><strong>上传图片：</strong>将签名照片上传——支持 PNG/JPG 格式，自动去除白色背景。</li>
-                                <li data-i18n="docu.signature.usageLandscape"><strong>横屏绘制：</strong>在移动设备上切换到横屏模式——更大的书写区域，更方便手写。</li>
-                                <li data-i18n="docu.signature.usageClearSignature"><strong>清除重绘：</strong>对手写效果不满意？点击"清除"按钮重新绘制。</li>
-                                <li data-i18n="docu.signature.usageSaveSignature"><strong>保存签名：</strong>签名创建后点击"保存"——签名被添加到待放置列表。</li>
+                                <li data-i18n="docu.signature.usageDraw">
+                                    <strong>手写绘制：</strong>点击"绘制签名"按钮打开画布——用鼠标或触屏手写签名。
+                                </li>
+                                <li data-i18n="docu.signature.usageUpload"><strong>上传图片：</strong>将签名照片上传——支持 PNG/JPG
+                                    格式，自动去除白色背景。</li>
+                                <li data-i18n="docu.signature.usageLandscape">
+                                    <strong>横屏绘制：</strong>在移动设备上切换到横屏模式——更大的书写区域，更方便手写。
+                                </li>
+                                <li data-i18n="docu.signature.usageClearSignature">
+                                    <strong>清除重绘：</strong>对手写效果不满意？点击"清除"按钮重新绘制。
+                                </li>
+                                <li data-i18n="docu.signature.usageSaveSignature">
+                                    <strong>保存签名：</strong>签名创建后点击"保存"——签名被添加到待放置列表。
+                                </li>
                             </ul>
                             <h4 data-i18n="docu.signature.usageAddTitle">放置签名</h4>
                             <ul>
-                                <li data-i18n="docu.signature.usageSwitchPage"><strong>翻页定位：</strong>使用翻页按钮导航到需要添加签名的页面。</li>
-                                <li data-i18n="docu.signature.usageConfirmAdd"><strong>确认添加：</strong>选择签名后点击"确认添加"——签名出现在页面上。</li>
-                                <li data-i18n="docu.signature.usageAdjustPosition"><strong>调整位置：</strong>拖拽签名图像移动到精确位置——支持像素级定位。</li>
-                                <li data-i18n="docu.signature.usageAdjustSize"><strong>调整大小：</strong>拖动签名角落的控制点缩放——保持宽高比不变形。</li>
-                                <li data-i18n="docu.signature.usageMultipleSignatures"><strong>多个签名：</strong>同一页面可以添加多个签名——如甲方签名和乙方签名。</li>
+                                <li data-i18n="docu.signature.usageSwitchPage"><strong>翻页定位：</strong>使用翻页按钮导航到需要添加签名的页面。
+                                </li>
+                                <li data-i18n="docu.signature.usageConfirmAdd">
+                                    <strong>确认添加：</strong>选择签名后点击"确认添加"——签名出现在页面上。
+                                </li>
+                                <li data-i18n="docu.signature.usageAdjustPosition">
+                                    <strong>调整位置：</strong>拖拽签名图像移动到精确位置——支持像素级定位。
+                                </li>
+                                <li data-i18n="docu.signature.usageAdjustSize">
+                                    <strong>调整大小：</strong>拖动签名角落的控制点缩放——保持宽高比不变形。
+                                </li>
+                                <li data-i18n="docu.signature.usageMultipleSignatures">
+                                    <strong>多个签名：</strong>同一页面可以添加多个签名——如甲方签名和乙方签名。
+                                </li>
                             </ul>
                             <h4 data-i18n="docu.signature.usagePreviewDownloadTitle">预览与下载</h4>
                             <ul>
                                 <li data-i18n="docu.signature.usageZoom"><strong>缩放查看：</strong>缩放预览确认签名位置和大小。</li>
-                                <li data-i18n="docu.signature.usageClearAll"><strong>清除全部：</strong>点击"清除"按钮移除当前页面的所有签名。</li>
-                                <li data-i18n="docu.signature.usageDownload"><strong>下载结果：</strong>处理完成后点击"下载"保存签名后的 PDF。</li>
+                                <li data-i18n="docu.signature.usageClearAll"><strong>清除全部：</strong>点击"清除"按钮移除当前页面的所有签名。
+                                </li>
+                                <li data-i18n="docu.signature.usageDownload"><strong>下载结果：</strong>处理完成后点击"下载"保存签名后的
+                                    PDF。</li>
                             </ul>
                         </div>
                     </article>
@@ -252,35 +302,59 @@
                         <div class="info-content">
                             <h4 data-i18n="docu.signature.notesSecurityTitle">数据安全</h4>
                             <ul>
-                                <li data-i18n="docu.signature.noteSecurity1"><strong>纯前端处理：</strong>所有签名处理在浏览器中完成——文档和签名不上传到服务器。</li>
-                                <li data-i18n="docu.signature.noteSecurity2"><strong>签名保护：</strong>签名图像只在当前会话中存在——页面关闭后自动清除，不持久化存储。</li>
+                                <li data-i18n="docu.signature.noteSecurity1">
+                                    <strong>纯前端处理：</strong>所有签名处理在浏览器中完成——文档和签名不上传到服务器。
+                                </li>
+                                <li data-i18n="docu.signature.noteSecurity2">
+                                    <strong>签名保护：</strong>签名图像只在当前会话中存在——页面关闭后自动清除，不持久化存储。
+                                </li>
                             </ul>
                             <h4 data-i18n="docu.signature.notesProcessTitle">处理说明</h4>
                             <ul>
-                                <li data-i18n="docu.signature.noteProcess1"><strong>视觉签名：</strong>本工具实现的是视觉签名（图像叠加）——不是数字证书签名。</li>
-                                <li data-i18n="docu.signature.noteProcess2"><strong>签名质量：</strong>手写签名的质量取决于输入设备——触屏设备手写效果优于鼠标。</li>
-                                <li data-i18n="docu.signature.noteProcess3"><strong>排版保留：</strong>签名叠加不影响原有内容——文字仍然可以选中和复制。</li>
+                                <li data-i18n="docu.signature.noteProcess1">
+                                    <strong>视觉签名：</strong>本工具实现的是视觉签名（图像叠加）——不是数字证书签名。
+                                </li>
+                                <li data-i18n="docu.signature.noteProcess2">
+                                    <strong>签名质量：</strong>手写签名的质量取决于输入设备——触屏设备手写效果优于鼠标。
+                                </li>
+                                <li data-i18n="docu.signature.noteProcess3">
+                                    <strong>排版保留：</strong>签名叠加不影响原有内容——文字仍然可以选中和复制。
+                                </li>
                             </ul>
                             <h4 data-i18n="docu.signature.notesFormatTitle">格式说明</h4>
                             <ul>
-                                <li data-i18n="docu.signature.noteFormat1"><strong>输入格式：</strong>支持 PDF 和 Word（.docx）格式——Word 文件自动转换后处理。</li>
-                                <li data-i18n="docu.signature.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——签名以透明 PNG 嵌入。</li>
-                                <li data-i18n="docu.signature.noteFormat3"><strong>签名格式：</strong>手绘签名导出为 PNG 格式——支持透明背景。</li>
+                                <li data-i18n="docu.signature.noteFormat1"><strong>输入格式：</strong>支持 PDF 和
+                                    Word（.docx）格式——Word 文件自动转换后处理。</li>
+                                <li data-i18n="docu.signature.noteFormat2"><strong>输出格式：</strong>输出为标准 PDF 文件——签名以透明 PNG
+                                    嵌入。</li>
+                                <li data-i18n="docu.signature.noteFormat3"><strong>签名格式：</strong>手绘签名导出为 PNG 格式——支持透明背景。
+                                </li>
                             </ul>
                             <h4 data-i18n="docu.signature.notesSignatureTitle">签名说明</h4>
                             <ul>
-                                <li data-i18n="docu.signature.noteSig1"><strong>手写 vs 上传：</strong>手写签名适合平板/触屏设备——上传签名适合已有纸质签名的场景。</li>
-                                <li data-i18n="docu.signature.noteSig2"><strong>背景透明：</strong>上传的签名图片如果是白色背景，工具自动去除——确保签名在文档上自然显示。</li>
-                                <li data-i18n="docu.signature.noteSig3"><strong>签名大小：</strong>建议签名宽度为文档宽度的 20-30%——过大显得不专业，过小不易辨认。</li>
-                                <li data-i18n="docu.signature.noteSig4"><strong>法律效力：</strong>视觉电子签名在多数司法管辖区不具有与手写签名同等的法律效力——重要合同请咨询法律顾问。</li>
+                                <li data-i18n="docu.signature.noteSig1"><strong>手写 vs
+                                        上传：</strong>手写签名适合平板/触屏设备——上传签名适合已有纸质签名的场景。</li>
+                                <li data-i18n="docu.signature.noteSig2">
+                                    <strong>背景透明：</strong>上传的签名图片如果是白色背景，工具自动去除——确保签名在文档上自然显示。
+                                </li>
+                                <li data-i18n="docu.signature.noteSig3"><strong>签名大小：</strong>建议签名宽度为文档宽度的
+                                    20-30%——过大显得不专业，过小不易辨认。</li>
+                                <li data-i18n="docu.signature.noteSig4">
+                                    <strong>法律效力：</strong>视觉电子签名在多数司法管辖区不具有与手写签名同等的法律效力——重要合同请咨询法律顾问。
+                                </li>
                             </ul>
                             <h4 data-i18n="docu.signature.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="docu.signature.faqUploadFail"><strong>Q: 上传 PDF 失败？</strong>A: 检查文件格式是否为 PDF 或 Word——加密的 PDF 需要先解密。</li>
-                                <li data-i18n="docu.signature.faqSignatureNotShown"><strong>Q: 签名在下载的 PDF 中看不到？</strong>A: 确认签名已保存并放置到页面上——只有确认添加的签名才会出现在输出中。</li>
-                                <li data-i18n="docu.signature.faqDownloadFail"><strong>Q: 下载失败？</strong>A: 大文件处理可能需要较长时间——确保网络连接稳定。如果仍然失败，尝试减小文件大小。</li>
-                                <li data-i18n="docu.signature.faqPositionWrong"><strong>Q: 签名位置偏移？</strong>A: 预览和实际输出的渲染引擎可能略有差异——下载后检查实际位置，必要时微调。</li>
-                                <li data-i18n="docu.signature.faqDrawLag"><strong>Q: 手写签名有延迟？</strong>A: 大页面渲染可能影响手写流畅度——尝试缩小浏览器窗口或降低页面缩放比例。</li>
+                                <li data-i18n="docu.signature.faqUploadFail"><strong>Q: 上传 PDF 失败？</strong>A: 检查文件格式是否为
+                                    PDF 或 Word——加密的 PDF 需要先解密。</li>
+                                <li data-i18n="docu.signature.faqSignatureNotShown"><strong>Q: 签名在下载的 PDF
+                                        中看不到？</strong>A: 确认签名已保存并放置到页面上——只有确认添加的签名才会出现在输出中。</li>
+                                <li data-i18n="docu.signature.faqDownloadFail"><strong>Q: 下载失败？</strong>A:
+                                    大文件处理可能需要较长时间——确保网络连接稳定。如果仍然失败，尝试减小文件大小。</li>
+                                <li data-i18n="docu.signature.faqPositionWrong"><strong>Q: 签名位置偏移？</strong>A:
+                                    预览和实际输出的渲染引擎可能略有差异——下载后检查实际位置，必要时微调。</li>
+                                <li data-i18n="docu.signature.faqDrawLag"><strong>Q: 手写签名有延迟？</strong>A:
+                                    大页面渲染可能影响手写流畅度——尝试缩小浏览器窗口或降低页面缩放比例。</li>
                             </ul>
                         </div>
                     </article>
@@ -293,10 +367,14 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>
@@ -308,6 +386,8 @@
     <!-- 边界检查工具模块 -->
     <script src="boundary-utils.js?v=1.0.0"></script>
     <script src="script.js?v=20251224"></script>
+    <!-- Word 文档签名处理模块(依赖 SignatureManager, 须在 script.js 后加载) -->
+    <!-- <script src="word-signature.js?v=20251224"></script> -->
 </body>
 
 </html>

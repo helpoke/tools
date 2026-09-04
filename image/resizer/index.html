@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <meta name="description" content="在线图片缩放工具，支持自定义尺寸缩放和预设尺寸，可保持宽高比，支持 JPG、PNG、WebP 格式输出，多种缩放算法，本地处理保护隐私">
     <meta name="keywords" content="图片缩放, 图像缩放, 在线调整图片大小, 图片尺寸修改, 图片放大缩小, 批量缩放, 免费图片工具">
@@ -40,7 +48,7 @@
         "@type": "WebApplication",
         "name": "图像缩放器",
         "description": "在线图片缩放工具，支持自定义尺寸缩放和预设尺寸，可保持宽高比，支持 JPG、PNG、WebP 格式输出，多种缩放算法，本地处理保护隐私。Online image resizer supporting custom dimensions and presets, aspect ratio lock, JPG/PNG/WebP output, multiple scaling algorithms.",
-        "url": "https://helpoke.com/image/resizer",
+        "url": "https://helpoke.com/image/resizer/",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -56,7 +64,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -199,118 +207,156 @@
                     <button id="downloadBtn" disabled data-i18n="image.resizer.downloadBtn">下载缩放图片</button>
                 </div>
             </div>
-            </div>
+        </div>
 
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.resizer.infoIntro">图像缩放：精确控制每一像素的输出尺寸</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.resizer.problemsTitle">一、为什么不能直接拖拽角落缩放</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.problem1">操作系统自带的图片查看器确实可以缩放图片——但它的缩放算法是简单的最近邻插值，缩小后图片会出现锯齿和摩尔纹，放大后更是模糊一片。更重要的是，它不支持按精确像素值设定输出尺寸——你无法告诉它"我要这张图片恰好是 800x600 像素"。</li>
-                            <li data-i18n="image.resizer.problem2">本工具提供三种缩放模式：精确尺寸（输入目标宽高像素值）、比例缩放（50%、25% 等）、预设尺寸（桌面分辨率、手机分辨率、社交媒体尺寸等）。缩放算法使用 Canvas 的双线性插值（bilinear interpolation），在缩小图片时保留更多细节、减少锯齿。</li>
-                            <li data-i18n="image.resizer.problem3">批量缩放支持——上传多张图片，统一设置目标尺寸后一键全部处理并打包下载。所有处理在浏览器中完成，图片不上传到服务器。适合电商卖家批量制作产品图、前端开发者批量生成缩略图等场景。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.formatTitle">二、三种缩放模式详解</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.formatInput"><strong>输入格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 五种常见图片格式。</li>
-                            <li data-i18n="image.resizer.formatOutput"><strong>输出格式：</strong>可输出 JPG（体积最小）、PNG（无损透明）、WebP（现代高效）或保持原始格式。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.featuresTitle">三、缩放算法的技术细节</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.featureCustom"><strong>自由缩放：</strong>自定义宽度和高度（像素），支持放大和缩小，最小可缩放到 1px。</li>
-                            <li data-i18n="image.resizer.featureRatio"><strong>宽高比锁定：</strong>勾选后修改宽度自动计算高度（或反之），确保图片不变形。</li>
-                            <li data-i18n="image.resizer.featurePreset"><strong>预设尺寸 + 比例缩放：</strong>常见分辨率一键选择（1920×1080、1280×720 等）+ 50%/25%/10% 等比例快速缩放。</li>
-                            <li data-i18n="image.resizer.featureFormat"><strong>格式 + 质量联合控制：</strong>缩放同时可转换格式并调节输出质量，一次操作完成全部优化。</li>
-                            <li data-i18n="image.resizer.featureSecurity"><strong>批量处理：</strong>多张图片统一设置目标尺寸后一键处理。每张图片独立缩放——不同原始尺寸的图片可以统一缩放到相同的目标尺寸。</li>
-                        </ul>
-                    </div>
-                </article>
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.resizer.infoIntro">图像缩放：精确控制每一像素的输出尺寸</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.resizer.problemsTitle">一、为什么不能直接拖拽角落缩放</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.problem1">
+                            操作系统自带的图片查看器确实可以缩放图片——但它的缩放算法是简单的最近邻插值，缩小后图片会出现锯齿和摩尔纹，放大后更是模糊一片。更重要的是，它不支持按精确像素值设定输出尺寸——你无法告诉它"我要这张图片恰好是
+                            800x600 像素"。</li>
+                        <li data-i18n="image.resizer.problem2">本工具提供三种缩放模式：精确尺寸（输入目标宽高像素值）、比例缩放（50%、25%
+                            等）、预设尺寸（桌面分辨率、手机分辨率、社交媒体尺寸等）。缩放算法使用 Canvas 的双线性插值（bilinear interpolation），在缩小图片时保留更多细节、减少锯齿。
+                        </li>
+                        <li data-i18n="image.resizer.problem3">
+                            批量缩放支持——上传多张图片，统一设置目标尺寸后一键全部处理并打包下载。所有处理在浏览器中完成，图片不上传到服务器。适合电商卖家批量制作产品图、前端开发者批量生成缩略图等场景。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.formatTitle">二、三种缩放模式详解</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.formatInput"><strong>输入格式：</strong>支持 JPG、PNG、WebP、GIF、BMP
+                            五种常见图片格式。</li>
+                        <li data-i18n="image.resizer.formatOutput"><strong>输出格式：</strong>可输出
+                            JPG（体积最小）、PNG（无损透明）、WebP（现代高效）或保持原始格式。</li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.featuresTitle">三、缩放算法的技术细节</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.featureCustom"><strong>自由缩放：</strong>自定义宽度和高度（像素），支持放大和缩小，最小可缩放到
+                            1px。</li>
+                        <li data-i18n="image.resizer.featureRatio"><strong>宽高比锁定：</strong>勾选后修改宽度自动计算高度（或反之），确保图片不变形。
+                        </li>
+                        <li data-i18n="image.resizer.featurePreset"><strong>预设尺寸 +
+                                比例缩放：</strong>常见分辨率一键选择（1920×1080、1280×720 等）+ 50%/25%/10% 等比例快速缩放。</li>
+                        <li data-i18n="image.resizer.featureFormat"><strong>格式 +
+                                质量联合控制：</strong>缩放同时可转换格式并调节输出质量，一次操作完成全部优化。</li>
+                        <li data-i18n="image.resizer.featureSecurity">
+                            <strong>批量处理：</strong>多张图片统一设置目标尺寸后一键处理。每张图片独立缩放——不同原始尺寸的图片可以统一缩放到相同的目标尺寸。
+                        </li>
+                    </ul>
+                </div>
+            </article>
 
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.resizer.infoUsage">缩放操作流程</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.resizer.usageUploadTitle">上传图片</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.usageClickUpload"><strong>单张或批量：</strong>点击或拖拽上传一张或多张图片。支持 JPG/PNG/WebP/BMP。</li>
-                            <li data-i18n="image.resizer.usagePreview"><strong>信息显示：</strong>每张图片显示原始尺寸（宽x高）和文件大小。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.usageSizeTitle">二、设置目标尺寸</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.usageCustomSize"><strong>自定义尺寸：</strong>在宽度/高度输入框中输入目标像素值。</li>
-                            <li data-i18n="image.resizer.usageRatioLock"><strong>锁定比例：</strong>勾选"保持宽高比"后，修改任一值另一值自动按比例变化。</li>
-                            <li data-i18n="image.resizer.usagePreset"><strong>精确尺寸：</strong>输入目标宽度和高度像素值。勾选"保持宽高比"时只需输入一个维度。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.usageFormatTitle">三、设置输出参数</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.usageFormatSelect"><strong>输出格式：</strong>选择缩放后的图片格式，默认为原始格式。</li>
-                            <li data-i18n="image.resizer.usageQuality"><strong>图片质量：</strong>调整 JPEG 和 WebP 格式的输出质量（10%-100%）。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.usageApplyTitle">四、应用与下载</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.usageApplyClick"><strong>应用缩放：</strong>点击"应用缩放"按钮执行缩放操作。</li>
-                            <li data-i18n="image.resizer.usageCompare"><strong>对比预览：</strong>缩放后右图显示结果，原图保留在左侧方便对比。</li>
-                            <li data-i18n="image.resizer.usageDownload"><strong>最佳实践：</strong>如果需要放大图片且对质量要求高，建议使用专门的 AI 超分辨率工具——本工具的双线性插值适合缩小和等比缩放。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.usagePrincipleTitle">五、缩放的数学原理</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.usagePrincipleCanvas"><strong>Canvas 缩放：</strong>利用 Canvas 的 drawImage 方法进行高质量图像缩放。</li>
-                            <li data-i18n="image.resizer.usagePrincipleAntiAlias"><strong>抗锯齿：</strong>缩放过程中自动进行抗锯齿处理，保证图像质量。</li>
-                            <li data-i18n="image.resizer.usagePrincipleLossless"><strong>无损放大限制：</strong>放大图片时无法增加细节，建议缩放前评估结果。</li>
-                        </ul>
-                    </div>
-                </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.resizer.infoUsage">缩放操作流程</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.resizer.usageUploadTitle">上传图片</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.usageClickUpload"><strong>单张或批量：</strong>点击或拖拽上传一张或多张图片。支持
+                            JPG/PNG/WebP/BMP。</li>
+                        <li data-i18n="image.resizer.usagePreview"><strong>信息显示：</strong>每张图片显示原始尺寸（宽x高）和文件大小。</li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.usageSizeTitle">二、设置目标尺寸</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.usageCustomSize"><strong>自定义尺寸：</strong>在宽度/高度输入框中输入目标像素值。</li>
+                        <li data-i18n="image.resizer.usageRatioLock"><strong>锁定比例：</strong>勾选"保持宽高比"后，修改任一值另一值自动按比例变化。
+                        </li>
+                        <li data-i18n="image.resizer.usagePreset"><strong>精确尺寸：</strong>输入目标宽度和高度像素值。勾选"保持宽高比"时只需输入一个维度。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.usageFormatTitle">三、设置输出参数</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.usageFormatSelect"><strong>输出格式：</strong>选择缩放后的图片格式，默认为原始格式。</li>
+                        <li data-i18n="image.resizer.usageQuality"><strong>图片质量：</strong>调整 JPEG 和 WebP
+                            格式的输出质量（10%-100%）。</li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.usageApplyTitle">四、应用与下载</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.usageApplyClick"><strong>应用缩放：</strong>点击"应用缩放"按钮执行缩放操作。</li>
+                        <li data-i18n="image.resizer.usageCompare"><strong>对比预览：</strong>缩放后右图显示结果，原图保留在左侧方便对比。</li>
+                        <li data-i18n="image.resizer.usageDownload"><strong>最佳实践：</strong>如果需要放大图片且对质量要求高，建议使用专门的 AI
+                            超分辨率工具——本工具的双线性插值适合缩小和等比缩放。</li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.usagePrincipleTitle">五、缩放的数学原理</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.usagePrincipleCanvas"><strong>Canvas 缩放：</strong>利用 Canvas 的
+                            drawImage 方法进行高质量图像缩放。</li>
+                        <li data-i18n="image.resizer.usagePrincipleAntiAlias">
+                            <strong>抗锯齿：</strong>缩放过程中自动进行抗锯齿处理，保证图像质量。
+                        </li>
+                        <li data-i18n="image.resizer.usagePrincipleLossless">
+                            <strong>无损放大限制：</strong>放大图片时无法增加细节，建议缩放前评估结果。
+                        </li>
+                    </ul>
+                </div>
+            </article>
 
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.resizer.infoNotes">注意事项</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.resizer.notesSecurityTitle">数据安全</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.noteSecurity1">图像缩放通过 Canvas 2D API 的 drawImage 方法在浏览器中直接运算——源图片解码后在 Canvas 上按目标尺寸重绘，然后编码为指定格式输出。整个缩放过程（包括像素重采样、抗锯齿处理）全部在本地 CPU 完成，无需任何网络请求或第三方服务。</li>
-                            <li data-i18n="image.resizer.noteSecurity2">原图和缩放结果仅在浏览器内存中以 Blob URL 形式暂存。关闭标签页或刷新页面后，所有图片数据立即从 JavaScript 堆内存中释放。工具不使用 Cookie、localStorage 或 IndexedDB 持久化任何图片数据。处理商业产品图或机密素材时，建议配合无痕模式使用。</li>
-                            <li data-i18n="image.resizer.noteSecurity3">缩放商业素材（未发布的产品渲染图、内部数据可视化截图）或包含敏感信息的图片（仪表盘截图、财务报表）时，建议使用无痕模式。无痕模式确保浏览器不保留任何访问记录和缓存文件，关闭后彻底清除所有痕迹，最大程度保护商业隐私。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.notesSizeTitle">二、缩放质量指南</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.noteSize1"><strong>缩小图片（推荐场景）：</strong>画质基本不受影响——Canvas 的 drawImage 使用双线性插值算法进行像素降采样，缩小后的图片边缘平滑自然。文件体积会随尺寸减小而显著降低（大致与像素总数成正比），这是网页优化和图片分享最常见的使用场景。</li>
-                            <li data-i18n="image.resizer.noteSize2"><strong>放大图片（谨慎使用）：</strong>无法增加原始图片中不存在的细节信息。大比例放大后（如 200×200 放大到 1000×1000），图片会显示模糊和锯齿——因为算法只能通过插值估算新增像素的颜色值。建议始终使用原始大图进行缩小操作，而非放大小图。如需放大，考虑使用 AI 超分辨率工具。</li>
-                            <li data-i18n="image.resizer.noteSize3">保持宽高比：强烈建议勾选，否则图片会被拉伸变形。取消勾选后可自由输入任意宽高值。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.notesFormatTitle">输出格式与体积</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.noteFormat1">JPG：体积最小，适合照片和网页配图，不支持透明。</li>
-                            <li data-i18n="image.resizer.noteFormat2">PNG：无损格式，支持透明背景，适合图标和截图，文件较大。</li>
-                            <li data-i18n="image.resizer.noteFormat3">WebP：现代格式，体积比 JPG 小 25-35% 且支持透明，现代浏览器均支持。</li>
-                        </ul>
-                        <h4 data-i18n="image.resizer.notesFaqTitle">常见问题</h4>
-                        <ul>
-                            <li data-i18n="image.resizer.noteFaq1"><strong>放大后图片模糊：</strong>这是图片处理的固有限制，放大无法增加原始细节。建议使用原始大图缩小到目标尺寸。</li>
-                            <li data-i18n="image.resizer.noteFaq2"><strong>如何缩放到特定文件大小：</strong>本工具控制像素尺寸，不直接控制文件大小。可通过调整输出格式和质量来间接控制。</li>
-                            <li data-i18n="image.resizer.noteFaq3"><strong>缩放后比例不对：</strong>确保勾选了“保持宽高比”，然后只修改宽度或高度其中一个值。</li>
-                            <li data-i18n="image.resizer.noteFaq4"><strong>支持 GIF 动图吗：</strong>仅处理 GIF 的第一帧，动态效果会丢失。</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.resizer.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.resizer.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.noteSecurity1">图像缩放通过 Canvas 2D API 的 drawImage
+                            方法在浏览器中直接运算——源图片解码后在 Canvas 上按目标尺寸重绘，然后编码为指定格式输出。整个缩放过程（包括像素重采样、抗锯齿处理）全部在本地 CPU
+                            完成，无需任何网络请求或第三方服务。</li>
+                        <li data-i18n="image.resizer.noteSecurity2">原图和缩放结果仅在浏览器内存中以 Blob URL 形式暂存。关闭标签页或刷新页面后，所有图片数据立即从
+                            JavaScript 堆内存中释放。工具不使用 Cookie、localStorage 或 IndexedDB 持久化任何图片数据。处理商业产品图或机密素材时，建议配合无痕模式使用。
+                        </li>
+                        <li data-i18n="image.resizer.noteSecurity3">
+                            缩放商业素材（未发布的产品渲染图、内部数据可视化截图）或包含敏感信息的图片（仪表盘截图、财务报表）时，建议使用无痕模式。无痕模式确保浏览器不保留任何访问记录和缓存文件，关闭后彻底清除所有痕迹，最大程度保护商业隐私。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.notesSizeTitle">二、缩放质量指南</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.noteSize1"><strong>缩小图片（推荐场景）：</strong>画质基本不受影响——Canvas 的 drawImage
+                            使用双线性插值算法进行像素降采样，缩小后的图片边缘平滑自然。文件体积会随尺寸减小而显著降低（大致与像素总数成正比），这是网页优化和图片分享最常见的使用场景。</li>
+                        <li data-i18n="image.resizer.noteSize2"><strong>放大图片（谨慎使用）：</strong>无法增加原始图片中不存在的细节信息。大比例放大后（如
+                            200×200 放大到 1000×1000），图片会显示模糊和锯齿——因为算法只能通过插值估算新增像素的颜色值。建议始终使用原始大图进行缩小操作，而非放大小图。如需放大，考虑使用 AI
+                            超分辨率工具。</li>
+                        <li data-i18n="image.resizer.noteSize3">保持宽高比：强烈建议勾选，否则图片会被拉伸变形。取消勾选后可自由输入任意宽高值。</li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.notesFormatTitle">输出格式与体积</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.noteFormat1">JPG：体积最小，适合照片和网页配图，不支持透明。</li>
+                        <li data-i18n="image.resizer.noteFormat2">PNG：无损格式，支持透明背景，适合图标和截图，文件较大。</li>
+                        <li data-i18n="image.resizer.noteFormat3">WebP：现代格式，体积比 JPG 小 25-35% 且支持透明，现代浏览器均支持。</li>
+                    </ul>
+                    <h4 data-i18n="image.resizer.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="image.resizer.noteFaq1">
+                            <strong>放大后图片模糊：</strong>这是图片处理的固有限制，放大无法增加原始细节。建议使用原始大图缩小到目标尺寸。
+                        </li>
+                        <li data-i18n="image.resizer.noteFaq2">
+                            <strong>如何缩放到特定文件大小：</strong>本工具控制像素尺寸，不直接控制文件大小。可通过调整输出格式和质量来间接控制。
+                        </li>
+                        <li data-i18n="image.resizer.noteFaq3"><strong>缩放后比例不对：</strong>确保勾选了“保持宽高比”，然后只修改宽度或高度其中一个值。
+                        </li>
+                        <li data-i18n="image.resizer.noteFaq4"><strong>支持 GIF 动图吗：</strong>仅处理 GIF 的第一帧，动态效果会丢失。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
         <!-- Footer component container -->
         <div id="footer-container">
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i>
                         关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

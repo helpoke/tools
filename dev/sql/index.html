@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://esm.sh https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://esm.sh; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://esm.sh; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>SQL格式化工具 - Helpoke 助点站</title>
     <meta property="og:title" content="SQL格式化工具 - Helpoke 助点站">
@@ -420,7 +428,7 @@
         "@type": "WebApplication",
         "name": "SQL格式化工具",
         "description": "SQL在线格式化美化工具，支持SQL语法高亮、关键字大写、格式化压缩、错误检测。免费在线SQL格式化工具。Online SQL formatter with syntax highlighting and beautification.",
-        "url": "https://helpoke.com/dev/sql",
+        "url": "https://helpoke.com/dev/sql/",
         "applicationCategory": "https://schema.org/DeveloperTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -436,7 +444,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -691,12 +699,12 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a>
+                    <a href="/privacy/" title="隐私政策" data-i18n="footer.privacy"><i class="fas fa-lock"></i> 隐私政策</a>
                     |
-                    <a href="/terms.html" title="服务条款" data-i18n="footer.terms"><i class="fas fa-file-contract"></i>
+                    <a href="/terms/" title="服务条款" data-i18n="footer.terms"><i class="fas fa-file-contract"></i>
                         服务条款</a> |
-                    <a href="/about.html" title="关于我们" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们" data-i18n="footer.contact"><i class="fas fa-envelope"></i>
+                    <a href="/about/" title="关于我们" data-i18n="footer.about"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们" data-i18n="footer.contact"><i class="fas fa-envelope"></i>
                         联系我们</a>
                 </p>
             </footer>

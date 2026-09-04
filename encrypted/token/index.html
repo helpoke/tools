@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>Token在线工具 - JWT解析、Token生成、JWT签名</title>
     <meta property="og:title" content="Token在线工具 - JWT解析、Token生成、JWT签名">
@@ -42,7 +50,7 @@
         "@type": "WebApplication",
         "name": "Token在线工具",
         "description": "在线Token工具，支持JWT解析验证、Token随机生成、JWT生成签名功能。离线工具，数据本地处理保护隐私。Online JWT parser and token generator.",
-        "url": "https://helpoke.com/encrypted/token",
+        "url": "https://helpoke.com/encrypted/token/",
         "applicationCategory": "https://schema.org/SecurityTool",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -57,7 +65,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -88,7 +96,8 @@
         <div class="container">
             <div class="tabs">
                 <button class="tab-btn" data-tab="jwt-gen" data-i18n="encrypted.token.tabJwtGen">JWT 生成</button>
-                <button class="tab-btn active" data-tab="jwt-decode" data-i18n="encrypted.token.tabJwtDecode">JWT 解析</button>
+                <button class="tab-btn active" data-tab="jwt-decode" data-i18n="encrypted.token.tabJwtDecode">JWT
+                    解析</button>
                 <button class="tab-btn" data-tab="token-gen" data-i18n="encrypted.token.tabTokenGen">Token 生成</button>
             </div>
 
@@ -119,7 +128,8 @@
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" id="jwt-decode-btn" data-i18n="encrypted.token.jwtDecodeBtn">解析 JWT</button>
+                        <button class="btn btn-primary" id="jwt-decode-btn" data-i18n="encrypted.token.jwtDecodeBtn">解析
+                            JWT</button>
                         <button class="btn btn-outline" id="jwt-clear-btn"
                             data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
@@ -278,14 +288,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="jwt-gen-custom" data-i18n="encrypted.token.jwtGenCustomLabel">自定义 Claims（JSON 格式，可选）</label>
+                        <label for="jwt-gen-custom" data-i18n="encrypted.token.jwtGenCustomLabel">自定义 Claims（JSON
+                            格式，可选）</label>
                         <textarea id="jwt-gen-custom" rows="3"
                             data-i18n-placeholder="encrypted.token.jwtGenCustomPlaceholder"
                             placeholder='例：{"name":"张三","role":"admin"}'></textarea>
                     </div>
 
                     <div class="btn-row">
-                        <button class="btn btn-primary" id="jwt-gen-btn" data-i18n="encrypted.token.jwtGenBtn">生成 JWT</button>
+                        <button class="btn btn-primary" id="jwt-gen-btn" data-i18n="encrypted.token.jwtGenBtn">生成
+                            JWT</button>
                         <button class="btn btn-outline" id="jwt-gen-clear-btn"
                             data-i18n="encrypted.token.clearBtn">清空</button>
                     </div>
@@ -312,21 +324,37 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.token.problemsTitle">一、JWT 和随机 Token 的使用场景</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.problem1">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c ——这段三段式字符串就是 JWT（JSON Web Token）。它是现代 Web 应用中最常用的认证方式——用户登录后服务器签发 JWT，客户端每次请求携带此 Token 证明身份。</li>
-                                <li data-i18n="encrypted.token.problem2">本工具提供三大功能：JWT 解析（粘贴 Token 自动解码 Header/Payload/Signature，验证签名有效性）、随机 Token 生成（自定义长度、字符集、格式）、JWT 生成（设置 Secret 和 Payload，选择签名算法，生成完整 JWT）。</li>
-                                <li data-i18n="encrypted.token.problem3">JWT 调试是开发者最常遇到的场景——收到一个 Token 但不确定它包含什么信息、是否过期、签名是否正确。本工具的可视化解析界面将 JWT 的三段结构清晰展示——Header 的算法、Payload 的声明（claims）、Signature 的验证状态一目了然。</li>
+                                <li data-i18n="encrypted.token.problem1">
+                                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                                    ——这段三段式字符串就是 JWT（JSON Web Token）。它是现代 Web 应用中最常用的认证方式——用户登录后服务器签发 JWT，客户端每次请求携带此
+                                    Token 证明身份。</li>
+                                <li data-i18n="encrypted.token.problem2">本工具提供三大功能：JWT 解析（粘贴 Token 自动解码
+                                    Header/Payload/Signature，验证签名有效性）、随机 Token 生成（自定义长度、字符集、格式）、JWT 生成（设置 Secret 和
+                                    Payload，选择签名算法，生成完整 JWT）。</li>
+                                <li data-i18n="encrypted.token.problem3">JWT 调试是开发者最常遇到的场景——收到一个 Token
+                                    但不确定它包含什么信息、是否过期、签名是否正确。本工具的可视化解析界面将 JWT 的三段结构清晰展示——Header 的算法、Payload
+                                    的声明（claims）、Signature 的验证状态一目了然。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.formatTitle">二、Token 格式</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.formatJWT"><strong>JWT 结构：</strong>三段 Base64URL 编码用点号分隔——Header.Payload.Signature。Header 声明算法（如 HS256），Payload 包含声明（iss/sub/exp 等），Signature 用 Secret 对前两段签名。</li>
-                                <li data-i18n="encrypted.token.formatToken"><strong>随机 Token：</strong>纯随机字符串——可自定义长度（8-256 位）、字符集（大写/小写/数字/符号）和格式（原始/UUID/Hex）。用于 API Key、Session ID、CSRF Token 等场景。</li>
+                                <li data-i18n="encrypted.token.formatJWT"><strong>JWT 结构：</strong>三段 Base64URL
+                                    编码用点号分隔——Header.Payload.Signature。Header 声明算法（如 HS256），Payload 包含声明（iss/sub/exp
+                                    等），Signature 用 Secret 对前两段签名。</li>
+                                <li data-i18n="encrypted.token.formatToken"><strong>随机
+                                        Token：</strong>纯随机字符串——可自定义长度（8-256 位）、字符集（大写/小写/数字/符号）和格式（原始/UUID/Hex）。用于 API
+                                    Key、Session ID、CSRF Token 等场景。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.featuresTitle">三、核心功能</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.featureOnline"><strong>JWT 解析：</strong>粘贴 JWT 自动解码——显示 Header（算法/类型）、Payload（所有声明，时间戳自动转为可读格式）、Signature（验证签名有效性）。</li>
-                                <li data-i18n="encrypted.token.featurePreview"><strong>随机 Token 生成：</strong>自定义长度、字符集和格式——一键生成安全的随机 Token。支持批量生成多个。</li>
-                                <li data-i18n="encrypted.token.featureExport"><strong>JWT 生成：</strong>设置 Secret、选择算法（HS256/HS384/HS512）、填写 Payload 声明——生成完整的签名 JWT。</li>
-                                <li data-i18n="encrypted.token.featureSecurity"><strong>纯前端处理：</strong>所有解析和生成在浏览器中完成——Token 和 Secret 不上传到服务器。</li>
+                                <li data-i18n="encrypted.token.featureOnline"><strong>JWT 解析：</strong>粘贴 JWT 自动解码——显示
+                                    Header（算法/类型）、Payload（所有声明，时间戳自动转为可读格式）、Signature（验证签名有效性）。</li>
+                                <li data-i18n="encrypted.token.featurePreview"><strong>随机 Token
+                                        生成：</strong>自定义长度、字符集和格式——一键生成安全的随机 Token。支持批量生成多个。</li>
+                                <li data-i18n="encrypted.token.featureExport"><strong>JWT 生成：</strong>设置
+                                    Secret、选择算法（HS256/HS384/HS512）、填写 Payload 声明——生成完整的签名 JWT。</li>
+                                <li data-i18n="encrypted.token.featureSecurity">
+                                    <strong>纯前端处理：</strong>所有解析和生成在浏览器中完成——Token 和 Secret 不上传到服务器。
+                                </li>
                             </ul>
                         </div>
                     </article>
@@ -338,39 +366,71 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.token.usageJwtTitle">解析步骤</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.usageJwtInput"><strong>粘贴 JWT：</strong>将完整的 JWT 字符串粘贴到输入框——以 eyJ 开头的三段式字符串。</li>
-                                <li data-i18n="encrypted.token.usageJwtSecret"><strong>输入 Secret：</strong>输入签名密钥——用于验证 Signature 是否有效。不知道 Secret 也能解析 Header 和 Payload。</li>
-                                <li data-i18n="encrypted.token.usageJwtClick"><strong>点击解析：</strong>工具自动将 JWT 拆分为三段并解码。</li>
-                                <li data-i18n="encrypted.token.usageJwtHeader"><strong>Header 解析：</strong>显示 alg（签名算法，如 HS256）和 typ（类型，固定为 JWT）。</li>
-                                <li data-i18n="encrypted.token.usageJwtPayload"><strong>Payload 解析：</strong>显示所有声明——iss（签发者）、sub（主题）、exp（过期时间）、iat（签发时间）等。时间戳自动转为人类可读格式。</li>
-                                <li data-i18n="encrypted.token.usageJwtTime"><strong>时间验证：</strong>自动检查 exp（是否过期）和 nbf（是否生效）——显示当前时间与 Token 有效期的对比。</li>
-                                <li data-i18n="encrypted.token.usageJwtSignature"><strong>签名验证：</strong>用 Secret 重新计算 Signature 并与 Token 中的 Signature 对比——匹配说明 Token 未被篡改。</li>
+                                <li data-i18n="encrypted.token.usageJwtInput"><strong>粘贴 JWT：</strong>将完整的 JWT
+                                    字符串粘贴到输入框——以 eyJ 开头的三段式字符串。</li>
+                                <li data-i18n="encrypted.token.usageJwtSecret"><strong>输入 Secret：</strong>输入签名密钥——用于验证
+                                    Signature 是否有效。不知道 Secret 也能解析 Header 和 Payload。</li>
+                                <li data-i18n="encrypted.token.usageJwtClick"><strong>点击解析：</strong>工具自动将 JWT 拆分为三段并解码。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtHeader"><strong>Header 解析：</strong>显示 alg（签名算法，如
+                                    HS256）和 typ（类型，固定为 JWT）。</li>
+                                <li data-i18n="encrypted.token.usageJwtPayload"><strong>Payload
+                                        解析：</strong>显示所有声明——iss（签发者）、sub（主题）、exp（过期时间）、iat（签发时间）等。时间戳自动转为人类可读格式。</li>
+                                <li data-i18n="encrypted.token.usageJwtTime"><strong>时间验证：</strong>自动检查 exp（是否过期）和
+                                    nbf（是否生效）——显示当前时间与 Token 有效期的对比。</li>
+                                <li data-i18n="encrypted.token.usageJwtSignature"><strong>签名验证：</strong>用 Secret 重新计算
+                                    Signature 并与 Token 中的 Signature 对比——匹配说明 Token 未被篡改。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.usageTokenTitle">随机 Token 生成</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.usageTokenLength"><strong>设置长度：</strong>Token 长度 8-256 位——API Key 建议 32 位以上，Session ID 建议 64 位以上。</li>
-                                <li data-i18n="encrypted.token.usageTokenCount"><strong>字符集：</strong>勾选大写（A-Z）、小写（a-z）、数字（0-9）、符号（!@#$）——至少选择一种。</li>
-                                <li data-i18n="encrypted.token.usageTokenCharset"><strong>格式选择：</strong>原始格式（纯随机字符串）、UUID 格式（8-4-4-4-12）、Hex 格式（仅十六进制字符）。</li>
-                                <li data-i18n="encrypted.token.usageTokenFormat"><strong>批量生成：</strong>设置生成数量——一次生成多个 Token，适合批量创建测试数据。</li>
-                                <li data-i18n="encrypted.token.usageTokenClick"><strong>点击生成：</strong>Token 立即生成并显示。</li>
-                                <li data-i18n="encrypted.token.usageTokenCopy"><strong>复制结果：</strong>点击"复制"按钮复制单个 Token，或"复制全部"复制所有 Token。</li>
+                                <li data-i18n="encrypted.token.usageTokenLength"><strong>设置长度：</strong>Token 长度 8-256
+                                    位——API Key 建议 32 位以上，Session ID 建议 64 位以上。</li>
+                                <li data-i18n="encrypted.token.usageTokenCount">
+                                    <strong>字符集：</strong>勾选大写（A-Z）、小写（a-z）、数字（0-9）、符号（!@#$）——至少选择一种。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenCharset">
+                                    <strong>格式选择：</strong>原始格式（纯随机字符串）、UUID 格式（8-4-4-4-12）、Hex 格式（仅十六进制字符）。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenFormat"><strong>批量生成：</strong>设置生成数量——一次生成多个
+                                    Token，适合批量创建测试数据。</li>
+                                <li data-i18n="encrypted.token.usageTokenClick"><strong>点击生成：</strong>Token 立即生成并显示。
+                                </li>
+                                <li data-i18n="encrypted.token.usageTokenCopy"><strong>复制结果：</strong>点击"复制"按钮复制单个
+                                    Token，或"复制全部"复制所有 Token。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.usageJwtGenTitle">JWT 生成</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.usageJwtGenSecret"><strong>设置 Secret：</strong>输入签名密钥——建议至少 32 字符的随机字符串。</li>
-                                <li data-i18n="encrypted.token.usageJwtGenAlg"><strong>选择算法：</strong>HS256（最常用）、HS384、HS512——安全级别递增。</li>
-                                <li data-i18n="encrypted.token.usageJwtGenPayload"><strong>填写声明：</strong>iss（签发者）、sub（用户 ID）、aud（受众）、exp（过期时间，分钟数）。</li>
-                                <li data-i18n="encrypted.token.usageJwtGenTime"><strong>时间声明：</strong>iat（签发时间）自动设为当前时间，exp 按设定的分钟数计算。</li>
-                                <li data-i18n="encrypted.token.usageJwtGenCustom"><strong>自定义声明：</strong>添加自定义 JSON 键值对——如 role: "admin"、name: "John"。</li>
-                                <li data-i18n="encrypted.token.usageJwtGenClick"><strong>点击生成：</strong>完整的 JWT 立即生成——可直接用于 API 测试。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenSecret"><strong>设置
+                                        Secret：</strong>输入签名密钥——建议至少 32 字符的随机字符串。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenAlg">
+                                    <strong>选择算法：</strong>HS256（最常用）、HS384、HS512——安全级别递增。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtGenPayload"><strong>填写声明：</strong>iss（签发者）、sub（用户
+                                    ID）、aud（受众）、exp（过期时间，分钟数）。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenTime">
+                                    <strong>时间声明：</strong>iat（签发时间）自动设为当前时间，exp 按设定的分钟数计算。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtGenCustom"><strong>自定义声明：</strong>添加自定义 JSON
+                                    键值对——如 role: "admin"、name: "John"。</li>
+                                <li data-i18n="encrypted.token.usageJwtGenClick"><strong>点击生成：</strong>完整的 JWT
+                                    立即生成——可直接用于 API 测试。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.usageJwtBasicTitle">五、JWT 技术背景</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.usageJwtBasicStructure"><strong>三段结构：</strong>Header（算法声明）+ Payload（数据声明）+ Signature（签名验证）。三段用 Base64URL 编码后用点号连接。</li>
-                                <li data-i18n="encrypted.token.usageJwtBasicHeader"><strong>Header：</strong>JSON 对象，声明签名算法和 Token 类型——如 {"alg":"HS256","typ":"JWT"}。</li>
-                                <li data-i18n="encrypted.token.usageJwtBasicPayload"><strong>Payload：</strong>JSON 对象，包含声明（claims）——注册声明（iss/sub/exp 等）和自定义声明。注意 Payload 不是加密的——任何人都能解码读取。</li>
-                                <li data-i18n="encrypted.token.usageJwtBasicSignature"><strong>Signature：</strong>用 Secret 对 Header + Payload 签名——HMAC-SHA256(Header.Payload, Secret)。任何篡改都会导致签名验证失败。</li>
-                                <li data-i18n="encrypted.token.usageJwtBasicClaims"><strong>标准声明：</strong>iss（issuer 签发者）、sub（subject 主题）、aud（audience 受众）、exp（expiration 过期时间）、nbf（not before 生效时间）、iat（issued at 签发时间）、jti（JWT ID 唯一标识）。</li>
+                                <li data-i18n="encrypted.token.usageJwtBasicStructure">
+                                    <strong>三段结构：</strong>Header（算法声明）+ Payload（数据声明）+ Signature（签名验证）。三段用 Base64URL
+                                    编码后用点号连接。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtBasicHeader"><strong>Header：</strong>JSON
+                                    对象，声明签名算法和 Token 类型——如 {"alg":"HS256","typ":"JWT"}。</li>
+                                <li data-i18n="encrypted.token.usageJwtBasicPayload"><strong>Payload：</strong>JSON
+                                    对象，包含声明（claims）——注册声明（iss/sub/exp 等）和自定义声明。注意 Payload 不是加密的——任何人都能解码读取。</li>
+                                <li data-i18n="encrypted.token.usageJwtBasicSignature"><strong>Signature：</strong>用
+                                    Secret 对 Header + Payload 签名——HMAC-SHA256(Header.Payload, Secret)。任何篡改都会导致签名验证失败。
+                                </li>
+                                <li data-i18n="encrypted.token.usageJwtBasicClaims"><strong>标准声明：</strong>iss（issuer
+                                    签发者）、sub（subject 主题）、aud（audience 受众）、exp（expiration 过期时间）、nbf（not before
+                                    生效时间）、iat（issued at 签发时间）、jti（JWT ID 唯一标识）。</li>
                             </ul>
                         </div>
                     </article>
@@ -381,39 +441,60 @@
                         <div class="info-content">
                             <h4 data-i18n="encrypted.token.notesSecurityTitle">安全警告</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteSecurity1"><strong>Secret 保护：</strong>JWT 的 Secret 一旦泄露，攻击者可以伪造任意 Token——Secret 必须存储在环境变量中，不能硬编码。</li>
-                                <li data-i18n="encrypted.token.noteSecurity2"><strong>Payload 非加密：</strong>JWT 的 Payload 只是 Base64 编码——任何人都能解码读取。不要在 Payload 中放置敏感信息（如密码）。</li>
-                                <li data-i18n="encrypted.token.noteSecurity3"><strong>过期时间：</strong>始终设置 exp 声明——没有过期时间的 JWT 一旦泄露就永久有效。建议 Access Token 15 分钟，Refresh Token 7 天。</li>
+                                <li data-i18n="encrypted.token.noteSecurity1"><strong>Secret 保护：</strong>JWT 的 Secret
+                                    一旦泄露，攻击者可以伪造任意 Token——Secret 必须存储在环境变量中，不能硬编码。</li>
+                                <li data-i18n="encrypted.token.noteSecurity2"><strong>Payload 非加密：</strong>JWT 的 Payload
+                                    只是 Base64 编码——任何人都能解码读取。不要在 Payload 中放置敏感信息（如密码）。</li>
+                                <li data-i18n="encrypted.token.noteSecurity3"><strong>过期时间：</strong>始终设置 exp 声明——没有过期时间的
+                                    JWT 一旦泄露就永久有效。建议 Access Token 15 分钟，Refresh Token 7 天。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.notesJwtTitle">JWT 注意</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteJwt1"><strong>HS256 vs RS256：</strong>HS256 使用对称密钥（同一个 Secret 签名和验证），RS256 使用非对称密钥（私钥签名，公钥验证）——微服务间通信用 RS256 更安全。</li>
-                                <li data-i18n="encrypted.token.noteJwt2"><strong>Token 大小：</strong>JWT 随每个 HTTP 请求发送——Payload 越大，网络开销越高。保持 Payload 精简，只包含必要声明。</li>
-                                <li data-i18n="encrypted.token.noteJwt3"><strong>存储位置：</strong>JWT 存储在 localStorage 易受 XSS 攻击，存储在 Cookie 需设置 HttpOnly 和 Secure 标志。</li>
-                                <li data-i18n="encrypted.token.noteJwt4"><strong>刷新策略：</strong>Access Token 短期有效（15 分钟），Refresh Token 长期有效（7 天）——过期后用 Refresh Token 获取新的 Access Token。</li>
-                                <li data-i18n="encrypted.token.noteJwt5"><strong>签名验证：</strong>服务端必须验证 JWT 签名——不验证等于不设防。同时验证 exp、iss、aud 等声明。</li>
+                                <li data-i18n="encrypted.token.noteJwt1"><strong>HS256 vs RS256：</strong>HS256
+                                    使用对称密钥（同一个 Secret 签名和验证），RS256 使用非对称密钥（私钥签名，公钥验证）——微服务间通信用 RS256 更安全。</li>
+                                <li data-i18n="encrypted.token.noteJwt2"><strong>Token 大小：</strong>JWT 随每个 HTTP
+                                    请求发送——Payload 越大，网络开销越高。保持 Payload 精简，只包含必要声明。</li>
+                                <li data-i18n="encrypted.token.noteJwt3"><strong>存储位置：</strong>JWT 存储在 localStorage 易受
+                                    XSS 攻击，存储在 Cookie 需设置 HttpOnly 和 Secure 标志。</li>
+                                <li data-i18n="encrypted.token.noteJwt4"><strong>刷新策略：</strong>Access Token 短期有效（15
+                                    分钟），Refresh Token 长期有效（7 天）——过期后用 Refresh Token 获取新的 Access Token。</li>
+                                <li data-i18n="encrypted.token.noteJwt5"><strong>签名验证：</strong>服务端必须验证 JWT
+                                    签名——不验证等于不设防。同时验证 exp、iss、aud 等声明。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.notesTokenTitle">Token 注意</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteToken1"><strong>随机性：</strong>Token 的安全性取决于随机性——使用 crypto.getRandomValues()（浏览器原生安全随机数）而非 Math.random()。</li>
-                                <li data-i18n="encrypted.token.noteToken2"><strong>长度建议：</strong>API Key 至少 32 字符，Session ID 至少 64 字符，CSRF Token 至少 32 字符。</li>
-                                <li data-i18n="encrypted.token.noteToken3"><strong>字符集：</strong>包含大小写+数字+符号的 Token 熵最高——但某些场景（如 URL 参数）不支持符号字符。</li>
-                                <li data-i18n="encrypted.token.noteToken4"><strong>唯一性：</strong>随机 Token 不保证全局唯一——高并发场景需要数据库唯一约束兜底。UUID v4 碰撞概率极低（2⁻¹²²）。</li>
+                                <li data-i18n="encrypted.token.noteToken1"><strong>随机性：</strong>Token 的安全性取决于随机性——使用
+                                    crypto.getRandomValues()（浏览器原生安全随机数）而非 Math.random()。</li>
+                                <li data-i18n="encrypted.token.noteToken2"><strong>长度建议：</strong>API Key 至少 32
+                                    字符，Session ID 至少 64 字符，CSRF Token 至少 32 字符。</li>
+                                <li data-i18n="encrypted.token.noteToken3"><strong>字符集：</strong>包含大小写+数字+符号的 Token
+                                    熵最高——但某些场景（如 URL 参数）不支持符号字符。</li>
+                                <li data-i18n="encrypted.token.noteToken4"><strong>唯一性：</strong>随机 Token
+                                    不保证全局唯一——高并发场景需要数据库唯一约束兜底。UUID v4 碰撞概率极低（2⁻¹²²）。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.notesJwtGenTitle">JWT 生成注意</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteJwtGen1"><strong>测试用途：</strong>本工具生成的 JWT 仅用于开发和测试——生产环境的 JWT 应由后端服务使用安全存储的 Secret 签发。</li>
-                                <li data-i18n="encrypted.token.noteJwtGen2"><strong>Secret 安全：</strong>在公共设备上生成 JWT 后，请清空 Secret 输入框和浏览器历史记录。</li>
-                                <li data-i18n="encrypted.token.noteJwtGen3"><strong>算法选择：</strong>HS256 适合大多数场景——如果安全要求极高，使用 HS512。</li>
-                                <li data-i18n="encrypted.token.noteJwtGen4"><strong>时间设置：</strong>exp 设置为从当前时间起的分钟数——如 15 表示 15 分钟后过期。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen1"><strong>测试用途：</strong>本工具生成的 JWT
+                                    仅用于开发和测试——生产环境的 JWT 应由后端服务使用安全存储的 Secret 签发。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen2"><strong>Secret 安全：</strong>在公共设备上生成 JWT
+                                    后，请清空 Secret 输入框和浏览器历史记录。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen3"><strong>算法选择：</strong>HS256
+                                    适合大多数场景——如果安全要求极高，使用 HS512。</li>
+                                <li data-i18n="encrypted.token.noteJwtGen4"><strong>时间设置：</strong>exp 设置为从当前时间起的分钟数——如
+                                    15 表示 15 分钟后过期。</li>
                             </ul>
                             <h4 data-i18n="encrypted.token.notesFaqTitle">常见问题</h4>
                             <ul>
-                                <li data-i18n="encrypted.token.noteFaq1"><strong>Q: JWT 能修改 Payload 吗？</strong>A: 修改 Payload 后签名会失效——除非你有 Secret。这就是 JWT 的防篡改机制。</li>
-                                <li data-i18n="encrypted.token.noteFaq2"><strong>Q: JWT 过期了怎么办？</strong>A: 使用 Refresh Token 获取新的 Access Token——不需要用户重新登录。</li>
-                                <li data-i18n="encrypted.token.noteFaq3"><strong>Q: 为什么签名验证失败？</strong>A: 检查 Secret 是否正确——Secret 区分大小写。也检查算法是否匹配（HS256 vs HS512）。</li>
-                                <li data-i18n="encrypted.token.noteFaq4"><strong>Q: JWT 和 Session 有什么区别？</strong>A: Session 存储在服务端（需要数据库），JWT 存储在客户端（无状态）。JWT 适合分布式系统和微服务。</li>
-                                <li data-i18n="encrypted.token.noteFaq5"><strong>Q: 生成的 Token 安全吗？</strong>A: 使用浏览器原生 crypto.getRandomValues() 生成——密码学安全随机数，不可预测。</li>
+                                <li data-i18n="encrypted.token.noteFaq1"><strong>Q: JWT 能修改 Payload 吗？</strong>A: 修改
+                                    Payload 后签名会失效——除非你有 Secret。这就是 JWT 的防篡改机制。</li>
+                                <li data-i18n="encrypted.token.noteFaq2"><strong>Q: JWT 过期了怎么办？</strong>A: 使用 Refresh
+                                    Token 获取新的 Access Token——不需要用户重新登录。</li>
+                                <li data-i18n="encrypted.token.noteFaq3"><strong>Q: 为什么签名验证失败？</strong>A: 检查 Secret
+                                    是否正确——Secret 区分大小写。也检查算法是否匹配（HS256 vs HS512）。</li>
+                                <li data-i18n="encrypted.token.noteFaq4"><strong>Q: JWT 和 Session 有什么区别？</strong>A:
+                                    Session 存储在服务端（需要数据库），JWT 存储在客户端（无状态）。JWT 适合分布式系统和微服务。</li>
+                                <li data-i18n="encrypted.token.noteFaq5"><strong>Q: 生成的 Token 安全吗？</strong>A: 使用浏览器原生
+                                    crypto.getRandomValues() 生成——密码学安全随机数，不可预测。</li>
                             </ul>
                         </div>
                     </article>
@@ -426,13 +507,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

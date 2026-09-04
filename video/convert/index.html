@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://unpkg.com https://cdn.jsdelivr.net; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://unpkg.com https://cdn.jsdelivr.net; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>视频格式转换 - 免费在线视频格式转换工具</title>
     <meta property="og:title" content="视频格式转换 - 免费在线视频格式转换工具">
@@ -46,7 +54,7 @@
         "@type": "WebApplication",
         "name": "视频格式转换工具",
         "description": "免费在线视频格式转换工具，支持MP4、WebM、MOV、AVI等格式互转。纯前端处理，保护用户隐私数据。Free online video format converter supporting MP4, WebM, MOV, AVI conversions.",
-        "url": "https://helpoke.com/video/convert",
+        "url": "https://helpoke.com/video/convert/",
         "applicationCategory": "https://schema.org/VideoEditing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -61,7 +69,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -80,7 +88,8 @@
     <main class="main">
         <section class="page-hero">
             <h1 data-i18n="video.convert.title">视频格式转换工具</h1>
-            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i> 查看详细使用文档与
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与
                 FAQ</a>
             <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
                 data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
@@ -89,14 +98,16 @@
                 *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
         </section>
         <div class="container">
-            <p class="description" data-i18n="video.convert.noteLimit"><b>注意：</b> 最大支持200MB视频文件。视频越大处理时间越长，建议先将视频裁剪到所需片段再转换格式。</p>
+            <p class="description" data-i18n="video.convert.noteLimit"><b>注意：</b>
+                最大支持200MB视频文件。视频越大处理时间越长，建议先将视频裁剪到所需片段再转换格式。</p>
 
             <div class="upload-section">
                 <label for="videoUpload" class="upload-area">
                     <input type="file" id="videoUpload" accept="video/*,.wmv,.avi,.mov,.mkv,.flv,.ts" hidden>
                     <div class="upload-icon">🎬</div>
                     <div class="upload-text" data-i18n="video.convert.uploadText">点击上传或拖拽视频到此处</div>
-                    <div class="upload-hint" data-i18n="video.convert.uploadHint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV, OGV, 3GP 格式</div>
+                    <div class="upload-hint" data-i18n="video.convert.uploadHint">支持 MP4, WebM, WMV, AVI, MOV, MKV, FLV,
+                        OGV, 3GP 格式</div>
                 </label>
             </div>
 
@@ -118,7 +129,8 @@
                         <label for="outputFormat" data-i18n="video.convert.outputFormatLabel">目标格式：</label>
                         <select id="outputFormat">
                             <option value="webm" data-i18n="video.convert.formatWebm">WebM (VP8 编码)</option>
-                            <option value="webm-vp9" data-i18n="video.convert.formatWebmVp9">WebM (VP9 编码 · 更小体积)</option>
+                            <option value="webm-vp9" data-i18n="video.convert.formatWebmVp9">WebM (VP9 编码 · 更小体积)
+                            </option>
                             <option value="mp4" data-i18n="video.convert.formatMp4">MP4 (H.264 编码)</option>
                             <option value="ts" data-i18n="video.convert.formatTs">TS (MPEG-TS · 流媒体)</option>
                             <option value="wmv">WMV (Windows Media)</option>
@@ -191,7 +203,8 @@
                 <div class="action-buttons">
                     <button id="convertBtn" disabled>
                         <span id="convertBtnText" data-i18n="video.convert.startBtn">开始转换</span>
-                        <span id="convertBtnLoading" style="display: none;" data-i18n="video.convert.converting">转换中...</span>
+                        <span id="convertBtnLoading" style="display: none;"
+                            data-i18n="video.convert.converting">转换中...</span>
                     </button>
                     <div class="progress-container" id="progressContainer" style="display: none;">
                         <div class="progress-bar" id="progressBar"></div>
@@ -220,23 +233,42 @@
                     <div class="info-content">
                         <h4 data-i18n="video.convert.problemsTitle">一、格式不兼容是最被低估的效率杀手</h4>
                         <ul>
-                            <li data-i18n="video.convert.problem1">iPhone 拍的 MOV 视频在 Windows 上打不开、客户发来的 AVI 文件无法嵌入网页、录制的 WebM 素材在剪辑软件里无法导入——格式不兼容的问题每天都在发生。安装格式转换软件？体积大、操作复杂、还要担心编解码器缺失。本工具基于 FFmpeg WASM 在浏览器中完成格式转换，支持 MP4、WebM（VP9/VP8）、TS 等格式的互相转换。</li>
-                            <li data-i18n="video.convert.problem2">转换过程中可以精细控制编码参数：视频码率、音频码率、分辨率、帧率、是否保留音频——所有参数都可自定义。也可以选择"高质量/中质量/低质量"预设快速转换，不需要理解编码细节。</li>
-                            <li data-i18n="video.convert.problem3">实时进度显示——转换过程中可以看到当前进度、已用时间和预估剩余时间。转换完成后显示输出文件信息（格式、分辨率、大小），支持一键下载。所有处理在浏览器本地完成，视频不上传到任何服务器。</li>
+                            <li data-i18n="video.convert.problem1">iPhone 拍的 MOV 视频在 Windows 上打不开、客户发来的 AVI 文件无法嵌入网页、录制的
+                                WebM 素材在剪辑软件里无法导入——格式不兼容的问题每天都在发生。安装格式转换软件？体积大、操作复杂、还要担心编解码器缺失。本工具基于 FFmpeg WASM
+                                在浏览器中完成格式转换，支持 MP4、WebM（VP9/VP8）、TS 等格式的互相转换。</li>
+                            <li data-i18n="video.convert.problem2">
+                                转换过程中可以精细控制编码参数：视频码率、音频码率、分辨率、帧率、是否保留音频——所有参数都可自定义。也可以选择"高质量/中质量/低质量"预设快速转换，不需要理解编码细节。
+                            </li>
+                            <li data-i18n="video.convert.problem3">
+                                实时进度显示——转换过程中可以看到当前进度、已用时间和预估剩余时间。转换完成后显示输出文件信息（格式、分辨率、大小），支持一键下载。所有处理在浏览器本地完成，视频不上传到任何服务器。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.formatTitle">二、输出格式的技术特性</h4>
                         <ul>
-                            <li data-i18n="video.convert.formatMp4Desc"><strong>MP4（H.264 + AAC）：</strong>兼容性之王——所有浏览器、操作系统、手机、电视、播放器都支持。如果目标是在尽可能多的设备上播放，MP4 是唯一选择。H.264 编码效率适中，文件体积合理。</li>
-                            <li data-i18n="video.convert.formatAviDesc"><strong>WebM VP9：</strong>Google 主导的开源格式，压缩效率比 H.264 高 20%-30%——同等画质下文件更小。Chrome、Firefox、Edge 原生支持，但 Safari（尤其是 iOS）支持有限。适合网页嵌入和开源生态。</li>
-                            <li data-i18n="video.convert.formatMovDesc"><strong>WebM VP8：</strong>VP9 的前代版本，兼容性略好于 VP9（旧版浏览器也支持），但压缩效率低 10%-15%。如果需要 WebM 格式且要兼容更多浏览器，选 VP8。</li>
-                            <li data-i18n="video.convert.formatFlvDesc"><strong>MPEG-TS（.ts）：</strong>流媒体传输格式，常用于 HLS 直播流。普通用户很少需要 TS 格式——它主要用于视频流服务的后端处理。如果你不确定是否需要 TS，大概率你不需要。</li>
+                            <li data-i18n="video.convert.formatMp4Desc"><strong>MP4（H.264 +
+                                    AAC）：</strong>兼容性之王——所有浏览器、操作系统、手机、电视、播放器都支持。如果目标是在尽可能多的设备上播放，MP4 是唯一选择。H.264
+                                编码效率适中，文件体积合理。</li>
+                            <li data-i18n="video.convert.formatAviDesc"><strong>WebM VP9：</strong>Google 主导的开源格式，压缩效率比
+                                H.264 高 20%-30%——同等画质下文件更小。Chrome、Firefox、Edge 原生支持，但 Safari（尤其是 iOS）支持有限。适合网页嵌入和开源生态。
+                            </li>
+                            <li data-i18n="video.convert.formatMovDesc"><strong>WebM VP8：</strong>VP9 的前代版本，兼容性略好于
+                                VP9（旧版浏览器也支持），但压缩效率低 10%-15%。如果需要 WebM 格式且要兼容更多浏览器，选 VP8。</li>
+                            <li data-i18n="video.convert.formatFlvDesc"><strong>MPEG-TS（.ts）：</strong>流媒体传输格式，常用于 HLS
+                                直播流。普通用户很少需要 TS 格式——它主要用于视频流服务的后端处理。如果你不确定是否需要 TS，大概率你不需要。</li>
                         </ul>
                         <h4 data-i18n="video.convert.featuresTitle">三、转换参数的影响</h4>
                         <ul>
-                            <li data-i18n="video.convert.featureOnline"><strong>视频码率：</strong>直接决定输出文件大小。码率越高画质越好但文件越大。建议值：720p 用 2000-3000kbps，1080p 用 4000-6000kbps，4K 用 15000-25000kbps。</li>
-                            <li data-i18n="video.convert.featurePreview"><strong>音频码率：</strong>音频码率影响声音质量。128kbps 是音乐的可接受质量，192kbps 是高质量，320kbps 是 CD 级。对于语音类视频，96kbps 已经足够。</li>
-                            <li data-i18n="video.convert.featureExport"><strong>分辨率缩放：</strong>转换时可以同时调整分辨率——原始 1080p 视频转为 720p 输出，文件体积减少 50%+。支持原始、75%、50%、25% 和自定义宽度。</li>
-                            <li data-i18n="video.convert.featureSecurity"><strong>帧率控制：</strong>保持原始帧率或指定帧率。降低帧率可以减少数据量但影响流畅度。建议保持原始帧率，除非明确需要降低。</li>
+                            <li data-i18n="video.convert.featureOnline">
+                                <strong>视频码率：</strong>直接决定输出文件大小。码率越高画质越好但文件越大。建议值：720p 用 2000-3000kbps，1080p 用
+                                4000-6000kbps，4K 用 15000-25000kbps。
+                            </li>
+                            <li data-i18n="video.convert.featurePreview"><strong>音频码率：</strong>音频码率影响声音质量。128kbps
+                                是音乐的可接受质量，192kbps 是高质量，320kbps 是 CD 级。对于语音类视频，96kbps 已经足够。</li>
+                            <li data-i18n="video.convert.featureExport"><strong>分辨率缩放：</strong>转换时可以同时调整分辨率——原始 1080p
+                                视频转为 720p 输出，文件体积减少 50%+。支持原始、75%、50%、25% 和自定义宽度。</li>
+                            <li data-i18n="video.convert.featureSecurity">
+                                <strong>帧率控制：</strong>保持原始帧率或指定帧率。降低帧率可以减少数据量但影响流畅度。建议保持原始帧率，除非明确需要降低。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -248,49 +280,82 @@
                     <div class="info-content">
                         <h4 data-i18n="video.convert.usageUploadTitle">载入视频</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageSelectFile"><strong>上传方式：</strong>点击或拖拽上传，支持所有主流视频格式（MP4/WebM/MOV/AVI/MKV/FLV/OGV 等）。</li>
-                            <li data-i18n="video.convert.usageFormats"><strong>格式检测：</strong>上传后工具自动识别视频的编码格式、分辨率、帧率、时长等信息，显示在视频下方。</li>
-                            <li data-i18n="video.convert.usageFileSize"><strong>文件大小：</strong>建议单个视频不超过 1GB。超大视频的处理时间较长，但工具本身没有文件大小限制。</li>
-                            <li data-i18n="video.convert.usagePreview"><strong>预览播放：</strong>上传后可以在页面上直接预览视频内容，确认上传的是正确的文件。</li>
+                            <li data-i18n="video.convert.usageSelectFile">
+                                <strong>上传方式：</strong>点击或拖拽上传，支持所有主流视频格式（MP4/WebM/MOV/AVI/MKV/FLV/OGV 等）。
+                            </li>
+                            <li data-i18n="video.convert.usageFormats">
+                                <strong>格式检测：</strong>上传后工具自动识别视频的编码格式、分辨率、帧率、时长等信息，显示在视频下方。
+                            </li>
+                            <li data-i18n="video.convert.usageFileSize"><strong>文件大小：</strong>建议单个视频不超过
+                                1GB。超大视频的处理时间较长，但工具本身没有文件大小限制。</li>
+                            <li data-i18n="video.convert.usagePreview">
+                                <strong>预览播放：</strong>上传后可以在页面上直接预览视频内容，确认上传的是正确的文件。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.usageOutputTitle">选择输出格式</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageMp4"><strong>MP4（H.264）：</strong>兼容性最好，适合需要在各种设备上播放的场景。</li>
-                            <li data-i18n="video.convert.usageWebm"><strong>WebM VP9：</strong>压缩效率最高，适合网页嵌入和现代浏览器场景。</li>
-                            <li data-i18n="video.convert.usageMov"><strong>WebM VP8：</strong>兼容性较好的 WebM 版本，适合需要广泛 WebM 支持的场景。</li>
-                            <li data-i18n="video.convert.usageAvi"><strong>自定义参数：</strong>除格式外，还可以调整视频码率、音频码率、分辨率和帧率。不确定参数时选择"高质量"预设。</li>
+                            <li data-i18n="video.convert.usageMp4"><strong>MP4（H.264）：</strong>兼容性最好，适合需要在各种设备上播放的场景。
+                            </li>
+                            <li data-i18n="video.convert.usageWebm"><strong>WebM VP9：</strong>压缩效率最高，适合网页嵌入和现代浏览器场景。
+                            </li>
+                            <li data-i18n="video.convert.usageMov"><strong>WebM VP8：</strong>兼容性较好的 WebM 版本，适合需要广泛 WebM
+                                支持的场景。</li>
+                            <li data-i18n="video.convert.usageAvi">
+                                <strong>自定义参数：</strong>除格式外，还可以调整视频码率、音频码率、分辨率和帧率。不确定参数时选择"高质量"预设。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.usageParamsTitle">设置编码参数</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageQuality"><strong>质量预设：</strong>高/中/低三档预设，自动设置合理的码率值。也可以选择"自定义"手动输入码率。</li>
-                            <li data-i18n="video.convert.usageResolution"><strong>分辨率：</strong>保持原始或按比例缩放。降低分辨率是减小文件体积的有效手段。</li>
-                            <li data-i18n="video.convert.usageWidth"><strong>自定义宽度：</strong>输入目标宽度（像素），高度自动按比例计算。适合需要特定尺寸的场景。</li>
+                            <li data-i18n="video.convert.usageQuality">
+                                <strong>质量预设：</strong>高/中/低三档预设，自动设置合理的码率值。也可以选择"自定义"手动输入码率。
+                            </li>
+                            <li data-i18n="video.convert.usageResolution">
+                                <strong>分辨率：</strong>保持原始或按比例缩放。降低分辨率是减小文件体积的有效手段。
+                            </li>
+                            <li data-i18n="video.convert.usageWidth">
+                                <strong>自定义宽度：</strong>输入目标宽度（像素），高度自动按比例计算。适合需要特定尺寸的场景。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.usageSuggestionTitle">五、不同场景的推荐设置</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageSocial"><strong>社交媒体分享：</strong>MP4 + 720p + 中质量。文件通常在 20-50MB，画质在手机屏幕上足够好。</li>
-                            <li data-i18n="video.convert.usageWebEmbed"><strong>网页嵌入：</strong>WebM VP9 + 720p + 中质量。文件最小，现代浏览器播放流畅。</li>
-                            <li data-i18n="video.convert.usageApple"><strong>Apple 设备：</strong>MP4（H.264 + AAC）。Apple 设备对 H.264 支持最好，HEVC 也可以但兼容性略差。</li>
-                            <li data-i18n="video.convert.usageCompat"><strong>最大兼容性：</strong>MP4 + H.264 + 原始分辨率 + 高质量。文件较大但确保在任何设备上都能播放。</li>
+                            <li data-i18n="video.convert.usageSocial"><strong>社交媒体分享：</strong>MP4 + 720p + 中质量。文件通常在
+                                20-50MB，画质在手机屏幕上足够好。</li>
+                            <li data-i18n="video.convert.usageWebEmbed"><strong>网页嵌入：</strong>WebM VP9 + 720p +
+                                中质量。文件最小，现代浏览器播放流畅。</li>
+                            <li data-i18n="video.convert.usageApple"><strong>Apple 设备：</strong>MP4（H.264 + AAC）。Apple
+                                设备对 H.264 支持最好，HEVC 也可以但兼容性略差。</li>
+                            <li data-i18n="video.convert.usageCompat"><strong>最大兼容性：</strong>MP4 + H.264 + 原始分辨率 +
+                                高质量。文件较大但确保在任何设备上都能播放。</li>
                         </ul>
                         <h4 data-i18n="video.convert.usageStartTitle">开始转换</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageClickConvert"><strong>点击"开始转换"：</strong>FFmpeg WASM 引擎开始工作。首次转换需要加载引擎（约 5-10 秒），后续转换直接开始。</li>
+                            <li data-i18n="video.convert.usageClickConvert"><strong>点击"开始转换"：</strong>FFmpeg WASM
+                                引擎开始工作。首次转换需要加载引擎（约 5-10 秒），后续转换直接开始。</li>
                             <li data-i18n="video.convert.usageProgress"><strong>进度追踪：</strong>实时显示转换进度、已用时间和预估剩余时间。</li>
-                            <li data-i18n="video.convert.usageWait"><strong>耐心等待：</strong>5 分钟 1080p 视频转换通常需要 2-5 分钟。转换过程中不要关闭页面。</li>
+                            <li data-i18n="video.convert.usageWait"><strong>耐心等待：</strong>5 分钟 1080p 视频转换通常需要 2-5
+                                分钟。转换过程中不要关闭页面。</li>
                         </ul>
                         <h4 data-i18n="video.convert.usageDownloadTitle">下载结果</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageResultPreview"><strong>结果预览：</strong>转换完成后显示输出文件信息（格式、分辨率、大小、压缩比）。</li>
-                            <li data-i18n="video.convert.usageViewInfo"><strong>在线播放：</strong>转换后的视频可以直接在页面上播放预览，确认画质和声音正常。</li>
-                            <li data-i18n="video.convert.usageDownload"><strong>下载文件：</strong>点击下载按钮保存到本地。文件名自动添加格式后缀。</li>
+                            <li data-i18n="video.convert.usageResultPreview">
+                                <strong>结果预览：</strong>转换完成后显示输出文件信息（格式、分辨率、大小、压缩比）。
+                            </li>
+                            <li data-i18n="video.convert.usageViewInfo">
+                                <strong>在线播放：</strong>转换后的视频可以直接在页面上播放预览，确认画质和声音正常。
+                            </li>
+                            <li data-i18n="video.convert.usageDownload"><strong>下载文件：</strong>点击下载按钮保存到本地。文件名自动添加格式后缀。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.usageScenesTitle">六、典型应用场景</h4>
                         <ul>
-                            <li data-i18n="video.convert.usageSceneCompat"><strong>跨平台分享：</strong>收到 MOV 格式视频需要发给 Windows 用户？转为 MP4 即可。网页上的 WebM 需要在 Safari 播放？转为 MP4。</li>
-                            <li data-i18n="video.convert.usageSceneEmbed"><strong>网页视频嵌入：</strong>将大体积的 MP4 转为 WebM VP9，文件减小 25%+，网页加载更快。</li>
-                            <li data-i18n="video.convert.usageSceneDevice"><strong>设备适配：</strong>不同设备偏好的格式不同——Android 优先 WebM，iOS 优先 MP4，Linux 两者都支持。</li>
-                            <li data-i18n="video.convert.usageSceneCompress"><strong>格式转换 + 压缩：</strong>转换格式的同时调整码率和分辨率，一举两得——既解决了兼容性问题，又优化了文件大小。</li>
+                            <li data-i18n="video.convert.usageSceneCompat"><strong>跨平台分享：</strong>收到 MOV 格式视频需要发给
+                                Windows 用户？转为 MP4 即可。网页上的 WebM 需要在 Safari 播放？转为 MP4。</li>
+                            <li data-i18n="video.convert.usageSceneEmbed"><strong>网页视频嵌入：</strong>将大体积的 MP4 转为 WebM
+                                VP9，文件减小 25%+，网页加载更快。</li>
+                            <li data-i18n="video.convert.usageSceneDevice"><strong>设备适配：</strong>不同设备偏好的格式不同——Android 优先
+                                WebM，iOS 优先 MP4，Linux 两者都支持。</li>
+                            <li data-i18n="video.convert.usageSceneCompress"><strong>格式转换 +
+                                    压缩：</strong>转换格式的同时调整码率和分辨率，一举两得——既解决了兼容性问题，又优化了文件大小。</li>
                         </ul>
                     </div>
                 </article>
@@ -301,34 +366,53 @@
                     <div class="info-content">
                         <h4 data-i18n="video.convert.notesSecurityTitle">数据安全</h4>
                         <ul>
-                            <li data-i18n="video.convert.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg WASM，视频数据完全在浏览器中处理，不上传到任何服务器。</li>
-                            <li data-i18n="video.convert.noteSecurity2"><strong>内存管理：</strong>转换完成后自动释放内存。处理大文件时建议关闭不必要的浏览器标签页。</li>
-                            <li data-i18n="video.convert.noteSecurity3"><strong>临时数据：</strong>关闭页面后所有处理数据自动清除，不留下任何缓存。</li>
+                            <li data-i18n="video.convert.noteSecurity1"><strong>本地处理：</strong>基于 FFmpeg
+                                WASM，视频数据完全在浏览器中处理，不上传到任何服务器。</li>
+                            <li data-i18n="video.convert.noteSecurity2">
+                                <strong>内存管理：</strong>转换完成后自动释放内存。处理大文件时建议关闭不必要的浏览器标签页。
+                            </li>
+                            <li data-i18n="video.convert.noteSecurity3"><strong>临时数据：</strong>关闭页面后所有处理数据自动清除，不留下任何缓存。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.notesPerfTitle">性能说明</h4>
                         <ul>
-                            <li data-i18n="video.convert.notePerf1"><strong>处理时间：</strong>取决于视频时长、分辨率和编码复杂度。5 分钟 1080p 视频转 MP4 约 2-5 分钟，转 WebM VP9 约 5-10 分钟（VP9 编码更复杂）。</li>
-                            <li data-i18n="video.convert.notePerf2"><strong>CPU 占用：</strong>视频编码是 CPU 密集型任务，处理时 CPU 占用可能达到 80%-100%。这是正常的——编码完成后自动释放。</li>
-                            <li data-i18n="video.convert.notePerf3"><strong>内存需求：</strong>建议至少 4GB 可用内存。处理 4K 视频时可能需要 2GB+ 内存。</li>
+                            <li data-i18n="video.convert.notePerf1"><strong>处理时间：</strong>取决于视频时长、分辨率和编码复杂度。5 分钟 1080p
+                                视频转 MP4 约 2-5 分钟，转 WebM VP9 约 5-10 分钟（VP9 编码更复杂）。</li>
+                            <li data-i18n="video.convert.notePerf2"><strong>CPU 占用：</strong>视频编码是 CPU 密集型任务，处理时 CPU
+                                占用可能达到 80%-100%。这是正常的——编码完成后自动释放。</li>
+                            <li data-i18n="video.convert.notePerf3"><strong>内存需求：</strong>建议至少 4GB 可用内存。处理 4K 视频时可能需要
+                                2GB+ 内存。</li>
                         </ul>
                         <h4 data-i18n="video.convert.notesLimitTitle">格式限制说明</h4>
                         <ul>
-                            <li data-i18n="video.convert.noteLimit1"><strong>不支持的编码：</strong>部分专业编码格式（如 ProRes、DNxHD）可能不被 FFmpeg WASM 支持。遇到无法处理的格式时会显示错误提示。</li>
-                            <li data-i18n="video.convert.noteLimit2"><strong>DRM 保护：</strong>带有 DRM 保护的视频（如 Netflix 下载的影片）无法转换——这是版权保护机制，工具无法绕过。</li>
-                            <li data-i18n="video.convert.noteLimit3"><strong>多音轨/字幕：</strong>转换时只处理第一个视频轨道和第一个音频轨道。多音轨或内嵌字幕的视频会丢失额外的轨道。</li>
+                            <li data-i18n="video.convert.noteLimit1"><strong>不支持的编码：</strong>部分专业编码格式（如
+                                ProRes、DNxHD）可能不被 FFmpeg WASM 支持。遇到无法处理的格式时会显示错误提示。</li>
+                            <li data-i18n="video.convert.noteLimit2"><strong>DRM 保护：</strong>带有 DRM 保护的视频（如 Netflix
+                                下载的影片）无法转换——这是版权保护机制，工具无法绕过。</li>
+                            <li data-i18n="video.convert.noteLimit3">
+                                <strong>多音轨/字幕：</strong>转换时只处理第一个视频轨道和第一个音频轨道。多音轨或内嵌字幕的视频会丢失额外的轨道。
+                            </li>
                         </ul>
                         <h4 data-i18n="video.convert.notesQualityTitle">画质保障</h4>
                         <ul>
-                            <li data-i18n="video.convert.noteQuality1"><strong>转码损失：</strong>从有损格式（如 MP4 H.264）转到另一种有损格式（如 WebM VP9），会有"二次编码损失"。画质可能略有下降——选择高质量参数可以最小化影响。</li>
-                            <li data-i18n="video.convert.noteQuality2"><strong>无损转换不存在：</strong>除了同格式同参数的"复制"模式（本工具不支持），任何转码都会引入一定程度的质量损失。但高质量参数下的损失肉眼通常不可见。</li>
-                            <li data-i18n="video.convert.noteQuality3"><strong>音频质量：</strong>音频同样经历重新编码。如果原始音频质量很高（如 320kbps MP3），转为低码率（如 96kbps）会有明显的音质损失。</li>
+                            <li data-i18n="video.convert.noteQuality1"><strong>转码损失：</strong>从有损格式（如 MP4
+                                H.264）转到另一种有损格式（如 WebM VP9），会有"二次编码损失"。画质可能略有下降——选择高质量参数可以最小化影响。</li>
+                            <li data-i18n="video.convert.noteQuality2">
+                                <strong>无损转换不存在：</strong>除了同格式同参数的"复制"模式（本工具不支持），任何转码都会引入一定程度的质量损失。但高质量参数下的损失肉眼通常不可见。
+                            </li>
+                            <li data-i18n="video.convert.noteQuality3"><strong>音频质量：</strong>音频同样经历重新编码。如果原始音频质量很高（如
+                                320kbps MP3），转为低码率（如 96kbps）会有明显的音质损失。</li>
                         </ul>
                         <h4 data-i18n="video.convert.notesFaqTitle">常见问题</h4>
                         <ul>
-                            <li data-i18n="video.convert.noteFaq1"><strong>Q: 转换后没有声音？</strong>A: 可能原始视频没有音频轨道，或选择的输出格式不支持原始音频编码。尝试勾选"保留音频"或更换输出格式。</li>
-                            <li data-i18n="video.convert.noteFaq2"><strong>Q: 为什么转换后文件反而更大？</strong>A: 如果输出码率高于原始码率，文件会变大。转码不会"恢复"已丢失的信息——高码率只是浪费了空间。建议输出码率不超过原始码率。</li>
-                            <li data-i18n="video.convert.noteFaq3"><strong>Q: 能批量转换多个视频吗？</strong>A: 当前版本一次只能转换一个视频。转换完成后再上传下一个。</li>
-                            <li data-i18n="video.convert.noteFaq4"><strong>Q: 转换过程中可以暂停吗？</strong>A: 不支持暂停。如果中断需要重新开始。建议在网络稳定、不关闭页面的情况下进行转换。</li>
+                            <li data-i18n="video.convert.noteFaq1"><strong>Q: 转换后没有声音？</strong>A:
+                                可能原始视频没有音频轨道，或选择的输出格式不支持原始音频编码。尝试勾选"保留音频"或更换输出格式。</li>
+                            <li data-i18n="video.convert.noteFaq2"><strong>Q: 为什么转换后文件反而更大？</strong>A:
+                                如果输出码率高于原始码率，文件会变大。转码不会"恢复"已丢失的信息——高码率只是浪费了空间。建议输出码率不超过原始码率。</li>
+                            <li data-i18n="video.convert.noteFaq3"><strong>Q: 能批量转换多个视频吗？</strong>A:
+                                当前版本一次只能转换一个视频。转换完成后再上传下一个。</li>
+                            <li data-i18n="video.convert.noteFaq4"><strong>Q: 转换过程中可以暂停吗？</strong>A:
+                                不支持暂停。如果中断需要重新开始。建议在网络稳定、不关闭页面的情况下进行转换。</li>
                         </ul>
                     </div>
                 </article>
@@ -340,13 +424,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

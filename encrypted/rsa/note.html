@@ -10,6 +10,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>RSA密钥对生成工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="RSA密钥对生成工具 - 免费、安全、快速">
+    <meta property="og:description" content="RSA密钥对生成工具说明，在线生成RSA公钥私钥，支持多种密钥长度，PEM格式输出，本地处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/rsa/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RSA密钥对生成工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="RSA密钥对生成工具说明，在线生成RSA公钥私钥，支持多种密钥长度，PEM格式输出，本地处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/rsa/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/rsa/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/rsa/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "RSA公钥和私钥有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "RSA是非对称加密算法，使用一对数学上相关联的密钥。公钥可以公开分享，任何人用它加密的数据只有对应的私钥才能解密；私钥必须严格保密，用它解密公钥加密的数据，或用它创建数字签名。简单来说：公钥加密→私钥解密（保密通信）；私钥签名→公钥验签（身份认证）。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "密钥长度应该选多少？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "密钥长度直接决定安全等级。1024位：已被认为不安全，不推荐用于生产环境。2048位：当前推荐标准，安全强度约等于112位对称密钥，足以应对大多数场景，预计到2030年前仍然安全。3072位：安全强度约等于128位对称密钥，适合中长期安全规划。4096位：安全强度约等于140位对称密钥，最高安全等级，但性能开销较大。建议：一般用途选2048位，重要系统选3072位，极高安全需求选4096位。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "PEM格式是什么？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PEM（Privacy Enhanced Mail）是一种Base64编码的文本格式，以\"-----BEGIN ...-----\"开头，\"-----END ...-----\"结尾。它是存储和传输加密密钥最通用的格式，几乎所有加密工具和编程语言都支持PEM格式。公钥使用SPKI（SubjectPublicKeyInfo）格式封装，私钥使用PKCS#8格式封装，这两种都是标准格式，兼容性极好。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "生成的密钥可以用于SSH登录或GitHub吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以。在导出格式中选择\"SSH\"，工具会生成 OpenSSH 兼容的公钥（ ssh-rsa AAAA... 单行）和私钥（ -----BEGIN OPENSSH PRIVATE KEY----- ），可直接用于 SSH 登录、GitHub/GitLab 等 Git 托管平台。注意：GitHub 要求 RSA 密钥至少 3072 位，请在本工具中选择 3072 或 4096 位，2048 位及以下会被 GitHub 拒绝。对于 SSL/TLS 证书、API 签名、数据加密等场景，建议选择 PEM 格式。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么生成4096位密钥很慢？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "RSA密钥生成需要寻找两个大素数，密钥长度越大，素数越大，寻找过程越耗时。这是数学计算的固有特性，不是工具的性能问题。2048位通常1秒内完成，4096位可能需要3-10秒，取决于设备性能。建议耐心等待，不要中途刷新页面。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -256,7 +319,10 @@
                 </p>
 
                 <h3>问：生成的密钥可以用于SSH登录或GitHub吗？</h3>
-                <p><strong>答：</strong>可以。在导出格式中选择"SSH"，工具会生成 OpenSSH 兼容的公钥（<code>ssh-rsa AAAA...</code> 单行）和私钥（<code>-----BEGIN OPENSSH PRIVATE KEY-----</code>），可直接用于 SSH 登录、GitHub/GitLab 等 Git 托管平台。注意：GitHub 要求 RSA 密钥至少 3072 位，请在本工具中选择 3072 或 4096 位，2048 位及以下会被 GitHub 拒绝。对于 SSL/TLS 证书、API 签名、数据加密等场景，建议选择 PEM 格式。
+                <p><strong>答：</strong>可以。在导出格式中选择"SSH"，工具会生成 OpenSSH 兼容的公钥（<code>ssh-rsa AAAA...</code>
+                    单行）和私钥（<code>-----BEGIN OPENSSH PRIVATE KEY-----</code>），可直接用于 SSH 登录、GitHub/GitLab 等 Git
+                    托管平台。注意：GitHub 要求 RSA 密钥至少 3072 位，请在本工具中选择 3072 或 4096 位，2048 位及以下会被 GitHub 拒绝。对于 SSL/TLS 证书、API
+                    签名、数据加密等场景，建议选择 PEM 格式。
                 </p>
 
                 <h3>问：为什么生成4096位密钥很慢？</h3>
@@ -281,10 +347,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

@@ -10,6 +10,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>视频提取封面工具 - 免费、安全、快速截取视频封面</title>
+    <meta property="og:title" content="视频提取封面工具 - 免费、安全、快速截取视频封面">
+    <meta property="og:description"
+        content="视频提取封面工具说明，支持从视频中截取任意时间点画面作为封面图片，可单张精确提取或批量均匀提取，导出PNG/JPG/WebP格式，纯前端处理保护隐私">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/video/thumbnail/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="视频提取封面工具 - 免费、安全、快速截取视频封面">
+    <meta name="twitter:description"
+        content="视频提取封面工具说明，支持从视频中截取任意时间点画面作为封面图片，可单张精确提取或批量均匀提取，导出PNG/JPG/WebP格式，纯前端处理保护隐私">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/video/thumbnail/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/video/thumbnail/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/video/thumbnail/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "提取的封面是黑屏怎么办？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "黑屏通常是因为所选时间点正好是视频的黑帧（常见于开头和结尾）或场景切换的过渡帧。建议：1. 拖动时间轴避开黑帧区间；2. 使用批量提取模式快速浏览全片画面；3. 尝试将时间点前后微调0.5-1秒。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么我的视频无法预览或提取？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具依赖浏览器原生解码能力。MP4（H.264编码）和 WebM 在所有现代浏览器中均可播放；但部分 MOV（ProRes编码）、MKV、AVI 等格式浏览器不支持解码。建议先使用本站的视频格式转换工具将视频转换为 MP4 格式后再提取封面。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "PNG、JPG、WebP 应该选哪个？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "三种格式各有优势：PNG 无损压缩，画质最好但文件较大，适合需要后期编辑的场景；JPG 有损压缩，体积小且所有平台都支持，是封面上传的通用选择；WebP 压缩比更高，同画质下体积比 JPG 小25-35%，适合对体积敏感的场景（需确认目标平台支持）。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "批量提取的张数越多越好吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不是。张数越多，每张之间的间隔越小，画面差异也越小，挑选意义不大；同时提取耗时也越长。一般建议：1分钟以内的短视频选3-6张；几分钟的视频选6-9张；超过10分钟的长视频选12张。先用批量模式锁定大致区间，再用单张模式精修是最高效的工作流。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "提取长视频靠后的时间点为什么变慢了？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "浏览器定位到指定时间点时，需要从最近的关键帧开始解码到目标帧。时间点越靠后、距离关键帧越远，需要解码的帧数越多，定位时间越长。这是正常现象，通常在1-2秒内都能完成，工具内置了10秒超时保护。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "视频提取封面和视频转GIF有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "两者用途不同：视频提取封面生成静态图片，用于封面、配图、缩略图等场景，速度快、画质高；视频转GIF生成动态图，用于表情包、动态演示等场景，可表现连续动作。如果只需要一帧精美画面，用本工具；需要连续动态效果，用视频转GIF工具。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -391,10 +464,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

@@ -10,7 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="robots" content="index, follow">
     <title>图像无损压缩工具，隐私图像压缩工具，本地化压缩</title>
     <meta property="og:title" content="图像无损压缩工具，隐私图像压缩工具，本地化压缩">
@@ -43,7 +51,7 @@
         "@type": "WebApplication",
         "name": "图像批量压缩工具",
         "description": "免费在线图片压缩工具，支持批量压缩JPG、PNG、WebP等格式图片。采用本地处理方式，保护您的隐私安全。支持多种压缩算法，平衡质量与文件大小。Free online image compression tool with batch processing support.",
-        "url": "https://helpoke.com/image/compressor",
+        "url": "https://helpoke.com/image/compressor/",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -59,7 +67,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -92,7 +100,8 @@
                     hidden>
                 <div class="upload-icon">🖼️</div>
                 <div class="upload-text" data-i18n="image.compressor.uploadText">点击上传或拖拽图片到此处</div>
-                <div class="upload-hint" data-i18n="image.compressor.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）</div>
+                <div class="upload-hint" data-i18n="image.compressor.uploadHint">支持 JPG、PNG、WebP、GIF、BMP 格式（支持多选，最多20张）
+                </div>
             </label>
             <div id="fileInfo" class="file-info"></div>
             <div id="fileList" class="file-list hidden">
@@ -117,7 +126,8 @@
             <div id="imageViewer" class="image-viewer hidden">
                 <div class="viewer-content">
                     <span class="close-btn">&times;</span>
-                    <img id="viewerImage" src="" alt="放大图片" data-i18n="image.compressor.viewerAlt">放大图片</div>
+                    <img id="viewerImage" src="" alt="放大图片" data-i18n="image.compressor.viewerAlt">放大图片
+                </div>
             </div>
 
             <div class="settings" style="display: none;">
@@ -136,11 +146,18 @@
                             </option>
                         </select>
                     </div>
-                    <p class="setting-tip" data-i18n="image.compressor.algorithmTip"><b>没有最优的压缩算法，只有最适合自己的压缩策略</b>。不同的压缩算法适用于不同的场景：</br> - <b>默认压缩</b>：平衡质量和大小，保持原始图片格式。<span class="orange-text">不适用于PNG透明图片</span>。<b>推荐场景</b>：一般JPG图片，需要保持原始格式的非透明图片</br> - <b>无损压缩</b>：保持最高质量和原始扩展名。<span class="orange-text">不推荐用于JPG图片</span>，会导致图片增大或无法有效压缩。<b>推荐场景</b>：PNG透明图片、需要保留完整图像信息</br> - <b>强力压缩</b>：优先减小文件大小，统一转换为JPG格式以获得最佳压缩率，会显著降低图像质量。<b>推荐场景</b>：极致减小文件体积，对图像质量要求不高</br> - <b>WebP格式</b>：现代浏览器高效图像格式，能在保持较高质量的同时显著减小文件体积。<b>推荐场景</b>：网站图片、支持WebP的应用，追求高质量和小体积平衡</span>。<b>推荐场景</b>：一般JPG图片，需要保持原始格式的非透明图片</br>
+                    <p class="setting-tip" data-i18n="image.compressor.algorithmTip">
+                        <b>没有最优的压缩算法，只有最适合自己的压缩策略</b>。不同的压缩算法适用于不同的场景：</br> - <b>默认压缩</b>：平衡质量和大小，保持原始图片格式。<span
+                            class="orange-text">不适用于PNG透明图片</span>。<b>推荐场景</b>：一般JPG图片，需要保持原始格式的非透明图片</br> -
+                        <b>无损压缩</b>：保持最高质量和原始扩展名。<span
+                            class="orange-text">不推荐用于JPG图片</span>，会导致图片增大或无法有效压缩。<b>推荐场景</b>：PNG透明图片、需要保留完整图像信息</br> -
+                        <b>强力压缩</b>：优先减小文件大小，统一转换为JPG格式以获得最佳压缩率，会显著降低图像质量。<b>推荐场景</b>：极致减小文件体积，对图像质量要求不高</br> -
+                        <b>WebP格式</b>：现代浏览器高效图像格式，能在保持较高质量的同时显著减小文件体积。<b>推荐场景</b>：网站图片、支持WebP的应用，追求高质量和小体积平衡</span>。<b>推荐场景</b>：一般JPG图片，需要保持原始格式的非透明图片</br>
                         - <b>无损压缩</b>：保持最高质量和原始扩展名。<span
                             class="orange-text">不推荐用于JPG图片</span>，会导致图片增大或无法有效压缩。<b>推荐场景</b>：PNG透明图片、需要保留完整图像信息</br>
                         - <b>强力压缩</b>：优先减小文件大小，统一转换为JPG格式以获得最佳压缩率，会显著降低图像质量。<b>推荐场景</b>：极致减小文件体积，对图像质量要求不高</br>
-                        - <b>WebP格式</b>：现代浏览器高效图像格式，能在保持较高质量的同时显著减小文件体积。<b>推荐场景</b>：网站图片、支持WebP的应用，追求高质量和小体积平衡</p>
+                        - <b>WebP格式</b>：现代浏览器高效图像格式，能在保持较高质量的同时显著减小文件体积。<b>推荐场景</b>：网站图片、支持WebP的应用，追求高质量和小体积平衡
+                    </p>
                 </div>
                 <div class="settings-section-lg">
                     <div class="settings-row-no-margin">
@@ -149,7 +166,9 @@
                         <input type="range" id="qualityRange" min="1" max="100" value="80" class="quality-range">
                         <span id="qualityValue" class="quality-value">80%</span>
                     </div>
-                    <p class="setting-tip no-margin-bottom" data-i18n="image.compressor.qualityTip"><b>压缩质量的值越高，图像质量越好，但文件大小也越大；值越低，压缩率越高，但可能会损失图像细节</b>。推荐设置在70-90之间，可根据实际需求调整。</p>
+                    <p class="setting-tip no-margin-bottom" data-i18n="image.compressor.qualityTip">
+                        <b>压缩质量的值越高，图像质量越好，但文件大小也越大；值越低，压缩率越高，但可能会损失图像细节</b>。推荐设置在70-90之间，可根据实际需求调整。
+                    </p>
                 </div>
 
                 <div class="dimension-row">
@@ -169,7 +188,8 @@
                             data-i18n-placeholder="image.compressor.maxSizePlaceholder">
                         <div id="maxSizeError" class="error-message"></div>
                     </div>
-                    <p class="setting-tip" data-i18n="image.compressor.dimensionTip">提示：最大尺寸限制图片的上限（100-16384px）；最大文件大小限制压缩后的文件大小，范围20KB到原文件大小，用户可在此范围内随意输入。</p>
+                    <p class="setting-tip" data-i18n="image.compressor.dimensionTip">
+                        提示：最大尺寸限制图片的上限（100-16384px）；最大文件大小限制压缩后的文件大小，范围20KB到原文件大小，用户可在此范围内随意输入。</p>
                 </div>
 
                 <div class="buttons-container">
@@ -196,22 +216,36 @@
                     <div class="info-content">
                         <h4 data-i18n="image.compressor.problemsTitle">一、为什么你需要专业的图片压缩工具</h4>
                         <ul>
-                            <li data-i18n="image.compressor.problem1">手机拍的照片动辄 5-10MB，上传到网站慢如蜗牛；电商详情页几十张产品图加起来上百 MB，页面加载超过 3 秒就会流失 40% 的用户。图片压缩不是简单地"降低画质"——而是在人眼几乎无法察觉差异的前提下，将文件体积缩小 60%-90%。</li>
-                            <li data-i18n="image.compressor.problem2">本工具使用 Canvas API 重新编码图片——通过调整质量参数（0.1-1.0）精确控制压缩程度。实时显示原始大小、压缩后大小、压缩率和尺寸信息。批量压缩支持——一次上传多张图片，统一设置参数后一键全部压缩并打包下载。</li>
-                            <li data-i18n="image.compressor.problem3">所有处理在浏览器本地完成，图片不上传到任何服务器。电商卖家、自媒体运营、前端开发者都能大幅提升工作效率——批量处理 20 张产品图通常只需 10-20 秒。</li>
+                            <li data-i18n="image.compressor.problem1">手机拍的照片动辄 5-10MB，上传到网站慢如蜗牛；电商详情页几十张产品图加起来上百
+                                MB，页面加载超过 3 秒就会流失 40% 的用户。图片压缩不是简单地"降低画质"——而是在人眼几乎无法察觉差异的前提下，将文件体积缩小 60%-90%。</li>
+                            <li data-i18n="image.compressor.problem2">本工具使用 Canvas API
+                                重新编码图片——通过调整质量参数（0.1-1.0）精确控制压缩程度。实时显示原始大小、压缩后大小、压缩率和尺寸信息。批量压缩支持——一次上传多张图片，统一设置参数后一键全部压缩并打包下载。
+                            </li>
+                            <li data-i18n="image.compressor.problem3">
+                                所有处理在浏览器本地完成，图片不上传到任何服务器。电商卖家、自媒体运营、前端开发者都能大幅提升工作效率——批量处理 20 张产品图通常只需 10-20 秒。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.formatTitle">二、压缩算法在做什么</h4>
                         <ul>
-                            <li data-i18n="image.compressor.formatJpg"><strong>JPEG 压缩原理：</strong>JPEG 使用离散余弦变换（DCT）将图片从空间域转换到频率域，然后对高频分量（人眼不敏感的细节）进行大幅度量化——这就是"有损压缩"的本质。质量参数控制量化的激进程度。</li>
-                            <li data-i18n="image.compressor.formatPng"><strong>PNG 压缩原理：</strong>PNG 使用 DEFLATE 算法（LZ77 + 霍夫曼编码），属于无损压缩。压缩空间主要来自颜色简化：将 24 位真彩色降为更少色深。压缩率通常不如 JPEG（一般 20%-50%），但不丢失任何像素信息。</li>
-                            <li data-i18n="image.compressor.formatWebp"><strong>WebP：</strong>Google 开发的现代图像格式，基于 VP8 视频编码，同等画质下比 JPG 小 25-35%，同时支持透明和动画。</li>
+                            <li data-i18n="image.compressor.formatJpg"><strong>JPEG 压缩原理：</strong>JPEG
+                                使用离散余弦变换（DCT）将图片从空间域转换到频率域，然后对高频分量（人眼不敏感的细节）进行大幅度量化——这就是"有损压缩"的本质。质量参数控制量化的激进程度。</li>
+                            <li data-i18n="image.compressor.formatPng"><strong>PNG 压缩原理：</strong>PNG 使用 DEFLATE 算法（LZ77
+                                + 霍夫曼编码），属于无损压缩。压缩空间主要来自颜色简化：将 24 位真彩色降为更少色深。压缩率通常不如 JPEG（一般 20%-50%），但不丢失任何像素信息。</li>
+                            <li data-i18n="image.compressor.formatWebp"><strong>WebP：</strong>Google 开发的现代图像格式，基于 VP8
+                                视频编码，同等画质下比 JPG 小 25-35%，同时支持透明和动画。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.featuresTitle">三、压缩控制参数详解</h4>
                         <ul>
-                            <li data-i18n="image.compressor.featureOnline"><strong>质量滑块（0.1-1.0）：</strong>0.1 最大压缩，1.0 几乎无损。实际使用中 0.7-0.85 是最佳平衡点——体积大幅减小，画质肉眼几乎无法区分。</li>
-                            <li data-i18n="image.compressor.featurePreview"><strong>实时预览对比：</strong>调整质量滑块时实时更新压缩后体积——无需下载就能看到效果。基于 Canvas toBlob API 实时编码。</li>
-                            <li data-i18n="image.compressor.featureExport"><strong>批量处理与打包下载：</strong>同时上传多张图片，统一参数后一键处理。处理完成后逐张下载或打包为 ZIP。</li>
-                            <li data-i18n="image.compressor.featureSecurity"><strong>尺寸缩放可选：</strong>除了质量压缩，还可以缩小图片尺寸。宽度限制为 1920px 可以额外减少 50%-70% 体积——像素总量大幅减少了。</li>
+                            <li data-i18n="image.compressor.featureOnline"><strong>质量滑块（0.1-1.0）：</strong>0.1 最大压缩，1.0
+                                几乎无损。实际使用中 0.7-0.85 是最佳平衡点——体积大幅减小，画质肉眼几乎无法区分。</li>
+                            <li data-i18n="image.compressor.featurePreview">
+                                <strong>实时预览对比：</strong>调整质量滑块时实时更新压缩后体积——无需下载就能看到效果。基于 Canvas toBlob API 实时编码。
+                            </li>
+                            <li data-i18n="image.compressor.featureExport">
+                                <strong>批量处理与打包下载：</strong>同时上传多张图片，统一参数后一键处理。处理完成后逐张下载或打包为 ZIP。
+                            </li>
+                            <li data-i18n="image.compressor.featureSecurity">
+                                <strong>尺寸缩放可选：</strong>除了质量压缩，还可以缩小图片尺寸。宽度限制为 1920px 可以额外减少 50%-70% 体积——像素总量大幅减少了。
+                            </li>
                         </ul>
                     </div>
                 </article>
@@ -223,36 +257,55 @@
                     <div class="info-content">
                         <h4 data-i18n="image.compressor.usageUploadTitle">第一步：上传图片</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageClickUpload"><strong>单张或批量上传：</strong>支持 JPG/PNG/WebP/GIF/BMP。每张图片显示原始大小和尺寸。</li>
+                            <li data-i18n="image.compressor.usageClickUpload"><strong>单张或批量上传：</strong>支持
+                                JPG/PNG/WebP/GIF/BMP。每张图片显示原始大小和尺寸。</li>
                             <li data-i18n="image.compressor.usageBatchUpload"><strong>批量上传：</strong>支持多选上传，最多20张图片。</li>
-                            <li data-i18n="image.compressor.usageFormats"><strong>输出格式：</strong>JPG（体积最小）或 PNG（保留透明通道）。原图有透明区域选 JPG 时透明变白色。</li>
+                            <li data-i18n="image.compressor.usageFormats"><strong>输出格式：</strong>JPG（体积最小）或
+                                PNG（保留透明通道）。原图有透明区域选 JPG 时透明变白色。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageAlgorithmTitle">二、选择压缩算法</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageDefault"><strong>默认压缩：</strong>平衡质量和大小，保持原始图片格式。不适用于PNG透明图片。</li>
-                            <li data-i18n="image.compressor.usageLossless"><strong>无损压缩：</strong>保持最高质量和原始扩展名。推荐用于PNG透明图片。</li>
-                            <li data-i18n="image.compressor.usageAggressive"><strong>强力压缩：</strong>优先减小文件大小，统一转换为JPG格式。</li>
-                            <li data-i18n="image.compressor.usageWebp"><strong>WebP格式：</strong>现代浏览器高效图像格式，保持较高质量和小体积。</li>
+                            <li data-i18n="image.compressor.usageDefault">
+                                <strong>默认压缩：</strong>平衡质量和大小，保持原始图片格式。不适用于PNG透明图片。
+                            </li>
+                            <li data-i18n="image.compressor.usageLossless">
+                                <strong>无损压缩：</strong>保持最高质量和原始扩展名。推荐用于PNG透明图片。
+                            </li>
+                            <li data-i18n="image.compressor.usageAggressive"><strong>强力压缩：</strong>优先减小文件大小，统一转换为JPG格式。
+                            </li>
+                            <li data-i18n="image.compressor.usageWebp"><strong>WebP格式：</strong>现代浏览器高效图像格式，保持较高质量和小体积。
+                            </li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageQualityTitle">三、调整压缩质量</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageQualitySlider"><strong>质量滑块：</strong>拖动滑块调整压缩质量（1%-100%）。</li>
+                            <li data-i18n="image.compressor.usageQualitySlider">
+                                <strong>质量滑块：</strong>拖动滑块调整压缩质量（1%-100%）。
+                            </li>
                             <li data-i18n="image.compressor.usageQualityHigh"><strong>质量越高：</strong>图像质量越好，但文件大小越大。</li>
                             <li data-i18n="image.compressor.usageQualityLow"><strong>质量越低：</strong>压缩率越高，但可能损失图像细节。</li>
-                            <li data-i18n="image.compressor.usageQualityRange"><strong>推荐范围：</strong>70-90之间，可根据实际需求调整。</li>
+                            <li data-i18n="image.compressor.usageQualityRange"><strong>推荐范围：</strong>70-90之间，可根据实际需求调整。
+                            </li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageDimensionTitle">四、设置最大尺寸</h4>
                         <ul>
-                            <li data-i18n="image.compressor.usageMaxWidth"><strong>最大宽度：</strong>设置图片压缩后的最大宽度（100-16384px）。</li>
-                            <li data-i18n="image.compressor.usageMaxHeight"><strong>最大高度：</strong>设置图片压缩后的最大高度（100-16384px）。</li>
-                            <li data-i18n="image.compressor.usageMaxSize"><strong>最大大小：</strong>设置压缩后文件的最大大小（20KB到原文件大小）。</li>
+                            <li data-i18n="image.compressor.usageMaxWidth">
+                                <strong>最大宽度：</strong>设置图片压缩后的最大宽度（100-16384px）。
+                            </li>
+                            <li data-i18n="image.compressor.usageMaxHeight">
+                                <strong>最大高度：</strong>设置图片压缩后的最大高度（100-16384px）。
+                            </li>
+                            <li data-i18n="image.compressor.usageMaxSize">
+                                <strong>最大大小：</strong>设置压缩后文件的最大大小（20KB到原文件大小）。
+                            </li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageCompressTitle">五、执行压缩</h4>
                         <ul>
                             <li data-i18n="image.compressor.usageSingle"><strong>单张压缩：</strong>点击"压缩当前图片"按钮。</li>
                             <li data-i18n="image.compressor.usageBatch"><strong>批量压缩：</strong>点击"批量压缩所有图片"按钮。</li>
-                            <li data-i18n="image.compressor.usagePreview"><strong>图片列表管理：</strong>多张图片以列表展示，每张可单独删除。</li>
-                            <li data-i18n="image.compressor.usageDownload"><strong>文件命名：</strong>自动添加 _compressed 后缀，避免与原文件混淆。</li>
+                            <li data-i18n="image.compressor.usagePreview"><strong>图片列表管理：</strong>多张图片以列表展示，每张可单独删除。
+                            </li>
+                            <li data-i18n="image.compressor.usageDownload"><strong>文件命名：</strong>自动添加 _compressed
+                                后缀，避免与原文件混淆。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.usageSuggestTitle">六、压缩算法选择建议</h4>
                         <ul>
@@ -270,15 +323,23 @@
                     <div class="info-content">
                         <h4 data-i18n="image.compressor.notesSecurityTitle">数据安全与隐私</h4>
                         <ul>
-                            <li data-i18n="image.compressor.noteSecurity1">四种压缩算法（libpng 有损、WebP、Canvas 质量调节、MozJPEG 优化）全部在浏览器 Web Worker 线程中运行。图片解码、重编码、质量调节等计算密集型操作均在本地 CPU 完成，全程零网络通信，即使处理机密商业素材也不会泄露。</li>
-                            <li data-i18n="image.compressor.noteSecurity2">压缩过程中，原始图片和压缩结果仅存在于浏览器的内存（Blob URL）中。关闭标签页后，所有图片数据和 Worker 线程立即释放。工具不使用 IndexedDB 或 localStorage 缓存任何图片文件。</li>
-                            <li data-i18n="image.compressor.noteSecurity3">批量处理企业内部设计素材、未发布产品图等敏感图片时，建议使用无痕模式。无痕模式下浏览器不会将访问过的图片 URL 写入历史记录，关闭后连 DNS 缓存也一并清除，最大程度保护商业隐私。</li>
+                            <li data-i18n="image.compressor.noteSecurity1">四种压缩算法（libpng 有损、WebP、Canvas 质量调节、MozJPEG
+                                优化）全部在浏览器 Web Worker 线程中运行。图片解码、重编码、质量调节等计算密集型操作均在本地 CPU 完成，全程零网络通信，即使处理机密商业素材也不会泄露。
+                            </li>
+                            <li data-i18n="image.compressor.noteSecurity2">压缩过程中，原始图片和压缩结果仅存在于浏览器的内存（Blob
+                                URL）中。关闭标签页后，所有图片数据和 Worker 线程立即释放。工具不使用 IndexedDB 或 localStorage 缓存任何图片文件。</li>
+                            <li data-i18n="image.compressor.noteSecurity3">
+                                批量处理企业内部设计素材、未发布产品图等敏感图片时，建议使用无痕模式。无痕模式下浏览器不会将访问过的图片 URL 写入历史记录，关闭后连 DNS
+                                缓存也一并清除，最大程度保护商业隐私。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.notesSettingTitle">二、压缩参数指南</h4>
                         <ul>
-                            <li data-i18n="image.compressor.noteSetting1">质量 80% 是最佳平衡点——SSIM（结构相似性指数）通常在 0.95 以上，肉眼几乎无法分辨差异。</li>
-                            <li data-i18n="image.compressor.noteSetting2">质量参数超过 90% 后，文件体积急剧增大（每增加 1% 质量可能增加 10-20% 体积）但人眼几乎无法分辨画质差异，性价比极低。对于网页展示用途，质量 80-85% 是最佳平衡点——画质损失微小但体积可减少 40-60%。</li>
-                            <li data-i18n="image.compressor.noteSetting3">质量参数低于 30% 时，JPG 格式会出现明显的块状伪影（色块和边缘毛刺），PNG 文件由于无损特性反而可能比高质量时更大（因为噪点增多导致压缩效率下降）。建议质量下限不低于 50%。</li>
+                            <li data-i18n="image.compressor.noteSetting1">质量 80% 是最佳平衡点——SSIM（结构相似性指数）通常在 0.95
+                                以上，肉眼几乎无法分辨差异。</li>
+                            <li data-i18n="image.compressor.noteSetting2">质量参数超过 90% 后，文件体积急剧增大（每增加 1% 质量可能增加 10-20%
+                                体积）但人眼几乎无法分辨画质差异，性价比极低。对于网页展示用途，质量 80-85% 是最佳平衡点——画质损失微小但体积可减少 40-60%。</li>
+                            <li data-i18n="image.compressor.noteSetting3">质量参数低于 30% 时，JPG 格式会出现明显的块状伪影（色块和边缘毛刺），PNG
+                                文件由于无损特性反而可能比高质量时更大（因为噪点增多导致压缩效率下降）。建议质量下限不低于 50%。</li>
                             <li data-i18n="image.compressor.noteSetting4">"最大文件大小"功能会自动迭代调整质量参数，直到满足目标体积要求。</li>
                         </ul>
                         <h4 data-i18n="image.compressor.notesBatchTitle">三、批量处理须知</h4>
@@ -290,10 +351,14 @@
                         </ul>
                         <h4 data-i18n="image.compressor.notesFaqTitle">常见问题解答</h4>
                         <ul>
-                            <li data-i18n="image.compressor.noteFaq1"><strong>压缩后文件反而变大：</strong>可能选择了不匹配的算法。JPG 图片请用默认压缩，PNG 透明图片请用无损压缩。</li>
-                            <li data-i18n="image.compressor.noteFaq2"><strong>PNG 压缩后透明背景变黑：</strong>默认压缩和强力压缩不支持透明通道，请切换为无损压缩或 WebP 格式。</li>
-                            <li data-i18n="image.compressor.noteFaq3"><strong>如何为网站优化图片：</strong>推荐 WebP 格式 + 质量 80% + 最大宽度 1920px，可兼顾画质和加载速度。</li>
-                            <li data-i18n="image.compressor.noteFaq4"><strong>批量下载 ZIP 失败：</strong>检查浏览器是否允许该网站下载多个文件，或尝试减少批量数量。</li>
+                            <li data-i18n="image.compressor.noteFaq1"><strong>压缩后文件反而变大：</strong>可能选择了不匹配的算法。JPG
+                                图片请用默认压缩，PNG 透明图片请用无损压缩。</li>
+                            <li data-i18n="image.compressor.noteFaq2"><strong>PNG
+                                    压缩后透明背景变黑：</strong>默认压缩和强力压缩不支持透明通道，请切换为无损压缩或 WebP 格式。</li>
+                            <li data-i18n="image.compressor.noteFaq3"><strong>如何为网站优化图片：</strong>推荐 WebP 格式 + 质量 80% +
+                                最大宽度 1920px，可兼顾画质和加载速度。</li>
+                            <li data-i18n="image.compressor.noteFaq4"><strong>批量下载 ZIP
+                                    失败：</strong>检查浏览器是否允许该网站下载多个文件，或尝试减少批量数量。</li>
                         </ul>
                     </div>
                 </article>
@@ -305,13 +370,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>

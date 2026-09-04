@@ -11,6 +11,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>JSON在线格式化对比工具 - 免费、安全、快速</title>
+    <meta property="og:title" content="JSON在线格式化对比工具 - 免费、安全、快速">
+    <meta property="og:description" content="JSON格式化工具说明，JSON在线格式化、比对、转换工具，支持节点折叠、键值模糊搜索、差异高亮、JSON与Java Bean/XML互转。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/json/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="JSON在线格式化对比工具 - 免费、安全、快速">
+    <meta name="twitter:description" content="JSON格式化工具说明，JSON在线格式化、比对、转换工具，支持节点折叠、键值模糊搜索、差异高亮、JSON与Java Bean/XML互转。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/json/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/json/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/json/note.html">
+    <script type="application/ld+json">
+{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "为什么我的JSON无法格式化？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "JSON格式有严格的语法规范，常见错误包括：字符串没有使用单引号或双引号包裹；对象或数组的最后一个元素后多加了逗号；字段名没有用引号包裹；缺少必要的冒号或括号等。本工具会在解析失败时自动定位错误位置并给出提示，您可以根据提示逐项检查修正。建议先使用浏览器的JSON.parse()方法或在线JSON校验工具检查数据格式是否正确。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "转Java Bean生成的代码可以直接使用吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "生成的Java代码完全符合标准JavaBean规范，字段类型智能推断，命名遵循驼峰规则，可以直接复制到您的项目中使用。不过建议您根据实际业务需求进行适当调整，例如修改字段类型（将String改为更精确的Integer或BigDecimal）、添加必要的注解（如@NotNull、@JsonProperty等）、补充字段注释等，以更好地适应您的项目规范和业务逻辑。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "比对功能如何判断两个JSON是否相同？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具的比对算法采用深度对比策略，不仅比较字段名和值，还会检查数据的层级结构、数组顺序等。具体来说：对象的字段顺序不影响比对结果，但数组的元素顺序会影响；数值类型会精确比较，不支持模糊匹配；null值和缺失字段会被视为不同；布尔值true和false严格区分。比对结果会清晰标注每个差异点的类型（新增、删除、修改）和具体位置。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "数据安全如何保障？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具采用完全本地化的处理策略，所有数据解析、格式化、转换等操作都在您的浏览器中执行，不会通过网络上传到任何服务器。这意味着您的敏感数据（如API密钥、用户信息、业务数据等）始终停留在您的本地计算机上，无法被第三方获取。即使关闭浏览器，数据也会自动清除，不会留下任何痕迹。我们强烈建议您在处理敏感数据时使用本工具，而不是那些需要上传数据到服务器的在线服务。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "支持哪些JSON数据类型和结构？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "本工具完整支持JSON规范定义的所有数据类型：字符串（String）、数字（Number）、布尔值（Boolean）、空值（null）、对象（Object）、数组（Array）。支持任意深度的嵌套结构，无论是多层嵌套对象还是复杂的数组组合，都能正确解析和格式化。同时支持JSON5的部分扩展语法（如单行注释、多行注释等），但建议使用标准JSON格式以确保兼容性。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "转换后的XML格式是否符合标准？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "生成的XML完全符合W3C XML规范，结构清晰，格式规范。对象转换为XML元素，字段名作为子元素标签，值作为元素内容；数组转换为多个同名子元素；特殊字符会自动转义处理。生成的XML可以直接用于系统集成、数据交换、配置管理等场景。反向转换时，XML元素和属性会正确映射到JSON对象和字段，保持数据的完整性和一致性。"
+                }
+            }
+        ]
+    }
+</script>
 
     <style>
         * {
@@ -324,10 +395,10 @@
             <footer class="footer">
                 <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
         </div>

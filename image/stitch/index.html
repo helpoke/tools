@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com;  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com;  frame-src https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google;">
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
     <meta name="description" content="在线免费图片拼接工具，支持多张图片垂直拼接、水平拼接，自定义拼接间距和背景颜色，本地处理保护隐私">
     <meta name="keywords" content="图片拼接, 在线图片拼接, 图片合并, 垂直拼接, 水平拼接, 免费图片拼接">
     <meta name="author" content="余一叶知秋尽">
@@ -104,7 +112,7 @@
         "@type": "WebApplication",
         "name": "图片拼接工具",
         "description": "在线免费图片拼接工具，支持多张图片垂直拼接、水平拼接，自定义拼接间距和背景颜色，支持二次拼接，本地处理保护隐私。Free online image stitcher for combining multiple images vertically or horizontally.",
-        "url": "https://helpoke.com/image/stitch",
+        "url": "https://helpoke.com/image/stitch/",
         "applicationCategory": "https://schema.org/ImageProcessing",
         "inLanguage": ["zh-CN", "en-US"],
         "featureList": [
@@ -122,7 +130,7 @@
         "author": {
             "@type": "Organization",
             "name": "Helpoke",
-            "url": "https://helpoke.com"
+            "url": "https://helpoke.com/"
         },
         "offers": {
             "@type": "Offer",
@@ -354,7 +362,8 @@
                             <li data-i18n="image.stitch.featureOnline"><strong>Canvas 合成：</strong>创建一个足够大的画布（总宽度 =
                                 最大图片宽度，总高度 = 所有图片高度之和 + 间距），然后使用 drawImage 将每张图片按计算好的坐标绘制到画布上。</li>
                             <li data-i18n="image.stitch.featurePreview">
-                                <strong>实时预览：</strong>每次上传图片、删除图片、调整顺序或修改参数后，预览区域立即更新。预览使用缩略图渲染，下载时使用原始分辨率——确保输出质量。</li>
+                                <strong>实时预览：</strong>每次上传图片、删除图片、调整顺序或修改参数后，预览区域立即更新。预览使用缩略图渲染，下载时使用原始分辨率——确保输出质量。
+                            </li>
                             <li data-i18n="image.stitch.featureExport"><strong>圆角处理：</strong>可选为每张图片添加圆角（0-50px）。圆角通过
                                 Canvas 的 clip() 方法实现——先绘制圆角矩形路径，再裁剪后绘制图片。圆角区域外的部分透明（PNG 输出）或填充背景色（JPG 输出）。</li>
                             <li data-i18n="image.stitch.featureSecurity"><strong>高分辨率输出：</strong>拼接后的图片分辨率可能非常大（比如 10 张
@@ -403,7 +412,8 @@
                             <li data-i18n="image.stitch.usageStitch2"><strong>实时预览：</strong>拼接后在预览区域显示结果。</li>
                             <li data-i18n="image.stitch.usageStitch3"><strong>双击放大：</strong>双击预览可全屏查看。</li>
                             <li data-i18n="image.stitch.usageStitch4">
-                                <strong>加入列表：</strong>点击“加入列表”将拼接结果添加到待处理列表，可继续参与二次拼接。</li>
+                                <strong>加入列表：</strong>点击“加入列表”将拼接结果添加到待处理列表，可继续参与二次拼接。
+                            </li>
                             <li data-i18n="image.stitch.usageStitch5"><strong>下载图片：</strong>点击“下载图片”按钮保存拼接结果。</li>
                         </ul>
                         <h4 data-i18n="image.stitch.usageStitch6Title">六、二次拼接</h4>
@@ -454,9 +464,11 @@
                             <li data-i18n="image.stitch.noteFaq1"><strong>拼接后图片大小不一致：</strong>勾选“统一图片尺寸”让所有图片缩放至相同大小。
                             </li>
                             <li data-i18n="image.stitch.noteFaq2">
-                                <strong>拼接结果有空白区域：</strong>这是“保持宽高比”导致的，不同尺寸图片等比缩放后会有留白，可通过背景色填充。</li>
+                                <strong>拼接结果有空白区域：</strong>这是“保持宽高比”导致的，不同尺寸图片等比缩放后会有留白，可通过背景色填充。
+                            </li>
                             <li data-i18n="image.stitch.noteFaq3">
-                                <strong>如何实现复杂布局：</strong>先拼接一组图片，点击“加入列表”，再选择其他图片进行二次拼接。</li>
+                                <strong>如何实现复杂布局：</strong>先拼接一组图片，点击“加入列表”，再选择其他图片进行二次拼接。
+                            </li>
                             <li data-i18n="image.stitch.noteFaq4"><strong>拼接失败：</strong>确保至少选择了 2 张有效图片，且图片格式受支持。</li>
                         </ul>
                     </div>
@@ -469,13 +481,13 @@
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
                 <p>
-                    <a href="/privacy.html" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
                             class="fas fa-lock"></i> 隐私政策</a> |
-                    <a href="/terms.html" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
                             class="fas fa-file-contract"></i> 服务条款</a> |
-                    <a href="/about.html" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
                             class="fas fa-user"></i> 关于我们</a> |
-                    <a href="/contact.html" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
                             class="fas fa-envelope"></i> 联系我们</a>
                 </p>
             </footer>
