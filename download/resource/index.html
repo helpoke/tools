@@ -6,7 +6,7 @@
     <meta name="description" content="在线资源文件下载工具, 支持下载JS、CSS、字体等网页资源, 批量下载静态资源文件">
     <meta name="keywords" content="资源下载, JS下载, CSS下载, 字体下载, 静态资源下载, 批量下载, 网页资源下载">
     <meta name="author" content="余一叶知秋尽">
-    <link rel="icon" href="../../common/img/helpoke.webp" type="image/x-icon">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
@@ -36,14 +36,14 @@
     <link rel="canonical" href="https://helpoke.com/download/resource/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/download/resource/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/download/resource/">
-    <link rel="stylesheet" href="../../common/lib/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
 
-    <script src="../../common/js/ads.js" async></script>
-    <script src="../lib/jszip.min.js"></script>
-    <script src="../../common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <script src="/common/lib/jszip.min.js"></script>
+    <script src="/common/js/i18n/i18n.js"></script>
     <style>
-        @import '../../common/css/style.css';
-        @import '../../common/css/utils.css';
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
     </style>
     <style>
         .container {
@@ -893,10 +893,10 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
         </div>
     </main>
 
-    <script src="../../common/js/theme.js"></script>
-    <script src="../../common/js/tools-data.js"></script>
-    <script src="../../common/js/nav.js"></script>
-    <script src="../../common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="/common/js/utils.js"></script>
     <script>
         (function () {
             const tabs = document.querySelectorAll('.tab-btn');
@@ -1101,9 +1101,16 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
             };
 
             document.getElementById('startDownload').addEventListener('click', () => {
-                const urls = document.getElementById('resourceUrls').value.split('\n')
-                    .map(url => formatUrl(url))
-                    .filter(url => url && url.includes('://'));
+                const rawValue = document.getElementById('resourceUrls').value.trim();
+                if (!rawValue) {
+                    showError(window.t('download.resource.errNoResourceUrl'));
+                    return;
+                }
+
+                const urls = rawValue.split('\n')
+                    .map(url => url.trim())
+                    .filter(url => url.length > 0)
+                    .map(url => formatUrl(url));
 
                 if (urls.length === 0) {
                     showError(window.t('download.resource.errNoResourceUrl'));
@@ -1201,6 +1208,10 @@ https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxM.woff2"></textarea>
 
             document.getElementById('addSelectedResourcesToQueue').addEventListener('click', () => {
                 const selected = document.querySelectorAll('#extractedResourcesContainer input[type="checkbox"]:checked');
+                if (selected.length === 0) {
+                    showError(window.t('download.resource.errNoResourceSelected'));
+                    return;
+                }
                 const textarea = document.getElementById('resourceUrls');
                 selected.forEach(cb => {
                     const url = cb.dataset.url;
