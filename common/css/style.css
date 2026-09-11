@@ -494,21 +494,26 @@ body.sidebar-collapsed main.main {
     position: relative;
 }
 
+/* 拖动图标 — 三竖条手柄，垂直居中 */
 .sidebar-resize-handle::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 3px;
+    top: 50%;
+    left: 1px;
     width: 2px;
-    height: 100%;
-    background: transparent;
-    transition: background 0.2s ease;
+    height: 28px;
+    border-radius: 1px;
+    background: var(--accent-color);
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.2s ease;
+    box-shadow: 4px 0 0 var(--accent-color);
+    pointer-events: none;
 }
 
 .sidebar-resize-handle:hover::after,
 .sidebar-resize-handle.active::after {
-    background: var(--accent-color);
-    opacity: 0.35;
+    opacity: 0.45;
 }
 
 /* Disable transitions during drag resize */
