@@ -307,7 +307,7 @@
                 <p>encodeURI适合场景：编码完整URL地址、编码静态资源路径、编码不需要作为URL参数的字符串。encodeURIComponent适合场景：编码URL参数名和参数值、编码查询字符串内容、编码需要作为URL一部分的用户输入。例如，对于URL"https://example.com/search?q=你好&amp;page=1"，搜索词"你好"应该用encodeURIComponent编码为%E4%BD%A0%E5%A5%BD，而整个URL应该用encodeURI编码。
                 </p>
 
-                <h3>实战案例：API请求参数处理</h3>
+                <h2>实战案例：API请求参数处理</h2>
                 <p>假设您正在调用一个支持中文搜索的API接口，需要将用户输入的搜索词"北京天气"作为查询参数传递。使用本工具的完整步骤如下：首先确定API的URL格式，如https://api.example.com/search?q=关键词；然后将"北京天气"作为参数值，使用encodeURIComponent编码，得到"%E5%8C%97%E4%BA%AC%E5%A4%A9%E6%B0%94"；接着构建完整URL：https://api.example.com/search?q=%E5%8C%97%E4%BA%AC%E5%A4%A9%E6%B0%94；最后在浏览器或调用工具中发起请求。如果API返回的数据有编码问题，可以使用解码功能反向验证参数是否正确传递。
                 </p>
             </div>
@@ -326,7 +326,7 @@
                     </div>
                 </div>
 
-                <h2>适用场景与人群</h2>
+                <h2>典型应用场景</h2>
                 <p><strong>前端开发者：</strong>处理URL参数传递，编码中文搜索词、特殊字符，确保参数正确传输和解析。</p>
                 <p><strong>后端开发者：</strong>解析URL参数，处理编码后的请求参数，正确解码接收到的中文内容。</p>
                 <p><strong>API开发者：</strong>构建API请求URL，处理包含中文或特殊字符的参数，验证URL编码格式。</p>
@@ -361,7 +361,7 @@
                     </ul>
                 </div>
 
-                <h2>常见问题与解答</h2>
+                <h2>常见问题</h2>
                 <h3>问：为什么URL需要编码？</h3>
                 <p><strong>答：</strong>URL需要编码的主要原因：1) URL语法限制：URL只能包含ASCII字符集中的保留字符，其他字符必须编码才能传输；2)
                     歧义消除：某些字符在URL中有特殊含义（如?表示查询开始，&amp;表示参数分隔），如果这些字符出现在参数值中而不编码，会被误认为是URL结构的一部分；3)
@@ -397,6 +397,19 @@
                 <p><strong>答：</strong>不一样，两者是不同的编码方法：1) URL编码：将每个字符的UTF-8字节转换为%XX格式，主要解决URL中非ASCII字符和特殊字符的传输问题；2)
                     Base64编码：将二进制数据转换为64个可打印ASCII字符（A-Z、a-z、0-9、+、/），主要用于在JSON、XML等文本协议中传输二进制数据。两者常结合使用：例如对图片进行Base64编码后，再对Base64字符串进行URL编码，才能作为URL参数传递。Helpoke提供的Base64工具和URL编码工具可以配合使用，先Base64编码再URL编码传输二进制数据。
                 </p>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>安全最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>密钥保密：</strong>不要在代码仓库、前端配置或不安全渠道中泄露密钥或敏感凭证。</li>
+                    <li><strong>本地优先：</strong>本工具所有计算在浏览器本地完成，处理完成后及时关闭页面，避免敏感信息驻留。</li>
+                    <li><strong>结合多层防护：</strong>单一工具不足以构建完整安全体系，建议配合 TLS、访问控制、审计日志等措施。</li>
+                    <li><strong>定期轮换：</strong>对长期使用的密钥、令牌或凭证建立轮换机制，降低泄露后的影响范围。</li>
+                    <li><strong>选择合适算法：</strong>根据安全需求选择算法长度和模式，优先使用经过广泛验证的标准方案。</li>
+                </ul>
             </div>
         </div>
 

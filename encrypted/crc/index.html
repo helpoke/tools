@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="在线CRC校验工具，支持CRC32/CRC16，文本校验码一键计算，纯前端本地处理保护隐私。Free online CRC calculator.">
+    <meta name="keywords" content="CRC校验,CRC32,CRC16,循环冗余校验,在线CRC,校验码计算">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>CRC 校验工具 - 在线 CRC32/CRC16 计算</title>
+    <meta property="og:title" content="CRC 校验工具 - 在线 CRC32/CRC16 计算">
+    <meta property="og:description" content="在线CRC校验工具，支持CRC32/CRC16，文本校验码一键计算，纯前端本地处理保护隐私。Free online CRC calculator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/crc/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="CRC 校验工具 - 在线 CRC32/CRC16 计算">
+    <meta name="twitter:description"
+        content="在线CRC校验工具，支持CRC32/CRC16，文本校验码一键计算，纯前端本地处理保护隐私。Free online CRC calculator.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/crc/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/crc/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/crc/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CRC校验工具",
+        "description": "免费在线CRC校验工具，支持CRC32和CRC16。Free online CRC calculator supporting CRC32 and CRC16.",
+        "url": "https://helpoke.com/encrypted/crc/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "CRC32 计算",
+            "CRC16 计算",
+            "Hex / Decimal 输出",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.crc.title">CRC 校验工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.crc.intro">在线 CRC32/CRC16 校验码计算工具，支持 Hex 和十进制输出，适用于数据完整性快速校验</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="algorithm" data-i18n="encrypted.crc.algorithmLabel">算法</label>
+                        <select id="algorithm">
+                            <option value="crc32" selected>CRC32</option>
+                            <option value="crc16">CRC16</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.crc.encodingLabel">输入编码</label>
+                        <select id="encoding">
+                            <option value="utf8" selected>UTF-8 文本</option>
+                            <option value="hex">Hex 字节</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-text" data-i18n="encrypted.crc.inputLabel">输入</label>
+                    <textarea id="input-text" rows="6" data-i18n-placeholder="encrypted.crc.inputPlaceholder"
+                        placeholder="请输入文本或 Hex 字节..."></textarea>
+                </div>
+                <button class="btn btn-primary" id="calculate-btn" data-i18n="encrypted.crc.calculateBtn">计算
+                    CRC</button>
+
+                <div class="result-section" id="result-section" style="display:none;">
+                    <h4 data-i18n="encrypted.crc.resultTitle">CRC 结果</h4>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="result-label" data-i18n="encrypted.crc.hexLabel">Hex</span>
+                            <span class="result-value" id="result-hex"></span>
+                            <button class="copy-icon-btn" id="copy-hex-btn" title="复制">📋</button>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" data-i18n="encrypted.crc.decimalLabel">十进制</span>
+                            <span class="result-value" id="result-decimal"></span>
+                            <button class="copy-icon-btn" id="copy-decimal-btn" title="复制">📋</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.crc.infoIntro">CRC：循环冗余校验</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.crc.problemsTitle">为什么需要 CRC</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.problem1">CRC（Cyclic Redundancy
+                            Check）是一种常用的错误检测码，通过多项式除法生成固定长度的校验值，广泛用于网络通信、存储系统和文件校验。</li>
+                        <li data-i18n="encrypted.crc.problem2">本工具支持 CRC32 和 CRC16 两种常见变体，可计算 UTF-8 文本或 Hex
+                            字节流的校验值。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.crc.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.featureAlgorithms"><strong>双算法：</strong>CRC32 和 CRC16 一键切换。
+                        </li>
+                        <li data-i18n="encrypted.crc.featureEncoding"><strong>双输入：</strong>支持 UTF-8 文本和 Hex 字节。
+                        </li>
+                        <li data-i18n="encrypted.crc.featureOutput"><strong>双输出：</strong>同时显示 Hex 和十进制结果。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.crc.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.crc.usageStepTitle">使用步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.usageSelect"><strong>选择算法：</strong>CRC32 更常用，CRC16 适合短数据。
+                        </li>
+                        <li data-i18n="encrypted.crc.usageInput"><strong>输入数据：</strong>选择 UTF-8 文本或 Hex 字节模式。
+                        </li>
+                        <li data-i18n="encrypted.crc.usageCalculate"><strong>点击计算：</strong>查看 Hex 和十进制 CRC 值。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.crc.notesTitle">注意</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.note1">CRC 不是加密算法，仅用于错误检测，不能防止恶意篡改。</li>
+                        <li data-i18n="encrypted.crc.note2">不同系统可能使用不同的 CRC 多项式，本工具采用标准 CRC-32（IEEE 802.3）和
+                            CRC-16/CCITT-FALSE。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.crc.infoScenarios">典型应用场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.crc.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.scenarioNetwork"><strong>网络通信：</strong>以太网帧末尾的 FCS（帧校验序列）通常就是
+                            CRC-32，用于检测传输错误。</li>
+                        <li data-i18n="encrypted.crc.scenarioFileIntegrity"><strong>文件完整性：</strong>ZIP、PNG、GZIP 等格式使用
+                            CRC-32 校验压缩包或图像数据在传输和存储中的完整性。</li>
+                        <li data-i18n="encrypted.crc.scenarioEmbedded"><strong>嵌入式系统：</strong>Modbus RTU、CAN 总线、蓝牙等协议常用
+                            CRC-16 对短数据帧进行快速校验。</li>
+                        <li data-i18n="encrypted.crc.scenarioFirmware"><strong>固件升级：</strong>设备在接收固件包时通过 CRC
+                            校验确认数据未损坏，防止刷入错误固件。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.crc.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.techAdvantageEfficient"><strong>计算高效：</strong>CRC
+                            通过位运算和查表实现，计算速度极快，适合实时性要求高的场景。</li>
+                        <li data-i18n="encrypted.crc.techAdvantageStandard"><strong>标准兼容：</strong>支持 CRC-32（IEEE 802.3）和
+                            CRC-16/CCITT-FALSE，与主流工具和协议结果一致。</li>
+                        <li data-i18n="encrypted.crc.techAdvantageFlexible"><strong>输入灵活：</strong>支持 UTF-8 文本和 Hex
+                            字节两种输入方式，覆盖文本和二进制数据。</li>
+                        <li data-i18n="encrypted.crc.techAdvantageLocal"><strong>本地计算：</strong>所有计算在浏览器本地完成，数据不上传服务器。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.crc.algorithmSelectionTitle">算法选择建议</h4>
+                    <p data-i18n="encrypted.crc.algorithmSelectionContent">CRC32 是最常用的 CRC 变体，广泛应用于文件校验、网络通信和压缩格式。CRC16
+                        适合短数据帧和嵌入式通信，计算结果更短、开销更小。本工具同时支持 Hex 和十进制输出，便于与不同系统对接。</p>
+                    <h4 data-i18n="encrypted.crc.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.crc.noteFaq1"><strong>Q: CRC 和哈希（如 MD5）有什么区别？</strong>A: CRC 基于多项式除法，设计目标是检测随机错误（如传输噪声），计算速度极快；MD5/SHA 基于密码学设计，能抵抗恶意篡改。CRC 不能替代安全哈希。</li>
+                        <li data-i18n="encrypted.crc.noteFaq2"><strong>Q: CRC-32 能检测所有错误吗？</strong>A: CRC-32 能检测所有单比特错误、所有双比特错误（在数据长度不超过一定范围时）和所有奇数个比特错误。但无法检测故意篡改——攻击者可以重新计算 CRC 使篡改后的数据通过校验。</li>
+                        <li data-i18n="encrypted.crc.noteFaq3"><strong>Q: 为什么 CRC-32 和 CRC-16 的结果不同？</strong>A: 它们使用不同的生成多项式和输出长度。CRC-32 输出 32 位校验值，CRC-16 输出 16 位——算法本质不同，结果当然不同。</li>
+                        <li data-i18n="encrypted.crc.noteFaq4"><strong>Q: Hex 输入怎么用？</strong>A: 选择 Hex 字节模式后，输入十六进制字符串（如 48656C6C6F），工具将其解析为字节序列再计算 CRC。适合校验二进制协议数据帧。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

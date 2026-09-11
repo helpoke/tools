@@ -315,7 +315,7 @@
                     JWT"按钮，工具自动构建Header和Payload，使用HMAC算法计算签名，生成完整的JWT Token。生成的JWT可直接粘贴到JWT解析功能中进行验证。
                 </p>
 
-                <h3>实战案例：调试第三方API认证</h3>
+                <h2>实战案例：调试第三方API认证</h2>
                 <p>假设您正在开发一个需要对接第三方支付API的项目，第三方返回的响应头中包含一个JWT格式的访问令牌。使用本工具进行调试的步骤如下：首先从响应头或响应体中复制完整的JWT字符串；然后粘贴到JWT解析框，工具立即显示Header、Payload和Signature三部分；如果Payload中包含用户ID、权限列表、过期时间等信息，可以验证这些数据是否符合预期；检查exp字段确认Token是否已过期；在开发过程中，可使用JWT生成功能快速构造测试Token，设置自定义Claims和过期时间，验证系统的认证逻辑是否正确。
                 </p>
             </div>
@@ -338,7 +338,7 @@
                     </div>
                 </div>
 
-                <h2>适用场景与人群</h2>
+                <h2>典型应用场景</h2>
                 <p><strong>前端开发者：</strong>解析API返回的JWT Token，查看用户信息和权限声明，调试登录认证流程和Token刷新逻辑。</p>
                 <p><strong>后端开发者：</strong>生成测试用Token，验证Token生成和验证逻辑，调试JWT中间件和认证守卫。</p>
                 <p><strong>API开发者：</strong>调试第三方API返回的Token，验证Webhook签名，处理OAuth回调中的授权码。</p>
@@ -372,7 +372,7 @@
                     </ul>
                 </div>
 
-                <h2>常见问题与解答</h2>
+                <h2>常见问题</h2>
                 <h3>问：JWT的三个部分分别是什么？</h3>
                 <p><strong>答：</strong>JWT（JSON Web Token）由三部分组成，用点号（.）分隔：1)
                     Header（头部）：JSON格式的Base64URL编码，指定Token类型（通常为JWT）和签名算法（如HS256、RS256）；2)
@@ -415,6 +415,19 @@
                     URL兼容性：Base64的+和/在URL中具有特殊含义，Base64URL将它们替换为-和_，可直接用于URL参数；3)
                     填充规则：标准Base64通常需要=填充，Base64URL通常省略尾部=填充；4)
                     JWT使用：JWT规范强制使用Base64URL编码，Header和Payload必须使用URL安全的字符集。本工具的JWT生成和解析均使用Base64URL编码，符合JWT规范要求。</p>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>安全最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>密钥保密：</strong>不要在代码仓库、前端配置或不安全渠道中泄露密钥或敏感凭证。</li>
+                    <li><strong>本地优先：</strong>本工具所有计算在浏览器本地完成，处理完成后及时关闭页面，避免敏感信息驻留。</li>
+                    <li><strong>结合多层防护：</strong>单一工具不足以构建完整安全体系，建议配合 TLS、访问控制、审计日志等措施。</li>
+                    <li><strong>定期轮换：</strong>对长期使用的密钥、令牌或凭证建立轮换机制，降低泄露后的影响范围。</li>
+                    <li><strong>选择合适算法：</strong>根据安全需求选择算法长度和模式，优先使用经过广泛验证的标准方案。</li>
+                </ul>
             </div>
         </div>
 

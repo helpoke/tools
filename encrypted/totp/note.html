@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="TOTP/OTP 生成器使用说明：兼容 Google Authenticator、Microsoft Authenticator，支持 Base32 密钥与 SHA-1/SHA-256/SHA-512，本地生成动态口令，保护账户安全">
+    <meta name="keywords" content="TOTP,OTP,动态口令,双因素认证,Google Authenticator,Microsoft Authenticator,Base32,RFC 6238">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>TOTP/OTP 生成器 - 使用说明与完整指南</title>
+    <link rel="canonical" href="https://helpoke.com/encrypted/totp/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/totp/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/totp/note.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #e74c3c;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: #e74c3c;
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        code {
+            background: rgba(231, 76, 60, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/note.css">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/note.js"></script>
+    <script src="/common/js/layout.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>TOTP/OTP 生成器</h1>
+            <p class="subtitle">本地生成基于时间的一次性密码，增强账户二次验证安全</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是 TOTP？</h2>
+                <p>TOTP（Time-based One-Time Password，基于时间的一次性密码）是一种由 IETF 在 <code>RFC 6238</code>
+                    中定义的双因素认证（2FA）标准。它结合了<strong>共享密钥</strong>和<strong>当前时间</strong>，通过 HMAC 算法生成一个只在短时间内有效的动态口令。典型的
+                    TOTP 口令每 30 秒更新一次，每次使用后即失效，因此即使攻击者截获了当前口令，也无法在下一个时间窗口内再次使用。</p>
+                <p>TOTP 的核心计算过程如下：首先将当前 Unix 时间戳按周期（通常为 30 秒）取整得到时间计数器；然后使用共享密钥对计数器计算 HMAC（常用 HMAC-SHA1）；最后从 HMAC
+                    结果中按特定规则截取 6 位或 8 位十进制数字作为动态口令。由于通信双方持有相同的密钥且时间同步，因此能生成一致的口令。</p>
+                <p>本工具严格遵循 RFC 6238 / RFC 4226 标准，使用浏览器原生 <code>Web Crypto API</code> 执行 HMAC 计算。只要输入正确的 Base32
+                    密钥并选择对应的算法、位数和周期，生成的口令就与 Google Authenticator、Microsoft Authenticator、Authy
+                    等主流验证器完全一致。密钥仅在浏览器本地使用，不会上传到服务器。</p>
+
+                <h2>三步生成动态口令</h2>
+                <h3>第一步：输入 Base32 密钥</h3>
+                <p>从服务提供的二维码或文本中获取 Base32 编码的密钥，并粘贴到工具中。Base32 字符集仅包含 A-Z 和 2-7，密钥长度通常为 16、24 或 32
+                    个字符。这个密钥与您的密码等效，务必妥善保管。</p>
+                <h3>第二步：配置参数</h3>
+                <p>大多数服务使用默认配置：<code>SHA-1 + 6 位数字 + 30 秒周期</code>，这也是 Google Authenticator 的默认设置。部分企业或高安全服务可能使用
+                    SHA-256/SHA-512 和 8 位数字。请确保算法、位数、周期与服务端配置完全一致，任一参数不同都会导致口令不匹配。</p>
+                <h3>第三步：生成并使用口令</h3>
+                <p>点击生成按钮，工具会显示当前有效的动态口令，并通过倒计时条提示下次刷新时间。在口令过期前将其输入到登录界面的二次验证框中即可完成认证。</p>
+            </div>
+            <div class="info-section">
+                <h2>典型应用场景</h2>
+                <p><strong>账户二次验证（2FA）：</strong>为邮箱、网银、社交媒体、云服务、代码托管平台等开启 TOTP 二次验证。即使密码泄露，攻击者没有密钥也无法登录。</p>
+                <p><strong>开发者调试：</strong>在实现 TOTP 登录流程时，使用本工具验证服务端生成的口令是否正确，排查密钥、算法、位数或周期配置问题。</p>
+                <p><strong>临时替代验证器：</strong>当手机不在身边、验证器 App 损坏或更换设备时，可临时使用本工具获取口令完成登录。</p>
+                <p><strong>安全测试与兼容验证：</strong>测试 TOTP 系统的跨平台兼容性，确保服务端与客户端使用完全相同的算法参数。</p>
+
+                <h2>技术优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">RFC 6238 / RFC 4226</span>
+                    <span class="feature-tag">Web Crypto API</span>
+                    <span class="feature-tag">SHA-1/256/512</span>
+                    <span class="feature-tag">6/8 位口令</span>
+                    <span class="feature-tag">30/60 秒周期</span>
+                    <span class="feature-tag">本地生成</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>安全注意事项：</strong></p>
+                    <ul>
+                        <li>TOTP 密钥与密码等效，泄露后攻击者可生成相同口令</li>
+                        <li>切勿截图保存到云端、发送给他人或保存在不安全的代码仓库中</li>
+                        <li>设备时间必须准确（建议开启 NTP 网络时间同步），否则口令会与服务端不一致</li>
+                        <li>本工具仅用于临时生成口令或开发调试，不建议长期保存密钥在浏览器中</li>
+                        <li>所有计算在浏览器本地完成，密钥不上传服务器</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题</h2>
+                <h3>问：生成的口令和验证器不一致？</h3>
+                <p><strong>答：</strong>请检查密钥、算法、位数和周期是否与服务配置完全一致，同时确认本机时间准确。任何一个参数不同，或设备时间偏差超过几个周期，都会导致口令不一致。</p>
+                <h3>问：本工具可以代替验证器 App 吗？</h3>
+                <p><strong>答：</strong>可以临时使用，但不建议长期保存密钥在浏览器中。专用验证器 App（如 Google Authenticator、Microsoft
+                    Authenticator、Authy）通常具有更好的安全隔离、备份和恢复机制。</p>
+                <h3>问：TOTP 和短信验证码有什么区别？</h3>
+                <p><strong>答：</strong>TOTP 不依赖网络和短信通道，由设备本地基于密钥和时间生成，不受 SIM 卡交换攻击（SIM
+                    Swap）和短信拦截影响。而短信验证码可能被运营商、中间人攻击或钓鱼手段截获，安全性相对较低。</p>
+                <h3>问：为什么需要二次验证？</h3>
+                <p><strong>答：</strong>据统计，超过 80%
+                    的账户入侵源于密码泄露、钓鱼攻击或凭证填充。二次验证在密码之外增加了一道防线，即使密码被盗，攻击者通常也无法通过第二因素认证，从而大幅降低账户被盗风险。</p>
+            </div>
+        </div>
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>安全最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>密钥保密：</strong>不要在代码仓库、前端配置或不安全渠道中泄露密钥或敏感凭证。</li>
+                    <li><strong>本地优先：</strong>本工具所有计算在浏览器本地完成，处理完成后及时关闭页面，避免敏感信息驻留。</li>
+                    <li><strong>结合多层防护：</strong>单一工具不足以构建完整安全体系，建议配合 TLS、访问控制、审计日志等措施。</li>
+                    <li><strong>定期轮换：</strong>对长期使用的密钥、令牌或凭证建立轮换机制，降低泄露后的影响范围。</li>
+                    <li><strong>选择合适算法：</strong>根据安全需求选择算法长度和模式，优先使用经过广泛验证的标准方案。</li>
+                </ul>
+            </div>
+            <h2>实战案例：接口请求安全加固</h2>
+            <p>某团队在开放 API 时，需要为第三方调用者提供一种轻量且可靠的鉴权方式。通过 TOTP/OTP 生成器，服务端为每个开发者分配唯一凭证，并要求请求中附带基于该工具生成的签名或令牌。</p>
+            <p><strong>实施流程：</strong></p>
+            <ol>
+                <li>开发者在控制台获取由 TOTP/OTP 生成器 生成的密钥或凭证。</li>
+                <li>调用 API 前，按照约定格式拼接请求参数与时间戳，使用 TOTP/OTP 生成器 计算签名。</li>
+                <li>将签名放入请求头，服务端使用相同逻辑重新计算并比对。</li>
+                <li>若签名一致且时间戳在有效窗口内，则放行请求；否则拒绝，防止重放和篡改。</li>
+            </ol>
+            <p><strong>效果：</strong>该方案无需复杂证书基础设施，仅通过浏览器本地即可完成计算，部署成本低且兼容性好。</p>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#e74c3c"></div>
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../hmac/index.html" class="tool-link">HMAC生成校验工具</a>
+                <a href="../aes/index.html" class="tool-link">AES加解密工具</a>
+                <a href="../rsa/index.html" class="tool-link">RSA密钥对生成工具</a>
+            </div>
+        </div>
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

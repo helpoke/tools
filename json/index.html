@@ -52,23 +52,23 @@
     <script type="importmap">
     {
         "imports": {
-            "codemirror": "./lib/codemirror/codemirror/index.js",
-            "@codemirror/lang-json": "./lib/codemirror/codemirror_lang-json/index.js",
-            "@codemirror/state": "./lib/codemirror/codemirror_state/index.js",
-            "@codemirror/view": "./lib/codemirror/codemirror_view/index.js",
-            "@codemirror/language": "./lib/codemirror/codemirror_language/index.js",
-            "@codemirror/commands": "./lib/codemirror/codemirror_commands/index.js",
-            "@codemirror/search": "./lib/codemirror/codemirror_search/index.js",
-            "@codemirror/autocomplete": "./lib/codemirror/codemirror_autocomplete/index.js",
-            "@codemirror/lint": "./lib/codemirror/codemirror_lint/index.js",
-            "@lezer/common": "./lib/codemirror/lezer_common/index.js",
-            "@lezer/highlight": "./lib/codemirror/lezer_highlight/index.js",
-            "@lezer/json": "./lib/codemirror/lezer_json/index.js",
-            "@lezer/lr": "./lib/codemirror/lezer_lr/index.js",
-            "@marijn/find-cluster-break": "./lib/codemirror/marijn_find-cluster-break/index.js",
-            "style-mod": "./lib/codemirror/style-mod/style-mod.js",
-            "w3c-keyname": "./lib/codemirror/w3c-keyname/index.js",
-            "crelt": "./lib/codemirror/crelt/index.js"
+            "codemirror": "/common/lib/codemirror/codemirror/index.js",
+            "@codemirror/lang-json": "/common/lib/codemirror/codemirror_lang-json/index.js",
+            "@codemirror/state": "/common/lib/codemirror/codemirror_state/index.js",
+            "@codemirror/view": "/common/lib/codemirror/codemirror_view/index.js",
+            "@codemirror/language": "/common/lib/codemirror/codemirror_language/index.js",
+            "@codemirror/commands": "/common/lib/codemirror/codemirror_commands/index.js",
+            "@codemirror/search": "/common/lib/codemirror/codemirror_search/index.js",
+            "@codemirror/autocomplete": "/common/lib/codemirror/codemirror_autocomplete/index.js",
+            "@codemirror/lint": "/common/lib/codemirror/codemirror_lint/index.js",
+            "@lezer/common": "/common/lib/codemirror/lezer_common/index.js",
+            "@lezer/highlight": "/common/lib/codemirror/lezer_highlight/index.js",
+            "@lezer/json": "/common/lib/codemirror/lezer_json/index.js",
+            "@lezer/lr": "/common/lib/codemirror/lezer_lr/index.js",
+            "@marijn/find-cluster-break": "/common/lib/codemirror/marijn_find-cluster-break/index.js",
+            "style-mod": "/common/lib/codemirror/style-mod/style-mod.js",
+            "w3c-keyname": "/common/lib/codemirror/w3c-keyname/index.js",
+            "crelt": "/common/lib/codemirror/crelt/index.js"
         }
     }
     </script>
@@ -373,231 +373,232 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="info-section">
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="tool.json.intro.title">工具介绍</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="tool.json.intro.aboutTitle">一、为什么需要专业的 JSON 工具</h4>
-                            <ul>
-                                <li data-i18n="tool.json.intro.about1">每个后端开发者都经历过这样的场景：从日志中复制出一段 API
-                                    响应，粘贴到编辑器里发现是压缩成一行的大字符串——几千个键值对挤在一起，花括号和方括号层层嵌套，肉眼根本找不到目标字段。更痛苦的是，当你需要对比两个环境的配置差异、或者把前端收到的
-                                    JSON 转成 Java 实体类时，手动操作既低效又容易出错。</li>
-                                <li data-i18n="tool.json.intro.about2">这款工具正是为解决这些日常痛点而设计的。它不是一个简单的"格式化器"——而是一套覆盖 JSON
-                                    全生命周期的工作台：从阅读（格式化+折叠+搜索）、到分析（双栏 diff 比对）、再到转换（生成 Java Bean、转
-                                    XML），所有操作在一个页面内无缝切换，无需在多个工具之间来回跳转。</li>
-                                <li data-i18n="tool.json.intro.about3">安全方面值得特别说明：整个工具是一个纯前端应用——不依赖任何后端
-                                    API，不向任何服务器发送你的数据。你在编辑器中粘贴的 API 密钥、数据库配置、用户信息，始终只存在于你的浏览器内存中。关闭标签页即彻底清除，无痕模式也不会留下痕迹。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.json.intro.modulesTitle">二、四大模块深度解读</h4>
-                            <ul>
-                                <li data-i18n="tool.json.intro.module1">
-                                    <strong>格式化模块</strong>不只是"加缩进"那么简单。它内置了一个容错解析引擎：自动剥离 UTF-8 BOM 头（Windows
-                                    记事本的"杰作"）、去除 JSONC 注释（VS Code 的 settings.json 风格）、将单引号修正为双引号、兼容 Python 风格的
-                                    True/False/None、容忍末尾多余逗号。这些"不标准但常见"的写法，在其他工具中会直接报错，在这里都能被智能修正。格式化后的编辑器基于 CodeMirror
-                                    6，支持语法高亮、行号、模糊搜索、节点折叠——大文件也能快速定位到目标字段。
-                                </li>
-                                <li data-i18n="tool.json.intro.module2"><strong>比对模块</strong>采用逐行 diff
-                                    算法，但不是简单的文本对比——它会先对两段 JSON
-                                    做标准化处理（忽略空白和字段顺序），然后精确标记到"哪个数组的第几个元素变了"或"哪个对象的哪个属性被修改"。新增、删除、修改三种差异用不同颜色高亮，一目了然。同步格式化/压缩/转义按钮确保两侧始终处于相同处理状态，避免格式不一致导致的"假差异"。
-                                </li>
-                                <li data-i18n="tool.json.intro.module3"><strong>Java Bean 转换模块</strong>解决的是一个高频需求：拿到一段
-                                    JSON 响应后，快速生成对应的 Java 实体类。它不只是映射字段名和类型——生成的代码中每个字段都自动填入 JSON
-                                    中的实际值作为初始化示例（<code>private String name = "张三";</code>），便于直观理解字段含义。类型推断覆盖
-                                    String、Long、Double、Boolean、List、嵌套对象等。反向转换同样支持——从 Java Bean 代码生成 JSON 模板。</li>
-                                <li data-i18n="tool.json.intro.module4"><strong>XML 互转模块</strong>处理两种数据格式之间的映射。JSON 转
-                                    XML 时，嵌套对象变为子元素，数组元素变为重复标签，支持属性模式；XML 转 JSON 时，元素名变键名，属性以 <code>$</code> 前缀标识，文本以
-                                    <code>_text</code> 存储，同名重复元素自动合并为数组。转换结果自动格式化，可直接用于 SOAP 接口调试、配置文件迁移等场景。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.json.intro.featuresTitle">三、核心特性</h4>
-                            <ul>
-                                <li data-i18n="tool.json.intro.feature1"><strong>智能容错：</strong>自动去除 BOM 头与注释、单引号转双引号、兼容
-                                    Python 风格 True/False/None、容错末尾多余逗号。</li>
-                                <li data-i18n="tool.json.intro.feature2"><strong>键值模糊搜索：</strong>对 key 和 value
-                                    模糊匹配，结果显示行号与完整路径，点击即可跳转定位。</li>
-                                <li data-i18n="tool.json.intro.feature3">
-                                    <strong>转义状态识别：</strong>转义状态下点击格式化会自动先去转义；去转义后自动恢复之前的显示状态。
-                                </li>
-                                <li data-i18n="tool.json.intro.feature4"><strong>现代编辑器：</strong>基于 CodeMirror
-                                    6，支持语法高亮、行号、自动换行、全屏与暗色模式。</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="tool.json.instructions.title">使用说明</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="tool.json.instructions.format.title">一、格式化：从混乱到清晰</h4>
-                            <ul>
-                                <li data-i18n="tool.json.instructions.format.item1">将压缩的 JSON
-                                    粘贴到编辑器中，点击"格式化"按钮。容错引擎会自动修正常见问题（BOM、注释、单引号、多余逗号），输出带缩进和语法高亮的可读格式。如果 JSON
-                                    本身有语法错误（如括号不匹配），编辑器会在错误位置显示红色标记和具体错误描述，精确到行号和列号。</li>
-                                <li data-i18n="tool.json.instructions.format.item2">"压缩"按钮执行格式化的逆操作——移除所有空白和换行，将 JSON
-                                    压缩为单行。压缩前会自动去除注释。这在需要减小 JSON 体积（存入数据库、通过网络传输）时特别有用。转义状态下的内容也可以直接压缩，工具会先处理转义再压缩。</li>
-                                <li data-i18n="tool.json.instructions.format.item3">"转义"按钮将 JSON
-                                    中的特殊字符转为转义序列（换行→<code>\n</code>，引号→<code>\"</code>，反斜杠→<code>\\</code>），常用于将 JSON 嵌入
-                                    JavaScript 字符串或日志输出。"去转义"则相反。工具会记住转义前的状态（格式化或压缩），去转义后自动恢复。</li>
-                                <li data-i18n="tool.json.instructions.format.item4">"折叠"按钮一键收起所有嵌套节点——对象显示
-                                    <code>{5个属性}</code>，数组显示 <code>[3个元素]</code>，方便快速浏览大型 JSON
-                                    的顶层骨架。再次点击展开所有节点。折叠依赖格式化后的结构信息，未格式化时会提示"请先格式化"。
-                                </li>
-                                <li data-i18n="tool.json.instructions.format.item5">
-                                    "搜索"按钮打开搜索面板，支持对键名和键值进行模糊匹配（不区分大小写）。每条搜索结果显示匹配类型、行号和完整 JSON 路径（如
-                                    <code>data.users[0].address.city</code>），点击结果自动滚动并高亮选中。搜索不要求先格式化，只要内容可解析为 JSON 即可。
-                                </li>
-                                <li data-i18n="tool.json.instructions.format.item6">"换行"按钮将单行 JSON
-                                    按结构分行显示（每个键值对一行），但不改变语义——介于格式化和压缩之间，适合查看嵌入的长字符串（如 Base64 数据、HTML 片段）。</li>
-                                <li data-i18n="tool.json.instructions.format.item7">
-                                    编辑器底部提供与顶部相同的按钮组——处理长文档时不必滚回顶部。"示例"按钮加载包含各种数据类型的示例 JSON，方便快速体验各项功能。</li>
-                            </ul>
-                            <h4 data-i18n="tool.json.instructions.compare.title">二、比对：精准定位每一处差异</h4>
-                            <ul>
-                                <li data-i18n="tool.json.instructions.compare.item1">切换到"比对"标签页，左右两侧分别粘贴需要对比的 JSON
-                                    数据。点击"开始比对"后，系统对两段 JSON 进行结构化 diff
-                                    分析——新增内容标绿、删除内容标红、修改内容标黄。对于数组，精确标记到第几个元素发生了变化；对于对象，指出具体哪个属性被修改。</li>
-                                <li data-i18n="tool.json.instructions.compare.item2">
-                                    四个同步按钮（格式化/压缩/转义/清除）同时作用于两侧。建议先点击"同步格式化"确保两边格式一致，再执行比对——否则缩进差异会被误判为内容差异。比对算法会忽略对象字段的顺序差异（<code>{"a":1,"b":2}</code>
-                                    和 <code>{"b":2,"a":1}</code> 视为相同），但数组元素顺序不同会被标记。</li>
-                                <li data-i18n="tool.json.instructions.compare.item3">如果两段 JSON
-                                    完全相同，比对结果区域会显示"两个JSON完全相同"的提示。对于大型 JSON（超过 3000 行），比对可能需要 2-3 秒，请耐心等待。</li>
-                            </ul>
-                            <h4 data-i18n="tool.json.instructions.javabean.title">三、JSON ↔ Java Bean 双向转换</h4>
-                            <ul>
-                                <li data-i18n="tool.json.instructions.javabean.item1">在"转Java"标签页左侧粘贴
-                                    JSON，点击"转Bean"。工具遍历 JSON 结构，为每个对象生成一个 Java
-                                    类：对象名取自键名（首字母大写），字段类型根据值自动推断（字符串→String，整数→Long，小数→Double，布尔→Boolean，数组→List，嵌套对象→独立类）。每个字段自动填入
-                                    JSON 中的实际值作为初始化示例。</li>
-                                <li data-i18n="tool.json.instructions.javabean.item2">类型推断策略：整数优先推断为 Long（而非
-                                    int），避免大数值溢出；小数推断为 Double；空值（null）推断为 Object，需手动调整。如果同一数组中不同元素的字段不一致，工具以第一个元素为准推断类型。
-                                </li>
-                                <li data-i18n="tool.json.instructions.javabean.item3">反向转换同样支持——在右侧粘贴 Java Bean
-                                    代码，点击"转JSON"，工具解析字段声明和类型注解，生成对应的 JSON 模板。字段初始值会被提取为 JSON 中的示例数据。</li>
-                                <li data-i18n="tool.json.instructions.javabean.item4">生成的 Java 代码可以直接复制到 IDE
-                                    中使用。如果类名或字段名与 Java 关键字冲突，工具会自动添加前缀避免编译错误。</li>
-                            </ul>
-                            <h4 data-i18n="tool.json.instructions.xml.title">四、JSON ↔ XML 双向转换</h4>
-                            <ul>
-                                <li data-i18n="tool.json.instructions.xml.item1">在"转XML"标签页左侧粘贴 JSON，点击"转XML"。转换规则：JSON
-                                    对象的键变为 XML 元素名，字符串/数字值变为元素文本，嵌套对象变为子元素，数组元素变为重复的同名标签。转换结果自动缩进格式化。</li>
-                                <li data-i18n="tool.json.instructions.xml.item2">反向转换（XML→JSON）时，XML 元素名作为 JSON 键名，元素属性以
-                                    <code>$</code> 前缀标识（如 <code>$id</code>），文本内容以 <code>_text</code> 键存储。多个同名子元素自动合并为
-                                    JSON 数组。根元素作为最外层对象包裹。
-                                </li>
-                                <li data-i18n="tool.json.instructions.xml.item3">两种格式的转换都保留完整的层级结构和数据内容。转换结果可直接用于 SOAP
-                                    接口调试、配置文件格式迁移、数据导入导出等场景。</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="tool.json.notes.title">注意事项</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="tool.json.notes.security.title">一、关于数据安全的事实</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.security.item1">这款工具是一个纯前端应用——整个代码运行在你的浏览器中，没有任何后端服务器。你的
-                                    JSON 数据（包括 API 密钥、数据库密码、用户信息等）不会通过任何网络请求发送出去。可以用浏览器的开发者工具（F12 →
-                                    Network）验证：打开工具后，除了页面本身的加载请求外，不会产生任何额外的网络通信。</li>
-                                <li data-i18n="tool.json.notes.security.item2">
-                                    尽管如此，仍不建议在公共电脑（网吧、图书馆）上处理高度敏感的数据。原因不是数据会被上传——而是浏览器内存和系统剪贴板可能被同一台机器上的其他程序读取。如果在公共设备上使用，完成后请清空编辑框、清除剪贴板、并关闭标签页。
-                                </li>
-                                <li data-i18n="tool.json.notes.security.item3">
-                                    处理完敏感数据后，点击"清空"按钮清除编辑框内容。虽然关闭标签页后浏览器会自动释放内存，但主动清空是更安全的习惯。对于包含密钥的
-                                    JSON，建议额外清除浏览器剪贴板（粘贴一次空白内容覆盖）。</li>
-                            </ul>
-                            <h4 data-i18n="tool.json.notes.format.title">二、格式兼容性与容错边界</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.format.item1">标准 JSON 规范（RFC
-                                    8259）要求：键名和字符串必须用双引号、不允许注释、不允许末尾多余逗号、不支持 undefined 或函数。但现实中的 JSON 数据经常"不那么标准"——来自
-                                    JavaScript 配置文件、Python 脚本输出、或手动编辑的内容。本工具的容错引擎覆盖了以下常见"不规范"情况：</li>
-                                <li data-i18n="tool.json.notes.format.item2">单引号字符串：自动将 <code>'value'</code> 修正为
-                                    <code>"value"</code>。但如果字符串内容本身包含未转义的单引号（如
-                                    <code>'it's fine'</code>），自动修正可能产生错误结果——建议手动修正后再格式化。
-                                </li>
-                                <li data-i18n="tool.json.notes.format.item3">末尾多余逗号（trailing
-                                    comma）：<code>{"a":1,"b":2,}</code> 中的最后一个逗号会被自动去除。JavaScript 的 JSON.parse
-                                    不容忍这种写法，但许多编辑器（VS Code）和语言（Python、Java）的 JSON 库都支持。</li>
-                                <li data-i18n="tool.json.notes.format.item4">JSONC 注释：<code>// 单行注释</code> 和
-                                    <code>/* 多行注释 */</code> 会在格式化时自动去除。如果你需要保留注释，请在格式化前备份原始内容。注意：VS Code 的
-                                    settings.json、tsconfig.json 等文件使用 JSONC 格式，格式化后注释会丢失。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.json.notes.usage.title">三、使用技巧与常见误区</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.usage.item1">折叠功能依赖格式化后的结构信息。未格式化的 JSON
-                                    是一行纯文本，工具无法识别节点边界，因此折叠按钮会提示"请先格式化"。格式化后，每个对象和数组都可以独立折叠——折叠后对象显示属性数量、数组显示元素数量，方便快速浏览大型
-                                    JSON 的顶层骨架。</li>
-                                <li data-i18n="tool.json.notes.usage.item2">
-                                    搜索功能不需要先格式化——它直接对原始文本进行正则匹配。但格式化后的搜索结果更直观（有行号、可折叠定位）。搜索面板支持对键名和键值分别匹配，显示完整 JSON 路径（如
-                                    <code>data.users[2].email</code>），点击结果自动滚动到对应位置。
-                                </li>
-                                <li data-i18n="tool.json.notes.usage.item3">
-                                    比对功能在对比前会做标准化处理——忽略空白差异和对象字段顺序。但数组元素的顺序差异会被标记——<code>[1,2,3]</code> 和
-                                    <code>[3,2,1]</code> 被视为不同。如果你只关心内容不关心顺序，建议先对数组排序再比对。
-                                </li>
-                                <li data-i18n="tool.json.notes.usage.item4">转义功能常用于将 JSON 嵌入到其他格式中（如 JavaScript 字符串、SQL
-                                    语句、日志输出）。转义后的 JSON 看起来像一堆带反斜杠的乱码，这是正常的——它仍然是有效的 JSON，只是所有特殊字符都被转义了。去转义后恢复原始可读格式。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.json.notes.performance.title">四、大文件处理建议</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.performance.item1">处理超过 10MB 的 JSON
-                                    文件时，格式化操作需要构建完整的语法树并渲染到 CodeMirror 编辑器，可能导致浏览器卡顿数秒。CodeMirror 的语法高亮在大文件时也会消耗较多
-                                    CPU。建议将大型 JSON 分段处理——先提取感兴趣的子结构进行格式化分析，而非一次性加载整个文件。</li>
-                                <li data-i18n="tool.json.notes.performance.item2">深层嵌套（超过 10 层）的 JSON 在折叠/展开时需要递归遍历 DOM
-                                    节点，可能有短暂延迟。搜索功能在大文件（超过 1MB）时的匹配速度也会下降。工具已使用 requestIdleCallback
-                                    优化，避免阻塞用户交互，但大文件操作仍需耐心等待。</li>
-                                <li data-i18n="tool.json.notes.performance.item3">比对功能的时间复杂度为 O(N×M)，其中 N 和 M 分别是两段 JSON
-                                    的行数。对比两个 5000 行的 JSON 可能需要 2-3 秒。如果比对大型配置文件，建议先分别压缩再对比关键差异部分。</li>
-                            </ul>
-                            <h4 data-i18n="tool.json.notes.compatibility.title">五、浏览器与编码</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.compatibility.item1">推荐使用 Chrome 80+、Firefox 75+、Edge
-                                    80+、Safari 13+。CodeMirror 6 编辑器依赖 ES6+ 特性（Proxy、Symbol），不支持 IE 11。Chrome/Edge 的
-                                    JavaScript 引擎性能最优，处理大文件速度最快。移动端浏览器可以打开工具进行基本操作，但编辑体验不如桌面端。</li>
-                                <li data-i18n="tool.json.notes.compatibility.item2">确保输入数据使用 UTF-8 编码。从 Windows
-                                    记事本复制的内容可能是 GBK 编码——中文字符会乱码。从网页/PDF 复制时可能带入不可见字符（零宽空格、BOM 标记），工具的容错引擎会自动去除
-                                    BOM，但其他不可见字符需要手动清理。</li>
-                                <li data-i18n="tool.json.notes.compatibility.item3">
-                                    转义功能处理特殊字符（换行→<code>\n</code>、引号→<code>\"</code>等），中文和 emoji 默认以 Unicode 原样保留，不进行
-                                    <code>\uXXXX</code> 转义，确保转义后的 JSON 仍然可读。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.json.notes.encoding.title">六、关于 JSON 的常见疑问</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.encoding.item1">为什么我的 JSON 格式化报错？最常见原因：1) 键名没有用双引号包裹（JSON
-                                    不允许单引号或无引号键名）；2) 末尾有多余逗号（某些语言容忍但标准 JSON 不允许）；3)
-                                    括号不匹配（花括号和方括号数量不对）。工具的容错引擎会自动尝试修正，但严重错误需要手动修复。</li>
-                                <li data-i18n="tool.json.notes.encoding.item2">为什么比对结果和我看到的不一样？工具在比对前会标准化
-                                    JSON（忽略空白和字段顺序），所以 <code>{"a":1,"b":2}</code> 和 <code>{"b":2,"a":1}</code>
-                                    被视为相同。如果确实看到了差异，说明是内容层面的不同而非格式差异。</li>
-                                <li data-i18n="tool.json.notes.encoding.item3">转 Java Bean
-                                    的结果需要手动调整吗？大多数情况下生成的代码可以直接使用。但以下情况需要手动修改：1) 同一数组不同元素字段不一致——工具以第一个元素为准；2) null 值被推断为
-                                    Object 类型；3) 整数被推断为 Long 而非 Integer。建议生成后在 IDE 中检查一遍。</li>
-                            </ul>
-                            <h4 data-i18n="tool.json.notes.faq.title">七、排错指南</h4>
-                            <ul>
-                                <li data-i18n="tool.json.notes.faq.item1"><strong>格式化后内容丢失了？</strong>检查原始 JSON
-                                    中是否有重复的键名——JSON 标准允许重复键（后一个覆盖前一个），格式化时会自动去重。如果原始数据依赖重复键传递不同信息，需要改用数组结构。</li>
-                                <li data-i18n="tool.json.notes.faq.item2">
-                                    <strong>搜索找不到明明存在的内容？</strong>搜索基于正则匹配，如果搜索词包含正则特殊字符（如
-                                    <code>.</code>、<code>*</code>、<code>[</code>），需要用反斜杠转义。另外，搜索区分 Unicode 编码和原始字符——如果
-                                    JSON 中的中文被 <code>\uXXXX</code> 编码了，搜索原始中文字符是找不到的。
-                                </li>
-                                <li data-i18n="tool.json.notes.faq.item3"><strong>XML 转换结果中有奇怪的 $ 和 _text？</strong>这是
-                                    XML 属性与 JSON 键值的映射约定。XML 属性没有对应的 JSON 概念，工具用 <code>$属性名</code>
-                                    前缀区分属性和子元素；文本内容和子元素共存时，文本用 <code>_text</code> 键存储。这是业界通用的 XML→JSON 映射规则。</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
             </div>
         </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.json.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.json.intro.aboutTitle">为什么需要专业的 JSON 工具</h4>
+                    <ul>
+                        <li data-i18n="tool.json.intro.about1">每个后端开发者都经历过这样的场景：从日志中复制出一段 API
+                            响应，粘贴到编辑器里发现是压缩成一行的大字符串——几千个键值对挤在一起，花括号和方括号层层嵌套，肉眼根本找不到目标字段。更痛苦的是，当你需要对比两个环境的配置差异、或者把前端收到的
+                            JSON 转成 Java 实体类时，手动操作既低效又容易出错。</li>
+                        <li data-i18n="tool.json.intro.about2">这款工具正是为解决这些日常痛点而设计的。它不是一个简单的"格式化器"——而是一套覆盖 JSON
+                            全生命周期的工作台：从阅读（格式化+折叠+搜索）、到分析（双栏 diff 比对）、再到转换（生成 Java Bean、转
+                            XML），所有操作在一个页面内无缝切换，无需在多个工具之间来回跳转。</li>
+                        <li data-i18n="tool.json.intro.about3">安全方面值得特别说明：整个工具是一个纯前端应用——不依赖任何后端
+                            API，不向任何服务器发送你的数据。你在编辑器中粘贴的 API 密钥、数据库配置、用户信息，始终只存在于你的浏览器内存中。关闭标签页即彻底清除，无痕模式也不会留下痕迹。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.json.intro.modulesTitle">四大模块深度解读</h4>
+                    <ul>
+                        <li data-i18n="tool.json.intro.module1">
+                            <strong>格式化模块</strong>不只是"加缩进"那么简单。它内置了一个容错解析引擎：自动剥离 UTF-8 BOM 头（Windows
+                            记事本的"杰作"）、去除 JSONC 注释（VS Code 的 settings.json 风格）、将单引号修正为双引号、兼容 Python 风格的
+                            True/False/None、容忍末尾多余逗号。这些"不标准但常见"的写法，在其他工具中会直接报错，在这里都能被智能修正。格式化后的编辑器基于 CodeMirror
+                            6，支持语法高亮、行号、模糊搜索、节点折叠——大文件也能快速定位到目标字段。
+                        </li>
+                        <li data-i18n="tool.json.intro.module2"><strong>比对模块</strong>采用逐行 diff
+                            算法，但不是简单的文本对比——它会先对两段 JSON
+                            做标准化处理（忽略空白和字段顺序），然后精确标记到"哪个数组的第几个元素变了"或"哪个对象的哪个属性被修改"。新增、删除、修改三种差异用不同颜色高亮，一目了然。同步格式化/压缩/转义按钮确保两侧始终处于相同处理状态，避免格式不一致导致的"假差异"。
+                        </li>
+                        <li data-i18n="tool.json.intro.module3"><strong>Java Bean 转换模块</strong>解决的是一个高频需求：拿到一段
+                            JSON 响应后，快速生成对应的 Java 实体类。它不只是映射字段名和类型——生成的代码中每个字段都自动填入 JSON
+                            中的实际值作为初始化示例（<code>private String name = "张三";</code>），便于直观理解字段含义。类型推断覆盖
+                            String、Long、Double、Boolean、List、嵌套对象等。反向转换同样支持——从 Java Bean 代码生成 JSON 模板。</li>
+                        <li data-i18n="tool.json.intro.module4"><strong>XML 互转模块</strong>处理两种数据格式之间的映射。JSON 转
+                            XML 时，嵌套对象变为子元素，数组元素变为重复标签，支持属性模式；XML 转 JSON 时，元素名变键名，属性以 <code>$</code> 前缀标识，文本以
+                            <code>_text</code> 存储，同名重复元素自动合并为数组。转换结果自动格式化，可直接用于 SOAP 接口调试、配置文件迁移等场景。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.json.intro.featuresTitle">核心特性</h4>
+                    <ul>
+                        <li data-i18n="tool.json.intro.feature1"><strong>智能容错：</strong>自动去除 BOM 头与注释、单引号转双引号、兼容
+                            Python 风格 True/False/None、容错末尾多余逗号。</li>
+                        <li data-i18n="tool.json.intro.feature2"><strong>键值模糊搜索：</strong>对 key 和 value
+                            模糊匹配，结果显示行号与完整路径，点击即可跳转定位。</li>
+                        <li data-i18n="tool.json.intro.feature3">
+                            <strong>转义状态识别：</strong>转义状态下点击格式化会自动先去转义；去转义后自动恢复之前的显示状态。
+                        </li>
+                        <li data-i18n="tool.json.intro.feature4"><strong>现代编辑器：</strong>基于 CodeMirror
+                            6，支持语法高亮、行号、自动换行、全屏与暗色模式。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.json.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.json.instructions.format.title">格式化：从混乱到清晰</h4>
+                    <ul>
+                        <li data-i18n="tool.json.instructions.format.item1">将压缩的 JSON
+                            粘贴到编辑器中，点击"格式化"按钮。容错引擎会自动修正常见问题（BOM、注释、单引号、多余逗号），输出带缩进和语法高亮的可读格式。如果 JSON
+                            本身有语法错误（如括号不匹配），编辑器会在错误位置显示红色标记和具体错误描述，精确到行号和列号。</li>
+                        <li data-i18n="tool.json.instructions.format.item2">"压缩"按钮执行格式化的逆操作——移除所有空白和换行，将 JSON
+                            压缩为单行。压缩前会自动去除注释。这在需要减小 JSON 体积（存入数据库、通过网络传输）时特别有用。转义状态下的内容也可以直接压缩，工具会先处理转义再压缩。</li>
+                        <li data-i18n="tool.json.instructions.format.item3">"转义"按钮将 JSON
+                            中的特殊字符转为转义序列（换行→<code>\n</code>，引号→<code>\"</code>，反斜杠→<code>\\</code>），常用于将 JSON 嵌入
+                            JavaScript 字符串或日志输出。"去转义"则相反。工具会记住转义前的状态（格式化或压缩），去转义后自动恢复。</li>
+                        <li data-i18n="tool.json.instructions.format.item4">"折叠"按钮一键收起所有嵌套节点——对象显示
+                            <code>{5个属性}</code>，数组显示 <code>[3个元素]</code>，方便快速浏览大型 JSON
+                            的顶层骨架。再次点击展开所有节点。折叠依赖格式化后的结构信息，未格式化时会提示"请先格式化"。
+                        </li>
+                        <li data-i18n="tool.json.instructions.format.item5">
+                            "搜索"按钮打开搜索面板，支持对键名和键值进行模糊匹配（不区分大小写）。每条搜索结果显示匹配类型、行号和完整 JSON 路径（如
+                            <code>data.users[0].address.city</code>），点击结果自动滚动并高亮选中。搜索不要求先格式化，只要内容可解析为 JSON 即可。
+                        </li>
+                        <li data-i18n="tool.json.instructions.format.item6">"换行"按钮将单行 JSON
+                            按结构分行显示（每个键值对一行），但不改变语义——介于格式化和压缩之间，适合查看嵌入的长字符串（如 Base64 数据、HTML 片段）。</li>
+                        <li data-i18n="tool.json.instructions.format.item7">
+                            编辑器底部提供与顶部相同的按钮组——处理长文档时不必滚回顶部。"示例"按钮加载包含各种数据类型的示例 JSON，方便快速体验各项功能。</li>
+                    </ul>
+                    <h4 data-i18n="tool.json.instructions.compare.title">比对：精准定位每一处差异</h4>
+                    <ul>
+                        <li data-i18n="tool.json.instructions.compare.item1">切换到"比对"标签页，左右两侧分别粘贴需要对比的 JSON
+                            数据。点击"开始比对"后，系统对两段 JSON 进行结构化 diff
+                            分析——新增内容标绿、删除内容标红、修改内容标黄。对于数组，精确标记到第几个元素发生了变化；对于对象，指出具体哪个属性被修改。</li>
+                        <li data-i18n="tool.json.instructions.compare.item2">
+                            四个同步按钮（格式化/压缩/转义/清除）同时作用于两侧。建议先点击"同步格式化"确保两边格式一致，再执行比对——否则缩进差异会被误判为内容差异。比对算法会忽略对象字段的顺序差异（<code>{"a":1,"b":2}</code>
+                            和 <code>{"b":2,"a":1}</code> 视为相同），但数组元素顺序不同会被标记。</li>
+                        <li data-i18n="tool.json.instructions.compare.item3">如果两段 JSON
+                            完全相同，比对结果区域会显示"两个JSON完全相同"的提示。对于大型 JSON（超过 3000 行），比对可能需要 2-3 秒，请耐心等待。</li>
+                    </ul>
+                    <h4 data-i18n="tool.json.instructions.javabean.title">JSON ↔ Java Bean 双向转换</h4>
+                    <ul>
+                        <li data-i18n="tool.json.instructions.javabean.item1">在"转Java"标签页左侧粘贴
+                            JSON，点击"转Bean"。工具遍历 JSON 结构，为每个对象生成一个 Java
+                            类：对象名取自键名（首字母大写），字段类型根据值自动推断（字符串→String，整数→Long，小数→Double，布尔→Boolean，数组→List，嵌套对象→独立类）。每个字段自动填入
+                            JSON 中的实际值作为初始化示例。</li>
+                        <li data-i18n="tool.json.instructions.javabean.item2">类型推断策略：整数优先推断为 Long（而非
+                            int），避免大数值溢出；小数推断为 Double；空值（null）推断为 Object，需手动调整。如果同一数组中不同元素的字段不一致，工具以第一个元素为准推断类型。
+                        </li>
+                        <li data-i18n="tool.json.instructions.javabean.item3">反向转换同样支持——在右侧粘贴 Java Bean
+                            代码，点击"转JSON"，工具解析字段声明和类型注解，生成对应的 JSON 模板。字段初始值会被提取为 JSON 中的示例数据。</li>
+                        <li data-i18n="tool.json.instructions.javabean.item4">生成的 Java 代码可以直接复制到 IDE
+                            中使用。如果类名或字段名与 Java 关键字冲突，工具会自动添加前缀避免编译错误。</li>
+                    </ul>
+                    <h4 data-i18n="tool.json.instructions.xml.title">JSON ↔ XML 双向转换</h4>
+                    <ul>
+                        <li data-i18n="tool.json.instructions.xml.item1">在"转XML"标签页左侧粘贴 JSON，点击"转XML"。转换规则：JSON
+                            对象的键变为 XML 元素名，字符串/数字值变为元素文本，嵌套对象变为子元素，数组元素变为重复的同名标签。转换结果自动缩进格式化。</li>
+                        <li data-i18n="tool.json.instructions.xml.item2">反向转换（XML→JSON）时，XML 元素名作为 JSON 键名，元素属性以
+                            <code>$</code> 前缀标识（如 <code>$id</code>），文本内容以 <code>_text</code> 键存储。多个同名子元素自动合并为
+                            JSON 数组。根元素作为最外层对象包裹。
+                        </li>
+                        <li data-i18n="tool.json.instructions.xml.item3">两种格式的转换都保留完整的层级结构和数据内容。转换结果可直接用于 SOAP
+                            接口调试、配置文件格式迁移、数据导入导出等场景。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.json.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.json.notes.security.title">关于数据安全的事实</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.security.item1">这款工具是一个纯前端应用——整个代码运行在你的浏览器中，没有任何后端服务器。你的
+                            JSON 数据（包括 API 密钥、数据库密码、用户信息等）不会通过任何网络请求发送出去。可以用浏览器的开发者工具（F12 →
+                            Network）验证：打开工具后，除了页面本身的加载请求外，不会产生任何额外的网络通信。</li>
+                        <li data-i18n="tool.json.notes.security.item2">
+                            尽管如此，仍不建议在公共电脑（网吧、图书馆）上处理高度敏感的数据。原因不是数据会被上传——而是浏览器内存和系统剪贴板可能被同一台机器上的其他程序读取。如果在公共设备上使用，完成后请清空编辑框、清除剪贴板、并关闭标签页。
+                        </li>
+                        <li data-i18n="tool.json.notes.security.item3">
+                            处理完敏感数据后，点击"清空"按钮清除编辑框内容。虽然关闭标签页后浏览器会自动释放内存，但主动清空是更安全的习惯。对于包含密钥的
+                            JSON，建议额外清除浏览器剪贴板（粘贴一次空白内容覆盖）。</li>
+                    </ul>
+                    <h4 data-i18n="tool.json.notes.format.title">格式兼容性与容错边界</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.format.item1">标准 JSON 规范（RFC
+                            8259）要求：键名和字符串必须用双引号、不允许注释、不允许末尾多余逗号、不支持 undefined 或函数。但现实中的 JSON 数据经常"不那么标准"——来自
+                            JavaScript 配置文件、Python 脚本输出、或手动编辑的内容。本工具的容错引擎覆盖了以下常见"不规范"情况：</li>
+                        <li data-i18n="tool.json.notes.format.item2">单引号字符串：自动将 <code>'value'</code> 修正为
+                            <code>"value"</code>。但如果字符串内容本身包含未转义的单引号（如
+                            <code>'it's fine'</code>），自动修正可能产生错误结果——建议手动修正后再格式化。
+                        </li>
+                        <li data-i18n="tool.json.notes.format.item3">末尾多余逗号（trailing
+                            comma）：<code>{"a":1,"b":2,}</code> 中的最后一个逗号会被自动去除。JavaScript 的 JSON.parse
+                            不容忍这种写法，但许多编辑器（VS Code）和语言（Python、Java）的 JSON 库都支持。</li>
+                        <li data-i18n="tool.json.notes.format.item4">JSONC 注释：<code>// 单行注释</code> 和
+                            <code>/* 多行注释 */</code> 会在格式化时自动去除。如果你需要保留注释，请在格式化前备份原始内容。注意：VS Code 的
+                            settings.json、tsconfig.json 等文件使用 JSONC 格式，格式化后注释会丢失。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.json.notes.usage.title">使用技巧与常见误区</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.usage.item1">折叠功能依赖格式化后的结构信息。未格式化的 JSON
+                            是一行纯文本，工具无法识别节点边界，因此折叠按钮会提示"请先格式化"。格式化后，每个对象和数组都可以独立折叠——折叠后对象显示属性数量、数组显示元素数量，方便快速浏览大型
+                            JSON 的顶层骨架。</li>
+                        <li data-i18n="tool.json.notes.usage.item2">
+                            搜索功能不需要先格式化——它直接对原始文本进行正则匹配。但格式化后的搜索结果更直观（有行号、可折叠定位）。搜索面板支持对键名和键值分别匹配，显示完整 JSON 路径（如
+                            <code>data.users[2].email</code>），点击结果自动滚动到对应位置。
+                        </li>
+                        <li data-i18n="tool.json.notes.usage.item3">
+                            比对功能在对比前会做标准化处理——忽略空白差异和对象字段顺序。但数组元素的顺序差异会被标记——<code>[1,2,3]</code> 和
+                            <code>[3,2,1]</code> 被视为不同。如果你只关心内容不关心顺序，建议先对数组排序再比对。
+                        </li>
+                        <li data-i18n="tool.json.notes.usage.item4">转义功能常用于将 JSON 嵌入到其他格式中（如 JavaScript 字符串、SQL
+                            语句、日志输出）。转义后的 JSON 看起来像一堆带反斜杠的乱码，这是正常的——它仍然是有效的 JSON，只是所有特殊字符都被转义了。去转义后恢复原始可读格式。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.json.notes.performance.title">大文件处理建议</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.performance.item1">处理超过 10MB 的 JSON
+                            文件时，格式化操作需要构建完整的语法树并渲染到 CodeMirror 编辑器，可能导致浏览器卡顿数秒。CodeMirror 的语法高亮在大文件时也会消耗较多
+                            CPU。建议将大型 JSON 分段处理——先提取感兴趣的子结构进行格式化分析，而非一次性加载整个文件。</li>
+                        <li data-i18n="tool.json.notes.performance.item2">深层嵌套（超过 10 层）的 JSON 在折叠/展开时需要递归遍历 DOM
+                            节点，可能有短暂延迟。搜索功能在大文件（超过 1MB）时的匹配速度也会下降。工具已使用 requestIdleCallback
+                            优化，避免阻塞用户交互，但大文件操作仍需耐心等待。</li>
+                        <li data-i18n="tool.json.notes.performance.item3">比对功能的时间复杂度为 O(N×M)，其中 N 和 M 分别是两段 JSON
+                            的行数。对比两个 5000 行的 JSON 可能需要 2-3 秒。如果比对大型配置文件，建议先分别压缩再对比关键差异部分。</li>
+                    </ul>
+                    <h4 data-i18n="tool.json.notes.compatibility.title">浏览器与编码</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.compatibility.item1">推荐使用 Chrome 80+、Firefox 75+、Edge
+                            80+、Safari 13+。CodeMirror 6 编辑器依赖 ES6+ 特性（Proxy、Symbol），不支持 IE 11。Chrome/Edge 的
+                            JavaScript 引擎性能最优，处理大文件速度最快。移动端浏览器可以打开工具进行基本操作，但编辑体验不如桌面端。</li>
+                        <li data-i18n="tool.json.notes.compatibility.item2">确保输入数据使用 UTF-8 编码。从 Windows
+                            记事本复制的内容可能是 GBK 编码——中文字符会乱码。从网页/PDF 复制时可能带入不可见字符（零宽空格、BOM 标记），工具的容错引擎会自动去除
+                            BOM，但其他不可见字符需要手动清理。</li>
+                        <li data-i18n="tool.json.notes.compatibility.item3">
+                            转义功能处理特殊字符（换行→<code>\n</code>、引号→<code>\"</code>等），中文和 emoji 默认以 Unicode 原样保留，不进行
+                            <code>\uXXXX</code> 转义，确保转义后的 JSON 仍然可读。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.json.notes.encoding.title">关于 JSON 的常见疑问</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.encoding.item1">为什么我的 JSON 格式化报错？最常见原因：1) 键名没有用双引号包裹（JSON
+                            不允许单引号或无引号键名）；2) 末尾有多余逗号（某些语言容忍但标准 JSON 不允许）；3)
+                            括号不匹配（花括号和方括号数量不对）。工具的容错引擎会自动尝试修正，但严重错误需要手动修复。</li>
+                        <li data-i18n="tool.json.notes.encoding.item2">为什么比对结果和我看到的不一样？工具在比对前会标准化
+                            JSON（忽略空白和字段顺序），所以 <code>{"a":1,"b":2}</code> 和 <code>{"b":2,"a":1}</code>
+                            被视为相同。如果确实看到了差异，说明是内容层面的不同而非格式差异。</li>
+                        <li data-i18n="tool.json.notes.encoding.item3">转 Java Bean
+                            的结果需要手动调整吗？大多数情况下生成的代码可以直接使用。但以下情况需要手动修改：1) 同一数组不同元素字段不一致——工具以第一个元素为准；2) null 值被推断为
+                            Object 类型；3) 整数被推断为 Long 而非 Integer。建议生成后在 IDE 中检查一遍。</li>
+                    </ul>
+                    <h4 data-i18n="tool.json.notes.faq.title">排错指南</h4>
+                    <ul>
+                        <li data-i18n="tool.json.notes.faq.item1"><strong>格式化后内容丢失了？</strong>检查原始 JSON
+                            中是否有重复的键名——JSON 标准允许重复键（后一个覆盖前一个），格式化时会自动去重。如果原始数据依赖重复键传递不同信息，需要改用数组结构。</li>
+                        <li data-i18n="tool.json.notes.faq.item2">
+                            <strong>搜索找不到明明存在的内容？</strong>搜索基于正则匹配，如果搜索词包含正则特殊字符（如
+                            <code>.</code>、<code>*</code>、<code>[</code>），需要用反斜杠转义。另外，搜索区分 Unicode 编码和原始字符——如果
+                            JSON 中的中文被 <code>\uXXXX</code> 编码了，搜索原始中文字符是找不到的。
+                        </li>
+                        <li data-i18n="tool.json.notes.faq.item3"><strong>XML 转换结果中有奇怪的 $ 和 _text？</strong>这是
+                            XML 属性与 JSON 键值的映射约定。XML 属性没有对应的 JSON 概念，工具用 <code>$属性名</code>
+                            前缀区分属性和子元素；文本内容和子元素共存时，文本用 <code>_text</code> 键存储。这是业界通用的 XML→JSON 映射规则。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
 
         <!-- Footer component container -->
         <div id="footer-container">

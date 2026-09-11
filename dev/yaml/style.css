@@ -62,17 +62,48 @@
     background: #059669;
 }
 
-.editor-panel {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+.editor-wrapper {
     margin-bottom: 16px;
+    position: relative;
 }
 
-@media (max-width: 768px) {
-    .editor-panel {
-        grid-template-columns: 1fr;
-    }
+.editor-float-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+}
+
+.editor-float-btn .btn {
+    padding: 4px 14px;
+    font-size: 12px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+.editor-float-btn .btn:hover {
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+body.dark-mode .editor-float-btn .btn {
+    background: rgba(30,41,59,0.92);
+    color: var(--text-primary, #e2e8f0);
+    border-color: var(--border-color, #334155);
+}
+
+body.dark-mode .editor-float-btn .btn:hover {
+    background: rgba(30,41,59,1);
+}
+
+.btn.convert-disabled,
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .panel {
@@ -186,79 +217,30 @@
     font-weight: 500;
 }
 
-/* Line numbers for input */
-.input-with-lines {
-    display: flex;
-    min-height: 600px;
-}
-
-.input-with-lines .line-numbers {
-    padding: 16px 8px;
-    background: #C7EDCC;
-    border-right: 1px solid #e2e8f0;
-    color: #94a3b8;
-    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.7;
-    text-align: right;
-    user-select: none;
-    min-width: 48px;
+/* CodeMirror editor container */
+.cm-editor-container {
+    height: 600px;
     overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
 }
 
-.input-with-lines textarea {
-    flex: 1;
-    height: 800px;
-    padding: 16px;
-    border: none;
+.cm-editor-container .cm-editor {
+    height: 100%;
+}
+
+.cm-editor-container .cm-editor .cm-scroller {
     font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
     font-size: 13px;
     line-height: 1.7;
-    resize: vertical;
-    outline: none;
-    tab-size: 2;
-    color: #1e293b;
-    background: #C7EDCC;
 }
 
-.input-with-lines textarea::placeholder {
-    color: #94a3b8;
+.cm-editor-container .cm-gutters {
+    background-color: var(--input-bg);
+    color: var(--text-muted);
+    border-right: 1px solid var(--border-color);
 }
 
-/* Line numbers for output */
-.output-with-lines {
-    display: flex;
-    min-height: 600px;
-}
-
-.line-numbers {
-    padding: 16px 8px;
-    background: #C7EDCC;
-    border-right: 1px solid #e2e8f0;
-    color: #94a3b8;
-    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.7;
-    text-align: right;
-    user-select: none;
-    min-width: 48px;
-}
-
-.line-numbers span {
-    display: block;
-}
-
-.output-content {
-    flex: 1;
-    padding: 16px;
-    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 13px;
-    line-height: 1.7;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-break: break-all;
-    color: #1e293b;
-}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -281,7 +263,7 @@
     }
 
     .input-with-lines,
-    .output-with-lines {
+    .cm-editor-container {
         min-height: 280px;
     }
 
@@ -316,7 +298,7 @@
     }
 
     .input-with-lines,
-    .output-with-lines {
+    .cm-editor-container {
         min-height: 220px;
     }
 
@@ -328,12 +310,6 @@
 
     .btn {
         padding: 5px 10px;
-        font-size: 11px;
-    }
-
-    .line-numbers {
-        min-width: 36px;
-        padding: 12px 6px;
         font-size: 11px;
     }
 
@@ -430,15 +406,9 @@ body.dark-mode .input-with-lines textarea {
     color: var(--text-primary);
 }
 
-body.dark-mode .output-with-lines .line-numbers {
-    background-color: var(--bg-secondary);
-    border-color: var(--border-color);
-    color: var(--text-muted);
-}
-
-body.dark-mode .output-content {
+body.dark-mode .cm-editor-container {
     background-color: var(--bg-tertiary);
-    color: var(--text-primary);
+    border-color: var(--border-color);
 }
 
 body.dark-mode .success-badge {
@@ -461,55 +431,4 @@ body.dark-mode select {
 
 body.dark-mode .copy-btn {
     border-color: var(--border-color);
-}
-
-/* ---- 输出语法高亮 ---- */
-.output-content .keyword {
-    color: #007bff;
-    font-weight: 500;
-}
-
-.output-content .attr {
-    color: #6f42c1;
-}
-
-.output-content .string {
-    color: #28a745;
-}
-
-.output-content .number {
-    color: #dc3545;
-}
-
-.output-content .comment {
-    color: #6c757d;
-    font-style: italic;
-}
-
-.output-content .operator {
-    color: #fd7e14;
-}
-
-body.dark-mode .output-content .keyword {
-    color: #79c0ff;
-}
-
-body.dark-mode .output-content .attr {
-    color: #d2a8ff;
-}
-
-body.dark-mode .output-content .string {
-    color: #7ee787;
-}
-
-body.dark-mode .output-content .number {
-    color: #ffa657;
-}
-
-body.dark-mode .output-content .comment {
-    color: #8b949e;
-}
-
-body.dark-mode .output-content .operator {
-    color: #ffab70;
 }

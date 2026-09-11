@@ -184,73 +184,74 @@
                     <button id="downloadBtn" data-i18n="video.audio.download">下载提取的音频文件</button>
                 </div>
             </div>
-
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="video.audio.infoUsage">音频提取操作步骤</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="video.audio.usageSelectTitle">上传视频</h4>
-                        <ul>
-                            <li data-i18n="video.audio.select1"><strong>上传方式：</strong>点击或拖拽上传视频文件。支持 MP4/WebM/MOV/AVI
-                                等格式。</li>
-                            <li data-i18n="video.audio.select2"><strong>视频信息：</strong>上传后显示文件名、时长、大小等信息。</li>
-                        </ul>
-                        <h4 data-i18n="video.audio.usageFormatTitle">设置输出参数</h4>
-                        <ul>
-                            <li data-i18n="video.audio.formatChoice"><strong>选择格式：</strong>根据目标平台选择输出格式——通用选 MP3，Apple 选
-                                M4A/AAC，无损选 WAV，开源选 OGG。</li>
-                            <li data-i18n="video.audio.bitrateChoice"><strong>选择码率：</strong>语音内容 128kbps 足够，音乐内容建议
-                                256-320kbps。</li>
-                            <li data-i18n="video.audio.segmentExtract"><strong>时间范围（可选）：</strong>如需提取部分音频，设置开始时间和持续时长。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="video.audio.usageConvertTitle">执行提取</h4>
-                        <ul>
-                            <li data-i18n="video.audio.convertStep1"><strong>点击"开始转换"：</strong>FFmpeg
-                                引擎从视频中分离音频轨道并编码为目标格式。</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="video.audio.infoFeatures">技术细节</h3>
-                    </header>
-                    <div class="info-content">
-                        <ul>
-                            <li data-i18n="video.audio.feature1">
-                                <strong>音频码率：</strong>96kbps（语音最低可接受）、128kbps（语音推荐）、192kbps（音乐可接受）、256kbps（音乐推荐）、320kbps（CD
-                                级品质）。码率越高文件越大。
-                            </li>
-                            <li data-i18n="video.audio.feature2">
-                                <strong>时间范围：</strong>可选只提取视频的某个时间段——设置开始时间和持续时长。留空表示提取整个视频的音频。
-                            </li>
-                            <li data-i18n="video.audio.feature3">
-                                <strong>在线预览：</strong>提取完成后可以直接在页面上播放音频——确认内容正确、音质满意后再下载。
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="video.audio.infoFaq">常见问题</h3>
-                    </header>
-                    <div class="info-content">
-                        <ul>
-                            <li data-i18n="video.audio.faq1"><strong>Q: 提取后没有声音？</strong>A:
-                                原始视频可能没有音频轨道（如纯动画视频）。或者音频编码不被 FFmpeg WASM 支持。</li>
-                            <li data-i18n="video.audio.faq2"><strong>Q: 音质比预期差？</strong>A: 检查码率设置——128kbps 的 MP3 音质明显不如
-                                320kbps。音乐内容建议使用 256kbps 以上。</li>
-                            <li data-i18n="video.audio.faq3"><strong>Q: 能提取视频的某个时间段的音频吗？</strong>A:
-                                可以。设置开始时间和持续时长即可只提取指定时间段。</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
         </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="video.audio.infoUsage">音频提取操作步骤</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="video.audio.usageSelectTitle">上传视频</h4>
+                    <ul>
+                        <li data-i18n="video.audio.select1"><strong>上传方式：</strong>点击或拖拽上传视频文件。支持 MP4/WebM/MOV/AVI
+                            等格式。</li>
+                        <li data-i18n="video.audio.select2"><strong>视频信息：</strong>上传后显示文件名、时长、大小等信息。</li>
+                    </ul>
+                    <h4 data-i18n="video.audio.usageFormatTitle">设置输出参数</h4>
+                    <ul>
+                        <li data-i18n="video.audio.formatChoice"><strong>选择格式：</strong>根据目标平台选择输出格式——通用选 MP3，Apple 选
+                            M4A/AAC，无损选 WAV，开源选 OGG。</li>
+                        <li data-i18n="video.audio.bitrateChoice"><strong>选择码率：</strong>语音内容 128kbps 足够，音乐内容建议
+                            256-320kbps。</li>
+                        <li data-i18n="video.audio.segmentExtract"><strong>时间范围（可选）：</strong>如需提取部分音频，设置开始时间和持续时长。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="video.audio.usageConvertTitle">执行提取</h4>
+                    <ul>
+                        <li data-i18n="video.audio.convertStep1"><strong>点击"开始转换"：</strong>FFmpeg
+                            引擎从视频中分离音频轨道并编码为目标格式。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="video.audio.infoFeatures">技术细节</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="video.audio.feature1">
+                            <strong>音频码率：</strong>96kbps（语音最低可接受）、128kbps（语音推荐）、192kbps（音乐可接受）、256kbps（音乐推荐）、320kbps（CD
+                            级品质）。码率越高文件越大。
+                        </li>
+                        <li data-i18n="video.audio.feature2">
+                            <strong>时间范围：</strong>可选只提取视频的某个时间段——设置开始时间和持续时长。留空表示提取整个视频的音频。
+                        </li>
+                        <li data-i18n="video.audio.feature3">
+                            <strong>在线预览：</strong>提取完成后可以直接在页面上播放音频——确认内容正确、音质满意后再下载。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="video.audio.infoFaq">常见问题</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="video.audio.faq1"><strong>Q: 提取后没有声音？</strong>A:
+                            原始视频可能没有音频轨道（如纯动画视频）。或者音频编码不被 FFmpeg WASM 支持。</li>
+                        <li data-i18n="video.audio.faq2"><strong>Q: 音质比预期差？</strong>A: 检查码率设置——128kbps 的 MP3 音质明显不如
+                            320kbps。音乐内容建议使用 256kbps 以上。</li>
+                        <li data-i18n="video.audio.faq3"><strong>Q: 能提取视频的某个时间段的音频吗？</strong>A:
+                            可以。设置开始时间和持续时长即可只提取指定时间段。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
 
         <div id="footer-container">
             <footer class="footer">

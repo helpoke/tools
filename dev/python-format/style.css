@@ -1,0 +1,411 @@
+.container {
+    max-width: 100%;
+    padding: 40px 0;
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tool-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.button-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn.primary {
+    background: #4f46e5;
+    color: #fff;
+    border-color: #4f46e5;
+}
+
+.btn.primary:hover {
+    background: #4338ca;
+}
+
+.btn.success {
+    background: #10b981;
+    color: #fff;
+    border-color: #10b981;
+}
+
+.btn.success:hover {
+    background: #059669;
+}
+
+.editor-wrapper {
+    margin-bottom: 16px;
+}
+
+.panel {
+    background: #C7EDCC;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: var(--bg-primary);
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.panel-body {
+    position: relative;
+    min-height: 600px;
+}
+
+.panel-body textarea,
+.panel-body .code-output {
+    min-height: 600px;
+    padding: 16px;
+    border: none;
+    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    tab-size: 2;
+}
+
+.panel-body textarea {
+    color: #1e293b;
+    background: #C7EDCC;
+}
+
+.panel-body textarea::placeholder {
+    color: #94a3b8;
+}
+
+.panel-body .code-output {
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Error panel */
+.error-panel {
+    margin-top: 16px;
+}
+
+.error-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.error-item:last-child {
+    border-bottom: none;
+}
+
+.error-icon {
+    color: #ef4444;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.error-detail {
+    color: #475569;
+}
+
+.error-line {
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.error-mark {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+/* Success state */
+.success-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #ecfdf5;
+    color: #059669;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* CodeMirror editor container */
+.cm-editor-container {
+    height: 600px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+.cm-editor-container .cm-editor {
+    height: 100%;
+}
+
+.cm-editor-container .cm-editor .cm-scroller {
+    font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.cm-editor-container .cm-gutters {
+    background-color: var(--input-bg);
+    color: var(--text-muted);
+    border-right: 1px solid var(--border-color);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px 0;
+    }
+
+    .tool-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tool-header h2 {
+        font-size: 18px;
+    }
+
+    .panel-body textarea,
+    .panel-body .code-output {
+        min-height: 280px;
+    }
+
+    .input-with-lines,
+    .cm-editor-container {
+        min-height: 280px;
+    }
+
+    .input-with-lines textarea {
+        min-height: 280px;
+    }
+
+    .btn {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    .button-group {
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 12px 0;
+    }
+
+    .tool-header h2 {
+        font-size: 16px;
+    }
+
+    .panel-body textarea,
+    .panel-body .code-output {
+        min-height: 220px;
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .input-with-lines,
+    .cm-editor-container {
+        min-height: 220px;
+    }
+
+    .input-with-lines textarea {
+        min-height: 220px;
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
+    .success-badge {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+
+    .error-item {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+/* ==================== 夜间模式样式 ==================== */
+body.dark-mode .tool-card {
+    background-color: var(--bg-card);
+    box-shadow: var(--box-shadow);
+}
+
+body.dark-mode textarea {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode textarea:focus {
+    border-color: var(--primary-color);
+}
+
+body.dark-mode select {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .btn:hover {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn.primary {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .btn.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+body.dark-mode .btn.success {
+    background-color: var(--success-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .error-box {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+body.dark-mode .result-box {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .error-item {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+}
+
+/* Panel 夜间模式样式 */
+body.dark-mode .panel {
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .panel-header {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .input-with-lines .line-numbers {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+body.dark-mode .input-with-lines textarea {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .cm-editor-container {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .success-badge {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+body.dark-mode .tool-header h2 {
+    color: var(--text-primary);
+}
+
+/* ==================== 边框颜色覆盖 ==================== */
+body.dark-mode textarea {
+    border-color: var(--border-color);
+}
+
+body.dark-mode select {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .panel {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .panel-header {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .result-panel {
+    border-color: var(--border-color);
+}

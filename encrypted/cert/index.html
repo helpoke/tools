@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线X.509证书解析器，粘贴PEM证书即可提取主题、颁发者、有效期、序列号、公钥、扩展信息、指纹，纯前端本地处理保护隐私。Free online X.509 certificate parser.">
+    <meta name="keywords" content="X.509证书解析,PEM证书,证书信息,SSL证书,在线证书解析,证书指纹">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>X.509 证书解析器 - 在线 PEM 证书解析</title>
+    <meta property="og:title" content="X.509 证书解析器 - 在线 PEM 证书解析">
+    <meta property="og:description"
+        content="在线X.509证书解析器，粘贴PEM证书即可提取主题、颁发者、有效期、序列号、公钥、扩展信息、指纹，纯前端本地处理保护隐私。Free online X.509 certificate parser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/cert/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="X.509 证书解析器 - 在线 PEM 证书解析">
+    <meta name="twitter:description"
+        content="在线X.509证书解析器，粘贴PEM证书即可提取主题、颁发者、有效期、序列号、公钥、扩展信息、指纹，纯前端本地处理保护隐私。Free online X.509 certificate parser.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/cert/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/cert/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/cert/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "X.509证书解析器",
+        "description": "免费在线X.509证书解析器，支持PEM格式证书解析。Free online X.509 certificate parser for PEM certificates.",
+        "url": "https://helpoke.com/encrypted/cert/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "X.509 证书解析",
+            "PEM 格式支持",
+            "主题 / 颁发者 / 有效期提取",
+            "序列号 / 签名算法 / 公钥信息",
+            "SHA-1 / SHA-256 指纹",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.cert.title">X.509 证书解析器</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.cert.intro">粘贴 PEM 格式 X.509 证书，一键解析主题、颁发者、有效期、序列号、公钥信息、指纹等字段</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="form-group">
+                    <label for="cert-input" data-i18n="encrypted.cert.inputLabel">PEM 证书</label>
+                    <textarea id="cert-input" rows="10" data-i18n-placeholder="encrypted.cert.inputPlaceholder"
+                        placeholder="请粘贴 -----BEGIN CERTIFICATE----- 开头的 PEM 证书..."></textarea>
+                </div>
+                <button class="btn btn-primary" id="parse-btn" data-i18n="encrypted.cert.parseBtn">解析证书</button>
+
+                <div class="result-section" id="result-section" style="display:none;">
+                    <div class="result-header">
+                        <h4 data-i18n="encrypted.cert.resultTitle">解析结果</h4>
+                        <button class="copy-icon-btn" id="copy-btn" title="复制">📋</button>
+                    </div>
+                    <div class="cert-result" id="cert-result"></div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.cert.infoIntro">X.509 证书：互联网信任基础设施</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.cert.problemsTitle">为什么需要证书解析</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.problem1">X.509 证书用于 HTTPS、代码签名、邮件加密等场景。手动阅读 PEM
+                            文件不直观，本工具将证书中的关键字段提取为可读信息。</li>
+                        <li data-i18n="encrypted.cert.problem2">通过解析证书，您可以快速确认域名归属、颁发机构、有效期和公钥算法，排查 SSL 配置问题。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.cert.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.featureFields">
+                            <strong>字段提取：</strong>主题、颁发者、有效期、序列号、签名算法、公钥信息。
+                        </li>
+                        <li data-i18n="encrypted.cert.featureExtensions"><strong>扩展解析：</strong>Subject
+                            Alternative Name、Key Usage 等常用扩展。</li>
+                        <li data-i18n="encrypted.cert.featureFingerprint"><strong>指纹计算：</strong>自动计算 SHA-1 和
+                            SHA-256 指纹。</li>
+                        <li data-i18n="encrypted.cert.featureSecurity"><strong>本地解析：</strong>证书数据不上传服务器。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.cert.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.cert.usageStepTitle">使用步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.usageInput"><strong>输入证书：</strong>复制 PEM 格式证书文本到输入框，包括
+                            -----BEGIN CERTIFICATE----- 和 -----END CERTIFICATE-----。</li>
+                        <li data-i18n="encrypted.cert.usageParse"><strong>点击解析：</strong>工具将自动解码 ASN.1 结构并展示关键信息。
+                        </li>
+                        <li data-i18n="encrypted.cert.usageVerify"><strong>验证信息：</strong>核对域名、颁发者和有效期是否与预期一致。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.cert.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.noteSecurity1">
+                            <strong>隐私保护：</strong>证书本身通常包含公开信息，但私钥不应包含在证书中。切勿粘贴包含私钥的 PEM 文件。
+                        </li>
+                        <li data-i18n="encrypted.cert.noteSecurity2">
+                            <strong>验证链：</strong>单张证书解析不能替代完整的证书链验证，生产环境应使用系统或浏览器内置验证。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.cert.infoScenarios">技术优势与典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.cert.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.scenarioHTTPS">
+                            <strong>HTTPS 证书检查：</strong>快速查看网站 SSL/TLS 证书的颁发者、有效期、域名覆盖范围和签名算法，排查证书配置问题。
+                        </li>
+                        <li data-i18n="encrypted.cert.scenarioCodeSigning">
+                            <strong>代码签名验证：</strong>解析软件发布者的代码签名证书，确认签名者身份和证书链可信度。
+                        </li>
+                        <li data-i18n="encrypted.cert.scenarioEmail">
+                            <strong>邮件加密与签名：</strong>查看 S/MIME 证书中的公钥和身份信息，确保加密邮件和数字签名的合法性。
+                        </li>
+                        <li data-i18n="encrypted.cert.scenarioIot">
+                            <strong>物联网与 API 安全：</strong>在设备接入和 API 通信中，验证服务端证书是否正确配置。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.cert.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.techAdvantageLocal">
+                            <strong>纯本地解析：</strong>使用 JavaScript 在浏览器本地解码 ASN.1 结构，证书数据不会上传到服务器。
+                        </li>
+                        <li data-i18n="encrypted.cert.techAdvantageFields">
+                            <strong>字段全面：</strong>自动提取主题、颁发者、有效期、序列号、签名算法、公钥信息、扩展等关键字段。
+                        </li>
+                        <li data-i18n="encrypted.cert.techAdvantageFingerprint">
+                            <strong>指纹计算：</strong>自动计算 SHA-1 和 SHA-256 指纹，方便与官方公布值比对。
+                        </li>
+                        <li data-i18n="encrypted.cert.techAdvantagePrivacy">
+                            <strong>隐私安全：</strong>证书本身通常包含公开信息，解析过程不会影响安全性。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.cert.algorithmSelectionTitle">证书安全判断要点</h4>
+                    <p data-i18n="encrypted.cert.algorithmSelectionContent">一张可信的证书应满足：由受信任 CA 签发、有效期未过期、签名算法为 SHA-256
+                        或更高、SAN 包含目标域名。若使用自签名证书，需手动添加到受信任根证书存储中。</p>
+                    <h4 data-i18n="encrypted.cert.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.cert.noteFaq1"><strong>Q: 证书解析能验证证书链吗？</strong>A: 本工具只解析单张证书的内容，不验证证书链的信任关系。验证证书链需要依赖操作系统或浏览器的内置信任存储，或使用 openssl verify 等命令行工具。</li>
+                        <li data-i18n="encrypted.cert.noteFaq2"><strong>Q: 自签名证书为什么不被信任？</strong>A: 自签名证书没有根 CA 的签名背书——浏览器和操作系统无法确认其真实性。工具会显示颁发者和主题相同。需要将自签名证书手动导入信任存储。</li>
+                        <li data-i18n="encrypted.cert.noteFaq3"><strong>Q: 证书指纹有什么用？</strong>A: 证书指纹是证书内容的哈希值，用于快速验证证书身份。比如下载了一个证书文件，可以对比指纹确认它确实是你要的那个证书，没有被中间人替换。</li>
+                        <li data-i18n="encrypted.cert.noteFaq4"><strong>Q: 签名算法 SHA-1 和 SHA-256 有什么区别？</strong>A: SHA-1 已被证明存在碰撞漏洞，主流浏览器已不再信任 SHA-1 签名的证书。SHA-256 是目前推荐的标准，新证书应一律使用 SHA-256 或更高算法。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

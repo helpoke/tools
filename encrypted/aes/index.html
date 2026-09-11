@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线AES加解密工具，支持AES-CBC、AES-CTR、AES-GCM多种模式，128/192/256位密钥，Base64/Hex输出格式，纯前端本地处理保护隐私。Free online AES encryptor and decryptor.">
+    <meta name="keywords" content="AES加密,AES解密,AES在线工具,AES-CBC,AES-GCM,AES-CTR,对称加密,在线加解密,免费AES工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>AES 加解密工具 - 在线免费对称加密解密</title>
+    <meta property="og:title" content="AES 加解密工具 - 在线免费对称加密解密">
+    <meta property="og:description"
+        content="在线AES加解密工具，支持AES-CBC、AES-CTR、AES-GCM多种模式，128/192/256位密钥，Base64/Hex输出格式，纯前端本地处理保护隐私。Free online AES encryptor and decryptor.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/aes/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="AES 加解密工具 - 在线免费对称加密解密">
+    <meta name="twitter:description"
+        content="在线AES加解密工具，支持AES-CBC、AES-CTR、AES-GCM多种模式，128/192/256位密钥，Base64/Hex输出格式，纯前端本地处理保护隐私。Free online AES encryptor and decryptor.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/aes/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/aes/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/aes/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AES加解密工具",
+        "description": "免费在线AES加解密工具，支持AES-CBC、AES-CTR、AES-GCM多种模式，128/192/256位密钥，Base64/Hex输出格式。Free online AES encryptor and decryptor supporting CBC/CTR/GCM modes.",
+        "url": "https://helpoke.com/encrypted/aes/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "AES Encryption and Decryption",
+            "支持 AES-CBC / AES-CTR / AES-GCM 模式",
+            "128 / 192 / 256 位密钥长度",
+            "Base64 / Hex 双输出格式",
+            "密钥支持文本 / Hex / Base64 输入",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.aes.title">AES 加解密工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.aes.intro">在线 AES 对称加解密工具，支持 CBC、CTR、GCM 多种模式与 128/192/256 位密钥，Base64 或 Hex
+                输出，纯前端本地处理</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <!-- 配置面板 -->
+                <div class="config-panel">
+                    <div class="config-row">
+                        <div class="form-group">
+                            <label for="aes-mode" data-i18n="encrypted.aes.modeLabel">加密模式</label>
+                            <select id="aes-mode">
+                                <option value="AES-CBC" selected>AES-CBC</option>
+                                <option value="AES-CTR">AES-CTR</option>
+                                <option value="AES-GCM">AES-GCM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="key-size" data-i18n="encrypted.aes.keySizeLabel">密钥长度</label>
+                            <select id="key-size">
+                                <option value="128">128 位</option>
+                                <option value="192">192 位</option>
+                                <option value="256" selected>256 位（推荐）</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="output-format" data-i18n="encrypted.aes.outputFormatLabel">输出格式</label>
+                            <select id="output-format">
+                                <option value="base64" selected>Base64</option>
+                                <option value="hex">Hex（十六进制）</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="config-row">
+                        <div class="form-group key-type-group">
+                            <label for="key-type" data-i18n="encrypted.aes.keyTypeLabel">密钥类型</label>
+                            <select id="key-type">
+                                <option value="text" data-i18n="encrypted.aes.keyTypeText">文本密码</option>
+                                <option value="hex" data-i18n="encrypted.aes.keyTypeHex">Hex（十六进制）</option>
+                                <option value="base64" data-i18n="encrypted.aes.keyTypeBase64">Base64</option>
+                            </select>
+                        </div>
+                        <div class="form-group key-input-group">
+                            <label for="key-input" data-i18n="encrypted.aes.keyInputLabel">密钥</label>
+                            <input type="text" id="key-input" data-i18n-placeholder="encrypted.aes.keyInputPlaceholder"
+                                placeholder="请输入密钥...">
+                        </div>
+                        <div class="form-group key-actions">
+                            <label data-i18n="encrypted.aes.keyActionLabel">操作</label>
+                            <button class="btn btn-outline btn-sm" id="generate-key-btn"
+                                data-i18n="encrypted.aes.generateKeyBtn">生成随机密钥</button>
+                        </div>
+                    </div>
+                    <div class="config-row" id="iv-row">
+                        <div class="form-group">
+                            <label for="iv-input" data-i18n="encrypted.aes.ivLabel">初始向量 / Nonce（可选，加密时留空将随机生成，长度必须为 16
+                                字节）</label>
+                            <input type="text" id="iv-input" data-i18n-placeholder="encrypted.aes.ivPlaceholder"
+                                placeholder="加密时留空自动生成；解密时将从密文中自动提取">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 左右布局 -->
+                <div class="converter-layout">
+                    <div class="input-panel">
+                        <div class="panel-header">
+                            <div class="panel-label" data-i18n="encrypted.aes.inputLabel">输入</div>
+                            <div class="panel-actions">
+                                <button class="panel-btn copy-btn" id="copy-input-btn"
+                                    data-i18n="encrypted.aes.copyBtn">复制</button>
+                                <button class="panel-btn clear-btn" id="clear-input-btn"
+                                    data-i18n="encrypted.aes.clearBtn">清空</button>
+                            </div>
+                        </div>
+                        <textarea id="input-text" data-i18n-placeholder="encrypted.aes.inputPlaceholder"
+                            placeholder="加密时输入明文，解密时输入密文..."></textarea>
+                    </div>
+                    <div class="convert-btn-wrapper">
+                        <button class="btn-convert encode-btn" id="encrypt-btn" title="加密"
+                            data-i18n-title="encrypted.aes.encryptBtn"><i class="fas fa-lock"></i></button>
+                        <button class="btn-convert decode-btn" id="decrypt-btn" title="解密"
+                            data-i18n-title="encrypted.aes.decryptBtn"><i class="fas fa-lock-open"></i></button>
+                        <button class="btn-swap" id="swap-btn" title="交换输入输出" data-i18n-title="encrypted.aes.swapBtn"><i
+                                class="fas fa-exchange-alt"></i></button>
+                    </div>
+                    <div class="output-panel">
+                        <div class="panel-header">
+                            <div class="panel-label" data-i18n="encrypted.aes.outputLabel">输出</div>
+                            <div class="panel-actions">
+                                <button class="panel-btn copy-btn" id="copy-output-btn"
+                                    data-i18n="encrypted.aes.copyBtn">复制</button>
+                                <button class="panel-btn clear-btn" id="clear-output-btn"
+                                    data-i18n="encrypted.aes.clearBtn">清空</button>
+                            </div>
+                        </div>
+                        <textarea id="output-text" data-i18n-placeholder="encrypted.aes.outputPlaceholder"
+                            placeholder="加密或解密结果将显示在这里..." readonly></textarea>
+                    </div>
+                </div>
+
+                <div id="error-message" class="error-msg" style="display: none;"></div>
+            </div>
+        </div>
+
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.aes.infoIntro">AES 对称加密：快速、安全、可逆的数据保护方案</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.aes.problemsTitle">为什么需要 AES 加解密</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.problem1">AES（Advanced Encryption
+                            Standard，高级加密标准）是目前全球最广泛使用的对称加密算法——速度快、安全性高、软硬件支持广泛。从 HTTPS、Wi-Fi
+                            WPA2/3、磁盘加密到密码管理器，AES 都是核心算法。</li>
+                        <li data-i18n="encrypted.aes.problem2">本工具提供在线 AES 加密和解密功能，支持 CBC、CTR、GCM 三种常用模式，支持
+                            128/192/256 位三种密钥长度。加密时自动生成随机 IV/Nonce 并附加到密文前，解密时自动提取，无需手动管理 IV。</li>
+                        <li data-i18n="encrypted.aes.problem3">所有加密运算使用浏览器原生 Web Crypto API
+                            执行——这是密码学安全的实现方式，性能接近系统级加密库。密钥和明文都不会上传到服务器，完全在本地完成。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.aes.formatTitle">加密模式说明</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.formatCbc">
+                            <strong>AES-CBC：</strong>密码块链接模式，每个明文块先与前一个密文块异或再加密。需要 16 字节 IV，简单可靠，但无法并行加密，且对 IV
+                            随机性要求严格。
+                        </li>
+                        <li data-i18n="encrypted.aes.formatCtr"><strong>AES-CTR：</strong>计数器模式，将 AES
+                            转换为流密码，可并行加解密。需要 16 字节初始计数器块，适合高速流式加密场景。</li>
+                        <li data-i18n="encrypted.aes.formatGcm">
+                            <strong>AES-GCM：</strong>伽罗瓦/计数器模式，同时提供加密和认证（完整性校验）。需要 12 字节 IV/Nonce，是现代网络通信（如 TLS
+                            1.3）的首选模式。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.aes.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.featureOnline">
+                            <strong>双向加解密：</strong>输入明文点击加密得到密文，输入密文点击解密还原明文，一键切换。
+                        </li>
+                        <li data-i18n="encrypted.aes.featureModes"><strong>多模式支持：</strong>CBC、CTR、GCM
+                            三种模式覆盖绝大多数开发和安全场景。</li>
+                        <li data-i18n="encrypted.aes.featureKey"><strong>灵活密钥输入：</strong>支持文本密码（自动派生）、Hex、Base64
+                            三种密钥形式，并可一键生成随机密钥。</li>
+                        <li data-i18n="encrypted.aes.featureFormat"><strong>双输出格式：</strong>结果可选 Base64 或 Hex
+                            编码，方便在不同系统和协议间使用。</li>
+                        <li data-i18n="encrypted.aes.featureSecurity">
+                            <strong>本地处理：</strong>所有运算在浏览器本地完成，密钥、明文、密文均不上传服务器。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.aes.infoUsage">AES 使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.aes.usageEncryptTitle">加密步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.usageEncryptMode"><strong>选择模式：</strong>CBC 通用、CTR 高速流式、GCM
+                            带认证。一般推荐 GCM。</li>
+                        <li data-i18n="encrypted.aes.usageEncryptKey"><strong>设置密钥：</strong>选择密钥长度（256
+                            位最安全）和密钥类型。文本密码将自动通过 SHA-256 派生为指定长度密钥；Hex/Base64 需精确匹配密钥长度。</li>
+                        <li data-i18n="encrypted.aes.usageEncryptIv"><strong>IV / Nonce：</strong>加密时留空，工具会自动生成随机
+                            IV 并附加到密文前。高级用户也可以手动输入固定 IV（不推荐重复使用）。</li>
+                        <li data-i18n="encrypted.aes.usageEncryptInput"><strong>输入明文：</strong>在左侧输入框中输入需要加密的文本。
+                        </li>
+                        <li data-i18n="encrypted.aes.usageEncryptClick"><strong>点击加密：</strong>右侧输出框显示密文，格式为
+                            Base64 或 Hex 编码的「IV + 密文」。</li>
+                        <li data-i18n="encrypted.aes.usageEncryptCopy">
+                            <strong>复制结果：</strong>将密文和密钥安全地发送给接收方，两者缺一不可。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.aes.usageDecryptTitle">解密步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.usageDecryptKey">
+                            <strong>输入密钥：</strong>使用与加密时完全相同的密钥、密钥长度和加密模式。
+                        </li>
+                        <li data-i18n="encrypted.aes.usageDecryptInput">
+                            <strong>输入密文：</strong>将密文粘贴到左侧输入框，工具会自动从密文前缀提取 IV/Nonce。
+                        </li>
+                        <li data-i18n="encrypted.aes.usageDecryptClick"><strong>点击解密：</strong>右侧输出框显示还原后的明文。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.aes.usageBasicsTitle">AES 基础知识</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.usageBasicsKey"><strong>密钥长度：</strong>128 位（16 字节）安全性足够；192
+                            位（24 字节）更高；256 位（32 字节）目前最高安全级别， brute-force 需要天文数字级算力。</li>
+                        <li data-i18n="encrypted.aes.usageBasicsIv"><strong>IV /
+                                Nonce：</strong>初始向量/随机数，确保相同明文加密后得到不同密文。CBC/CTR 使用 16 字节，GCM 推荐 12
+                            字节。切勿重复使用同一密钥+IV 组合。</li>
+                        <li data-i18n="encrypted.aes.usageBasicsPadding"><strong>填充：</strong>CBC 模式对不足块长的明文使用
+                            PKCS#7 填充；CTR/GCM 本质上为流模式，无需填充。</li>
+                        <li data-i18n="encrypted.aes.usageBasicsAuth"><strong>认证：</strong>只有 GCM
+                            模式提供密文完整性校验，可检测篡改。CBC/CTR 不提供认证，需额外使用 HMAC。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.aes.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.aes.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.noteSecurity1"><strong>密钥保密：</strong>AES
+                            的安全性完全依赖密钥保密。不要通过明文聊天、邮件或不安全通道传输密钥。</li>
+                        <li data-i18n="encrypted.aes.noteSecurity2"><strong>IV 不可预测：</strong>加密时必须使用密码学安全随机数生成
+                            IV。本工具已自动处理，请勿手动输入固定值进行多次加密。</li>
+                        <li data-i18n="encrypted.aes.noteSecurity3"><strong>GCM 推荐：</strong>如需同时保证机密性和完整性，优先选择
+                            AES-GCM。CBC/CTR 单独使用无法防篡改。</li>
+                        <li data-i18n="encrypted.aes.noteSecurity4"><strong>密钥强度：</strong>生产环境建议使用 256
+                            位密钥，并由密码学安全随机数生成，避免使用弱口令。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.aes.notesCompatTitle">兼容性说明</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.noteCompat1"><strong>密文格式：</strong>本工具输出格式为「IV/Nonce +
+                            密文」的连续字节，再整体进行 Base64 或 Hex 编码。IV 长度：CBC/CTR 为 16 字节，GCM 为 12 字节。</li>
+                        <li data-i18n="encrypted.aes.noteCompat2"><strong>文本密钥：</strong>选择「文本密码」时，工具先对密码做
+                            SHA-256 哈希，再截断到所选密钥长度。此方式便于记忆，但与直接使用原始字节作为密钥的工具可能不兼容。</li>
+                        <li data-i18n="encrypted.aes.noteCompat3"><strong>Hex/Base64
+                                密钥：</strong>必须精确等于所选密钥长度的字节数。例如 256 位密钥需要 32 字节，即 64 个 Hex 字符或 44 个 Base64
+                            字符（含填充）。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.aes.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.aes.noteFaq1"><strong>Q: AES 是对称加密还是非对称加密？</strong>A: AES
+                            是对称加密——加密和解密使用同一个密钥。适合加密大量数据；密钥分发问题可结合 RSA 等非对称算法解决。</li>
+                        <li data-i18n="encrypted.aes.noteFaq2"><strong>Q: 解密失败怎么办？</strong>A:
+                            检查密钥、密钥长度、加密模式、输出格式是否与加密时完全一致。任何一个参数不同都会导致解密失败。</li>
+                        <li data-i18n="encrypted.aes.noteFaq3"><strong>Q: 256 位密钥比 128 位慢很多吗？</strong>A: 在现代 CPU
+                            上差别很小。Web Crypto API 对三种密钥长度都有良好优化，一般无需为性能牺牲安全性。</li>
+                        <li data-i18n="encrypted.aes.noteFaq4"><strong>Q: 可以加密文件吗？</strong>A:
+                            当前版本专注于文本加解密。如需加密文件，可先将文件转为 Base64 再加密，解密后再转回文件。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

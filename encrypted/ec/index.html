@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线EC椭圆曲线密钥对生成工具，支持P-256/P-384/P-521曲线，生成PEM/JWK/Raw格式公钥私钥，纯前端本地处理保护隐私。Free online EC key pair generator.">
+    <meta name="keywords" content="EC密钥生成,椭圆曲线密钥对,ECDSA,ECDH,P-256,P-384,P-521,在线EC生成">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>EC 椭圆曲线密钥对生成工具 - 在线免费生成</title>
+    <meta property="og:title" content="EC 椭圆曲线密钥对生成工具 - 在线免费生成">
+    <meta property="og:description"
+        content="在线EC椭圆曲线密钥对生成工具，支持P-256/P-384/P-521曲线，生成PEM/JWK/Raw格式公钥私钥，纯前端本地处理保护隐私。Free online EC key pair generator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/ec/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="EC 椭圆曲线密钥对生成工具 - 在线免费生成">
+    <meta name="twitter:description"
+        content="在线EC椭圆曲线密钥对生成工具，支持P-256/P-384/P-521曲线，生成PEM/JWK/Raw格式公钥私钥，纯前端本地处理保护隐私。Free online EC key pair generator.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/ec/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/ec/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/ec/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "EC椭圆曲线密钥对生成工具",
+        "description": "免费在线EC椭圆曲线密钥对生成工具，支持P-256/P-384/P-521曲线。Free online elliptic curve key pair generator supporting P-256/P-384/P-521 curves.",
+        "url": "https://helpoke.com/encrypted/ec/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "EC 密钥对生成",
+            "支持 P-256 / P-384 / P-521 曲线",
+            "PEM / JWK / Raw 格式导出",
+            "一键复制与下载",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.ec.title">EC 椭圆曲线密钥对生成工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.ec.intro">在线生成 EC 椭圆曲线密钥对，支持 P-256/P-384/P-521 曲线，输出 PEM、JWK 或 Raw 格式，适用于 ECDSA
+                数字签名与 ECDH 密钥交换</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="curve" data-i18n="encrypted.ec.curveLabel">曲线</label>
+                        <select id="curve">
+                            <option value="P-256" selected>P-256（推荐）</option>
+                            <option value="P-384">P-384</option>
+                            <option value="P-521">P-521</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="key-format" data-i18n="encrypted.ec.formatLabel">导出格式</label>
+                        <select id="key-format">
+                            <option value="pem" selected>PEM</option>
+                            <option value="jwk">JWK（JSON）</option>
+                            <option value="raw">Raw（Hex）</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="generate-btn" data-i18n="encrypted.ec.generateBtn">生成密钥对</button>
+
+                <div class="key-output" style="margin-top:24px;">
+                    <div class="key-output-header">
+                        <h3 data-i18n="encrypted.ec.publicKeyTitle">公钥 (Public Key)</h3>
+                        <div class="key-output-actions">
+                            <button class="btn-sm btn-copy" id="copy-public-btn"
+                                data-i18n="encrypted.ec.copyBtn">复制</button>
+                            <button class="btn-sm btn-download" id="download-public-btn"
+                                data-i18n="encrypted.ec.downloadBtn">下载</button>
+                        </div>
+                    </div>
+                    <textarea class="key-textarea" id="public-key" readonly
+                        data-i18n-placeholder="encrypted.ec.publicKeyPlaceholder"
+                        placeholder="点击「生成密钥对」按钮后，公钥将显示在此处..."></textarea>
+                </div>
+
+                <div class="key-output">
+                    <div class="key-output-header">
+                        <h3 data-i18n="encrypted.ec.privateKeyTitle">私钥 (Private Key)</h3>
+                        <div class="key-output-actions">
+                            <button class="btn-sm btn-copy" id="copy-private-btn"
+                                data-i18n="encrypted.ec.copyBtn">复制</button>
+                            <button class="btn-sm btn-download" id="download-private-btn"
+                                data-i18n="encrypted.ec.downloadBtn">下载</button>
+                        </div>
+                    </div>
+                    <textarea class="key-textarea" id="private-key" readonly
+                        data-i18n-placeholder="encrypted.ec.privateKeyPlaceholder"
+                        placeholder="点击「生成密钥对」按钮后，私钥将显示在此处..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.ec.infoIntro">EC 椭圆曲线：更高效的非对称加密</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.ec.problemsTitle">为什么需要 EC</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.problem1">椭圆曲线密码学（ECC）用更短的密钥实现与 RSA 相当的安全性。例如 P-256 约相当于 128
+                            位安全级别，而 2048 位 RSA 也约相当于 112 位。ECC 密钥更短、计算更快、带宽占用更少。</li>
+                        <li data-i18n="encrypted.ec.problem2">本工具使用 Web Crypto API 生成 ECDSA/ECDH 密钥对，支持
+                            P-256/P-384/P-521 三条常用曲线，可导出 PEM、JWK 或 Raw 格式。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.ec.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.featureCurves"><strong>多曲线支持：</strong>P-256 通用、P-384
+                            高安全、P-521 最高安全。</li>
+                        <li data-i18n="encrypted.ec.featureExport"><strong>多格式导出：</strong>PEM（最通用）、JWK（Web
+                            应用）、Raw Hex（底层开发）。</li>
+                        <li data-i18n="encrypted.ec.featureSecurity"><strong>本地生成：</strong>私钥不离开浏览器，不上传服务器。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.ec.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.ec.usageStepTitle">使用步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.usageCurve"><strong>选择曲线：</strong>P-256 适合大多数场景，P-521
+                            适合极高安全需求。</li>
+                        <li data-i18n="encrypted.ec.usageFormat"><strong>选择格式：</strong>PEM 最通用，JWK 适合 JavaScript
+                            应用。</li>
+                        <li data-i18n="encrypted.ec.usageGenerate"><strong>点击生成：</strong>立即获得公钥和私钥。</li>
+                        <li data-i18n="encrypted.ec.usageSave"><strong>保存私钥：</strong>私钥必须保密，建议安全存储。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.ec.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.noteSecurity1"><strong>私钥保密：</strong>私钥是 EC
+                            密码学安全的根基，必须妥善保存，不可泄露或传输到不安全环境。</li>
+                        <li data-i18n="encrypted.ec.noteSecurity2"><strong>曲线选择：</strong>P-256 已能满足大多数商业安全需求；P-384 和
+                            P-521 适合需要更高安全冗余的场景。</li>
+                        <li data-i18n="encrypted.ec.noteSecurity3"><strong>安全随机数：</strong>本工具使用浏览器内置 CSPRNG
+                            生成私钥，确保不可预测性。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.ec.infoScenarios">典型应用场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.ec.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.scenarioEcdsa">
+                            <strong>数字签名（ECDSA）：</strong>使用私钥对数据或消息签名，任何人都可以用公钥验证签名来源和完整性。广泛应用于代码签名、文档签名和区块链交易。</li>
+                        <li data-i18n="encrypted.ec.scenarioEcdh"><strong>密钥交换（ECDH）：</strong>双方使用各自的 EC
+                            密钥对协商出共享密钥，用于后续对称加密通信。TLS 1.3 大量使用了 ECDHE 进行前向安全密钥交换。</li>
+                        <li data-i18n="encrypted.ec.scenarioJwt"><strong>JWT 与 API 安全：</strong>ECDSA 签名在 JWT 中越来越流行，特别是
+                            ES256 算法，因其更短的签名而减少传输开销。</li>
+                        <li data-i18n="encrypted.ec.scenarioIot"><strong>移动与物联网：</strong>ECC 的高性能和短密钥优势，使其特别适合资源受限的移动设备和
+                            IoT 终端。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.ec.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.techAdvantageShortKey"><strong>密钥更短：</strong>256 位 ECC 密钥可提供与 3072 位
+                            RSA 相当的安全强度，显著降低存储和传输开销。</li>
+                        <li data-i18n="encrypted.ec.techAdvantagePerformance"><strong>性能更高：</strong>椭圆曲线运算比大整数 RSA
+                            运算更快，尤其擅长签名和密钥协商。</li>
+                        <li data-i18n="encrypted.ec.techAdvantageFormat"><strong>多格式导出：</strong>支持 PEM、JWK、Raw
+                            三种格式，兼容不同平台和协议。</li>
+                        <li data-i18n="encrypted.ec.techAdvantageLocal"><strong>本地生成：</strong>基于 Web Crypto
+                            API，私钥不会离开浏览器，适合处理敏感密钥。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.ec.curveSelectionTitle">曲线选择建议</h4>
+                    <p data-i18n="encrypted.ec.curveSelectionContent">P-256（secp256r1）是目前最广泛使用的曲线，兼容性和性能俱佳，适用于绝大多数 Web
+                        和移动应用。P-384 提供更高的安全冗余，适合政府和金融机构。P-521 提供最高安全级别，但计算开销更大，适合对安全性要求极高且性能不是瓶颈的场景。</p>
+                    <h4 data-i18n="encrypted.ec.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.ec.noteFaq1"><strong>Q: ECC 能替代 RSA 吗？</strong>A: 在安全性和性能上 ECC 已全面超越 RSA——256 位 ECC 相当于 3072 位 RSA。但在密钥管理生态和旧系统兼容性方面，RSA 仍有优势。新项目建议优先考虑 ECC。</li>
+                        <li data-i18n="encrypted.ec.noteFaq2"><strong>Q: ECDSA 签名和 RSA 签名能互验吗？</strong>A: 不能。ECDSA 和 RSA 是完全不同的签名算法，密钥格式和签名格式都不兼容。验证方必须使用与签名方相同的算法。</li>
+                        <li data-i18n="encrypted.ec.noteFaq3"><strong>Q: P-256 和 P-384 能混合使用吗？</strong>A: 不能直接混合。密钥交换和签名验证要求双方使用同一条曲线。如果服务端使用 P-256，客户端也必须使用 P-256。</li>
+                        <li data-i18n="encrypted.ec.noteFaq4"><strong>Q: Raw 格式的公钥怎么用？</strong>A: Raw 格式导出的是纯公钥字节（Hex 编码），不包含曲线信息和格式包装。导入时需要手动指定曲线参数，适合底层开发场景。一般建议使用 PEM 或 JWK 格式。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

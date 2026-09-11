@@ -328,153 +328,155 @@
                     </div> -->
                 </div>
             </div>
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.stitch.infoIntro">
-                            图片拼接：将多张图片无缝合并为一张长图</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.stitch.problemsTitle">一、为什么需要图片拼接而不是发多张图</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.problem1">
-                                聊天记录截图需要拼成长图方便分享、电商产品多角度图需要拼成一张方便展示、教程步骤图需要纵向排列方便阅读——在这些场景中，一张长图比多张散图更实用、更易传播。但手机自带的拼接功能往往只支持
-                                2-3 张图，且有尺寸限制。</li>
-                            <li data-i18n="image.stitch.problem2">
-                                本工具支持无限数量的图片拼接——纵向拼接（上下排列）和横向拼接（左右排列）两种模式。可设置间距（0-100px）、背景颜色、圆角大小。所有操作在浏览器中完成，支持高分辨率输出。
-                            </li>
-                            <li data-i18n="image.stitch.problem3">
-                                拖拽排序功能让你随时调整图片顺序——上传后如果不满意排列顺序，直接拖动缩略图调整。预览区域实时更新拼接效果，确认满意后一键下载高清长图。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.formatTitle">二、拼接模式与参数</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.formatJpg">
-                                <strong>纵向拼接：</strong>图片从上到下依次排列——最常见的模式，适合聊天记录、教程步骤、产品详情等场景。所有图片宽度自动统一为最宽图片的宽度（等比缩放），高度保持各自比例。
-                            </li>
-                            <li data-i18n="image.stitch.formatPng">
-                                <strong>横向拼接：</strong>图片从左到右依次排列——适合对比图（如处理前后对比）、时间线、产品多角度展示等场景。所有图片高度自动统一为最高图片的高度（等比缩放），宽度保持各自比例。
-                            </li>
-                            <li data-i18n="image.stitch.formatWebp"><strong>WebP：</strong>支持拼接输入，可与 JPG、PNG、BMP
-                                等其他格式的图片混合拼接，工具自动统一处理不同格式的解码和色彩空间转换。不同格式的图片在拼接结果中保持各自的色彩特性，互不影响。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.featuresTitle">三、拼接引擎的技术实现</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.featureOnline"><strong>Canvas 合成：</strong>创建一个足够大的画布（总宽度 =
-                                最大图片宽度，总高度 = 所有图片高度之和 + 间距），然后使用 drawImage 将每张图片按计算好的坐标绘制到画布上。</li>
-                            <li data-i18n="image.stitch.featurePreview">
-                                <strong>实时预览：</strong>每次上传图片、删除图片、调整顺序或修改参数后，预览区域立即更新。预览使用缩略图渲染，下载时使用原始分辨率——确保输出质量。
-                            </li>
-                            <li data-i18n="image.stitch.featureExport"><strong>圆角处理：</strong>可选为每张图片添加圆角（0-50px）。圆角通过
-                                Canvas 的 clip() 方法实现——先绘制圆角矩形路径，再裁剪后绘制图片。圆角区域外的部分透明（PNG 输出）或填充背景色（JPG 输出）。</li>
-                            <li data-i18n="image.stitch.featureSecurity"><strong>高分辨率输出：</strong>拼接后的图片分辨率可能非常大（比如 10 张
-                                1080p 图片纵向拼接，输出高度超过 10000px）。Canvas 对最大尺寸有限制——如果超出限制，工具会自动缩小到浏览器支持的最大尺寸。</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.stitch.infoUsage">
-                            拼接操作流程</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.stitch.usageUploadTitle">上传图片</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.usageUpload1"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
-                            <li data-i18n="image.stitch.usageUpload2"><strong>批量上传：</strong>支持多选上传，最多10张图片。</li>
-                            <li data-i18n="image.stitch.usageUpload3"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.usageSelectTitle">二、选择图片</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.usageSelect1"><strong>选择拼接：</strong>在文件列表中勾选需要拼接的图片。</li>
-                            <li data-i18n="image.stitch.usageSelect2"><strong>全选/清空：</strong>点击“全选”或“清空”按钮批量操作。</li>
-                            <li data-i18n="image.stitch.usageSelect3"><strong>查看列表：</strong>已选择图片会显示在拼接顺序列表中。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.usageOrderTitle">三、调整顺序</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.usageOrder1"><strong>拖拽排序：</strong>在拼接顺序列表中拖拽图片调整顺序。</li>
-                            <li data-i18n="image.stitch.usageOrder2"><strong>反转顺序：</strong>点击“反转顺序”按钮快速反转。</li>
-                            <li data-i18n="image.stitch.usageOrder3"><strong>顺序重要：</strong>拼接顺序决定最终图片的排列顺序。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.usageSettingsTitle">四、拼接设置</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.usageSettings1"><strong>拼接方向：</strong>选择垂直拼接（上下排列）或水平拼接（左右排列）。
-                            </li>
-                            <li data-i18n="image.stitch.usageSettings2"><strong>拼接间距：</strong>调整图片之间的间距（0-50像素）。</li>
-                            <li data-i18n="image.stitch.usageSettings3"><strong>背景颜色：</strong>选择拼接后的背景颜色。</li>
-                            <li data-i18n="image.stitch.usageSettings4"><strong>保持宽高比：</strong>勾选后保持图片原始宽高比。</li>
-                            <li data-i18n="image.stitch.usageSettings5"><strong>统一尺寸：</strong>勾选后将所有图片调整为统一尺寸。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.usageStitchTitle">五、执行拼接</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.usageStitch1"><strong>点击拼接：</strong>点击“开始拼接”按钮执行拼接。</li>
-                            <li data-i18n="image.stitch.usageStitch2"><strong>实时预览：</strong>拼接后在预览区域显示结果。</li>
-                            <li data-i18n="image.stitch.usageStitch3"><strong>双击放大：</strong>双击预览可全屏查看。</li>
-                            <li data-i18n="image.stitch.usageStitch4">
-                                <strong>加入列表：</strong>点击“加入列表”将拼接结果添加到待处理列表，可继续参与二次拼接。
-                            </li>
-                            <li data-i18n="image.stitch.usageStitch5"><strong>下载图片：</strong>点击“下载图片”按钮保存拼接结果。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.usageStitch6Title">六、二次拼接</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.usageStitch6"><strong>拼接后再拼接：</strong>将拼接结果加入列表后，可与其他图片再次拼接。
-                            </li>
-                            <li data-i18n="image.stitch.usageStitch7"><strong>灵活组合：</strong>支持多次拼接，实现复杂的图片布局。</li>
-                        </ul>
-                    </div>
-                </article>
-                <article class="info-details">
-                    <header>
-                        <h3 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.stitch.infoNotes">注意事项
-                        </h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.stitch.notesSecurityTitle">数据安全</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.noteSecurity1">拼接引擎通过 Canvas 2D API
-                                在浏览器中直接运算——多张图片的解码、缩放、对齐、合成全部在本地 CPU 完成。Canvas drawImage
-                                操作不涉及任何网络请求，即使拼接包含商业机密的产品设计图或内部文档截图，数据也不会离开本地设备。</li>
-                            <li data-i18n="image.stitch.noteSecurity2">上传的多张源图片和拼接结果仅在浏览器内存中以 Blob URL
-                                形式暂存。关闭标签页或刷新页面后，所有图片数据立即从 JavaScript 堆内存中释放。工具不使用 Cookie、localStorage 或 IndexedDB
-                                持久化任何图片数据，确保隐私安全。</li>
-                            <li data-i18n="image.stitch.noteSecurity3">拼接截图或文档时，注意去除其中的个人信息（如地址、电话等）。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.notesSettingsTitle">二、拼接设置指南</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.noteSettings1">至少选择 2 张图片才能进行拼接，最多支持 10 张。</li>
-                            <li data-i18n="image.stitch.noteSettings2">勾选“保持宽高比”时，不同尺寸的图片会自动缩放以保持比例，可能产生空白区域。</li>
-                            <li data-i18n="image.stitch.noteSettings3">勾选“统一图片尺寸”时，所有图片会被缩放至相同大小，适合需要整齐排列的场景。</li>
-                            <li data-i18n="image.stitch.noteSettings4">间距设置大于 0 时，记得同时设置背景色，否则间距区域为透明。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.notesFormatTitle">输出格式说明</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.noteFormat1">JPG、PNG、WebP 等不同格式的图片可以混合拼接，无兼容性问题。</li>
-                            <li data-i18n="image.stitch.noteFormat2">PNG 透明图片拼接后仍保持透明效果，间距区域也可透明。</li>
-                            <li data-i18n="image.stitch.noteFormat3">GIF 动态图片仅取第一帧参与拼接。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.notesPerfTitle">四、性能提示</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.notePerf1">大尺寸图片拼接需要较长时间，请耐心等待。</li>
-                            <li data-i18n="image.stitch.notePerf2">建议在拼接前先压缩图片以提高处理速度。</li>
-                            <li data-i18n="image.stitch.notePerf3">处理期间不要关闭浏览器或刷新页面。</li>
-                        </ul>
-                        <h4 data-i18n="image.stitch.notesFaqTitle">常见问题</h4>
-                        <ul>
-                            <li data-i18n="image.stitch.noteFaq1"><strong>拼接后图片大小不一致：</strong>勾选“统一图片尺寸”让所有图片缩放至相同大小。
-                            </li>
-                            <li data-i18n="image.stitch.noteFaq2">
-                                <strong>拼接结果有空白区域：</strong>这是“保持宽高比”导致的，不同尺寸图片等比缩放后会有留白，可通过背景色填充。
-                            </li>
-                            <li data-i18n="image.stitch.noteFaq3">
-                                <strong>如何实现复杂布局：</strong>先拼接一组图片，点击“加入列表”，再选择其他图片进行二次拼接。
-                            </li>
-                            <li data-i18n="image.stitch.noteFaq4"><strong>拼接失败：</strong>确保至少选择了 2 张有效图片，且图片格式受支持。</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
         </main>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.stitch.infoIntro">
+                        图片拼接：将多张图片无缝合并为一张长图</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.stitch.problemsTitle">为什么需要图片拼接而不是发多张图</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.problem1">
+                            聊天记录截图需要拼成长图方便分享、电商产品多角度图需要拼成一张方便展示、教程步骤图需要纵向排列方便阅读——在这些场景中，一张长图比多张散图更实用、更易传播。但手机自带的拼接功能往往只支持
+                            2-3 张图，且有尺寸限制。</li>
+                        <li data-i18n="image.stitch.problem2">
+                            本工具支持无限数量的图片拼接——纵向拼接（上下排列）和横向拼接（左右排列）两种模式。可设置间距（0-100px）、背景颜色、圆角大小。所有操作在浏览器中完成，支持高分辨率输出。
+                        </li>
+                        <li data-i18n="image.stitch.problem3">
+                            拖拽排序功能让你随时调整图片顺序——上传后如果不满意排列顺序，直接拖动缩略图调整。预览区域实时更新拼接效果，确认满意后一键下载高清长图。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.formatTitle">拼接模式与参数</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.formatJpg">
+                            <strong>纵向拼接：</strong>图片从上到下依次排列——最常见的模式，适合聊天记录、教程步骤、产品详情等场景。所有图片宽度自动统一为最宽图片的宽度（等比缩放），高度保持各自比例。
+                        </li>
+                        <li data-i18n="image.stitch.formatPng">
+                            <strong>横向拼接：</strong>图片从左到右依次排列——适合对比图（如处理前后对比）、时间线、产品多角度展示等场景。所有图片高度自动统一为最高图片的高度（等比缩放），宽度保持各自比例。
+                        </li>
+                        <li data-i18n="image.stitch.formatWebp"><strong>WebP：</strong>支持拼接输入，可与 JPG、PNG、BMP
+                            等其他格式的图片混合拼接，工具自动统一处理不同格式的解码和色彩空间转换。不同格式的图片在拼接结果中保持各自的色彩特性，互不影响。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.featuresTitle">拼接引擎的技术实现</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.featureOnline"><strong>Canvas 合成：</strong>创建一个足够大的画布（总宽度 =
+                            最大图片宽度，总高度 = 所有图片高度之和 + 间距），然后使用 drawImage 将每张图片按计算好的坐标绘制到画布上。</li>
+                        <li data-i18n="image.stitch.featurePreview">
+                            <strong>实时预览：</strong>每次上传图片、删除图片、调整顺序或修改参数后，预览区域立即更新。预览使用缩略图渲染，下载时使用原始分辨率——确保输出质量。
+                        </li>
+                        <li data-i18n="image.stitch.featureExport"><strong>圆角处理：</strong>可选为每张图片添加圆角（0-50px）。圆角通过
+                            Canvas 的 clip() 方法实现——先绘制圆角矩形路径，再裁剪后绘制图片。圆角区域外的部分透明（PNG 输出）或填充背景色（JPG 输出）。</li>
+                        <li data-i18n="image.stitch.featureSecurity"><strong>高分辨率输出：</strong>拼接后的图片分辨率可能非常大（比如 10 张
+                            1080p 图片纵向拼接，输出高度超过 10000px）。Canvas 对最大尺寸有限制——如果超出限制，工具会自动缩小到浏览器支持的最大尺寸。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.stitch.infoUsage">
+                        拼接操作流程</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.stitch.usageUploadTitle">上传图片</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.usageUpload1"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                        <li data-i18n="image.stitch.usageUpload2"><strong>批量上传：</strong>支持多选上传，最多10张图片。</li>
+                        <li data-i18n="image.stitch.usageUpload3"><strong>支持格式：</strong>支持 JPG、PNG、WebP、GIF、BMP 格式。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.usageSelectTitle">选择图片</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.usageSelect1"><strong>选择拼接：</strong>在文件列表中勾选需要拼接的图片。</li>
+                        <li data-i18n="image.stitch.usageSelect2"><strong>全选/清空：</strong>点击“全选”或“清空”按钮批量操作。</li>
+                        <li data-i18n="image.stitch.usageSelect3"><strong>查看列表：</strong>已选择图片会显示在拼接顺序列表中。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.usageOrderTitle">调整顺序</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.usageOrder1"><strong>拖拽排序：</strong>在拼接顺序列表中拖拽图片调整顺序。</li>
+                        <li data-i18n="image.stitch.usageOrder2"><strong>反转顺序：</strong>点击“反转顺序”按钮快速反转。</li>
+                        <li data-i18n="image.stitch.usageOrder3"><strong>顺序重要：</strong>拼接顺序决定最终图片的排列顺序。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.usageSettingsTitle">拼接设置</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.usageSettings1"><strong>拼接方向：</strong>选择垂直拼接（上下排列）或水平拼接（左右排列）。
+                        </li>
+                        <li data-i18n="image.stitch.usageSettings2"><strong>拼接间距：</strong>调整图片之间的间距（0-50像素）。</li>
+                        <li data-i18n="image.stitch.usageSettings3"><strong>背景颜色：</strong>选择拼接后的背景颜色。</li>
+                        <li data-i18n="image.stitch.usageSettings4"><strong>保持宽高比：</strong>勾选后保持图片原始宽高比。</li>
+                        <li data-i18n="image.stitch.usageSettings5"><strong>统一尺寸：</strong>勾选后将所有图片调整为统一尺寸。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.usageStitchTitle">执行拼接</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.usageStitch1"><strong>点击拼接：</strong>点击“开始拼接”按钮执行拼接。</li>
+                        <li data-i18n="image.stitch.usageStitch2"><strong>实时预览：</strong>拼接后在预览区域显示结果。</li>
+                        <li data-i18n="image.stitch.usageStitch3"><strong>双击放大：</strong>双击预览可全屏查看。</li>
+                        <li data-i18n="image.stitch.usageStitch4">
+                            <strong>加入列表：</strong>点击“加入列表”将拼接结果添加到待处理列表，可继续参与二次拼接。
+                        </li>
+                        <li data-i18n="image.stitch.usageStitch5"><strong>下载图片：</strong>点击“下载图片”按钮保存拼接结果。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.usageStitch6Title">二次拼接</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.usageStitch6"><strong>拼接后再拼接：</strong>将拼接结果加入列表后，可与其他图片再次拼接。
+                        </li>
+                        <li data-i18n="image.stitch.usageStitch7"><strong>灵活组合：</strong>支持多次拼接，实现复杂的图片布局。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 class="text-xl font-semibold mb-4 flex items-center" data-i18n="image.stitch.infoNotes">注意事项
+                    </h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.stitch.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.noteSecurity1">拼接引擎通过 Canvas 2D API
+                            在浏览器中直接运算——多张图片的解码、缩放、对齐、合成全部在本地 CPU 完成。Canvas drawImage
+                            操作不涉及任何网络请求，即使拼接包含商业机密的产品设计图或内部文档截图，数据也不会离开本地设备。</li>
+                        <li data-i18n="image.stitch.noteSecurity2">上传的多张源图片和拼接结果仅在浏览器内存中以 Blob URL
+                            形式暂存。关闭标签页或刷新页面后，所有图片数据立即从 JavaScript 堆内存中释放。工具不使用 Cookie、localStorage 或 IndexedDB
+                            持久化任何图片数据，确保隐私安全。</li>
+                        <li data-i18n="image.stitch.noteSecurity3">拼接截图或文档时，注意去除其中的个人信息（如地址、电话等）。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.notesSettingsTitle">拼接设置指南</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.noteSettings1">至少选择 2 张图片才能进行拼接，最多支持 10 张。</li>
+                        <li data-i18n="image.stitch.noteSettings2">勾选“保持宽高比”时，不同尺寸的图片会自动缩放以保持比例，可能产生空白区域。</li>
+                        <li data-i18n="image.stitch.noteSettings3">勾选“统一图片尺寸”时，所有图片会被缩放至相同大小，适合需要整齐排列的场景。</li>
+                        <li data-i18n="image.stitch.noteSettings4">间距设置大于 0 时，记得同时设置背景色，否则间距区域为透明。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.notesFormatTitle">输出格式说明</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.noteFormat1">JPG、PNG、WebP 等不同格式的图片可以混合拼接，无兼容性问题。</li>
+                        <li data-i18n="image.stitch.noteFormat2">PNG 透明图片拼接后仍保持透明效果，间距区域也可透明。</li>
+                        <li data-i18n="image.stitch.noteFormat3">GIF 动态图片仅取第一帧参与拼接。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.notesPerfTitle">性能提示</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.notePerf1">大尺寸图片拼接需要较长时间，请耐心等待。</li>
+                        <li data-i18n="image.stitch.notePerf2">建议在拼接前先压缩图片以提高处理速度。</li>
+                        <li data-i18n="image.stitch.notePerf3">处理期间不要关闭浏览器或刷新页面。</li>
+                    </ul>
+                    <h4 data-i18n="image.stitch.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="image.stitch.noteFaq1"><strong>拼接后图片大小不一致：</strong>勾选“统一图片尺寸”让所有图片缩放至相同大小。
+                        </li>
+                        <li data-i18n="image.stitch.noteFaq2">
+                            <strong>拼接结果有空白区域：</strong>这是“保持宽高比”导致的，不同尺寸图片等比缩放后会有留白，可通过背景色填充。
+                        </li>
+                        <li data-i18n="image.stitch.noteFaq3">
+                            <strong>如何实现复杂布局：</strong>先拼接一组图片，点击“加入列表”，再选择其他图片进行二次拼接。
+                        </li>
+                        <li data-i18n="image.stitch.noteFaq4"><strong>拼接失败：</strong>确保至少选择了 2 张有效图片，且图片格式受支持。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
 
         <!-- Footer component container -->
         <div id="footer-container">

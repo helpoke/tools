@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="PBKDF2密钥派生工具详细说明：密码学密钥派生、盐与迭代次数、AES密钥生成、密码安全存储与最佳实践，本地处理保护隐私">
+    <meta name="keywords" content="PBKDF2,密钥派生,密码学,盐,迭代次数,AES密钥,密码存储">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>PBKDF2 密钥派生工具 - 详细使用说明与安全实践</title>
+    <link rel="canonical" href="https://helpoke.com/encrypted/pbkdf2/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/pbkdf2/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/pbkdf2/note.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #3498db;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #3498db;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section h4 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul,
+        .info-section ol {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: #3498db;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        .algorithm-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .algorithm-card h4 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .algorithm-card p {
+            text-indent: 0 !important;
+            margin-bottom: 10px !important;
+        }
+
+        .algorithm-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .algorithm-tag {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .tag-recommend {
+            background: rgba(16, 185, 129, 0.2);
+            color: #059669;
+        }
+
+        .tag-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #D97706;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/note.css">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/note.js"></script>
+    <script src="/common/js/layout.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>PBKDF2 密钥派生工具</h1>
+            <p class="subtitle">基于密码的密钥派生、安全存储与加密实践指南</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是 PBKDF2？</h2>
+                <p>PBKDF2（Password-Based Key Derivation Function 2）是一种标准的密码学密钥派生算法，由 RSA 实验室在 PKCS #5 v2.0 中提出，并被 RFC
+                    2898 标准化。它的核心作用是将用户容易记忆的弱密码转换为高强度的密钥，供 AES 等加密算法使用。</p>
+                <p>PBKDF2
+                    通过两个关键机制增强安全性：一是引入随机盐值（Salt），抵御彩虹表攻击并确保相同密码产生不同密钥；二是通过大量迭代（Iterations）重复伪随机函数运算，显著增加暴力破解的计算成本。即使攻击者截获了派生密钥，也很难反推出原始密码。
+                </p>
+                <p>本工具基于浏览器原生 Web Crypto API 实现，严格遵循 PKCS #5/RFC 2898 标准，支持 SHA-1、SHA-256、SHA-384、SHA-512
+                    四种哈希算法，可自定义盐值、迭代次数和输出密钥长度。所有计算在浏览器本地完成，密码和盐值不会上传到服务器。</p>
+
+                <h2>PBKDF2 的工作原理</h2>
+                <p>PBKDF2 的计算过程可以概括为：将密码和盐作为输入，通过多次迭代调用伪随机函数（PRF），最终输出指定长度的派生密钥。其公式为：</p>
+                <div class="code-block">DK = PBKDF2(PRF, Password, Salt, c, dkLen)</div>
+                <p>其中，PRF 是伪随机函数（如 HMAC-SHA256），Password 是用户密码，Salt 是随机盐，c 是迭代次数，dkLen 是期望的输出密钥长度。迭代次数 c
+                    越大，每次派生所需时间越长，暴力破解成本也越高。</p>
+
+                <h2>五步完成密钥派生</h2>
+                <h3>第一步：输入密码</h3>
+                <p>输入需要派生密钥的原始密码。密码的熵值直接影响最终密钥的安全性，建议使用包含大小写字母、数字和特殊符号的强密码，长度至少 12 位以上。</p>
+                <h3>第二步：设置盐值</h3>
+                <p>盐值是随机生成的数据，用于确保即使两个用户使用相同密码，派生出的密钥也不同。本工具支持自动生成密码学安全随机盐，也可以手动输入 Hex 或文本形式的盐。每个密码应使用不同的盐。</p>
+                <h3>第三步：选择哈希算法</h3>
+                <p>根据安全需求选择哈希算法。SHA-256 是推荐选择，兼顾安全性和速度；SHA-512 提供更高安全性但计算更慢；SHA-1 因安全性较弱，仅建议用于兼容旧系统。</p>
+                <h3>第四步：配置迭代次数和密钥长度</h3>
+                <p>一般推荐 100,000 次迭代和 256 位密钥长度，以平衡安全性和计算速度。迭代次数越高，暴力破解成本越高，但派生时间也越长。密钥长度根据用途选择，如 AES-256 需要 256 位。</p>
+                <h3>第五步：派生密钥</h3>
+                <p>点击派生按钮，工具会计算并输出 Hex 或 Base64 格式的派生密钥。请妥善保存算法、盐、迭代次数和密钥长度，解密或验证时需要完全相同的参数。</p>
+            </div>
+            <div class="info-section">
+                <h2>参数选择建议</h2>
+
+                <div class="algorithm-card">
+                    <h4>SHA-256 + 100,000 次迭代 + 256 位</h4>
+                    <p>最推荐的参数组合，兼顾安全性、兼容性和计算速度。适用于大多数文件加密、密码存储和密钥生成场景。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-recommend">推荐用于大多数场景</span>
+                        <span class="algorithm-tag">兼容性好</span>
+                    </div>
+                </div>
+
+                <div class="algorithm-card">
+                    <h4>SHA-512 + 100,000 次迭代 + 256 位</h4>
+                    <p>提供比 SHA-256 更高的安全冗余，适合对长期安全性要求极高的场景。计算开销更大，派生时间更长。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-recommend">高安全性场景</span>
+                        <span class="algorithm-tag">计算开销较大</span>
+                    </div>
+                </div>
+
+                <div class="algorithm-card">
+                    <h4>SHA-1（仅兼容旧系统）</h4>
+                    <p>SHA-1 已被证明存在碰撞攻击风险，不推荐用于新系统。仅在必须与旧系统或旧协议兼容时使用。</p>
+                    <div class="algorithm-tags">
+                        <span class="algorithm-tag tag-warning">不推荐新系统使用</span>
+                        <span class="algorithm-tag">仅用于兼容</span>
+                    </div>
+                </div>
+
+                <h2>典型应用场景</h2>
+                <p><strong>加密密钥生成：</strong>将用户输入的密码转换为 AES 加密所需的 128/256 位密钥，无需用户直接管理复杂的二进制密钥。</p>
+                <p><strong>密码验证存储：</strong>服务端不存储明文密码，而是存储 PBKDF2 派生值、盐和迭代次数。用户登录时重新计算并比对，有效防止数据库泄露后被破解。</p>
+                <p><strong>文件加密：</strong>在本地加密文件时，使用 PBKDF2 从密码派生 AES-GCM 密钥，结合随机盐实现安全的文件加密。</p>
+                <p><strong>跨平台密钥协商：</strong>在跨语言、跨平台系统中，使用标准 PBKDF2 参数确保各方派生出的密钥一致。</p>
+
+                <h2>技术优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">PKCS #5 / RFC 2898</span>
+                    <span class="feature-tag">Web Crypto API</span>
+                    <span class="feature-tag">SHA-1/256/384/512</span>
+                    <span class="feature-tag">随机盐生成</span>
+                    <span class="feature-tag">自定义迭代次数</span>
+                    <span class="feature-tag">Hex/Base64 输出</span>
+                    <span class="feature-tag">本地处理</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>迭代次数推荐至少 100,000 次，安全要求越高可设置更大值</li>
+                        <li>每个密码应使用不同的随机盐，切勿全局复用</li>
+                        <li>解密或验证时需要完全相同的算法、盐、迭代次数和密钥长度</li>
+                        <li>本工具所有计算在浏览器本地完成，数据不上传服务器</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>实战案例：用户密码安全存储</h2>
+            <p>某论坛在数据库泄露事件后发现，其早期使用 MD5 存储的用户密码被大量破解。为提升安全性，技术团队决定将所有密码存储方式迁移到 PBKDF2-HMAC-SHA256。</p>
+            <p><strong>迁移方案：</strong></p>
+            <ol>
+                <li>用户注册或修改密码时，系统生成 16 字节（128 位）的密码学安全随机盐。</li>
+                <li>使用 PBKDF2-HMAC-SHA256，设置 100,000 次迭代，派生 256 位（32 字节）的密钥。</li>
+                <li>数据库中不再存储明文密码，而是存储盐、迭代次数和派生密钥的 Hex 字符串。</li>
+                <li>用户登录时，系统读取该用户的盐，用相同参数重新计算 PBKDF2，与数据库中存储的值比对。</li>
+            </ol>
+            <p><strong>效果：</strong>即使数据库再次泄露，攻击者也无法通过彩虹表快速破解密码。每次猜测一个密码都需要执行 10 万次 HMAC-SHA256
+                运算，大幅降低了暴力破解效率。相同密码因盐不同而产生完全不同的派生值，也有效防止了批量破解。</p>
+
+            <h2>安全最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>盐值必须唯一：</strong>每个密码、每个文件、每个用户都应使用不同的随机盐。全局复用盐会让彩虹表攻击重新变得可行。</li>
+                    <li><strong>迭代次数动态调整：</strong>随着硬件性能提升，应定期增加迭代次数。现代服务器通常可接受 100,000-600,000 次，移动端可根据响应时间适当降低。</li>
+                    <li><strong>保存完整参数：</strong>盐、迭代次数、哈希算法和密钥长度都是派生密钥的必要输入。解密或验证时缺少任一参数都无法恢复密钥。</li>
+                    <li><strong>盐不需要保密：</strong>盐值通常与派生密钥一起存储，其作用是防止预计算攻击，而非提供保密性。不要依赖盐来保护密码。</li>
+                    <li><strong>密码强度仍然关键：</strong>PBKDF2 只能延缓破解速度，无法弥补弱密码。应强制用户设置足够长且复杂的密码。</li>
+                    <li><strong>考虑更现代的替代方案：</strong>对于全新的系统设计，可以考虑 Argon2、scrypt 等内存困难型密钥派生函数，它们对 GPU 和专用硬件攻击有更强的抵抗能力。
+                    </li>
+                </ul>
+            </div>
+
+            <h2>常见问题</h2>
+            <h3>问：PBKDF2 和直接哈希密码有什么区别？</h3>
+            <p><strong>答：</strong>直接哈希（如 SHA-256）计算速度极快，攻击者每秒可尝试数十亿次，容易被暴力破解。PBKDF2 通过大量迭代和盐值显著降低破解速度，更适合从密码派生密钥。</p>
+            <h3>问：迭代次数越高越好吗？</h3>
+            <p><strong>答：</strong>迭代次数越高，暴力破解成本越高，但计算时间也越长。一般推荐 100,000-600,000 次之间，具体取决于应用场景对响应时间的要求。过高的迭代次数会影响用户体验。
+            </p>
+            <h3>问：盐值需要保密吗？</h3>
+            <p><strong>答：</strong>盐值不需要保密，通常与派生密钥一起存储。但它的作用是让相同密码产生不同结果，防止彩虹表攻击。每个密码应使用唯一盐值。</p>
+            <h3>问：为什么相同密码和盐每次派生结果相同？</h3>
+            <p><strong>答：</strong>PBKDF2 是确定性算法，给定相同的密码、盐、迭代次数、哈希算法和密钥长度，始终会输出相同的派生密钥。这也是它能用于密码验证和密钥恢复的原因。</p>
+            <h3>问：PBKDF2 输出应该选 Hex 还是 Base64？</h3>
+            <p><strong>答：</strong>Hex 格式便于阅读和调试，Base64 更紧凑。作为 AES 密钥使用时，两者都可以，关键是与加密工具的输入格式保持一致。存储到数据库时通常使用 Hex。</p>
+        </div>
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#3498db"></div>
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../aes/index.html" class="tool-link">AES加解密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+                <a href="../rsa/index.html" class="tool-link">RSA密钥对生成工具</a>
+                <a href="../file-encrypt/index.html" class="tool-link">文件加解密工具</a>
+            </div>
+        </div>
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+.container {
+    padding: 40px 20px;
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.tool-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 32px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 13px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    font-family: 'Consolas', 'Monaco', monospace;
+    resize: vertical;
+    min-height: 180px;
+    line-height: 1.5;
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: #27ae60;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #219150;
+}
+
+.result-section {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.result-header h4 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.copy-icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    opacity: 0.8;
+}
+
+.copy-icon-btn:hover {
+    opacity: 1;
+}
+
+.cert-result {
+    display: grid;
+    gap: 10px;
+}
+
+.cert-field {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    align-items: start;
+}
+
+.cert-field .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.cert-field .value {
+    font-size: 13px;
+    word-break: break-all;
+    line-height: 1.5;
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.cert-field .value.multi {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+@media (max-width: 480px) {
+    .tool-card {
+        padding: 20px;
+    }
+    .cert-field {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+}

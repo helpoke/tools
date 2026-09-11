@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线文件加解密工具，使用密码在本地加密/解密文件，支持下载加密后的 .enc 文件，纯前端处理保护隐私。Free online file encryptor and decryptor.">
+    <meta name="keywords" content="文件加密,文件解密,文件加解密,在线文件加密,本地加密,AES加密">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>文件加解密工具 - 本地加密解密文件</title>
+    <meta property="og:title" content="文件加解密工具 - 本地加密解密文件">
+    <meta property="og:description"
+        content="在线文件加解密工具，使用密码在本地加密/解密文件，支持下载加密后的 .enc 文件，纯前端处理保护隐私。Free online file encryptor and decryptor.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/file-encrypt/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="文件加解密工具 - 本地加密解密文件">
+    <meta name="twitter:description"
+        content="在线文件加解密工具，使用密码在本地加密/解密文件，支持下载加密后的 .enc 文件，纯前端处理保护隐私。Free online file encryptor and decryptor.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/file-encrypt/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/file-encrypt/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/file-encrypt/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "文件加解密工具",
+        "description": "免费在线文件加解密工具，使用密码在本地加密/解密文件并下载 .enc 加密文件。Free online file encryptor and decryptor for local file encryption.",
+        "url": "https://helpoke.com/encrypted/file-encrypt/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "文件 AES-256-GCM 加密",
+            "文件 AES-256-GCM 解密",
+            "PBKDF2 密钥派生",
+            "随机盐与 IV",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.fileEncrypt.title">文件加解密工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.fileEncrypt.intro">使用 AES-256-GCM 与 PBKDF2 在本地加密/解密文件，密码保护敏感数据，文件不上传服务器</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="encrypt"
+                        data-i18n="encrypted.fileEncrypt.tabEncrypt">加密文件</button>
+                    <button class="tab-btn" data-tab="decrypt"
+                        data-i18n="encrypted.fileEncrypt.tabDecrypt">解密文件</button>
+                </div>
+
+                <div id="tab-encrypt" class="tab-pane active">
+                    <div class="form-group">
+                        <label for="enc-password" data-i18n="encrypted.fileEncrypt.passwordLabel">密码</label>
+                        <input type="password" id="enc-password"
+                            data-i18n-placeholder="encrypted.fileEncrypt.passwordPlaceholder" placeholder="请输入加密密码...">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.fileEncrypt.fileLabel">选择文件</label>
+                        <div class="upload-area" id="enc-upload-area">
+                            <input type="file" id="enc-file">
+                            <div class="upload-prompt">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p data-i18n="encrypted.fileEncrypt.dropPrompt">点击选择文件或拖拽文件到此处</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="file-info" id="enc-file-info"></div>
+                    <button class="btn btn-primary" id="encrypt-btn"
+                        data-i18n="encrypted.fileEncrypt.encryptBtn">加密并下载</button>
+                </div>
+
+                <div id="tab-decrypt" class="tab-pane">
+                    <div class="form-group">
+                        <label for="dec-password" data-i18n="encrypted.fileEncrypt.passwordLabel">密码</label>
+                        <input type="password" id="dec-password"
+                            data-i18n-placeholder="encrypted.fileEncrypt.passwordPlaceholder" placeholder="请输入解密密码...">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.fileEncrypt.fileLabel">选择已加密文件</label>
+                        <div class="upload-area" id="dec-upload-area">
+                            <input type="file" id="dec-file">
+                            <div class="upload-prompt">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p data-i18n="encrypted.fileEncrypt.dropEncryptedPrompt">点击选择 .enc 加密文件或拖拽到此处</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="file-info" id="dec-file-info"></div>
+                    <button class="btn btn-primary" id="decrypt-btn"
+                        data-i18n="encrypted.fileEncrypt.decryptBtn">解密并下载</button>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.fileEncrypt.infoIntro">本地文件加密：简单且安全</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.fileEncrypt.problemsTitle">为什么需要文件加密</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.problem1">
+                            在传输或备份敏感文件时，您可能需要先对文件进行加密，以防止未经授权的访问。本工具使用 AES-256-GCM 算法，提供认证加密。</li>
+                        <li data-i18n="encrypted.fileEncrypt.problem2">
+                            所有加密/解密操作在浏览器本地完成，文件内容不会上传到服务器，适合处理隐私文档、照片、视频等。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileEncrypt.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.featureAes">
+                            <strong>AES-256-GCM：</strong>现代认证加密算法，同时保证机密性和完整性。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.featurePbkdf2"><strong>PBKDF2 密钥派生：</strong>密码经
+                            100,000 次迭代和盐值派生为 256 位密钥。</li>
+                        <li data-i18n="encrypted.fileEncrypt.featureFormat"><strong>自包含格式：</strong>加密文件自动包含盐和
+                            IV，解密时无需额外输入。</li>
+                        <li data-i18n="encrypted.fileEncrypt.featureSecurity">
+                            <strong>本地处理：</strong>文件完全在浏览器内存中处理，处理完成后立即释放。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.fileEncrypt.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.fileEncrypt.usageEncryptTitle">加密步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.usageEncryptPassword">
+                            <strong>设置密码：</strong>使用强密码，解密时需要完全相同的密码。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.usageEncryptFile">
+                            <strong>选择文件：</strong>点击上传或拖拽需要加密的文件。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.usageEncryptClick"><strong>点击加密：</strong>下载 .enc
+                            扩展名的加密文件。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileEncrypt.usageDecryptTitle">解密步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.usageDecryptFile"><strong>选择加密文件：</strong>上传 .enc
+                            文件。</li>
+                        <li data-i18n="encrypted.fileEncrypt.usageDecryptPassword">
+                            <strong>输入密码：</strong>必须与加密时完全一致。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.usageDecryptClick"><strong>点击解密：</strong>下载原始文件。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileEncrypt.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.noteSecurity1"><strong>密码强度：</strong>建议使用 12
+                            位以上包含大小写字母、数字和符号的密码。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteSecurity2">
+                            <strong>密码保管：</strong>工具不保存密码，忘记密码将无法解密文件。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.noteSecurity3">
+                            <strong>文件大小：</strong>大文件会占用较多浏览器内存，处理完成后请关闭标签页。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.fileEncrypt.infoScenarios">技术优势与典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.fileEncrypt.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.scenarioPrivacy">
+                            <strong>隐私文件保护：</strong>加密个人身份证件、财务资料、医疗记录等敏感文件，防止设备丢失或被盗后数据泄露。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.scenarioCloudBackup">
+                            <strong>云端备份加密：</strong>在上传文件到网盘或云存储前，先对文件进行加密，即使云端账号被盗，攻击者也无法读取加密内容。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.scenarioSecureTransfer">
+                            <strong>文件安全传输：</strong>通过邮件、即时通讯或 U 盘发送机密文件时，先加密再传输，接收方通过单独渠道获取密码。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.scenarioEnterpriseArchive">
+                            <strong>企业数据归档：</strong>对重要合同、设计稿、源代码等商业资料进行本地加密归档，满足数据安全和合规要求。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileEncrypt.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.techAdvantageAes">
+                            <strong>认证加密：</strong>AES-256-GCM 同时保证机密性、完整性和认证功能，可检测文件是否被篡改。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.techAdvantagePbkdf2">
+                            <strong>强密钥派生：</strong>PBKDF2 配合随机盐和 100,000 次迭代，有效抵御暴力破解。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.techAdvantageFormat">
+                            <strong>自包含格式：</strong>加密文件自动包含 magic、version、salt、iv 和密文，解密时无需额外参数。
+                        </li>
+                        <li data-i18n="encrypted.fileEncrypt.techAdvantageLocal">
+                            <strong>本地处理：</strong>文件完全在浏览器内存中加密/解密，不上传服务器，保护隐私。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileEncrypt.algorithmSelectionTitle">安全使用建议</h4>
+                    <p data-i18n="encrypted.fileEncrypt.algorithmSelectionContent">AES-256-GCM
+                        是目前推荐的文件加密方案。请使用强密码并通过不同渠道发送密码。建议保留本地备份以防密码丢失。</p>
+                    <h4 data-i18n="encrypted.fileEncrypt.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq1"><strong>Q: 忘记密码能恢复吗？</strong>A: 不能。AES-256-GCM 的密钥由密码通过 PBKDF2 派生，没有密码就无法解密。请务必牢记密码或安全记录。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq2"><strong>Q: 加密后文件会变大吗？</strong>A: 会略微增大——加密文件包含盐值（16 字节）、IV（12 字节）和认证标签（16 字节），总计增加约 44 字节。对于大文件可忽略不计。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq3"><strong>Q: 同一个文件用相同密码加密两次，结果一样吗？</strong>A: 不一样。每次加密都会生成新的随机盐和 IV，所以密文不同。这是安全优势——攻击者无法通过对比密文判断两个文件是否相同。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq4"><strong>Q: 加密大文件会很慢吗？</strong>A: AES-256-GCM 使用 Web Crypto API 原生实现，速度接近系统级加密库。100MB 文件通常在 1-3 秒内完成加密。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

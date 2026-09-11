@@ -798,171 +798,172 @@
                     </div>
                 </div>
             </div>
-
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.cropping.infoIntro">图片裁剪：不只是"切一刀"那么简单</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.cropping.problemsTitle">一、裁剪背后的像素级计算</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.problem1">头像要正方形、公众号封面要 2.35:1、身份证裁剪要精确到毫米、电商主图要
-                                800x800——不同平台对图片尺寸和比例的要求千差万别。手动用 Photoshop 裁剪再上传？太慢了。本工具提供 12 种预设比例（1:1、4:3、16:9、2.35:1
-                                等）和自由裁剪模式，拖拽选区即可精确裁剪，像素级精度。</li>
-                            <li data-i18n="image.cropping.problem2">裁剪不仅仅是"去掉不需要的部分"——它涉及重新计算像素坐标、调整分辨率、保持宽高比。本工具基于
-                                Canvas 的
-                                drawImage 裁剪，直接从原图的指定矩形区域提取像素，不经过二次压缩——裁剪后的图片质量与原始区域完全一致。</li>
-                            <li data-i18n="image.cropping.problem3">旋转功能同步集成——裁剪前可以先将图片旋转 90/180/270
-                                度，方便处理手机竖拍的照片。所有操作在浏览器中完成，图片不上传到任何服务器。</li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.formatsTitle">二、支持格式与输出特性</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.formatJpg">
-                                <strong>常用预设比例：</strong>1:1（头像/社交媒体）、4:3（传统照片）、3:2（单反相机）、16:9（宽屏视频封面）、2.35:1（电影宽银幕）、A4（打印文档）。选择预设后裁剪框自动锁定比例，拖拽时只会等比缩放。
-                            </li>
-                            <li data-i18n="image.cropping.formatPng">
-                                <strong>自由裁剪模式：</strong>不锁定比例，完全自由拖拽选区。适合需要精确到像素的裁剪场景——比如去掉图片边缘的水印、裁剪特定区域的内容。
-                            </li>
-                            <li data-i18n="image.cropping.formatWebp"><strong>WebP：</strong>现代高效格式，同时支持有损/无损压缩和透明，文件体积比
-                                JPG
-                                小 25-35%。</li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.featuresTitle">三、裁剪工具的技术实现</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.featureOnline"><strong>Canvas 像素提取：</strong>裁剪使用 Canvas
-                                drawImage
-                                的九参数版本——指定源矩形（sx, sy, sw, sh）和目标矩形，直接从原图像素数组中提取目标区域。这个过程不涉及重新编码，质量零损失。</li>
-                            <li data-i18n="image.cropping.featurePreview">
-                                <strong>实时选区预览：</strong>裁剪框拖动时实时更新选区位置和大小。选区外区域半透明遮罩覆盖，直观显示将被裁掉的部分。选区信息面板实时显示当前选区的坐标、宽高和比例。
-                            </li>
-                            <li data-i18n="image.cropping.featureExport"><strong>旋转集成：</strong>裁剪前可先旋转图片（90/180/270
-                                度），旋转基于
-                                Canvas transform 实现，同样不损失质量。旋转后的裁剪选区自动适配新的图片方向。</li>
-                            <li data-i18n="image.cropping.featureSecurity">
-                                <strong>输出格式保持：</strong>裁剪后的图片保持与原始图片相同的格式（JPG→JPG，PNG→PNG）。PNG 的透明通道在裁剪后完整保留。
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.cropping.infoUsage">裁剪操作流程</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.cropping.usageUploadTitle">载入图片</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.usageUploadClick"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
-                            <li data-i18n="image.cropping.usageUploadFormats"><strong>支持格式：</strong>支持
-                                JPG、PNG、WebP、GIF、BMP
-                                格式。</li>
-                            <li data-i18n="image.cropping.usageUploadPreview"><strong>图片预览：</strong>上传后进入裁剪编辑器界面。</li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.usageRatioTitle">二、选择裁剪比例</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.usageRatioFree"><strong>自由裁剪：</strong>选择"自由"模式，可任意调整裁剪框大小和比例。
-                            </li>
-                            <li data-i18n="image.cropping.usageRatioPreset">
-                                <strong>预设比例：</strong>选择1:1、4:3、3:2、16:9、3:4、2:3、9:16等预设比例。
-                            </li>
-                            <li data-i18n="image.cropping.usageRatioCustom"><strong>自定义比例：</strong>选择"自定义"，输入宽高比后点击应用。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.usageAdjustTitle">三、调整裁剪区域</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.usageAdjustDrag"><strong>拖动裁剪框：</strong>点击裁剪框内部拖动调整位置。</li>
-                            <li data-i18n="image.cropping.usageAdjustResize"><strong>调整大小：</strong>拖动裁剪框边角的调整手柄改变大小。
-                            </li>
-                            <li data-i18n="image.cropping.usageAdjustDims"><strong>精确尺寸：</strong>在右侧面板输入精确的X、Y、宽、高值。
-                            </li>
-                            <li data-i18n="image.cropping.usageAdjustReset"><strong>重置裁剪框：</strong>点击"重置裁剪框"按钮恢复初始状态。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.usagePreviewTitle">四、裁剪预览</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.usagePreviewLive"><strong>实时预览：</strong>右侧预览区域实时显示裁剪效果。</li>
-                            <li data-i18n="image.cropping.usagePreviewGrid"><strong>网格参考：</strong>裁剪框内显示三分网格线辅助构图。</li>
-                            <li data-i18n="image.cropping.usagePreviewInfo"><strong>信息显示：</strong>底部显示选区位置、选区大小和原图尺寸。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.usageDownloadTitle">五、下载裁剪图片</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.usageDownloadFormat">
-                                <strong>选择格式：</strong>在下拉菜单中选择输出格式（PNG、JPG、WebP）。
-                            </li>
-                            <li data-i18n="image.cropping.usageDownloadClick"><strong>点击下载：</strong>点击"下载裁剪图片"按钮保存结果。
-                            </li>
-                            <li data-i18n="image.cropping.usageDownloadReupload"><strong>重新上传：</strong>点击"重新上传图片"按钮更换图片。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.usageSuggestTitle">六、比例选择建议</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.usageSuggestAvatar"><strong>社交媒体头像：</strong>使用1:1比例。</li>
-                            <li data-i18n="image.cropping.usageSuggestBanner"><strong>网站横幅：</strong>使用16:9比例。</li>
-                            <li data-i18n="image.cropping.usageSuggestPhoto"><strong>照片打印：</strong>使用4:3或3:2比例。</li>
-                            <li data-i18n="image.cropping.usageSuggestWallpaper"><strong>手机壁纸：</strong>使用9:16比例。</li>
-                        </ul>
-                    </div>
-                </article>
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="image.cropping.infoNotes">注意事项</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="image.cropping.notesSecurityTitle">数据安全</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.noteSecurity1">裁剪操作通过 Canvas API 的 drawImage
-                                方法在浏览器中直接完成——从原图中提取指定矩形区域的像素数据并生成新图片。整个裁剪过程（包括坐标计算、像素复制、图片编码）全部在本地执行，无需任何网络请求或第三方库。</li>
-                            <li data-i18n="image.cropping.noteSecurity2">原图和裁剪结果仅在浏览器内存中暂存（以 Blob URL
-                                形式存在）。关闭页面或刷新后，所有图片数据自动从内存中释放。工具不会将任何图片数据写入 Cookie、localStorage 或 IndexedDB，确保隐私安全。</li>
-                            <li data-i18n="image.cropping.noteSecurity3">
-                                裁剪身份证、护照、银行卡、合同截图等包含个人敏感信息的图片时，强烈建议使用浏览器无痕模式。无痕模式关闭后，浏览历史、缓存、Cookie
-                                等数据会被彻底清除，避免敏感图片残留被他人恢复。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.notesCropTitle">二、裁剪技巧</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.noteCrop1">裁剪框最小尺寸为 10×10
-                                像素，这是为了保证输出图片有足够的有效内容。如果需要裁剪更小的区域，建议先放大图片再操作。裁剪坐标和尺寸在输入框中精确显示（X、Y、宽、高），支持手动输入数值进行像素级精确裁剪。
-                            </li>
-                            <li data-i18n="image.cropping.noteCrop2">选择固定比例后，拖动裁剪框时会自动锁定该比例，无需手动调整。</li>
-                            <li data-i18n="image.cropping.noteCrop3">精确尺寸模式下，输入宽度后高度会根据当前比例自动计算。</li>
-                            <li data-i18n="image.cropping.noteCrop4">点击“重置裁剪框”可恢复为全图范围，重新开始调整。</li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.notesFormatTitle">输出格式说明</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.noteFormatPng">
-                                <strong>PNG：</strong>无损输出，保留透明通道，文件较大，适合设计素材和图标。
-                            </li>
-                            <li data-i18n="image.cropping.noteFormatJpg"><strong>JPG：</strong>有损压缩，文件最小，适合照片和网页配图，不支持透明。
-                            </li>
-                            <li data-i18n="image.cropping.noteFormatWebp">
-                                <strong>WebP：</strong>现代格式，文件最小且支持透明，适合网站图片和社交分享。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.notesPerfTitle">四、性能提示</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.notePerf1">大尺寸图片可能需要较长时间加载，请耐心等待。</li>
-                            <li data-i18n="image.cropping.notePerf2">裁剪操作在浏览器中完成，不会消耗服务器资源。</li>
-                            <li data-i18n="image.cropping.notePerf3">建议在裁剪前先压缩图片以提高处理速度。</li>
-                        </ul>
-                        <h4 data-i18n="image.cropping.notesFaqTitle">常见问题</h4>
-                        <ul>
-                            <li data-i18n="image.cropping.noteFaq1"><strong>裁剪框无法移动：</strong>确保鼠标点击在裁剪框内部区域，然后拖动。</li>
-                            <li data-i18n="image.cropping.noteFaq2"><strong>裁剪后图片有白边：</strong>JPG
-                                格式不支持透明，裁剪超出原图范围时会填充白色。建议用
-                                PNG 输出。</li>
-                            <li data-i18n="image.cropping.noteFaq3"><strong>如何裁剪特定像素区域：</strong>在右侧面板直接输入 X、Y、宽度、高度的像素值。
-                            </li>
-                            <li data-i18n="image.cropping.noteFaq4">
-                                <strong>图片显示不全：</strong>图片会自动缩放以适应预览区域，但裁剪基于原始分辨率，不影响输出质量。
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
         </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.cropping.infoIntro">图片裁剪：不只是"切一刀"那么简单</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.cropping.problemsTitle">裁剪背后的像素级计算</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.problem1">头像要正方形、公众号封面要 2.35:1、身份证裁剪要精确到毫米、电商主图要
+                            800x800——不同平台对图片尺寸和比例的要求千差万别。手动用 Photoshop 裁剪再上传？太慢了。本工具提供 12 种预设比例（1:1、4:3、16:9、2.35:1
+                            等）和自由裁剪模式，拖拽选区即可精确裁剪，像素级精度。</li>
+                        <li data-i18n="image.cropping.problem2">裁剪不仅仅是"去掉不需要的部分"——它涉及重新计算像素坐标、调整分辨率、保持宽高比。本工具基于
+                            Canvas 的
+                            drawImage 裁剪，直接从原图的指定矩形区域提取像素，不经过二次压缩——裁剪后的图片质量与原始区域完全一致。</li>
+                        <li data-i18n="image.cropping.problem3">旋转功能同步集成——裁剪前可以先将图片旋转 90/180/270
+                            度，方便处理手机竖拍的照片。所有操作在浏览器中完成，图片不上传到任何服务器。</li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.formatsTitle">支持格式与输出特性</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.formatJpg">
+                            <strong>常用预设比例：</strong>1:1（头像/社交媒体）、4:3（传统照片）、3:2（单反相机）、16:9（宽屏视频封面）、2.35:1（电影宽银幕）、A4（打印文档）。选择预设后裁剪框自动锁定比例，拖拽时只会等比缩放。
+                        </li>
+                        <li data-i18n="image.cropping.formatPng">
+                            <strong>自由裁剪模式：</strong>不锁定比例，完全自由拖拽选区。适合需要精确到像素的裁剪场景——比如去掉图片边缘的水印、裁剪特定区域的内容。
+                        </li>
+                        <li data-i18n="image.cropping.formatWebp"><strong>WebP：</strong>现代高效格式，同时支持有损/无损压缩和透明，文件体积比
+                            JPG
+                            小 25-35%。</li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.featuresTitle">裁剪工具的技术实现</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.featureOnline"><strong>Canvas 像素提取：</strong>裁剪使用 Canvas
+                            drawImage
+                            的九参数版本——指定源矩形（sx, sy, sw, sh）和目标矩形，直接从原图像素数组中提取目标区域。这个过程不涉及重新编码，质量零损失。</li>
+                        <li data-i18n="image.cropping.featurePreview">
+                            <strong>实时选区预览：</strong>裁剪框拖动时实时更新选区位置和大小。选区外区域半透明遮罩覆盖，直观显示将被裁掉的部分。选区信息面板实时显示当前选区的坐标、宽高和比例。
+                        </li>
+                        <li data-i18n="image.cropping.featureExport"><strong>旋转集成：</strong>裁剪前可先旋转图片（90/180/270
+                            度），旋转基于
+                            Canvas transform 实现，同样不损失质量。旋转后的裁剪选区自动适配新的图片方向。</li>
+                        <li data-i18n="image.cropping.featureSecurity">
+                            <strong>输出格式保持：</strong>裁剪后的图片保持与原始图片相同的格式（JPG→JPG，PNG→PNG）。PNG 的透明通道在裁剪后完整保留。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.cropping.infoUsage">裁剪操作流程</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.cropping.usageUploadTitle">载入图片</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.usageUploadClick"><strong>点击上传：</strong>点击上传区域或拖拽图片到上传区域。</li>
+                        <li data-i18n="image.cropping.usageUploadFormats"><strong>支持格式：</strong>支持
+                            JPG、PNG、WebP、GIF、BMP
+                            格式。</li>
+                        <li data-i18n="image.cropping.usageUploadPreview"><strong>图片预览：</strong>上传后进入裁剪编辑器界面。</li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.usageRatioTitle">选择裁剪比例</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.usageRatioFree"><strong>自由裁剪：</strong>选择"自由"模式，可任意调整裁剪框大小和比例。
+                        </li>
+                        <li data-i18n="image.cropping.usageRatioPreset">
+                            <strong>预设比例：</strong>选择1:1、4:3、3:2、16:9、3:4、2:3、9:16等预设比例。
+                        </li>
+                        <li data-i18n="image.cropping.usageRatioCustom"><strong>自定义比例：</strong>选择"自定义"，输入宽高比后点击应用。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.usageAdjustTitle">调整裁剪区域</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.usageAdjustDrag"><strong>拖动裁剪框：</strong>点击裁剪框内部拖动调整位置。</li>
+                        <li data-i18n="image.cropping.usageAdjustResize"><strong>调整大小：</strong>拖动裁剪框边角的调整手柄改变大小。
+                        </li>
+                        <li data-i18n="image.cropping.usageAdjustDims"><strong>精确尺寸：</strong>在右侧面板输入精确的X、Y、宽、高值。
+                        </li>
+                        <li data-i18n="image.cropping.usageAdjustReset"><strong>重置裁剪框：</strong>点击"重置裁剪框"按钮恢复初始状态。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.usagePreviewTitle">裁剪预览</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.usagePreviewLive"><strong>实时预览：</strong>右侧预览区域实时显示裁剪效果。</li>
+                        <li data-i18n="image.cropping.usagePreviewGrid"><strong>网格参考：</strong>裁剪框内显示三分网格线辅助构图。</li>
+                        <li data-i18n="image.cropping.usagePreviewInfo"><strong>信息显示：</strong>底部显示选区位置、选区大小和原图尺寸。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.usageDownloadTitle">下载裁剪图片</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.usageDownloadFormat">
+                            <strong>选择格式：</strong>在下拉菜单中选择输出格式（PNG、JPG、WebP）。
+                        </li>
+                        <li data-i18n="image.cropping.usageDownloadClick"><strong>点击下载：</strong>点击"下载裁剪图片"按钮保存结果。
+                        </li>
+                        <li data-i18n="image.cropping.usageDownloadReupload"><strong>重新上传：</strong>点击"重新上传图片"按钮更换图片。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.usageSuggestTitle">比例选择建议</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.usageSuggestAvatar"><strong>社交媒体头像：</strong>使用1:1比例。</li>
+                        <li data-i18n="image.cropping.usageSuggestBanner"><strong>网站横幅：</strong>使用16:9比例。</li>
+                        <li data-i18n="image.cropping.usageSuggestPhoto"><strong>照片打印：</strong>使用4:3或3:2比例。</li>
+                        <li data-i18n="image.cropping.usageSuggestWallpaper"><strong>手机壁纸：</strong>使用9:16比例。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="image.cropping.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="image.cropping.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.noteSecurity1">裁剪操作通过 Canvas API 的 drawImage
+                            方法在浏览器中直接完成——从原图中提取指定矩形区域的像素数据并生成新图片。整个裁剪过程（包括坐标计算、像素复制、图片编码）全部在本地执行，无需任何网络请求或第三方库。</li>
+                        <li data-i18n="image.cropping.noteSecurity2">原图和裁剪结果仅在浏览器内存中暂存（以 Blob URL
+                            形式存在）。关闭页面或刷新后，所有图片数据自动从内存中释放。工具不会将任何图片数据写入 Cookie、localStorage 或 IndexedDB，确保隐私安全。</li>
+                        <li data-i18n="image.cropping.noteSecurity3">
+                            裁剪身份证、护照、银行卡、合同截图等包含个人敏感信息的图片时，强烈建议使用浏览器无痕模式。无痕模式关闭后，浏览历史、缓存、Cookie
+                            等数据会被彻底清除，避免敏感图片残留被他人恢复。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.notesCropTitle">裁剪技巧</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.noteCrop1">裁剪框最小尺寸为 10×10
+                            像素，这是为了保证输出图片有足够的有效内容。如果需要裁剪更小的区域，建议先放大图片再操作。裁剪坐标和尺寸在输入框中精确显示（X、Y、宽、高），支持手动输入数值进行像素级精确裁剪。
+                        </li>
+                        <li data-i18n="image.cropping.noteCrop2">选择固定比例后，拖动裁剪框时会自动锁定该比例，无需手动调整。</li>
+                        <li data-i18n="image.cropping.noteCrop3">精确尺寸模式下，输入宽度后高度会根据当前比例自动计算。</li>
+                        <li data-i18n="image.cropping.noteCrop4">点击“重置裁剪框”可恢复为全图范围，重新开始调整。</li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.notesFormatTitle">输出格式说明</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.noteFormatPng">
+                            <strong>PNG：</strong>无损输出，保留透明通道，文件较大，适合设计素材和图标。
+                        </li>
+                        <li data-i18n="image.cropping.noteFormatJpg"><strong>JPG：</strong>有损压缩，文件最小，适合照片和网页配图，不支持透明。
+                        </li>
+                        <li data-i18n="image.cropping.noteFormatWebp">
+                            <strong>WebP：</strong>现代格式，文件最小且支持透明，适合网站图片和社交分享。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.notesPerfTitle">性能提示</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.notePerf1">大尺寸图片可能需要较长时间加载，请耐心等待。</li>
+                        <li data-i18n="image.cropping.notePerf2">裁剪操作在浏览器中完成，不会消耗服务器资源。</li>
+                        <li data-i18n="image.cropping.notePerf3">建议在裁剪前先压缩图片以提高处理速度。</li>
+                    </ul>
+                    <h4 data-i18n="image.cropping.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="image.cropping.noteFaq1"><strong>裁剪框无法移动：</strong>确保鼠标点击在裁剪框内部区域，然后拖动。</li>
+                        <li data-i18n="image.cropping.noteFaq2"><strong>裁剪后图片有白边：</strong>JPG
+                            格式不支持透明，裁剪超出原图范围时会填充白色。建议用
+                            PNG 输出。</li>
+                        <li data-i18n="image.cropping.noteFaq3"><strong>如何裁剪特定像素区域：</strong>在右侧面板直接输入 X、Y、宽度、高度的像素值。
+                        </li>
+                        <li data-i18n="image.cropping.noteFaq4">
+                            <strong>图片显示不全：</strong>图片会自动缩放以适应预览区域，但裁剪基于原始分辨率，不影响输出质量。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
 
         <!-- Footer component container -->
         <div id="footer-container">

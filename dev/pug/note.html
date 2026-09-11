@@ -274,7 +274,7 @@
             </div>
 
             <div class="info-section">
-                <h2>适用场景与人群</h2>
+                <h2>典型应用场景</h2>
                 <p><strong>前端开发者：</strong>处理Pug模板代码，提高代码可读性，便于团队协作。</p>
                 <p><strong>Node.js开发者：</strong>使用Express框架开发，编写和优化Pug模板。</p>
                 <p><strong>模板设计师：</strong>设计Pug模板结构，确保语法正确，便于后期维护。</p>
@@ -307,7 +307,7 @@
                     </ul>
                 </div>
 
-                <h2>常见问题与解答</h2>
+                <h2>常见问题</h2>
                 <h3>问：Pug和Jade有什么关系？</h3>
                 <p><strong>答：</strong>Pug原名Jade，是一个高效的HTML模板引擎。由于商标问题，项目在2016年更名为Pug。两者语法完全相同，只是名称不同。本工具同时支持Pug和Jade代码，您可以直接使用任何一种名称的代码。现有项目中的Jade代码无需修改，可以直接在本工具中处理。
                 </p>
@@ -333,6 +333,29 @@
                 <p><strong>答：</strong>压缩后的Pug代码仍然有效，只是移除了多余空格和缩进，代码更紧凑。压缩后的代码需要在使用前进行编译，编译器会根据紧凑的格式解析标签关系。建议在开发环境使用格式化代码便于编辑，在生产环境部署前使用压缩代码减小体积。
                 </p>
             </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>使用最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>备份原始数据：</strong>格式化或转换前保留原始内容，便于出错后恢复。</li>
+                    <li><strong>检查敏感信息：</strong>处理生产环境配置或接口数据时，注意脱敏 API 密钥、密码和个人信息。</li>
+                    <li><strong>验证输出结果：</strong>格式化或转换后使用目标解析器验证，确保语法正确。</li>
+                    <li><strong>本地处理：</strong>数据在浏览器本地处理，不会上传服务器，但仍建议在安全环境中操作。</li>
+                    <li><strong>善用示例：</strong>不确定语法时，先参考工具提供的示例数据再修改。</li>
+                </ul>
+            </div>
+            <h2>实战案例：接口返回数据格式化调试</h2>
+            <p>某后端接口返回了一段未格式化的 JSON，前端开发人员在排查字段时发现结构混乱、难以阅读。</p>
+            <p><strong>调试流程：</strong></p>
+            <ol>
+                <li>将接口返回的 JSON 粘贴到 Pug格式化校验工具 中。</li>
+                <li>点击格式化按钮，工具自动缩进、高亮语法并校验结构。</li>
+                <li>根据错误提示修复缺失的逗号或括号。</li>
+                <li>将格式化后的结果复制到接口文档或测试用例中。</li>
+            </ol>
+            <p><strong>效果：</strong>排查时间从数十分钟缩短到几分钟，显著提升了前后端协作效率。</p>
         </div>
 
         <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#A855F7">

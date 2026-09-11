@@ -477,11 +477,46 @@ JSON Schema 核心特性：
   ✓ 需要处理复杂文档结构 → XML + XSD
   ✓ 高性能场景 → Protobuf / MessagePack（二进制）
   ✗ 不要在新项目中使用 XML（除非行业标准要求）</code></pre>
+        <h2>典型应用场景</h2>
+            <p><strong>前端开发者：</strong>选择 API 响应格式（JSON 为主流），处理配置文件（YAML/JSON/TOML），解析用户上传的数据文件。</p>
+            <p><strong>后端开发者：</strong>设计 RESTful API 的数据交换格式，处理不同系统间的数据格式转换，配置微服务的参数文件。</p>
+            <p><strong>数据工程师：</strong>在 JSON 和 XML 之间转换数据以适配不同系统的接口要求，处理数据格式迁移。</p>
+            <p><strong>企业 IT：</strong>处理遗留系统的 XML 数据与现代系统 JSON 格式的对接，数据迁移中的格式转换。</p>
+
+        <h2>实战案例：API 数据格式迁移</h2>
+            <p>某企业将遗留的 SOAP/XML 服务迁移为 RESTful/JSON 架构。迁移过程中需要处理：</p>
+            <ul>
+                <li>新旧系统并行期间，网关层自动将 XML 请求转换为 JSON，响应再转回 XML</li>
+                <li>使用 JSON Schema 验证 API 输入数据，减少因格式错误导致的服务端异常</li>
+                <li>处理 XML 特有的属性、命名空间、CDATA 等在 JSON 中的等价表示</li>
+                <li>对大数据量的报表接口，使用 JSON 流式解析（SAX 模式）避免内存溢出</li>
+            </ul>
+            <p>通过渐进式迁移策略，在 3 个月内完成了全部接口的格式切换，零停机。</p>
+
+        <h2>使用最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>优先 JSON：</strong>新项目优先选择 JSON 作为数据交换格式，解析速度快、体积小、生态完善。</li>
+                    <li><strong>验证数据格式：</strong>使用 JSON Schema 或 XML DTD/XSD 验证输入数据的合法性，不要信任外部数据。</li>
+                    <li><strong>注意数值精度：</strong>JSON 中超过 53 位的整数会丢失精度（JavaScript Number 限制），大数使用字符串表示。</li>
+                    <li><strong>处理特殊字符：</strong>JSON 中的字符串需要正确转义特殊字符（如引号、反斜杠、换行符），避免解析错误。</li>
+                    <li><strong>大文件流式处理：</strong>处理大型 JSON/XML 文件时使用流式解析器，避免一次性加载到内存。</li>
+                </ul>
+            </div>
+
+        <h2>常见问题</h2>
+            <h3>问：JSON 和 XML 哪个更好？</h3>
+            <p><strong>答：</strong>没有绝对的好坏。JSON 更轻量、解析更快，适合 Web API 和配置文件；XML 支持更复杂的数据结构（属性、命名空间、Schema 验证），适合企业级数据交换和文档标记。新项目通常优先选择 JSON。</p>
+            <h3>问：JSON 解析报错 "Unexpected token" 是什么原因？</h3>
+            <p><strong>答：</strong>常见原因包括：JSON 中使用了单引号而非双引号、末尾有多余的逗号（trailing comma）、包含了注释（JSON 不支持注释）、特殊字符未正确转义。使用 JSON 校验工具可以快速定位问题。</p>
+            <h3>问：XML 的 CDATA 在 JSON 中怎么表示？</h3>
+            <p><strong>答：</strong>JSON 没有 CDATA 的概念，所有值都是字符串。XML 转 JSON 时，CDATA 内容直接作为普通字符串值即可。如果需要在 JSON 中区分"文本内容"和"标记内容"，通常通过键名约定或嵌套对象来表示。</p>
+
+        
 
             <h2>总结</h2>
             <p>JSON 和 XML 各有所长，选择合适的格式需要综合考虑性能需求、数据复杂度和应用场景。对于现代 Web 开发，JSON 因其简洁高效而成为主流选择；而对于复杂数据结构、文档处理和需要严格验证的场景，XML
-                依然不可替代。掌握两者的语法规则和常见错误排查方法，是每个开发者必备的技能。</p>
-        </article>
+                依然不可替代。掌握两者的语法规则和常见错误排查方法，是每个开发者必备的技能。</p></article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
             <div class="related-tools-grid">

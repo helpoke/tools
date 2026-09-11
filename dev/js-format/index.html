@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScript在线格式化工具, JS代码美化, JS语法校验, 免费在线JavaScript格式化, JS压缩, JS错误定位">
+    <meta name="keywords"
+        content="JS格式化, JavaScript在线校验, JS代码美化, JavaScript在线格式化, JS压缩, JS错误定位, 免费JS工具, JavaScript beautify">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://esm.sh; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://esm.sh; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>JavaScript在线格式化校验工具</title>
+    <meta property="og:title" content="JavaScript在线格式化校验工具">
+    <meta property="og:description" content="JavaScript在线格式化工具, JS代码美化, JS语法校验, 免费在线JavaScript格式化, JS压缩, JS错误定位">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/js-format/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="JavaScript在线格式化校验工具">
+    <meta name="twitter:description" content="JavaScript在线格式化工具, JS代码美化, JS语法校验, 免费在线JavaScript格式化, JS压缩, JS错误定位">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/js-format/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/js-format/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/js-format/">
+
+    <link rel="stylesheet" href="/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/utils.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+
+    <script src="/common/js/ads.js" async></script>
+    <script type="importmap">
+{
+    "imports": {
+        "codemirror": "/common/lib/codemirror/codemirror/index.js",
+        "@codemirror/state": "/common/lib/codemirror/codemirror_state/index.js",
+        "@codemirror/view": "/common/lib/codemirror/codemirror_view/index.js",
+        "@codemirror/commands": "/common/lib/codemirror/codemirror_commands/index.js",
+        "@codemirror/search": "/common/lib/codemirror/codemirror_search/index.js",
+        "@codemirror/autocomplete": "/common/lib/codemirror/codemirror_autocomplete/index.js",
+        "@codemirror/language": "/common/lib/codemirror/codemirror_language/index.js",
+        "@codemirror/lint": "/common/lib/codemirror/codemirror_lint/index.js",
+        "@codemirror/lang-javascript": "/common/lib/codemirror/codemirror_lang-javascript/index.js",
+        "@lezer/javascript": "/common/lib/codemirror/lezer_javascript/index.js",
+        "@lezer/common": "/common/lib/codemirror/lezer_common/index.js",
+        "@lezer/highlight": "/common/lib/codemirror/lezer_highlight/index.js",
+        "@lezer/lr": "/common/lib/codemirror/lezer_lr/index.js",
+        "@marijn/find-cluster-break": "/common/lib/codemirror/marijn_find-cluster-break/index.js",
+        "style-mod": "/common/lib/codemirror/style-mod/style-mod.js",
+        "w3c-keyname": "/common/lib/codemirror/w3c-keyname/index.js",
+        "crelt": "/common/lib/codemirror/crelt/index.js"
+    }
+}
+    </script>
+    <script type="module" src="script.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JavaScript格式化校验工具",
+        "description": "JavaScript在线格式化工具，支持JS代码美化、语法校验和压缩功能。免费在线JavaScript工具。Online JavaScript formatter with syntax validation and code beautification.",
+        "url": "https://helpoke.com/dev/js-format/",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "JavaScript代码格式化美化",
+            "JS语法校验与错误定位",
+            "代码压缩功能",
+            "ES6+语法支持",
+            "一键复制格式化结果"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="dev.jsFormat.title">JavaScript 格式化校验工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.jsFormat.intro">JavaScript格式化校验工具，支持JS/ES6+代码格式化美化、语法校验与错误定位、代码压缩</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="tool-header">
+                <h2 data-i18n="dev.jsFormat.editorTitle">JavaScript 编辑器</h2>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <span id="status-badge" class="success-badge" data-i18n="dev.jsFormat.badgeWait">等待输入</span>
+                    <div class="button-group">
+                        <button class="btn" data-action="load-sample" data-i18n="dev.jsFormat.sampleBtn">示例数据</button>
+                        <button class="btn" data-action="validate-js" data-i18n="dev.jsFormat.validateBtn">校验</button>
+                        <button class="btn primary" data-action="format-js"
+                            data-i18n="dev.jsFormat.formatBtn">格式化</button>
+                        <button class="btn" data-action="toggle-fold" id="fold-btn"
+                            data-i18n="common.buttons.collapse">折叠</button>
+                        <button class="btn" data-action="minify-js" data-i18n="dev.jsFormat.minifyBtn">压缩</button>
+                        <button class="btn" data-action="copy-output" data-i18n="dev.jsFormat.copyBtn">复制</button>
+                        <button class="btn" data-action="clear-all" data-i18n="dev.jsFormat.clearBtn">清空</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-wrapper">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div id="js-input" class="cm-editor-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel error-panel" id="error-panel" style="display:none;">
+                <div class="panel-header" data-i18n="dev.jsFormat.errorTitle">语法错误 <span id="error-count"
+                        style="color:#ef4444;"></span></div>
+                <div id="error-list"></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.jsFormat.infoIntro">JavaScript 格式化：前端开发者的代码整理工具</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.jsFormat.problemsTitle">为什么需要 JavaScript 格式化工具</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.problem1">JavaScript 是 Web 开发的核心语言——从前端交互到 Node.js 后端，从 React/Vue
+                            框架到数据处理脚本。但压缩后的 JS 代码难以阅读和维护——变量名被混淆、空格被去除、所有代码挤在一行。</li>
+                        <li data-i18n="dev.jsFormat.problem2">本工具支持 JavaScript
+                            代码的格式化、验证和压缩。格式化自动修正缩进和括号对齐，验证检查语法错误并精确定位行号，压缩去除多余空格生成紧凑代码。支持 ES6+
+                            现代语法——包括箭头函数、解构赋值、模板字符串、async/await 等。</li>
+                        <li data-i18n="dev.jsFormat.problem3">
+                            无论是调试压缩后的第三方库代码、整理团队项目中风格不一致的代码，还是学习优秀开源项目的代码结构——格式化工具都是提升效率的必备助手。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.formatTitle">JavaScript 语法特点</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.formatEs6"><strong>ES6+ 语法：</strong>支持箭头函数（=>）、let/const
+                            块级作用域、解构赋值（{name, age}）、模板字符串（`Hello ${name}`）、Promise/async-await
+                            异步编程、类（class）与模块（import/export）。</li>
+                        <li data-i18n="dev.jsFormat.formatModern"><strong>现代特性：</strong>支持可选链（?.）、空值合并（??）、动态
+                            import()、BigInt 大数处理、Symbol 唯一标识、Map/Set 集合数据结构等 ES2020+ 新特性。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.featureOnline"><strong>格式化与验证：</strong>一键格式化 JavaScript
+                            代码——自动修正缩进、对齐括号、统一分号。验证模式检查语法错误并显示错误行号。</li>
+                        <li data-i18n="dev.jsFormat.featurePreview">
+                            <strong>语法高亮：</strong>格式化后的代码自动高亮显示——关键字、字符串、数字、注释用不同颜色标记，提升可读性。
+                        </li>
+                        <li data-i18n="dev.jsFormat.featureExport"><strong>压缩输出：</strong>去除空格和注释，生成紧凑的 JavaScript
+                            代码——适合生产环境部署。</li>
+                        <li data-i18n="dev.jsFormat.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——代码不上传到服务器。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.jsFormat.infoUsage">JavaScript 操作指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.jsFormat.usageFormatTitle">格式化步骤</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.usageFormat"><strong>粘贴代码：</strong>将 JavaScript
+                            代码粘贴到输入框——支持从项目文件、浏览器控制台或在线代码片段中直接复制。</li>
+                        <li data-i18n="dev.jsFormat.usageValidate">
+                            <strong>格式化/验证：</strong>点击"格式化"按钮自动修正缩进；点击"验证"按钮检查语法错误。
+                        </li>
+                        <li data-i18n="dev.jsFormat.usageMinify"><strong>压缩：</strong>点击"压缩"按钮去除空格和注释——输出紧凑的 JavaScript
+                            代码。</li>
+                        <li data-i18n="dev.jsFormat.usageCopy"><strong>复制结果：</strong>点击"复制"按钮将输出复制到剪贴板。</li>
+                        <li data-i18n="dev.jsFormat.usageSample"><strong>示例加载：</strong>点击"示例"按钮加载 JavaScript
+                            代码示例——快速体验工具功能。</li>
+                        <li data-i18n="dev.jsFormat.usageClear"><strong>清空：</strong>点击"清空"按钮清除输入和输出。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.usageSyntaxTitle">JavaScript 语法详解</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.syntaxVariable"><strong>变量声明：</strong>使用 let（可变）和
+                            const（不可变）声明变量——避免使用 var（函数作用域易导致 bug）。</li>
+                        <li data-i18n="dev.jsFormat.syntaxFunction"><strong>箭头函数：</strong>(params) =>
+                            expression——简洁的函数表达式。箭头函数没有自己的 this，继承外层作用域。</li>
+                        <li data-i18n="dev.jsFormat.syntaxAsync"><strong>异步编程：</strong>async/await 是 Promise
+                            的语法糖——让异步代码看起来像同步代码。async 函数返回 Promise，await 等待 Promise 完成。</li>
+                        <li data-i18n="dev.jsFormat.syntaxModule"><strong>模块系统：</strong>import/export
+                            实现代码模块化——每个文件是一个模块，通过 import 引入依赖，export 暴露接口。</li>
+                        <li data-i18n="dev.jsFormat.syntaxClass"><strong>类与继承：</strong>class 关键字定义类——constructor
+                            构造函数、extends 继承、super 调用父类方法。ES6 类是原型继承的语法糖。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.usageShortcutsTitle">注意事项</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.shortcut1"><strong>分号规则：</strong>JavaScript
+                            有自动分号插入（ASI）机制——但建议显式添加分号避免歧义。格式化会统一分号风格。</li>
+                        <li data-i18n="dev.jsFormat.shortcut2"><strong>缩进风格：</strong>社区主流使用 2 空格或 4 空格缩进——格式化默认使用 2 空格。
+                        </li>
+                        <li data-i18n="dev.jsFormat.shortcut3"><strong>引号选择：</strong>字符串可用单引号或双引号——建议项目内统一。格式化不改变引号类型。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.jsFormat.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.jsFormat.notesFormatTitle">格式注意</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.noteFormat1">
+                            <strong>代码逻辑：</strong>格式化只调整缩进和空白——不改变代码逻辑。如果格式化后行为变化，原始代码可能有语法错误。
+                        </li>
+                        <li data-i18n="dev.jsFormat.noteFormat2"><strong>注释保留：</strong>格式化保留所有注释——包括单行（//）和多行（/* */）注释。
+                        </li>
+                        <li data-i18n="dev.jsFormat.noteFormat3"><strong>ES6+ 支持：</strong>完整支持 ES2015-ES2023
+                            语法——包括箭头函数、解构、async/await、可选链等。</li>
+                        <li data-i18n="dev.jsFormat.noteFormat4"><strong>TypeScript：</strong>本工具仅支持
+                            JavaScript——TypeScript 代码需要先编译为 JavaScript 再格式化。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.notesErrorTitle">错误处理</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.noteError1"><strong>语法错误：</strong>验证模式会报告错误类型和位置——如"Unexpected
+                            token"、"Missing semicolon"。</li>
+                        <li data-i18n="dev.jsFormat.noteError2"><strong>未闭合括号：</strong>缺少右括号、花括号或方括号——工具会提示错误位置。</li>
+                        <li data-i18n="dev.jsFormat.noteError3"><strong>变量未定义：</strong>引用未声明的变量不会报语法错误（运行时错误）——但建议使用前声明。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.notesPerfTitle">性能说明</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.notePerf1"><strong>大文件：</strong>超过 5000 行的 JavaScript
+                            文件格式化可能较慢——建议按模块拆分。</li>
+                        <li data-i18n="dev.jsFormat.notePerf2"><strong>复杂表达式：</strong>深层嵌套的三元表达式或正则可能影响解析性能。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.noteSecurity1"><strong>纯前端处理：</strong>所有 JavaScript
+                            代码的处理在浏览器中完成——代码不上传到服务器。</li>
+                        <li data-i18n="dev.jsFormat.noteSecurity2"><strong>代码保护：</strong>你的 JavaScript
+                            代码（可能包含业务逻辑和敏感数据）始终留在本地。</li>
+                    </ul>
+                    <h4 data-i18n="dev.jsFormat.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="dev.jsFormat.noteFaq1"><strong>Q: 支持 TypeScript 吗？</strong>A: 本工具仅支持
+                            JavaScript——TypeScript 代码需要先编译为 JavaScript。</li>
+                        <li data-i18n="dev.jsFormat.noteFaq2"><strong>Q: 格式化后代码行为变了？</strong>A:
+                            格式化只调整缩进和空白——不改变语义。如果行为变化，原始代码可能有语法错误。</li>
+                        <li data-i18n="dev.jsFormat.noteFaq3"><strong>Q: 能处理 JSX/Vue 模板吗？</strong>A: 本工具仅处理纯
+                            JavaScript——JSX 需要用 Babel 编译，Vue 模板需要专用工具。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="/common/js/utils.js"></script>
+</body>
+
+</html>

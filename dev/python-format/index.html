@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Python在线格式化工具, Python代码美化, Python语法校验, 免费在线Python格式化, PEP8规范, Python错误定位">
+    <meta name="keywords"
+        content="Python格式化, Python在线校验, Python代码美化, Python在线格式化, PEP8, Python错误定位, 免费Python工具, Python beautify">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com https://esm.sh; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com https://esm.sh; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>Python在线格式化校验工具</title>
+    <meta property="og:title" content="Python在线格式化校验工具">
+    <meta property="og:description" content="Python在线格式化工具, Python代码美化, Python语法校验, 免费在线Python格式化, PEP8规范, Python错误定位">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/dev/python-format/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python在线格式化校验工具">
+    <meta name="twitter:description" content="Python在线格式化工具, Python代码美化, Python语法校验, 免费在线Python格式化, PEP8规范, Python错误定位">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/dev/python-format/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/dev/python-format/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/dev/python-format/">
+
+    <link rel="stylesheet" href="/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/utils.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+
+    <script src="/common/js/ads.js" async></script>
+    <script type="importmap">
+{
+    "imports": {
+        "codemirror": "/common/lib/codemirror/codemirror/index.js",
+        "@codemirror/state": "/common/lib/codemirror/codemirror_state/index.js",
+        "@codemirror/view": "/common/lib/codemirror/codemirror_view/index.js",
+        "@codemirror/commands": "/common/lib/codemirror/codemirror_commands/index.js",
+        "@codemirror/search": "/common/lib/codemirror/codemirror_search/index.js",
+        "@codemirror/autocomplete": "/common/lib/codemirror/codemirror_autocomplete/index.js",
+        "@codemirror/language": "/common/lib/codemirror/codemirror_language/index.js",
+        "@codemirror/lint": "/common/lib/codemirror/codemirror_lint/index.js",
+        "@codemirror/lang-python": "/common/lib/codemirror/codemirror_lang-python/index.js",
+        "@lezer/python": "/common/lib/codemirror/lezer_python/index.js",
+        "@lezer/common": "/common/lib/codemirror/lezer_common/index.js",
+        "@lezer/highlight": "/common/lib/codemirror/lezer_highlight/index.js",
+        "@lezer/lr": "/common/lib/codemirror/lezer_lr/index.js",
+        "@marijn/find-cluster-break": "/common/lib/codemirror/marijn_find-cluster-break/index.js",
+        "style-mod": "/common/lib/codemirror/style-mod/style-mod.js",
+        "w3c-keyname": "/common/lib/codemirror/w3c-keyname/index.js",
+        "crelt": "/common/lib/codemirror/crelt/index.js"
+    }
+}
+    </script>
+    <script type="module" src="script.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Python格式化校验工具",
+        "description": "Python在线格式化工具，支持Python代码美化、语法校验和PEP8规范检查。免费在线Python工具。Online Python formatter with syntax validation and PEP8 compliance.",
+        "url": "https://helpoke.com/dev/python-format/",
+        "applicationCategory": "https://schema.org/DeveloperTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "Python代码格式化美化",
+            "Python语法校验与错误定位",
+            "PEP8规范检查",
+            "代码压缩功能",
+            "Python3语法支持",
+            "一键复制格式化结果"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock" 
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="dev.pyFormat.title">Python 格式化校验工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="dev.pyFormat.intro">Python格式化校验工具，支持Python3代码格式化美化、语法校验与PEP8规范检查、错误定位</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="tool-header">
+                <h2 data-i18n="dev.pyFormat.editorTitle">Python 编辑器</h2>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <span id="status-badge" class="success-badge" data-i18n="dev.pyFormat.badgeWait">等待输入</span>
+                    <div class="button-group">
+                        <button class="btn" data-action="load-sample" data-i18n="dev.pyFormat.sampleBtn">示例数据</button>
+                        <button class="btn" data-action="validate-python"
+                            data-i18n="dev.pyFormat.validateBtn">校验</button>
+                        <button class="btn primary" data-action="format-python"
+                            data-i18n="dev.pyFormat.formatBtn">格式化</button>
+                        <button class="btn" data-action="toggle-fold" id="fold-btn"
+                            data-i18n="common.buttons.collapse">折叠</button>
+                        <button class="btn" data-action="minify-python" data-i18n="dev.pyFormat.minifyBtn">压缩</button>
+                        <button class="btn" data-action="copy-output" data-i18n="dev.pyFormat.copyBtn">复制</button>
+                        <button class="btn" data-action="clear-all" data-i18n="dev.pyFormat.clearBtn">清空</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-wrapper">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div id="python-input" class="cm-editor-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel error-panel" id="error-panel" style="display:none;">
+                <div class="panel-header" data-i18n="dev.pyFormat.errorTitle">语法错误 <span id="error-count"
+                        style="color:#ef4444;"></span></div>
+                <div id="error-list"></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.pyFormat.infoIntro">Python 格式化：数据科学与后端开发的代码整理工具</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.pyFormat.problemsTitle">为什么需要 Python 格式化工具</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.problem1">Python 是数据科学、人工智能和后端开发的首选语言——以简洁优雅的语法著称。但 Python
+                            对缩进有严格要求——缩进错误直接导致语法错误（IndentationError）。团队协作中缩进风格不一致（2空格 vs 4空格）是常见问题。</li>
+                        <li data-i18n="dev.pyFormat.problem2">本工具支持 Python 代码的格式化、验证和压缩。格式化自动统一缩进风格（PEP8 推荐的 4
+                            空格），验证检查语法错误并精确定位行号，压缩去除多余空行和注释生成紧凑代码。支持 Python 3 全部语法特性。</li>
+                        <li data-i18n="dev.pyFormat.problem3">无论是整理 Jupyter Notebook 导出的代码、修复缩进错误，还是检查 PEP8 规范——格式化工具都是
+                            Python 开发者的必备助手。特别适合处理从网上复制的格式混乱的代码片段。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.formatTitle">Python 语法特点</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.formatIndent"><strong>缩进语法：</strong>Python
+                            用缩进表示代码块——不同于其他语言使用花括号。函数体、条件分支、循环体都用缩进表示层级关系。缩进不一致会导致 IndentationError。</li>
+                        <li data-i18n="dev.pyFormat.formatModern"><strong>现代特性：</strong>支持 f-string
+                            字符串格式化、列表推导式、字典推导式、生成器表达式、装饰器（@decorator）、上下文管理器（with）、类型注解（Type Hints）、async/await 异步编程等
+                            Python 3.6+ 特性。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.featureOnline"><strong>格式化与验证：</strong>一键格式化 Python 代码——自动统一缩进为 4
+                            空格（PEP8 规范）。验证模式检查语法错误并显示错误行号。</li>
+                        <li data-i18n="dev.pyFormat.featurePreview">
+                            <strong>语法高亮：</strong>格式化后的代码自动高亮显示——关键字、字符串、数字、注释用不同颜色标记，提升可读性。
+                        </li>
+                        <li data-i18n="dev.pyFormat.featureExport"><strong>压缩输出：</strong>去除空行和注释，生成紧凑的 Python
+                            代码——适合嵌入脚本或减小文件体积。</li>
+                        <li data-i18n="dev.pyFormat.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——代码不上传到服务器。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.pyFormat.infoUsage">Python 操作指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.pyFormat.usageFormatTitle">格式化步骤</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.usageFormat"><strong>粘贴代码：</strong>将 Python 代码粘贴到输入框——支持从 Jupyter
+                            Notebook、项目文件或网上代码片段中直接复制。</li>
+                        <li data-i18n="dev.pyFormat.usageValidate">
+                            <strong>格式化/验证：</strong>点击"格式化"按钮自动统一缩进；点击"验证"按钮检查语法错误。
+                        </li>
+                        <li data-i18n="dev.pyFormat.usageMinify"><strong>压缩：</strong>点击"压缩"按钮去除空行和注释——输出紧凑的 Python 代码。
+                        </li>
+                        <li data-i18n="dev.pyFormat.usageCopy"><strong>复制结果：</strong>点击"复制"按钮将输出复制到剪贴板。</li>
+                        <li data-i18n="dev.pyFormat.usageSample"><strong>示例加载：</strong>点击"示例"按钮加载 Python 代码示例——快速体验工具功能。
+                        </li>
+                        <li data-i18n="dev.pyFormat.usageClear"><strong>清空：</strong>点击"清空"按钮清除输入和输出。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.usageSyntaxTitle">Python 语法详解</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.syntaxIndent"><strong>缩进规则：</strong>Python
+                            使用缩进表示代码块——同一层级的代码必须缩进相同空格数。PEP8 规范推荐 4 个空格。不允许混用 Tab 和空格。</li>
+                        <li data-i18n="dev.pyFormat.syntaxVariable"><strong>变量声明：</strong>Python
+                            是动态类型语言——变量不需要声明类型，赋值即创建。支持类型注解（name: str = "Alice"）提升代码可读性。</li>
+                        <li data-i18n="dev.pyFormat.syntaxFunction"><strong>函数定义：</strong>def function_name(params):
+                            定义函数——函数体用缩进表示。支持默认参数、可变参数（*args, **kwargs）和类型注解。</li>
+                        <li data-i18n="dev.pyFormat.syntaxClass"><strong>类定义：</strong>class ClassName: 定义类——支持继承（class
+                            Child(Parent):）、方法重写、@property 装饰器、类方法和静态方法。</li>
+                        <li data-i18n="dev.pyFormat.syntaxImport"><strong>模块导入：</strong>import module 或 from module
+                            import function——Python 的模块系统。支持相对导入和绝对导入。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.usageShortcutsTitle">注意事项</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.shortcut1"><strong>缩进一致性：</strong>Python
+                            严格依赖缩进——同一代码块内缩进空格数必须一致。格式化会统一为 4 空格。</li>
+                        <li data-i18n="dev.pyFormat.shortcut2"><strong>Tab vs 空格：</strong>Python 3 不允许混用 Tab
+                            和空格。格式化工具会自动将 Tab 转换为空格。</li>
+                        <li data-i18n="dev.pyFormat.shortcut3"><strong>空行规范：</strong>PEP8 推荐：顶层函数和类之间空 2 行，方法之间空 1
+                            行。格式化会适当添加空行。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.pyFormat.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.pyFormat.notesFormatTitle">格式注意</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.noteFormat1">
+                            <strong>代码逻辑：</strong>格式化只调整缩进和空白——不改变代码逻辑。如果格式化后行为变化，原始代码可能有缩进错误。
+                        </li>
+                        <li data-i18n="dev.pyFormat.noteFormat2"><strong>注释保留：</strong>格式化保留所有注释——包括单行（#）和多行字符串注释。</li>
+                        <li data-i18n="dev.pyFormat.noteFormat3"><strong>PEP8 规范：</strong>格式化遵循 PEP8 编码规范——Python
+                            社区的标准代码风格指南。</li>
+                        <li data-i18n="dev.pyFormat.noteFormat4"><strong>Python 版本：</strong>支持 Python 3.6+ 语法——包括
+                            f-string、类型注解、async/await 等。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.notesErrorTitle">错误处理</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.noteError1"><strong>缩进错误：</strong>IndentationError 是最常见的 Python
+                            错误——缩进不一致导致。格式化工具自动修复。</li>
+                        <li data-i18n="dev.pyFormat.noteError2"><strong>语法错误：</strong>验证模式会报告错误类型和位置——如"SyntaxError:
+                            invalid syntax"。</li>
+                        <li data-i18n="dev.pyFormat.noteError3"><strong>括号匹配：</strong>缺少右括号、花括号或方括号——工具会提示错误位置。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.notesPerfTitle">性能说明</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.notePerf1"><strong>大文件：</strong>超过 5000 行的 Python
+                            文件格式化可能较慢——建议按模块拆分。</li>
+                        <li data-i18n="dev.pyFormat.notePerf2"><strong>复杂表达式：</strong>深层嵌套的列表推导式或正则可能影响解析性能。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.noteSecurity1"><strong>纯前端处理：</strong>所有 Python
+                            代码的处理在浏览器中完成——代码不上传到服务器。</li>
+                        <li data-i18n="dev.pyFormat.noteSecurity2"><strong>代码保护：</strong>你的 Python
+                            代码（可能包含业务逻辑和敏感数据）始终留在本地。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pyFormat.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="dev.pyFormat.noteFaq1"><strong>Q: 支持 Python 2 吗？</strong>A: 本工具主要支持 Python
+                            3——Python 2 的大部分语法也能处理，但建议使用 Python 3。</li>
+                        <li data-i18n="dev.pyFormat.noteFaq2"><strong>Q: 格式化后代码行为变了？</strong>A:
+                            格式化只调整缩进和空白——不改变语义。如果行为变化，原始代码可能有缩进错误。</li>
+                        <li data-i18n="dev.pyFormat.noteFaq3"><strong>Q: 能处理 Jupyter Notebook 吗？</strong>A: 本工具处理纯
+                            Python 代码——Jupyter Notebook 的 .ipynb 文件需要先导出为 .py 文件。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="/common/js/utils.js"></script>
+</body>
+
+</html>

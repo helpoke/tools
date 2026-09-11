@@ -280,7 +280,7 @@
             </div>
 
             <div class="info-section">
-                <h2>适用场景与人群</h2>
+                <h2>典型应用场景</h2>
                 <p><strong>DevOps工程师：</strong>处理CI/CD配置文件，确保语法正确，避免部署失败。</p>
                 <p><strong>Kubernetes管理员：</strong>编辑Kubernetes配置文件，格式化YAML资源定义。</p>
                 <p><strong>后端开发者：</strong>处理应用配置文件，校验YAML语法，确保配置正确。</p>
@@ -313,7 +313,7 @@
                     </ul>
                 </div>
 
-                <h2>常见问题与解答</h2>
+                <h2>常见问题</h2>
                 <h3>问：YAML和JSON有什么区别？</h3>
                 <p><strong>答：</strong>YAML和JSON都是数据序列化格式，但特点不同：YAML更注重人类可读性，语法简洁，支持注释、多行字符串、锚点引用等高级特性；JSON更注重机器解析效率，语法严格，不支持注释，结构简单。YAML适合配置文件、CI/CD流程等人工编辑场景；JSON适合API数据传输、程序间通信等自动化场景。本工具可以帮助您在两种格式间转换，适应不同需求。
                 </p>
@@ -338,6 +338,29 @@
                 <p><strong>答：</strong>YAML注释使用井号#开头，从#到行尾都是注释内容。注释可以出现在行的任何位置，可以在数据项前面、后面或单独一行。但YAML不支持多行注释（类似/*
                     */），每行注释都需要单独的#。本工具的格式化功能会保留注释内容，但可能调整注释的位置和缩进以匹配数据结构。压缩功能会移除所有注释，生成无注释的纯净YAML代码。</p>
             </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>使用最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>备份原始数据：</strong>格式化或转换前保留原始内容，便于出错后恢复。</li>
+                    <li><strong>检查敏感信息：</strong>处理生产环境配置或接口数据时，注意脱敏 API 密钥、密码和个人信息。</li>
+                    <li><strong>验证输出结果：</strong>格式化或转换后使用目标解析器验证，确保语法正确。</li>
+                    <li><strong>本地处理：</strong>数据在浏览器本地处理，不会上传服务器，但仍建议在安全环境中操作。</li>
+                    <li><strong>善用示例：</strong>不确定语法时，先参考工具提供的示例数据再修改。</li>
+                </ul>
+            </div>
+            <h2>实战案例：接口返回数据格式化调试</h2>
+            <p>某后端接口返回了一段未格式化的 JSON，前端开发人员在排查字段时发现结构混乱、难以阅读。</p>
+            <p><strong>调试流程：</strong></p>
+            <ol>
+                <li>将接口返回的 JSON 粘贴到 YAML格式化校验工具 中。</li>
+                <li>点击格式化按钮，工具自动缩进、高亮语法并校验结构。</li>
+                <li>根据错误提示修复缺失的逗号或括号。</li>
+                <li>将格式化后的结果复制到接口文档或测试用例中。</li>
+            </ol>
+            <p><strong>效果：</strong>排查时间从数十分钟缩短到几分钟，显著提升了前后端协作效率。</p>
         </div>
 
         <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#84CC16">

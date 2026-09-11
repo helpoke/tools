@@ -543,168 +543,168 @@
                         <td class="cn">亿</td>
                     </tr>
                 </table>
-
-                <div class="info-section">
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="tool.num-to-chinese.infoIntro">数字转中文：将阿拉伯数字精确转换为中文大写/小写金额</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="tool.num-to-chinese.problemsTitle">一、为什么财务系统需要"数字转中文"</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.problem1">
-                                    银行支票上的金额必须用中文大写（壹万贰仟叁佰肆拾伍元陆角柒分）——这是为了防止篡改：阿拉伯数字"10000"可以轻易改为"90000"，但"壹万"改成"玖万"需要涂改整个字，一目了然。这不仅是格式转换，更是金融安全的刚需。本工具支持将任意数字转换为中文大写金额、小写金额、中文读数三种格式。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.problem2">
-                                    中文数字系统有两套"计数方式"：读数系统（一、十、百、千、万、亿）用于日常读数，如"一千二百三十四"；财务系统（壹、贰、叁、拾、佰、仟、萬、億）用于票据和合同，防止涂改。本工具同时支持这两种系统，并自动处理"零"的插入规则（如
-                                    1001 → 壹仟零壹元整，不是壹仟壹元整）。</li>
-                                <li data-i18n="tool.num-to-chinese.problem3">
-                                    支持整数、小数和负数。小数部分自动识别为角/分（金额模式）或逐位读出（读数模式）。精度支持到分（两位小数）——满足绝大多数财务场景。纯前端计算，不上传任何数据。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.formatTitle">二、三种转换模式</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.formatNumber"><strong>数字：</strong>支持该格式的完整处理功能。</li>
-                                <li data-i18n="tool.num-to-chinese.formatChinese"><strong>中文：</strong>支持该格式的完整处理功能。</li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.featuresTitle">三、转换规则详解</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.featureOnline"><strong>零的处理：</strong>连续零只读一个"零"——如
-                                    10001 → "壹万零壹元整"（不是"壹万零零零壹元整"）。每级末尾的零不读——如 12000 → "壹万贰仟元整"。</li>
-                                <li data-i18n="tool.num-to-chinese.featurePreview">
-                                    <strong>角的处理：</strong>有角无分时，末尾不加"整"——如 1.50 → "壹元伍角"。无角无分时，末尾加"整"——如 1.00 →
-                                    "壹元整"。有角有分也不加"整"——如 1.56 → "壹元伍角陆分"。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.featureExport">
-                                    <strong>负数支持：</strong>负数在前面添加"负"或"负"字——如 -100 → "负壹佰元整"。适合表示退款、亏损等场景。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.featureSecurity">
-                                    <strong>精度控制：</strong>金额模式最多支持两位小数（角/分）。超过两位小数会四舍五入到分——这是财务系统的标准做法。
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="tool.num-to-chinese.infoUsage">数字转中文操作步骤</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="tool.num-to-chinese.usageNum2CnTitle">一、阿拉伯数字转中文大写</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.usageInputNumber">
-                                    <strong>输入数字：</strong>在输入框中输入阿拉伯数字（支持整数和小数）。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageDecimalSupport">
-                                    <strong>小数支持：</strong>最多支持两位小数，自动转换为"角""分"。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageNegativeSupport">
-                                    <strong>负数支持：</strong>输入负数会转换为"负"开头的大写中文。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageResult"><strong>转换结果：</strong>自动生成金额格式的中文大写数字。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageExample1"><strong>示例：</strong>112.55 →
-                                    壹佰壹拾贰圆伍角伍分</li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.usageCn2NumTitle">二、中文大写转阿拉伯数字</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.usageInputChinese">
-                                    <strong>输入中文：</strong>在输入框中输入中文大写数字。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageMeasureWord">
-                                    <strong>量词支持：</strong>支持"元""圆""点"作为小数点，"角""分"作为小数位。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageSimplifiedSupport">
-                                    <strong>简体支持：</strong>同时支持简体数字（一、二、三）和大写数字（壹、贰、叁）。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageCnResult">
-                                    <strong>转换结果：</strong>自动转换为阿拉伯数字，保留两位小数。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.usageExample2"><strong>示例：</strong>壹佰壹拾贰元整 → 112.0
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.usageRulesTitle">三、转换规则</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.ruleInteger"><strong>整数部分：</strong>按位转换，添加"圆"字。</li>
-                                <li data-i18n="tool.num-to-chinese.ruleDecimal"><strong>小数部分：</strong>第一位为"角"，第二位为"分"。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.ruleNoDecimal"><strong>无小数：</strong>添加"整"字。</li>
-                                <li data-i18n="tool.num-to-chinese.ruleUnit"><strong>单位换算：</strong>万=10⁴，亿=10⁸，万亿=10¹²。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.usageTipsTitle">四、操作技巧</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.tipRealtime"><strong>实时转换：</strong>输入过程中自动实时转换。</li>
-                                <li data-i18n="tool.num-to-chinese.tipCopy"><strong>一键复制：</strong>点击"复制结果"按钮复制转换结果。</li>
-                                <li data-i18n="tool.num-to-chinese.tipSwitchTab"><strong>切换标签：</strong>点击标签切换转换方向。</li>
-                                <li data-i18n="tool.num-to-chinese.tipEnter"><strong>Enter键：</strong>按Enter键触发转换。</li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.usageScenariosTitle">五、适用场景</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.scenarioFinance">
-                                    <strong>财务票据：</strong>填写发票、支票等需要大写金额的场合。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.scenarioContract"><strong>合同金额：</strong>合同中的金额大写。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.scenarioBank"><strong>银行转账：</strong>转账金额的大写转换。</li>
-                                <li data-i18n="tool.num-to-chinese.scenarioDaily"><strong>日常使用：</strong>各种需要大写数字的场合。
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="tool.num-to-chinese.infoNotes">注意事项</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="tool.num-to-chinese.notesSecurityTitle">数据安全</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.noteSecurity1">
-                                    <strong>纯前端计算：</strong>数字转换完全在浏览器中完成——不上传任何数据。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.noteSecurity2">
-                                    <strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.noteSecurity3">
-                                    <strong>无数据存储：</strong>不保存转换历史——每次打开都是全新开始。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.notesInputTitle">二、输入限制</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.noteInput1">阿拉伯数字转中文：最大支持到万亿位。</li>
-                                <li data-i18n="tool.num-to-chinese.noteInput2">小数位最多两位，超过会自动截断。</li>
-                                <li data-i18n="tool.num-to-chinese.noteInput3">中文转阿拉伯：支持标准中文大写格式。</li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.notesFormatTitle">转换规则说明</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.noteFormat1"><strong>"两"vs"二"：</strong>中文读数中，200
-                                    读作"两百"（口语）或"二百"（书面）。本工具统一使用"二"——更正式的书面表达。</li>
-                                <li data-i18n="tool.num-to-chinese.noteFormat2">
-                                    <strong>万亿进位：</strong>中文数字以"万"为进位单位（万、亿、万亿），不同于英文的千进位（thousand, million,
-                                    billion）。工具正确处理中文进位规则。
-                                </li>
-                                <li data-i18n="tool.num-to-chinese.noteFormat3"><strong>小数读法：</strong>小数点后的数字逐位读出——如
-                                    3.14 → "三点一四"（读数模式）或"叁元壹角肆分"（金额模式）。</li>
-                                <li data-i18n="tool.num-to-chinese.noteFormat4">
-                                    <strong>精度限制：</strong>金额模式最多两位小数（角/分）。超过两位会四舍五入。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="tool.num-to-chinese.notesFaqTitle">常见问题</h4>
-                            <ul>
-                                <li data-i18n="tool.num-to-chinese.noteFaq1"><strong>Q: 能转换负数吗？</strong>A:
-                                    可以。负数在前面添加"负"字——如 -100 → "负壹佰元整"。</li>
-                                <li data-i18n="tool.num-to-chinese.noteFaq2"><strong>Q: 能转换分数吗？</strong>A: 不支持直接输入分数（如
-                                    1/2）。请将分数转为小数后输入（如 0.5）。</li>
-                                <li data-i18n="tool.num-to-chinese.noteFaq3"><strong>Q: 转换结果用于正式场合准确吗？</strong>A:
-                                    工具的转换规则遵循中国人民银行和国家标准——大写金额格式可直接用于财务票据。</li>
-                                <li data-i18n="tool.num-to-chinese.noteFaq4"><strong>负数问题：</strong>负数会正确转换为"负"开头。</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
             </div>
-
         </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.num-to-chinese.infoIntro">数字转中文：将阿拉伯数字精确转换为中文大写/小写金额</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.num-to-chinese.problemsTitle">为什么财务系统需要"数字转中文"</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.problem1">
+                            银行支票上的金额必须用中文大写（壹万贰仟叁佰肆拾伍元陆角柒分）——这是为了防止篡改：阿拉伯数字"10000"可以轻易改为"90000"，但"壹万"改成"玖万"需要涂改整个字，一目了然。这不仅是格式转换，更是金融安全的刚需。本工具支持将任意数字转换为中文大写金额、小写金额、中文读数三种格式。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.problem2">
+                            中文数字系统有两套"计数方式"：读数系统（一、十、百、千、万、亿）用于日常读数，如"一千二百三十四"；财务系统（壹、贰、叁、拾、佰、仟、萬、億）用于票据和合同，防止涂改。本工具同时支持这两种系统，并自动处理"零"的插入规则（如
+                            1001 → 壹仟零壹元整，不是壹仟壹元整）。</li>
+                        <li data-i18n="tool.num-to-chinese.problem3">
+                            支持整数、小数和负数。小数部分自动识别为角/分（金额模式）或逐位读出（读数模式）。精度支持到分（两位小数）——满足绝大多数财务场景。纯前端计算，不上传任何数据。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.formatTitle">三种转换模式</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.formatNumber"><strong>数字：</strong>支持该格式的完整处理功能。</li>
+                        <li data-i18n="tool.num-to-chinese.formatChinese"><strong>中文：</strong>支持该格式的完整处理功能。</li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.featuresTitle">转换规则详解</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.featureOnline"><strong>零的处理：</strong>连续零只读一个"零"——如
+                            10001 → "壹万零壹元整"（不是"壹万零零零壹元整"）。每级末尾的零不读——如 12000 → "壹万贰仟元整"。</li>
+                        <li data-i18n="tool.num-to-chinese.featurePreview">
+                            <strong>角的处理：</strong>有角无分时，末尾不加"整"——如 1.50 → "壹元伍角"。无角无分时，末尾加"整"——如 1.00 →
+                            "壹元整"。有角有分也不加"整"——如 1.56 → "壹元伍角陆分"。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.featureExport">
+                            <strong>负数支持：</strong>负数在前面添加"负"或"负"字——如 -100 → "负壹佰元整"。适合表示退款、亏损等场景。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.featureSecurity">
+                            <strong>精度控制：</strong>金额模式最多支持两位小数（角/分）。超过两位小数会四舍五入到分——这是财务系统的标准做法。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.num-to-chinese.infoUsage">数字转中文操作步骤</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.num-to-chinese.usageNum2CnTitle">阿拉伯数字转中文大写</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.usageInputNumber">
+                            <strong>输入数字：</strong>在输入框中输入阿拉伯数字（支持整数和小数）。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageDecimalSupport">
+                            <strong>小数支持：</strong>最多支持两位小数，自动转换为"角""分"。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageNegativeSupport">
+                            <strong>负数支持：</strong>输入负数会转换为"负"开头的大写中文。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageResult"><strong>转换结果：</strong>自动生成金额格式的中文大写数字。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageExample1"><strong>示例：</strong>112.55 →
+                            壹佰壹拾贰圆伍角伍分</li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.usageCn2NumTitle">中文大写转阿拉伯数字</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.usageInputChinese">
+                            <strong>输入中文：</strong>在输入框中输入中文大写数字。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageMeasureWord">
+                            <strong>量词支持：</strong>支持"元""圆""点"作为小数点，"角""分"作为小数位。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageSimplifiedSupport">
+                            <strong>简体支持：</strong>同时支持简体数字（一、二、三）和大写数字（壹、贰、叁）。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageCnResult">
+                            <strong>转换结果：</strong>自动转换为阿拉伯数字，保留两位小数。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.usageExample2"><strong>示例：</strong>壹佰壹拾贰元整 → 112.0
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.usageRulesTitle">转换规则</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.ruleInteger"><strong>整数部分：</strong>按位转换，添加"圆"字。</li>
+                        <li data-i18n="tool.num-to-chinese.ruleDecimal"><strong>小数部分：</strong>第一位为"角"，第二位为"分"。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.ruleNoDecimal"><strong>无小数：</strong>添加"整"字。</li>
+                        <li data-i18n="tool.num-to-chinese.ruleUnit"><strong>单位换算：</strong>万=10⁴，亿=10⁸，万亿=10¹²。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.usageTipsTitle">操作技巧</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.tipRealtime"><strong>实时转换：</strong>输入过程中自动实时转换。</li>
+                        <li data-i18n="tool.num-to-chinese.tipCopy"><strong>一键复制：</strong>点击"复制结果"按钮复制转换结果。</li>
+                        <li data-i18n="tool.num-to-chinese.tipSwitchTab"><strong>切换标签：</strong>点击标签切换转换方向。</li>
+                        <li data-i18n="tool.num-to-chinese.tipEnter"><strong>Enter键：</strong>按Enter键触发转换。</li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.usageScenariosTitle">适用场景</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.scenarioFinance">
+                            <strong>财务票据：</strong>填写发票、支票等需要大写金额的场合。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.scenarioContract"><strong>合同金额：</strong>合同中的金额大写。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.scenarioBank"><strong>银行转账：</strong>转账金额的大写转换。</li>
+                        <li data-i18n="tool.num-to-chinese.scenarioDaily"><strong>日常使用：</strong>各种需要大写数字的场合。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.num-to-chinese.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.num-to-chinese.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.noteSecurity1">
+                            <strong>纯前端计算：</strong>数字转换完全在浏览器中完成——不上传任何数据。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.noteSecurity2">
+                            <strong>无网络依赖：</strong>页面加载完成后离线也能正常使用。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.noteSecurity3">
+                            <strong>无数据存储：</strong>不保存转换历史——每次打开都是全新开始。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.notesInputTitle">输入限制</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.noteInput1">阿拉伯数字转中文：最大支持到万亿位。</li>
+                        <li data-i18n="tool.num-to-chinese.noteInput2">小数位最多两位，超过会自动截断。</li>
+                        <li data-i18n="tool.num-to-chinese.noteInput3">中文转阿拉伯：支持标准中文大写格式。</li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.notesFormatTitle">转换规则说明</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.noteFormat1"><strong>"两"vs"二"：</strong>中文读数中，200
+                            读作"两百"（口语）或"二百"（书面）。本工具统一使用"二"——更正式的书面表达。</li>
+                        <li data-i18n="tool.num-to-chinese.noteFormat2">
+                            <strong>万亿进位：</strong>中文数字以"万"为进位单位（万、亿、万亿），不同于英文的千进位（thousand, million,
+                            billion）。工具正确处理中文进位规则。
+                        </li>
+                        <li data-i18n="tool.num-to-chinese.noteFormat3"><strong>小数读法：</strong>小数点后的数字逐位读出——如
+                            3.14 → "三点一四"（读数模式）或"叁元壹角肆分"（金额模式）。</li>
+                        <li data-i18n="tool.num-to-chinese.noteFormat4">
+                            <strong>精度限制：</strong>金额模式最多两位小数（角/分）。超过两位会四舍五入。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.num-to-chinese.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="tool.num-to-chinese.noteFaq1"><strong>Q: 能转换负数吗？</strong>A:
+                            可以。负数在前面添加"负"字——如 -100 → "负壹佰元整"。</li>
+                        <li data-i18n="tool.num-to-chinese.noteFaq2"><strong>Q: 能转换分数吗？</strong>A: 不支持直接输入分数（如
+                            1/2）。请将分数转为小数后输入（如 0.5）。</li>
+                        <li data-i18n="tool.num-to-chinese.noteFaq3"><strong>Q: 转换结果用于正式场合准确吗？</strong>A:
+                            工具的转换规则遵循中国人民银行和国家标准——大写金额格式可直接用于财务票据。</li>
+                        <li data-i18n="tool.num-to-chinese.noteFaq4"><strong>负数问题：</strong>负数会正确转换为"负"开头。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
 
         <!-- Footer component container -->
         <div id="footer-container">

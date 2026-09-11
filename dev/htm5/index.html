@@ -64,16 +64,8 @@
             margin: 0 auto;
         }
 
-        .editor-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+        .editor-wrapper {
             margin-bottom: 24px;
-        }
-
-        .editor-panel {
-            display: flex;
-            flex-direction: column;
         }
 
         .editor-header {
@@ -94,96 +86,29 @@
             gap: 8px;
         }
 
-        .editor-textarea {
+        .cm-editor-container {
             width: 100%;
             height: 800px;
-            padding: 16px;
             border: 1px solid #eaeaea;
             border-radius: 8px;
-            font-size: 13px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            resize: vertical;
-            line-height: 1.5;
-            box-sizing: border-box;
+            overflow: hidden;
             background-color: var(--input-bg);
         }
 
-        .editor-textarea:focus {
-            outline: none;
-            border-color: #3498db;
+        .cm-editor-container .cm-editor {
+            height: 100%;
         }
 
-        .editor-pre {
-            width: 100%;
-            height: 800px;
-            padding: 16px;
-            border: 1px solid #eaeaea;
-            border-radius: 8px;
+        .cm-editor-container .cm-editor .cm-scroller {
+            font-family: 'Consolas', 'Monaco', 'Cascadia Code', monospace;
             font-size: 13px;
-            font-family: 'Consolas', 'Monaco', monospace;
             line-height: 1.5;
-            box-sizing: border-box;
+        }
+
+        .cm-editor-container .cm-gutters {
             background-color: var(--input-bg);
-            margin: 0;
-            overflow: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        .editor-pre:empty::before {
-            content: attr(data-placeholder);
-            color: #94a3b8;
-        }
-
-        /* 语法高亮 */
-        .editor-pre .keyword {
-            color: #007bff;
-            font-weight: 500;
-        }
-
-        .editor-pre .tag {
-            color: #d63384;
-        }
-
-        .editor-pre .attr {
-            color: #6f42c1;
-        }
-
-        .editor-pre .string {
-            color: #28a745;
-        }
-
-        .editor-pre .number {
-            color: #dc3545;
-        }
-
-        .editor-pre .comment {
-            color: #6c757d;
-            font-style: italic;
-        }
-
-        body.dark-mode .editor-pre .keyword {
-            color: #79c0ff;
-        }
-
-        body.dark-mode .editor-pre .tag {
-            color: #ff7b72;
-        }
-
-        body.dark-mode .editor-pre .attr {
-            color: #d2a8ff;
-        }
-
-        body.dark-mode .editor-pre .string {
-            color: #7ee787;
-        }
-
-        body.dark-mode .editor-pre .number {
-            color: #ffa657;
-        }
-
-        body.dark-mode .editor-pre .comment {
-            color: #8b949e;
+            color: var(--text-muted);
+            border-right: 1px solid var(--border-color);
         }
 
         .actions-row {
@@ -239,6 +164,12 @@
 
         .btn-secondary:hover {
             background-color: #7f8c8d;
+        }
+
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         .small-btn {
@@ -314,10 +245,6 @@
         }
 
         @media (max-width: 900px) {
-            .editor-row {
-                grid-template-columns: 1fr;
-            }
-
             .tool-card {
                 padding: 20px;
                 margin: 0 10px;
@@ -341,14 +268,9 @@
             box-shadow: var(--box-shadow);
         }
 
-        body.dark-mode textarea {
+        body.dark-mode .cm-editor-container {
             background-color: var(--bg-tertiary);
             border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode textarea:focus {
-            border-color: var(--primary-color);
         }
 
         body.dark-mode select {
@@ -399,10 +321,6 @@
         }
 
         /* ==================== 边框颜色覆盖 ==================== */
-        body.dark-mode textarea {
-            border-color: var(--border-color);
-        }
-
         body.dark-mode select {
             border-color: var(--border-color);
         }
@@ -491,6 +409,34 @@
     }
     </script>
     <script src="/common/js/i18n/i18n.js"></script>
+    <script type="importmap">
+{
+    "imports": {
+        "codemirror": "/common/lib/codemirror/codemirror/index.js",
+        "@codemirror/state": "/common/lib/codemirror/codemirror_state/index.js",
+        "@codemirror/view": "/common/lib/codemirror/codemirror_view/index.js",
+        "@codemirror/commands": "/common/lib/codemirror/codemirror_commands/index.js",
+        "@codemirror/search": "/common/lib/codemirror/codemirror_search/index.js",
+        "@codemirror/autocomplete": "/common/lib/codemirror/codemirror_autocomplete/index.js",
+        "@codemirror/language": "/common/lib/codemirror/codemirror_language/index.js",
+        "@codemirror/lint": "/common/lib/codemirror/codemirror_lint/index.js",
+        "@codemirror/lang-html": "/common/lib/codemirror/codemirror_lang-html/index.js",
+        "@codemirror/lang-css": "/common/lib/codemirror/codemirror_lang-css/index.js",
+        "@codemirror/lang-javascript": "/common/lib/codemirror/codemirror_lang-javascript/index.js",
+        "@lezer/html": "/common/lib/codemirror/lezer_html/index.js",
+        "@lezer/css": "/common/lib/codemirror/lezer_css/index.js",
+        "@lezer/javascript": "/common/lib/codemirror/lezer_javascript/index.js",
+        "@lezer/common": "/common/lib/codemirror/lezer_common/index.js",
+        "@lezer/highlight": "/common/lib/codemirror/lezer_highlight/index.js",
+        "@lezer/lr": "/common/lib/codemirror/lezer_lr/index.js",
+        "@marijn/find-cluster-break": "/common/lib/codemirror/marijn_find-cluster-break/index.js",
+        "style-mod": "/common/lib/codemirror/style-mod/style-mod.js",
+        "w3c-keyname": "/common/lib/codemirror/w3c-keyname/index.js",
+        "crelt": "/common/lib/codemirror/crelt/index.js"
+    }
+}
+    </script>
+    <script type="module" src="script.js"></script>
 </head>
 
 <body>
@@ -526,172 +472,157 @@
                 </div>
 
                 <div class="actions-row">
-                    <button class="btn btn-primary" id="btn-format" data-i18n="dev.htm5.formatBtn">格式化</button>
-                    <button class="btn btn-warning" id="btn-compress" data-i18n="dev.htm5.compressBtn">压缩</button>
-                    <button class="btn btn-success" id="btn-copy" data-i18n="dev.htm5.copyBtn">复制结果</button>
-                    <button class="btn btn-secondary" id="btn-clear" data-i18n="dev.htm5.clearBtn">清空</button>
                     <button class="btn btn-secondary" id="btn-sample" data-i18n="dev.htm5.sampleBtn">加载示例</button>
+                    <button class="btn btn-primary" id="btn-format" data-i18n="dev.htm5.formatBtn">格式化</button>
+                    <button class="btn btn-secondary" id="fold-btn" data-i18n="common.buttons.collapse">折叠</button>
+                    <button class="btn btn-warning" id="btn-compress" data-i18n="dev.htm5.compressBtn">压缩</button>
+                    <button class="btn btn-success" id="btn-copy" data-i18n="dev.htm5.copyBtn">复制</button>
+                    <button class="btn btn-secondary" id="btn-clear" data-i18n="dev.htm5.clearBtn">清空</button>
                 </div>
 
                 <div id="error-msg" class="error-msg"></div>
 
-                <div class="editor-row">
-                    <div class="editor-panel">
-                        <div class="editor-header">
-                            <span class="editor-title" data-i18n="dev.htm5.inputTitle">输入 HTML</span>
-                            <div class="editor-actions">
-                                <button class="small-btn" id="btn-paste" data-i18n="dev.htm5.pasteBtn">粘贴</button>
-                            </div>
+                <div class="editor-wrapper">
+                    <div class="editor-header">
+                        <span class="editor-title" data-i18n="dev.htm5.editorTitle">HTML 编辑器</span>
+                        <div class="editor-actions">
+                            <button class="small-btn" id="btn-paste" data-i18n="dev.htm5.pasteBtn">粘贴</button>
                         </div>
-                        <textarea class="editor-textarea" id="input-html" placeholder="请输入或粘贴 HTML 代码..."
-                            data-i18n-placeholder="dev.htm5.inputPlaceholder" spellcheck="false"></textarea>
                     </div>
-
-                    <div class="editor-panel">
-                        <div class="editor-header">
-                            <span class="editor-title" data-i18n="dev.htm5.outputTitle">输出结果</span>
-                            <div class="editor-actions">
-                                <button class="small-btn" id="btn-copy-output"
-                                    data-i18n="dev.htm5.copyOutputBtn">复制</button>
-                            </div>
-                        </div>
-                        <pre class="editor-pre" id="output-html" data-placeholder="格式化后的结果将显示在这里..."
-                            spellcheck="false"></pre>
-                    </div>
+                    <div id="input-html" class="cm-editor-container"></div>
                 </div>
 
                 <div class="stats" id="stats-panel">
-                    <div class="stat-item" data-i18n="dev.htm5.statsOriginal">原始大小: <span class="stat-value"
-                            id="original-size">0</span> 字符</div>
-                    <div class="stat-item" data-i18n="dev.htm5.statsOutput">输出大小: <span class="stat-value"
-                            id="output-size">0</span> 字符</div>
+                    <div class="stat-item" data-i18n="dev.htm5.statsChars">字符数: <span class="stat-value"
+                            id="char-count">0</span></div>
                     <div class="stat-item" data-i18n="dev.htm5.statsLines">行数: <span class="stat-value"
                             id="line-count">0</span></div>
                 </div>
-
-                <div class="info-section">
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="dev.htm5.introTitle">HTML 格式化：让混乱的代码恢复秩序</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="dev.htm5.problemsTitle">一、为什么需要 HTML 格式化</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.problems1">从服务器抓取的 HTML
-                                    往往是一整行——没有缩进、没有换行、标签嵌套关系完全看不出来。调试页面结构时，面对上千个字符挤在一行的 HTML，人眼几乎无法定位目标元素。HTML
-                                    格式化工具自动添加缩进和换行，将"压缩"的 HTML 还原为可读的树形结构。</li>
-                                <li data-i18n="dev.htm5.problems2">反过来，当你要将 HTML 嵌入 JSON 配置、邮件模板或单行文本字段时，又需要将格式化好的 HTML
-                                    压缩为单行——去除所有多余空白。本工具同时支持格式化和压缩两种模式。</li>
-                                <li data-i18n="dev.htm5.problems3">还支持 HTML 与多种数据格式的互转——HTML 转 JSON（提取文本节点和属性）、HTML 转
-                                    XML（确保标签闭合和命名空间）、HTML 转纯文本（去除所有标签保留内容）。每种转换都保留语义结构。</li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.formatsTitle">二、HTML 的技术特点</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.formats1"><strong>标签嵌套：</strong>HTML 由开始标签、内容和结束标签组成（如
-                                    &lt;div&gt;内容
-                                    &lt;/div&gt;）。格式化时工具自动识别嵌套层级——每个子元素比父元素多缩进一级。自闭合标签（如 &lt;img /&gt;、&lt;br
-                                    /&gt;）不需要结束标签。</li>
-                                <li data-i18n="dev.htm5.formats2"><strong>属性处理：</strong>标签内的属性（class、id、style
-                                    等）保持在一行内，不因格式化而拆行——避免属性值被意外截断。</li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.featuresTitle">三、核心功能</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.features1"><strong>格式化与压缩：</strong>一键将混乱的 HTML
-                                    格式化为带缩进的可读结构，或压缩为无多余空白的单行文本。支持 2 空格和 4 空格两种缩进风格。</li>
-                                <li data-i18n="dev.htm5.features2"><strong>格式转换：</strong>HTML 转 JSON（提取 DOM 结构为键值对）、HTML
-                                    转 XML（确保标签严格闭合）、HTML 转纯文本（去除标签保留文字）。每种转换都有独立的转换按钮。</li>
-                                <li data-i18n="dev.htm5.features3"><strong>统计信息：</strong>实时显示字符数、行数、标签数——帮助你了解 HTML
-                                    文档的规模。</li>
-                                <li data-i18n="dev.htm5.features4"><strong>纯前端处理：</strong>所有格式化和转换在浏览器中完成——不上传任何数据。</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="dev.htm5.guideTitle">HTML 格式化操作指南</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="dev.htm5.guideFormatTitle">格式化步骤</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.guideFormat1"><strong>粘贴 HTML：</strong>将需要格式化的 HTML
-                                    代码粘贴到输入框——支持从浏览器开发者工具、服务器响应、文件中直接复制。</li>
-                                <li data-i18n="dev.htm5.guideFormat2"><strong>选择缩进：</strong>选择 2 空格或 4 空格缩进——2 空格更紧凑，4
-                                    空格层级更清晰。</li>
-                                <li data-i18n="dev.htm5.guideFormat3"><strong>点击格式化：</strong>点击"格式化"按钮，输出框立即显示格式化后的
-                                    HTML。</li>
-                                <li data-i18n="dev.htm5.guideFormat4"><strong>复制结果：</strong>点击"复制"按钮将结果复制到剪贴板。</li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.guideOptionsTitle">压缩模式</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.guideOptions1">
-                                    <strong>一键压缩：</strong>点击"压缩"按钮，去除所有多余空格和换行——输出紧凑的单行 HTML。适合嵌入 JSON 或邮件模板。
-                                </li>
-                                <li data-i18n="dev.htm5.guideOptions2"><strong>统计对比：</strong>压缩前后显示字符数和行数——直观看到压缩效果。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.guideShortcutsTitle">五、HTML 语法速查</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.guideShortcuts1"><strong>基本结构：</strong>每个 HTML 文档以
-                                    &lt;!DOCTYPE html&gt; 开头，包含 &lt;html&gt;、
-
-                                    &lt;head&gt;、
-
-                                    &lt;body&gt; 三个核心标签。
-                                </li>
-                                <li data-i18n="dev.htm5.guideShortcuts2"><strong>常用标签：</strong>
-                                    &lt;div&gt;（块级容器）、&lt;span&gt;（行内容器）、&lt;p&gt;（段落）、&lt;a&gt;（链接）、&lt;img&gt;（图片）、&lt;input&gt;（输入框）。
-                                </li>
-                                <li data-i18n="dev.htm5.guideShortcuts3"><strong>语义化标签：</strong>
-                                    &lt;header&gt;、&lt;nav&gt;、&lt;main&gt;、&lt;article&gt;、&lt;section&gt;、&lt;footer&gt;——比
-                                    &lt;div&gt; 更有语义，有利于 SEO 和可访问性。
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="dev.htm5.notesTitle">注意事项</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="dev.htm5.notesFormatTitle">格式化注意</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.notesFormat1"><strong>HTML vs XHTML：</strong>标准 HTML 允许部分标签不闭合（如
-                                    &lt;br&gt;、&lt;img&gt;），但 XHTML 要求所有标签必须闭合。格式化时工具自动处理。
-                                </li>
-                                <li data-i18n="dev.htm5.notesFormat2"><strong>特殊字符：</strong>&amp;、&lt;、&gt;、&quot; 等
-                                    HTML 实体在格式化过程中保持不变——不会被意外修改。</li>
-                                <li data-i18n="dev.htm5.notesFormat3"><strong>注释保留：</strong>HTML
-                                    注释（<!-- -->）在格式化和压缩时都会被保留——不会丢失。</li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.notesPerfTitle">性能说明</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.notesPerf1"><strong>大文件处理：</strong>超过 1MB 的 HTML
-                                    文件可能格式化较慢——建议分段处理。</li>
-                                <li data-i18n="dev.htm5.notesPerf2"><strong>浏览器限制：</strong>格式化在浏览器主线程执行——超大文件可能短暂阻塞页面响应。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.notesSecurityTitle">数据安全</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.notesSecurity1">
-                                    <strong>纯前端处理：</strong>所有格式化和转换在浏览器中完成——代码不离开你的设备。
-                                </li>
-                                <li data-i18n="dev.htm5.notesSecurity2"><strong>无网络依赖：</strong>页面加载后离线也能正常使用。</li>
-                            </ul>
-                            <h4 data-i18n="dev.htm5.notesFaqTitle">常见问题</h4>
-                            <ul>
-                                <li data-i18n="dev.htm5.notesFaq1"><strong>Q: 格式化后页面显示异常？</strong>A:
-                                    格式化只改变代码的空白字符，不影响渲染结果。如果页面异常，可能是原始 HTML 本身有语法错误。</li>
-                                <li data-i18n="dev.htm5.notesFaq2"><strong>Q: 压缩后 HTML 功能异常？</strong>A: 极少数 JavaScript
-                                    代码依赖空白字符（如正则表达式中的空格）。压缩前检查是否有此类代码。</li>
-                                <li data-i18n="dev.htm5.notesFaq3"><strong>Q: 支持 Vue/React 的 JSX 吗？</strong>A: 工具处理标准
-                                    HTML。JSX 包含 JavaScript 表达式（如 {variable}），可能无法正确格式化。</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
             </div>
         </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.htm5.introTitle">HTML 格式化：让混乱的代码恢复秩序</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.htm5.problemsTitle">为什么需要 HTML 格式化</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.problems1">从服务器抓取的 HTML
+                            往往是一整行——没有缩进、没有换行、标签嵌套关系完全看不出来。调试页面结构时，面对上千个字符挤在一行的 HTML，人眼几乎无法定位目标元素。HTML
+                            格式化工具自动添加缩进和换行，将"压缩"的 HTML 还原为可读的树形结构。</li>
+                        <li data-i18n="dev.htm5.problems2">反过来，当你要将 HTML 嵌入 JSON 配置、邮件模板或单行文本字段时，又需要将格式化好的 HTML
+                            压缩为单行——去除所有多余空白。本工具同时支持格式化和压缩两种模式。</li>
+                        <li data-i18n="dev.htm5.problems3">还支持 HTML 与多种数据格式的互转——HTML 转 JSON（提取文本节点和属性）、HTML 转
+                            XML（确保标签闭合和命名空间）、HTML 转纯文本（去除所有标签保留内容）。每种转换都保留语义结构。</li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.formatsTitle">HTML 的技术特点</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.formats1"><strong>标签嵌套：</strong>HTML 由开始标签、内容和结束标签组成（如
+                            &lt;div&gt;内容
+                            &lt;/div&gt;）。格式化时工具自动识别嵌套层级——每个子元素比父元素多缩进一级。自闭合标签（如 &lt;img /&gt;、&lt;br
+                            /&gt;）不需要结束标签。</li>
+                        <li data-i18n="dev.htm5.formats2"><strong>属性处理：</strong>标签内的属性（class、id、style
+                            等）保持在一行内，不因格式化而拆行——避免属性值被意外截断。</li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.features1"><strong>格式化与压缩：</strong>一键将混乱的 HTML
+                            格式化为带缩进的可读结构，或压缩为无多余空白的单行文本。支持 2 空格和 4 空格两种缩进风格。</li>
+                        <li data-i18n="dev.htm5.features2"><strong>格式转换：</strong>HTML 转 JSON（提取 DOM 结构为键值对）、HTML
+                            转 XML（确保标签严格闭合）、HTML 转纯文本（去除标签保留文字）。每种转换都有独立的转换按钮。</li>
+                        <li data-i18n="dev.htm5.features3"><strong>统计信息：</strong>实时显示字符数、行数、标签数——帮助你了解 HTML
+                            文档的规模。</li>
+                        <li data-i18n="dev.htm5.features4"><strong>纯前端处理：</strong>所有格式化和转换在浏览器中完成——不上传任何数据。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.htm5.guideTitle">HTML 格式化操作指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.htm5.guideFormatTitle">格式化步骤</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.guideFormat1"><strong>粘贴 HTML：</strong>将需要格式化的 HTML
+                            代码粘贴到输入框——支持从浏览器开发者工具、服务器响应、文件中直接复制。</li>
+                        <li data-i18n="dev.htm5.guideFormat2"><strong>选择缩进：</strong>选择 2 空格或 4 空格缩进——2 空格更紧凑，4
+                            空格层级更清晰。</li>
+                        <li data-i18n="dev.htm5.guideFormat3"><strong>点击格式化：</strong>点击"格式化"按钮，输出框立即显示格式化后的
+                            HTML。</li>
+                        <li data-i18n="dev.htm5.guideFormat4"><strong>复制结果：</strong>点击"复制"按钮将结果复制到剪贴板。</li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.guideOptionsTitle">压缩模式</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.guideOptions1">
+                            <strong>一键压缩：</strong>点击"压缩"按钮，去除所有多余空格和换行——输出紧凑的单行 HTML。适合嵌入 JSON 或邮件模板。
+                        </li>
+                        <li data-i18n="dev.htm5.guideOptions2"><strong>统计对比：</strong>压缩前后显示字符数和行数——直观看到压缩效果。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.guideShortcutsTitle">HTML 语法速查</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.guideShortcuts1"><strong>基本结构：</strong>每个 HTML 文档以
+                            &lt;!DOCTYPE html&gt; 开头，包含 &lt;html&gt;、
+
+                            &lt;head&gt;、
+
+                            &lt;body&gt; 三个核心标签。
+                        </li>
+                        <li data-i18n="dev.htm5.guideShortcuts2"><strong>常用标签：</strong>
+                            &lt;div&gt;（块级容器）、&lt;span&gt;（行内容器）、&lt;p&gt;（段落）、&lt;a&gt;（链接）、&lt;img&gt;（图片）、&lt;input&gt;（输入框）。
+                        </li>
+                        <li data-i18n="dev.htm5.guideShortcuts3"><strong>语义化标签：</strong>
+                            &lt;header&gt;、&lt;nav&gt;、&lt;main&gt;、&lt;article&gt;、&lt;section&gt;、&lt;footer&gt;——比
+                            &lt;div&gt; 更有语义，有利于 SEO 和可访问性。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.htm5.notesTitle">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.htm5.notesFormatTitle">格式化注意</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.notesFormat1"><strong>HTML vs XHTML：</strong>标准 HTML 允许部分标签不闭合（如
+                            &lt;br&gt;、&lt;img&gt;），但 XHTML 要求所有标签必须闭合。格式化时工具自动处理。
+                        </li>
+                        <li data-i18n="dev.htm5.notesFormat2"><strong>特殊字符：</strong>&amp;、&lt;、&gt;、&quot; 等
+                            HTML 实体在格式化过程中保持不变——不会被意外修改。</li>
+                        <li data-i18n="dev.htm5.notesFormat3"><strong>注释保留：</strong>HTML
+                            注释（<!-- -->）在格式化和压缩时都会被保留——不会丢失。</li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.notesPerfTitle">性能说明</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.notesPerf1"><strong>大文件处理：</strong>超过 1MB 的 HTML
+                            文件可能格式化较慢——建议分段处理。</li>
+                        <li data-i18n="dev.htm5.notesPerf2"><strong>浏览器限制：</strong>格式化在浏览器主线程执行——超大文件可能短暂阻塞页面响应。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.notesSecurity1">
+                            <strong>纯前端处理：</strong>所有格式化和转换在浏览器中完成——代码不离开你的设备。
+                        </li>
+                        <li data-i18n="dev.htm5.notesSecurity2"><strong>无网络依赖：</strong>页面加载后离线也能正常使用。</li>
+                    </ul>
+                    <h4 data-i18n="dev.htm5.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="dev.htm5.notesFaq1"><strong>Q: 格式化后页面显示异常？</strong>A:
+                            格式化只改变代码的空白字符，不影响渲染结果。如果页面异常，可能是原始 HTML 本身有语法错误。</li>
+                        <li data-i18n="dev.htm5.notesFaq2"><strong>Q: 压缩后 HTML 功能异常？</strong>A: 极少数 JavaScript
+                            代码依赖空白字符（如正则表达式中的空格）。压缩前检查是否有此类代码。</li>
+                        <li data-i18n="dev.htm5.notesFaq3"><strong>Q: 支持 Vue/React 的 JSX 吗？</strong>A: 工具处理标准
+                            HTML。JSX 包含 JavaScript 表达式（如 {variable}），可能无法正确格式化。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
         <div id="footer-container">
             <footer class="footer">
                 <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
@@ -712,7 +643,6 @@
     <script src="/common/js/tools-data.js"></script>
     <script src="/common/js/nav.js"></script>
     <script src="/common/js/utils.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>

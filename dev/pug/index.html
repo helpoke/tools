@@ -44,6 +44,27 @@
     <script src="/common/js/i18n/i18n.js"></script>
 
     <script src="/common/js/ads.js" async></script>
+    <script type="importmap">
+{
+    "imports": {
+        "codemirror": "/common/lib/codemirror/codemirror/index.js",
+        "@codemirror/state": "/common/lib/codemirror/codemirror_state/index.js",
+        "@codemirror/view": "/common/lib/codemirror/codemirror_view/index.js",
+        "@codemirror/commands": "/common/lib/codemirror/codemirror_commands/index.js",
+        "@codemirror/search": "/common/lib/codemirror/codemirror_search/index.js",
+        "@codemirror/autocomplete": "/common/lib/codemirror/codemirror_autocomplete/index.js",
+        "@codemirror/language": "/common/lib/codemirror/codemirror_language/index.js",
+        "@codemirror/lint": "/common/lib/codemirror/codemirror_lint/index.js",
+        "@lezer/common": "/common/lib/codemirror/lezer_common/index.js",
+        "@lezer/highlight": "/common/lib/codemirror/lezer_highlight/index.js",
+        "@lezer/lr": "/common/lib/codemirror/lezer_lr/index.js",
+        "@marijn/find-cluster-break": "/common/lib/codemirror/marijn_find-cluster-break/index.js",
+        "style-mod": "/common/lib/codemirror/style-mod/style-mod.js",
+        "w3c-keyname": "/common/lib/codemirror/w3c-keyname/index.js",
+        "crelt": "/common/lib/codemirror/crelt/index.js"
+    }
+}
+    </script>
     <script type="module">
         import pugBeautify from 'https://esm.sh/@johnsoncodehk/pug-beautify@0.2.2';
         import pugLexer from 'https://esm.sh/pug-lexer@5';
@@ -52,7 +73,7 @@
         window.pugLexer = pugLexer;
         window.pugParser = pugParser;
     </script>
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -108,33 +129,21 @@
                     <span id="status-badge" class="success-badge" data-i18n="dev.pug.badgeWait">等待输入</span>
                     <div class="button-group">
                         <button class="btn" data-action="load-sample" data-i18n="dev.pug.sampleBtn">示例数据</button>
-                        <button class="btn primary" data-action="format-pug" data-i18n="dev.pug.formatBtn">格式化</button>
                         <button class="btn" data-action="validate-pug" data-i18n="dev.pug.validateBtn">校验语法</button>
+                        <button class="btn primary" data-action="format-pug" data-i18n="dev.pug.formatBtn">格式化</button>
+                        <button class="btn" data-action="toggle-fold" id="fold-btn"
+                            data-i18n="common.buttons.collapse">折叠</button>
                         <button class="btn" data-action="minify-pug" data-i18n="dev.pug.minifyBtn">压缩</button>
-                        <button class="btn" data-action="copy-output" data-i18n="dev.pug.copyBtn">复制结果</button>
+                        <button class="btn" data-action="copy-output" data-i18n="dev.pug.copyBtn">复制</button>
                         <button class="btn" data-action="clear-all" data-i18n="dev.pug.clearBtn">清空</button>
                     </div>
                 </div>
             </div>
 
-            <div class="editor-panel">
+            <div class="editor-wrapper">
                 <div class="panel">
-                    <div class="panel-header" data-i18n="dev.pug.inputTitle">输入 Pug</div>
                     <div class="panel-body">
-                        <div class="input-with-lines">
-                            <div class="line-numbers" id="input-lines"><span>1</span></div>
-                            <textarea id="pug-input" data-i18n-placeholder="dev.pug.inputPlaceholder"
-                                placeholder="请在此输入 Pug 内容，或点击「示例数据」查看效果..."></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel">
-                    <div class="panel-header" data-i18n="dev.pug.outputTitle">格式化输出</div>
-                    <div class="panel-body">
-                        <div class="output-with-lines">
-                            <div class="line-numbers" id="output-lines"><span></span></div>
-                            <div class="output-content" id="pug-output"></div>
-                        </div>
+                        <div id="pug-input" class="cm-editor-container"></div>
                     </div>
                 </div>
             </div>
@@ -144,143 +153,144 @@
                         style="color:#ef4444;"></span></div>
                 <div id="error-list"></div>
             </div>
-
-            <div class="info-section">
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="dev.pug.infoIntro">Pug 格式化：模板引擎代码的整理利器</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="dev.pug.problemsTitle">一、Pug 模板引擎简介</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.problem1">Pug（原名 Jade）是一种简洁的 HTML 模板引擎——用缩进代替尖括号，用极简语法生成完整 HTML。一行
-                                pug 代码 div.container 等价于 &lt;div
-                                class=\"container\"&gt;&lt;/div&gt;。但简洁的代价是缩进必须严格正确——一个空格错位就可能导致整个模板结构错误。</li>
-                            <li data-i18n="dev.pug.problem2">本工具支持 Pug
-                                代码的格式化、验证和压缩。格式化自动修正缩进层级，验证检查语法错误并精确定位行号，压缩去除多余空行和注释生成紧凑代码。</li>
-                            <li data-i18n="dev.pug.problem3">还支持 Pug 到 HTML 的实时编译——在输入框中编写 Pug 代码，输出框立即显示对应的 HTML。支持 Pug
-                                的变量、条件、循环、混入等高级语法。</li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.formatTitle">二、Pug 语法特点</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.formatPug"><strong>Pug 语法：</strong>标签名直接写（不需要尖括号），class 用 .
-                                前缀（.container），id 用 # 前缀（#main），属性用括号（(href='/')）。缩进表示嵌套关系——严格使用空格（不能用 Tab）。</li>
-                            <li data-i18n="dev.pug.formatHtml"><strong>HTML 输出：</strong>Pug 编译后生成标准
-                                HTML——每个缩进层级对应一对嵌套标签。Pug 的一行可能对应 HTML 的多行—— Pug 的简洁性体现在用缩进替代了大量重复的标签符号。</li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.featuresTitle">三、核心功能</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.featureOnline"><strong>格式化与验证：</strong>一键格式化 Pug
-                                代码——自动修正缩进、对齐属性。验证模式检查语法错误并显示错误行号和列号。</li>
-                            <li data-i18n="dev.pug.featurePreview"><strong>编译预览：</strong>Pug 代码实时编译为 HTML——方便对照查看 Pug
-                                语法对应的 HTML 输出。</li>
-                            <li data-i18n="dev.pug.featureExport"><strong>压缩输出：</strong>去除空行和注释，生成紧凑的 Pug 代码——适合生产环境部署。
-                            </li>
-                            <li data-i18n="dev.pug.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——模板代码不上传到服务器。
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="dev.pug.infoUsage">Pug 操作指南</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="dev.pug.usageFormatTitle">格式化步骤</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.usageFormat"><strong>粘贴代码：</strong>将 Pug 代码粘贴到输入框——支持从项目文件中直接复制。</li>
-                            <li data-i18n="dev.pug.usageValidate">
-                                <strong>格式化/验证：</strong>点击"格式化"按钮自动修正缩进；点击"验证"按钮检查语法错误。
-                            </li>
-                            <li data-i18n="dev.pug.usageMinify"><strong>压缩：</strong>点击"压缩"按钮去除空行和注释——输出紧凑代码。</li>
-                            <li data-i18n="dev.pug.usageCopy"><strong>复制结果：</strong>点击"复制"按钮将输出复制到剪贴板。</li>
-                            <li data-i18n="dev.pug.usageSample"><strong>示例加载：</strong>点击"示例"按钮加载 Pug 代码示例——快速体验工具功能。
-                            </li>
-                            <li data-i18n="dev.pug.usageClear"><strong>清空：</strong>点击"清空"按钮清除输入和输出。</li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.usageSyntaxTitle">五、Pug 语法详解</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.syntaxTag"><strong>标签：</strong>直接写标签名——div、p、span、a。不写标签名默认生成 div。
-                            </li>
-                            <li data-i18n="dev.pug.syntaxClassId"><strong>类和 ID：</strong>.className 表示 class 属性，#idName
-                                表示 id 属性。可组合使用——div.container#main。</li>
-                            <li data-i18n="dev.pug.syntaxAttr"><strong>属性：</strong>用圆括号包裹——a(href='/home',
-                                target='_blank')。属性之间用逗号分隔。</li>
-                            <li data-i18n="dev.pug.syntaxText"><strong>文本内容：</strong>标签后加空格和文本——p Hello World。支持管道符 |
-                                用于多行文本。</li>
-                            <li data-i18n="dev.pug.syntaxVariable"><strong>变量插值：</strong>#{variable}
-                                在文本中插入变量值，#{expression} 支持 JavaScript 表达式。</li>
-                            <li data-i18n="dev.pug.syntaxComment"><strong>注释：</strong>// 单行注释（不输出到 HTML），//-
-                                静默注释（编译时完全忽略）。</li>
-                            <li data-i18n="dev.pug.syntaxCondition"><strong>条件语句：</strong>if/else if/else——Pug 的条件渲染。如
-                                if user 检查变量是否存在。</li>
-                            <li data-i18n="dev.pug.syntaxLoop"><strong>循环：</strong>each item in items——遍历数组生成重复结构。支持
-                                index 变量获取索引。</li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.usageShortcutsTitle">六、注意事项</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.shortcut1"><strong>缩进规则：</strong>Pug 严格使用空格缩进（不能用
-                                Tab）——同一层级的缩进空格数必须一致（通常 2 个或 4 个）。</li>
-                            <li data-i18n="dev.pug.shortcut2"><strong>换行敏感：</strong>Pug
-                                是换行敏感的语言——每行一个标签或指令。多行文本需要特殊语法（管道符或点号）。</li>
-                            <li data-i18n="dev.pug.shortcut3"><strong>混合内容：</strong>标签内同时包含文本和子标签时，需要用管道符 | 标记纯文本行。</li>
-                        </ul>
-                    </div>
-                </article>
-                <article class="info-details">
-                    <header>
-                        <h3 data-i18n="dev.pug.infoNotes">注意事项</h3>
-                    </header>
-                    <div class="info-content">
-                        <h4 data-i18n="dev.pug.notesFormatTitle">格式注意</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.noteFormat1"><strong>缩进一致性：</strong>格式化会统一缩进风格——如果你的原始代码混用 Tab
-                                和空格，格式化后全部转为空格。</li>
-                            <li data-i18n="dev.pug.noteFormat2"><strong>属性顺序：</strong>格式化不会改变属性的书写顺序——保持你原有的属性排列。</li>
-                            <li data-i18n="dev.pug.noteFormat3"><strong>注释保留：</strong>格式化保留所有注释——包括 // 和 //- 两种注释类型。
-                            </li>
-                            <li data-i18n="dev.pug.noteFormat4"><strong>Include/Extend：</strong>Pug 的 include 和 extend
-                                指令在格式化时保留路径——但工具不会解析被引用的文件。</li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.notesErrorTitle">错误处理</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.noteError1"><strong>缩进错误：</strong>最常见的 Pug 错误——缩进不一致会导致"unexpected
-                                indent"错误。格式化工具自动修复。</li>
-                            <li data-i18n="dev.pug.noteError2"><strong>语法错误：</strong>验证模式会报告错误类型和位置——如"unexpected
-                                token"、"missing closing bracket"。</li>
-                            <li data-i18n="dev.pug.noteError3"><strong>变量未定义：</strong>Pug 模板中引用未定义的变量会在编译时报错——工具会显示错误位置。
-                            </li>
-                            <li data-i18n="dev.pug.noteError4"><strong>混用 Tab：</strong>如果输入包含 Tab 字符，工具自动转换为空格（默认 2 空格）。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.notesPerfTitle">性能说明</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.notePerf1"><strong>大文件：</strong>超过 500 行的 Pug 文件格式化可能较慢——建议按模块拆分。
-                            </li>
-                            <li data-i18n="dev.pug.notePerf2"><strong>实时编译：</strong>Pug 到 HTML
-                                的编译是实时的——输入时立即更新输出。复杂模板可能有短暂延迟。</li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.notesSecurityTitle">数据安全</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.noteSecurity1"><strong>纯前端处理：</strong>所有 Pug 代码的处理在浏览器中完成——模板不上传到服务器。
-                            </li>
-                            <li data-i18n="dev.pug.noteSecurity2"><strong>代码保护：</strong>你的 Pug 模板（可能包含业务逻辑和数据结构）始终留在本地。
-                            </li>
-                        </ul>
-                        <h4 data-i18n="dev.pug.notesFaqTitle">常见问题</h4>
-                        <ul>
-                            <li data-i18n="dev.pug.noteFaq1"><strong>Q: 支持 Pug 3.0 语法吗？</strong>A:
-                                支持——包括模板继承、混入、条件、循环等全部 Pug 3.0 语法。</li>
-                            <li data-i18n="dev.pug.noteFaq2"><strong>Q: 格式化后代码行为变了？</strong>A:
-                                格式化只调整缩进和空白——不改变语义。如果行为变化，原始代码可能有缩进错误。</li>
-                            <li data-i18n="dev.pug.noteFaq3"><strong>Q: 能处理 .jade 文件吗？</strong>A: Pug 就是 Jade
-                                的改名——工具完全兼容旧版 .jade 语法。</li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
         </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.pug.infoIntro">Pug 格式化：模板引擎代码的整理利器</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.pug.problemsTitle">Pug 模板引擎简介</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.problem1">Pug（原名 Jade）是一种简洁的 HTML 模板引擎——用缩进代替尖括号，用极简语法生成完整 HTML。一行
+                            pug 代码 div.container 等价于 &lt;div
+                            class=\"container\"&gt;&lt;/div&gt;。但简洁的代价是缩进必须严格正确——一个空格错位就可能导致整个模板结构错误。</li>
+                        <li data-i18n="dev.pug.problem2">本工具支持 Pug
+                            代码的格式化、验证和压缩。格式化自动修正缩进层级，验证检查语法错误并精确定位行号，压缩去除多余空行和注释生成紧凑代码。</li>
+                        <li data-i18n="dev.pug.problem3">还支持 Pug 到 HTML 的实时编译——在输入框中编写 Pug 代码，输出框立即显示对应的 HTML。支持 Pug
+                            的变量、条件、循环、混入等高级语法。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.formatTitle">Pug 语法特点</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.formatPug"><strong>Pug 语法：</strong>标签名直接写（不需要尖括号），class 用 .
+                            前缀（.container），id 用 # 前缀（#main），属性用括号（(href='/')）。缩进表示嵌套关系——严格使用空格（不能用 Tab）。</li>
+                        <li data-i18n="dev.pug.formatHtml"><strong>HTML 输出：</strong>Pug 编译后生成标准
+                            HTML——每个缩进层级对应一对嵌套标签。Pug 的一行可能对应 HTML 的多行—— Pug 的简洁性体现在用缩进替代了大量重复的标签符号。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.featureOnline"><strong>格式化与验证：</strong>一键格式化 Pug
+                            代码——自动修正缩进、对齐属性。验证模式检查语法错误并显示错误行号和列号。</li>
+                        <li data-i18n="dev.pug.featurePreview"><strong>编译预览：</strong>Pug 代码实时编译为 HTML——方便对照查看 Pug
+                            语法对应的 HTML 输出。</li>
+                        <li data-i18n="dev.pug.featureExport"><strong>压缩输出：</strong>去除空行和注释，生成紧凑的 Pug 代码——适合生产环境部署。
+                        </li>
+                        <li data-i18n="dev.pug.featureSecurity"><strong>纯前端处理：</strong>所有处理在浏览器中完成——模板代码不上传到服务器。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.pug.infoUsage">Pug 操作指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.pug.usageFormatTitle">格式化步骤</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.usageFormat"><strong>粘贴代码：</strong>将 Pug 代码粘贴到输入框——支持从项目文件中直接复制。</li>
+                        <li data-i18n="dev.pug.usageValidate">
+                            <strong>格式化/验证：</strong>点击"格式化"按钮自动修正缩进；点击"验证"按钮检查语法错误。
+                        </li>
+                        <li data-i18n="dev.pug.usageMinify"><strong>压缩：</strong>点击"压缩"按钮去除空行和注释——输出紧凑代码。</li>
+                        <li data-i18n="dev.pug.usageCopy"><strong>复制结果：</strong>点击"复制"按钮将输出复制到剪贴板。</li>
+                        <li data-i18n="dev.pug.usageSample"><strong>示例加载：</strong>点击"示例"按钮加载 Pug 代码示例——快速体验工具功能。
+                        </li>
+                        <li data-i18n="dev.pug.usageClear"><strong>清空：</strong>点击"清空"按钮清除输入和输出。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.usageSyntaxTitle">Pug 语法详解</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.syntaxTag"><strong>标签：</strong>直接写标签名——div、p、span、a。不写标签名默认生成 div。
+                        </li>
+                        <li data-i18n="dev.pug.syntaxClassId"><strong>类和 ID：</strong>.className 表示 class 属性，#idName
+                            表示 id 属性。可组合使用——div.container#main。</li>
+                        <li data-i18n="dev.pug.syntaxAttr"><strong>属性：</strong>用圆括号包裹——a(href='/home',
+                            target='_blank')。属性之间用逗号分隔。</li>
+                        <li data-i18n="dev.pug.syntaxText"><strong>文本内容：</strong>标签后加空格和文本——p Hello World。支持管道符 |
+                            用于多行文本。</li>
+                        <li data-i18n="dev.pug.syntaxVariable"><strong>变量插值：</strong>#{variable}
+                            在文本中插入变量值，#{expression} 支持 JavaScript 表达式。</li>
+                        <li data-i18n="dev.pug.syntaxComment"><strong>注释：</strong>// 单行注释（不输出到 HTML），//-
+                            静默注释（编译时完全忽略）。</li>
+                        <li data-i18n="dev.pug.syntaxCondition"><strong>条件语句：</strong>if/else if/else——Pug 的条件渲染。如
+                            if user 检查变量是否存在。</li>
+                        <li data-i18n="dev.pug.syntaxLoop"><strong>循环：</strong>each item in items——遍历数组生成重复结构。支持
+                            index 变量获取索引。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.usageShortcutsTitle">注意事项</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.shortcut1"><strong>缩进规则：</strong>Pug 严格使用空格缩进（不能用
+                            Tab）——同一层级的缩进空格数必须一致（通常 2 个或 4 个）。</li>
+                        <li data-i18n="dev.pug.shortcut2"><strong>换行敏感：</strong>Pug
+                            是换行敏感的语言——每行一个标签或指令。多行文本需要特殊语法（管道符或点号）。</li>
+                        <li data-i18n="dev.pug.shortcut3"><strong>混合内容：</strong>标签内同时包含文本和子标签时，需要用管道符 | 标记纯文本行。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.pug.infoNotes">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.pug.notesFormatTitle">格式注意</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.noteFormat1"><strong>缩进一致性：</strong>格式化会统一缩进风格——如果你的原始代码混用 Tab
+                            和空格，格式化后全部转为空格。</li>
+                        <li data-i18n="dev.pug.noteFormat2"><strong>属性顺序：</strong>格式化不会改变属性的书写顺序——保持你原有的属性排列。</li>
+                        <li data-i18n="dev.pug.noteFormat3"><strong>注释保留：</strong>格式化保留所有注释——包括 // 和 //- 两种注释类型。
+                        </li>
+                        <li data-i18n="dev.pug.noteFormat4"><strong>Include/Extend：</strong>Pug 的 include 和 extend
+                            指令在格式化时保留路径——但工具不会解析被引用的文件。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.notesErrorTitle">错误处理</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.noteError1"><strong>缩进错误：</strong>最常见的 Pug 错误——缩进不一致会导致"unexpected
+                            indent"错误。格式化工具自动修复。</li>
+                        <li data-i18n="dev.pug.noteError2"><strong>语法错误：</strong>验证模式会报告错误类型和位置——如"unexpected
+                            token"、"missing closing bracket"。</li>
+                        <li data-i18n="dev.pug.noteError3"><strong>变量未定义：</strong>Pug 模板中引用未定义的变量会在编译时报错——工具会显示错误位置。
+                        </li>
+                        <li data-i18n="dev.pug.noteError4"><strong>混用 Tab：</strong>如果输入包含 Tab 字符，工具自动转换为空格（默认 2 空格）。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.notesPerfTitle">性能说明</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.notePerf1"><strong>大文件：</strong>超过 500 行的 Pug 文件格式化可能较慢——建议按模块拆分。
+                        </li>
+                        <li data-i18n="dev.pug.notePerf2"><strong>实时编译：</strong>Pug 到 HTML
+                            的编译是实时的——输入时立即更新输出。复杂模板可能有短暂延迟。</li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.notesSecurityTitle">数据安全</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.noteSecurity1"><strong>纯前端处理：</strong>所有 Pug 代码的处理在浏览器中完成——模板不上传到服务器。
+                        </li>
+                        <li data-i18n="dev.pug.noteSecurity2"><strong>代码保护：</strong>你的 Pug 模板（可能包含业务逻辑和数据结构）始终留在本地。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.pug.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="dev.pug.noteFaq1"><strong>Q: 支持 Pug 3.0 语法吗？</strong>A:
+                            支持——包括模板继承、混入、条件、循环等全部 Pug 3.0 语法。</li>
+                        <li data-i18n="dev.pug.noteFaq2"><strong>Q: 格式化后代码行为变了？</strong>A:
+                            格式化只调整缩进和空白——不改变语义。如果行为变化，原始代码可能有缩进错误。</li>
+                        <li data-i18n="dev.pug.noteFaq3"><strong>Q: 能处理 .jade 文件吗？</strong>A: Pug 就是 Jade
+                            的改名——工具完全兼容旧版 .jade 语法。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
 
         <!-- Footer component container -->
         <div id="footer-container">

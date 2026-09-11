@@ -320,11 +320,60 @@ body.dark-mode .field-chip.second {
 }
 
 /* 预设表达式 */
+.presets-pair-grid {
+    margin-bottom: 24px;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.presets-pair-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 13px;
+    font-weight: 600;
+    color: #7f8c8d;
+}
+
+.presets-pair-header span {
+    padding: 10px 14px;
+}
+
+.presets-pair-header span:last-child {
+    border-left: 1px solid #eaeaea;
+}
+
+.presets-pair-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.presets-pair-row:last-child {
+    border-bottom: none;
+}
+
+.presets-pair-row .preset-btn {
+    border: none;
+    border-radius: 0;
+    border-right: 1px solid #f0f0f0;
+}
+
+.presets-pair-row .preset-btn:last-child {
+    border-right: none;
+}
+
+.presets-pair-row .preset-btn:hover {
+    background: #f0f7ff;
+}
+
 .presets-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    margin-bottom: 24px;
+    grid-template-columns: 1fr;
+    gap: 8px;
 }
 
 .preset-btn {
@@ -619,6 +668,25 @@ body.dark-mode .field-chip.second {
         grid-template-columns: 1fr;
     }
 
+    .presets-pair-header,
+    .presets-pair-row {
+        grid-template-columns: 1fr;
+    }
+
+    .presets-pair-header span:last-child {
+        border-left: none;
+        border-top: 1px solid var(--border-color, #eaeaea);
+    }
+
+    .presets-pair-row .preset-btn {
+        border-right: none;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .presets-pair-row .preset-btn:last-child {
+        border-bottom: none;
+    }
+
     .input-row {
         flex-direction: column;
     }
@@ -792,6 +860,35 @@ body.dark-mode .preset-btn .preset-name {
 
 body.dark-mode .preset-btn .preset-cron {
     color: var(--text-muted);
+}
+
+body.dark-mode .presets-pair-grid {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .presets-pair-header {
+    background-color: var(--bg-secondary);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .presets-pair-header span {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .presets-pair-header span:last-child {
+    border-left-color: var(--border-color);
+}
+
+body.dark-mode .presets-pair-row {
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .presets-pair-row .preset-btn {
+    border-right-color: var(--border-color);
+}
+
+body.dark-mode .presets-pair-row .preset-btn:hover {
+    background-color: rgba(99, 102, 241, 0.05);
 }
 
 body.dark-mode .ref-table {

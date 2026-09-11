@@ -40,668 +40,9 @@
     <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
 
     <script src="/common/js/ads.js" async></script>
-    <style>
-        @import '/common/css/style.css';
-        @import '/common/css/utils.css';
-    </style>
-    <style>
-        .container {
-            max-width: 100%;
-            padding: 40px 0;
-            width: 100%;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .tool-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-            padding: 28px;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 24px;
-            background: #fff;
-            border-radius: 10px;
-            padding: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px 20px;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background: #4f46e5;
-            color: #fff;
-        }
-
-        .tab-btn:hover:not(.active) {
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 6px;
-        }
-
-        /* Regex input row */
-        .regex-input-row {
-            display: flex;
-            gap: 0;
-            margin-bottom: 4px;
-        }
-
-        .regex-delimiter {
-            display: flex;
-            align-items: center;
-            padding: 0 8px;
-            font-size: 20px;
-            color: #94a3b8;
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            user-select: none;
-        }
-
-        .regex-input-row input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 1px solid #e2e8f0;
-            font-size: 16px;
-            font-family: 'Courier New', Consolas, monospace;
-            transition: border-color 0.2s;
-        }
-
-        .regex-input-row input:first-child {
-            border-radius: 8px 0 0 8px;
-        }
-
-        .regex-input-row input:focus {
-            outline: none;
-            border-color: #4f46e5;
-            z-index: 1;
-            position: relative;
-        }
-
-        .regex-input-row input.error {
-            border-color: #dc2626;
-            background: #fef2f2;
-        }
-
-        .flags-input {
-            width: 100px;
-            text-align: center;
-            border-radius: 0 8px 8px 0;
-            letter-spacing: 3px;
-        }
-
-        .flags-hint {
-            font-size: 11px;
-            color: #94a3b8;
-            margin-top: 4px;
-            margin-left: 12px;
-        }
-
-        .flags-hint span {
-            cursor: pointer;
-            color: #4f46e5;
-            font-weight: 600;
-            margin: 0 2px;
-        }
-
-        .flags-hint span:hover {
-            text-decoration: underline;
-        }
-
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background-color: var(--input-bg);
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Courier New', Consolas, monospace;
-            resize: vertical;
-            min-height: 180px;
-            line-height: 1.6;
-            transition: border-color 0.2s;
-        }
-
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-primary {
-            background: #4f46e5;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: #4338ca;
-        }
-
-        .btn-outline {
-            background: #fff;
-            color: #475569;
-            border: 1px solid #e2e8f0;
-        }
-
-        .btn-outline:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-        }
-
-        /* Match results */
-        .regex-error {
-            padding: 10px 16px;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 8px;
-            color: #dc2626;
-            font-size: 13px;
-            margin-bottom: 16px;
-        }
-
-        .stats-row {
-            display: flex;
-            gap: 20px;
-            padding: 10px 16px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: #15803d;
-            flex-wrap: wrap;
-        }
-
-        /* Highlighted text area */
-        .highlight-area {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-break: break-all;
-            background: #fff;
-            max-height: 400px;
-            overflow: auto;
-        }
-
-        .highlight-area .match {
-            background: #fef08a;
-            border-radius: 3px;
-            padding: 0 1px;
-        }
-
-        .highlight-area .match:nth-child(odd) {
-            background: #fde047;
-        }
-
-        .highlight-area .match.focus {
-            background: #fb923c;
-            color: #fff;
-            outline: 2px solid #ea580c;
-            outline-offset: 1px;
-        }
-
-        /* Match list */
-        .match-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .match-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .match-item-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 14px;
-            background: #f8fafc;
-            font-size: 12px;
-            color: #64748b;
-            border-bottom: 1px solid #e2e8f0;
-            cursor: pointer;
-        }
-
-        .match-item-header:hover {
-            background: #f1f5f9;
-        }
-
-        .match-item-body {
-            padding: 8px 14px;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 13px;
-            word-break: break-all;
-            background: #fffbeb;
-        }
-
-        .match-item .group-row {
-            display: flex;
-            gap: 12px;
-            padding: 4px 0;
-            font-size: 12px;
-            border-bottom: 1px solid #fef3c7;
-        }
-
-        .match-item .group-row:last-child {
-            border-bottom: none;
-        }
-
-        .match-item .group-label {
-            color: #92400e;
-            font-weight: 600;
-            min-width: 52px;
-            flex-shrink: 0;
-        }
-
-        .match-item .group-value {
-            color: #78350f;
-            word-break: break-all;
-        }
-
-        /* Replace tab */
-        .replace-preview {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 14px 16px;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-break: break-all;
-            background: #f8fafc;
-            min-height: 60px;
-            max-height: 400px;
-            overflow: auto;
-        }
-
-        .replace-preview ins {
-            background: #bbf7d0;
-            text-decoration: none;
-            border-radius: 3px;
-            padding: 0 2px;
-        }
-
-        /* Presets */
-        .presets-section {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .presets-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
-            margin-bottom: 10px;
-        }
-
-        .presets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 8px;
-        }
-
-        .preset-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.15s;
-            background: #fff;
-        }
-
-        .preset-item:hover {
-            border-color: #4f46e5;
-            background: #f8faff;
-        }
-
-        .preset-item .preset-name {
-            font-size: 13px;
-            color: #1e293b;
-            font-weight: 500;
-        }
-
-        .preset-item .preset-regex {
-            font-size: 11px;
-            color: #94a3b8;
-            font-family: 'Courier New', monospace;
-            max-width: 160px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .replace-row {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-            margin-bottom: 16px;
-        }
-
-        .replace-row .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-
-        .replace-row input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Courier New', Consolas, monospace;
-        }
-
-        .replace-row input:focus {
-            outline: none;
-            border-color: #4f46e5;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 16px;
-            }
-
-            .tool-card {
-                padding: 20px;
-            }
-
-            .regex-input-row {
-                flex-wrap: wrap;
-            }
-
-            .regex-input-row input:first-child {
-                border-radius: 8px 8px 0 0;
-            }
-
-            .flags-input {
-                width: 100%;
-                border-radius: 0 0 8px 8px;
-                border-top: none;
-            }
-
-            .regex-delimiter {
-                display: none;
-            }
-
-            .presets-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tab-btn {
-                padding: 10px 14px;
-                font-size: 13px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 24px 12px;
-            }
-
-            .tool-card {
-                padding: 16px;
-            }
-        }
-
-        /* ==================== 夜间模式样式 ==================== */
-        body.dark-mode .tool-card {
-            background-color: var(--bg-card);
-            box-shadow: var(--box-shadow);
-        }
-
-        body.dark-mode input[type="text"],
-        body.dark-mode textarea {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode input:focus,
-        body.dark-mode textarea:focus {
-            border-color: var(--primary-color);
-        }
-
-        body.dark-mode select {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .btn {
-            background-color: var(--primary-color);
-        }
-
-        body.dark-mode .btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        body.dark-mode .btn-outline {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .result-box {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .match-item {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .match-item-header {
-            background-color: var(--bg-secondary);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .match-item-body {
-            background-color: var(--bg-tertiary);
-        }
-
-        body.dark-mode .match-item .group-label {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .match-item .group-value {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .error-msg {
-            color: var(--error-color);
-        }
-
-        body.dark-mode .tabs {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .tab-btn {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .tab-btn:hover:not(.active) {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .tab-btn.active {
-            background-color: var(--primary-color);
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .highlight-area {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .highlight-area .match {
-            background-color: rgba(251, 146, 60, 0.3);
-        }
-
-        body.dark-mode .highlight-area .match:nth-child(odd) {
-            background-color: rgba(251, 146, 60, 0.4);
-        }
-
-        body.dark-mode .highlight-area .match.focus {
-            background-color: #fb923c;
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .stats-row {
-            background-color: rgba(16, 185, 129, 0.1);
-            border-color: var(--success-color);
-            color: var(--success-color);
-        }
-
-        body.dark-mode .presets-section {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .presets-title {
-            color: var(--text-secondary);
-        }
-
-        body.dark-mode .preset-item {
-            background-color: var(--bg-card);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .preset-item:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(99, 102, 241, 0.1);
-        }
-
-        body.dark-mode .preset-item .preset-name {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .preset-item .preset-regex {
-            color: var(--text-muted);
-        }
-
-        body.dark-mode .replace-preview {
-            background-color: var(--bg-tertiary);
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .replace-preview ins {
-            background-color: rgba(16, 185, 129, 0.3);
-        }
-
-        body.dark-mode .regex-error {
-            background-color: rgba(239, 68, 68, 0.1);
-            border-color: var(--error-color);
-            color: var(--error-color);
-        }
-
-        body.dark-mode .form-group label {
-            color: var(--text-primary);
-        }
-
-        body.dark-mode .flags-hint {
-            color: var(--text-muted);
-        }
-
-        body.dark-mode .flags-hint span {
-            color: var(--primary-color);
-        }
-
-        /* ==================== 边框颜色覆盖 ==================== */
-        body.dark-mode textarea {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode select {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .result-box {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode input[type="text"] {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .match-item {
-            border-color: var(--border-color);
-        }
-
-        body.dark-mode .tab-pane label[style*="color:#1e293b"] {
-            color: var(--text-primary) !important;
-        }
-
-        body.dark-mode #match-stats.no-match,
-        body.dark-mode #match-stats.match-found {
-            background-color: transparent !important;
-            border-color: transparent !important;
-            color: inherit !important;
-        }
-    </style>
+    <link rel="stylesheet" href="/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/utils.css">
+    <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -755,9 +96,9 @@
             <div class="tool-card">
                 <!-- Tabs -->
                 <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('match')"
+                    <button class="tab-btn active" data-regex-action="tab-match"
                         data-i18n="dev.regex.tabMatch">正则匹配</button>
-                    <button class="tab-btn" onclick="switchTab('replace')"
+                    <button class="tab-btn" data-regex-action="tab-replace"
                         data-i18n="dev.regex.tabReplace">正则替换</button>
                 </div>
 
@@ -772,10 +113,10 @@
                             <span class="regex-delimiter">/</span>
                             <input type="text" id="regex-flags" class="flags-input" placeholder="gm" value="g">
                         </div>
-                        <div class="flags-hint" data-i18n="dev.regex.flagsHint">标志：<span
-                                onclick="toggleFlag('g')">g</span> 全局 &nbsp; <span onclick="toggleFlag('i')">i</span>
-                            忽略大小写 &nbsp; <span onclick="toggleFlag('m')">m</span> 多行 &nbsp; <span
-                                onclick="toggleFlag('s')">s</span> 点匹配换行 &nbsp; <span onclick="toggleFlag('u')">u</span>
+                        <div class="flags-hint">标志：<span data-toggle-flag="g">g</span>
+                            全局 &nbsp; <span data-toggle-flag="i">i</span>
+                            忽略大小写 &nbsp; <span data-toggle-flag="m">m</span> 多行 &nbsp; <span
+                                data-toggle-flag="s">s</span> 点匹配换行 &nbsp; <span data-toggle-flag="u">u</span>
                             Unicode</div>
                     </div>
 
@@ -802,12 +143,12 @@
                             <span class="regex-delimiter">/</span>
                             <input type="text" id="replace-flags" class="flags-input" placeholder="g" value="g">
                         </div>
-                        <div class="flags-hint" data-i18n="dev.regex.flagsHint">
-                            标志：<span onclick="toggleFlag('g')">g</span> 全局 &nbsp;
-                            <span onclick="toggleFlag('i')">i</span> 忽略大小写 &nbsp;
-                            <span onclick="toggleFlag('m')">m</span> 多行 &nbsp;
-                            <span onclick="toggleFlag('s')">s</span> 点匹配换行 &nbsp;
-                            <span onclick="toggleFlag('u')">u</span> Unicode
+                        <div class="flags-hint">
+                            标志：<span data-toggle-flag="g">g</span> 全局 &nbsp;
+                            <span data-toggle-flag="i">i</span> 忽略大小写 &nbsp;
+                            <span data-toggle-flag="m">m</span> 多行 &nbsp;
+                            <span data-toggle-flag="s">s</span> 点匹配换行 &nbsp;
+                            <span data-toggle-flag="u">u</span> Unicode
                         </div>
                     </div>
 
@@ -823,7 +164,7 @@
                             <input type="text" id="replace-with"
                                 data-i18n-placeholder="dev.regex.replaceWithPlaceholder" placeholder="$1, $$ 等引用...">
                         </div>
-                        <button class="btn btn-primary" onclick="doReplace()"
+                        <button class="btn btn-primary" data-regex-action="replace"
                             data-i18n="dev.regex.replaceBtn">替换</button>
                     </div>
 
@@ -838,172 +179,173 @@
                     <div class="presets-title" data-i18n="dev.regex.presetsTitle">常用正则速查（点击填入）</div>
                     <div class="presets-grid" id="presets-grid"></div>
                 </div>
-
-                <div class="info-section">
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="dev.regex.introTitle">正则表达式：文本处理的瑞士军刀</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="dev.regex.problemsTitle">一、正则表达式为什么让人又爱又恨</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.problem1">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b
-                                    ——这串"天书"匹配的是邮箱地址。正则表达式（Regular
-                                    Expression）是文本搜索和替换的终极工具——几乎所有编程语言、文本编辑器、命令行工具都支持它。但正则的语法极其晦涩，一个括号漏写就可能导致整个匹配失败。
-                                </li>
-                                <li data-i18n="dev.regex.problem2">
-                                    本工具提供可视化的正则表达式测试环境——输入正则表达式和测试文本，工具实时高亮所有匹配结果，显示匹配位置、捕获组内容和匹配统计。支持 JavaScript 和
-                                    Python 两种正则语法。</li>
-                                <li data-i18n="dev.regex.problem3">内置 12 个常用正则预设——邮箱、手机号、URL、IP
-                                    地址、身份证号、中文字符等——一键加载，不需要从零编写。还提供正则语法速查表——字符类、量词、锚点、分组、断言——方便随时查阅。</li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.formatsTitle">二、正则表达式语法</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.formatRegex"><strong>通用语法：</strong>正则表达式由字面字符和元字符组成。^ 匹配开头，$
-                                    匹配结尾，. 匹配任意字符，* 匹配 0 次或多次，+ 匹配 1 次或多次，? 匹配 0 次或 1 次，[] 匹配字符集，() 分组捕获，| 表示或。</li>
-                                <li data-i18n="dev.regex.formatJs"><strong>JavaScript 语法：</strong>支持 /pattern/flags
-                                    字面量语法。常用标志：g（全局匹配）、i（忽略大小写）、m（多行模式）。支持命名捕获组 (?<name>...) 和前后瞻 (?=...) / (?!...)。
-                                </li>
-                                <li data-i18n="dev.regex.formatPython"><strong>Python 风格参考：</strong>虽然浏览器环境使用 JavaScript
-                                    正则引擎，但本工具的语法速查表同时标注了 Python re
-                                    模块的等价语法。大部分基础语法（字符类、量词、分组）在两种风格中通用，少数高级特性（如命名分组语法）有差异。</li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.featuresTitle">三、核心功能</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.featureOnline">
-                                    <strong>实时匹配：</strong>输入正则表达式后，匹配结果立即在测试文本中高亮显示——不需要点击"测试"按钮。修改正则或测试文本都会实时更新。
-                                </li>
-                                <li data-i18n="dev.regex.featurePreview">
-                                    <strong>匹配详情：</strong>每个匹配结果显示起始位置、结束位置和匹配内容。捕获组单独列出——方便提取子匹配。
-                                </li>
-                                <li data-i18n="dev.regex.featureExport">
-                                    <strong>搜索替换：</strong>输入正则表达式和替换文本，工具执行全局替换并显示替换后结果——支持 $1、$2 等反向引用。
-                                </li>
-                                <li data-i18n="dev.regex.featureSecurity">
-                                    <strong>纯前端处理：</strong>所有正则匹配在浏览器中完成——测试文本不上传到服务器。
-                                </li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="dev.regex.usageTitle">正则表达式操作指南</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="dev.regex.matchGuideTitle">匹配测试</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.guideInputRegex"><strong>输入正则：</strong>在正则输入框中输入表达式——不需要写 /
-                                    分隔符，直接写 pattern 部分。</li>
-                                <li data-i18n="dev.regex.guideSelectFlags"><strong>选择标志：</strong>勾选
-                                    g（全局）、i（忽略大小写）、m（多行）等标志。</li>
-                                <li data-i18n="dev.regex.guideInputText"><strong>输入测试文本：</strong>在测试文本框中输入或粘贴需要匹配的文本。
-                                </li>
-                                <li data-i18n="dev.regex.guideRealtime"><strong>实时匹配：</strong>匹配结果自动高亮显示——每个匹配用不同颜色标记。
-                                </li>
-                                <li data-i18n="dev.regex.guideDetails"><strong>查看详情：</strong>匹配列表显示每个匹配的起始位置、结束位置和匹配内容。
-                                </li>
-                                <li data-i18n="dev.regex.guideLocate"><strong>定位匹配：</strong>点击匹配列表中的某项，测试文本自动滚动到对应位置。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.replaceGuideTitle">搜索替换</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.guideSwitchReplace"><strong>切换到替换模式：</strong>点击"替换"标签页进入替换模式。
-                                </li>
-                                <li data-i18n="dev.regex.guideSetRegex"><strong>设置正则：</strong>输入用于匹配的正则表达式——支持捕获组。</li>
-                                <li data-i18n="dev.regex.guideInputSource"><strong>输入源文本：</strong>输入需要替换的原始文本。</li>
-                                <li data-i18n="dev.regex.guideSetReplace"><strong>设置替换文本：</strong>输入替换内容——$1 引用第一个捕获组，$2
-                                    引用第二个，以此类推。</li>
-                                <li data-i18n="dev.regex.guideDoReplace"><strong>执行替换：</strong>点击"替换"按钮，显示替换后的结果。</li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.cheatsheetTitle">五、正则语法速查</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.guideClickPreset">
-                                    <strong>预设模板：</strong>点击预设按钮快速加载常用正则——邮箱、手机号、URL 等。
-                                </li>
-                                <li data-i18n="dev.regex.guidePresetContent">
-                                    <strong>预设内容：</strong>每个预设都经过实际验证——可以直接使用或在此基础上修改。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.syntaxTitle">语法速查</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.syntaxCharClass">
-                                    <strong>字符类：</strong>\d（数字）、\w（字母数字下划线）、\s（空白）、.（任意字符）。反义：\D、\W、\S。
-                                </li>
-                                <li data-i18n="dev.regex.syntaxQuantifier"><strong>量词：</strong>*（0+）、+（1+）、?（0/1）、{n}（恰好
-                                    n 次）、{n,m}（n 到 m 次）、{n,}（至少 n 次）。</li>
-                                <li data-i18n="dev.regex.syntaxAnchor">
-                                    <strong>锚点：</strong>^（开头）、$（结尾）、\b（单词边界）、\B（非单词边界）。
-                                </li>
-                                <li data-i18n="dev.regex.syntaxGroup"><strong>分组：</strong>(...)（捕获组）、(?:...)（非捕获组）、(?
-                                    <name>...)（命名捕获组）。
-                                </li>
-                                <li data-i18n="dev.regex.syntaxAlternation"><strong>选择：</strong>|（或）——如 cat|dog 匹配 cat 或
-                                    dog。优先级最低，需要时用括号分组。</li>
-                                <li data-i18n="dev.regex.syntaxCharSet"><strong>字符集：</strong>[abc]（a 或 b 或
-                                    c）、[a-z]（范围）、[^abc]（排除）。</li>
-                            </ul>
-                        </div>
-                    </article>
-                    <article class="info-details">
-                        <header>
-                            <h3 data-i18n="dev.regex.notesTitle">注意事项</h3>
-                        </header>
-                        <div class="info-content">
-                            <h4 data-i18n="dev.regex.notesSyntaxTitle">语法注意</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.notesEscape"><strong>转义字符：</strong>在正则中匹配特殊字符（.、*、+、?、(、)
-                                    等）需要用反斜杠转义——\. 匹配实际的点号。</li>
-                                <li data-i18n="dev.regex.notesDoubleEscape"><strong>双重转义：</strong>在 JavaScript
-                                    字符串中写正则需要双重转义——\d 写成 \\d。建议使用正则字面量 /pattern/。</li>
-                                <li data-i18n="dev.regex.notesGroupNumbering"><strong>捕获组编号：</strong>捕获组按左括号顺序编号——$1
-                                    是第一个 (，$2 是第二个。嵌套括号按左括号出现顺序编号。</li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.notesFlagsTitle">标志说明</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.flagGlobal"><strong>g（全局）：</strong>匹配所有结果——不勾选时只返回第一个匹配。</li>
-                                <li data-i18n="dev.regex.flagInsensitive"><strong>i（忽略大小写）：</strong>匹配时不区分大小写——abc 也能匹配
-                                    ABC。</li>
-                                <li data-i18n="dev.regex.flagMultiline"><strong>m（多行）：</strong>^ 和 $
-                                    匹配每行的开头和结尾——而不只是整个字符串的开头和结尾。</li>
-                                <li data-i18n="dev.regex.flagDotAll"><strong>s（点号匹配全部）：</strong>. 也匹配换行符——默认情况下 . 不匹配
-                                    \n。</li>
-                                <li data-i18n="dev.regex.flagUnicode"><strong>u（Unicode）：</strong>启用 Unicode 模式——正确处理
-                                    emoji 和其他 Unicode 字符。</li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.performanceTitle">性能注意</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.perfComplex"><strong>回溯陷阱：</strong>某些正则可能导致指数级回溯——如 (a+)+b 匹配
-                                    aaaaaaaaaac 时。避免嵌套量词。</li>
-                                <li data-i18n="dev.regex.perfGreedy"><strong>贪婪 vs 惰性：</strong>默认量词是贪婪的（匹配尽可能多）——加 ?
-                                    变为惰性（匹配尽可能少）。如 .*? 匹配到第一个可能位置就停止。</li>
-                                <li data-i18n="dev.regex.perfLargeText">
-                                    <strong>大文本性能：</strong>对超大文本（>1MB）使用复杂正则时，匹配可能变慢——建议分段处理或简化正则。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.securityTitle">安全注意</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.securityLocal"><strong>纯前端处理：</strong>所有正则匹配在浏览器中完成——测试文本不上传。
-                                </li>
-                                <li data-i18n="dev.regex.securityPublicDevice">
-                                    <strong>公共设备：</strong>如果在公共设备上测试包含敏感信息的文本，使用完毕后请清空输入。
-                                </li>
-                            </ul>
-                            <h4 data-i18n="dev.regex.faqTitle">常见问题</h4>
-                            <ul>
-                                <li data-i18n="dev.regex.faqSyntax"><strong>Q: 正则语法因语言而异？</strong>A:
-                                    基础语法（.、*、+、[]、()）通用。高级特性（前后瞻、命名捕获组、Unicode 属性）因语言而异——本工具支持 JS 和 Python 语法。</li>
-                                <li data-i18n="dev.regex.faqNoMatch"><strong>Q: 正则正确但没有匹配？</strong>A: 检查是否勾选了 g
-                                    标志（全局匹配）。不勾选时只返回第一个匹配。也检查大小写是否需要 i 标志。</li>
-                                <li data-i18n="dev.regex.faqPartialMatch"><strong>Q: 匹配结果不完整？</strong>A:
-                                    可能是贪婪/惰性量词的问题——.* 会匹配到最后一个可能位置，.*? 匹配到第一个。根据需求选择。</li>
-                                <li data-i18n="dev.regex.faqReplaceIssue"><strong>Q: 替换结果不对？</strong>A: 检查反向引用编号——$1
-                                    对应第一个捕获组。如果用了命名捕获组，可以用 $<name> 引用。</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
             </div>
+        </div>
+
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.regex.introTitle">正则表达式：文本处理的瑞士军刀</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.regex.problemsTitle">正则表达式为什么让人又爱又恨</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.problem1">\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b
+                            ——这串"天书"匹配的是邮箱地址。正则表达式（Regular
+                            Expression）是文本搜索和替换的终极工具——几乎所有编程语言、文本编辑器、命令行工具都支持它。但正则的语法极其晦涩，一个括号漏写就可能导致整个匹配失败。
+                        </li>
+                        <li data-i18n="dev.regex.problem2">
+                            本工具提供可视化的正则表达式测试环境——输入正则表达式和测试文本，工具实时高亮所有匹配结果，显示匹配位置、捕获组内容和匹配统计。支持 JavaScript 和
+                            Python 两种正则语法。</li>
+                        <li data-i18n="dev.regex.problem3">内置 12 个常用正则预设——邮箱、手机号、URL、IP
+                            地址、身份证号、中文字符等——一键加载，不需要从零编写。还提供正则语法速查表——字符类、量词、锚点、分组、断言——方便随时查阅。</li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.formatsTitle">正则表达式语法</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.formatRegex"><strong>通用语法：</strong>正则表达式由字面字符和元字符组成。^ 匹配开头，$
+                            匹配结尾，. 匹配任意字符，* 匹配 0 次或多次，+ 匹配 1 次或多次，? 匹配 0 次或 1 次，[] 匹配字符集，() 分组捕获，| 表示或。</li>
+                        <li data-i18n="dev.regex.formatJs"><strong>JavaScript 语法：</strong>支持 /pattern/flags
+                            字面量语法。常用标志：g（全局匹配）、i（忽略大小写）、m（多行模式）。支持命名捕获组 (?<name>...) 和前后瞻 (?=...) / (?!...)。
+                        </li>
+                        <li data-i18n="dev.regex.formatPython"><strong>Python 风格参考：</strong>虽然浏览器环境使用 JavaScript
+                            正则引擎，但本工具的语法速查表同时标注了 Python re
+                            模块的等价语法。大部分基础语法（字符类、量词、分组）在两种风格中通用，少数高级特性（如命名分组语法）有差异。</li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.featureOnline">
+                            <strong>实时匹配：</strong>输入正则表达式后，匹配结果立即在测试文本中高亮显示——不需要点击"测试"按钮。修改正则或测试文本都会实时更新。
+                        </li>
+                        <li data-i18n="dev.regex.featurePreview">
+                            <strong>匹配详情：</strong>每个匹配结果显示起始位置、结束位置和匹配内容。捕获组单独列出——方便提取子匹配。
+                        </li>
+                        <li data-i18n="dev.regex.featureExport">
+                            <strong>搜索替换：</strong>输入正则表达式和替换文本，工具执行全局替换并显示替换后结果——支持 $1、$2 等反向引用。
+                        </li>
+                        <li data-i18n="dev.regex.featureSecurity">
+                            <strong>纯前端处理：</strong>所有正则匹配在浏览器中完成——测试文本不上传到服务器。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.regex.usageTitle">正则表达式操作指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.regex.matchGuideTitle">匹配测试</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.guideInputRegex"><strong>输入正则：</strong>在正则输入框中输入表达式——不需要写 /
+                            分隔符，直接写 pattern 部分。</li>
+                        <li data-i18n="dev.regex.guideSelectFlags"><strong>选择标志：</strong>勾选
+                            g（全局）、i（忽略大小写）、m（多行）等标志。</li>
+                        <li data-i18n="dev.regex.guideInputText"><strong>输入测试文本：</strong>在测试文本框中输入或粘贴需要匹配的文本。
+                        </li>
+                        <li data-i18n="dev.regex.guideRealtime"><strong>实时匹配：</strong>匹配结果自动高亮显示——每个匹配用不同颜色标记。
+                        </li>
+                        <li data-i18n="dev.regex.guideDetails"><strong>查看详情：</strong>匹配列表显示每个匹配的起始位置、结束位置和匹配内容。
+                        </li>
+                        <li data-i18n="dev.regex.guideLocate"><strong>定位匹配：</strong>点击匹配列表中的某项，测试文本自动滚动到对应位置。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.replaceGuideTitle">搜索替换</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.guideSwitchReplace"><strong>切换到替换模式：</strong>点击"替换"标签页进入替换模式。
+                        </li>
+                        <li data-i18n="dev.regex.guideSetRegex"><strong>设置正则：</strong>输入用于匹配的正则表达式——支持捕获组。</li>
+                        <li data-i18n="dev.regex.guideInputSource"><strong>输入源文本：</strong>输入需要替换的原始文本。</li>
+                        <li data-i18n="dev.regex.guideSetReplace"><strong>设置替换文本：</strong>输入替换内容——$1 引用第一个捕获组，$2
+                            引用第二个，以此类推。</li>
+                        <li data-i18n="dev.regex.guideDoReplace"><strong>执行替换：</strong>点击"替换"按钮，显示替换后的结果。</li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.cheatsheetTitle">正则语法速查</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.guideClickPreset">
+                            <strong>预设模板：</strong>点击预设按钮快速加载常用正则——邮箱、手机号、URL 等。
+                        </li>
+                        <li data-i18n="dev.regex.guidePresetContent">
+                            <strong>预设内容：</strong>每个预设都经过实际验证——可以直接使用或在此基础上修改。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.syntaxTitle">语法速查</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.syntaxCharClass">
+                            <strong>字符类：</strong>\d（数字）、\w（字母数字下划线）、\s（空白）、.（任意字符）。反义：\D、\W、\S。
+                        </li>
+                        <li data-i18n="dev.regex.syntaxQuantifier"><strong>量词：</strong>*（0+）、+（1+）、?（0/1）、{n}（恰好
+                            n 次）、{n,m}（n 到 m 次）、{n,}（至少 n 次）。</li>
+                        <li data-i18n="dev.regex.syntaxAnchor">
+                            <strong>锚点：</strong>^（开头）、$（结尾）、\b（单词边界）、\B（非单词边界）。
+                        </li>
+                        <li data-i18n="dev.regex.syntaxGroup"><strong>分组：</strong>(...)（捕获组）、(?:...)（非捕获组）、(?
+                            <name>...)（命名捕获组）。
+                        </li>
+                        <li data-i18n="dev.regex.syntaxAlternation"><strong>选择：</strong>|（或）——如 cat|dog 匹配 cat 或
+                            dog。优先级最低，需要时用括号分组。</li>
+                        <li data-i18n="dev.regex.syntaxCharSet"><strong>字符集：</strong>[abc]（a 或 b 或
+                            c）、[a-z]（范围）、[^abc]（排除）。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="dev.regex.notesTitle">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="dev.regex.notesSyntaxTitle">语法注意</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.notesEscape"><strong>转义字符：</strong>在正则中匹配特殊字符（.、*、+、?、(、)
+                            等）需要用反斜杠转义——\. 匹配实际的点号。</li>
+                        <li data-i18n="dev.regex.notesDoubleEscape"><strong>双重转义：</strong>在 JavaScript
+                            字符串中写正则需要双重转义——\d 写成 \\d。建议使用正则字面量 /pattern/。</li>
+                        <li data-i18n="dev.regex.notesGroupNumbering"><strong>捕获组编号：</strong>捕获组按左括号顺序编号——$1
+                            是第一个 (，$2 是第二个。嵌套括号按左括号出现顺序编号。</li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.notesFlagsTitle">标志说明</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.flagGlobal"><strong>g（全局）：</strong>匹配所有结果——不勾选时只返回第一个匹配。</li>
+                        <li data-i18n="dev.regex.flagInsensitive"><strong>i（忽略大小写）：</strong>匹配时不区分大小写——abc 也能匹配
+                            ABC。</li>
+                        <li data-i18n="dev.regex.flagMultiline"><strong>m（多行）：</strong>^ 和 $
+                            匹配每行的开头和结尾——而不只是整个字符串的开头和结尾。</li>
+                        <li data-i18n="dev.regex.flagDotAll"><strong>s（点号匹配全部）：</strong>. 也匹配换行符——默认情况下 . 不匹配
+                            \n。</li>
+                        <li data-i18n="dev.regex.flagUnicode"><strong>u（Unicode）：</strong>启用 Unicode 模式——正确处理
+                            emoji 和其他 Unicode 字符。</li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.performanceTitle">性能注意</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.perfComplex"><strong>回溯陷阱：</strong>某些正则可能导致指数级回溯——如 (a+)+b 匹配
+                            aaaaaaaaaac 时。避免嵌套量词。</li>
+                        <li data-i18n="dev.regex.perfGreedy"><strong>贪婪 vs 惰性：</strong>默认量词是贪婪的（匹配尽可能多）——加 ?
+                            变为惰性（匹配尽可能少）。如 .*? 匹配到第一个可能位置就停止。</li>
+                        <li data-i18n="dev.regex.perfLargeText">
+                            <strong>大文本性能：</strong>对超大文本（>1MB）使用复杂正则时，匹配可能变慢——建议分段处理或简化正则。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.securityTitle">安全注意</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.securityLocal"><strong>纯前端处理：</strong>所有正则匹配在浏览器中完成——测试文本不上传。
+                        </li>
+                        <li data-i18n="dev.regex.securityPublicDevice">
+                            <strong>公共设备：</strong>如果在公共设备上测试包含敏感信息的文本，使用完毕后请清空输入。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="dev.regex.faqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="dev.regex.faqSyntax"><strong>Q: 正则语法因语言而异？</strong>A:
+                            基础语法（.、*、+、[]、()）通用。高级特性（前后瞻、命名捕获组、Unicode 属性）因语言而异——本工具支持 JS 和 Python 语法。</li>
+                        <li data-i18n="dev.regex.faqNoMatch"><strong>Q: 正则正确但没有匹配？</strong>A: 检查是否勾选了 g
+                            标志（全局匹配）。不勾选时只返回第一个匹配。也检查大小写是否需要 i 标志。</li>
+                        <li data-i18n="dev.regex.faqPartialMatch"><strong>Q: 匹配结果不完整？</strong>A:
+                            可能是贪婪/惰性量词的问题——.* 会匹配到最后一个可能位置，.*? 匹配到第一个。根据需求选择。</li>
+                        <li data-i18n="dev.regex.faqReplaceIssue"><strong>Q: 替换结果不对？</strong>A: 检查反向引用编号——$1
+                            对应第一个捕获组。如果用了命名捕获组，可以用 $<name> 引用。</li>
+                    </ul>
+                </div>
+            </article>
         </div>
 
         <!-- Footer component container -->
@@ -1027,265 +369,7 @@
     <script src="/common/js/theme.js"></script>
     <script src="/common/js/tools-data.js"></script>
     <script src="/common/js/nav.js"></script>
-    <script>
-        var PRESETS = [
-            { name: '日期 (YYYY-MM-DD)', nameKey: 'regex.presetDate', regex: '\\d{4}-\\d{2}-\\d{2}', flags: 'g' },
-            { name: '手机号 (中国)', nameKey: 'regex.presetPhone', regex: '1[3-9]\\d{9}', flags: 'g' },
-            { name: '邮箱', nameKey: 'regex.presetEmail', regex: '[\\w.-]+@[\\w.-]+\\.\\w+', flags: 'gi' },
-            { name: 'URL', nameKey: 'regex.presetUrl', regex: 'https?://[^\\s<>"{}|\\\\^`\\[\\]]+', flags: 'gi' },
-            { name: 'IP 地址 (v4)', nameKey: 'regex.presetIp', regex: '\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}', flags: 'g' },
-            { name: '身份证 (中国)', nameKey: 'regex.presetIdCard', regex: '\\d{17}[\\dXx]', flags: 'g' },
-            { name: '中文汉字', nameKey: 'regex.presetChinese', regex: '[\\u4e00-\\u9fa5]+', flags: 'g' },
-            { name: '空白行', nameKey: 'regex.presetBlankLine', regex: '^\\s*$', flags: 'gm' },
-            { name: 'HTML 标签', nameKey: 'regex.presetHtmlTag', regex: '<[^>]+>', flags: 'gi' },
-            { name: '十六进制颜色', nameKey: 'regex.presetHexColor', regex: '#[0-9a-fA-F]{6}\\b', flags: 'gi' },
-            { name: '数字', nameKey: 'regex.presetNumber', regex: '\\d+(\\.\\d+)?', flags: 'g' },
-            { name: '单词', nameKey: 'regex.presetWord', regex: '\\b\\w+\\b', flags: 'g' }
-        ];
-
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-            document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
-            document.getElementById('tab-' + tab).classList.add('active');
-            var btns = document.querySelectorAll('.tab-btn');
-            if (tab === 'match') btns[0].classList.add('active');
-            else btns[1].classList.add('active');
-        }
-
-        function toggleFlag(flag) {
-            var input = document.getElementById('regex-flags');
-            var flags = input.value;
-            if (flags.indexOf(flag) !== -1) {
-                flags = flags.replace(flag, '');
-            } else {
-                flags += flag;
-            }
-            input.value = flags;
-            doMatch();
-        }
-
-        function makeRegex(pattern, flags) {
-            try {
-                return new RegExp(pattern, flags);
-            } catch (e) {
-                return null;
-            }
-        }
-
-        // ===== Match =====
-        function doMatch() {
-            var pattern = document.getElementById('regex-pattern').value;
-            var flags = document.getElementById('regex-flags').value;
-            var text = document.getElementById('test-text').value;
-            var errorDiv = document.getElementById('regex-error');
-            var statsDiv = document.getElementById('match-stats');
-            var highlightDiv = document.getElementById('highlight-area');
-            var matchListDiv = document.getElementById('match-list');
-
-            errorDiv.style.display = 'none';
-
-            if (!pattern) {
-                highlightDiv.innerHTML = '';
-                statsDiv.style.display = 'none';
-                matchListDiv.innerHTML = '';
-                return;
-            }
-
-            var re = makeRegex(pattern, flags);
-            if (!re) {
-                errorDiv.textContent = window.t('dev.regex.msgSyntaxError');
-                errorDiv.style.display = 'block';
-                highlightDiv.innerHTML = '';
-                statsDiv.style.display = 'none';
-                matchListDiv.innerHTML = '';
-                document.getElementById('regex-pattern').classList.add('error');
-                return;
-            }
-            document.getElementById('regex-pattern').classList.remove('error');
-
-            var matches = [];
-            var globalRe = new RegExp(re.source, re.flags.replace('g', '') + (re.global ? '' : 'g'));
-            // Actually use the original regex to match
-            var m;
-            if (re.global || re.sticky) {
-                re.lastIndex = 0;
-                while ((m = re.exec(text)) !== null) {
-                    matches.push({ match: m[0], index: m.index, groups: Array.from(m) });
-                    if (m[0].length === 0) re.lastIndex++; // prevent infinite loop on empty match
-                }
-            } else {
-                m = text.match(re);
-                if (m) {
-                    matches.push({ match: m[0], index: m.index || text.indexOf(m[0]), groups: Array.from(m) });
-                }
-            }
-
-            // Stats
-            if (matches.length === 0) {
-                statsDiv.style.display = 'flex';
-                statsDiv.innerHTML = window.t('dev.regex.msgNoMatch');
-                if (document.body.classList.contains('dark-mode')) {
-                    statsDiv.style.background = 'rgba(251, 146, 60, 0.1)';
-                    statsDiv.style.border = '1px solid rgba(251, 146, 60, 0.3)';
-                    statsDiv.style.color = '#fb923c';
-                } else {
-                    statsDiv.style.background = '#fff7ed';
-                    statsDiv.style.border = '1px solid #fed7aa';
-                    statsDiv.style.color = '#c2410c';
-                }
-            } else {
-                statsDiv.style.display = 'flex';
-                if (document.body.classList.contains('dark-mode')) {
-                    statsDiv.style.background = 'rgba(16, 185, 129, 0.1)';
-                    statsDiv.style.border = '1px solid rgba(16, 185, 129, 0.3)';
-                    statsDiv.style.color = '#10b981';
-                } else {
-                    statsDiv.style.background = '#f0fdf4';
-                    statsDiv.style.border = '1px solid #bbf7d0';
-                    statsDiv.style.color = '#15803d';
-                }
-                statsDiv.innerHTML = window.t('dev.regex.msgMatchCount', { count: matches.length });
-            }
-
-            // Highlight
-            var hlHtml = '';
-            var lastIdx = 0;
-            matches.forEach(function (m) {
-                hlHtml += escHtml(text.substring(lastIdx, m.index));
-                hlHtml += '<span class="match">' + escHtml(m.match) + '</span>';
-                lastIdx = m.index + m.match.length;
-            });
-            hlHtml += escHtml(text.substring(lastIdx));
-
-            highlightDiv.innerHTML = hlHtml || '<span style="color:#94a3b8;">' + window.t('dev.regex.msgNoHighlight') + '</span>';
-
-            // Match list with groups
-            var mlHtml = '';
-            if (matches.length > 0) {
-                matches.forEach(function (m, idx) {
-                    mlHtml += '<div class="match-item">' +
-                        '<div class="match-item-header">' +
-                        '<span>' + window.t('dev.regex.msgMatchInfo', { num: idx + 1, pos: m.index, len: m.match.length }) + '</span>' +
-                        '<span style="cursor:pointer;" onclick="scrollToMatch(' + idx + ')">' + window.t('dev.regex.btnLocate') + '</span>' +
-                        '</div>' +
-                        '<div class="match-item-body">';
-                    m.groups.forEach(function (g, gi) {
-                        var label = gi === 0 ? window.t('dev.regex.labelFullMatch') : window.t('dev.regex.labelGroup') + gi;
-                        mlHtml += '<div class="group-row"><span class="group-label">' + label + '</span><span class="group-value">' + (g !== undefined ? escHtml(g) : '<em style="color:#94a3b8;">' + window.t('dev.regex.labelUncaptured') + '</em>') + '</span></div>';
-                    });
-                    mlHtml += '</div></div>';
-                });
-            }
-            matchListDiv.innerHTML = mlHtml;
-
-            // Scroll to match highlight
-            window._matchPositions = matches;
-        }
-
-        function scrollToMatch(idx) {
-            var matches = window._matchPositions;
-            if (!matches || !matches[idx]) return;
-            var highlights = document.querySelectorAll('#highlight-area .match');
-            if (highlights[idx]) {
-                // Remove previous focus
-                document.querySelectorAll('#highlight-area .match.focus').forEach(function (el) {
-                    el.classList.remove('focus');
-                });
-                highlights[idx].classList.add('focus');
-                highlights[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        function escHtml(s) {
-            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        }
-
-        // ===== Replace =====
-        function doReplace() {
-            var pattern = document.getElementById('replace-pattern').value;
-            var flags = document.getElementById('replace-flags').value;
-            var text = document.getElementById('replace-text').value;
-            var replaceWith = document.getElementById('replace-with').value;
-            var errorDiv = document.getElementById('replace-error');
-            var resultDiv = document.getElementById('replace-result');
-
-            errorDiv.style.display = 'none';
-            document.getElementById('replace-pattern').classList.remove('error');
-
-            if (!pattern || !text) {
-                resultDiv.innerHTML = '<span style="color:#94a3b8;">' + window.t('dev.regex.msgInputRequired') + '</span>';
-                return;
-            }
-
-            var re = makeRegex(pattern, flags);
-            if (!re) {
-                errorDiv.textContent = window.t('dev.regex.msgSyntaxError');
-                errorDiv.style.display = 'block';
-                document.getElementById('replace-pattern').classList.add('error');
-                resultDiv.innerHTML = '';
-                return;
-            }
-
-            try {
-                // Unescape replacement string for $1, $$ etc
-                var result = text.replace(re, replaceWith);
-                // Highlight changes
-                resultDiv.innerHTML = escHtml(result) || '<span style="color:#94a3b8;">' + window.t('dev.regex.msgEmptyResult') + '</span>';
-            } catch (e) {
-                errorDiv.textContent = window.t('dev.regex.msgReplaceError') + e.message;
-                errorDiv.style.display = 'block';
-                resultDiv.innerHTML = '';
-            }
-        }
-
-        // ===== Presets =====
-        function buildPresets() {
-            var html = '';
-            PRESETS.forEach(function (p) {
-                html += '<div class="preset-item" onclick="usePreset(\'' + p.regex.replace(/\\/g, '\\\\') + '\', \'' + p.flags + '\')">' +
-                    '<span class="preset-name">' + (window.t(p.nameKey) !== p.nameKey ? window.t(p.nameKey) : p.name) + '</span>' +
-                    '<span class="preset-regex">/' + p.regex + '/' + p.flags + '</span>' +
-                    '</div>';
-            });
-            document.getElementById('presets-grid').innerHTML = html;
-        }
-
-        function usePreset(regex, flags) {
-            document.getElementById('regex-pattern').value = regex;
-            document.getElementById('regex-flags').value = flags;
-            document.getElementById('replace-pattern').value = regex;
-            document.getElementById('replace-flags').value = flags;
-            doMatch();
-        }
-
-        // ===== Real-time =====
-        var matchTimer = null;
-        document.getElementById('regex-pattern').addEventListener('input', function () {
-            clearTimeout(matchTimer);
-            matchTimer = setTimeout(doMatch, 300);
-        });
-        document.getElementById('regex-flags').addEventListener('input', function () {
-            clearTimeout(matchTimer);
-            matchTimer = setTimeout(doMatch, 300);
-        });
-        document.getElementById('test-text').addEventListener('input', function () {
-            clearTimeout(matchTimer);
-            matchTimer = setTimeout(doMatch, 300);
-        });
-
-        // Replace real-time
-        var replaceTimer = null;
-        ['replace-pattern', 'replace-flags', 'replace-text', 'replace-with'].forEach(function (id) {
-            document.getElementById(id).addEventListener('input', function () {
-                clearTimeout(replaceTimer);
-                replaceTimer = setTimeout(doReplace, 300);
-            });
-        });
-
-        // Init
-        buildPresets();
-        doMatch();
-    </script>
+    <script src="script.js"></script>
 
 </body>
 

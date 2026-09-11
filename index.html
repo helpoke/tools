@@ -99,9 +99,9 @@
                 {
                     "@type": "WebApplication",
                     "name": "加密安全工具",
-                    "description": "MD5、SHA、Token工具、JS混淆加密",
+                    "description": "MD5、SHA、Token工具、JS混淆加密、AES加解密、RSA密钥对生成、HMAC、PBKDF2、EC、CRC、文件哈希、TOTP、X.509证书、文件加解密",
                     "inLanguage": ["zh-CN"],
-                    "featureList": ["MD5加密", "SHA加密", "Token工具", "JS代码混淆", "JS代码加密", "JWT工具", "Token解析", "URL编码", "URL解码", "Base64编码", "Base64解码", "RSA密钥对生成"],
+                    "featureList": ["MD5加密", "SHA加密", "Token工具", "JS代码混淆", "JS代码加密", "JWT工具", "Token解析", "URL编码", "URL解码", "Base64编码", "Base64解码", "RSA密钥对生成", "AES加密", "AES解密", "HMAC生成", "HMAC校验", "PBKDF2密钥派生", "EC密钥对生成", "CRC校验", "文件哈希", "TOTP动态口令", "X.509证书解析", "文件加解密"],
                     "url": "https://helpoke.com/encrypted/md5/"
                 },
                 {
@@ -198,30 +198,37 @@
                     <div class="stat-card">
                         <div class="stat-icon pink">📝</div>
                         <div class="stat-info">
-                            <div class="stat-value">10</div>
-                            <div class="stat-label" data-i18n="home.stats.document">文档&下载</div>
+                            <div class="stat-value">8</div>
+                            <div class="stat-label" data-i18n="home.stats.document">文档处理</div>
                         </div>
                     </div>
 
                     <div class="stat-card">
                         <div class="stat-icon purple">💻</div>
                         <div class="stat-info">
-                            <div class="stat-value">10</div>
-                            <div class="stat-label" data-i18n="home.stats.data">数据开发</div>
+                            <div class="stat-value">8</div>
+                            <div class="stat-label" data-i18n="home.stats.data">格式化</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon orange">🔐</div>
                         <div class="stat-info">
-                            <div class="stat-value">10</div>
-                            <div class="stat-label" data-i18n="home.stats.security">加密转换</div>
+                            <div class="stat-value">16</div>
+                            <div class="stat-label" data-i18n="home.stats.security">安全加密</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon yellow">🛠️</div>
                         <div class="stat-info">
+                            <div class="stat-value">11</div>
+                            <div class="stat-label" data-i18n="home.stats.utility">开发常用</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow">📦</div>
+                        <div class="stat-info">
                             <div class="stat-value">10</div>
-                            <div class="stat-label" data-i18n="home.stats.utility">实用工具</div>
+                            <div class="stat-label" data-i18n="home.stats.other">其他工具</div>
                         </div>
                     </div>
                 </div>
@@ -337,15 +344,15 @@
                         </div>
                     </div>
 
-                    <!-- 文档与下载工具 -->
+                    <!-- 文档处理工具 -->
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon doc">📥</div>
-                            <span class="category-title" data-i18n="tool.categories.document">文档与下载工具</span>
+                            <span class="category-title" data-i18n="tool.categories.document">文档处理工具</span>
                         </div>
                         <div class="tools-list">
                             <a href="/docu/markdown/" class="tool-link">
-                                <span class="icon">📝</span><b data-i18n="nav.tools.docMarkdown">Markdown编辑器</b>(预览/下载)
+                                <span class="icon">📝</span><b data-i18n="nav.tools.docMarkdown">Markdown 编辑器</b>(预览/下载)
                                 <span class="badge" data-i18n="tool.badges.edit">MD</span>
                             </a>
                             <a href="/docu/signature/" class="tool-link">
@@ -376,73 +383,68 @@
                                 <span class="icon">📋</span><b data-i18n="nav.tools.docBlurr">PDF页面模糊</b>(内容模糊)
                                 <span class="badge" data-i18n="tool.badges.edit">模糊</span>
                             </a>
-                            <a href="/download/media/" class="tool-link">
-                                <span class="icon">⬇️</span><b data-i18n="nav.tools.downloadMedia">视频图像下载</b>(批量+爬取)
-                                <span class="badge download" data-i18n="tool.badges.download">下载</span>
-                            </a>
-                            <a href="/download/resource/" class="tool-link">
-                                <span class="icon">📦</span><b
-                                    data-i18n="nav.tools.downloadResource">资源文件下载</b>(JS/CSS/字体)
-                                <span class="badge resource" data-i18n="tool.badges.resource">下载</span>
-                            </a>
                         </div>
                     </div>
 
-                    <!-- 实用工具 -->
+                    <!-- 开发者工具 -->
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon util">🛠️</div>
-                            <span class="category-title" data-i18n="tool.categories.utility">生活实用工具</span>
+                            <span class="category-title" data-i18n="tool.categories.utility">开发者工具</span>
                         </div>
                         <div class="tools-list">
-                            <a href="/mermaid/" class="tool-link">
-                                <span class="icon">📊</span><b data-i18n="nav.tools.mermaid">Mermaid 图表</b>(UML图)
-                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
-                            </a>
-                            <a href="/tool/diff/" class="tool-link">
-                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">文本内容对比器</b>(内容差异)
-                                <span class="badge" data-i18n="tool.badges.edit">对比</span>
-                            </a>
-                            <a href="/tool/duplicate-finder/" class="tool-link">
-                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">重复内容查找器</b>(查重复项)
-                                <span class="badge" data-i18n="tool.badges.edit">重复</span>
-                            </a>
                             <a href="/tool/color-picker/" class="tool-link">
                                 <span class="icon">🎨</span><b data-i18n="nav.tools.colorPicker">颜色选择器</b>(HEX/RGB/HSL)
                                 <span class="badge" data-i18n="tool.badges.color">颜色</span>
+                            </a>
+                            <a href="/dev/cron/" class="tool-link">
+                                <span class="icon">⏰</span><b data-i18n="nav.tools.cron">Cron 解析器</b>
+                                <span class="badge" data-i18n="tool.badges.cron">Cron</span>
+                            </a>
+                            <a href="/dev/regex/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.regex">正则表达式</b>(校验+提取)
+                                <span class="badge" data-i18n="tool.badges.regex">Regex</span>
+                            </a>
+                            <a href="/dev/base-convert/" class="tool-link">
+                                <span class="icon">🧮</span><b data-i18n="nav.tools.baseConvert">进制转换器</b>(2/8/10/16)
+                                <span class="badge" data-i18n="tool.badges.base">进制</span>
                             </a>
                             <a href="/tool/timestamp/" class="tool-link">
                                 <span class="icon">🕐</span><b data-i18n="nav.tools.timestamp">时间戳转换器</b>(秒/毫秒)
                                 <span class="badge" data-i18n="tool.badges.time">时间</span>
                             </a>
-                            <a href="/tool/num-to-chinese/" class="tool-link">
-                                <span class="icon">🔢</span><b data-i18n="nav.tools.numToChinese">中文大写数字转换器</b>
-                                <span class="badge" data-i18n="tool.badges.time">钱币</span>
-                            </a>
                             <a href="/tool/text-transform/" class="tool-link">
-                                <span class="icon">ABC</span><b data-i18n="nav.tools.textTransform">大小写字母转换器</b>(驼峰)
+                                <span class="icon">Abc</span><b data-i18n="nav.tools.textTransform">大小写字母转换器</b>(驼峰)
                                 <span class="badge" data-i18n="tool.badges.edit">字母</span>
                             </a>
-                            <a href="/tool/qrcode/" class="tool-link">
-                                <span class="icon">📱</span><b data-i18n="nav.tools.qrcode">二维码生成器</b>(生成+解析)
-                                <span class="badge" data-i18n="tool.badges.qr">QR</span>
+                            <a href="/mermaid/" class="tool-link">
+                                <span class="icon">📊</span><b data-i18n="nav.tools.mermaid">Mermaid 图表</b>(UML图)
+                                <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
                             </a>
-                            <a href="/tool/barcode/" class="tool-link">
-                                <span class="icon">🏷️</span><b data-i18n="nav.tools.barcode">条形码生成器</b>(CODE/EAN)
-                                <span class="badge" data-i18n="tool.badges.barcode">条码</span>
+                            <a href="/encrypted/urlcode/" class="tool-link">
+                                <span class="icon">🔗</span><b data-i18n="nav.tools.urlcode">URL 编解码器</b>
+                                <span class="badge" data-i18n="tool.badges.url">URL</span>
                             </a>
-                            <a href="https://remind.helpoke.com" class="tool-link" target="_blank">
-                                <span class="icon">⏰</span><b data-i18n="nav.tools.healthReminder">防久坐健康提醒</b>(定时提醒)
-                                <span class="badge" data-i18n="tool.badges.exe">EXE</span>
+                            <a href="/encrypted/encoding-base64/" class="tool-link">
+                                <span class="icon">🔐</span><b data-i18n="nav.tools.base64">Base64 编解码器</b>
+                                <span class="badge" data-i18n="tool.badges.base64">Base64</span>
+                            </a>
+                            <a href="/encrypted/encoding-unicode/" class="tool-link">
+                                <span class="icon">🔐</span><b data-i18n="nav.tools.unicode">Unicode 编解码器</b>(ASCII)
+                                <span class="badge" data-i18n="tool.badges.unicode">Unicode</span>
+                            </a>
+                            <a href="/dev/file-size/" class="tool-link">
+                                <span class="icon">📏</span><b data-i18n="nav.tools.fileSize">文件大小换算</b>
+                                <span class="badge" data-i18n="tool.badges.size">换算</span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- 数据开发工具 -->
+                    <!-- 格式化工具 -->
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon data">💻</div>
-                            <span class="category-title" data-i18n="tool.categories.data">数据开发工具</span>
+                            <span class="category-title" data-i18n="tool.categories.data">格式化工具</span>
                         </div>
                         <div class="tools-list">
                             <a href="/json/" class="tool-link">
@@ -469,24 +471,14 @@
                                 <span class="icon">CSS</span><b data-i18n="nav.tools.html">HTML 格式化</b>(HTML/CSS)
                                 <span class="badge" data-i18n="tool.badges.html">HTML</span>
                             </a>
-                            <!-- 其他工具 -->
-                            <a href="/dev/cron/" class="tool-link">
-                                <span class="icon">⏰</span><b data-i18n="nav.tools.cron">Cron 解析器</b>
-                                <span class="badge" data-i18n="tool.badges.cron">Cron</span>
+                            <a href="/dev/js-format/" class="tool-link">
+                                <span class="icon">JS</span><b data-i18n="nav.tools.jsFormat">JS 格式化</b>(ES6+)
+                                <span class="badge" data-i18n="tool.badges.jsFormat">JS</span>
                             </a>
-                            <a href="/dev/regex/" class="tool-link">
-                                <span class="icon">🔍</span><b data-i18n="nav.tools.regex">正则表达式</b>(校验+提取)
-                                <span class="badge" data-i18n="tool.badges.regex">Regex</span>
+                            <a href="/dev/python-format/" class="tool-link">
+                                <span class="icon">Py</span><b data-i18n="nav.tools.pythonFormat">Python 格式化</b>(PEP8)
+                                <span class="badge" data-i18n="tool.badges.pythonFormat">Python</span>
                             </a>
-                            <a href="/dev/base-convert/" class="tool-link">
-                                <span class="icon">🧮</span><b data-i18n="nav.tools.baseConvert">进制转换器</b>(2/8/10/16)
-                                <span class="badge" data-i18n="tool.badges.base">进制</span>
-                            </a>
-                            <a href="/dev/file-size/" class="tool-link">
-                                <span class="icon">📏</span><b data-i18n="nav.tools.fileSize">文件大小换算</b>
-                                <span class="badge" data-i18n="tool.badges.size">换算</span>
-                            </a>
-
                         </div>
                     </div>
 
@@ -494,7 +486,7 @@
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon security">🔐</div>
-                            <span class="category-title" data-i18n="tool.categories.security">加密转换工具</span>
+                            <span class="category-title" data-i18n="tool.categories.security">安全加密工具</span>
                         </div>
                         <div class="tools-list">
                             <a href="/encrypted/pwd/" class="tool-link">
@@ -519,23 +511,99 @@
                             </a>
                             <a href="/encrypted/rsa/" class="tool-link">
                                 <span class="icon">🔐</span><b data-i18n="nav.tools.rsa">RSA 密钥对生成器</b>
-                                <span class="badge new" data-i18n="tool.badges.new">RSA</span>
+                                <span class="badge" data-i18n="tool.badges.rsa">RSA</span>
+                            </a>
+                            <a href="/encrypted/aes/" class="tool-link">
+                                <span class="icon">🔒</span><b data-i18n="nav.tools.aes">AES 加解密器</b>
+                                <span class="badge" data-i18n="tool.badges.aes">AES</span>
+                            </a>
+                            <a href="/encrypted/hmac/" class="tool-link">
+                                <span class="icon">🔏</span><b data-i18n="nav.tools.hmac">HMAC 生成与校验器</b>
+                                <span class="badge" data-i18n="tool.badges.hmac">HMAC</span>
+                            </a>
+                            <a href="/encrypted/pbkdf2/" class="tool-link">
+                                <span class="icon">🔑</span><b data-i18n="nav.tools.pbkdf2">PBKDF2 密钥派生器</b>
+                                <span class="badge" data-i18n="tool.badges.pbkdf2">PBKDF2</span>
+                            </a>
+                            <a href="/encrypted/ec/" class="tool-link">
+                                <span class="icon">🔐</span><b data-i18n="nav.tools.ec">EC 椭圆曲线密钥对生成器</b>
+                                <span class="badge" data-i18n="tool.badges.ec">EC</span>
+                            </a>
+                            <a href="/encrypted/crc/" class="tool-link">
+                                <span class="icon">🧮</span><b data-i18n="nav.tools.crc">CRC 校验器</b>
+                                <span class="badge" data-i18n="tool.badges.crc">CRC</span>
+                            </a>
+                            <a href="/encrypted/file-hash/" class="tool-link">
+                                <span class="icon">📁</span><b data-i18n="nav.tools.fileHash">文件哈希计算器</b>
+                                <span class="badge" data-i18n="tool.badges.fileHash">Hash</span>
+                            </a>
+                            <a href="/encrypted/totp/" class="tool-link">
+                                <span class="icon">⏱️</span><b data-i18n="nav.tools.totp">TOTP/OTP 生成器</b>
+                                <span class="badge" data-i18n="tool.badges.totp">TOTP</span>
+                            </a>
+                            <a href="/encrypted/cert/" class="tool-link">
+                                <span class="icon">📜</span><b data-i18n="nav.tools.cert">X.509 证书解析器</b>
+                                <span class="badge" data-i18n="tool.badges.cert">X.509</span>
+                            </a>
+                            <a href="/encrypted/file-encrypt/" class="tool-link">
+                                <span class="icon">🔒</span><b data-i18n="nav.tools.fileEncrypt">文件加解密工具</b>
+                                <span class="badge new" data-i18n="tool.badges.fileEncrypt">AES</span>
                             </a>
                             <a href="/encrypted/js-secrecy/" class="tool-link">
                                 <span class="icon">🛡️</span><b data-i18n="nav.tools.jsSecrecy">JS 混淆加密器</b>
                                 <span class="badge" data-i18n="tool.badges.js">JS</span>
                             </a>
-                            <a href="/encrypted/urlcode/" class="tool-link">
-                                <span class="icon">🔗</span><b data-i18n="nav.tools.urlcode">URL 编解码器</b>
-                                <span class="badge" data-i18n="tool.badges.url">URL</span>
+                        </div>
+                    </div>
+
+                    <!-- 其他工具 -->
+                    <div class="category-card category-other">
+                        <div class="category-header">
+                            <div class="category-icon other">📦</div>
+                            <span class="category-title" data-i18n="tool.categories.other">其他工具</span>
+                        </div>
+                        <div class="tools-list">
+                            <a href="/tool/num-to-chinese/" class="tool-link">
+                                <span class="icon">壹</span><b data-i18n="nav.tools.numToChinese">中文大写数字转换器</b>
+                                <span class="badge" data-i18n="tool.badges.time">钱币</span>
                             </a>
-                            <a href="/encrypted/encoding-base64/" class="tool-link">
-                                <span class="icon">🔐</span><b data-i18n="nav.tools.base64">Base64 编解码器</b>
-                                <span class="badge" data-i18n="tool.badges.base64">Base64</span>
+                            <a href="/tool/qrcode/" class="tool-link">
+                                <span class="icon">📱</span><b data-i18n="nav.tools.qrcode">二维码生成器</b>(生成+解析)
+                                <span class="badge" data-i18n="tool.badges.qr">QR</span>
                             </a>
-                            <a href="/encrypted/encoding-unicode/" class="tool-link">
-                                <span class="icon">🔐</span><b data-i18n="nav.tools.unicode">Unicode 编解码器</b>(ASCII)
-                                <span class="badge" data-i18n="tool.badges.unicode">Unicode</span>
+                            <a href="/tool/barcode/" class="tool-link">
+                                <span class="icon">🏷️</span><b data-i18n="nav.tools.barcode">条形码生成器</b>(CODE/EAN)
+                                <span class="badge" data-i18n="tool.badges.barcode">条码</span>
+                            </a>
+                            <a href="https://remind.helpoke.com" class="tool-link" target="_blank">
+                                <span class="icon">⏰</span><b data-i18n="nav.tools.healthReminder">防久坐健康提醒</b>(定时提醒)
+                                <span class="badge" data-i18n="tool.badges.exe">EXE</span>
+                            </a>
+                            <a href="/tool/diff/" class="tool-link">
+                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">文本内容对比器</b>(内容差异)
+                                <span class="badge" data-i18n="tool.badges.edit">对比</span>
+                            </a>
+                            <a href="/tool/duplicate-finder/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">重复内容查找器</b>(查重复项)
+                                <span class="badge" data-i18n="tool.badges.edit">重复</span>
+                            </a>
+                            <a href="/tool/text-format/" class="tool-link">
+                                <span class="icon">📝</span><b data-i18n="nav.tools.textFormat">文本内容格式化</b>(压缩/分割/去重)
+                                <span class="badge" data-i18n="tool.badges.textFormat">格式化</span>
+                            </a>
+                            <a href="/tool/file-compressor/" class="tool-link">
+                                <span class="icon">📦</span><b
+                                    data-i18n="nav.tools.fileCompressor">文件ZIP压缩器</b>(ZIP压缩/解压)
+                                <span class="badge" data-i18n="tool.badges.fileCompressor">压缩</span>
+                            </a>
+                            <a href="/download/media/" class="tool-link">
+                                <span class="icon">⬇️</span><b data-i18n="nav.tools.downloadMedia">视频图像下载</b>(批量+爬取)
+                                <span class="badge download" data-i18n="tool.badges.download">下载</span>
+                            </a>
+                            <a href="/download/resource/" class="tool-link">
+                                <span class="icon">📦</span><b
+                                    data-i18n="nav.tools.downloadResource">资源文件下载</b>(JS/CSS/字体)
+                                <span class="badge resource" data-i18n="tool.badges.resource">下载</span>
                             </a>
                         </div>
                     </div>

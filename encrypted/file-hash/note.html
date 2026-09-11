@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="文件哈希计算器使用说明：支持 MD5/SHA-1/SHA-256/SHA-384/SHA-512，本地计算文件数字指纹，用于下载校验、备份验证、数字证据固定等场景">
+    <meta name="keywords" content="文件哈希,文件MD5,文件SHA256,文件完整性校验,数字指纹,SHA-256">
+    <meta name="author" content="Helpoke">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <title>文件哈希计算器 - 使用说明与完整指南</title>
+    <link rel="canonical" href="https://helpoke.com/encrypted/file-hash/note.html">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/file-hash/note.html">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/file-hash/note.html">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            margin: 0 10px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: #3498db;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #3498db;
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        .algorithm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.98rem;
+        }
+
+        .algorithm-table th,
+        .algorithm-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .algorithm-table th {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+
+        code {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            color: #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section {
+                padding: 20px;
+            }
+
+            .algorithm-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/note.css">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/note.js"></script>
+    <script src="/common/js/layout.js"></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>文件哈希计算器</h1>
+            <p class="subtitle">本地计算文件数字指纹，快速验证完整性与一致性</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
+        </header>
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是文件哈希？</h2>
+                <p>文件哈希（File Hash）是将任意长度的文件内容通过哈希函数（Hash
+                    Function）压缩成固定长度摘要的过程。这个摘要通常被称为文件的<strong>数字指纹</strong>或<strong>消息摘要</strong>。只要文件内容发生任何细微变化，哪怕只是一个比特（bit）的翻转，生成的哈希值也会发生巨大变化，这就是密码学中的<strong>雪崩效应</strong>。
+                </p>
+                <p>安全的哈希函数还必须具备<strong>抗碰撞性</strong>：在计算上不可能找到两个不同的文件，它们产生完全相同的哈希值。SHA-256、SHA-384、SHA-512
+                    等算法目前仍被认为是抗碰撞的；而 MD5 和 SHA-1 的碰撞攻击已被学术界和工业界多次演示，因此不应再用于任何安全敏感场景。</p>
+                <p>本工具基于浏览器原生 <code>Web Crypto API</code> 计算文件哈希，支持 MD5、SHA-1、SHA-256、SHA-384、SHA-512 五种算法，可输出 Hex 或
+                    Base64 格式。所有文件均在浏览器本地读取和计算，不会上传到服务器，可放心处理包含敏感信息的文件。</p>
+
+                <h2>哈希算法速查表</h2>
+                <table class="algorithm-table">
+                    <thead>
+                        <tr>
+                            <th>算法</th>
+                            <th>输出长度</th>
+                            <th>安全状态</th>
+                            <th>推荐场景</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MD5</td>
+                            <td>128 位</td>
+                            <td>已发现碰撞，不推荐安全场景</td>
+                            <td>旧系统兼容、普通完整性校验</td>
+                        </tr>
+                        <tr>
+                            <td>SHA-1</td>
+                            <td>160 位</td>
+                            <td>已发现碰撞，不推荐安全场景</td>
+                            <td>旧系统兼容、历史数据校验</td>
+                        </tr>
+                        <tr>
+                            <td>SHA-256</td>
+                            <td>256 位</td>
+                            <td>安全，当前主流推荐</td>
+                            <td>软件下载校验、备份验证、日常安全</td>
+                        </tr>
+                        <tr>
+                            <td>SHA-384</td>
+                            <td>384 位</td>
+                            <td>安全，更高冗余</td>
+                            <td>高安全场景、长期归档</td>
+                        </tr>
+                        <tr>
+                            <td>SHA-512</td>
+                            <td>512 位</td>
+                            <td>安全，最高冗余</td>
+                            <td>高安全场景、金融与政务</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>四步完成文件哈希计算</h2>
+                <h3>第一步：选择算法</h3>
+                <p>日常完整性校验推荐使用 <code>SHA-256</code>，兼顾安全性与兼容性；需要与旧系统兼容可选 MD5 或 SHA-1；高安全需求或长期归档使用 SHA-384 或 SHA-512。</p>
+                <h3>第二步：选择输出格式</h3>
+                <p>Hex（十六进制）是最常见的格式，Linux <code>sha256sum</code> 等工具默认输出 Hex。Base64 更短，适合嵌入 URL、配置文件或 JSON 字段。</p>
+                <h3>第三步：上传文件</h3>
+                <p>点击上传区域选择文件，或直接拖拽文件到上传区域。本工具支持批量上传多个文件，一次性计算所有文件的哈希值，结果可复制或下载。</p>
+                <h3>第四步：计算与对比</h3>
+                <p>点击计算按钮，工具会读取文件并生成哈希值。将结果与官方提供的哈希值、历史记录或对方提供的摘要进行对比，一致即表示文件完整未被篡改。</p>
+            </div>
+            <div class="info-section">
+                <h2>典型应用场景</h2>
+                <p><strong>软件下载校验：</strong>从官网或第三方镜像下载安装包、固件、ISO 镜像后，对比官方公布的 MD5/SHA256 值，可快速发现下载中断、CDN 污染或供应链攻击导致的文件篡改。
+                </p>
+                <p><strong>数据备份验证：</strong>定期对重要文件、数据库备份、虚拟机镜像计算哈希并归档。恢复或迁移后重新计算比对，确保备份介质没有静默损坏或位衰减。</p>
+                <p><strong>数字证据固定：</strong>在法律、审计和电子取证场景中，文件哈希可作为证据链中的完整性锚点。提交文件的同时提交哈希值，可证明自固定之时起文件未被改动。</p>
+                <p><strong>版本控制与去重：</strong>通过哈希值快速判断文件是否发生变化，常用于大文件去重、增量同步和内容寻址存储（CAS）。</p>
+
+                <h2>技术优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">MD5/SHA-1/SHA-256/384/512</span>
+                    <span class="feature-tag">Hex/Base64 输出</span>
+                    <span class="feature-tag">批量并行处理</span>
+                    <span class="feature-tag">Web Crypto API</span>
+                    <span class="feature-tag">本地计算</span>
+                    <span class="feature-tag">拖拽上传</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>安全注意事项：</strong></p>
+                    <ul>
+                        <li>MD5 和 SHA-1 已被证明存在碰撞攻击，不再适合安全场景</li>
+                        <li>重要场景请使用 SHA-256 或更高算法</li>
+                        <li>哈希只能验证完整性，不能验证文件来源——如需来源认证请使用 HMAC 或数字签名</li>
+                        <li>超大文件可能受浏览器内存限制，建议分批处理或使用桌面工具</li>
+                        <li>本工具所有计算在浏览器本地完成，文件不上传服务器</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题</h2>
+                <h3>问：MD5 还安全吗？</h3>
+                <p><strong>答：</strong>MD5 已被证明存在碰撞攻击，可以在数秒内构造出两个内容不同但 MD5 相同的文件。因此 MD5
+                    不再适合安全验证、数字签名等场景，但用于普通完整性校验（如下载是否完整）仍可接受。重要场景请使用 SHA-256 或更高算法。</p>
+                <h3>问：哈希值相同代表文件一定相同吗？</h3>
+                <p><strong>答：</strong>在理论上，不同文件产生相同哈希值的概率称为碰撞。对于 SHA-256 等安全哈希，实际应用中可以认为哈希相同即文件相同。但 MD5 和 SHA-1
+                    的碰撞已被证实，不建议用于安全验证。</p>
+                <h3>问：大文件会卡吗？</h3>
+                <p><strong>答：</strong>工具会一次性读取整个文件到浏览器内存。处理超大文件（如数
+                    GB）可能受限于设备内存，建议分批处理或使用桌面工具。对于日常文档、图片、小型安装包等，浏览器处理速度非常快。</p>
+                <h3>问：哈希和 HMAC 有什么区别？</h3>
+                <p><strong>答：</strong>普通哈希不带密钥，任何人都可以重新计算，因此只能验证完整性，不能验证来源。HMAC
+                    在哈希计算中引入共享密钥，既能验证完整性，也能验证数据是否来自持有密钥的通信方。如果需要在文件传输中同时验证完整性和发送方身份，请使用 HMAC 或数字签名。</p>
+            </div>
+        </div>
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>安全最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>密钥保密：</strong>不要在代码仓库、前端配置或不安全渠道中泄露密钥或敏感凭证。</li>
+                    <li><strong>本地优先：</strong>本工具所有计算在浏览器本地完成，处理完成后及时关闭页面，避免敏感信息驻留。</li>
+                    <li><strong>结合多层防护：</strong>单一工具不足以构建完整安全体系，建议配合 TLS、访问控制、审计日志等措施。</li>
+                    <li><strong>定期轮换：</strong>对长期使用的密钥、令牌或凭证建立轮换机制，降低泄露后的影响范围。</li>
+                    <li><strong>选择合适算法：</strong>根据安全需求选择算法长度和模式，优先使用经过广泛验证的标准方案。</li>
+                </ul>
+            </div>
+            <h2>实战案例：接口请求安全加固</h2>
+            <p>某团队在开放 API 时，需要为第三方调用者提供一种轻量且可靠的鉴权方式。通过 文件哈希计算器，服务端为每个开发者分配唯一凭证，并要求请求中附带基于该工具生成的签名或令牌。</p>
+            <p><strong>实施流程：</strong></p>
+            <ol>
+                <li>开发者在控制台获取由 文件哈希计算器 生成的密钥或凭证。</li>
+                <li>调用 API 前，按照约定格式拼接请求参数与时间戳，使用 文件哈希计算器 计算签名。</li>
+                <li>将签名放入请求头，服务端使用相同逻辑重新计算并比对。</li>
+                <li>若签名一致且时间戳在有效窗口内，则放行请求；否则拒绝，防止重放和篡改。</li>
+            </ol>
+            <p><strong>效果：</strong>该方案无需复杂证书基础设施，仅通过浏览器本地即可完成计算，部署成本低且兼容性好。</p>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#3498db"></div>
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="../md5/index.html" class="tool-link">MD5加密工具</a>
+                <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
+                <a href="../hmac/index.html" class="tool-link">HMAC生成校验工具</a>
+                <a href="../crc/index.html" class="tool-link">CRC校验工具</a>
+            </div>
+        </div>
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

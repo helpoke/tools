@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线PBKDF2密钥派生工具，支持SHA-1/SHA-256/SHA-512哈希，自定义盐与迭代次数，输出Hex/Base64，纯前端本地处理保护隐私。Free online PBKDF2 key derivation tool.">
+    <meta name="keywords" content="PBKDF2,密钥派生,密码学,盐,迭代次数,在线PBKDF2,密钥生成">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>PBKDF2 密钥派生工具 - 在线密码学密钥派生</title>
+    <meta property="og:title" content="PBKDF2 密钥派生工具 - 在线密码学密钥派生">
+    <meta property="og:description"
+        content="在线PBKDF2密钥派生工具，支持SHA-1/SHA-256/SHA-512哈希，自定义盐与迭代次数，输出Hex/Base64，纯前端本地处理保护隐私。Free online PBKDF2 key derivation tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/pbkdf2/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PBKDF2 密钥派生工具 - 在线密码学密钥派生">
+    <meta name="twitter:description"
+        content="在线PBKDF2密钥派生工具，支持SHA-1/SHA-256/SHA-512哈希，自定义盐与迭代次数，输出Hex/Base64，纯前端本地处理保护隐私。Free online PBKDF2 key derivation tool.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/pbkdf2/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/pbkdf2/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/pbkdf2/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PBKDF2密钥派生工具",
+        "description": "免费在线PBKDF2密钥派生工具，支持SHA-1/SHA-256/SHA-512。Free online PBKDF2 key derivation tool supporting SHA-1/SHA-256/SHA-512.",
+        "url": "https://helpoke.com/encrypted/pbkdf2/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "PBKDF2 密钥派生",
+            "支持 SHA-1 / SHA-256 / SHA-512",
+            "自定义盐与迭代次数",
+            "Hex / Base64 输出",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.pbkdf2.title">PBKDF2 密钥派生工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.pbkdf2.intro">在线 PBKDF2 密钥派生工具，支持 SHA-1/SHA-256/SHA-512，自定义盐与迭代次数，生成高强度派生密钥</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hash-algorithm" data-i18n="encrypted.pbkdf2.hashLabel">哈希算法</label>
+                        <select id="hash-algorithm">
+                            <option value="SHA-256" selected>SHA-256</option>
+                            <option value="SHA-1">SHA-1</option>
+                            <option value="SHA-384">SHA-384</option>
+                            <option value="SHA-512">SHA-512</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="key-length" data-i18n="encrypted.pbkdf2.keyLengthLabel">派生密钥长度（位）</label>
+                        <input type="number" id="key-length" min="8" max="8192" step="8" value="256">
+                    </div>
+                    <div class="form-group">
+                        <label for="iterations" data-i18n="encrypted.pbkdf2.iterationsLabel">迭代次数</label>
+                        <input type="number" id="iterations" min="1" max="999999999" value="100000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group flex-2">
+                        <label for="password" data-i18n="encrypted.pbkdf2.passwordLabel">密码</label>
+                        <input type="text" id="password" data-i18n-placeholder="encrypted.pbkdf2.passwordPlaceholder"
+                            placeholder="请输入密码...">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.pbkdf2.saltActionLabel">盐</label>
+                        <button class="btn btn-outline btn-sm" id="generate-salt-btn"
+                            data-i18n="encrypted.pbkdf2.generateSaltBtn">生成随机盐</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="salt" data-i18n="encrypted.pbkdf2.saltLabel">盐（Hex 或 文本）</label>
+                    <input type="text" id="salt" data-i18n-placeholder="encrypted.pbkdf2.saltPlaceholder"
+                        placeholder="请输入或生成盐值...">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="encrypted.pbkdf2.outputFormatLabel">输出格式</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="output-format" value="hex" checked> <span
+                                data-i18n="encrypted.pbkdf2.formatHex">Hex</span></label>
+                        <label><input type="radio" name="output-format" value="base64"> <span
+                                data-i18n="encrypted.pbkdf2.formatBase64">Base64</span></label>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="derive-btn" data-i18n="encrypted.pbkdf2.deriveBtn">派生密钥</button>
+
+                <div class="result-section" id="result-section" style="display:none;">
+                    <h4 data-i18n="encrypted.pbkdf2.resultTitle">派生密钥</h4>
+                    <div class="copy-row">
+                        <span class="text" id="output"></span>
+                        <button class="copy-icon-btn" id="copy-btn" data-i18n-title="encrypted.pbkdf2.copyTitle"
+                            title="复制">📋</button>
+                    </div>
+                    <div class="result-info" id="result-info"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.pbkdf2.infoIntro">PBKDF2：从密码到安全密钥</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.pbkdf2.problemsTitle">为什么需要 PBKDF2</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.problem1">
+                            用户设置的密码通常熵值较低，直接作为加密密钥容易被暴力破解。PBKDF2（Password-Based Key Derivation Function
+                            2）通过大量迭代和盐值，将弱密码转换为高安全性的密钥。</li>
+                        <li data-i18n="encrypted.pbkdf2.problem2">本工具使用浏览器原生 Web Crypto API 执行 PBKDF2，支持
+                            SHA-1/SHA-256/SHA-384/SHA-512 哈希算法，可自定义迭代次数和输出密钥长度。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.pbkdf2.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.featureDerive"><strong>密钥派生：</strong>输入密码和盐，获得指定长度的派生密钥。
+                        </li>
+                        <li data-i18n="encrypted.pbkdf2.featureSalt">
+                            <strong>随机盐生成：</strong>一键生成密码学安全随机盐，增强抗彩虹表能力。
+                        </li>
+                        <li data-i18n="encrypted.pbkdf2.featureFormat"><strong>双格式输出：</strong>支持 Hex 和 Base64
+                            编码。</li>
+                        <li data-i18n="encrypted.pbkdf2.featureSecurity"><strong>本地处理：</strong>所有计算在浏览器本地完成。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.pbkdf2.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.pbkdf2.usageStepTitle">使用步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.usagePassword"><strong>输入密码：</strong>即需要被派生的原始密码。</li>
+                        <li data-i18n="encrypted.pbkdf2.usageSalt"><strong>设置盐：</strong>建议使用随机生成的唯一盐值，并妥善保存。
+                        </li>
+                        <li data-i18n="encrypted.pbkdf2.usageIterations"><strong>迭代次数：</strong>推荐至少 100,000
+                            次，安全要求越高可设置越大。</li>
+                        <li data-i18n="encrypted.pbkdf2.usageLength"><strong>密钥长度：</strong>根据用途选择，如 AES-256 需要
+                            256 位（32 字节）。</li>
+                        <li data-i18n="encrypted.pbkdf2.usageClick"><strong>点击派生：</strong>获得最终密钥，可用于 AES 加密等场景。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.pbkdf2.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.noteSecurity1"><strong>盐值唯一：</strong>每个密码应使用不同的盐，切勿全局复用。
+                        </li>
+                        <li data-i18n="encrypted.pbkdf2.noteSecurity2">
+                            <strong>迭代次数：</strong>迭代次数越高，暴力破解成本越高，但计算时间也越长。
+                        </li>
+                        <li data-i18n="encrypted.pbkdf2.noteSecurity3">
+                            <strong>保存参数：</strong>解密或验证时需要完全相同的算法、盐、迭代次数和密钥长度。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.pbkdf2.infoScenarios">典型应用场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.pbkdf2.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.scenarioKeyDerivation"><strong>加密密钥生成：</strong>将用户输入的密码转换为 AES
+                            加密所需的 128/256 位密钥，无需用户直接管理复杂的二进制密钥。</li>
+                        <li data-i18n="encrypted.pbkdf2.scenarioPasswordStorage"><strong>密码验证存储：</strong>服务端不存储明文密码，而是存储
+                            PBKDF2 派生值、盐和迭代次数。用户登录时重新计算并比对，有效防止数据库泄露后被破解。</li>
+                        <li data-i18n="encrypted.pbkdf2.scenarioFileEncryption"><strong>文件加密：</strong>在本地加密文件时，使用 PBKDF2
+                            从密码派生 AES-GCM 密钥，结合随机盐实现安全的文件加密。</li>
+                        <li data-i18n="encrypted.pbkdf2.scenarioCrossPlatform"><strong>跨平台密钥协商：</strong>在跨语言、跨平台系统中，使用标准
+                            PBKDF2 参数确保各方从相同密码派生一致的密钥。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.pbkdf2.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.techAdvantageStandard"><strong>标准兼容：</strong>基于 PKCS #5/RFC 2898
+                            标准，与 Python hashlib.pbkdf2_hmac、Node.js crypto.pbkdf2、Java SecretKeyFactory 等主流库完全兼容。</li>
+                        <li data-i18n="encrypted.pbkdf2.techAdvantageParams">
+                            <strong>参数可调：</strong>支持自定义哈希算法、迭代次数和密钥长度，灵活适配不同安全需求和性能约束。</li>
+                        <li data-i18n="encrypted.pbkdf2.techAdvantageSalt">
+                            <strong>随机盐生成：</strong>一键生成密码学安全随机盐，有效防止彩虹表和预计算攻击。</li>
+                        <li data-i18n="encrypted.pbkdf2.techAdvantageLocal"><strong>本地计算：</strong>基于 Web Crypto
+                            API，密码和盐值不会上传到服务器，适合处理敏感数据。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.pbkdf2.algorithmSelectionTitle">参数选择建议</h4>
+                    <p data-i18n="encrypted.pbkdf2.algorithmSelectionContent">一般推荐 SHA-256 + 100,000 次迭代 + 256
+                        位密钥长度，兼顾安全性和计算速度。SHA-512 计算开销更大但安全性更高，适合高安全场景。SHA-1 因安全性较弱，仅用于兼容旧系统。迭代次数可根据设备性能和响应时间要求在 100,000
+                        到 600,000 之间调整。</p>
+                    <h4 data-i18n="encrypted.pbkdf2.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq1"><strong>Q: 迭代次数越高越好吗？</strong>A: 安全性越高，但计算也越慢。100,000 次是目前的最低推荐值，高安全场景可用 600,000 次。需要在安全性和响应速度之间平衡。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq2"><strong>Q: PBKDF2 和 bcrypt 哪个好？</strong>A: 都是密码派生函数。bcrypt 内置内存消耗机制，更能抵御 GPU 攻击；PBKDF2 是 NIST 标准，兼容性更广。新系统建议考虑 bcrypt 或 Argon2。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq3"><strong>Q: 盐值可以复用吗？</strong>A: 不建议。每个密码应使用独立的随机盐——盐值复用会降低安全性，使彩虹表攻击成为可能。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq4"><strong>Q: PBKDF2 的结果能直接用作 AES 密钥吗？</strong>A: 可以。将密钥长度设为 256 位，派生结果可直接作为 AES-256 的密钥使用。这也是本工具 file-encrypt 模块的工作方式。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

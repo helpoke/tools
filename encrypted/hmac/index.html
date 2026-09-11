@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线HMAC生成与校验工具，支持HMAC-SHA256/SHA384/SHA512，消息认证码一键生成与对比，纯前端本地处理保护隐私。Free online HMAC generator and verifier.">
+    <meta name="keywords" content="HMAC生成,HMAC校验,HMAC-SHA256,HMAC-SHA512,消息认证码,在线HMAC,免费HMAC工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>HMAC 生成与校验工具 - 在线消息认证码</title>
+    <meta property="og:title" content="HMAC 生成与校验工具 - 在线消息认证码">
+    <meta property="og:description"
+        content="在线HMAC生成与校验工具，支持HMAC-SHA256/SHA384/SHA512，消息认证码一键生成与对比，纯前端本地处理保护隐私。Free online HMAC generator and verifier.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/hmac/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="HMAC 生成与校验工具 - 在线消息认证码">
+    <meta name="twitter:description"
+        content="在线HMAC生成与校验工具，支持HMAC-SHA256/SHA384/SHA512，消息认证码一键生成与对比，纯前端本地处理保护隐私。Free online HMAC generator and verifier.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/hmac/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/hmac/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/hmac/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "HMAC生成与校验工具",
+        "description": "免费在线HMAC生成与校验工具，支持HMAC-SHA256/SHA384/SHA512。Free online HMAC generator and verifier supporting SHA256/SHA384/SHA512.",
+        "url": "https://helpoke.com/encrypted/hmac/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "HMAC 生成",
+            "HMAC 校验",
+            "支持 HMAC-SHA256 / SHA384 / SHA512",
+            "Base64 / Hex 双输出格式",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.hmac.title">HMAC 生成与校验工具</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.hmac.intro">在线 HMAC 消息认证码工具，支持 HMAC-SHA256/SHA384/SHA512，一键生成与校验，适用于 API 签名与数据完整性验证
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="generate" data-i18n="encrypted.hmac.tabGenerate">生成
+                        HMAC</button>
+                    <button class="tab-btn" data-tab="verify" data-i18n="encrypted.hmac.tabVerify">校验 HMAC</button>
+                </div>
+
+                <div id="tab-generate" class="tab-pane active">
+                    <div class="form-group">
+                        <label for="gen-algorithm" data-i18n="encrypted.hmac.algorithmLabel">算法</label>
+                        <select id="gen-algorithm">
+                            <option value="SHA-256" selected>HMAC-SHA256</option>
+                            <option value="SHA-384">HMAC-SHA384</option>
+                            <option value="SHA-512">HMAC-SHA512</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gen-key" data-i18n="encrypted.hmac.keyLabel">密钥</label>
+                        <input type="text" id="gen-key" data-i18n-placeholder="encrypted.hmac.keyPlaceholder"
+                            placeholder="请输入密钥...">
+                    </div>
+                    <div class="form-group">
+                        <label for="gen-message" data-i18n="encrypted.hmac.messageLabel">消息</label>
+                        <textarea id="gen-message" rows="5" data-i18n-placeholder="encrypted.hmac.messagePlaceholder"
+                            placeholder="请输入需要计算 HMAC 的消息..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.hmac.outputFormatLabel">输出格式</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gen-format" value="hex" checked> <span
+                                    data-i18n="encrypted.hmac.formatHex">Hex</span></label>
+                            <label><input type="radio" name="gen-format" value="base64"> <span
+                                    data-i18n="encrypted.hmac.formatBase64">Base64</span></label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="gen-btn" data-i18n="encrypted.hmac.generateBtn">生成 HMAC</button>
+                    <div class="result-section" id="gen-result-section" style="display:none;">
+                        <h4 data-i18n="encrypted.hmac.resultTitle">HMAC 结果</h4>
+                        <div class="copy-row">
+                            <span class="text" id="gen-output"></span>
+                            <button class="copy-icon-btn" id="gen-copy-btn" data-i18n-title="encrypted.hmac.copyTitle"
+                                title="复制">📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-verify" class="tab-pane">
+                    <div class="form-group">
+                        <label for="verify-algorithm" data-i18n="encrypted.hmac.algorithmLabel">算法</label>
+                        <select id="verify-algorithm">
+                            <option value="SHA-256" selected>HMAC-SHA256</option>
+                            <option value="SHA-384">HMAC-SHA384</option>
+                            <option value="SHA-512">HMAC-SHA512</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="verify-key" data-i18n="encrypted.hmac.keyLabel">密钥</label>
+                        <input type="text" id="verify-key" data-i18n-placeholder="encrypted.hmac.keyPlaceholder"
+                            placeholder="请输入密钥...">
+                    </div>
+                    <div class="form-group">
+                        <label for="verify-message" data-i18n="encrypted.hmac.messageLabel">消息</label>
+                        <textarea id="verify-message" rows="5" data-i18n-placeholder="encrypted.hmac.messagePlaceholder"
+                            placeholder="请输入需要校验 HMAC 的消息..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="verify-hmac" data-i18n="encrypted.hmac.verifyHmacLabel">待校验 HMAC</label>
+                        <input type="text" id="verify-hmac" data-i18n-placeholder="encrypted.hmac.verifyHmacPlaceholder"
+                            placeholder="请输入 Hex 或 Base64 格式的 HMAC...">
+                    </div>
+                    <button class="btn btn-primary" id="verify-btn" data-i18n="encrypted.hmac.verifyBtn">校验
+                        HMAC</button>
+                    <div id="verify-result" style="display:none; margin-top:16px;"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.hmac.infoIntro">HMAC：带密钥的消息认证码</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.hmac.problemsTitle">为什么需要 HMAC</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.problem1">普通哈希（如
+                            SHA-256）只能验证数据完整性，无法验证数据来源。攻击者可以在篡改数据后重新计算哈希。HMAC 通过引入共享密钥，同时实现完整性校验和身份认证。</li>
+                        <li data-i18n="encrypted.hmac.problem2">本工具支持 HMAC-SHA256/SHA384/SHA512
+                            三种常用算法，提供生成和校验两种模式，输出可选 Hex 或 Base64，适用于 API 请求签名、Webhook 验证等场景。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.hmac.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.featureGenerate"><strong>HMAC
+                                生成：</strong>输入密钥和消息，一键生成消息认证码。</li>
+                        <li data-i18n="encrypted.hmac.featureVerify"><strong>HMAC 校验：</strong>输入待校验的
+                            HMAC，自动比对并提示是否匹配。</li>
+                        <li data-i18n="encrypted.hmac.featureFormat"><strong>双格式输出：</strong>支持 Hex 和 Base64
+                            两种常见编码。</li>
+                        <li data-i18n="encrypted.hmac.featureSecurity">
+                            <strong>本地处理：</strong>所有计算在浏览器中完成，密钥和消息不上传服务器。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.hmac.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.hmac.usageGenerateTitle">生成步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.usageGenerateAlg"><strong>选择算法：</strong>一般推荐
+                            HMAC-SHA256，安全要求极高可选 SHA512。</li>
+                        <li data-i18n="encrypted.hmac.usageGenerateKey"><strong>输入密钥：</strong>使用双方约定的共享密钥。</li>
+                        <li data-i18n="encrypted.hmac.usageGenerateMsg"><strong>输入消息：</strong>即需要签名的原始数据。</li>
+                        <li data-i18n="encrypted.hmac.usageGenerateClick"><strong>点击生成：</strong>获得 Hex 或 Base64
+                            格式的 HMAC。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.hmac.usageVerifyTitle">校验步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.usageVerifyInput">
+                            <strong>输入三要素：</strong>算法、密钥、消息必须与生成方完全一致。
+                        </li>
+                        <li data-i18n="encrypted.hmac.usageVerifyHmac"><strong>输入待校验 HMAC：</strong>工具会自动识别 Hex 或
+                            Base64 格式。</li>
+                        <li data-i18n="encrypted.hmac.usageVerifyClick"><strong>点击校验：</strong>显示匹配或不匹配结果。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.hmac.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.noteSecurity1"><strong>密钥保密：</strong>HMAC
+                            的安全性完全依赖密钥保密，不要明文传输。</li>
+                        <li data-i18n="encrypted.hmac.noteSecurity2">
+                            <strong>算法一致：</strong>生成和校验必须使用完全相同的算法、密钥和消息编码。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.hmac.infoScenarios">典型应用场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.hmac.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.scenarioApiSigning"><strong>API
+                                请求签名：</strong>客户端与服务端共享密钥，对请求方法、路径、时间戳和请求体拼接后的字符串计算 HMAC，将结果放在 Authorization
+                            头中。服务端用相同密钥重新计算并比对，有效防止请求参数被篡改或重放攻击。</li>
+                        <li data-i18n="encrypted.hmac.scenarioWebhook"><strong>Webhook
+                                验证：</strong>GitHub、Stripe、钉钉等平台在推送 Webhook 时会附带 HMAC-SHA256 签名。接收方提取请求体，用预先配置的密钥计算
+                            HMAC，与请求头中的签名比对，确认事件确实来自该平台。</li>
+                        <li data-i18n="encrypted.hmac.scenarioJwt"><strong>JWT 签名验证：</strong>JWT 的 HS256/HS384/HS512
+                            签名模式本质就是 HMAC。本工具可用于调试 JWT 签名逻辑、验证 Token 是否由持有密钥的服务端签发。</li>
+                        <li data-i18n="encrypted.hmac.scenarioFileDistribution">
+                            <strong>软件分发校验：</strong>在固件更新、安装包下载等场景中，发布者可以同时提供文件和 HMAC 值。用户下载后用相同密钥计算
+                            HMAC，既可确认文件未被篡改，也能验证发布者身份。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.hmac.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.techAdvantageStandard"><strong>算法标准：</strong>严格遵循 RFC 2104 和 Web
+                            Crypto API，计算结果与 Python hmac、Node.js crypto、Java javax.crypto 等主流库完全兼容。</li>
+                        <li data-i18n="encrypted.hmac.techAdvantageDualMode"><strong>双模式支持：</strong>同时支持 HMAC
+                            生成和校验，一站式满足签名与验证需求，无需在多个工具间切换。</li>
+                        <li data-i18n="encrypted.hmac.techAdvantageFormat"><strong>格式灵活：</strong>输出可选 Hex 或
+                            Base64，便于与不同协议、数据库字段和日志系统对接。</li>
+                        <li data-i18n="encrypted.hmac.techAdvantageLocal">
+                            <strong>本地安全：</strong>所有计算在浏览器本地完成，密钥和消息不会上传到服务器，适合处理敏感数据。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.hmac.algorithmSelectionTitle">算法选择建议</h4>
+                    <p data-i18n="encrypted.hmac.algorithmSelectionContent">HMAC-SHA256 是目前最常用、兼容性最好的算法，适用于绝大多数 API 签名和
+                        Webhook 验证场景。HMAC-SHA384 和 HMAC-SHA512 提供更高的安全冗余，计算开销也相应增加，适合金融、政务等对安全性要求极高的场景。</p>
+                    <h4 data-i18n="encrypted.hmac.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.hmac.noteFaq1"><strong>Q: HMAC 和普通哈希有什么区别？</strong>A: HMAC 引入了密钥——只有持有密钥的人才能计算和验证 MAC 值。普通哈希任何人都能重新计算。HMAC 同时提供完整性校验和身份认证。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq2"><strong>Q: HMAC 的密钥长度有要求吗？</strong>A: 没有严格限制，但建议密钥长度至少与哈希输出长度相同（如 HMAC-SHA256 建议至少 32 字节）。密钥过短时，可先用哈希函数派生。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq3"><strong>Q: HMAC 能和 MD5 配合使用吗？</strong>A: 技术上可以，但 MD5 的碰撞漏洞会影响 HMAC 的安全性。建议搭配 SHA-256 或更高算法。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq4"><strong>Q: HMAC 是加密吗？</strong>A: 不是。HMAC 是消息认证码，不提供数据保密性——它只验证消息完整性和来源。如需保密，先用 AES 加密数据，再用 HMAC 认证。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

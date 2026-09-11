@@ -135,7 +135,7 @@
                     <h3 data-i18n="image.backcolor.infoIntro">给图片换背景色，远比你想象的有趣</h3>
                 </header>
                 <div class="info-content">
-                    <h4 data-i18n="image.backcolor.problemsTitle">一、一张图片的背景色到底有多少种像素</h4>
+                    <h4 data-i18n="image.backcolor.problemsTitle">一张图片的背景色到底有多少种像素</h4>
                     <ul>
                         <li data-i18n="image.backcolor.problem1">产品图要换白底、证件照要换蓝底、社交媒体头像想换个鲜艳背景——这些需求在 Photoshop
                             里可能要折腾半小时，而本工具只需四步：上传图片、选颜色、调容差、点应用。Canvas API 在像素级别工作，逐个检查每个像素的颜色值，将符合背景条件的像素替换为目标颜色。</li>
@@ -145,7 +145,7 @@
                         <li data-i18n="image.backcolor.problem3">完全在浏览器中完成——图片不上传到任何服务器。基于 Canvas 的
                             getImageData/putImageData 实现像素级操作，处理速度与图片分辨率直接相关。一张 1920x1080 的照片通常在 1-2 秒内完成背景替换。</li>
                     </ul>
-                    <h4 data-i18n="image.backcolor.formatTitle">二、容差：决定"哪些像素算背景"的那把尺子</h4>
+                    <h4 data-i18n="image.backcolor.formatTitle">容差：决定"哪些像素算背景"的那把尺子</h4>
                     <ul>
                         <li data-i18n="image.backcolor.formatJpg"><strong>JPG 格式注意：</strong>JPG
                             是有损压缩格式，纯色背景在压缩后会产生微弱的色块噪声（比如纯白背景实际包含 #FEFFFE、#FFFDFB 等微小差异）。建议将容差调到 10-20
@@ -155,7 +155,7 @@
                         <li data-i18n="image.backcolor.formatGif"><strong>GIF 格式限制：</strong>GIF 仅支持 256
                             色调色板，背景替换后的颜色会被量化到最近的调色板颜色，可能出现色差。动态 GIF 只处理第一帧。</li>
                     </ul>
-                    <h4 data-i18n="image.backcolor.featuresTitle">三、Canvas 像素级色彩替换是如何工作的</h4>
+                    <h4 data-i18n="image.backcolor.featuresTitle">Canvas 像素级色彩替换是如何工作的</h4>
                     <ul>
                         <li data-i18n="image.backcolor.featureOnline"><strong>纯浏览器端处理：</strong>基于 Canvas 2D API 的
                             getImageData 获取每个像素的 RGBA 值，在内存中完成所有计算后通过 putImageData 写回。整个过程不产生任何网络请求。</li>
@@ -214,7 +214,7 @@
                         <li data-i18n="image.backcolor.usageDownload"><strong>下载结果：</strong>处理满意后保存为 PNG 格式（保留透明通道）。
                         </li>
                     </ul>
-                    <h4 data-i18n="image.backcolor.usagePrincipleTitle">五、背景替换的技术原理</h4>
+                    <h4 data-i18n="image.backcolor.usagePrincipleTitle">背景替换的技术原理</h4>
                     <ul>
                         <li data-i18n="image.backcolor.usageColorDetect">
                             <strong>背景色检测：</strong>从图片四个角落采样，取出现频率最高的颜色作为背景色基准——比只取一个像素更可靠。
@@ -266,7 +266,6 @@
                     </ul>
                 </div>
             </article>
-        </div>
         </div>
 
         <script src="/common/js/theme.js"></script>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="在线文件哈希计算器，支持MD5/SHA-1/SHA-256/SHA-384/SHA-512，文件拖拽上传，输出Hex/Base64，纯前端本地处理保护隐私。Free online file hash calculator.">
+    <meta name="keywords" content="文件哈希,文件MD5,文件SHA256,在线文件校验,哈希计算,文件完整性">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>文件哈希计算器 - 在线 MD5/SHA 文件校验</title>
+    <meta property="og:title" content="文件哈希计算器 - 在线 MD5/SHA 文件校验">
+    <meta property="og:description"
+        content="在线文件哈希计算器，支持MD5/SHA-1/SHA-256/SHA-384/SHA-512，文件拖拽上传，输出Hex/Base64，纯前端本地处理保护隐私。Free online file hash calculator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/encrypted/file-hash/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="文件哈希计算器 - 在线 MD5/SHA 文件校验">
+    <meta name="twitter:description"
+        content="在线文件哈希计算器，支持MD5/SHA-1/SHA-256/SHA-384/SHA-512，文件拖拽上传，输出Hex/Base64，纯前端本地处理保护隐私。Free online file hash calculator.">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/encrypted/file-hash/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/file-hash/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/file-hash/">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
+    <script src="/common/js/i18n/i18n.js"></script>
+    <script src="/common/js/ads.js" async></script>
+    <style>
+        @import '/common/css/style.css';
+        @import '/common/css/utils.css';
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "文件哈希计算器",
+        "description": "免费在线文件哈希计算器，支持MD5/SHA-1/SHA-256/SHA-384/SHA-512。Free online file hash calculator supporting MD5/SHA-1/SHA-256/SHA-384/SHA-512.",
+        "url": "https://helpoke.com/encrypted/file-hash/",
+        "applicationCategory": "https://schema.org/SecurityTool",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "文件 MD5 / SHA-1 / SHA-256 / SHA-384 / SHA-512 哈希计算",
+            "Hex / Base64 输出",
+            "拖拽上传与批量处理",
+            "本地处理，保护隐私"
+        ],
+        "operatingSystem": "Web",
+        "author": { "@type": "Organization", "name": "Helpoke", "url": "https://helpoke.com/" },
+        "offers": { "@type": "Offer", "price": 0, "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="nav-container"></div>
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="encrypted.fileHash.title">文件哈希计算器</h1>
+            <a href="note.html" class="doc-link" data-i18n="common.buttons.viewDoc"><i class="fas fa-book"></i>
+                查看详细使用文档与 FAQ</a>
+            <a href="javascript:void(0)" id="back-home-link" data-i18n-title="common.buttons.backHomeTitle"
+                data-i18n="common.buttons.backHome"><i class="fas fa-home"></i> 返回首页</a>
+            <p data-i18n="encrypted.fileHash.intro">在线计算文件 MD5/SHA 哈希值，支持拖拽上传与批量处理，输出 Hex 或 Base64，快速校验文件完整性</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+
+        <div class="container">
+            <div class="tool-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="algorithm" data-i18n="encrypted.fileHash.algorithmLabel">哈希算法</label>
+                        <select id="algorithm">
+                            <option value="SHA-256" selected>SHA-256</option>
+                            <option value="SHA-1">SHA-1</option>
+                            <option value="SHA-384">SHA-384</option>
+                            <option value="SHA-512">SHA-512</option>
+                            <option value="MD5">MD5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="encrypted.fileHash.formatLabel">输出格式</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="output-format" value="hex" checked> <span
+                                    data-i18n="encrypted.fileHash.formatHex">Hex</span></label>
+                            <label><input type="radio" name="output-format" value="base64"> <span
+                                    data-i18n="encrypted.fileHash.formatBase64">Base64</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="file-input" multiple>
+                    <div class="upload-prompt">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p data-i18n="encrypted.fileHash.dropPrompt">点击选择文件或拖拽文件到此处</p>
+                        <span class="upload-hint" data-i18n="encrypted.fileHash.dropHint">支持多选，文件不会上传到服务器</span>
+                    </div>
+                </div>
+
+                <div class="file-list" id="file-list"></div>
+
+                <button class="btn btn-primary" id="calculate-btn"
+                    data-i18n="encrypted.fileHash.calculateBtn">计算哈希</button>
+
+                <div class="result-section" id="result-section" style="display:none;">
+                    <div class="result-header">
+                        <h4 data-i18n="encrypted.fileHash.resultTitle">哈希结果</h4>
+                        <button class="btn btn-outline btn-sm" id="copy-all-btn"
+                            data-i18n="encrypted.fileHash.copyAllBtn">复制全部</button>
+                        <button class="btn btn-outline btn-sm" id="download-btn"
+                            data-i18n="encrypted.fileHash.downloadBtn">下载结果</button>
+                    </div>
+                    <div class="result-list" id="result-list"></div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.fileHash.infoIntro">文件哈希：验证完整性的利器</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.fileHash.problemsTitle">为什么需要文件哈希</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.problem1">
+                            文件在下载、传输或备份过程中可能被意外损坏或恶意篡改。哈希值相当于文件的“数字指纹”，只要文件内容发生一个比特变化，哈希值就会完全不同。</li>
+                        <li data-i18n="encrypted.fileHash.problem2">本工具支持 MD5、SHA-1、SHA-256/384/512
+                            等常见算法，可快速计算本地文件的哈希值，与官方提供的哈希值对比即可确认文件完整性。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileHash.featuresTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.featureAlgorithms">
+                            <strong>多算法：</strong>MD5、SHA-1、SHA-256、SHA-384、SHA-512 一键切换。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.featureFormat"><strong>双输出：</strong>Hex 或 Base64 编码结果。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.featureBatch"><strong>批量处理：</strong>支持一次选择多个文件。</li>
+                        <li data-i18n="encrypted.fileHash.featureSecurity">
+                            <strong>本地处理：</strong>文件仅在浏览器中读取，不上传服务器。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.fileHash.infoUsage">使用指南</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.fileHash.usageStepTitle">使用步骤</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.usageSelect"><strong>选择算法：</strong>一般推荐使用
+                            SHA-256；需要与旧系统兼容可选 MD5 或 SHA-1。</li>
+                        <li data-i18n="encrypted.fileHash.usageUpload">
+                            <strong>上传文件：</strong>点击选择文件或直接拖拽到上传区域，支持多选。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.usageCalculate"><strong>点击计算：</strong>工具会读取文件并计算哈希值。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.usageCompare">
+                            <strong>对比校验：</strong>将计算结果与官方提供的哈希值对比，一致则文件完整。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileHash.notesSecurityTitle">安全建议</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.noteSecurity1"><strong>防篡改：</strong>MD5 和 SHA-1
+                            已被证明存在碰撞攻击，重要场景请使用 SHA-256 或更高算法。</li>
+                        <li data-i18n="encrypted.fileHash.noteSecurity2">
+                            <strong>隐私保护：</strong>文件内容不会离开您的设备，可放心处理敏感文件。
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.fileHash.infoScenarios">技术优势与典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="encrypted.fileHash.scenariosTitle">典型应用场景</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.scenarioDownloadVerify">
+                            <strong>软件下载校验：</strong>从官网或第三方镜像下载软件后，对比官方提供的 MD5/SHA256 值，确认文件未被篡改或损坏。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.scenarioBackupVerify">
+                            <strong>数据备份验证：</strong>定期计算重要文件的哈希值并保存。恢复或迁移后重新计算对比，确保数据一致性。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.scenarioEvidence">
+                            <strong>数字证据固定：</strong>在法律或审计场景中，文件哈希可作为电子证据完整性的证明。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.scenarioVersionControl">
+                            <strong>版本控制辅助：</strong>通过哈希值快速判断文件是否发生变化，常用于大文件去重和版本比对。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileHash.techAdvantagesTitle">技术优势</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.techAdvantageAlgorithms">
+                            <strong>多算法支持：</strong>支持 MD5、SHA-1、SHA-256、SHA-384、SHA-512，满足不同安全和兼容需求。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.techAdvantageBatch">
+                            <strong>批量处理：</strong>支持一次上传多个文件，一次性计算所有文件的哈希值。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.techAdvantageFormat">
+                            <strong>格式可选：</strong>输出可选 Hex 或 Base64，方便与各类系统和协议对接。
+                        </li>
+                        <li data-i18n="encrypted.fileHash.techAdvantageLocal">
+                            <strong>本地计算：</strong>文件仅在浏览器中读取，不上传服务器，保护敏感数据隐私。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="encrypted.fileHash.algorithmSelectionTitle">算法选择建议</h4>
+                    <p data-i18n="encrypted.fileHash.algorithmSelectionContent">SHA-256
+                        是目前最推荐的通用算法，兼具安全性与兼容性。MD5 和 SHA-1 仅用于兼容旧系统。</p>
+                    <h4 data-i18n="encrypted.fileHash.notesFaqTitle">常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.fileHash.noteFaq1"><strong>Q: 同一个文件在不同工具计算的哈希不同？</strong>A: 可能是编码或处理方式不同。文本文件可能被当作 UTF-8 或 ASCII 处理，换行符（CRLF vs LF）也会导致差异。确保所有工具都使用相同的字节流。</li>
+                        <li data-i18n="encrypted.fileHash.noteFaq2"><strong>Q: 大文件会导致浏览器崩溃吗？</strong>A: 本工具采用流式读取，不会将整个文件加载到内存。即使数 GB 的文件也能正常处理，只是计算时间较长。</li>
+                        <li data-i18n="encrypted.fileHash.noteFaq3"><strong>Q: MD5 和 SHA-256 哪个更快？</strong>A: MD5 计算速度略快，但差距不大。对于日常文件校验，两者都能在数秒内完成。安全场景应使用 SHA-256。</li>
+                        <li data-i18n="encrypted.fileHash.noteFaq4"><strong>Q: 文件夹也能计算哈希吗？</strong>A: 不能直接计算——哈希算法只能处理字节流。文件夹需要先打包为 ZIP 等格式，再计算哈希。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n-title="footer.privacy" data-i18n="footer.privacy"><i
+                            class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" data-i18n-title="footer.terms" data-i18n="footer.terms"><i
+                            class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" data-i18n-title="footer.about" data-i18n="footer.about"><i
+                            class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n-title="footer.contact" data-i18n="footer.contact"><i
+                            class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </main>
+    <script src="/common/js/utils.js"></script>
+    <script src="/common/js/theme.js"></script>
+    <script src="/common/js/tools-data.js"></script>
+    <script src="/common/js/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
