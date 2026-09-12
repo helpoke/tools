@@ -227,14 +227,14 @@
 <body>
     <div class="note-container">
         <header>
-            <h1>PBKDF2 密钥派生工具</h1>
+            <h1>PBKDF2 密钥派生工具 - PBKDF2 密钥派生</h1>
             <p class="subtitle">基于密码的密钥派生、安全存储与加密实践指南</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
         <div class="content-wrapper">
             <div class="info-section">
-                <h2>什么是 PBKDF2？</h2>
+                <h2> PBKDF2 是什么</h2>
                 <p>PBKDF2（Password-Based Key Derivation Function 2）是一种标准的密码学密钥派生算法，由 RSA 实验室在 PKCS #5 v2.0 中提出，并被 RFC
                     2898 标准化。它的核心作用是将用户容易记忆的弱密码转换为高强度的密钥，供 AES 等加密算法使用。</p>
                 <p>PBKDF2
@@ -291,7 +291,7 @@
                     </div>
                 </div>
 
-                <h2>典型应用场景</h2>
+                <h2>实战场景</h2>
                 <p><strong>加密密钥生成：</strong>将用户输入的密码转换为 AES 加密所需的 128/256 位密钥，无需用户直接管理复杂的二进制密钥。</p>
                 <p><strong>密码验证存储：</strong>服务端不存储明文密码，而是存储 PBKDF2 派生值、盐和迭代次数。用户登录时重新计算并比对，有效防止数据库泄露后被破解。</p>
                 <p><strong>文件加密：</strong>在本地加密文件时，使用 PBKDF2 从密码派生 AES-GCM 密钥，结合随机盐实现安全的文件加密。</p>
@@ -346,7 +346,7 @@
                 </ul>
             </div>
 
-            <h2>常见问题</h2>
+            <h2>FAQ 常见问题</h2>
             <h3>问：PBKDF2 和直接哈希密码有什么区别？</h3>
             <p><strong>答：</strong>直接哈希（如 SHA-256）计算速度极快，攻击者每秒可尝试数十亿次，容易被暴力破解。PBKDF2 通过大量迭代和盐值显著降低破解速度，更适合从密码派生密钥。</p>
             <h3>问：迭代次数越高越好吗？</h3>
@@ -361,7 +361,7 @@
         </div>
         <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#3498db"></div>
         <div class="related-tools">
-            <h2>相关工具推荐</h2>
+            <h2>相关工具</h2>
             <div class="tool-links">
                 <a href="../aes/index.html" class="tool-link">AES加解密工具</a>
                 <a href="../sha/index.html" class="tool-link">SHA加密工具</a>

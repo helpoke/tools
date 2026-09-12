@@ -147,14 +147,14 @@
 <body>
     <div class="note-container">
         <header>
-            <h1>X.509 证书解析器</h1>
+            <h1>X.509 证书解析器 - X.509 证书解析/PEM 解析</h1>
             <p class="subtitle">在线解析 PEM 格式 X.509 数字证书，快速排查 HTTPS/SSL 配置问题</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
         <div class="content-wrapper">
             <div class="info-section">
-                <h2>什么是 X.509 证书？</h2>
+                <h2> X.509 证书 是什么</h2>
                 <p>X.509 是一种由 ITU-T 制定的公钥基础设施（PKI）标准，用于定义数字证书的格式。证书将实体身份（如域名、组织或个人）与公钥绑定，并由受信任的证书颁发机构（CA）进行数字签名，是
                     HTTPS/TLS、代码签名、S/MIME 邮件加密、VPN 身份认证等安全通信的基石。</p>
                 <p>一张标准的 X.509 证书包含以下关键信息：版本号、序列号、签名算法、颁发者（Issuer）、有效期、主题（Subject）、公钥、主题备用名称（SAN）、密钥用途（Key
@@ -173,7 +173,7 @@
                 <p>点击解析按钮，工具会提取证书的关键字段，包括主题、颁发者、有效期、公钥算法、扩展信息和指纹。请重点关注有效期是否过期、签名算法是否为 SHA-256 或更高、主题备用名称是否包含正确的域名。</p>
             </div>
             <div class="info-section">
-                <h2>典型应用场景</h2>
+                <h2>实战场景</h2>
                 <p><strong>HTTPS 证书检查：</strong>快速查看网站 SSL/TLS 证书的颁发者、有效期、域名覆盖范围和签名算法，排查证书过期、域名不匹配、弱签名算法等配置问题。</p>
                 <p><strong>代码签名验证：</strong>解析软件发布者的代码签名证书，确认签名者身份、证书链可信度和证书是否处于有效期内。</p>
                 <p><strong>邮件加密与签名：</strong>查看 S/MIME 证书中的公钥和身份信息，确保加密邮件和数字签名的合法性。</p>
@@ -200,7 +200,7 @@
                     </ul>
                 </div>
 
-                <h2>常见问题</h2>
+                <h2>FAQ 常见问题</h2>
                 <h3>问：解析失败怎么办？</h3>
                 <p><strong>答：</strong>请确保输入的是完整 PEM 格式证书（包含 BEGIN/END 标记），且内容没有被截断或混入其他文本。如果 PEM
                     文件包含证书链，请只粘贴第一个证书部分。某些证书可能使用了特殊编码或扩展，可尝试用 OpenSSL 导出为标准格式后再解析。</p>
@@ -239,7 +239,7 @@
 
         <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#27ae60"></div>
         <div class="related-tools">
-            <h2>相关工具推荐</h2>
+            <h2>相关工具</h2>
             <div class="tool-links">
                 <a href="../rsa/index.html" class="tool-link">RSA密钥对生成工具</a>
                 <a href="../ec/index.html" class="tool-link">EC椭圆曲线密钥对生成工具</a>

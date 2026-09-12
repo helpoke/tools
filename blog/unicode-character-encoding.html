@@ -306,41 +306,39 @@ Unicode 规范化形式：
 
 教训：乱码的本质是“字节边界对齐错误”
   修复方法：用正确的编码重新解码，而不是“猜”</code></pre>
-        <h2>典型应用场景</h2>
-            <p><strong>前端开发者：</strong>在 URL 中传递中文或特殊字符参数时需要 URL 编码；在 JSON Web Token 中使用 Base64URL 编码；处理 Emoji 和国际化文本时需要 Unicode 编码。</p>
-            <p><strong>后端开发者：</strong>API 接口数据的编码与解码，二维码生成用于物流追踪和支付，条形码生成用于商品零售和库存管理。</p>
-            <p><strong>数据工程师：</strong>处理 CSV、XML、JSON 等数据格式之间的转换，确保不同系统间的数据编码一致性。</p>
-            <p><strong>电商开发者：</strong>生成商品条形码（EAN-13/Code 128），实现快递面单的二维码打印，处理多语言商品名称的字符编码。</p>
-            <p><strong>安全工程师：</strong>分析和处理编码相关的安全问题，如 URL 编码绕过、Unicode 规范化漏洞等。</p>
+        <h2>Unicode 在实际开发中的应用场景</h2>
+            <p><strong>国际化 Web 应用：</strong>多语言网站必须正确处理 Unicode，包括阿拉伯语的 RTL 排版、日语的混合汉字假名、Emoji 的代理对字符。前端使用 `<meta charset="UTF-8">` 只是第一步，还需要在 API 层、数据库层统一编码。</p>
+            <p><strong>数据库存储：</strong>MySQL 的 `utf8` 字符集只支持 3 字节 BMP 字符，不包拮 Emoji（4 字节）。必须使用 `utf8mb4` 才能完整存储所有 Unicode 字符，这是生产环境中常见的"坑"。</p>
+            <p><strong>文件处理：</strong>读写文件时需要明确指定编码。Node.js 的 `fs.readFile` 默认 UTF-8，但 Windows 系统的文本文件常用 GBK/GB18030。处理 Excel CSV 导出时要注意 BOM 头的添加。</p>
+            <p><strong>安全领域：</strong>Unicode 规范化形式（NFC/NFD/NFKC/NFKD）的差异可能导致安全漏洞，如 NFC 与 NFD 形式的同一字符有不同字节序列，可绕过基于字节的过滤规则。</p>
 
-        <h2>实战案例：多语言电商平台的编码方案</h2>
-            <p>某跨境电商平台需要支持中、日、韩、阿拉伯等多种语言的商品信息展示，同时需要生成商品条形码和物流二维码。技术团队面临的编码挑战包括：</p>
+        <h2>实战案例：Emoji 导致的数据库乱码问题</h2>
+            <p>某 SaaS 平台的用户昵称功能上线后，运维团队收到反馈：部分用户的昵称中包含 Emoji，存入数据库后变成了 `?` 号。技术团队排查后发现：</p>
             <ul>
-                <li>数据库统一使用 UTF-8 编码，避免不同语言字符的乱码问题</li>
-                <li>URL 中的商品名称使用 encodeURIComponent 编码，确保搜索和分享链接正确</li>
-                <li>商品条形码使用 EAN-13 标准（全球零售通用），物流标签使用 Code 128（支持全 ASCII）</li>
-                <li>支付二维码使用 QR Code 的 UTF-8 模式编码，确保多语言内容正确显示</li>
+                <li>数据库字符集为 MySQL `utf8`（只支持 3 字节 BMP 字符）</li>
+                <li>Emoji 位于 Unicode 补充平面（U+10000 及以上），需要 4 字节存储</li>
+                <li>应用层使用 `utf8` 连接字符串，未指定 `utf8mb4`</li>
             </ul>
-            <p>通过统一编码规范和自动化测试，将编码相关的 Bug 减少了 95%。</p>
+            <p>解决方案：将数据库、表、连接层全部改为 `utf8mb4`，同时在前端使用 `Array.from(str)` 正确处理代理对字符的字符串长度和截取。修改后所有语言的字符（包拮 Emoji）都能正确存储和显示。</p>
 
-        <h2>使用最佳实践</h2>
+        <h2>字符编码开发注意事项</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>统一 UTF-8：</strong>整个技术栈（数据库、服务器、前端）统一使用 UTF-8 编码，从根源上杜绝乱码问题。</li>
-                    <li><strong>区分编码与加密：</strong>Base64、URL 编码、Unicode 都是编码转换，不是加密。敏感数据必须先用 AES/RSA 加密，再进行编码传输。</li>
-                    <li><strong>条形码遵循行业标准：</strong>零售商品用 EAN-13，北美用 UPC-A，物流用 Code 128，不要混用。</li>
-                    <li><strong>注意编码边界情况：</strong>空字符串、纯 Emoji、代理对字符（Surrogate Pair）等特殊输入，都需要在编码时正确处理。</li>
-                    <li><strong>二维码纠错等级：</strong>需要嵌入 Logo 或可能被部分遮挡的场景，选择高纠错等级（H 级，30%）；纯数据场景可选 M 级（15%）以减小码图尺寸。</li>
+                    <li><strong>统一 UTF-8：</strong>整个技术栈（HTML、HTTP Header、数据库、文件系统）统一使用 UTF-8，从根源上杜绝乱码问题。MySQL 必须用 `utf8mb4` 而非 `utf8`。</li>
+                    <li><strong>理解代理对字符：</strong>JavaScript 中 `"𠮷".length` 返回 2 而非 1，因为它是代理对字符。使用 `Array.from(str)` 或 `[...str]` 才能正确拆分字符。</li>
+                    <li><strong>区分编码与加密：</strong>Unicode、Base64、URL 编码都是编码转换，不是加密。敏感数据必须先用 AES/RSA 加密再进行编码传输。</li>
+                    <li><strong>Unicode 规范化很重要：</strong>比较用户输入时，先做 NFKC 规范化。某些字符有多个 Unicode 表示形式（如全角/半角、组合字符），直接比较字节会匹配失败。</li>
+                    <li><strong>同形字安全威胁：</strong>西里尔字母 `а`（U+0430）和拉丁字母 `a`（U+0061）看起来一样，可被用于钓鱼域名。安全敏感场景需要做 Unicode 同形字检测。</li>
                 </ul>
             </div>
 
         <h2>常见问题</h2>
-            <h3>问：Base64 编码和加密有什么区别？</h3>
-            <p><strong>答：</strong>Base64 只是编码转换，任何人都可以用 <code>atob()</code> 10 秒内还原，没有任何安全性。加密（如 AES）需要密钥才能解密。敏感数据必须先加密再 Base64 编码传输。</p>
-            <h3>问：为什么网页上经常出现乱码？</h3>
-            <p><strong>答：</strong>乱码的根本原因是编码和解码使用了不同的字符集。确保整个链路（HTML meta charset、HTTP Content-Type、数据库连接、文件系统）都统一使用 UTF-8，可以消除 99% 的乱码问题。</p>
-            <h3>问：二维码扫描不出来是什么原因？</h3>
-            <p><strong>答：</strong>常见原因包括：二维码尺寸太小（低于 2cm×2cm 印刷）、纠错等级不够导致 Logo 遮挡过多数据、对比度不足（浅色码在深色背景上）、编码数据超出当前版本容量。建议生成后先打印实测。</p>
+            <h3>问：为什么 JavaScript 中 Emoji 的 length 是 2？</h3>
+            <p><strong>答：</strong>JavaScript 字符串内部使用 UTF-16 编码，Emoji（如 😊 U+1F60A）位于补充平面，需要用两个 16 位代理对字符表示，所以 `length` 返回 2。解决方案：使用 `Array.from('😊').length` 返回 1，或用 `for...of` 遍历。</p>
+            <h3>问：数据库中出现问号怎么办？</h3>
+            <p><strong>答：</strong>检查三个环节：① 数据库字符集是否为 `utf8mb4`（MySQL 的 `utf8` 只支持 3 字节，Emoji 会丢失）；② 连接层是否指定了 `charset=utf8mb4`；③ 应用层读写时是否统一使用 UTF-8 编码。</p>
+            <h3>问：文件打开后乱码怎么修复？</h3>
+            <p><strong>答：</strong>乱码的本质是解码时用了错误的字符集。修复方法：用正确的编码重新解码。Windows 中文系统常见 GBK 文件被当作 UTF-8 打开，反之亦然。在 VS Code 中可以通过右下角编码按钮重新打开；编程时用 `TextDecoder('gbk')` 指定编码。</p>
 
     
 

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="'Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f8fafc"/><stop offset="100%" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)" rx="12"/>
+  <text x="400" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">Base64 Encoding: 3 Bytes → 4 Characters</text>
+  <!-- Input bytes -->
+  <g transform="translate(40,80)">
+    <text x="80" y="-8" text-anchor="middle" font-size="13" fill="#64748b" font-weight="600">Input (3 Bytes)</text>
+    <rect x="0" y="0" width="52" height="52" rx="8" fill="url(#blue)"/><text x="26" y="30" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">M</text>
+    <rect x="58" y="0" width="52" height="52" rx="8" fill="url(#blue)"/><text x="84" y="30" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">a</text>
+    <rect x="116" y="0" width="52" height="52" rx="8" fill="url(#blue)"/><text x="142" y="30" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">n</text>
+    <text x="0" y="72" font-size="11" fill="#475569">01001101</text>
+    <text x="58" y="72" font-size="11" fill="#475569">01100001</text>
+    <text x="116" y="72" font-size="11" fill="#475569">01101110</text>
+  </g>
+  <!-- Arrows -->
+  <g transform="translate(220,100)" fill="none" stroke="#94a3b8" stroke-width="2">
+    <path d="M0,10 L60,10" marker-end="url(#arrow)"/>
+    <path d="M0,30 L60,30" marker-end="url(#arrow)"/>
+  </g>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#94a3b8"/></marker></defs>
+  <!-- 6-bit groups -->
+  <g transform="translate(290,80)">
+    <text x="105" y="-8" text-anchor="middle" font-size="13" fill="#64748b" font-weight="600">Regroup (6-bit each)</text>
+    <rect x="0" y="0" width="44" height="52" rx="8" fill="url(#green)"/><text x="22" y="22" text-anchor="middle" font-size="10" fill="#fff">010011</text><text x="22" y="38" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">19</text>
+    <rect x="50" y="0" width="44" height="52" rx="8" fill="url(#green)"/><text x="72" y="22" text-anchor="middle" font-size="10" fill="#fff">010110</text><text x="72" y="38" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">22</text>
+    <rect x="100" y="0" width="44" height="52" rx="8" fill="url(#green)"/><text x="122" y="22" text-anchor="middle" font-size="10" fill="#fff">000101</text><text x="122" y="38" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">5</text>
+    <rect x="150" y="0" width="44" height="52" rx="8" fill="url(#green)"/><text x="172" y="22" text-anchor="middle" font-size="10" fill="#fff">101110</text><text x="172" y="38" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">46</text>
+  </g>
+  <!-- Arrows -->
+  <g transform="translate(500,100)" fill="none" stroke="#94a3b8" stroke-width="2">
+    <path d="M0,10 L50,10" marker-end="url(#arrow)"/>
+    <path d="M0,30 L50,30" marker-end="url(#arrow)"/>
+  </g>
+  <!-- Output characters -->
+  <g transform="translate(560,80)">
+    <text x="100" y="-8" text-anchor="middle" font-size="13" fill="#64748b" font-weight="600">Output (4 Chars)</text>
+    <rect x="0" y="0" width="52" height="52" rx="8" fill="url(#orange)"/><text x="26" y="32" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">T</text>
+    <rect x="58" y="0" width="52" height="52" rx="8" fill="url(#orange)"/><text x="84" y="32" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">W</text>
+    <rect x="116" y="0" width="52" height="52" rx="8" fill="url(#orange)"/><text x="142" y="32" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">F</text>
+    <rect x="174" y="0" width="52" height="52" rx="8" fill="url(#orange)"/><text x="200" y="32" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">u</text>
+  </g>
+  <!-- Character table excerpt -->
+  <g transform="translate(120,200)">
+    <text x="280" y="0" text-anchor="middle" font-size="14" fill="#1e293b" font-weight="700">Base64 Index → Character</text>
+    <rect x="0" y="12" width="560" height="170" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+    <g font-size="12" fill="#334155">
+      <text x="20" y="38">Index 0 → A</text><text x="150" y="38">Index 16 → Q</text><text x="290" y="38">Index 32 → g</text><text x="430" y="38">Index 48 → w</text>
+      <text x="20" y="62">Index 5 → F</text><text x="150" y="62">Index 19 → T</text><text x="290" y="62">Index 22 → W</text><text x="430" y="62">Index 46 → u</text>
+      <text x="20" y="90" fill="#94a3b8">...</text><text x="150" y="90" fill="#94a3b8">...</text><text x="290" y="90" fill="#94a3b8">...</text><text x="430" y="90" fill="#94a3b8">...</text>
+    </g>
+    <rect x="10" y="100" width="540" height="70" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="280" y="122" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="600">Key Formula</text>
+    <text x="280" y="148" text-anchor="middle" font-size="16" fill="#1e40af" font-weight="700">3 bytes (24 bits) → 4 × 6 bits → 4 Base64 chars</text>
+    <text x="280" y="164" text-anchor="middle" font-size="11" fill="#64748b">Data size increases by 33% (3B → 4B)</text>
+  </g>
+</svg>

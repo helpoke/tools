@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="'Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f8fafc"/><stop offset="100%" stop-color="#e2e8f0"/></linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">JWT Token Structure: Three Parts, Two Dots</text>
+  <!-- Header -->
+  <g transform="translate(40,55)">
+    <rect x="0" y="0" width="220" height="140" rx="10" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+    <rect x="0" y="0" width="220" height="32" rx="10" fill="#ef4444"/>
+    <rect x="0" y="16" width="220" height="16" fill="#ef4444"/>
+    <text x="110" y="22" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">① Header</text>
+    <text x="15" y="52" font-size="11" fill="#991b1b" font-weight="600">JSON:</text>
+    <text x="15" y="70" font-size="11" fill="#7f1d1d" font-family="monospace">{ "alg": "HS256",</text>
+    <text x="15" y="86" font-size="11" fill="#7f1d1d" font-family="monospace">  "typ": "JWT" }</text>
+    <text x="15" y="110" font-size="11" fill="#991b1b" font-weight="600">Base64URL →</text>
+    <text x="15" y="128" font-size="10" fill="#7f1d1d" font-family="monospace" word-break="break-all">eyJhbGciOiJIUzI1...</text>
+  </g>
+  <!-- Dot 1 -->
+  <text x="272" y="135" font-size="36" fill="#64748b" font-weight="700">.</text>
+  <!-- Payload -->
+  <g transform="translate(290,55)">
+    <rect x="0" y="0" width="220" height="140" rx="10" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2"/>
+    <rect x="0" y="0" width="220" height="32" rx="10" fill="#8b5cf6"/>
+    <rect x="0" y="16" width="220" height="16" fill="#8b5cf6"/>
+    <text x="110" y="22" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">② Payload</text>
+    <text x="15" y="52" font-size="11" fill="#5b21b6" font-weight="600">Claims (JSON):</text>
+    <text x="15" y="70" font-size="11" fill="#4c1d95" font-family="monospace">{ "sub": "123456",</text>
+    <text x="15" y="86" font-size="11" fill="#4c1d95" font-family="monospace">  "name": "John",</text>
+    <text x="15" y="102" font-size="11" fill="#4c1d95" font-family="monospace">  "exp": 1699999 }</text>
+    <text x="15" y="124" font-size="10" fill="#5b21b6" font-family="monospace">eyJzdWIiOiIxMjM0...</text>
+  </g>
+  <!-- Dot 2 -->
+  <text x="522" y="135" font-size="36" fill="#64748b" font-weight="700">.</text>
+  <!-- Signature -->
+  <g transform="translate(540,55)">
+    <rect x="0" y="0" width="220" height="140" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+    <rect x="0" y="0" width="220" height="32" rx="10" fill="#3b82f6"/>
+    <rect x="0" y="16" width="220" height="16" fill="#3b82f6"/>
+    <text x="110" y="22" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">③ Signature</text>
+    <text x="15" y="52" font-size="11" fill="#1e3a8a" font-weight="600">HMACSHA256(</text>
+    <text x="15" y="68" font-size="10" fill="#1e40af" font-family="monospace">  base64(header) + "."</text>
+    <text x="15" y="82" font-size="10" fill="#1e40af" font-family="monospace">  + base64(payload),</text>
+    <text x="15" y="96" font-size="10" fill="#1e40af" font-family="monospace">  secret_key</text>
+    <text x="15" y="112" font-size="11" fill="#1e3a8a">)</text>
+    <text x="15" y="132" font-size="10" fill="#1e3a8a" font-family="monospace">SflKxwRJSMeKKF2q...</text>
+  </g>
+  <!-- Verification flow -->
+  <g transform="translate(60,220)">
+    <rect x="0" y="0" width="680" height="165" rx="10" fill="#fff" stroke="#cbd5e1"/>
+    <text x="340" y="24" text-anchor="middle" font-size="14" fill="#1e293b" font-weight="700">Verification Process</text>
+    <!-- Step 1 -->
+    <g transform="translate(20,40)">
+      <rect x="0" y="0" width="200" height="50" rx="8" fill="#fef2f2"/>
+      <text x="100" y="20" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="600">1. Receive Token</text>
+      <text x="100" y="38" text-anchor="middle" font-size="10" fill="#7f1d1d">Client sends JWT in Header</text>
+    </g>
+    <text x="230" y="70" font-size="20" fill="#94a3b8">→</text>
+    <!-- Step 2 -->
+    <g transform="translate(250,40)">
+      <rect x="0" y="0" width="200" height="50" rx="8" fill="#faf5ff"/>
+      <text x="100" y="20" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="600">2. Decode Parts</text>
+      <text x="100" y="38" text-anchor="middle" font-size="10" fill="#4c1d95">Split by "." → 3 parts</text>
+    </g>
+    <text x="460" y="70" font-size="20" fill="#94a3b8">→</text>
+    <!-- Step 3 -->
+    <g transform="translate(480,40)">
+      <rect x="0" y="0" width="180" height="50" rx="8" fill="#eff6ff"/>
+      <text x="90" y="20" text-anchor="middle" font-size="11" fill="#1e3a8a" font-weight="600">3. Verify Signature</text>
+      <text x="90" y="38" text-anchor="middle" font-size="10" fill="#1e40af">Recompute &amp; compare</text>
+    </g>
+    <!-- Warning -->
+    <rect x="20" y="105" width="640" height="48" rx="8" fill="#fef3c7" stroke="#fcd34d"/>
+    <text x="340" y="125" text-anchor="middle" font-size="12" fill="#92400e" font-weight="700">⚠ Security Reminders</text>
+    <text x="340" y="143" text-anchor="middle" font-size="11" fill="#78350f">• Payload is Base64URL encoded, NOT encrypted — never put passwords in JWT</text>
+    <text x="340" y="157" text-anchor="middle" font-size="11" fill="#78350f">• Always use HTTPS • Set reasonable expiration (exp) • Store secret keys securely</text>
+  </g>
+</svg>

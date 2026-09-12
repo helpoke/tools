@@ -49,7 +49,13 @@
                 让人望而生畏。本文的目标是让你从零开始，通过真实场景驱动的方式，逐步掌握正则表达式的核心语法和高级特性。
             </p>
 
-            <h2>一、基础语法：正则表达式的"字母表"</h2>
+            <h2>一、基础语法：正则表达式的“字母表”</h2>
+            
+            <figure style="margin: 2rem 0; text-align: center;">
+                <img src="/imgs/blog-regex-matching.svg" alt="Regular Expression Pattern Matching Diagram" style="max-width: 100%; height: auto;" loading="lazy">
+                <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：正则表达式模式匹配 — 从文本中提取邮箱、电话、URL</figcaption>
+            </figure>
+            
             <h3>1.1 字符匹配</h3>
             <p>最基本的正则表达式就是字面量匹配——正则中的普通字符匹配文本中相同的字符：</p>
             <pre><code>正则：hello
@@ -370,41 +376,40 @@ $3 = "24"    （日）
   ✓ 用具体字符类替代 .*：[a-z]+ 代替 .*
   ✓ 使用占有量词/原子组：a++ 或 (?>a+)（禁止回溯）
   ✓ 设置匹配超时（Python regex 模块、.NET）</code></pre>
-        <h2>典型应用场景</h2>
-            <p><strong>后端开发者：</strong>使用 Cron 表达式配置定时任务（数据备份、日志清理、报表生成），使用正则表达式进行数据校验和文本提取。</p>
-            <p><strong>前端开发者：</strong>使用正则表达式进行表单验证、文本搜索替换，使用 Mermaid 绘制技术文档中的架构图和流程图。</p>
-            <p><strong>全栈开发者：</strong>处理跨时区应用的时间戳转换，使用进制转换理解底层数据表示和位运算优化。</p>
-            <p><strong>运维工程师：</strong>编写 Cron 定时任务实现自动化运维，使用正则表达式分析日志文件。</p>
-            <p><strong>技术文档作者：</strong>使用 Mermaid 在 Markdown 中嵌入流程图、时序图、甘特图，提升文档可读性。</p>
+        <h2>正则表达式在实际开发中的应用场景</h2>
+            <p><strong>表单验证：</strong>邮箱、手机号、身份证号、URL 等前端验证都离不开正则。但要注意：前端验证只是用户体验优化，安全校验必须在后端做。</p>
+            <p><strong>日志分析：</strong>从海量日志中提取特定模式的记录，如提取所有 5xx 错误、统计某个 IP 的访问频率、解析 Apache/Nginx 访问日志格式。</p>
+            <p><strong>数据清洗：</strong>从 HTML 中提取纯文本、去除多余空白、格式化电话号码、统一日期格式。正则 + replace 是文本处理的瑞士军刀。</p>
+            <p><strong>代码重构：</strong>IDE 的正则搜索替换可以批量修改变量命名、更新 import 路径、统一代码风格。比手动修改效率高 10 倍。</p>
 
-        <h2>实战案例：定时任务与日志分析</h2>
-            <p>某互联网公司的运维团队需要优化自动化运维流程：</p>
+        <h2>实战案例：用正则表达式解析 Nginx 访问日志</h2>
+            <p>某运维团队需要从 Nginx 访问日志中提取关键信息用于安全分析：</p>
             <ul>
-                <li>使用 Cron 表达式 <code>0 2 * * *</code> 配置每日凌晨 2 点的数据库备份任务</li>
-                <li>使用 <code>0 */6 * * 1-5</code> 在工作日每 6 小时执行一次系统健康检查</li>
-                <li>使用正则表达式 <code>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.*ERROR</code> 从海量日志中提取错误记录</li>
-                <li>使用 Mermaid 时序图记录微服务间的调用链路，帮助新成员快速理解系统架构</li>
+                <li>用正则提取 IP、时间、请求方法、URL、状态码、响应大小等字段</li>
+                <li>统计每个 IP 的请求频率，识别异常访问（如每秒超过 100 次）</li>
+                <li>提取所有 4xx/5xx 状态码的请求，分析错误原因</li>
+                <li>匹配可疑的 SQL 注入和 XSS 攻击模式</li>
             </ul>
-            <p>通过规范化工具的使用，团队将运维效率提升了 60%，故障排查时间缩短了 50%。</p>
+            <p>核心正则：<code>^(\S+) .* \[(.+?)\] "(\w+) (\S+).*" (\d{3}) (\d+)</code>，配合 Python 脚本实现自动化分析，将安全事件响应时间从 30 分钟缩短到 2 分钟。</p>
 
-        <h2>使用最佳实践</h2>
+        <h2>正则表达式开发注意事项</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>Cron 表达式加注释：</strong>复杂的 Cron 表达式旁添加注释说明其含义，避免团队成员误读。优先使用 6 位（含秒）标准格式。</li>
-                    <li><strong>正则表达式先测试：</strong>使用在线正则测试工具验证表达式的正确性，特别注意贪婪/惰性匹配的区别和边界情况。</li>
-                    <li><strong>时间处理用 UTC：</strong>后端存储统一使用 UTC 时间戳，前端显示时再转换为用户本地时区。避免使用本地时间存储。</li>
-                    <li><strong>Mermaid 图表保持简洁：</strong>过于复杂的图表难以阅读和维护。大型流程图应拆分为多个子图，每个图聚焦一个流程。</li>
-                    <li><strong>避免灾难性回溯：</strong>正则表达式中避免嵌套量词（如 <code>(a+)+</code>），防止导致指数级回溯时间，引发 ReDoS 攻击。</li>
+                    <li><strong>避免灾难性回溯：</strong>嵌套量词（如 <code>(a+)+</code>、<code>(a|a)*</code>）会导致指数级回溯时间，引发 ReDoS 攻击。用在线工具测试正则的性能。</li>
+                    <li><strong>贪婪 vs 惰性：</strong>从 HTML 中提取内容用惰性匹配 <code>&lt;h1&gt;.*?&lt;/h1&gt;</code>，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。</li>
+                    <li><strong>Unicode 支持：</strong>JavaScript 正则默认不支持 Unicode 属性转义（如 <code>\p{Letter}</code>），需要加 <code>u</code> 标志：<code>/\p{Script=Han}/u</code> 匹配中文字符。</li>
+                    <li><strong>不要用正则解析 HTML：</strong>HTML 不是正则语言，嵌套标签、属性引号、注释等边界情况太多。简单提取用正则可以，复杂解析请用 DOM 解析器。</li>
+                    <li><strong>命名捕获组提高可读性：</strong>用 <code>(?&lt;name&gt;...)</code> 代替数字捕获组，代码更易维护：<code>match.groups.ip</code> 比 <code>match[1]</code> 更清晰。</li>
                 </ul>
             </div>
 
         <h2>常见问题</h2>
-            <h3>问：Cron 表达式中 "*/5" 和 "0,5,10..." 有什么区别？</h3>
-            <p><strong>答：</strong>功能上等价，都表示每 5 分钟执行。但 <code>*/5</code> 更简洁易读。注意 <code>*/5</code> 在分钟字段表示 0,5,10...55，而不是"每隔 5 分钟"——对于 <code>*/7</code> 这类不能整除 60 的情况，行为可能不符合直觉。</p>
             <h3>问：正则表达式中的贪婪和惰性匹配有什么区别？</h3>
             <p><strong>答：</strong>贪婪匹配（如 <code>.*</code>）会尽可能多地匹配字符；惰性匹配（如 <code>.*?</code>）会尽可能少地匹配。例如从 HTML 中提取标题：<code>&lt;h1&gt;.*?&lt;/h1&gt;</code> 用惰性匹配才能正确提取，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。</p>
-            <h3>问：为什么时间戳转换总是差 8 小时？</h3>
-            <p><strong>答：</strong>这是时区问题。Unix 时间戳是 UTC 时间，中国标准时间是 UTC+8。在后端处理时统一使用 UTC，只在前端显示时转换为用户时区（如 <code>Intl.DateTimeFormat</code> 设置 timeZone），可以彻底避免时区混乱。</p>
+            <h3>问：如何验证邮箱地址的正则表达式？</h3>
+            <p><strong>答：</strong>完全准确的邮箱正则非常复杂（RFC 5322 规范有数百种合法格式）。实际开发中推荐用简单版本做格式检查：<code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code>，真正的验证应该发确认邮件。不要过度追求正则的"完美"。</p>
+            <h3>问：为什么我的正则在 JavaScript 和 Python 中结果不同？</h3>
+            <p><strong>答：</strong>不同语言的正则引擎有差异。JavaScript 用 ECMAScript 引擎，Python 用 PCRE。主要差异：① 反向引用语法不同；② Unicode 支持程度不同；③ 多行模式的 <code>^</code>/<code>$</code> 行为不同。跨语言使用正则时要测试各平台兼容性。</p>
 
         
 

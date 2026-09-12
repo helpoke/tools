@@ -304,14 +304,14 @@
 <body>
     <div class="note-container">
         <header>
-            <h1>HMAC 生成与校验工具</h1>
+            <h1>HMAC 生成与校验工具 - HMAC 生成校验/消息认证码</h1>
             <p class="subtitle">HMAC-SHA256/SHA384/SHA512 消息认证码生成、校验与安全实践指南</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-tools"></i> 使用工具</a>
         </header>
         <div class="content-wrapper">
             <div class="info-section">
-                <h2>什么是 HMAC？</h2>
+                <h2> HMAC 是什么</h2>
                 <p>HMAC（Hash-based Message Authentication Code，基于哈希的消息认证码）是一种结合加密哈希函数与共享密钥的消息认证机制，由 RFC 2104
                     定义。它通过让密钥参与哈希计算，既能检测消息在传输过程中是否被篡改，又能验证消息是否来自持有相同密钥的合法发送方。</p>
                 <p>与普通哈希算法不同，HMAC 不是简单的数据指纹。普通哈希（如 SHA-256）任何人都可以重新计算，因此无法防止伪造。而 HMAC
@@ -365,7 +365,7 @@
                     </div>
                 </div>
 
-                <h2>典型应用场景</h2>
+                <h2>实战场景</h2>
                 <p><strong>API 请求签名：</strong>服务端与客户端约定密钥，客户端对请求参数计算 HMAC 并附在请求头中，服务端用相同密钥校验，防止请求被篡改或重放。</p>
                 <p><strong>Webhook 验证：</strong>GitHub、Stripe、钉钉等平台在推送 Webhook 时附带 HMAC 签名，接收方通过验证签名确认事件来源的真实性。</p>
                 <p><strong>JWT 签名验证：</strong>JWT 的 HS256/HS384/HS512 签名模式本质就是 HMAC。本工具可用于调试和验证签名逻辑。</p>
@@ -419,7 +419,7 @@
                 </ul>
             </div>
 
-            <h2>常见问题</h2>
+            <h2>FAQ 常见问题</h2>
             <h3>问：HMAC 能加密数据吗？</h3>
             <p><strong>答：</strong>不能。HMAC 只用于验证数据完整性和来源，不能隐藏数据内容。如需加密，请使用 AES 等对称加密工具。</p>
             <h3>问：校验失败是什么原因？</h3>
@@ -437,7 +437,7 @@
         </div>
         <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#3498db"></div>
         <div class="related-tools">
-            <h2>相关工具推荐</h2>
+            <h2>相关工具</h2>
             <div class="tool-links">
                 <a href="../sha/index.html" class="tool-link">SHA加密工具</a>
                 <a href="../md5/index.html" class="tool-link">MD5加密工具</a>

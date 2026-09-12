@@ -574,47 +574,54 @@ graph LR
   ✓ 描述“对象之间的关系” → 类图
   ✗ 不要用流程图表示时间顺序（用时序图）
   ✗ 不要用时序图表示决策分支（用流程图）</code></pre>
-        <h2>典型应用场景</h2>
-            <p><strong>后端开发者：</strong>使用 Cron 表达式配置定时任务（数据备份、日志清理、报表生成），使用正则表达式进行数据校验和文本提取。</p>
-            <p><strong>前端开发者：</strong>使用正则表达式进行表单验证、文本搜索替换，使用 Mermaid 绘制技术文档中的架构图和流程图。</p>
-            <p><strong>全栈开发者：</strong>处理跨时区应用的时间戳转换，使用进制转换理解底层数据表示和位运算优化。</p>
-            <p><strong>运维工程师：</strong>编写 Cron 定时任务实现自动化运维，使用正则表达式分析日志文件。</p>
-            <p><strong>技术文档作者：</strong>使用 Mermaid 在 Markdown 中嵌入流程图、时序图、甘特图，提升文档可读性。</p>
+            <h2>Mermaid 在实际工作中的应用场景</h2>
+            <p><strong>技术文档：</strong>在 README、RFC、设计文档中用 Mermaid 绘制架构图和流程图，代码即文档，修改代码即更新图表。GitHub、GitLab、Notion 原生支持
+                Mermaid 渲染。</p>
+            <p><strong>项目复盘：</strong>用时序图记录微服务调用链路，定位性能瓶颈。相比截图工具，文本格式可以纳入 Git 版本控制，每次变更都有记录。</p>
+            <p><strong>敏捷开发：</strong>甘特图用于展示 Sprint 计划和里程碑，团队成员可以直接在 Markdown 中修改任务进度，无需专业绘图软件。</p>
+            <p><strong>知识分享：</strong>技术博客中嵌入 Mermaid 图表，用代码块展示源文件，用渲染结果展示最终效果，读者可以直接复制代码复用。</p>
 
-        <h2>实战案例：定时任务与日志分析</h2>
-            <p>某互联网公司的运维团队需要优化自动化运维流程：</p>
+            <h2>实战案例：用 Mermaid 构建团队文档体系</h2>
+            <p>某技术团队需要将分散在 Wiki、PPT、白板中的架构图、流程图统一为可维护的文档体系：</p>
             <ul>
-                <li>使用 Cron 表达式 <code>0 2 * * *</code> 配置每日凌晨 2 点的数据库备份任务</li>
-                <li>使用 <code>0 */6 * * 1-5</code> 在工作日每 6 小时执行一次系统健康检查</li>
-                <li>使用正则表达式 <code>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.*ERROR</code> 从海量日志中提取错误记录</li>
-                <li>使用 Mermaid 时序图记录微服务间的调用链路，帮助新成员快速理解系统架构</li>
+                <li>所有图表用 Mermaid 编写，存储在 Git 仓库中，与代码同版本管理</li>
+                <li>系统架构图用 flowchart，展示服务间的调用关系和数据流向</li>
+                <li>接口时序图用 sequenceDiagram，记录核心业务的完整调用链</li>
+                <li>项目计划用 Gantt 图，嵌入到 Sprint 回顾文档中</li>
             </ul>
-            <p>通过规范化工具的使用，团队将运维效率提升了 60%，故障排查时间缩短了 50%。</p>
+            <p>实施后，新成员熟悉系统架构的时间从 2 周缩短到 3 天，图表更新维护成本降低 70%（修改一行文本 vs 重绘一张图）。</p>
 
-        <h2>使用最佳实践</h2>
+            <h2>Mermaid 使用注意事项</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>Cron 表达式加注释：</strong>复杂的 Cron 表达式旁添加注释说明其含义，避免团队成员误读。优先使用 6 位（含秒）标准格式。</li>
-                    <li><strong>正则表达式先测试：</strong>使用在线正则测试工具验证表达式的正确性，特别注意贪婪/惰性匹配的区别和边界情况。</li>
-                    <li><strong>时间处理用 UTC：</strong>后端存储统一使用 UTC 时间戳，前端显示时再转换为用户本地时区。避免使用本地时间存储。</li>
-                    <li><strong>Mermaid 图表保持简洁：</strong>过于复杂的图表难以阅读和维护。大型流程图应拆分为多个子图，每个图聚焦一个流程。</li>
-                    <li><strong>避免灾难性回溯：</strong>正则表达式中避免嵌套量词（如 <code>(a+)+</code>），防止导致指数级回溯时间，引发 ReDoS 攻击。</li>
+                    <li><strong>图表保持简洁：</strong>超过 20 个节点的流程图难以阅读和维护。大型系统应拆分为多个子图，每个图聚焦一个模块或流程。</li>
+                    <li><strong>注意渲染性能：</strong>超大图表（100+ 节点）可能导致浏览器卡顿。建议用 subgraph 分组，或改用静态图片工具（如 draw.io）处理复杂图表。</li>
+                    <li><strong>主题定制：</strong>Mermaid 支持通过 <code>%%{init: {'theme': 'dark'}}%%</code>
+                        指令切换主题，可以嵌入到暗色模式的文档中。</li>
+                    <li><strong>GitHub 兼容性：</strong>GitHub 支持的 Mermaid
+                        版本可能滞后于最新版，避免使用最新特性。常用语法（flowchart、sequenceDiagram、gantt）在 GitHub 上完全兼容。</li>
+                    <li><strong>导出为图片：</strong>用 <code>mermaid-cli</code>（mmdc）可以将 Mermaid 文件导出为 SVG/PNG，用于 PPT 或打印场景。
+                    </li>
                 </ul>
             </div>
 
-        <h2>常见问题</h2>
-            <h3>问：Cron 表达式中 "*/5" 和 "0,5,10..." 有什么区别？</h3>
-            <p><strong>答：</strong>功能上等价，都表示每 5 分钟执行。但 <code>*/5</code> 更简洁易读。注意 <code>*/5</code> 在分钟字段表示 0,5,10...55，而不是"每隔 5 分钟"——对于 <code>*/7</code> 这类不能整除 60 的情况，行为可能不符合直觉。</p>
-            <h3>问：正则表达式中的贪婪和惰性匹配有什么区别？</h3>
-            <p><strong>答：</strong>贪婪匹配（如 <code>.*</code>）会尽可能多地匹配字符；惰性匹配（如 <code>.*?</code>）会尽可能少地匹配。例如从 HTML 中提取标题：<code>&lt;h1&gt;.*?&lt;/h1&gt;</code> 用惰性匹配才能正确提取，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。</p>
-            <h3>问：为什么时间戳转换总是差 8 小时？</h3>
-            <p><strong>答：</strong>这是时区问题。Unix 时间戳是 UTC 时间，中国标准时间是 UTC+8。在后端处理时统一使用 UTC，只在前端显示时转换为用户时区（如 <code>Intl.DateTimeFormat</code> 设置 timeZone），可以彻底避免时区混乱。</p>
+            <h2>常见问题</h2>
+            <h3>问：Mermaid 和 draw.io、PlantUML 该怎么选？</h3>
+            <p><strong>答：</strong>Mermaid 优势在于纯文本、GitHub 原生支持、学习曲线低。PlantUML 功能更强大（支持更多图表类型），但需要 Java 环境。draw.io
+                适合需要精细布局控制的复杂图表。建议：日常文档用 Mermaid，专业架构设计用 draw.io。</p>
+            <h3>问：为什么我的 Mermaid 图表渲染失败？</h3>
+            <p><strong>答：</strong>常见原因：① 语法错误（如节点 ID 包含空格或特殊字符）；② 箭头符号写错（<code>--></code> 写成 <code>--></code> 中间有空格）；③
+                中文节点文本需要用引号包裹。建议用 Mermaid Live Editor 实时调试。</p>
+            <h3>问：如何在博客中嵌入 Mermaid 图表？</h3>
+            <p><strong>答：</strong>三种方案：① 引入 mermaid.js 库，用 <code>&lt;pre class="mermaid"&gt;</code> 标签自动渲染；② 用 Markdown
+                的 fenced code block（<code>```mermaid</code>），GitHub/GitLab 原生支持；③ 用 mmdc 导出为 SVG 图片后嵌入。</p>
 
-        
+
 
             <h2>总结</h2>
             <p>Mermaid 作为代码驱动的图表工具，完美契合现代开发工作流，显著提升了文档编写和团队协作效率。通过简单的文本语法，开发者可以快速绘制流程图、时序图、甘特图等多种图表，并轻松集成到 Markdown
-                文档、Git 工作流和自动化流程中。掌握 Mermaid 语法和最佳实践，是提升技术文档编写效率的重要技能。</p></article>
+                文档、Git 工作流和自动化流程中。掌握 Mermaid 语法和最佳实践，是提升技术文档编写效率的重要技能。</p>
+        </article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
             <div class="related-tools-grid">
