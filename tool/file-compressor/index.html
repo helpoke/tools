@@ -7,6 +7,11 @@
     <meta name="keywords" content="文件压缩，ZIP，解压，加密，解密，打包下载，免费工具">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
@@ -122,11 +127,15 @@
                     <label for="compression-method" data-i18n="tool.file-compressor.compressionLabel">压缩算法:</label>
                     <select id="compression-method">
                         <option value="STORE" data-i18n="tool.file-compressor.optStore">仅打包（不压缩，速度最快）</option>
-                        <option value="DEFLATE_1" data-i18n="tool.file-compressor.optDeflate1">快速压缩（DEFLATE Level 1，速度快，压缩率较低）</option>
-                        <option value="DEFLATE_6" selected data-i18n="tool.file-compressor.optDeflate6">标准压缩（DEFLATE Level 6，速度与压缩率平衡）</option>
-                        <option value="DEFLATE_9" data-i18n="tool.file-compressor.optDeflate9">最大压缩（DEFLATE Level 9，速度较慢，压缩率最高）</option>
+                        <option value="DEFLATE_1" data-i18n="tool.file-compressor.optDeflate1">快速压缩（DEFLATE Level
+                            1，速度快，压缩率较低）</option>
+                        <option value="DEFLATE_6" selected data-i18n="tool.file-compressor.optDeflate6">标准压缩（DEFLATE
+                            Level 6，速度与压缩率平衡）</option>
+                        <option value="DEFLATE_9" data-i18n="tool.file-compressor.optDeflate9">最大压缩（DEFLATE Level
+                            9，速度较慢，压缩率最高）</option>
                     </select>
-                    <div class="compression-hint" data-i18n="tool.file-compressor.compressionHint">选择更高的压缩级别可获得更小的文件体积，但需要更长的处理时间</div>
+                    <div class="compression-hint" data-i18n="tool.file-compressor.compressionHint">
+                        选择更高的压缩级别可获得更小的文件体积，但需要更长的处理时间</div>
                 </div>
 
                 <div class="actions-row">
@@ -139,7 +148,8 @@
                 </div>
 
                 <div class="progress-bar-wrapper" id="progress-wrapper" style="display: none;">
-                    <div class="progress-label" id="progress-label" data-i18n="tool.file-compressor.progressCompressing">压缩中...</div>
+                    <div class="progress-label" id="progress-label"
+                        data-i18n="tool.file-compressor.progressCompressing">压缩中...</div>
                     <div class="progress-track">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>

@@ -12,7 +12,10 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="description" content="系统讲解正则表达式语法、贪婪与惰性匹配、分组捕获、前瞻断言等高级特性，配合 20+ 真实场景示例。">
     <meta name="keywords" content="正则表达式,regex,正则,模式匹配,文本处理,表单验证,数据提取">
-    <link rel="icon" href="/common/img/helpoke.webp">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
     <link rel="stylesheet" href="/common/css/style.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
@@ -50,12 +53,14 @@
             </p>
 
             <h2>一、基础语法：正则表达式的“字母表”</h2>
-            
+
             <figure style="margin: 2rem 0; text-align: center;">
-                <img src="/imgs/blog-regex-matching.svg" alt="Regular Expression Pattern Matching Diagram" style="max-width: 100%; height: auto;" loading="lazy">
-                <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：正则表达式模式匹配 — 从文本中提取邮箱、电话、URL</figcaption>
+                <img src="/imgs/blog-regex-matching.svg" alt="Regular Expression Pattern Matching Diagram"
+                    style="max-width: 100%; height: auto;" loading="lazy">
+                <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：正则表达式模式匹配 —
+                    从文本中提取邮箱、电话、URL</figcaption>
             </figure>
-            
+
             <h3>1.1 字符匹配</h3>
             <p>最基本的正则表达式就是字面量匹配——正则中的普通字符匹配文本中相同的字符：</p>
             <pre><code>正则：hello
@@ -376,13 +381,13 @@ $3 = "24"    （日）
   ✓ 用具体字符类替代 .*：[a-z]+ 代替 .*
   ✓ 使用占有量词/原子组：a++ 或 (?>a+)（禁止回溯）
   ✓ 设置匹配超时（Python regex 模块、.NET）</code></pre>
-        <h2>正则表达式在实际开发中的应用场景</h2>
+            <h2>正则表达式在实际开发中的应用场景</h2>
             <p><strong>表单验证：</strong>邮箱、手机号、身份证号、URL 等前端验证都离不开正则。但要注意：前端验证只是用户体验优化，安全校验必须在后端做。</p>
             <p><strong>日志分析：</strong>从海量日志中提取特定模式的记录，如提取所有 5xx 错误、统计某个 IP 的访问频率、解析 Apache/Nginx 访问日志格式。</p>
             <p><strong>数据清洗：</strong>从 HTML 中提取纯文本、去除多余空白、格式化电话号码、统一日期格式。正则 + replace 是文本处理的瑞士军刀。</p>
             <p><strong>代码重构：</strong>IDE 的正则搜索替换可以批量修改变量命名、更新 import 路径、统一代码风格。比手动修改效率高 10 倍。</p>
 
-        <h2>实战案例：用正则表达式解析 Nginx 访问日志</h2>
+            <h2>实战案例：用正则表达式解析 Nginx 访问日志</h2>
             <p>某运维团队需要从 Nginx 访问日志中提取关键信息用于安全分析：</p>
             <ul>
                 <li>用正则提取 IP、时间、请求方法、URL、状态码、响应大小等字段</li>
@@ -390,34 +395,45 @@ $3 = "24"    （日）
                 <li>提取所有 4xx/5xx 状态码的请求，分析错误原因</li>
                 <li>匹配可疑的 SQL 注入和 XSS 攻击模式</li>
             </ul>
-            <p>核心正则：<code>^(\S+) .* \[(.+?)\] "(\w+) (\S+).*" (\d{3}) (\d+)</code>，配合 Python 脚本实现自动化分析，将安全事件响应时间从 30 分钟缩短到 2 分钟。</p>
+            <p>核心正则：<code>^(\S+) .* \[(.+?)\] "(\w+) (\S+).*" (\d{3}) (\d+)</code>，配合 Python 脚本实现自动化分析，将安全事件响应时间从 30
+                分钟缩短到 2 分钟。</p>
 
-        <h2>正则表达式开发注意事项</h2>
+            <h2>正则表达式开发注意事项</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>避免灾难性回溯：</strong>嵌套量词（如 <code>(a+)+</code>、<code>(a|a)*</code>）会导致指数级回溯时间，引发 ReDoS 攻击。用在线工具测试正则的性能。</li>
-                    <li><strong>贪婪 vs 惰性：</strong>从 HTML 中提取内容用惰性匹配 <code>&lt;h1&gt;.*?&lt;/h1&gt;</code>，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。</li>
-                    <li><strong>Unicode 支持：</strong>JavaScript 正则默认不支持 Unicode 属性转义（如 <code>\p{Letter}</code>），需要加 <code>u</code> 标志：<code>/\p{Script=Han}/u</code> 匹配中文字符。</li>
+                    <li><strong>避免灾难性回溯：</strong>嵌套量词（如 <code>(a+)+</code>、<code>(a|a)*</code>）会导致指数级回溯时间，引发 ReDoS
+                        攻击。用在线工具测试正则的性能。</li>
+                    <li><strong>贪婪 vs 惰性：</strong>从 HTML 中提取内容用惰性匹配
+                        <code>&lt;h1&gt;.*?&lt;/h1&gt;</code>，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。
+                    </li>
+                    <li><strong>Unicode 支持：</strong>JavaScript 正则默认不支持 Unicode 属性转义（如 <code>\p{Letter}</code>），需要加
+                        <code>u</code> 标志：<code>/\p{Script=Han}/u</code> 匹配中文字符。
+                    </li>
                     <li><strong>不要用正则解析 HTML：</strong>HTML 不是正则语言，嵌套标签、属性引号、注释等边界情况太多。简单提取用正则可以，复杂解析请用 DOM 解析器。</li>
-                    <li><strong>命名捕获组提高可读性：</strong>用 <code>(?&lt;name&gt;...)</code> 代替数字捕获组，代码更易维护：<code>match.groups.ip</code> 比 <code>match[1]</code> 更清晰。</li>
+                    <li><strong>命名捕获组提高可读性：</strong>用 <code>(?&lt;name&gt;...)</code>
+                        代替数字捕获组，代码更易维护：<code>match.groups.ip</code> 比 <code>match[1]</code> 更清晰。</li>
                 </ul>
             </div>
 
-        <h2>常见问题</h2>
+            <h2>常见问题</h2>
             <h3>问：正则表达式中的贪婪和惰性匹配有什么区别？</h3>
-            <p><strong>答：</strong>贪婪匹配（如 <code>.*</code>）会尽可能多地匹配字符；惰性匹配（如 <code>.*?</code>）会尽可能少地匹配。例如从 HTML 中提取标题：<code>&lt;h1&gt;.*?&lt;/h1&gt;</code> 用惰性匹配才能正确提取，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。</p>
+            <p><strong>答：</strong>贪婪匹配（如 <code>.*</code>）会尽可能多地匹配字符；惰性匹配（如 <code>.*?</code>）会尽可能少地匹配。例如从 HTML
+                中提取标题：<code>&lt;h1&gt;.*?&lt;/h1&gt;</code> 用惰性匹配才能正确提取，贪婪匹配会跨标签匹配到最后一个 &lt;/h1&gt;。</p>
             <h3>问：如何验证邮箱地址的正则表达式？</h3>
-            <p><strong>答：</strong>完全准确的邮箱正则非常复杂（RFC 5322 规范有数百种合法格式）。实际开发中推荐用简单版本做格式检查：<code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code>，真正的验证应该发确认邮件。不要过度追求正则的"完美"。</p>
+            <p><strong>答：</strong>完全准确的邮箱正则非常复杂（RFC 5322
+                规范有数百种合法格式）。实际开发中推荐用简单版本做格式检查：<code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code>，真正的验证应该发确认邮件。不要过度追求正则的"完美"。</p>
             <h3>问：为什么我的正则在 JavaScript 和 Python 中结果不同？</h3>
-            <p><strong>答：</strong>不同语言的正则引擎有差异。JavaScript 用 ECMAScript 引擎，Python 用 PCRE。主要差异：① 反向引用语法不同；② Unicode 支持程度不同；③ 多行模式的 <code>^</code>/<code>$</code> 行为不同。跨语言使用正则时要测试各平台兼容性。</p>
+            <p><strong>答：</strong>不同语言的正则引擎有差异。JavaScript 用 ECMAScript 引擎，Python 用 PCRE。主要差异：① 反向引用语法不同；② Unicode
+                支持程度不同；③ 多行模式的 <code>^</code>/<code>$</code> 行为不同。跨语言使用正则时要测试各平台兼容性。</p>
 
-        
+
 
             <h2>结语</h2>
             <p>正则表达式是开发者工具箱中的"瑞士军刀"——掌握它，文本处理效率可以提升数倍甚至数十倍。
                 本文从基础语法到高级断言，从贪婪惰性到灾难性回溯，配合 20 个真实场景示例，希望能帮助你建立系统的正则表达式知识体系。
                 记住：好的正则表达式不仅要"能匹配"，还要"匹配得准确、运行得高效"。
-            </p></article>
+            </p>
+        </article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
             <div class="related-tools-grid">

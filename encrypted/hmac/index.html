@@ -8,6 +8,11 @@
     <meta name="keywords" content="HMAC生成,HMAC校验,HMAC-SHA256,HMAC-SHA512,消息认证码,在线HMAC,免费HMAC工具">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -240,7 +245,8 @@
                             签名模式本质就是 HMAC。本工具可用于调试 JWT 签名逻辑、验证 Token 是否由持有密钥的服务端签发。</li>
                         <li data-i18n="encrypted.hmac.scenarioFileDistribution">
                             <strong>软件分发校验：</strong>在固件更新、安装包下载等场景中，发布者可以同时提供文件和 HMAC 值。用户下载后用相同密钥计算
-                            HMAC，既可确认文件未被篡改，也能验证发布者身份。</li>
+                            HMAC，既可确认文件未被篡改，也能验证发布者身份。
+                        </li>
                     </ul>
                     <h4 data-i18n="encrypted.hmac.techAdvantagesTitle">技术优势</h4>
                     <ul>
@@ -251,17 +257,22 @@
                         <li data-i18n="encrypted.hmac.techAdvantageFormat"><strong>格式灵活：</strong>输出可选 Hex 或
                             Base64，便于与不同协议、数据库字段和日志系统对接。</li>
                         <li data-i18n="encrypted.hmac.techAdvantageLocal">
-                            <strong>本地安全：</strong>所有计算在浏览器本地完成，密钥和消息不会上传到服务器，适合处理敏感数据。</li>
+                            <strong>本地安全：</strong>所有计算在浏览器本地完成，密钥和消息不会上传到服务器，适合处理敏感数据。
+                        </li>
                     </ul>
                     <h4 data-i18n="encrypted.hmac.algorithmSelectionTitle">算法选择建议</h4>
                     <p data-i18n="encrypted.hmac.algorithmSelectionContent">HMAC-SHA256 是目前最常用、兼容性最好的算法，适用于绝大多数 API 签名和
                         Webhook 验证场景。HMAC-SHA384 和 HMAC-SHA512 提供更高的安全冗余，计算开销也相应增加，适合金融、政务等对安全性要求极高的场景。</p>
                     <h4 data-i18n="encrypted.hmac.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.hmac.noteFaq1"><strong>Q: HMAC 和普通哈希有什么区别？</strong>A: HMAC 引入了密钥——只有持有密钥的人才能计算和验证 MAC 值。普通哈希任何人都能重新计算。HMAC 同时提供完整性校验和身份认证。</li>
-                        <li data-i18n="encrypted.hmac.noteFaq2"><strong>Q: HMAC 的密钥长度有要求吗？</strong>A: 没有严格限制，但建议密钥长度至少与哈希输出长度相同（如 HMAC-SHA256 建议至少 32 字节）。密钥过短时，可先用哈希函数派生。</li>
-                        <li data-i18n="encrypted.hmac.noteFaq3"><strong>Q: HMAC 能和 MD5 配合使用吗？</strong>A: 技术上可以，但 MD5 的碰撞漏洞会影响 HMAC 的安全性。建议搭配 SHA-256 或更高算法。</li>
-                        <li data-i18n="encrypted.hmac.noteFaq4"><strong>Q: HMAC 是加密吗？</strong>A: 不是。HMAC 是消息认证码，不提供数据保密性——它只验证消息完整性和来源。如需保密，先用 AES 加密数据，再用 HMAC 认证。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq1"><strong>Q: HMAC 和普通哈希有什么区别？</strong>A: HMAC
+                            引入了密钥——只有持有密钥的人才能计算和验证 MAC 值。普通哈希任何人都能重新计算。HMAC 同时提供完整性校验和身份认证。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq2"><strong>Q: HMAC 的密钥长度有要求吗？</strong>A:
+                            没有严格限制，但建议密钥长度至少与哈希输出长度相同（如 HMAC-SHA256 建议至少 32 字节）。密钥过短时，可先用哈希函数派生。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq3"><strong>Q: HMAC 能和 MD5 配合使用吗？</strong>A: 技术上可以，但 MD5
+                            的碰撞漏洞会影响 HMAC 的安全性。建议搭配 SHA-256 或更高算法。</li>
+                        <li data-i18n="encrypted.hmac.noteFaq4"><strong>Q: HMAC 是加密吗？</strong>A: 不是。HMAC
+                            是消息认证码，不提供数据保密性——它只验证消息完整性和来源。如需保密，先用 AES 加密数据，再用 HMAC 认证。</li>
                     </ul>
                 </div>
             </article>

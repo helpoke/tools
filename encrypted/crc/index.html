@@ -7,6 +7,11 @@
     <meta name="keywords" content="CRC校验,CRC32,CRC16,循环冗余校验,在线CRC,校验码计算">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -201,10 +206,14 @@
                         适合短数据帧和嵌入式通信，计算结果更短、开销更小。本工具同时支持 Hex 和十进制输出，便于与不同系统对接。</p>
                     <h4 data-i18n="encrypted.crc.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.crc.noteFaq1"><strong>Q: CRC 和哈希（如 MD5）有什么区别？</strong>A: CRC 基于多项式除法，设计目标是检测随机错误（如传输噪声），计算速度极快；MD5/SHA 基于密码学设计，能抵抗恶意篡改。CRC 不能替代安全哈希。</li>
-                        <li data-i18n="encrypted.crc.noteFaq2"><strong>Q: CRC-32 能检测所有错误吗？</strong>A: CRC-32 能检测所有单比特错误、所有双比特错误（在数据长度不超过一定范围时）和所有奇数个比特错误。但无法检测故意篡改——攻击者可以重新计算 CRC 使篡改后的数据通过校验。</li>
-                        <li data-i18n="encrypted.crc.noteFaq3"><strong>Q: 为什么 CRC-32 和 CRC-16 的结果不同？</strong>A: 它们使用不同的生成多项式和输出长度。CRC-32 输出 32 位校验值，CRC-16 输出 16 位——算法本质不同，结果当然不同。</li>
-                        <li data-i18n="encrypted.crc.noteFaq4"><strong>Q: Hex 输入怎么用？</strong>A: 选择 Hex 字节模式后，输入十六进制字符串（如 48656C6C6F），工具将其解析为字节序列再计算 CRC。适合校验二进制协议数据帧。</li>
+                        <li data-i18n="encrypted.crc.noteFaq1"><strong>Q: CRC 和哈希（如 MD5）有什么区别？</strong>A: CRC
+                            基于多项式除法，设计目标是检测随机错误（如传输噪声），计算速度极快；MD5/SHA 基于密码学设计，能抵抗恶意篡改。CRC 不能替代安全哈希。</li>
+                        <li data-i18n="encrypted.crc.noteFaq2"><strong>Q: CRC-32 能检测所有错误吗？</strong>A: CRC-32
+                            能检测所有单比特错误、所有双比特错误（在数据长度不超过一定范围时）和所有奇数个比特错误。但无法检测故意篡改——攻击者可以重新计算 CRC 使篡改后的数据通过校验。</li>
+                        <li data-i18n="encrypted.crc.noteFaq3"><strong>Q: 为什么 CRC-32 和 CRC-16 的结果不同？</strong>A:
+                            它们使用不同的生成多项式和输出长度。CRC-32 输出 32 位校验值，CRC-16 输出 16 位——算法本质不同，结果当然不同。</li>
+                        <li data-i18n="encrypted.crc.noteFaq4"><strong>Q: Hex 输入怎么用？</strong>A: 选择 Hex 字节模式后，输入十六进制字符串（如
+                            48656C6C6F），工具将其解析为字节序列再计算 CRC。适合校验二进制协议数据帧。</li>
                     </ul>
                 </div>
             </article>

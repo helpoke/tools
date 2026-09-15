@@ -12,7 +12,10 @@
   <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
   <meta name="description" content="深入解析 RGB、HSL、HSV、CMYK 等颜色模型的数学原理，讲解色彩和谐理论与前端开发实践。">
   <meta name="keywords" content="颜色空间,RGB,HSL,HSV,CMYK,色彩理论,配色方案,取色器">
-  <link rel="icon" href="/common/img/helpoke.webp">
+  <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+  <!-- 初始化主题 -->
+  <script src="/common/js/theme-init.js"></script>
+
   <link rel="stylesheet" href="/common/css/style.css">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
@@ -29,7 +32,7 @@
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
   <main class="article-container">
     <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
     <header class="article-header">
@@ -301,47 +304,54 @@ const lab2 = srgbToLab(0, 255, 0);    // 绿色 → [87.74, -86.18, 83.18]
   ✓ 用广色域空间制作的内容，必须提供 sRGB 降级版本
   ✓ 图片导出时勾选"转换为 sRGB"（除非你确定目标设备支持 P3）
   ✗ 不要在设计时用 sRGB 选色，然后期望在 P3 屏幕上看到同样的效果</code></pre>
-        <h2>颜色空间在实际开发中的应用场景</h2>
-            <p><strong>前端开发：</strong>CSS 配色用 HSL 更直观（调色调亮调饱和），Canvas 取色用 RGB 数值计算，设计稿与实现的颜色一致性需要 ICC 色彩管理。</p>
-            <p><strong>设计师：</strong>设计稿用 sRGB 确保屏幕显示一致，印刷品用 CMYK 避免色差，视频调色用 Rec.709/Rec.2020 色彩空间。</p>
-            <p><strong>图像处理：</strong>滤镜算法通常在 HSL/Lab 空间操作更自然，比如调整饱和度只需修改 S 通道，在 RGB 空间需要复杂的矩阵运算。</p>
-            <p><strong>数据可视化：</strong>配色方案需要考虡色觉障碍用户的感知，使用 WCAG 对比度标准确保文本可读性。</p>
+      <h2>颜色空间在实际开发中的应用场景</h2>
+      <p><strong>前端开发：</strong>CSS 配色用 HSL 更直观（调色调亮调饱和），Canvas 取色用 RGB 数值计算，设计稿与实现的颜色一致性需要 ICC 色彩管理。</p>
+      <p><strong>设计师：</strong>设计稿用 sRGB 确保屏幕显示一致，印刷品用 CMYK 避免色差，视频调色用 Rec.709/Rec.2020 色彩空间。</p>
+      <p><strong>图像处理：</strong>滤镜算法通常在 HSL/Lab 空间操作更自然，比如调整饱和度只需修改 S 通道，在 RGB 空间需要复杂的矩阵运算。</p>
+      <p><strong>数据可视化：</strong>配色方案需要考虡色觉障碍用户的感知，使用 WCAG 对比度标准确保文本可读性。</p>
 
-        <h2>实战案例：设计稿与实现的颜色不一致问题</h2>
-            <p>某品牌设计团队发现设计稿中的品牌色在网页上显示偏色，尤其是橙色和肤色区域：</p>
-            <ul>
-                <li>设计师用 Adobe RGB 色彩空间工作，但网页只支持 sRGB</li>
-                <li>导出图片时未转换色彩空间，导致浏览器用 sRGB 解读 Adobe RGB 数据</li>
-                <li>不同显示器的色域覆盖不同，同一颜色在 MacBook 和廉价显示器上差异明显</li>
-                <li>暗色模式下对比度不足，部分文字无法通过 WCAG AA 标准</li>
-            </ul>
-            <p>解决方案：统一工作流为 sRGB，导出时用 CSS <code>color-profile</code> 声明色彩空间，用 JavaScript 动态计算 WCAG 对比度并自动调整文字颜色。</p>
+      <h2>实战案例：设计稿与实现的颜色不一致问题</h2>
+      <p>某品牌设计团队发现设计稿中的品牌色在网页上显示偏色，尤其是橙色和肤色区域：</p>
+      <ul>
+        <li>设计师用 Adobe RGB 色彩空间工作，但网页只支持 sRGB</li>
+        <li>导出图片时未转换色彩空间，导致浏览器用 sRGB 解读 Adobe RGB 数据</li>
+        <li>不同显示器的色域覆盖不同，同一颜色在 MacBook 和廉价显示器上差异明显</li>
+        <li>暗色模式下对比度不足，部分文字无法通过 WCAG AA 标准</li>
+      </ul>
+      <p>解决方案：统一工作流为 sRGB，导出时用 CSS <code>color-profile</code> 声明色彩空间，用 JavaScript 动态计算 WCAG 对比度并自动调整文字颜色。</p>
 
-        <h2>颜色空间开发注意事项</h2>
-            <div class="warning-box">
-                <ul>
-                    <li><strong>Web 只用 sRGB：</strong>浏览器默认假设所有图片为 sRGB。设计稿用 Adobe RGB/Display P3 工作时，导出前必须转换为 sRGB，否则颜色会偏暗/偏饱和。</li>
-                    <li><strong>CSS 优先用 HSL：</strong><code>hsl(210, 80%, 50%)</code> 比 <code>#1a73e8</code> 更直观，调色时只需修改一个参数。CSS Color Level 4 还支持 <code>oklch()</code> 感知均匀色彩空间。</li>
-                    <li><strong>Canvas 取色注意色彩空间：</strong><code>ctx.getImageData()</code> 返回的是 sRGB 值，如果要做准确的色彩计算，需要先转为线性空间。</li>
-                    <li><strong>WCAG 对比度必须达标：</strong>正文文本对比度至少 4.5:1（AA 级），大文本至少 3:1。用公式 <code>(L1 + 0.05) / (L2 + 0.05)</code> 计算。</li>
-                    <li><strong>暗色模式不能简单反色：</strong>纯黑背景 + 纯白文字对比度过高会导致视觉疲劳。推荐背景 #121212 + 文字 #E0E0E0，对比度约 12:1。</li>
-                </ul>
-            </div>
+      <h2>颜色空间开发注意事项</h2>
+      <div class="warning-box">
+        <ul>
+          <li><strong>Web 只用 sRGB：</strong>浏览器默认假设所有图片为 sRGB。设计稿用 Adobe RGB/Display P3 工作时，导出前必须转换为 sRGB，否则颜色会偏暗/偏饱和。
+          </li>
+          <li><strong>CSS 优先用 HSL：</strong><code>hsl(210, 80%, 50%)</code> 比 <code>#1a73e8</code> 更直观，调色时只需修改一个参数。CSS
+            Color Level 4 还支持 <code>oklch()</code> 感知均匀色彩空间。</li>
+          <li><strong>Canvas 取色注意色彩空间：</strong><code>ctx.getImageData()</code> 返回的是 sRGB 值，如果要做准确的色彩计算，需要先转为线性空间。</li>
+          <li><strong>WCAG 对比度必须达标：</strong>正文文本对比度至少 4.5:1（AA 级），大文本至少 3:1。用公式 <code>(L1 + 0.05) / (L2 + 0.05)</code>
+            计算。</li>
+          <li><strong>暗色模式不能简单反色：</strong>纯黑背景 + 纯白文字对比度过高会导致视觉疲劳。推荐背景 #121212 + 文字 #E0E0E0，对比度约 12:1。</li>
+        </ul>
+      </div>
 
-        <h2>常见问题</h2>
-            <h3>问：RGB 和 HSL 该怎么用？</h3>
-            <p><strong>答：</strong>存储和传输用 RGB（十六进制或数值），调色和配色用 HSL。HSL 的三个维度（色相、饱和度、亮度）与人的直觉一致，调“更红一点”只需修改 H 值，在 RGB 中需要同时调整三个通道。</p>
-            <h3>问：为什么我的设计稿和网页颜色不一样？</h3>
-            <p><strong>答：</strong>三个原因：① 设计软件的色彩空间与浏览器不一致（Adobe RGB vs sRGB）；② 显示器色域差异；③ 图片未嵌入 ICC 配置文件。解决方案：统一用 sRGB 工作流，导出时用 <code>convert -profile</code> 转换色彩空间。</p>
-            <h3>问：如何确保色觉障碍用户能看到内容？</h3>
-            <p><strong>答：</strong>不要仅用颜色区分信息（如红色=错误、绿色=成功），同时用图标、文字或纹理区分。用 Chrome DevTools 的“渲染”面板模拟色觉障碍视角，检查关键信息是否可区分。</p>
+      <h2>常见问题</h2>
+      <h3>问：RGB 和 HSL 该怎么用？</h3>
+      <p><strong>答：</strong>存储和传输用 RGB（十六进制或数值），调色和配色用 HSL。HSL 的三个维度（色相、饱和度、亮度）与人的直觉一致，调“更红一点”只需修改 H 值，在 RGB
+        中需要同时调整三个通道。</p>
+      <h3>问：为什么我的设计稿和网页颜色不一样？</h3>
+      <p><strong>答：</strong>三个原因：① 设计软件的色彩空间与浏览器不一致（Adobe RGB vs sRGB）；② 显示器色域差异；③ 图片未嵌入 ICC 配置文件。解决方案：统一用 sRGB 工作流，导出时用
+        <code>convert -profile</code> 转换色彩空间。
+      </p>
+      <h3>问：如何确保色觉障碍用户能看到内容？</h3>
+      <p><strong>答：</strong>不要仅用颜色区分信息（如红色=错误、绿色=成功），同时用图标、文字或纹理区分。用 Chrome DevTools 的“渲染”面板模拟色觉障碍视角，检查关键信息是否可区分。</p>
 
-    
+
 
       <h2>结语</h2>
       <p>颜色空间是连接人类视觉感知与计算机数值表示的桥梁。RGB 是显示器的物理语言，HSL 是人类直觉的数学化，CMYK
         是印刷工艺的经验总结。掌握这些颜色模型的原理和转换方法，配合色彩和谐理论，你就能在设计和开发中做出既美观又专业的配色决策。
-      </p></article>
+      </p>
+    </article>
     <section class="related-tools">
       <h3>相关工具推荐</h3>
       <div class="related-tools-grid">

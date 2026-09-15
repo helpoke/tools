@@ -7,6 +7,11 @@
     <meta name="keywords" content="XML格式化, XML在线格式化, XML压缩, XML转JSON, JSON转XML, 免费XML工具">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
     <meta http-equiv="Content-Security-Policy"
@@ -39,7 +44,7 @@
     <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css">
 
     <script src="/common/js/ads.js" async></script>
-    <script type="importmap">
+    <script type="importmap" defer>
 {
     "imports": {
         "codemirror": "/common/lib/codemirror/codemirror/index.js",
@@ -123,20 +128,20 @@
                     <button class="btn" data-xml-action="sample" data-i18n="dev.xml.sampleBtn">加载示例</button>
                     <button class="btn" data-xml-action="format" title="格式化 XML（缩进美化）" data-i18n="dev.xml.formatBtn"
                         data-i18n-title="dev.xml.formatBtnTitle">格式化</button>
-                    <button class="btn" id="fold-btn" disabled
-                        data-i18n="common.buttons.collapse">折叠</button>
+                    <button class="btn" id="fold-btn" disabled data-i18n="common.buttons.collapse">折叠</button>
                     <button class="btn" data-xml-action="minify" title="压缩 XML（去除空白）" data-i18n="dev.xml.minifyBtn"
                         data-i18n-title="dev.xml.minifyBtnTitle">压缩</button>
-                    <button class="btn accent" id="btn-to-json" title="XML 转 JSON"
-                        data-i18n="dev.xml.toJsonBtn" data-i18n-title="dev.xml.toJsonBtnTitle">转 JSON</button>
+                    <button class="btn accent" id="btn-to-json" title="XML 转 JSON" data-i18n="dev.xml.toJsonBtn"
+                        data-i18n-title="dev.xml.toJsonBtnTitle">转 JSON</button>
                     <div class="dropdown-btn">
-                        <button class="btn accent convert-disabled" id="btn-to-xml"
-                            title="JSON 转 XML" data-i18n="dev.xml.toXmlBtn" data-i18n-title="dev.xml.toXmlBtnTitle">转
+                        <button class="btn accent convert-disabled" id="btn-to-xml" title="JSON 转 XML"
+                            data-i18n="dev.xml.toXmlBtn" data-i18n-title="dev.xml.toXmlBtnTitle">转
                             XML ▼</button>
                         <div class="dropdown-menu" id="xmlConvertMenu" style="display:none;">
                             <div class="dropdown-item" data-xml-action="json2xml-expanded"
                                 data-i18n="dev.xml.modeExpanded">展开（子元素）</div>
-                            <div class="dropdown-item" data-xml-action="json2xml-compact" data-i18n="dev.xml.modeCompact">
+                            <div class="dropdown-item" data-xml-action="json2xml-compact"
+                                data-i18n="dev.xml.modeCompact">
                                 紧凑（属性）</div>
                         </div>
                     </div>

@@ -12,7 +12,10 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="description" content="深入对比 JSON 与 XML 两种数据格式的性能差异、使用场景和常见语法错误，帮助开发者选择合适的数据格式。">
     <meta name="keywords" content="JSON,XML,数据格式,性能对比,语法错误,API开发">
-    <link rel="icon" href="/common/img/helpoke.webp">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
     <link rel="stylesheet" href="/common/css/style.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
@@ -43,7 +46,8 @@
         </header>
         <article class="article-content">
             <h2>前言：为什么需要深入了解数据格式</h2>
-            <p>JSON 和 XML 的选择困扰了很多开发者。实际上，答案很简单：新项目用 JSON，遗留系统对接用 XML。但具体到数值精度、XXE 安全、大文件解析等细节，还有很多容易踩的坑。这篇从实际开发场景出发，对比两种格式的优劣，并给出迁移过程中的实战经验。</p>
+            <p>JSON 和 XML 的选择困扰了很多开发者。实际上，答案很简单：新项目用 JSON，遗留系统对接用 XML。但具体到数值精度、XXE
+                安全、大文件解析等细节，还有很多容易踩的坑。这篇从实际开发场景出发，对比两种格式的优劣，并给出迁移过程中的实战经验。</p>
 
             <h2>一、JSON 与 XML 的基本概念对比</h2>
             <h3>1.1 JSON 简介与特性</h3>
@@ -476,13 +480,14 @@ JSON Schema 核心特性：
   ✓ 需要处理复杂文档结构 → XML + XSD
   ✓ 高性能场景 → Protobuf / MessagePack（二进制）
   ✗ 不要在新项目中使用 XML（除非行业标准要求）</code></pre>
-        <h2>JSON 与 XML 在实际项目中的选型建议</h2>
+            <h2>JSON 与 XML 在实际项目中的选型建议</h2>
             <p><strong>RESTful API：</strong>JSON 是绝对主流，解析快、体积小、前端原生支持。XML 仅在 SOAP、WSDL 等遗留协议中使用。</p>
-            <p><strong>配置文件：</strong>JSON/YAML/TOML 各有生态。Node.js 项目用 JSON，Python/Ruby 用 YAML，Rust/Go 用 TOML。XML 配置在 Java/Spring 生态中仍有大量存量。</p>
+            <p><strong>配置文件：</strong>JSON/YAML/TOML 各有生态。Node.js 项目用 JSON，Python/Ruby 用 YAML，Rust/Go 用 TOML。XML 配置在
+                Java/Spring 生态中仍有大量存量。</p>
             <p><strong>数据交换：</strong>企业内部系统对接优先用 JSON，与政府/银行等遗留系统对接可能必须用 XML。</p>
             <p><strong>文档标记：</strong>XML 的强项，HTML、SVG、MathML 都是 XML 应用。JSON 不适合标记文档结构。</p>
 
-        <h2>实战案例：API 数据格式迁移</h2>
+            <h2>实战案例：API 数据格式迁移</h2>
             <p>某企业将遗留的 SOAP/XML 服务迁移为 RESTful/JSON 架构。迁移过程中需要处理：</p>
             <ul>
                 <li>新旧系统并行期间，网关层自动将 XML 请求转换为 JSON，响应再转回 XML</li>
@@ -492,30 +497,41 @@ JSON Schema 核心特性：
             </ul>
             <p>通过渐进式迁移策略，在 3 个月内完成了全部接口的格式切换，零停机。</p>
 
-        <h2>数据格式开发注意事项</h2>
+            <h2>数据格式开发注意事项</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>JSON 不支持注释：</strong>这是设计决策而非缺陷。如果需要注释，用 JSONC（VS Code 配置）或 JSON5。API 文档用 OpenAPI/Swagger 描述字段含义。</li>
-                    <li><strong>数值精度问题：</strong>JSON 中超过 53 位的整数会丢失精度（JavaScript Number 限制），大数用字符串表示。Java 后端用 <code>BigInteger</code> 序列化时注意。</li>
-                    <li><strong>XML 的 XXE 攻击：</strong>解析外部 XML 时必须禁用外部实体解析，否则攻击者可以读取服务器文件。Java 用 <code>DocumentBuilderFactory.setFeature</code> 禁用。</li>
-                    <li><strong>大文件流式处理：</strong>处理大型 JSON 用流式解析器（如 Node.js 的 <code>stream-json</code>），大型 XML 用 SAX/StAX，避免一次性加载到内存。</li>
-                    <li><strong>版本兼容：</strong>API 响应中新增字段不影响旧客户端（JSON 忽略未知字段），删除字段会破坏兼容性。用版本号或 <code>Accept</code> 头管理 API 版本。</li>
+                    <li><strong>JSON 不支持注释：</strong>这是设计决策而非缺陷。如果需要注释，用 JSONC（VS Code 配置）或 JSON5。API 文档用 OpenAPI/Swagger
+                        描述字段含义。</li>
+                    <li><strong>数值精度问题：</strong>JSON 中超过 53 位的整数会丢失精度（JavaScript Number 限制），大数用字符串表示。Java 后端用
+                        <code>BigInteger</code> 序列化时注意。
+                    </li>
+                    <li><strong>XML 的 XXE 攻击：</strong>解析外部 XML 时必须禁用外部实体解析，否则攻击者可以读取服务器文件。Java 用
+                        <code>DocumentBuilderFactory.setFeature</code> 禁用。
+                    </li>
+                    <li><strong>大文件流式处理：</strong>处理大型 JSON 用流式解析器（如 Node.js 的 <code>stream-json</code>），大型 XML 用
+                        SAX/StAX，避免一次性加载到内存。</li>
+                    <li><strong>版本兼容：</strong>API 响应中新增字段不影响旧客户端（JSON 忽略未知字段），删除字段会破坏兼容性。用版本号或 <code>Accept</code> 头管理
+                        API 版本。</li>
                 </ul>
             </div>
 
-        <h2>常见问题</h2>
+            <h2>常见问题</h2>
             <h3>问：JSON 和 XML 哪个更好？</h3>
-            <p><strong>答：</strong>没有绝对的好坏。JSON 更轻量、解析更快，适合 Web API 和配置文件；XML 支持更复杂的数据结构（属性、命名空间、Schema 验证），适合企业级数据交换和文档标记。新项目通常优先选择 JSON。</p>
+            <p><strong>答：</strong>没有绝对的好坏。JSON 更轻量、解析更快，适合 Web API 和配置文件；XML 支持更复杂的数据结构（属性、命名空间、Schema
+                验证），适合企业级数据交换和文档标记。新项目通常优先选择 JSON。</p>
             <h3>问：JSON 解析报错 "Unexpected token" 是什么原因？</h3>
-            <p><strong>答：</strong>常见原因：① JSON 中使用了单引号而非双引号；② 末尾有多余的逗号（trailing comma）；③ 包含了注释（JSON 不支持）；④ 特殊字符未正确转义。使用 JSON 校验工具可以快速定位问题。</p>
+            <p><strong>答：</strong>常见原因：① JSON 中使用了单引号而非双引号；② 末尾有多余的逗号（trailing comma）；③ 包含了注释（JSON 不支持）；④ 特殊字符未正确转义。使用
+                JSON 校验工具可以快速定位问题。</p>
             <h3>问：XML 的 CDATA 在 JSON 中怎么表示？</h3>
-            <p><strong>答：</strong>JSON 没有 CDATA 的概念，所有值都是字符串。XML 转 JSON 时，CDATA 内容直接作为普通字符串值即可。如果需要在 JSON 中区分"文本内容"和"标记内容"，通常通过键名约定或嵌套对象来表示。</p>
+            <p><strong>答：</strong>JSON 没有 CDATA 的概念，所有值都是字符串。XML 转 JSON 时，CDATA 内容直接作为普通字符串值即可。如果需要在 JSON
+                中区分"文本内容"和"标记内容"，通常通过键名约定或嵌套对象来表示。</p>
 
-        
+
 
             <h2>总结</h2>
             <p>JSON 和 XML 各有所长，选择合适的格式需要综合考虑性能需求、数据复杂度和应用场景。对于现代 Web 开发，JSON 因其简洁高效而成为主流选择；而对于复杂数据结构、文档处理和需要严格验证的场景，XML
-                依然不可替代。掌握两者的语法规则和常见错误排查方法，是每个开发者必备的技能。</p></article>
+                依然不可替代。掌握两者的语法规则和常见错误排查方法，是每个开发者必备的技能。</p>
+        </article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
             <div class="related-tools-grid">

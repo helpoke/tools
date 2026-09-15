@@ -12,7 +12,10 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="description" content="深入解析 Unix 时间戳的原理、2038 年问题、各编程语言的时间处理方式，以及时区转换和夏令时的工程实践。">
     <meta name="keywords" content="时间戳,Unix时间戳,时区,UTC,夏令时,2038年问题,日期处理,时间转换">
-    <link rel="icon" href="/common/img/helpoke.webp">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
     <link rel="stylesheet" href="/common/css/style.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
@@ -346,13 +349,18 @@ System.out.println(shanghai.format(fmt));  // "2026-08-24 12:00:00"</code></pre>
   ✓ 显示层才做时区转换（前端/客户端负责）
   ✓ 用户时区偏好单独存储（不要硬编码 +8）
   ✗ 永远不要存“无时区的本地时间字符串”——它是“薛定谔的时间”</code></pre>
-        <h2>时间戳在跨语言开发中的应用场景</h2>
-            <p><strong>后端存储：</strong>数据库中的时间字段统一用 BIGINT 存储 Unix 时间戳（秒或毫秒），避免时区和夏令时问题。MySQL 用 <code>UNIX_TIMESTAMP()</code>，PostgreSQL 用 <code>EXTRACT(EPOCH FROM ...)</code>。</p>
-            <p><strong>API 接口：</strong>RESTful API 的时间参数用时间戳而非字符串，避免格式歧义。JWT 的 <code>exp</code>、<code>iat</code>、<code>nbf</code> 声明都是 Unix 时间戳（秒）。</p>
-            <p><strong>前端显示：</strong>JavaScript 的 <code>Date.now()</code> 返回毫秒级时间戳，显示时用 <code>Intl.DateTimeFormat</code> 转换为用户本地时间。React/Vue 项目中推荐用 dayjs 或 date-fns 处理。</p>
+            <h2>时间戳在跨语言开发中的应用场景</h2>
+            <p><strong>后端存储：</strong>数据库中的时间字段统一用 BIGINT 存储 Unix 时间戳（秒或毫秒），避免时区和夏令时问题。MySQL 用
+                <code>UNIX_TIMESTAMP()</code>，PostgreSQL 用 <code>EXTRACT(EPOCH FROM ...)</code>。
+            </p>
+            <p><strong>API 接口：</strong>RESTful API 的时间参数用时间戳而非字符串，避免格式歧义。JWT 的
+                <code>exp</code>、<code>iat</code>、<code>nbf</code> 声明都是 Unix 时间戳（秒）。
+            </p>
+            <p><strong>前端显示：</strong>JavaScript 的 <code>Date.now()</code> 返回毫秒级时间戳，显示时用 <code>Intl.DateTimeFormat</code>
+                转换为用户本地时间。React/Vue 项目中推荐用 dayjs 或 date-fns 处理。</p>
             <p><strong>日志分析：</strong>服务器日志中的时间戳通常是 UTC 时间，分析时需要转换为目标时区。ELK Stack 默认将时间戳转为 UTC 存储，在 Kibana 中按用户时区显示。</p>
 
-        <h2>实战案例：跨时区会议系统的时区处理</h2>
+            <h2>实战案例：跨时区会议系统的时区处理</h2>
             <p>某远程团队分布在纽约、伦敦、北京三个时区，需要开发一个会议调度系统：</p>
             <ul>
                 <li>后端统一用 UTC 时间戳存储会议时间，避免夏令时导致的偏移</li>
@@ -362,32 +370,42 @@ System.out.println(shanghai.format(fmt));  // "2026-08-24 12:00:00"</code></pre>
             </ul>
             <p>上线后时区相关的 Bug 从每周 5-8 个降低到 0 个。核心经验：存储用 UTC，显示用本地，传输用时间戳。</p>
 
-        <h2>时间处理常见踩坑点</h2>
+            <h2>时间处理常见踩坑点</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>秒 vs 毫秒：</strong>Unix 时间戳标准单位是秒，但 JavaScript <code>Date.now()</code> 返回毫秒。混用会导致时间偏差 1000 倍。API 接口文档必须明确标注单位。</li>
-                    <li><strong>2038 年问题：</strong>32 位有符号整数的最大值为 2^31-1 = 2147483647，对应 2038-01-19 03:14:07 UTC。超过此时间会溢出。解决方案：使用 64 位整数存储时间戳。</li>
-                    <li><strong>夏令时切换日：</strong>某些时区在夏令时切换日会出现 23 小时或 25 小时的一天。用 <code>date-fns-tz</code> 等库可以正确处理，不要手动加减 3600 秒。</li>
+                    <li><strong>秒 vs 毫秒：</strong>Unix 时间戳标准单位是秒，但 JavaScript <code>Date.now()</code> 返回毫秒。混用会导致时间偏差 1000
+                        倍。API 接口文档必须明确标注单位。</li>
+                    <li><strong>2038 年问题：</strong>32 位有符号整数的最大值为 2^31-1 = 2147483647，对应 2038-01-19 03:14:07
+                        UTC。超过此时间会溢出。解决方案：使用 64 位整数存储时间戳。</li>
+                    <li><strong>夏令时切换日：</strong>某些时区在夏令时切换日会出现 23 小时或 25 小时的一天。用 <code>date-fns-tz</code>
+                        等库可以正确处理，不要手动加减 3600 秒。</li>
                     <li><strong>闰秒问题：</strong>Unix 时间戳忽略闰秒，UTC 时间包含闰秒。大多数应用场景不受影响，但高精度场景（如卫星通信）需要注意。</li>
                     <li><strong>时区数据库要更新：</strong>各国时区规则会变化（如某国取消夏令时），服务器上的 tzdata 包需要定期更新，否则历史时间转换会出错。</li>
                 </ul>
             </div>
 
-        <h2>常见问题</h2>
+            <h2>常见问题</h2>
             <h3>问：为什么时间戳转换总是差 8 小时？</h3>
-            <p><strong>答：</strong>这是时区问题。Unix 时间戳是 UTC 时间，中国标准时间是 UTC+8。在后端处理时统一使用 UTC，只在前端显示时转换为用户时区（如 <code>Intl.DateTimeFormat</code> 设置 timeZone），可以彻底避免时区混乱。</p>
+            <p><strong>答：</strong>这是时区问题。Unix 时间戳是 UTC 时间，中国标准时间是 UTC+8。在后端处理时统一使用 UTC，只在前端显示时转换为用户时区（如
+                <code>Intl.DateTimeFormat</code> 设置 timeZone），可以彻底避免时区混乱。
+            </p>
             <h3>问：JavaScript 中如何获取秒级时间戳？</h3>
-            <p><strong>答：</strong><code>Math.floor(Date.now() / 1000)</code> 或 <code>Math.floor(new Date().getTime() / 1000)</code>。注意 JavaScript 的时间戳是毫秒级，除以 1000 取整才是秒级。与后端 API 对接时务必确认单位。</p>
+            <p><strong>答：</strong><code>Math.floor(Date.now() / 1000)</code> 或
+                <code>Math.floor(new Date().getTime() / 1000)</code>。注意 JavaScript 的时间戳是毫秒级，除以 1000 取整才是秒级。与后端 API
+                对接时务必确认单位。
+            </p>
             <h3>问：如何正确处理跨时区的日期计算？</h3>
-            <p><strong>答：</strong>不要用 <code>new Date("2026-01-01")</code> 解析日期字符串，不同浏览器对时区的处理不一致。推荐用 <code>dayjs</code> 或 <code>date-fns</code> 库，明确指定时区：`dayjs.tz("2026-01-01", "Asia/Shanghai")`。</p>
+            <p><strong>答：</strong>不要用 <code>new Date("2026-01-01")</code> 解析日期字符串，不同浏览器对时区的处理不一致。推荐用 <code>dayjs</code>
+                或 <code>date-fns</code> 库，明确指定时区：`dayjs.tz("2026-01-01", "Asia/Shanghai")`。</p>
 
-        
+
 
             <h2>结语</h2>
             <p>Unix 时间戳用一个简单的整数解决了"全球时间统一表示"的问题——它是跨时区、跨系统时间处理的基石。
                 但时间处理的复杂性远不止一个数字：时区规则在变、夏令时在切换、不同语言的 API 各有差异。
                 遵循"存储用 UTC、显示转本地、使用 IANA 时区名"这三大原则，可以规避绝大多数时间处理陷阱。
-            </p></article>
+            </p>
+        </article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
             <div class="related-tools-grid">

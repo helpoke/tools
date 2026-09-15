@@ -8,6 +8,11 @@
     <meta name="keywords" content="TOTP生成器,OTP,动态口令,双因素认证,Google Authenticator,Base32,在线TOTP">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -226,10 +231,14 @@
                         秒周期。高安全场景可能使用 SHA-256/SHA-512 + 8 位数字。请确保参数与服务端配置完全一致。</p>
                     <h4 data-i18n="encrypted.totp.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.totp.noteFaq1"><strong>Q: 手机时间不准会影响口令吗？</strong>A: 会。TOTP 基于时间戳生成口令，如果设备时间与服务器时间偏差超过 30 秒到 1 分钟（服务端通常允许的容差），生成的口令将无法通过验证。建议定期同步设备时间。</li>
-                        <li data-i18n="encrypted.totp.noteFaq2"><strong>Q: 同一个密钥能在多台设备上使用吗？</strong>A: 可以。只要时间同步，多台设备会生成相同的口令。但注意保管好密钥，任何持有密钥的人都能生成有效口令。</li>
-                        <li data-i18n="encrypted.totp.noteFaq3"><strong>Q: TOTP 密钥泄露后能撤销吗？</strong>A: TOTP 本身不支持撤销——它是离线算法，不依赖服务端实时生成。密钥泄露后需要在服务端重新绑定新密钥，旧密钥将失效。</li>
-                        <li data-i18n="encrypted.totp.noteFaq4"><strong>Q: 6 位和 8 位口令哪个更安全？</strong>A: 8 位口令有 1 亿种组合（6 位仅 100 万种），安全冗余更高。但大多数服务使用 6 位，30 秒窗口内暴力破解 6 位口令的概率也极低。</li>
+                        <li data-i18n="encrypted.totp.noteFaq1"><strong>Q: 手机时间不准会影响口令吗？</strong>A: 会。TOTP
+                            基于时间戳生成口令，如果设备时间与服务器时间偏差超过 30 秒到 1 分钟（服务端通常允许的容差），生成的口令将无法通过验证。建议定期同步设备时间。</li>
+                        <li data-i18n="encrypted.totp.noteFaq2"><strong>Q: 同一个密钥能在多台设备上使用吗？</strong>A:
+                            可以。只要时间同步，多台设备会生成相同的口令。但注意保管好密钥，任何持有密钥的人都能生成有效口令。</li>
+                        <li data-i18n="encrypted.totp.noteFaq3"><strong>Q: TOTP 密钥泄露后能撤销吗？</strong>A: TOTP
+                            本身不支持撤销——它是离线算法，不依赖服务端实时生成。密钥泄露后需要在服务端重新绑定新密钥，旧密钥将失效。</li>
+                        <li data-i18n="encrypted.totp.noteFaq4"><strong>Q: 6 位和 8 位口令哪个更安全？</strong>A: 8 位口令有 1 亿种组合（6
+                            位仅 100 万种），安全冗余更高。但大多数服务使用 6 位，30 秒窗口内暴力破解 6 位口令的概率也极低。</li>
                     </ul>
                 </div>
             </article>

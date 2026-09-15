@@ -7,6 +7,10 @@
     <meta name="keywords" content="文件加密,文件解密,AES加密,PBKDF2,AES-256-GCM,本地加密,隐私保护">
     <meta name="author" content="Helpoke">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>文件加解密工具 - 使用说明与完整指南</title>
@@ -156,7 +160,8 @@
                 <h2>工具简介</h2>
                 <p>本工具使用 <code>AES-256-GCM</code> 算法在浏览器本地对文件进行加密与解密。AES-256-GCM
                     是一种现代<strong>认证加密</strong>方案，它同时提供三项安全保证：<strong>机密性</strong>（未授权者无法读取内容）、<strong>完整性</strong>（任何篡改都会被检测到）和<strong>认证</strong>（确保解密方使用正确的密钥）。加密时，密码通过
-                    <code>PBKDF2</code>（SHA-256，100,000 次迭代）和随机盐派生为 256 位密钥，并配合随机 IV/Nonce 进行加密。</p>
+                    <code>PBKDF2</code>（SHA-256，100,000 次迭代）和随机盐派生为 256 位密钥，并配合随机 IV/Nonce 进行加密。
+                </p>
                 <p>加密后的文件采用自包含格式：<code>magic + version + salt + iv + ciphertext + tag</code>。解密时无需手动输入盐或
                     IV，只需原始密码即可还原文件。如果加密文件在传输或存储过程中被篡改，GCM 认证标签验证会失败，解密将立即终止，从而有效保护数据安全。</p>
                 <p>所有加解密操作完全在浏览器内存中完成，文件内容不会上传到服务器。处理完成后，文件数据会从浏览器内存中释放，适合处理身份证件、财务资料、医疗记录、商业合同、设计稿、源代码等高度敏感文件。</p>
@@ -168,7 +173,8 @@
                 <p>点击上传区域选择需要加密的文件，或直接拖拽文件到上传区域。文件内容仅在浏览器内存中读取，不会上传到服务器。支持加密任意类型文件，包括文档、图片、视频、压缩包等。</p>
                 <h3>第三步：点击加密</h3>
                 <p>工具会自动生成密码学安全随机盐和 IV，通过 PBKDF2 派生密钥并使用 AES-256-GCM 加密文件。处理完成后，浏览器会自动下载以 <code>.enc</code> 结尾的加密文件（如
-                    <code>document.pdf.enc</code>）。</p>
+                    <code>document.pdf.enc</code>）。
+                </p>
                 <h3>第四步：安全解密</h3>
                 <p>需要恢复文件时，切换到解密模式，上传 <code>.enc</code> 文件并输入加密时使用的密码。密码正确且文件未被篡改即可下载原始文件。</p>
             </div>
@@ -208,7 +214,8 @@
                 <p><strong>答：</strong>本工具不保存密码，也无法通过任何方式重置或找回密码。忘记密码将导致文件永久无法解密，请务必妥善保管密码。建议将密码记录在可靠的密码管理器中。</p>
                 <h3>问：加密后的文件扩展名是什么？</h3>
                 <p><strong>答：</strong>工具会在原文件名后追加 <code>.enc</code>，例如 <code>document.pdf</code> 加密后保存为
-                    <code>document.pdf.enc</code>。解密时会自动去除 <code>.enc</code> 并还原原始文件名。</p>
+                    <code>document.pdf.enc</code>。解密时会自动去除 <code>.enc</code> 并还原原始文件名。
+                </p>
                 <h3>问：可以加密多大的文件？</h3>
                 <p><strong>答：</strong>文件大小受浏览器可用内存限制。建议单文件不超过几百 MB；超大文件请使用专业桌面加密软件。处理完成后关闭标签页可释放内存。</p>
                 <h3>问：解密失败怎么办？</h3>

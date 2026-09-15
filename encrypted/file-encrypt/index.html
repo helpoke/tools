@@ -8,6 +8,11 @@
     <meta name="keywords" content="文件加密,文件解密,文件加解密,在线文件加密,本地加密,AES加密">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -242,10 +247,14 @@
                         是目前推荐的文件加密方案。请使用强密码并通过不同渠道发送密码。建议保留本地备份以防密码丢失。</p>
                     <h4 data-i18n="encrypted.fileEncrypt.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.fileEncrypt.noteFaq1"><strong>Q: 忘记密码能恢复吗？</strong>A: 不能。AES-256-GCM 的密钥由密码通过 PBKDF2 派生，没有密码就无法解密。请务必牢记密码或安全记录。</li>
-                        <li data-i18n="encrypted.fileEncrypt.noteFaq2"><strong>Q: 加密后文件会变大吗？</strong>A: 会略微增大——加密文件包含盐值（16 字节）、IV（12 字节）和认证标签（16 字节），总计增加约 44 字节。对于大文件可忽略不计。</li>
-                        <li data-i18n="encrypted.fileEncrypt.noteFaq3"><strong>Q: 同一个文件用相同密码加密两次，结果一样吗？</strong>A: 不一样。每次加密都会生成新的随机盐和 IV，所以密文不同。这是安全优势——攻击者无法通过对比密文判断两个文件是否相同。</li>
-                        <li data-i18n="encrypted.fileEncrypt.noteFaq4"><strong>Q: 加密大文件会很慢吗？</strong>A: AES-256-GCM 使用 Web Crypto API 原生实现，速度接近系统级加密库。100MB 文件通常在 1-3 秒内完成加密。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq1"><strong>Q: 忘记密码能恢复吗？</strong>A: 不能。AES-256-GCM
+                            的密钥由密码通过 PBKDF2 派生，没有密码就无法解密。请务必牢记密码或安全记录。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq2"><strong>Q: 加密后文件会变大吗？</strong>A:
+                            会略微增大——加密文件包含盐值（16 字节）、IV（12 字节）和认证标签（16 字节），总计增加约 44 字节。对于大文件可忽略不计。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq3"><strong>Q: 同一个文件用相同密码加密两次，结果一样吗？</strong>A:
+                            不一样。每次加密都会生成新的随机盐和 IV，所以密文不同。这是安全优势——攻击者无法通过对比密文判断两个文件是否相同。</li>
+                        <li data-i18n="encrypted.fileEncrypt.noteFaq4"><strong>Q: 加密大文件会很慢吗？</strong>A: AES-256-GCM 使用
+                            Web Crypto API 原生实现，速度接近系统级加密库。100MB 文件通常在 1-3 秒内完成加密。</li>
                     </ul>
                 </div>
             </article>

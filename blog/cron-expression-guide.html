@@ -12,7 +12,10 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="description" content="系统讲解 Cron 表达式语法、常见用法和最佳实践，帮助开发者精准控制定时任务。">
     <meta name="keywords" content="Cron表达式,定时任务,任务调度,Cron语法,定时器,Linux定时任务">
-    <link rel="icon" href="/common/img/helpoke.webp">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
     <link rel="stylesheet" href="/common/css/style.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
@@ -418,7 +421,8 @@ String cron = isHoliday(today) ? "0 0 0 31 2 ?" : "0 0 12 * * ?";
             <p><strong>数据库备份：</strong>最常见的场景，用 <code>0 2 * * *</code> 配置每日凌晨 2 点自动备份。生产环境建议备份任务与业务高峰期间隔至少 4 小时，避免 IO 竞争。
             </p>
             <p><strong>日志轮转与清理：</strong>用 <code>0 0 * * 0</code> 每周日凌晨清理过期日志，防止磁盘被占满。配合
-                <code>find /var/log -name "*.log" -mtime +30 -delete</code> 使用。</p>
+                <code>find /var/log -name "*.log" -mtime +30 -delete</code> 使用。
+            </p>
             <p><strong>定时报表生成：</strong>用 <code>0 8 1 * *</code> 每月 1 号早 8 点生成上月业务报表，发送邮件给管理层。注意避开节假日可用脚本内部判断。</p>
             <p><strong>健康检查与监控：</strong>用 <code>*/5 * * * *</code> 每 5 分钟检测服务存活状态，连续 3 次失败触发告警。这是 Prometheus 和 Grafana
                 监控体系的基础。</p>
@@ -441,7 +445,8 @@ String cron = isHoliday(today) ? "0 0 0 31 2 ?" : "0 0 12 * * ?";
                         周）。混用会导致解析错误，务必确认调度器支持的格式。</li>
                     <li><strong>时区必须明确指定：</strong>不要在 Cron 表达式中依赖服务器本地时区。Linux 系统用
                         <code>CRON_TZ=Asia/Shanghai</code>，Spring 用
-                        <code>@Scheduled(cron="...", zone="Asia/Shanghai")</code>。</li>
+                        <code>@Scheduled(cron="...", zone="Asia/Shanghai")</code>。
+                    </li>
                     <li><strong>夏令时问题：</strong>使用 <code>30 2 * * *</code> 在夏令时切换日可能执行 0 次或 2 次。建议避开凌晨 2-3 点这个夏令时切换窗口。
                     </li>
                     <li><strong>"*/7" 不等于"每 7 分钟"：</strong><code>*/7</code> 在分钟字段表示 0,7,14,21,28,35,42,49,56，第 8 次执行在第

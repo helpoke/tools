@@ -8,6 +8,10 @@
     <meta name="keywords" content="X.509证书,PEM证书,证书解析,SSL证书,HTTPS证书,ASN.1,数字证书">
     <meta name="author" content="Helpoke">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
     <title>X.509 证书解析器 - 使用说明与完整指南</title>
@@ -159,14 +163,16 @@
                     HTTPS/TLS、代码签名、S/MIME 邮件加密、VPN 身份认证等安全通信的基石。</p>
                 <p>一张标准的 X.509 证书包含以下关键信息：版本号、序列号、签名算法、颁发者（Issuer）、有效期、主题（Subject）、公钥、主题备用名称（SAN）、密钥用途（Key
                     Usage）、基本约束（Basic Constraints）等扩展信息，以及颁发机构对以上内容的数字签名。PEM 格式是 Base64 编码的 ASN.1 结构，以
-                    <code>-----BEGIN CERTIFICATE-----</code> 开头，以 <code>-----END CERTIFICATE-----</code> 结尾。</p>
+                    <code>-----BEGIN CERTIFICATE-----</code> 开头，以 <code>-----END CERTIFICATE-----</code> 结尾。
+                </p>
                 <p>本工具使用纯 JavaScript 在浏览器本地解析 PEM 编码的 X.509 证书，解码 ASN.1 结构并提取关键字段，同时计算 SHA-1 和 SHA-256
                     指纹。解析过程完全在本地完成，证书数据不会上传到服务器。</p>
 
                 <h2>三步解析 X.509 证书</h2>
                 <h3>第一步：获取 PEM 证书</h3>
                 <p>从服务器、浏览器导出或 CA 下发的文件中找到 PEM 格式证书。确保证书内容完整，包含 <code>-----BEGIN CERTIFICATE-----</code> 和
-                    <code>-----END CERTIFICATE-----</code> 标记。如果 PEM 文件包含证书链，请只粘贴第一个证书部分。</p>
+                    <code>-----END CERTIFICATE-----</code> 标记。如果 PEM 文件包含证书链，请只粘贴第一个证书部分。
+                </p>
                 <h3>第二步：粘贴到工具</h3>
                 <p>将完整的 PEM 文本复制粘贴到输入框中，确保证书内容没有被截断或混入其他数据。本工具会自动识别 PEM 格式并提取证书主体。</p>
                 <h3>第三步：解析并验证</h3>

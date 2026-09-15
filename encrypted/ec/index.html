@@ -8,6 +8,11 @@
     <meta name="keywords" content="EC密钥生成,椭圆曲线密钥对,ECDSA,ECDH,P-256,P-384,P-521,在线EC生成">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -194,7 +199,8 @@
                     <h4 data-i18n="encrypted.ec.scenariosTitle">典型应用场景</h4>
                     <ul>
                         <li data-i18n="encrypted.ec.scenarioEcdsa">
-                            <strong>数字签名（ECDSA）：</strong>使用私钥对数据或消息签名，任何人都可以用公钥验证签名来源和完整性。广泛应用于代码签名、文档签名和区块链交易。</li>
+                            <strong>数字签名（ECDSA）：</strong>使用私钥对数据或消息签名，任何人都可以用公钥验证签名来源和完整性。广泛应用于代码签名、文档签名和区块链交易。
+                        </li>
                         <li data-i18n="encrypted.ec.scenarioEcdh"><strong>密钥交换（ECDH）：</strong>双方使用各自的 EC
                             密钥对协商出共享密钥，用于后续对称加密通信。TLS 1.3 大量使用了 ECDHE 进行前向安全密钥交换。</li>
                         <li data-i18n="encrypted.ec.scenarioJwt"><strong>JWT 与 API 安全：</strong>ECDSA 签名在 JWT 中越来越流行，特别是
@@ -218,10 +224,14 @@
                         和移动应用。P-384 提供更高的安全冗余，适合政府和金融机构。P-521 提供最高安全级别，但计算开销更大，适合对安全性要求极高且性能不是瓶颈的场景。</p>
                     <h4 data-i18n="encrypted.ec.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.ec.noteFaq1"><strong>Q: ECC 能替代 RSA 吗？</strong>A: 在安全性和性能上 ECC 已全面超越 RSA——256 位 ECC 相当于 3072 位 RSA。但在密钥管理生态和旧系统兼容性方面，RSA 仍有优势。新项目建议优先考虑 ECC。</li>
-                        <li data-i18n="encrypted.ec.noteFaq2"><strong>Q: ECDSA 签名和 RSA 签名能互验吗？</strong>A: 不能。ECDSA 和 RSA 是完全不同的签名算法，密钥格式和签名格式都不兼容。验证方必须使用与签名方相同的算法。</li>
-                        <li data-i18n="encrypted.ec.noteFaq3"><strong>Q: P-256 和 P-384 能混合使用吗？</strong>A: 不能直接混合。密钥交换和签名验证要求双方使用同一条曲线。如果服务端使用 P-256，客户端也必须使用 P-256。</li>
-                        <li data-i18n="encrypted.ec.noteFaq4"><strong>Q: Raw 格式的公钥怎么用？</strong>A: Raw 格式导出的是纯公钥字节（Hex 编码），不包含曲线信息和格式包装。导入时需要手动指定曲线参数，适合底层开发场景。一般建议使用 PEM 或 JWK 格式。</li>
+                        <li data-i18n="encrypted.ec.noteFaq1"><strong>Q: ECC 能替代 RSA 吗？</strong>A: 在安全性和性能上 ECC 已全面超越
+                            RSA——256 位 ECC 相当于 3072 位 RSA。但在密钥管理生态和旧系统兼容性方面，RSA 仍有优势。新项目建议优先考虑 ECC。</li>
+                        <li data-i18n="encrypted.ec.noteFaq2"><strong>Q: ECDSA 签名和 RSA 签名能互验吗？</strong>A: 不能。ECDSA 和 RSA
+                            是完全不同的签名算法，密钥格式和签名格式都不兼容。验证方必须使用与签名方相同的算法。</li>
+                        <li data-i18n="encrypted.ec.noteFaq3"><strong>Q: P-256 和 P-384 能混合使用吗？</strong>A:
+                            不能直接混合。密钥交换和签名验证要求双方使用同一条曲线。如果服务端使用 P-256，客户端也必须使用 P-256。</li>
+                        <li data-i18n="encrypted.ec.noteFaq4"><strong>Q: Raw 格式的公钥怎么用？</strong>A: Raw 格式导出的是纯公钥字节（Hex
+                            编码），不包含曲线信息和格式包装。导入时需要手动指定曲线参数，适合底层开发场景。一般建议使用 PEM 或 JWK 格式。</li>
                     </ul>
                 </div>
             </article>

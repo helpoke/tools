@@ -12,7 +12,10 @@
   <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
   <meta name="description" content="深入解析 QR Code 的数据编码流程、纠错等级、掩码选择算法，以及动态二维码与静态二维码的技术差异。">
   <meta name="keywords" content="二维码,QR Code,纠错,Reed-Solomon,掩码,数据编码,动态二维码">
-  <link rel="icon" href="/common/img/helpoke.webp">
+  <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+  <!-- 初始化主题 -->
+  <script src="/common/js/theme-init.js"></script>
+
   <link rel="stylesheet" href="/common/css/style.css">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
@@ -29,7 +32,7 @@
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
   <main class="article-container">
     <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
     <header class="article-header">
@@ -336,48 +339,53 @@ Version 40：177×177 模块 → 可存 7,089 个数字 / 4,296 个字母
   ✓ 无标准要求时，QR Code 是最安全的选择（手机支持率最高）
   ✓ 空间极小时，DataMatrix 是唯一选择（最小可达 1-2mm²）
   ✗ 不要为了“好看”而用非标准码制——扫描器支持率是硬约束</code></pre>
-        <h2>二维码在实际场景中的应用</h2>
-            <p><strong>移动支付：</strong>支付宝/微信支付的付款码使用 QR Code，将用户身份 Token 编码为二维码，POS 机扫描后通过服务端验证完成支付。数据量通常在 100-300 字节之间。</p>
-            <p><strong>物流追踪：</strong>快递面单上的 QR Code 包含运单号、目的地、收件人等信息。相比一维码，二维码可以存储更多信息且自带纠错能力，即使面单部分损坏也能读取。</p>
-            <p><strong>医疗健康：</strong>DataMatrix 码用于医疗器械的 UDI（唯一器械标识），最小可在 2mm² 面积上编码，适合小型器械如骨科螺钉的标记。采用 DPM（直接部件标记）工艺可耐受高温消毒。</p>
-            <p><strong>票务系统：</strong>航空登机牌使用 Aztec 码（IATA 标准），只需单定位角即可识别，适合任意方向的快速扫描。火车票使用 QR Code 存储车次、座位、票价信息。</p>
+      <h2>二维码在实际场景中的应用</h2>
+      <p><strong>移动支付：</strong>支付宝/微信支付的付款码使用 QR Code，将用户身份 Token 编码为二维码，POS 机扫描后通过服务端验证完成支付。数据量通常在 100-300 字节之间。</p>
+      <p><strong>物流追踪：</strong>快递面单上的 QR Code 包含运单号、目的地、收件人等信息。相比一维码，二维码可以存储更多信息且自带纠错能力，即使面单部分损坏也能读取。</p>
+      <p><strong>医疗健康：</strong>DataMatrix 码用于医疗器械的 UDI（唯一器械标识），最小可在 2mm² 面积上编码，适合小型器械如骨科螺钉的标记。采用 DPM（直接部件标记）工艺可耐受高温消毒。
+      </p>
+      <p><strong>票务系统：</strong>航空登机牌使用 Aztec 码（IATA 标准），只需单定位角即可识别，适合任意方向的快速扫描。火车票使用 QR Code 存储车次、座位、票价信息。</p>
 
-        <h2>实战案例：门店会员系统的二维码设计</h2>
-            <p>某连锁门店需要为会员系统设计"扫码即付"功能，用户出示会员二维码后，店员扫描即可完成身份识别和扣款。技术团队的设计决策包括：</p>
-            <ul>
-                <li>选择 QR Code 而非 DataMatrix，因为手机摄像头对 QR Code 的识别率最高</li>
-                <li>使用 H 级纠错（30% 恢复能力），因为二维码中心需要嵌入品牌 Logo</li>
-                <li>二维码内容采用 JSON 格式，包含会员 ID + 时间戳 + HMAC 签名，防止伪造</li>
-                <li>Token 有效期设为 60 秒，每次刷新重新生成二维码</li>
-            </ul>
-            <p>上线后实测：在弱网环境下二维码生成成功率 99.2%，店员扫描平均耗时 0.8 秒，H 级纠错确保 Logo 遮挡 20% 区域仍可正常识别。</p>
+      <h2>实战案例：门店会员系统的二维码设计</h2>
+      <p>某连锁门店需要为会员系统设计"扫码即付"功能，用户出示会员二维码后，店员扫描即可完成身份识别和扣款。技术团队的设计决策包括：</p>
+      <ul>
+        <li>选择 QR Code 而非 DataMatrix，因为手机摄像头对 QR Code 的识别率最高</li>
+        <li>使用 H 级纠错（30% 恢复能力），因为二维码中心需要嵌入品牌 Logo</li>
+        <li>二维码内容采用 JSON 格式，包含会员 ID + 时间戳 + HMAC 签名，防止伪造</li>
+        <li>Token 有效期设为 60 秒，每次刷新重新生成二维码</li>
+      </ul>
+      <p>上线后实测：在弱网环境下二维码生成成功率 99.2%，店员扫描平均耗时 0.8 秒，H 级纠错确保 Logo 遮挡 20% 区域仍可正常识别。</p>
 
-        <h2>二维码开发与选型指南</h2>
-            <div class="warning-box">
-                <ul>
-                    <li><strong>QR Code 是手机场景的首选：</strong>所有智能手机原生支持 QR Code 识别，无需额外 App。DataMatrix 和 Aztec 在部分手机上无法原生识别。</li>
-                    <li><strong>嵌入 Logo 必须用 H 级纠错：</strong>H 级可恢复 30% 的数据，Logo 遮挡面积不超过 20-25% 时可正常扫描。用低纠错等级嵌入 Logo 会导致扫描失败。</li>
-                    <li><strong>版本选择要合理：</strong>数据量少时用低版本（小码图），扫描更快。超过 200 字节时考虑版本 10+，但要注意手机摄像头分辨率对码图密度的限制。</li>
-                    <li><strong>印刷尺寸不能太小：</strong>手机扫描建议不低于 2cm×2cm，工业扫描器可识别更小尺寸但需要精确对焦。</li>
-                    <li><strong>中文内容优先用 UTF-8：</strong>QR Code 的汉字模式使用 Shift_JIS 编码，中文手机可能无法正确显示。推荐将中文转为 UTF-8 字节序列后用二进制模式编码。</li>
-                </ul>
-            </div>
+      <h2>二维码开发与选型指南</h2>
+      <div class="warning-box">
+        <ul>
+          <li><strong>QR Code 是手机场景的首选：</strong>所有智能手机原生支持 QR Code 识别，无需额外 App。DataMatrix 和 Aztec 在部分手机上无法原生识别。</li>
+          <li><strong>嵌入 Logo 必须用 H 级纠错：</strong>H 级可恢复 30% 的数据，Logo 遮挡面积不超过 20-25% 时可正常扫描。用低纠错等级嵌入 Logo 会导致扫描失败。</li>
+          <li><strong>版本选择要合理：</strong>数据量少时用低版本（小码图），扫描更快。超过 200 字节时考虑版本 10+，但要注意手机摄像头分辨率对码图密度的限制。</li>
+          <li><strong>印刷尺寸不能太小：</strong>手机扫描建议不低于 2cm×2cm，工业扫描器可识别更小尺寸但需要精确对焦。</li>
+          <li><strong>中文内容优先用 UTF-8：</strong>QR Code 的汉字模式使用 Shift_JIS 编码，中文手机可能无法正确显示。推荐将中文转为 UTF-8 字节序列后用二进制模式编码。</li>
+        </ul>
+      </div>
 
-        <h2>常见问题</h2>
-            <h3>问：二维码扫描不出来是什么原因？</h3>
-            <p><strong>答：</strong>按以下顺序排查：① 印刷尺寸太小（低于 2cm×2cm）；② 对比度不足（浅色码在深色背景上）；③ 纠错等级不够，Logo 遮挡过多数据；④ 码图密度过高，超出手机摄像头分辨率。建议生成后用实际设备测试，不要只看屏幕预览。</p>
-            <h3>问：QR Code 能存储多少中文？</h3>
-            <p><strong>答：</strong>取决于版本和纠错等级。版本 40（最大）+ E 级纠错可存储约 1800 个中文字符。但实际应用中，版本过高会导致码图过密、扫描困难。建议控制在版本 10 以内（约 200 个中文字符），超过这个量考虑用 URL 指向服务器数据。</p>
-            <h3>问：二维码会被复制伪造吗？</h3>
-            <p><strong>答：</strong>二维码本身只是数据载体，不包含安全机制。静态二维码（如固定 URL）可以被复制后替换为钓鱼链接。安全措施包括：① 使用 HTTPS 验证服务器身份；② 动态二维码包含时间戳和签名，过期失效；③ 支付场景使用一次性 Token。</p>
+      <h2>常见问题</h2>
+      <h3>问：二维码扫描不出来是什么原因？</h3>
+      <p><strong>答：</strong>按以下顺序排查：① 印刷尺寸太小（低于 2cm×2cm）；② 对比度不足（浅色码在深色背景上）；③ 纠错等级不够，Logo 遮挡过多数据；④
+        码图密度过高，超出手机摄像头分辨率。建议生成后用实际设备测试，不要只看屏幕预览。</p>
+      <h3>问：QR Code 能存储多少中文？</h3>
+      <p><strong>答：</strong>取决于版本和纠错等级。版本 40（最大）+ E 级纠错可存储约 1800 个中文字符。但实际应用中，版本过高会导致码图过密、扫描困难。建议控制在版本 10 以内（约 200
+        个中文字符），超过这个量考虑用 URL 指向服务器数据。</p>
+      <h3>问：二维码会被复制伪造吗？</h3>
+      <p><strong>答：</strong>二维码本身只是数据载体，不包含安全机制。静态二维码（如固定 URL）可以被复制后替换为钓鱼链接。安全措施包括：① 使用 HTTPS 验证服务器身份；②
+        动态二维码包含时间戳和签名，过期失效；③ 支付场景使用一次性 Token。</p>
 
-    
+
 
       <h2>结语</h2>
       <p>QR Code 的设计堪称工程美学的典范——Reed-Solomon
         纠错让它"不怕损坏"，掩码选择让它"不怕干扰"，多模式编码让它"什么都能存"，版本系统让它"大小灵活"。
         一个小小的二维码，背后是精密的数学算法和深思熟虑的工程决策。理解这些技术细节，能帮助开发者在实际应用中做出更合理的选择。
-      </p></article>
+      </p>
+    </article>
     <section class="related-tools">
       <h3>相关工具推荐</h3>
       <div class="related-tools-grid">

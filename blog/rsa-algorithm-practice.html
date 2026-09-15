@@ -12,7 +12,10 @@
   <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
   <meta name="description" content="深入解析 RSA 非对称加密的数学原理，以及在数字签名、HTTPS 证书、JWT 签名中的实际应用。">
   <meta name="keywords" content="RSA,非对称加密,公钥私钥,数字签名,HTTPS,欧拉函数,大数分解,模幂运算">
-  <link rel="icon" href="/common/img/helpoke.webp">
+  <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+  <!-- 初始化主题 -->
+  <script src="/common/js/theme-init.js"></script>
+
   <link rel="stylesheet" href="/common/css/style.css">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
@@ -29,7 +32,7 @@
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
   <main class="article-container">
     <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
     <header class="article-header">
@@ -51,8 +54,10 @@
       <h2>一、数学基础：RSA 依赖的三大数论定理</h2>
 
       <figure style="margin: 2rem 0; text-align: center;">
-        <img src="/imgs/blog-rsa-encryption.svg" alt="RSA Encryption Flow Diagram" style="max-width: 100%; height: auto;" loading="lazy">
-        <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：RSA 非对称加密流程 — 公钥加密、私钥解密</figcaption>
+        <img src="/imgs/blog-rsa-encryption.svg" alt="RSA Encryption Flow Diagram"
+          style="max-width: 100%; height: auto;" loading="lazy">
+        <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：RSA 非对称加密流程 — 公钥加密、私钥解密
+        </figcaption>
       </figure>
 
       <h3>1.1 大数分解难题</h3>
@@ -366,47 +371,53 @@ OAEP 填充（Optimal Asymmetric Encryption Padding，2001年）：
   ✗ 不要用 RSA-1024 或更短（已不安全）
   ✗ 不要用 ECDSA + 重复随机数（会泄露私钥！PS3 被黑事件）
   ✓ Ed25519 是确定性的，不依赖随机数质量，更安全</code></pre>
-        <h2>RSA 在实际系统中的典型应用</h2>
-            <p><strong>HTTPS/TLS 握手：</strong>浏览器与服务器建立 HTTPS 连接时，用 RSA 交换对称密钥（密钥协商），后续通信改用 AES 等对称加密。RSA 的公钥包含在 SSL 证书中。</p>
-            <p><strong>数字签名：</strong>软件发布商用私钥对安装包签名，用户用公钥验证签名，确保软件未被篡改。Linux 包管理器（apt、yum）和代码签名（Windows Authenticode）都用 RSA 签名。</p>
-            <p><strong>JWT 签名（RS256）：</strong>微服务架构中，认证服务用 RSA 私钥签发 JWT，其他服务用公钥验证签名，无需共享密钥。</p>
-            <p><strong>加密小数据：</strong>RSA 可以加密少量数据（最多 245 字节/2048 位密钥），常用于加密对称密钥或密码。大数据加密应采用"RSA + AES"混合方案。</p>
+      <h2>RSA 在实际系统中的典型应用</h2>
+      <p><strong>HTTPS/TLS 握手：</strong>浏览器与服务器建立 HTTPS 连接时，用 RSA 交换对称密钥（密钥协商），后续通信改用 AES 等对称加密。RSA 的公钥包含在 SSL 证书中。</p>
+      <p><strong>数字签名：</strong>软件发布商用私钥对安装包签名，用户用公钥验证签名，确保软件未被篡改。Linux 包管理器（apt、yum）和代码签名（Windows Authenticode）都用 RSA
+        签名。</p>
+      <p><strong>JWT 签名（RS256）：</strong>微服务架构中，认证服务用 RSA 私钥签发 JWT，其他服务用公钥验证签名，无需共享密钥。</p>
+      <p><strong>加密小数据：</strong>RSA 可以加密少量数据（最多 245 字节/2048 位密钥），常用于加密对称密钥或密码。大数据加密应采用"RSA + AES"混合方案。</p>
 
-        <h2>实战案例：API 接口的 RSA 签名验证</h2>
-            <p>某开放平台需要为第三方开发者提供安全的 API 接口，防止请求被篡改和重放攻击：</p>
-            <ul>
-                <li>平台生成 RSA 2048 位密钥对，私钥自己保留，公钥提供给第三方开发者</li>
-                <li>每次请求时，平台用私钥对请求参数签名，开发者用公钥验证签名</li>
-                <li>响应数据中携带时间戳和随机数，防止重放攻击</li>
-                <li>敏感数据（如用户手机号）用开发者的公钥加密，只有开发者能用私钥解密</li>
-            </ul>
-            <p>上线后成功拦截多起请求篡改攻击，第三方开发者通过 SDK 自动处理签名和验证，接入体验良好。</p>
+      <h2>实战案例：API 接口的 RSA 签名验证</h2>
+      <p>某开放平台需要为第三方开发者提供安全的 API 接口，防止请求被篡改和重放攻击：</p>
+      <ul>
+        <li>平台生成 RSA 2048 位密钥对，私钥自己保留，公钥提供给第三方开发者</li>
+        <li>每次请求时，平台用私钥对请求参数签名，开发者用公钥验证签名</li>
+        <li>响应数据中携带时间戳和随机数，防止重放攻击</li>
+        <li>敏感数据（如用户手机号）用开发者的公钥加密，只有开发者能用私钥解密</li>
+      </ul>
+      <p>上线后成功拦截多起请求篡改攻击，第三方开发者通过 SDK 自动处理签名和验证，接入体验良好。</p>
 
-        <h2>RSA 安全实践注意事项</h2>
-            <div class="warning-box">
-                <ul>
-                    <li><strong>密钥长度至少 2048 位：</strong>1024 位 RSA 已被认为不安全（2010 年后逐步被淘汰）。新系统建议 2048 位，高安全场景用 4096 位或迁移到 ECC。</li>
-                    <li><strong>私钥绝对不能泄露：</strong>私钥不应出现在代码、日志、配置文件中。生产环境用 HSM（硬件安全模块）或 KMS（密钥管理服务）存储。</li>
-                    <li><strong>不要用 RSA 加密大数据：</strong>RSA 只能加密比密钥长度少 11 字节的数据。大数据应用采用"RSA 加密 AES 密钥 + AES 加密数据"的混合方案。</li>
-                    <li><strong>填充方案很重要：</strong>必须使用 OAEP 填充（PKCS#1 v2.1），不要用 PKCS#1 v1.5 填充加密（存在 Bleichenbacher 攻击风险）。签名可以用 PKCS#1 v1.5。</li>
-                    <li><strong>关注量子计算威胁：</strong>Shor 算法可以在量子计算机上多项式时间内分解大数，破解 RSA。后量子密码学（如 CRYSTALS-Kyber）正在标准化中。</li>
-                </ul>
-            </div>
+      <h2>RSA 安全实践注意事项</h2>
+      <div class="warning-box">
+        <ul>
+          <li><strong>密钥长度至少 2048 位：</strong>1024 位 RSA 已被认为不安全（2010 年后逐步被淘汰）。新系统建议 2048 位，高安全场景用 4096 位或迁移到 ECC。</li>
+          <li><strong>私钥绝对不能泄露：</strong>私钥不应出现在代码、日志、配置文件中。生产环境用 HSM（硬件安全模块）或 KMS（密钥管理服务）存储。</li>
+          <li><strong>不要用 RSA 加密大数据：</strong>RSA 只能加密比密钥长度少 11 字节的数据。大数据应用采用"RSA 加密 AES 密钥 + AES 加密数据"的混合方案。</li>
+          <li><strong>填充方案很重要：</strong>必须使用 OAEP 填充（PKCS#1 v2.1），不要用 PKCS#1 v1.5 填充加密（存在 Bleichenbacher 攻击风险）。签名可以用
+            PKCS#1 v1.5。</li>
+          <li><strong>关注量子计算威胁：</strong>Shor 算法可以在量子计算机上多项式时间内分解大数，破解 RSA。后量子密码学（如 CRYSTALS-Kyber）正在标准化中。</li>
+        </ul>
+      </div>
 
-        <h2>常见问题</h2>
-            <h3>问：RSA 和 ECC 该怎么选？</h3>
-            <p><strong>答：</strong>ECC（椭圆曲线密码）在相同安全强度下密钥更短（256 位 ECC ≈ 3072 位 RSA），性能更好、带宽更省。新系统建议用 ECC（如 P-256 曲线），旧系统继续用 RSA 2048 也可以。TLS 1.3 默认用 ECC 密钥交换。</p>
-            <h3>问：RSA 密钥对是怎么生成的？</h3>
-            <p><strong>答：</strong>核心步骤：① 随机选择两个大素数 p 和 q；② 计算 n = p × q；③ 计算欧拉函数 φ(n) = (p-1)(q-1)；④ 选择 e 使得 gcd(e, φ(n)) = 1（常用 65537）；⑤ 计算 d 使得 e×d ≡ 1 (mod φ(n))。公钥是 (n, e)，私钥是 (n, d)。</p>
-            <h3>问：为什么 HTTPS 不只用 RSA，还要用 AES？</h3>
-            <p><strong>答：</strong>RSA 非对称加密计算量大，速度比 AES 慢 1000 倍以上，且只能加密小数据。HTTPS 的做法是：用 RSA 交换对称密钥（密钥协商），后续通信全部用 AES 加密数据。结合了两者的优势：RSA 解决密钥分发问题，AES 解决加密性能问题。</p>
+      <h2>常见问题</h2>
+      <h3>问：RSA 和 ECC 该怎么选？</h3>
+      <p><strong>答：</strong>ECC（椭圆曲线密码）在相同安全强度下密钥更短（256 位 ECC ≈ 3072 位 RSA），性能更好、带宽更省。新系统建议用 ECC（如 P-256 曲线），旧系统继续用 RSA
+        2048 也可以。TLS 1.3 默认用 ECC 密钥交换。</p>
+      <h3>问：RSA 密钥对是怎么生成的？</h3>
+      <p><strong>答：</strong>核心步骤：① 随机选择两个大素数 p 和 q；② 计算 n = p × q；③ 计算欧拉函数 φ(n) = (p-1)(q-1)；④ 选择 e 使得 gcd(e, φ(n)) =
+        1（常用 65537）；⑤ 计算 d 使得 e×d ≡ 1 (mod φ(n))。公钥是 (n, e)，私钥是 (n, d)。</p>
+      <h3>问：为什么 HTTPS 不只用 RSA，还要用 AES？</h3>
+      <p><strong>答：</strong>RSA 非对称加密计算量大，速度比 AES 慢 1000 倍以上，且只能加密小数据。HTTPS 的做法是：用 RSA 交换对称密钥（密钥协商），后续通信全部用 AES
+        加密数据。结合了两者的优势：RSA 解决密钥分发问题，AES 解决加密性能问题。</p>
 
-    
+
 
       <h2>结语</h2>
       <p>RSA 算法的优雅之处在于它将纯数学（数论、欧拉定理、模逆元）转化为实用的安全工具。大数分解难题保证了"正向容易、逆向困难"，非对称密钥对解决了密钥分发困境。
         虽然量子计算的发展可能在未来威胁 RSA 的安全性，但在当下，RSA 仍然是互联网安全的基石之一——从 HTTPS 到数字签名，从 JWT 到 SSH，无处不在。
-      </p></article>
+      </p>
+    </article>
     <section class="related-tools">
       <h3>相关工具推荐</h3>
       <div class="related-tools-grid">

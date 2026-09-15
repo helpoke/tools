@@ -12,7 +12,10 @@
   <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
   <meta name="description" content="系统梳理字符编码的发展历史，深入解析 Unicode 编码空间、UTF-8/UTF-16 编码方案，以及 BOM、代理对、规范化等核心概念。">
   <meta name="keywords" content="Unicode,UTF-8,UTF-16,ASCII,字符编码,BOM,代理对,乱码,编码转换">
-  <link rel="icon" href="/common/img/helpoke.webp">
+  <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+  <!-- 初始化主题 -->
+  <script src="/common/js/theme-init.js"></script>
+
   <link rel="stylesheet" href="/common/css/style.css">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
@@ -29,7 +32,7 @@
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
   <main class="article-container">
     <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
     <header class="article-header">
@@ -306,47 +309,57 @@ Unicode 规范化形式：
 
 教训：乱码的本质是“字节边界对齐错误”
   修复方法：用正确的编码重新解码，而不是“猜”</code></pre>
-        <h2>Unicode 在实际开发中的应用场景</h2>
-            <p><strong>国际化 Web 应用：</strong>多语言网站必须正确处理 Unicode，包括阿拉伯语的 RTL 排版、日语的混合汉字假名、Emoji 的代理对字符。前端使用 `<meta charset="UTF-8">` 只是第一步，还需要在 API 层、数据库层统一编码。</p>
-            <p><strong>数据库存储：</strong>MySQL 的 `utf8` 字符集只支持 3 字节 BMP 字符，不包拮 Emoji（4 字节）。必须使用 `utf8mb4` 才能完整存储所有 Unicode 字符，这是生产环境中常见的"坑"。</p>
-            <p><strong>文件处理：</strong>读写文件时需要明确指定编码。Node.js 的 `fs.readFile` 默认 UTF-8，但 Windows 系统的文本文件常用 GBK/GB18030。处理 Excel CSV 导出时要注意 BOM 头的添加。</p>
-            <p><strong>安全领域：</strong>Unicode 规范化形式（NFC/NFD/NFKC/NFKD）的差异可能导致安全漏洞，如 NFC 与 NFD 形式的同一字符有不同字节序列，可绕过基于字节的过滤规则。</p>
+      <h2>Unicode 在实际开发中的应用场景</h2>
+      <p><strong>国际化 Web 应用：</strong>多语言网站必须正确处理 Unicode，包括阿拉伯语的 RTL 排版、日语的混合汉字假名、Emoji 的代理对字符。前端使用 `
+        <meta charset="UTF-8">` 只是第一步，还需要在 API 层、数据库层统一编码。
+      </p>
+      <p><strong>数据库存储：</strong>MySQL 的 `utf8` 字符集只支持 3 字节 BMP 字符，不包拮 Emoji（4 字节）。必须使用 `utf8mb4` 才能完整存储所有 Unicode
+        字符，这是生产环境中常见的"坑"。</p>
+      <p><strong>文件处理：</strong>读写文件时需要明确指定编码。Node.js 的 `fs.readFile` 默认 UTF-8，但 Windows 系统的文本文件常用 GBK/GB18030。处理 Excel
+        CSV 导出时要注意 BOM 头的添加。</p>
+      <p><strong>安全领域：</strong>Unicode 规范化形式（NFC/NFD/NFKC/NFKD）的差异可能导致安全漏洞，如 NFC 与 NFD 形式的同一字符有不同字节序列，可绕过基于字节的过滤规则。</p>
 
-        <h2>实战案例：Emoji 导致的数据库乱码问题</h2>
-            <p>某 SaaS 平台的用户昵称功能上线后，运维团队收到反馈：部分用户的昵称中包含 Emoji，存入数据库后变成了 `?` 号。技术团队排查后发现：</p>
-            <ul>
-                <li>数据库字符集为 MySQL `utf8`（只支持 3 字节 BMP 字符）</li>
-                <li>Emoji 位于 Unicode 补充平面（U+10000 及以上），需要 4 字节存储</li>
-                <li>应用层使用 `utf8` 连接字符串，未指定 `utf8mb4`</li>
-            </ul>
-            <p>解决方案：将数据库、表、连接层全部改为 `utf8mb4`，同时在前端使用 `Array.from(str)` 正确处理代理对字符的字符串长度和截取。修改后所有语言的字符（包拮 Emoji）都能正确存储和显示。</p>
+      <h2>实战案例：Emoji 导致的数据库乱码问题</h2>
+      <p>某 SaaS 平台的用户昵称功能上线后，运维团队收到反馈：部分用户的昵称中包含 Emoji，存入数据库后变成了 `?` 号。技术团队排查后发现：</p>
+      <ul>
+        <li>数据库字符集为 MySQL `utf8`（只支持 3 字节 BMP 字符）</li>
+        <li>Emoji 位于 Unicode 补充平面（U+10000 及以上），需要 4 字节存储</li>
+        <li>应用层使用 `utf8` 连接字符串，未指定 `utf8mb4`</li>
+      </ul>
+      <p>解决方案：将数据库、表、连接层全部改为 `utf8mb4`，同时在前端使用 `Array.from(str)` 正确处理代理对字符的字符串长度和截取。修改后所有语言的字符（包拮 Emoji）都能正确存储和显示。</p>
 
-        <h2>字符编码开发注意事项</h2>
-            <div class="warning-box">
-                <ul>
-                    <li><strong>统一 UTF-8：</strong>整个技术栈（HTML、HTTP Header、数据库、文件系统）统一使用 UTF-8，从根源上杜绝乱码问题。MySQL 必须用 `utf8mb4` 而非 `utf8`。</li>
-                    <li><strong>理解代理对字符：</strong>JavaScript 中 `"𠮷".length` 返回 2 而非 1，因为它是代理对字符。使用 `Array.from(str)` 或 `[...str]` 才能正确拆分字符。</li>
-                    <li><strong>区分编码与加密：</strong>Unicode、Base64、URL 编码都是编码转换，不是加密。敏感数据必须先用 AES/RSA 加密再进行编码传输。</li>
-                    <li><strong>Unicode 规范化很重要：</strong>比较用户输入时，先做 NFKC 规范化。某些字符有多个 Unicode 表示形式（如全角/半角、组合字符），直接比较字节会匹配失败。</li>
-                    <li><strong>同形字安全威胁：</strong>西里尔字母 `а`（U+0430）和拉丁字母 `a`（U+0061）看起来一样，可被用于钓鱼域名。安全敏感场景需要做 Unicode 同形字检测。</li>
-                </ul>
-            </div>
+      <h2>字符编码开发注意事项</h2>
+      <div class="warning-box">
+        <ul>
+          <li><strong>统一 UTF-8：</strong>整个技术栈（HTML、HTTP Header、数据库、文件系统）统一使用 UTF-8，从根源上杜绝乱码问题。MySQL 必须用 `utf8mb4` 而非
+            `utf8`。</li>
+          <li><strong>理解代理对字符：</strong>JavaScript 中 `"𠮷".length` 返回 2 而非 1，因为它是代理对字符。使用 `Array.from(str)` 或 `[...str]`
+            才能正确拆分字符。</li>
+          <li><strong>区分编码与加密：</strong>Unicode、Base64、URL 编码都是编码转换，不是加密。敏感数据必须先用 AES/RSA 加密再进行编码传输。</li>
+          <li><strong>Unicode 规范化很重要：</strong>比较用户输入时，先做 NFKC 规范化。某些字符有多个 Unicode 表示形式（如全角/半角、组合字符），直接比较字节会匹配失败。</li>
+          <li><strong>同形字安全威胁：</strong>西里尔字母 `а`（U+0430）和拉丁字母 `a`（U+0061）看起来一样，可被用于钓鱼域名。安全敏感场景需要做 Unicode 同形字检测。</li>
+        </ul>
+      </div>
 
-        <h2>常见问题</h2>
-            <h3>问：为什么 JavaScript 中 Emoji 的 length 是 2？</h3>
-            <p><strong>答：</strong>JavaScript 字符串内部使用 UTF-16 编码，Emoji（如 😊 U+1F60A）位于补充平面，需要用两个 16 位代理对字符表示，所以 `length` 返回 2。解决方案：使用 `Array.from('😊').length` 返回 1，或用 `for...of` 遍历。</p>
-            <h3>问：数据库中出现问号怎么办？</h3>
-            <p><strong>答：</strong>检查三个环节：① 数据库字符集是否为 `utf8mb4`（MySQL 的 `utf8` 只支持 3 字节，Emoji 会丢失）；② 连接层是否指定了 `charset=utf8mb4`；③ 应用层读写时是否统一使用 UTF-8 编码。</p>
-            <h3>问：文件打开后乱码怎么修复？</h3>
-            <p><strong>答：</strong>乱码的本质是解码时用了错误的字符集。修复方法：用正确的编码重新解码。Windows 中文系统常见 GBK 文件被当作 UTF-8 打开，反之亦然。在 VS Code 中可以通过右下角编码按钮重新打开；编程时用 `TextDecoder('gbk')` 指定编码。</p>
+      <h2>常见问题</h2>
+      <h3>问：为什么 JavaScript 中 Emoji 的 length 是 2？</h3>
+      <p><strong>答：</strong>JavaScript 字符串内部使用 UTF-16 编码，Emoji（如 😊 U+1F60A）位于补充平面，需要用两个 16 位代理对字符表示，所以 `length` 返回
+        2。解决方案：使用 `Array.from('😊').length` 返回 1，或用 `for...of` 遍历。</p>
+      <h3>问：数据库中出现问号怎么办？</h3>
+      <p><strong>答：</strong>检查三个环节：① 数据库字符集是否为 `utf8mb4`（MySQL 的 `utf8` 只支持 3 字节，Emoji 会丢失）；② 连接层是否指定了
+        `charset=utf8mb4`；③ 应用层读写时是否统一使用 UTF-8 编码。</p>
+      <h3>问：文件打开后乱码怎么修复？</h3>
+      <p><strong>答：</strong>乱码的本质是解码时用了错误的字符集。修复方法：用正确的编码重新解码。Windows 中文系统常见 GBK 文件被当作 UTF-8 打开，反之亦然。在 VS Code
+        中可以通过右下角编码按钮重新打开；编程时用 `TextDecoder('gbk')` 指定编码。</p>
 
-    
+
 
       <h2>结语</h2>
       <p>字符编码是计算机处理人类语言的基石。从 ASCII 的 128 个字符到 Unicode 的 111 万个码点，从各国编码的混乱到 UTF-8
         的统一——这是计算机科学史上最成功的标准化工程之一。
         理解 Unicode 和 UTF-8 的原理，不仅能彻底告别乱码问题，还能正确处理 Emoji、国际化文本等现代 Web 开发中的常见挑战。
-      </p></article>
+      </p>
+    </article>
     <section class="related-tools">
       <h3>相关工具推荐</h3>
       <div class="related-tools-grid">

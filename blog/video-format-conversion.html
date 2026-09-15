@@ -12,7 +12,10 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="description" content="全面对比主流视频格式特点，解析编码容器区别，提供视频格式转换的最佳实践。">
     <meta name="keywords" content="视频格式转换,MP4,WebM,MOV,视频编码,H.264,H.265,视频压缩">
-    <link rel="icon" href="/common/img/helpoke.webp">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
     <link rel="stylesheet" href="/common/css/style.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
@@ -43,7 +46,8 @@
         </header>
         <article class="article-content">
             <h2>引言：视频格式的迷宫</h2>
-            <p>视频格式转换的核心难点在于区分“容器”和“编码器”——MP4 是容器，H.264 是编码器，同一个 MP4 容器可以用不同编码器。很多人混淆这两者，导致转换后文件变大、画质下降或无法播放。这篇从原理讲起，覆盖主流格式对比和 FFmpeg 实战命令。</p>
+            <p>视频格式转换的核心难点在于区分“容器”和“编码器”——MP4 是容器，H.264 是编码器，同一个 MP4
+                容器可以用不同编码器。很多人混淆这两者，导致转换后文件变大、画质下降或无法播放。这篇从原理讲起，覆盖主流格式对比和 FFmpeg 实战命令。</p>
 
             <h2>一、视频格式基础：编码器与容器</h2>
             <h3>1.1 核心概念区分</h3>
@@ -488,13 +492,16 @@ ffmpeg -i input.mp4 -vf "subtitles=subtitle.srt:force_style='FontName=Microsoft 
   ✓ Web 场景优先考虑 VP9 或 AV1（无专利费）
   ✓ 4K 以上分辨率才值得用 H.265（1080p 下收益不大）
   ✗ AV1 编码太慢，不适合实时场景（直播/视频会议）</code></pre>
-        <h2>视频格式转换在实际工作中的应用</h2>
-            <p><strong>多平台发布：</strong>同一视频需要适配不同平台要求：YouTube 推荐 MP4 (H.264)，B站支持 MP4/FLV，抖音推荐 9:16 竖屏 MP4。用 FFmpeg 一次转换多平台分发。</p>
-            <p><strong>设备兼容：</strong>iPhone 拍摄的 MOV 文件在 Windows 上可能无法播放，转换为 MP4 (H.264) 可以跨平台通用。老式 DVD 播放机只支持 MPEG-2。</p>
-            <p><strong>编辑软件互通：</strong>不同剪辑软件支持的原生格式不同，Premiere 用 MXF，Final Cut 用 ProRes，DaVinci 用 DNxHR。转换格式实现跨软件协作。</p>
+            <h2>视频格式转换在实际工作中的应用</h2>
+            <p><strong>多平台发布：</strong>同一视频需要适配不同平台要求：YouTube 推荐 MP4 (H.264)，B站支持 MP4/FLV，抖音推荐 9:16 竖屏 MP4。用 FFmpeg
+                一次转换多平台分发。</p>
+            <p><strong>设备兼容：</strong>iPhone 拍摄的 MOV 文件在 Windows 上可能无法播放，转换为 MP4 (H.264) 可以跨平台通用。老式 DVD 播放机只支持 MPEG-2。
+            </p>
+            <p><strong>编辑软件互通：</strong>不同剪辑软件支持的原生格式不同，Premiere 用 MXF，Final Cut 用 ProRes，DaVinci 用 DNxHR。转换格式实现跨软件协作。
+            </p>
             <p><strong>归档与备份：</strong>将各种格式的珍贵素材统一转换为无损格式（FFV1/MKV）归档，确保长期可读取。</p>
 
-        <h2>实战案例：多平台视频分发工作流</h2>
+            <h2>实战案例：多平台视频分发工作流</h2>
             <p>某内容团队需要将同一视频发布到 YouTube、B站、抖音、微信公众号四个平台：</p>
             <ul>
                 <li>源文件为 4K ProRes MOV（约 10GB），需要转换为各平台要求的格式</li>
@@ -504,7 +511,7 @@ ffmpeg -i input.mp4 -vf "subtitles=subtitle.srt:force_style='FontName=Microsoft 
             </ul>
             <p>用 FFmpeg 脚本一键转换，配合批处理参数实现自动化。转换时间从手动 2 小时缩短到自动 15 分钟。</p>
 
-        <h2>视频格式转换注意事项</h2>
+            <h2>视频格式转换注意事项</h2>
             <div class="warning-box">
                 <ul>
                     <li><strong>区分容器和编码器：</strong>MP4 是容器，H.264/H.265 是编码器。同一个 MP4 容器可以用不同编码器，转换时两者都要指定。</li>
@@ -515,15 +522,18 @@ ffmpeg -i input.mp4 -vf "subtitles=subtitle.srt:force_style='FontName=Microsoft 
                 </ul>
             </div>
 
-        <h2>常见问题</h2>
+            <h2>常见问题</h2>
             <h3>问：MP4、MKV、WebM 容器该怎么选？</h3>
-            <p><strong>答：</strong>MP4 兼容性最好，适合绝大多数场景；WebM 是 Web 平台首选（开源免专利费）；MKV 支持多音轨、多字幕，适合影视收藏。避免使用 AVI、FLV 等过时格式。</p>
+            <p><strong>答：</strong>MP4 兼容性最好，适合绝大多数场景；WebM 是 Web 平台首选（开源免专利费）；MKV 支持多音轨、多字幕，适合影视收藏。避免使用 AVI、FLV 等过时格式。
+            </p>
             <h3>问：为什么转换后文件反而更大了？</h3>
             <p><strong>答：</strong>常见原因：① 编码器选择不当（如用 MPEG-2 编码 H.264 的内容）；② 码率设置过高；③ 分辨率未降低。检查输出文件的实际码率，确保低于源文件。</p>
             <h3>问：如何无损转换视频格式？</h3>
-            <p><strong>答：</strong>用 FFmpeg 的 <code>-c copy</code> 参数可以直接复制音视频流，只改变容器格式而不重新编码。例如 <code>ffmpeg -i input.mkv -c copy output.mp4</code>。前提是容器支持内部的编码格式。</p>
+            <p><strong>答：</strong>用 FFmpeg 的 <code>-c copy</code> 参数可以直接复制音视频流，只改变容器格式而不重新编码。例如
+                <code>ffmpeg -i input.mkv -c copy output.mp4</code>。前提是容器支持内部的编码格式。
+            </p>
 
-        
+
 
             <h2>结语</h2>
             <p>视频格式转换是一项技术活，需要理解编码器与容器的区别，掌握不同格式的特点，并根据实际应用场景选择合适的方案。MP4凭借其强大的兼容性，依然是主流选择；WebM以其开源免费的特性，在Web领域占据重要地位；MOV则是Apple生态的首选。
@@ -531,7 +541,8 @@ ffmpeg -i input.mp4 -vf "subtitles=subtitle.srt:force_style='FontName=Microsoft 
 
             <p>在进行格式转换时，不仅要考虑兼容性，还要权衡文件大小、画质、转换速度等多个维度。FFmpeg作为最强大的视频处理工具，值得每一位视频处理从业者深入学习。</p>
 
-            <p>希望本文能帮助您全面理解视频格式，在实际工作中做出明智的选择，高效完成视频格式转换任务。</p></article>
+            <p>希望本文能帮助您全面理解视频格式，在实际工作中做出明智的选择，高效完成视频格式转换任务。</p>
+        </article>
         <section class="related-tools">
             <h3>相关工具推荐</h3>
             <div class="related-tools-grid">

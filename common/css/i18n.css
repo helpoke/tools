@@ -55,6 +55,16 @@
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
+/* 首屏防闪烁 CSS */
+html:not(.i18n-ready) body {
+    visibility: hidden;
+}
+
+html.i18n-ready body {
+    visibility: visible;
+}
+
+
 /* 按钮内的图标 */
 .lang-switch-btn .lang-icon {
     font-size: 14px;
@@ -195,38 +205,38 @@
 }
 
 /* ========== 深色模式适配 ========== */
-body.dark-mode .language-switcher {
+html.dark-mode .language-switcher {
     background: rgba(0, 0, 0, 0.2);
 }
 
-body.dark-mode .language-switcher:hover {
+html.dark-mode .language-switcher:hover {
     background: rgba(0, 0, 0, 0.3);
 }
 
-body.dark-mode .lang-switch-btn {
+html.dark-mode .lang-switch-btn {
     color: rgba(255, 255, 255, 0.7);
 }
 
-body.dark-mode .lang-switch-btn:hover {
+html.dark-mode .lang-switch-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.9);
 }
 
-body.dark-mode .language-dropdown-btn {
+html.dark-mode .language-dropdown-btn {
     background: rgba(0, 0, 0, 0.2);
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-body.dark-mode .language-dropdown-menu {
+html.dark-mode .language-dropdown-menu {
     background: #1e293b;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-body.dark-mode .language-dropdown-item {
+html.dark-mode .language-dropdown-item {
     color: rgba(255, 255, 255, 0.8);
 }
 
-body.dark-mode .language-dropdown-item:hover {
+html.dark-mode .language-dropdown-item:hover {
     background: rgba(99, 102, 241, 0.2);
     color: #818cf8;
 }
@@ -237,6 +247,7 @@ body.dark-mode .language-dropdown-item:hover {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

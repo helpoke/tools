@@ -12,7 +12,10 @@
   <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
   <meta name="description" content="深入解析主流一维条形码的编码原理、校验算法和应用场景，包括 EAN-13、UPC-A、Code 39、Code 128 等标准。">
   <meta name="keywords" content="条形码,barcode,EAN-13,UPC,Code128,Code39,编码标准,校验位">
-  <link rel="icon" href="/common/img/helpoke.webp">
+  <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+  <!-- 初始化主题 -->
+  <script src="/common/js/theme-init.js"></script>
+
   <link rel="stylesheet" href="/common/css/style.css">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
@@ -29,7 +32,7 @@
 </head>
 
 <body>
-    <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
+  <button id="theme-toggle" class="theme-toggle" title="切换护眼模式" aria-label="切换护眼模式">🌙</button>
   <main class="article-container">
     <a href="/blog/" class="back-to-blog">← 返回博客列表</a>
     <header class="article-header">
@@ -314,48 +317,55 @@ JsBarcode("#barcode", "HELLO-123", {
   ✓ 需要字母+数字混合 → Code 128（Code 39 不支持小写）
   ✓ 空间有限 → Code 128 比 Code 39 体积小 30%+
   ✗ 不要用 EAN-13 存非数字内容</code></pre>
-        <h2>条形码在不同行业的实际应用</h2>
-            <p><strong>零售行业：</strong>EAN-13 是全球零售商品的"身份证"，每件商品在上市前都必须分配唯一的 GTIN-13 编码。超市 POS 系统通过扫描条形码实现快速结账和库存扣减，整个过程在毫秒级完成。</p>
-            <p><strong>物流与仓储：</strong>Code 128 是物流行业的主力码制，支持全 ASCII 字符集，可以编码批次号、目的地、重量等信息。快递面单上的条码通常遵循 GS1-128 标准，包含应用标识符（AI）来区分不同数据字段。</p>
-            <p><strong>医疗健康：</strong>药品包装上的 GTIN 条码用于追溯流通环节，HIBC（Health Industry Bar Code）标准在医疗器械领域广泛使用，可以编码产品编号、批次号和有效期。</p>
-            <p><strong>制造业：</strong>Code 39 在军工和汽车制造领域仍有大量存量系统，其"无需校验位"的简单设计适合产线工人手工录入场景。</p>
+      <h2>条形码在不同行业的实际应用</h2>
+      <p><strong>零售行业：</strong>EAN-13 是全球零售商品的"身份证"，每件商品在上市前都必须分配唯一的 GTIN-13 编码。超市 POS 系统通过扫描条形码实现快速结账和库存扣减，整个过程在毫秒级完成。
+      </p>
+      <p><strong>物流与仓储：</strong>Code 128 是物流行业的主力码制，支持全 ASCII 字符集，可以编码批次号、目的地、重量等信息。快递面单上的条码通常遵循 GS1-128
+        标准，包含应用标识符（AI）来区分不同数据字段。</p>
+      <p><strong>医疗健康：</strong>药品包装上的 GTIN 条码用于追溯流通环节，HIBC（Health Industry Bar Code）标准在医疗器械领域广泛使用，可以编码产品编号、批次号和有效期。</p>
+      <p><strong>制造业：</strong>Code 39 在军工和汽车制造领域仍有大量存量系统，其"无需校验位"的简单设计适合产线工人手工录入场景。</p>
 
-        <h2>实战案例：医药追溯系统的条码选型</h2>
-            <p>某医院需要为药品包装实现"一物一码"追溯系统，要求在小直径药瓶上印刷可扫描的条码，同时满足国家药品监管平台的 GS1 标准要求。技术团队面临的挑战包括：</p>
-            <ul>
-                <li>药瓶标签面积有限（周长仅 3cm），需要选择高密度码制</li>
-                <li>必须兼容现有医院的 handheld 扫描器（仅支持一维码）</li>
-                <li>需要在条码中编码 GTIN + 批次号 + 有效期，总长度约 40 字符</li>
-                <li>印刷产线速度为每分钟 200 瓶，要求首次扫描通过率 > 99.9%</li>
-            </ul>
-            <p>最终选择 Code 128（GS1-128 子集），原因：高密度（比 Code 39 体积小 30%+）、支持全 ASCII、符合 GS1 标准。配合自动校验位验证和分级质量检测（ISO/IEC 15416），上线后首次扫描通过率达到 99.97%。</p>
+      <h2>实战案例：医药追溯系统的条码选型</h2>
+      <p>某医院需要为药品包装实现"一物一码"追溯系统，要求在小直径药瓶上印刷可扫描的条码，同时满足国家药品监管平台的 GS1 标准要求。技术团队面临的挑战包括：</p>
+      <ul>
+        <li>药瓶标签面积有限（周长仅 3cm），需要选择高密度码制</li>
+        <li>必须兼容现有医院的 handheld 扫描器（仅支持一维码）</li>
+        <li>需要在条码中编码 GTIN + 批次号 + 有效期，总长度约 40 字符</li>
+        <li>印刷产线速度为每分钟 200 瓶，要求首次扫描通过率 > 99.9%</li>
+      </ul>
+      <p>最终选择 Code 128（GS1-128 子集），原因：高密度（比 Code 39 体积小 30%+）、支持全 ASCII、符合 GS1 标准。配合自动校验位验证和分级质量检测（ISO/IEC
+        15416），上线后首次扫描通过率达到 99.97%。</p>
 
-        <h2>条码生成常见踩坑点</h2>
-            <div class="warning-box">
-                <ul>
-                    <li><strong>静区（Quiet Zone）不能省：</strong>条形码左右两侧必须留出至少 10 倍模块宽度的空白区域，否则扫描器无法识别起始/终止符。这是最常见的印刷错误。</li>
-                    <li><strong>对比度要够高：</strong>深色条（Bars）配浅色空（Spaces），推荐黑色条 + 白色空。避免红色条（多数扫描器使用红光，红色条会被"看不见"）。</li>
-                    <li><strong>缩放比例要合理：</strong>EAN-13 标准尺寸为 37.29mm × 25.93mm，缩小不低于 80%，放大不超过 200%。过小的条码在手持扫描器上无法读取。</li>
-                    <li><strong>校验位必须正确：</strong>EAN-13 的校验位由前 12 位通过"奇偶交替×3/×1"算法计算得出，错误的校验位会导致扫描器拒绝识别。</li>
-                    <li><strong>印刷材质要考虑：</strong>热敏打印的条码会随时间褪色，长期保存场景建议使用热转印或激光雕刻。</li>
-                </ul>
-            </div>
+      <h2>条码生成常见踩坑点</h2>
+      <div class="warning-box">
+        <ul>
+          <li><strong>静区（Quiet Zone）不能省：</strong>条形码左右两侧必须留出至少 10 倍模块宽度的空白区域，否则扫描器无法识别起始/终止符。这是最常见的印刷错误。</li>
+          <li><strong>对比度要够高：</strong>深色条（Bars）配浅色空（Spaces），推荐黑色条 + 白色空。避免红色条（多数扫描器使用红光，红色条会被"看不见"）。</li>
+          <li><strong>缩放比例要合理：</strong>EAN-13 标准尺寸为 37.29mm × 25.93mm，缩小不低于 80%，放大不超过 200%。过小的条码在手持扫描器上无法读取。</li>
+          <li><strong>校验位必须正确：</strong>EAN-13 的校验位由前 12 位通过"奇偶交替×3/×1"算法计算得出，错误的校验位会导致扫描器拒绝识别。</li>
+          <li><strong>印刷材质要考虑：</strong>热敏打印的条码会随时间褪色，长期保存场景建议使用热转印或激光雕刻。</li>
+        </ul>
+      </div>
 
-        <h2>常见问题</h2>
-            <h3>问：EAN-13 和 Code 128 该怎么选？</h3>
-            <p><strong>答：</strong>EAN-13 仅支持 13 位纯数字，专用于零售商品标识（GTIN），全球统一标准不可自定义。Code 128 支持全 ASCII 字符、长度灵活（通常不超过 80 字符），适用于物流、工业等内部标识场景。简言之：卖给消费者的用 EAN-13，内部流转的用 Code 128。</p>
-            <h3>问：条形码扫描不出来怎么办？</h3>
-            <p><strong>答：</strong>按以下顺序排查：① 检查静区是否被裁切或遮挡；② 确认打印对比度（避免浅色条码）；③ 检查尺寸是否在标准范围内（不低于 80%）；④ 确认码制与扫描器支持列表匹配。如果以上都正常，用校验位公式验证数据是否正确。</p>
-            <h3>问：条形码能存多少数据？</h3>
-            <p><strong>答：</strong>一维码容量有限：EAN-13 仅 13 位数字，Code 39 通常不超过 43 个字符，Code 128 理论上可编码全 ASCII 但实际建议不超过 80 字符。需要存储中文、URL 或大量数据时，应该选择二维码（QR Code 可存储数千字符）。</p>
+      <h2>常见问题</h2>
+      <h3>问：EAN-13 和 Code 128 该怎么选？</h3>
+      <p><strong>答：</strong>EAN-13 仅支持 13 位纯数字，专用于零售商品标识（GTIN），全球统一标准不可自定义。Code 128 支持全 ASCII 字符、长度灵活（通常不超过 80
+        字符），适用于物流、工业等内部标识场景。简言之：卖给消费者的用 EAN-13，内部流转的用 Code 128。</p>
+      <h3>问：条形码扫描不出来怎么办？</h3>
+      <p><strong>答：</strong>按以下顺序排查：① 检查静区是否被裁切或遮挡；② 确认打印对比度（避免浅色条码）；③ 检查尺寸是否在标准范围内（不低于 80%）；④
+        确认码制与扫描器支持列表匹配。如果以上都正常，用校验位公式验证数据是否正确。</p>
+      <h3>问：条形码能存多少数据？</h3>
+      <p><strong>答：</strong>一维码容量有限：EAN-13 仅 13 位数字，Code 39 通常不超过 43 个字符，Code 128 理论上可编码全 ASCII 但实际建议不超过 80
+        字符。需要存储中文、URL 或大量数据时，应该选择二维码（QR Code 可存储数千字符）。</p>
 
-    
+
 
       <h2>结语</h2>
       <p>条形码技术虽然“古老”，但在零售、物流、医疗、制造等领域仍然是不可替代的基础设施。
         从 EAN-13 的奇偶编码巧思，到 Code 128 的动态编码表切换，每种标准都凝聚了特定场景下的工程智慧。
         理解这些编码原理，不仅能帮助开发者正确生成和识别条码，还能在系统设计中做出更合理的技术选型。
-      </p></article>
+      </p>
+    </article>
     <section class="related-tools">
       <h3>相关工具推荐</h3>
       <div class="related-tools-grid">

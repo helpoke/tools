@@ -12,7 +12,10 @@
     <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
     <meta name="description" content="从数学原理到实际应用，全面解析哈希算法在密码学中的核心地位及网络安全实践。">
     <meta name="keywords" content="哈希算法,MD5,SHA256,加密,网络安全,密码学">
-    <link rel="icon" href="/common/img/helpoke.webp">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+
     <link rel="stylesheet" href="/common/css/style.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
@@ -62,22 +65,26 @@
                 <span>⏱️ 阅读时长：20 分钟</span>
                 <span>✍️ 作者：Helpoke 技术团队</span>
             </div>
-            <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-size: 0.9rem; color: #475569;">
+            <div
+                style="background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-size: 0.9rem; color: #475569;">
                 <strong>📖 本文适合：</strong>关注网络安全的开发者、需要实现密码存储的后端工程师<br>
                 <strong>🎯 阅读后你将掌握：</strong>哈希算法原理、MD5/SHA 对比、密码存储最佳实践、HMAC 签名、区块链应用
             </div>
         </header>
         <article class="article-content">
             <h2>前言：哈希算法的重要性</h2>
-            <p>很多开发者把哈希算法等同于“加密工具”，用 SHA-256 直接存储密码，用 MD5 做文件校验后以为万事大吉。实际上，MD5 的碰撞攻击已经实用化，SHA-256 存密码在 GPU 面前不堪一击。这篇从数学原理讲起，覆盖密码存储的正确姿势、HMAC 签名、以及哈希算法在区块链中的核心作用。</p>
+            <p>很多开发者把哈希算法等同于“加密工具”，用 SHA-256 直接存储密码，用 MD5 做文件校验后以为万事大吉。实际上，MD5 的碰撞攻击已经实用化，SHA-256 存密码在 GPU
+                面前不堪一击。这篇从数学原理讲起，覆盖密码存储的正确姿势、HMAC 签名、以及哈希算法在区块链中的核心作用。</p>
 
             <h2>一、哈希算法的基本原理：单向函数、雪崩效应</h2>
             <h3>1.1 什么是哈希函数</h3>
             <p>哈希函数（Hash Function）是一种将任意长度的输入数据映射为固定长度输出的函数。其核心特征是：</p>
 
             <figure style="margin: 2rem 0; text-align: center;">
-                <img src="/imgs/blog-hash-algorithms.svg" alt="Hash Algorithm Comparison Diagram" style="max-width: 100%; height: auto;" loading="lazy">
-                <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：主流哈希算法对比 — MD5、SHA-1、SHA-256、SHA-512 输出长度与安全性</figcaption>
+                <img src="/imgs/blog-hash-algorithms.svg" alt="Hash Algorithm Comparison Diagram"
+                    style="max-width: 100%; height: auto;" loading="lazy">
+                <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #64748b;">图 1：主流哈希算法对比 —
+                    MD5、SHA-1、SHA-256、SHA-512 输出长度与安全性</figcaption>
             </figure>
 
             <ul>
@@ -441,7 +448,8 @@ function verifyPassword(password, storedHash):
                 <h3 style="margin-top: 0; color: #1e293b;">💻 多语言密码哈希代码示例</h3>
                 <div style="margin-bottom: 1rem;">
                     <strong>Node.js (bcrypt):</strong>
-                    <pre style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>const bcrypt = require('bcrypt');
+                    <pre
+                        style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
 // 注册时哈希密码
@@ -452,7 +460,8 @@ const isValid = await bcrypt.compare(userPassword, hashedPassword);</code></pre>
                 </div>
                 <div style="margin-bottom: 1rem;">
                     <strong>Python (argon2):</strong>
-                    <pre style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>from argon2 import PasswordHasher
+                    <pre
+                        style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>from argon2 import PasswordHasher
 
 ph = PasswordHasher()
 
@@ -467,7 +476,8 @@ except:
                 </div>
                 <div>
                     <strong>Java (bcrypt):</strong>
-                    <pre style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import org.mindrot.jbcrypt.BCrypt;
+                    <pre
+                        style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto;"><code>import org.mindrot.jbcrypt.BCrypt;
 
 // 注册时哈希密码
 String hashed = BCrypt.hashpw(userPassword, BCrypt.gensalt(12));

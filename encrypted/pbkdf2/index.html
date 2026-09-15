@@ -8,6 +8,11 @@
     <meta name="keywords" content="PBKDF2,密钥派生,密码学,盐,迭代次数,在线PBKDF2,密钥生成">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -223,9 +228,11 @@
                         <li data-i18n="encrypted.pbkdf2.techAdvantageStandard"><strong>标准兼容：</strong>基于 PKCS #5/RFC 2898
                             标准，与 Python hashlib.pbkdf2_hmac、Node.js crypto.pbkdf2、Java SecretKeyFactory 等主流库完全兼容。</li>
                         <li data-i18n="encrypted.pbkdf2.techAdvantageParams">
-                            <strong>参数可调：</strong>支持自定义哈希算法、迭代次数和密钥长度，灵活适配不同安全需求和性能约束。</li>
+                            <strong>参数可调：</strong>支持自定义哈希算法、迭代次数和密钥长度，灵活适配不同安全需求和性能约束。
+                        </li>
                         <li data-i18n="encrypted.pbkdf2.techAdvantageSalt">
-                            <strong>随机盐生成：</strong>一键生成密码学安全随机盐，有效防止彩虹表和预计算攻击。</li>
+                            <strong>随机盐生成：</strong>一键生成密码学安全随机盐，有效防止彩虹表和预计算攻击。
+                        </li>
                         <li data-i18n="encrypted.pbkdf2.techAdvantageLocal"><strong>本地计算：</strong>基于 Web Crypto
                             API，密码和盐值不会上传到服务器，适合处理敏感数据。</li>
                     </ul>
@@ -235,10 +242,14 @@
                         到 600,000 之间调整。</p>
                     <h4 data-i18n="encrypted.pbkdf2.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.pbkdf2.noteFaq1"><strong>Q: 迭代次数越高越好吗？</strong>A: 安全性越高，但计算也越慢。100,000 次是目前的最低推荐值，高安全场景可用 600,000 次。需要在安全性和响应速度之间平衡。</li>
-                        <li data-i18n="encrypted.pbkdf2.noteFaq2"><strong>Q: PBKDF2 和 bcrypt 哪个好？</strong>A: 都是密码派生函数。bcrypt 内置内存消耗机制，更能抵御 GPU 攻击；PBKDF2 是 NIST 标准，兼容性更广。新系统建议考虑 bcrypt 或 Argon2。</li>
-                        <li data-i18n="encrypted.pbkdf2.noteFaq3"><strong>Q: 盐值可以复用吗？</strong>A: 不建议。每个密码应使用独立的随机盐——盐值复用会降低安全性，使彩虹表攻击成为可能。</li>
-                        <li data-i18n="encrypted.pbkdf2.noteFaq4"><strong>Q: PBKDF2 的结果能直接用作 AES 密钥吗？</strong>A: 可以。将密钥长度设为 256 位，派生结果可直接作为 AES-256 的密钥使用。这也是本工具 file-encrypt 模块的工作方式。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq1"><strong>Q: 迭代次数越高越好吗？</strong>A: 安全性越高，但计算也越慢。100,000
+                            次是目前的最低推荐值，高安全场景可用 600,000 次。需要在安全性和响应速度之间平衡。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq2"><strong>Q: PBKDF2 和 bcrypt 哪个好？</strong>A:
+                            都是密码派生函数。bcrypt 内置内存消耗机制，更能抵御 GPU 攻击；PBKDF2 是 NIST 标准，兼容性更广。新系统建议考虑 bcrypt 或 Argon2。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq3"><strong>Q: 盐值可以复用吗？</strong>A:
+                            不建议。每个密码应使用独立的随机盐——盐值复用会降低安全性，使彩虹表攻击成为可能。</li>
+                        <li data-i18n="encrypted.pbkdf2.noteFaq4"><strong>Q: PBKDF2 的结果能直接用作 AES 密钥吗？</strong>A:
+                            可以。将密钥长度设为 256 位，派生结果可直接作为 AES-256 的密钥使用。这也是本工具 file-encrypt 模块的工作方式。</li>
                     </ul>
                 </div>
             </article>

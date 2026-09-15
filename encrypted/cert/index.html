@@ -8,6 +8,11 @@
     <meta name="keywords" content="X.509证书解析,PEM证书,证书信息,SSL证书,在线证书解析,证书指纹">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; 
@@ -193,10 +198,14 @@
                         或更高、SAN 包含目标域名。若使用自签名证书，需手动添加到受信任根证书存储中。</p>
                     <h4 data-i18n="encrypted.cert.notesFaqTitle">常见问题</h4>
                     <ul>
-                        <li data-i18n="encrypted.cert.noteFaq1"><strong>Q: 证书解析能验证证书链吗？</strong>A: 本工具只解析单张证书的内容，不验证证书链的信任关系。验证证书链需要依赖操作系统或浏览器的内置信任存储，或使用 openssl verify 等命令行工具。</li>
-                        <li data-i18n="encrypted.cert.noteFaq2"><strong>Q: 自签名证书为什么不被信任？</strong>A: 自签名证书没有根 CA 的签名背书——浏览器和操作系统无法确认其真实性。工具会显示颁发者和主题相同。需要将自签名证书手动导入信任存储。</li>
-                        <li data-i18n="encrypted.cert.noteFaq3"><strong>Q: 证书指纹有什么用？</strong>A: 证书指纹是证书内容的哈希值，用于快速验证证书身份。比如下载了一个证书文件，可以对比指纹确认它确实是你要的那个证书，没有被中间人替换。</li>
-                        <li data-i18n="encrypted.cert.noteFaq4"><strong>Q: 签名算法 SHA-1 和 SHA-256 有什么区别？</strong>A: SHA-1 已被证明存在碰撞漏洞，主流浏览器已不再信任 SHA-1 签名的证书。SHA-256 是目前推荐的标准，新证书应一律使用 SHA-256 或更高算法。</li>
+                        <li data-i18n="encrypted.cert.noteFaq1"><strong>Q: 证书解析能验证证书链吗？</strong>A:
+                            本工具只解析单张证书的内容，不验证证书链的信任关系。验证证书链需要依赖操作系统或浏览器的内置信任存储，或使用 openssl verify 等命令行工具。</li>
+                        <li data-i18n="encrypted.cert.noteFaq2"><strong>Q: 自签名证书为什么不被信任？</strong>A: 自签名证书没有根 CA
+                            的签名背书——浏览器和操作系统无法确认其真实性。工具会显示颁发者和主题相同。需要将自签名证书手动导入信任存储。</li>
+                        <li data-i18n="encrypted.cert.noteFaq3"><strong>Q: 证书指纹有什么用？</strong>A:
+                            证书指纹是证书内容的哈希值，用于快速验证证书身份。比如下载了一个证书文件，可以对比指纹确认它确实是你要的那个证书，没有被中间人替换。</li>
+                        <li data-i18n="encrypted.cert.noteFaq4"><strong>Q: 签名算法 SHA-1 和 SHA-256 有什么区别？</strong>A: SHA-1
+                            已被证明存在碰撞漏洞，主流浏览器已不再信任 SHA-1 签名的证书。SHA-256 是目前推荐的标准，新证书应一律使用 SHA-256 或更高算法。</li>
                     </ul>
                 </div>
             </article>
