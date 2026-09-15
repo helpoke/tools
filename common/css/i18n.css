@@ -55,13 +55,26 @@
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
-/* 首屏防闪烁 CSS */
-html:not(.i18n-ready) body {
+/* 首屏防闪烁 CSS（仅英文环境）
+ * 静态 HTML 即中文，中文环境无需等待翻译、零闪烁；
+ * 英文环境在 i18n.js 应用翻译前隐藏 body，避免先显示中文再切换。
+ * animation 兜底：i18n.js 加载失败时 2.5s 后自动显示，避免页面永久空白。
+ */
+/* html:not(.i18n-ready) body { */
+/* 英文环境首屏防闪烁 */
+html[lang="en-US"]:not(.i18n-ready) body {
     visibility: hidden;
+    animation: i18n-failsafe-reveal 0s 2.5s forwards;
 }
 
 html.i18n-ready body {
     visibility: visible;
+}
+
+@keyframes i18n-failsafe-reveal {
+    to {
+        visibility: visible;
+    }
 }
 
 
