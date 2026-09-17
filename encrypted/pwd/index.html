@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -8,9 +8,9 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609152300"></script>
+    <script src="/common/js/theme-init.js?v=202609171402"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609152300"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609171402"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
@@ -41,10 +41,10 @@
     <link rel="canonical" href="https://helpoke.com/encrypted/pwd/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/pwd/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/pwd/">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609152300">
-    <script src="/common/js/i18n/i18n.js?v=202609152300" defer></script>
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609171402">
+    <script src="/common/js/i18n/i18n.js?v=202609171402" defer></script>
 
-    <script src="/common/js/ads.js?v=202609152300" async></script>
+    <script src="/common/js/ads.js?v=202609171402" async></script>
     <style>
         @import '/common/css/style.css';
         @import '/common/css/utils.css';
@@ -190,12 +190,13 @@
             padding: 8px 0;
             border-bottom: 1px solid #f0f0f0;
             display: flex;
-            align-items: flex-start;
-            /* gap: 12px; */
+            align-items: center;
+            gap: 12px;
         }
 
         .password-item .password-text {
-            flex: 1;
+            flex: 0 1 auto;
+            min-width: 0;
             word-break: break-all;
         }
 
@@ -208,8 +209,9 @@
         }
 
         .password-text {
-            flex: 1;
-            margin-right: 12px;
+            flex: 0 1 auto;
+            min-width: 0;
+            word-break: break-all;
         }
 
         .copy-single-btn {
@@ -258,21 +260,21 @@
         }
 
         .password-strength {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 8px;
-            margin-left: 12px;
-            margin-right: 60px;
-            flex-shrink: 0;
+            flex: 0 0 auto;
+            margin-inline: auto;
+            width: min(50%, 420px);
         }
 
         .password-strength-bar {
             height: 6px;
-            width: 500px;
+            flex: 1;
+            min-width: 0;
             background-color: #eaeaea;
             border-radius: 3px;
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .password-strength-fill {
@@ -282,8 +284,8 @@
         }
 
         .password-strength-text {
-            font-size: 11px;
-            color: #7f8c8d;
+            font-size: 12px;
+            font-weight: 600;
             white-space: nowrap;
         }
 
@@ -317,8 +319,7 @@
             }
 
             .password-strength {
-                margin-left: auto;
-                margin-right: auto;
+                width: min(180px, 45%);
             }
         }
 
@@ -341,12 +342,15 @@
 
             .password-strength-bar {
                 display: none;
-                margin-left: 12px;
             }
 
             .password-strength {
+                width: auto;
+                margin-inline: 0;
+            }
+
+            .password-item .copy-single-btn {
                 margin-left: auto;
-                margin-right: auto;
             }
 
             .password-item {
@@ -383,10 +387,6 @@
 
             .password-item .password-text {
                 font-size: 12px;
-            }
-
-            .password-strength-bar {
-                width: 120px;
             }
 
             .copy-single-btn {
@@ -474,10 +474,6 @@
 
         html.dark-mode .password-strength-bar {
             background-color: var(--bg-card);
-        }
-
-        html.dark-mode .password-strength-text {
-            color: var(--text-secondary);
         }
 
         html.dark-mode .checkbox-item label {
@@ -759,7 +755,7 @@
         </div>
     </main>
 
-    <script src="/common/js/utils.js?v=202609152300"></script>
+    <script src="/common/js/utils.js?v=202609171402"></script>
     <script>
         // 生成密码函数
         function generatePassword() {
@@ -919,19 +915,19 @@
                 label = window.t('encrypted.pwd.strengthVeryWeak');
             } else if (strength < 40) {
                 color = '#e74c3c';
-                label = window.t('encrypted.pwd.strengthWeak');
+                label = window.t('encrypted.pwd.strengthLabelWeak');
             } else if (strength < 60) {
                 color = '#f39c12';
-                label = window.t('encrypted.pwd.strengthMedium');
+                label = window.t('encrypted.pwd.strengthLabelMedium');
             } else if (strength < 85) {
                 color = '#27ae60';
-                label = window.t('encrypted.pwd.strengthStrong');
+                label = window.t('encrypted.pwd.strengthLabelStrong');
             } else {
                 color = '#27ae60';
                 label = window.t('encrypted.pwd.strengthVeryStrong');
             }
 
-            return `<div class="password-strength-bar"><div class="password-strength-fill" style="width:${strength}%;background-color:${color}"></div></div><span class="password-strength-text">${label}</span>`;
+            return `<div class="password-strength-bar"><div class="password-strength-fill" style="width:${strength}%;background-color:${color}"></div></div><span class="password-strength-text" style="color:${color}">${label}</span>`;
         }
 
         // 复制到剪贴板
@@ -996,9 +992,9 @@
             generatePassword();
         });
     </script>
-    <script src="/common/js/theme.js?v=202609152300" defer></script>
-    <script src="/common/js/tools-data.js?v=202609152300" defer></script>
-    <script src="/common/js/nav.js?v=202609152300" defer></script>
+    <script src="/common/js/theme.js?v=202609171402" defer></script>
+    <script src="/common/js/tools-data.js?v=202609171402" defer></script>
+    <script src="/common/js/nav.js?v=202609171402" defer></script>
 </body>
 
 </html>
