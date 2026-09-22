@@ -8,9 +8,9 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609221949"></script>
+    <script src="/common/js/theme-init.js?v=202609221958"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609221949"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609221958"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
@@ -41,16 +41,16 @@
     <link rel="canonical" href="https://helpoke.com/tool/file-compressor/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/file-compressor/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/file-compressor/">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609221949">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609221958">
 
-    <script src="/common/js/ads.js?v=202609221949" async></script>
+    <script src="/common/js/ads.js?v=202609221958" async></script>
     <style>
         @import '/common/css/style.css';
         @import '/common/css/utils.css';
         @import '/common/css/i18n.css';
     </style>
-    <link rel="stylesheet" href="style.css?v=202609221949">
-    <script src="/common/lib/jszip.min.js?v=202609221949" defer></script>
+    <link rel="stylesheet" href="style.css?v=202609221958">
+    <script src="/common/lib/jszip.min.js?v=202609221958" defer></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -82,7 +82,7 @@
         }
     }
     </script>
-    <script src="/common/js/i18n/i18n.js?v=202609221949" defer></script>
+    <script src="/common/js/i18n/i18n.js?v=202609221958" defer></script>
 </head>
 
 <body>
@@ -267,11 +267,11 @@
                 <div class="info-content">
                     <h4 data-i18n="tool.file-compressor.faqTitle">常见问题解答</h4>
                     <ul>
-                        <li data-i18n="tool.file-compressor.faq1">...</li>
-                        <li data-i18n="tool.file-compressor.faq2">...</li>
-                        <li data-i18n="tool.file-compressor.faq3">...</li>
-                        <li data-i18n="tool.file-compressor.faq4">...</li>
-                        <li data-i18n="tool.file-compressor.faq5">...</li>
+                        <li data-i18n="tool.file-compressor.faq1"><strong>Q: 压缩率大概是多少？为什么有些文件几乎压不小？</strong>A: 文本、日志、数据库导出、未压缩图片（BMP）等通常可压缩 50%–90%；而 JPG、MP4、MP3、已有 ZIP 等格式本身已是高压缩数据，再次压缩体积几乎不变甚至略增。对这类文件选择"仅打包"即可，速度最快。</li>
+                        <li data-i18n="tool.file-compressor.faq2"><strong>Q: ZIP 密码安全吗？其他解压软件能打开加密文件吗？</strong>A: 本工具先打包为标准 ZIP，再对整个文件做 AES-256-GCM 加密（密钥经 PBKDF2 派生），强度远高于传统 ZipCrypto。但这是"外层加密"，Windows 自带解压、7-Zip、WinRAR 等通用软件无法直接打开，需回到本工具输入密码解密解压。</li>
+                        <li data-i18n="tool.file-compressor.faq3"><strong>Q: 支持多大的文件？有数量限制吗？</strong>A: 文件数量没有硬性限制；建议单次处理的文件总大小不超过 500MB。超过 1GB 时浏览器内存占用会明显上升，可能出现卡顿或失败，建议分批处理。</li>
+                        <li data-i18n="tool.file-compressor.faq4"><strong>Q: 能解压带密码的 ZIP 吗？</strong>A: 分两种情况：本工具加密的文件会在解压时自动识别并提示输入密码，密码错误会明确提示；普通第三方软件加密的 ZIP（ZipCrypto/AES）目前不支持解压，因为 JSZip 本身不处理加密条目，请使用对应原软件解密。</li>
+                        <li data-i18n="tool.file-compressor.faq5"><strong>Q: 我的文件会被上传到服务器吗？</strong>A: 不会。文件在浏览器本地读取，压缩、加密、解压全部在内存中完成，不向任何服务器发送文件内容；关闭页面后数据即刻清除。</li>
                     </ul>
                 </div>
             </article>
@@ -280,19 +280,19 @@
                     <h3 data-i18n="tool.file-compressor.infoPrivacy">隐私承诺与数据安全</h3>
                 </header>
                 <div class="info-content">
-                    <p data-i18n="tool.file-compressor.privacyIntro">...</p>
+                    <p data-i18n="tool.file-compressor.privacyIntro">本工具完全在您的浏览器本地运行：文件只在您的设备上被读取、压缩和加密，绝不上传到任何服务器，无需登录，也不保存任何处理历史。</p>
                     <h4 data-i18n="tool.file-compressor.privacyTitle">我们如何保护您的数据</h4>
                     <ul>
-                        <li data-i18n="tool.file-compressor.privacyPoint1">...</li>
-                        <li data-i18n="tool.file-compressor.privacyPoint2">...</li>
-                        <li data-i18n="tool.file-compressor.privacyPoint3">...</li>
-                        <li data-i18n="tool.file-compressor.privacyPoint4">...</li>
+                        <li data-i18n="tool.file-compressor.privacyPoint1"><strong>纯前端本地处理：</strong>文件的读取、打包、压缩与加密运算全部在浏览器内存中完成，处理过程不依赖服务器。</li>
+                        <li data-i18n="tool.file-compressor.privacyPoint2"><strong>不上传任何内容：</strong>您的文件内容不会通过网络发送到任何服务器或第三方接口，页面请求中不包含文件数据。</li>
+                        <li data-i18n="tool.file-compressor.privacyPoint3"><strong>不留存历史：</strong>我们不保存任何文件副本或处理记录，关闭或刷新页面后内存中的数据即刻清除。</li>
+                        <li data-i18n="tool.file-compressor.privacyPoint4"><strong>无账号无追踪：</strong>使用本工具不需要注册或登录，我们不会将您的文件内容用于广告画像或任何形式的用户分析。</li>
                     </ul>
                     <h4 data-i18n="tool.file-compressor.privacyFaqTitle">隐私常见问题</h4>
                     <ul>
-                        <li data-i18n="tool.file-compressor.privacyFaq1">...</li>
-                        <li data-i18n="tool.file-compressor.privacyFaq2">...</li>
-                        <li data-i18n="tool.file-compressor.privacyFaq3">...</li>
+                        <li data-i18n="tool.file-compressor.privacyFaq1"><strong>Q: 加密后的文件安全吗？密码丢了怎么办？</strong>A: 加密采用 AES-256-GCM，在没有密码的情况下无法解密文件内容。但请务必牢记密码——我们没有任何后门或找回机制，密码遗忘后文件将无法恢复。</li>
+                        <li data-i18n="tool.file-compressor.privacyFaq2"><strong>Q: 断网后还能压缩和解压吗？</strong>A: 可以。页面加载完成后所有逻辑已在本地运行，断开网络同样可以完成压缩、加密与解压操作。</li>
+                        <li data-i18n="tool.file-compressor.privacyFaq3"><strong>Q: 你们能看到我压缩了什么文件吗？</strong>A: 不能。服务器不接收文件内容，也没有日志记录您的文件名或操作，我们无法、也不会查看您的数据。</li>
                     </ul>
                 </div>
             </article>
@@ -316,11 +316,11 @@
         </div>
     </main>
 
-    <script src="/common/js/theme.js?v=202609221949" defer></script>
-    <script src="/common/js/tools-data.js?v=202609221949" defer></script>
-    <script src="/common/js/nav.js?v=202609221949" defer></script>
-    <script src="/common/js/utils.js?v=202609221949" defer></script>
-    <script src="script.js?v=202609221949" defer></script>
+    <script src="/common/js/theme.js?v=202609221958" defer></script>
+    <script src="/common/js/tools-data.js?v=202609221958" defer></script>
+    <script src="/common/js/nav.js?v=202609221958" defer></script>
+    <script src="/common/js/utils.js?v=202609221958" defer></script>
+    <script src="script.js?v=202609221958" defer></script>
 </body>
 
 </html>
