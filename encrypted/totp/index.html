@@ -9,9 +9,9 @@
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609171402"></script>
+    <script src="/common/js/theme-init.js?v=202609221949"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609171402"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609221949"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Security-Policy"
@@ -43,15 +43,15 @@
     <link rel="canonical" href="https://helpoke.com/encrypted/totp/">
     <link rel="alternate" hreflang="zh" href="https://helpoke.com/encrypted/totp/">
     <link rel="alternate" hreflang="x-default" href="https://helpoke.com/encrypted/totp/">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609171402">
-    <script src="/common/js/i18n/i18n.js?v=202609171402" defer></script>
-    <script src="/common/js/ads.js?v=202609171402" async></script>
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609221949">
+    <script src="/common/js/i18n/i18n.js?v=202609221949" defer></script>
+    <script src="/common/js/ads.js?v=202609221949" async></script>
     <style>
         @import '/common/css/style.css';
         @import '/common/css/utils.css';
         @import '/common/css/i18n.css';
     </style>
-    <link rel="stylesheet" href="style.css?v=202609171402">
+    <link rel="stylesheet" href="style.css?v=202609221949">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -243,6 +243,27 @@
                     </ul>
                 </div>
             </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="encrypted.totp.infoPrivacy">隐私承诺与数据安全</h3>
+                </header>
+                <div class="info-content">
+                    <p data-i18n="encrypted.totp.privacyIntro">TOTP 生成器完全在浏览器本地运行：您输入的 Base32 密钥仅用于在本机计算动态口令，不会上传到任何服务器，也不会写入持久化存储，无需账号即可使用，且不留存任何生成记录。</p>
+                    <h4 data-i18n="encrypted.totp.privacyTitle">我们如何保护您的数据</h4>
+                    <ul>
+                        <li data-i18n="encrypted.totp.privacyPoint1"><strong>纯前端本地计算：</strong>动态口令由浏览器基于当前时间和您输入的密钥实时算出（HMAC 运算在本地完成），整个过程没有任何网络请求参与。</li>
+                        <li data-i18n="encrypted.totp.privacyPoint2"><strong>密钥不上传、不留存：</strong>Base32 密钥只存在于当前页面的内存中，不会被发送到服务器或记录到日志；但请注意，密钥本身等同于您的第二重密码，请务必自行妥善保管。</li>
+                        <li data-i18n="encrypted.totp.privacyPoint3"><strong>口令即时刷新即弃：</strong>每个 6/8 位动态口令只在页面上临时显示，随周期自动刷新覆盖，历史口令不被保存，关闭页面后所有数据即刻清除。</li>
+                        <li data-i18n="encrypted.totp.privacyPoint4"><strong>无账号无追踪：</strong>本工具不要求登录或注册，我们不会收集与您身份相关的信息，也不会将任何使用数据用于广告投放或用户画像。</li>
+                    </ul>
+                    <h4 data-i18n="encrypted.totp.privacyFaqTitle">隐私常见问题</h4>
+                    <ul>
+                        <li data-i18n="encrypted.totp.privacyFaq1"><strong>Q: 我的 Base32 密钥会被上传或保存吗？</strong>A: 不会。密钥仅在浏览器内存中用于本地计算口令，不经过网络传输、不写入磁盘；但密钥泄露等同于 2FA 失效，请勿将其粘贴到不受信任的站点或截图保存到云端。</li>
+                        <li data-i18n="encrypted.totp.privacyFaq2"><strong>Q: 你们会用我的密钥做广告或出售吗？</strong>A: 不会。服务器从未收到过您的密钥或口令，我们无从获取，自然也不会将其用于广告、分析或任何商业目的。</li>
+                        <li data-i18n="encrypted.totp.privacyFaq3"><strong>Q: 关闭页面后密钥去哪了？还安全吗？</strong>A: 页面关闭后密钥随浏览器内存一起释放，本站不留任何副本。若您曾在本工具中输入过重要账户的密钥，建议留意输入环境（如公共电脑），必要时在服务端重新绑定密钥。</li>
+                    </ul>
+                </div>
+            </article>
         </div>
 
         <div id="footer-container">
@@ -261,11 +282,11 @@
             </footer>
         </div>
     </main>
-    <script src="/common/js/utils.js?v=202609171402" defer></script>
-    <script src="/common/js/theme.js?v=202609171402" defer></script>
-    <script src="/common/js/tools-data.js?v=202609171402" defer></script>
-    <script src="/common/js/nav.js?v=202609171402" defer></script>
-    <script src="script.js?v=202609171402" defer></script>
+    <script src="/common/js/utils.js?v=202609221949" defer></script>
+    <script src="/common/js/theme.js?v=202609221949" defer></script>
+    <script src="/common/js/tools-data.js?v=202609221949" defer></script>
+    <script src="/common/js/nav.js?v=202609221949" defer></script>
+    <script src="script.js?v=202609221949" defer></script>
 </body>
 
 </html>

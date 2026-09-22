@@ -1102,7 +1102,18 @@
     "errEmptyHmac": "Please enter the HMAC to verify",
     "verifyMatch": "Match",
     "verifyMismatch": "Mismatch",
-    "errVerify": "Verification failed: "
+    "errVerify": "Verification failed: ",
+    "infoPrivacy": "Privacy Commitment & Data Security",
+    "privacyIntro": "The HMAC tool runs entirely inside your browser: your shared key and message text only exist in local memory while the Web Crypto computation runs, are never uploaded to any server, require no account or login, and leave no signing or verification history behind.",
+    "privacyTitle": "How We Protect Your Data",
+    "privacyPoint1": "<strong>Pure client-side processing:</strong>HMAC-SHA256/384/512 computations are performed by the browser's native Web Crypto API, so your key and message never leave your device or traverse any network connection.",
+    "privacyPoint2": "<strong>Keys are never uploaded:</strong>Your shared secret and the data being signed are never sent to our servers or any third party; this page is a static file with no backend that could receive them.",
+    "privacyPoint3": "<strong>No history is retained:</strong>Generated MACs and verification results appear only on the current page, are never written to localStorage or logs, and vanish when you close the tab—no trace of which keys you handled.",
+    "privacyPoint4": "<strong>No account, no tracking:</strong>No sign-in is required and your inputs are never used for advertising profiles; keep in mind that HMAC security ultimately depends on keeping your key secret, which remains your responsibility.",
+    "privacyFaqTitle": "Privacy FAQ",
+    "privacyFaq1": "<strong>Q: Will my key or message be uploaded or stored?</strong>A: No. Signing and verification happen locally in the browser—the key, message, and result never cross the network or touch a disk, and no server-side records exist.",
+    "privacyFaq2": "<strong>Q: Do you use this data for ads or sell it?</strong>A: Never. We have no way to access the keys and messages you enter, so they cannot possibly be used for ad targeting, analytics, or sale.",
+    "privacyFaq3": "<strong>Q: Where does my data go when I close the page?</strong>A: The key, message, and MAC held in memory are released as soon as the page closes, with no copies kept. If you worked on a shared machine, close the tab fully before leaving."
   },
   "pbkdf2": {
     "title": "PBKDF2 Key Derivation Tool",
@@ -1171,7 +1182,18 @@
     "errKeyLength": "Key length must be a multiple of 8 and at least 8 bits",
     "deriving": "Deriving...",
     "resultInfo": "Derived: {{bits}} bits ({{bytes}} bytes) in {{time}} seconds",
-    "errDerive": "Derivation failed: "
+    "errDerive": "Derivation failed: ",
+    "infoPrivacy": "Privacy Commitment & Data Security",
+    "privacyIntro": "The PBKDF2 key derivation tool runs completely in your browser: the password and salt you type only participate in Web Crypto computations inside local memory, never travel over the network, need no registration or login, and no derivation history is ever stored.",
+    "privacyTitle": "How We Protect Your Data",
+    "privacyPoint1": "<strong>Pure client-side processing:</strong>The heavy PBKDF2 iteration loop is executed directly by the browser's native Web Crypto API, keeping your password and salt in local memory with no server round-trip involved.",
+    "privacyPoint2": "<strong>Nothing is uploaded:</strong>Neither your raw password, the salt, nor the derived key is ever sent in an HTTP request to us or any third party—this page is a static file with no backend capable of receiving such data.",
+    "privacyPoint3": "<strong>No history is retained:</strong>The derived key is shown only on the current page and is never persisted to localStorage or any storage; refreshing or closing the page wipes the password and intermediate data from memory instantly.",
+    "privacyPoint4": "<strong>No account, no tracking:</strong>You don't need to log in, your inputs are never linked to your identity, and nothing you derive is used for advertising profiles or user analytics of any kind.",
+    "privacyFaqTitle": "Privacy FAQ",
+    "privacyFaq1": "<strong>Q: Are the password and salt I enter uploaded or saved?</strong>A: No. All computation happens locally in the browser—the password, salt, and derived key never leave your device, and no corresponding logs exist on any server.",
+    "privacyFaq2": "<strong>Q: Will you use my password data for ads or sell it?</strong>A: Impossible. Your input never reaches our servers in the first place, so it cannot be used for advertising, analysis, or resale under any circumstances.",
+    "privacyFaq3": "<strong>Q: What happens to my data after I close the page?</strong>A: The password, salt, and derived output are released along with the browser process memory, leaving no trace; for highly sensitive material, close the tab immediately after use."
   },
   "ec": {
     "title": "EC Elliptic Curve Key Pair Generator",
@@ -1275,7 +1297,18 @@
     "noteFaq4": "<strong>Q: How to use Hex input?</strong>A: Select Hex byte mode and enter a hexadecimal string (e.g., 48656C6C6F). The tool parses it as a byte sequence before computing CRC. Ideal for verifying binary protocol data frames.",
     "errHexOdd": "Hex string length must be even",
     "errEmptyInput": "Please enter data to calculate",
-    "copied": "Copied"
+    "copied": "Copied",
+    "infoPrivacy": "Privacy Commitment & Data Security",
+    "privacyIntro": "The CRC checker runs entirely in your browser: the text or Hex data you enter is processed only on your own machine through local polynomial-division math, never uploaded to any server, with no account required and no input history saved.",
+    "privacyTitle": "How We Protect Your Data",
+    "privacyPoint1": "<strong>Pure client-side computation:</strong>CRC-32/CRC-16 checksums are produced instantly in browser memory using table-driven bit operations—the whole process issues no network requests, so your data stays on your device.",
+    "privacyPoint2": "<strong>Nothing is uploaded:</strong>Neither the text nor the Hex byte stream is ever sent to a server; this page is a static file with no backend that could receive or record your input.",
+    "privacyPoint3": "<strong>No history is retained:</strong>Your input and the resulting checksum exist only on the current page, are never written to localStorage or cookies, and are wiped the moment you refresh or close the page.",
+    "privacyPoint4": "<strong>No secrets at risk:</strong>CRC is a non-cryptographic error-detection algorithm involving no keys or cryptographic material; even so, fully local computation guarantees that sensitive data you paste in never leaks.",
+    "privacyFaqTitle": "Privacy FAQ",
+    "privacyFaq1": "<strong>Q: Will the text or Hex data I enter be uploaded or saved?</strong>A: No. CRC calculation happens entirely inside the browser—the data crosses no network and is never written to disk, and no server-side record exists.",
+    "privacyFaq2": "<strong>Q: Do you use this data for ads or sell it?</strong>A: No. Your input never reaches our servers, so it cannot be used for ad targeting, user profiling, or sale in any form.",
+    "privacyFaq3": "<strong>Q: Where does my data go when I close the page?</strong>A: The entered data and checksum are cleared from memory when the page closes, leaving no trace; simply re-enter the data if you need to check it again."
   },
   "fileHash": {
     "title": "File Hash Calculator",
@@ -1332,7 +1365,18 @@
     "success": "Calculation complete",
     "errCalculate": "Calculation failed: ",
     "copied": "Copied",
-    "downloaded": "Downloaded"
+    "downloaded": "Downloaded",
+    "infoPrivacy": "Privacy Commitment & Data Security",
+    "privacyIntro": "The file hash calculator runs entirely in your browser: files are streamed and digested locally through the FileReader API, their contents are never uploaded to any server, no registration or login is needed, and no file list or calculation history is kept.",
+    "privacyTitle": "How We Protect Your Data",
+    "privacyPoint1": "<strong>Files never leave your device:</strong>Files you select or drop are read only by the browser's FileReader interface locally, fed chunk by chunk into Web Crypto for hashing—the full contents never leave your machine.",
+    "privacyPoint2": "<strong>Nothing is uploaded:</strong>This is a purely static front-end with no upload endpoint; not even metadata such as file names or sizes is ever sent back to a server.",
+    "privacyPoint3": "<strong>No history is retained:</strong>Hash results appear only on the current page and are never written to disk or browser storage; closing the page releases the file references and intermediate data instantly, so no one can tell which files you processed.",
+    "privacyPoint4": "<strong>Safe for sensitive files:</strong>Contracts, database backups, and forensic images can be verified with confidence—no account, no tracking, and none of your usage data is used for advertising profiles.",
+    "privacyFaqTitle": "Privacy FAQ",
+    "privacyFaq1": "<strong>Q: Will my files be uploaded or stored?</strong>A: No. Files are only streamed and read inside the browser to compute a digest; not a single byte is sent to a server, and we operate no file storage at all.",
+    "privacyFaq2": "<strong>Q: Do you use my files or hash results for ads?</strong>A: No. Our servers never see your file contents or hashes, so there is no possibility of them being used for advertising, analytics, or sale.",
+    "privacyFaq3": "<strong>Q: What happens to the data after computing, and does it work offline?</strong>A: File data is cleared from memory once the page closes; the tool needs no backend service, so it works fully offline—disconnect your network first for extra peace of mind with sensitive files."
   },
   "totp": {
     "title": "TOTP/OTP Generator",
@@ -1386,7 +1430,18 @@
     "errEmptySecret": "Please enter the Base32 secret",
     "errGenerate": "Generation failed: ",
     "copied": "Copied",
-    "errNoCrypto": "Your browser does not support Web Crypto API. Please use a modern browser"
+    "errNoCrypto": "Your browser does not support Web Crypto API. Please use a modern browser",
+    "infoPrivacy": "Privacy Commitment & Data Security",
+    "privacyIntro": "The TOTP generator runs entirely in your browser: the Base32 secret you enter is used only on your own machine to compute one-time codes, is never uploaded to any server or written to persistent storage, requires no account, and leaves no generation history.",
+    "privacyTitle": "How We Protect Your Data",
+    "privacyPoint1": "<strong>Pure client-side computation:</strong>Each code is derived in real time by the browser from the current clock and your secret (the HMAC math happens locally)—no network request is involved at any step.",
+    "privacyPoint2": "<strong>Secrets are neither uploaded nor stored:</strong>The Base32 secret lives only in the current page's memory and is never sent to a server or logged; remember, though, that this secret is effectively your second password, so safeguarding it is your responsibility.",
+    "privacyPoint3": "<strong>Codes are ephemeral by design:</strong>Each 6/8-digit code is shown briefly and overwritten at the next period tick; past codes are never saved, and closing the page clears everything at once.",
+    "privacyPoint4": "<strong>No account, no tracking:</strong>No sign-in or registration is required, we collect nothing tied to your identity, and no usage data is ever used for advertising or user profiling.",
+    "privacyFaqTitle": "Privacy FAQ",
+    "privacyFaq1": "<strong>Q: Will my Base32 secret be uploaded or saved?</strong>A: No. The secret stays in browser memory solely to compute codes locally—never transmitted, never written to disk; but a leaked secret defeats 2FA, so don't paste it into untrusted sites or store screenshots in the cloud.",
+    "privacyFaq2": "<strong>Q: Do you use my secret for ads or sell it?</strong>A: No. Our servers have never received your secret or codes, so they cannot be used for advertising, analytics, or any commercial purpose.",
+    "privacyFaq3": "<strong>Q: Where does my secret go after I close the page? Is it still safe?</strong>A: It is released with browser memory when the page closes and no copies are kept here. If you entered a secret for an important account, mind your environment (e.g., shared computers) and rebind a new secret on the server side if in doubt."
   },
   "cert": {
     "title": "X.509 Certificate Parser",
