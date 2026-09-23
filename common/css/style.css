@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+/* 始终预留滚动条槽位，避免折叠 info-section 使页面变短、纵向滚动条消失时
+   内容宽度回流（折叠前后宽度应保持一致）；移动端为覆盖式滚动条，槽位为 0，无副作用 */
+html {
+    scrollbar-gutter: stable;
+}
+
 :root {
     --sidebar-width: 240px;
     /* 默认主题变量 */
