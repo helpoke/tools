@@ -1237,6 +1237,103 @@
       "notifyJavaBeanFormatFail": "Java Bean解析失败，请检查代码格式"
     }
   },
+  "chart": {
+    "title": "Json数据转图表",
+    "desc": "Json 数据转图表工具，支持将 JSON 或 CSV 数据可视化成柱状图、折线图、面积图、饼图、环形图、散点图，支持主题色切换、全屏、下载 PNG 等交互功能",
+    "parseError": "数据解析失败，请检查 JSON / CSV 格式",
+    "noDownloadableChart": "请先生成有效图表",
+    "downloadSuccess": "图表已下载",
+    "downloadFailed": "下载失败",
+    "copyFailed": "复制失败",
+    "templateDownloaded": "模板已下载",
+    "uploadLoaded": "数据文件已载入",
+    "uploadFailed": "文件读取失败",
+    "chartTypes": {
+      "bar": "柱状图",
+      "barh": "水平条形图",
+      "stack": "堆叠柱状图",
+      "line": "折线图",
+      "area": "面积图",
+      "stackarea": "堆叠面积图",
+      "pie": "饼图",
+      "doughnut": "环形图",
+      "radar": "雷达图",
+      "polar": "玫瑰图",
+      "scatter": "散点图"
+    },
+    "examples": {
+      "title": "示例数据：",
+      "sales": "销售柱状图",
+      "trend": "增长折线图",
+      "traffic": "流量面积图",
+      "share": "占比饼图",
+      "ratio": "环形图",
+      "points": "散点图",
+      "rank": "排行榜",
+      "compose": "堆叠构成",
+      "ability": "能力雷达",
+      "rose": "玫瑰图"
+    },
+    "editor": {
+      "title": "图表数据 (JSON / CSV)",
+      "template": "下载模板",
+      "upload": "上传",
+      "format": "格式化",
+      "placeholder": "请输入 JSON 或 CSV 数据，例如：\n{\n  \"type\": \"bar\",\n  \"title\": \"季度销售额\",\n  \"xTitle\": \"季度\",\n  \"yTitle\": \"销售额(万元)\",\n  \"labels\": [\"Q1\", \"Q2\", \"Q3\", \"Q4\"],\n  \"datasets\": [\n    { \"name\": \"线上\", \"color\": \"#5470c6\", \"data\": [120, 200, 150, 80] },\n    { \"name\": \"线下\", \"color\": \"#91cc75\", \"data\": [80, 120, 90, 110] }\n  ]\n}"
+    },
+    "preview": {
+      "title": "图表预览",
+      "download": "下载",
+      "empty": "暂无数据，请输入或载入示例",
+      "noData": "无有效数据"
+    },
+    "intro": {
+      "title": "工具介绍",
+      "problemTitle": "让数据一眼看懂",
+      "problem1": "表格里的数字很难一眼看出趋势和占比。本工具把结构化的 JSON 或 CSV 数据，一键渲染成直观的图表——柱状图对比大小、折线图看趋势、饼图看占比、散点图看分布。无需安装 Excel、无需连接任何图表服务器，粘贴数据即可出图。",
+      "problem2": "工具内置 11 种常用图表类型（柱状图、水平条形图、堆叠柱状图、折线图、面积图、堆叠面积图、饼图、环形图、雷达图、玫瑰图、散点图），支持多数据集对比、坐标轴标题、图例、网格线和自适应刻度。渲染基于原生 Canvas 2D 绘制，不依赖任何第三方图表库，加载更快、体积更小。",
+      "problem3": "所有解析和绘制都在浏览器本地完成——你的经营数据、统计报表不会上传到任何服务器，可用 F12 的 Network 面板验证。生成的图表可一键导出为高清 PNG 图片，直接插入 PPT、Word、网页或邮件。",
+      "coreTitle": "核心功能",
+      "core1": "规范数据结构：工具定义了一套简洁的 JSON 数据规范（type / title / labels / datasets），并提供模板下载。你也可以直接粘贴常见的 CSV 表格，系统自动识别。",
+      "core2": "实时预览：编辑数据后自动重新渲染，切换上方图表类型按钮即可在同一份数据上换一种展示方式。",
+      "core3": "主题配色：内置多彩、海洋、暖色、森林、单色 5 套配色方案，一键切换图表整体风格。",
+      "core4": "下载导出：点击“下载”导出高清 PNG 图片；点击全屏按钮可放大查看大型数据集。"
+    },
+    "instructions": {
+      "title": "使用说明",
+      "dataTitle": "数据结构规范",
+      "data1": "type：图表类型，可选 bar、line、area、pie、doughnut、scatter（也可点击页面上方按钮切换）。",
+      "data2": "title / xTitle / yTitle：图表标题与 X、Y 轴标题，可省略。",
+      "data3": "labels：横轴/分类标签数组。饼图、环形图中它表示每个扇区的名称。",
+      "data4": "datasets：数据系列数组，每个系列包含 name（名称）、color（可选）、data（与 labels 等长的数值数组）。饼图/环形图通常只有一个系列。",
+      "data5": "CSV 兼容：直接粘贴表格文本，首行会被当作系列名，首列被当作 labels。散点图的 labels 会被视为数值 X 坐标。",
+      "basicTitle": "基本使用方法",
+      "basic1": "载入示例：点击“示例数据”下的按钮，即可载入一份完整示例。",
+      "basic2": "下载模板：点击“下载模板”获取标准 JSON 结构文件。",
+      "basic3": "上传数据：点击“上传”选择本地 .json 或 .csv 文件载入。",
+      "basic4": "编辑数据：在左侧文本框修改数据，右侧图表实时刷新。",
+      "interactionTitle": "图表交互功能",
+      "interaction1": "切换类型：点击上方图表类型按钮，用同一份数据切换展示方式。",
+      "interaction2": "主题配色：点击预览区上方的颜色圆点切换配色方案。",
+      "interaction3": "下载图片：点击“下载”按钮导出高清 PNG 图表。",
+      "interaction4": "全屏预览：点击全屏按钮放大查看图表，再次点击或按 Esc 退出。",
+      "interaction5": "格式化：点击“格式化”按钮把 JSON 数据整理为缩进友好的排版。"
+    },
+    "notes": {
+      "title": "注意事项",
+      "dataTitle": "数据要点",
+      "data1": "每个系列的 data 数组长度应与 labels 一致；若某个点缺失数据，可用 null 占位，折线图会自动断开，柱状图会跳过该柱。",
+      "data2": "数值需为数字类型（不要带单位或千分位字符串）。若需要显示单位，请写在 yTitle 中。",
+      "data3": "饼图和环形图用于展示“部分与整体”的占比，建议分类数量控制在 8 个以内。",
+      "troubleshootTitle": "排错建议",
+      "troubleshoot1": "提示“数据解析失败”？检查 JSON 是否用了中文引号、是否多了尾逗号、括号是否闭合。可先点击“格式化”验证。",
+      "troubleshoot2": "图表空白？确认 datasets 至少有一个系列且 data 非空；饼图/环形图不要使用多个系列。",
+      "troubleshoot3": "下载的 PNG 模糊？本工具按设备像素比渲染，已较为清晰。如需超高清图建议全屏放大后再截图。",
+      "securityTitle": "隐私保护",
+      "security1": "数据的解析与绘制完全在浏览器本地完成，不会传输到任何服务器。不使用 localStorage 持久化，关闭标签页后即清除。",
+      "security2": "在公共设备上使用时，建议配合浏览器无痕模式，关闭后不保留任何缓存与记录。"
+    }
+  },
   "mermaid": {
     "title": "Mermaid 在线画 UML 图工具",
     "desc": "Mermaid 在线画 UML 图工具，支持流程图、时序图、状态图、类图、实体关系图、饼图、甘特图、用户旅程图等多种图表类型，支持主题色切换、全屏、滚轮放大、拖动等交互功能",

@@ -1,0 +1,538 @@
+/* 数据转图表工具样式 —— 基于 mermaid 工具模板适配 */
+@font-face {
+    font-family: "iconfont";
+    /* Project id 5007233 */
+    src: url('/common/font/iconfont.woff2?t=1761390387822') format('woff2'),
+        url('/common/font/iconfont.woff?t=1761390387822') format('woff'),
+        url('/common/font/iconfont.ttf?t=1761390387822') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bolder;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-quanping1:before {
+    content: "\e8fa";
+}
+
+.icon-quxiaoquanping:before {
+    content: "\e656";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 100%;
+    padding: 40px 0;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.88em;
+    color: #555;
+}
+
+/* ---------- 图表类型 / 示例按钮 ---------- */
+.chart-types {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.chart-examples {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    margin: 15px 0;
+}
+
+.chart-examples .chart-buttons {
+    gap: 6px;
+}
+
+.chart-examples .chart-btn {
+    padding: 4px 8px;
+    font-size: 14px;
+    border: 1px solid #d1e5ff;
+    color: #3d6aae;
+    font-weight: 500;
+}
+
+.chart-examples .chart-btn:hover {
+    background-color: #f0f7ff;
+    color: #6ea6ff;
+    transform: translateY(-1px);
+    box-shadow: 0 1px 3px rgba(59, 130, 246, 0.15);
+}
+
+.chart-examples .chart-btn.active {
+    background-color: #6ea6ff;
+    color: white;
+    border-color: #6ea6ff;
+}
+
+.chart-examples h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-right: 8px;
+    align-self: center;
+}
+
+.chart-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-btn {
+    padding: 10px 20px;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    background-color: var(--bg-card);
+    color: #3498db;
+}
+
+.chart-btn:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+.chart-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+/* ---------- 编辑区 + 预览区 ---------- */
+.editor-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.input-section {
+    flex: 2;
+    min-width: 300px;
+    max-width: 500px;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-section {
+    flex: 3;
+    min-width: 300px;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.input-section .section-header {
+    justify-content: space-between;
+}
+
+.input-section .section-header h2 {
+    flex: 1 1 100%;
+}
+
+.preview-section .section-header {
+    justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+    .preview-section .section-header h2 {
+        flex: 0 0 auto;
+    }
+
+    .theme-selector {
+        flex: 1;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .section-header button,
+    .section-header label {
+        flex: 0 0 auto;
+    }
+}
+
+.section-header h2 {
+    color: #34495e;
+    font-size: 1.5em;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+.theme-selector {
+    display: flex;
+    gap: 8px;
+    margin: 0 10px;
+    align-items: center;
+}
+
+.theme-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-circle:hover {
+    transform: scale(1.2);
+    border-color: #3498db;
+}
+
+.theme-circle.active {
+    border-color: white;
+    box-shadow: 0 0 0 2px #3498db;
+}
+
+#chart-input {
+    width: 100%;
+    min-height: 260px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    overflow: auto;
+    flex-grow: 1;
+    white-space: pre;
+    tab-size: 2;
+}
+
+#chart-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: var(--input-bg);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.editor-container button,
+.editor-container label#upload-label {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+#upload-label {
+    background-color: #16a3dc;
+    color: white;
+}
+
+#upload-label:hover {
+    background-color: #1290c4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(22, 163, 220, 0.3);
+}
+
+#zoom-btn {
+    background-color: #9b59b6;
+    color: white;
+    margin-right: 10px;
+}
+
+#zoom-btn:hover {
+    background-color: #8e44ad;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(155, 89, 182, 0.3);
+}
+
+#download-btn {
+    background-color: #27ae60;
+    color: white;
+}
+
+#download-btn:hover {
+    background-color: #229954;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+}
+
+#template-btn {
+    background-color: #16a3dc;
+    color: white;
+}
+
+#template-btn:hover {
+    background-color: #1290c4;
+    transform: translateY(-2px);
+}
+
+#format-btn {
+    background-color: #16a085;
+    color: white;
+}
+
+#format-btn:hover {
+    background-color: #138d75;
+    transform: translateY(-2px);
+}
+
+#copy-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+#copy-btn:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+}
+
+#clear-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#clear-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+#chart-preview {
+    width: 100%;
+    height: 800px;
+    min-height: 500px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px;
+    background-color: var(--bg-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chart-canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 全屏预览 */
+#chart-fullscreen-view {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+#chart-fullscreen-view canvas {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 自定义提示框 */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 10000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.success {
+    background-color: #27ae60;
+}
+
+.toast.error {
+    background-color: #e74c3c;
+}
+
+.toast.warning {
+    background-color: #f39c12;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 16px 0;
+    }
+
+    .editor-container {
+        flex-direction: column;
+    }
+
+    .input-section,
+    .preview-section {
+        max-width: 100%;
+    }
+
+    #chart-preview {
+        height: 460px;
+        min-height: 360px;
+    }
+
+    #chart-input {
+        min-height: 200px;
+        font-size: 13px;
+    }
+
+    .chart-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .section-header {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .section-header h2 {
+        font-size: 1.2em;
+    }
+
+    .editor-container button,
+    .editor-container label#upload-label {
+        padding: 7px 10px;
+        font-size: 13px;
+    }
+
+    .toast {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px 0;
+    }
+
+    #chart-preview {
+        height: 360px;
+        min-height: 300px;
+    }
+
+    #chart-input {
+        min-height: 320px;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .chart-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .chart-examples .chart-btn {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+
+    .section-header h2 {
+        font-size: 1em;
+    }
+
+    .editor-container button,
+    .editor-container label#upload-label {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    .theme-circle {
+        width: 20px;
+        height: 20px;
+    }
+
+    .input-section,
+    .preview-section {
+        padding: 14px;
+    }
+}
+
+/* ==================== 夜间模式样式 ==================== */
+html.dark-mode .input-section,
+html.dark-mode .preview-section {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+}
+
+html.dark-mode textarea {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+html.dark-mode .chart-types,
+html.dark-mode .chart-examples {
+    background-color: var(--bg-tertiary);
+}
+
+html.dark-mode .section-header h2 {
+    color: var(--text-primary);
+}
+
+html.dark-mode #chart-preview {
+    background-color: var(--bg-tertiary);
+}

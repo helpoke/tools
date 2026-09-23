@@ -1237,6 +1237,103 @@
       "notifyJavaBeanFormatFail": "Java Bean parsing failed, please check code format"
     }
   },
+  "chart": {
+    "title": "Data to Chart Tool",
+    "desc": "Data-to-chart tool that visualizes JSON or CSV data into bar, line, area, pie, doughnut and scatter charts, with theme switching, fullscreen and PNG download.",
+    "parseError": "Failed to parse data, please check the JSON / CSV format",
+    "noDownloadableChart": "Please generate a valid chart first",
+    "downloadSuccess": "Chart downloaded",
+    "downloadFailed": "Download failed",
+    "copyFailed": "Copy failed",
+    "templateDownloaded": "Template downloaded",
+    "uploadLoaded": "Data file loaded",
+    "uploadFailed": "Failed to read file",
+    "chartTypes": {
+      "bar": "Bar",
+      "barh": "Horizontal Bar",
+      "stack": "Stacked Bar",
+      "line": "Line",
+      "area": "Area",
+      "stackarea": "Stacked Area",
+      "pie": "Pie",
+      "doughnut": "Doughnut",
+      "radar": "Radar",
+      "polar": "Rose",
+      "scatter": "Scatter"
+    },
+    "examples": {
+      "title": "Sample data:",
+      "sales": "Sales Bar",
+      "trend": "Growth Line",
+      "traffic": "Traffic Area",
+      "share": "Share Pie",
+      "ratio": "Doughnut",
+      "points": "Scatter",
+      "rank": "Ranking",
+      "compose": "Stacked Mix",
+      "ability": "Radar",
+      "rose": "Rose"
+    },
+    "editor": {
+      "title": "Chart Data (JSON / CSV)",
+      "template": "Template",
+      "upload": "Upload",
+      "format": "Format",
+      "placeholder": "Enter JSON or CSV data, e.g.:\n{\n  \"type\": \"bar\",\n  \"title\": \"Quarterly Sales\",\n  \"xTitle\": \"Quarter\",\n  \"yTitle\": \"Sales (10k)\",\n  \"labels\": [\"Q1\", \"Q2\", \"Q3\", \"Q4\"],\n  \"datasets\": [\n    { \"name\": \"Online\", \"color\": \"#5470c6\", \"data\": [120, 200, 150, 80] },\n    { \"name\": \"Offline\", \"color\": \"#91cc75\", \"data\": [80, 120, 90, 110] }\n  ]\n}"
+    },
+    "preview": {
+      "title": "Chart Preview",
+      "download": "Download",
+      "empty": "No data yet. Please enter data or load a sample",
+      "noData": "No valid data"
+    },
+    "intro": {
+      "title": "Overview",
+      "problemTitle": "Make data understandable at a glance",
+      "problem1": "Numbers in a table rarely reveal trends or proportions at a glance. This tool turns structured JSON or CSV data into clear charts—bars compare size, lines show trends, pies show share, and scatter plots show distribution. No Excel, no chart server—just paste data.",
+      "problem2": "It includes 11 common chart types (bar, horizontal bar, stacked bar, line, area, stacked area, pie, doughnut, radar, rose, scatter) with multi-series comparison, axis titles, legend, gridlines and auto ticks. Rendering uses native Canvas 2D, with no third-party chart library—faster and lighter.",
+      "problem3": "All parsing and drawing happen locally in the browser—your data never leaves your machine and can be verified via the F12 Network panel. Export the chart as a high-resolution PNG and drop it into PPT, Word, web pages or email.",
+      "coreTitle": "Core features",
+      "core1": "Structured data spec: a concise JSON schema (type / title / labels / datasets) with a downloadable template. You can also paste common CSV tables which are recognized automatically.",
+      "core2": "Live preview: charts re-render automatically after edits; switch the type buttons to change how the same data is displayed.",
+      "core3": "Color themes: 5 built-in palettes (Colorful, Ocean, Warm, Forest, Mono) to restyle the whole chart with one click.",
+      "core4": "Export: click Download to save a high-resolution PNG; click Fullscreen to inspect large datasets."
+    },
+    "instructions": {
+      "title": "How to use",
+      "dataTitle": "Data structure spec",
+      "data1": "type: chart type—bar, line, area, pie, doughnut, scatter (also switchable via the buttons above).",
+      "data2": "title / xTitle / yTitle: chart and axis titles, all optional.",
+      "data3": "labels: the category label array. For pie/doughnut it names each slice.",
+      "data4": "datasets: an array of series, each with name, optional color, and data (a numeric array as long as labels). Pie/doughnut usually have one series.",
+      "data5": "CSV support: paste table text; the first row becomes series names and the first column becomes labels. For scatter, labels are treated as numeric X values.",
+      "basicTitle": "Basic usage",
+      "basic1": "Load a sample: click a button under Sample data to load a complete example.",
+      "basic2": "Download template: click Template to get a standard JSON structure file.",
+      "basic3": "Upload data: click Upload to load a local .json or .csv file.",
+      "basic4": "Edit data: modify the text on the left and the chart refreshes in real time.",
+      "interactionTitle": "Interactions",
+      "interaction1": "Switch type: use the type buttons to render the same data differently.",
+      "interaction2": "Color theme: click the color dots above the preview to change the palette.",
+      "interaction3": "Download: click Download to export a high-resolution PNG.",
+      "interaction4": "Fullscreen: click the fullscreen button to enlarge; click again or press Esc to exit.",
+      "interaction5": "Format: click Format to prettify the JSON with friendly indentation."
+    },
+    "notes": {
+      "title": "Notes",
+      "dataTitle": "Data tips",
+      "data1": "Each series' data length should match labels; use null for missing points—lines break automatically and bars are skipped.",
+      "data2": "Values must be numeric (no units or thousands separators). Put units in yTitle instead.",
+      "data3": "Pie and doughnut show part-to-whole; keep categories under 8 for legibility.",
+      "troubleshootTitle": "Troubleshooting",
+      "troubleshoot1": "Parse error? Check for Chinese quotes, trailing commas or unclosed brackets. Click Format to validate the JSON first.",
+      "troubleshoot2": "Blank chart? Ensure datasets has at least one series with non-empty data; pie/doughnut should use a single series.",
+      "troubleshoot3": "Blurry PNG? The tool renders at device pixel ratio for sharpness. For ultra-high resolution, go fullscreen and screenshot.",
+      "securityTitle": "Privacy",
+      "security1": "Parsing and rendering happen entirely in your browser; nothing is sent to any server. No localStorage persistence—data is cleared when the tab closes.",
+      "security2": "On shared devices, use incognito mode so no cache or history is retained after closing."
+    }
+  },
   "mermaid": {
     "title": "Mermaid Online UML Diagram Tool",
     "desc": "Mermaid online UML diagram tool supporting flowcharts, sequence diagrams, state diagrams, class diagrams, ER diagrams, pie charts, Gantt charts, user journey diagrams, and more. Features theme switching, fullscreen, scroll zoom, and drag interactions.",

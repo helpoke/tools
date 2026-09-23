@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="免费的数据转图表在线工具，将 JSON 或 CSV 数据快速转换为柱状图、折线图、面积图、饼图、环形图、散点图等图表，支持一键下载 PNG 图片，本地渲染无需上传。">
+    <meta name="keywords" content="数据转图表,JSON转图表,CSV转图表,在线图表工具,柱状图生成,折线图生成,饼图生成,数据可视化,图表下载,免费图表工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202609232300"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202609232300"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>数据转图表工具 - JSON/CSV 生成柱状图折线图饼图 | Helpoke 助点站</title>
+    <meta property="og:title" content="数据转图表工具 - JSON/CSV 生成柱状图折线图饼图 | Helpoke 助点站">
+    <meta property="og:description"
+        content="免费的数据转图表在线工具，将 JSON 或 CSV 数据快速转换为柱状图、折线图、面积图、饼图、环形图、散点图，支持一键下载 PNG 图片，本地渲染无需上传。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/chart/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="数据转图表工具，JSON/CSV 在线生成图表">
+    <meta name="twitter:description" content="将 JSON 或 CSV 数据快速转换为柱状图、折线图、面积图、饼图、环形图、散点图，支持一键下载 PNG 图片，本地渲染无需上传。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/chart/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/chart/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/chart/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202609232300">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202609232300">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609232300">
+    <link rel="stylesheet" href="style.css?v=202609232300">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609232300">
+
+    <script src="/common/js/ads.js?v=202609232300" async></script>
+
+    <script src="/common/js/i18n/i18n.js?v=202609232300" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "数据转图表工具",
+        "description": "免费在线数据可视化工具，将 JSON 或 CSV 数据转换为柱状图、折线图、面积图、饼图、环形图、散点图，支持下载 PNG 图片。Convert JSON/CSV data into charts online for free.",
+        "url": "https://helpoke.com/tool/chart/",
+        "applicationCategory": "https://schema.org/AnalysisApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "支持柱状图(Bar Chart)与水平条形图(Horizontal Bar Chart)",
+            "支持堆叠柱状图(Stacked Bar Chart)",
+            "支持折线图(Line Chart)与面积图(Area Chart)",
+            "支持堆叠面积图(Stacked Area Chart)",
+            "支持饼图(Pie Chart)与环形图(Doughnut Chart)",
+            "支持雷达图(Radar Chart)与南丁格尔玫瑰图(Rose / Polar Area Chart)",
+            "支持散点图(Scatter Chart)",
+            "支持 JSON / CSV 数据输入",
+            "提供规范数据结构模板下载",
+            "一键导出 PNG 图表图片"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.chart.title">数据转图表工具</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.chart.desc">数据转图表工具，支持将 JSON 或 CSV 数据可视化成柱状图、折线图、面积图、饼图、环形图、散点图，支持主题色切换、全屏、下载 PNG 等交互功能
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="chart-types">
+                <div class="chart-buttons">
+                    <button class="chart-btn" data-type="bar" data-i18n="tool.chart.chartTypes.bar">柱状图</button>
+                    <button class="chart-btn" data-type="barh" data-i18n="tool.chart.chartTypes.barh">水平条形图</button>
+                    <button class="chart-btn" data-type="stack" data-i18n="tool.chart.chartTypes.stack">堆叠柱状图</button>
+                    <button class="chart-btn" data-type="line" data-i18n="tool.chart.chartTypes.line">折线图</button>
+                    <button class="chart-btn" data-type="area" data-i18n="tool.chart.chartTypes.area">面积图</button>
+                    <button class="chart-btn" data-type="stackarea"
+                        data-i18n="tool.chart.chartTypes.stackarea">堆叠面积图</button>
+                    <button class="chart-btn" data-type="pie" data-i18n="tool.chart.chartTypes.pie">饼图</button>
+                    <button class="chart-btn" data-type="doughnut"
+                        data-i18n="tool.chart.chartTypes.doughnut">环形图</button>
+                    <button class="chart-btn" data-type="radar" data-i18n="tool.chart.chartTypes.radar">雷达图</button>
+                    <button class="chart-btn" data-type="polar" data-i18n="tool.chart.chartTypes.polar">玫瑰图</button>
+                    <button class="chart-btn" data-type="scatter" data-i18n="tool.chart.chartTypes.scatter">散点图</button>
+                </div>
+            </div>
+            <div class="chart-examples">
+                <div class="chart-buttons">
+                    <h3 data-i18n="tool.chart.examples.title">示例数据：</h3>
+                    <button class="chart-btn" data-example="sales" data-i18n="tool.chart.examples.sales">销售柱状图</button>
+                    <button class="chart-btn" data-example="trend" data-i18n="tool.chart.examples.trend">增长折线图</button>
+                    <button class="chart-btn" data-example="traffic"
+                        data-i18n="tool.chart.examples.traffic">流量面积图</button>
+                    <button class="chart-btn" data-example="share" data-i18n="tool.chart.examples.share">占比饼图</button>
+                    <button class="chart-btn" data-example="ratio" data-i18n="tool.chart.examples.ratio">环形图</button>
+                    <button class="chart-btn" data-example="points" data-i18n="tool.chart.examples.points">散点图</button>
+                    <button class="chart-btn" data-example="rank" data-i18n="tool.chart.examples.rank">排行榜</button>
+                    <button class="chart-btn" data-example="compose"
+                        data-i18n="tool.chart.examples.compose">堆叠构成</button>
+                    <button class="chart-btn" data-example="ability"
+                        data-i18n="tool.chart.examples.ability">能力雷达</button>
+                    <button class="chart-btn" data-example="rose" data-i18n="tool.chart.examples.rose">玫瑰图</button>
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.chart.editor.title">图表数据 (JSON / CSV)</h2>
+                        <button id="template-btn" data-i18n="tool.chart.editor.template">下载模板</button>
+                        <label id="upload-label">
+                            <span data-i18n="tool.chart.editor.upload">上传</span>
+                            <input type="file" id="upload-input" accept=".json,.csv,.txt" hidden>
+                        </label>
+                        <button id="format-btn" data-i18n="tool.chart.editor.format">格式化</button>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="chart-input" spellcheck="false" data-i18n-placeholder="tool.chart.editor.placeholder"
+                        placeholder='请输入 JSON 或 CSV 数据，例如：
+{
+  "type": "bar",
+  "title": "季度销售额",
+  "xTitle": "季度",
+  "yTitle": "销售额(万元)",
+  "labels": ["Q1", "Q2", "Q3", "Q4"],
+  "datasets": [
+    { "name": "线上", "color": "#5470c6", "data": [120, 200, 150, 80] },
+    { "name": "线下", "color": "#91cc75", "data": [80, 120, 90, 110] }
+  ]
+}'></textarea>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.chart.preview.title">图表预览</h2>
+                        <div class="theme-selector">
+                            <div class="theme-circle" data-theme="colorful" style="background-color: #5470c6;"></div>
+                            <div class="theme-circle" data-theme="ocean" style="background-color: #3aa6b9;"></div>
+                            <div class="theme-circle" data-theme="warm" style="background-color: #ee6666;"></div>
+                            <div class="theme-circle" data-theme="forest" style="background-color: #4a9d5b;"></div>
+                            <div class="theme-circle" data-theme="mono" style="background-color: #6b7280;"></div>
+                        </div>
+                        <button id="download-btn" data-i18n="tool.chart.preview.download">下载</button>
+                        <button id="zoom-btn"><span class="iconfont">&#xe8fa;</span></button>
+                    </div>
+                    <div id="chart-preview">
+                        <canvas id="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.chart.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.chart.intro.problemTitle">让数据一眼看懂</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.intro.problem1">表格里的数字很难一眼看出趋势和占比。本工具把结构化的 JSON 或 CSV
+                            数据，一键渲染成直观的图表——柱状图对比大小、折线图看趋势、饼图看占比、散点图看分布。无需安装 Excel、无需连接任何图表服务器，粘贴数据即可出图。</li>
+                        <li data-i18n="tool.chart.intro.problem2">工具内置 6
+                            种常用图表类型（柱状图、折线图、面积图、饼图、环形图、散点图），支持多数据集对比、坐标轴标题、图例、网格线和自适应刻度。渲染基于原生
+                            Canvas 2D 绘制，不依赖任何第三方图表库，加载更快、体积更小。</li>
+                        <li data-i18n="tool.chart.intro.problem3">
+                            所有解析和绘制都在浏览器本地完成——你的经营数据、统计报表不会上传到任何服务器，可用 F12 的 Network 面板验证。生成的图表可一键导出为高清
+                            PNG 图片，直接插入 PPT、Word、网页或邮件。</li>
+                    </ul>
+                    <h4 data-i18n="tool.chart.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.intro.core1"><strong>规范数据结构：</strong>工具定义了一套简洁的 JSON
+                            数据规范（type / title / labels / datasets），并提供模板下载。你也可以直接粘贴常见的 CSV
+                            表格（首列为分类标签，其余列为数据系列），系统自动识别。</li>
+                        <li data-i18n="tool.chart.intro.core2">
+                            <strong>实时预览：</strong>编辑数据后自动重新渲染，切换上方图表类型按钮即可在同一份数据上换一种展示方式。
+                        </li>
+                        <li data-i18n="tool.chart.intro.core3"><strong>主题配色：</strong>内置多彩、海洋、暖色、森林、单色
+                            5 套配色方案，一键切换图表整体风格。</li>
+                        <li data-i18n="tool.chart.intro.core4"><strong>下载导出：</strong>点击"下载"导出高清
+                            PNG 图片；点击全屏按钮可放大查看大型数据集。</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.chart.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.chart.instructions.dataTitle">数据结构规范</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.instructions.data1"><strong>type：</strong>图表类型，可选
+                            <code>bar</code>、<code>line</code>、<code>area</code>、<code>pie</code>、<code>doughnut</code>、<code>scatter</code>（也可点击页面上方按钮切换）。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.data2"><strong>title / xTitle / yTitle：</strong>图表标题与
+                            X、Y 轴标题，可省略。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.data3"><strong>labels：</strong>横轴/分类标签数组，如
+                            <code>["一月","二月","三月"]</code>。饼图、环形图中它表示每个扇区的名称。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.data4"><strong>datasets：</strong>数据系列数组，每个系列包含
+                            <code>name</code>（名称）、<code>color</code>（可选，#RRGGBB）、<code>data</code>（与
+                            labels 等长的数值数组）。饼图/环形图通常只有一个系列。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.data5"><strong>CSV 兼容：</strong>直接粘贴
+                            <code>名称,系列A,系列B</code> 这样的表格文本，首行会被当作系列名，首列被当作
+                            labels。散点图的 labels 会被视为数值 X 坐标。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.chart.instructions.basicTitle">基本使用方法</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.instructions.basic1">
+                            <strong>载入示例：</strong>点击"示例数据"下的按钮，即可载入一份完整示例，快速体验各类图表。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.basic2"><strong>下载模板：</strong>点击"下载模板"获取标准
+                            JSON 结构文件，用编辑器打开替换成你的数据。</li>
+                        <li data-i18n="tool.chart.instructions.basic3"><strong>上传数据：</strong>点击"上传"选择本地
+                            .json 或 .csv 文件载入。</li>
+                        <li data-i18n="tool.chart.instructions.basic4"><strong>编辑数据：</strong>在左侧文本框修改数据，右侧图表实时刷新。</li>
+                    </ul>
+                    <h4 data-i18n="tool.chart.instructions.interactionTitle">图表交互功能</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.instructions.interaction1">
+                            <strong>切换类型：</strong>点击上方图表类型按钮，用同一份数据切换展示方式。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.interaction2"><strong>主题配色：</strong>点击预览区上方的颜色圆点切换配色方案。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.interaction3"><strong>下载图片：</strong>点击"下载"按钮导出高清 PNG 图表。
+                        </li>
+                        <li data-i18n="tool.chart.instructions.interaction4"><strong>全屏预览：</strong>点击全屏按钮放大查看图表，再次点击或按
+                            Esc 退出。</li>
+                        <li data-i18n="tool.chart.instructions.interaction5"><strong>格式化：</strong>点击"格式化"按钮把 JSON
+                            数据整理为缩进友好的排版。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.chart.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.chart.notes.dataTitle">数据要点</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.notes.data1">每个系列的
+                            <code>data</code> 数组长度应与 <code>labels</code> 一致；若某个点缺失数据，可用
+                            <code>null</code> 占位，折线图会自动断开，柱状图会跳过该柱。
+                        </li>
+                        <li data-i18n="tool.chart.notes.data2">数值需为数字类型（不要带单位或千分位字符串）。若需要显示单位，请写在
+                            <code>yTitle</code> 中，例如 <code>"销售额(万元)"</code>。
+                        </li>
+                        <li data-i18n="tool.chart.notes.data3">饼图和环形图用于展示"部分与整体"的占比，建议分类数量控制在
+                            8 个以内，过多分类会让扇区难以辨认。
+                        </li>
+                    </ul>
+                    <h4 data-i18n="tool.chart.notes.troubleshootTitle">排错建议</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.notes.troubleshoot1"><strong>提示"数据解析失败"？</strong>检查 JSON
+                            是否用了中文引号、是否多了尾逗号、括号是否闭合。可先点击"格式化"验证 JSON 是否合法。</li>
+                        <li data-i18n="tool.chart.notes.troubleshoot2"><strong>图表空白？</strong>确认
+                            <code>datasets</code> 至少有一个系列且 <code>data</code> 非空；饼图/环形图不要使用多个系列。
+                        </li>
+                        <li data-i18n="tool.chart.notes.troubleshoot3"><strong>下载的 PNG 模糊？</strong>本工具按设备像素比渲染，Retina
+                            屏幕下已较为清晰。如需超高清图用于印刷，建议全屏放大后再截图。</li>
+                    </ul>
+                    <h4 data-i18n="tool.chart.notes.securityTitle">隐私保护</h4>
+                    <ul>
+                        <li data-i18n="tool.chart.notes.security1">你的经营数据、统计报表的解析与绘制完全在浏览器本地完成，不会通过网络传输到任何服务器。本工具不使用
+                            localStorage 持久化数据，关闭标签页后即从内存中清除。</li>
+                        <li data-i18n="tool.chart.notes.security2">在公共设备上使用时，建议配合浏览器无痕模式，关闭后不保留任何缓存与记录。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- 自定义提示框 -->
+        <div id="toast" class="toast"></div>
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202609232300" defer></script>
+    <script src="/common/js/theme.js?v=202609232300" defer></script>
+    <script src="/common/js/tools-data.js?v=202609232300" defer></script>
+    <script src="/common/js/nav.js?v=202609232300" defer></script>
+    <script src="example.js?v=202609232300" defer></script>
+    <script src="script.js?v=202609232300" defer></script>
+
+</body>
+
+</html>
