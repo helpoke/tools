@@ -45,17 +45,17 @@
     <link rel="icon" href="common/img/helpoke.webp" type="image/x-icon">
     <link rel="apple-touch-icon" href="common/img/helpoke.webp">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609232300"></script>
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609232300"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609281808"></script>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="common/css/utils.css?v=202609232300">
-    <link rel="stylesheet" href="common/css/style.css?v=202609232300">
-    <link rel="stylesheet" href="common/css/index.css?v=202609232300">
-    <link rel="stylesheet" href="common/lib/font-awesome/css/all.min.css?v=202609232300">
+    <link rel="stylesheet" href="common/css/utils.css?v=202609281808">
+    <link rel="stylesheet" href="common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="common/css/index.css?v=202609281808">
+    <link rel="stylesheet" href="common/lib/font-awesome/css/all.min.css?v=202609281808">
 
-    <script src="common/js/ads.js?v=202609232300" async></script>
+    <script src="common/js/ads.js?v=202609281808" async></script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -95,9 +95,9 @@
                 {
                     "@type": "WebApplication",
                     "name": "数据开发工具",
-                    "description": "JSON、YAML、Pug、XML、SQL格式化工具",
+                    "description": "JSON、YAML、Pug、XML、SQL格式化，数据转图表、CSV工具箱与模拟数据生成工具",
                     "inLanguage": ["zh-CN"],
-                    "featureList": ["JSON格式化", "YAML格式化", "Pug格式化", "XML格式化", "SQL格式化"],
+                    "featureList": ["JSON格式化", "YAML格式化", "Pug格式化", "XML格式化", "SQL格式化", "数据转图表", "CSV工具箱", "模拟数据生成"],
                     "url": "https://helpoke.com/json/"
                 },
                 {
@@ -212,8 +212,8 @@
                     <div class="stat-card">
                         <div class="stat-icon purple">💻</div>
                         <div class="stat-info">
-                            <div class="stat-value">8</div>
-                            <div class="stat-label" data-i18n="home.stats.data">格式化</div>
+                            <div class="stat-value">14</div>
+                            <div class="stat-label" data-i18n="home.stats.data">数据处理</div>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -233,7 +233,7 @@
                     <div class="stat-card">
                         <div class="stat-icon yellow">📦</div>
                         <div class="stat-info">
-                            <div class="stat-value">11</div>
+                            <div class="stat-value">7</div>
                             <div class="stat-label" data-i18n="home.stats.other">其他工具</div>
                         </div>
                     </div>
@@ -446,16 +446,28 @@
                         </div>
                     </div>
 
-                    <!-- 格式化工具 -->
+                    <!-- 数据处理 -->
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon data">💻</div>
-                            <span class="category-title" data-i18n="tool.categories.data">格式化工具</span>
+                            <span class="category-title" data-i18n="tool.categories.data">数据处理</span>
                         </div>
                         <div class="tools-list">
                             <a href="/json/" class="tool-link">
                                 <span class="icon">{ }</span><b data-i18n="nav.tools.json">JSON 格式化</b>(比对+转换)
                                 <span class="badge popular" data-i18n="tool.badges.popular">热门</span>
+                            </a>
+                            <a href="/tool/chart/" class="tool-link">
+                                <span class="icon">📈</span><b data-i18n="nav.tools.chart">Json/CSV 转图表</b>(可视化)
+                                <span class="badge" data-i18n="tool.badges.chart">图表</span>
+                            </a>
+                            <a href="/tool/csv/" class="tool-link">
+                                <span class="icon">📄</span><b data-i18n="nav.tools.csv">CSV 数据转换</b>(CSV/转JSON/HTML)
+                                <span class="badge" data-i18n="tool.badges.csv">表格</span>
+                            </a>
+                            <a href="/tool/mock/" class="tool-link">
+                                <span class="icon">🎲</span><b data-i18n="nav.tools.mock">模拟数据生成器</b>(测试数据)
+                                <span class="badge" data-i18n="tool.badges.mock">数据</span>
                             </a>
                             <a href="/dev/yaml/" class="tool-link">
                                 <span class="icon">⚙️</span><b data-i18n="nav.tools.yaml">YAML 格式化</b>(校验)
@@ -484,6 +496,18 @@
                             <a href="/dev/python-format/" class="tool-link">
                                 <span class="icon">Py</span><b data-i18n="nav.tools.pythonFormat">Python 格式化</b>(PEP8)
                                 <span class="badge" data-i18n="tool.badges.pythonFormat">Python</span>
+                            </a>
+                            <a href="/tool/diff/" class="tool-link">
+                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">文本内容对比器</b>(内容差异)
+                                <span class="badge" data-i18n="tool.badges.edit">对比</span>
+                            </a>
+                            <a href="/tool/duplicate-finder/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">重复内容查找器</b>(查重复项)
+                                <span class="badge" data-i18n="tool.badges.edit">重复</span>
+                            </a>
+                            <a href="/tool/text-format/" class="tool-link">
+                                <span class="icon">📝</span><b data-i18n="nav.tools.textFormat">文本内容格式化</b>(压缩/分割/去重)
+                                <span class="badge" data-i18n="tool.badges.textFormat">格式化</span>
                             </a>
                         </div>
                     </div>
@@ -585,26 +609,10 @@
                                 <span class="icon">⏰</span><b data-i18n="nav.tools.healthReminder">防久坐健康提醒</b>(定时提醒)
                                 <span class="badge" data-i18n="tool.badges.exe">EXE</span>
                             </a>
-                            <a href="/tool/diff/" class="tool-link">
-                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">文本内容对比器</b>(内容差异)
-                                <span class="badge" data-i18n="tool.badges.edit">对比</span>
-                            </a>
-                            <a href="/tool/duplicate-finder/" class="tool-link">
-                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">重复内容查找器</b>(查重复项)
-                                <span class="badge" data-i18n="tool.badges.edit">重复</span>
-                            </a>
-                            <a href="/tool/text-format/" class="tool-link">
-                                <span class="icon">📝</span><b data-i18n="nav.tools.textFormat">文本内容格式化</b>(压缩/分割/去重)
-                                <span class="badge" data-i18n="tool.badges.textFormat">格式化</span>
-                            </a>
                             <a href="/tool/file-compressor/" class="tool-link">
                                 <span class="icon">📦</span><b
                                     data-i18n="nav.tools.fileCompressor">文件ZIP压缩器</b>(ZIP压缩/解压)
                                 <span class="badge" data-i18n="tool.badges.fileCompressor">压缩</span>
-                            </a>
-                            <a href="/tool/chart/" class="tool-link">
-                                <span class="icon">📈</span><b data-i18n="nav.tools.chart">Json数据转图表</b>(JSON/CSV可视化)
-                                <span class="badge" data-i18n="tool.badges.chart">图表</span>
                             </a>
                             <a href="/download/media/" class="tool-link">
                                 <span class="icon">⬇️</span><b data-i18n="nav.tools.downloadMedia">视频图像下载</b>(批量+爬取)
@@ -814,10 +822,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="common/js/tools-data.js?v=202609232300" defer></script>
+    <script src="common/js/tools-data.js?v=202609281808" defer></script>
     <!-- <script src="common/js/nav.js" defer></script> -->
-    <script src="common/js/theme.js?v=202609232300" defer></script>
-    <script src="common/js/index.js?v=202609232300" defer></script>
+    <script src="common/js/theme.js?v=202609281808" defer></script>
+    <script src="common/js/index.js?v=202609281808" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="免费的模拟数据生成器在线工具，按字段模板批量生成姓名、手机号、邮箱、地址、日期、时间戳、随机数、UUID、IP 等测试数据，导出 JSON / CSV / JSON Lines，本地生成无需上传。">
+    <meta name="keywords" content="模拟数据生成,测试数据生成器,Mock数据,随机数据,假数据生成,JSON测试数据,CSV测试数据,UUID生成,随机姓名,批量造数据">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202609281808"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>模拟数据生成器 - 批量生成 JSON/CSV 测试数据 | Helpoke 助点站</title>
+    <meta property="og:title" content="模拟数据生成器 - 批量生成 JSON/CSV 测试数据 | Helpoke 助点站">
+    <meta property="og:description"
+        content="按字段模板批量生成姓名、手机号、邮箱、日期、随机数、UUID 等测试数据，一键导出 JSON / CSV / JSON Lines，本地生成无需上传。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/mock/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="模拟数据生成器，批量生成测试数据">
+    <meta name="twitter:description" content="按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据，导出 JSON / CSV / JSON Lines。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/mock/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/mock/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/mock/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609281808">
+    <link rel="stylesheet" href="style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
+
+    <script src="/common/js/ads.js?v=202609281808" async></script>
+
+    <script src="/common/js/i18n/i18n.js?v=202609281808" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "模拟数据生成器",
+        "description": "免费在线测试数据生成工具，按字段模板批量生成姓名、手机号、邮箱、地址、日期、随机数、UUID 等数据，导出 JSON / CSV / JSON Lines。Generate mock test data (names, phones, emails, dates, UUIDs) as JSON/CSV online for free.",
+        "url": "https://helpoke.com/tool/mock/",
+        "applicationCategory": "https://schema.org/DeveloperApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "16 种常用字段模板：姓名、性别、手机号、邮箱、地址、日期、时间戳、随机数、UUID、IP 等",
+            "一次生成 1~1000 条记录",
+            "JSON 数组 / CSV / JSON Lines 三种输出格式",
+            "整数范围、小数位数可配置",
+            "结果一键复制或下载文件",
+            "全部随机在浏览器本地生成，不请求任何服务器"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.mock.title">模拟数据生成器</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.mock.desc">模拟数据生成器，按字段模板批量生成姓名、手机号、邮箱、日期、随机数、UUID 等测试数据，支持导出
+                JSON / CSV / JSON Lines
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="mock-toolbar">
+                <div class="option-group">
+                    <label for="row-count" data-i18n="tool.mock.count">生成条数：</label>
+                    <input type="number" id="row-count" min="1" max="1000" step="1" value="10">
+                </div>
+                <div class="option-group">
+                    <label for="out-format" data-i18n="tool.mock.format">输出格式：</label>
+                    <select id="out-format">
+                        <option value="json" data-i18n="tool.mock.formats.json">JSON 数组</option>
+                        <option value="csv" data-i18n="tool.mock.formats.csv">CSV</option>
+                        <option value="ndjson" data-i18n="tool.mock.formats.ndjson">JSON Lines</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label for="int-min" data-i18n="tool.mock.intRange">随机整数范围：</label>
+                    <input type="number" id="int-min" value="1" style="width: 80px;">
+                    <span>~</span>
+                    <input type="number" id="int-max" value="100" style="width: 80px;">
+                </div>
+                <div class="option-group">
+                    <button id="select-all-btn" data-i18n="tool.mock.selectAll">全选字段</button>
+                    <button id="select-none-btn" data-i18n="tool.mock.selectNone">清空选择</button>
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.mock.fields.title">字段模板</h2>
+                        <button id="generate-btn" data-i18n="tool.mock.generate">生成数据</button>
+                    </div>
+                    <div id="field-grid" class="field-grid">
+                        <label class="field-item"><input type="checkbox" data-field="id" checked><span
+                                data-i18n="tool.mock.fields.id">自增ID</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="name" checked><span
+                                data-i18n="tool.mock.fields.name">中文姓名</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="enName"><span
+                                data-i18n="tool.mock.fields.enName">英文姓名</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="gender" checked><span
+                                data-i18n="tool.mock.fields.gender">性别</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="phone" checked><span
+                                data-i18n="tool.mock.fields.phone">手机号</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="email" checked><span
+                                data-i18n="tool.mock.fields.email">邮箱</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="address"><span
+                                data-i18n="tool.mock.fields.address">地址</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="date"><span
+                                data-i18n="tool.mock.fields.date">日期</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="datetime"><span
+                                data-i18n="tool.mock.fields.datetime">日期时间</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="ts"><span
+                                data-i18n="tool.mock.fields.ts">时间戳</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="int" checked><span
+                                data-i18n="tool.mock.fields.int">随机整数</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="float"><span
+                                data-i18n="tool.mock.fields.float">随机小数</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="bool"><span
+                                data-i18n="tool.mock.fields.bool">布尔值</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="uuid"><span
+                                data-i18n="tool.mock.fields.uuid">UUID</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="ip"><span
+                                data-i18n="tool.mock.fields.ip">IP 地址</span></label>
+                        <label class="field-item"><input type="checkbox" data-field="color"><span
+                                data-i18n="tool.mock.fields.color">颜色值</span></label>
+                    </div>
+                    <div id="mock-stats" class="stats-bar"></div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.mock.output.title">生成结果</h2>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="download-btn" data-i18n="tool.mock.buttons.download">下载</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="mock-output" spellcheck="false" readonly data-i18n-placeholder="tool.mock.output.hint"
+                        placeholder="勾选左侧字段模板后点击“生成数据”"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.mock.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.mock.intro.problemTitle">造测试数据不必再手写</h4>
+                    <ul>
+                        <li data-i18n="tool.mock.intro.problem1">
+                            联调接口、演示表格组件、验证导入功能时，总需要一批"看起来像真的"的数据。手写十几行费时，网上找的样例库又未必贴合字段。本工具按你勾选的字段模板，一次生成最多 1000 条结构化记录。
+                        </li>
+                        <li data-i18n="tool.mock.intro.problem2">内置 16
+                            种常用字段：中文/英文姓名、性别、手机号、邮箱、地址、日期、日期时间、时间戳、随机整数（范围可配）、随机小数、布尔值、UUID、IP 地址、颜色值，字段名即 JSON
+                            键名，生成即可用。</li>
+                        <li data-i18n="tool.mock.intro.problem3">结果支持 JSON 数组、CSV、JSON Lines 三种格式，一键复制或下载成文件；生成的 CSV
+                            还能直接粘进"数据转图表"工具演示可视化效果。</li>
+                    </ul>
+                    <h4 data-i18n="tool.mock.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.mock.intro.core1">字段模板勾选式配置，支持全选/清空快捷操作；各字段以英文键名输出（id / name / phone / email
+                            …）。</li>
+                        <li data-i18n="tool.mock.intro.core2">手机号、邮箱、日期等均符合真实格式规律（随机号段、随机域名、近年日期），但不指向任何真实个人。</li>
+                        <li data-i18n="tool.mock.intro.core3">全部随机数由浏览器本地生成（Web Crypto / Math.random），不请求任何第三方接口。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.mock.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <ol>
+                        <li data-i18n="tool.mock.instructions.step1">勾选需要的字段模板（默认已选 ID、姓名、性别、手机号、邮箱、随机整数）。</li>
+                        <li data-i18n="tool.mock.instructions.step2">设置生成条数（1~1000）、输出格式，以及随机整数的取值范围。</li>
+                        <li data-i18n="tool.mock.instructions.step3">点击"生成数据"，结果出现在右侧输出区，可重新点击换一批。</li>
+                        <li data-i18n="tool.mock.instructions.step4">点击"复制"取用文本，或"下载"得到 .json / .csv / .ndjson 文件。</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.mock.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.mock.notes.note1">生成的数据均为随机虚构值，请勿当作真实用户数据使用；也不要将真实个人信息与本工具产物混用。</li>
+                        <li data-i18n="tool.mock.notes.note2">CSV 格式默认首行为英文字段名表头；文本含逗号时自动加引号转义。</li>
+                        <li data-i18n="tool.mock.notes.note3">一次最多生成 1000 条，更大规模建议分批生成或下载文件后处理。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.mock.tips.title">进阶技巧</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.mock.tips.t1">先小批后大批：先生成 10 条确认字段组合与格式符合预期，再放大到 1000 条批量造数据。</li>
+                        <li data-i18n="tool.mock.tips.t2">跨批次主键：自增 ID 每次生成都从 1 重新开始；需要合并多批数据时，勾选 UUID 字段作主键避免冲突。</li>
+                        <li data-i18n="tool.mock.tips.t3">固定数据集：随机值每次点击都会变化；需要可复现的数据时，生成后立即下载保存，后续反复用同一份文件。</li>
+                        <li data-i18n="tool.mock.tips.t4">工具组合：输出的 CSV 可继续用“CSV 工具箱”排序/去重/转格式，或粘进“数据转图表”工具演示可视化效果。</li>
+                        <li data-i18n="tool.mock.tips.t5">按场景选字段：用户表选 id+姓名+性别+手机号+邮箱+日期；订单流水选 uuid+日期时间+时间戳+随机小数；配置演示选整数+IP+颜色值。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- 自定义提示框 -->
+        <div id="toast" class="toast"></div>
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202609281808" defer></script>
+    <script src="/common/js/theme.js?v=202609281808" defer></script>
+    <script src="/common/js/tools-data.js?v=202609281808" defer></script>
+    <script src="/common/js/nav.js?v=202609281808" defer></script>
+    <script src="script.js?v=202609281808" defer></script>
+
+</body>
+
+</html>

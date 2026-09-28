@@ -1,0 +1,260 @@
+/* ================= 模拟数据生成器样式 ================= */
+
+/* 工具条 */
+.mock-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    align-items: center;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+}
+
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+}
+
+.option-group>label {
+    font-weight: 600;
+    color: var(--text-color, #1f2937);
+}
+
+.option-group select,
+.option-group input[type="number"] {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+}
+
+.option-group button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.option-group button:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+/* 编辑区两栏 */
+.editor-container {
+    display: flex;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-section,
+.preview-section {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.input-section {
+    flex: 0 0 42%;
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    flex: 1;
+    min-width: 90px;
+    margin: 0;
+    font-size: 17px;
+    color: var(--text-color, #1f2937);
+}
+
+.section-header button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.section-header button:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#generate-btn {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+    font-weight: 600;
+}
+
+#generate-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* 字段勾选网格 */
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.field-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    background: var(--bg-color, #f9fafb);
+    font-size: 14px;
+    color: var(--text-color, #374151);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+}
+
+.field-item:hover {
+    border-color: var(--primary-color, #3b82f6);
+}
+
+.field-item input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.field-item:has(input:checked) {
+    border-color: var(--primary-color, #3b82f6);
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--primary-color, #3b82f6);
+    font-weight: 600;
+}
+
+/* 输出区 */
+#mock-output {
+    flex: 1;
+    min-height: 520px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: var(--bg-color, #C7EDCC);
+    color: var(--text-color, #1f2937);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    tab-size: 2;
+    cursor: default;
+}
+
+/* 统计条 */
+.stats-bar {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-color, #6b7280);
+}
+
+/* Toast 提示 */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(17, 24, 39, 0.92);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 3000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 暗色模式 */
+html.dark-mode .mock-toolbar,
+html.dark-mode .input-section,
+html.dark-mode .preview-section {
+    background: #242424;
+    border-color: #3a3a3a;
+}
+
+html.dark-mode .option-group select,
+html.dark-mode .option-group input[type="number"],
+html.dark-mode .option-group button,
+html.dark-mode #mock-output,
+html.dark-mode .section-header button,
+html.dark-mode .field-item {
+    background: #1e1e1e;
+    border-color: #4a4a4a;
+    color: #e5e7eb;
+}
+
+html.dark-mode .option-group>label,
+html.dark-mode .section-header h2 {
+    color: #e5e7eb;
+}
+
+html.dark-mode .field-item:has(input:checked) {
+    border-color: #2563eb;
+    background: rgba(37, 99, 235, 0.18);
+    color: #93c5fd;
+}
+
+html.dark-mode #generate-btn,
+html.dark-mode .option-group button:hover,
+html.dark-mode .section-header button:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .editor-container {
+        flex-direction: column;
+    }
+
+    .input-section {
+        flex: 1;
+    }
+
+    #mock-output {
+        min-height: 300px;
+    }
+}

@@ -8,9 +8,9 @@
     <meta name="author" content="Helpoke">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609232300"></script>
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609232300"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609281808"></script>
 
     <link rel="apple-touch-icon" href="/common/img/helpoke.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -39,7 +39,7 @@
         connect-src 'self' https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
         frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
 
-    <script src="/common/js/ads.js?v=202609232300" async></script>
+    <script src="/common/js/ads.js?v=202609281808" async></script>
 
     <!-- Schema.org 结构化数据 (AboutPage) -->
     <script type="application/ld+json">
@@ -224,6 +224,23 @@
             color: var(--text-secondary);
         }
 
+        .back-to-top {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.5);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
@@ -245,12 +262,12 @@
         }
     </style>
 
-    <link rel="stylesheet" href="/common/css/style.css?v=202609232300">
-    <link rel="stylesheet" href="/common/css/i18n.css?v=202609232300">
-    <script src="/common/js/ads.js?v=202609232300" defer></script>
-    <script src="/common/js/theme.js?v=202609232300" defer></script>
-    <script src="/common/js/i18n/i18n.js?v=202609232300" defer></script>
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609232300">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609281808">
+    <script src="/common/js/ads.js?v=202609281808" defer></script>
+    <script src="/common/js/theme.js?v=202609281808" defer></script>
+    <script src="/common/js/i18n/i18n.js?v=202609281808" defer></script>
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
 </head>
 
 <body>
@@ -307,7 +324,7 @@
                 <div class="feature-card">
                     <i class="fas fa-free-code-camp"></i>
                     <h4 data-i18n="pages.about.values.freeTitle">永久免费</h4>
-                    <p data-i18n="pages.about.values.freeDesc">所有工具完全免费，无隐藏收费，无广告干扰</p>
+                    <p data-i18n="pages.about.values.freeDesc">所有工具完全免费，无隐藏收费，免注册即用</p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-bolt"></i>
@@ -334,17 +351,24 @@
 
         <div class="content-section">
             <h2 data-i18n="pages.about.servicesTitle">我们的服务</h2>
-            <p data-i18n="pages.about.servicesIntro">Helpoke 提供六大类、数十款实用在线工具，覆盖图像处理、视频编辑、数据开发、加密安全、文档处理等多个领域：</p>
+            <p data-i18n="pages.about.servicesIntro">Helpoke 提供七大类、六十余款实用在线工具，覆盖图像处理、视频编辑、文档处理、数据开发、加密安全等多个领域：</p>
             <ul>
-                <li data-i18n="pages.about.servicesImage"><strong>图像工具：</strong>图像压缩、格式转换、水印添加、裁剪、旋转、模糊、打码、拼接等</li>
-                <li data-i18n="pages.about.servicesVideo"><strong>视频工具：</strong>视频裁剪、水印添加与移除、格式转换、音频提取、合并、GIF制作等</li>
-                <li data-i18n="pages.about.servicesData"><strong>数据开发工具：</strong>JSON格式化、YAML格式化、XML格式化、SQL格式化、Pug格式化等
+                <li data-i18n="pages.about.servicesImage">
+                    <strong>图像工具：</strong>批量压缩、批量格式转换、图像转GIF、水印添加与去除、尺寸裁剪、模糊旋转、拼接合并、取色器、缩放器等</li>
+                <li data-i18n="pages.about.servicesVideo">
+                    <strong>视频工具：</strong>尺寸裁剪、批量压缩、水印添加与去除、格式转换、视频转GIF、视频转音频、模糊旋转、合并拼接、提取封面等</li>
+                <li data-i18n="pages.about.servicesDocument">
+                    <strong>文档工具：</strong>PDF在线签名、PDF添加水印、PDF页面模糊、页面旋转、页面筛选、合并拆分、大小压缩、Markdown编辑器等</li>
+                <li data-i18n="pages.about.servicesData">
+                    <strong>数据处理工具：</strong>JSON/YAML/XML/SQL/HTML/JS/Python/Pug格式化、CSV数据转换、Json/CSV转图表、模拟数据生成等</li>
+                <li data-i18n="pages.about.servicesDev">
+                    <strong>开发者工具：</strong>Cron解析、正则测试、进制转换、文件大小换算、时间戳转换、颜色选择器、大小写转换、URL/Base64/Unicode编解码、Mermaid图表等
                 </li>
                 <li data-i18n="pages.about.servicesSecurity">
-                    <strong>加密安全工具：</strong>MD5加密、SHA加密、Base64编码解码、URL编码解码、密码生成、UUID生成等
+                    <strong>加密安全工具：</strong>MD5/SHA/HMAC加密、RSA/AES/EC加解密、PBKDF2密钥派生、文件哈希计算、TOTP动态口令、X.509证书解析、JWT解析、文件加解密、密码/UUID生成等
                 </li>
-                <li data-i18n="pages.about.servicesDocument"><strong>文档工具：</strong>文档模糊、文档签名、文档水印、文档旋转等</li>
-                <li data-i18n="pages.about.servicesUtility"><strong>实用工具：</strong>Mermaid图表、二维码生成、条形码生成、时间戳转换、进制转换等</li>
+                <li data-i18n="pages.about.servicesUtility">
+                    <strong>实用工具：</strong>文本对比、重复内容查找、文本格式化、文件ZIP压缩、二维码/条形码生成、数字转中文大写、视频图像下载等</li>
             </ul>
             <p data-i18n="pages.about.servicesOutro">所有工具均采用先进的Web技术开发，支持离线使用，无需安装任何软件，打开浏览器即可使用。</p>
         </div>
@@ -363,12 +387,15 @@
         <div class="content-section" style="text-align: center;">
             <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" class="back-link"><i
                     class="fas fa-home"></i> <span data-i18n="pages.about.backHome">返回首页</span></a>
+            <a href="javascript:void(0)" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
+                    class="fas fa-arrow-up"></i> <span data-i18n="pages.about.backToTop">回到顶部</span></a>
         </div>
 
         <div class="footer-info">
             <p data-i18n="pages.about.footerInfo">本文由 Helpoke 技术团队编辑整理，致力于为开发者提供高效、安全的在线工具。Helpoke
-                团队深耕Web开发领域多年，专注于构建本地化、隐私友好的在线解决方案，所有工具均在浏览器端运行，无需上传数据到服务器。内容持续更新，确保工具功能和文档说明与时俱进。最后更新于 2026年6月。</p>
+                团队深耕Web开发领域多年，专注于构建本地化、隐私友好的在线解决方案，所有工具均在浏览器端运行，无需上传数据到服务器。内容持续更新，确保工具功能和文档说明与时俱进。最后更新于 2026年9月。</p>
         </div>
+
         <footer class="footer">
             <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. All rights reserved. | 保留所有权利.</p>
             <p style="font-size: 0.9rem; margin-top: 5px;">
@@ -380,7 +407,7 @@
             </p>
         </footer>
     </div>
-    <script src="/common/js/tools-data.js?v=202609232300" defer></script>
+    <script src="/common/js/tools-data.js?v=202609281808" defer></script>
 </body>
 
 </html>

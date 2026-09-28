@@ -28,9 +28,9 @@
     <!-- Favicon 图标设置（使用绝对根路径） -->
     <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609232300"></script>
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609232300"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609281808"></script>
 
 
     <!-- 内容安全策略 (CSP) -->
@@ -196,6 +196,23 @@
             color: var(--text-secondary);
         }
 
+        .back-to-top {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
@@ -207,12 +224,12 @@
         }
     </style>
 
-    <link rel="stylesheet" href="/common/css/style.css?v=202609232300">
-    <link rel="stylesheet" href="/common/css/i18n.css?v=202609232300">
-    <script src="/common/js/ads.js?v=202609232300" defer></script>
-    <script src="/common/js/theme.js?v=202609232300" defer></script>
-    <script src="/common/js/i18n/i18n.js?v=202609232300" defer></script>
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609232300">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609281808">
+    <script src="/common/js/ads.js?v=202609281808" defer></script>
+    <script src="/common/js/theme.js?v=202609281808" defer></script>
+    <script src="/common/js/i18n/i18n.js?v=202609281808" defer></script>
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
 </head>
 
 <body>
@@ -245,17 +262,29 @@
 
         <div class="content-section">
             <h2 data-i18n="pages.terms.serviceTitle">服务内容</h2>
-            <p data-i18n="pages.terms.serviceIntro">本网站提供免费的在线工具服务，包括但不限于：</p>
+            <p data-i18n="pages.terms.serviceIntro">本网站提供免费的在线工具服务，涵盖七大类、六十余款工具，包括但不限于：</p>
             <ul>
-                <li data-i18n="pages.terms.serviceImage"><strong>图像工具：</strong>图像压缩、格式转换、水印添加、裁剪、旋转、模糊、打码、拼接等</li>
-                <li data-i18n="pages.terms.serviceVideo"><strong>视频工具：</strong>视频裁剪、水印添加与移除、格式转换、音频提取、合并、GIF制作等</li>
-                <li data-i18n="pages.terms.serviceData"><strong>数据开发工具：</strong>JSON格式化、YAML格式化、XML格式化、SQL格式化、Pug格式化等
+                <li data-i18n="pages.terms.serviceImage">
+                    <strong>图像工具：</strong>批量压缩、批量格式转换、图像转GIF、水印添加与去除、尺寸裁剪、模糊旋转、拼接合并、取色器、缩放器等
+                </li>
+                <li data-i18n="pages.terms.serviceVideo">
+                    <strong>视频工具：</strong>尺寸裁剪、批量压缩、水印添加与去除、格式转换、视频转GIF、视频转音频、模糊旋转、合并拼接、提取封面等
+                </li>
+                <li data-i18n="pages.terms.serviceDocument">
+                    <strong>文档工具：</strong>PDF在线签名、PDF添加水印、PDF页面模糊、页面旋转、页面筛选、合并拆分、大小压缩、Markdown编辑器等
+                </li>
+                <li data-i18n="pages.terms.serviceData">
+                    <strong>数据处理工具：</strong>JSON/YAML/XML/SQL/HTML/JS/Python/Pug格式化、CSV数据转换、Json/CSV转图表、模拟数据生成、Mermaid图表等
+                </li>
+                <li data-i18n="pages.terms.serviceDev">
+                    <strong>开发者工具：</strong>Cron解析、正则测试、进制转换、文件大小换算、时间戳转换、颜色选择器、大小写转换、URL/Base64/Unicode编解码等
                 </li>
                 <li data-i18n="pages.terms.serviceSecurity">
-                    <strong>加密安全工具：</strong>MD5加密、SHA加密、Base64编码解码、URL编码解码、密码生成、UUID生成等
+                    <strong>加密安全工具：</strong>MD5/SHA/HMAC加密、RSA/AES/EC加解密、PBKDF2密钥派生、文件哈希计算、TOTP动态口令、X.509证书解析、JWT解析、文件加解密、密码/UUID生成等
                 </li>
-                <li data-i18n="pages.terms.serviceDocument"><strong>文档工具：</strong>文档模糊、文档签名、文档水印、文档旋转等</li>
-                <li data-i18n="pages.terms.serviceUtility"><strong>实用工具：</strong>Mermaid图表、二维码生成、条形码生成、时间戳转换、进制转换等</li>
+                <li data-i18n="pages.terms.serviceUtility">
+                    <strong>实用工具：</strong>文本对比、重复内容查找、文本格式化、文件ZIP压缩、二维码/条形码生成、数字转中文大写、视频图像下载等
+                </li>
             </ul>
             <p data-i18n="pages.terms.serviceOutro">我们保留随时修改、添加或删除工具服务的权利，无需提前通知用户。我们致力于提供稳定可靠的服务，但不保证所有工具在任何时间都可用。</p>
         </div>
@@ -356,7 +385,8 @@
             <p data-i18n="pages.terms.contactIntro">如果您对本服务条款有任何疑问或建议，请通过以下方式联系我们：</p>
             <ul>
                 <li data-i18n="pages.terms.contactEmail"><strong>邮箱：</strong>contact@helpoke.com</li>
-                <li data-i18n="pages.terms.contactFeedback"><strong>网站反馈：</strong>请在网站首页的反馈区域提交您的意见</li>
+                <li data-i18n="pages.terms.contactFeedback"><strong>网站反馈：</strong>请通过<a href="/contact/"
+                        style="color: var(--accent-color);">联系我们</a>页面提交您的意见</li>
             </ul>
             <p data-i18n="pages.terms.contactOutro">我们会在收到您的反馈后尽快回复。</p>
         </div>
@@ -364,12 +394,15 @@
         <div class="content-section" style="text-align: center;">
             <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" class="back-link"><i
                     class="fas fa-home"></i> <span data-i18n="pages.terms.backHome">返回首页</span></a>
+            <a href="javascript:void(0)" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
+                    class="fas fa-arrow-up"></i> <span data-i18n="pages.terms.backToTop">回到顶部</span></a>
         </div>
 
         <div class="footer-info">
             <p data-i18n="pages.terms.footerInfo">本文由 Helpoke 技术团队编辑整理，致力于为开发者提供高效、安全的在线工具。Helpoke
-                团队深耕Web开发领域多年，专注于构建本地化、隐私友好的在线解决方案，所有工具均在浏览器端运行，无需上传数据到服务器。内容持续更新，确保工具功能和文档说明与时俱进。最后更新于 2026年7月。</p>
+                团队深耕Web开发领域多年，专注于构建本地化、隐私友好的在线解决方案，所有工具均在浏览器端运行，无需上传数据到服务器。内容持续更新，确保工具功能和文档说明与时俱进。最后更新于 2026年9月。</p>
         </div>
+
         <footer class="footer">
             <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. All rights reserved. | 保留所有权利.</p>
             <p style="font-size: 0.9rem; margin-top: 5px;">
@@ -381,7 +414,7 @@
             </p>
         </footer>
     </div>
-    <script src="/common/js/tools-data.js?v=202609232300" defer></script>
+    <script src="/common/js/tools-data.js?v=202609281808" defer></script>
 </body>
 
 </html>

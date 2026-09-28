@@ -48,20 +48,20 @@
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <link rel="apple-touch-icon" href="/common/img/helpoke.webp">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609232300"></script>
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609232300"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609281808"></script>
 
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/common/css/utils.css?v=202609232300">
-    <link rel="stylesheet" href="/common/css/i18n.css?v=202609232300">
-    <link rel="stylesheet" href="/common/css/style.css?v=202609232300">
-    <link rel="stylesheet" href="/common/css/index.css?v=202609232300">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609232300">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/index.css?v=202609281808">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
 
     <!-- Google AdSense -->
-    <script src="/common/js/ads.js?v=202609232300" async></script>
+    <script src="/common/js/ads.js?v=202609281808" async></script>
 
     <!-- JSON-LD Structured Data (English) -->
     <script type="application/ld+json">
@@ -110,9 +110,9 @@
 				{
 					"@type": "WebApplication",
 					"name": "Data Processing Tools",
-					"description": "JSON, YAML, Pug, XML, SQL, HTML formatting tools",
+					"description": "JSON, YAML, Pug, XML, SQL, HTML formatting, chart visualization, CSV toolbox and mock data tools",
 					"inLanguage": "en",
-					"featureList": ["JSON Formatting", "YAML Formatting", "Pug Formatting", "XML Formatting", "SQL Formatting", "HTML Formatting"],
+					"featureList": ["JSON Formatting", "YAML Formatting", "Pug Formatting", "XML Formatting", "SQL Formatting", "HTML Formatting", "Data Chart Visualization", "CSV Toolbox", "Mock Data Generation"],
 					"url": "https://helpoke.com/json/"
 				},
 				{
@@ -224,8 +224,8 @@
                     <div class="stat-card">
                         <div class="stat-icon purple">💻</div>
                         <div class="stat-info">
-                            <div class="stat-value">8</div>
-                            <div class="stat-label" data-i18n="home.stats.data">Formatter Tools</div>
+                            <div class="stat-value">14</div>
+                            <div class="stat-label" data-i18n="home.stats.data">Data Processing</div>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -245,7 +245,7 @@
                     <div class="stat-card">
                         <div class="stat-icon yellow">📦</div>
                         <div class="stat-info">
-                            <div class="stat-value">11</div>
+                            <div class="stat-value">7</div>
                             <div class="stat-label" data-i18n="home.stats.other">Other Tools</div>
                         </div>
                     </div>
@@ -506,17 +506,32 @@
                         </div>
                     </div>
 
-                    <!-- 格式化工具 -->
+                    <!-- 数据处理 -->
                     <div class="category-card">
                         <div class="category-header">
                             <div class="category-icon data">💻</div>
-                            <span class="category-title" data-i18n="tool.categories.data">Formatter Tools</span>
+                            <span class="category-title" data-i18n="tool.categories.data">Data Processing</span>
                         </div>
                         <div class="tools-list">
                             <a href="/json/" class="tool-link">
                                 <span class="icon">{ }</span><b data-i18n="nav.tools.json">JSON
                                     Formatter</b>(Compare+Transform)
                                 <span class="badge popular" data-i18n="tool.badges.popular">Popular</span>
+                            </a>
+                            <a href="/tool/chart/" class="tool-link">
+                                <span class="icon">📈</span><b data-i18n="nav.tools.chart">Data to Chart</b>(JSON/CSV
+                                Visualization)
+                                <span class="badge" data-i18n="tool.badges.chart">Chart</span>
+                            </a>
+                            <a href="/tool/csv/" class="tool-link">
+                                <span class="icon">📄</span><b data-i18n="nav.tools.csv">CSV Toolbox</b>(CSV to
+                                JSON/HTML)
+                                <span class="badge" data-i18n="tool.badges.csv">Table</span>
+                            </a>
+                            <a href="/tool/mock/" class="tool-link">
+                                <span class="icon">🎲</span><b data-i18n="nav.tools.mock">Mock Data Generator</b>(Test
+                                Data)
+                                <span class="badge" data-i18n="tool.badges.mock">Data</span>
                             </a>
                             <a href="/dev/yaml/" class="tool-link">
                                 <span class="icon">⚙️</span><b data-i18n="nav.tools.yaml">YAML
@@ -553,7 +568,22 @@
                                     Formatter</b>(PEP8)
                                 <span class="badge" data-i18n="tool.badges.pythonFormat">Python</span>
                             </a>
-
+                            <a href="/tool/diff/" class="tool-link">
+                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">Text
+                                    Content Comparator</b>(Content Difference)
+                                <span class="badge" data-i18n="tool.badges.edit">Compare</span>
+                            </a>
+                            <a href="/tool/duplicate-finder/" class="tool-link">
+                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">Duplicate
+                                    Content
+                                    Finder</b>(Find Duplicate Items)
+                                <span class="badge" data-i18n="tool.badges.edit">Duplicate</span>
+                            </a>
+                            <a href="/tool/text-format/" class="tool-link">
+                                <span class="icon">📝</span><b data-i18n="nav.tools.textFormat">Text
+                                    Formatter</b>(Compress/Split/Deduplicate)
+                                <span class="badge" data-i18n="tool.badges.textFormat">Format</span>
+                            </a>
                         </div>
                     </div>
 
@@ -676,30 +706,10 @@
                                     Reminder</b>(Schedule Reminder)
                                 <span class="badge" data-i18n="tool.badges.exe">EXE</span>
                             </a>
-                            <a href="/tool/diff/" class="tool-link">
-                                <span class="icon">📋</span><b data-i18n="nav.tools.diff">Text
-                                    Content Comparator</b>(Content Difference)
-                                <span class="badge" data-i18n="tool.badges.edit">Compare</span>
-                            </a>
-                            <a href="/tool/duplicate-finder/" class="tool-link">
-                                <span class="icon">🔍</span><b data-i18n="nav.tools.duplicateFinder">Duplicate
-                                    Content
-                                    Finder</b>(Find Duplicate Items)
-                                <span class="badge" data-i18n="tool.badges.edit">Duplicate</span>
-                            </a>
-                            <a href="/tool/text-format/" class="tool-link">
-                                <span class="icon">📝</span><b data-i18n="nav.tools.textFormat">Text
-                                    Formatter</b>(Compress/Split/Deduplicate)
-                                <span class="badge" data-i18n="tool.badges.textFormat">Format</span>
-                            </a>
                             <a href="/tool/file-compressor/" class="tool-link">
                                 <span class="icon">📦</span><b data-i18n="nav.tools.fileCompressor">File
                                     Compressor</b>(ZIP Compress/Extract)
                                 <span class="badge" data-i18n="tool.badges.fileCompressor">Compress</span>
-                            </a>
-                            <a href="/tool/chart/" class="tool-link">
-                                <span class="icon">📈</span><b data-i18n="nav.tools.chart">Data to Chart</b>(JSON/CSV Visualization)
-                                <span class="badge" data-i18n="tool.badges.chart">Chart</span>
                             </a>
 
                             <a href="/download/media/" class="tool-link">
@@ -805,9 +815,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/common/js/tools-data.js?v=202609232300" defer></script>
-    <script src="/common/js/theme.js?v=202609232300" defer></script>
-    <script src="/common/js/index.js?v=202609232300" defer></script>
+    <script src="/common/js/tools-data.js?v=202609281808" defer></script>
+    <script src="/common/js/theme.js?v=202609281808" defer></script>
+    <script src="/common/js/index.js?v=202609281808" defer></script>
 </body>
 
 </html>

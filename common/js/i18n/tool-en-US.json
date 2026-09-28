@@ -1237,6 +1237,163 @@
       "notifyJavaBeanFormatFail": "Java Bean parsing failed, please check code format"
     }
   },
+  "csv": {
+    "title": "CSV Toolbox",
+    "desc": "CSV toolbox that converts CSV / TSV data into JSON, Markdown tables and HTML tables, with dedupe, sorting and transpose operations",
+    "parseError": "Parse failed: no rows or columns detected",
+    "noData": "No valid data",
+    "stats": "Data",
+    "statsRows": "rows",
+    "statsCols": "cols",
+    "copied": "Result copied to clipboard",
+    "copyFailed": "Copy failed, please select and copy manually",
+    "downloaded": "Download started",
+    "downloadFailed": "Download failed",
+    "examples": {
+      "basic": "Load Sample"
+    },
+    "options": {
+      "delimiter": "Delimiter:",
+      "auto": "Auto detect",
+      "header": "First row is header",
+      "trim": "Trim spaces",
+      "rmEmpty": "Remove empty rows",
+      "dedupe": "Remove duplicate rows",
+      "transpose": "Transpose rows/cols",
+      "sort": "Sort by column:",
+      "none": "No sorting",
+      "asc": "Ascending",
+      "desc": "Descending"
+    },
+    "input": {
+      "title": "CSV Data",
+      "placeholder": "name,city,age\nAlice,Beijing,28\nBob,Shanghai,35"
+    },
+    "output": {
+      "title": "Result",
+      "hint": "Click \"Convert\" to generate the result"
+    },
+    "outputs": {
+      "md": "Markdown"
+    },
+    "buttons": {
+      "convert": "Convert",
+      "download": "Download"
+    },
+    "intro": {
+      "title": "About This Tool",
+      "problemTitle": "Reshape Table Data with One Click",
+      "problem1": "A CSV exported from Excel or a database needs to be JSON for the frontend, a Markdown table for docs, and an HTML table for emails — reshaping it by hand is slow and error-prone. This tool parses any CSV/TSV once and switches between four output formats.",
+      "problem2": "A full RFC4180 state-machine parser handles quoted fields, commas inside fields, doubled-quote escaping and newlines within fields, so no more misaligned columns from a stray trailing comma.",
+      "problem3": "Dedupe, sorting, transpose and blank-row cleanup all run locally in your browser — your business data is never uploaded to any server, verifiable via the F12 Network panel.",
+      "coreTitle": "Key Features",
+      "core1": "Multi-format output: JSON (objects or 2D arrays), CSV (rejoined with a new delimiter), Markdown tables and HTML tables, switchable via tabs.",
+      "core2": "Automatic delimiter detection: comma, semicolon, Tab and pipe are picked by frequency, or set manually.",
+      "core3": "Table operations: header detection, per-column ascending/descending sort (smart numeric compare), duplicate removal, blank-row removal, transpose and whitespace trimming."
+    },
+    "instructions": {
+      "title": "How to Use",
+      "step1": "Paste CSV/TSV text into the input box (Excel clipboard content is Tab-separated and works too), or click \"Load Sample\".",
+      "step2": "Pick the delimiter (auto by default) and options: header, trim, blank rows, dedupe, transpose, sort column (0-based).",
+      "step3": "Click \"Convert\", then switch between JSON / CSV / Markdown / HTML tabs to preview each format.",
+      "step4": "Copy the result or download it as a file, then paste it into your code, docs or web page."
+    },
+    "notes": {
+      "title": "Notes",
+      "note1": "Sort column numbers are 0-based; with \"First row is header\" checked, the header row stays on top and is excluded from sorting and dedupe.",
+      "note2": "Smart numeric sorting: pure numbers compare numerically, everything else uses natural text order; values with units (e.g. 12kg) are treated as text.",
+      "note3": "All processing happens in the local browser and is cleared when the page closes; for very large files (tens of thousands of rows) split them in a spreadsheet app first."
+    },
+    "scenarios": {
+      "title": "Use Cases",
+      "s1": "API development: turn a field spec table into a JSON object array straight into your code — pure numbers are auto-converted to numeric types, no manual quoting.",
+      "s2": "Tech writing: convert a data table into a Markdown table for READMEs, blogs or wikis, with alignment bars and separator rows generated automatically.",
+      "s3": "Email reports: paste cells straight from Excel (Tab detection is automatic) and convert to an HTML table for email bodies without losing formatting.",
+      "s4": "Data cleaning: dedupe, drop blank rows and sort by key column, then export CSV/JSON for import — keep dirty data out of your database.",
+      "s5": "Dashboard demos: paste cleaned tables into the Data-to-Chart tool and turn rows into bar/line charts for instant reporting."
+    }
+  },
+  "mock": {
+    "title": "Mock Data Generator",
+    "desc": "Mock data generator that builds names, phone numbers, emails, dates, random numbers, UUIDs and more from field templates, exported as JSON / CSV / JSON Lines",
+    "count": "Rows:",
+    "format": "Output format:",
+    "intRange": "Random integer range:",
+    "selectAll": "Select all fields",
+    "selectNone": "Clear selection",
+    "generate": "Generate",
+    "noFields": "Please select at least one field",
+    "generated": "Generated",
+    "generatedUnit": "records",
+    "copied": "Result copied to clipboard",
+    "copyFailed": "Copy failed, please select and copy manually",
+    "downloaded": "Download started",
+    "downloadFailed": "Download failed",
+    "formats": {
+      "json": "JSON array",
+      "csv": "CSV",
+      "ndjson": "JSON Lines"
+    },
+    "fields": {
+      "title": "Field Templates",
+      "id": "Auto ID",
+      "name": "Chinese Name",
+      "enName": "English Name",
+      "gender": "Gender",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "date": "Date",
+      "datetime": "Datetime",
+      "ts": "Timestamp",
+      "int": "Random Int",
+      "float": "Random Float",
+      "bool": "Boolean",
+      "uuid": "UUID",
+      "ip": "IP Address",
+      "color": "Color",
+      "unit": "fields"
+    },
+    "output": {
+      "title": "Generated Output",
+      "hint": "Select field templates on the left, then click \"Generate\""
+    },
+    "buttons": {
+      "download": "Download"
+    },
+    "intro": {
+      "title": "About This Tool",
+      "problemTitle": "Stop Hand-Writing Test Data",
+      "problem1": "API integration, table component demos and import testing all need data that \"looks real\". Writing rows by hand is slow, and sample datasets rarely match your fields. Pick the fields you need and generate up to 1000 structured records at once.",
+      "problem2": "16 common field types built in: Chinese/English names, gender, phone, email, address, date, datetime, timestamp, random integer (configurable range), random float, boolean, UUID, IP address and color — field names are the JSON keys, ready to use.",
+      "problem3": "Results export as JSON arrays, CSV or JSON Lines with one-click copy or download; the generated CSV can be pasted straight into the Data-to-Chart tool for visualization demos.",
+      "coreTitle": "Key Features",
+      "core1": "Checkbox-driven field templates with select-all/clear shortcuts; every field outputs with an English key (id / name / phone / email …).",
+      "core2": "Phones, emails and dates follow real-world format patterns (random valid prefixes, sample domains, recent dates) but never point to real people.",
+      "core3": "All randomness is generated locally in your browser (Web Crypto / Math.random) — no third-party requests at all."
+    },
+    "instructions": {
+      "title": "How to Use",
+      "step1": "Check the field templates you need (ID, name, gender, phone, email and random integer are preselected).",
+      "step2": "Set the row count (1–1000), output format, and the random integer range if used.",
+      "step3": "Click \"Generate\" — the result appears in the output panel; click again for a fresh batch.",
+      "step4": "Click \"Copy\" for the text, or \"Download\" to save a .json / .csv / .ndjson file."
+    },
+    "notes": {
+      "title": "Notes",
+      "note1": "All generated data is randomly fabricated — never use it as real user data, and do not mix real personal information with the output.",
+      "note2": "CSV output uses English field names as the header row; cells containing commas are automatically quoted and escaped.",
+      "note3": "Up to 1000 rows per batch; for larger datasets generate in batches or download and process the files."
+    },
+    "tips": {
+      "title": "Pro Tips",
+      "t1": "Start small: generate 10 rows first to verify field combinations and format, then scale up to 1000.",
+      "t2": "Cross-batch keys: auto IDs restart at 1 every run; check UUID as the primary key when merging multiple batches.",
+      "t3": "Reproducible data: values change on every click — download immediately to keep a fixed dataset for repeated use.",
+      "t4": "Tool chain: feed the CSV into the CSV Toolbox for sorting/dedupe/reformatting, or into the Data-to-Chart tool for visualization demos.",
+      "t5": "Pick fields by scenario: user table = id+name+gender+phone+email+date; order log = uuid+datetime+ts+float+bool; demo config = int+ip+color."
+    }
+  },
   "chart": {
     "title": "Data to Chart Tool",
     "desc": "Data-to-chart tool that visualizes JSON or CSV data into bar, line, area, pie, doughnut and scatter charts, with theme switching, fullscreen and PNG download.",

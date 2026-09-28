@@ -28,9 +28,9 @@
     <!-- Favicon 图标设置（建议补全 png 标准图标） -->
     <link rel="icon" href="/common/img/helpoke.webp" type="image/webp">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609232300"></script>
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=202609232300"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202609281808"></script>
 
 
     <!-- 内容安全策略 (CSP) -->
@@ -196,6 +196,23 @@
             color: var(--text-secondary);
         }
 
+        .back-to-top {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
@@ -207,12 +224,12 @@
         }
     </style>
 
-    <link rel="stylesheet" href="/common/css/style.css?v=202609232300">
-    <link rel="stylesheet" href="/common/css/i18n.css?v=202609232300">
-    <script src="/common/js/ads.js?v=202609232300" defer></script>
-    <script src="/common/js/theme.js?v=202609232300" defer></script>
-    <script src="/common/js/i18n/i18n.js?v=202609232300" defer></script>
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609232300">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609281808">
+    <script src="/common/js/ads.js?v=202609281808" defer></script>
+    <script src="/common/js/theme.js?v=202609281808" defer></script>
+    <script src="/common/js/i18n/i18n.js?v=202609281808" defer></script>
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
 </head>
 
 <body>
@@ -252,7 +269,8 @@
             <h2 data-i18n="pages.privacy.dataTitle">数据处理方式</h2>
             <h3 data-i18n="pages.privacy.localSubTitle">本地处理</h3>
             <p data-i18n="pages.privacy.local1">
-                本网站提供的所有在线工具均采用"本地处理"技术。这意味着您使用工具时输入的所有数据（包括但不限于图片、视频、文本、JSON数据等）都仅在您的浏览器中进行处理，不会通过网络传输到任何服务器。</p>
+                本网站提供的所有在线工具均采用"本地处理"技术。这意味着您使用工具时输入的所有数据（包括但不限于图片、视频、PDF文档、文本、JSON数据、密钥等）都仅在您的浏览器中进行处理，不会通过网络传输到任何服务器。
+            </p>
             <p data-i18n="pages.privacy.local2">处理完成后，结果数据同样仅在浏览器中生成，您可以选择下载到本地设备或复制到剪贴板。我们不会获取、存储或保留任何您处理的数据。</p>
 
             <h3 data-i18n="pages.privacy.securitySubTitle">数据安全</h3>
@@ -266,7 +284,8 @@
             <p data-i18n="pages.privacy.noPersonal">我们不会收集您的任何个人信息，包括但不限于姓名、邮箱地址、电话号码、身份证号码等。您可以匿名使用本网站的所有服务，无需注册账号。</p>
 
             <h3 data-i18n="pages.privacy.noDataSubTitle">不收集处理数据</h3>
-            <p data-i18n="pages.privacy.noData">如前所述，您使用工具时输入的所有数据都仅在本地处理，我们不会收集、存储或分析这些数据。您的图片、视频、文档、代码等内容始终属于您自己。</p>
+            <p data-i18n="pages.privacy.noData">如前所述，您使用工具时输入的所有数据都仅在本地处理，我们不会收集、存储或分析这些数据。您的图片、视频、文档、代码、密钥等内容始终属于您自己。
+            </p>
 
             <h3 data-i18n="pages.privacy.anonymousSubTitle">匿名统计信息</h3>
             <p data-i18n="pages.privacy.anonymousIntro">为了改善网站服务质量，我们可能会收集一些匿名的统计信息，包括：</p>
@@ -339,7 +358,8 @@
             <p data-i18n="pages.privacy.contactIntro">如果您对本隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
             <ul>
                 <li data-i18n="pages.privacy.contactEmail"><strong>邮箱：</strong>contact@helpoke.com</li>
-                <li data-i18n="pages.privacy.contactFeedback"><strong>网站反馈：</strong>请在网站首页的反馈区域提交您的意见</li>
+                <li data-i18n="pages.privacy.contactFeedback"><strong>网站反馈：</strong>请通过<a href="/contact/"
+                        style="color: var(--accent-color);">联系我们</a>页面提交您的意见</li>
             </ul>
             <p data-i18n="pages.privacy.contactOutro">我们会在收到您的反馈后尽快回复。</p>
         </div>
@@ -347,12 +367,15 @@
         <div class="content-section" style="text-align: center;">
             <a href="javascript:void(0)" onclick="window.goHome&&window.goHome()" class="back-link"><i
                     class="fas fa-home"></i> <span data-i18n="pages.privacy.backHome">返回首页</span></a>
+            <a href="javascript:void(0)" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i
+                    class="fas fa-arrow-up"></i> <span data-i18n="pages.privacy.backToTop">回到顶部</span></a>
         </div>
 
         <div class="footer-info">
             <p data-i18n="pages.privacy.footerInfo">本文由 Helpoke 技术团队编辑整理，致力于为开发者提供高效、安全的在线工具。Helpoke
-                团队深耕Web开发领域多年，专注于构建本地化、隐私友好的在线解决方案，所有工具均在浏览器端运行，无需上传数据到服务器。内容持续更新，确保工具功能和文档说明与时俱进。最后更新于 2026年6月。</p>
+                团队深耕Web开发领域多年，专注于构建本地化、隐私友好的在线解决方案，所有工具均在浏览器端运行，无需上传数据到服务器。内容持续更新，确保工具功能和文档说明与时俱进。最后更新于 2026年9月。</p>
         </div>
+
         <footer class="footer">
             <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. All rights reserved. | 保留所有权利.</p>
             <p style="font-size: 0.9rem; margin-top: 5px;">
@@ -364,7 +387,7 @@
             </p>
         </footer>
     </div>
-    <script src="/common/js/tools-data.js?v=202609232300" defer></script>
+    <script src="/common/js/tools-data.js?v=202609281808" defer></script>
 </body>
 
 </html>

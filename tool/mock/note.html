@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="模拟数据生成器使用说明与常见问题：如何按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据，JSON / CSV / JSON Lines 格式说明、整数范围配置与数据隐私说明。">
+    <meta name="keywords"
+        content="模拟数据生成教程, 测试数据怎么造, Mock数据方法, 随机姓名生成, 假手机号生成, UUID批量生成, JSON测试数据, CSV测试数据, 批量造数据, 测试数据常见问题">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <script src="/common/js/theme-init.js?v=202609281808"></script>
+    <title>模拟数据生成器使用说明与 FAQ | Helpoke 助点站</title>
+    <meta property="og:title" content="模拟数据生成器使用说明与 FAQ | Helpoke 助点站">
+    <meta property="og:description" content="按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据的使用说明、格式详解与常见问题。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/mock/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://helpoke.com/tool/mock/note.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "生成的手机号、邮箱会指向真实的人吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会。手机号从常见号段随机拼接，邮箱域名固定使用 example.com、test.com 等示例域，姓名、地址均来自公开语料随机组合。数据符合真实格式规律但不指向任何真实个人，可放心用于测试环境。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么每次点击\"生成数据\"结果都不一样？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "工具使用浏览器本地的随机数源（Web Crypto / Math.random）每次重新生成，这是造测试数据的预期行为。若需要稳定可复现的数据集，生成后请立即点击\"复制\"或\"下载\"保存结果。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "JSON、CSV、JSON Lines 三种输出格式该怎么选？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "前端接口 Mock、组件演示选 JSON 数组；要导入 Excel、数据库或传给 CSV 解析类工具选 CSV（首行为字段名表头）；日志系统、流式处理、按行解析的场景选 JSON Lines（每行一个独立 JSON 对象）。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "生成数据会被上传到服务器吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会。字段模板、条数、随机范围全部在您的浏览器本地参与随机生成，不发送任何网络请求，可用浏览器 F12 的 Network 面板验证。页面关闭后结果即从内存清除。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #7c3aed 0%, #4c1d95 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            text-indent: 0 !important;
+            padding: 14px !important;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
+    <link rel="stylesheet" href="/common/css/note.css?v=202609281808">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
+    <script src="/common/js/ads.js?v=202609281808" async></script>
+    <script src="/common/js/theme.js?v=202609281808" defer></script>
+    <script src="/common/js/note.js?v=202609281808" defer></script>
+    <script src="/common/js/layout.js?v=202609281808" defer></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>模拟数据生成器 - 使用说明与 FAQ</h1>
+            <p class="subtitle">按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据，本地生成，支持导出 JSON / CSV /
+                JSON Lines</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-dice"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是模拟数据生成器？</h2>
+                <p>模拟数据生成器是一款免费的在线造数据工具。开发联调接口、演示表格组件、验证导入导出功能时，总需要一批"看起来像真的"的数据。手写费时，网上找的样例库又未必贴合字段——本工具让你像点菜一样勾选字段，一次生成最多
+                    <strong>1000 条</strong>结构化记录。
+                </p>
+                <p>工具内置 <strong>16 种常用字段模板</strong>：自增 ID、中文姓名、英文姓名、性别、手机号、邮箱、地址、日期、日期时间、时间戳、随机整数（范围可配）、随机小数、布尔值、UUID、IP
+                    地址、颜色值。字段名即 JSON 键名（id / name / phone / email …），生成即可用。全部随机数在浏览器本地生成，不请求任何接口。
+                </p>
+
+                <h2>支持的输出格式</h2>
+                <ul>
+                    <li><code>JSON 数组</code>：标准 <code>[{...}, {...}]</code> 结构，带缩进，可直接粘进前端代码或接口 Mock。</li>
+                    <li><code>CSV</code>：首行为英文字段名表头，文本含逗号/引号时自动按 RFC4180 加引号转义，可导入 Excel 或数据库。</li>
+                    <li><code>JSON Lines</code>：每行一个独立 JSON 对象，适合日志系统、流式处理与按行解析场景。</li>
+                </ul>
+
+                <h2>如何快速开始？</h2>
+                <h3>第一步：勾选字段模板</h3>
+                <p>默认已勾选 ID、姓名、性别、手机号、邮箱、随机整数六个常用字段；可用"全选字段 / 清空选择"快捷操作，或按需单独勾选。</p>
+                <h3>第二步：设置条数与格式</h3>
+                <p>填写生成条数（1~1000），选择输出格式；若勾选了随机整数，可先配置取值范围（默认 1~100）。</p>
+                <h3>第三步：生成并取用结果</h3>
+                <p>点击"生成数据"，结果出现在右侧输出区；点击"复制"取用文本，或"下载"得到 .json / .csv / .ndjson 文件。再点一次即可换一批。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>典型应用场景</h2>
+                <p><strong>接口联调：</strong>生成字段齐全的用户列表 JSON，前端先跑起来，后端接口就绪后无缝替换。</p>
+                <p><strong>组件演示：</strong>给表格、图表组件喂一批带姓名/日期/数值的演示数据（CSV 可直接粘进"数据转图表"工具）。</p>
+                <p><strong>导入测试：</strong>导出 CSV 验证系统的批量导入、去重、字段校验逻辑。</p>
+                <p><strong>压力占位：</strong>批量生成 UUID、IP、时间戳，填充缓存或消息队列的测试报文。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地生成，保护隐私</span>
+                    <span class="feature-tag">无需注册，即用即走</span>
+                    <span class="feature-tag">16 种字段模板</span>
+                    <span class="feature-tag">单次最多 1000 条</span>
+                    <span class="feature-tag">JSON / CSV / JSON Lines</span>
+                    <span class="feature-tag">整数范围可配置</span>
+                    <span class="feature-tag">一键复制与下载</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>生成的数据均为随机虚构值，请勿当作真实用户数据使用，也不要用于伪造身份、虚假注册等违规用途。</li>
+                        <li>自增 ID 每次点击"生成数据"都从 1 重新开始；跨批次需要唯一主键时建议改用 UUID 字段。</li>
+                        <li>日期与时间戳在近三年内随机分布；布尔值只有 true / false 两种取值。</li>
+                        <li>一次最多生成 1000 条，更大规模建议分批生成后合并文件。</li>
+                        <li>数据在浏览器本地生成，不上传服务器，仍建议在安全环境中操作。</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题</h2>
+                <h3>问：生成的手机号是真实号码吗？</h3>
+                <p><strong>答：</strong>不是。手机号从公开号段随机拼接 11 位数字，符合格式规律但不指向任何真实机主，仅供测试使用。</p>
+                <h3>问：能让两次生成的数据一样吗？</h3>
+                <p><strong>答：</strong>工具不提供随机种子功能。需要稳定的数据集时，生成后立即下载保存，之后反复使用同一份文件。</p>
+                <h3>问：CSV 打开后中文乱码怎么办？</h3>
+                <p><strong>答：</strong>下载的文件为 UTF-8 编码。用 Excel 直接双击打开旧版 CSV 可能识别错编码，建议通过"数据 → 从文本导入"并选择 UTF-8。</p>
+                <h3>问：可以自定义字段名吗？</h3>
+                <p><strong>答：</strong>暂不支持。当前版本字段名固定为英文键名（id / name / phone / email 等），生成后可在代码或"CSV 工具箱"中做二次处理。</p>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>使用最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>先小批后大批：</strong>先按 10 条确认字段组合与格式符合预期，再放大到 1000 条。</li>
+                    <li><strong>UUID 代替自增 ID：</strong>多批次数据合并去重时，UUID 字段可保证主键不冲突。</li>
+                    <li><strong>配合 CSV 工具箱：</strong>生成的 CSV 可在"CSV 工具箱"里继续做排序、去重、转格式。</li>
+                    <li><strong>配合数据转图表：</strong>带日期与随机整数的 CSV 粘进"数据转图表"即可快速演示可视化效果。</li>
+                    <li><strong>及时下载留存：</strong>每次点击都会重新随机，满意的结果请立即复制或下载。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#2563EB"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="/tool/csv/" class="tool-link">CSV 工具箱</a>
+                <a href="/tool/chart/" class="tool-link">数据转图表工具</a>
+                <a href="/json/" class="tool-link">在线 JSON 格式化工具</a>
+                <a href="/encrypted/uuid/" class="tool-link">UUID 生成器</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>
