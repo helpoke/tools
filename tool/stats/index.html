@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="免费的数据统计器在线工具，粘贴、上传 Excel(.xlsx)/CSV 数据即可本地计算计数、求和、均值、中位数、众数、极差、方差、标准差、四分位数与分位数，支持多列分别统计，并用直方图与箱线图可视化分布，结果可复制或下载，无需上传数据。">
+    <meta name="keywords" content="数据统计,求平均值,中位数,众数,标准差,方差计算,四分位数,分位数,极差,数据摘要,在线统计计算器,CSV统计,Excel上传,直方图,箱线图">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202609291220"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>数据统计器 - 均值/中位数/标准差/分位数在线计算 | Helpoke 助点站</title>
+    <meta property="og:title" content="数据统计器 - 均值/中位数/标准差/分位数在线计算 | Helpoke 助点站">
+    <meta property="og:description"
+        content="粘贴或上传 Excel(.xlsx)/CSV 数据即可本地计算计数、求和、均值、中位数、众数、方差、标准差、分位数，支持多列分别统计，并以直方图+箱线图可视化分布，结果可复制或下载。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/stats/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="数据统计器，均值/中位数/标准差/分位数在线计算">
+    <meta name="twitter:description" content="粘贴或上传 Excel(.xlsx)/CSV 数据，本地计算均值、中位数、众数、方差、标准差与分位数，并用直方图/箱线图可视化分布，无需上传。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/stats/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/stats/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/stats/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609291220">
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+
+    <script src="/common/js/i18n/i18n.js?v=202609291220" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "数据统计器",
+        "description": "免费在线数据统计工具，支持粘贴或上传 Excel(.xlsx)/CSV 数据，计算计数、求和、均值、中位数、众数、方差、标准差、四分位数与分位数，并以直方图和箱线图可视化分布。Compute statistics for numeric columns from pasted data or uploaded Excel/CSV files, with histogram and boxplot visualization.",
+        "url": "https://helpoke.com/tool/stats/",
+        "applicationCategory": "https://schema.org/UtilityApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "计数、求和、极差一键得出",
+            "算术均值与中位数",
+            "众数（多峰自动列出）",
+            "总体 / 样本方差与标准差",
+            "四分位数 Q1 / Q3 与 IQR",
+            "任意百分位（P10、P90 等）分位数",
+            "多列分别统计，自动识别数值列",
+            "非数值、空值自动剔除并计数",
+            "支持上传 Excel(.xlsx) / CSV / TXT 文件",
+            "直方图 + 箱线图可视化分布",
+            "关键指标卡片与多列切换",
+            "结果一键复制或下载为 CSV"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.stats.title">数据统计器</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.stats.desc">粘贴或上传 Excel(.xlsx)/CSV 数据，本地计算计数、求和、均值、中位数、众数、方差、标准差与分位数，并以直方图/箱线图可视化分布
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="stats-options">
+                <div class="option-group">
+                    <label for="delimiter-select" data-i18n="tool.stats.options.delimiter">分隔符：</label>
+                    <select id="delimiter-select">
+                        <option value="auto" data-i18n="tool.stats.options.auto">自动识别</option>
+                        <option value=",">,</option>
+                        <option value=";">;</option>
+                        <option value="&#9;">Tab</option>
+                        <option value="|">|</option>
+                        <option value=" " data-i18n="tool.stats.options.space">空格/换行</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label class="check-label"><input type="checkbox" id="opt-header" checked>
+                        <span data-i18n="tool.stats.options.header">首行为表头</span></label>
+                </div>
+                <div class="option-group">
+                    <label for="column-select" data-i18n="tool.stats.options.column">统计列：</label>
+                    <select id="column-select">
+                        <option value="all" data-i18n="tool.stats.options.allCols">全部数值列</option>
+                    </select>
+                    <label for="precision-input" data-i18n="tool.stats.options.precision">小数位：</label>
+                    <input type="number" id="precision-input" min="0" max="10" step="1" value="4" style="width: 64px;">
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.stats.input.title">数据</h2>
+                        <button id="example-btn" data-i18n="tool.stats.examples.basic">载入示例</button>
+                        <button id="upload-btn" data-i18n="tool.stats.upload.label">上传 Excel/CSV</button>
+                        <input type="file" id="file-input" accept=".xlsx,.csv,.tsv,.txt" hidden>
+                        <button id="convert-btn" data-i18n="tool.stats.buttons.compute">统计</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="csv-input" spellcheck="false" data-i18n-placeholder="tool.stats.input.placeholder"
+                        placeholder="score&#10;88&#10;92.5&#10;75&#10;90&#10;88&#10;97&#10;65"></textarea>
+                    <div id="csv-stats" class="stats-bar"></div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.stats.output.title">统计结果</h2>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="download-btn" data-i18n="tool.stats.buttons.download">下载</button>
+                    </div>
+                    <textarea id="csv-output" spellcheck="false" readonly data-i18n-placeholder="tool.stats.output.hint"
+                        placeholder='点击“统计”按钮生成结果'></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-panel" id="charts-panel" hidden>
+            <div class="charts-header">
+                <h2 data-i18n="tool.stats.charts.title">分布可视化</h2>
+                <div class="col-tabs" id="col-tabs"></div>
+            </div>
+            <div class="metrics-grid" id="metrics-grid"></div>
+            <div class="chart-wrap">
+                <canvas id="dist-canvas"></canvas>
+            </div>
+            <p class="charts-hint" data-i18n="tool.stats.charts.hint">上方柱状图为频数分布，下方为箱线图（须线取 1.5×IQR，圆点为离群点）</p>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.stats.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.stats.intro.problemTitle">一列数字，秒出完整统计摘要</h4>
+                    <ul>
+                        <li data-i18n="tool.stats.intro.problem1">手头有一列成绩、销售额、响应时间，想快速知道平均值、最高最低、有没有异常值？开
+                            Excel 或写脚本都太重，本工具粘贴即算，一次给出十余项常用统计量。</li>
+                        <li data-i18n="tool.stats.intro.problem2">自动识别数值列，非数字与空值自动剔除并单独计数，避免“一个脏数据毁掉一次计算”，也不会把
+                            0 当成空值漏算。</li>
+                        <li data-i18n="tool.stats.intro.problem3">所有计算在浏览器本地完成，敏感的业务数据不会上传到任何服务器，可用 F12 的
+                            Network 面板验证。</li>
+                    </ul>
+                    <h4 data-i18n="tool.stats.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.stats.intro.core1">集中趋势：算术均值、中位数、众数（多峰自动全部列出），一眼看清数据的典型水平与最常见取值。</li>
+                        <li data-i18n="tool.stats.intro.core2">离散程度：极差、总体与样本方差、标准差、四分位距 IQR，帮助判断数据是否稳定、有无离群点。</li>
+                        <li data-i18n="tool.stats.intro.core3">分位数：Q1 / Q3 / P90 等任意百分位，配合多列分别统计，可对整张表逐列出一份摘要。</li>
+                        <li data-i18n="tool.stats.intro.core4">可视化与文件：直方图叠加箱线图直观展示分布形态与离群点，关键指标卡片化呈现；支持直接上传 Excel(.xlsx)、CSV、TXT 文件。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.stats.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <ol>
+                        <li data-i18n="tool.stats.instructions.step1">把数据粘贴到左侧输入框，或点击“上传 Excel/CSV”直接加载 .xlsx / .csv / .txt 文件：可以只有一列数字（每行一个，或空格/逗号分隔），也可以是带表头的
+                            CSV/TSV（可从 Excel 复制）。</li>
+                        <li data-i18n="tool.stats.instructions.step2">选择分隔符（默认自动识别）与“首行为表头”；“统计列”可选全部数值列或指定某一列。</li>
+                        <li data-i18n="tool.stats.instructions.step3">设置结果保留的小数位，点击“统计”，右侧生成完整统计报告。</li>
+                        <li data-i18n="tool.stats.instructions.step4">复制或下载报告，也可直接下载为 CSV 摘要文件，粘进表格或文档继续分析。</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.stats.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.stats.notes.note1">只统计能被完整解析为数字的单元格；带单位、千分位逗号或货币符号的内容会被视为非数值并剔除计数。</li>
+                        <li data-i18n="tool.stats.notes.note2">方差/标准差同时给出“总体”与“样本”两种口径：数据是全部对象用总体，抽样估计用样本（除以
+                            n-1）。</li>
+                        <li data-i18n="tool.stats.notes.note3">分位数采用线性插值法（与多数统计软件默认口径一致）；样本量过小（如 n&lt;4）时四分位数仅供参考。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.stats.scenarios.title">典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.stats.scenarios.s1">成绩与考核：粘贴一列分数，立刻得到平均分、及格线附近的中位数、分布是否偏斜（均值 vs
+                            中位数）、最高最低与标准差。</li>
+                        <li data-i18n="tool.stats.scenarios.s2">运营指标：对日订单量、客单价、转化率序列求均值与波动（标准差/IQR），判断指标是否稳定。</li>
+                        <li data-i18n="tool.stats.scenarios.s3">性能分析：把接口响应时间列表粘进来，用 P90/P99 分位数评估长尾延迟，比平均值更能反映体验。</li>
+                        <li data-i18n="tool.stats.scenarios.s4">财务核对：一列金额快速求和、找极值与众数（重复出现的异常金额），配合去重排查问题账单。</li>
+                        <li data-i18n="tool.stats.scenarios.s5">数据预处理：入库前先逐列看计数、缺失（非数值）与分布范围，及时发现脏数据与异常量纲。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- 自定义提示框 -->
+        <div id="toast" class="toast"></div>
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202609291220" defer></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/tools-data.js?v=202609291220" defer></script>
+    <script src="/common/js/nav.js?v=202609291220" defer></script>
+    <script src="/common/lib/jszip.min.js?v=202609291220" defer></script>
+    <script src="script.js?v=202609291220" defer></script>
+
+</body>
+
+</html>

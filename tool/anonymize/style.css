@@ -1,0 +1,227 @@
+/* ================= 数据脱敏工具样式 ================= */
+
+/* 选项区 */
+.anon-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+}
+
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+}
+
+.option-group>label {
+    font-weight: 600;
+    color: var(--text-color, #1f2937);
+}
+
+.option-group select,
+.option-group input[type="number"],
+.option-group input[type="text"] {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+}
+
+.check-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-color, #374151);
+    user-select: none;
+}
+
+.check-label input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* 编辑区两栏 */
+.editor-container {
+    display: flex;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-section,
+.preview-section {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    flex: 1;
+    min-width: 90px;
+    margin: 0;
+    font-size: 17px;
+    color: var(--text-color, #1f2937);
+}
+
+.section-header button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.section-header button:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#upload-btn {
+    border-color: var(--primary-color, #3b82f6);
+    color: var(--primary-color, #3b82f6);
+}
+
+#upload-btn:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#convert-btn {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+    font-weight: 600;
+}
+
+#convert-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* 文本域 */
+#csv-input,
+#csv-output {
+    flex: 1;
+    min-height: 580px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: var(--bg-color, #C7EDCC);
+    color: var(--text-color, #1f2937);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    tab-size: 2;
+}
+
+#csv-output {
+    background: var(--bg-color, #C7EDCC);
+    cursor: default;
+}
+
+/* 统计条 */
+.stats-bar {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-color, #6b7280);
+}
+
+/* Toast 提示 */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(17, 24, 39, 0.92);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 3000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 暗色模式 */
+html.dark-mode .anon-options,
+html.dark-mode .input-section,
+html.dark-mode .preview-section {
+    background: #242424;
+    border-color: #3a3a3a;
+}
+
+html.dark-mode .option-group select,
+html.dark-mode .option-group input[type="number"],
+html.dark-mode .option-group input[type="text"],
+html.dark-mode #csv-input,
+html.dark-mode #csv-output,
+html.dark-mode .section-header button {
+    background: #1e1e1e;
+    border-color: #4a4a4a;
+    color: #e5e7eb;
+}
+
+html.dark-mode .option-group>label,
+html.dark-mode .check-label,
+html.dark-mode .section-header h2 {
+    color: #e5e7eb;
+}
+
+html.dark-mode #convert-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .section-header button:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .editor-container {
+        flex-direction: column;
+    }
+
+    #csv-input,
+    #csv-output {
+        min-height: 300px;
+    }
+}

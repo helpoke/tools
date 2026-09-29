@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="免费的行处理工具在线版，对多行文本一键去重、排序、翻转、去除空行、去除首尾空格、加行号、加前后缀、大小写转换、随机打乱，并实时统计行数/词数/字符数，本地处理不上传。">
+    <meta name="keywords" content="行处理,文本去重,按行排序,去除空行,加行号,前后缀批量,文本翻转,大小写转换,行数统计,词数统计,在线文本处理工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202609291220"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>行处理工具 - 文本去重/排序/加行号/前后缀 | Helpoke 助点站</title>
+    <meta property="og:title" content="行处理工具 - 文本去重/排序/加行号/前后缀 | Helpoke 助点站">
+    <meta property="og:description"
+        content="支持粘贴或上传 Excel(.xlsx)/CSV/TXT 文件，对多行文本一键去重、排序、翻转、去空行、去首尾空格、加行号、加前后缀、大小写转换、随机打乱，实时统计行数/词数/字符数，本地处理不上传。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/lines/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="行处理工具，文本去重/排序/加行号/前后缀批量处理">
+    <meta name="twitter:description"
+        content="支持上传 Excel(.xlsx)/CSV/TXT 文件或粘贴多行文本，一键去重、排序、翻转、去空行、加行号、加前后缀、大小写转换、随机打乱，实时统计行/词/字符。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/lines/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/lines/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/lines/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609291220">
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+
+    <script src="/common/js/i18n/i18n.js?v=202609291220" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "行处理工具",
+        "description": "免费在线多行文本处理工具，支持粘贴或上传 Excel(.xlsx)/CSV/TXT 文件，按行去重、排序、翻转、去除空行、去除首尾空格、加行号、加前后缀、大小写转换、随机打乱，并实时统计行数/词数/字符数。Deduplicate, sort, reverse, number and transform lines of text (pasted or uploaded from Excel/CSV/TXT files) with live line/word/char stats.",
+        "url": "https://helpoke.com/tool/lines/",
+        "applicationCategory": "https://schema.org/UtilityApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "按行去重（保留首次出现）",
+            "升序 / 降序 / 数字 / 长度排序",
+            "行序翻转与随机打乱",
+            "去除空行与首尾空格",
+            "自动加行号（1. / 1 / 001 等格式）",
+            "批量添加前缀 / 后缀",
+            "大小写与首字母大写转换",
+            "支持上传 Excel(.xlsx) / CSV / TXT 文件",
+            "实时行数 / 词数 / 字符数统计",
+            "结果一键复制或下载"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.lines.title">行处理工具</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.lines.desc">支持粘贴或上传 Excel(.xlsx)/CSV/TXT 文件，对多行文本一键去重、排序、翻转、去空行、加行号、加前后缀、大小写转换，实时统计行/词/字符
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="lines-options">
+                <div class="option-group">
+                    <label for="sort-select" data-i18n="tool.lines.options.sort">排序：</label>
+                    <select id="sort-select">
+                        <option value="none" data-i18n="tool.lines.options.none">不排序</option>
+                        <option value="asc" data-i18n="tool.lines.options.asc">升序 A→Z</option>
+                        <option value="desc" data-i18n="tool.lines.options.desc">降序 Z→A</option>
+                        <option value="numasc" data-i18n="tool.lines.options.numasc">数字升序</option>
+                        <option value="numdesc" data-i18n="tool.lines.options.numdesc">数字降序</option>
+                        <option value="lenasc" data-i18n="tool.lines.options.lenasc">按长度升序</option>
+                        <option value="lendesc" data-i18n="tool.lines.options.lendesc">按长度降序</option>
+                    </select>
+                    <label for="case-select" data-i18n="tool.lines.options.case">大小写：</label>
+                    <select id="case-select">
+                        <option value="none" data-i18n="tool.lines.options.caseNone">不变</option>
+                        <option value="upper" data-i18n="tool.lines.options.upper">全大写</option>
+                        <option value="lower" data-i18n="tool.lines.options.lower">全小写</option>
+                        <option value="capital" data-i18n="tool.lines.options.capital">首字母大写</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label class="check-label"><input type="checkbox" id="opt-dedupe">
+                        <span data-i18n="tool.lines.options.dedupe">去除重复行</span></label>
+                    <label class="check-label"><input type="checkbox" id="opt-empty">
+                        <span data-i18n="tool.lines.options.rmEmpty">去除空行</span></label>
+                    <label class="check-label"><input type="checkbox" id="opt-trim">
+                        <span data-i18n="tool.lines.options.trim">去除首尾空格</span></label>
+                    <label class="check-label"><input type="checkbox" id="opt-reverse">
+                        <span data-i18n="tool.lines.options.reverse">翻转行序</span></label>
+                    <label class="check-label"><input type="checkbox" id="opt-shuffle">
+                        <span data-i18n="tool.lines.options.shuffle">随机打乱</span></label>
+                </div>
+                <div class="option-group">
+                    <label for="numbering-select" data-i18n="tool.lines.options.numbering">加行号：</label>
+                    <select id="numbering-select">
+                        <option value="none" data-i18n="tool.lines.options.numberingNone">不加</option>
+                        <option value="dot" data-i18n="tool.lines.options.numberingDot">1. 2. 3.</option>
+                        <option value="space" data-i18n="tool.lines.options.numberingSpace">1 2 3</option>
+                        <option value="zero" data-i18n="tool.lines.options.numberingZero">001 002 003</option>
+                        <option value="paren" data-i18n="tool.lines.options.numberingParen">1) 2) 3)</option>
+                    </select>
+                    <label for="prefix-input" data-i18n="tool.lines.options.prefix">每行前缀：</label>
+                    <input type="text" id="prefix-input" value="" spellcheck="false" style="width: 110px;">
+                    <label for="suffix-input" data-i18n="tool.lines.options.suffix">每行后缀：</label>
+                    <input type="text" id="suffix-input" value="" spellcheck="false" style="width: 110px;">
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.lines.input.title">原始文本</h2>
+                        <button id="example-btn" data-i18n="tool.lines.examples.basic">载入示例</button>
+                        <button id="upload-btn" data-i18n="tool.lines.upload.label">上传 Excel/CSV</button>
+                        <input type="file" id="file-input" accept=".xlsx,.csv,.tsv,.txt" hidden>
+                        <button id="convert-btn" data-i18n="tool.lines.buttons.run">处理</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="csv-input" spellcheck="false" data-i18n-placeholder="tool.lines.input.placeholder"
+                        placeholder="banana&#10;apple&#10;cherry&#10;apple&#10;&#10;date"></textarea>
+                    <div id="csv-stats" class="stats-bar"></div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.lines.output.title">处理结果</h2>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="download-btn" data-i18n="tool.lines.buttons.download">下载</button>
+                    </div>
+                    <textarea id="csv-output" spellcheck="false" readonly data-i18n-placeholder="tool.lines.output.hint"
+                        placeholder='点击“处理”按钮生成结果'></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.lines.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.lines.intro.problemTitle">多行文本的批量整理利器</h4>
+                    <ul>
+                        <li data-i18n="tool.lines.intro.problem1">
+                            一份名单要按行去重、一列名字要排序、抓下来的文本要加行号、给每行代码补上引号逗号——这些零散需求手写脚本麻烦、用编辑器又要点好几下，本工具一站式解决。</li>
+                        <li data-i18n="tool.lines.intro.problem2">
+                            所有操作以"行"为单位组合执行：先去空行去空格、再去重、再排序或翻转、最后加行号与前后缀，顺序合理、结果可预期。</li>
+                        <li data-i18n="tool.lines.intro.problem3">处理全在浏览器本地完成，文本不会上传到任何服务器，可用 F12 的 Network 面板验证。</li>
+                    </ul>
+                    <h4 data-i18n="tool.lines.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.lines.intro.core1">清理与去重：去除空行、去除每行首尾空格、按行去重并保留首次出现顺序。</li>
+                        <li data-i18n="tool.lines.intro.core2">排序与重排：字母升/降序、数字升/降序、按长度升/降序、翻转行序、随机打乱。</li>
+                        <li data-i18n="tool.lines.intro.core3">批量改写：自动加行号（1.、1、001、1)
+                            等格式）、每行统一加前缀/后缀、大小写与首字母大写转换，实时统计行数/词数/字符数。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.lines.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <ol>
+                        <li data-i18n="tool.lines.instructions.step1">把多行文本粘贴到左侧输入框，或点击"载入示例"体验。</li>
+                        <li data-i18n="tool.lines.instructions.step2">按需组合选项：去重、去空行、去空格、排序方式、翻转/打乱、加行号、前后缀、大小写。</li>
+                        <li data-i18n="tool.lines.instructions.step3">点击"处理"，右侧生成结果，下方统计行数/词数/字符数（含处理前后对比）。</li>
+                        <li data-i18n="tool.lines.instructions.step4">复制或下载处理后的文本，直接粘回编辑器、文档或数据源。</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.lines.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.lines.notes.note1">操作有固定先后顺序：去空格 → 去空行 → 去重 → 大小写 → 排序/翻转/打乱 → 加行号 →
+                            前后缀；不同顺序会得到不同结果，可按需要分两次处理。</li>
+                        <li data-i18n="tool.lines.notes.note2">去重按处理前的行内容精确匹配（区分大小写，除非先做了大小写转换）；数字排序取每行首个数字，无数字的行排在末尾。
+                        </li>
+                        <li data-i18n="tool.lines.notes.note3">随机打乱每次结果不同且不保证稳定；超大文本（数十万行）建议分批处理，以免浏览器卡顿。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.lines.scenarios.title">典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.lines.scenarios.s1">名单去重：把重复填写的邮箱、手机号名单粘贴进来，去空行+去重一步清理干净。</li>
+                        <li data-i18n="tool.lines.scenarios.s2">代码片段：给每行 JSON 字段加上引号和逗号后缀，或给一堆字符串加前缀统一成数组元素。</li>
+                        <li data-i18n="tool.lines.scenarios.s3">清单编号：把无序待办列表一键加上 1. 2. 3. 行号，或 001 补零对齐便于引用。</li>
+                        <li data-i18n="tool.lines.scenarios.s4">排序整理：按字母给一堆标签排序、按数字给题目序号重排、按长度筛出最长/最短的几行。</li>
+                        <li data-i18n="tool.lines.scenarios.s5">数据预处理：把一列值去重去空后，再送进 CSV 工具箱、数据统计器或表格转 SQL 工具继续处理。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- 自定义提示框 -->
+        <div id="toast" class="toast"></div>
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202609291220" defer></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/tools-data.js?v=202609291220" defer></script>
+    <script src="/common/js/nav.js?v=202609291220" defer></script>
+    <script src="/common/lib/jszip.min.js?v=202609291220" defer></script>
+    <script src="script.js?v=202609291220" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="免费的数据脱敏工具在线版，自动识别并打码文本或 CSV 中的手机号、固定电话、身份证号、银行卡号、邮箱、IP 地址等敏感信息，支持掩码/哈希/泛化三种方式，本地处理不上传，安全分享日志与数据。">
+    <meta name="keywords" content="数据脱敏,手机号打码,身份证脱敏,邮箱脱敏,银行卡掩码,IP脱敏,隐私保护,日志脱敏,敏感信息替换,在线脱敏工具">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202609291220"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>数据脱敏工具 - 手机号/身份证/邮箱/银行卡打码 | Helpoke 助点站</title>
+    <meta property="og:title" content="数据脱敏工具 - 手机号/身份证/邮箱/银行卡打码 | Helpoke 助点站">
+    <meta property="og:description" content="支持粘贴或上传 Excel(.xlsx)/CSV 文件，自动识别并打码文本或 CSV 中的手机号、固定电话、身份证号、银行卡号、邮箱、IP 地址等敏感信息，支持掩码、哈希、泛化三种方式，本地处理不上传。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/anonymize/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="数据脱敏工具，手机号/身份证/邮箱/银行卡在线打码">
+    <meta name="twitter:description" content="支持上传 Excel(.xlsx)/CSV 文件或粘贴文本，自动识别手机号、身份证、邮箱、银行卡、IP 等敏感信息并掩码/哈希/泛化，本地处理不上传。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/anonymize/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/anonymize/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/anonymize/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202609291220">
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+
+    <script src="/common/js/i18n/i18n.js?v=202609291220" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "数据脱敏工具",
+        "description": "免费在线数据脱敏工具，支持粘贴或上传 Excel(.xlsx)/CSV 文件，自动识别文本或 CSV 中的手机号、固定电话、身份证号、银行卡号、邮箱、IP 地址并以掩码/哈希/泛化方式替换，全部在浏览器本地完成。Anonymize phone numbers, ID cards, emails, bank cards and IPs in pasted text or uploaded Excel/CSV files locally.",
+        "url": "https://helpoke.com/tool/anonymize/",
+        "applicationCategory": "https://schema.org/UtilityApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "手机号 / 固定电话自动打码",
+            "身份证号 18/15 位识别脱敏",
+            "银行卡号掩码替换",
+            "邮箱地址用户名/域名脱敏",
+            "IP 地址泛化掩码",
+            "掩码 / 哈希 / 泛化三种方式",
+            "保留首尾位数可自定义",
+            "支持纯文本与 CSV/TSV 混排内容",
+            "支持上传 Excel(.xlsx) / CSV / TXT 文件",
+            "本地处理，数据不上传服务器"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.anonymize.title">数据脱敏工具</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.anonymize.desc">支持粘贴或上传 Excel(.xlsx)/CSV 文件，自动识别并打码文本 / CSV 中的手机号、身份证、银行卡、邮箱、IP 等敏感信息，本地处理不上传
+            </p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="anon-options">
+                <div class="option-group">
+                    <label for="method-select" data-i18n="tool.anonymize.options.method">脱敏方式：</label>
+                    <select id="method-select">
+                        <option value="mask" data-i18n="tool.anonymize.methods.mask">掩码打码</option>
+                        <option value="hash" data-i18n="tool.anonymize.methods.hash">哈希替身</option>
+                        <option value="generalize" data-i18n="tool.anonymize.methods.generalize">泛化保留</option>
+                    </select>
+                    <label for="keep-input" data-i18n="tool.anonymize.options.keep">保留首尾各：</label>
+                    <input type="number" id="keep-input" min="0" max="4" step="1" value="3" style="width: 56px;">
+                    <label for="maskchar-input" data-i18n="tool.anonymize.options.maskChar">掩码字符：</label>
+                    <input type="text" id="maskchar-input" maxlength="1" value="*" style="width: 44px;">
+                </div>
+                <div class="option-group">
+                    <label class="check-label"><input type="checkbox" data-rule="phone" checked>
+                        <span data-i18n="tool.anonymize.rules.phone">手机号</span></label>
+                    <label class="check-label"><input type="checkbox" data-rule="landline">
+                        <span data-i18n="tool.anonymize.rules.landline">固定电话</span></label>
+                    <label class="check-label"><input type="checkbox" data-rule="idcard" checked>
+                        <span data-i18n="tool.anonymize.rules.idcard">身份证号</span></label>
+                    <label class="check-label"><input type="checkbox" data-rule="bank" checked>
+                        <span data-i18n="tool.anonymize.rules.bank">银行卡号</span></label>
+                    <label class="check-label"><input type="checkbox" data-rule="email" checked>
+                        <span data-i18n="tool.anonymize.rules.email">邮箱地址</span></label>
+                    <label class="check-label"><input type="checkbox" data-rule="ip" checked>
+                        <span data-i18n="tool.anonymize.rules.ip">IP 地址</span></label>
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.anonymize.input.title">原始文本</h2>
+                        <button id="example-btn" data-i18n="tool.anonymize.examples.basic">载入示例</button>
+                        <button id="upload-btn" data-i18n="tool.anonymize.upload.label">上传 Excel/CSV</button>
+                        <input type="file" id="file-input" accept=".xlsx,.csv,.tsv,.txt" hidden>
+                        <button id="convert-btn" data-i18n="tool.anonymize.buttons.run">开始脱敏</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="csv-input" spellcheck="false" data-i18n-placeholder="tool.anonymize.input.placeholder"
+                        placeholder="客户张三，手机 13812345678，身份证 110101199003071234，邮箱 zhangsan@example.com，IP 192.168.10.55"></textarea>
+                    <div id="csv-stats" class="stats-bar"></div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.anonymize.output.title">脱敏结果</h2>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="download-btn" data-i18n="tool.anonymize.buttons.download">下载</button>
+                    </div>
+                    <textarea id="csv-output" spellcheck="false" readonly
+                        data-i18n-placeholder="tool.anonymize.output.hint" placeholder='点击“开始脱敏”生成结果'></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.anonymize.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.anonymize.intro.problemTitle">分享数据前，先抹掉隐私</h4>
+                    <ul>
+                        <li data-i18n="tool.anonymize.intro.problem1">
+                            截图里的手机号、日志中的身份证号、要发到群里的客户名单、贴到提问区的报错信息——直接转发极易泄露隐私。本工具自动识别常见敏感字段并一键打码，脱敏后再分享。</li>
+                        <li data-i18n="tool.anonymize.intro.problem2">
+                            支持掩码、哈希、泛化三种脱敏策略：想给人看清"打码了"用掩码；要保持同一号码脱敏后仍一致可关联，用哈希；只想保留大致范围（如 IP 网段），用泛化。</li>
+                        <li data-i18n="tool.anonymize.intro.problem3">识别、替换全部在浏览器本地完成，敏感原文不会上传到任何服务器，可用 F12 的 Network
+                            面板验证。</li>
+                    </ul>
+                    <h4 data-i18n="tool.anonymize.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.anonymize.intro.core1">多类型识别：中国大陆手机号、固定电话、18/15 位身份证、16-19 位银行卡、电子邮箱、IPv4
+                            地址，可按类型勾选开关。</li>
+                        <li data-i18n="tool.anonymize.intro.core2">
+                            三种脱敏方式：掩码（首尾保留位数可调）、哈希（同值同码、便于关联分析）、泛化（保留前缀/量级，隐藏精确值）。</li>
+                        <li data-i18n="tool.anonymize.intro.core3">通用文本处理：既能整段散文，也能 CSV/TSV 表格，逐类型统计替换数量，结果复制或下载即用。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.anonymize.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <ol>
+                        <li data-i18n="tool.anonymize.instructions.step1">把需要脱敏的文本或 CSV/TSV 数据粘贴到左侧输入框，或点击"载入示例"体验。</li>
+                        <li data-i18n="tool.anonymize.instructions.step2">勾选需要处理的敏感类型，选择脱敏方式（掩码/哈希/泛化），并可调整掩码字符与首尾保留位数。
+                        </li>
+                        <li data-i18n="tool.anonymize.instructions.step3">点击"开始脱敏"，右侧生成脱敏后的文本，下方统计各类替换数量。</li>
+                        <li data-i18n="tool.anonymize.instructions.step4">核对无误后复制或下载结果，再用于分享、存档或提 Bug。</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.anonymize.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.anonymize.notes.note1">
+                            识别基于正则模式，纯数字串可能被银行卡/手机号规则同时命中；处理后请务必人工抽查关键结果，重要合规场景请以专业脱敏系统为准。</li>
+                        <li data-i18n="tool.anonymize.notes.note2">
+                            哈希方式为可逆性较低的短摘要（非密码学加盐），用于保持"同值同码"的关联性；如需不可追溯请使用掩码或配合密钥。</li>
+                        <li data-i18n="tool.anonymize.notes.note3">本工具面向中国大陆常见格式（手机号 1[3-9] 开头、18
+                            位身份证等）；其他地区的号码格式可能不被识别。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.anonymize.scenarios.title">典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.anonymize.scenarios.s1">报障贴文：把报错日志里的用户手机号、身份证、IP 一键打码后再发到技术社区求助，不泄露他人隐私。
+                        </li>
+                        <li data-i18n="tool.anonymize.scenarios.s2">名单分享：客户/员工表格导出后需要跨部门流转，先脱敏身份证与银行卡，保留可读姓名与城市。</li>
+                        <li data-i18n="tool.anonymize.scenarios.s3">演示数据：把生产数据脱敏成"看起来真实但不含真实隐私"的样例，用于培训、演示或测试环境。</li>
+                        <li data-i18n="tool.anonymize.scenarios.s4">日志分析：用哈希方式把用户 ID 转成稳定的替身码，既能做去重与关联统计，又不暴露真实身份。</li>
+                        <li data-i18n="tool.anonymize.scenarios.s5">合规自查：截图或文档发布前快速扫一遍，把残留的邮箱、卡号等 PII 打码，降低违规风险。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- 自定义提示框 -->
+        <div id="toast" class="toast"></div>
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202609291220" defer></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/tools-data.js?v=202609291220" defer></script>
+    <script src="/common/js/nav.js?v=202609291220" defer></script>
+    <script src="/common/lib/jszip.min.js?v=202609291220" defer></script>
+    <script src="script.js?v=202609291220" defer></script>
+
+</body>
+
+</html>

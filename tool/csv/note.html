@@ -9,7 +9,7 @@
     <meta name="keywords" content="CSV转JSON教程, CSV转Markdown方法, CSV转HTML表格, TSV转换, CSV编辑器使用, 分隔符识别, 表格去重排序, CSV工具常见问题">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
-    <script src="/common/js/theme-init.js?v=202609281808"></script>
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
     <title>CSV工具箱使用说明与 FAQ | Helpoke 助点站</title>
     <meta property="og:title" content="CSV工具箱使用说明与 FAQ | Helpoke 助点站">
     <meta property="og:description" content="将 CSV/TSV 数据转换为 JSON、Markdown、HTML 表格的使用说明、处理选项详解与常见问题。">
@@ -47,6 +47,14 @@
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "工具会智能判断：单元格内容是纯数字时按数值比较，否则按文本自然序比较。若数字带单位（如 12kg）或千分位逗号，会被视为文本。导出前建议先在源数据中去掉单位。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "支持直接上传文件吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "支持。除粘贴文本外，可上传 .xlsx（浏览器本地解析并取首个工作表）、.csv / .txt / .tsv 文件自动载入并转换。解析与转换均在本地完成，不会上传服务器。"
                 }
             },
             {
@@ -229,14 +237,14 @@
         }
     </style>
 
-    <link rel="stylesheet" href="style.css?v=202609281808">
-    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
-    <link rel="stylesheet" href="/common/css/note.css?v=202609281808">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
-    <script src="/common/js/ads.js?v=202609281808" async></script>
-    <script src="/common/js/theme.js?v=202609281808" defer></script>
-    <script src="/common/js/note.js?v=202609281808" defer></script>
-    <script src="/common/js/layout.js?v=202609281808" defer></script>
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/note.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/note.js?v=202609291220" defer></script>
+    <script src="/common/js/layout.js?v=202609291220" defer></script>
 </head>
 
 <body>
@@ -260,7 +268,7 @@
                 </p>
 
                 <h2>支持的输入与输出</h2>
-                <p><strong>输入：</strong>逗号分隔的 .csv、Tab 分隔的 .tsv（可直接从 Excel 复制粘贴）、分号或竖线分隔的文本；分隔符支持自动识别。</p>
+                <p><strong>输入：</strong>逗号分隔的 .csv、Tab 分隔的 .tsv（可直接从 Excel 复制粘贴）、分号或竖线分隔的文本；分隔符支持自动识别。也可直接上传 <code>.xlsx / .csv / .txt / .tsv</code> 文件自动载入。</p>
                 <p><strong>输出：</strong></p>
                 <ul>
                     <li><code>JSON</code>：勾选"首行为表头"时输出对象数组（每行一个对象，键取自表头），否则输出二维数组；纯数字内容自动转为数值类型。</li>
@@ -272,7 +280,7 @@
 
                 <h2>如何快速开始？</h2>
                 <h3>第一步：粘贴数据</h3>
-                <p>把 CSV 文本粘贴到输入框，或从 Excel 直接复制单元格粘贴（Tab 分隔自动识别）；也可以点击"载入示例"体验。</p>
+                <p>把 CSV 文本粘贴到输入框，或从 Excel 直接复制单元格粘贴（Tab 分隔自动识别）；也可上传 <code>.xlsx / .csv / .txt</code> 文件，或点击“载入示例”体验。</p>
                 <h3>第二步：设置处理选项</h3>
                 <p>选择分隔符、是否含表头，按需勾选去空格、去空行、去重、转置，或填写排序列号（从 0 开始）与升/降序。</p>
                 <h3>第三步：转换并取用结果</h3>
@@ -294,6 +302,7 @@
                     <span class="feature-tag">四种输出格式</span>
                     <span class="feature-tag">分隔符自动识别</span>
                     <span class="feature-tag">去重 / 排序 / 转置</span>
+                    <span class="feature-tag">支持上传 xlsx/csv/txt</span>
                     <span class="feature-tag">一键复制与下载</span>
                 </div>
 
@@ -318,7 +327,36 @@
                 <p><strong>答：</strong>内容能被完整解析为数字（如 28、92.5）时会自动转为数值类型；带单位、空格或千分位逗号的会保留为字符串。</p>
                 <h3>问：HTML 输出会执行脚本吗？</h3>
                 <p><strong>答：</strong>不会。输出的 HTML 是转义后的代码文本（<code>&lt;</code> 等已转义显示），仅供复制使用，工具不会将其注入页面执行。</p>
+                <h3>问：支持直接上传文件吗？</h3>
+                <p><strong>答：</strong>支持。除粘贴文本外，可上传 <code>.xlsx</code>（浏览器本地解析取首个工作表）、<code>.csv / .txt / .tsv</code> 自动载入并转换，全程本地完成不上传。</p>
+                <h3>问：开启“转置”后表头会怎样？</h3>
+                <p><strong>答：</strong>转置会把整个表格（含表头行）做行列互换，原来的第一列变成第一行；因为是对解析后的整块操作，表头行不会被单独剔除，若只想转数据部分可先不开表头处理。</p>
             </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>转换示例：一份数据→四种格式</h2>
+            <h3>输入 CSV（勾选“首行为表头”）</h3>
+            <p class="code-block">name,city,age,score
+Alice,Beijing,28,92.5
+Bob,Shanghai,35,78</p>
+            <h3>输出 JSON（纯数字自动转为数值）</h3>
+            <p class="code-block">[
+  { "name": "Alice", "city": "Beijing", "age": 28, "score": 92.5 },
+  { "name": "Bob", "city": "Shanghai", "age": 35, "score": 78 }
+]</p>
+            <h3>输出 Markdown 表格</h3>
+            <p class="code-block">| name | city | age | score |
+| --- | --- | --- | --- |
+| Alice | Beijing | 28 | 92.5 |
+| Bob | Shanghai | 35 | 78 |</p>
+            <h3>输出 HTML 表格</h3>
+            <p class="code-block">&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;city&lt;/th&gt;&lt;th&gt;age&lt;/th&gt;&lt;th&gt;score&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;td&gt;Beijing&lt;/td&gt;&lt;td&gt;28&lt;/td&gt;&lt;td&gt;92.5&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Bob&lt;/td&gt;&lt;td&gt;Shanghai&lt;/td&gt;&lt;td&gt;35&lt;/td&gt;&lt;td&gt;78&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</p>
+            <p>同一份解析结果可在标签页之间自由切换，无需反复粘贴；若源数据末尾有重复行，勾选“去重”会删除与前面完全相同的数据行（表头行除外）。</p>
         </div>
 
         <div class="info-section" style="grid-column: 1 / -1;">

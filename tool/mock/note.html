@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="模拟数据生成器使用说明与常见问题：如何按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据，JSON / CSV / JSON Lines 格式说明、整数范围配置与数据隐私说明。">
+        content="模拟数据生成器使用说明与常见问题：如何按字段结构批量生成姓名、手机号、邮箱、身份证、UUID 等 45+ 种测试数据，点号路径多层嵌套与数组写法、自定义模板与枚举配置、JSON / CSV / JSON Lines 格式说明与数据隐私说明。">
     <meta name="keywords"
         content="模拟数据生成教程, 测试数据怎么造, Mock数据方法, 随机姓名生成, 假手机号生成, UUID批量生成, JSON测试数据, CSV测试数据, 批量造数据, 测试数据常见问题">
     <meta name="author" content="余一叶知秋尽">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
-    <script src="/common/js/theme-init.js?v=202609281808"></script>
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
     <title>模拟数据生成器使用说明与 FAQ | Helpoke 助点站</title>
     <meta property="og:title" content="模拟数据生成器使用说明与 FAQ | Helpoke 助点站">
     <meta property="og:description" content="按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据的使用说明、格式详解与常见问题。">
@@ -47,7 +47,39 @@
                 "name": "JSON、CSV、JSON Lines 三种输出格式该怎么选？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "前端接口 Mock、组件演示选 JSON 数组；要导入 Excel、数据库或传给 CSV 解析类工具选 CSV（首行为字段名表头）；日志系统、流式处理、按行解析的场景选 JSON Lines（每行一个独立 JSON 对象）。"
+                    "text": "前端接口 Mock、组件演示选 JSON 数组（完整保留嵌套结构）；要导入 Excel、数据库或传给 CSV 解析类工具选 CSV（按顶层键拆列，嵌套对象/数组以 JSON 字符串写入单元格）；日志系统、流式处理、按行解析的场景选 JSON Lines（每行一个独立 JSON 对象）。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何生成多层嵌套的 JSON 结构？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "字段路径用点号分层、[] 表示数组，层级不限。例如 profile.city 生成嵌套对象，tags[] 生成标量数组，orders[].items[].qty 生成对象数组里再套对象数组；共用同一路径前缀的行会合并到同一对象/同一数组元素内。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "可以自定义字段名和字段内容吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以。字段路径就是输出键名，任意命名；类型选“枚举”可限定候选值列表；选“自定义模板”可用 {{name}}、{{date}}、{{int}} 等占位符拼接任意字段生成自定义格式的值，如订单号 ORDER-{{date}}-{{int}}。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "可以导入已有的 JSON 结构吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以。点击“导入 JSON”按钮粘贴接口响应样例（对象或对象数组），工具会按键名（如 email、phone、created_at）和值特征（如 1[3-9] 开头 11 位数字、ISO 日期、URL）自动推断每个字段的类型并生成结构表；嵌套对象与数组同样支持，不可识别的字符串字段会保留原值作为自定义模板，可在结构表中随时手动改类型。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "数组长度设置是什么意思？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "对以 [] 结尾的路径（如 tags[]、orders[]），“数组长度”控制每条记录中该数组随机包含的元素个数（默认 1~3）。多个不同数组共用同一个长度区间，适合控制标签、子项等变长字段的数据量。"
                 }
             },
             {
@@ -55,7 +87,7 @@
                 "name": "生成数据会被上传到服务器吗？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "不会。字段模板、条数、随机范围全部在您的浏览器本地参与随机生成，不发送任何网络请求，可用浏览器 F12 的 Network 面板验证。页面关闭后结果即从内存清除。"
+                    "text": "不会。字段结构、条数、随机范围全部在您的浏览器本地参与随机生成，不发送任何网络请求，可用浏览器 F12 的 Network 面板验证。页面关闭后结果即从内存清除。"
                 }
             }
         ]
@@ -230,21 +262,21 @@
         }
     </style>
 
-    <link rel="stylesheet" href="style.css?v=202609281808">
-    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
-    <link rel="stylesheet" href="/common/css/note.css?v=202609281808">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
-    <script src="/common/js/ads.js?v=202609281808" async></script>
-    <script src="/common/js/theme.js?v=202609281808" defer></script>
-    <script src="/common/js/note.js?v=202609281808" defer></script>
-    <script src="/common/js/layout.js?v=202609281808" defer></script>
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/note.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/note.js?v=202609291220" defer></script>
+    <script src="/common/js/layout.js?v=202609291220" defer></script>
 </head>
 
 <body>
     <div class="note-container">
         <header>
             <h1>模拟数据生成器 - 使用说明与 FAQ</h1>
-            <p class="subtitle">按字段模板批量生成姓名、手机号、邮箱、日期、UUID 等测试数据，本地生成，支持导出 JSON / CSV /
+            <p class="subtitle">按字段结构批量生成 45+ 种常用测试数据，支持点号路径多层嵌套、数组、自定义模板与枚举，本地生成，导出 JSON / CSV /
                 JSON Lines</p>
             <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
             <a href="index.html" class="back-link"><i class="fas fa-dice"></i> 使用工具</a>
@@ -253,44 +285,64 @@
         <div class="content-wrapper">
             <div class="info-section">
                 <h2>什么是模拟数据生成器？</h2>
-                <p>模拟数据生成器是一款免费的在线造数据工具。开发联调接口、演示表格组件、验证导入导出功能时，总需要一批"看起来像真的"的数据。手写费时，网上找的样例库又未必贴合字段——本工具让你像点菜一样勾选字段，一次生成最多
+                <p>模拟数据生成器是一款免费的在线造数据工具。开发联调接口、演示表格组件、验证导入导出功能时，总需要一批"看起来像真的"的数据。手写费时，网上找的样例库又未必贴合字段——本工具让你像填表一样定义字段结构，一次生成最多
                     <strong>1000 条</strong>结构化记录。
                 </p>
-                <p>工具内置 <strong>16 种常用字段模板</strong>：自增 ID、中文姓名、英文姓名、性别、手机号、邮箱、地址、日期、日期时间、时间戳、随机整数（范围可配）、随机小数、布尔值、UUID、IP
-                    地址、颜色值。字段名即 JSON 键名（id / name / phone / email …），生成即可用。全部随机数在浏览器本地生成，不请求任何接口。
+                <p>工具内置 <strong>45+ 种常用字段类型</strong>，按基础/标识/地理/企业/时间/网络/文本分组：中文/英文姓名、性别、手机号、邮箱、地址、身份证（带校验位）、银行卡（Luhn
+                    合法）、公司、职业、经纬度、URL、段落等。每行字段由"路径 + 类型 + 配置"三部分组成，路径即输出键名，可自由命名。全部随机数在浏览器本地生成，不请求任何接口。
                 </p>
+
+                <h2>字段路径与多层嵌套</h2>
+                <ul>
+                    <li><code>name</code>：普通顶层字段，直接作为 JSON 键名。</li>
+                    <li><code>profile.city</code>：点号分层，生成嵌套对象；层级不限，如 <code>user.address.geo.lat</code>。</li>
+                    <li><code>tags[]</code>：<code>[]</code> 后缀表示数组，元素长度由工具条"数组长度"控制。</li>
+                    <li><code>orders[].sku</code>、<code>orders[].items[].qty</code>：对象数组及数组套数组；共用同一路径前缀的行会合并到同一元素内。</li>
+                </ul>
+
+                <h2>自定义字段</h2>
+                <ul>
+                    <li><code>枚举</code>：配置列填候选值（逗号分隔），每次随机取其中一个，如 <code>待支付,已支付,已取消</code>。</li>
+                    <li><code>自定义模板</code>：用 <code>{{类型}}</code> 占位符拼接任意字段，如
+                        <code>ORDER-{{date}}-{{int}}</code>、<code>{{username}}@{{domain}}</code>。
+                    </li>
+                </ul>
 
                 <h2>支持的输出格式</h2>
                 <ul>
-                    <li><code>JSON 数组</code>：标准 <code>[{...}, {...}]</code> 结构，带缩进，可直接粘进前端代码或接口 Mock。</li>
-                    <li><code>CSV</code>：首行为英文字段名表头，文本含逗号/引号时自动按 RFC4180 加引号转义，可导入 Excel 或数据库。</li>
+                    <li><code>JSON 数组</code>：标准 <code>[{...}, {...}]</code> 结构，带缩进，完整保留嵌套层级，可直接粘进前端代码或接口 Mock。</li>
+                    <li><code>CSV</code>：按顶层键拆列，嵌套对象/数组序列化为 JSON 字符串写入单元格，可导入 Excel 或数据库。</li>
                     <li><code>JSON Lines</code>：每行一个独立 JSON 对象，适合日志系统、流式处理与按行解析场景。</li>
                 </ul>
 
                 <h2>如何快速开始？</h2>
-                <h3>第一步：勾选字段模板</h3>
-                <p>默认已勾选 ID、姓名、性别、手机号、邮箱、随机整数六个常用字段；可用"全选字段 / 清空选择"快捷操作，或按需单独勾选。</p>
-                <h3>第二步：设置条数与格式</h3>
-                <p>填写生成条数（1~1000），选择输出格式；若勾选了随机整数，可先配置取值范围（默认 1~100）。</p>
+                <h3>第一步：配置字段结构</h3>
+                <p>页面默认载入嵌套示例；也可点"常用示例"回到扁平结构，用"＋ 常用字段"快选下拉或"＋ 新增字段"按钮逐行添加。</p>
+                <h3>第二步：设置条数与参数</h3>
+                <p>填写生成条数（1~1000），选择输出格式；按需配置随机整数范围、数组长度（默认 1~3）与日期范围——日期、时间、时间戳类字段在范围内随机，止不填默认为今天，起不填默认止往前一年。</p>
                 <h3>第三步：生成并取用结果</h3>
-                <p>点击"生成数据"，结果出现在右侧输出区；点击"复制"取用文本，或"下载"得到 .json / .csv / .ndjson 文件。再点一次即可换一批。</p>
+                <p>修改任意行都会自动重新生成；点击"复制"取用文本，或"下载"得到 .json / .csv / .ndjson 文件。点"生成数据"可换一批。</p>
             </div>
 
             <div class="info-section">
                 <h2>典型应用场景</h2>
-                <p><strong>接口联调：</strong>生成字段齐全的用户列表 JSON，前端先跑起来，后端接口就绪后无缝替换。</p>
+                <p><strong>接口联调：</strong>生成字段齐全、嵌套层次真实的用户/订单 JSON，前端先跑起来，后端接口就绪后无缝替换。</p>
                 <p><strong>组件演示：</strong>给表格、图表组件喂一批带姓名/日期/数值的演示数据（CSV 可直接粘进"数据转图表"工具）。</p>
-                <p><strong>导入测试：</strong>导出 CSV 验证系统的批量导入、去重、字段校验逻辑。</p>
-                <p><strong>压力占位：</strong>批量生成 UUID、IP、时间戳，填充缓存或消息队列的测试报文。</p>
+                <p><strong>导入测试：</strong>导出 CSV 验证系统的批量导入、去重、字段校验逻辑；用枚举类型构造状态列验证分支。</p>
+                <p><strong>压力占位：</strong>批量生成 UUID、IP、时间戳与多层数组，填充缓存或消息队列的测试报文。</p>
 
                 <h2>特点与优势</h2>
                 <div class="feature-list">
                     <span class="feature-tag">本地生成，保护隐私</span>
                     <span class="feature-tag">无需注册，即用即走</span>
-                    <span class="feature-tag">16 种字段模板</span>
+                    <span class="feature-tag">45+ 种字段类型</span>
+                    <span class="feature-tag">点号路径多层嵌套</span>
+                    <span class="feature-tag">数组长度可配置</span>
+                    <span class="feature-tag">自定义模板与枚举</span>
+                    <span class="feature-tag">日期范围可配置</span>
+                    <span class="feature-tag">导入 JSON 自动识结构</span>
                     <span class="feature-tag">单次最多 1000 条</span>
                     <span class="feature-tag">JSON / CSV / JSON Lines</span>
-                    <span class="feature-tag">整数范围可配置</span>
                     <span class="feature-tag">一键复制与下载</span>
                 </div>
 
@@ -298,9 +350,10 @@
                     <p><strong>注意事项：</strong></p>
                     <ul>
                         <li>生成的数据均为随机虚构值，请勿当作真实用户数据使用，也不要用于伪造身份、虚假注册等违规用途。</li>
-                        <li>自增 ID 每次点击"生成数据"都从 1 重新开始；跨批次需要唯一主键时建议改用 UUID 字段。</li>
-                        <li>日期与时间戳在近三年内随机分布；布尔值只有 true / false 两种取值。</li>
-                        <li>一次最多生成 1000 条，更大规模建议分批生成后合并文件。</li>
+                        <li>自增 ID 每次点击"生成数据"都从 1 重新开始；跨批次需要唯一主键时建议改用 UUID 类型。</li>
+                        <li>身份证、银行卡等证件号仅保证校验位算法合法，不对任何真实证件有效。</li>
+                        <li>同一路径先写成标量后又写成对象/数组时结构会冲突，生成后请检查输出结果。</li>
+                        <li>嵌套层数多且数组长度大时记录内容会成倍增长，建议控制数组长度上限。</li>
                         <li>数据在浏览器本地生成，不上传服务器，仍建议在安全环境中操作。</li>
                     </ul>
                 </div>
@@ -312,19 +365,71 @@
                 <p><strong>答：</strong>工具不提供随机种子功能。需要稳定的数据集时，生成后立即下载保存，之后反复使用同一份文件。</p>
                 <h3>问：CSV 打开后中文乱码怎么办？</h3>
                 <p><strong>答：</strong>下载的文件为 UTF-8 编码。用 Excel 直接双击打开旧版 CSV 可能识别错编码，建议通过"数据 → 从文本导入"并选择 UTF-8。</p>
-                <h3>问：可以自定义字段名吗？</h3>
-                <p><strong>答：</strong>暂不支持。当前版本字段名固定为英文键名（id / name / phone / email 等），生成后可在代码或"CSV 工具箱"中做二次处理。</p>
+                <h3>问：可以自定义字段名和字段内容吗？</h3>
+                <p><strong>答：</strong>可以。字段路径就是输出键名，任意命名、任意嵌套；类型选"枚举"可限定候选值，选"自定义模板"可用 {{name}}、{{date}}
+                    等占位符拼接任意字段生成自定义格式的值。</p>
+                <h3>问：如何生成对象数组（如订单列表）？</h3>
+                <p><strong>答：</strong>多行共用同一数组路径前缀即可，如
+                    orders[].sku、orders[].amount、orders[].items[].name，这些字段会组合在同一个数组元素内，点"嵌套示例"按钮可一键载入该结构的模板。</p>
+                <h3>问：可以导入已有的 JSON 结构吗？</h3>
+                <p><strong>答：</strong>可以。点"导入
+                    JSON"粘贴接口响应样例（对象或对象数组），工具按键名与值特征自动推断类型生成结构表，嵌套/数组同样支持；不可识别的字符串字段会保留原值作为自定义模板，推断结果可在结构表中逐行调整。</p>
+                <h3>问：数组长度是什么意思？</h3>
+                <p><strong>答：</strong>对以 <code>[]</code> 结尾的路径（如
+                    <code>tags[]</code>、<code>orders[]</code>），工具条里的"数组长度"控制每条记录中该数组随机包含的元素个数（默认
+                    1~3）。多个不同数组共用同一个长度区间；如需更复杂可逐次调整。</p>
+                <h3>问：JSON、CSV、JSON Lines 怎么选？</h3>
+                <p><strong>答：</strong>前端联调、接口 Mock 用 <code>JSON 数组</code>（完整保留嵌套）；导入 Excel/数据库用
+                    <code>CSV</code>（嵌套对象会序列化入单元格）；日志、流式处理、逐行解析场景用 <code>JSON Lines</code>。</p>
             </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>生成示例：从结构表到输出</h2>
+            <h3>定义字段结构（路径 + 类型）</h3>
+            <p class="code-block">id 自增 ID
+                name 中文姓名
+                profile.city 城市
+                profile.age 整数
+                tags[] 枚举：标签A,标签B,标签C
+                orders[].sku 自定义模板：SKU-{{int}}
+                orders[].items[].name 商品名称
+                orders[].items[].qty 整数</p>
+            <h3>生成的单条记录（JSON）</h3>
+            <p class="code-block">{
+                "id": 1,
+                "name": "张伟",
+                "profile": { "city": "广州市", "age": 28 },
+                "tags": ["标签A", "标签C"],
+                "orders": [
+                {
+                "sku": "SKU-1042",
+                "items": [
+                { "name": "智能手环", "qty": 2 },
+                { "name": "机械键盘", "qty": 1 }
+                ]
+                }
+                ]
+                }</p>
+            <h3>要点解读</h3>
+            <ul>
+                <li><code>profile.city</code>、<code>profile.age</code> 共用 <code>profile.</code> 前缀，合并为一个嵌套对象。</li>
+                <li><code>tags[]</code> 为标量数组，元素个数在"数组长度"区间（1~3）内随机，取自枚举候选。</li>
+                <li><code>orders[].sku</code> 与 <code>orders[].items[]</code> 共用 <code>orders[]</code> 前缀，同一元素内既有 sku
+                    字段又有子数组。</li>
+                <li><code>orders[].items[].name</code>、<code>.qty</code> 组成二层嵌套的对象数组，每个子项包含 name + qty。</li>
+            </ul>
         </div>
 
         <div class="info-section" style="grid-column: 1 / -1;">
             <h2>使用最佳实践</h2>
             <div class="warning-box">
                 <ul>
-                    <li><strong>先小批后大批：</strong>先按 10 条确认字段组合与格式符合预期，再放大到 1000 条。</li>
-                    <li><strong>UUID 代替自增 ID：</strong>多批次数据合并去重时，UUID 字段可保证主键不冲突。</li>
+                    <li><strong>先小批后大批：</strong>先按 10 条确认结构与格式符合预期，再放大到 1000 条。</li>
+                    <li><strong>从示例出发：</strong>点"常用示例 / 嵌套示例"载入模板，在示例基础上改路径和类型比从零配置更快。</li>
+                    <li><strong>UUID 代替自增 ID：</strong>多批次数据合并去重时，UUID 类型可保证主键不冲突。</li>
+                    <li><strong>模板拼接业务键：</strong>用自定义模板生成符合业务规则的编号，如 ORDER-{{date}}-{{int}}。</li>
                     <li><strong>配合 CSV 工具箱：</strong>生成的 CSV 可在"CSV 工具箱"里继续做排序、去重、转格式。</li>
-                    <li><strong>配合数据转图表：</strong>带日期与随机整数的 CSV 粘进"数据转图表"即可快速演示可视化效果。</li>
                     <li><strong>及时下载留存：</strong>每次点击都会重新随机，满意的结果请立即复制或下载。</li>
                 </ul>
             </div>

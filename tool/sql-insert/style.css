@@ -1,0 +1,339 @@
+/* ================= 表格转 SQL INSERT 样式 ================= */
+
+/* 选项区 */
+.sql-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+}
+
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+}
+
+.option-group>label {
+    font-weight: 600;
+    color: var(--text-color, #1f2937);
+}
+
+.option-group select,
+.option-group input[type="number"],
+.option-group input[type="text"] {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.option-group input[type="text"] {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+.check-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-color, #374151);
+    user-select: none;
+}
+
+.check-label input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* 编辑区两栏 */
+.editor-container {
+    display: flex;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-section,
+.preview-section {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    flex: 1;
+    min-width: 90px;
+    margin: 0;
+    font-size: 17px;
+    color: var(--text-color, #1f2937);
+}
+
+.section-header button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.section-header button:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#upload-btn {
+    border-color: var(--primary-color, #3b82f6);
+    color: var(--primary-color, #3b82f6);
+}
+
+#upload-btn:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#convert-btn {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+    font-weight: 600;
+}
+
+#convert-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* 文本域 */
+#csv-input,
+#csv-output {
+    flex: 1;
+    min-height: 580px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: var(--bg-color, #C7EDCC);
+    color: var(--text-color, #1f2937);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    tab-size: 2;
+}
+
+#csv-output {
+    background: var(--bg-color, #C7EDCC);
+    cursor: default;
+}
+
+/* 统计条 */
+.stats-bar {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-color, #6b7280);
+}
+
+/* Toast 提示 */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(17, 24, 39, 0.92);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 3000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 建表预览面板 */
+.ddl-panel {
+    margin-top: 18px;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.ddl-code {
+    margin: 0 0 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #1f2937);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.ddl-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+}
+
+.ddl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.ddl-table th,
+.ddl-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+    text-align: left;
+    white-space: nowrap;
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ddl-table th {
+    background: var(--bg-color, #f3f4f6);
+    color: var(--text-color, #1f2937);
+    font-weight: 600;
+}
+
+.ddl-table .col-type {
+    display: inline-block;
+    margin-top: 3px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--primary-color, #3b82f6);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.ddl-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.ddl-table tbody tr:hover td {
+    background: rgba(59, 130, 246, 0.06);
+}
+
+.ddl-note {
+    margin: 10px 0 0;
+    font-size: 12.5px;
+    color: var(--text-color, #6b7280);
+}
+
+/* 暗色模式 */
+html.dark-mode .sql-options,
+html.dark-mode .input-section,
+html.dark-mode .preview-section,
+html.dark-mode .ddl-panel {
+    background: #242424;
+    border-color: #3a3a3a;
+}
+
+html.dark-mode .ddl-code {
+    background: #1e1e1e;
+    border-color: #4a4a4a;
+    color: #e5e7eb;
+}
+
+html.dark-mode .ddl-table-wrap {
+    border-color: #3a3a3a;
+}
+
+html.dark-mode .ddl-table th,
+html.dark-mode .ddl-table td {
+    border-bottom-color: #3a3a3a;
+}
+
+html.dark-mode .ddl-table th {
+    background: #2c2c2c;
+    color: #e5e7eb;
+}
+
+html.dark-mode .ddl-table .col-type {
+    background: rgba(96, 165, 250, 0.18);
+    color: #60a5fa;
+}
+
+html.dark-mode .ddl-table tbody tr:hover td {
+    background: rgba(96, 165, 250, 0.08);
+}
+
+html.dark-mode .option-group select,
+html.dark-mode .option-group input[type="number"],
+html.dark-mode .option-group input[type="text"],
+html.dark-mode #csv-input,
+html.dark-mode #csv-output,
+html.dark-mode .section-header button {
+    background: #1e1e1e;
+    border-color: #4a4a4a;
+    color: #e5e7eb;
+}
+
+html.dark-mode .option-group>label,
+html.dark-mode .check-label,
+html.dark-mode .section-header h2 {
+    color: #e5e7eb;
+}
+
+html.dark-mode #convert-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .section-header button:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .editor-container {
+        flex-direction: column;
+    }
+
+    #csv-input,
+    #csv-output {
+        min-height: 300px;
+    }
+}

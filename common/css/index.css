@@ -387,6 +387,25 @@ html.dark-mode .footer-note a:hover {
     gap: 16px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 点击统计卡片定位到类目卡片时，预留顶部间距 */
+.category-card[id^="cat-"] {
+    scroll-margin-top: 16px;
+    transition: border-color 0.6s;
+}
+
+/* 定位后短暂高亮目标类目卡片 */
+.category-card.cat-flash {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
 }
 
 .stat-icon {

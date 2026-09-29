@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="行处理工具使用说明与常见问题：如何对多行文本按行去重、排序、翻转、去除空行、去除首尾空格、加行号、加前后缀、大小写转换，处理顺序、去重规则与行列/词数统计说明。">
+    <meta name="keywords" content="行去重教程, 按行排序方法, 文本加行号, 去除空行, 批量前后缀, 行翻转打乱, 大小写转换, 行词字符统计, 文本处理常见问题">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
+    <title>行处理工具使用说明与 FAQ | Helpoke 助点站</title>
+    <meta property="og:title" content="行处理工具使用说明与 FAQ | Helpoke 助点站">
+    <meta property="og:description" content="对多行文本去重、排序、翻转、去空行、加行号、加前后缀、大小写转换的使用说明、处理顺序详解与常见问题。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/lines/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://helpoke.com/tool/lines/note.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "多个操作同时勾选时，处理顺序是怎样的？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "固定顺序为：去首尾空格 → 去空行 → 去重 → 大小写转换 → 排序/翻转/打乱 → 加行号 → 加前后缀。这个顺序能保证去重在清理空格后进行、行号在最终排序后编号。若想得到不同结果，可分两次处理。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "去重会区分大小写吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "会。去重按当前行内容精确匹配，Apple 与 apple 视为不同行。若希望忽略大小写去重，可先选择大小写转换为\"全小写\"再处理，这样二者会统一成同一值并被去重。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "数字排序是怎么取值的？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "数字升/降序取每行中出现的第一个数字作为排序键（如第 3 题、金额 1200 等），没有数字的行统一排在末尾。若行首是编号、行内含其它数字，建议先拆出纯数字列或用其它工具预处理。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "支持直接上传文件吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "支持。除粘贴文本外，可上传 .xlsx（浏览器本地解析并取首个工作表）、.csv / .txt / .tsv / .log 文件直接载入内容。解析与处理均在本地完成，不会上传服务器。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "同时加行号和前后缀，结果是怎样的？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "固定顺序下“加行号”先于“加前后缀”执行，因此前后缀会包在行号外层。例如前缀为双引号、后缀为双引号加逗号、行号选 1. 时，结果为双引号包裹的“1. apple”再加逗号。若想行号在最外层，可分两次处理。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "我的文本会被上传到服务器吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会。去重、排序、加行号、前后缀等全部在您的浏览器本地完成，不会通过网络发送任何内容，可用 F12 的 Network 面板验证。页面关闭后数据即从内存清除。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #0891b2 0%, #155e75 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            text-indent: 0 !important;
+            padding: 14px !important;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/note.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/note.js?v=202609291220" defer></script>
+    <script src="/common/js/layout.js?v=202609291220" defer></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>行处理工具 - 使用说明与 FAQ</h1>
+            <p class="subtitle">对多行文本一键去重、排序、翻转、去空行、加行号、加前后缀、大小写转换，本地处理不上传</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-list-ul"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是行处理工具？</h2>
+                <p>行处理工具是一款免费的在线多行文本整理助手。名单去重、标签排序、给列表加行号、给每行代码补引号逗号——这些以"行"为单位的零散需求，手写脚本麻烦、用编辑器又要点好几下，本工具一站式解决。
+                </p>
+                <p>所有操作可<strong>组合执行</strong>，并按固定先后顺序进行：先去空行去空格、再去重、再排序或翻转、最后加行号与前后缀，结果清晰可预期。除粘贴文本外，也可直接上传 <code>.xlsx / .csv / .txt / .tsv / .log</code> 文件载入内容。全部逻辑在浏览器本地运行，不加载任何第三方处理库。
+                </p>
+
+                <h2>支持的处理</h2>
+                <ul>
+                    <li><code>清理</code>：去除空行、去除每行首尾空格、按行去重（保留首次出现）。</li>
+                    <li><code>排序重排</code>：字母升/降序、数字升/降序、按长度升/降序、翻转行序、随机打乱。</li>
+                    <li><code>改写</code>：加行号（1. / 1 / 001 / 1)）、每行统一加前缀或后缀、全大写/全小写/首字母大写。</li>
+                    <li><code>统计</code>：实时显示处理前后的行数、词数、字符数与去重/去空移除条数。</li>
+                    <li><code>文件导入</code>：支持拖放/选择 <code>.xlsx</code>（本地解析取首个工作表）、<code>.csv / .txt / .tsv / .log</code> 直接载入文本。</li>
+                </ul>
+
+                <h2>如何快速开始？</h2>
+                <h3>第一步：粘贴文本</h3>
+                <p>把多行文本粘贴到输入框，或点击"载入示例"体验。</p>
+                <h3>第二步：组合选项</h3>
+                <p>按需勾选去重、去空行、去空格、排序方式、翻转/打乱、加行号、前后缀与大小写。</p>
+                <h3>第三步：处理并取用</h3>
+                <p>点击"处理"生成结果并查看统计，复制或下载后粘回编辑器、文档或数据源。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>典型应用场景</h2>
+                <p><strong>名单去重：</strong>重复填写的邮箱、手机号，去空行+去重一步清理干净。</p>
+                <p><strong>代码片段：</strong>给每行 JSON 字段补引号逗号，或统一加前缀成数组元素。</p>
+                <p><strong>清单编号：</strong>无序待办一键加上 1. 2. 3. 或 001 补零对齐行号。</p>
+                <p><strong>排序整理：</strong>标签按字母排序、题目按序号重排、按长度筛最长行。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">本地处理，保护隐私</span>
+                    <span class="feature-tag">多操作可组合</span>
+                    <span class="feature-tag">固定顺序、结果可预期</span>
+                    <span class="feature-tag">四种行号格式</span>
+                    <span class="feature-tag">前后缀批量</span>
+                    <span class="feature-tag">行/词/字符统计</span>
+                    <span class="feature-tag">支持上传 xlsx/csv/txt</span>
+                    <span class="feature-tag">一键复制与下载</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>处理顺序固定：去空格 → 去空行 → 去重 → 大小写 → 排序/翻转/打乱 → 加行号 → 前后缀。</li>
+                        <li>去重区分大小写；要忽略大小写请先做"全小写"转换再去重。</li>
+                        <li>数字排序取每行第一个数字，无数字的行排末尾；随机打乱每次结果不同。</li>
+                        <li>数据在浏览器本地处理，不会上传服务器，公共设备建议配合无痕模式。</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题</h2>
+                <h3>问：同时勾了很多操作，先算哪个？</h3>
+                <p><strong>答：</strong>固定顺序去空格→去空行→去重→大小写→排序/翻转/打乱→加行号→前后缀，行号总是在最终排序后编号。</p>
+                <h3>问：Apple 和 apple 会被当成重复吗？</h3>
+                <p><strong>答：</strong>不会，去重区分大小写。先做"全小写"转换再去重即可忽略大小写。</p>
+                <h3>问：数字排序取的是哪个数？</h3>
+                <p><strong>答：</strong>取每行出现的第一个数字作为排序键，没有数字的行排在末尾。</p>
+                <h3>问：字母升序是自然序吗？item2 和 item10 谁在前？</h3>
+                <p><strong>答：</strong>字母升/降序采用自然序比较，会识别字符串中的数字大小，因此 <code>item2</code> 排在 <code>item10</code> 前；比较时忽略大小写。若要严格按行内第一个数值排序，请用“数字升/降序”。</p>
+                <h3>问：同时用了行号与前缀后缀，谁在外面？</h3>
+                <p><strong>答：</strong>固定顺序下行号先于前后缀，所以前后缀会包在行号外层。例如前缀 <code>"</code>、后缀 <code>",</code> 行号 <code>1.</code>，得到 <code>"1. apple",</code>。若想行号在最外，分两次处理。</p>
+                <h3>问：001 补零行号的宽度会多宽？</h3>
+                <p><strong>答：</strong>按总行数的位数对齐且至少 3 位（不足补零）：如 8 行时统一为 3 位 <code>001</code>，120 行时为 3 位，超过 999 行则按实际位数扩展。</p>
+                <h3>问：会上传我的文本吗？</h3>
+                <p><strong>答：</strong>不会。全部处理在浏览器本地完成，可用 F12 的 Network 面板验证，关闭页面即清除。</p>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>处理示例：输入→输出</h2>
+            <h3>原始多行文本（含重复、空行、多余空格）</h3>
+            <p class="code-block">banana
+apple
+cherry
+apple
+
+date
+  Elderberry  
+fig
+banana</p>
+            <h3>勾选：去首尾空格 + 去空行 + 去重 + 字母升序 + 行号（1.）</h3>
+            <p class="code-block">1. apple
+2. banana
+3. cherry
+4. date
+5. Elderberry
+6. fig</p>
+            <p>统计条显示：结果 6 行（原文 9 行，去重/去空移除 3）。</p>
+            <h3>前后缀拼接代码片段（把一列字符串变成数组元素）</h3>
+            <p>输入两行 <code>apple</code>、<code>fig</code>，前缀填 <code>"</code>、后缀填 <code>",</code>，得到：</p>
+            <p class="code-block">"apple",
+"fig",</p>
+            <p>行号与前后缀同时开启时，因行号先于前后缀执行，前后缀会包在行号外层；需不同结果可分两次处理。</p>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>使用最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>先去空再排序：</strong>清理类操作放前面能避免空行干扰去重与排序结果，默认顺序已如此设计。</li>
+                    <li><strong>大小写配合去重：</strong>需要忽略大小写去重时，先"全小写"再去重，效果最稳。</li>
+                    <li><strong>前后缀生成代码：</strong>给一列字符串加 <code>"</code> 前缀与 <code>",</code> 后缀，快速得到可粘贴进数组/IN 子句的片段。</li>
+                    <li><strong>配合数据处理工具：</strong>清理好的一列值可继续送入"数据统计器""表格转 SQL INSERT"等工具。</li>
+                    <li><strong>本地处理：</strong>文本全程在浏览器，关闭页面即清除。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#0891B2"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="/tool/diff/" class="tool-link">文本对比工具</a>
+                <a href="/tool/text-transform/" class="tool-link">文本转换工具</a>
+                <a href="/tool/csv/" class="tool-link">CSV 工具箱</a>
+                <a href="/tool/sql-insert/" class="tool-link">表格转 SQL INSERT</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

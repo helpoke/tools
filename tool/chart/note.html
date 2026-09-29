@@ -9,7 +9,7 @@
     <meta name="author" content="Helpoke">
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=202609281808"></script>
+    <script src="/common/js/theme-init.js?v=202609291220"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow">
@@ -47,7 +47,7 @@
             "name": "规范的数据结构是什么样的？",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "标准 JSON 结构为：{ \"type\": \"bar\", \"title\": \"标题\", \"xTitle\": \"X轴\", \"yTitle\": \"Y轴\", \"labels\": [\"A\",\"B\"], \"datasets\": [ { \"name\": \"系列名\", \"color\": \"#5470c6\", \"data\": [10, 20] } ] }。其中 type 可选 bar、line、area、pie、doughnut、scatter。color 可省略，系统会自动配色。点击页面上的\"下载模板\"按钮可获取完整的示例模板文件。"
+                "text": "标准 JSON 结构为：{ \"type\": \"bar\", \"title\": \"标题\", \"xTitle\": \"X轴\", \"yTitle\": \"Y轴\", \"labels\": [\"A\",\"B\"], \"datasets\": [ { \"name\": \"系列名\", \"color\": \"#5470c6\", \"data\": [10, 20] } ] }。其中 type 支持 bar、barh（水平条形）、line、area、stack（堆叠柱）、stackarea（堆叠面积）、pie、doughnut、radar、polar（玫瑰）、scatter 共 11 种，也可载入后用类型按钮切换。color 可省略，系统会自动配色。点击页面上的\"下载模板\"按钮可获取完整的示例模板文件。"
             }
         },
         {
@@ -254,14 +254,14 @@
         }
     </style>
 
-    <link rel="stylesheet" href="style.css?v=202609281808">
-    <link rel="stylesheet" href="/common/css/style.css?v=202609281808">
-    <link rel="stylesheet" href="/common/css/note.css?v=202609281808">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609281808">
-    <script src="/common/js/ads.js?v=202609281808" async></script>
-    <script src="/common/js/theme.js?v=202609281808" defer></script>
-    <script src="/common/js/note.js?v=202609281808" defer></script>
-    <script src="/common/js/layout.js?v=202609281808" defer></script>
+    <link rel="stylesheet" href="style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/style.css?v=202609291220">
+    <link rel="stylesheet" href="/common/css/note.css?v=202609291220">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202609291220">
+    <script src="/common/js/ads.js?v=202609291220" async></script>
+    <script src="/common/js/theme.js?v=202609291220" defer></script>
+    <script src="/common/js/note.js?v=202609291220" defer></script>
+    <script src="/common/js/layout.js?v=202609291220" defer></script>
 </head>
 
 <body>
@@ -297,8 +297,7 @@
                     ]
                     }</p>
                 <ul>
-                    <li><code>type</code>：图表类型，可选
-                        <code>bar</code>、<code>line</code>、<code>area</code>、<code>pie</code>、<code>doughnut</code>、<code>scatter</code>。
+                    <li><code>type</code>：图表类型，支持 <code>bar</code>（柱状）、<code>barh</code>（水平条形）、<code>line</code>、<code>area</code>、<code>stack</code>（堆叠柱）、<code>stackarea</code>（堆叠面积）、<code>pie</code>、<code>doughnut</code>（环形）、<code>radar</code>（雷达）、<code>polar</code>（玫瑰）、<code>scatter</code>（散点）共 11 种；也可载入后用上方类型按钮随时切换，不必改数据。
                     </li>
                     <li><code>title</code> / <code>xTitle</code> / <code>yTitle</code>：图表与坐标轴标题，均可省略。</li>
                     <li><code>labels</code>：分类标签数组；散点图中它会被当作数值 X 坐标。</li>
@@ -355,7 +354,20 @@
                 <p><strong>答：</strong>导出按 2 倍分辨率渲染，Retina 屏清晰锐利。预览与导出均跟随浏览器明暗主题，所见即所得。</p>
                 <h3>问：可以画多系列对比吗？</h3>
                 <p><strong>答：</strong>可以。在 datasets 中放多个系列即可，柱状图会分组并排、折线/面积图会叠加显示，并自动生成图例。</p>
+                <h3>问：散点图的数据怎么写？</h3>
+                <p><strong>答：</strong>散点图中 <code>labels</code> 被当作各点的数值 X 坐标，<code>data</code> 为对应的 Y 坐标，两数组等长逐个点配对；因此 labels 应填数字而非文字标签。</p>
             </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>CSV 写法示例</h2>
+            <p>不想手写 JSON 时，可直接粘贴简单表格：第一列为分类标签，其余列为数据系列，首行为系列名。</p>
+            <p class="code-block">季度,线上渠道,线下门店
+Q1,320,220
+Q2,410,260
+Q3,380,300
+Q4,520,340</p>
+            <p>系统会把首行作为图例系列名、首列作为横轴标签，自动识别为柱状图；载入后仍可点类型按钮切换为折线、面积、堆叠等其他展示方式，并一键换配色、导出 PNG。若需自定义标题、坐标轴名或逐系列指定颜色，请改用上方的 JSON 模板结构。</p>
         </div>
 
         <div class="info-section" style="grid-column: 1 / -1;">
