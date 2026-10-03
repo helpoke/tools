@@ -1,0 +1,222 @@
+/* ================= 数据校验器样式 ================= */
+
+/* 选项区 */
+.val-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    align-items: center;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+}
+
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+}
+
+.option-group>label {
+    font-weight: 600;
+    color: var(--text-color, #1f2937);
+    white-space: nowrap;
+}
+
+.option-group select {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+    max-width: 220px;
+}
+
+/* 宽松选项：复选框组 */
+.option-group.checks {
+    gap: 6px 18px;
+}
+
+.option-group.checks label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--text-color, #374151);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.option-group.checks input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--primary-color, #3b82f6);
+    cursor: pointer;
+}
+
+/* 编辑区两栏 */
+.editor-container {
+    display: flex;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-section,
+.preview-section {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    flex: 1;
+    min-width: 90px;
+    margin: 0;
+    font-size: 17px;
+    color: var(--text-color, #1f2937);
+}
+
+.section-header button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.section-header button:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#upload-btn {
+    border-color: var(--primary-color, #3b82f6);
+    color: var(--primary-color, #3b82f6);
+}
+
+#upload-btn:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#validate-btn {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+    font-weight: 600;
+}
+
+#validate-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* 文本域 */
+#in-text,
+#out-text {
+    flex: 1;
+    min-height: 620px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: var(--bg-color, #C7EDCC);
+    color: var(--text-color, #1f2937);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    tab-size: 2;
+    white-space: pre;
+    overflow-wrap: normal;
+}
+
+#out-text {
+    cursor: default;
+}
+
+/* 统计条 */
+.stats-bar {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-color, #6b7280);
+    word-break: break-all;
+}
+
+/* 暗色模式 */
+html.dark-mode .val-options,
+html.dark-mode .input-section,
+html.dark-mode .preview-section {
+    background: #242424;
+    border-color: #3a3a3a;
+}
+
+html.dark-mode .option-group select,
+html.dark-mode #in-text,
+html.dark-mode #out-text,
+html.dark-mode .section-header button {
+    background: #1e1e1e;
+    border-color: #4a4a4a;
+    color: #e5e7eb;
+}
+
+html.dark-mode .option-group>label,
+html.dark-mode .option-group.checks label,
+html.dark-mode .section-header h2 {
+    color: #e5e7eb;
+}
+
+html.dark-mode #validate-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .section-header button:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .stats-bar {
+    color: #a1a1aa;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .editor-container {
+        flex-direction: column;
+    }
+
+    #in-text,
+    #out-text {
+        min-height: 300px;
+    }
+
+    .option-group select {
+        max-width: 100%;
+    }
+}

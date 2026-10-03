@@ -180,3 +180,26 @@ html.dark-mode .info-content code {
 html.dark-mode .info-details>header::after {
     border-color: var(--text-secondary);
 }
+
+/* 通用轻量提示（由 common/js/utils.js 的 toast() 创建，居底部单条气泡） */
+/* 与工具页自有的 .toast 样式、showToast 的右下角彩色弹框并存，类名不同互不影响 */
+.utils-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(17, 24, 39, 0.92);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 3000;
+}
+
+.utils-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

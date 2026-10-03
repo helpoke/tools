@@ -1,0 +1,485 @@
+/* ================= CSV 分组聚合与透视表样式 ================= */
+
+/* 选项条 */
+.cg-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    align-items: center;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+}
+
+.cg-options.second {
+    margin-bottom: 18px;
+}
+
+.option-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+}
+
+.option-group>label {
+    font-weight: 600;
+    color: var(--text-color, #1f2937);
+    white-space: nowrap;
+}
+
+.option-group select,
+.option-group input[type="number"] {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+}
+
+.option-group input[type="number"] {
+    width: 84px;
+}
+
+.option-group span {
+    color: var(--text-color, #374151);
+    font-size: 14px;
+}
+
+.option-group.checks label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.option-group.checks input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--primary-color, #3b82f6);
+    cursor: pointer;
+}
+
+/* 功能面板：分组列 / 聚合列 / 透视设置 */
+.cg-panel {
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 12px 18px 14px;
+    margin-bottom: 12px;
+}
+
+.cg-panel.hidden {
+    display: none;
+}
+
+.panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color, #374151);
+    margin-bottom: 10px;
+}
+
+/* 列名胶囊 */
+.field-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 30px;
+}
+
+.field-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 18px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+}
+
+.field-chip:hover {
+    border-color: var(--primary-color, #3b82f6);
+    color: var(--primary-color, #3b82f6);
+}
+
+.field-chip.active {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+.field-chip .ord {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.field-empty {
+    font-size: 13px;
+    color: var(--text-color, #9ca3af);
+}
+
+/* 聚合配置 */
+.agg-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.agg-form select {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+    max-width: 220px;
+}
+
+.agg-form button,
+.pivot-form button {
+    padding: 6px 14px;
+    border: 1px solid var(--primary-color, #3b82f6);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--primary-color, #3b82f6);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.agg-form button:hover {
+    background: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+.agg-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    min-height: 8px;
+}
+
+.agg-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 6px 4px 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 16px;
+    background: var(--bg-color, #f3f4f6);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+}
+
+.agg-tag b {
+    font-weight: 600;
+}
+
+.agg-tag .del {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-color, #9ca3af);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.agg-tag .del:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+.agg-hint {
+    font-size: 12.5px;
+    color: var(--text-color, #9ca3af);
+}
+
+/* 透视设置 */
+.pivot-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    align-items: center;
+}
+
+.pivot-form label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    color: var(--text-color, #374151);
+}
+
+.pivot-form select {
+    padding: 6px 8px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #fff);
+    color: var(--text-color, #1f2937);
+    font-size: 14px;
+    max-width: 190px;
+}
+
+.pivot-form label.chk {
+    cursor: pointer;
+}
+
+.pivot-form label.chk input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--primary-color, #3b82f6);
+}
+
+/* 编辑区两栏 */
+.editor-container {
+    display: flex;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.input-section,
+.preview-section {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    flex: 1;
+    min-width: 90px;
+    margin: 0;
+    font-size: 17px;
+    color: var(--text-color, #1f2937);
+}
+
+.section-header button {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 6px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #374151);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.section-header button:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#upload-btn {
+    border-color: var(--primary-color, #3b82f6);
+    color: var(--primary-color, #3b82f6);
+}
+
+#upload-btn:hover {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+}
+
+#run-btn {
+    background: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color, #3b82f6);
+    color: #fff;
+    font-weight: 600;
+}
+
+#run-btn:hover {
+    filter: brightness(1.1);
+}
+
+#in-text,
+#out-text {
+    flex: 1;
+    min-height: 440px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--border-color, #d1d5db);
+    border-radius: 8px;
+    background: var(--bg-color, #C7EDCC);
+    color: var(--text-color, #1f2937);
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    tab-size: 2;
+    white-space: pre;
+    overflow-wrap: normal;
+}
+
+#out-text {
+    cursor: default;
+}
+
+/* 统计条 */
+.stats-bar {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-color, #6b7280);
+    word-break: break-all;
+}
+
+/* 数据提示 */
+.notes-header {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color, #374151);
+}
+
+.notes-box {
+    max-height: 112px;
+    min-height: 34px;
+    overflow-y: auto;
+    margin-top: 6px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    background: var(--bg-color, #f9fafb);
+    color: var(--text-color, #4b5563);
+    font-size: 12.5px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.notes-box.none {
+    color: #16a34a;
+}
+
+/* 暗色模式 */
+html.dark-mode .cg-options,
+html.dark-mode .cg-panel,
+html.dark-mode .input-section,
+html.dark-mode .preview-section {
+    background: #242424;
+    border-color: #3a3a3a;
+}
+
+html.dark-mode .option-group select,
+html.dark-mode .option-group input,
+html.dark-mode .agg-form select,
+html.dark-mode .pivot-form select,
+html.dark-mode #in-text,
+html.dark-mode #out-text,
+html.dark-mode .notes-box,
+html.dark-mode .section-header button,
+html.dark-mode .field-chip,
+html.dark-mode .agg-tag {
+    background: #1e1e1e;
+    border-color: #4a4a4a;
+    color: #e5e7eb;
+}
+
+html.dark-mode .option-group>label,
+html.dark-mode .option-group span,
+html.dark-mode .option-group.checks label,
+html.dark-mode .panel-title,
+html.dark-mode .notes-header,
+html.dark-mode .section-header h2,
+html.dark-mode .pivot-form label {
+    color: #e5e7eb;
+}
+
+html.dark-mode .field-chip:hover {
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+
+html.dark-mode .field-chip.active,
+html.dark-mode .field-chip.active:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .agg-form button,
+html.dark-mode .pivot-form button {
+    background: #1e1e1e;
+    border-color: #2563eb;
+    color: #60a5fa;
+}
+
+html.dark-mode .agg-form button:hover,
+html.dark-mode .pivot-form button:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode #run-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .section-header button:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+html.dark-mode .stats-bar,
+html.dark-mode .field-empty,
+html.dark-mode .agg-hint {
+    color: #a1a1aa;
+}
+
+html.dark-mode .notes-box.none {
+    color: #4ade80;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .editor-container {
+        flex-direction: column;
+    }
+
+    #in-text,
+    #out-text {
+        min-height: 300px;
+    }
+
+    .option-group select,
+    .agg-form select,
+    .pivot-form select {
+        max-width: 100%;
+    }
+}

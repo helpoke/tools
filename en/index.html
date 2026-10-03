@@ -48,20 +48,20 @@
     <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
     <link rel="apple-touch-icon" href="/common/img/helpoke.webp">
     <!-- 初始化主题 -->
-    <script src="/common/js/theme-init.js?v=2c38121178"></script>
+    <script src="/common/js/theme-init.js?v=202610032258"></script>
     <!-- i18n 初始化 -->
-    <script src="/common/js/i18n/i18n-init.js?v=252cd2dad8"></script>
+    <script src="/common/js/i18n/i18n-init.js?v=202610032258"></script>
 
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/common/css/utils.css?v=6b62793198">
-    <link rel="stylesheet" href="/common/css/i18n.css?v=11aac644e3">
-    <link rel="stylesheet" href="/common/css/style.css?v=eba2470d7b">
-    <link rel="stylesheet" href="/common/css/index.css?v=c0d5421b07">
-    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=ce6f72d6b4">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/index.css?v=202610032258">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202610032258">
 
     <!-- Google AdSense -->
-    <script src="/common/js/ads.js?v=dfd522d58c" async></script>
+    <script src="/common/js/ads.js?v=202610032258" async></script>
 
     <!-- JSON-LD Structured Data (English) -->
     <script type="application/ld+json">
@@ -110,9 +110,9 @@
 				{
 					"@type": "WebApplication",
 					"name": "Data Processing Tools",
-					"description": "JSON, YAML, XML formatting, chart visualization, CSV toolbox, mock data, statistics, anonymizer, SQL import and line processing tools",
+					"description": "JSON, YAML, XML formatting, chart visualization, CSV toolbox, CSV encoding converter, mock data, statistics, anonymizer, SQL import, line processing, data validation, flat-to-tree, CSV pivot and CSV split/merge tools",
 					"inLanguage": "en",
-					"featureList": ["JSON Formatting", "YAML Formatting", "XML Formatting", "Data Chart Visualization", "CSV Toolbox", "Mock Data Generation", "Data Statistics", "Data Anonymizer", "Table to SQL INSERT", "Line Utils"],
+					"featureList": ["JSON Formatting", "YAML Formatting", "XML Formatting", "Data Chart Visualization", "CSV Toolbox", "CSV Encoding Conversion", "Mock Data Generation", "Data Statistics", "Data Anonymizer", "Table to SQL INSERT", "Line Utils", "Data Validation", "Flat List To Tree", "CSV Group By & Pivot", "CSV Split & Merge"],
 					"url": "https://helpoke.com/json/"
 				},
 				{
@@ -227,7 +227,7 @@
                     <div class="stat-card">
                         <div class="stat-icon purple">💻</div>
                         <div class="stat-info">
-                            <div class="stat-value">13</div>
+                            <div class="stat-value">18</div>
                             <div class="stat-label" data-i18n="home.stats.data" data-target="cat-data">Data Processing
                             </div>
                         </div>
@@ -561,6 +561,11 @@
                                 JSON)
                                 <span class="badge" data-i18n="tool.badges.csv">Table</span>
                             </a>
+                            <a href="/tool/csv-encoding/" class="tool-link">
+                                <span class="icon">🔤</span><b data-i18n="nav.tools.csvEncoding">CSV Encoding
+                                    Converter</b>(GBK/UTF-8 mojibake)
+                                <span class="badge" data-i18n="tool.badges.csvEncoding">Encoding</span>
+                            </a>
                             <a href="/dev/yaml/" class="tool-link">
                                 <span class="icon">⚙️</span><b data-i18n="nav.tools.yaml">YAML
                                     Formatter</b>(Validate)
@@ -585,6 +590,26 @@
                                 <span class="icon">🕶️</span><b data-i18n="nav.tools.anonymize">Data Anonymizer</b>(mask
                                 PII)
                                 <span class="badge" data-i18n="tool.badges.anonymize">Privacy</span>
+                            </a>
+                            <a href="/tool/data-validate/" class="tool-link">
+                                <span class="icon">✅</span><b data-i18n="nav.tools.dataValidate">Data
+                                    Validator</b>(ID card/bank card checksum)
+                                <span class="badge" data-i18n="tool.badges.dataValidate">Validate</span>
+                            </a>
+                            <a href="/tool/flat-tree/" class="tool-link">
+                                <span class="icon">🌳</span><b data-i18n="nav.tools.flatTree">Flat List To
+                                    Tree</b>(id/pid to children)
+                                <span class="badge" data-i18n="tool.badges.flatTree">Tree</span>
+                            </a>
+                            <a href="/tool/csv-group/" class="tool-link">
+                                <span class="icon">📊</span><b data-i18n="nav.tools.csvGroup">CSV Group By &
+                                    Pivot</b>(sum/count/cross tab)
+                                <span class="badge" data-i18n="tool.badges.csvGroup">Pivot</span>
+                            </a>
+                            <a href="/tool/csv-split/" class="tool-link">
+                                <span class="icon">✂️</span><b data-i18n="nav.tools.csvSplit">CSV Split &
+                                    Merge</b>(by rows/size/column value)
+                                <span class="badge" data-i18n="tool.badges.csvSplit">Split</span>
                             </a>
                             <a href="/tool/lines/" class="tool-link">
                                 <span class="icon">📃</span><b data-i18n="nav.tools.lines">Line
@@ -611,6 +636,7 @@
                                     Formatter</b>(Split/Deduplicate)
                                 <span class="badge" data-i18n="tool.badges.textFormat">Format</span>
                             </a>
+
                         </div>
                     </div>
 
@@ -842,9 +868,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/common/js/tools-data.js?v=80d29b4cdc" defer></script>
-    <script src="/common/js/theme.js?v=7f2ee888b8" defer></script>
-    <script src="/common/js/index.js?v=eb9258fbef" defer></script>
+    <script src="/common/js/tools-data.js?v=202610032258" defer></script>
+    <script src="/common/js/theme.js?v=202610032258" defer></script>
+    <script src="/common/js/index.js?v=202610032258" defer></script>
 </body>
 
 </html>

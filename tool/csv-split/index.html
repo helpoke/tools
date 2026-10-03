@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="免费的 CSV 拆分与合并在线工具：按固定行数、按每片文件大小、或按某一列的取值把大 CSV / TSV 切成多个小文件，分片可逐个下载或打包成 ZIP；也能把多个 CSV 文件合并成一份，自动只保留一份表头、按列名对齐或按位置直接拼接，可选去除完全重复行。全程浏览器本地处理，不上传任何数据。">
+    <meta name="keywords" content="CSV拆分,CSV分割,大文件拆分,按行拆分CSV,按大小拆分,按列值拆分,分组导出文件,CSV合并,多文件合并,表头对齐,去除重复行,ZIP打包下载">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202610032258"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202610032258"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    img-src 'self' data: blob: https:; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>CSV 拆分与合并 - 按行/按大小/按列值切分大文件 | Helpoke 助点站</title>
+    <meta property="og:title" content="CSV 拆分与合并 - 按行/按大小/按列值切分大文件 | Helpoke 助点站">
+    <meta property="og:description"
+        content="把大 CSV 按行数、按每片体积或按某一列的取值切成多个小文件，逐个下载或打包 ZIP；也能合并多份 CSV，表头去重、按列名对齐、可选去除重复行，本地处理不上传。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/csv-split/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="CSV 拆分与合并，浏览器里切文件不上传">
+    <meta name="twitter:description" content="按行数、按体积、按列取值三种拆法，分片保留原始写法；多份 CSV 合并时自动对齐列名、只留一份表头。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/csv-split/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/csv-split/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/csv-split/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202610032258">
+    <link rel="stylesheet" href="style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202610032258">
+
+    <script src="/common/js/ads.js?v=202610032258" async></script>
+    <script src="/common/lib/jszip.min.js?v=202610032258" defer></script>
+    <script src="/common/js/i18n/i18n.js?v=202610032258" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CSV 拆分与合并",
+        "description": "免费在线 CSV / TSV 拆分与合并工具：按固定行数、按每片文件体积、或按某一列的取值把大文件切成多个分片，分片保留原始写法并可打包为 ZIP；反向支持把多份 CSV 合并成一份，自动只保留一份表头、按列名对齐缺失列或按位置直接拼接，可选去除完全重复的数据行。Split a large CSV by row count, by approximate file size, or by the values of one column, and merge multiple CSV files with header dedupe and column-name alignment, entirely in your browser.",
+        "url": "https://helpoke.com/tool/csv-split/",
+        "applicationCategory": "https://schema.org/DataAnalyticsApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "按固定行数拆分：每片 N 行，可控制是否给每片重复写入表头",
+            "按体积拆分：按每片大约多少 KB 切分，逐条累加 UTF-8 字节数直到逼近上限",
+            "按列值拆分：把某一列取值相同的行放进同一文件，可设置每片装几个不同取值",
+            "分片保留原始文本：不做重新引号化，切出来的内容与源文件的字节写法一致",
+            "分片可逐个下载，也可打包成一个 ZIP 一次性下载",
+            "多文件合并：上传多份 CSV，自动只保留第一份表头，其余文件的表头行识别后丢弃",
+            "列对齐两种方式：按列名对齐（缺列补空并提示）或按位置直接拼接",
+            "可选去除完全重复的数据行，合并结果可复制、下载或打包",
+            "自动识别分隔符（逗号、分号、制表符、竖线），正确处理引号包裹与字段内换行",
+            "全程本地处理，数据不上传服务器，无需注册、无需安装"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.csvSplit.title">CSV 拆分与合并</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.csvSplit.desc">按行数、按体积或按某一列的取值把大 CSV 切成多个小文件，也能把多份 CSV 合并成一份，本地处理不上传</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="cs-options">
+                <div class="option-group">
+                    <label for="mode-select" data-i18n="tool.csvSplit.options.mode">操作：</label>
+                    <select id="mode-select">
+                        <option value="split" data-i18n="tool.csvSplit.modes.split">拆分成多个文件</option>
+                        <option value="merge" data-i18n="tool.csvSplit.modes.merge">合并多个文件</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label for="delim-select" data-i18n="tool.csvSplit.options.delim">分隔符：</label>
+                    <select id="delim-select">
+                        <option value="auto" data-i18n="tool.csvSplit.delims.auto">自动识别</option>
+                        <option value="," data-i18n="tool.csvSplit.delims.comma">逗号 ,</option>
+                        <option value=";" data-i18n="tool.csvSplit.delims.semicolon">分号 ;</option>
+                        <option value="\t" data-i18n="tool.csvSplit.delims.tab">制表符 Tab</option>
+                        <option value="|" data-i18n="tool.csvSplit.delims.pipe">竖线 |</option>
+                    </select>
+                </div>
+                <div class="option-group checks">
+                    <label><input type="checkbox" id="opt-header" checked> <span
+                            data-i18n="tool.csvSplit.options.header">首行为列名</span></label>
+                    <label><input type="checkbox" id="opt-repeat-header" checked> <span
+                            data-i18n="tool.csvSplit.options.repeatHeader">每个分片都写入表头</span></label>
+                    <label><input type="checkbox" id="opt-keep-blank"> <span
+                            data-i18n="tool.csvSplit.options.keepBlank">保留空行</span></label>
+                </div>
+            </div>
+
+            <div class="cs-options second">
+                <div class="option-group split-only">
+                    <label for="basis-select" data-i18n="tool.csvSplit.options.basis">拆分依据：</label>
+                    <select id="basis-select">
+                        <option value="rows" data-i18n="tool.csvSplit.basis.rows">按行数</option>
+                        <option value="size" data-i18n="tool.csvSplit.basis.size">按每片体积</option>
+                        <option value="column" data-i18n="tool.csvSplit.basis.column">按某一列的取值</option>
+                    </select>
+                </div>
+                <div class="option-group split-only" id="grp-rows">
+                    <label for="chunk-rows" data-i18n="tool.csvSplit.options.chunkRows">每片行数：</label>
+                    <input type="number" id="chunk-rows" min="1" step="1" value="1000">
+                </div>
+                <div class="option-group split-only hidden" id="grp-size">
+                    <label for="chunk-kb" data-i18n="tool.csvSplit.options.chunkKb">每片不超过</label>
+                    <input type="number" id="chunk-kb" min="1" step="1" value="500">
+                    <span>KB</span>
+                </div>
+                <div class="option-group split-only hidden" id="grp-col">
+                    <label for="split-col" data-i18n="tool.csvSplit.options.splitCol">取值列：</label>
+                    <select id="split-col"></select>
+                    <label for="values-per-file" data-i18n="tool.csvSplit.options.valuesPerFile">每片取值数：</label>
+                    <input type="number" id="values-per-file" min="1" step="1" value="1">
+                </div>
+                <div class="option-group split-only hidden" id="grp-colorder">
+                    <label for="value-sort" data-i18n="tool.csvSplit.options.valueSort">取值顺序：</label>
+                    <select id="value-sort">
+                        <option value="origin" data-i18n="tool.csvSplit.vsorts.origin">按出现顺序</option>
+                        <option value="asc" data-i18n="tool.csvSplit.vsorts.asc">按取值升序</option>
+                    </select>
+                </div>
+                <div class="option-group merge-only hidden">
+                    <label for="align-select" data-i18n="tool.csvSplit.options.align">列对齐：</label>
+                    <select id="align-select">
+                        <option value="name" data-i18n="tool.csvSplit.aligns.name">按列名（缺列补空）</option>
+                        <option value="pos" data-i18n="tool.csvSplit.aligns.pos">按位置直接拼接</option>
+                    </select>
+                </div>
+                <div class="option-group merge-only checks hidden">
+                    <label><input type="checkbox" id="opt-dedup"> <span
+                            data-i18n="tool.csvSplit.options.dedup">去除完全重复的数据行</span></label>
+                    <label><input type="checkbox" id="opt-skip-header" checked> <span
+                            data-i18n="tool.csvSplit.options.skipHeader">丢弃后续文件的表头行</span></label>
+                </div>
+                <div class="option-group">
+                    <label for="prefix-input" data-i18n="tool.csvSplit.options.prefix">文件名前缀：</label>
+                    <input type="text" id="prefix-input" maxlength="40" value="part">
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.csvSplit.input.title">原始数据</h2>
+                        <button id="example-btn" data-i18n="tool.csvSplit.example">载入示例</button>
+                        <button id="upload-btn" data-i18n="tool.csvSplit.upload.label">上传文件</button>
+                        <input type="file" id="file-input" accept=".csv,.txt,.tsv,.log" multiple hidden>
+                        <button id="run-btn" data-i18n="tool.csvSplit.buttons.run">执行</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="in-text" spellcheck="false" data-i18n-placeholder="tool.csvSplit.input.placeholder"
+                        placeholder="粘贴 CSV / TSV 数据；合并模式下这里的内容会作为第一份数据"></textarea>
+                    <div id="in-stats" class="stats-bar"></div>
+                    <div class="sources-header" data-i18n="tool.csvSplit.sources.title">已读入的文件</div>
+                    <div id="sources" class="sources-box"></div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.csvSplit.output.title">结果</h2>
+                        <button id="zip-btn" data-i18n="tool.csvSplit.buttons.zip">打包 ZIP</button>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="download-btn" data-i18n="tool.csvSplit.buttons.download">下载结果</button>
+                    </div>
+                    <textarea id="out-text" spellcheck="false" readonly
+                        data-i18n-placeholder="tool.csvSplit.output.hint"
+                        placeholder="拆分模式下这里是当前选中分片的内容；合并模式下这里是合并结果"></textarea>
+                    <div id="out-stats" class="stats-bar"></div>
+                    <div class="parts-header" data-i18n="tool.csvSplit.parts.title">分片列表</div>
+                    <div id="parts" class="parts-box"></div>
+                    <div class="notes-header" data-i18n="tool.csvSplit.notesTitle">处理提示</div>
+                    <div id="cs-notes" class="notes-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.csvSplit.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.csvSplit.intro.problemTitle">大 CSV 卡住的往往是"传输"和"打不开"</h4>
+                    <ul>
+                        <li data-i18n="tool.csvSplit.intro.problem1">
+                            导出的明细动辄几十上百兆：邮件附件超限、接口限制单次上传体积、Excel
+                            双击打开转半天圈、同事的电脑配置一般直接未响应。这些场景需要的不是压缩，而是把一份文件按可预期的边界切成几份能各自打开的小文件。</li>
+                        <li data-i18n="tool.csvSplit.intro.problem2">
+                            另一种切法是按业务维度：一个 <code>region</code>
+                            列把全国数据混在一起，发给各分公司时希望自动拆成"华东.csv、华南.csv"，而且每组里都必须带表头。手工筛选着复制粘贴，几百个取值根本做不完。</li>
+                        <li data-i18n="tool.csvSplit.intro.problem3">
+                            反过来的合并也一样麻烦：多个人的分表列顺序不完全一致、表头都被重复粘进
+                            N 遍、多余的空列名写法不同，直接首尾相接的结果就是错列。而用脚本处理又得先装环境。</li>
+                    </ul>
+                    <h4 data-i18n="tool.csvSplit.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.csvSplit.intro.core1">三种拆分依据：按固定行数、按每片体积上限（逐条累加 UTF-8
+                            字节数逼近阈值）、按某一列的取值分组，取值可只出现在一个文件里，也可每片装多个取值。</li>
+                        <li data-i18n="tool.csvSplit.intro.core2">分片保留原始写法：拆分是在源文本的记录边界上定位切口，不做重新引号化，所以
+                            <code>"1,200"</code>、字段内的换行、行尾风格都和原文件一致。
+                        </li>
+                        <li data-i18n="tool.csvSplit.intro.core3">合并多份
+                            CSV：自动只保留第一份表头（可关闭），列对齐支持"按列名对齐补空"和"按位置直接拼接"两种口径，可选去除完全重复的数据行，结果直接复制或下载。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.csvSplit.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <ol>
+                        <li data-i18n="tool.csvSplit.instructions.step1">
+                            拆分：粘贴数据或上传文件（单个文件），选好"拆分依据"与参数，点"执行"，分片列在右下，可逐个下载或点"打包
+                            ZIP"一次拿走。</li>
+                        <li data-i18n="tool.csvSplit.instructions.step2">合并：把"操作"切成"合并多个文件"，上传多份
+                            CSV（文本框里的内容会作为第一份），选择列对齐方式与是否去重，点"执行"。</li>
+                        <li data-i18n="tool.csvSplit.instructions.step3">
+                            需要每片都带表头就保留"每个分片都写入表头"（默认开启）；只要第一片有表头就取消勾选。合并时若各份文件本身没有表头，请取消"首行为列名"。</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.csvSplit.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.csvSplit.notes.note1">
+                            按体积拆分是<strong>逼近</strong>而非精确：以整条记录为单位累加，每片通常略低于上限；单条记录本身超过上限时它会独占一片，该片必然超限并在提示区计数。</li>
+                        <li data-i18n="tool.csvSplit.notes.note2">
+                            字段内含有换行的记录算<strong>一条</strong>记录，不会被切开；这类跨行记录在按行数拆分时也不会计数为多行。</li>
+                        <li data-i18n="tool.csvSplit.notes.note3">按列值拆分时，取值比较前只去掉首尾空格、区分大小写、不做全半角归一；空取值统一归入一个"（空值）"文件。
+                        </li>
+                        <li data-i18n="tool.csvSplit.notes.note4">
+                            合并的"按列名对齐"以第一份文件的列顺序为基准，后续文件多出来的列会被丢弃并在提示区列出；要保留全部列请选"按位置直接拼接"或先统一表头。</li>
+                        <li data-i18n="tool.csvSplit.notes.note5">单次处理建议不超过 200000 行、单个文件不超过 20MB，分片数上限
+                            200 片；全部在主线程同步完成，大文件会有几秒停顿。不联网、不上传，关闭页面即清除。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.csvSplit.scenarios.title">典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.csvSplit.scenarios.s1">邮件 / 表单有附件大小限制：按每片 5MB 拆分，压缩包发出去，接收方合并回去即可。</li>
+                        <li data-i18n="tool.csvSplit.scenarios.s2">分发给各区域负责人：按"地区"列拆分，每个分公司拿到自己那份带表头的文件。</li>
+                        <li data-i18n="tool.csvSplit.scenarios.s3">批量导入接口限流：按 1000
+                            行一片拆好，脚本按文件名顺序逐片调用接口，失败只需重传那一片。</li>
+                        <li data-i18n="tool.csvSplit.scenarios.s4">汇总各组回传的分表：列顺序略有出入时选"按列名对齐"，一次合成总表。</li>
+                        <li data-i18n="tool.csvSplit.scenarios.s5">Excel 打不开的大文件：先拆成若干小片再逐片查看，定位问题时不必等整表加载。</li>
+                        <li data-i18n="tool.csvSplit.scenarios.s6">清理重复上报：合并时勾"去除完全重复的数据行"，把同一批数据被传了两次的情况直接压掉。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202610032258" defer></script>
+    <script src="/common/js/theme.js?v=202610032258" defer></script>
+    <script src="/common/js/tools-data.js?v=202610032258" defer></script>
+    <script src="/common/js/nav.js?v=202610032258" defer></script>
+    <script src="script.js?v=202610032258" defer></script>
+
+</body>
+
+</html>

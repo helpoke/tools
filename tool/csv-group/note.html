@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CSV 分组聚合与透视表使用说明与常见问题：GROUP BY 多列分组怎么做、透视表的行合计为什么和格子加起来不一样、1,234.50 / ¥99 / 12% 这类值怎么参与求和平均、去重计数如何处理空值、空格子与 0 的区别、分隔符自动识别会不会认错、换了数据以后之前选的列去了哪里，以及九种聚合算法的规则表。">
+    <meta name="keywords" content="CSV分组聚合,GROUP BY用法,交叉透视表,行合计计算,去重计数,数值容错,千分位逗号,分隔符识别,CSV转Markdown表格,数据透视常见问题">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <script src="/common/js/theme-init.js?v=202610032258"></script>
+    <title>CSV 分组聚合与透视表使用说明与 FAQ | Helpoke 助点站</title>
+    <meta property="og:title" content="CSV 分组聚合与透视表使用说明与 FAQ | Helpoke 助点站">
+    <meta property="og:description" content="多列 GROUP BY、交叉透视表、九种聚合算法的口径说明，以及求和平均值为何与 Excel 不一致、合计行为什么不等于格子相加等常见疑问。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/csv-group/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://helpoke.com/tool/csv-group/note.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "分组聚合和交叉透视表有什么区别？该用哪个？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "分组聚合是 GROUP BY：把一列或多列的值当键，相同的行归成一组，每组输出一行，纵向可叠多个聚合列（求和、计数、平均……）。透视表是把某个字段的每个不同取值横向摊开成列，行方向再取另一个字段的取值，交叉点放值字段的聚合结果。判断标准很简单：结果给人竖着看还是横着看。要一张\"地区 / 金额合计 / 订单数\"的清单就用分组聚合；要\"行是地区、列是渠道、格里是销售额\"这种能直接贴进周报的矩阵，就用透视表。透视表只能有 1 个行字段和 1 个列字段，需要多层级行分组时请回到分组聚合。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "金额写成 1,234.50、¥99、12%，求和与平均为什么会和 Excel 不一样？",
+                "@id": "numeric-coercion",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "工具在计算前会做一次清洗：去掉货币符号 ¥￥$€£ 与空格，去掉结尾的百分号（只去符号，不除以 100，所以 12% 按 12 计入），并且只有形如 1,234.50 的标准千分位写法才会剔除逗号。因此 1,234.50 记作 1234.5、¥99 记作 99、12% 记作 12。与 Excel 的差别通常来自两点：一是 Excel 把带 ¥ 或百分号的单元格存成文本后整列求和得 0，这里会逐个单元格识别；二是 - — N/A null 无 空 这类占位符以及无法解析的文本，工具按\"缺失\"处理并计入跳过数，不会当成 0 参与运算，所以平均值分母是有效数字的个数而不是行数。想让百分比按小数参与计算，请先把列除以 100。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "透视表的行合计为什么不等于该行几个格子相加？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "因为合计不是把格子里的显示值再算一遍，而是用同一个算法在该行涉及的全部明细行上重新复算一次。对求和、计数两种算法，两者结果恰好一致；但对平均值、去重计数、最大值、最小值就会不同。最典型的是去重计数：某行三个格子分别是 3、2、2（各列内部去重后的个数），行合计并不是 7，而是这一行全部明细在该字段上的去重个数，可能有跨列重复，于是合计小于格子之和。平均值同理，是按全部明细求平均，不是几个格子平均数的平均。这样设计是为了让合计永远等于\"直接对这一行做一次聚合\"的结果，避免出现口径矛盾。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "透视结果里的空空格子和 0 有什么区别？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "空格子表示这个行列组合在原始数据里一行都没有，工具不会为它补 0；0 表示确实有明细行，只是聚合结果算出来是 0（例如求和的各项正负相抵，或值字段本身是 0）。这一点在核对时很关键：如果按 0 去补全缺失组合，会把\"没有业务发生\"错算成\"业务量是 0\"，平均值与最大最小也会跟着变形。需要完整矩阵时，请自行按维度笛卡尔积补 0，或改用分组聚合后在下游透视。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "去重计数和计数有什么区别？空值算不算一个？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "计数统计的是行数，不看值，因此分组里每一行都 +1，全空的分组计数依然等于行数。去重统计的是该列在本组内出现过的不同非空文本，比较前只去掉首尾空格、不区分大小写、不做全半角归一，空串不参与统计。所以一列里有 5 行、值是 a、a、A、空格、空串 时，计数为 5，去重计数为 2（a 与 A）。基数判断（用户数、SKU 数）请用去重计数，但要先把数据里的大小写与全半角差异洗干净。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "分隔符自动识别会不会认错？带引号的逗号怎么办？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "自动识别取前 10 行，分别统计逗号、分号、制表符、竖线出现的次数，选总数最多的那个作为分隔符，因此对正常的 CSV / TSV 都能命中；风险在于正文里大量出现某一种符号却没有真正分列（比如整份数据只有一列备注文本、内容里满是逗号），此时会被误当成逗号分列——这种情况请手动指定分隔符，或者干脆选\"制表符\"再核对列名。引号的处理遵循 RFC4180：字段用双引号包裹时，里面的逗号、竖线、换行都算字段内容，不参与分列与断行，连续两个双引号还原成一个引号，所以 \"12,800.00\" 这样的金额不会被拆成两列。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "换了一批数据后，之前选的分组列和聚合列不见了？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "这是刻意的设计。选择是按列名记忆的：新数据的表头与上一次完全一致时，选择原样保留（包括两个同名列也不会跳位）；表头变了则按名字去新数据里找，找得到的继续用，找不到的直接丢弃，并在提示区写明\"列名与上次不同，未能按名称匹配的分组列 / 聚合列已移除\"。早期版本按下标保留选择，结果是换了份字段顺序不同的 CSV，你以为还在按地区分组，实际已经悄悄按金额分了组，这类错误比报错更危险，所以改成按名称匹配并显式提示。如果只是想复用同一套聚合设置，把列名保持成一致即可。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "勾了\"首行为列名\"，结果把列名那行也算进数据了？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "只有一行数据时会这样：无法判断这一行究竟是表头还是唯一的数据行，工具选择把它当数据、列名用\"列1、列2……\"代替，并在提示区说明。两行及以上时，勾选状态生效，第一行作为列名不参与聚合；取消勾选则所有行都是数据，列名一律用序号，此时分组键的\"（空值）\"标签等仍按界面语言显示。若要区分大小写、含空格的真实表头，建议保留默认勾选，工具只去掉列名首尾空格。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "输出的 JSON 里数字没有引号，下载 CSV 用 Excel 打开是乱码？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "选 JSON 时，计数、去重计数、求和、平均、最大、最小这些算法产生的列会输出成真正的 number（缺失的格子是 null），文本类算法（首个值、末尾值、拼接）保持字符串，分组键始终是字符串，所以 JSON 可以直接喂给图表库或回填接口，不需要再 Number() 一次。下载的结果文件带 UTF-8 BOM，这是为了让 Windows 版 Excel 双击打开时正确识别中文；如果您用该文件做后续脚本处理，注意某些只认 ANSI 的老工具会因 BOM 报错，此时改用复制或 JSON 格式即可。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "数据会上传吗？能处理多大、多慢？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会上传。粘贴内容、文件读取（FileReader）、解析、建桶、聚合、导出全部在浏览器内存里同步完成，页面不会向后端发送任何携带数据的请求，可用 F12 的 Network 面板核对；刷新或关闭页面即清空。上限是单次 200000 行（超出只处理前 200000 行并提示）、上传文件 20MB、透视表最多 200 个透视列、拼接文本每组最多保留 50 个值。解析和聚合是单线程的，几万行数据时点击\"汇总\"会有可感知的停顿，属正常现象；输入时的列名预览只解析开头 4000 个字符，所以边打字边改不会卡顿。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(130deg, #1d4ed8 0%, #1e3a8a 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            text-indent: 0 !important;
+            padding: 14px !important;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px;
+            font-size: 0.98rem;
+        }
+
+        th,
+        td {
+            padding: 12px 14px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th,
+            td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/note.css?v=202610032258">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202610032258">
+    <script src="/common/js/ads.js?v=202610032258" async></script>
+    <script src="/common/js/theme.js?v=202610032258" defer></script>
+    <script src="/common/js/note.js?v=202610032258" defer></script>
+    <script src="/common/js/layout.js?v=202610032258" defer></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>CSV 分组聚合与透视表 - 使用说明与 FAQ</h1>
+            <p class="subtitle">在浏览器里跑一次 GROUP BY：多列分组、九种聚合、行×列交叉透视，脏数值容错并逐条说明口径</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-exchange-alt"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>这个工具在做什么？</h2>
+                <p>
+                    它把 <strong>SQL 的 GROUP BY</strong> 和 <strong>Excel 的数据透视表</strong>
+                    塞进了一个文本框：粘贴一份 CSV，点列名选分组维度，挑几个聚合算法，点一次"汇总"就得到结果；切到透视模式，再指定行字段、列字段、值字段与算法，就得到一张交叉表。
+                </p>
+                <p>
+                    之所以值得单独立一个工具，是因为"把 CSV 分个组"这件小事通常会先要求您打开某个东西——Excel、Numbers、一段
+                    <code>pandas</code>
+                    环境、或者一个得先导入数据的数据库。而导出的报表里往往就躺着您要算的那份 CSV，几百行到几十万行都有。这里不需要安装、不需要注册、不需要联网。
+                </p>
+                <p>
+                    第二个动机是<strong>口径可核对</strong>。金额列写成
+                    <code>1,234.50</code>、<code>¥99</code>、<code>12%</code>
+                    时，Excel 经常把整列识别成文本、求和结果静默变成
+                    0；朴素的 <code>split(',')</code>
+                    又会把引号里的逗号当成字段分隔符，汇总口径悄悄变了却看不出来。本工具按
+                    <strong>RFC4180</strong> 解析引号与字段内换行，清洗后仍不能解析成数字的单元格一律计入"跳过"并在提示区报数，让差异摆在明面上。
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>数据是怎么流动的？</h2>
+                <p>整条链路只有一次同步遍历，理解它有助于解释各种"为什么"：</p>
+                <p class="code-block">粘贴文本
+                    ↓ 识别分隔符（取前 10 行统计 , ; Tab | 的出现次数）
+                    ↓ 逐字符解析：双引号内的逗号 / 换行不分列不分行
+                    ↓ 首行为列名？取作表头；否则列名用「列1、列2…」
+                    ↓ 按选中的分组列取值拼键 → 哈希桶（保持首次出现顺序）
+                    ↓ 每喂进一行，同时更新该分组的每个聚合器
+                    ↓ 排序（聚合值降序 / 分组键升序 / 原顺序）→ 截断前 N 行
+                    ↓ 输出 CSV / JSON / Markdown</p>
+                <p>
+                    透视模式复用同一套桶结构：行字段的值做主键，列字段的值做子键，格子里放值字段的聚合器。行合计、列合计与右下角总计各自持有<strong>独立的聚合器</strong>，用同一算法在该行（列）的全部明细上复算，因此平均、去重、最大最小的合计不等于格子结果的再运算。
+                </p>
+                <div class="warning-box">
+                    <p><strong>一句话口径：</strong>凡是"求和 / 平均 / 最大 /
+                        最小"，只有能解析成数字的单元格参与；空串、<code>-</code>、<code>N/A</code>、<code>null</code>、<code>无</code>、<code>空</code>
+                        以及纯文本都被视为缺失，计入跳过数，绝不当成 0。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>输入与输出</h2>
+            <p><strong>输入</strong>：左侧文本框粘贴任意 CSV /
+                TSV 文本，或上传 <code>.csv</code> / <code>.tsv</code> / <code>.txt</code> /
+                <code>.log</code> 文件（≤20MB，按 UTF-8 读取并自动跳过开头 BOM；GBK
+                文件请先转码）。分隔符默认自动识别，也可手动指定逗号、分号、制表符、竖线。列数以基准行为准：勾选"首行为列名"时以表头那行为准，未勾选时以最宽的那一行为准；比基准短的行缺的列按空值处理，比基准长的行多出的列忽略，两种情况都会在提示区计数。
+            </p>
+            <p><strong>输出</strong>：右侧文本框是结果表，可选三种格式——
+                <code>CSV</code>（带 BOM，行分隔符
+                <code>CRLF</code>，含逗号 / 引号 /
+                换行的单元格自动加引号转义）、<code>JSON</code>（对象数组，数值列为
+                number，缺失为 <code>null</code>）、<code>Markdown</code>
+                表格（可直接贴进文档，单元格里的竖线会转义、换行压成空格）。底部统计条给出行数、列数、分组数 /
+                行列数、输出行列数；再下面的"数据提示"区列出本次的口径说明与异常计数。
+            </p>
+            <p class="code-block">分组聚合（示例数据，按地区分组，求和(金额) + 计数）
+                地区,求和(金额),计数
+                华东,26646.5,6
+                华南,22485,4
+                华北,11947,3
+                西南,9198,2
+
+                交叉透视（行=地区 列=渠道 值=金额 求和，附行列合计）
+                地区,代理,门店,线上,合计
+                华东,750.00,4299.00,21597.50,26646.50
+                华南,,10598.00,11887.00,22485.00
+                华北,1250.00,10697.00,,11947.00
+                西南,3899.00,5299.00,,9198.00
+                合计,5899.00,30893.00,33484.50,70276.50 ← 注意华南的代理格是空的，不是 0</p>
+            <h3>快速开始</h3>
+            <ul>
+                <li>点<strong>载入示例</strong>：一份 15
+                    行销售明细会立刻按"地区"跑出求和与计数，先看结果形状，再照自己的数据结构对照。</li>
+                <li>粘贴自己的数据；列名会自动出现在"分组列"里，点一个或多个列名选择分组维度，<strong>点击的先后就是层级的先后</strong>。</li>
+                <li>在"聚合列"选算法与列后点<strong>添加</strong>，可叠加多个；一个都不加时默认输出每组的计数。</li>
+                <li>需要交叉表就把"汇总方式"切成<strong>交叉透视表</strong>，指定行字段、列字段、算法、值字段，勾上"添加行列合计"。</li>
+                <li>按需用<strong>结果排序</strong>、<strong>小数位</strong>、<strong>只看前
+                        N 行</strong>、<strong>输出格式</strong>调整，然后复制或下载。</li>
+            </ul>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>九种聚合算法的口径</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>算法</th>
+                            <th>要求</th>
+                            <th>空值 / 非数值的处理</th>
+                            <th>结果类型</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>计数</strong></td>
+                            <td>不需要选值字段（选"（全部行）"）</td>
+                            <td>逐行 +1，与值内容无关，空行也计入</td>
+                            <td>整数，不受小数位选项影响</td>
+                        </tr>
+                        <tr>
+                            <td><strong>去重计数</strong></td>
+                            <td>必须选值字段</td>
+                            <td>空串不参与；其余按去掉首尾空格后的文本比较，区分大小写</td>
+                            <td>整数，不受小数位选项影响</td>
+                        </tr>
+                        <tr>
+                            <td><strong>求和</strong></td>
+                            <td>必须选值字段</td>
+                            <td>非数值单元格跳过并计入提示；全部跳过时该组结果为空（不输出 0）</td>
+                            <td>数值</td>
+                        </tr>
+                        <tr>
+                            <td><strong>平均值</strong></td>
+                            <td>必须选值字段</td>
+                            <td>分母是<strong>有效数字的个数</strong>，不是行数</td>
+                            <td>数值</td>
+                        </tr>
+                        <tr>
+                            <td><strong>最小值 / 最大值</strong></td>
+                            <td>必须选值字段</td>
+                            <td>只在能解析成数字的值里比较</td>
+                            <td>数值</td>
+                        </tr>
+                        <tr>
+                            <td><strong>首个值 / 末尾值</strong></td>
+                            <td>选值字段</td>
+                            <td>取该列在组内<strong>第一个 / 最后一个非空</strong>的原样文本</td>
+                            <td>文本</td>
+                        </tr>
+                        <tr>
+                            <td><strong>拼接文本</strong></td>
+                            <td>选值字段</td>
+                            <td>忽略空值，最多保留前 50 个，超出以 <code>…</code>
+                                结尾；用 <code> / </code> 分隔</td>
+                            <td>文本</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    透视模式提供其中 6
+                    种（求和、计数、去重计数、平均、最小、最大），因为交叉表的格子必须是可比较的单值。<strong>同一个值字段被求和与平均同时使用时，非数值的跳过判定完全一致</strong>，两者可以互相对账：求和
+                    ÷
+                    有效数字个数 = 平均。
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h2>典型使用场景</h2>
+                <ul>
+                    <li><strong>报表核对</strong>：按地区汇总金额、订单数、客单价，确认给领导的数字与自己逐行算的一致。</li>
+                    <li><strong>日志速判</strong>：状态码 ×
+                        接口路径分组计数，一眼看出哪个链路在集中报错，不必把日志导进任何平台。</li>
+                    <li><strong>周报交叉表</strong>：行渠道 × 列月份 × 值销售额，附行列合计，输出 Markdown 直接贴进周报或
+                        IM 文档。</li>
+                    <li><strong>基数评估</strong>：用去重计数看某列的用户数 /
+                        SKU 数 / 订单号数，决定入库前要不要建字典表或索引。</li>
+                    <li><strong>双向对账</strong>：两份明细各跑一次同口径分组求和，比对差额落在哪个维度，比逐行
+                        diff 快一个量级。</li>
+                    <li><strong>接口联调</strong>：把分组结果输出成 JSON 数组，直接当图表数据或
+                        mock 返回值。</li>
+                    <li><strong>清洗前置</strong>：勾掉"首行为列名"看纯数据行的分组结果，用提示区的"分组键为空"计数定位缺失字段。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>工具优势</h2>
+            <div class="feature-list">
+                <span class="feature-tag">多列分组，点选顺序即层级</span>
+                <span class="feature-tag">九种聚合可叠加</span>
+                <span class="feature-tag">行×列交叉透视带行列合计</span>
+                <span class="feature-tag">RFC4180 引号与内嵌换行</span>
+                <span class="feature-tag">千分位 / 货币 / 百分号容错</span>
+                <span class="feature-tag">非数值跳过并报数</span>
+                <span class="feature-tag">合计按同口径复算</span>
+                <span class="feature-tag">CSV / JSON / Markdown 三输出</span>
+                <span class="feature-tag">列名变化按名称保留选择</span>
+                <span class="feature-tag">全程本地不上传</span>
+            </div>
+            <p style="margin-top:20px">
+                和"把数据粘进 Excel
+                拖透视表"相比，差别不在速度而在<strong>可复现</strong>：这里的每一步都写在提示区，跳过几个单元格、几行列数不齐、几个空分组键，全都能报给您，换个人重新做一遍结果一致；把数据丢给在线转换站则要承担资料外传的风险。与国内常见的"必须装客户端才能做透视"相比，它免安装；与
+                <code>pandas</code> 相比，它免环境。代价是它只做"分组—聚合—输出"这一段，不做多表 join、不做时间粒度重采样，需要那些请回到代码里。
+            </p>
+        </div>
+
+        <div class="info-section" style="margin-bottom: 30px;">
+            <h2>注意事项</h2>
+            <ul>
+                <li><strong>分组键是纯文本比较。</strong>只去掉首尾空格，不区分大小写、不做全半角归一、不忽略不可见字符：<code>华东</code>
+                    与 <code>华东&#8195;</code>（全角空格）会被分成两组。建议先用 <a href="/tool/text-format/">文本清理</a> 或 <a
+                        href="/tool/lines/">行处理</a>
+                    工具统一，再来做汇总。</li>
+                <li><strong>百分号只去符号、不除以 100。</strong><code>12%</code> 按 12
+                    参与求和与平均，这样一批带百分号的完成率求和得到的是"百分点之和"。要按小数口径统计，请先整列除以
+                    100。</li>
+                <li><strong>透视列宽由列字段的基数决定。</strong>用日期、订单号、手机号这类高基数列当列字段会生成极宽的表；超过
+                    200 个列值时只取排序后的前 200 个并在提示区写明总数，剩下的值不会出现在任何格子里，因此合计仍按全部明细复算，可能与可见格子之和不一致。</li>
+                <li><strong>行字段与列字段选了同一列时</strong>，只有对角线有值，提示区会直接要求您换成两个不同的列。</li>
+                <li><strong>排序的三种模式含义固定</strong>：按第一个聚合值降序（非数值视为最小沉底，同值再按分组键升序）、按分组键升序（数字优先于文本，多列时逐列比较）、保持出现顺序。<strong>只看前
+                        N 行</strong>在排序之后截断，统计条里的分组数仍是全量数。</li>
+                <li><strong>小数位选项只影响数值显示</strong>：自动模式最多保留 6
+                    位有效小数（按四舍五入截断），计数与去重计数恒为整数。<strong>求和的精度就是 IEEE
+                        754 双精度的结果</strong>，大额金额建议用整数分单位再汇总。</li>
+                <li><strong>容量与性能：</strong>单次 200000 行、上传 20MB
+                    以内；解析与汇总在主线程同步完成，大文件点击"汇总"会有数秒停顿，可分批处理。输入时的列名预览只读取开头
+                    4000 个字符，所以边打字边看不会卡。</li>
+                <li><strong>编码：</strong>文件按 UTF-8 读取，GBK 保存的中文 CSV 会整列乱码并导致分组键异常，请先用 <a href="/tool/csv-encoding/">CSV
+                        编码转换</a> 转成 UTF-8。</li>
+                <li><strong>不做的事：</strong>不联网查询、不与其他文件 join、不生成图表、不写回原文件。需要把大 CSV 拆开后分批处理，可用 <a
+                        href="/tool/csv-split/">CSV 拆分合并</a>；需要把扁平数据转成层级结构，可用 <a href="/tool/flat-tree/">扁平数据转树形</a>。
+                </li>
+            </ul>
+        </div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="/tool/csv/" class="tool-link">CSV 数据转换工具</a>
+                <a href="/tool/csv-encoding/" class="tool-link">CSV 编码转换</a>
+                <a href="/tool/csv-split/" class="tool-link">CSV 拆分与合并</a>
+                <a href="/tool/stats/" class="tool-link">数据统计工具</a>
+                <a href="/tool/data-validate/" class="tool-link">数据校验器</a>
+                <a href="/tool/sql-insert/" class="tool-link">CSV 转 SQL 插入语句</a>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+            <p>
+                <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>

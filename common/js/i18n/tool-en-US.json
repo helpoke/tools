@@ -1655,6 +1655,101 @@
       "s5": "Dashboard demos: paste cleaned tables into the Data-to-Chart tool and turn rows into bar/line charts for instant reporting."
     }
   },
+  "csvEncoding": {
+    "title": "CSV Encoding Converter",
+    "desc": "CSV encoding converter that detects and fixes mojibake in CSV/TXT files opened by Excel, converting between GBK / GB18030 / Big5 / UTF-8 (BOM) byte by byte without touching any cell content",
+    "example": "Load GBK Sample",
+    "upload": {
+      "label": "Upload CSV/TXT",
+      "loaded": "File loaded",
+      "readFail": "Failed to read the file, please retry",
+      "unsupported": "This file type is not supported, please use .csv / .tsv / .txt / .log",
+      "tooLarge": "File too large (over 50MB), please split it first"
+    },
+    "input": {
+      "title": "Source File / Text",
+      "placeholder": "Paste CSV text, or click \"Upload CSV/TXT\" to load a mojibake file"
+    },
+    "output": {
+      "title": "Converted Result",
+      "hint": "Click \"Convert\" to generate the result"
+    },
+    "buttons": {
+      "convert": "Convert",
+      "download": "Download"
+    },
+    "options": {
+      "source": "Source encoding:",
+      "target": "Output encoding:",
+      "newline": "Line endings:",
+      "auto": "Auto detect",
+      "nlKeep": "Keep as is",
+      "nlCrlf": "CRLF (Windows)",
+      "nlLf": "LF (Unix)"
+    },
+    "stats": {
+      "src": "Source",
+      "out": "Output",
+      "encoding": "Encoding",
+      "textOnly": "plain text input",
+      "yes": "yes",
+      "no": "no"
+    },
+    "statsRows": "rows",
+    "statsCols": "cols",
+    "statsChars": "chars",
+    "statsReplaced": "replacements",
+    "statsNewline": "line endings",
+    "statsUnmappable": "unmappable",
+    "msg": {
+      "empty": "Please upload a file or paste some content first",
+      "converted": "Conversion finished",
+      "copied": "Content copied to clipboard",
+      "copyFailed": "Copy failed, please select and copy manually",
+      "downloaded": "Download started",
+      "downloadFailed": "Download failed",
+      "unsupportedEnc": "This browser does not support that encoding, please pick another or upgrade your browser",
+      "stillBroken": "Replacement characters remain, please try a different source encoding",
+      "redecoded": "Re-decoded with the selected encoding",
+      "mapFail": "This browser cannot build the character map for that encoding, please output UTF-8 instead",
+      "needFile": "The source encoding applies to raw file bytes; without a file, just edit or paste the text directly",
+      "edited": "Content edited manually; re-upload the file to decode it with another encoding",
+      "example": "Loaded a GBK-encoded sample, auto-detected as:"
+    },
+    "intro": {
+      "title": "Overview",
+      "problemTitle": "CSV files that Excel opens as gibberish usually just need the right encoding",
+      "problem1": "CSV exports from ERP systems and databases are often GBK/GB18030, while Excel reads them with a different code page, so Chinese columns turn into meaningless gibberish; switching to UTF-8 then fails again because older Excel ignores UTF-8 without a BOM. This tool covers exactly that path: detect the real encoding, re-decode, and output UTF-8 with BOM so Excel opens it correctly on double-click.",
+      "problem2": "Legacy encodings (GBK, GB18030, Big5, EUC-KR, Shift_JIS, UTF-16) are read by the browser-native <code>TextDecoder</code>; the character maps used to write GBK/Big5 are built locally at runtime by inverting those decoders, so no third-party conversion library is loaded.",
+      "problem3": "It is a byte-level re-encoding: the CSV is never parsed, reordered or reformatted. Commas, quotes, embedded line breaks and padding spaces are preserved character by character, so a conversion cannot split one field into three.",
+      "coreTitle": "Key Features",
+      "core1": "Automatic encoding detection: BOM first, strict UTF-8 validation, then candidate scoring across GBK/Big5/EUC-KR/Shift_JIS/Windows-1252 — and you can always pin the source encoding to re-decode instantly.",
+      "core2": "Five output encodings: UTF-8 + BOM (opens straight in Excel), UTF-8 without BOM (APIs and Git friendly), GBK (ANSI Chinese), Big5 (Traditional Chinese exchange) and UTF-16LE + BOM.",
+      "core3": "Quality report: source bytes, detected encoding, character count, row/column count, the number of U+FFFD replacement characters and the number of characters written as <code>?</code>, so you can tell at a glance whether the mojibake is really fixed."
+    },
+    "instructions": {
+      "title": "How to Use",
+      "step1": "Click \"Upload CSV/TXT\" and pick the broken file (or click \"Load GBK Sample\" for a quick tour); its content is decoded with the detected encoding and shown on the left.",
+      "step2": "If the left pane still looks wrong, set \"Source encoding\" to GBK/GB18030/Big5 and the page re-decodes the raw bytes immediately; once the text reads correctly, choose the \"Output encoding\" and \"Line endings\".",
+      "step3": "Click \"Convert\" to review the result and output statistics, then click \"Download\" to save the new file (the encoding suffix is appended automatically, e.g. <code>-utf8bom</code>), or click \"Copy\" to take the text."
+    },
+    "notes": {
+      "title": "Important Notes",
+      "note1": "\"Source encoding\" only decides how raw file bytes are decoded. Text you paste is already Unicode decoded by the browser, so in that case just pick the \"Output encoding\".",
+      "note2": "When writing GBK/Big5, characters missing from the code page (emoji, rare CJK ideographs, the other side of a simplified/traditional mix) are written as <code>?</code> and counted in the statistics; if that count is not zero, prefer a UTF-8 output.",
+      "note3": "Big5 only contains Traditional Chinese forms, so converting Simplified content to Big5 produces many <code>?</code>; use UTF-8 + BOM for cross-region data exchange instead.",
+      "note4": "The tool cannot decide which encoding is business-correct: the same byte stream can often be decoded by GBK and Big5 into two plausible-looking texts, so always trust the preview semantics.",
+      "note5": "Keep single files under 50MB, larger ones consume a lot of browser memory; everything runs locally and memory is cleared when the page closes."
+    },
+    "scenarios": {
+      "title": "Use Cases",
+      "s1": "Finance reconciliation: an ERP report exported in GBK shows as mojibake in Excel; convert it to UTF-8 + BOM to read it by double-click, then continue with the CSV Toolbox for dedupe and sorting.",
+      "s2": "Bank and payroll batch uploads: front-end machines only accept ANSI(GBK) text, so convert the UTF-8 template back to GBK instead of having the whole batch rejected.",
+      "s3": "Cross-strait data exchange: a Big5 customer list from a Taiwan partner becomes clean UTF-8 in your browser before it is imported into the CRM.",
+      "s4": "Development: legacy GBK CSV fixtures converted to UTF-8 without BOM, avoiding <code>ï»¿</code> prefixes that break Git diffs and first-field parsing.",
+      "s5": "Pre-import pipeline: unify the encoding to UTF-8 first, then generate statements with Table-to-SQL INSERT or charts with the Data-to-Chart tool."
+    }
+  },
   "mock": {
     "title": "Mock Data Generator",
     "desc": "Mock data generator that builds 45+ common field types from a schema, with dot-path nesting, arrays, custom templates and enums, exported as JSON / CSV / JSON Lines",
@@ -2186,5 +2281,593 @@
     "privacyFaq1": "<strong>Q: Are encrypted files secure? What if I lose the password?</strong>A: Encryption uses AES-256-GCM, so the contents cannot be decrypted without the password. But please remember it — there is no backdoor or recovery mechanism, and a forgotten password means the file is unrecoverable.",
     "privacyFaq2": "<strong>Q: Does it still work offline?</strong>A: Yes. Once the page has loaded, all logic runs locally, so compression, encryption, and extraction all work without a network connection.",
     "privacyFaq3": "<strong>Q: Can you see which files I compressed?</strong>A: No. The server never receives file contents, and no logs record your file names or actions — we cannot and will not look at your data."
+  },
+  "dataValidate": {
+    "buttons": {
+      "download": "Download CSV report",
+      "validate": "Validate"
+    },
+    "csv": {
+      "header": "Line,Value,Type,Result,Reason"
+    },
+    "desc": "Validate phone numbers, ID cards, USCC codes, bank cards, emails, IPs, MAC addresses, IMEIs, ISBNs and postcodes in bulk — check digits and dates are recomputed line by line, with the exact reason for every failure",
+    "example": "Load sample",
+    "input": {
+      "placeholder": "One value per line: ID card numbers, phone numbers, emails, IP addresses…",
+      "title": "Data to validate"
+    },
+    "instructions": {
+      "step1": "Paste the values into the left box, one per line (or click “Upload TXT/CSV” to read a file). Keep “Type” on “Auto-detect” when you are not sure what each line is.",
+      "step2": "Tick the leniency options you need: accept old 15-digit ID cards, allow spaces and hyphens inside numbers. When all lines share one format, pick that type explicitly for a stricter verdict.",
+      "step3": "Click “Validate” to see the per-line report and the summary bar. Tick “Only list invalid items” to spot bad rows at a glance, then copy or download the CSV report.",
+      "title": "How to use"
+    },
+    "intro": {
+      "core1": "12 formats covered: phone, ID card, USCC, bank card, email, IPv4, IPv6, MAC, IMEI, ISBN, postcode, plus auto-detection — it first looks for a type whose rules the value fully satisfies, then falls back to a “looks like it but is invalid” type so the concrete reason can still be reported.",
+      "core2": "Structural checks, not just shapes: ID cards are verified against allocated province codes and a real birth date not later than today; IPv4 rejects leading zeros and out-of-range octets; IPv6 supports :: compression, mixed IPv4 tails and an optional prefix length; MAC accepts colons, hyphens and the three-groups-of-four notation.",
+      "core3": "The report is both readable and usable: the per-line text can be copied, and the full report (line, value, type, verdict, reason) downloads as a CSV with a UTF-8 BOM so Excel opens it without mojibake; the summary bar totals items, passes, failures and the type distribution.",
+      "coreTitle": "Key features",
+      "problem1": "Most online validators only ask “is the length right, are the characters allowed” and never check the final digit: an ID card with a random last character, a bank card with one mistyped digit, sail straight through until the database or the bank rejects them. Here the ID card check digit is recomputed per GB11643-1999, the USCC check character per the GB32100-2015 weights, bank cards and IMEIs by Luhn, ISBNs by modulo 11 / modulo 10 — what is judged is “could this number exist at all”.",
+      "problem2": "Checking a scattered column is far faster than cell-by-cell review in Excel: paste an exported user table, a returned signup sheet or a crawled address list and get line numbers, the detected type and the exact reason (wrong length, illegal character, check digit mismatch, birth date out of range, octet over limit) instead of guessing where the mistake is.",
+      "problem3": "ID cards, phone numbers and USCC codes only exist in a Chinese context, and foreign tooling rarely supports them; sending them to an online service meanwhile means handing over real user records. Every algorithm here runs in your browser and is cleared when the tab closes.",
+      "problemTitle": "A regex can match and the data can still be wrong",
+      "title": "About this tool"
+    },
+    "msg": {
+      "copied": "Report copied to clipboard",
+      "copyFailed": "Copy failed, please select and copy manually",
+      "downloadFailed": "Download failed",
+      "downloaded": "Report download started",
+      "empty": "Paste or upload the data to validate first",
+      "example": "Sample data loaded",
+      "tooManyLines": "Too much data, only the first ",
+      "validated": "Validation finished"
+    },
+    "notes": {
+      "note1": "A valid check digit only proves the number follows the encoding rules — it cannot prove the record exists in the public-security or banking system, nor that it belongs to the person holding it. Likewise a well-formed 13800138000 is not necessarily reachable. Region codes are only verified down to the province level; district-level codes are not embedded.",
+      "note2": "Auto-detection tries ID card → USCC → IMEI → ISBN → bank card → IPv4 → IPv6 → MAC → email → phone → postcode, preferring the most specific length first: 15 pure digits are read as an IMEI before the wide-range bank card. This overlap cannot be removed by any algorithm (a 15-digit American Express card and a 15-digit IMEI are mathematically the same string), so for homogeneous data pick the type manually — the report always names the type used.",
+      "note3": "15-digit ID numbers belong to cards issued before 1999: no check digit, no century prefix, so only structure and birth date can be verified. With “accept old 15-digit cards” ticked they are read as born in 19xx; untick it if modern numbers are mixed in.",
+      "note4": "IPv4 rejects leading zeros (192.168.01.1) by default, because most modern resolvers treat such octets as decimal rather than octal — the notation usually means a transcription error.",
+      "note5": "Keep single runs under 50000 lines and split larger inputs. All computation happens on the browser's main thread, so the page may pause briefly. Nothing is stored: closing the page clears everything.",
+      "title": "Good to know"
+    },
+    "options": {
+      "allow15": "Accept old 15-digit ID cards",
+      "onlyFail": "Only list invalid items",
+      "separator": "Allow spaces / hyphens / comma separators",
+      "type": "Type:"
+    },
+    "output": {
+      "hint": "Click “Validate” to build the line-by-line report",
+      "noneFail": "Everything passed, no invalid items",
+      "title": "Validation report"
+    },
+    "reason": {
+      "atSign": "Email is missing @ or has more than one",
+      "charset": "Illegal character: {{ch}}",
+      "checkDigit": "Check digit mismatch: expected {{want}}, got {{got}}",
+      "dateFuture": "Birth date is later than today: {{ymd}}",
+      "dateInvalid": "Invalid birth date: {{ymd}} does not exist",
+      "domainRule": "Invalid domain part (empty label / leading or trailing character / missing dot)",
+      "doubleColon": "More than one '::' appears",
+      "groupCount": "Wrong group count: expected {{want}}, got {{got}}",
+      "len": "Wrong length: expected {{want}} characters, got {{got}}",
+      "localRule": "Invalid local part before @ (empty / starts or ends with a dot / contains consecutive dots)",
+      "luhn": "Luhn check failed (the check digit does not match the preceding digits)",
+      "macSep": "Separators must be consistent (colons / hyphens / dots)",
+      "noMatch": "Does not match any supported format",
+      "octetLead": "Octet {{n}} ({{v}}) has a leading zero",
+      "octetRange": "Octet {{n}} ({{v}}) is outside 0-255",
+      "old15": "Old-style 15-digit ID number (needs “Accept old 15-digit ID cards”)",
+      "orderZero": "Sequence code is 000 (unallocated)",
+      "prefixLen": "Prefix length must be 0-128: {{p}}",
+      "region": "Invalid region code: {{code}}",
+      "segment": "Unknown number range / prefix: {{code}}",
+      "sepDisabled": "Contains a space or hyphen while “Allow separators” is unticked",
+      "structure": "Invalid structure: {{part}}",
+      "tldRule": "The top-level domain needs at least two letters",
+      "tooLong": "Exceeds the length limit of {{max}}",
+      "yearRange": "Birth year {{y}} is outside 1900-{{max}}"
+    },
+    "scenarios": {
+      "s1": "Front-end integration before the API is live: paste the phone numbers, ID cards and bank cards from your test accounts and confirm the dirty data is not your own doing.",
+      "s2": "Operations collections: validate ID cards from hundreds of returned signup sheets at once and send the check-digit and birth-date failures straight back for correction.",
+      "s3": "Finance reconciliation: run every card number in a bank return file through Luhn before submission so payment rejections are caught in advance instead of bouncing the whole batch.",
+      "s4": "Master data onboarding: batch-check USCC structure and check characters to stop the short, shifted or wrong-case codes produced by copy-paste.",
+      "s5": "Ops troubleshooting: bulk-check IPv4/IPv6 and MAC notations exported from ACLs, firewall rules or a CMDB — “the rule does not apply” is often a mistyped address string.",
+      "title": "Typical use cases"
+    },
+    "stats": {
+      "chars": "characters",
+      "fail": "invalid",
+      "items": "items",
+      "lines": "Lines",
+      "linesShort": "lines",
+      "pass": "valid",
+      "skipped": "Blank lines skipped",
+      "total": "Total",
+      "types": "Type distribution: "
+    },
+    "title": "Data Validator",
+    "types": {
+      "auto": "Auto-detect",
+      "bank": "Bank card number",
+      "email": "Email address",
+      "idcard": "ID card number",
+      "imei": "IMEI",
+      "ip": "IPv4 / IPv6",
+      "ipv4": "IPv4 address",
+      "ipv6": "IPv6 address",
+      "isbn": "ISBN",
+      "mac": "MAC address",
+      "phone": "Mobile number",
+      "postcode": "Postal code",
+      "unknown": "Unrecognized",
+      "uscc": "Unified Social Credit Code"
+    },
+    "upload": {
+      "label": "Upload TXT/CSV",
+      "loaded": "File loaded",
+      "readFail": "Failed to read the file, please try again",
+      "tooLarge": "File too large (over 10MB), please split it first",
+      "unsupported": "Unsupported file type, please use .txt / .csv / .log"
+    },
+    "verdict": {
+      "fail": "Invalid",
+      "pass": "Valid"
+    }
+  },
+  "flatTree": {
+    "buttons": {
+      "convert": "Convert",
+      "download": "Download JSON"
+    },
+    "desc": "Two-way conversion between flat id / parentId arrays and nested children trees, with duplicate ids, parent cycles and orphan nodes detected and explained",
+    "dirs": {
+      "flat2tree": "Flat array → tree",
+      "tree2flat": "Tree → flat array"
+    },
+    "example": "Load sample",
+    "indents": {
+      "min": "Compact single line",
+      "tab": "Tab"
+    },
+    "input": {
+      "placeholder": "Paste a JSON array, JSONL line-per-object records, or an already nested tree",
+      "title": "Input data"
+    },
+    "instructions": {
+      "step1": "Confirm the direction (default “Flat array → tree”) and paste the array returned by your API or exported from the database into the left box; JSONL (one object per line) and arrays wrapped inside an object are recognised too.",
+      "step2": "Rename the ID, parent and children fields to your own naming (menuId / pid / items, for example), then pick the child ordering and output indentation if you need them.",
+      "step3": "Click “Convert” to see the result and the summary; the issue list on the right gives exact line numbers for duplicate ids, cycles and orphans. While cleaning data, untick “Promote orphans to roots” so parentless nodes stay visible in the list.",
+      "title": "How to use"
+    },
+    "intro": {
+      "core1": "Assemble and flatten both ways: a flat array is turned into a tree in one pass (O(n) hash index, no nested scanning), and a tree is flattened depth-first into an array; every field name (ID, parent, children) is configurable, so it matches your existing API naming.",
+      "core2": "All four structural defects are covered: duplicate ids, a node pointing at itself, A→B→A cycles and orphans whose parent does not exist. Each one goes into the issue list with its line number and node identifier; cycles are broken instead of overflowing the stack, and orphans can be promoted to roots so nothing disappears.",
+      "core3": "The result is both readable and usable: output indentation can be 2 / 4 / tab / compact single line, children can be ordered by original position, id, name field or sort-number field, and one click copies or downloads a .json file; the summary bar reports node count, root count, maximum depth and issue count.",
+      "coreTitle": "Key features",
+      "problem1": "Menu tables, department tables, category trees and comment threads all land in a relational database as a flat table with a parent_id; APIs usually return flat arrays too, and the nesting only becomes necessary when the front end renders. Writing the assembly code is not the hard part — the edges are: a missing parent silently deletes a whole subtree, one self-reference freezes the page, two nodes pointing at each other recurse forever.",
+      "problem2": "The most common production incident is “half the menu vanished and nothing was reported”: a batch import wrote a parentId that does not exist, every node in that batch and all of their descendants became orphans, and the assembly code only filtered root nodes — no warning, no trace. This tool lists such defects on the spot: which line, which id, which parent, how many descendants.",
+      "problem3": "The reverse need is just as frequent: a tree rendered by level in the back office has to be flattened into an array with parent pointers for a flat-table consumer or a unit-test fixture, without losing nodes. This is one two-way tool rather than two scripts written twice.",
+      "problemTitle": "In a database, a tree is never a tree",
+      "title": "About this tool"
+    },
+    "issues": {
+      "cycle": "Parent-child cycle {{path}} detected, the parent pointer of node {{id}} was broken",
+      "dupId": "Duplicate ID {{id}} (line {{first}} and line {{row}}), the later one was ignored",
+      "noChildren": "Tree → flat: no {{key}} nesting found in the input, output as a flat array unchanged",
+      "noId": "Line {{row}} has no ID field {{key}}, skipped as a node without id",
+      "none": "No structural problems found",
+      "notObject": "Element {{row}} is not an object, skipped",
+      "orphan": "Parent {{pid}} of node {{id}} does not exist ({{n}} descendants), promoted to a root",
+      "orphanDropped": "Parent {{pid}} of node {{id}} does not exist ({{n}} descendants), excluded from the result",
+      "pidSelf": "Node {{id}} points to itself as its parent, treated as a root node",
+      "title": "Structural issue list",
+      "tooMany": "Node count exceeded {{max}}, the extra nodes were ignored"
+    },
+    "msg": {
+      "converted": "Conversion finished",
+      "copied": "Result copied to clipboard",
+      "copyFailed": "Copy failed, please select and copy manually",
+      "downloadFailed": "Download failed",
+      "downloaded": "File download started",
+      "empty": "Paste or upload the data first",
+      "example": "Back-office menu sample loaded (with an orphan, a cycle, a self-reference and a duplicate ID)",
+      "moreIssues": "{{n}} further issues are not shown",
+      "noArray": "No record array to convert (a JSON array, JSONL, or an array field inside an object is required)",
+      "parseFail": "JSON parsing failed: {{detail}}"
+    },
+    "notes": {
+      "note1": "ID and parent values are compared as stringified values, so the number 1 and the string \"1\" are the same node; null, undefined, empty string, 0 and '0' are all treated as “top-level root”. If your data uses 0 for top-level menus and also genuinely contains a node with id 0, rewrite those zeros before converting, otherwise they are judged as a mutual cycle.",
+      "note2": "Building the tree never rewrites a node's business fields: apart from adding the children array, the original field order and values are kept; with “Keep parent field” ticked the nested result still carries parentId, unticked it is closer to the props shape a front-end component expects.",
+      "note3": "When a parent-child cycle is detected, one edge in the loop is broken so traversal can terminate, and the issue list names the node whose parent pointer was cut; the descendants under that edge appear at the end of the result as independent roots instead of being dropped silently.",
+      "note4": "“By name field” and “By sort field” take the first field that exists among name / title / label / text and sort / order / weight / rank; if none exists they behave like “Keep original order” without a note.",
+      "note5": "Keep single runs under 50000 nodes and inputs under 10MB. Parsing and conversion run synchronously on the browser's main thread, so the page may pause briefly. Nothing is stored: closing the page clears everything.",
+      "title": "Good to know"
+    },
+    "options": {
+      "childrenKey": "Children field",
+      "direction": "Direction:",
+      "idKey": "ID field",
+      "indent": "Output indentation:",
+      "keepPid": "Keep parent field",
+      "orphanRoot": "Promote orphans to roots",
+      "pidKey": "Parent field",
+      "sort": "Order children:"
+    },
+    "output": {
+      "hint": "Click “Convert” to build the result",
+      "title": "Conversion result"
+    },
+    "scenarios": {
+      "s1": "Admin menu rendering: the API returns every menu item at once, the front end assembles the multi-level children structure a sidebar needs — and you confirm no node vanished because of a mistyped parent id.",
+      "s2": "Organisation import: turn the department table exported from Excel (one department per line plus a “parent department” column) into JSON, build the tree and see instantly which departments point at a parent that does not exist.",
+      "s3": "Region cascades: a three-level cascader needs nested data, generated in one pass from the flat administrative-division table by parentCode — much faster than a self join in SQL.",
+      "s4": "Comment threads: the API returns a time-ordered list with replyTo; assemble the nested floors and at the same time catch self-replies that create cycles.",
+      "s5": "Test data: flatten a real nested config into an array with parent pointers for a fixture, or use the flattened output to check that the nesting depth is what you expect.",
+      "title": "Typical use cases"
+    },
+    "sorts": {
+      "byId": "By ID",
+      "byName": "By name field",
+      "bySort": "By sort field",
+      "origin": "Keep original order"
+    },
+    "stats": {
+      "chars": "characters",
+      "depth": "Max depth",
+      "inputLines": "Non-empty lines",
+      "issues": "Issues",
+      "jsonl": "Parsed as JSONL line by line",
+      "noIssue": "Structure sound",
+      "nodes": "Nodes",
+      "roots": "Roots"
+    },
+    "title": "Flat List to Tree",
+    "upload": {
+      "label": "Upload JSON",
+      "loaded": "File loaded",
+      "readFail": "Failed to read the file, please try again",
+      "tooLarge": "File too large (over 10MB), please split it first",
+      "unsupported": "Unsupported file type, please use .json / .jsonl / .txt"
+    }
+  },
+  "csvGroup": {
+    "agg": {
+      "add": "Add",
+      "empty": "No aggregate column added, row count per group is output by default",
+      "remove": "Remove this aggregate column",
+      "title": "Aggregate columns"
+    },
+    "buttons": {
+      "download": "Download result",
+      "run": "Summarize"
+    },
+    "colAll": "(all rows)",
+    "colName": "Column{{n}}",
+    "delims": {
+      "auto": "Auto-detect",
+      "comma": "Comma ,",
+      "pipe": "Pipe |",
+      "semicolon": "Semicolon ;",
+      "tab": "Tab"
+    },
+    "desc": "Group a CSV by column and sum, count or average it, or build a row×column pivot table — just paste the data, processed locally and never uploaded",
+    "emptyVal": "(empty)",
+    "example": "Load sample",
+    "fields": {
+      "empty": "Column names appear here once you paste data",
+      "pick": "Click a column name to add or remove it as a grouping column",
+      "title": "Grouping columns (click to select; the click order is the hierarchy order)"
+    },
+    "formats": {
+      "csv": "CSV",
+      "md": "Markdown table"
+    },
+    "funcs": {
+      "avg": "Average",
+      "count": "Count",
+      "distinct": "Distinct count",
+      "first": "First value",
+      "join": "Concatenate",
+      "last": "Last value",
+      "max": "Maximum",
+      "min": "Minimum",
+      "sum": "Sum"
+    },
+    "input": {
+      "placeholder": "Paste CSV / TSV data; the first line is usually the header",
+      "title": "Source data"
+    },
+    "instructions": {
+      "step1": "Paste the CSV on the left (or upload a file). Column names appear under “Grouping columns” automatically — click them to choose the dimensions, and the order you click is the hierarchy order.",
+      "step2": "Pick a function and a column under “Aggregate columns” and click “Add”; you can stack several. With none added, the output is simply the row count per group.",
+      "step3": "Click “Summarize” and adjust sorting, decimals, top-N and output format as needed; for a matrix, switch “Mode” to pivot table and set the row, column and value fields.",
+      "title": "How to use"
+    },
+    "intro": {
+      "core1": "Group aggregation: select several grouping columns at once and combine count, distinct count, sum, average, max, min, first/last value and text concatenation — a GROUP BY run inside the browser; quoted fields and newlines inside values are parsed by the standard CSV rules.",
+      "core2": "Cross pivot: set the row field, column field, value field and function to generate the matrix, with column values sorted numbers-first and optional row and column totals; an empty cell (“this combination has no data”) is kept distinct from a genuine 0.",
+      "core3": "Number tolerance and checkable output: the delimiter is auto-detected, thousands separators, currency signs, percent signs and spaces are stripped before computing, non-numeric cells are skipped and counted in the notes; results export as a BOM-prefixed CSV, a JSON array or a Markdown table you can paste straight into a document or ticket.",
+      "coreTitle": "Key features",
+      "problem1": "You have an exported CSV and want sales by region and orders by channel. The usual route is: open Excel and drag a pivot table (not installed at work, Numbers on the Mac behaves differently, a 40MB file spins for ages), write a pandas groupby (hundreds of megabytes of environment for one summary), or run GROUP BY in a database (except the data is sitting on the desktop, not loaded).",
+      "problem2": "The details are worse: an amount column written as 1,234.50 or with ¥ makes Excel treat the whole column as text and sum it to 0; headers with stray spaces or inconsistent case break formula references; fields containing quoted commas and newlines get shredded by a naive split(','), so the aggregation quietly changes meaning and you cannot see it.",
+      "problem3": "Cross tables are the other frequent request: rows are regions, columns are months, cells hold sales. Transposing by hand in a spreadsheet is slow and easily breaks the reconciliation of “this region has no data in this month” blanks against the total row.",
+      "problemTitle": "Summarising once means starting up a pile of things",
+      "title": "About this tool"
+    },
+    "modes": {
+      "group": "Group aggregation (GROUP BY)",
+      "pivot": "Cross pivot table"
+    },
+    "msg": {
+      "copied": "Result copied to clipboard",
+      "copyFailed": "Copy failed, please select and copy manually",
+      "done": "Aggregation finished",
+      "downloadFailed": "Download failed",
+      "downloaded": "File download started",
+      "dupAgg": "This aggregate column already exists",
+      "empty": "Paste or upload the data first",
+      "example": "Sales detail sample loaded (amount summarised by region)",
+      "needCols": "A pivot table needs at least two columns of data",
+      "needVal": "This function needs a value field",
+      "noCols": "No columns were parsed, please check the delimiter and the first line"
+    },
+    "notes": {
+      "clean": "No anomalies found",
+      "colsReset": "The column names differ from last time; grouping / aggregate columns that could not be matched by name were removed",
+      "emptyKey": "{{n}} rows have an empty grouping key and were placed in the “(empty)” group",
+      "longRow": "{{n}} rows have more columns than the header; the extra parts were ignored",
+      "noAgg": "No aggregate column was added, so the output is the row count per group",
+      "noGroup": "No grouping column selected, all data was aggregated into a single row",
+      "note1": "“Sum / average / min / max” only count cells that parse as numbers: 1,234.50, ¥99 and 12% are read as 1234.5, 99 and 12 (the percent sign is stripped, never divided by 100); -, N/A, empty strings and values recognised as text are counted as skipped and reported in the notes, and are never treated as 0 dragging the average down.",
+      "note2": "Grouping keys are case-sensitive, are not normalised between full-width and half-width, and only lose leading/trailing spaces: 华东 and 华东 (with a full-width space) become two groups. Clean the data with a text tool before exporting.",
+      "note3": "The number of pivot columns equals the distinct values of the column field, so using dates or order numbers there produces a very wide table; beyond 200 column values only the first 200 are kept and the total is reported in the notes.",
+      "note4": "Count and distinct count do not require numeric values; “Concatenate” keeps at most the first 50 values per group and ends with … to stop result cells from growing huge.",
+      "note5": "Keep single runs under 200000 rows and files under 20MB; parsing and aggregation run synchronously on the main thread, so large files pause for a few seconds. No network, no upload — closing the page clears everything.",
+      "sameField": "The row field and the column field are the same column, so only the diagonal would have values; please pick two different columns",
+      "shortRow": "{{n}} rows have fewer columns than the header; the missing parts are treated as empty",
+      "singleRow": "Only one row of data with “First line is the header” ticked, so it was treated as data and columns named “Column1, Column2…”",
+      "skipped": "{{n}} cells could not be parsed as numbers and were skipped in sum / average / min / max",
+      "title": "Good to know",
+      "tooManyCols": "The column field has {{total}} distinct values; only the first {{max}} are used as pivot columns",
+      "tooManyRows": "The data exceeds {{max}} rows; only the first {{max}} rows were processed"
+    },
+    "notesTitle": "Data notes",
+    "options": {
+      "delim": "Delimiter:",
+      "format": "Output format:",
+      "header": "First line is the header",
+      "mode": "Mode:",
+      "precision": "Decimals:",
+      "sort": "Sort result:",
+      "topn": "Show only the first",
+      "topnUnit": "rows (0 = all)"
+    },
+    "output": {
+      "hint": "Click “Summarize” to build the result",
+      "title": "Aggregated result"
+    },
+    "pivot": {
+      "col": "Column field",
+      "colTotal": "Total",
+      "func": "Function",
+      "row": "Row field",
+      "rowTotal": "Total",
+      "title": "Pivot settings",
+      "total": "Add row and column totals",
+      "val": "Value field"
+    },
+    "precisions": {
+      "raw": "Auto"
+    },
+    "scenarios": {
+      "s1": "Order report check: sum “amount” by “region”, then look at orders and average order value per region to confirm the number you hand to your manager matches your own arithmetic.",
+      "s2": "Log triage: group by status code or endpoint and count, and see immediately which path the 5xx errors concentrate on.",
+      "s3": "Weekly cross table: rows are channels, columns are months, cells are sales, with row and column totals — paste straight into the report or a Markdown document.",
+      "s4": "Pre-clean cardinality: use distinct count to size a column (users, SKUs) and decide whether an index or a lookup table is worth building before loading.",
+      "s5": "Reconciliation: run the same grouped sum on both sides and locate which dimension the difference falls on — an order of magnitude faster than diffing rows.",
+      "title": "Typical use cases"
+    },
+    "sorts": {
+      "aggDesc": "By the first aggregate value, descending",
+      "keyAsc": "By grouping key, ascending",
+      "origin": "Keep order of appearance"
+    },
+    "stats": {
+      "chars": "characters",
+      "cols": "Columns",
+      "groups": "Groups",
+      "lines": "Non-empty lines",
+      "outCols": "Output columns",
+      "outRows": "Output rows",
+      "pivotCols": "Columns",
+      "pivotRows": "Rows",
+      "rows": "Data rows"
+    },
+    "title": "CSV Group By & Pivot Table",
+    "upload": {
+      "label": "Upload CSV",
+      "loaded": "File loaded",
+      "readFail": "Failed to read the file, please try again",
+      "tooLarge": "File too large (over 20MB), please split it first",
+      "unsupported": "Unsupported file type, please use .csv / .tsv / .txt"
+    }
+  },
+  "csvSplit": {
+    "aligns": {
+      "name": "By column name (fill missing with blanks)",
+      "pos": "By position, appended as is"
+    },
+    "basis": {
+      "column": "By the values of one column",
+      "rows": "By row count",
+      "size": "By size per part"
+    },
+    "buttons": {
+      "download": "Download result",
+      "downloadPart": "Download",
+      "remove": "Remove",
+      "run": "Run",
+      "zip": "Pack as ZIP"
+    },
+    "colName": "Column{{n}}",
+    "delims": {
+      "auto": "Auto-detect",
+      "comma": "Comma ,",
+      "pipe": "Pipe |",
+      "semicolon": "Semicolon ;",
+      "tab": "Tab"
+    },
+    "desc": "Split a large CSV into several small files by row count, by size or by the values of one column, and merge multiple CSV files back into one — processed locally, never uploaded",
+    "emptyVal": "(empty)",
+    "example": "Load sample",
+    "input": {
+      "placeholder": "Paste CSV / TSV data; in merge mode the content here becomes the first source",
+      "title": "Source data"
+    },
+    "instructions": {
+      "step1": "Split: paste data or upload one file, choose the “Basis” and its parameter, click “Run”. The parts are listed under the result — download them one by one or click “Pack as ZIP” to take everything.",
+      "step2": "Merge: switch “Mode” to “Merge multiple files”, upload several CSVs (the text box content is used as the first source), choose the column alignment and whether to deduplicate, then click “Run”.",
+      "step3": "Keep “Write the header into every part” ticked (default) if each part must be usable on its own; untick it to have the header only in part 1. If your files have no header at all, untick “First line is the header” before merging.",
+      "title": "How to use"
+    },
+    "intro": {
+      "core1": "Three split bases: a fixed number of rows per part, a size cap per part (UTF-8 bytes accumulated record by record until the threshold is approached), or the values of one column — a value can occupy a single file or several values can share one part.",
+      "core2": "Parts keep the original bytes: the cut is placed on record boundaries of the source text with no re-quoting, so \"1,200\", newlines inside fields and the line-ending style stay exactly as in the original file.",
+      "core3": "Merge several CSV files: only the first header is kept (can be turned off), columns are aligned either by name (missing cells filled) or by position, fully duplicated data rows can be removed, and the result is copied or downloaded directly.",
+      "coreTitle": "Key features",
+      "problem1": "Exported detail files run to tens or hundreds of megabytes: the mail attachment is over the limit, the API caps the upload size, Excel spins for ages on a double click, a colleague's laptop simply stops responding. What these need is not compression but splitting one file at predictable boundaries into several that each open on their own.",
+      "problem2": "The other way to cut is by business dimension: a single region column mixes the whole country together, and when you send data to each branch you want 华东.csv and 华南.csv produced automatically, each with its header. Filtering and copy-pasting by hand never finishes for a few hundred values.",
+      "problem3": "Merging in reverse is just as awkward: several people's sheets have slightly different column orders, the header got pasted N times, the extra blank column names are written differently — concatenating head to tail simply misaligns columns. And scripting it means installing an environment first.",
+      "problemTitle": "With a big CSV it is transfer and “it will not open” that block you",
+      "title": "About this tool"
+    },
+    "modes": {
+      "merge": "Merge multiple files",
+      "split": "Split into multiple files"
+    },
+    "msg": {
+      "copied": "Result copied to clipboard",
+      "copyFailed": "Copy failed, please select and copy manually",
+      "downloadFailed": "Download failed",
+      "downloaded": "File download started",
+      "empty": "Paste or upload the data first",
+      "emptyOut": "There is no result to download yet, please run first",
+      "example": "Order sample loaded (split by the region column, every part with a header)",
+      "exampleMerge": "Merge sample loaded: two sheets with different column orders",
+      "mergeDone": "Merged",
+      "needTwo": "Merging needs at least two sources: paste one in the text box and upload at least one file",
+      "noCol": "Splitting by column values needs parsed column names first; check the delimiter and “First line is the header”",
+      "noRecords": "No data rows were parsed; check the delimiter and the header setting",
+      "parts": "parts",
+      "previewCut": "(preview truncated; download gives the complete part)",
+      "rowsUnit": "rows",
+      "sources": "sources",
+      "splitDone": "Generated",
+      "zipFail": "ZIP packing is not available in this environment, please download the parts one by one",
+      "zipping": "Packing…"
+    },
+    "notes": {
+      "bigRecord": "{{n}} records are themselves larger than the per-part limit and each got a part of its own",
+      "blankSkipped": "{{n}} blank lines skipped",
+      "clean": "Nothing unusual",
+      "colValues": "The value column has {{n}} distinct values, producing {{parts}} parts",
+      "dedup": "{{n}} fully duplicated data rows removed",
+      "dupName": "Sanitised values produced duplicate file names, {{n}} parts got a numeric suffix",
+      "emptyKey": "{{n}} records have an empty value column and were placed together in one part",
+      "extraCols": "Source {{i}} had {{n}} columns not present in the base header and they were dropped: {{list}}",
+      "headerAligned": "The first line of source {{i}} was aligned by column name and then dropped (column order or names differ from the base)",
+      "headerDropped": "The first line of source {{i}} was dropped as a header (column names differ from the base; aligning by position does not reorder)",
+      "headerKept": "The first line of source {{i}} does not match the header and was kept as data",
+      "headerMatched": "The first line of source {{i}} matches the header and was dropped",
+      "headerOnce": "{{n}} parts in total, only part 1 carries the header line",
+      "lineStyle": "The source mixes line endings; parts are written with {{style}}",
+      "missingCols": "Source {{i}} is missing {{n}} columns; those positions were filled with empty values",
+      "moreNotes": "{{n}} further notes are omitted",
+      "note1": "Splitting by size approaches rather than hits the limit: accumulation happens per whole record, so a part usually ends up slightly below the cap and the last one can be far below it; only when a single record is itself larger than the cap does it take a part of its own, and that part necessarily exceeds it — the notes say how many such records there were.",
+      "note2": "A record whose field contains a newline counts as one record and is never cut; such multi-line records are not counted as several rows when splitting by row count either.",
+      "note3": "When splitting by column values, comparison only strips leading/trailing spaces, is case-sensitive and does not normalise full-width characters; empty values are collected into a single “(empty)” file.",
+      "note4": "The “by column name” merge uses the column order of the first source as the base; extra columns in later files are dropped and listed in the notes. To keep every column, choose “by position” or unify the headers first.",
+      "note5": "Keep single runs under 200000 records and files under 20MB; parts are capped at 200. Everything runs synchronously on the main thread, so large files pause for a few seconds. No network, no upload — closing the page clears everything.",
+      "onePart": "The current parameters would produce only 1 part, so the input was output as is (reduce rows or size per part)",
+      "posMismatch": "Source {{i}} has at most {{n}} columns against a base of {{base}}; aligning by position will misalign",
+      "title": "Good to know",
+      "tooManyParts": "The part count exceeded {{max}}; the extra records were merged into the last part",
+      "tooManySources": "More than {{max}} sources; the extra files were ignored",
+      "trimCols": "{{n}} columns of source {{i}} went beyond the header width and were dropped",
+      "truncated": "Record count exceeded {{max}}; only the first {{max}} were processed",
+      "unclosedQuote": "An unclosed quote starts at line {{row}}; the following content is treated as one record"
+    },
+    "notesTitle": "Processing notes",
+    "options": {
+      "align": "Column alignment:",
+      "basis": "Split basis:",
+      "chunkKb": "Each part up to",
+      "chunkRows": "Rows per part:",
+      "dedup": "Remove fully duplicated data rows",
+      "delim": "Delimiter:",
+      "header": "First line is the header",
+      "keepBlank": "Keep blank lines",
+      "mode": "Mode:",
+      "prefix": "File name prefix:",
+      "repeatHeader": "Write the header into every part",
+      "skipHeader": "Drop header lines of later files",
+      "splitCol": "Value column:",
+      "valueSort": "Value order:",
+      "valuesPerFile": "Values per part:"
+    },
+    "output": {
+      "hint": "In split mode this is the content of the selected part; in merge mode it is the merged result",
+      "title": "Result"
+    },
+    "parts": {
+      "empty": "After running, every part is listed here and can be downloaded individually",
+      "metaIndex": "Part {{index}} · {{rows}} rows · {{size}}",
+      "metaValue": "Value {{label}} · {{rows}} rows · {{size}}",
+      "multiValue": "{{key}} and {{n}} values",
+      "title": "Part list"
+    },
+    "scenarios": {
+      "s1": "Mail or form attachment limits: split at 5MB per part, send the ZIP out, and the receiver merges the parts back.",
+      "s2": "Distributing to regional owners: split by the “region” column so each branch gets its own file with a header.",
+      "s3": "Bulk import behind rate limits: split into 1000-row parts, let a script call the API part by part in file-name order, and re-send only the failed part.",
+      "s4": "Collecting sheets back: when column orders drift slightly, choose “by column name” and build the master table in one pass.",
+      "s5": "A file Excel cannot open: split it into small parts first and inspect them one by one instead of waiting for the whole table to load.",
+      "s6": "Cleaning duplicate reports: tick “Remove fully duplicated data rows” while merging to collapse the same batch submitted twice.",
+      "title": "Typical use cases"
+    },
+    "sources": {
+      "title": "Files loaded"
+    },
+    "src": {
+      "empty": "Paste data in the text box, or upload several CSV files",
+      "emptySplit": "No data loaded yet",
+      "input": "Text box content",
+      "lineCount": "lines"
+    },
+    "stats": {
+      "cols": "Columns",
+      "current": "Current",
+      "lines": "Non-empty lines",
+      "parts": "Parts",
+      "rows": "Data rows",
+      "size": "Size",
+      "sources": "Sources"
+    },
+    "title": "CSV Split & Merge",
+    "upload": {
+      "label": "Upload files",
+      "loaded": "File loaded",
+      "readFail": "Failed to read the file, please try again",
+      "tooLarge": "File too large (over 20MB), please split it first",
+      "tooMany": "At most {{max}} sources can be merged at a time; the extra {{n}} files were ignored",
+      "unsupported": "Unsupported file type, please use .csv / .tsv / .txt"
+    },
+    "vsorts": {
+      "asc": "By value, ascending",
+      "origin": "By order of appearance"
+    }
   }
 }

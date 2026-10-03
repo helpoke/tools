@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="免费的扁平数据与树形结构互转在线工具：把带 id / parentId 的平铺数组（数据库查询结果、接口返回的菜单表、部门表）一次装配成 children 嵌套的树，也能把树拍平回带父指针的列表；自动检出重复 id、自环、父子环与孤儿节点并逐条列出原因，字段名可自定义，全程本地处理不上传。">
+    <meta name="keywords" content="扁平转树,树形结构转换,菜单树构建,无限级分类,id pid 转树,children 嵌套,JSON树形组装,环检测,孤儿节点,树拍平,部门树,评论区嵌套">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <!-- 初始化主题 -->
+    <script src="/common/js/theme-init.js?v=202610032258"></script>
+    <!-- i18n 初始化 -->
+    <script src="/common/js/i18n/i18n-init.js?v=202610032258"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CSP安全策略：限制脚本/样式/字体来源，防止XSS攻击 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://*.googlesyndication.com https://*.doubleclick.net https://*.googleadservices.com https://*.adtrafficquality.google https://*.cloudflareinsights.com https://*.google.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://*.googlesyndication.com; 
+    font-src 'self' https://cdnjs.cloudflare.com data:; 
+    img-src 'self' data: blob: https:; 
+    media-src 'self' blob:; 
+    worker-src 'self' blob:; 
+    connect-src 'self' blob: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://*.adtrafficquality.google https://cloudflareinsights.com https://*.cloudflareinsights.com; 
+    frame-src 'self' https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.googlesyndication.com https://googleads.g.doubleclick.net;">
+    <meta name="robots" content="index, follow">
+    <title>扁平转树形结构 - id/pid 数组与 children 树互转 | Helpoke 助点站</title>
+    <meta property="og:title" content="扁平转树形结构 - id/pid 数组与 children 树互转 | Helpoke 助点站">
+    <meta property="og:description"
+        content="把带 id / parentId 的平铺数组装配成 children 嵌套树，或把树拍平成列表；自动检出重复 id、父子环、孤儿节点并给出具体原因，字段名可自定义，本地处理不上传。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/flat-tree/">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="扁平数据 ↔ 树形结构互转，带环与孤儿检测">
+    <meta name="twitter:description" content="菜单表、部门表、评论表这类 id/pid 平铺数据一次装配成嵌套树；重复 id、父子环、孤儿节点逐条列出，反向也能把树拍平回列表。">
+    <meta name="twitter:image" content="https://helpoke.com/common/img/helpoke.webp">
+    <link rel="canonical" href="https://helpoke.com/tool/flat-tree/">
+    <link rel="alternate" hreflang="zh" href="https://helpoke.com/tool/flat-tree/">
+    <link rel="alternate" hreflang="x-default" href="https://helpoke.com/tool/flat-tree/">
+
+    <link rel="stylesheet" href="/common/css/style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/utils.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/i18n.css?v=202610032258">
+    <link rel="stylesheet" href="style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202610032258">
+
+    <script src="/common/js/ads.js?v=202610032258" async></script>
+
+    <script src="/common/js/i18n/i18n.js?v=202610032258" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "扁平转树形结构",
+        "description": "免费在线数据结构转换工具，把带 id 与 parentId 的平铺数组（数据库查询结果、接口返回的菜单表、部门表、评论表）按父子关系装配成 children 嵌套的树，也可反向把树拍平成带父指针的列表；自动检出重复 id、自环、父子环、孤儿节点并逐条给出原因，字段名与缩进可自定义，全程在浏览器本地完成。Convert a flat list of id/parentId records into a nested children tree and back, with duplicate-id, cycle and orphan detection running entirely in your browser.",
+        "url": "https://helpoke.com/tool/flat-tree/",
+        "applicationCategory": "https://schema.org/DeveloperApplication",
+        "inLanguage": ["zh-CN", "en-US"],
+        "featureList": [
+            "双向转换：扁平数组 → children 嵌套树，树 → 带父指针的扁平数组",
+            "字段名完全可自定义：id 字段、父级字段、子节点字段各自独立设置，适配不同接口命名",
+            "自动检出重复 id、自环（父指向自己）、父子环（A→B→A）与孤儿节点，问题清单逐条给出行号与涉及节点",
+            "支持 JSON 数组、JSONL 逐行对象、以及嵌套在对象里的数组，粘贴进来即可识别",
+            "找不到父节点的记录可按选项提升为根，避免整棵子树静默消失",
+            "子节点排序可选保持原顺序、按 id 数值/字典序、或按 name / title / sort 等常用字段",
+            "输出缩进可选 2 空格、4 空格、制表符或紧凑单行，环与孤儿不参与建树但会被完整报告",
+            "结果可复制或下载为 .json 文件，全程本地处理，数据不上传服务器"
+        ],
+        "operatingSystem": "Web",
+        "author": {
+            "@type": "Organization",
+            "name": "Helpoke",
+            "url": "https://helpoke.com/"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": 0,
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation component container -->
+    <div id="nav-container"></div>
+
+    <main class="main">
+        <section class="page-hero">
+            <h1 data-i18n="tool.flatTree.title">扁平转树形结构</h1>
+            <a href="note.html" class="doc-link"><span data-i18n="common.buttons.viewDoc">查看详细使用文档与 FAQ</span></a>
+            <a href="javascript:void(0)" id="back-home-link" title="to home"><span
+                    data-i18n="common.buttons.backHome">返回首页</span></a>
+            <p data-i18n="tool.flatTree.desc">id / parentId 平铺数组与 children 嵌套树双向转换，自动检出重复 id、父子环与孤儿节点并说明原因</p>
+            <p class="description" data-i18n="common.privacyNote">
+                *（<b><em>所有处理完全在您本地浏览器中完成，本站绝不收集、不存储、不传播、不上传您的任何数据文件</em></b>）</p>
+        </section>
+        <div class="container">
+            <div class="tree-options">
+                <div class="option-group">
+                    <label for="dir-select" data-i18n="tool.flatTree.options.direction">转换方向：</label>
+                    <select id="dir-select">
+                        <option value="f2t" data-i18n="tool.flatTree.dirs.flat2tree">扁平数组 → 树</option>
+                        <option value="t2f" data-i18n="tool.flatTree.dirs.tree2flat">树 → 扁平数组</option>
+                    </select>
+                </div>
+                <div class="option-group fields">
+                    <label for="id-key"><span data-i18n="tool.flatTree.options.idKey">ID 字段</span>
+                        <code>id</code></label>
+                    <input type="text" id="id-key" value="id" spellcheck="false" autocomplete="off">
+                    <label for="pid-key"><span data-i18n="tool.flatTree.options.pidKey">父级字段</span>
+                        <code>parentId</code></label>
+                    <input type="text" id="pid-key" value="parentId" spellcheck="false" autocomplete="off">
+                    <label for="children-key"><span data-i18n="tool.flatTree.options.childrenKey">子节点字段</span>
+                        <code>children</code></label>
+                    <input type="text" id="children-key" value="children" spellcheck="false" autocomplete="off">
+                </div>
+            </div>
+            <div class="tree-options second">
+                <div class="option-group">
+                    <label for="sort-select" data-i18n="tool.flatTree.options.sort">子节点排序：</label>
+                    <select id="sort-select">
+                        <option value="origin" data-i18n="tool.flatTree.sorts.origin">保持原顺序</option>
+                        <option value="id" data-i18n="tool.flatTree.sorts.byId">按 ID</option>
+                        <option value="name" data-i18n="tool.flatTree.sorts.byName">按名称字段</option>
+                        <option value="sort" data-i18n="tool.flatTree.sorts.bySort">按排序号字段</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label for="indent-select" data-i18n="tool.flatTree.options.indent">输出缩进：</label>
+                    <select id="indent-select">
+                        <option value="2">2</option>
+                        <option value="4" selected>4</option>
+                        <option value="tab" data-i18n="tool.flatTree.indents.tab">制表符</option>
+                        <option value="min" data-i18n="tool.flatTree.indents.min">紧凑单行</option>
+                    </select>
+                </div>
+                <div class="option-group checks">
+                    <label><input type="checkbox" id="opt-orphan" checked> <span
+                            data-i18n="tool.flatTree.options.orphanRoot">孤儿节点提升为根</span></label>
+                    <label><input type="checkbox" id="opt-keep-pid" checked> <span
+                            data-i18n="tool.flatTree.options.keepPid">保留父级字段</span></label>
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.flatTree.input.title">输入数据</h2>
+                        <button id="example-btn" data-i18n="tool.flatTree.example">载入示例</button>
+                        <button id="upload-btn" data-i18n="tool.flatTree.upload.label">上传 JSON</button>
+                        <input type="file" id="file-input" accept=".json,.txt,.jsonl,.log" hidden>
+                        <button id="convert-btn" data-i18n="tool.flatTree.buttons.convert">转换</button>
+                        <button id="clear-btn" data-i18n="common.buttons.clear">清空</button>
+                    </div>
+                    <textarea id="in-text" spellcheck="false" data-i18n-placeholder="tool.flatTree.input.placeholder"
+                        placeholder="粘贴 JSON 数组、JSONL 逐行对象，或一棵已嵌套的树"></textarea>
+                    <div id="in-stats" class="stats-bar"></div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="section-header">
+                        <h2 data-i18n="tool.flatTree.output.title">转换结果</h2>
+                        <button id="copy-btn" data-i18n="common.buttons.copy">复制</button>
+                        <button id="download-btn" data-i18n="tool.flatTree.buttons.download">下载 JSON</button>
+                    </div>
+                    <textarea id="out-text" spellcheck="false" readonly
+                        data-i18n-placeholder="tool.flatTree.output.hint" placeholder='点击“转换”生成结果'></textarea>
+                    <div id="out-stats" class="stats-bar"></div>
+                    <div class="issues-header" data-i18n="tool.flatTree.issues.title">结构问题清单</div>
+                    <div id="issues" class="issues-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.flatTree.intro.title">工具介绍</h3>
+                </header>
+                <div class="info-content">
+                    <h4 data-i18n="tool.flatTree.intro.problemTitle">树在数据库里从来就不是一棵树</h4>
+                    <ul>
+                        <li data-i18n="tool.flatTree.intro.problem1">
+                            菜单表、部门表、分类目录、评论区，落到关系型数据库里都是一张带
+                            <code>parent_id</code> 的平铺表；接口返回的也往往是扁平数组，前端渲染时才发现需要
+                            <code>children</code>
+                            嵌套。手写这段装配逻辑不难，难的是它边界上一堆坑：父找不到时整棵子树静默消失、数据里混进一条自环把页面卡死、两个节点互相引用造成无限递归。
+                        </li>
+                        <li data-i18n="tool.flatTree.intro.problem2">
+                            线上事故最常见的形态是"菜单少了一半且不报错"：某次批量导入把 <code>parentId</code> 写成了一个不存在的值，这批节点连同它们的子孙全部成了孤儿，而装配代码只用
+                            <code>filter</code> 挑根节点，既不告警也不留痕。本工具把这类结构缺陷当场列出：哪一行、哪个
+                            id、父指向谁、子孙共多少个。
+                        </li>
+                        <li data-i18n="tool.flatTree.intro.problem3">
+                            反向需求同样频繁：后台按层级渲染好的树，导出给只认平铺表的结构、或喂给单元测试的
+                            fixture，需要拍平成带父指针的数组并保证不丢节点。这里是一个双向工具，而不是两个各写一遍的脚本。</li>
+                    </ul>
+                    <h4 data-i18n="tool.flatTree.intro.coreTitle">核心功能</h4>
+                    <ul>
+                        <li data-i18n="tool.flatTree.intro.core1">双向装配与拍平：扁平数组按父子关系一次建树（<code>O(n)</code>
+                            哈希索引，不做嵌套遍历），树则深度优先拍平成数组；字段名（ID
+                            字段、父级字段、子节点字段）全部可改，直接对上您现有的接口命名。
+                        </li>
+                        <li data-i18n="tool.flatTree.intro.core2">四类结构问题全覆盖：重复
+                            id、父指向自己的自环、A→B→A
+                            的父子环、父不存在的孤儿，逐条进入问题清单并给出行号与节点标识；环会被打断而非让页面栈溢出，孤儿可按选项提升为根，保证不丢数据。
+                        </li>
+                        <li data-i18n="tool.flatTree.intro.core3">结果能直接用也能看：输出缩进可选 2 / 4 / 制表符 /
+                            紧凑单行，子节点排序支持原顺序、按 ID、按名称字段、按排序号字段，一键复制或下载 <code>.json</code>
+                            文件，统计条给出节点数、根数、最大深度与问题数。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.flatTree.instructions.title">使用说明</h3>
+                </header>
+                <div class="info-content">
+                    <ol>
+                        <li data-i18n="tool.flatTree.instructions.step1">确认转换方向（默认"扁平数组 →
+                            树"），把接口返回的数组或数据库导出的 JSON 整块粘贴到左侧；JSONL（一行一个对象）与包在对象里的数组也认。
+                        </li>
+                        <li data-i18n="tool.flatTree.instructions.step2">把
+                            ID 字段、父级字段、子节点字段改成您自己的命名（如 <code>menuId</code> / <code>pid</code> /
+                            <code>items</code>），需要时再选排序方式与输出缩进。
+                        </li>
+                        <li data-i18n="tool.flatTree.instructions.step3">点击"转换"查看结果与统计，右侧问题清单会列出重复
+                            id、环、孤儿的具体行号；修数据时建议取消"孤儿节点提升为根"，让缺父的节点显式暴露在清单里。
+                        </li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.flatTree.notes.title">注意事项</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.flatTree.notes.note1">ID
+                            与父级字段的比较按"字符串化后的值"进行，因此数字 <code>1</code> 与字符串
+                            <code>"1"</code> 视为同一个节点；<code>null</code>、<code>undefined</code>、空字符串、<code>0</code>
+                            与 <code>'0'</code>
+                            都按"顶层根节点"处理。若您的数据用 <code>0</code> 表示顶级目录而又确实存在
+                            id 为 0 的节点，请改掉这批 0 值再转，否则会被判成互指环。
+                        </li>
+                        <li data-i18n="tool.flatTree.notes.note2">
+                            建树时不会修改节点的业务字段：除新增子节点数组外，原字段顺序与值都保持不动；勾选"保留父级字段"时嵌套结果里仍带
+                            <code>parentId</code>，取消后输出更贴近前端组件的 props 形状。
+                        </li>
+                        <li data-i18n="tool.flatTree.notes.note3">
+                            检测到父子环时，工具会在成环的边上断开一条使遍历能终止，并在清单里写明被断开的是哪个节点的父指向；这条边上的子孙会作为独立根节点出现在结果末尾，不会静默丢弃。</li>
+                        <li data-i18n="tool.flatTree.notes.note4">"按名称字段"与"按排序号字段"会在
+                            <code>name</code> / <code>title</code> / <code>label</code> /
+                            <code>text</code> 与 <code>sort</code> / <code>order</code> / <code>weight</code> /
+                            <code>rank</code> 中取第一个存在的字段；都没有时等同"保持原顺序"，清单不做提示。
+                        </li>
+                        <li data-i18n="tool.flatTree.notes.note5">单次建议不超过 50000
+                            个节点、输入不超过 10MB；全部解析与转换在浏览器主线程同步完成，期间页面可能短暂停顿。本工具不记录任何输入，关闭页面即清除。</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-details">
+                <header>
+                    <h3 data-i18n="tool.flatTree.scenarios.title">典型场景</h3>
+                </header>
+                <div class="info-content">
+                    <ul>
+                        <li data-i18n="tool.flatTree.scenarios.s1">后台菜单渲染：接口一次性返回全部菜单项，前端装配成侧边栏需要的多级
+                            <code>children</code> 结构，顺便确认没有节点因父 id 拼错而消失。
+                        </li>
+                        <li data-i18n="tool.flatTree.scenarios.s2">组织架构导入：把 Excel
+                            导出的部门表（每行一个部门加"上级部门"列）先拍成 JSON 再建树，一眼看出哪几个部门的上级不存在。
+                        </li>
+                        <li data-i18n="tool.flatTree.scenarios.s3">省市区级联：三级联动组件初始化需要嵌套数据，从行政区划平铺表按
+                            <code>parentCode</code> 一次生成，比在 SQL 里自连接快得多。
+                        </li>
+                        <li data-i18n="tool.flatTree.scenarios.s4">评论区盖楼：接口按时间序返回带
+                            <code>replyTo</code> 的评论列表，装配成楼层嵌套，同时排查用户连自己评论回复造成的自环。
+                        </li>
+                        <li data-i18n="tool.flatTree.scenarios.s5">测试数据准备：把一个真实的嵌套配置拍平成带父指针的数组写进
+                            fixture，或反向用拍平结果核对层级深度是否符合预期。</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- Footer component container -->
+        <div id="footer-container">
+            <footer class="footer">
+                <p data-i18n="footer.copyright">&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" data-i18n="footer.privacy" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a>
+                    |
+                    <a href="/terms/" data-i18n="footer.terms" title="服务条款"><i class="fas fa-file-contract"></i>
+                        服务条款</a> |
+                    <a href="/about/" data-i18n="footer.about" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" data-i18n="footer.contact" title="联系我们"><i class="fas fa-envelope"></i>
+                        联系我们</a>
+                </p>
+            </footer>
+        </div>
+
+    </main>
+    <script src="/common/js/utils.js?v=202610032258" defer></script>
+    <script src="/common/js/theme.js?v=202610032258" defer></script>
+    <script src="/common/js/tools-data.js?v=202610032258" defer></script>
+    <script src="/common/js/nav.js?v=202610032258" defer></script>
+    <script src="script.js?v=202610032258" defer></script>
+
+</body>
+
+</html>

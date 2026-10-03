@@ -153,6 +153,39 @@ function showWarning(message, duration = 3000) {
 }
 
 /**
+ * 轻量提示（各工具页通用）
+ *
+ * 与上方 showToast 的右下角彩色弹框并存：本函数是屏幕底部居中的单条灰黑气泡，
+ * 适用于“已复制 / 转码完成 / 文件过大”这类短反馈，不需要区分成功失败类型。
+ * 提示框元素由此处按需创建（样式见 common/css/utils.css 的 .utils-toast），
+ * 工具页无需再自带 <div id="toast"> 与本地 toast() 实现。
+ * 本文件是普通脚本，顶层函数声明即全局 window.toast，各工具页可直接调 toast(...)。
+ *
+ * @param {string} message - 提示文本（按纯文本写入，不走 innerHTML）
+ * @param {number} duration - 显示时长（毫秒），默认 2200
+ */
+let utilsToastTimer = null;
+function toast(message, duration = 2200) {
+    if (message === null || message === undefined || message === '') return;
+
+    let el = document.getElementById('utils-toast');
+    if (!el) {
+        el = document.createElement('div');
+        el.id = 'utils-toast';
+        el.className = 'utils-toast';
+        el.setAttribute('role', 'status');
+        document.body.appendChild(el);
+    }
+
+    el.textContent = message;
+    el.classList.add('show');
+    clearTimeout(utilsToastTimer);
+    utilsToastTimer = setTimeout(function () {
+        el.classList.remove('show');
+    }, duration);
+}
+
+/**
  * 验证输入值
  * @param {HTMLInputElement} inputElement - 输入元素
  * @returns {boolean} - 验证是否通过
@@ -179,6 +212,7 @@ if (typeof module !== 'undefined' && module.exports) {
         showError,
         showInfo,
         showWarning,
+        toast,
         validateInput
     };
 } else if (typeof window !== 'undefined') {
@@ -188,6 +222,7 @@ if (typeof module !== 'undefined' && module.exports) {
         showError,
         showInfo,
         showWarning,
+        toast,
         validateInput
     };
 }

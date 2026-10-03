@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CSV 编码转换使用说明与常见问题：如何把 Excel 打开乱码的 CSV 从 GBK/GB18030/Big5 转成带 BOM 的 UTF-8，编码自动识别的原理与失误场景、UTF-8 要不要 BOM、输出 GBK 时为什么会出现 ? 号、文件是否会上传服务器。">
+    <meta name="keywords"
+        content="CSV乱码解决,GBK转UTF-8,UTF-8转GBK,Big5转UTF-8,GB18030,Excel打开CSV乱码,UTF-8 BOM,编码检测原理,TextDecoder,CSV编码转换常见问题">
+    <meta name="author" content="余一叶知秋尽">
+    <link rel="icon" href="/common/img/helpoke.webp" type="image/x-icon">
+    <script src="/common/js/theme-init.js?v=202610032258"></script>
+    <title>CSV编码转换使用说明与 FAQ | Helpoke 助点站</title>
+    <meta property="og:title" content="CSV编码转换使用说明与 FAQ | Helpoke 助点站">
+    <meta property="og:description" content="GBK / GB18030 / Big5 / UTF-8(BOM) 编码互转的使用说明、编码识别原理、BOM 取舍建议与常见问题。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://helpoke.com/tool/csv-encoding/note.html">
+    <meta property="og:site_name" content="Helpoke">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://helpoke.com/tool/csv-encoding/note.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "编码自动识别会不会认错？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "有可能。工具按 BOM、UTF-8 严格校验、再对 GBK/Big5/EUC-KR/Shift_JIS/Windows-1252 逐个解码并统计东亚文字数量来打分，谁解出更多正常汉字就选谁。但 GBK 与 Big5 的字节流往往能被对方合法解码成另一套看似通顺的文字，程序无法判断语义对不对，因此一定要看预览；觉得不对就把\"源编码\"手动改成 GBK、GB18030 或 Big5 重新解码，页面会立即用新编码重解原始字节。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "输出 GBK / Big5 时为什么有些字符变成了 ?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "GBK 和 Big5 的字符集比 Unicode 小得多：GBK 没有 emoji 和 CJK 扩展区的生僻字，Big5 只收繁体字，简体内容转 Big5 会有大量字符无法映射。工具会用 ? 占位并在输出统计里给出\"无法映射\"的数量，方便您判断是否要改出 UTF-8 文件。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "UTF-8 到底要不要加 BOM？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "看下游谁来读。给 Excel（尤其是 2016 及更早版本）、WPS 双击打开的 CSV，建议选 UTF-8 + BOM，否则中文按系统 ANSI 码页解析照样乱码。给程序读取的 CSV/JSON、进 Git 仓库的文件、Linux/macOS 工具链处理的文本，建议选无 BOM 的 UTF-8，因为 BOM 会被当成正文的一部分，导致第一个字段名变成 \"ï»¿姓名\" 这类问题。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "为什么下载只提供 GBK 和 Big5，没有 GB18030 / EUC-KR / Shift_JIS？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "浏览器只提供了这些遗留编码的解码器（TextDecoder），没有编码器。本工具的 GBK / Big5 输出是靠原生解码器枚举全部合法双字节组合、在本地反查构建字符映射表实现的，因此只对这两种最常用的中文码表开放下载。GB18030、EUC-KR、Shift_JIS 在读取（解码）方向是完整支持的；若确实需要输出这些编码，建议以 UTF-8 + BOM 交付，或用源系统重新按其内部码表导出。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "我的文件会被上传到服务器吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会。文件通过 FileReader 以字节流读进浏览器内存，解码、编码、生成下载文件全部在本地完成，页面没有向后端发送任何文件内容的请求，您可以用浏览器 F12 的 Network 面板验证。关闭页面后数据即从内存清除。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "粘贴进输入框的文字，为什么\"源编码\"下拉不起作用？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "\"源编码\"作用的对象是文件的原始字节。您从别处复制粘贴到输入框的内容，已经是浏览器解码好的 Unicode 文本，不存在\"按什么码表读字节\"的问题，所以此时只需要选好\"输出编码\"。如果粘贴的本身是乱码（例如用错编码打开后又复制出来），请改为直接上传原始文件。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "工具会不会顺便帮我整理表格、去掉重复行？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "不会，这是有意为之。本工具只做字节级转码：不解析 CSV 结构、不改分隔符、不合并单元格、不裁剪空格，除您主动选择的换行符统一（CRLF/LF）外，正文逐字符原样保留。需要去重、排序、转 JSON 时，请转码完成后接着用同站的\"CSV 数据转换\"工具。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .note-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(130deg, #4338ca 0%, #1e3a8a 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .info-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .info-section h3 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-section p {
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            text-indent: 0 !important;
+            padding: 14px !important;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px;
+            font-size: 0.98rem;
+        }
+
+        th,
+        td {
+            padding: 12px 14px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .warning-box p {
+            margin-bottom: 0 !important;
+            text-indent: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-section,
+            .related-tools {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th,
+            td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/style.css?v=202610032258">
+    <link rel="stylesheet" href="/common/css/note.css?v=202610032258">
+    <link rel="stylesheet" href="/common/lib/font-awesome/css/all.min.css?v=202610032258">
+    <script src="/common/js/ads.js?v=202610032258" async></script>
+    <script src="/common/js/theme.js?v=202610032258" defer></script>
+    <script src="/common/js/note.js?v=202610032258" defer></script>
+    <script src="/common/js/layout.js?v=202610032258" defer></script>
+</head>
+
+<body>
+    <div class="note-container">
+        <header>
+            <h1>CSV编码转换 - 使用说明与 FAQ</h1>
+            <p class="subtitle">GBK / GB18030 / Big5 / UTF-8(BOM) 在线互转，修复 Excel 打开就乱码的 CSV，本地处理不上传</p>
+            <a href="/" class="back-link"><i class="fas fa-home"></i> 返回首页</a>
+            <a href="index.html" class="back-link"><i class="fas fa-exchange-alt"></i> 使用工具</a>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="info-section">
+                <h2>什么是 CSV 编码转换？</h2>
+                <p>CSV
+                    编码转换是一款专门处理"文件能打开、中文全是乱码"这类问题的在线工具。系统、数据库、ERP
+                    导出的 CSV 常用 <strong>GBK/GB18030</strong> 保存，而浏览器、Git 仓库、现代后端普遍使用
+                    <strong>UTF-8</strong>；台湾与港澳的合作方则常见 <strong>Big5</strong>。同一个字节流被按错误的字符集解读，就会出现
+                    <code>æ±‰å­—</code>、<code>娑堟伅</code>、<code>ä½ å¥½</code> 这类面目全非的文字。
+                </p>
+                <p>工具的思路很直接：把文件的<strong>原始字节</strong>读进浏览器，用
+                    <strong>TextDecoder</strong> 按正确的字符集重新解码，再按您指定的目标编码重新写出字节并下载。整个过程是纯粹的
+                    <strong>字节级转码</strong>——不解析 CSV、不改分隔符、不动行列、不裁剪空格，除了您主动选择的换行符统一之外，正文逐字符原样保留，避免"转一次码多出几列"的二次破坏。
+                </p>
+                <p>为了让转完的文件真的能被下游接受，输出侧专门保留了 <strong>UTF-8 + BOM</strong>
+                    这一档：Excel 2016 及更早版本双击无 BOM 的 UTF-8 文件时仍会按系统 ANSI
+                    码页解析而显示乱码，加上 BOM 之后即可双击直开；同时提供无 BOM 的 UTF-8 给程序读取，也提供
+                    <strong>GBK（ANSI）</strong>与 <strong>Big5</strong> 用于回写给只认老码表的前置机与批量代付模板。
+                </p>
+
+                <h2>乱码是怎么产生的？</h2>
+                <p>字符集（码表）定义"哪个数字对应哪个字"，编码定义"这个数字怎么变成字节"。<code>汉</code>字在
+                    UTF-8 里是 3 个字节 <code>E6 B1 89</code>，在 GBK 里是 2 个字节 <code>BA BA</code>。用错表去读，字节就被翻译成完全不同的字符：
+                </p>
+                <p class="code-block">原始内容：汉字
+                    UTF-8 字节： E6 B1 89 E5 AD 97
+                    按 UTF-8 读 → 汉字 ✔
+                    按 GBK 读 → 姹夊瓧 ✘（GBK 把 E6B1 / 89E5 / AD97 拼成三对）
+
+                    原始内容：汉字
+                    GBK 字节： BA BA D7 D6
+                    按 GBK 读 → 汉字 ✔
+                    按 UTF-8 读 → &#65533;&#65533;&#65533;&#65533; ✘（不是合法的 UTF-8 序列，浏览器逐字节给出替换符 U+FFFD）</p>
+                <p>所以"修乱码"的本质不是改文字，而是<strong>找回原始字节再用正确的码表重读一遍</strong>。这也是为什么工具强烈建议直接上传文件，而不是把已经乱码的文字复制粘贴进来——粘贴的那一刻，错误的解码结果已经被固化成
+                    Unicode 文本，原字节信息就丢了。</p>
+
+                <h2>支持的输入与输出</h2>
+                <p><strong>输入文件：</strong><code>.csv</code>、<code>.tsv</code>、<code>.txt</code>、<code>.log</code>，单文件建议不超过
+                    50MB；也可直接把文本粘贴进输入框。</p>
+                <p><strong>读取（解码）编码：</strong>自动识别、UTF-8、GBK、GB18030、Big5、EUC-KR、Shift_JIS、Windows-1252、UTF-16LE、UTF-16BE。
+                </p>
+                <p><strong>写出（下载）编码：</strong>UTF-8 + BOM、UTF-8（无 BOM）、GBK（ANSI 中文）、Big5（繁体中文）、UTF-16LE + BOM。</p>
+                <p><strong>换行符：</strong>保持原样 / 统一 CRLF（Windows、Excel、老系统）/ 统一 LF（Linux、macOS、容器）。</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>编码</th>
+                            <th>读取</th>
+                            <th>写出</th>
+                            <th>常见来源</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>UTF-8（无 BOM）</td>
+                            <td>支持</td>
+                            <td>支持</td>
+                            <td>接口导出、开源仓库、Node/Python 程序</td>
+                        </tr>
+                        <tr>
+                            <td>UTF-8 + BOM</td>
+                            <td>支持</td>
+                            <td>支持</td>
+                            <td>给 Excel 双击打开的报表</td>
+                        </tr>
+                        <tr>
+                            <td>GBK / GB2312</td>
+                            <td>支持</td>
+                            <td>支持（ANSI 中文）</td>
+                            <td>Windows 中文系统、国产 ERP、网银代付模板</td>
+                        </tr>
+                        <tr>
+                            <td>GB18030</td>
+                            <td>支持（含四字节生僻字）</td>
+                            <td>不支持</td>
+                            <td>政务、公安、金融系统的强制码表</td>
+                        </tr>
+                        <tr>
+                            <td>Big5</td>
+                            <td>支持</td>
+                            <td>支持</td>
+                            <td>台湾、港澳地区的资料与账单</td>
+                        </tr>
+                        <tr>
+                            <td>EUC-KR / Shift_JIS</td>
+                            <td>支持</td>
+                            <td>不支持</td>
+                            <td>韩国、日本的老旧系统导出文件</td>
+                        </tr>
+                        <tr>
+                            <td>UTF-16LE / BE</td>
+                            <td>支持（自动按 BOM 判断）</td>
+                            <td>支持 UTF-16LE + BOM</td>
+                            <td>PowerShell、SQL Server bcp 导出</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>如何快速开始？</h2>
+                <h3>第一步：载入文件</h3>
+                <p>点击"上传 CSV/TXT"选择乱码文件，或点"载入示例（GBK 文件）"先体验一次完整流程。文件会以自动识别出的编码解码后显示在左侧，统计条同时给出字节数、编码、行列数与替换符数量。</p>
+                <h3>第二步：确认没有乱码</h3>
+                <p>盯着左侧预览里的中文看：如果仍是乱码，把"源编码"手动改成 GBK / GB18030 / Big5，页面会立刻用新编码重新解码原始字节；"替换符"计数为 0 且文字读得通，说明编码找对了。</p>
+                <h3>第三步：转码并下载</h3>
+                <p>选择"输出编码"（给 Excel 就选 UTF-8 + BOM）与换行符，点击"转码"查看输出统计，再点"下载"保存文件。文件名会自动追加编码后缀，例如
+                    <code>orders-utf8-bom.csv</code>；也可以直接"复制"结果文本。</p>
+            </div>
+
+            <div class="info-section">
+                <h2>典型应用场景</h2>
+                <p><strong>财务对账：</strong>ERP 导出的 GBK 报表在 Excel 里是一团乱码，转成 UTF-8 + BOM
+                    后双击即读，再去"CSV 数据转换"里做去重与排序。</p>
+                <p><strong>银行 / 社保批量代付：</strong>网银前置机只认 ANSI(GBK) 文本，把 UTF-8
+                    模板转回 GBK 再上传，避免整批文件被打回。</p>
+                <p><strong>两岸资料交换：</strong>台湾合作方发来的 Big5
+                    客户名单，本地转成 UTF-8 后交给 CRM 导入，姓名不再是一串问号。</p>
+                <p><strong>开发与运维：</strong>老项目遗留的 GBK 测试数据批量转成无 BOM 的
+                    UTF-8，防止前端解析时第一个字段名带上 <code>ï»¿</code> 前缀，也避免 Git 差异里出现整文件变更。</p>
+                <p><strong>数据入库接力：</strong>统一成 UTF-8 之后，接"表格转 SQL
+                    INSERT"生成导入语句，或接"Json/CSV 转图表"出汇报图，链路里不会再有第二个人被乱码卡住。</p>
+
+                <h2>特点与优势</h2>
+                <div class="feature-list">
+                    <span class="feature-tag">原生 TextDecoder 解码</span>
+                    <span class="feature-tag">本地反查构建 GBK/Big5 表</span>
+                    <span class="feature-tag">零第三方图标库</span>
+                    <span class="feature-tag">UTF-8 + BOM 供 Excel 直开</span>
+                    <span class="feature-tag">字节级转码不改内容</span>
+                    <span class="feature-tag">替换符 / 无法映射计数</span>
+                    <span class="feature-tag">换行符 CRLF / LF 统一</span>
+                    <span class="feature-tag">全程本地不上传</span>
+                </div>
+
+                <div class="warning-box">
+                    <p><strong>注意事项：</strong></p>
+                    <ul>
+                        <li>"源编码"只作用于文件原始字节；粘贴进来的文本已是 Unicode，改"源编码"不会有效果。</li>
+                        <li>自动识别只采样前 256KB 字节，若文件开头一大段都是英文、中文集中在后部，可能判成 UTF-8，请手动指定。</li>
+                        <li>GBK 与 Big5 常能互相解出"看着像字"的结果，最终对不对要靠人眼看预览语义，工具不做语义判断。</li>
+                        <li>输出 GBK/Big5 时，映射表里没有的字符（emoji、生僻字、简繁另一侧的字）会写成 <code>?</code> 并计入"无法映射"；不为 0 时建议改出 UTF-8。
+                        </li>
+                        <li>工具不会解析或重排 CSV，若您怀疑源文件本身列错位，请用"CSV 数据转换"检查，而不是在这里反复转码。</li>
+                        <li>大文件全部驻留浏览器内存，超过 50MB 请拆分处理；公共设备建议使用无痕模式，关闭页面即清除数据。</li>
+                    </ul>
+                </div>
+
+                <h2>常见问题</h2>
+                <h3>问：编码自动识别会不会认错？</h3>
+                <p><strong>答：</strong>有可能。识别顺序是 BOM 优先 → 纯 ASCII → UTF-8 严格校验 →
+                    对
+                    GBK/Big5/EUC-KR/Shift_JIS/Windows-1252 逐个解码并统计解出的中日韩文字数量，取分值最高者。难点在于同一串字节在 GBK 与
+                    Big5 下都可能合法解出文字，程序无法判断语义。所以一定要看左侧预览，读不通就直接切"源编码"，每次切换都会用新码表重新解码原始字节。</p>
+                <h3>问：输出 GBK / Big5 时为什么有些字符变成了 <code>?</code>？</h3>
+                <p><strong>答：</strong>GBK、Big5 的字符集比 Unicode 小得多：GBK 不含 emoji 与 CJK
+                    扩展区生僻字，Big5 只收繁体字，用它写简体内容会有大量字无处映射。工具按行业惯例写入
+                    <code>?</code>（与 Excel「另存为 ANSI」的行为一致），并在输出统计里报告"无法映射"的数量，方便您决定是否改出 UTF-8。
+                </p>
+                <h3>问：UTF-8 到底要不要加 BOM？</h3>
+                <p><strong>答：</strong>看下游。给人用 Excel（含 2016 及更早版本）、WPS
+                    双击打开，选 <strong>UTF-8 + BOM</strong>；给程序读（pandas、MySQL
+                    <code>LOAD DATA</code>、前端 CSV 解析）、进 Git 仓库、Linux/macOS 工具链处理，选
+                    <strong>无 BOM 的 UTF-8</strong>，否则 BOM 会被当成正文，导致首个列名变成 <code>ï»¿姓名</code>
+                    这类取值失败问题。不确定时：先按"谁来读"想一遍，别按"谁来写"。
+                </p>
+                <h3>问：为什么下载不支持 GB18030 / EUC-KR / Shift_JIS？</h3>
+                <p><strong>答：</strong>浏览器只提供这些遗留编码的<strong>解码器</strong>（<code>TextDecoder</code>），没有编码器。本工具的
+                    GBK / Big5 输出是靠原生解码器枚举全部合法双字节组合、在本地反查出「字符 → 字节对」映射表实现的，只对这两种最常用的中文码表开放写出；GB18030
+                    的四字节区（生僻字）未被枚举，因此也不作为输出选项。读取方向则完整支持。</p>
+                <h3>问：我的文件会被上传吗？</h3>
+                <p><strong>答：</strong>不会。文件用 <code>FileReader.readAsArrayBuffer</code>
+                    读成字节数组后就在内存里，解码、编码、生成下载都发生在浏览器本地，页面不发送任何携带文件内容的请求，可用
+                    F12 的 Network 面板验证。</p>
+                <h3>问：粘贴进来的乱码能直接修好吗？</h3>
+                <p><strong>答：</strong>不能，也不该。粘贴的瞬间，错误的解码结果已经固化成 Unicode
+                    文本，原字节信息丢失，再解一次只会越改越乱。正确做法是把<strong>原始文件</strong>上传进来重新解码。如果手头只有已经乱码的文本，可以让对方重发原文件。</p>
+                <h3>问：支持 Safari / 手机浏览器吗？</h3>
+                <p><strong>答：</strong>需要浏览器支持带遗留编码的 <code>TextDecoder</code>：Chrome/Edge 38+、Firefox
+                    63+、Safari 14.1+ 均可。若某个码表不被支持，工具不会静默出错，而是提示"当前浏览器不支持该编码"，此时改用 UTF-8
+                    输出或在桌面浏览器上处理。手机端可用，但大文件建议用电脑，内存更充裕。</p>
+            </div>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>转码示例：一份 GBK 文件的四种去向</h2>
+            <h3>上传的源文件（GBK 字节，非中文系统的 Excel 按本机 ANSI 码页读取后就是乱码）</h3>
+            <p class="code-block">B6 A9 B5 A5 BA C5 2C BF CD BB A7 D0 D5 C3 FB ...
+                显示为：¶©µ¥ºÅ,¿Í»§ÐÕÃû... （GBK 字节被当作 Windows-1252 读）</p>
+            <h3>① 给 Excel 用：输出「UTF-8 + BOM」</h3>
+            <p class="code-block">EF BB BF E8 AE A2 E5 8D 95 E5 8F B7 ...
+                → 双击即可正常显示"订单号、客户姓名、城市、金额"</p>
+            <h3>② 给程序/仓库用：输出「UTF-8（无 BOM）」</h3>
+            <p class="code-block">E8 AE A2 E5 8D 95 E5 8F B7 ...
+                → pandas / LOAD DATA 读到的第一个列名就是"订单号"本身</p>
+            <h3>③ 回传给老系统：输出「GBK（ANSI）」</h3>
+            <p class="code-block">B6 A9 B5 A5 BA C5 ...
+                → 与源文件字节一致；若源文本含 emoji，则对应位置写成 3F（?）</p>
+            <h3>④ 繁体交付：输出「Big5」</h3>
+            <p class="code-block">简体内容 → 大量字符不在 Big5 表内，统计里"无法映射"会明显不为 0
+                → 建议先由对方提供繁体原文，或统一以 UTF-8 + BOM 交付</p>
+            <p>同一次解码结果可反复切换输出编码与换行符，不必重新上传文件；若只是想改行尾（例如 Windows 的文件给 Linux
+                用），保持源编码不变、把"换行符"设为"统一 LF"再下载即可。</p>
+        </div>
+
+        <div class="info-section" style="grid-column: 1 / -1;">
+            <h2>使用最佳实践</h2>
+            <div class="warning-box">
+                <ul>
+                    <li><strong>先验证再批量：</strong>拿一份文件转成 UTF-8 + BOM 后用 Excel
+                        打开确认语义正确，再处理同类文件，避免整批返工。</li>
+                    <li><strong>盯两个计数：</strong>源统计里的"替换符"不为 0 说明码表选错；输出统计里的"无法映射"不为 0
+                        说明目标编码装不下，二者都为零才是干净的一转。</li>
+                    <li><strong>记住下游是谁：</strong>人读 → UTF-8 + BOM；机器读 → UTF-8 无
+                        BOM；老系统 → GBK。这一条判断比任何自动识别都可靠。</li>
+                    <li><strong>留好原始文件：</strong>转码文件用于交付，原始字节文件用于复查；一旦怀疑转错，重新上传原文件即可复原。</li>
+                    <li><strong>与其他工具接力：</strong>编码统一后再进"CSV 数据转换"做去重排序、进"数据脱敏"打码手机号与身份证、进"表格转
+                        SQL INSERT"生成入库语句，避免每一步都被乱码绊一次。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="note-footer-container" data-tool-url="index.html" data-btn-color="#2563EB"></div>
+
+        <div class="related-tools">
+            <h2>相关工具推荐</h2>
+            <div class="tool-links">
+                <a href="/tool/csv/" class="tool-link">CSV 数据转换工具</a>
+                <a href="/tool/anonymize/" class="tool-link">数据脱敏工具</a>
+                <a href="/tool/sql-insert/" class="tool-link">表格转 SQL INSERT</a>
+                <a href="/encrypted/encoding-unicode/" class="tool-link">Unicode 编解码器</a>
+                <a href="/tool/lines/" class="tool-link">行处理工具</a>
+            </div>
+        </div>
+
+        <div id="footer-container">
+            <footer class="footer">
+                <p>&copy; 2026 Helpoke 助点站. 保留所有权利.</p>
+                <p>
+                    <a href="/privacy/" title="隐私政策"><i class="fas fa-lock"></i> 隐私政策</a> |
+                    <a href="/terms/" title="服务条款"><i class="fas fa-file-contract"></i> 服务条款</a> |
+                    <a href="/about/" title="关于我们"><i class="fas fa-user"></i> 关于我们</a> |
+                    <a href="/contact/" title="联系我们"><i class="fas fa-envelope"></i> 联系我们</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>
